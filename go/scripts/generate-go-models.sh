@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Ensure we are in the root of the repo
 REPO_ROOT=$(git rev-parse --show-toplevel)
-cd "$REPO_ROOT"
+cd "$REPO_ROOT/go"
 
 INPUT_SPEC="spec.json"
 TEMP_SPEC="spec-sanitised.json"
@@ -16,7 +16,6 @@ echo "Starting Go model generation..."
 echo "✓ Generated JSON spec"
 
 # Create temporary json spec file that we can sanitise
-cd "$REPO_ROOT/go"
 cp "$INPUT_SPEC" "$TEMP_SPEC"
 # Ensure "title" is present in the spec which is needed for Go generation of top-level model
 jq '.title //= .["$id"]' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"

@@ -1,0 +1,15 @@
+name: PR Quality Guard
+
+on:
+  pull_request:
+    branches: [main]
+    # Trigger on changes to the Go files (including the JSON schema)
+    paths:
+      - 'go/**'
+
+jobs:
+  validate:
+    uses: ./.github/workflows/validate-go.yaml
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
+    secrets: inherit
