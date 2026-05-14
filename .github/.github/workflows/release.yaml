@@ -1,0 +1,125 @@
+name: Unified Release Orchestrator
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+# Ensures only one release process runs at a time to prevent version collisions
+concurrency:
+  group: "unified-release"
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  determine-version:
+    # Only run this job if the pull request was actually merged into main
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      sha: ${{ github.sha }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Determine bump type from Pull Request labels
+        id: bump
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const labels = context.payload.pull_request.labels.map(l => l.name);
+            let bump = "patch";
+            if (labels.includes("release:major")) {
+              bump = "major";
+            } else if (labels.includes("release:minor")) {
+              bump = "minor";
+            }
+            core.setOutput("bump", bump);
+
+      - name: Compute next unified version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Retrieve the latest tag matching the 'release/v*' pattern
+          latest_tag="$(git tag -l 'release/v*' --sort=-v:refname | head -n1)"
+          
+          if [[ -z "${latest_tag}" ]]; then
+            # Default starting version if no tags exist
+            major=0
+            minor=0
+            patch=0
+          else
+            # Strip the 'release/v' prefix to extract the version numbers
+            version_string="${latest_tag#release/v}"
+            IFS='.' read -r major minor patch <<< "$version_string"
+          fi
+
+          # Increment the version based on the determined bump type
+          case "${{ steps.bump.outputs.bump }}" in
+            major)
+              major=$((major+1))
+              minor=0
+              patch=0
+              ;;
+            minor)
+              minor=$((minor+1))
+              patch=0
+              ;;
+            patch)
+              patch=$((patch+1))
+              ;;
+          esac
+
+          next_version="${major}.${minor}.${patch}"
+          echo "version=${next_version}" >> "$GITHUB_OUTPUT"
+          echo "Next version determined: ${next_version}"
+
+  validate-go:
+    needs: determine-version
+    uses: ./.github/workflows/validate-go.yaml
+    with:
+      ref: ${{ needs.determine-version.outputs.sha }}
+    secrets: inherit
+
+  finalise-release:
+    needs: [determine-version, validate-go]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository at specific SHA
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.determine-version.outputs.sha }}
+          fetch-depth: 0
+          lfs: true
+
+      - name: Create and Push Unified Tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          
+          # Configure Git Identity for the runner
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          VERSION="${{ needs.determine-version.outputs.version }}"
+          
+          echo "Creating and pushing tags for version v${VERSION}"
+          
+          # Create an annotated tag for the main release/spec
+          git tag -a "release/v${VERSION}" -m "release v${VERSION}"
+          
+          # Create an annotated tag for the Go module subfolder
+          git tag -a "go/v${VERSION}" -m "go v${VERSION}"
+          
+          # Push all newly created tags to the remote repository
+          git push origin --tags

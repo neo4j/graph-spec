@@ -1,0 +1,47 @@
+name: Validate Go Module
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        description: 'The specific git commit SHA to checkout and test'
+        required: true
+        type: string
+
+jobs:
+  test-go-bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+          lfs: true # Critical: The CGO linker requires the actual .a static libraries
+
+      - name: Set up Go Environment
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go/go.mod
+
+      - name: Run Go Module Tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Navigate into the subfolder where the Go module resides
+          cd go
+          # Run tests with verbose output to verify the Kotlin/Native bridge links correctly
+          go test -v ./...
+
+      - name: Run Go Generation and Check Sync
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x ./go/scripts/generate-go-models.sh
+          ./go/scripts/generate-go-models.sh
+          
+          # 2. Check for drift
+          if ! git diff --exit-code; then
+            echo "❌ Go models are out of sync with latest changes Kotlin. Run ./scripts/generate-go-models.sh locally and commit."
+            git diff
+            exit 1
+          fi

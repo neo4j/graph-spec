@@ -332,6 +332,10 @@
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
                     }
+                },
+                "name": {
+                    "type": "string",
+                    "nullable": true
                 }
             },
             "required": [
@@ -378,6 +382,10 @@
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
                     }
+                },
+                "name": {
+                    "type": "string",
+                    "nullable": true
                 }
             },
             "required": [
@@ -485,6 +493,10 @@
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
                     }
+                },
+                "name": {
+                    "type": "string",
+                    "nullable": true
                 }
             },
             "required": [
@@ -516,6 +528,10 @@
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
                     }
+                },
+                "name": {
+                    "type": "string",
+                    "nullable": true
                 }
             },
             "required": [
