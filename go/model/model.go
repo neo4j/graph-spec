@@ -6,6 +6,22 @@ import (
 	"fmt"
 )
 
+type ConstraintType string
+
+const (
+	ConstraintTypeExists       ConstraintType = "EXISTS"
+	ConstraintTypeKey          ConstraintType = "KEY"
+	ConstraintTypePropertyType ConstraintType = "PROPERTY_TYPE"
+	ConstraintTypeUnique       ConstraintType = "UNIQUE"
+)
+
+var ConstraintTypeValues = []ConstraintType{
+	ConstraintTypeExists,
+	ConstraintTypeKey,
+	ConstraintTypePropertyType,
+	ConstraintTypeUnique,
+}
+
 type ExtensionValueUnion interface {
 	ExtensionValueType() string
 	isExtensionValue()
@@ -277,17 +293,39 @@ type Labels struct {
 
 type NodeConstraint struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Label      string                    `json:"label"`
+	Label      *string                   `json:"label,omitempty"`
+	Name       *string                   `json:"name,omitempty"`
 	Properties []string                  `json:"properties"`
-	Type       string                    `json:"type"`
+	Type       ConstraintType            `json:"type"`
+}
+
+type IndexType string
+
+const (
+	IndexTypeFulltext IndexType = "FULLTEXT"
+	IndexTypePoint    IndexType = "POINT"
+	IndexTypeRange    IndexType = "RANGE"
+	IndexTypeText     IndexType = "TEXT"
+	IndexTypeVector   IndexType = "VECTOR"
+	IndexTypeLookup   IndexType = "LOOKUP"
+)
+
+var IndexTypeValues = []IndexType{
+	IndexTypeFulltext,
+	IndexTypePoint,
+	IndexTypeRange,
+	IndexTypeText,
+	IndexTypeVector,
+	IndexTypeLookup,
 }
 
 type NodeIndex struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
 	Labels     []string                  `json:"labels"`
+	Name       *string                   `json:"name,omitempty"`
 	Options    map[string]ExtensionValue `json:"options,omitempty"`
 	Properties []string                  `json:"properties"`
-	Type       string                    `json:"type"`
+	Type       IndexType                 `json:"type"`
 }
 
 type Neo4jType string
@@ -386,6 +424,7 @@ type Node struct {
 	Constraints map[string]NodeConstraint `json:"constraints,omitempty"`
 	Extensions  map[string]ExtensionValue `json:"extensions,omitempty"`
 	Indexes     map[string]NodeIndex      `json:"indexes,omitempty"`
+	Label       *string                   `json:"label,omitempty"`
 	Labels      *Labels                   `json:"labels,omitempty"`
 	Name        *string                   `json:"name,omitempty"`
 	Properties  map[string]Property       `json:"properties,omitempty"`
@@ -393,16 +432,18 @@ type Node struct {
 
 type RelationshipConstraint struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
+	Name       *string                   `json:"name,omitempty"`
 	Options    map[string]ExtensionValue `json:"options,omitempty"`
 	Properties []string                  `json:"properties"`
-	Type       string                    `json:"type"`
+	Type       ConstraintType            `json:"type"`
 }
 
 type RelationshipIndex struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
+	Name       *string                   `json:"name,omitempty"`
 	Options    map[string]ExtensionValue `json:"options,omitempty"`
 	Properties []string                  `json:"properties"`
-	Type       string                    `json:"type"`
+	Type       IndexType                 `json:"type"`
 }
 
 type RelationshipTarget struct {
