@@ -15,8 +15,14 @@ permissions:
 
 jobs:
   determine-version:
-    # Only run this job if the pull request was actually merged into main
-    if: github.event.pull_request.merged == true
+    # Only run for merged PRs that explicitly request a release label
+    if: >
+      github.event.pull_request.merged == true &&
+      (
+        contains(github.event.pull_request.labels.*.name, 'release:major') ||
+        contains(github.event.pull_request.labels.*.name, 'release:minor') ||
+        contains(github.event.pull_request.labels.*.name, 'release:patch')
+      )
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
