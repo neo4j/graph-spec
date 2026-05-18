@@ -9,8 +9,6 @@ This package contains the Go GraphSpec Library. It consists of:
 
 ## Usage
 
-> TODO: Update this when first release from main repo
-
 This library can be imported into your Go project via the standard `go get`: 
 
 ```shell
