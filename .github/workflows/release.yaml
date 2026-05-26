@@ -146,7 +146,7 @@ jobs:
           fi
 
   finalise-release:
-    needs: [determine-version, validate-go]
+    needs: [determine-version, validate-go, publish-npm]
     runs-on: ubuntu-latest
     permissions:
       contents: write
