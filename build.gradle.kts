@@ -26,7 +26,11 @@ kotlin {
     }
     js(IR) {
         binaries.library()
-        browser()
+        nodejs {
+            testTask {
+                useMocha()
+            }
+        }
         compilerOptions {
             sourceMap = true
             moduleKind = JsModuleKind.MODULE_ES
@@ -110,7 +114,7 @@ tasks.register("generateTsUnions", TypeScriptModifierTask::class.java) {
             .asFile
 }
 
-tasks.named("jsBrowserProductionLibraryDistribution") {
+tasks.named("jsNodeProductionLibraryDistribution") {
     finalizedBy("generateTsUnions")
 }
 
