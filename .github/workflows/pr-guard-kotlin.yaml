@@ -1,0 +1,19 @@
+name: Kotlin PR Quality Guard
+
+on:
+  pull_request:
+    branches: [main]
+    # Trigger on changes to the Kotlin files
+    paths:
+      - 'src/**'
+      - 'build.gradle.kts'
+      - 'settings.gradle.kts'
+      - 'gradle.properties'
+      - 'gradle/**'
+
+jobs:
+  validate:
+    uses: ./.github/workflows/validate-kotlin.yaml
+    with:
+      ref: ${{ github.event.pull_request.head.sha }}
+    secrets: inherit

@@ -20,6 +20,39 @@ version = scmVersion.version
 repositories { mavenCentral() }
 
 kotlin {
+    jvm {
+        compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
+        testRuns.named("test") { executionTask.configure { useJUnitPlatform() } }
+    }
+    js(IR) {
+        binaries.library()
+        nodejs {
+            testTask {
+                useMocha()
+            }
+        }
+        compilerOptions {
+            sourceMap = true
+            moduleKind = JsModuleKind.MODULE_ES
+            freeCompilerArgs.add("-opt-in=kotlin.js.ExperimentalWasmJsInterop")
+            freeCompilerArgs.add("-Xes-long-as-bigint")
+        }
+        generateTypeScriptDefinitions()
+    }
+    macosArm64 {
+        binaries.sharedLib()
+        binaries.staticLib { baseName = "graphdatamodel" }
+    }
+    linuxX64 {
+        binaries.sharedLib()
+        binaries.staticLib { baseName = "graphdatamodel" }
+    }
+    linuxArm64 {
+        binaries.sharedLib()
+        binaries.staticLib { baseName = "graphdatamodel" }
+    }
+
+    applyDefaultHierarchyTemplate()
     // Override target source sets for KMP
     sourceSets {
         val commonMain by getting
@@ -29,7 +62,6 @@ kotlin {
         }
         val bridgeTest by creating {
             dependsOn(commonTest)
-            dependsOn(bridge)
         }
         targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>().configureEach {
             compilations.getByName("main").defaultSourceSet.dependsOn(bridge)
@@ -48,35 +80,12 @@ kotlin {
         }
         commonTest.dependencies { implementation(libs.kotlin.test) }
     }
-    jvm {
-        compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
-        testRuns.named("test") { executionTask.configure { useJUnitPlatform() } }
-    }
-    js(IR) {
-        binaries.library()
-        browser()
-        compilerOptions {
-            sourceMap = true
-            moduleKind = JsModuleKind.MODULE_ES
-            freeCompilerArgs.add("-opt-in=kotlin.js.ExperimentalWasmJsInterop")
-            freeCompilerArgs.add("-Xes-long-as-bigint")
-        }
-        generateTypeScriptDefinitions()
-    }
-    macosX64 { binaries.sharedLib() }
-    macosArm64 { binaries.sharedLib() }
-    linuxX64 { binaries.sharedLib() }
-    linuxArm64 { binaries.sharedLib() }
 
     compilerOptions {
         freeCompilerArgs.add("-opt-in=kotlin.js.ExperimentalJsExport")
         freeCompilerArgs.add("-opt-in=kotlin.js.ExperimentalJsStatic")
     }
 
-    // Koltin/Native config
-    macosArm64 { binaries.staticLib { baseName = "graphdatamodel" } }
-    linuxX64 { binaries.staticLib { baseName = "graphdatamodel" } }
-    linuxArm64 { binaries.staticLib { baseName = "graphdatamodel" } }
     compilerOptions {
         freeCompilerArgs.add("-Xmulti-dollar-interpolation")
         freeCompilerArgs.add("-opt-in=kotlin.native.ExperimentalNativeApi")
@@ -105,7 +114,7 @@ tasks.register("generateTsUnions", TypeScriptModifierTask::class.java) {
             .asFile
 }
 
-tasks.named("jsBrowserProductionLibraryDistribution") {
+tasks.named("jsNodeProductionLibraryDistribution") {
     finalizedBy("generateTsUnions")
 }
 
