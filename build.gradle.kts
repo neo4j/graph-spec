@@ -87,7 +87,6 @@ kotlin {
     }
 
     compilerOptions {
-        freeCompilerArgs.add("-Xmulti-dollar-interpolation")
         freeCompilerArgs.add("-opt-in=kotlin.native.ExperimentalNativeApi")
     }
 }
