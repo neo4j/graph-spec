@@ -102,6 +102,44 @@ jobs:
       ref: ${{ needs.determine-version.outputs.sha }}
     secrets: inherit
 
+  publish-npm:
+    needs: [determine-version, validate-kotlin]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Build JS/TS Artifacts
+        run: ./gradlew assemble -Pversion=${{ needs.determine-version.outputs.version }} --no-daemon
+
+      - name: Publish NPM Package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          TARGET_DIR="build/dist/js/productionLibrary/"
+          
+          if [ -d "$TARGET_DIR" ]; then
+            cd "$TARGET_DIR"
+            # Update package.json version dynamically before publishing
+            npm version ${{ needs.determine-version.outputs.version }} --no-git-tag-version --allow-same-version
+            npm publish --access public
+          else
+            echo "Directory $TARGET_DIR not found. Check your Gradle JS/TS build configurations."
+            exit 1
+          fi
+
   finalise-release:
     needs: [determine-version, validate-go]
     runs-on: ubuntu-latest

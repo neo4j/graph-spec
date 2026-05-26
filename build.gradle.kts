@@ -26,6 +26,11 @@ kotlin {
     }
     js(IR) {
         binaries.library()
+        compilations.named("main") {
+            packageJson {
+                name = "@neo4j-importer/graph-spec"
+            }
+        }
         nodejs {
             testTask {
                 useMocha()
@@ -111,6 +116,15 @@ tasks.register("generateTsUnions", TypeScriptModifierTask::class.java) {
             .get()
             .file("graph-spec.d.mts")
             .asFile
+}
+
+val copyReadmeToJs by tasks.registering(Copy::class) {
+    from(rootProject.file("README.md"))
+    into(layout.buildDirectory.dir("dist/js/productionLibrary"))
+}
+
+tasks.named("jsProductionLibraryCompileSync") {
+    finalizedBy(copyReadmeToJs)
 }
 
 tasks.named("jsNodeProductionLibraryDistribution") {

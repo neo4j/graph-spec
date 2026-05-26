@@ -1,19 +1,15 @@
 # Neo4j Graph Specification Format
 
-## Scope
-
-
 ## Getting Started
 
+## Installing
 
-### Building TypeScript locally
-```gradle
-gradle jsNodeProductionLibraryDistribution
+### TypeScript
+
+`npm install -D @neo4j-importer/graph-spec`
+
+```typescript
+import { GraphSpec } from "@neo4j-importer/graph-spec";
+
+const model: GraphModel = GraphSpec.Json.decodeFromString(value);
 ```
-
-Files will be produced in:
-`build/dist/js/productionLibrary/`
-
-## Prerequisites
-
-- JDK 11+
