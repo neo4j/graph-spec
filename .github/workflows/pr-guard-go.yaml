@@ -1,4 +1,4 @@
-name: PR Quality Guard
+name: Go PR Quality Guard
 
 on:
   pull_request:

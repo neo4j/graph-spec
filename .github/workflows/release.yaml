@@ -95,6 +95,13 @@ jobs:
       ref: ${{ needs.determine-version.outputs.sha }}
     secrets: inherit
 
+  validate-kotlin:
+    needs: determine-version
+    uses: ./.github/workflows/validate-kotlin.yaml
+    with:
+      ref: ${{ needs.determine-version.outputs.sha }}
+    secrets: inherit
+
   finalise-release:
     needs: [determine-version, validate-go]
     runs-on: ubuntu-latest
