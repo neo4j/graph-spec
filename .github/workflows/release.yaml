@@ -107,6 +107,11 @@ jobs:
     needs: [determine-version, validate-kotlin]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.determine-version.outputs.sha }}
+
       - name: Set up JDK 17
         uses: actions/setup-java@v5
         with:
