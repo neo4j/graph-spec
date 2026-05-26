@@ -132,8 +132,6 @@ jobs:
         run: ./gradlew assemble -Pversion=${{ needs.determine-version.outputs.version }} --no-daemon
 
       - name: Publish NPM Package
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           TARGET_DIR="build/dist/js/productionLibrary/"
           
