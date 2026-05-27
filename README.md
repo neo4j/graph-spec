@@ -1,6 +1,10 @@
 # Neo4j Graph Specification Format
 
-## Getting Started
+Graph Spec is a format and library for representing graph models in YAML or JSON.
+It provides library support for JVM, JavaScript, TypeScript & Go.
+
+> [!WARNING]
+> This repository is currently under construction and highly experimental.
 
 ## Installing
 
