@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.js.plain.objects)
     id("maven-publish")
+    id("signing")
     alias(libs.plugins.axion.release)
 }
 
@@ -172,14 +173,14 @@ publishing {
                 }
                 developers {
                     developer {
-                        id = "team-connectors"
-                        name = "Connectors Team"
+                        id = "team-data-importer"
+                        name = "Data Importer Team"
                         organization = "Neo4j"
                         organizationUrl = "https://neo4j.com"
                     }
                     developer {
-                        id = "team-data-importer"
-                        name = "Data Importer Team"
+                        id = "team-connectors"
+                        name = "Connectors Team"
                         organization = "Neo4j"
                         organizationUrl = "https://neo4j.com"
                     }
@@ -191,6 +192,28 @@ publishing {
                 }
             }
         }
+    }
+    repositories {
+        maven {
+            name = "mavenCentral"
+            val releasesRepoUrl = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            val snapshotsRepoUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            url = if (version.toString().contains("alpha")) snapshotsRepoUrl else releasesRepoUrl
+            credentials {
+                username = System.getenv("SONATYPE_USERNAME") ?: project.providers.gradleProperty("sonatypeUsername").orNull
+                password = System.getenv("SONATYPE_PASSWORD") ?: project.providers.gradleProperty("sonatypePassword").orNull
+            }
+        }
+    }
+}
+
+signing {
+    val signingKey = System.getenv("SIGNING_KEY") ?: project.providers.gradleProperty("signingKey").orNull
+    val signingPassword = System.getenv("SIGNING_PASSWORD") ?: project.providers.gradleProperty("signingPassword").orNull
+
+    if (!signingKey.isNullOrBlank() && !signingPassword.isNullOrBlank()) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign(publishing.publications)
     }
 }
 
