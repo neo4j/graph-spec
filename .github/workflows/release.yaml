@@ -12,6 +12,7 @@ concurrency:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   determine-version:
@@ -32,7 +33,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          lfs: true
 
       - name: Determine bump type from Pull Request labels
         id: bump
@@ -102,8 +102,50 @@ jobs:
       ref: ${{ needs.determine-version.outputs.sha }}
     secrets: inherit
 
+  publish-npm:
+    needs: [determine-version, validate-kotlin]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.determine-version.outputs.sha }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Build JS/TS Artifacts
+        run: ./gradlew assemble -Pversion=${{ needs.determine-version.outputs.version }} --no-daemon
+
+      - name: Publish NPM Package
+        run: |
+          TARGET_DIR="build/dist/js/productionLibrary/"
+          
+          if [ -d "$TARGET_DIR" ]; then
+            cd "$TARGET_DIR"
+            # Update package.json version dynamically before publishing
+            npm version ${{ needs.determine-version.outputs.version }} --no-git-tag-version --allow-same-version
+            npm publish --access public
+          else
+            echo "Directory $TARGET_DIR not found. Check your Gradle JS/TS build configurations."
+            exit 1
+          fi
+
   finalise-release:
-    needs: [determine-version, validate-go]
+    needs: [determine-version, validate-go, publish-npm]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -113,7 +155,6 @@ jobs:
         with:
           ref: ${{ needs.determine-version.outputs.sha }}
           fetch-depth: 0
-          lfs: true
 
       - name: Create and Push Unified Tags
         shell: bash

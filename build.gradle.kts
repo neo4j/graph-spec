@@ -26,6 +26,11 @@ kotlin {
     }
     js(IR) {
         binaries.library()
+        compilations.named("main") {
+            packageJson {
+                name = "@neo4j-importer/graph-spec"
+            }
+        }
         nodejs {
             testTask {
                 useMocha()
@@ -87,7 +92,6 @@ kotlin {
     }
 
     compilerOptions {
-        freeCompilerArgs.add("-Xmulti-dollar-interpolation")
         freeCompilerArgs.add("-opt-in=kotlin.native.ExperimentalNativeApi")
     }
 }
@@ -98,6 +102,11 @@ tasks.withType<Kotlin2JsCompile>().configureEach {
     }
 }
 
+val copyReadmeToJs by tasks.registering(Copy::class) {
+    from(rootProject.file("README.md"))
+    into(layout.buildDirectory.dir("dist/js/productionLibrary"))
+}
+
 /*
     Kotlin/JS doesn't support TypeScript unions
     https://youtrack.jetbrains.com/issue/KT-55101/
@@ -106,12 +115,17 @@ tasks.withType<Kotlin2JsCompile>().configureEach {
     There's the potential to use a different library for TS generation in the future which does support this natively.
  */
 tasks.register("generateTsUnions", TypeScriptModifierTask::class.java) {
+    dependsOn(copyReadmeToJs)
     typescriptFile =
         layout.buildDirectory
             .dir("dist/js/productionLibrary/")
             .get()
             .file("graph-spec.d.mts")
             .asFile
+}
+
+tasks.named("jsProductionLibraryCompileSync") {
+    finalizedBy(copyReadmeToJs)
 }
 
 tasks.named("jsNodeProductionLibraryDistribution") {
