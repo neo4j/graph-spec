@@ -99,19 +99,14 @@ jobs:
           alpha_tags="$(printf '%s\n' "$all_tags" | grep -E '^release/v[0-9]+\.[0-9]+\.[0-9]+-alpha\.[0-9]+$' || true)"
 
           latest_stable_tag="$(printf '%s\n' "$stable_tags" | head -n1 || true)"
-          latest_stable_version=""
-          if [[ -n "${latest_stable_tag}" ]]; then
-            latest_stable_version="${latest_stable_tag#release/v}"
-          fi
+          latest_stable_version="${latest_stable_tag#release/v}"
 
-          dangling_alpha_tag=""
           dangling_alpha_base=""
           while IFS= read -r tag; do
             [[ -z "$tag" ]] && continue
-            version="${tag#release/v}"
-            base="${version%-alpha.*}"
+            tag_version="${tag#release/v}"
+            base="${tag_version%-alpha.*}"
             if ! git rev-parse -q --verify "refs/tags/release/v${base}" >/dev/null; then
-              dangling_alpha_tag="$tag"
               dangling_alpha_base="$base"
               break
             fi
@@ -130,11 +125,6 @@ jobs:
               *) echo "Unsupported bump type: ${bump_kind}" >&2; exit 1 ;;
             esac
           }
-
-          if [[ "${channel}" == "alpha" && "${promote}" == "true" ]]; then
-            echo "Invalid labels: release:alpha cannot be combined with release:promote" >&2
-            exit 1
-          fi
 
           if [[ "${channel}" == "stable" ]]; then
             if [[ "${promote}" == "true" ]]; then
