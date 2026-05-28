@@ -12,7 +12,7 @@ plugins {
     alias(libs.plugins.maven.publish)
 }
 
-group = "com.neo4j.importer"
+group = "org.neo4j.importer"
 
 repositories { mavenCentral() }
 
@@ -144,7 +144,6 @@ tasks.register<JavaExec>("generateGraphModelJsonSchema") {
 }
 
 mavenPublishing {
-
     publishToMavenCentral()
     signAllPublications()
     coordinates(group.toString(), "graph-spec", version.toString())
