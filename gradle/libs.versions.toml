@@ -2,7 +2,7 @@
 kotlin = "2.3.20"
 kotlinx-serialization = "1.10.0"
 spotless = "8.3.0"
-axion = "1.18.17"
+venniktech = "0.36.0"
 
 [libraries]
 spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
@@ -21,4 +21,4 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 kotlin-js-plain-objects = { id = "org.jetbrains.kotlin.plugin.js-plain-objects", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-axion-release = { id = "pl.allegro.tech.build.axion-release", version.ref = "axion" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "venniktech" }

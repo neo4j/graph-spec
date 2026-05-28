@@ -243,12 +243,12 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: Publish to Maven Central
-        run: ./gradlew publishAllPublicationsToMavenCentralRepository -Pversion=${{ needs.determine-version.outputs.version }} --no-daemon
+        run: ./gradlew publishToMavenCentral -Pversion=${{ needs.determine-version.outputs.version }} --no-daemon # Replace with publishAndReleaseToMavenCentral later
         env:
-          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
-          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
 
   finalise-release:
     needs: [determine-version, validate-go, publish-npm, publish-maven]
