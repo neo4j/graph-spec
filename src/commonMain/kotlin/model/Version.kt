@@ -32,5 +32,5 @@ object Version {
     /*
         Graph spec versions
      */
-    const val LATEST = "1.0.0"
+    const val LATEST = "4.0.0"
 }
