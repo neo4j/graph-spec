@@ -34,7 +34,7 @@ class ValidationTest {
     @Test
     fun testValidate() {
         val input = """{
-            "version": "1.0.0",
+            "version": "4.0.0",
             "nodes": {
                 "n": {
                     "constraints": {
