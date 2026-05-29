@@ -8,7 +8,23 @@ It provides library support for JVM, JavaScript, TypeScript & Go for migration a
 
 ## Installing
 
-### TypeScript
+### Gradle
+
+```gradle
+implementation("org.neo4j.importer:graph-spec:x.y.z")
+```
+
+### Maven
+
+```xml
+<dependency>
+    <groupId>org.neo4j.importer</groupId>
+    <artifactId>graph-spec</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
+### Node Package Manager
 
 `npm install -D @neo4j-importer/graph-spec`
 
@@ -16,4 +32,10 @@ It provides library support for JVM, JavaScript, TypeScript & Go for migration a
 import { GraphSpec } from "@neo4j-importer/graph-spec";
 
 const model: GraphModel = GraphSpec.Json.decodeFromString(value);
+```
+
+### Go
+
+```bash
+go get github.com/neo4j/graph-spec/go@vx.y.z
 ```

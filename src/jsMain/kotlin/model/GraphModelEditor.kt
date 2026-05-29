@@ -21,6 +21,7 @@ import model.display.toClass
 import model.display.toJs
 import model.mapping.toClass
 import model.mapping.toJs
+import model.node.NodeEditor
 import model.node.nodeJs
 import model.node.toClass
 import model.node.toJs
@@ -59,9 +60,14 @@ class GraphModelEditor {
         )
 
         @JsStatic
-        fun addNode(model: GraphModelJs, name: String?): String = model.nodes.addUnique("node") { nodeId ->
-            nodeJs(id = nodeId, name = name ?: nodeId)
-        }
+        fun addNode(model: GraphModelJs, name: String? = null, label: String? = null): String =
+            model.nodes.addUnique("node") { nodeId ->
+                val node = nodeJs(id = nodeId, name = name ?: nodeId)
+                if (label != null) {
+                    NodeEditor.setIdentifyingLabel(model, nodeId, label)
+                }
+                node
+            }
 
         @JsStatic
         fun removeNode(model: GraphModelJs, nodeId: String) {

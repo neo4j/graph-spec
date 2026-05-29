@@ -194,9 +194,6 @@ typedef struct {
 } libgraphdatamodel_kref_migrate_migration_dataModel_GraphSpecDataModelV3Migration_Companion;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
-} libgraphdatamodel_kref_migrate_migration_dataModel_GraphSpecV3PrettyMigration;
-typedef struct {
-  libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_migrate_MigrationPath;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
@@ -335,6 +332,9 @@ typedef struct {
 } libgraphdatamodel_kref_model_mapping_NodeMapping;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
+} libgraphdatamodel_kref_kotlin_collections_MutableSet;
+typedef struct {
+  libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_mapping_NodeMapping_$serializer;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
@@ -398,6 +398,9 @@ typedef struct {
 } libgraphdatamodel_kref_model_node_NodeConstraint;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
+} libgraphdatamodel_kref_model_type_ConstraintType;
+typedef struct {
+  libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_node_NodeConstraint_$serializer;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
@@ -405,6 +408,9 @@ typedef struct {
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_node_NodeIndex;
+typedef struct {
+  libgraphdatamodel_KNativePtr pinned;
+} libgraphdatamodel_kref_model_type_IndexType;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_node_NodeIndex_$serializer;
@@ -614,22 +620,16 @@ typedef struct {
 } libgraphdatamodel_kref_model_source_TableField_Companion;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
-} libgraphdatamodel_kref_model_type_ConstraintType;
-typedef struct {
-  libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_type_ConstraintType_EXISTS;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_type_ConstraintType_KEY;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
-} libgraphdatamodel_kref_model_type_ConstraintType_TYPE;
+} libgraphdatamodel_kref_model_type_ConstraintType_PROPERTY_TYPE;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_type_ConstraintType_UNIQUE;
-typedef struct {
-  libgraphdatamodel_KNativePtr pinned;
-} libgraphdatamodel_kref_model_type_IndexType;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_type_IndexType_FULLTEXT;
@@ -648,6 +648,15 @@ typedef struct {
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_type_IndexType_LOOKUP;
+typedef struct {
+  libgraphdatamodel_KNativePtr pinned;
+} libgraphdatamodel_kref_model_type_Named;
+typedef struct {
+  libgraphdatamodel_KNativePtr pinned;
+} libgraphdatamodel_kref_model_Internal;
+typedef struct {
+  libgraphdatamodel_KNativePtr pinned;
+} libgraphdatamodel_kref_model_Pretty;
 typedef struct {
   libgraphdatamodel_KNativePtr pinned;
 } libgraphdatamodel_kref_model_Type;
@@ -994,13 +1003,6 @@ typedef struct {
               libgraphdatamodel_kref_migrate_migration_dataModel_GraphSpecDataModelV3Migration (*GraphSpecDataModelV3Migration)();
               libgraphdatamodel_kref_codec_schema_SchemaMap (*migrate)(libgraphdatamodel_kref_migrate_migration_dataModel_GraphSpecDataModelV3Migration thiz, libgraphdatamodel_kref_codec_schema_SchemaMap schema);
             } GraphSpecDataModelV3Migration;
-            struct {
-              libgraphdatamodel_KType* (*_type)(void);
-              libgraphdatamodel_kref_migrate_migration_dataModel_GraphSpecV3PrettyMigration (*GraphSpecV3PrettyMigration)();
-              libgraphdatamodel_kref_codec_schema_SchemaMap (*migrate)(libgraphdatamodel_kref_migrate_migration_dataModel_GraphSpecV3PrettyMigration thiz, libgraphdatamodel_kref_codec_schema_SchemaMap schema);
-              void (*sort)(libgraphdatamodel_kref_migrate_migration_dataModel_GraphSpecV3PrettyMigration thiz, libgraphdatamodel_kref_codec_schema_SchemaMap schema);
-              void (*tidyConstraints)(libgraphdatamodel_kref_migrate_migration_dataModel_GraphSpecV3PrettyMigration thiz, libgraphdatamodel_kref_codec_schema_SchemaMap schema);
-            } GraphSpecV3PrettyMigration;
           } dataModel;
         } migration;
         struct {
@@ -1016,6 +1018,8 @@ typedef struct {
           struct {
             libgraphdatamodel_KType* (*_type)(void);
             libgraphdatamodel_kref_model_GraphModel_Companion (*_instance)();
+            void (*internalise)(libgraphdatamodel_kref_model_GraphModel_Companion thiz, libgraphdatamodel_kref_model_GraphModel model);
+            void (*prettify)(libgraphdatamodel_kref_model_GraphModel_Companion thiz, libgraphdatamodel_kref_model_GraphModel model);
             libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_GraphModel_Companion thiz);
             libgraphdatamodel_kref_kotlin_collections_List (*validate)(libgraphdatamodel_kref_model_GraphModel_Companion thiz, libgraphdatamodel_kref_model_GraphModel model, libgraphdatamodel_kref_kotlin_collections_List validators);
           } Companion;
@@ -1028,22 +1032,24 @@ typedef struct {
             void (*serialize)(libgraphdatamodel_kref_model_GraphModel_$serializer thiz, libgraphdatamodel_kref_kotlinx_serialization_encoding_Encoder encoder, libgraphdatamodel_kref_model_GraphModel value);
           } $serializer;
           libgraphdatamodel_KType* (*_type)(void);
-          libgraphdatamodel_kref_model_GraphModel (*GraphModel)(const char* version, libgraphdatamodel_kref_kotlin_collections_Map nodes, libgraphdatamodel_kref_kotlin_collections_Map relationships, libgraphdatamodel_kref_kotlin_collections_Map tables, libgraphdatamodel_kref_kotlin_collections_List mappings, libgraphdatamodel_kref_model_display_Display display);
+          libgraphdatamodel_kref_model_GraphModel (*GraphModel)(const char* version, libgraphdatamodel_kref_kotlin_collections_MutableMap nodes, libgraphdatamodel_kref_kotlin_collections_MutableMap relationships, libgraphdatamodel_kref_kotlin_collections_MutableMap tables, libgraphdatamodel_kref_kotlin_collections_MutableList mappings, libgraphdatamodel_kref_model_display_Display display);
           libgraphdatamodel_kref_model_display_Display (*get_display)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_kotlin_collections_List (*get_mappings)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_kotlin_collections_Map (*get_nodes)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_kotlin_collections_Map (*get_relationships)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_kotlin_collections_Map (*get_tables)(libgraphdatamodel_kref_model_GraphModel thiz);
+          libgraphdatamodel_kref_kotlin_collections_MutableList (*get_mappings)(libgraphdatamodel_kref_model_GraphModel thiz);
+          libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_nodes)(libgraphdatamodel_kref_model_GraphModel thiz);
+          libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_relationships)(libgraphdatamodel_kref_model_GraphModel thiz);
+          libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_tables)(libgraphdatamodel_kref_model_GraphModel thiz);
           const char* (*get_version)(libgraphdatamodel_kref_model_GraphModel thiz);
           const char* (*component1)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_kotlin_collections_Map (*component2)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_kotlin_collections_Map (*component3)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_kotlin_collections_Map (*component4)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_kotlin_collections_List (*component5)(libgraphdatamodel_kref_model_GraphModel thiz);
+          libgraphdatamodel_kref_kotlin_collections_MutableMap (*component2)(libgraphdatamodel_kref_model_GraphModel thiz);
+          libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_GraphModel thiz);
+          libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_GraphModel thiz);
+          libgraphdatamodel_kref_kotlin_collections_MutableList (*component5)(libgraphdatamodel_kref_model_GraphModel thiz);
           libgraphdatamodel_kref_model_display_Display (*component6)(libgraphdatamodel_kref_model_GraphModel thiz);
-          libgraphdatamodel_kref_model_GraphModel (*copy)(libgraphdatamodel_kref_model_GraphModel thiz, const char* version, libgraphdatamodel_kref_kotlin_collections_Map nodes, libgraphdatamodel_kref_kotlin_collections_Map relationships, libgraphdatamodel_kref_kotlin_collections_Map tables, libgraphdatamodel_kref_kotlin_collections_List mappings, libgraphdatamodel_kref_model_display_Display display);
+          libgraphdatamodel_kref_model_GraphModel (*copy)(libgraphdatamodel_kref_model_GraphModel thiz, const char* version, libgraphdatamodel_kref_kotlin_collections_MutableMap nodes, libgraphdatamodel_kref_kotlin_collections_MutableMap relationships, libgraphdatamodel_kref_kotlin_collections_MutableMap tables, libgraphdatamodel_kref_kotlin_collections_MutableList mappings, libgraphdatamodel_kref_model_display_Display display);
           libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_GraphModel thiz, libgraphdatamodel_kref_kotlin_Any other);
           libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_GraphModel thiz);
+          void (*internalise)(libgraphdatamodel_kref_model_GraphModel thiz);
+          void (*prettify)(libgraphdatamodel_kref_model_GraphModel thiz);
           const char* (*toString)(libgraphdatamodel_kref_model_GraphModel thiz);
           libgraphdatamodel_kref_kotlin_collections_List (*validate)(libgraphdatamodel_kref_model_GraphModel thiz, libgraphdatamodel_kref_kotlin_collections_List validators);
         } GraphModel;
@@ -1063,10 +1069,10 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_display_Display_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_display_Display (*Display)(libgraphdatamodel_kref_kotlin_collections_Map nodes);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_nodes)(libgraphdatamodel_kref_model_display_Display thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component1)(libgraphdatamodel_kref_model_display_Display thiz);
-            libgraphdatamodel_kref_model_display_Display (*copy)(libgraphdatamodel_kref_model_display_Display thiz, libgraphdatamodel_kref_kotlin_collections_Map nodes);
+            libgraphdatamodel_kref_model_display_Display (*Display)(libgraphdatamodel_kref_kotlin_collections_MutableMap nodes);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_nodes)(libgraphdatamodel_kref_model_display_Display thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component1)(libgraphdatamodel_kref_model_display_Display thiz);
+            libgraphdatamodel_kref_model_display_Display (*copy)(libgraphdatamodel_kref_model_display_Display thiz, libgraphdatamodel_kref_kotlin_collections_MutableMap nodes);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_display_Display thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_display_Display thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_display_Display thiz);
@@ -1089,7 +1095,9 @@ typedef struct {
             libgraphdatamodel_kref_model_display_NodeDisplay (*NodeDisplay)(libgraphdatamodel_KDouble x, libgraphdatamodel_KDouble y, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_display_NodeDisplay thiz);
             libgraphdatamodel_KDouble (*get_x)(libgraphdatamodel_kref_model_display_NodeDisplay thiz);
+            void (*set_x)(libgraphdatamodel_kref_model_display_NodeDisplay thiz, libgraphdatamodel_KDouble set);
             libgraphdatamodel_KDouble (*get_y)(libgraphdatamodel_kref_model_display_NodeDisplay thiz);
+            void (*set_y)(libgraphdatamodel_kref_model_display_NodeDisplay thiz, libgraphdatamodel_KDouble set);
             libgraphdatamodel_KDouble (*component1)(libgraphdatamodel_kref_model_display_NodeDisplay thiz);
             libgraphdatamodel_KDouble (*component2)(libgraphdatamodel_kref_model_display_NodeDisplay thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_display_NodeDisplay thiz);
@@ -1334,7 +1342,9 @@ typedef struct {
             libgraphdatamodel_KType* (*_type)(void);
             libgraphdatamodel_kref_model_mapping_LabelMapping (*LabelMapping)(const char* table, const char* field);
             const char* (*get_field)(libgraphdatamodel_kref_model_mapping_LabelMapping thiz);
+            void (*set_field)(libgraphdatamodel_kref_model_mapping_LabelMapping thiz, const char* set);
             const char* (*get_table)(libgraphdatamodel_kref_model_mapping_LabelMapping thiz);
+            void (*set_table)(libgraphdatamodel_kref_model_mapping_LabelMapping thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_mapping_LabelMapping thiz);
             const char* (*component2)(libgraphdatamodel_kref_model_mapping_LabelMapping thiz);
             libgraphdatamodel_kref_model_mapping_LabelMapping (*copy)(libgraphdatamodel_kref_model_mapping_LabelMapping thiz, const char* table, const char* field);
@@ -1395,20 +1405,24 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_mapping_NodeMapping_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_mapping_NodeMapping (*NodeMapping)(const char* node, const char* table, libgraphdatamodel_kref_kotlin_collections_Map properties, libgraphdatamodel_kref_model_mapping_MappingMode mode, const char* matchLabel, libgraphdatamodel_kref_kotlin_collections_Set keys);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_keys)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
+            libgraphdatamodel_kref_model_mapping_NodeMapping (*NodeMapping)(const char* node, const char* table, libgraphdatamodel_kref_kotlin_collections_MutableMap properties, libgraphdatamodel_kref_model_mapping_MappingMode mode, const char* matchLabel, libgraphdatamodel_kref_kotlin_collections_MutableSet keys);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_keys)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
             const char* (*get_matchLabel)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
+            void (*set_matchLabel)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz, const char* set);
             libgraphdatamodel_kref_model_mapping_MappingMode (*get_mode)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
+            void (*set_mode)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz, libgraphdatamodel_kref_model_mapping_MappingMode set);
             const char* (*get_node)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_properties)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
+            void (*set_node)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_properties)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
             const char* (*get_table)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
+            void (*set_table)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
             const char* (*component2)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component3)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
             libgraphdatamodel_kref_model_mapping_MappingMode (*component4)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
             const char* (*component5)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component6)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
-            libgraphdatamodel_kref_model_mapping_NodeMapping (*copy)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz, const char* node, const char* table, libgraphdatamodel_kref_kotlin_collections_Map properties, libgraphdatamodel_kref_model_mapping_MappingMode mode, const char* matchLabel, libgraphdatamodel_kref_kotlin_collections_Set keys);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component6)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
+            libgraphdatamodel_kref_model_mapping_NodeMapping (*copy)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz, const char* node, const char* table, libgraphdatamodel_kref_kotlin_collections_MutableMap properties, libgraphdatamodel_kref_model_mapping_MappingMode mode, const char* matchLabel, libgraphdatamodel_kref_kotlin_collections_MutableSet keys);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_mapping_NodeMapping thiz);
@@ -1430,6 +1444,7 @@ typedef struct {
             libgraphdatamodel_KType* (*_type)(void);
             libgraphdatamodel_kref_model_mapping_PropertyMapping (*PropertyMapping)(const char* field);
             const char* (*get_field)(libgraphdatamodel_kref_model_mapping_PropertyMapping thiz);
+            void (*set_field)(libgraphdatamodel_kref_model_mapping_PropertyMapping thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_mapping_PropertyMapping thiz);
             libgraphdatamodel_kref_model_mapping_PropertyMapping (*copy)(libgraphdatamodel_kref_model_mapping_PropertyMapping thiz, const char* field);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_mapping_PropertyMapping thiz, libgraphdatamodel_kref_kotlin_Any other);
@@ -1453,7 +1468,9 @@ typedef struct {
             libgraphdatamodel_KType* (*_type)(void);
             libgraphdatamodel_kref_model_mapping_QueryMapping (*QueryMapping)(const char* table, const char* query);
             const char* (*get_query)(libgraphdatamodel_kref_model_mapping_QueryMapping thiz);
+            void (*set_query)(libgraphdatamodel_kref_model_mapping_QueryMapping thiz, const char* set);
             const char* (*get_table)(libgraphdatamodel_kref_model_mapping_QueryMapping thiz);
+            void (*set_table)(libgraphdatamodel_kref_model_mapping_QueryMapping thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_mapping_QueryMapping thiz);
             const char* (*component2)(libgraphdatamodel_kref_model_mapping_QueryMapping thiz);
             libgraphdatamodel_kref_model_mapping_QueryMapping (*copy)(libgraphdatamodel_kref_model_mapping_QueryMapping thiz, const char* table, const char* query);
@@ -1476,24 +1493,28 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_mapping_RelationshipMapping_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_mapping_RelationshipMapping (*RelationshipMapping)(const char* relationship, const char* table, libgraphdatamodel_kref_model_mapping_TargetMapping from, libgraphdatamodel_kref_model_mapping_TargetMapping to, const char* matchLabel, libgraphdatamodel_kref_kotlin_collections_Map properties, libgraphdatamodel_kref_model_mapping_MappingMode mode, libgraphdatamodel_kref_kotlin_collections_Set keys);
+            libgraphdatamodel_kref_model_mapping_RelationshipMapping (*RelationshipMapping)(const char* relationship, const char* table, libgraphdatamodel_kref_model_mapping_TargetMapping from, libgraphdatamodel_kref_model_mapping_TargetMapping to, const char* matchLabel, libgraphdatamodel_kref_kotlin_collections_MutableMap properties, libgraphdatamodel_kref_model_mapping_MappingMode mode, libgraphdatamodel_kref_kotlin_collections_MutableSet keys);
             libgraphdatamodel_kref_model_mapping_TargetMapping (*get_from)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_keys)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_keys)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             const char* (*get_matchLabel)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
+            void (*set_matchLabel)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz, const char* set);
             libgraphdatamodel_kref_model_mapping_MappingMode (*get_mode)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_properties)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
+            void (*set_mode)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz, libgraphdatamodel_kref_model_mapping_MappingMode set);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_properties)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             const char* (*get_relationship)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
+            void (*set_relationship)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz, const char* set);
             const char* (*get_table)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
+            void (*set_table)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz, const char* set);
             libgraphdatamodel_kref_model_mapping_TargetMapping (*get_to)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             const char* (*component1)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             const char* (*component2)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             libgraphdatamodel_kref_model_mapping_TargetMapping (*component3)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             libgraphdatamodel_kref_model_mapping_TargetMapping (*component4)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             const char* (*component5)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component6)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component6)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             libgraphdatamodel_kref_model_mapping_MappingMode (*component7)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component8)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
-            libgraphdatamodel_kref_model_mapping_RelationshipMapping (*copy)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz, const char* relationship, const char* table, libgraphdatamodel_kref_model_mapping_TargetMapping from, libgraphdatamodel_kref_model_mapping_TargetMapping to, const char* matchLabel, libgraphdatamodel_kref_kotlin_collections_Map properties, libgraphdatamodel_kref_model_mapping_MappingMode mode, libgraphdatamodel_kref_kotlin_collections_Set keys);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component8)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
+            libgraphdatamodel_kref_model_mapping_RelationshipMapping (*copy)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz, const char* relationship, const char* table, libgraphdatamodel_kref_model_mapping_TargetMapping from, libgraphdatamodel_kref_model_mapping_TargetMapping to, const char* matchLabel, libgraphdatamodel_kref_kotlin_collections_MutableMap properties, libgraphdatamodel_kref_model_mapping_MappingMode mode, libgraphdatamodel_kref_kotlin_collections_MutableSet keys);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_mapping_RelationshipMapping thiz);
@@ -1513,14 +1534,16 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_mapping_TargetMapping_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_mapping_TargetMapping (*TargetMapping)(const char* node, const char* label, libgraphdatamodel_kref_kotlin_collections_Map properties);
+            libgraphdatamodel_kref_model_mapping_TargetMapping (*TargetMapping)(const char* node, const char* label, libgraphdatamodel_kref_kotlin_collections_MutableMap properties);
             const char* (*get_label)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
+            void (*set_label)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz, const char* set);
             const char* (*get_node)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_properties)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
+            void (*set_node)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_properties)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
             const char* (*component1)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
             const char* (*component2)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component3)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
-            libgraphdatamodel_kref_model_mapping_TargetMapping (*copy)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz, const char* node, const char* label, libgraphdatamodel_kref_kotlin_collections_Map properties);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
+            libgraphdatamodel_kref_model_mapping_TargetMapping (*copy)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz, const char* node, const char* label, libgraphdatamodel_kref_kotlin_collections_MutableMap properties);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_mapping_TargetMapping thiz);
@@ -1542,16 +1565,17 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_node_Labels_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_node_Labels (*Labels)(const char* identifier, libgraphdatamodel_kref_kotlin_collections_Set implied, libgraphdatamodel_kref_kotlin_collections_Set optional, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_node_Labels (*Labels)(const char* identifier, libgraphdatamodel_kref_kotlin_collections_MutableSet implied, libgraphdatamodel_kref_kotlin_collections_MutableSet optional, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_node_Labels thiz);
             const char* (*get_identifier)(libgraphdatamodel_kref_model_node_Labels thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_implied)(libgraphdatamodel_kref_model_node_Labels thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_optional)(libgraphdatamodel_kref_model_node_Labels thiz);
+            void (*set_identifier)(libgraphdatamodel_kref_model_node_Labels thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_implied)(libgraphdatamodel_kref_model_node_Labels thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_optional)(libgraphdatamodel_kref_model_node_Labels thiz);
             const char* (*component1)(libgraphdatamodel_kref_model_node_Labels thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component2)(libgraphdatamodel_kref_model_node_Labels thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component3)(libgraphdatamodel_kref_model_node_Labels thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component2)(libgraphdatamodel_kref_model_node_Labels thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component3)(libgraphdatamodel_kref_model_node_Labels thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_node_Labels thiz);
-            libgraphdatamodel_kref_model_node_Labels (*copy)(libgraphdatamodel_kref_model_node_Labels thiz, const char* identifier, libgraphdatamodel_kref_kotlin_collections_Set implied, libgraphdatamodel_kref_kotlin_collections_Set optional, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_node_Labels (*copy)(libgraphdatamodel_kref_model_node_Labels thiz, const char* identifier, libgraphdatamodel_kref_kotlin_collections_MutableSet implied, libgraphdatamodel_kref_kotlin_collections_MutableSet optional, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_node_Labels thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_node_Labels thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_node_Labels thiz);
@@ -1571,20 +1595,24 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_node_Node_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_node_Node (*Node)(libgraphdatamodel_kref_model_node_Labels labels, libgraphdatamodel_kref_kotlin_collections_Map properties, libgraphdatamodel_kref_kotlin_collections_Map constraints, libgraphdatamodel_kref_kotlin_collections_Map indexes, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_constraints)(libgraphdatamodel_kref_model_node_Node thiz);
+            libgraphdatamodel_kref_model_node_Node (*Node)(const char* label, libgraphdatamodel_kref_model_node_Labels labels, libgraphdatamodel_kref_kotlin_collections_MutableMap properties, libgraphdatamodel_kref_kotlin_collections_MutableMap constraints, libgraphdatamodel_kref_kotlin_collections_MutableMap indexes, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_constraints)(libgraphdatamodel_kref_model_node_Node thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_node_Node thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_indexes)(libgraphdatamodel_kref_model_node_Node thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_indexes)(libgraphdatamodel_kref_model_node_Node thiz);
+            const char* (*get_label)(libgraphdatamodel_kref_model_node_Node thiz);
+            void (*set_label)(libgraphdatamodel_kref_model_node_Node thiz, const char* set);
             libgraphdatamodel_kref_model_node_Labels (*get_labels)(libgraphdatamodel_kref_model_node_Node thiz);
             const char* (*get_name)(libgraphdatamodel_kref_model_node_Node thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_properties)(libgraphdatamodel_kref_model_node_Node thiz);
-            libgraphdatamodel_kref_model_node_Labels (*component1)(libgraphdatamodel_kref_model_node_Node thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component2)(libgraphdatamodel_kref_model_node_Node thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component3)(libgraphdatamodel_kref_model_node_Node thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component4)(libgraphdatamodel_kref_model_node_Node thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_node_Node thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_properties)(libgraphdatamodel_kref_model_node_Node thiz);
+            const char* (*component1)(libgraphdatamodel_kref_model_node_Node thiz);
+            libgraphdatamodel_kref_model_node_Labels (*component2)(libgraphdatamodel_kref_model_node_Node thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_node_Node thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_node_Node thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component5)(libgraphdatamodel_kref_model_node_Node thiz);
-            const char* (*component6)(libgraphdatamodel_kref_model_node_Node thiz);
-            libgraphdatamodel_kref_model_node_Node (*copy)(libgraphdatamodel_kref_model_node_Node thiz, libgraphdatamodel_kref_model_node_Labels labels, libgraphdatamodel_kref_kotlin_collections_Map properties, libgraphdatamodel_kref_kotlin_collections_Map constraints, libgraphdatamodel_kref_kotlin_collections_Map indexes, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component6)(libgraphdatamodel_kref_model_node_Node thiz);
+            const char* (*component7)(libgraphdatamodel_kref_model_node_Node thiz);
+            libgraphdatamodel_kref_model_node_Node (*copy)(libgraphdatamodel_kref_model_node_Node thiz, const char* label, libgraphdatamodel_kref_model_node_Labels labels, libgraphdatamodel_kref_kotlin_collections_MutableMap properties, libgraphdatamodel_kref_kotlin_collections_MutableMap constraints, libgraphdatamodel_kref_kotlin_collections_MutableMap indexes, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_node_Node thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_node_Node thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_node_Node thiz);
@@ -1604,16 +1632,21 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_node_NodeConstraint_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_node_NodeConstraint (*NodeConstraint)(const char* type, const char* label, libgraphdatamodel_kref_kotlin_collections_Set properties, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_node_NodeConstraint (*NodeConstraint)(libgraphdatamodel_kref_model_type_ConstraintType type, const char* label, libgraphdatamodel_kref_kotlin_collections_MutableSet properties, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
             const char* (*get_label)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_properties)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
-            const char* (*get_type)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
-            const char* (*component1)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
+            void (*set_label)(libgraphdatamodel_kref_model_node_NodeConstraint thiz, const char* set);
+            const char* (*get_name)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_node_NodeConstraint thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_properties)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
+            libgraphdatamodel_kref_model_type_ConstraintType (*get_type)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
+            void (*set_type)(libgraphdatamodel_kref_model_node_NodeConstraint thiz, libgraphdatamodel_kref_model_type_ConstraintType set);
+            libgraphdatamodel_kref_model_type_ConstraintType (*component1)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
             const char* (*component2)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component3)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component3)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
-            libgraphdatamodel_kref_model_node_NodeConstraint (*copy)(libgraphdatamodel_kref_model_node_NodeConstraint thiz, const char* type, const char* label, libgraphdatamodel_kref_kotlin_collections_Set properties, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            const char* (*component5)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
+            libgraphdatamodel_kref_model_node_NodeConstraint (*copy)(libgraphdatamodel_kref_model_node_NodeConstraint thiz, libgraphdatamodel_kref_model_type_ConstraintType type, const char* label, libgraphdatamodel_kref_kotlin_collections_MutableSet properties, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_node_NodeConstraint thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_node_NodeConstraint thiz);
@@ -1633,18 +1666,22 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_node_NodeIndex_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_node_NodeIndex (*NodeIndex)(const char* type, libgraphdatamodel_kref_kotlin_collections_Set labels, libgraphdatamodel_kref_kotlin_collections_Set properties, libgraphdatamodel_kref_kotlin_collections_Map options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_node_NodeIndex (*NodeIndex)(libgraphdatamodel_kref_model_type_IndexType type, libgraphdatamodel_kref_kotlin_collections_MutableSet labels, libgraphdatamodel_kref_kotlin_collections_MutableSet properties, libgraphdatamodel_kref_kotlin_collections_MutableMap options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_labels)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_options)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_properties)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            const char* (*get_type)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            const char* (*component1)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component2)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component3)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component4)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_labels)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            const char* (*get_name)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_node_NodeIndex thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_options)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_properties)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            libgraphdatamodel_kref_model_type_IndexType (*get_type)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            void (*set_type)(libgraphdatamodel_kref_model_node_NodeIndex thiz, libgraphdatamodel_kref_model_type_IndexType set);
+            libgraphdatamodel_kref_model_type_IndexType (*component1)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component2)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component3)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component5)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
-            libgraphdatamodel_kref_model_node_NodeIndex (*copy)(libgraphdatamodel_kref_model_node_NodeIndex thiz, const char* type, libgraphdatamodel_kref_kotlin_collections_Set labels, libgraphdatamodel_kref_kotlin_collections_Set properties, libgraphdatamodel_kref_kotlin_collections_Map options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            const char* (*component6)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
+            libgraphdatamodel_kref_model_node_NodeIndex (*copy)(libgraphdatamodel_kref_model_node_NodeIndex thiz, libgraphdatamodel_kref_model_type_IndexType type, libgraphdatamodel_kref_kotlin_collections_MutableSet labels, libgraphdatamodel_kref_kotlin_collections_MutableSet properties, libgraphdatamodel_kref_kotlin_collections_MutableMap options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_node_NodeIndex thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_node_NodeIndex thiz);
@@ -1793,9 +1830,13 @@ typedef struct {
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_property_Property thiz);
             libgraphdatamodel_KBoolean (*get_key)(libgraphdatamodel_kref_model_property_Property thiz);
             const char* (*get_name)(libgraphdatamodel_kref_model_property_Property thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_property_Property thiz, const char* set);
             libgraphdatamodel_KBoolean (*get_nullable)(libgraphdatamodel_kref_model_property_Property thiz);
+            void (*set_nullable)(libgraphdatamodel_kref_model_property_Property thiz, libgraphdatamodel_KBoolean set);
             libgraphdatamodel_kref_model_property_Neo4jType (*get_type)(libgraphdatamodel_kref_model_property_Property thiz);
+            void (*set_type)(libgraphdatamodel_kref_model_property_Property thiz, libgraphdatamodel_kref_model_property_Neo4jType set);
             libgraphdatamodel_KBoolean (*get_unique)(libgraphdatamodel_kref_model_property_Property thiz);
+            void (*set_unique)(libgraphdatamodel_kref_model_property_Property thiz, libgraphdatamodel_KBoolean set);
             libgraphdatamodel_kref_model_property_Neo4jType (*component1)(libgraphdatamodel_kref_model_property_Property thiz);
             libgraphdatamodel_KBoolean (*component2)(libgraphdatamodel_kref_model_property_Property thiz);
             libgraphdatamodel_KBoolean (*component3)(libgraphdatamodel_kref_model_property_Property thiz);
@@ -1823,24 +1864,26 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_relationship_Relationship_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_relationship_Relationship (*Relationship)(const char* type, libgraphdatamodel_kref_model_relationship_RelationshipTarget from, libgraphdatamodel_kref_model_relationship_RelationshipTarget to, libgraphdatamodel_kref_kotlin_collections_Map properties, libgraphdatamodel_kref_kotlin_collections_Map constraints, libgraphdatamodel_kref_kotlin_collections_Map indexes, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_constraints)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
+            libgraphdatamodel_kref_model_relationship_Relationship (*Relationship)(const char* type, libgraphdatamodel_kref_model_relationship_RelationshipTarget from, libgraphdatamodel_kref_model_relationship_RelationshipTarget to, libgraphdatamodel_kref_kotlin_collections_MutableMap properties, libgraphdatamodel_kref_kotlin_collections_MutableMap constraints, libgraphdatamodel_kref_kotlin_collections_MutableMap indexes, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_constraints)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             libgraphdatamodel_kref_model_relationship_RelationshipTarget (*get_from)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_indexes)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_indexes)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             const char* (*get_name)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_properties)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_relationship_Relationship thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_properties)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             libgraphdatamodel_kref_model_relationship_RelationshipTarget (*get_to)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             const char* (*get_type)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
+            void (*set_type)(libgraphdatamodel_kref_model_relationship_Relationship thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             libgraphdatamodel_kref_model_relationship_RelationshipTarget (*component2)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             libgraphdatamodel_kref_model_relationship_RelationshipTarget (*component3)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component4)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component5)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component6)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component5)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component6)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component7)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             const char* (*component8)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
-            libgraphdatamodel_kref_model_relationship_Relationship (*copy)(libgraphdatamodel_kref_model_relationship_Relationship thiz, const char* type, libgraphdatamodel_kref_model_relationship_RelationshipTarget from, libgraphdatamodel_kref_model_relationship_RelationshipTarget to, libgraphdatamodel_kref_kotlin_collections_Map properties, libgraphdatamodel_kref_kotlin_collections_Map constraints, libgraphdatamodel_kref_kotlin_collections_Map indexes, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
+            libgraphdatamodel_kref_model_relationship_Relationship (*copy)(libgraphdatamodel_kref_model_relationship_Relationship thiz, const char* type, libgraphdatamodel_kref_model_relationship_RelationshipTarget from, libgraphdatamodel_kref_model_relationship_RelationshipTarget to, libgraphdatamodel_kref_kotlin_collections_MutableMap properties, libgraphdatamodel_kref_kotlin_collections_MutableMap constraints, libgraphdatamodel_kref_kotlin_collections_MutableMap indexes, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_relationship_Relationship thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_relationship_Relationship thiz);
@@ -1860,16 +1903,20 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_relationship_RelationshipConstraint (*RelationshipConstraint)(const char* type, libgraphdatamodel_kref_kotlin_collections_Set properties, libgraphdatamodel_kref_kotlin_collections_Map options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_relationship_RelationshipConstraint (*RelationshipConstraint)(libgraphdatamodel_kref_model_type_ConstraintType type, libgraphdatamodel_kref_kotlin_collections_MutableSet properties, libgraphdatamodel_kref_kotlin_collections_MutableMap options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_options)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_properties)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
-            const char* (*get_type)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
-            const char* (*component1)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component2)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component3)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
+            const char* (*get_name)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_options)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_properties)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
+            libgraphdatamodel_kref_model_type_ConstraintType (*get_type)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
+            void (*set_type)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz, libgraphdatamodel_kref_model_type_ConstraintType set);
+            libgraphdatamodel_kref_model_type_ConstraintType (*component1)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component2)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
-            libgraphdatamodel_kref_model_relationship_RelationshipConstraint (*copy)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz, const char* type, libgraphdatamodel_kref_kotlin_collections_Set properties, libgraphdatamodel_kref_kotlin_collections_Map options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            const char* (*component5)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
+            libgraphdatamodel_kref_model_relationship_RelationshipConstraint (*copy)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz, libgraphdatamodel_kref_model_type_ConstraintType type, libgraphdatamodel_kref_kotlin_collections_MutableSet properties, libgraphdatamodel_kref_kotlin_collections_MutableMap options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_relationship_RelationshipConstraint thiz);
@@ -1889,16 +1936,20 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_relationship_RelationshipIndex_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_relationship_RelationshipIndex (*RelationshipIndex)(const char* type, libgraphdatamodel_kref_kotlin_collections_Set properties, libgraphdatamodel_kref_kotlin_collections_Map options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_relationship_RelationshipIndex (*RelationshipIndex)(libgraphdatamodel_kref_model_type_IndexType type, libgraphdatamodel_kref_kotlin_collections_MutableSet properties, libgraphdatamodel_kref_kotlin_collections_MutableMap options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_options)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_properties)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
-            const char* (*get_type)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
-            const char* (*component1)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component2)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component3)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
+            const char* (*get_name)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz, const char* set);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_options)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_properties)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
+            libgraphdatamodel_kref_model_type_IndexType (*get_type)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
+            void (*set_type)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz, libgraphdatamodel_kref_model_type_IndexType set);
+            libgraphdatamodel_kref_model_type_IndexType (*component1)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component2)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
-            libgraphdatamodel_kref_model_relationship_RelationshipIndex (*copy)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz, const char* type, libgraphdatamodel_kref_kotlin_collections_Set properties, libgraphdatamodel_kref_kotlin_collections_Map options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            const char* (*component5)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
+            libgraphdatamodel_kref_model_relationship_RelationshipIndex (*copy)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz, libgraphdatamodel_kref_model_type_IndexType type, libgraphdatamodel_kref_kotlin_collections_MutableSet properties, libgraphdatamodel_kref_kotlin_collections_MutableMap options, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_relationship_RelationshipIndex thiz);
@@ -1920,8 +1971,11 @@ typedef struct {
             libgraphdatamodel_KType* (*_type)(void);
             libgraphdatamodel_kref_model_relationship_RelationshipTarget (*RelationshipTarget)(const char* node, const char* label, const char* property);
             const char* (*get_label)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz);
+            void (*set_label)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz, const char* set);
             const char* (*get_node)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz);
+            void (*set_node)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz, const char* set);
             const char* (*get_property)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz);
+            void (*set_property)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz);
             const char* (*component2)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz);
             const char* (*component3)(libgraphdatamodel_kref_model_relationship_RelationshipTarget thiz);
@@ -1947,14 +2001,14 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_source_ForeignKey_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_source_ForeignKey (*ForeignKey)(libgraphdatamodel_kref_kotlin_collections_Set fields, libgraphdatamodel_kref_model_source_ForeignKeyReference references, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_source_ForeignKey (*ForeignKey)(libgraphdatamodel_kref_kotlin_collections_MutableSet fields, libgraphdatamodel_kref_model_source_ForeignKeyReference references, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_fields)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_fields)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
             libgraphdatamodel_kref_model_source_ForeignKeyReference (*get_references)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component1)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component1)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
             libgraphdatamodel_kref_model_source_ForeignKeyReference (*component2)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
-            libgraphdatamodel_kref_model_source_ForeignKey (*copy)(libgraphdatamodel_kref_model_source_ForeignKey thiz, libgraphdatamodel_kref_kotlin_collections_Set fields, libgraphdatamodel_kref_model_source_ForeignKeyReference references, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_source_ForeignKey (*copy)(libgraphdatamodel_kref_model_source_ForeignKey thiz, libgraphdatamodel_kref_kotlin_collections_MutableSet fields, libgraphdatamodel_kref_model_source_ForeignKeyReference references, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_source_ForeignKey thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_source_ForeignKey thiz);
@@ -1974,14 +2028,15 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_source_ForeignKeyReference_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_source_ForeignKeyReference (*ForeignKeyReference)(const char* table, libgraphdatamodel_kref_kotlin_collections_Set fields, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_source_ForeignKeyReference (*ForeignKeyReference)(const char* table, libgraphdatamodel_kref_kotlin_collections_MutableSet fields, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_fields)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_fields)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
             const char* (*get_table)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
+            void (*set_table)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component2)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component2)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component3)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
-            libgraphdatamodel_kref_model_source_ForeignKeyReference (*copy)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz, const char* table, libgraphdatamodel_kref_kotlin_collections_Set fields, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_source_ForeignKeyReference (*copy)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz, const char* table, libgraphdatamodel_kref_kotlin_collections_MutableSet fields, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_source_ForeignKeyReference thiz);
@@ -2001,18 +2056,19 @@ typedef struct {
               libgraphdatamodel_kref_kotlinx_serialization_KSerializer (*serializer)(libgraphdatamodel_kref_model_source_Table_Companion thiz);
             } Companion;
             libgraphdatamodel_KType* (*_type)(void);
-            libgraphdatamodel_kref_model_source_Table (*Table)(const char* source, libgraphdatamodel_kref_kotlin_collections_Map fields, libgraphdatamodel_kref_kotlin_collections_Set primaryKeys, libgraphdatamodel_kref_kotlin_collections_Map foreignKeys, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_source_Table (*Table)(const char* source, libgraphdatamodel_kref_kotlin_collections_MutableMap fields, libgraphdatamodel_kref_kotlin_collections_MutableSet primaryKeys, libgraphdatamodel_kref_kotlin_collections_MutableMap foreignKeys, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_source_Table thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_fields)(libgraphdatamodel_kref_model_source_Table thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*get_foreignKeys)(libgraphdatamodel_kref_model_source_Table thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*get_primaryKeys)(libgraphdatamodel_kref_model_source_Table thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_fields)(libgraphdatamodel_kref_model_source_Table thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_foreignKeys)(libgraphdatamodel_kref_model_source_Table thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*get_primaryKeys)(libgraphdatamodel_kref_model_source_Table thiz);
             const char* (*get_source)(libgraphdatamodel_kref_model_source_Table thiz);
+            void (*set_source)(libgraphdatamodel_kref_model_source_Table thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_source_Table thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component2)(libgraphdatamodel_kref_model_source_Table thiz);
-            libgraphdatamodel_kref_kotlin_collections_Set (*component3)(libgraphdatamodel_kref_model_source_Table thiz);
-            libgraphdatamodel_kref_kotlin_collections_Map (*component4)(libgraphdatamodel_kref_model_source_Table thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component2)(libgraphdatamodel_kref_model_source_Table thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableSet (*component3)(libgraphdatamodel_kref_model_source_Table thiz);
+            libgraphdatamodel_kref_kotlin_collections_MutableMap (*component4)(libgraphdatamodel_kref_model_source_Table thiz);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*component5)(libgraphdatamodel_kref_model_source_Table thiz);
-            libgraphdatamodel_kref_model_source_Table (*copy)(libgraphdatamodel_kref_model_source_Table thiz, const char* source, libgraphdatamodel_kref_kotlin_collections_Map fields, libgraphdatamodel_kref_kotlin_collections_Set primaryKeys, libgraphdatamodel_kref_kotlin_collections_Map foreignKeys, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
+            libgraphdatamodel_kref_model_source_Table (*copy)(libgraphdatamodel_kref_model_source_Table thiz, const char* source, libgraphdatamodel_kref_kotlin_collections_MutableMap fields, libgraphdatamodel_kref_kotlin_collections_MutableSet primaryKeys, libgraphdatamodel_kref_kotlin_collections_MutableMap foreignKeys, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions);
             libgraphdatamodel_KBoolean (*equals)(libgraphdatamodel_kref_model_source_Table thiz, libgraphdatamodel_kref_kotlin_Any other);
             libgraphdatamodel_KInt (*hashCode)(libgraphdatamodel_kref_model_source_Table thiz);
             const char* (*toString)(libgraphdatamodel_kref_model_source_Table thiz);
@@ -2035,10 +2091,13 @@ typedef struct {
             libgraphdatamodel_kref_model_source_TableField (*TableField)(const char* type, libgraphdatamodel_KInt size, libgraphdatamodel_kref_model_property_Neo4jType suggested, libgraphdatamodel_kref_kotlin_collections_Set supported, libgraphdatamodel_kref_kotlin_collections_MutableMap extensions, const char* name);
             libgraphdatamodel_kref_kotlin_collections_MutableMap (*get_extensions)(libgraphdatamodel_kref_model_source_TableField thiz);
             const char* (*get_name)(libgraphdatamodel_kref_model_source_TableField thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_source_TableField thiz, const char* set);
             libgraphdatamodel_KInt (*get_size)(libgraphdatamodel_kref_model_source_TableField thiz);
+            void (*set_size)(libgraphdatamodel_kref_model_source_TableField thiz, libgraphdatamodel_KInt set);
             libgraphdatamodel_kref_model_property_Neo4jType (*get_suggested)(libgraphdatamodel_kref_model_source_TableField thiz);
             libgraphdatamodel_kref_kotlin_collections_Set (*get_supported)(libgraphdatamodel_kref_model_source_TableField thiz);
             const char* (*get_type)(libgraphdatamodel_kref_model_source_TableField thiz);
+            void (*set_type)(libgraphdatamodel_kref_model_source_TableField thiz, const char* set);
             const char* (*component1)(libgraphdatamodel_kref_model_source_TableField thiz);
             libgraphdatamodel_KInt (*component2)(libgraphdatamodel_kref_model_source_TableField thiz);
             libgraphdatamodel_kref_model_property_Neo4jType (*component3)(libgraphdatamodel_kref_model_source_TableField thiz);
@@ -2060,8 +2119,8 @@ typedef struct {
               libgraphdatamodel_kref_model_type_ConstraintType (*get)(); /* enum entry for KEY. */
             } KEY;
             struct {
-              libgraphdatamodel_kref_model_type_ConstraintType (*get)(); /* enum entry for TYPE. */
-            } TYPE;
+              libgraphdatamodel_kref_model_type_ConstraintType (*get)(); /* enum entry for PROPERTY_TYPE. */
+            } PROPERTY_TYPE;
             struct {
               libgraphdatamodel_kref_model_type_ConstraintType (*get)(); /* enum entry for UNIQUE. */
             } UNIQUE;
@@ -2088,13 +2147,27 @@ typedef struct {
             } LOOKUP;
             libgraphdatamodel_KType* (*_type)(void);
           } IndexType;
+          struct {
+            libgraphdatamodel_KType* (*_type)(void);
+            const char* (*get_name)(libgraphdatamodel_kref_model_type_Named thiz);
+            void (*set_name)(libgraphdatamodel_kref_model_type_Named thiz, const char* set);
+          } Named;
         } type;
+        struct {
+          libgraphdatamodel_KType* (*_type)(void);
+          libgraphdatamodel_kref_model_Internal (*_instance)();
+          void (*internalise)(libgraphdatamodel_kref_model_Internal thiz, libgraphdatamodel_kref_model_GraphModel model);
+        } Internal;
+        struct {
+          libgraphdatamodel_KType* (*_type)(void);
+          libgraphdatamodel_kref_model_Pretty (*_instance)();
+          void (*prettify)(libgraphdatamodel_kref_model_Pretty thiz, libgraphdatamodel_kref_model_GraphModel model);
+        } Pretty;
         struct {
           libgraphdatamodel_KType* (*_type)(void);
           libgraphdatamodel_kref_model_Type (*_instance)();
           const char* (*get_DATA_MODEL)(libgraphdatamodel_kref_model_Type thiz);
           const char* (*get_GRAPH_SPEC)(libgraphdatamodel_kref_model_Type thiz);
-          const char* (*get_GRAPH_SPEC_PRETTY)(libgraphdatamodel_kref_model_Type thiz);
           const char* (*get_IMPORT_SPEC)(libgraphdatamodel_kref_model_Type thiz);
         } Type;
         struct {
