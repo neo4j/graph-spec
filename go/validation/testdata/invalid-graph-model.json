@@ -10,7 +10,7 @@
       "properties": {},
       "constraints": {
         "typeConstraint": {
-          "type": "TYPE",
+          "type": "PROPERTY_TYPE",
           "label": "Person",
           "properties": []
         },
