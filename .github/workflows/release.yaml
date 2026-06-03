@@ -250,7 +250,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
 
-  finalise-release:
+  publish-tags:
     needs: [determine-version, validate-go, publish-npm, publish-maven]
     runs-on: ubuntu-latest
     permissions:
