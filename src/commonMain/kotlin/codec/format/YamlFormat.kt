@@ -32,8 +32,12 @@ import net.mamoe.yamlkt.YamlPrimitive
 import kotlin.collections.component1
 import kotlin.collections.component2
 
-class YamlFormat(private val yaml: Yaml, private val json: JsonFormat) : Format {
-    override fun encodeToString(element: SchemaElement) = yaml.encodeToString(element.toYaml())
+class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: YamlPrintOptions) : Format {
+
+    // The YAML library isn't as customisable as we'd like so we're rolling our own writing
+    private val writer = YamlWriter(options)
+
+    override fun encodeToString(element: SchemaElement) = writer.write(element)
 
     override fun decodeFromString(string: String) = schemaElement(yaml.decodeYamlFromString(string))
 
@@ -79,7 +83,30 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat) : Format 
             Yaml {
                 encodeDefaultValues = false
             },
-            JsonFormat.default
+            JsonFormat.default,
+            YamlPrintOptions(
+                alwaysQuoteStrings = true,
+                inlinePaths = setOf(
+                "nodes.*.properties.*",
+                "nodes.*.constraints.*.properties",
+                "nodes.*.indexes.*.labels",
+                "nodes.*.indexes.*.properties",
+                "relationships.*.properties.*",
+                "relationships.*.from",
+                "relationships.*.to",
+                "relationships.*.constraints.*.properties",
+                "relationships.*.constraints.*.options.*",
+                "relationships.*.indexes.*.properties",
+                "relationships.*.indexes.*.options.*",
+                "tables.*.fields.*.supported",
+                "tables.*.primaryKeys",
+                "tables.*.foreignKeys.*.fields",
+                "tables.*.foreignKeys.*.references.fields",
+                "mappings[*].properties.*",
+                "mappings[*].keys",
+                "mappings[*].from.properties.*",
+                "mappings[*].to.properties.*",
+            ))
         )
     }
 }
