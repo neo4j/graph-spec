@@ -87,26 +87,27 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
             YamlPrintOptions(
                 alwaysQuoteStrings = true,
                 inlinePaths = setOf(
-                "nodes.*.properties.*",
-                "nodes.*.constraints.*.properties",
-                "nodes.*.indexes.*.labels",
-                "nodes.*.indexes.*.properties",
-                "relationships.*.properties.*",
-                "relationships.*.from",
-                "relationships.*.to",
-                "relationships.*.constraints.*.properties",
-                "relationships.*.constraints.*.options.*",
-                "relationships.*.indexes.*.properties",
-                "relationships.*.indexes.*.options.*",
-                "tables.*.fields.*.supported",
-                "tables.*.primaryKeys",
-                "tables.*.foreignKeys.*.fields",
-                "tables.*.foreignKeys.*.references.fields",
-                "mappings[*].properties.*",
-                "mappings[*].keys",
-                "mappings[*].from.properties.*",
-                "mappings[*].to.properties.*",
-            ))
+                    "nodes.*.properties.*",
+                    "nodes.*.constraints.*.properties",
+                    "nodes.*.indexes.*.labels",
+                    "nodes.*.indexes.*.properties",
+                    "relationships.*.properties.*",
+                    "relationships.*.from",
+                    "relationships.*.to",
+                    "relationships.*.constraints.*.properties",
+                    "relationships.*.constraints.*.options.*",
+                    "relationships.*.indexes.*.properties",
+                    "relationships.*.indexes.*.options.*",
+                    "tables.*.fields.*.supported",
+                    "tables.*.primaryKeys",
+                    "tables.*.foreignKeys.*.fields",
+                    "tables.*.foreignKeys.*.references.fields",
+                    "mappings[*].properties.*",
+                    "mappings[*].keys",
+                    "mappings[*].from.properties.*",
+                    "mappings[*].to.properties.*"
+                )
+            )
         )
     }
 }
