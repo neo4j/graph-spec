@@ -130,12 +130,9 @@ class YamlWriter(private val options: YamlPrintOptions = YamlPrintOptions()) {
         value.contains("\n") || value.contains("\t") || value.contains("\r") ||
         value.toDoubleOrNull() != null
 
-    private fun escapeAndQuoteString(value: String, needsQuotes: Boolean = false): String {
-        var needsQuotes = needsQuotes
-        if (!needsQuotes) {
-            needsQuotes = needsQuotes(value)
-        }
-        if (!needsQuotes) {
+    private fun escapeAndQuoteString(value: String, forceQuotes: Boolean = false): String {
+        val quote = if (forceQuotes) true else needsQuotes(value)
+        if (!quote) {
             return value
         }
         val escaped = value
