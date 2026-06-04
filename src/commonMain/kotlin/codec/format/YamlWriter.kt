@@ -40,11 +40,7 @@ class YamlWriter(private val options: YamlPrintOptions = YamlPrintOptions()) {
         when (element) {
             is SchemaNull -> builder.append("null")
             is SchemaLiteral -> if (element.isString) {
-                if (options.alwaysQuoteStrings) {
-                    builder.append(escapeAndQuoteString(element.string, true))
-                } else {
-                    builder.append(escapeAndQuoteString(element.string))
-                }
+                builder.append(escapeAndQuoteString(element.string, options.alwaysQuoteStrings))
             } else {
                 builder.append(element.string)
             }
@@ -134,7 +130,11 @@ class YamlWriter(private val options: YamlPrintOptions = YamlPrintOptions()) {
         value.contains("\n") || value.contains("\t") || value.contains("\r") ||
         value.toDoubleOrNull() != null
 
-    private fun escapeAndQuoteString(value: String, needsQuotes: Boolean = needsQuotes(value)): String {
+    private fun escapeAndQuoteString(value: String, needsQuotes: Boolean = false): String {
+        var needsQuotes = needsQuotes
+        if (!needsQuotes) {
+            needsQuotes = needsQuotes(value)
+        }
         if (!needsQuotes) {
             return value
         }

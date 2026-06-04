@@ -71,13 +71,6 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
         YamlNull -> SchemaNull(parent)
     }
 
-    fun SchemaElement.toYaml(): YamlElement = when (this) {
-        is SchemaList -> YamlList(content.map { it.toYaml() })
-        is SchemaMap -> YamlMap(content.mapValues { (_, value) -> value.toYaml() })
-        is SchemaLiteral -> if (isString) YamlPrimitive(string) else YamlLiteral(string)
-        is SchemaNull -> YamlNull
-    }
-
     companion object {
         val default = YamlFormat(
             Yaml {
