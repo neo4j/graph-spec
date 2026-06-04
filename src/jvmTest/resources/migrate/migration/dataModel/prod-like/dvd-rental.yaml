@@ -1,0 +1,1255 @@
+version: "4.0.0"
+nodes:
+  actor:
+    label: "actor"
+    properties:
+      actor_id: { type: "INTEGER", unique: true }
+      first_name: { type: "STRING" }
+      last_name: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      actor:
+        type: "UNIQUE"
+        label: "actor"
+        properties: ["actor_id"]
+    indexes:
+      actor:
+        type: "TEXT"
+        labels: ["actor"]
+        properties: ["actor_id"]
+  address:
+    label: "address"
+    properties:
+      address_id: { type: "INTEGER", unique: true }
+      address: { type: "STRING" }
+      address2: { type: "STRING" }
+      district: { type: "STRING" }
+      postal_code: { type: "STRING" }
+      phone: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      address:
+        type: "UNIQUE"
+        label: "address"
+        properties: ["address_id"]
+    indexes:
+      address:
+        type: "TEXT"
+        labels: ["address"]
+        properties: ["address_id"]
+  category:
+    label: "category"
+    properties:
+      category_id: { type: "INTEGER", unique: true }
+      name: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      category:
+        type: "UNIQUE"
+        label: "category"
+        properties: ["category_id"]
+    indexes:
+      category:
+        type: "TEXT"
+        labels: ["category"]
+        properties: ["category_id"]
+  city:
+    label: "city"
+    properties:
+      city_id: { type: "INTEGER", unique: true }
+      city: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      city:
+        type: "UNIQUE"
+        label: "city"
+        properties: ["city_id"]
+    indexes:
+      city:
+        type: "TEXT"
+        labels: ["city"]
+        properties: ["city_id"]
+  country:
+    label: "country"
+    properties:
+      country_id: { type: "INTEGER", unique: true }
+      country: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      country:
+        type: "UNIQUE"
+        label: "country"
+        properties: ["country_id"]
+    indexes:
+      country:
+        type: "TEXT"
+        labels: ["country"]
+        properties: ["country_id"]
+  customer:
+    label: "customer"
+    properties:
+      customer_id: { type: "INTEGER", unique: true }
+      store_id: { type: "INTEGER" }
+      first_name: { type: "STRING" }
+      last_name: { type: "STRING" }
+      email: { type: "STRING" }
+      activebool: { type: "BOOLEAN" }
+      create_date: { type: "DATE" }
+      last_update: { type: "ZONED DATETIME" }
+      active: { type: "INTEGER" }
+    constraints:
+      customer:
+        type: "UNIQUE"
+        label: "customer"
+        properties: ["customer_id"]
+    indexes:
+      customer:
+        type: "TEXT"
+        labels: ["customer"]
+        properties: ["customer_id"]
+  film:
+    label: "film"
+    properties:
+      film_id: { type: "INTEGER", unique: true }
+      title: { type: "STRING" }
+      description: { type: "STRING" }
+      rental_duration: { type: "INTEGER" }
+      rental_rate: { type: "FLOAT" }
+      length: { type: "INTEGER" }
+      replacement_cost: { type: "FLOAT" }
+      rating: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      film:
+        type: "UNIQUE"
+        label: "film"
+        properties: ["film_id"]
+    indexes:
+      film:
+        type: "TEXT"
+        labels: ["film"]
+        properties: ["film_id"]
+  inventory:
+    label: "inventory"
+    properties:
+      inventory_id: { type: "INTEGER", unique: true }
+      store_id: { type: "INTEGER" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      inventory:
+        type: "UNIQUE"
+        label: "inventory"
+        properties: ["inventory_id"]
+    indexes:
+      inventory:
+        type: "TEXT"
+        labels: ["inventory"]
+        properties: ["inventory_id"]
+  language:
+    label: "language"
+    properties:
+      language_id: { type: "INTEGER", unique: true }
+      name: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      language:
+        type: "UNIQUE"
+        label: "language"
+        properties: ["language_id"]
+    indexes:
+      language:
+        type: "TEXT"
+        labels: ["language"]
+        properties: ["language_id"]
+  payment:
+    label: "payment"
+    properties:
+      payment_id: { type: "INTEGER", unique: true }
+      amount: { type: "FLOAT" }
+      payment_date: { type: "ZONED DATETIME" }
+    constraints:
+      payment:
+        type: "UNIQUE"
+        label: "payment"
+        properties: ["payment_id"]
+    indexes:
+      payment:
+        type: "TEXT"
+        labels: ["payment"]
+        properties: ["payment_id"]
+  rental:
+    label: "rental"
+    properties:
+      rental_id: { type: "INTEGER", unique: true }
+      rental_date: { type: "ZONED DATETIME" }
+      return_date: { type: "ZONED DATETIME" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      rental:
+        type: "UNIQUE"
+        label: "rental"
+        properties: ["rental_id"]
+    indexes:
+      rental:
+        type: "TEXT"
+        labels: ["rental"]
+        properties: ["rental_id"]
+  staff:
+    label: "staff"
+    properties:
+      staff_id: { type: "INTEGER", unique: true }
+      first_name: { type: "STRING" }
+      last_name: { type: "STRING" }
+      email: { type: "STRING" }
+      store_id: { type: "INTEGER" }
+      active: { type: "BOOLEAN" }
+      username: { type: "STRING" }
+      password: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      staff:
+        type: "UNIQUE"
+        label: "staff"
+        properties: ["staff_id"]
+    indexes:
+      staff:
+        type: "TEXT"
+        labels: ["staff"]
+        properties: ["staff_id"]
+  store:
+    label: "store"
+    properties:
+      store_id: { type: "INTEGER", unique: true }
+      last_update: { type: "ZONED DATETIME" }
+    constraints:
+      store:
+        type: "UNIQUE"
+        label: "store"
+        properties: ["store_id"]
+    indexes:
+      store:
+        type: "TEXT"
+        labels: ["store"]
+        properties: ["store_id"]
+relationships:
+  "r:0":
+    type: "RELATED_TO_CITY"
+    from: { node: "n:1" }
+    to: { node: "n:3" }
+  "r:1":
+    type: "RELATED_TO_COUNTRY"
+    from: { node: "n:3" }
+    to: { node: "n:4" }
+  "r:2":
+    type: "RELATED_TO_ADDRESS"
+    from: { node: "n:5" }
+    to: { node: "n:1" }
+  "r:3":
+    type: "RELATED_TO_LANGUAGE"
+    from: { node: "n:6" }
+    to: { node: "n:8" }
+  "r:4":
+    type: "RELATED_TO_FILM"
+    from: { node: "n:0" }
+    to: { node: "n:6" }
+    properties:
+      last_update: { type: "ZONED DATETIME" }
+  "r:5":
+    type: "RELATED_TO_FILM"
+    from: { node: "n:2" }
+    to: { node: "n:6" }
+    properties:
+      last_update: { type: "ZONED DATETIME" }
+  "r:6":
+    type: "RELATED_TO_FILM"
+    from: { node: "n:7" }
+    to: { node: "n:6" }
+  "r:7":
+    type: "RELATED_TO_CUSTOMER"
+    from: { node: "n:9" }
+    to: { node: "n:5" }
+  "r:8":
+    type: "RELATED_TO_RENTAL"
+    from: { node: "n:9" }
+    to: { node: "n:10" }
+  "r:9":
+    type: "RELATED_TO_STAFF"
+    from: { node: "n:9" }
+    to: { node: "n:11" }
+  "r:10":
+    type: "RELATED_TO_CUSTOMER"
+    from: { node: "n:10" }
+    to: { node: "n:5" }
+  "r:11":
+    type: "RELATED_TO_INVENTORY"
+    from: { node: "n:10" }
+    to: { node: "n:7" }
+  "r:12":
+    type: "RELATED_TO_STAFF"
+    from: { node: "n:10" }
+    to: { node: "n:11" }
+  "r:13":
+    type: "RELATED_TO_ADDRESS"
+    from: { node: "n:11" }
+    to: { node: "n:1" }
+  "r:14":
+    type: "RELATED_TO_ADDRESS"
+    from: { node: "n:12" }
+    to: { node: "n:1" }
+  "r:15":
+    type: "RELATED_TO_STAFF"
+    from: { node: "n:12" }
+    to: { node: "n:11" }
+tables:
+  actor:
+    source: "cloud"
+    fields:
+      actor_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      first_name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["actor_id"]
+  actor_info:
+    source: "cloud"
+    fields:
+      actor_id:
+        type: "int4"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      first_name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      film_info:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+  address:
+    source: "cloud"
+    fields:
+      address_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      address:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      address2:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      district:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      city_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      postal_code:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      phone:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["address_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["city_id"]
+        references:
+          table: "city"
+          fields: ["city_id"]
+  category:
+    source: "cloud"
+    fields:
+      category_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["category_id"]
+  city:
+    source: "cloud"
+    fields:
+      city_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      city:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      country_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["city_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["country_id"]
+        references:
+          table: "country"
+          fields: ["country_id"]
+  country:
+    source: "cloud"
+    fields:
+      country_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      country:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["country_id"]
+  customer:
+    source: "cloud"
+    fields:
+      customer_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      store_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      first_name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      email:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      address_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      activebool:
+        type: "bool"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      create_date:
+        type: "date"
+        suggested: "DATE"
+        supported: ["DATE"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+      active:
+        type: "int4"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["customer_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["address_id"]
+        references:
+          table: "address"
+          fields: ["address_id"]
+  customer_list:
+    source: "cloud"
+    fields:
+      id:
+        type: "int4"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+      address:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      zip code:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      phone:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      city:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      country:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      notes:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+      sid:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  film:
+    source: "cloud"
+    fields:
+      film_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      title:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      description:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+      release_year:
+        type: "year"
+      language_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      rental_duration:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      rental_rate:
+        type: "numeric"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      length:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      replacement_cost:
+        type: "numeric"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      rating:
+        type: "mpaa_rating"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+      special_features:
+        type: "_text"
+      fulltext:
+        type: "tsvector"
+    primaryKeys: ["film_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["language_id"]
+        references:
+          table: "language"
+          fields: ["language_id"]
+  film_actor:
+    source: "cloud"
+    fields:
+      actor_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      film_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["actor_id", "film_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["actor_id"]
+        references:
+          table: "actor"
+          fields: ["actor_id"]
+      foreignKey2:
+        fields: ["film_id"]
+        references:
+          table: "film"
+          fields: ["film_id"]
+  film_category:
+    source: "cloud"
+    fields:
+      film_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      category_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["film_id", "category_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["category_id"]
+        references:
+          table: "category"
+          fields: ["category_id"]
+      foreignKey2:
+        fields: ["film_id"]
+        references:
+          table: "film"
+          fields: ["film_id"]
+  film_list:
+    source: "cloud"
+    fields:
+      fid:
+        type: "int4"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      title:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      description:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+      category:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      price:
+        type: "numeric"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      length:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      rating:
+        type: "mpaa_rating"
+        suggested: "STRING"
+        supported: ["STRING"]
+      actors:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+  inventory:
+    source: "cloud"
+    fields:
+      inventory_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      film_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      store_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["inventory_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["film_id"]
+        references:
+          table: "film"
+          fields: ["film_id"]
+  language:
+    source: "cloud"
+    fields:
+      language_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "bpchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["language_id"]
+  nicer_but_slower_film_list:
+    source: "cloud"
+    fields:
+      fid:
+        type: "int4"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      title:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      description:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+      category:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      price:
+        type: "numeric"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      length:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      rating:
+        type: "mpaa_rating"
+        suggested: "STRING"
+        supported: ["STRING"]
+      actors:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+  payment:
+    source: "cloud"
+    fields:
+      payment_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      customer_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      staff_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      rental_id:
+        type: "int4"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      amount:
+        type: "numeric"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      payment_date:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["payment_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["customer_id"]
+        references:
+          table: "customer"
+          fields: ["customer_id"]
+      foreignKey2:
+        fields: ["rental_id"]
+        references:
+          table: "rental"
+          fields: ["rental_id"]
+      foreignKey3:
+        fields: ["staff_id"]
+        references:
+          table: "staff"
+          fields: ["staff_id"]
+  rental:
+    source: "cloud"
+    fields:
+      rental_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      rental_date:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+      inventory_id:
+        type: "int4"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      customer_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      return_date:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+      staff_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["rental_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["customer_id"]
+        references:
+          table: "customer"
+          fields: ["customer_id"]
+      foreignKey2:
+        fields: ["inventory_id"]
+        references:
+          table: "inventory"
+          fields: ["inventory_id"]
+      foreignKey3:
+        fields: ["staff_id"]
+        references:
+          table: "staff"
+          fields: ["staff_id"]
+  sales_by_film_category:
+    source: "cloud"
+    fields:
+      category:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      total_sales:
+        type: "numeric"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  sales_by_store:
+    source: "cloud"
+    fields:
+      store:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+      manager:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+      total_sales:
+        type: "numeric"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  staff:
+    source: "cloud"
+    fields:
+      staff_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      first_name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_name:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      address_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      email:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      store_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      active:
+        type: "bool"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      username:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      password:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+      picture:
+        type: "bytea"
+    primaryKeys: ["staff_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["address_id"]
+        references:
+          table: "address"
+          fields: ["address_id"]
+  staff_list:
+    source: "cloud"
+    fields:
+      id:
+        type: "int4"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "text"
+        suggested: "STRING"
+        supported: ["STRING"]
+      address:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      zip code:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      phone:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      city:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      country:
+        type: "varchar"
+        suggested: "STRING"
+        supported: ["STRING"]
+      sid:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  store:
+    source: "cloud"
+    fields:
+      store_id:
+        type: "serial"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      manager_staff_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      address_id:
+        type: "int2"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      last_update:
+        type: "timestamp"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
+    primaryKeys: ["store_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["address_id"]
+        references:
+          table: "address"
+          fields: ["address_id"]
+      foreignKey2:
+        fields: ["manager_staff_id"]
+        references:
+          table: "staff"
+          fields: ["staff_id"]
+mappings:
+  - node: "actor"
+    table: "actor"
+    properties:
+      actor_id: { field: "actor_id" }
+      first_name: { field: "first_name" }
+      last_name: { field: "last_name" }
+      last_update: { field: "last_update" }
+  - node: "address"
+    table: "address"
+    properties:
+      address_id: { field: "address_id" }
+      address: { field: "address" }
+      address2: { field: "address2" }
+      district: { field: "district" }
+      postal_code: { field: "postal_code" }
+      phone: { field: "phone" }
+      last_update: { field: "last_update" }
+  - node: "category"
+    table: "category"
+    properties:
+      category_id: { field: "category_id" }
+      name: { field: "name" }
+      last_update: { field: "last_update" }
+  - node: "city"
+    table: "city"
+    properties:
+      city_id: { field: "city_id" }
+      city: { field: "city" }
+      last_update: { field: "last_update" }
+  - node: "country"
+    table: "country"
+    properties:
+      country_id: { field: "country_id" }
+      country: { field: "country" }
+      last_update: { field: "last_update" }
+  - node: "customer"
+    table: "customer"
+    properties:
+      customer_id: { field: "customer_id" }
+      store_id: { field: "store_id" }
+      first_name: { field: "first_name" }
+      last_name: { field: "last_name" }
+      email: { field: "email" }
+      activebool: { field: "activebool" }
+      create_date: { field: "create_date" }
+      last_update: { field: "last_update" }
+      active: { field: "active" }
+  - node: "film"
+    table: "film"
+    properties:
+      film_id: { field: "film_id" }
+      title: { field: "title" }
+      description: { field: "description" }
+      rental_duration: { field: "rental_duration" }
+      rental_rate: { field: "rental_rate" }
+      length: { field: "length" }
+      replacement_cost: { field: "replacement_cost" }
+      rating: { field: "rating" }
+      last_update: { field: "last_update" }
+  - node: "inventory"
+    table: "inventory"
+    properties:
+      inventory_id: { field: "inventory_id" }
+      store_id: { field: "store_id" }
+      last_update: { field: "last_update" }
+  - node: "language"
+    table: "language"
+    properties:
+      language_id: { field: "language_id" }
+      name: { field: "name" }
+      last_update: { field: "last_update" }
+  - node: "payment"
+    table: "payment"
+    properties:
+      payment_id: { field: "payment_id" }
+      amount: { field: "amount" }
+      payment_date: { field: "payment_date" }
+  - node: "rental"
+    table: "rental"
+    properties:
+      rental_id: { field: "rental_id" }
+      rental_date: { field: "rental_date" }
+      return_date: { field: "return_date" }
+      last_update: { field: "last_update" }
+  - node: "staff"
+    table: "staff"
+    properties:
+      staff_id: { field: "staff_id" }
+      first_name: { field: "first_name" }
+      last_name: { field: "last_name" }
+      email: { field: "email" }
+      store_id: { field: "store_id" }
+      active: { field: "active" }
+      username: { field: "username" }
+      password: { field: "password" }
+      last_update: { field: "last_update" }
+  - node: "store"
+    table: "store"
+    properties:
+      store_id: { field: "store_id" }
+      last_update: { field: "last_update" }
+  - relationship: "RELATED_TO_CITY"
+    table: "address"
+    from:
+      node: "address"
+      properties:
+        address_id: { field: "address_id" }
+    to:
+      node: "city"
+      properties:
+        city_id: { field: "city_id" }
+  - relationship: "RELATED_TO_COUNTRY"
+    table: "city"
+    from:
+      node: "city"
+      properties:
+        city_id: { field: "city_id" }
+    to:
+      node: "country"
+      properties:
+        country_id: { field: "country_id" }
+  - relationship: "RELATED_TO_ADDRESS"
+    table: "customer"
+    from:
+      node: "customer"
+      properties:
+        customer_id: { field: "customer_id" }
+    to:
+      node: "address"
+      properties:
+        address_id: { field: "address_id" }
+  - relationship: "RELATED_TO_LANGUAGE"
+    table: "film"
+    from:
+      node: "film"
+      properties:
+        film_id: { field: "film_id" }
+    to:
+      node: "language"
+      properties:
+        language_id: { field: "language_id" }
+  - relationship: "RELATED_TO_FILM"
+    table: "film_actor"
+    from:
+      node: "actor"
+      properties:
+        actor_id: { field: "actor_id" }
+    to:
+      node: "film"
+      properties:
+        film_id: { field: "film_id" }
+    properties:
+      "p:4_0": { field: "last_update" }
+  - relationship: "RELATED_TO_FILM"
+    table: "film_category"
+    from:
+      node: "category"
+      properties:
+        category_id: { field: "category_id" }
+    to:
+      node: "film"
+      properties:
+        film_id: { field: "film_id" }
+    properties:
+      "p:5_0": { field: "last_update" }
+  - relationship: "RELATED_TO_FILM"
+    table: "inventory"
+    from:
+      node: "inventory"
+      properties:
+        inventory_id: { field: "inventory_id" }
+    to:
+      node: "film"
+      properties:
+        film_id: { field: "film_id" }
+  - relationship: "RELATED_TO_CUSTOMER"
+    table: "payment"
+    from:
+      node: "payment"
+      properties:
+        payment_id: { field: "payment_id" }
+    to:
+      node: "customer"
+      properties:
+        customer_id: { field: "customer_id" }
+  - relationship: "RELATED_TO_RENTAL"
+    table: "payment"
+    from:
+      node: "payment"
+      properties:
+        payment_id: { field: "payment_id" }
+    to:
+      node: "rental"
+      properties:
+        rental_id: { field: "rental_id" }
+  - relationship: "RELATED_TO_STAFF"
+    table: "payment"
+    from:
+      node: "payment"
+      properties:
+        payment_id: { field: "payment_id" }
+    to:
+      node: "staff"
+      properties:
+        staff_id: { field: "staff_id" }
+  - relationship: "RELATED_TO_CUSTOMER"
+    table: "rental"
+    from:
+      node: "rental"
+      properties:
+        rental_id: { field: "rental_id" }
+    to:
+      node: "customer"
+      properties:
+        customer_id: { field: "customer_id" }
+  - relationship: "RELATED_TO_INVENTORY"
+    table: "rental"
+    from:
+      node: "rental"
+      properties:
+        rental_id: { field: "rental_id" }
+    to:
+      node: "inventory"
+      properties:
+        inventory_id: { field: "inventory_id" }
+  - relationship: "RELATED_TO_STAFF"
+    table: "rental"
+    from:
+      node: "rental"
+      properties:
+        rental_id: { field: "rental_id" }
+    to:
+      node: "staff"
+      properties:
+        staff_id: { field: "staff_id" }
+  - relationship: "RELATED_TO_ADDRESS"
+    table: "staff"
+    from:
+      node: "staff"
+      properties:
+        staff_id: { field: "staff_id" }
+    to:
+      node: "address"
+      properties:
+        address_id: { field: "address_id" }
+  - relationship: "RELATED_TO_ADDRESS"
+    table: "store"
+    from:
+      node: "store"
+      properties:
+        store_id: { field: "store_id" }
+    to:
+      node: "address"
+      properties:
+        address_id: { field: "address_id" }
+  - relationship: "RELATED_TO_STAFF"
+    table: "store"
+    from:
+      node: "store"
+      properties:
+        store_id: { field: "store_id" }
+    to:
+      node: "staff"
+      properties:
+        staff_id: { field: "manager_staff_id" }

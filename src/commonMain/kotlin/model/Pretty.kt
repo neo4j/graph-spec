@@ -28,10 +28,29 @@ import kotlin.collections.component2
 object Pretty {
     fun prettify(model: GraphModel) {
         model.prettifyNodeLabels()
-        model.prettifyNodes()
         model.prettifyNodeProperties()
-        model.prettifyRelationships()
+        model.prettifyNodes()
         model.prettifyRelationshipProperties()
+        model.prettifyRelationships()
+        removeNames(model)
+    }
+
+    private fun removeNames(model: GraphModel) {
+        model.nodes.values.forEach { node ->
+            node.properties.values.forEach { it.name = null }
+            node.constraints.values.forEach { it.name = null }
+            node.indexes.values.forEach { it.name = null }
+            node.name = null
+        }
+        model.relationships.values.forEach { relationship ->
+            relationship.properties.values.forEach { it.name = null }
+            relationship.constraints.values.forEach { it.name = null }
+            relationship.indexes.values.forEach { it.name = null }
+            relationship.name = null
+        }
+        model.tables.values.forEach { table ->
+            table.fields.values.forEach { it.name = null }
+        }
     }
 
     /*
@@ -54,6 +73,14 @@ object Pretty {
             node.constraints.prettify()
             node.indexes.prettify()
         }
+        relationships.values.forEach { relationship ->
+            if (relationship.from.node != "") {
+                relationship.from.node = renames[relationship.from.node] ?: relationship.from.node
+            }
+            if (relationship.to.node != "") {
+                relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
+            }
+        }
     }
 
     internal fun renameNodeMappings(model: GraphModel, renames: Map<String, String>) {
@@ -70,6 +97,12 @@ object Pretty {
         val renames = mutableMapOf<String, String>()
         nodes.forEach { (key, node) ->
             renames.putAll(node.properties.prettify(key))
+            node.constraints.values.forEach { property ->
+                property.properties.rename(renames, key)
+            }
+            node.indexes.values.forEach { property ->
+                property.properties.rename(renames, key)
+            }
         }
         renameNodeMappingProperties(this, renames)
     }
@@ -99,7 +132,6 @@ object Pretty {
 
     internal fun renameRelationshipMappings(model: GraphModel, renames: Map<String, String>) {
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
-            println("Set ${mapping.relationship} to ${renames[mapping.relationship] ?: mapping.relationship}")
             mapping.relationship = renames[mapping.relationship] ?: mapping.relationship
         }
     }
@@ -108,12 +140,19 @@ object Pretty {
         val renames = mutableMapOf<String, String>()
         relationships.forEach { (key, relationship) ->
             renames.putAll(relationship.properties.prettify(key))
+            relationship.constraints.values.forEach { property ->
+                property.properties.rename(renames, key)
+            }
+            relationship.indexes.values.forEach { property ->
+                property.properties.rename(renames, key)
+            }
         }
         renameRelationshipMappingProperties(this, renames)
     }
 
     internal fun renameRelationshipMappingProperties(model: GraphModel, renames: Map<String, String>) {
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
+            println("Rename ${mapping.relationship} ${renames.filter { it.key.startsWith(mapping.relationship) }}")
             mapping.properties.rename(renames, mapping.relationship)
         }
     }
@@ -132,6 +171,22 @@ object Pretty {
                 renames[og]
             } ?: og
             this[key] = value
+        }
+    }
+    /**
+     * Goes through a MutableSet, replacing the keys with replacements from [renames]
+     * @param parent optionally used to look up the replacement key
+     */
+    private fun MutableSet<String>.rename(renames: Map<String, String>, parent: String? = null) {
+        val original = toMutableSet()
+        clear()
+        for (og in original) {
+            val key = if (parent != null) {
+                renames["$parent:$og"]
+            } else {
+                renames[og]
+            } ?: og
+            add(key)
         }
     }
 

@@ -1,0 +1,1111 @@
+version: "4.0.0"
+nodes:
+  Comment:
+    label: "Comment"
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER", unique: true }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      content: { type: "STRING" }
+      length: { type: "INTEGER" }
+    constraints:
+      Comment:
+        type: "UNIQUE"
+        label: "Comment"
+        properties: ["id"]
+    indexes:
+      Comment:
+        type: "TEXT"
+        labels: ["Comment"]
+        properties: ["id"]
+  Forum:
+    label: "Forum"
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER", unique: true }
+      title: { type: "STRING" }
+    constraints:
+      Forum:
+        type: "UNIQUE"
+        label: "Forum"
+        properties: ["id"]
+    indexes:
+      Forum:
+        type: "TEXT"
+        labels: ["Forum"]
+        properties: ["id"]
+  Organisation:
+    label: "Organisation"
+    properties:
+      id: { type: "INTEGER", unique: true }
+      type: { type: "STRING" }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
+    constraints:
+      Organisation:
+        type: "UNIQUE"
+        label: "Organisation"
+        properties: ["id"]
+    indexes:
+      Organisation:
+        type: "TEXT"
+        labels: ["Organisation"]
+        properties: ["id"]
+  Person:
+    label: "Person"
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER", unique: true }
+      firstName: { type: "STRING" }
+      lastName: { type: "STRING" }
+      gender: { type: "STRING" }
+      birthday: { type: "INTEGER" }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      language: { type: "STRING" }
+      email: { type: "STRING" }
+    constraints:
+      Person:
+        type: "UNIQUE"
+        label: "Person"
+        properties: ["id"]
+    indexes:
+      Person:
+        type: "TEXT"
+        labels: ["Person"]
+        properties: ["id"]
+  Place:
+    label: "Place"
+    properties:
+      id: { type: "INTEGER", unique: true }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
+      type: { type: "STRING" }
+    constraints:
+      Place:
+        type: "UNIQUE"
+        label: "Place"
+        properties: ["id"]
+    indexes:
+      Place:
+        type: "TEXT"
+        labels: ["Place"]
+        properties: ["id"]
+  Post:
+    label: "Post"
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER", unique: true }
+      imageFile: { type: "STRING" }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      language: { type: "STRING" }
+      content: { type: "STRING" }
+      length: { type: "INTEGER" }
+    constraints:
+      Post:
+        type: "UNIQUE"
+        label: "Post"
+        properties: ["id"]
+    indexes:
+      Post:
+        type: "TEXT"
+        labels: ["Post"]
+        properties: ["id"]
+  Tag:
+    label: "Tag"
+    properties:
+      id: { type: "INTEGER", unique: true }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
+    constraints:
+      Tag:
+        type: "UNIQUE"
+        label: "Tag"
+        properties: ["id"]
+    indexes:
+      Tag:
+        type: "TEXT"
+        labels: ["Tag"]
+        properties: ["id"]
+  TagClass:
+    label: "TagClass"
+    properties:
+      id: { type: "INTEGER", unique: true }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
+    constraints:
+      TagClass:
+        type: "UNIQUE"
+        label: "TagClass"
+        properties: ["id"]
+    indexes:
+      TagClass:
+        type: "TEXT"
+        labels: ["TagClass"]
+        properties: ["id"]
+relationships:
+  "r:0":
+    type: "AUTHORED_BY"
+    from: { node: "n:0" }
+    to: { node: "n:3" }
+  "r:1":
+    type: "AUTHORED_AT"
+    from: { node: "n:0" }
+    to: { node: "n:4" }
+  "r:2":
+    type: "REPLIED_TO"
+    from: { node: "n:0" }
+    to: { node: "n:5" }
+  "r:3":
+    type: "REPLIED_TO"
+    from: { node: "n:0" }
+    to: { node: "n:0" }
+  "r:4":
+    type: "HAS_TAG"
+    from: { node: "n:0" }
+    to: { node: "n:6" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+  "r:5":
+    type: "MODERATED_BY"
+    from: { node: "n:1" }
+    to: { node: "n:3" }
+  "r:6":
+    type: "MEMBER_OF"
+    from: { node: "n:3" }
+    to: { node: "n:1" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+  "r:7":
+    type: "HAS_TAG"
+    from: { node: "n:1" }
+    to: { node: "n:6" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+  "r:8":
+    type: "LOCATED_IN"
+    from: { node: "n:2" }
+    to: { node: "n:4" }
+  "r:9":
+    type: "LIVES_IN"
+    from: { node: "n:3" }
+    to: { node: "n:4" }
+  "r:10":
+    type: "INTERESTED_IN"
+    from: { node: "n:3" }
+    to: { node: "n:6" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+  "r:11":
+    type: "KNOWS"
+    from: { node: "n:3" }
+    to: { node: "n:3" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+  "r:12":
+    type: "LIKED"
+    from: { node: "n:3" }
+    to: { node: "n:0" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+  "r:13":
+    type: "LIKED"
+    from: { node: "n:3" }
+    to: { node: "n:5" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+  "r:14":
+    type: "STUDIES_AT"
+    from: { node: "n:3" }
+    to: { node: "n:2" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      classYear: { type: "INTEGER" }
+  "r:15":
+    type: "WORKS_AT"
+    from: { node: "n:3" }
+    to: { node: "n:2" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      workFrom: { type: "INTEGER" }
+  "r:16":
+    type: "IS_SIMILAR_TO"
+    from: { node: "n:4" }
+    to: { node: "n:4" }
+  "r:17":
+    type: "AUTHORED_BY"
+    from: { node: "n:5" }
+    to: { node: "n:3" }
+  "r:18":
+    type: "POSTED_IN"
+    from: { node: "n:5" }
+    to: { node: "n:1" }
+  "r:19":
+    type: "AUTHORED_AT"
+    from: { node: "n:5" }
+    to: { node: "n:4" }
+  "r:20":
+    type: "HAS_TAG"
+    from: { node: "n:5" }
+    to: { node: "n:6" }
+    properties:
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+  "r:21":
+    type: "HAS_CLASS"
+    from: { node: "n:6" }
+    to: { node: "n:7" }
+  "r:22":
+    type: "IS_SUBCLASS"
+    from: { node: "n:7" }
+    to: { node: "n:7" }
+tables:
+  Comment:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      explicitlyDeleted:
+        type: "BOOLEAN"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      id:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      locationIP:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      browserUsed:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      content:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      length:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      CreatorPersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      LocationCountryId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      ParentPostId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      ParentCommentId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  CommentHasTag:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      CommentId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      TagId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  Forum:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      explicitlyDeleted:
+        type: "BOOLEAN"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      id:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      title:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      ModeratorPersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  ForumHasMember:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      explicitlyDeleted:
+        type: "BOOLEAN"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      ForumId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      PersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  ForumHasTag:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      ForumId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      TagId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  Organisation:
+    source: "cloud"
+    fields:
+      id:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      type:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      url:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      LocationPlaceId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  Person:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      explicitlyDeleted:
+        type: "BOOLEAN"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      id:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      firstName:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      lastName:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      gender:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      birthday:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      locationIP:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      browserUsed:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      LocationCityId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      language:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      email:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+  PersonHasInterest:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      PersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      TagId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  PersonKnowsPerson:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      explicitlyDeleted:
+        type: "BOOLEAN"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      Person1Id:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      Person2Id:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  PersonLikesComment:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      explicitlyDeleted:
+        type: "BOOLEAN"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      PersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      CommentId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  PersonLikesPost:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      explicitlyDeleted:
+        type: "BOOLEAN"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      PersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      PostId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  PersonStudiesAt:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      PersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      UniversityId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      classYear:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  PersonWorksAt:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      PersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      CompanyId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      workFrom:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  Place:
+    source: "cloud"
+    fields:
+      id:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      url:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      type:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      PartOfPlaceId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  Post:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      explicitlyDeleted:
+        type: "BOOLEAN"
+        suggested: "BOOLEAN"
+        supported: ["STRING", "BOOLEAN"]
+      id:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      imageFile:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      locationIP:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      browserUsed:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      language:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      content:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      length:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      CreatorPersonId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      ContainerForumId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      LocationCountryId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  PostHasTag:
+    source: "cloud"
+    fields:
+      creationDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      deletionDate:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      PostId:
+        type: "BIGINT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      TagId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  Tag:
+    source: "cloud"
+    fields:
+      id:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      url:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      TypeTagClassId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+  TagClass:
+    source: "cloud"
+    fields:
+      id:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      url:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      SubclassOfTagClassId:
+        type: "INTEGER"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+mappings:
+  - node: "Comment"
+    table: "Comment"
+    properties:
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      explicitlyDeleted: { field: "explicitlyDeleted" }
+      id: { field: "id" }
+      locationIP: { field: "locationIP" }
+      browserUsed: { field: "browserUsed" }
+      content: { field: "content" }
+      length: { field: "length" }
+  - node: "Forum"
+    table: "Forum"
+    properties:
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      explicitlyDeleted: { field: "explicitlyDeleted" }
+      id: { field: "id" }
+      title: { field: "title" }
+  - node: "Organisation"
+    table: "Organisation"
+    properties:
+      id: { field: "id" }
+      type: { field: "type" }
+      name: { field: "name" }
+      url: { field: "url" }
+  - node: "Person"
+    table: "Person"
+    properties:
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      explicitlyDeleted: { field: "explicitlyDeleted" }
+      id: { field: "id" }
+      firstName: { field: "firstName" }
+      lastName: { field: "lastName" }
+      gender: { field: "gender" }
+      birthday: { field: "birthday" }
+      locationIP: { field: "locationIP" }
+      browserUsed: { field: "browserUsed" }
+      language: { field: "language" }
+      email: { field: "email" }
+  - node: "Place"
+    table: "Place"
+    properties:
+      id: { field: "id" }
+      name: { field: "name" }
+      url: { field: "url" }
+      type: { field: "type" }
+  - node: "Post"
+    table: "Post"
+    properties:
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      explicitlyDeleted: { field: "explicitlyDeleted" }
+      id: { field: "id" }
+      imageFile: { field: "imageFile" }
+      locationIP: { field: "locationIP" }
+      browserUsed: { field: "browserUsed" }
+      language: { field: "language" }
+      content: { field: "content" }
+      length: { field: "length" }
+  - node: "Tag"
+    table: "Tag"
+    properties:
+      id: { field: "id" }
+      name: { field: "name" }
+      url: { field: "url" }
+  - node: "TagClass"
+    table: "TagClass"
+    properties:
+      id: { field: "id" }
+      name: { field: "name" }
+      url: { field: "url" }
+  - relationship: "AUTHORED_BY"
+    table: "Comment"
+    from:
+      node: "Comment"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Person"
+      properties:
+        id: { field: "CreatorPersonId" }
+  - relationship: "AUTHORED_AT"
+    table: "Comment"
+    from:
+      node: "Comment"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Place"
+      properties:
+        id: { field: "LocationCountryId" }
+  - relationship: "REPLIED_TO"
+    table: "Comment"
+    from:
+      node: "Comment"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Post"
+      properties:
+        id: { field: "ParentPostId" }
+  - relationship: "REPLIED_TO"
+    table: "Comment"
+    from:
+      node: "Comment"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Comment"
+      properties:
+        id: { field: "ParentCommentId" }
+  - relationship: "HAS_TAG"
+    table: "CommentHasTag"
+    from:
+      node: "Comment"
+      properties:
+        id: { field: "CommentId" }
+    to:
+      node: "Tag"
+      properties:
+        id: { field: "TagId" }
+    properties:
+      "p:4_0": { field: "creationDate" }
+      "p:4_1": { field: "deletionDate" }
+  - relationship: "MODERATED_BY"
+    table: "Forum"
+    from:
+      node: "Forum"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Person"
+      properties:
+        id: { field: "ModeratorPersonId" }
+  - relationship: "MEMBER_OF"
+    table: "ForumHasMember"
+    from:
+      node: "Person"
+      properties:
+        id: { field: "PersonId" }
+    to:
+      node: "Forum"
+      properties:
+        id: { field: "ForumId" }
+    properties:
+      "p:6_0": { field: "creationDate" }
+      "p:6_1": { field: "deletionDate" }
+      "p:6_2": { field: "explicitlyDeleted" }
+  - relationship: "HAS_TAG"
+    table: "ForumHasTag"
+    from:
+      node: "Forum"
+      properties:
+        id: { field: "ForumId" }
+    to:
+      node: "Tag"
+      properties:
+        id: { field: "TagId" }
+    properties:
+      "p:7_0": { field: "creationDate" }
+      "p:7_1": { field: "deletionDate" }
+  - relationship: "LOCATED_IN"
+    table: "Organisation"
+    from:
+      node: "Organisation"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Place"
+      properties:
+        id: { field: "LocationPlaceId" }
+  - relationship: "LIVES_IN"
+    table: "Person"
+    from:
+      node: "Person"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Place"
+      properties:
+        id: { field: "LocationCityId" }
+  - relationship: "INTERESTED_IN"
+    table: "PersonHasInterest"
+    from:
+      node: "Person"
+      properties:
+        id: { field: "PersonId" }
+    to:
+      node: "Tag"
+      properties:
+        id: { field: "TagId" }
+    properties:
+      "p:10_0": { field: "creationDate" }
+      "p:10_1": { field: "deletionDate" }
+  - relationship: "KNOWS"
+    table: "PersonKnowsPerson"
+    from:
+      node: "Person"
+      properties:
+        id: { field: "Person1Id" }
+    to:
+      node: "Person"
+      properties:
+        id: { field: "Person2Id" }
+    properties:
+      "p:11_0": { field: "creationDate" }
+      "p:11_1": { field: "deletionDate" }
+      "p:11_2": { field: "explicitlyDeleted" }
+  - relationship: "LIKED"
+    table: "PersonLikesComment"
+    from:
+      node: "Person"
+      properties:
+        id: { field: "PersonId" }
+    to:
+      node: "Comment"
+      properties:
+        id: { field: "CommentId" }
+    properties:
+      "p:12_0": { field: "creationDate" }
+      "p:12_1": { field: "deletionDate" }
+      "p:12_2": { field: "explicitlyDeleted" }
+  - relationship: "LIKED"
+    table: "PersonLikesPost"
+    from:
+      node: "Person"
+      properties:
+        id: { field: "PersonId" }
+    to:
+      node: "Post"
+      properties:
+        id: { field: "PostId" }
+    properties:
+      "p:13_0": { field: "creationDate" }
+      "p:13_1": { field: "deletionDate" }
+      "p:13_2": { field: "explicitlyDeleted" }
+  - relationship: "STUDIES_AT"
+    table: "PersonStudiesAt"
+    from:
+      node: "Person"
+      properties:
+        id: { field: "PersonId" }
+    to:
+      node: "Organisation"
+      properties:
+        id: { field: "UniversityId" }
+    properties:
+      "p:14_0": { field: "creationDate" }
+      "p:14_1": { field: "deletionDate" }
+      "p:14_2": { field: "classYear" }
+  - relationship: "WORKS_AT"
+    table: "PersonWorksAt"
+    from:
+      node: "Person"
+      properties:
+        id: { field: "PersonId" }
+    to:
+      node: "Organisation"
+      properties:
+        id: { field: "CompanyId" }
+    properties:
+      "p:15_0": { field: "creationDate" }
+      "p:15_1": { field: "deletionDate" }
+      "p:15_2": { field: "workFrom" }
+  - relationship: "IS_SIMILAR_TO"
+    table: "Place"
+    from:
+      node: "Place"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Place"
+      properties:
+        id: { field: "PartOfPlaceId" }
+  - relationship: "AUTHORED_BY"
+    table: "Post"
+    from:
+      node: "Post"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Person"
+      properties:
+        id: { field: "CreatorPersonId" }
+  - relationship: "POSTED_IN"
+    table: "Post"
+    from:
+      node: "Post"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Forum"
+      properties:
+        id: { field: "ContainerForumId" }
+  - relationship: "AUTHORED_AT"
+    table: "Post"
+    from:
+      node: "Post"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "Place"
+      properties:
+        id: { field: "LocationCountryId" }
+  - relationship: "HAS_TAG"
+    table: "PostHasTag"
+    from:
+      node: "Post"
+      properties:
+        id: { field: "PostId" }
+    to:
+      node: "Tag"
+      properties:
+        id: { field: "TagId" }
+    properties:
+      "p:20_0": { field: "creationDate" }
+      "p:20_1": { field: "deletionDate" }
+  - relationship: "HAS_CLASS"
+    table: "Tag"
+    from:
+      node: "Tag"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "TagClass"
+      properties:
+        id: { field: "TypeTagClassId" }
+  - relationship: "IS_SUBCLASS"
+    table: "TagClass"
+    from:
+      node: "TagClass"
+      properties:
+        id: { field: "id" }
+    to:
+      node: "TagClass"
+      properties:
+        id: { field: "SubclassOfTagClassId" }

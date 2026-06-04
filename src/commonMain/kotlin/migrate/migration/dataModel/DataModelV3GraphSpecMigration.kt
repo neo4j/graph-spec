@@ -195,7 +195,7 @@ class DataModelV3GraphSpecMigration :
                 "to" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType)),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token),
-                "indexes" toNotEmpty convertIndexes(indexes, typeRef, token)
+                "indexes" toNotEmpty convertIndexes(indexes, typeRef, token),
             )
         }
         return relationships
@@ -238,7 +238,7 @@ class DataModelV3GraphSpecMigration :
             // ref is lost, and we know type isn't unique; so we are assuming type + property id are unique
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.RELATIONSHIP), // needed for Kotlin/Native migrations
-                "relationship" to type.string("token"),
+                "relationship" to ref,
                 "from" to mapOf(
                     "node" to obj.ref("from"),
                     "properties" to mapping.entityMap("fromMappings")
