@@ -120,8 +120,8 @@ class YamlFormatTest {
 
         val yamlString = yamlFormat.encodeToString(schemaMap)
 
-        assertTrue(yamlString.contains("name: test"))
-        assertTrue(yamlString.contains("- item1"))
+        assertTrue(yamlString.contains("name: \"test\""))
+        assertTrue(yamlString.contains("- \"item1\""))
         assertTrue(yamlString.contains("- null") || yamlString.contains("~"))
     }
 }
