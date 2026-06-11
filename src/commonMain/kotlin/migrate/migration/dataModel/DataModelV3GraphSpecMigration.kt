@@ -37,6 +37,7 @@ import model.type.IndexType.POINT
 import model.type.IndexType.RANGE
 import model.type.IndexType.TEXT
 import model.type.IndexType.VECTOR
+import net.pearx.kasechange.toCamelCase
 
 /**
  * 3.0 -> Graph Spec 1.0
@@ -89,6 +90,9 @@ class DataModelV3GraphSpecMigration :
         val (nodes, rels) = elements.partition { it.string("entityType") == "node" }
         val nodeElements = nodes.groupBy { it.ref("nodeLabel") }
         val relationshipElements = rels.groupBy { it.ref("relationshipType") }
+        for (element in elements) {
+            element["name"] = element.stringOrNull("name")?.toCamelCase()
+        }
         return Pair(nodeElements, relationshipElements)
     }
 
@@ -121,7 +125,7 @@ class DataModelV3GraphSpecMigration :
                 "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel),
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel),
                 "properties" toNotEmpty convertProperties(labels, nodeKeys[id] ?: emptySet()),
-                "name" to tokens.firstOrNull()
+                "name" to tokens.firstOrNull()?.toCamelCase()
             )
         }
         return nodes
@@ -183,6 +187,7 @@ class DataModelV3GraphSpecMigration :
         constraints: Map<String, List<SchemaMap>>,
         indexes: Map<String, List<SchemaMap>>
     ): MutableMap<String, SchemaMap> {
+        val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()
         val relationshipTypes = schema.listOfMaps("relationshipTypes").associateBy { it.id() }
         for (objectType in schema.listOfMaps("relationshipObjectTypes")) {
@@ -196,9 +201,23 @@ class DataModelV3GraphSpecMigration :
                 "properties" to convertProperties(listOf(relationshipType)),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token),
+                "name" to uniqueRelationshipName(token.toCamelCase(), uniqueNames)
             )
         }
         return relationships
+    }
+
+    private fun uniqueRelationshipName(token: String, names: MutableSet<String>): String {
+        if (names.add(token)) {
+            return token
+        }
+        for (i in 2 until Int.MAX_VALUE) {
+            val name = "${token}$i"
+            if (names.add(name)) {
+                return name
+            }
+        }
+        throw IllegalArgumentException("Unable to find unique relationship name for $token")
     }
 
     internal fun convertProperties(
@@ -208,9 +227,8 @@ class DataModelV3GraphSpecMigration :
         .flatMap { label -> label.listOfMaps("properties") }
         .associate { property ->
             val typeObj = property.map("type") // TODO arrays
-            // TODO constraints
             val map = schemaMapOf(
-                "name" to property.literalOrNull("token"),
+                "name" to property.literalOrNull("token")?.string?.toCamelCase(),
                 "type" to propertyType(typeObj.string("type")),
                 "nullable" to property.literalOrNull("nullable")
             )
@@ -225,7 +243,6 @@ class DataModelV3GraphSpecMigration :
     internal fun relationshipMappings(schema: SchemaMap): List<SchemaMap> {
         val graph = schema.map("graphSchemaRepresentation").map("graphSchema")
         val relInfo = graph.listOfMapsOrNull("relationshipObjectTypes")?.associateBy { it.id() } ?: return emptyList()
-        val relTypes = graph.listOfMapsOrNull("relationshipTypes")?.associateBy { it.id() } ?: return emptyList()
         val relationshipMappings = schema
             .map("graphMappingRepresentation")
             .listOfMapsOrNull("relationshipMappings") ?: return emptyList()
@@ -233,8 +250,6 @@ class DataModelV3GraphSpecMigration :
         for (mapping in relationshipMappings) {
             val ref = mapping.ref("relationship")
             val obj = relInfo[ref] ?: error("Relationship $ref not found")
-            val typeRef = obj.ref("type")
-            val type = relTypes[typeRef] ?: error("Relationship type $typeRef not found")
             // ref is lost, and we know type isn't unique; so we are assuming type + property id are unique
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.RELATIONSHIP), // needed for Kotlin/Native migrations
@@ -319,7 +334,7 @@ class DataModelV3GraphSpecMigration :
         for (field in table.listOfMaps("fields")) {
             val name = field.string("name")
             fields[name] = schemaMapOf(
-                "name" to field.literal("name"),
+                "name" to field.literal("name").string.toCamelCase(),
                 "type" to field.literalOrNull("rawType"),
                 "size" to field.literalOrNull("size"),
                 "suggested" to propertyType(field.mapOrNull("recommendedType")?.string("type")),

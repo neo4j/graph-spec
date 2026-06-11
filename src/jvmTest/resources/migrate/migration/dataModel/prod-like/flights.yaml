@@ -1,22 +1,22 @@
 version: "4.0.0"
 nodes:
-  Aircraft:
+  aircraft:
     label: "Aircraft"
     properties:
       aircraftCode: { type: "STRING", unique: true }
       model: { type: "STRING" }
       aircraftRange: { type: "INTEGER" }
     constraints:
-      aircrafts_data:
+      aircraftsData:
         type: "UNIQUE"
         label: "Aircraft"
         properties: ["aircraftCode"]
     indexes:
-      "aircrafts_data-text":
+      aircraftsDataText:
         type: "TEXT"
         labels: ["Aircraft"]
         properties: ["aircraftCode"]
-  Airport:
+  airport:
     label: "Airport"
     properties:
       airportCode: { type: "STRING", unique: true }
@@ -25,16 +25,16 @@ nodes:
       coordinates: { type: "POINT" }
       timezone: { type: "STRING" }
     constraints:
-      airports_data:
+      airportsData:
         type: "UNIQUE"
         label: "Airport"
         properties: ["airportCode"]
     indexes:
-      "airports_data-text":
+      airportsDataText:
         type: "TEXT"
         labels: ["Airport"]
         properties: ["airportCode"]
-  Booking:
+  booking:
     label: "Booking"
     properties:
       bookRef: { type: "STRING", unique: true }
@@ -46,11 +46,11 @@ nodes:
         label: "Booking"
         properties: ["bookRef"]
     indexes:
-      "bookings-text":
+      bookingsText:
         type: "TEXT"
         labels: ["Booking"]
         properties: ["bookRef"]
-  Flight:
+  flight:
     label: "Flight"
     properties:
       flightId: { type: "INTEGER", unique: true }
@@ -70,7 +70,7 @@ nodes:
         type: "TEXT"
         labels: ["Flight"]
         properties: ["flightId"]
-  Ticket:
+  ticket:
     label: "Ticket"
     properties:
       ticketNo: { type: "STRING", unique: true }
@@ -83,34 +83,34 @@ nodes:
         label: "Ticket"
         properties: ["ticketNo"]
     indexes:
-      "tickets-text":
+      ticketsText:
         type: "TEXT"
         labels: ["Ticket"]
         properties: ["ticketNo"]
 relationships:
-  "r:0":
+  flightUsesAircraft:
     type: "FLIGHT_USES_AIRCRAFT"
-    from: { node: "n:3" }
-    to: { node: "n:0" }
-  "r:1":
+    from: { node: "flight" }
+    to: { node: "aircraft" }
+  flightDepartsFromAirport:
     type: "FLIGHT_DEPARTS_FROM_AIRPORT"
-    from: { node: "n:3" }
-    to: { node: "n:1" }
-  "r:2":
+    from: { node: "flight" }
+    to: { node: "airport" }
+  flightArrivesAtAirport:
     type: "FLIGHT_ARRIVES_AT_AIRPORT"
-    from: { node: "n:3" }
-    to: { node: "n:1" }
-  "r:3":
+    from: { node: "flight" }
+    to: { node: "airport" }
+  flightHasTicket:
     type: "FLIGHT_HAS_TICKET"
-    from: { node: "n:3" }
-    to: { node: "n:4" }
+    from: { node: "flight" }
+    to: { node: "ticket" }
     properties:
-      fare_conditions: { type: "STRING" }
+      fareConditions: { type: "STRING" }
       amount: { type: "FLOAT" }
-  "r:4":
+  ticketBelongsToBooking:
     type: "TICKET_BELONGS_TO_BOOKING"
-    from: { node: "n:4" }
-    to: { node: "n:2" }
+    from: { node: "ticket" }
+    to: { node: "booking" }
 tables:
   aircrafts_data:
     source: "cloud"
@@ -333,13 +333,13 @@ tables:
           table: "bookings"
           fields: ["book_ref"]
 mappings:
-  - node: "Aircraft"
+  - node: "aircraft"
     table: "aircrafts_data"
     properties:
       aircraftCode: { field: "aircraft_code" }
       model: { field: "model" }
       aircraftRange: { field: "aircrafts_range" }
-  - node: "Airport"
+  - node: "airport"
     table: "airports_data"
     properties:
       airportCode: { field: "airport_code" }
@@ -347,13 +347,13 @@ mappings:
       city: { field: "city" }
       coordinates: { field: "coordinates" }
       timezone: { field: "timezone" }
-  - node: "Booking"
+  - node: "booking"
     table: "bookings"
     properties:
       bookRef: { field: "book_ref" }
       bookDate: { field: "book_date" }
       totalAmount: { field: "total_amount" }
-  - node: "Flight"
+  - node: "flight"
     table: "flights"
     properties:
       flightId: { field: "flight_id" }
@@ -363,63 +363,63 @@ mappings:
       status: { field: "status" }
       actualDeparture: { field: "actual_departure" }
       actualArrival: { field: "actual_arrival" }
-  - node: "Ticket"
+  - node: "ticket"
     table: "tickets"
     properties:
       ticketNo: { field: "ticket_no" }
       passengerId: { field: "passenger_id" }
       passengerName: { field: "passenger_name" }
       contactData: { field: "contact_data" }
-  - relationship: "FLIGHT_USES_AIRCRAFT"
+  - relationship: "flightUsesAircraft"
     table: "flights"
     from:
-      node: "Flight"
+      node: "flight"
       properties:
         flightId: { field: "flight_id" }
     to:
-      node: "Aircraft"
+      node: "aircraft"
       properties:
         aircraftCode: { field: "aircraft_code" }
-  - relationship: "FLIGHT_DEPARTS_FROM_AIRPORT"
+  - relationship: "flightDepartsFromAirport"
     table: "flights"
     from:
-      node: "Flight"
+      node: "flight"
       properties:
         flightId: { field: "flight_id" }
     to:
-      node: "Airport"
+      node: "airport"
       properties:
         airportCode: { field: "departure_airport" }
-  - relationship: "FLIGHT_ARRIVES_AT_AIRPORT"
+  - relationship: "flightArrivesAtAirport"
     table: "flights"
     from:
-      node: "Flight"
+      node: "flight"
       properties:
         flightId: { field: "flight_id" }
     to:
-      node: "Airport"
+      node: "airport"
       properties:
         airportCode: { field: "arrival_airport" }
-  - relationship: "FLIGHT_HAS_TICKET"
+  - relationship: "flightHasTicket"
     table: "ticket_flights"
     from:
-      node: "Flight"
+      node: "flight"
       properties:
         flightId: { field: "flight_id" }
     to:
-      node: "Ticket"
+      node: "ticket"
       properties:
         ticketNo: { field: "ticket_no" }
     properties:
-      "p:3_0": { field: "fare_conditions" }
-      "p:3_1": { field: "amount" }
-  - relationship: "TICKET_BELONGS_TO_BOOKING"
+      fareConditions: { field: "fare_conditions" }
+      amount: { field: "amount" }
+  - relationship: "ticketBelongsToBooking"
     table: "tickets"
     from:
-      node: "Ticket"
+      node: "ticket"
       properties:
         ticketNo: { field: "ticket_no" }
     to:
-      node: "Booking"
+      node: "booking"
       properties:
         bookRef: { field: "book_ref" }

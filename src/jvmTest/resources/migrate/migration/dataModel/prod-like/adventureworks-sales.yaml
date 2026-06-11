@@ -30,7 +30,7 @@ nodes:
         label: "currency"
         properties: ["currencycode"]
     indexes:
-      "currency-text":
+      currencyText:
         type: "TEXT"
         labels: ["currency"]
         properties: ["currencycode"]
@@ -229,48 +229,48 @@ nodes:
         labels: ["store"]
         properties: ["businessentityid"]
 relationships:
-  "r:0":
+  salesterritory:
     type: "SALESTERRITORY"
-    from: { node: "n:3" }
-    to: { node: "n:8" }
-  "r:1":
+    from: { node: "customer" }
+    to: { node: "salesterritory" }
+  store:
     type: "STORE"
-    from: { node: "n:3" }
-    to: { node: "n:11" }
-  "r:2":
+    from: { node: "customer" }
+    to: { node: "store" }
+  creditcard:
     type: "CREDITCARD"
-    from: { node: "n:4" }
-    to: { node: "n:0" }
-  "r:3":
+    from: { node: "salesorderheader" }
+    to: { node: "creditcard" }
+  currencyrate:
     type: "CURRENCYRATE"
-    from: { node: "n:4" }
-    to: { node: "n:2" }
-  "r:4":
+    from: { node: "salesorderheader" }
+    to: { node: "currencyrate" }
+  customer:
     type: "CUSTOMER"
-    from: { node: "n:4" }
-    to: { node: "n:3" }
-  "r:5":
+    from: { node: "salesorderheader" }
+    to: { node: "customer" }
+  salesperson:
     type: "SALESPERSON"
-    from: { node: "n:4" }
-    to: { node: "n:5" }
-  "r:6":
+    from: { node: "salesorderheader" }
+    to: { node: "salesperson" }
+  salesterritory2:
     type: "SALESTERRITORY"
-    from: { node: "n:4" }
-    to: { node: "n:8" }
-  "r:7":
+    from: { node: "salesorderheader" }
+    to: { node: "salesterritory" }
+  salesreason:
     type: "SALESREASON"
-    from: { node: "n:4" }
-    to: { node: "n:6" }
+    from: { node: "salesorderheader" }
+    to: { node: "salesreason" }
     properties:
       modifieddate: { type: "ZONED DATETIME" }
-  "r:8":
+  salesterritory3:
     type: "SALESTERRITORY"
-    from: { node: "n:5" }
-    to: { node: "n:8" }
-  "r:9":
+    from: { node: "salesperson" }
+    to: { node: "salesterritory" }
+  salesperson2:
     type: "SALESPERSON"
-    from: { node: "n:11" }
-    to: { node: "n:5" }
+    from: { node: "store" }
+    to: { node: "salesperson" }
 tables:
   countryregioncurrency:
     source: "cloud"
@@ -1503,7 +1503,7 @@ mappings:
       businessentityid: { field: "businessentityid" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
-  - relationship: "SALESTERRITORY"
+  - relationship: "salesterritory"
     table: "customer"
     from:
       node: "customer"
@@ -1513,7 +1513,7 @@ mappings:
       node: "salesterritory"
       properties:
         territoryid: { field: "territoryid" }
-  - relationship: "STORE"
+  - relationship: "store"
     table: "customer"
     from:
       node: "customer"
@@ -1523,7 +1523,7 @@ mappings:
       node: "store"
       properties:
         businessentityid: { field: "storeid" }
-  - relationship: "CREDITCARD"
+  - relationship: "creditcard"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
@@ -1533,7 +1533,7 @@ mappings:
       node: "creditcard"
       properties:
         creditcardid: { field: "creditcardid" }
-  - relationship: "CURRENCYRATE"
+  - relationship: "currencyrate"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
@@ -1543,7 +1543,7 @@ mappings:
       node: "currencyrate"
       properties:
         currencyrateid: { field: "currencyrateid" }
-  - relationship: "CUSTOMER"
+  - relationship: "customer"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
@@ -1553,7 +1553,7 @@ mappings:
       node: "customer"
       properties:
         customerid: { field: "customerid" }
-  - relationship: "SALESPERSON"
+  - relationship: "salesperson"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
@@ -1563,7 +1563,7 @@ mappings:
       node: "salesperson"
       properties:
         businessentityid: { field: "salespersonid" }
-  - relationship: "SALESTERRITORY"
+  - relationship: "salesterritory2"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
@@ -1573,7 +1573,7 @@ mappings:
       node: "salesterritory"
       properties:
         territoryid: { field: "territoryid" }
-  - relationship: "SALESREASON"
+  - relationship: "salesreason"
     table: "salesorderheadersalesreason"
     from:
       node: "salesorderheader"
@@ -1584,8 +1584,8 @@ mappings:
       properties:
         salesreasonid: { field: "salesreasonid" }
     properties:
-      "p:7_0": { field: "modifieddate" }
-  - relationship: "SALESTERRITORY"
+      modifieddate: { field: "modifieddate" }
+  - relationship: "salesterritory3"
     table: "salesperson"
     from:
       node: "salesperson"
@@ -1595,7 +1595,7 @@ mappings:
       node: "salesterritory"
       properties:
         territoryid: { field: "territoryid" }
-  - relationship: "SALESPERSON"
+  - relationship: "salesperson2"
     table: "store"
     from:
       node: "store"

@@ -152,7 +152,6 @@ object Pretty {
 
     internal fun renameRelationshipMappingProperties(model: GraphModel, renames: Map<String, String>) {
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
-            println("Rename ${mapping.relationship} ${renames.filter { it.key.startsWith(mapping.relationship) }}")
             mapping.properties.rename(renames, mapping.relationship)
         }
     }
@@ -173,6 +172,7 @@ object Pretty {
             this[key] = value
         }
     }
+
     /**
      * Goes through a MutableSet, replacing the keys with replacements from [renames]
      * @param parent optionally used to look up the replacement key

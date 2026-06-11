@@ -64,14 +64,14 @@ nodes:
         labels: ["suppliers"]
         properties: ["supplierid"]
 relationships:
-  "r:0":
+  categories:
     type: "CATEGORIES"
-    from: { node: "n:1" }
-    to: { node: "n:0" }
-  "r:1":
+    from: { node: "products" }
+    to: { node: "categories" }
+  suppliers:
     type: "SUPPLIERS"
-    from: { node: "n:1" }
-    to: { node: "n:2" }
+    from: { node: "products" }
+    to: { node: "suppliers" }
 tables:
   categories:
     source: "cloud"
@@ -264,7 +264,7 @@ mappings:
       phone: { field: "phone" }
       fax: { field: "fax" }
       homepage: { field: "homepage" }
-  - relationship: "CATEGORIES"
+  - relationship: "categories"
     table: "products"
     from:
       node: "products"
@@ -274,7 +274,7 @@ mappings:
       node: "categories"
       properties:
         categoryid: { field: "categoryid" }
-  - relationship: "SUPPLIERS"
+  - relationship: "suppliers"
     table: "products"
     from:
       node: "products"

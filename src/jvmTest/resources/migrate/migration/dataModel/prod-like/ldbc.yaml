@@ -1,27 +1,27 @@
 version: "4.0.0"
 nodes:
-  Comment:
+  comment:
     label: "Comment"
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
       id: { type: "INTEGER", unique: true }
-      locationIP: { type: "STRING" }
+      locationIp: { type: "STRING" }
       browserUsed: { type: "STRING" }
       content: { type: "STRING" }
       length: { type: "INTEGER" }
     constraints:
-      Comment:
+      comment:
         type: "UNIQUE"
         label: "Comment"
         properties: ["id"]
     indexes:
-      Comment:
+      comment:
         type: "TEXT"
         labels: ["Comment"]
         properties: ["id"]
-  Forum:
+  forum:
     label: "Forum"
     properties:
       creationDate: { type: "INTEGER" }
@@ -30,16 +30,16 @@ nodes:
       id: { type: "INTEGER", unique: true }
       title: { type: "STRING" }
     constraints:
-      Forum:
+      forum:
         type: "UNIQUE"
         label: "Forum"
         properties: ["id"]
     indexes:
-      Forum:
+      forum:
         type: "TEXT"
         labels: ["Forum"]
         properties: ["id"]
-  Organisation:
+  organisation:
     label: "Organisation"
     properties:
       id: { type: "INTEGER", unique: true }
@@ -47,16 +47,16 @@ nodes:
       name: { type: "STRING" }
       url: { type: "STRING" }
     constraints:
-      Organisation:
+      organisation:
         type: "UNIQUE"
         label: "Organisation"
         properties: ["id"]
     indexes:
-      Organisation:
+      organisation:
         type: "TEXT"
         labels: ["Organisation"]
         properties: ["id"]
-  Person:
+  person:
     label: "Person"
     properties:
       creationDate: { type: "INTEGER" }
@@ -67,21 +67,21 @@ nodes:
       lastName: { type: "STRING" }
       gender: { type: "STRING" }
       birthday: { type: "INTEGER" }
-      locationIP: { type: "STRING" }
+      locationIp: { type: "STRING" }
       browserUsed: { type: "STRING" }
       language: { type: "STRING" }
       email: { type: "STRING" }
     constraints:
-      Person:
+      person:
         type: "UNIQUE"
         label: "Person"
         properties: ["id"]
     indexes:
-      Person:
+      person:
         type: "TEXT"
         labels: ["Person"]
         properties: ["id"]
-  Place:
+  place:
     label: "Place"
     properties:
       id: { type: "INTEGER", unique: true }
@@ -89,16 +89,16 @@ nodes:
       url: { type: "STRING" }
       type: { type: "STRING" }
     constraints:
-      Place:
+      place:
         type: "UNIQUE"
         label: "Place"
         properties: ["id"]
     indexes:
-      Place:
+      place:
         type: "TEXT"
         labels: ["Place"]
         properties: ["id"]
-  Post:
+  post:
     label: "Post"
     properties:
       creationDate: { type: "INTEGER" }
@@ -106,182 +106,182 @@ nodes:
       explicitlyDeleted: { type: "BOOLEAN" }
       id: { type: "INTEGER", unique: true }
       imageFile: { type: "STRING" }
-      locationIP: { type: "STRING" }
+      locationIp: { type: "STRING" }
       browserUsed: { type: "STRING" }
       language: { type: "STRING" }
       content: { type: "STRING" }
       length: { type: "INTEGER" }
     constraints:
-      Post:
+      post:
         type: "UNIQUE"
         label: "Post"
         properties: ["id"]
     indexes:
-      Post:
+      post:
         type: "TEXT"
         labels: ["Post"]
         properties: ["id"]
-  Tag:
+  tag:
     label: "Tag"
     properties:
       id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       url: { type: "STRING" }
     constraints:
-      Tag:
+      tag:
         type: "UNIQUE"
         label: "Tag"
         properties: ["id"]
     indexes:
-      Tag:
+      tag:
         type: "TEXT"
         labels: ["Tag"]
         properties: ["id"]
-  TagClass:
+  tagClass:
     label: "TagClass"
     properties:
       id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       url: { type: "STRING" }
     constraints:
-      TagClass:
+      tagClass:
         type: "UNIQUE"
         label: "TagClass"
         properties: ["id"]
     indexes:
-      TagClass:
+      tagClass:
         type: "TEXT"
         labels: ["TagClass"]
         properties: ["id"]
 relationships:
-  "r:0":
+  authoredBy:
     type: "AUTHORED_BY"
-    from: { node: "n:0" }
-    to: { node: "n:3" }
-  "r:1":
+    from: { node: "comment" }
+    to: { node: "person" }
+  authoredAt:
     type: "AUTHORED_AT"
-    from: { node: "n:0" }
-    to: { node: "n:4" }
-  "r:2":
+    from: { node: "comment" }
+    to: { node: "place" }
+  repliedTo:
     type: "REPLIED_TO"
-    from: { node: "n:0" }
-    to: { node: "n:5" }
-  "r:3":
+    from: { node: "comment" }
+    to: { node: "post" }
+  repliedTo2:
     type: "REPLIED_TO"
-    from: { node: "n:0" }
-    to: { node: "n:0" }
-  "r:4":
+    from: { node: "comment" }
+    to: { node: "comment" }
+  hasTag:
     type: "HAS_TAG"
-    from: { node: "n:0" }
-    to: { node: "n:6" }
+    from: { node: "comment" }
+    to: { node: "tag" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
-  "r:5":
+  moderatedBy:
     type: "MODERATED_BY"
-    from: { node: "n:1" }
-    to: { node: "n:3" }
-  "r:6":
+    from: { node: "forum" }
+    to: { node: "person" }
+  memberOf:
     type: "MEMBER_OF"
-    from: { node: "n:3" }
-    to: { node: "n:1" }
+    from: { node: "person" }
+    to: { node: "forum" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-  "r:7":
+  hasTag2:
     type: "HAS_TAG"
-    from: { node: "n:1" }
-    to: { node: "n:6" }
+    from: { node: "forum" }
+    to: { node: "tag" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
-  "r:8":
+  locatedIn:
     type: "LOCATED_IN"
-    from: { node: "n:2" }
-    to: { node: "n:4" }
-  "r:9":
+    from: { node: "organisation" }
+    to: { node: "place" }
+  livesIn:
     type: "LIVES_IN"
-    from: { node: "n:3" }
-    to: { node: "n:4" }
-  "r:10":
+    from: { node: "person" }
+    to: { node: "place" }
+  interestedIn:
     type: "INTERESTED_IN"
-    from: { node: "n:3" }
-    to: { node: "n:6" }
+    from: { node: "person" }
+    to: { node: "tag" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
-  "r:11":
+  knows:
     type: "KNOWS"
-    from: { node: "n:3" }
-    to: { node: "n:3" }
+    from: { node: "person" }
+    to: { node: "person" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-  "r:12":
+  liked:
     type: "LIKED"
-    from: { node: "n:3" }
-    to: { node: "n:0" }
+    from: { node: "person" }
+    to: { node: "comment" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-  "r:13":
+  liked2:
     type: "LIKED"
-    from: { node: "n:3" }
-    to: { node: "n:5" }
+    from: { node: "person" }
+    to: { node: "post" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-  "r:14":
+  studiesAt:
     type: "STUDIES_AT"
-    from: { node: "n:3" }
-    to: { node: "n:2" }
+    from: { node: "person" }
+    to: { node: "organisation" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       classYear: { type: "INTEGER" }
-  "r:15":
+  worksAt:
     type: "WORKS_AT"
-    from: { node: "n:3" }
-    to: { node: "n:2" }
+    from: { node: "person" }
+    to: { node: "organisation" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       workFrom: { type: "INTEGER" }
-  "r:16":
+  isSimilarTo:
     type: "IS_SIMILAR_TO"
-    from: { node: "n:4" }
-    to: { node: "n:4" }
-  "r:17":
+    from: { node: "place" }
+    to: { node: "place" }
+  authoredBy2:
     type: "AUTHORED_BY"
-    from: { node: "n:5" }
-    to: { node: "n:3" }
-  "r:18":
+    from: { node: "post" }
+    to: { node: "person" }
+  postedIn:
     type: "POSTED_IN"
-    from: { node: "n:5" }
-    to: { node: "n:1" }
-  "r:19":
+    from: { node: "post" }
+    to: { node: "forum" }
+  authoredAt2:
     type: "AUTHORED_AT"
-    from: { node: "n:5" }
-    to: { node: "n:4" }
-  "r:20":
+    from: { node: "post" }
+    to: { node: "place" }
+  hasTag3:
     type: "HAS_TAG"
-    from: { node: "n:5" }
-    to: { node: "n:6" }
+    from: { node: "post" }
+    to: { node: "tag" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
-  "r:21":
+  hasClass:
     type: "HAS_CLASS"
-    from: { node: "n:6" }
-    to: { node: "n:7" }
-  "r:22":
+    from: { node: "tag" }
+    to: { node: "tagClass" }
+  isSubclass:
     type: "IS_SUBCLASS"
-    from: { node: "n:7" }
-    to: { node: "n:7" }
+    from: { node: "tagClass" }
+    to: { node: "tagClass" }
 tables:
   Comment:
     source: "cloud"
@@ -770,18 +770,18 @@ tables:
         suggested: "INTEGER"
         supported: ["INTEGER", "STRING", "FLOAT"]
 mappings:
-  - node: "Comment"
+  - node: "comment"
     table: "Comment"
     properties:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
       explicitlyDeleted: { field: "explicitlyDeleted" }
       id: { field: "id" }
-      locationIP: { field: "locationIP" }
+      locationIp: { field: "locationIP" }
       browserUsed: { field: "browserUsed" }
       content: { field: "content" }
       length: { field: "length" }
-  - node: "Forum"
+  - node: "forum"
     table: "Forum"
     properties:
       creationDate: { field: "creationDate" }
@@ -789,14 +789,14 @@ mappings:
       explicitlyDeleted: { field: "explicitlyDeleted" }
       id: { field: "id" }
       title: { field: "title" }
-  - node: "Organisation"
+  - node: "organisation"
     table: "Organisation"
     properties:
       id: { field: "id" }
       type: { field: "type" }
       name: { field: "name" }
       url: { field: "url" }
-  - node: "Person"
+  - node: "person"
     table: "Person"
     properties:
       creationDate: { field: "creationDate" }
@@ -807,18 +807,18 @@ mappings:
       lastName: { field: "lastName" }
       gender: { field: "gender" }
       birthday: { field: "birthday" }
-      locationIP: { field: "locationIP" }
+      locationIp: { field: "locationIP" }
       browserUsed: { field: "browserUsed" }
       language: { field: "language" }
       email: { field: "email" }
-  - node: "Place"
+  - node: "place"
     table: "Place"
     properties:
       id: { field: "id" }
       name: { field: "name" }
       url: { field: "url" }
       type: { field: "type" }
-  - node: "Post"
+  - node: "post"
     table: "Post"
     properties:
       creationDate: { field: "creationDate" }
@@ -826,286 +826,286 @@ mappings:
       explicitlyDeleted: { field: "explicitlyDeleted" }
       id: { field: "id" }
       imageFile: { field: "imageFile" }
-      locationIP: { field: "locationIP" }
+      locationIp: { field: "locationIP" }
       browserUsed: { field: "browserUsed" }
       language: { field: "language" }
       content: { field: "content" }
       length: { field: "length" }
-  - node: "Tag"
+  - node: "tag"
     table: "Tag"
     properties:
       id: { field: "id" }
       name: { field: "name" }
       url: { field: "url" }
-  - node: "TagClass"
+  - node: "tagClass"
     table: "TagClass"
     properties:
       id: { field: "id" }
       name: { field: "name" }
       url: { field: "url" }
-  - relationship: "AUTHORED_BY"
+  - relationship: "authoredBy"
     table: "Comment"
     from:
-      node: "Comment"
+      node: "comment"
       properties:
         id: { field: "id" }
     to:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "CreatorPersonId" }
-  - relationship: "AUTHORED_AT"
+  - relationship: "authoredAt"
     table: "Comment"
     from:
-      node: "Comment"
+      node: "comment"
       properties:
         id: { field: "id" }
     to:
-      node: "Place"
+      node: "place"
       properties:
         id: { field: "LocationCountryId" }
-  - relationship: "REPLIED_TO"
+  - relationship: "repliedTo"
     table: "Comment"
     from:
-      node: "Comment"
+      node: "comment"
       properties:
         id: { field: "id" }
     to:
-      node: "Post"
+      node: "post"
       properties:
         id: { field: "ParentPostId" }
-  - relationship: "REPLIED_TO"
+  - relationship: "repliedTo2"
     table: "Comment"
     from:
-      node: "Comment"
+      node: "comment"
       properties:
         id: { field: "id" }
     to:
-      node: "Comment"
+      node: "comment"
       properties:
         id: { field: "ParentCommentId" }
-  - relationship: "HAS_TAG"
+  - relationship: "hasTag"
     table: "CommentHasTag"
     from:
-      node: "Comment"
+      node: "comment"
       properties:
         id: { field: "CommentId" }
     to:
-      node: "Tag"
+      node: "tag"
       properties:
         id: { field: "TagId" }
     properties:
-      "p:4_0": { field: "creationDate" }
-      "p:4_1": { field: "deletionDate" }
-  - relationship: "MODERATED_BY"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+  - relationship: "moderatedBy"
     table: "Forum"
     from:
-      node: "Forum"
+      node: "forum"
       properties:
         id: { field: "id" }
     to:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "ModeratorPersonId" }
-  - relationship: "MEMBER_OF"
+  - relationship: "memberOf"
     table: "ForumHasMember"
     from:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "PersonId" }
     to:
-      node: "Forum"
+      node: "forum"
       properties:
         id: { field: "ForumId" }
     properties:
-      "p:6_0": { field: "creationDate" }
-      "p:6_1": { field: "deletionDate" }
-      "p:6_2": { field: "explicitlyDeleted" }
-  - relationship: "HAS_TAG"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      explicitlyDeleted: { field: "explicitlyDeleted" }
+  - relationship: "hasTag2"
     table: "ForumHasTag"
     from:
-      node: "Forum"
+      node: "forum"
       properties:
         id: { field: "ForumId" }
     to:
-      node: "Tag"
+      node: "tag"
       properties:
         id: { field: "TagId" }
     properties:
-      "p:7_0": { field: "creationDate" }
-      "p:7_1": { field: "deletionDate" }
-  - relationship: "LOCATED_IN"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+  - relationship: "locatedIn"
     table: "Organisation"
     from:
-      node: "Organisation"
+      node: "organisation"
       properties:
         id: { field: "id" }
     to:
-      node: "Place"
+      node: "place"
       properties:
         id: { field: "LocationPlaceId" }
-  - relationship: "LIVES_IN"
+  - relationship: "livesIn"
     table: "Person"
     from:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "id" }
     to:
-      node: "Place"
+      node: "place"
       properties:
         id: { field: "LocationCityId" }
-  - relationship: "INTERESTED_IN"
+  - relationship: "interestedIn"
     table: "PersonHasInterest"
     from:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "PersonId" }
     to:
-      node: "Tag"
+      node: "tag"
       properties:
         id: { field: "TagId" }
     properties:
-      "p:10_0": { field: "creationDate" }
-      "p:10_1": { field: "deletionDate" }
-  - relationship: "KNOWS"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+  - relationship: "knows"
     table: "PersonKnowsPerson"
     from:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "Person1Id" }
     to:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "Person2Id" }
     properties:
-      "p:11_0": { field: "creationDate" }
-      "p:11_1": { field: "deletionDate" }
-      "p:11_2": { field: "explicitlyDeleted" }
-  - relationship: "LIKED"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      explicitlyDeleted: { field: "explicitlyDeleted" }
+  - relationship: "liked"
     table: "PersonLikesComment"
     from:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "PersonId" }
     to:
-      node: "Comment"
+      node: "comment"
       properties:
         id: { field: "CommentId" }
     properties:
-      "p:12_0": { field: "creationDate" }
-      "p:12_1": { field: "deletionDate" }
-      "p:12_2": { field: "explicitlyDeleted" }
-  - relationship: "LIKED"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      explicitlyDeleted: { field: "explicitlyDeleted" }
+  - relationship: "liked2"
     table: "PersonLikesPost"
     from:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "PersonId" }
     to:
-      node: "Post"
+      node: "post"
       properties:
         id: { field: "PostId" }
     properties:
-      "p:13_0": { field: "creationDate" }
-      "p:13_1": { field: "deletionDate" }
-      "p:13_2": { field: "explicitlyDeleted" }
-  - relationship: "STUDIES_AT"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      explicitlyDeleted: { field: "explicitlyDeleted" }
+  - relationship: "studiesAt"
     table: "PersonStudiesAt"
     from:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "PersonId" }
     to:
-      node: "Organisation"
+      node: "organisation"
       properties:
         id: { field: "UniversityId" }
     properties:
-      "p:14_0": { field: "creationDate" }
-      "p:14_1": { field: "deletionDate" }
-      "p:14_2": { field: "classYear" }
-  - relationship: "WORKS_AT"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      classYear: { field: "classYear" }
+  - relationship: "worksAt"
     table: "PersonWorksAt"
     from:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "PersonId" }
     to:
-      node: "Organisation"
+      node: "organisation"
       properties:
         id: { field: "CompanyId" }
     properties:
-      "p:15_0": { field: "creationDate" }
-      "p:15_1": { field: "deletionDate" }
-      "p:15_2": { field: "workFrom" }
-  - relationship: "IS_SIMILAR_TO"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+      workFrom: { field: "workFrom" }
+  - relationship: "isSimilarTo"
     table: "Place"
     from:
-      node: "Place"
+      node: "place"
       properties:
         id: { field: "id" }
     to:
-      node: "Place"
+      node: "place"
       properties:
         id: { field: "PartOfPlaceId" }
-  - relationship: "AUTHORED_BY"
+  - relationship: "authoredBy2"
     table: "Post"
     from:
-      node: "Post"
+      node: "post"
       properties:
         id: { field: "id" }
     to:
-      node: "Person"
+      node: "person"
       properties:
         id: { field: "CreatorPersonId" }
-  - relationship: "POSTED_IN"
+  - relationship: "postedIn"
     table: "Post"
     from:
-      node: "Post"
+      node: "post"
       properties:
         id: { field: "id" }
     to:
-      node: "Forum"
+      node: "forum"
       properties:
         id: { field: "ContainerForumId" }
-  - relationship: "AUTHORED_AT"
+  - relationship: "authoredAt2"
     table: "Post"
     from:
-      node: "Post"
+      node: "post"
       properties:
         id: { field: "id" }
     to:
-      node: "Place"
+      node: "place"
       properties:
         id: { field: "LocationCountryId" }
-  - relationship: "HAS_TAG"
+  - relationship: "hasTag3"
     table: "PostHasTag"
     from:
-      node: "Post"
+      node: "post"
       properties:
         id: { field: "PostId" }
     to:
-      node: "Tag"
+      node: "tag"
       properties:
         id: { field: "TagId" }
     properties:
-      "p:20_0": { field: "creationDate" }
-      "p:20_1": { field: "deletionDate" }
-  - relationship: "HAS_CLASS"
+      creationDate: { field: "creationDate" }
+      deletionDate: { field: "deletionDate" }
+  - relationship: "hasClass"
     table: "Tag"
     from:
-      node: "Tag"
+      node: "tag"
       properties:
         id: { field: "id" }
     to:
-      node: "TagClass"
+      node: "tagClass"
       properties:
         id: { field: "TypeTagClassId" }
-  - relationship: "IS_SUBCLASS"
+  - relationship: "isSubclass"
     table: "TagClass"
     from:
-      node: "TagClass"
+      node: "tagClass"
       properties:
         id: { field: "id" }
     to:
-      node: "TagClass"
+      node: "tagClass"
       properties:
         id: { field: "SubclassOfTagClassId" }

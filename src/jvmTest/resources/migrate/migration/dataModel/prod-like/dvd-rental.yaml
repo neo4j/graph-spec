@@ -3,303 +3,303 @@ nodes:
   actor:
     label: "actor"
     properties:
-      actor_id: { type: "INTEGER", unique: true }
-      first_name: { type: "STRING" }
-      last_name: { type: "STRING" }
-      last_update: { type: "ZONED DATETIME" }
+      actorId: { type: "INTEGER", unique: true }
+      firstName: { type: "STRING" }
+      lastName: { type: "STRING" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       actor:
         type: "UNIQUE"
         label: "actor"
-        properties: ["actor_id"]
+        properties: ["actorId"]
     indexes:
       actor:
         type: "TEXT"
         labels: ["actor"]
-        properties: ["actor_id"]
+        properties: ["actorId"]
   address:
     label: "address"
     properties:
-      address_id: { type: "INTEGER", unique: true }
+      addressId: { type: "INTEGER", unique: true }
       address: { type: "STRING" }
       address2: { type: "STRING" }
       district: { type: "STRING" }
-      postal_code: { type: "STRING" }
+      postalCode: { type: "STRING" }
       phone: { type: "STRING" }
-      last_update: { type: "ZONED DATETIME" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       address:
         type: "UNIQUE"
         label: "address"
-        properties: ["address_id"]
+        properties: ["addressId"]
     indexes:
       address:
         type: "TEXT"
         labels: ["address"]
-        properties: ["address_id"]
+        properties: ["addressId"]
   category:
     label: "category"
     properties:
-      category_id: { type: "INTEGER", unique: true }
+      categoryId: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-      last_update: { type: "ZONED DATETIME" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       category:
         type: "UNIQUE"
         label: "category"
-        properties: ["category_id"]
+        properties: ["categoryId"]
     indexes:
       category:
         type: "TEXT"
         labels: ["category"]
-        properties: ["category_id"]
+        properties: ["categoryId"]
   city:
     label: "city"
     properties:
-      city_id: { type: "INTEGER", unique: true }
+      cityId: { type: "INTEGER", unique: true }
       city: { type: "STRING" }
-      last_update: { type: "ZONED DATETIME" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       city:
         type: "UNIQUE"
         label: "city"
-        properties: ["city_id"]
+        properties: ["cityId"]
     indexes:
       city:
         type: "TEXT"
         labels: ["city"]
-        properties: ["city_id"]
+        properties: ["cityId"]
   country:
     label: "country"
     properties:
-      country_id: { type: "INTEGER", unique: true }
+      countryId: { type: "INTEGER", unique: true }
       country: { type: "STRING" }
-      last_update: { type: "ZONED DATETIME" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       country:
         type: "UNIQUE"
         label: "country"
-        properties: ["country_id"]
+        properties: ["countryId"]
     indexes:
       country:
         type: "TEXT"
         labels: ["country"]
-        properties: ["country_id"]
+        properties: ["countryId"]
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER", unique: true }
-      store_id: { type: "INTEGER" }
-      first_name: { type: "STRING" }
-      last_name: { type: "STRING" }
+      customerId: { type: "INTEGER", unique: true }
+      storeId: { type: "INTEGER" }
+      firstName: { type: "STRING" }
+      lastName: { type: "STRING" }
       email: { type: "STRING" }
       activebool: { type: "BOOLEAN" }
-      create_date: { type: "DATE" }
-      last_update: { type: "ZONED DATETIME" }
+      createDate: { type: "DATE" }
+      lastUpdate: { type: "ZONED DATETIME" }
       active: { type: "INTEGER" }
     constraints:
       customer:
         type: "UNIQUE"
         label: "customer"
-        properties: ["customer_id"]
+        properties: ["customerId"]
     indexes:
       customer:
         type: "TEXT"
         labels: ["customer"]
-        properties: ["customer_id"]
+        properties: ["customerId"]
   film:
     label: "film"
     properties:
-      film_id: { type: "INTEGER", unique: true }
+      filmId: { type: "INTEGER", unique: true }
       title: { type: "STRING" }
       description: { type: "STRING" }
-      rental_duration: { type: "INTEGER" }
-      rental_rate: { type: "FLOAT" }
+      rentalDuration: { type: "INTEGER" }
+      rentalRate: { type: "FLOAT" }
       length: { type: "INTEGER" }
-      replacement_cost: { type: "FLOAT" }
+      replacementCost: { type: "FLOAT" }
       rating: { type: "STRING" }
-      last_update: { type: "ZONED DATETIME" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       film:
         type: "UNIQUE"
         label: "film"
-        properties: ["film_id"]
+        properties: ["filmId"]
     indexes:
       film:
         type: "TEXT"
         labels: ["film"]
-        properties: ["film_id"]
+        properties: ["filmId"]
   inventory:
     label: "inventory"
     properties:
-      inventory_id: { type: "INTEGER", unique: true }
-      store_id: { type: "INTEGER" }
-      last_update: { type: "ZONED DATETIME" }
+      inventoryId: { type: "INTEGER", unique: true }
+      storeId: { type: "INTEGER" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       inventory:
         type: "UNIQUE"
         label: "inventory"
-        properties: ["inventory_id"]
+        properties: ["inventoryId"]
     indexes:
       inventory:
         type: "TEXT"
         labels: ["inventory"]
-        properties: ["inventory_id"]
+        properties: ["inventoryId"]
   language:
     label: "language"
     properties:
-      language_id: { type: "INTEGER", unique: true }
+      languageId: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-      last_update: { type: "ZONED DATETIME" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       language:
         type: "UNIQUE"
         label: "language"
-        properties: ["language_id"]
+        properties: ["languageId"]
     indexes:
       language:
         type: "TEXT"
         labels: ["language"]
-        properties: ["language_id"]
+        properties: ["languageId"]
   payment:
     label: "payment"
     properties:
-      payment_id: { type: "INTEGER", unique: true }
+      paymentId: { type: "INTEGER", unique: true }
       amount: { type: "FLOAT" }
-      payment_date: { type: "ZONED DATETIME" }
+      paymentDate: { type: "ZONED DATETIME" }
     constraints:
       payment:
         type: "UNIQUE"
         label: "payment"
-        properties: ["payment_id"]
+        properties: ["paymentId"]
     indexes:
       payment:
         type: "TEXT"
         labels: ["payment"]
-        properties: ["payment_id"]
+        properties: ["paymentId"]
   rental:
     label: "rental"
     properties:
-      rental_id: { type: "INTEGER", unique: true }
-      rental_date: { type: "ZONED DATETIME" }
-      return_date: { type: "ZONED DATETIME" }
-      last_update: { type: "ZONED DATETIME" }
+      rentalId: { type: "INTEGER", unique: true }
+      rentalDate: { type: "ZONED DATETIME" }
+      returnDate: { type: "ZONED DATETIME" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       rental:
         type: "UNIQUE"
         label: "rental"
-        properties: ["rental_id"]
+        properties: ["rentalId"]
     indexes:
       rental:
         type: "TEXT"
         labels: ["rental"]
-        properties: ["rental_id"]
+        properties: ["rentalId"]
   staff:
     label: "staff"
     properties:
-      staff_id: { type: "INTEGER", unique: true }
-      first_name: { type: "STRING" }
-      last_name: { type: "STRING" }
+      staffId: { type: "INTEGER", unique: true }
+      firstName: { type: "STRING" }
+      lastName: { type: "STRING" }
       email: { type: "STRING" }
-      store_id: { type: "INTEGER" }
+      storeId: { type: "INTEGER" }
       active: { type: "BOOLEAN" }
       username: { type: "STRING" }
       password: { type: "STRING" }
-      last_update: { type: "ZONED DATETIME" }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       staff:
         type: "UNIQUE"
         label: "staff"
-        properties: ["staff_id"]
+        properties: ["staffId"]
     indexes:
       staff:
         type: "TEXT"
         labels: ["staff"]
-        properties: ["staff_id"]
+        properties: ["staffId"]
   store:
     label: "store"
     properties:
-      store_id: { type: "INTEGER", unique: true }
-      last_update: { type: "ZONED DATETIME" }
+      storeId: { type: "INTEGER", unique: true }
+      lastUpdate: { type: "ZONED DATETIME" }
     constraints:
       store:
         type: "UNIQUE"
         label: "store"
-        properties: ["store_id"]
+        properties: ["storeId"]
     indexes:
       store:
         type: "TEXT"
         labels: ["store"]
-        properties: ["store_id"]
+        properties: ["storeId"]
 relationships:
-  "r:0":
+  relatedToCity:
     type: "RELATED_TO_CITY"
-    from: { node: "n:1" }
-    to: { node: "n:3" }
-  "r:1":
+    from: { node: "address" }
+    to: { node: "city" }
+  relatedToCountry:
     type: "RELATED_TO_COUNTRY"
-    from: { node: "n:3" }
-    to: { node: "n:4" }
-  "r:2":
+    from: { node: "city" }
+    to: { node: "country" }
+  relatedToAddress:
     type: "RELATED_TO_ADDRESS"
-    from: { node: "n:5" }
-    to: { node: "n:1" }
-  "r:3":
+    from: { node: "customer" }
+    to: { node: "address" }
+  relatedToLanguage:
     type: "RELATED_TO_LANGUAGE"
-    from: { node: "n:6" }
-    to: { node: "n:8" }
-  "r:4":
+    from: { node: "film" }
+    to: { node: "language" }
+  relatedToFilm:
     type: "RELATED_TO_FILM"
-    from: { node: "n:0" }
-    to: { node: "n:6" }
+    from: { node: "actor" }
+    to: { node: "film" }
     properties:
-      last_update: { type: "ZONED DATETIME" }
-  "r:5":
+      lastUpdate: { type: "ZONED DATETIME" }
+  relatedToFilm2:
     type: "RELATED_TO_FILM"
-    from: { node: "n:2" }
-    to: { node: "n:6" }
+    from: { node: "category" }
+    to: { node: "film" }
     properties:
-      last_update: { type: "ZONED DATETIME" }
-  "r:6":
+      lastUpdate: { type: "ZONED DATETIME" }
+  relatedToFilm3:
     type: "RELATED_TO_FILM"
-    from: { node: "n:7" }
-    to: { node: "n:6" }
-  "r:7":
+    from: { node: "inventory" }
+    to: { node: "film" }
+  relatedToCustomer:
     type: "RELATED_TO_CUSTOMER"
-    from: { node: "n:9" }
-    to: { node: "n:5" }
-  "r:8":
+    from: { node: "payment" }
+    to: { node: "customer" }
+  relatedToRental:
     type: "RELATED_TO_RENTAL"
-    from: { node: "n:9" }
-    to: { node: "n:10" }
-  "r:9":
+    from: { node: "payment" }
+    to: { node: "rental" }
+  relatedToStaff:
     type: "RELATED_TO_STAFF"
-    from: { node: "n:9" }
-    to: { node: "n:11" }
-  "r:10":
+    from: { node: "payment" }
+    to: { node: "staff" }
+  relatedToCustomer2:
     type: "RELATED_TO_CUSTOMER"
-    from: { node: "n:10" }
-    to: { node: "n:5" }
-  "r:11":
+    from: { node: "rental" }
+    to: { node: "customer" }
+  relatedToInventory:
     type: "RELATED_TO_INVENTORY"
-    from: { node: "n:10" }
-    to: { node: "n:7" }
-  "r:12":
+    from: { node: "rental" }
+    to: { node: "inventory" }
+  relatedToStaff2:
     type: "RELATED_TO_STAFF"
-    from: { node: "n:10" }
-    to: { node: "n:11" }
-  "r:13":
+    from: { node: "rental" }
+    to: { node: "staff" }
+  relatedToAddress2:
     type: "RELATED_TO_ADDRESS"
-    from: { node: "n:11" }
-    to: { node: "n:1" }
-  "r:14":
+    from: { node: "staff" }
+    to: { node: "address" }
+  relatedToAddress3:
     type: "RELATED_TO_ADDRESS"
-    from: { node: "n:12" }
-    to: { node: "n:1" }
-  "r:15":
+    from: { node: "store" }
+    to: { node: "address" }
+  relatedToStaff3:
     type: "RELATED_TO_STAFF"
-    from: { node: "n:12" }
-    to: { node: "n:11" }
+    from: { node: "store" }
+    to: { node: "staff" }
 tables:
   actor:
     source: "cloud"
@@ -991,265 +991,265 @@ mappings:
   - node: "actor"
     table: "actor"
     properties:
-      actor_id: { field: "actor_id" }
-      first_name: { field: "first_name" }
-      last_name: { field: "last_name" }
-      last_update: { field: "last_update" }
+      actorId: { field: "actor_id" }
+      firstName: { field: "first_name" }
+      lastName: { field: "last_name" }
+      lastUpdate: { field: "last_update" }
   - node: "address"
     table: "address"
     properties:
-      address_id: { field: "address_id" }
+      addressId: { field: "address_id" }
       address: { field: "address" }
       address2: { field: "address2" }
       district: { field: "district" }
-      postal_code: { field: "postal_code" }
+      postalCode: { field: "postal_code" }
       phone: { field: "phone" }
-      last_update: { field: "last_update" }
+      lastUpdate: { field: "last_update" }
   - node: "category"
     table: "category"
     properties:
-      category_id: { field: "category_id" }
+      categoryId: { field: "category_id" }
       name: { field: "name" }
-      last_update: { field: "last_update" }
+      lastUpdate: { field: "last_update" }
   - node: "city"
     table: "city"
     properties:
-      city_id: { field: "city_id" }
+      cityId: { field: "city_id" }
       city: { field: "city" }
-      last_update: { field: "last_update" }
+      lastUpdate: { field: "last_update" }
   - node: "country"
     table: "country"
     properties:
-      country_id: { field: "country_id" }
+      countryId: { field: "country_id" }
       country: { field: "country" }
-      last_update: { field: "last_update" }
+      lastUpdate: { field: "last_update" }
   - node: "customer"
     table: "customer"
     properties:
-      customer_id: { field: "customer_id" }
-      store_id: { field: "store_id" }
-      first_name: { field: "first_name" }
-      last_name: { field: "last_name" }
+      customerId: { field: "customer_id" }
+      storeId: { field: "store_id" }
+      firstName: { field: "first_name" }
+      lastName: { field: "last_name" }
       email: { field: "email" }
       activebool: { field: "activebool" }
-      create_date: { field: "create_date" }
-      last_update: { field: "last_update" }
+      createDate: { field: "create_date" }
+      lastUpdate: { field: "last_update" }
       active: { field: "active" }
   - node: "film"
     table: "film"
     properties:
-      film_id: { field: "film_id" }
+      filmId: { field: "film_id" }
       title: { field: "title" }
       description: { field: "description" }
-      rental_duration: { field: "rental_duration" }
-      rental_rate: { field: "rental_rate" }
+      rentalDuration: { field: "rental_duration" }
+      rentalRate: { field: "rental_rate" }
       length: { field: "length" }
-      replacement_cost: { field: "replacement_cost" }
+      replacementCost: { field: "replacement_cost" }
       rating: { field: "rating" }
-      last_update: { field: "last_update" }
+      lastUpdate: { field: "last_update" }
   - node: "inventory"
     table: "inventory"
     properties:
-      inventory_id: { field: "inventory_id" }
-      store_id: { field: "store_id" }
-      last_update: { field: "last_update" }
+      inventoryId: { field: "inventory_id" }
+      storeId: { field: "store_id" }
+      lastUpdate: { field: "last_update" }
   - node: "language"
     table: "language"
     properties:
-      language_id: { field: "language_id" }
+      languageId: { field: "language_id" }
       name: { field: "name" }
-      last_update: { field: "last_update" }
+      lastUpdate: { field: "last_update" }
   - node: "payment"
     table: "payment"
     properties:
-      payment_id: { field: "payment_id" }
+      paymentId: { field: "payment_id" }
       amount: { field: "amount" }
-      payment_date: { field: "payment_date" }
+      paymentDate: { field: "payment_date" }
   - node: "rental"
     table: "rental"
     properties:
-      rental_id: { field: "rental_id" }
-      rental_date: { field: "rental_date" }
-      return_date: { field: "return_date" }
-      last_update: { field: "last_update" }
+      rentalId: { field: "rental_id" }
+      rentalDate: { field: "rental_date" }
+      returnDate: { field: "return_date" }
+      lastUpdate: { field: "last_update" }
   - node: "staff"
     table: "staff"
     properties:
-      staff_id: { field: "staff_id" }
-      first_name: { field: "first_name" }
-      last_name: { field: "last_name" }
+      staffId: { field: "staff_id" }
+      firstName: { field: "first_name" }
+      lastName: { field: "last_name" }
       email: { field: "email" }
-      store_id: { field: "store_id" }
+      storeId: { field: "store_id" }
       active: { field: "active" }
       username: { field: "username" }
       password: { field: "password" }
-      last_update: { field: "last_update" }
+      lastUpdate: { field: "last_update" }
   - node: "store"
     table: "store"
     properties:
-      store_id: { field: "store_id" }
-      last_update: { field: "last_update" }
-  - relationship: "RELATED_TO_CITY"
+      storeId: { field: "store_id" }
+      lastUpdate: { field: "last_update" }
+  - relationship: "relatedToCity"
     table: "address"
     from:
       node: "address"
       properties:
-        address_id: { field: "address_id" }
+        addressId: { field: "address_id" }
     to:
       node: "city"
       properties:
-        city_id: { field: "city_id" }
-  - relationship: "RELATED_TO_COUNTRY"
+        cityId: { field: "city_id" }
+  - relationship: "relatedToCountry"
     table: "city"
     from:
       node: "city"
       properties:
-        city_id: { field: "city_id" }
+        cityId: { field: "city_id" }
     to:
       node: "country"
       properties:
-        country_id: { field: "country_id" }
-  - relationship: "RELATED_TO_ADDRESS"
+        countryId: { field: "country_id" }
+  - relationship: "relatedToAddress"
     table: "customer"
     from:
       node: "customer"
       properties:
-        customer_id: { field: "customer_id" }
+        customerId: { field: "customer_id" }
     to:
       node: "address"
       properties:
-        address_id: { field: "address_id" }
-  - relationship: "RELATED_TO_LANGUAGE"
+        addressId: { field: "address_id" }
+  - relationship: "relatedToLanguage"
     table: "film"
     from:
       node: "film"
       properties:
-        film_id: { field: "film_id" }
+        filmId: { field: "film_id" }
     to:
       node: "language"
       properties:
-        language_id: { field: "language_id" }
-  - relationship: "RELATED_TO_FILM"
+        languageId: { field: "language_id" }
+  - relationship: "relatedToFilm"
     table: "film_actor"
     from:
       node: "actor"
       properties:
-        actor_id: { field: "actor_id" }
+        actorId: { field: "actor_id" }
     to:
       node: "film"
       properties:
-        film_id: { field: "film_id" }
+        filmId: { field: "film_id" }
     properties:
-      "p:4_0": { field: "last_update" }
-  - relationship: "RELATED_TO_FILM"
+      lastUpdate: { field: "last_update" }
+  - relationship: "relatedToFilm2"
     table: "film_category"
     from:
       node: "category"
       properties:
-        category_id: { field: "category_id" }
+        categoryId: { field: "category_id" }
     to:
       node: "film"
       properties:
-        film_id: { field: "film_id" }
+        filmId: { field: "film_id" }
     properties:
-      "p:5_0": { field: "last_update" }
-  - relationship: "RELATED_TO_FILM"
+      lastUpdate: { field: "last_update" }
+  - relationship: "relatedToFilm3"
     table: "inventory"
     from:
       node: "inventory"
       properties:
-        inventory_id: { field: "inventory_id" }
+        inventoryId: { field: "inventory_id" }
     to:
       node: "film"
       properties:
-        film_id: { field: "film_id" }
-  - relationship: "RELATED_TO_CUSTOMER"
+        filmId: { field: "film_id" }
+  - relationship: "relatedToCustomer"
     table: "payment"
     from:
       node: "payment"
       properties:
-        payment_id: { field: "payment_id" }
+        paymentId: { field: "payment_id" }
     to:
       node: "customer"
       properties:
-        customer_id: { field: "customer_id" }
-  - relationship: "RELATED_TO_RENTAL"
+        customerId: { field: "customer_id" }
+  - relationship: "relatedToRental"
     table: "payment"
     from:
       node: "payment"
       properties:
-        payment_id: { field: "payment_id" }
+        paymentId: { field: "payment_id" }
     to:
       node: "rental"
       properties:
-        rental_id: { field: "rental_id" }
-  - relationship: "RELATED_TO_STAFF"
+        rentalId: { field: "rental_id" }
+  - relationship: "relatedToStaff"
     table: "payment"
     from:
       node: "payment"
       properties:
-        payment_id: { field: "payment_id" }
+        paymentId: { field: "payment_id" }
     to:
       node: "staff"
       properties:
-        staff_id: { field: "staff_id" }
-  - relationship: "RELATED_TO_CUSTOMER"
+        staffId: { field: "staff_id" }
+  - relationship: "relatedToCustomer2"
     table: "rental"
     from:
       node: "rental"
       properties:
-        rental_id: { field: "rental_id" }
+        rentalId: { field: "rental_id" }
     to:
       node: "customer"
       properties:
-        customer_id: { field: "customer_id" }
-  - relationship: "RELATED_TO_INVENTORY"
+        customerId: { field: "customer_id" }
+  - relationship: "relatedToInventory"
     table: "rental"
     from:
       node: "rental"
       properties:
-        rental_id: { field: "rental_id" }
+        rentalId: { field: "rental_id" }
     to:
       node: "inventory"
       properties:
-        inventory_id: { field: "inventory_id" }
-  - relationship: "RELATED_TO_STAFF"
+        inventoryId: { field: "inventory_id" }
+  - relationship: "relatedToStaff2"
     table: "rental"
     from:
       node: "rental"
       properties:
-        rental_id: { field: "rental_id" }
+        rentalId: { field: "rental_id" }
     to:
       node: "staff"
       properties:
-        staff_id: { field: "staff_id" }
-  - relationship: "RELATED_TO_ADDRESS"
+        staffId: { field: "staff_id" }
+  - relationship: "relatedToAddress2"
     table: "staff"
     from:
       node: "staff"
       properties:
-        staff_id: { field: "staff_id" }
+        staffId: { field: "staff_id" }
     to:
       node: "address"
       properties:
-        address_id: { field: "address_id" }
-  - relationship: "RELATED_TO_ADDRESS"
+        addressId: { field: "address_id" }
+  - relationship: "relatedToAddress3"
     table: "store"
     from:
       node: "store"
       properties:
-        store_id: { field: "store_id" }
+        storeId: { field: "store_id" }
     to:
       node: "address"
       properties:
-        address_id: { field: "address_id" }
-  - relationship: "RELATED_TO_STAFF"
+        addressId: { field: "address_id" }
+  - relationship: "relatedToStaff3"
     table: "store"
     from:
       node: "store"
       properties:
-        store_id: { field: "store_id" }
+        storeId: { field: "store_id" }
     to:
       node: "staff"
       properties:
-        staff_id: { field: "manager_staff_id" }
+        staffId: { field: "manager_staff_id" }
