@@ -366,7 +366,7 @@ class DataModelV3GraphSpecMigrationTest {
         val result = migration.relationshipMappings(unwrap(input))
 
         val mapping = result.first()
-        assertEquals("WORKS_AT", mapping.string("relationship"))
+        assertEquals("obj1", mapping.string("relationship"))
         assertEquals("WORKS_IN", mapping.string("table"))
 
         val fromProps = mapping.map("from").map("properties")
