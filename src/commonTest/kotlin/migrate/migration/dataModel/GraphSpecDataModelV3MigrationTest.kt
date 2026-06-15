@@ -198,7 +198,7 @@ class GraphSpecDataModelV3MigrationTest {
             ),
             "mappings" to listOf(
                 schemaMapOf(
-                    "relationship" to "FOLLOWS",
+                    "relationship" to "actual_rel_id",
                     "table" to "user_follows",
                     "from" to
                         schemaMapOf(
