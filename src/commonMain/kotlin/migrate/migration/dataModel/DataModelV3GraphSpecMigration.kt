@@ -37,7 +37,6 @@ import model.type.IndexType.POINT
 import model.type.IndexType.RANGE
 import model.type.IndexType.TEXT
 import model.type.IndexType.VECTOR
-import net.pearx.kasechange.toCamelCase
 
 /**
  * 3.0 -> Graph Spec 1.0
@@ -91,7 +90,7 @@ class DataModelV3GraphSpecMigration :
         val nodeElements = nodes.groupBy { it.ref("nodeLabel") }
         val relationshipElements = rels.groupBy { it.ref("relationshipType") }
         for (element in elements) {
-            element["name"] = element.stringOrNull("name")?.toCamelCase()
+            element["name"] = element.stringOrNull("name")
         }
         return Pair(nodeElements, relationshipElements)
     }
@@ -125,7 +124,7 @@ class DataModelV3GraphSpecMigration :
                 "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel),
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel),
                 "properties" toNotEmpty convertProperties(labels, nodeKeys[id] ?: emptySet()),
-                "name" to tokens.firstOrNull()?.toCamelCase()
+                "name" to tokens.firstOrNull()
             )
         }
         return nodes
@@ -201,7 +200,7 @@ class DataModelV3GraphSpecMigration :
                 "properties" to convertProperties(listOf(relationshipType)),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token),
-                "name" to uniqueRelationshipName(token.toCamelCase(), uniqueNames)
+                "name" to uniqueRelationshipName(token, uniqueNames)
             )
         }
         return relationships
@@ -228,7 +227,7 @@ class DataModelV3GraphSpecMigration :
         .associate { property ->
             val typeObj = property.map("type") // TODO arrays
             val map = schemaMapOf(
-                "name" to property.literalOrNull("token")?.string?.toCamelCase(),
+                "name" to property.literalOrNull("token"),
                 "type" to propertyType(typeObj.string("type")),
                 "nullable" to property.literalOrNull("nullable")
             )
@@ -334,7 +333,7 @@ class DataModelV3GraphSpecMigration :
         for (field in table.listOfMaps("fields")) {
             val name = field.string("name")
             fields[name] = schemaMapOf(
-                "name" to field.literal("name").string.toCamelCase(),
+                "name" to field.literal("name"),
                 "type" to field.literalOrNull("rawType"),
                 "size" to field.literalOrNull("size"),
                 "suggested" to propertyType(field.mapOrNull("recommendedType")?.string("type")),

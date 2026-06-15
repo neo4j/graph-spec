@@ -20,7 +20,7 @@ class DataModelMigrationIT {
     fun `Round trip`() =
         File(End2EndMigrationTest::class.java.getResource("prod-like")!!.path).listFiles()!!.map { file ->
             dynamicTest("dataset ${file.nameWithoutExtension}") {
-                if (file.nameWithoutExtension == "two-nodes-same-name") {
+                if (file.nameWithoutExtension == "two-nodes-same-name" || file.extension != "json") {
                     // FIXME combining node labels
                     return@dynamicTest
                 }

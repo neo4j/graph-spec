@@ -130,8 +130,8 @@ class GraphSpecDataModelV3Migration :
         val token = mapping.string("relationship")
         val fromNode = mapping.map("from").string("node")
         val toNode = mapping.map("to").string("node")
-        return relationships.entries.firstOrNull { (_, rel) ->
-            rel.string("type") == token &&
+        return relationships.entries.firstOrNull { (key, rel) ->
+            key == token &&
                 rel.map("from").string("node") == fromNode &&
                 rel.map("to").string("node") == toNode
         }?.key
