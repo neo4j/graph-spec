@@ -3,45 +3,45 @@ nodes:
   album:
     label: "album"
     properties:
-      albumId: { type: "INTEGER", unique: true }
+      album_id: { type: "INTEGER", unique: true }
       title: { type: "STRING" }
     constraints:
       album:
         type: "UNIQUE"
         label: "album"
-        properties: ["albumId"]
+        properties: ["album_id"]
     indexes:
       album:
         type: "TEXT"
         labels: ["album"]
-        properties: ["albumId"]
+        properties: ["album_id"]
   artist:
     label: "artist"
     properties:
-      artistId: { type: "INTEGER", unique: true }
+      artist_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
     constraints:
       artist:
         type: "UNIQUE"
         label: "artist"
-        properties: ["artistId"]
+        properties: ["artist_id"]
     indexes:
       artist:
         type: "TEXT"
         labels: ["artist"]
-        properties: ["artistId"]
+        properties: ["artist_id"]
   customer:
     label: "customer"
     properties:
-      customerId: { type: "INTEGER", unique: true }
-      firstName: { type: "STRING" }
-      lastName: { type: "STRING" }
+      customer_id: { type: "INTEGER", unique: true }
+      first_name: { type: "STRING" }
+      last_name: { type: "STRING" }
       company: { type: "STRING" }
       address: { type: "STRING" }
       city: { type: "STRING" }
       state: { type: "STRING" }
       country: { type: "STRING" }
-      postalCode: { type: "STRING" }
+      postal_code: { type: "STRING" }
       phone: { type: "STRING" }
       fax: { type: "STRING" }
       email: { type: "STRING" }
@@ -49,26 +49,26 @@ nodes:
       customer:
         type: "UNIQUE"
         label: "customer"
-        properties: ["customerId"]
+        properties: ["customer_id"]
     indexes:
       customer:
         type: "TEXT"
         labels: ["customer"]
-        properties: ["customerId"]
+        properties: ["customer_id"]
   employee:
     label: "employee"
     properties:
-      employeeId: { type: "INTEGER", unique: true }
-      lastName: { type: "STRING" }
-      firstName: { type: "STRING" }
+      employee_id: { type: "INTEGER", unique: true }
+      last_name: { type: "STRING" }
+      first_name: { type: "STRING" }
       title: { type: "STRING" }
-      birthDate: { type: "ZONED DATETIME" }
-      hireDate: { type: "ZONED DATETIME" }
+      birth_date: { type: "ZONED DATETIME" }
+      hire_date: { type: "ZONED DATETIME" }
       address: { type: "STRING" }
       city: { type: "STRING" }
       state: { type: "STRING" }
       country: { type: "STRING" }
-      postalCode: { type: "STRING" }
+      postal_code: { type: "STRING" }
       phone: { type: "STRING" }
       fax: { type: "STRING" }
       email: { type: "STRING" }
@@ -76,154 +76,154 @@ nodes:
       employee:
         type: "UNIQUE"
         label: "employee"
-        properties: ["employeeId"]
+        properties: ["employee_id"]
     indexes:
       employee:
         type: "TEXT"
         labels: ["employee"]
-        properties: ["employeeId"]
+        properties: ["employee_id"]
   genre:
     label: "genre"
     properties:
-      genreId: { type: "INTEGER", unique: true }
+      genre_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
     constraints:
       genre:
         type: "UNIQUE"
         label: "genre"
-        properties: ["genreId"]
+        properties: ["genre_id"]
     indexes:
       genre:
         type: "TEXT"
         labels: ["genre"]
-        properties: ["genreId"]
+        properties: ["genre_id"]
   invoice:
     label: "invoice"
     properties:
-      invoiceId: { type: "INTEGER", unique: true }
-      invoiceDate: { type: "ZONED DATETIME" }
-      billingAddress: { type: "STRING" }
-      billingCity: { type: "STRING" }
-      billingState: { type: "STRING" }
-      billingCountry: { type: "STRING" }
-      billingPostalCode: { type: "STRING" }
+      invoice_id: { type: "INTEGER", unique: true }
+      invoice_date: { type: "ZONED DATETIME" }
+      billing_address: { type: "STRING" }
+      billing_city: { type: "STRING" }
+      billing_state: { type: "STRING" }
+      billing_country: { type: "STRING" }
+      billing_postal_code: { type: "STRING" }
       total: { type: "FLOAT" }
     constraints:
       invoice:
         type: "UNIQUE"
         label: "invoice"
-        properties: ["invoiceId"]
+        properties: ["invoice_id"]
     indexes:
       invoice:
         type: "TEXT"
         labels: ["invoice"]
-        properties: ["invoiceId"]
-  invoiceLine:
+        properties: ["invoice_id"]
+  invoice_line:
     label: "invoice_line"
     properties:
-      invoiceLineId: { type: "INTEGER", unique: true }
-      unitPrice: { type: "FLOAT" }
+      invoice_line_id: { type: "INTEGER", unique: true }
+      unit_price: { type: "FLOAT" }
       quantity: { type: "INTEGER" }
     constraints:
-      invoiceLine:
+      invoice_line:
         type: "UNIQUE"
         label: "invoice_line"
-        properties: ["invoiceLineId"]
+        properties: ["invoice_line_id"]
     indexes:
-      invoiceLine:
+      invoice_line:
         type: "TEXT"
         labels: ["invoice_line"]
-        properties: ["invoiceLineId"]
-  mediaType:
+        properties: ["invoice_line_id"]
+  media_type:
     label: "media_type"
     properties:
-      mediaTypeId: { type: "INTEGER", unique: true }
+      media_type_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
     constraints:
-      mediaType:
+      media_type:
         type: "UNIQUE"
         label: "media_type"
-        properties: ["mediaTypeId"]
+        properties: ["media_type_id"]
     indexes:
-      mediaType:
+      media_type:
         type: "TEXT"
         labels: ["media_type"]
-        properties: ["mediaTypeId"]
+        properties: ["media_type_id"]
   playlist:
     label: "playlist"
     properties:
-      playlistId: { type: "INTEGER", unique: true }
+      playlist_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
     constraints:
       playlist:
         type: "UNIQUE"
         label: "playlist"
-        properties: ["playlistId"]
+        properties: ["playlist_id"]
     indexes:
       playlist:
         type: "TEXT"
         labels: ["playlist"]
-        properties: ["playlistId"]
+        properties: ["playlist_id"]
   track:
     label: "track"
     properties:
-      trackId: { type: "INTEGER", unique: true }
+      track_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       composer: { type: "STRING" }
       milliseconds: { type: "INTEGER" }
       bytes: { type: "INTEGER" }
-      unitPrice: { type: "FLOAT" }
+      unit_price: { type: "FLOAT" }
     constraints:
       track:
         type: "UNIQUE"
         label: "track"
-        properties: ["trackId"]
+        properties: ["track_id"]
     indexes:
       track:
         type: "TEXT"
         labels: ["track"]
-        properties: ["trackId"]
+        properties: ["track_id"]
 relationships:
-  artist:
+  ARTIST:
     type: "ARTIST"
     from: { node: "album" }
     to: { node: "artist" }
-  employee:
+  EMPLOYEE:
     type: "EMPLOYEE"
     from: { node: "customer" }
     to: { node: "employee" }
-  employee2:
+  EMPLOYEE2:
     type: "EMPLOYEE"
     from: { node: "employee" }
     to: { node: "employee" }
-  customer:
+  CUSTOMER:
     type: "CUSTOMER"
     from: { node: "invoice" }
     to: { node: "customer" }
-  invoice:
+  INVOICE:
     type: "INVOICE"
-    from: { node: "invoiceLine" }
+    from: { node: "invoice_line" }
     to: { node: "invoice" }
-  track:
+  TRACK:
     type: "TRACK"
-    from: { node: "invoiceLine" }
+    from: { node: "invoice_line" }
     to: { node: "track" }
-  track2:
+  TRACK2:
     type: "TRACK"
     from: { node: "playlist" }
     to: { node: "track" }
-  album:
+  ALBUM:
     type: "ALBUM"
     from: { node: "track" }
     to: { node: "album" }
-  genre:
+  GENRE:
     type: "GENRE"
     from: { node: "track" }
     to: { node: "genre" }
-  mediaType:
+  MEDIA_TYPE:
     type: "MEDIA_TYPE"
     from: { node: "track" }
-    to: { node: "mediaType" }
+    to: { node: "media_type" }
 tables:
   album:
     source: "cloud"
@@ -591,183 +591,183 @@ mappings:
   - node: "album"
     table: "album"
     properties:
-      albumId: { field: "album_id" }
+      album_id: { field: "album_id" }
       title: { field: "title" }
   - node: "artist"
     table: "artist"
     properties:
-      artistId: { field: "artist_id" }
+      artist_id: { field: "artist_id" }
       name: { field: "name" }
   - node: "customer"
     table: "customer"
     properties:
-      customerId: { field: "customer_id" }
-      firstName: { field: "first_name" }
-      lastName: { field: "last_name" }
+      customer_id: { field: "customer_id" }
+      first_name: { field: "first_name" }
+      last_name: { field: "last_name" }
       company: { field: "company" }
       address: { field: "address" }
       city: { field: "city" }
       state: { field: "state" }
       country: { field: "country" }
-      postalCode: { field: "postal_code" }
+      postal_code: { field: "postal_code" }
       phone: { field: "phone" }
       fax: { field: "fax" }
       email: { field: "email" }
   - node: "employee"
     table: "employee"
     properties:
-      employeeId: { field: "employee_id" }
-      lastName: { field: "last_name" }
-      firstName: { field: "first_name" }
+      employee_id: { field: "employee_id" }
+      last_name: { field: "last_name" }
+      first_name: { field: "first_name" }
       title: { field: "title" }
-      birthDate: { field: "birth_date" }
-      hireDate: { field: "hire_date" }
+      birth_date: { field: "birth_date" }
+      hire_date: { field: "hire_date" }
       address: { field: "address" }
       city: { field: "city" }
       state: { field: "state" }
       country: { field: "country" }
-      postalCode: { field: "postal_code" }
+      postal_code: { field: "postal_code" }
       phone: { field: "phone" }
       fax: { field: "fax" }
       email: { field: "email" }
   - node: "genre"
     table: "genre"
     properties:
-      genreId: { field: "genre_id" }
+      genre_id: { field: "genre_id" }
       name: { field: "name" }
   - node: "invoice"
     table: "invoice"
     properties:
-      invoiceId: { field: "invoice_id" }
-      invoiceDate: { field: "invoice_date" }
-      billingAddress: { field: "billing_address" }
-      billingCity: { field: "billing_city" }
-      billingState: { field: "billing_state" }
-      billingCountry: { field: "billing_country" }
-      billingPostalCode: { field: "billing_postal_code" }
+      invoice_id: { field: "invoice_id" }
+      invoice_date: { field: "invoice_date" }
+      billing_address: { field: "billing_address" }
+      billing_city: { field: "billing_city" }
+      billing_state: { field: "billing_state" }
+      billing_country: { field: "billing_country" }
+      billing_postal_code: { field: "billing_postal_code" }
       total: { field: "total" }
-  - node: "invoiceLine"
+  - node: "invoice_line"
     table: "invoice_line"
     properties:
-      invoiceLineId: { field: "invoice_line_id" }
-      unitPrice: { field: "unit_price" }
+      invoice_line_id: { field: "invoice_line_id" }
+      unit_price: { field: "unit_price" }
       quantity: { field: "quantity" }
-  - node: "mediaType"
+  - node: "media_type"
     table: "media_type"
     properties:
-      mediaTypeId: { field: "media_type_id" }
+      media_type_id: { field: "media_type_id" }
       name: { field: "name" }
   - node: "playlist"
     table: "playlist"
     properties:
-      playlistId: { field: "playlist_id" }
+      playlist_id: { field: "playlist_id" }
       name: { field: "name" }
   - node: "track"
     table: "track"
     properties:
-      trackId: { field: "track_id" }
+      track_id: { field: "track_id" }
       name: { field: "name" }
       composer: { field: "composer" }
       milliseconds: { field: "milliseconds" }
       bytes: { field: "bytes" }
-      unitPrice: { field: "unit_price" }
-  - relationship: "artist"
+      unit_price: { field: "unit_price" }
+  - relationship: "ARTIST"
     table: "album"
     from:
       node: "album"
       properties:
-        albumId: { field: "album_id" }
+        album_id: { field: "album_id" }
     to:
       node: "artist"
       properties:
-        artistId: { field: "artist_id" }
-  - relationship: "employee"
+        artist_id: { field: "artist_id" }
+  - relationship: "EMPLOYEE"
     table: "customer"
     from:
       node: "customer"
       properties:
-        customerId: { field: "customer_id" }
+        customer_id: { field: "customer_id" }
     to:
       node: "employee"
       properties:
-        employeeId: { field: "support_rep_id" }
-  - relationship: "employee2"
+        employee_id: { field: "support_rep_id" }
+  - relationship: "EMPLOYEE2"
     table: "employee"
     from:
       node: "employee"
       properties:
-        employeeId: { field: "employee_id" }
+        employee_id: { field: "employee_id" }
     to:
       node: "employee"
       properties:
-        employeeId: { field: "reports_to" }
-  - relationship: "customer"
+        employee_id: { field: "reports_to" }
+  - relationship: "CUSTOMER"
     table: "invoice"
     from:
       node: "invoice"
       properties:
-        invoiceId: { field: "invoice_id" }
+        invoice_id: { field: "invoice_id" }
     to:
       node: "customer"
       properties:
-        customerId: { field: "customer_id" }
-  - relationship: "invoice"
+        customer_id: { field: "customer_id" }
+  - relationship: "INVOICE"
     table: "invoice_line"
     from:
-      node: "invoiceLine"
+      node: "invoice_line"
       properties:
-        invoiceLineId: { field: "invoice_line_id" }
+        invoice_line_id: { field: "invoice_line_id" }
     to:
       node: "invoice"
       properties:
-        invoiceId: { field: "invoice_id" }
-  - relationship: "track"
+        invoice_id: { field: "invoice_id" }
+  - relationship: "TRACK"
     table: "invoice_line"
     from:
-      node: "invoiceLine"
+      node: "invoice_line"
       properties:
-        invoiceLineId: { field: "invoice_line_id" }
+        invoice_line_id: { field: "invoice_line_id" }
     to:
       node: "track"
       properties:
-        trackId: { field: "track_id" }
-  - relationship: "track2"
+        track_id: { field: "track_id" }
+  - relationship: "TRACK2"
     table: "playlist_track"
     from:
       node: "playlist"
       properties:
-        playlistId: { field: "playlist_id" }
+        playlist_id: { field: "playlist_id" }
     to:
       node: "track"
       properties:
-        trackId: { field: "track_id" }
-  - relationship: "album"
+        track_id: { field: "track_id" }
+  - relationship: "ALBUM"
     table: "track"
     from:
       node: "track"
       properties:
-        trackId: { field: "track_id" }
+        track_id: { field: "track_id" }
     to:
       node: "album"
       properties:
-        albumId: { field: "album_id" }
-  - relationship: "genre"
+        album_id: { field: "album_id" }
+  - relationship: "GENRE"
     table: "track"
     from:
       node: "track"
       properties:
-        trackId: { field: "track_id" }
+        track_id: { field: "track_id" }
     to:
       node: "genre"
       properties:
-        genreId: { field: "genre_id" }
-  - relationship: "mediaType"
+        genre_id: { field: "genre_id" }
+  - relationship: "MEDIA_TYPE"
     table: "track"
     from:
       node: "track"
       properties:
-        trackId: { field: "track_id" }
+        track_id: { field: "track_id" }
     to:
-      node: "mediaType"
+      node: "media_type"
       properties:
-        mediaTypeId: { field: "media_type_id" }
+        media_type_id: { field: "media_type_id" }
