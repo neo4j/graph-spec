@@ -53,8 +53,8 @@ class DataModelV3GraphSpecMigration :
         val schema = unwrap(schema)
         val extensions = schema.map("graphSchemaExtensionsRepresentation").listOfMapsOrNull("nodeKeyProperties")
         val graphSchema = schema.map("graphSchemaRepresentation").map("graphSchema")
-        val (nodeConstraints, relationshipConstraints) = gather(graphSchema, "constraints")
-        val (nodeIndexes, relationshipIndexes) = gather(graphSchema, "indexes")
+        val (nodeConstraints, relationshipConstraints) = gatherWithNames(graphSchema, "constraints")
+        val (nodeIndexes, relationshipIndexes) = gatherWithNames(graphSchema, "indexes")
         val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes, extensions)
         return schemaMapOf(
             "version" to schema.literal("version"),
@@ -81,7 +81,7 @@ class DataModelV3GraphSpecMigration :
         return schemaMapOf("nodes" to display)
     }
 
-    internal fun gather(
+    internal fun gatherWithNames(
         schema: SchemaMap,
         key: String
     ): Pair<Map<String, List<SchemaMap>>, Map<String, List<SchemaMap>>> {
@@ -249,7 +249,6 @@ class DataModelV3GraphSpecMigration :
         for (mapping in relationshipMappings) {
             val ref = mapping.ref("relationship")
             val obj = relInfo[ref] ?: error("Relationship $ref not found")
-            // ref is lost, and we know type isn't unique; so we are assuming type + property id are unique
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.RELATIONSHIP), // needed for Kotlin/Native migrations
                 "relationship" to ref,

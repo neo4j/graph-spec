@@ -24,7 +24,6 @@ import codec.schema.toNotEmpty
 import migrate.Migration
 import model.Type
 import model.Version
-import net.pearx.kasechange.toCamelCase
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
@@ -124,14 +123,14 @@ class GraphSpecDataModelV3Migration :
     }
 
     /**
-     * Recovers the lost relationship ObjectType reference matching the unique combo of (token, from, to)
+     * Recovers the lost relationship ObjectType reference matching the unique combo of (relId, from, to)
      */
     private fun findRelationshipId(relationships: Map<String, SchemaMap>, mapping: SchemaMap): String? {
-        val token = mapping.string("relationship")
+        val id = mapping.string("relationship")
         val fromNode = mapping.map("from").string("node")
         val toNode = mapping.map("to").string("node")
         return relationships.entries.firstOrNull { (key, rel) ->
-            key == token &&
+            key == id &&
                 rel.map("from").string("node") == fromNode &&
                 rel.map("to").string("node") == toNode
         }?.key

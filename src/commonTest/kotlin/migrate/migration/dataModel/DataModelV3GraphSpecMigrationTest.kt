@@ -87,7 +87,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val (nodeCons, relCons) = migration.gather(graphSchema, "constraints")
+        val (nodeCons, relCons) = migration.gatherWithNames(graphSchema, "constraints")
 
         assertTrue(nodeCons.containsKey("L1"))
         assertTrue(relCons.containsKey("R1"))
