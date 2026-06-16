@@ -77,6 +77,7 @@ kotlin {
             implementation(libs.kaseChange)
         }
         jsMain.dependencies {
+            implementation(devNpm("typescript", "5.9.3"))
             implementation(libs.kotlin.js.plain.objects)
             implementation(libs.kotlin.wrappers.ts)
         }
