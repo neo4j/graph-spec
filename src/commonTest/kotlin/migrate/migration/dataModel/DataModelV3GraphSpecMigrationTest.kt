@@ -87,7 +87,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val (nodeCons, relCons) = migration.gather(graphSchema, "constraints")
+        val (nodeCons, relCons) = migration.gatherWithNames(graphSchema, "constraints")
 
         assertTrue(nodeCons.containsKey("L1"))
         assertTrue(relCons.containsKey("R1"))
@@ -366,7 +366,7 @@ class DataModelV3GraphSpecMigrationTest {
         val result = migration.relationshipMappings(unwrap(input))
 
         val mapping = result.first()
-        assertEquals("WORKS_AT", mapping.string("relationship"))
+        assertEquals("obj1", mapping.string("relationship"))
         assertEquals("WORKS_IN", mapping.string("table"))
 
         val fromProps = mapping.map("from").map("properties")
