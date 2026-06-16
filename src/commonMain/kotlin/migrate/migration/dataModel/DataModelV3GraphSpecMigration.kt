@@ -39,7 +39,7 @@ import model.type.IndexType.TEXT
 import model.type.IndexType.VECTOR
 
 /**
- * 3.0 -> Graph Spec 1.0
+ * 3.0 -> Graph Spec 4.0
  */
 class DataModelV3GraphSpecMigration :
     Migration(
