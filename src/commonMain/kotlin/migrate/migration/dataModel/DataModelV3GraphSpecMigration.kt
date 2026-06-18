@@ -87,6 +87,7 @@ class DataModelV3GraphSpecMigration :
     ): Pair<Map<String, List<SchemaMap>>, Map<String, List<SchemaMap>>> {
         val elements = schema.listOfMapsOrNull(key) ?: return Pair(emptyMap(), emptyMap())
         val (nodes, rels) = elements.partition { it.string("entityType") == "node" }
+        // It's assumed that all nodes have nodeLabel fields and rels have relationshipType's
         val nodeElements = nodes.groupBy { it.ref("nodeLabel") }
         val relationshipElements = rels.groupBy { it.ref("relationshipType") }
         for (element in elements) {
@@ -102,11 +103,12 @@ class DataModelV3GraphSpecMigration :
         nodeKeyProperties: List<SchemaMap>?
     ): MutableMap<String, SchemaMap> {
         val nodes = mutableMapOf<String, SchemaMap>()
-        val nodeLabels = schema.listOfMaps("nodeLabels").associateBy { it.id() }
+        val nodeLabels = schema.listOfMapsOrNull("nodeLabels")?.associateBy { it.id() } ?: return nodes
         val nodeKeys = nodeKeyProperties?.associate { nkp ->
             nkp.ref("node") to nkp.listOfMaps("keyProperties").map { it.ref() }.toSet()
         } ?: emptyMap()
-        for (nodeObject in schema.listOfMaps("nodeObjectTypes")) {
+        val nodeObjTypes = schema.listOfMapsOrNull("nodeObjectTypes") ?: return nodes
+        for (nodeObject in nodeObjTypes) {
             val labelRefs = nodeObject.listOfMaps("labels").map { it.ref() }
             val labels = labelRefs.map { labelRef ->
                 nodeLabels[labelRef] ?: error("Label $labelRef not found")
@@ -189,7 +191,8 @@ class DataModelV3GraphSpecMigration :
         val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()
         val relationshipTypes = schema.listOfMapsOrNull("relationshipTypes")?.associateBy { it.id() } ?: return relationships
-        for (objectType in schema.listOfMaps("relationshipObjectTypes")) {
+        val relObjTypes = schema.listOfMapsOrNull("relationshipObjectTypes") ?: return relationships
+        for (objectType in relObjTypes) {
             val typeRef = objectType.ref("type")
             val relationshipType = relationshipTypes[typeRef] ?: error("RelationshipType $typeRef not found")
             val token = relationshipType.string("token")
