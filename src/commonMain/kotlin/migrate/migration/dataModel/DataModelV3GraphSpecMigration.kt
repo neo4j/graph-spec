@@ -366,10 +366,10 @@ class DataModelV3GraphSpecMigration :
 
         private fun indexType(name: String): IndexType? = when (name) {
             "lookup" -> LOOKUP
-            "range" -> RANGE
+            "default", "range" -> RANGE // TODO is default always range or is it dynamic based on type?
             "fulltext" -> FULLTEXT
             "point" -> POINT
-            "default", "text" -> TEXT
+            "text" -> TEXT
             "vector" -> VECTOR
             else -> null
         }
