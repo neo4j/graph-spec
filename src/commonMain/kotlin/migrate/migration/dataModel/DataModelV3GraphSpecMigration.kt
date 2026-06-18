@@ -190,7 +190,8 @@ class DataModelV3GraphSpecMigration :
     ): MutableMap<String, SchemaMap> {
         val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()
-        val relationshipTypes = schema.listOfMapsOrNull("relationshipTypes")?.associateBy { it.id() } ?: return relationships
+        val relationshipTypes =
+            schema.listOfMapsOrNull("relationshipTypes")?.associateBy { it.id() } ?: return relationships
         val relObjTypes = schema.listOfMapsOrNull("relationshipObjectTypes") ?: return relationships
         for (objectType in relObjTypes) {
             val typeRef = objectType.ref("type")
