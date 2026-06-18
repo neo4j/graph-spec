@@ -54,7 +54,7 @@ fun propertyJs(
 }
 
 fun Property.toJs(key: String) = propertyJs(
-    type = type.name,
+    type = Neo4jType.toString(type),
     nullable = nullable,
     unique = unique,
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
@@ -64,9 +64,8 @@ fun Property.toJs(key: String) = propertyJs(
 
 fun PropertyJs.toClass(parent: String, property: String): Property {
     val type = type
-    val neo4jType =
-        Neo4jType.entries.firstOrNull { it.name == type }
-            ?: error("Invalid neo4j type '$type' for $parent.properties.$property")
+    val neo4jType = Neo4jType.entries.firstOrNull { Neo4jType.toString(it) == type }
+        ?: error("Invalid neo4j type '$type' for $parent.properties.$property")
     return Property(
         type = neo4jType,
         nullable = nullable,

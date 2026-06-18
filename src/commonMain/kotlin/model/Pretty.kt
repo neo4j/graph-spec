@@ -60,8 +60,10 @@ object Pretty {
     private fun GraphModel.prettifyNodeLabels() {
         nodes.values.forEach { node ->
             if (node.labels.implied.isEmpty() && node.labels.optional.isEmpty()) {
-                node.label = node.labels.identifier
-                node.labels.identifier = ""
+                if (node.labels.identifier.isNotBlank()) {
+                    node.label = node.labels.identifier
+                    node.labels.identifier = ""
+                }
             }
         }
     }
