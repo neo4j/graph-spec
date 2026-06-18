@@ -54,7 +54,7 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
     object Yaml : GraphSpec(defaultConfig(YamlFormat.default))
 }
 
-private fun defaultConfig(format: Format): GraphSpecConfig {
+fun defaultConfig(format: Format): GraphSpecConfig {
     val builder = GraphSpecConfig.Builder(format)
     builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V23))
     builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V24))

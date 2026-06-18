@@ -188,7 +188,7 @@ class DataModelV3GraphSpecMigration :
     ): MutableMap<String, SchemaMap> {
         val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()
-        val relationshipTypes = schema.listOfMaps("relationshipTypes").associateBy { it.id() }
+        val relationshipTypes = schema.listOfMapsOrNull("relationshipTypes")?.associateBy { it.id() } ?: return relationships
         for (objectType in schema.listOfMaps("relationshipObjectTypes")) {
             val typeRef = objectType.ref("type")
             val relationshipType = relationshipTypes[typeRef] ?: error("RelationshipType $typeRef not found")
@@ -297,7 +297,7 @@ class DataModelV3GraphSpecMigration :
 
     internal fun migrateTables(schema: SchemaMap): MutableMap<String, SchemaMap> {
         val tables = mutableMapOf<String, SchemaMap>()
-        val sourceSchema = schema.map("graphMappingRepresentation").map("dataSourceSchema")
+        val sourceSchema = schema.map("graphMappingRepresentation").mapOrNull("dataSourceSchema") ?: return tables
         for (table in sourceSchema.listOfMaps("tableSchemas")) {
             val name = table.string("name")
             tables[name] = schemaMapOf(
