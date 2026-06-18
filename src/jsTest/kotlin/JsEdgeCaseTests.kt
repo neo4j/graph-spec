@@ -41,7 +41,7 @@ class JsEdgeCaseTests {
     }
 
     @Test
-    fun `encodeToString drops name form table schema`() {
+    fun `encodeToString shouldn't drop name fields`() {
         val graphSpec = GraphModel(
             version = "4.0.0",
             nodes = mutableMapOf(
