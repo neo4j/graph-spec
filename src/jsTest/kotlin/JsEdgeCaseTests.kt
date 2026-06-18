@@ -38,7 +38,16 @@ class JsEdgeCaseTests {
         val model = GraphModelEditor.model(plainSpec)
 
         val encoded = GraphSpec.Json.encodeToString(model, "data_model", "3.0.0")
-        assertNotNull(encoded)
+
+        val expected = """
+            "type": {
+                "type": "array",
+                "items": {
+                    "type": "STRING"
+                }
+            },
+        """.trimIndent()
+        assertTrue(encoded.replace(" ", "").contains(expected.replace(" ", "")))
     }
 
     @Test

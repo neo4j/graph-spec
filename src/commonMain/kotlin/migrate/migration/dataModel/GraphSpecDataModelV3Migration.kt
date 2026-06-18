@@ -320,12 +320,23 @@ class GraphSpecDataModelV3Migration :
             return emptyList()
         }
         return properties.map { (propId, prop) ->
+            val propertyType = propertyType(prop.string("type"))
             schemaMapOf(
                 "\$id" to propId,
                 "token" to (prop.literalOrNull("name")?.string ?: propId),
-                "type" to schemaMapOf(
-                    "type" to propertyType(prop.string("type"))
-                ),
+                "type" to when {
+                    propertyType != null && propertyType.startsWith("VECTOR") -> schemaMapOf(
+                        "type" to "vector",
+                        "items" to schemaMapOf("type" to propertyType.removePrefix("VECTOR<").removeSuffix(">"))
+                    )
+                    propertyType != null && propertyType.startsWith("LIST") -> schemaMapOf(
+                        "type" to "array",
+                        "items" to schemaMapOf("type" to propertyType.removePrefix("LIST<").removeSuffix(">"))
+                    )
+                    else -> schemaMapOf(
+                        "type" to propertyType
+                    )
+                },
                 "nullable" to (prop.literalOrNull("nullable")?.string?.toBooleanStrictOrNull() ?: false)
             )
         }
