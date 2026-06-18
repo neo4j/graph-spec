@@ -17,7 +17,7 @@ class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
         extensions = mutableMapOf("key1" to StringValue("val1")),
     )
 
-    override fun toJs(k: TableField): TableFieldJs = k.toJs()
+    override fun toJs(k: TableField): TableFieldJs = k.toJs("key1")
 
     override fun toClass(js: TableFieldJs): TableField = js.toClass()
 

@@ -64,5 +64,82 @@ class JsEdgeCaseTests {
         assertEquals("Person", decoded.nodes["n:1"]?.name)
         assertEquals("born", decoded.nodes["n:1"]?.properties?.get("p:1")?.name)
     }
+
+    @Test
+    fun `encodeToString shouldn't drop field names`() {
+        val string = """
+       {
+          "version": "3.0.0",
+          "dataModel": {
+            "version": "3.0.0",
+            "graphSchemaRepresentation": {
+              "version": "1.0.0",
+              "graphSchema": {
+                "nodeLabels": [
+                  {
+                    "${'$'}id": "nl:1",
+                    "token": "Test",
+                    "properties": []
+                  }
+                ],
+                "nodeObjectTypes": [
+                  {
+                    "${'$'}id": "n:1",
+                    "labels": [
+                      {
+                        "${'$'}ref": "#nl:1"
+                      }
+                    ]
+                  }
+                ],
+                "relationshipTypes": [],
+                "relationshipObjectTypes": [],
+                "indexes": [],
+                "constraints": []
+              }
+            },
+            "graphSchemaExtensionsRepresentation": {
+              "nodeKeyProperties": [],
+              "relationshipKeyProperties": []
+            },
+            "graphMappingRepresentation": {
+              "dataSourceSchema": {
+                "type": "local",
+                "tableSchemas": [
+                  {
+                    "name": "categories.csv",
+                    "expanded": true,
+                    "fields": [
+                      {
+                        "name": "categoryID",
+                        "sample": "1",
+                        "recommendedType": {
+                          "type": "integer"
+                        }
+                      }
+                    ],
+                    "primaryKeys": [],
+                    "foreignKeys": []
+                  }
+                ]
+              },
+              "nodeMappings": [
+              ],
+              "relationshipMappings": []
+            },
+            "configurations": {
+              "idsToIgnore": []
+            }
+          }
+        }
+        """.trimIndent()
+        val dataModel = GraphSpec.Json.decodeFromString(string, Type.DATA_MODEL)
+        val plain = GraphModelEditor.plain(dataModel)
+        val filled = GraphModelEditor.model(plain)
+        val encoded = GraphSpec.Json.encodeToString(filled, Type.DATA_MODEL, Version.DATA_MODEL_V30)
+        val decoded = GraphSpec.Json.decodeFromString(encoded, Type.DATA_MODEL)
+        assertNotNull(decoded)
+    }
+
 }
 
