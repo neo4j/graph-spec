@@ -16,6 +16,7 @@ import model.property.propertyJs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 class JsEdgeCaseTests {
     @Test
@@ -41,7 +42,7 @@ class JsEdgeCaseTests {
     }
 
     @Test
-    fun `encodeToString shouldn't drop name fields`() {
+    fun `encodeToString shouldn't drop fields`() {
         val graphSpec = GraphModel(
             version = "4.0.0",
             nodes = mutableMapOf(
@@ -55,6 +56,9 @@ class JsEdgeCaseTests {
         val plain = GraphModelEditor.plain(graphSpec)
         val model = GraphModelEditor.model(plain)
         val encoded = GraphSpec.Json.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30)
+
+        assertTrue(encoded.contains("\"token\": \"born\""))
+        assertTrue(encoded.contains("\"nullable\": false"))
 
         val decoded = GraphSpec.Json.decodeFromString(encoded, Type.DATA_MODEL)
         assertEquals("Person", decoded.nodes["n:1"]?.name)

@@ -316,15 +316,17 @@ class GraphSpecDataModelV3Migration :
     }
 
     internal fun convertProperties(properties: Map<String, SchemaMap>?): List<SchemaMap> {
-        if (properties.isNullOrEmpty()) return emptyList()
+        if (properties.isNullOrEmpty()) {
+            return emptyList()
+        }
         return properties.map { (propId, prop) ->
             schemaMapOf(
                 "\$id" to propId,
-                "token" to prop.literalOrNull("name"),
+                "token" to (prop.literalOrNull("name")?.string ?: propId),
                 "type" to schemaMapOf(
                     "type" to propertyType(prop.string("type"))
                 ),
-                "nullable" to prop.literalOrNull("nullable")
+                "nullable" to (prop.literalOrNull("nullable")?.string?.toBooleanStrictOrNull() ?: false)
             )
         }
     }
