@@ -114,5 +114,96 @@ enum class Neo4jType {
     @SerialName("LIST<ZONED TIME>")
     LIST_ZONED_TIME,
 
-    UUID
+    UUID;
+    
+    companion object {
+        // Ideally we'd have these as values inside the enum however
+        // this would break the js union conversion
+        fun fromString(string: String): Neo4jType? {
+            return when (string) {
+                "ANY" -> ANY
+                "BOOLEAN" -> BOOLEAN
+                "LIST<BOOLEAN>" -> LIST_BOOLEAN
+                "DATE" -> DATE
+                "LIST<DATE>" -> LIST_DATE
+                "DURATION" -> DURATION
+                "LIST<DURATION>" -> LIST_DURATION
+                "FLOAT32" -> FLOAT32
+                "LIST<FLOAT32>" -> LIST_FLOAT32
+                "FLOAT" -> FLOAT
+                "LIST<FLOAT>" -> LIST_FLOAT
+                "INTEGER8" -> INTEGER8
+                "LIST<INTEGER8>" -> LIST_INTEGER8
+                "INTEGER16" -> INTEGER16
+                "LIST<INTEGER16>" -> LIST_INTEGER16
+                "INTEGER32" -> INTEGER32
+                "LIST<INTEGER32>" -> LIST_INTEGER32
+                "INTEGER" -> INTEGER
+                "LIST<INTEGER>" -> LIST_INTEGER
+                "LOCAL DATETIME" -> LOCAL_DATETIME
+                "LIST<LOCAL DATETIME>" -> LIST_LOCAL_DATETIME
+                "LOCAL TIME" -> LOCAL_TIME
+                "LIST<LOCAL TIME>" -> LIST_LOCAL_TIME
+                "POINT" -> POINT
+                "LIST<POINT>" -> LIST_POINT
+                "STRING" -> STRING
+                "LIST<STRING>" -> LIST_STRING
+                "VECTOR<FLOAT>" -> VECTOR_FLOAT
+                "VECTOR<FLOAT32>" -> VECTOR_FLOAT32
+                "VECTOR<INTEGER>" -> VECTOR_INTEGER
+                "VECTOR<INTEGER32>" -> VECTOR_INTEGER32
+                "VECTOR<INTEGER16>" -> VECTOR_INTEGER16
+                "VECTOR<INTEGER8>" -> VECTOR_INTEGER8
+                "ZONED DATETIME" -> ZONED_DATETIME
+                "LIST<ZONED DATETIME>" -> LIST_ZONED_DATETIME
+                "ZONED TIME" -> ZONED_TIME
+                "LIST<ZONED TIME>" -> LIST_ZONED_TIME
+                "UUID" -> UUID
+                else -> null
+            }
+        }
+
+        fun toString(type: Neo4jType): String {
+            return when (type) {
+                ANY -> "ANY"
+                BOOLEAN -> "BOOLEAN"
+                LIST_BOOLEAN -> "LIST<BOOLEAN>"
+                DATE -> "DATE"
+                LIST_DATE -> "LIST<DATE>"
+                DURATION -> "DURATION"
+                LIST_DURATION -> "LIST<DURATION>"
+                FLOAT32 -> "FLOAT32"
+                LIST_FLOAT32 -> "LIST<FLOAT32>"
+                FLOAT -> "FLOAT"
+                LIST_FLOAT -> "LIST<FLOAT>"
+                INTEGER8 -> "INTEGER8"
+                LIST_INTEGER8 -> "LIST<INTEGER8>"
+                INTEGER16 -> "INTEGER16"
+                LIST_INTEGER16 -> "LIST<INTEGER16>"
+                INTEGER32 -> "INTEGER32"
+                LIST_INTEGER32 -> "LIST<INTEGER32>"
+                INTEGER -> "INTEGER"
+                LIST_INTEGER -> "LIST<INTEGER>"
+                LOCAL_DATETIME -> "LOCAL DATETIME"
+                LIST_LOCAL_DATETIME -> "LIST<LOCAL DATETIME>"
+                LOCAL_TIME -> "LOCAL TIME"
+                LIST_LOCAL_TIME -> "LIST<LOCAL TIME>"
+                POINT -> "POINT"
+                LIST_POINT -> "LIST<POINT>"
+                STRING -> "STRING"
+                LIST_STRING -> "LIST<STRING>"
+                VECTOR_FLOAT -> "VECTOR<FLOAT>"
+                VECTOR_FLOAT32 -> "VECTOR<FLOAT32>"
+                VECTOR_INTEGER -> "VECTOR<INTEGER>"
+                VECTOR_INTEGER32 -> "VECTOR<INTEGER32>"
+                VECTOR_INTEGER16 -> "VECTOR<INTEGER16>"
+                VECTOR_INTEGER8 -> "VECTOR<INTEGER8>"
+                ZONED_DATETIME -> "ZONED DATETIME"
+                LIST_ZONED_DATETIME -> "LIST<ZONED DATETIME>"
+                ZONED_TIME -> "ZONED TIME"
+                LIST_ZONED_TIME -> "LIST<ZONED TIME>"
+                UUID -> "UUID"
+            }
+        }
+    }
 }
