@@ -45,7 +45,7 @@ fun tableFieldJs(
     suggested: String = "ANY",
     supported: Array<String> = emptyArray(),
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
-    name: String = "",
+    name: String = ""
 ): TableFieldJs = jso {
     this.type = type
     this.size = size
@@ -61,7 +61,7 @@ fun TableField.toJs(key: String) = tableFieldJs(
     suggested = suggested.name,
     supported = supported.map { it.name }.toTypedArray(),
     extensions = extensions.associateBy { _, value -> value.toJs() },
-    name = name ?: key,
+    name = name ?: key
 )
 
 fun TableFieldJs.toClass() = TableField(
@@ -70,5 +70,5 @@ fun TableFieldJs.toClass() = TableField(
     suggested = suggested.let { Neo4jType.valueOf(it) },
     supported = supported.map { Neo4jType.valueOf(it) }.toSet(),
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
-    name = name,
+    name = name
 )
