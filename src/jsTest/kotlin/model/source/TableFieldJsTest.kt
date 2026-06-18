@@ -15,9 +15,10 @@ class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
         suggested = Neo4jType.STRING,
         supported = setOf(Neo4jType.STRING, Neo4jType.INTEGER),
         extensions = mutableMapOf("key1" to StringValue("val1")),
+        name = "Field name"
     )
 
-    override fun toJs(k: TableField): TableFieldJs = k.toJs("key1")
+    override fun toJs(k: TableField): TableFieldJs = k.toJs("fieldId")
 
     override fun toClass(js: TableFieldJs): TableField = js.toClass()
 
@@ -27,6 +28,7 @@ class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
         assertEquals("STRING", jsObject.suggested)
         assertContentEquals(arrayOf("STRING", "INTEGER"), jsObject.supported)
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
+        assertEquals("Field name", jsObject.name)
     }
 
 }
