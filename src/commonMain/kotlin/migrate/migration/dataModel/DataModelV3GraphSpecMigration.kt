@@ -51,7 +51,7 @@ class DataModelV3GraphSpecMigration :
 
     override fun migrate(schema: SchemaMap): SchemaMap {
         val schema = unwrap(schema)
-        val extensions = schema.map("graphSchemaExtensionsRepresentation").listOfMapsOrNull("nodeKeyProperties")
+        val extensions = schema.mapOrNull("graphSchemaExtensionsRepresentation")?.listOfMapsOrNull("nodeKeyProperties")
         val graphSchema = schema.map("graphSchemaRepresentation").map("graphSchema")
         val (nodeConstraints, relationshipConstraints) = gatherWithNames(graphSchema, "constraints")
         val (nodeIndexes, relationshipIndexes) = gatherWithNames(graphSchema, "indexes")
@@ -366,10 +366,10 @@ class DataModelV3GraphSpecMigration :
 
         private fun indexType(name: String): IndexType? = when (name) {
             "lookup" -> LOOKUP
-            "range" -> RANGE
+            "default", "range" -> RANGE // TODO is default always range or is it dynamic based on type?
             "fulltext" -> FULLTEXT
             "point" -> POINT
-            "default", "text" -> TEXT
+            "text" -> TEXT
             "vector" -> VECTOR
             else -> null
         }
