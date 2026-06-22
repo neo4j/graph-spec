@@ -57,7 +57,8 @@ class GraphSpecDataModelV3Migration :
                     )
                 ),
                 "graphMappingRepresentation" to convertGraphMapping(schema),
-                "graphSchemaExtensionsRepresentation" to convertExtensions(schema)
+                "graphSchemaExtensionsRepresentation" to convertExtensions(schema),
+                "configurations" to schemaMapOf("idsToIgnore" to emptyList<String>())
             ),
             "visualisation" toNotEmpty convertVisualisation(schema)
         )
@@ -87,9 +88,9 @@ class GraphSpecDataModelV3Migration :
             }
         }.partition { it.first == "node" }
         return schemaMapOf(
-            "dataSourceSchema" toNotEmpty convertSourceSchema(schema.mapOfMapsOrNull("tables")),
-            "nodeMappings" toNotEmpty nodeMappings.map { it.second },
-            "relationshipMappings" toNotEmpty relationshipMappings.map { it.second }
+            "dataSourceSchema" to convertSourceSchema(schema.mapOfMapsOrNull("tables")),
+            "nodeMappings" to nodeMappings.map { it.second },
+            "relationshipMappings" to relationshipMappings.map { it.second }
         )
     }
 
@@ -118,7 +119,7 @@ class GraphSpecDataModelV3Migration :
             }
         }
         return schemaMapOf(
-            "nodeKeyProperties" toNotEmpty nodeKeyProperties
+            "nodeKeyProperties" to nodeKeyProperties
         )
     }
 
@@ -278,16 +279,23 @@ class GraphSpecDataModelV3Migration :
         return NodeData(nodeLabels, nodeObjectTypes, constraints, indexes)
     }
 
-    private fun convertSourceSchema(tables: Map<String, SchemaMap>?): SchemaMap? {
+    private fun convertSourceSchema(tables: Map<String, SchemaMap>?): SchemaMap {
+        if (tables == null) {
+            return schemaMapOf(
+                "type" to SchemaNull(),
+                "tableSchemas" to emptyList<SchemaMap>()
+            )
+        }
         val tableSchemas = mutableListOf<SchemaMap>()
         var sourceType: Any? = null
-        for ((tableName, table) in tables ?: return null) {
+        for ((tableName, table) in tables) {
             if (sourceType == null) {
                 sourceType = table.literalOrNull("source")
             }
             tableSchemas.add(
                 schemaMapOf(
                     "name" to tableName,
+                    "expanded" to true,
                     "fields" to convertFields(table.mapOfMapsOrNull("fields")),
                     "primaryKeys" to table.listOrNull("primaryKeys"),
                     "foreignKeys" to convertForeignKeys(table.mapOfMapsOrNull("foreignKeys"))
@@ -295,8 +303,8 @@ class GraphSpecDataModelV3Migration :
             )
         }
         return schemaMapOf(
-            "type" to sourceType,
-            "tableSchemas" toNotEmpty tableSchemas
+            "type" to (sourceType ?: SchemaNull()),
+            "tableSchemas" to tableSchemas
         )
     }
 

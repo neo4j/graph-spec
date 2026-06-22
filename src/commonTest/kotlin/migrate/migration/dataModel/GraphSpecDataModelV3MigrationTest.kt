@@ -23,7 +23,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class GraphSpecDataModelV3MigrationTest {
@@ -243,7 +242,7 @@ class GraphSpecDataModelV3MigrationTest {
         val relMappings = result.map("dataModel")
             .map("graphMappingRepresentation")
             .listOfMapsOrNull("relationshipMappings")
-        assertNull(relMappings)
+        assertEquals(emptyList(), relMappings)
     }
 
     @Test
@@ -344,6 +343,112 @@ class GraphSpecDataModelV3MigrationTest {
         assertEquals("node1", nodes[0].string("id"))
         assertEquals(100.23, nodes[0].map("position").string("x").toDouble())
         assertEquals(200.12, nodes[0].map("position").string("y").toDouble())
+    }
+
+    @Test
+    fun `convertExtensions emits nodeKeyProperties as empty list when no node has key properties`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "properties" to schemaMapOf(
+                        "p1" to schemaMapOf("nullable" to true, "unique" to true), // nullable — not a key
+                        "p2" to schemaMapOf("nullable" to false, "unique" to false) // not unique — not a key
+                    )
+                )
+            )
+        )
+
+        val result = migration.convertExtensions(input)
+
+        assertNotNull(result)
+        assertTrue(result.containsKey("nodeKeyProperties"), "nodeKeyProperties key must always be present")
+        assertEquals(emptyList(), result.listOfMapsOrNull("nodeKeyProperties"))
+    }
+
+    @Test
+    fun `migrate graphMappingRepresentation is complete when tables key is absent`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf("labels" to schemaMapOf("identifier" to "Person"))
+            )
+        )
+
+        val result = migration.migrate(input)
+        val mapping = result.map("dataModel").map("graphMappingRepresentation")
+
+        assertTrue(mapping.containsKey("dataSourceSchema"), "dataSourceSchema must always be present")
+        val dataSourceSchema = mapping.map("dataSourceSchema")
+        assertTrue(dataSourceSchema["type"] is SchemaNull, "type should be null when no tables")
+        assertEquals(emptyList(), dataSourceSchema.listOfMapsOrNull("tableSchemas"))
+
+        assertTrue(mapping.containsKey("nodeMappings"), "nodeMappings must always be present")
+        assertEquals(emptyList(), mapping.listOfMapsOrNull("nodeMappings"))
+
+        assertTrue(mapping.containsKey("relationshipMappings"), "relationshipMappings must always be present")
+        assertEquals(emptyList(), mapping.listOfMapsOrNull("relationshipMappings"))
+    }
+
+    @Test
+    fun `migrate graphMappingRepresentation is complete when tables key is present but empty`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf("labels" to schemaMapOf("identifier" to "Person"))
+            ),
+            "tables" to schemaMapOf() // key present, but no table entries
+        )
+
+        val result = migration.migrate(input)
+        val mapping = result.map("dataModel").map("graphMappingRepresentation")
+
+        assertTrue(mapping.containsKey("dataSourceSchema"), "dataSourceSchema must be present even for empty tables")
+        val dataSourceSchema = mapping.map("dataSourceSchema")
+        assertTrue(dataSourceSchema.containsKey("tableSchemas"), "tableSchemas must be present even when empty")
+        assertEquals(emptyList(), dataSourceSchema.listOfMapsOrNull("tableSchemas"))
+
+        assertEquals(emptyList(), mapping.listOfMapsOrNull("nodeMappings"))
+        assertEquals(emptyList(), mapping.listOfMapsOrNull("relationshipMappings"))
+    }
+
+    @Test
+    fun `migrate always includes configurations with idsToIgnore`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf("labels" to schemaMapOf("identifier" to "Person"))
+            )
+        )
+
+        val result = migration.migrate(input)
+        val dataModel = result.map("dataModel")
+
+        assertTrue(dataModel.containsKey("configurations"), "configurations must always be present")
+        val configurations = dataModel.map("configurations")
+        assertTrue(configurations.containsKey("idsToIgnore"), "idsToIgnore must always be present")
+        assertEquals(0, configurations.listOrNull("idsToIgnore")?.content?.size)
+    }
+
+    @Test
+    fun `migrate emits expanded true for each converted table schema`() {
+        val input = schemaMapOf(
+            "tables" to schemaMapOf(
+                "users" to schemaMapOf(
+                    "source" to "local",
+                    "fields" to schemaMapOf(
+                        "id" to schemaMapOf("name" to "id", "type" to "INTEGER")
+                    )
+                )
+            )
+        )
+
+        val result = migration.migrate(input)
+        val tableSchemas = result
+            .map("dataModel")
+            .map("graphMappingRepresentation")
+            .map("dataSourceSchema")
+            .listOfMaps("tableSchemas")
+
+        assertEquals(1, tableSchemas.size)
+        assertTrue(tableSchemas[0].containsKey("expanded"), "expanded must be present on each table schema")
+        assertTrue(tableSchemas[0].bool("expanded"), "expanded should default to true")
     }
 
     @Test
