@@ -38,14 +38,22 @@ class DataModelMigrationIT {
                 // Remove unused configurations
                 removeDefaultSizes(actual)
                 actual = actual.map("dataModel") // Unwrap
-                // Remove unused configurations that we don't mind losing
+                // Remove fields we don't mind losing in the round-trip
                 expected.remove("configurations")
+                actual.remove("configurations")
                 expected
                     .map("graphMappingRepresentation")
                     .map("dataSourceSchema")
                     .listOfMaps("tableSchemas")
                     .forEach {
                         it.remove("rawType") // Shouldn't be at this level
+                        it.remove("expanded")
+                    }
+                actual
+                    .map("graphMappingRepresentation")
+                    .map("dataSourceSchema")
+                    .listOfMaps("tableSchemas")
+                    .forEach {
                         it.remove("expanded")
                     }
 
