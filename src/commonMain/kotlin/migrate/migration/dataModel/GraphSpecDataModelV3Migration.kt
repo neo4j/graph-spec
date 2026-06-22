@@ -320,23 +320,10 @@ class GraphSpecDataModelV3Migration :
             return emptyList()
         }
         return properties.map { (propId, prop) ->
-            val propertyType = propertyType(prop.string("type"))
             schemaMapOf(
                 "\$id" to propId,
                 "token" to (prop.literalOrNull("name")?.string ?: propId),
-                "type" to when {
-                    propertyType != null && propertyType.startsWith("VECTOR") -> schemaMapOf(
-                        "type" to "vector",
-                        "items" to schemaMapOf("type" to propertyType.removePrefix("VECTOR<").removeSuffix(">"))
-                    )
-                    propertyType != null && propertyType.startsWith("LIST") -> schemaMapOf(
-                        "type" to "array",
-                        "items" to schemaMapOf("type" to propertyType.removePrefix("LIST<").removeSuffix(">"))
-                    )
-                    else -> schemaMapOf(
-                        "type" to propertyType
-                    )
-                },
+                "type" to propertyType(prop.string("type")),
                 "nullable" to (prop.literalOrNull("nullable")?.string?.toBooleanStrictOrNull() ?: false)
             )
         }
@@ -379,15 +366,10 @@ class GraphSpecDataModelV3Migration :
                 "rawType" to field.literalOrNull("type"),
                 "size" to field.literalOrNull("size"),
                 "recommendedType" to field.literalOrNull("suggested")?.let {
-                    val propertyType = propertyType(it.string)
-                    if (propertyType == null) {
-                        SchemaNull()
-                    } else {
-                        schemaMapOf("type" to propertyType)
-                    }
+                    propertyType(it.string)
                 },
                 "supportedTypes" to field.listOrNull("supported")?.map {
-                    schemaMapOf("type" to propertyType((it as SchemaLiteral).string))
+                    propertyType((it as SchemaLiteral).string)
                 }
             )
         }
@@ -439,7 +421,7 @@ class GraphSpecDataModelV3Migration :
     }
 
     companion object {
-        private fun propertyType(string: String?): String? = when (string?.uppercase()) {
+        private fun type(string: String?): String? = when (string?.uppercase()) {
             "LOCAL DATETIME" -> "localdatetime"
             "ZONED DATETIME" -> "datetime"
             "STRING" -> "string"
@@ -451,7 +433,20 @@ class GraphSpecDataModelV3Migration :
             "LOCAL TIME" -> "localtime"
             "ZONED TIME" -> "time"
             "POINT" -> "point"
-            else -> string
+            else -> string?.lowercase()
+        }
+
+        private fun propertyType(propertyType: String?) = when {
+            propertyType == "ANY" -> SchemaNull()
+            propertyType != null && propertyType.startsWith("VECTOR") -> schemaMapOf(
+                "type" to "vector",
+                "items" to schemaMapOf("type" to type(propertyType.removePrefix("VECTOR<").removeSuffix(">")))
+            )
+            propertyType != null && propertyType.startsWith("LIST") -> schemaMapOf(
+                "type" to "array",
+                "items" to schemaMapOf("type" to type(propertyType.removePrefix("LIST<").removeSuffix(">")))
+            )
+            else -> schemaMapOf("type" to type(propertyType))
         }
 
         private fun constraintType(name: String): String = when (name) {
@@ -459,7 +454,7 @@ class GraphSpecDataModelV3Migration :
             "EXISTS" -> "propertyExistence"
             "TYPE" -> "propertyType"
             "KEY" -> "key"
-            else -> name
+            else -> name.lowercase()
         }
 
         private fun indexType(name: String): String = when (name) {
@@ -469,7 +464,7 @@ class GraphSpecDataModelV3Migration :
             "POINT" -> "point"
             "TEXT" -> "text"
             "VECTOR" -> "vector"
-            else -> name
+            else -> name.lowercase()
         }
     }
 }

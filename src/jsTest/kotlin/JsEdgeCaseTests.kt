@@ -43,10 +43,11 @@ class JsEdgeCaseTests {
             "type": {
                 "type": "array",
                 "items": {
-                    "type": "STRING"
+                    "type": "string"
                 }
             },
         """.trimIndent()
+        println(encoded)
         assertTrue(encoded.replace(" ", "").contains(expected.replace(" ", "")))
     }
 
