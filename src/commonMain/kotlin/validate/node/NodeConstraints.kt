@@ -20,9 +20,6 @@ import model.GraphModel
 import model.node.Node
 import model.node.NodeConstraint
 import validate.Issue
-import validate.Validation
-import validate.node.NodeValidation
-import kotlin.collections.iterator
 
 object NodeConstraints : NodeValidation {
     override fun validateConstraint(
@@ -34,7 +31,7 @@ object NodeConstraints : NodeValidation {
         issues: MutableList<Issue>
     ) {
         for (property in constraint.properties) {
-            if (node.properties.containsKey(property)) {
+            if (!node.properties.containsKey(property)) {
                 issues.add(
                     Issue(
                         code = "missing_node_constraint_property",

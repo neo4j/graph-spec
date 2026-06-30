@@ -31,7 +31,7 @@ object RelationshipIndexes : RelationshipValidation {
         issues: MutableList<Issue>
     ) {
         for (property in index.properties) {
-            if (!relationship.properties.containsKey(property)) {
+            if (relationship.properties.containsKey(property)) {
                 continue
             }
             issues.add(

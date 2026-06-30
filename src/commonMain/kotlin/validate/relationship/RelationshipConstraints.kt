@@ -31,7 +31,7 @@ object RelationshipConstraints : RelationshipValidation {
         issues: MutableList<Issue>
     ) {
         for (property in constraint.properties) {
-            if (!relationship.properties.containsKey(property)) {
+            if (relationship.properties.containsKey(property)) {
                 continue
             }
             issues.add(

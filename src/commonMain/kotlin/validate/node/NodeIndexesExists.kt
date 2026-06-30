@@ -20,9 +20,6 @@ import model.GraphModel
 import model.node.Node
 import model.node.NodeIndex
 import validate.Issue
-import validate.Validation
-import validate.node.NodeValidation
-import kotlin.collections.iterator
 
 object NodeIndexesExists : NodeValidation {
     override fun validateIndex(
@@ -34,7 +31,7 @@ object NodeIndexesExists : NodeValidation {
         issues: MutableList<Issue>
     ) {
         for (property in index.properties) {
-            if (!node.properties.containsKey(property)) {
+            if (node.properties.containsKey(property)) {
                 continue
             }
             issues.add(
