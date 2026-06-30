@@ -27,21 +27,21 @@ object RelationshipNodes : RelationshipValidation {
         relationship: Relationship,
         issues: MutableList<Issue>
     ) {
-        if (relationship.from.node.isNotBlank() && model.nodes.containsKey(relationship.from.node)) {
+        if (relationship.from.node.isNotBlank() && !model.nodes.containsKey(relationship.from.node)) {
             issues.add(
                 Issue(
                     code = "missing_relation_from_node",
-                    message = "Missing node with id '${relationship.from}' for relationship '$relationshipId'",
-                    path = "relationships.$relationshipId.from.${relationship.from}"
+                    message = "Missing node with id '${relationship.from.node}' for relationship '$relationshipId'",
+                    path = "relationships.$relationshipId.from.${relationship.from.node}"
                 )
             )
         }
-        if (relationship.to.node.isNotBlank() && model.nodes.containsKey(relationship.to.node)) {
+        if (relationship.to.node.isNotBlank() && !model.nodes.containsKey(relationship.to.node)) {
             issues.add(
                 Issue(
                     code = "missing_relation_to_node",
-                    message = "Missing node with id '${relationship.from}' for relationship '$relationshipId'",
-                    path = "relationships.$relationshipId.to.${relationship.from}"
+                    message = "Missing node with id '${relationship.to.node}' for relationship '$relationshipId'",
+                    path = "relationships.$relationshipId.to.${relationship.to.node}"
                 )
             )
         }

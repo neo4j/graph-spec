@@ -35,18 +35,14 @@ object NodeExistenceConstraint : NodeValidation {
         constraint: NodeConstraint,
         issues: MutableList<Issue>
     ) {
-        if (constraint.type != ConstraintType.EXISTS) {
-            return
-        }
-        if (constraint.properties.size == 1) {
-            return
-        }
-        issues.add(
-            Issue(
-                code = "invalid_node_exist_constraint_property_count",
-                message = "Node existence constraint '$constraintId' must have exactly one property.",
-                path = "nodes.$nodeId.constraints.$constraintId.properties"
+        if (constraint.type == ConstraintType.EXISTS && constraint.properties.size != 1) {
+            issues.add(
+                Issue(
+                    code = "invalid_node_exist_constraint_property_count",
+                    message = "Node existence constraint '$constraintId' must have exactly one property.",
+                    path = "nodes.$nodeId.constraints.$constraintId.properties"
+                )
             )
-        )
+        }
     }
 }

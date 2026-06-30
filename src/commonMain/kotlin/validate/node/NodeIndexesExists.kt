@@ -20,9 +20,6 @@ import model.GraphModel
 import model.node.Node
 import model.node.NodeIndex
 import validate.Issue
-import validate.Validation
-import validate.node.NodeValidation
-import kotlin.collections.iterator
 
 object NodeIndexesExists : NodeValidation {
     override fun validateIndex(
@@ -35,15 +32,14 @@ object NodeIndexesExists : NodeValidation {
     ) {
         for (property in index.properties) {
             if (!node.properties.containsKey(property)) {
-                continue
-            }
-            issues.add(
-                Issue(
-                    code = "missing_node_index_property",
-                    message = "Missing property with id '$property' for node index '$indexId'",
-                    path = "nodes.$nodeId.indexes.$indexId.properties.$property"
+                issues.add(
+                    Issue(
+                        code = "missing_node_index_property",
+                        message = "Missing property with id '$property' for node index '$indexId'",
+                        path = "nodes.$nodeId.indexes.$indexId.properties.$property"
+                    )
                 )
-            )
+            }
         }
     }
 }

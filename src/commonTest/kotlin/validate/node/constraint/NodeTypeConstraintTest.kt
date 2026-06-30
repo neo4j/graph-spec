@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) "Neo4j"
+ * Neo4j Sweden AB [https://neo4j.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package validate.node.constraint
+
+import model.GraphModel
+import model.node.Node
+import model.node.NodeConstraint
+import model.type.ConstraintType
+import validate.Issue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
+
+class NodeTypeConstraintTest {
+
+    private val validator = NodeTypeConstraint
+    private val model = GraphModel("4.0.0")
+    private val nodeDummy = Node()
+
+    @Test
+    fun `ignore constraint when type is not PROPERTY_TYPE`() {
+        val constraint = NodeConstraint(
+            type = ConstraintType.UNIQUE,
+            properties = mutableSetOf("email", "username")
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateConstraint(model, "user", nodeDummy, "uniq_email", constraint, issues)
+
+        assertTrue(issues.isEmpty(), "Expected no issues because constraint type is not PROPERTY_TYPE")
+    }
+
+    @Test
+    fun `pass when PROPERTY_TYPE constraint has exactly one property`() {
+        val constraint = NodeConstraint(
+            type = ConstraintType.PROPERTY_TYPE,
+            properties = mutableSetOf("age")
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateConstraint(model, "user", nodeDummy, "type_age", constraint, issues)
+
+        assertTrue(issues.isEmpty(), "Expected no issues when PROPERTY_TYPE constraint has exactly 1 property")
+    }
+
+    @Test
+    fun `fail when PROPERTY_TYPE constraint has multiple properties`() {
+        val constraint = NodeConstraint(
+            type = ConstraintType.PROPERTY_TYPE,
+            properties = mutableSetOf("age", "score")
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateConstraint(model, "user", nodeDummy, "type_multi", constraint, issues)
+
+        assertEquals(1, issues.size)
+        val issue = issues.first()
+        assertEquals("invalid_node_type_constraint_property_count", issue.code)
+        assertEquals("nodes.user.constraints.type_multi.properties", issue.path)
+    }
+}
