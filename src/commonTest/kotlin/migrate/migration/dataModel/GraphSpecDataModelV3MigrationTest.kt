@@ -18,6 +18,7 @@ package migrate.migration.dataModel
 
 import codec.schema.SchemaLiteral
 import codec.schema.SchemaNull
+import codec.schema.schemaListOf
 import codec.schema.schemaMapOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -267,6 +268,37 @@ class GraphSpecDataModelV3MigrationTest {
         val keys = nodeKeyProps[0].listOfMaps("keyProperties")
         assertEquals(1, keys.size)
         assertEquals("#p1", keys[0].string("\$ref"))
+    }
+
+    @Test
+    fun `convertExtensions identifies key properties from constraints`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "properties" to schemaMapOf(
+                        "p1" to schemaMapOf("nullable" to false),
+                        "p2" to schemaMapOf("nullable" to true),
+                        "p3" to schemaMapOf("nullable" to false)
+                    ),
+                    "constraints" to schemaMapOf(
+                        "const" to schemaMapOf(
+                            "type" to "KEY",
+                            "properties" to schemaListOf("p2"),
+                        ),
+                    ),
+                )
+            )
+        )
+
+        val result = migration.convertExtensions(input)
+        assertNotNull(result)
+        val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
+
+        assertEquals(1, nodeKeyProps.size)
+        assertEquals("#n1", nodeKeyProps[0].map("node").string("\$ref"))
+        val keys = nodeKeyProps[0].listOfMaps("keyProperties")
+        assertEquals(1, keys.size)
+        assertEquals("#p2", keys[0].string("\$ref"))
     }
 
     @Test
