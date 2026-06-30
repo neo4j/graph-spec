@@ -35,18 +35,14 @@ object RelationshipExistenceConstraint : RelationshipValidation {
         constraint: RelationshipConstraint,
         issues: MutableList<Issue>
     ) {
-        if (constraint.type != ConstraintType.EXISTS) {
-            return
-        }
-        if (constraint.properties.size == 1) {
-            return
-        }
-        issues.add(
-            Issue(
-                code = "invalid_relation_exist_constraint_property_count",
-                message = "Relationship existence constraint '$constraintId' must have exactly one property.",
-                path = "relationships.$relationshipId.constraints.$constraintId.properties"
+        if (constraint.type == ConstraintType.EXISTS && constraint.properties.size != 1) {
+            issues.add(
+                Issue(
+                    code = "invalid_relation_exist_constraint_property_count",
+                    message = "Relationship existence constraint '$constraintId' must have exactly one property.",
+                    path = "relationships.$relationshipId.constraints.$constraintId.properties"
+                )
             )
-        )
+        }
     }
 }

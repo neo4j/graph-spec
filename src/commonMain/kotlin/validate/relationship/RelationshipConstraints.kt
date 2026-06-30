@@ -31,16 +31,15 @@ object RelationshipConstraints : RelationshipValidation {
         issues: MutableList<Issue>
     ) {
         for (property in constraint.properties) {
-            if (relationship.properties.containsKey(property)) {
-                continue
-            }
-            issues.add(
-                Issue(
-                    code = "missing_relation_constraint_property",
-                    message = "Missing property with id '$property' for relationship constraint '$constraintId'",
-                    path = "relationships.$relationshipId.constraints.$constraintId.properties.$property"
+            if (!relationship.properties.containsKey(property)) {
+                issues.add(
+                    Issue(
+                        code = "missing_relation_constraint_property",
+                        message = "Missing property with id '$property' for relationship constraint '$constraintId'",
+                        path = "relationships.$relationshipId.constraints.$constraintId.properties.$property"
+                    )
                 )
-            )
+            }
         }
     }
 }

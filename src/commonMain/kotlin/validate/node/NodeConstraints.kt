@@ -40,11 +40,9 @@ object NodeConstraints : NodeValidation {
                     )
                 )
             }
-
-            val label = constraint.label
-            if (node.labels.implied.contains(label) || node.labels.identifier == label) {
-                continue
-            }
+        }
+        val label = constraint.label
+        if (!node.labels.implied.contains(label) && node.labels.identifier != label) {
             issues.add(
                 Issue(
                     code = "missing_node_constraint_label",
