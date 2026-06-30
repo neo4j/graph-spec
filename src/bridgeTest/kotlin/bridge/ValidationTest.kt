@@ -59,7 +59,7 @@ class ValidationTest {
             val response = Json.decodeFromString(BridgeResponse.serializer(), outputBuffer.toKString())
             assertNull(response.error)
             assertNotNull(response.data)
-            assertTrue(response.data.contains("Node existence constraint 'c1' must have exactly one property"))
+            assertTrue(response.data.contains("Missing label with id 'L' for node constraint 'c1'"))
         }
     }
 }
