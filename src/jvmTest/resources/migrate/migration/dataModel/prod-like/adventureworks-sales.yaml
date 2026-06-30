@@ -1404,11 +1404,13 @@ mappings:
       expmonth: { field: "expmonth" }
       expyear: { field: "expyear" }
       modifieddate: { field: "modifieddate" }
+    keys: ["creditcardid"]
   - node: "currency"
     table: "currency"
     properties:
       currencycode: { field: "currencycode" }
       modifieddate: { field: "modifieddate" }
+    keys: ["currencycode"]
   - node: "currencyrate"
     table: "currencyrate"
     properties:
@@ -1417,12 +1419,14 @@ mappings:
       averagerate: { field: "averagerate" }
       endofdayrate: { field: "endofdayrate" }
       modifieddate: { field: "modifieddate" }
+    keys: ["currencyrateid"]
   - node: "customer"
     table: "customer"
     properties:
       customerid: { field: "customerid" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    keys: ["customerid"]
   - node: "salesorderheader"
     table: "salesorderheader"
     properties:
@@ -1440,6 +1444,7 @@ mappings:
       comment: { field: "comment" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    keys: ["salesorderid"]
   - node: "salesperson"
     table: "salesperson"
     properties:
@@ -1451,11 +1456,13 @@ mappings:
       saleslastyear: { field: "saleslastyear" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    keys: ["businessentityid"]
   - node: "salesreason"
     table: "salesreason"
     properties:
       salesreasonid: { field: "salesreasonid" }
       modifieddate: { field: "modifieddate" }
+    keys: ["salesreasonid"]
   - node: "salestaxrate"
     table: "salestaxrate"
     properties:
@@ -1464,6 +1471,7 @@ mappings:
       taxrate: { field: "taxrate" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    keys: ["salestaxrateid"]
   - node: "salesterritory"
     table: "salesterritory"
     properties:
@@ -1475,6 +1483,7 @@ mappings:
       costlastyear: { field: "costlastyear" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    keys: ["territoryid"]
   - node: "shoppingcartitem"
     table: "shoppingcartitem"
     properties:
@@ -1483,6 +1492,7 @@ mappings:
       quantity: { field: "quantity" }
       datecreated: { field: "datecreated" }
       modifieddate: { field: "modifieddate" }
+    keys: ["shoppingcartitemid"]
   - node: "specialoffer"
     table: "specialoffer"
     properties:
@@ -1497,12 +1507,14 @@ mappings:
       maxqty: { field: "maxqty" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    keys: ["specialofferid"]
   - node: "store"
     table: "store"
     properties:
       businessentityid: { field: "businessentityid" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    keys: ["businessentityid"]
   - relationship: "SALESTERRITORY"
     table: "customer"
     from:
