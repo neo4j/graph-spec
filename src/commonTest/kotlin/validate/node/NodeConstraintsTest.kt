@@ -110,14 +110,14 @@ class NodeConstraintsTest {
         val constraint = NodeConstraint(
             type = ConstraintType.UNIQUE,
             label = "User", // Expected label
-            properties = mutableSetOf("email")
+            properties = mutableSetOf("email", "name")
         )
 
         val issues = mutableListOf<Issue>()
         validator.validateConstraint(model, nodeId, node, constraintId, constraint, issues)
 
-        assertEquals(1, issues.size)
-        val issue = issues.first()
+        assertEquals(2, issues.size)
+        val issue = issues.last()
         assertEquals("missing_node_constraint_label", issue.code)
         assertEquals("nodes.userNode.constraints.uniq_user_email.labels.User", issue.path)
     }
