@@ -72,6 +72,12 @@ relationships:
     type: "SUPPLIERS"
     from: { node: "products" }
     to: { node: "suppliers" }
+    properties:
+      productname: { type: "STRING", nullable: true }
+    constraints:
+      productname_SUPPLIERS_key:
+        type: "KEY"
+        properties: ["productname"]
 tables:
   categories:
     source: "cloud"
@@ -287,3 +293,6 @@ mappings:
       node: "suppliers"
       properties:
         supplierid: { field: "supplierid" }
+    properties:
+      productname: { field: "productname" }
+    keys: ["productname"]

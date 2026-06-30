@@ -339,7 +339,7 @@ mappings:
       aircraftCode: { field: "aircraft_code" }
       model: { field: "model" }
       aircraftRange: { field: "aircrafts_range" }
-    keys: ["aircraft_code"]
+    keys: ["aircraftCode"]
   - node: "Airport"
     table: "airports_data"
     properties:
@@ -348,14 +348,14 @@ mappings:
       city: { field: "city" }
       coordinates: { field: "coordinates" }
       timezone: { field: "timezone" }
-    keys: ["airport_code"]
+    keys: ["airportCode"]
   - node: "Booking"
     table: "bookings"
     properties:
       bookRef: { field: "book_ref" }
       bookDate: { field: "book_date" }
       totalAmount: { field: "total_amount" }
-    keys: ["book_ref"]
+    keys: ["bookRef"]
   - node: "Flight"
     table: "flights"
     properties:
@@ -366,7 +366,7 @@ mappings:
       status: { field: "status" }
       actualDeparture: { field: "actual_departure" }
       actualArrival: { field: "actual_arrival" }
-    keys: ["flight_id"]
+    keys: ["flightId"]
   - node: "Ticket"
     table: "tickets"
     properties:
@@ -374,7 +374,7 @@ mappings:
       passengerId: { field: "passenger_id" }
       passengerName: { field: "passenger_name" }
       contactData: { field: "contact_data" }
-    keys: ["ticket_no"]
+    keys: ["ticketNo"]
   - relationship: "FLIGHT_USES_AIRCRAFT"
     table: "flights"
     from:

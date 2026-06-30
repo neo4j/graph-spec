@@ -283,9 +283,9 @@ class GraphSpecDataModelV3MigrationTest {
                     "constraints" to schemaMapOf(
                         "const" to schemaMapOf(
                             "type" to "KEY",
-                            "properties" to schemaListOf("p2"),
-                        ),
-                    ),
+                            "properties" to schemaListOf("p2")
+                        )
+                    )
                 )
             )
         )

@@ -103,11 +103,16 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         )
     }
 
-    internal fun convertExtensions(schema: SchemaMap): SchemaMap? {
-        val nodes = schema.mapOfMapsOrNull("nodes") ?: return null
-        val nodeKeyProperties = mutableListOf<SchemaMap>()
-        for ((nodeId, node) in nodes) {
-            val properties = node.mapOfMapsOrNull("properties") ?: continue
+    internal fun convertExtensions(schema: SchemaMap): SchemaMap = schemaMapOf(
+        "nodeKeyProperties" to convertKeyProperties(schema, "nodes", "node"),
+        "relationshipKeyProperties" toNotEmpty convertKeyProperties(schema, "relationships", "relationship")
+    )
+
+    internal fun convertKeyProperties(schema: SchemaMap, plural: String, singular: String): List<SchemaMap>? {
+        val entities = schema.mapOfMapsOrNull(plural) ?: return null
+        val entityKeyProperties = mutableListOf<SchemaMap>()
+        for ((id, entity) in entities) {
+            val properties = entity.mapOfMapsOrNull("properties") ?: continue
             val keyProperties = mutableSetOf<String>()
             for ((propertyId, property) in properties) {
                 if (property.boolOrNull("key") == true) {
@@ -115,33 +120,32 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 }
             }
             if (keyProperties.isNotEmpty()) {
-                nodeKeyProperties.add(
+                entityKeyProperties.add(
                     schemaMapOf(
-                        "node" to refOf(nodeId),
+                        singular to refOf(id),
                         "keyProperties" to keyProperties.map { id ->
                             refOf(id)
                         }
                     )
                 )
             }
-            val constraints = node.mapOfMapsOrNull("constraints") ?: continue
+            val constraints = entity.mapOfMapsOrNull("constraints") ?: continue
             for ((_, constraint) in constraints) {
                 val type = constraint.string("type")
-                if (type == ConstraintType.KEY.name) {
-                    nodeKeyProperties.add(
-                        schemaMapOf(
-                            "node" to refOf(nodeId),
-                            "keyProperties" to constraint.list("properties").map {
-                                refOf((it as SchemaLiteral).string)
-                            }
-                        )
-                    )
+                if (type != ConstraintType.KEY.name) {
+                    continue
                 }
+                entityKeyProperties.add(
+                    schemaMapOf(
+                        singular to refOf(id),
+                        "keyProperties" to constraint.list("properties").map {
+                            refOf((it as SchemaLiteral).string)
+                        }
+                    )
+                )
             }
         }
-        return schemaMapOf(
-            "nodeKeyProperties" to nodeKeyProperties
-        )
+        return entityKeyProperties
     }
 
     /**
@@ -153,8 +157,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val toNode = mapping.map("to").string("node")
         return relationships.entries.firstOrNull { (key, rel) ->
             key == id &&
-                    rel.map("from").string("node") == fromNode &&
-                    rel.map("to").string("node") == toNode
+                rel.map("from").string("node") == fromNode &&
+                rel.map("to").string("node") == toNode
         }?.key
     }
 
