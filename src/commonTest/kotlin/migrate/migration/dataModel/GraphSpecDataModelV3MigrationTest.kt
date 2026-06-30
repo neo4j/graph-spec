@@ -24,6 +24,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class GraphSpecDataModelV3MigrationTest {
@@ -256,18 +257,34 @@ class GraphSpecDataModelV3MigrationTest {
                         "p4" to schemaMapOf("mustExist" to true, "unique" to false) // Not Key (not unique)
                     )
                 )
+            ),
+            "relationships" to schemaMapOf(
+                "r1" to schemaMapOf(
+                    "properties" to schemaMapOf(
+                        "p1" to schemaMapOf("nullable" to false, "unique" to true), // Key
+                        "p2" to schemaMapOf("nullable" to true, "unique" to true), // Not Key (nullable)
+                        "p3" to schemaMapOf("nullable" to false, "unique" to false) // Not Key (not unique)
+                    )
+                )
             )
         )
 
         val result = migration.convertExtensions(input)
         assertNotNull(result)
-        val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
 
+        val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
         assertEquals(1, nodeKeyProps.size)
         assertEquals("#n1", nodeKeyProps[0].map("node").string("\$ref"))
-        val keys = nodeKeyProps[0].listOfMaps("keyProperties")
-        assertEquals(1, keys.size)
-        assertEquals("#p1", keys[0].string("\$ref"))
+        val nodeKeys = nodeKeyProps[0].listOfMaps("keyProperties")
+        assertEquals(1, nodeKeys.size)
+        assertEquals("#p1", nodeKeys[0].string("\$ref"))
+
+        val relationshipKeyProps = result.listOfMaps("relationshipKeyProperties")
+        assertEquals(1, relationshipKeyProps.size)
+        assertEquals("#r1", relationshipKeyProps[0].map("relationship").string("\$ref"))
+        val relKeys = relationshipKeyProps[0].listOfMaps("keyProperties")
+        assertEquals(1, relKeys.size)
+        assertEquals("#p1", relKeys[0].string("\$ref"))
     }
 
     @Test
@@ -287,18 +304,40 @@ class GraphSpecDataModelV3MigrationTest {
                         )
                     )
                 )
+            ),
+            "relationships" to schemaMapOf(
+                "r1" to schemaMapOf(
+                    "properties" to schemaMapOf(
+                        "p1" to schemaMapOf("nullable" to false),
+                        "p2" to schemaMapOf("nullable" to true),
+                        "p3" to schemaMapOf("nullable" to false)
+                    ),
+                    "constraints" to schemaMapOf(
+                        "const" to schemaMapOf(
+                            "type" to "KEY",
+                            "properties" to schemaListOf("p2")
+                        )
+                    )
+                )
             )
         )
 
         val result = migration.convertExtensions(input)
         assertNotNull(result)
-        val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
 
+        val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
         assertEquals(1, nodeKeyProps.size)
         assertEquals("#n1", nodeKeyProps[0].map("node").string("\$ref"))
-        val keys = nodeKeyProps[0].listOfMaps("keyProperties")
-        assertEquals(1, keys.size)
-        assertEquals("#p2", keys[0].string("\$ref"))
+        val nodeKeys = nodeKeyProps[0].listOfMaps("keyProperties")
+        assertEquals(1, nodeKeys.size)
+        assertEquals("#p2", nodeKeys[0].string("\$ref"))
+
+        val relationshipKeyProps = result.listOfMaps("relationshipKeyProperties")
+        assertEquals(1, relationshipKeyProps.size)
+        assertEquals("#r1", relationshipKeyProps[0].map("relationship").string("\$ref"))
+        val relKeys = relationshipKeyProps[0].listOfMaps("keyProperties")
+        assertEquals(1, relKeys.size)
+        assertEquals("#p2", relKeys[0].string("\$ref"))
     }
 
     @Test
@@ -385,6 +424,14 @@ class GraphSpecDataModelV3MigrationTest {
                         "p2" to schemaMapOf("mustExist" to true, "unique" to false) // not unique — not a key
                     )
                 )
+            ),
+            "relationships" to schemaMapOf(
+                "r1" to schemaMapOf(
+                    "properties" to schemaMapOf(
+                        "p1" to schemaMapOf("nullable" to true, "unique" to true), // nullable — not a key
+                        "p2" to schemaMapOf("nullable" to false, "unique" to false) // not unique — not a key
+                    )
+                )
             )
         )
 
@@ -393,6 +440,7 @@ class GraphSpecDataModelV3MigrationTest {
         assertNotNull(result)
         assertTrue(result.containsKey("nodeKeyProperties"), "nodeKeyProperties key must always be present")
         assertEquals(emptyList(), result.listOfMapsOrNull("nodeKeyProperties"))
+        assertNull(result.listOfMapsOrNull("relationshipKeyProperties"))
     }
 
     @Test

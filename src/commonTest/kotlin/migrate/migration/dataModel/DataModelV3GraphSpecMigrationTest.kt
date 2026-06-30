@@ -16,8 +16,10 @@
  */
 package migrate.migration.dataModel
 
+import codec.schema.SchemaLiteral
 import codec.schema.schemaMapOf
 import codec.schema.toSchemaElement
+import kotlin.collections.listOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -347,13 +349,19 @@ class DataModelV3GraphSpecMigrationTest {
                         "tableName" to "WORKS_IN",
                         "fromMappings" to mapOf("#propA" to "COL_A"), // Tests prefix removal
                         "toMappings" to mapOf("#propB" to "COL_B"),
-                        "propertyMappings" to emptyList<Any>()
+                        "propertyMappings" to listOf(
+                            schemaMapOf(
+                                "property" to mapOf("\$ref" to "#prop1"),
+                                "fieldName" to "name"
+                            )
+                        )
                     )
                 )
             )
         )
 
-        val result = migration.relationshipMappings(unwrap(input), emptyMap())
+        val relKeys = mapOf("obj1" to setOf("prop1"))
+        val result = migration.relationshipMappings(unwrap(input), relKeys)
 
         val mapping = result.first()
         assertEquals("obj1", mapping.string("relationship"))
@@ -362,6 +370,10 @@ class DataModelV3GraphSpecMigrationTest {
         val fromProps = mapping.map("from").map("properties")
         assertTrue(fromProps.containsKey("propA"))
         assertEquals("COL_A", fromProps.map("propA").string("field"))
+
+        val properties = mapping.mapOfMaps("properties")
+        assertEquals("name", properties["prop1"]?.string("field"))
+        assertEquals("prop1", (mapping.list("keys").first() as SchemaLiteral).string)
     }
 
     @Test
@@ -404,13 +416,15 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.nodeMappings(unwrap(input), emptyMap())
+        val nodeKeys = mutableMapOf("node1" to setOf("prop1"))
+        val result = migration.nodeMappings(unwrap(input), nodeKeys)
 
         assertEquals(1, result.size)
         val mapping = result.first()
         assertEquals("node1", mapping.string("node"))
         assertEquals("USERS_TABLE", mapping.string("table"))
         assertEquals("USER_NAME", mapping.map("properties").map("prop1").string("field"))
+        assertEquals("prop1", (mapping.list("keys").first() as SchemaLiteral).string)
     }
 
     @Test

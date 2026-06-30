@@ -327,7 +327,6 @@ class DataModelV3GraphSpecMigration :
         .listOfMaps("propertyMappings")
         .mapNotNull { mapping ->
             val ref = mapping.ref("property")
-//            val name = mapping.literal("fieldName")
             if (nodeKeys.contains(ref)) ref else null
         }
 
