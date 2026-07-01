@@ -16,32 +16,52 @@ This library can be imported into your Go project via the standard `go get`:
 git config --global url."git@github.com:".insteadOf "https://github.com/" 
 
 # Fetch Go library
-go get github.com/neo4j/graph-spec/go@vx.y.z
+go get github.com/neo4j/graph-spec/go/vX@vX.Y.Z
 ```
 
-## Contributing
+> [!NOTE]
+> Because it is a glibc-based Kotlin/Native library, the runtime must provide `glibc` and `libstdc++`.
 
-### Building and testing on MacOS
-As above, the migration and validation methods rely on Kotlin/Native static libraries that are built from the Kotlin 
-code. MacOS requires an environment configuration to allow specific linker flags used by the Kotlin/Native binary.
+## How the Kotlin/Native library is loaded
 
-To prevent Go from blocking the `-force_load` flag the following environment variable needs to be set:
+The migration and validation methods call into a Kotlin/Native shared library
+(`libgraphdatamodel.so` on Linux, `libgraphdatamodel.dylib` on macOS) at runtime via
+[purego](https://github.com/ebitengine/purego). 
+
+By default, the library is automatically embedded in the binary for supported platforms (`linux/amd64`, `linux/arm64`, 
+`darwin/arm64`) and loaded on first use, so nothing extra is needed after `go get` on any of those platforms. 
+
+### Using Without Embedding
+
+Automatic embedding can be disabled if needed (e.g. if the runtime is locked down and extracting and loading the 
+embedded native library is not possible). Instead of automatic embedding, the relevant shared library can be hosted
+in a desired location available to the Go binary at runtime, and pointed to via the `GRAPHDATAMODEL_LIB_PATH` env var.
+If this env var is set, the shared library will be loaded from there.
+
+Optionally, if not using automatic embedding, a Go binary without the bundled library can be built from source with the 
+`graphspec_noembed` tag:
+
 ```
-CGO_LDFLAGS_ALLOW="-Wl,-force_load,.*"
+go build -tags graphspec_noembed ./...
 ```
 
-E.g. to run tests from the `go/` directory:
-```
-CGO_LDFLAGS_ALLOW="-Wl,-force_load,.*" go test ./... 
+> [!NOTE]
+> The shared native lib must be provided either via automatic embedding or the `GRAPHDATAMODEL_LIB_PATH` var. If not 
+> available, e.g. for an unsupported platform and no `GRAPHDATAMODEL_LIB_PATH`, an error will be returned when run.
+
+## Development
+
+### Building and testing
+
+The Go library can be built and tested as normal:
+
+```shell
+go test ./...
 ```
 
-#### Why is this needed?
-* macOS (Darwin): Uses the Apple linker (ld64), which is aggressive at "dead-code stripping." `-Wl,-force_load` is used 
-  to ensure all Kotlin symbols are included in the final binary. For security, the Go toolchain blocks this specific 
-  flag by default unless it is added to the allowlist.
-
-* Linux: Uses standard linkers (bfd or gold) that do not require "force-load" instructions to resolve these symbols. 
-  Consequently, no security allowlist is triggered.
+Tests load the shared library exactly as consumers do. With embedding on (the default) nothing
+extra is needed. If building or testing with `graphspec_noembed`, set `GRAPHDATAMODEL_LIB_PATH`
+first (see [Using Without Embedding](#using-without-embedding)).
 
 ### Generating Kotlin/Native libraries
 
@@ -49,6 +69,11 @@ CGO_LDFLAGS_ALLOW="-Wl,-force_load,.*" go test ./...
 ./go/scripts/generate-kotlin-native-libs.sh
 ```
 
+This rebuilds the shared libraries for all supported platforms from the Kotlin source and copies them into 
+`internal/bridge/lib/`. This should be done when the underlying Kotlin logic materially changes. 
+
+The regenerated `.so`/`.dylib` files are checked in to git history. They are what `//go:embed` bundles, so a
+published tag whose module omits them will fail to build for consumers.
 
 ### Generating Go types
 

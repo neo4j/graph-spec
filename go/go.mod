@@ -2,7 +2,10 @@ module github.com/neo4j/graph-spec/go/v4
 
 go 1.24.4
 
-require github.com/stretchr/testify v1.10.0
+require (
+	github.com/ebitengine/purego v0.10.1
+	github.com/stretchr/testify v1.10.0
+)
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

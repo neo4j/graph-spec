@@ -37,5 +37,10 @@ const model: GraphModel = GraphSpec.Json.decodeFromString(value);
 ### Go
 
 ```bash
-go get github.com/neo4j/graph-spec/go@vx.y.z
+go get github.com/neo4j/graph-spec/go/vX@vX.Y.Z
 ```
+
+> [!NOTE]
+> The Go library comes bundled with the Kotlin/Native library which is embedded and loaded automatically. 
+> The runtime needs `glibc` and `libstdc++`. The Go library can also be run without automatic embedding if needed 
+> (e.g. due to runtime restrictions) - see the [Go README](go/README.md).
