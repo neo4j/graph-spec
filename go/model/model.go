@@ -414,8 +414,8 @@ var Neo4jTypeValues = []Neo4jType{
 
 type Property struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Name       *string                   `json:"name,omitempty"`
 	MustExist  *bool                     `json:"mustExist,omitempty"`
+	Name       *string                   `json:"name,omitempty"`
 	Type       *Neo4jType                `json:"type,omitempty"`
 	Unique     *bool                     `json:"unique,omitempty"`
 }
