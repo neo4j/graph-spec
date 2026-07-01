@@ -28,14 +28,14 @@ import model.jso
 @JsExport
 @JsPlainObject
 external interface LabelsJs {
-    var identifier: String
+    var identifier: String?
     var implied: Array<String>
     var optional: Array<String>
     val extensions: Record<String, ExtensionValueJs>
 }
 
 fun labelsJs(
-    identifier: String = "",
+    identifier: String? = null,
     implied: Array<String> = emptyArray(),
     optional: Array<String> = emptyArray(),
     extensions: Record<String, ExtensionValueJs> = emptyRecord()

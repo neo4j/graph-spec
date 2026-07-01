@@ -26,7 +26,7 @@ import kotlin.js.JsExport
 @Serializable
 @SerialName("Labels")
 data class Labels(
-    var identifier: String = "",
+    var identifier: String? = null,
     val implied: MutableSet<String> = mutableSetOf(),
     val optional: MutableSet<String> = mutableSetOf(),
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
