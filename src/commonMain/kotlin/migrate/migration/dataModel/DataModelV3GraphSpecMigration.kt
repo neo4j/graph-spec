@@ -136,14 +136,14 @@ class DataModelV3GraphSpecMigration :
         indexes: Map<String, List<SchemaMap>>,
         labelRef: String?,
         label: String,
-        type: String,
+        type: String
     ): Map<String, SchemaMap>? = indexes[labelRef]?.associate { index ->
         val id = index.id()
         id to schemaMapOf(
             "type" to indexType(index).name,
             "labels" to listOf(label),
             "properties" to index.listOfMapsOrNull("properties")?.map { it.ref() },
-            "name" to (index.stringOrNull("name") ?: "${type}Index${index}")
+            "name" to (index.stringOrNull("name") ?: "${type}Index$index")
         )
     }
 
