@@ -24,9 +24,6 @@ import model.type.Named
  */
 object Internal {
     fun internalise(model: GraphModel) {
-        if (!model.pretty) {
-            return
-        }
         model.internaliseNodeLabels()
         model.internaliseNodes()
         model.internaliseNodeProperties()
@@ -101,6 +98,11 @@ object Internal {
         var i = 0
         val changes = mutableMapOf<String, String>()
         for ((name, node) in original) {
+            if (node.name != null) {
+                println("Keep name $name instead of ${node.name}")
+                this[name] = node
+                continue
+            }
             node.name = name
             val key = "${type}${i++}"
             this[key] = node

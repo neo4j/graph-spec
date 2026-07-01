@@ -27,9 +27,6 @@ import kotlin.collections.component2
  */
 object Pretty {
     fun prettify(model: GraphModel) {
-        if (model.pretty) {
-            return
-        }
         model.prettifyNodeLabels()
         model.prettifyNodeProperties()
         model.prettifyNodes()
@@ -206,7 +203,11 @@ object Pretty {
         clear()
         val changes = mutableMapOf<String, String>()
         for ((og, node) in original) {
-            val key = node.name ?: og
+            val key = node.name
+            if (key == null) {
+                this[og] = node
+                continue
+            }
             node.name = null
             this[key] = node
             if (parent != null) {
