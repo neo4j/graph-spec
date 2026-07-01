@@ -41,7 +41,9 @@ class GraphModelEditor {
     companion object {
         @JsStatic
         fun plain(model: GraphModel): GraphModelJs {
-            model.internalise()
+            if (model.pretty) {
+                error("Pretty models can't be converted to plain models, call model.internalise() first.")
+            }
             return graphModelJs(
                 version = model.version,
                 nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
