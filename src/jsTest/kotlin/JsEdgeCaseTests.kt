@@ -90,7 +90,7 @@ class JsEdgeCaseTests {
             pretty = true
         )
         val encoded = GraphSpec.Json.encodeToString(graphSpec, Type.DATA_MODEL, Version.DATA_MODEL_V30)
-        assertNotNull(encoded)
+        assertTrue(encoded.contains("\"token\": \"Person\""))
     }
 
     @Test

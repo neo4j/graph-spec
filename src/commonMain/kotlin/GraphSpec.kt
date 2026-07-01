@@ -50,6 +50,8 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
         var map = schema as? SchemaMap ?: error("Schema format expected")
         map = path.migrate(map, type, Version.LATEST, Type.GRAPH_SPEC)
         val graphModel = configuration.format.decodeFromSchema(map)
+        // Force internalise
+        graphModel.pretty = true
         graphModel.internalise()
         return graphModel
     }

@@ -42,7 +42,7 @@ object Internal {
     private fun GraphModel.internaliseNodeLabels() {
         nodes.values.forEach { node ->
             val label = node.label
-            if (label != null) {
+            if (label != null && node.labels.identifier == null) {
                 node.labels.identifier = label
                 node.label = null
             }
