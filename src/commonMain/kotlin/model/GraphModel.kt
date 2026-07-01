@@ -41,7 +41,7 @@ data class GraphModel(
     val mappings: MutableList<Mapping> = mutableListOf(),
     val display: Display = Display(),
     @Transient
-    var pretty: Boolean = false,
+    var pretty: Boolean = false
 ) {
     @JsExport.Ignore
     fun prettify() {
