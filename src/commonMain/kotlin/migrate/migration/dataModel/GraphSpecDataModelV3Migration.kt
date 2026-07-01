@@ -224,10 +224,10 @@ class GraphSpecDataModelV3Migration :
         val nodeLabels = mutableListOf<SchemaMap>()
         val nodeObjectTypes = mutableListOf<SchemaMap>()
         for ((nodeId, node) in nodes) {
-            val labelsInfo = node.map("labels")
-            val primaryLabel = labelsInfo.string("identifier")
-            val impliedLabels = labelsInfo.listOrNull("implied")?.map { it.toString() } ?: emptyList()
-            val optionalLabels = labelsInfo.listOrNull("optional")?.map { it.toString() } ?: emptyList()
+            val labelsInfo = node.mapOrNull("labels")
+            val primaryLabel = labelsInfo?.string("identifier") ?: node.string("label")
+            val impliedLabels = labelsInfo?.listOrNull("implied")?.map { it.toString() } ?: emptyList()
+            val optionalLabels = labelsInfo?.listOrNull("optional")?.map { it.toString() } ?: emptyList()
             val allLabels = listOf(primaryLabel) + impliedLabels + optionalLabels
 
             var primaryLabelId = "nl:null"
