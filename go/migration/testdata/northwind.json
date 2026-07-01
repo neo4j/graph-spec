@@ -14,7 +14,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:0_1",
@@ -22,7 +22,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:0_2",
@@ -30,7 +30,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:0_3",
@@ -38,7 +38,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             }
           ]
         },
@@ -52,7 +52,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:1_1",
@@ -60,7 +60,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:1_4",
@@ -68,7 +68,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:1_5",
@@ -76,7 +76,7 @@
               "type": {
                 "type": "float"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:1_6",
@@ -84,7 +84,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:1_7",
@@ -92,7 +92,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:1_8",
@@ -100,7 +100,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:1_9",
@@ -108,7 +108,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "mustExist": false
             }
           ]
         },
@@ -122,7 +122,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_1",
@@ -130,7 +130,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_2",
@@ -138,7 +138,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_3",
@@ -146,7 +146,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_4",
@@ -154,7 +154,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_5",
@@ -162,7 +162,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_6",
@@ -170,7 +170,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_7",
@@ -178,7 +178,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_8",
@@ -186,7 +186,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_9",
@@ -194,7 +194,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_10",
@@ -202,7 +202,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             },
             {
               "$id": "p:2_11",
@@ -210,7 +210,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "mustExist": false
             }
           ]
         }

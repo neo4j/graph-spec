@@ -16,7 +16,6 @@
  */
 package model.node
 
-import js.objects.Object
 import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
@@ -102,9 +101,9 @@ class NodeEditor {
         }
 
         @JsStatic
-        fun setPropertyNullable(model: GraphModelJs, nodeId: String, propertyId: String, nullable: Boolean) {
+        fun setPropertyMustExist(model: GraphModelJs, nodeId: String, propertyId: String, mustExist: Boolean) {
             val property = getProperty(model, nodeId, propertyId)
-            PropertyEditor.setNullable(property, nullable)
+            PropertyEditor.setMustExist(property, mustExist)
         }
 
         @JsStatic

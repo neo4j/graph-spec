@@ -67,7 +67,7 @@ class NodeEditorTest {
         // Set Property Attributes
         NodeEditor.setPropertyName(model, nodeId, propId, "age")
         NodeEditor.setPropertyType(model, nodeId, propId, "Integer")
-        NodeEditor.setPropertyNullable(model, nodeId, propId, false)
+        NodeEditor.setPropertyMustExist(model, nodeId, propId, false)
         NodeEditor.setPropertyUnique(model, nodeId, propId, true)
 
         val prop = model.nodes[nodeId]?.properties?.get(propId)

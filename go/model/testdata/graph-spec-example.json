@@ -11,13 +11,13 @@
       "properties": {
         "id": {
           "type": "STRING",
-          "nullable": false,
+          "mustExist": false,
           "unique": true,
           "extensions": {}
         },
         "name": {
           "type": "STRING",
-          "nullable": false,
+          "mustExist": false,
           "unique": false,
           "extensions": {}
         }
@@ -36,7 +36,7 @@
       "properties": {
         "id": {
           "type": "STRING",
-          "nullable": false,
+          "mustExist": false,
           "unique": true,
           "extensions": {}
         }
@@ -62,7 +62,7 @@
       "properties": {
         "roles": {
           "type": "STRING",
-          "nullable": false,
+          "mustExist": false,
           "unique": false,
           "extensions": {}
         }

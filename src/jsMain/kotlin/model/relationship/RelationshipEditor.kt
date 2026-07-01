@@ -102,9 +102,9 @@ class RelationshipEditor {
         }
 
         @JsStatic
-        fun setPropertyNullable(model: GraphModelJs, relationshipId: String, propertyId: String, nullable: Boolean) {
+        fun setPropertyMustExist(model: GraphModelJs, relationshipId: String, propertyId: String, mustExist: Boolean) {
             val property = getProperty(model, relationshipId, propertyId)
-            PropertyEditor.setNullable(property, nullable)
+            PropertyEditor.setMustExist(property, mustExist)
         }
 
         @JsStatic

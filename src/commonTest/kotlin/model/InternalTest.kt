@@ -96,7 +96,7 @@ class InternalTest {
             nodes = mutableMapOf(
                 "Person" to Node(
                     label = "Person",
-                    properties = mutableMapOf("age" to Property(nullable = false))
+                    properties = mutableMapOf("age" to Property(mustExist = false))
                 )
             ),
             relationships = mutableMapOf(
@@ -104,7 +104,7 @@ class InternalTest {
                     type = "KNOWS",
                     from = RelationshipTarget(),
                     to = RelationshipTarget(),
-                    properties = mutableMapOf("since" to Property(nullable = false))
+                    properties = mutableMapOf("since" to Property(mustExist = false))
                 )
             ),
             mappings = mutableListOf(

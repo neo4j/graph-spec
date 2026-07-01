@@ -20,7 +20,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
 import model.extension.Extensions
-import model.property.Neo4jType
 import model.type.Named
 import kotlin.js.JsExport
 
@@ -29,12 +28,12 @@ import kotlin.js.JsExport
 @SerialName("Property")
 data class Property(
     var type: Neo4jType = Neo4jType.ANY,
-    var nullable: Boolean = false,
+    var mustExist: Boolean = false,
     var unique: Boolean = false,
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
 ) : Extensions,
     Named {
     val key: Boolean
-        get() = !nullable && unique
+        get() = !mustExist && unique
 }
