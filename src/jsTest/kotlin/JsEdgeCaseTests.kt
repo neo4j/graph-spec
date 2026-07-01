@@ -89,7 +89,6 @@ class JsEdgeCaseTests {
             ),
             pretty = true
         )
-        graphSpec.internalise()
         val encoded = GraphSpec.Json.encodeToString(graphSpec, Type.DATA_MODEL, Version.DATA_MODEL_V30)
         assertNotNull(encoded)
     }
