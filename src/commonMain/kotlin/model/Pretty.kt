@@ -27,12 +27,16 @@ import kotlin.collections.component2
  */
 object Pretty {
     fun prettify(model: GraphModel) {
+        if (model.pretty) {
+            return
+        }
         model.prettifyNodeLabels()
         model.prettifyNodeProperties()
         model.prettifyNodes()
         model.prettifyRelationshipProperties()
         model.prettifyRelationships()
         removeNames(model)
+        model.pretty = true
     }
 
     private fun removeNames(model: GraphModel) {
@@ -60,9 +64,9 @@ object Pretty {
     private fun GraphModel.prettifyNodeLabels() {
         nodes.values.forEach { node ->
             if (node.labels.implied.isEmpty() && node.labels.optional.isEmpty()) {
-                if (node.labels.identifier.isNotBlank()) {
+                if (node.labels.identifier != null) {
                     node.label = node.labels.identifier
-                    node.labels.identifier = ""
+                    node.labels.identifier = null
                 }
             }
         }

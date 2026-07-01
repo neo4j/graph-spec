@@ -42,7 +42,8 @@ class InternalTest {
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(label = "UserLabel")
-            )
+            ),
+            pretty = true
         )
 
         model.internalise()
@@ -69,7 +70,8 @@ class InternalTest {
                     indexes = mutableMapOf("i1" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf()))
                 ),
                 "User2" to Node()
-            )
+            ),
+            pretty = true
         )
 
         model.internalise()
@@ -120,7 +122,8 @@ class InternalTest {
                         "since" to PropertyMapping("friends_since")
                     )
                 )
-            )
+            ),
+            pretty = true
         )
 
         originalModel.internalise()

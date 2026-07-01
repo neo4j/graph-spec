@@ -24,11 +24,15 @@ import model.type.Named
  */
 object Internal {
     fun internalise(model: GraphModel) {
+        if (!model.pretty) {
+            return
+        }
         model.internaliseNodeLabels()
         model.internaliseNodes()
         model.internaliseNodeProperties()
         model.internaliseRelationships()
         model.internaliseRelationshipProperties()
+        model.pretty = false
     }
 
     /*
@@ -38,7 +42,7 @@ object Internal {
     private fun GraphModel.internaliseNodeLabels() {
         nodes.values.forEach { node ->
             val label = node.label
-            if (label != null && node.labels.identifier.isBlank()) {
+            if (label != null) {
                 node.labels.identifier = label
                 node.label = null
             }
