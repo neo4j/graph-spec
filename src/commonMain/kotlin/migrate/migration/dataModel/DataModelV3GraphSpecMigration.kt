@@ -236,7 +236,7 @@ class DataModelV3GraphSpecMigration :
             val map = schemaMapOf(
                 "name" to property.literalOrNull("token"),
                 "type" to propertyType(typeObj.string("type")),
-                "mustExist" to when (property.stringOrNull("nullable")) {
+                "mustExist" to when (property.stringOrNull("mustExist")) {
                     "false" -> true
                     null -> null
                     else -> false
