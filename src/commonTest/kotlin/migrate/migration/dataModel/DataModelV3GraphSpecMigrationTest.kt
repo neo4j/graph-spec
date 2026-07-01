@@ -164,28 +164,30 @@ class DataModelV3GraphSpecMigrationTest {
         val indexes = mapOf(
             "label1" to listOf(
                 schemaMapOf(
-                    "indexType" to "range",
+                    "\$id" to "i:0",
                     "name" to "custom_idx",
+                    "indexType" to "range",
                     "properties" to listOf(mapOf("\$ref" to "#p1"))
                 ),
                 schemaMapOf(
+                    "\$id" to "i:1",
                     "indexType" to "text",
                     "properties" to listOf(mapOf("\$ref" to "#p2"))
                 )
             )
         )
 
-        val result = migration.convertIndexes(indexes, "label1", "Person")
+        val result = migration.convertIndexes(indexes, "label1", "Person", "node")
         assertNotNull(result)
 
         // First index uses custom name
-        val idx1 = result["custom_idx"]
+        val idx1 = result["i:0"]
         assertNotNull(idx1)
         assertEquals("RANGE", idx1.string("type"))
         assertEquals(listOf("Person").toSchemaElement(), idx1.list("labels"))
 
         // Second index gets generated name "index2"
-        val idx2 = result["index2"]
+        val idx2 = result["i:1"]
         assertNotNull(idx2)
         assertEquals("TEXT", idx2.string("type"))
         assertEquals(listOf("p2").toSchemaElement(), idx2.list("properties"))
@@ -200,7 +202,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException> {
-            migration.convertIndexes(mapOf("L1" to listOf(index)), "L1", "Label")
+            migration.convertIndexes(mapOf("L1" to listOf(index)), "L1", "Label", "node")
         }
     }
 
@@ -217,7 +219,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Type constraints not supported on multiple properties") {
-            migration.convertConstraints(constraints, "L1", "Person")
+            migration.convertConstraints(constraints, "L1", "Person", "node")
         }
     }
 
@@ -226,37 +228,22 @@ class DataModelV3GraphSpecMigrationTest {
         val constraints = mapOf(
             "label1" to listOf(
                 schemaMapOf(
+                    "\$id" to "c:1",
+                    "name" to "constraint1",
                     "constraintType" to "uniqueness",
                     "properties" to listOf(mapOf("\$ref" to "#p1"), mapOf("\$ref" to "#p2"))
                 )
             )
         )
 
-        val result = migration.convertConstraints(constraints, "label1", "Person")
+        val result = migration.convertConstraints(constraints, "label1", "Person", "node")
 
         assertNotNull(result)
-        val constraint = result["constraint1"]
+        val constraint = result["c:1"]
         assertNotNull(constraint)
         assertEquals("UNIQUE", constraint.string("type"))
         assertEquals("Person", constraint.string("label"))
         assertEquals(listOf("p1", "p2").toSchemaElement(), constraint.list("properties"))
-    }
-
-    @Test
-    fun `check associateByUniqueName handles collisions`() {
-        val items = listOf(
-            schemaMapOf("name" to "existing"),
-            schemaMapOf("name" to "existing"), // Collision
-            schemaMapOf() // No name
-        )
-
-        val result = with(migration) {
-            items.associateByUniqueName("prefix") { schemaMapOf("key" to "value") }
-        }
-
-        assertTrue(result.containsKey("existing"))
-        assertTrue(result.containsKey("prefix2"))
-        assertTrue(result.containsKey("prefix3"))
     }
 
     @Test
@@ -289,7 +276,8 @@ class DataModelV3GraphSpecMigrationTest {
         val constraints = mapOf(
             relTypeRef to listOf(
                 schemaMapOf(
-                    "name" to "c1",
+                    "\$id" to "c1",
+                    "name" to "constraint",
                     "constraintType" to "propertyExistence",
                     "properties" to listOf(mapOf("\$ref" to "#p1"))
                 )

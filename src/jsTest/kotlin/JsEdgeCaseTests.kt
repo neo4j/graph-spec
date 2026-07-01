@@ -73,8 +73,8 @@ class JsEdgeCaseTests {
         assertTrue(encoded.contains("\"nullable\": false"))
 
         val decoded = GraphSpec.Json.decodeFromString(encoded, Type.DATA_MODEL)
-        assertEquals("Person", decoded.nodes["node0"]?.name)
-        assertEquals("born", decoded.nodes["node0"]?.properties?.get("nodeProperty0")?.name)
+        assertEquals("Person", decoded.nodes["PersonNode"]?.name)
+        assertEquals("born", decoded.nodes["PersonNode"]?.properties?.get("nodeProperty0")?.name)
     }
 
     @Test
