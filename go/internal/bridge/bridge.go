@@ -54,7 +54,8 @@ func Call(op Op, inputs ...string) (string, error) {
 
 	// To simplify memory management on the Kotlin side we create an output buffer, still under
 	// the scope of the Go GC, for the Kotlin library to write a response to. We must also provide
-	// the maximum buffer size to avoid overflows when the Kotlin library writes the output
+	// the maximum buffer size to avoid overflows when the Kotlin library writes the output. We use
+	// the length of the first input as reference as this is the graph model.
 	buf := make([]byte, 2*len(inputs[0]))
 	// The buffer is pinned for the duration of the native call so the Go GC cannot move it while the Kotlin library holds the pointer.
 	var pinner runtime.Pinner
@@ -81,11 +82,14 @@ func callBridge(b *bridgeFuncs, op Op, inputs []string, out unsafe.Pointer, outL
 	var res int32
 	switch op {
 	case Migrate:
-		if len(inputs) < 4 {
+		if len(inputs) != 4 {
 			return -1, fmt.Errorf("migrate requires 4 inputs, got %d", len(inputs))
 		}
 		res = b.migrate(inputs[0], inputs[1], inputs[2], inputs[3], out, outLen)
 	case Validate:
+		if len(inputs) != 1 {
+			return -1, fmt.Errorf("validate requires 1 input, got %d", len(inputs))
+		}
 		res = b.validate(inputs[0], out, outLen)
 	default:
 		return -1, fmt.Errorf("unknown bridge call: %s", op)
