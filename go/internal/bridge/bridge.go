@@ -26,7 +26,7 @@ const (
 	validate = "validate"
 )
 
-type bridgeFuncs struct {
+type bridge struct {
 	migrate  func(inputJSON, inputType, targetType, targetVersion string, outputBuffer unsafe.Pointer, bufferSize int32) int32
 	validate func(inputJSON string, outputBuffer unsafe.Pointer, bufferSize int32) int32
 }
@@ -58,7 +58,7 @@ func Call(op Op, inputs ...string) (string, error) {
 	pinner.Pin(&buf[0])
 	defer pinner.Unpin()
 
-	bufSize, err := callBridge(b, op, inputs, unsafe.Pointer(&buf[0]), int32(len(buf)))
+	bufSize, err := b.call(op, inputs, unsafe.Pointer(&buf[0]), int32(len(buf)))
 	if err != nil {
 		return "", err
 	}
@@ -74,7 +74,7 @@ func Call(op Op, inputs ...string) (string, error) {
 	return resp.Data, nil
 }
 
-func callBridge(b *bridgeFuncs, op Op, inputs []string, out unsafe.Pointer, outLen int32) (int, error) {
+func (b *bridge) call(op Op, inputs []string, out unsafe.Pointer, outLen int32) (int, error) {
 	var res int32
 	switch op {
 	case Migrate:
@@ -97,7 +97,7 @@ func callBridge(b *bridgeFuncs, op Op, inputs []string, out unsafe.Pointer, outL
 	return int(res), nil
 }
 
-func bindBridge() (b *bridgeFuncs, err error) {
+func bindBridge() (b *bridge, err error) {
 	defer func() {
 		// purego.RegisterLibFunc panics if a symbol cannot be bound which gets converted to an error.
 		if r := recover(); r != nil {
@@ -110,7 +110,7 @@ func bindBridge() (b *bridgeFuncs, err error) {
 		return nil, err
 	}
 
-	b = &bridgeFuncs{}
+	b = &bridge{}
 	purego.RegisterLibFunc(&b.migrate, lib, migrate)
 	purego.RegisterLibFunc(&b.validate, lib, validate)
 	return b, nil
