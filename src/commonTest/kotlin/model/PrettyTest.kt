@@ -54,7 +54,7 @@ class PrettyTest {
         val prettyNode = model.nodes["User"]
         assertNotNull(prettyNode, "Node key should be reverted to original name 'User'")
         assertEquals("UserLabel", prettyNode.label, "Label should be restored from identifier")
-        assertEquals("", prettyNode.labels.identifier, "Identifier should be cleared out")
+        assertNull(prettyNode.labels.identifier, "Identifier should be cleared out")
         assertNull(prettyNode.name, "Name property should be cleared out")
     }
 

@@ -33,6 +33,7 @@ object Pretty {
         model.prettifyRelationshipProperties()
         model.prettifyRelationships()
         removeNames(model)
+        model.pretty = true
     }
 
     private fun removeNames(model: GraphModel) {
@@ -60,9 +61,9 @@ object Pretty {
     private fun GraphModel.prettifyNodeLabels() {
         nodes.values.forEach { node ->
             if (node.labels.implied.isEmpty() && node.labels.optional.isEmpty()) {
-                if (node.labels.identifier.isNotBlank()) {
+                if (node.labels.identifier != null) {
                     node.label = node.labels.identifier
-                    node.labels.identifier = ""
+                    node.labels.identifier = null
                 }
             }
         }
@@ -202,7 +203,11 @@ object Pretty {
         clear()
         val changes = mutableMapOf<String, String>()
         for ((og, node) in original) {
-            val key = node.name ?: og
+            val key = node.name
+            if (key == null) {
+                this[og] = node
+                continue
+            }
             node.name = null
             this[key] = node
             if (parent != null) {

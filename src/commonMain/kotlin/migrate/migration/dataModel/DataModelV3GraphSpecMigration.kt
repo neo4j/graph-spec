@@ -123,8 +123,8 @@ class DataModelV3GraphSpecMigration :
                     "implied" toNotEmpty tokens.drop(1)
                     // TODO optional
                 ),
-                "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel),
-                "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel),
+                "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, "node"),
+                "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
                 "properties" toNotEmpty convertProperties(labels, nodeKeys[id] ?: emptySet()),
                 "name" to tokens.firstOrNull()
             )
@@ -135,13 +135,20 @@ class DataModelV3GraphSpecMigration :
     internal fun convertIndexes(
         indexes: Map<String, List<SchemaMap>>,
         labelRef: String?,
-        label: String
-    ): Map<String, SchemaMap>? = indexes[labelRef]?.associateByUniqueName("index") { index ->
-        schemaMapOf(
-            "type" to indexType(index).name,
-            "labels" to listOf(label),
-            "properties" to index.listOfMapsOrNull("properties")?.map { it.ref() }
-        )
+        label: String,
+        type: String
+    ): Map<String, SchemaMap>? {
+        var count = 0
+        return indexes[labelRef]?.associate { index ->
+            count++
+            val id = index.id()
+            id to schemaMapOf(
+                "type" to indexType(index).name,
+                "labels" to listOf(label),
+                "properties" to index.listOfMapsOrNull("properties")?.map { it.ref() },
+                "name" to (index.stringOrNull("name") ?: "${type}Index${count - 1}")
+            )
+        }
     }
 
     private fun indexType(index: SchemaMap): IndexType {
@@ -152,35 +159,31 @@ class DataModelV3GraphSpecMigration :
     internal fun convertConstraints(
         constraints: Map<String, List<SchemaMap>>,
         labelRef: String?,
-        label: String
-    ): Map<String, SchemaMap>? = constraints[labelRef]?.associateByUniqueName("constraint") { constraint ->
-        val properties = constraint.listOfMapsOrNull("properties")
-        val constraintType = constraintType(constraint)
-        if (properties != null && properties.size > 1 && constraintType == ConstraintType.PROPERTY_TYPE) {
-            error("Type constraints not supported on multiple properties.")
+        label: String,
+        type: String
+    ): Map<String, SchemaMap>? {
+        var index = 0
+        return constraints[labelRef]?.associate { constraint ->
+            index++
+            val properties = constraint.listOfMapsOrNull("properties")
+            val constraintType = constraintType(constraint)
+            if (properties != null && properties.size > 1 && constraintType == PROPERTY_TYPE) {
+                error("Type constraints not supported on multiple properties.")
+            }
+            val id = constraint.id()
+            id to schemaMapOf(
+                "type" to constraintType.name,
+                "label" to label,
+                "properties" toNotEmpty properties?.map { it.ref() },
+                "name" to (constraint.stringOrNull("name") ?: "${type}Constraint${index - 1}")
+            )
         }
-        schemaMapOf(
-            "type" to constraintType.name,
-            "label" to label,
-            "properties" toNotEmpty properties?.map { it.ref() }
-        )
     }
 
     private fun constraintType(constraint: SchemaMap): ConstraintType {
         val type = constraint.string("constraintType")
         return constraintType(type)
             ?: error("Unknown constraint type: $type at ${constraint.path}.${constraint.string("name")}")
-    }
-
-    internal fun List<SchemaMap>.associateByUniqueName(
-        prefix: String,
-        transform: (SchemaMap) -> SchemaMap
-    ): Map<String, SchemaMap> {
-        val usedNames = mutableSetOf<String>()
-        return withIndex().associate { (idx, item) ->
-            val name = item.stringOrNull("name")?.takeIf { usedNames.add(it) } ?: "$prefix${idx + 1}"
-            name to transform(item)
-        }
     }
 
     internal fun migrateRelationships(
@@ -202,8 +205,8 @@ class DataModelV3GraphSpecMigration :
                 "from" to mapOf("node" to objectType.ref("from")),
                 "to" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType)),
-                "constraints" toNotEmpty convertConstraints(constraints, typeRef, token),
-                "indexes" toNotEmpty convertIndexes(indexes, typeRef, token),
+                "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, "relationship"),
+                "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
                 "name" to uniqueRelationshipName(token, uniqueNames)
             )
         }

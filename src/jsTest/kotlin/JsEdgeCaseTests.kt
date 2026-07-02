@@ -14,7 +14,9 @@ import model.property.Neo4jType
 import model.property.Property
 import model.property.propertyJs
 import kotlin.test.Test
+import kotlin.test.assertContains
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
@@ -47,7 +49,6 @@ class JsEdgeCaseTests {
                 }
             },
         """.trimIndent()
-        println(encoded)
         assertTrue(encoded.replace(" ", "").contains(expected.replace(" ", "")))
     }
 
@@ -56,13 +57,15 @@ class JsEdgeCaseTests {
         val graphSpec = GraphModel(
             version = "4.0.0",
             nodes = mutableMapOf(
-                "n:1" to Node(
+                "PersonNode" to Node(
                     labels = Labels("Person"),
-                    properties = mutableMapOf("p:1" to Property(Neo4jType.INTEGER, name = "born")),
+                    properties = mutableMapOf("born" to Property(Neo4jType.INTEGER)),
                     name = "Person",
                 )
-            )
+            ),
+            pretty = true
         )
+        graphSpec.internalise()
         val plain = GraphModelEditor.plain(graphSpec)
         val model = GraphModelEditor.model(plain)
         val encoded = GraphSpec.Json.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30)
@@ -71,8 +74,24 @@ class JsEdgeCaseTests {
         assertTrue(encoded.contains("\"nullable\": false"))
 
         val decoded = GraphSpec.Json.decodeFromString(encoded, Type.DATA_MODEL)
-        assertEquals("Person", decoded.nodes["n:1"]?.name)
-        assertEquals("born", decoded.nodes["n:1"]?.properties?.get("p:1")?.name)
+        assertEquals("Person", decoded.nodes["PersonNode"]?.name)
+        assertEquals("born", decoded.nodes["PersonNode"]?.properties?.get("nodeProperty0")?.name)
+    }
+
+    @Test
+    fun `encodeToString should be able to encode a graph spec that is using shorthand label syntax to data_model`() {
+        val graphSpec = GraphModel(
+            version = "4.0.0",
+            nodes = mutableMapOf(
+                "Person" to Node(
+                    label = "Person",
+                    properties = mutableMapOf("name" to Property(Neo4jType.STRING)),
+                )
+            ),
+            pretty = true
+        )
+        val encoded = GraphSpec.Json.encodeToString(graphSpec, Type.DATA_MODEL, Version.DATA_MODEL_V30)
+        assertTrue(encoded.contains("\"token\": \"Person\""))
     }
 
     @Test

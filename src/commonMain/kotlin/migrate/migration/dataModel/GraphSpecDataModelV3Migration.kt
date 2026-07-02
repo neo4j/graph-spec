@@ -180,7 +180,6 @@ class GraphSpecDataModelV3Migration :
 
             constraints.addAll(
                 convertElements(
-                    id = "c:${constraints.size}",
                     elements = rel.mapOfMapsOrNull("constraints"),
                     entityType = "relationship",
                     refId = typeId,
@@ -190,7 +189,6 @@ class GraphSpecDataModelV3Migration :
             )
             indexes.addAll(
                 convertElements(
-                    id = "i:${indexes.size}",
                     elements = rel.mapOfMapsOrNull("indexes"),
                     entityType = "relationship",
                     refId = typeId,
@@ -224,7 +222,11 @@ class GraphSpecDataModelV3Migration :
         val nodeLabels = mutableListOf<SchemaMap>()
         val nodeObjectTypes = mutableListOf<SchemaMap>()
         for ((nodeId, node) in nodes) {
-            val labelsInfo = node.map("labels")
+            val labelsInfo =
+                node.mapOrNull("labels")
+                    ?: error(
+                        "Missing required labels at ${node.path}.labels - Make sure you are using internal version."
+                    )
             val primaryLabel = labelsInfo.string("identifier")
             val impliedLabels = labelsInfo.listOrNull("implied")?.map { it.toString() } ?: emptyList()
             val optionalLabels = labelsInfo.listOrNull("optional")?.map { it.toString() } ?: emptyList()
@@ -257,7 +259,6 @@ class GraphSpecDataModelV3Migration :
             )
             constraints.addAll(
                 convertElements(
-                    id = "c:${constraints.size}",
                     elements = node.mapOfMapsOrNull("constraints"),
                     entityType = "node",
                     refId = primaryLabelId,
@@ -267,7 +268,6 @@ class GraphSpecDataModelV3Migration :
             )
             indexes.addAll(
                 convertElements(
-                    id = "i:${indexes.size}",
                     elements = node.mapOfMapsOrNull("indexes"),
                     entityType = "node",
                     refId = primaryLabelId,
@@ -338,7 +338,6 @@ class GraphSpecDataModelV3Migration :
     }
 
     internal fun convertElements(
-        id: String,
         elements: Map<String, SchemaMap>?,
         entityType: String,
         refId: String,
@@ -353,8 +352,8 @@ class GraphSpecDataModelV3Migration :
                 refOf((propId as SchemaLiteral).string)
             } ?: emptyList()
             schemaMapOf(
-                "\$id" to id,
-                "name" to name,
+                "\$id" to name,
+                "name" to (element.stringOrNull("name") ?: name),
                 typeKey to typeTransform(element.string("type")),
                 "entityType" to entityType,
                 "nodeLabel" to if (entityType == "node") refOf(refId) else SchemaNull(),

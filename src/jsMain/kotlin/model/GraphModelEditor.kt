@@ -40,14 +40,20 @@ import model.source.toJs
 class GraphModelEditor {
     companion object {
         @JsStatic
-        fun plain(model: GraphModel): GraphModelJs = graphModelJs(
-            version = model.version,
-            nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
-            relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }.toRecord(),
-            tables = model.tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
-            mappings = model.mappings.map { mapping -> mapping.toJs() }.toTypedArray(),
-            display = model.display.toJs()
-        )
+        fun plain(model: GraphModel): GraphModelJs {
+            if (model.pretty) {
+                error("Pretty models can't be converted to plain models, call model.internalise() first.")
+            }
+            return graphModelJs(
+                version = model.version,
+                nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
+                relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
+                    .toRecord(),
+                tables = model.tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
+                mappings = model.mappings.map { mapping -> mapping.toJs() }.toTypedArray(),
+                display = model.display.toJs()
+            )
+        }
 
         @JsStatic
         fun model(model: GraphModelJs): GraphModel = GraphModel(

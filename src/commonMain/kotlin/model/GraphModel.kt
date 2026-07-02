@@ -18,6 +18,7 @@ package model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import model.display.Display
 import model.mapping.Mapping
 import model.node.Node
@@ -38,7 +39,9 @@ data class GraphModel(
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
     val tables: MutableMap<String, Table> = mutableMapOf(),
     val mappings: MutableList<Mapping> = mutableListOf(),
-    val display: Display = Display()
+    val display: Display = Display(),
+    @Transient
+    var pretty: Boolean = false
 ) {
     @JsExport.Ignore
     fun prettify() {

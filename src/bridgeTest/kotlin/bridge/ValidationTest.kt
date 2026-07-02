@@ -41,7 +41,8 @@ class ValidationTest {
                         "c1": {
                             "type": "EXISTS",
                             "label": "L",
-                            "properties": []
+                            "properties": [],
+                            "name": "constraint1"
                         }
                     }
                 }

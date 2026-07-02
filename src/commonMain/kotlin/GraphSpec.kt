@@ -36,6 +36,9 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
         targetType: String = Type.GRAPH_SPEC,
         targetVersion: String = Version.LATEST
     ): String {
+        if (targetType != Type.GRAPH_SPEC) { // Migrations expect internalised graph spec models.
+            model.internalise()
+        }
         val schema = configuration.format.encodeToSchema(model)
         var map = schema as? SchemaMap ?: error("Schema format expected")
         map = path.migrate(map, Type.GRAPH_SPEC, targetVersion, targetType)
@@ -46,7 +49,9 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
         val schema = configuration.format.decodeFromString(content)
         var map = schema as? SchemaMap ?: error("Schema format expected")
         map = path.migrate(map, type, Version.LATEST, Type.GRAPH_SPEC)
-        return configuration.format.decodeFromSchema(map)
+        val graphModel = configuration.format.decodeFromSchema(map)
+        graphModel.internalise()
+        return graphModel
     }
 
     object Json : GraphSpec(defaultConfig(JsonFormat.default))

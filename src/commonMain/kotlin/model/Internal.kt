@@ -29,6 +29,7 @@ object Internal {
         model.internaliseNodeProperties()
         model.internaliseRelationships()
         model.internaliseRelationshipProperties()
+        model.pretty = false
     }
 
     /*
@@ -38,7 +39,7 @@ object Internal {
     private fun GraphModel.internaliseNodeLabels() {
         nodes.values.forEach { node ->
             val label = node.label
-            if (label != null && node.labels.identifier.isBlank()) {
+            if (label != null && node.labels.identifier == null) {
                 node.labels.identifier = label
                 node.label = null
             }
@@ -97,6 +98,10 @@ object Internal {
         var i = 0
         val changes = mutableMapOf<String, String>()
         for ((name, node) in original) {
+            if (node.name != null) {
+                this[name] = node
+                continue
+            }
             node.name = name
             val key = "${type}${i++}"
             this[key] = node
