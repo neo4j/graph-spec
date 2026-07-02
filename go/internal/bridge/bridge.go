@@ -52,10 +52,11 @@ func Call(op Op, inputs ...string) (string, error) {
 		}
 	}
 
-	// The library writes its JSON response into a caller-provided buffer. It is a Go
-	// buffer (so it stays under the Go GC), pinned for the duration of the native call
-	// so the GC cannot move it while the library holds the pointer.
+	// To simplify memory management on the Kotlin side we create an output buffer, still under
+	// the scope of the Go GC, for the Kotlin library to write a response to. We must also provide
+	// the maximum buffer size to avoid overflows when the Kotlin library writes the output
 	buf := make([]byte, 2*len(inputs[0]))
+	// The buffer is pinned for the duration of the native call so the Go GC cannot move it while the Kotlin library holds the pointer.
 	var pinner runtime.Pinner
 	pinner.Pin(&buf[0])
 	defer pinner.Unpin()
