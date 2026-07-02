@@ -99,7 +99,6 @@ object Internal {
         val changes = mutableMapOf<String, String>()
         for ((name, node) in original) {
             if (node.name != null) {
-                println("Keep name $name instead of ${node.name}")
                 this[name] = node
                 continue
             }
