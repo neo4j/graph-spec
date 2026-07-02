@@ -101,9 +101,7 @@ class GraphSpecDataModelV3Migration :
             val properties = node.mapOfMapsOrNull("properties") ?: continue
             val keyProperties = mutableSetOf<String>()
             for ((propertyId, property) in properties) {
-                val mustExist = property.boolOrNull("mustExist") == true
-                val unique = property.boolOrNull("unique") == true
-                if (mustExist && unique) {
+                if (property.boolOrNull("key") == true) {
                     keyProperties.add(propertyId)
                 }
             }

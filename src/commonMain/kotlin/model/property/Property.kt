@@ -28,12 +28,10 @@ import kotlin.js.JsExport
 @SerialName("Property")
 data class Property(
     var type: Neo4jType = Neo4jType.ANY,
-    var mustExist: Boolean = false,
-    var unique: Boolean = false,
+    var mustExist: Boolean? = null,
+    var unique: Boolean? = null,
+    var key: Boolean? = null,
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
 ) : Extensions,
-    Named {
-    val key: Boolean
-        get() = mustExist && unique
-}
+    Named

@@ -30,8 +30,9 @@ import model.jso
 @JsPlainObject
 external interface PropertyJs {
     var type: String
-    var mustExist: Boolean
-    var unique: Boolean
+    var mustExist: Boolean?
+    var unique: Boolean?
+    var key: Boolean?
     val extensions: Record<String, ExtensionValueJs>
     var name: String
     val id: String
@@ -39,8 +40,9 @@ external interface PropertyJs {
 
 fun propertyJs(
     type: String = "ANY",
-    mustExist: Boolean = false,
-    unique: Boolean = false,
+    mustExist: Boolean? = null,
+    unique: Boolean? = null,
+    key: Boolean? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String,
     id: String
@@ -48,6 +50,7 @@ fun propertyJs(
     this.type = type
     this.mustExist = mustExist
     this.unique = unique
+    this.key = key
     this.extensions = extensions
     this.name = name
     this.id = id
@@ -57,6 +60,7 @@ fun Property.toJs(key: String) = propertyJs(
     type = Neo4jType.toString(type),
     mustExist = mustExist,
     unique = unique,
+    key = this.key,
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: key,
     id = key
@@ -70,6 +74,7 @@ fun PropertyJs.toClass(parent: String, property: String): Property {
         type = neo4jType,
         mustExist = mustExist,
         unique = unique,
+        key = key,
         extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
         name = name
     )

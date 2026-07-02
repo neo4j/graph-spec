@@ -71,7 +71,7 @@ class RelationshipEditorTest {
         val prop = rel.properties[propId]!!
         assertEquals("NewName", prop.name)
         assertEquals("STRING", prop.type)
-        assertTrue(prop.mustExist)
+        assertTrue(prop.mustExist!!)
 
         // Remove Property
         RelationshipEditor.removeProperty(model, relId, propId)

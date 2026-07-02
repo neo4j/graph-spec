@@ -12,6 +12,7 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         type = Neo4jType.BOOLEAN,
         mustExist = true,
         unique = true,
+        key = true,
         extensions = mutableMapOf("key1" to StringValue("val1")),
         name = "propertyName"
     )
@@ -21,8 +22,9 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
     override fun toClass(js: PropertyJs): Property = js.toClass("parent", "propertyId")
 
     override fun verifyJsObject(jsObject: PropertyJs) {
-        assertTrue(jsObject.mustExist)
-        assertTrue(jsObject.unique)
+        assertTrue(jsObject.mustExist!!)
+        assertTrue(jsObject.unique!!)
+        assertTrue(jsObject.key!!)
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
         assertEquals("propertyId", jsObject.id)
         assertEquals("propertyName", jsObject.name)

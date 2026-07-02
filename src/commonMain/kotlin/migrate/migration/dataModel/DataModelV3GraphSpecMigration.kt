@@ -240,12 +240,12 @@ class DataModelV3GraphSpecMigration :
                     "false" -> true
                     null -> null
                     else -> false
-                }
+                },
+                "unique" to property.literalOrNull("unique")
             )
             val id = property.id()
             if (keyProperties.contains(id)) {
-                map["mustExist"] = true
-                map["unique"] = true
+                map["key"] = true
             }
             id to map
         }
