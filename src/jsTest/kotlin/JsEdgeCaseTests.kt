@@ -65,6 +65,7 @@ class JsEdgeCaseTests {
             ),
             pretty = true
         )
+        graphSpec.internalise()
         val plain = GraphModelEditor.plain(graphSpec)
         val model = GraphModelEditor.model(plain)
         val encoded = GraphSpec.Json.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30)
