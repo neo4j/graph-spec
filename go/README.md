@@ -36,7 +36,8 @@ By default, the library is automatically embedded in the binary for supported pl
 Automatic embedding can be disabled if needed (e.g. if the runtime is locked down and extracting and loading the 
 embedded native library is not possible). Instead of automatic embedding, the relevant shared library can be hosted
 in a desired location available to the Go binary at runtime, and pointed to via the `GRAPHDATAMODEL_LIB_PATH` env var.
-If this env var is set, the shared library will be loaded from there.
+If this env var is set, the shared library will be loaded from there. The shared libraries are stored in this repo 
+under the `go/internal/bridge/lib/` directory.
 
 Optionally, if not using automatic embedding, a Go binary without the bundled library can be built from source with the 
 `graphspec_noembed` tag:

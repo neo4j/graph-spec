@@ -3,25 +3,12 @@ package bridge
 import (
 	"encoding/json"
 	"fmt"
-	"os"
-	"path/filepath"
 	"runtime"
 	"sync"
 	"unsafe"
 
 	"github.com/ebitengine/purego"
 )
-
-// LibPathEnv can be set to an absolute path to the graphdatamodel shared library.
-// When set it takes precedence over the embedded copy, letting callers supply their
-// own library (e.g. one baked into an image at a fixed path for hardened runtimes
-// where extracting to a temp dir is not possible). It is dormant when unset.
-const LibPathEnv = "GRAPHDATAMODEL_LIB_PATH"
-
-// embeddedLib holds the platform's shared library bytes. It is populated by the
-// embed_<platform>.go files and is nil when embedding is disabled (the
-// `graphspec_noembed` build tag) or the platform has no bundled library — in which
-// case GRAPHDATAMODEL_LIB_PATH must be set.
 
 type Resp struct {
 	Data   string `json:"data"`
@@ -33,85 +20,23 @@ type Op string
 const (
 	Migrate  Op = "Migrate"
 	Validate Op = "Validate"
+
+	// export native method names
+	migrate  = "migrate"
+	validate = "validate"
 )
 
-// bridgeFuncs holds the library's exported functions once bound.
+// bridgeFuncs holds the lib's exported functions once bound.
 type bridgeFuncs struct {
 	migrate  func(inputJSON, inputType, targetType, targetVersion string, outputBuffer unsafe.Pointer, bufferSize int32) int32
 	validate func(inputJSON string, outputBuffer unsafe.Pointer, bufferSize int32) int32
 }
 
-// loadBridge resolves, opens, and binds the shared library exactly once, lazily on
-// the first Call — so importing this package never fails; any failure is returned
-// from that first Call.
-var loadBridge = sync.OnceValues(openBridge)
+// loadBridge binds the lib's exported functions exactly once, lazily on first Call.
+var loadBridge = sync.OnceValues(bindBridge)
 
-func libraryExt() string {
-	if runtime.GOOS == "darwin" {
-		return ".dylib"
-	}
-	return ".so"
-}
-
-// resolveLibraryPath decides which shared library the loader should open, in order:
-//  1. the GRAPHDATAMODEL_LIB_PATH override, used verbatim when set;
-//  2. the embedded library, extracted to a private temp file (the zero-setup default).
-//
-// When neither is available (built with `graphspec_noembed`, or an unsupported
-// platform, and no override set) it returns an error rather than searching the
-// dynamic loader's path, so we never load a same-named library an attacker could
-// plant on that path.
-func resolveLibraryPath() (string, error) {
-	if p := os.Getenv(LibPathEnv); p != "" {
-		return p, nil
-	}
-	if len(embeddedLib) > 0 {
-		return extractEmbeddedLib()
-	}
-	return "", fmt.Errorf("no graphdatamodel library available: this binary was built without the embedded library, so %s must be set to the library path", LibPathEnv)
-}
-
-// extractEmbeddedLib writes the embedded library into a private, per-process temp
-// directory (created 0700 with an unpredictable name) and returns its path. Using a
-// private directory rather than a shared, predictable path avoids a temp-file
-// hijack, where another user could pre-create the file we would otherwise load.
-func extractEmbeddedLib() (string, error) {
-	dir, err := os.MkdirTemp("", "graphdatamodel-")
-	if err != nil {
-		return "", fmt.Errorf("could not create temp dir for embedded library: %w", err)
-	}
-	path := filepath.Join(dir, "libgraphdatamodel"+libraryExt())
-	if err := os.WriteFile(path, embeddedLib, 0o700); err != nil {
-		_ = os.RemoveAll(dir)
-		return "", fmt.Errorf("could not write embedded library: %w", err)
-	}
-	return path, nil
-}
-
-func openBridge() (b *bridgeFuncs, err error) {
-	// purego.RegisterLibFunc panics if a symbol cannot be bound; convert that to an error.
-	defer func() {
-		if r := recover(); r != nil {
-			b, err = nil, fmt.Errorf("failed to bind graphdatamodel symbols: %v", r)
-		}
-	}()
-
-	path, err := resolveLibraryPath()
-	if err != nil {
-		return nil, err
-	}
-
-	lib, err := purego.Dlopen(path, purego.RTLD_NOW|purego.RTLD_GLOBAL)
-	if err != nil {
-		return nil, fmt.Errorf("could not load graphdatamodel library %q (set %s to override): %w", path, LibPathEnv, err)
-	}
-
-	b = &bridgeFuncs{}
-	purego.RegisterLibFunc(&b.migrate, lib, "migrate")
-	purego.RegisterLibFunc(&b.validate, lib, "validate")
-	return b, nil
-}
-
+// Call invokes the named bridge operation with the given string inputs and returns
+// the lib's response, decoded from its JSON envelope.
 func Call(op Op, inputs ...string) (string, error) {
 	b, err := loadBridge()
 	if err != nil {
@@ -169,4 +94,23 @@ func callBridge(b *bridgeFuncs, op Op, inputs []string, out unsafe.Pointer, outL
 		return int(res), fmt.Errorf("bridge error (buffer too small or internal failure): code %d", res)
 	}
 	return int(res), nil
+}
+
+func bindBridge() (b *bridgeFuncs, err error) {
+	defer func() {
+		// purego.RegisterLibFunc panics if a symbol cannot be bound which gets converted to an error.
+		if r := recover(); r != nil {
+			b, err = nil, fmt.Errorf("failed to bind graphdatamodel symbols: %v", r)
+		}
+	}()
+
+	lib, err := library()
+	if err != nil {
+		return nil, err
+	}
+
+	b = &bridgeFuncs{}
+	purego.RegisterLibFunc(&b.migrate, lib, migrate)
+	purego.RegisterLibFunc(&b.validate, lib, validate)
+	return b, nil
 }
