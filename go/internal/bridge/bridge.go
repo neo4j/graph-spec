@@ -26,17 +26,13 @@ const (
 	validate = "validate"
 )
 
-// bridgeFuncs holds the lib's exported functions once bound.
 type bridgeFuncs struct {
 	migrate  func(inputJSON, inputType, targetType, targetVersion string, outputBuffer unsafe.Pointer, bufferSize int32) int32
 	validate func(inputJSON string, outputBuffer unsafe.Pointer, bufferSize int32) int32
 }
 
-// loadBridge binds the lib's exported functions exactly once, lazily on first Call.
 var loadBridge = sync.OnceValues(bindBridge)
 
-// Call invokes the named bridge operation with the given string inputs and returns
-// the lib's response, decoded from its JSON envelope.
 func Call(op Op, inputs ...string) (string, error) {
 	b, err := loadBridge()
 	if err != nil {
