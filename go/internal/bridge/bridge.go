@@ -21,7 +21,7 @@ const (
 	Migrate  Op = "Migrate"
 	Validate Op = "Validate"
 
-	// export native method names
+	// exported native method names
 	migrate  = "migrate"
 	validate = "validate"
 )
