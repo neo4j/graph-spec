@@ -103,7 +103,7 @@ class GraphSpecDataModelV3Migration :
             for ((propertyId, property) in properties) {
                 val mustExist = property.boolOrNull("mustExist") == true
                 val unique = property.boolOrNull("unique") == true
-                if (!mustExist && unique) {
+                if (mustExist && unique) {
                     keyProperties.add(propertyId)
                 }
             }
@@ -330,9 +330,12 @@ class GraphSpecDataModelV3Migration :
         return properties.map { (propId, prop) ->
             schemaMapOf(
                 "\$id" to propId,
-                "token" to (prop.literalOrNull("name")?.string ?: propId),
+                "token" to (prop.stringOrNull("name") ?: propId),
                 "type" to propertyType(prop.string("type")),
-                "nullable" to (prop.literalOrNull("mustExist")?.string?.toBooleanStrictOrNull() ?: false)
+                "nullable" to when (prop.stringOrNull("mustExist")) {
+                    "false" -> true
+                    else -> false
+                }
             )
         }
     }

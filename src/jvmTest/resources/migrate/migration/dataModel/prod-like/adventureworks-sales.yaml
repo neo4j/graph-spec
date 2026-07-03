@@ -3,12 +3,12 @@ nodes:
   creditcard:
     label: "creditcard"
     properties:
-      creditcardid: { type: "INTEGER", unique: true }
-      cardtype: { type: "STRING" }
-      cardnumber: { type: "STRING" }
-      expmonth: { type: "INTEGER" }
-      expyear: { type: "INTEGER" }
-      modifieddate: { type: "ZONED DATETIME" }
+      creditcardid: { type: "INTEGER", mustExist: true, unique: true }
+      cardtype: { type: "STRING", mustExist: true }
+      cardnumber: { type: "STRING", mustExist: true }
+      expmonth: { type: "INTEGER", mustExist: true }
+      expyear: { type: "INTEGER", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       creditcard:
         type: "UNIQUE"
@@ -22,8 +22,8 @@ nodes:
   currency:
     label: "currency"
     properties:
-      currencycode: { type: "STRING", unique: true }
-      modifieddate: { type: "ZONED DATETIME" }
+      currencycode: { type: "STRING", mustExist: true, unique: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       currency:
         type: "UNIQUE"
@@ -37,11 +37,11 @@ nodes:
   currencyrate:
     label: "currencyrate"
     properties:
-      currencyrateid: { type: "INTEGER", unique: true }
-      currencyratedate: { type: "ZONED DATETIME" }
-      averagerate: { type: "FLOAT" }
-      endofdayrate: { type: "FLOAT" }
-      modifieddate: { type: "ZONED DATETIME" }
+      currencyrateid: { type: "INTEGER", mustExist: true, unique: true }
+      currencyratedate: { type: "ZONED DATETIME", mustExist: true }
+      averagerate: { type: "FLOAT", mustExist: true }
+      endofdayrate: { type: "FLOAT", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       currencyrate:
         type: "UNIQUE"
@@ -55,9 +55,9 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customerid: { type: "INTEGER", unique: true }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      customerid: { type: "INTEGER", mustExist: true, unique: true }
+      rowguid: { type: "STRING", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       customer:
         type: "UNIQUE"
@@ -71,20 +71,20 @@ nodes:
   salesorderheader:
     label: "salesorderheader"
     properties:
-      salesorderid: { type: "INTEGER", unique: true }
-      revisionnumber: { type: "INTEGER" }
-      orderdate: { type: "ZONED DATETIME" }
-      duedate: { type: "ZONED DATETIME" }
-      shipdate: { type: "ZONED DATETIME" }
-      status: { type: "INTEGER" }
-      creditcardapprovalcode: { type: "STRING" }
-      subtotal: { type: "FLOAT" }
-      taxamt: { type: "FLOAT" }
-      freight: { type: "FLOAT" }
-      totaldue: { type: "FLOAT" }
-      comment: { type: "STRING" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      salesorderid: { type: "INTEGER", mustExist: true, unique: true }
+      revisionnumber: { type: "INTEGER", mustExist: true }
+      orderdate: { type: "ZONED DATETIME", mustExist: true }
+      duedate: { type: "ZONED DATETIME", mustExist: true }
+      shipdate: { type: "ZONED DATETIME", mustExist: true }
+      status: { type: "INTEGER", mustExist: true }
+      creditcardapprovalcode: { type: "STRING", mustExist: true }
+      subtotal: { type: "FLOAT", mustExist: true }
+      taxamt: { type: "FLOAT", mustExist: true }
+      freight: { type: "FLOAT", mustExist: true }
+      totaldue: { type: "FLOAT", mustExist: true }
+      comment: { type: "STRING", mustExist: true }
+      rowguid: { type: "STRING", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       salesorderheader:
         type: "UNIQUE"
@@ -98,14 +98,14 @@ nodes:
   salesperson:
     label: "salesperson"
     properties:
-      businessentityid: { type: "INTEGER", unique: true }
-      salesquota: { type: "FLOAT" }
-      bonus: { type: "FLOAT" }
-      commissionpct: { type: "FLOAT" }
-      salesytd: { type: "FLOAT" }
-      saleslastyear: { type: "FLOAT" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      businessentityid: { type: "INTEGER", mustExist: true, unique: true }
+      salesquota: { type: "FLOAT", mustExist: true }
+      bonus: { type: "FLOAT", mustExist: true }
+      commissionpct: { type: "FLOAT", mustExist: true }
+      salesytd: { type: "FLOAT", mustExist: true }
+      saleslastyear: { type: "FLOAT", mustExist: true }
+      rowguid: { type: "STRING", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       salesperson:
         type: "UNIQUE"
@@ -119,8 +119,8 @@ nodes:
   salesreason:
     label: "salesreason"
     properties:
-      salesreasonid: { type: "INTEGER", unique: true }
-      modifieddate: { type: "ZONED DATETIME" }
+      salesreasonid: { type: "INTEGER", mustExist: true, unique: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       salesreason:
         type: "UNIQUE"
@@ -134,11 +134,11 @@ nodes:
   salestaxrate:
     label: "salestaxrate"
     properties:
-      salestaxrateid: { type: "INTEGER", unique: true }
-      taxtype: { type: "INTEGER" }
-      taxrate: { type: "FLOAT" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      salestaxrateid: { type: "INTEGER", mustExist: true, unique: true }
+      taxtype: { type: "INTEGER", mustExist: true }
+      taxrate: { type: "FLOAT", mustExist: true }
+      rowguid: { type: "STRING", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       salestaxrate:
         type: "UNIQUE"
@@ -152,14 +152,14 @@ nodes:
   salesterritory:
     label: "salesterritory"
     properties:
-      territoryid: { type: "INTEGER", unique: true }
-      group: { type: "STRING" }
-      salesytd: { type: "FLOAT" }
-      saleslastyear: { type: "FLOAT" }
-      costytd: { type: "FLOAT" }
-      costlastyear: { type: "FLOAT" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      territoryid: { type: "INTEGER", mustExist: true, unique: true }
+      group: { type: "STRING", mustExist: true }
+      salesytd: { type: "FLOAT", mustExist: true }
+      saleslastyear: { type: "FLOAT", mustExist: true }
+      costytd: { type: "FLOAT", mustExist: true }
+      costlastyear: { type: "FLOAT", mustExist: true }
+      rowguid: { type: "STRING", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       salesterritory:
         type: "UNIQUE"
@@ -173,11 +173,11 @@ nodes:
   shoppingcartitem:
     label: "shoppingcartitem"
     properties:
-      shoppingcartitemid: { type: "INTEGER", unique: true }
-      shoppingcartid: { type: "STRING" }
-      quantity: { type: "INTEGER" }
-      datecreated: { type: "ZONED DATETIME" }
-      modifieddate: { type: "ZONED DATETIME" }
+      shoppingcartitemid: { type: "INTEGER", mustExist: true, unique: true }
+      shoppingcartid: { type: "STRING", mustExist: true }
+      quantity: { type: "INTEGER", mustExist: true }
+      datecreated: { type: "ZONED DATETIME", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       shoppingcartitem:
         type: "UNIQUE"
@@ -191,17 +191,17 @@ nodes:
   specialoffer:
     label: "specialoffer"
     properties:
-      specialofferid: { type: "INTEGER", unique: true }
-      description: { type: "STRING" }
-      discountpct: { type: "FLOAT" }
-      type: { type: "STRING" }
-      category: { type: "STRING" }
-      startdate: { type: "ZONED DATETIME" }
-      enddate: { type: "ZONED DATETIME" }
-      minqty: { type: "INTEGER" }
-      maxqty: { type: "INTEGER" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      specialofferid: { type: "INTEGER", mustExist: true, unique: true }
+      description: { type: "STRING", mustExist: true }
+      discountpct: { type: "FLOAT", mustExist: true }
+      type: { type: "STRING", mustExist: true }
+      category: { type: "STRING", mustExist: true }
+      startdate: { type: "ZONED DATETIME", mustExist: true }
+      enddate: { type: "ZONED DATETIME", mustExist: true }
+      minqty: { type: "INTEGER", mustExist: true }
+      maxqty: { type: "INTEGER", mustExist: true }
+      rowguid: { type: "STRING", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       specialoffer:
         type: "UNIQUE"
@@ -215,9 +215,9 @@ nodes:
   store:
     label: "store"
     properties:
-      businessentityid: { type: "INTEGER", unique: true }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      businessentityid: { type: "INTEGER", mustExist: true, unique: true }
+      rowguid: { type: "STRING", mustExist: true }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       store:
         type: "UNIQUE"
@@ -262,7 +262,7 @@ relationships:
     from: { node: "salesorderheader" }
     to: { node: "salesreason" }
     properties:
-      modifieddate: { type: "ZONED DATETIME" }
+      modifieddate: { type: "ZONED DATETIME", mustExist: true }
   SALESTERRITORY3:
     type: "SALESTERRITORY"
     from: { node: "salesperson" }

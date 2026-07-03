@@ -251,9 +251,9 @@ class GraphSpecDataModelV3MigrationTest {
             "nodes" to schemaMapOf(
                 "n1" to schemaMapOf(
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("mustExist" to false, "unique" to true), // Key
-                        "p2" to schemaMapOf("mustExist" to true, "unique" to true), // Not Key (mustExist)
-                        "p3" to schemaMapOf("mustExist" to false, "unique" to false) // Not Key (not unique)
+                        "p1" to schemaMapOf("mustExist" to true, "unique" to true), // Key
+                        "p2" to schemaMapOf("mustExist" to false, "unique" to true), // Not Key (mustExist)
+                        "p3" to schemaMapOf("mustExist" to true, "unique" to false) // Not Key (not unique)
                     )
                 )
             )
@@ -351,8 +351,8 @@ class GraphSpecDataModelV3MigrationTest {
             "nodes" to schemaMapOf(
                 "n1" to schemaMapOf(
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("mustExist" to true, "unique" to true), // mustExist — not a key
-                        "p2" to schemaMapOf("mustExist" to false, "unique" to false) // not unique — not a key
+                        "p1" to schemaMapOf("mustExist" to false, "unique" to true), // mustExist — not a key
+                        "p2" to schemaMapOf("mustExist" to true, "unique" to false) // not unique — not a key
                     )
                 )
             )

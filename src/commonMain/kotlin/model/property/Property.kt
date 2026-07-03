@@ -35,5 +35,5 @@ data class Property(
 ) : Extensions,
     Named {
     val key: Boolean
-        get() = !mustExist && unique
+        get() = mustExist && unique
 }
