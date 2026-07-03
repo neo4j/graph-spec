@@ -330,10 +330,7 @@ class GraphSpecDataModelV3Migration :
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
                 "type" to propertyType(prop.string("type")),
-                "nullable" to when (prop.stringOrNull("mustExist")) {
-                    "false" -> true
-                    else -> false
-                }
+                "nullable" to (prop.stringOrNull("mustExist") == "false")
             )
         }
     }
