@@ -85,7 +85,8 @@
             "type": "object",
             "properties": {
                 "identifier": {
-                    "type": "string"
+                    "type": "string",
+                    "nullable": true
                 },
                 "implied": {
                     "type": "array",
