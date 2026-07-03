@@ -329,13 +329,13 @@ class GraphSpecDataModelV3Migration :
             val map = schemaMapOf(
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
-                "type" to propertyType(prop.string("type"))
+                "type" to propertyType(prop.string("type")),
+                "nullable" to if (prop.stringOrNull("key") == "true") {
+                    false
+                } else {
+                    prop.stringOrNull("mustExist") != "true"
+                }
             )
-            if (prop.stringOrNull("key") == "true") {
-                map["nullable"] = false
-            } else {
-                map["nullable"] = prop.stringOrNull("mustExist") != "true"
-            }
             map
         }
     }
