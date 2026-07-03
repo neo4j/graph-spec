@@ -90,6 +90,10 @@ _Kotlin_ → _JSON Schema_ → _Go_
 Some temporary sanitising is needed to ensure there are no issues relating to Go enum variable names when generating
 Neo4jTypes. The script handles this.
 
+> [!NOTE]
+> The deployment pipeline automatically checks the Go types are up-to-date. If you receive a pipeline failure relating
+> to out-of-date types then rerun the above script.
+
 #### Generating JSON schema
 
 If you want to update the JSON schema separately you can run the individual Gradle command from the repo root:
