@@ -131,7 +131,8 @@ class DataModelV3GraphSpecMigrationTest {
                     schemaMapOf(
                         "\$id" to "prop1",
                         "token" to "name",
-                        "type" to mapOf("type" to "string", "nullable" to false)
+                        "type" to mapOf("type" to "string"),
+                        "nullable" to false
                     )
                 )
             )
@@ -157,6 +158,7 @@ class DataModelV3GraphSpecMigrationTest {
         val props = migratedNode.map("properties")
         assertNotNull(props["prop1"])
         assertEquals("STRING", props.map("prop1").string("type"))
+        assertEquals("true", props.map("prop1").string("mustExist"))
     }
 
     @Test

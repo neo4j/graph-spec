@@ -40,7 +40,7 @@ class GraphSpecDataModelV3MigrationTest {
                         "implied" to listOf("Entity")
                     ),
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("name" to "name", "type" to "STRING", "nullable" to true)
+                        "p1" to schemaMapOf("name" to "name", "type" to "STRING", "mustExist" to true)
                     )
                 )
             )
