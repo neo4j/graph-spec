@@ -3,7 +3,7 @@ nodes:
   Aircraft:
     label: "Aircraft"
     properties:
-      aircraftCode: { type: "STRING", mustExist: true, unique: true }
+      aircraftCode: { type: "STRING", key: true }
       model: { type: "STRING", mustExist: true }
       aircraftRange: { type: "INTEGER", mustExist: true }
     constraints:
@@ -19,7 +19,7 @@ nodes:
   Airport:
     label: "Airport"
     properties:
-      airportCode: { type: "STRING", mustExist: true, unique: true }
+      airportCode: { type: "STRING", key: true }
       airportName: { type: "STRING", mustExist: true }
       city: { type: "STRING", mustExist: true }
       coordinates: { type: "POINT", mustExist: true }
@@ -37,7 +37,7 @@ nodes:
   Booking:
     label: "Booking"
     properties:
-      bookRef: { type: "STRING", mustExist: true, unique: true }
+      bookRef: { type: "STRING", key: true }
       bookDate: { type: "ZONED DATETIME", mustExist: true }
       totalAmount: { type: "FLOAT", mustExist: true }
     constraints:
@@ -53,7 +53,7 @@ nodes:
   Flight:
     label: "Flight"
     properties:
-      flightId: { type: "INTEGER", mustExist: true, unique: true }
+      flightId: { type: "INTEGER", key: true }
       flightNo: { type: "STRING", mustExist: true }
       scheduledDeparture: { type: "ZONED DATETIME", mustExist: true }
       scheduledArrival: { type: "ZONED DATETIME", mustExist: true }
@@ -73,7 +73,7 @@ nodes:
   Ticket:
     label: "Ticket"
     properties:
-      ticketNo: { type: "STRING", mustExist: true, unique: true }
+      ticketNo: { type: "STRING", key: true }
       passengerId: { type: "STRING", mustExist: true }
       passengerName: { type: "STRING", mustExist: true }
       contactData: { type: "STRING", mustExist: true }
