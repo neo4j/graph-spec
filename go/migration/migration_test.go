@@ -25,6 +25,11 @@ func TestV3ToGraphSpecMigration(t *testing.T) {
 	resultBytes, err := json.Marshal(result)
 	require.NoError(t, err)
 	t.Log(fmt.Sprintf("Transformed graph: %v", string(resultBytes)))
+
+	// Check round trip back to V3 data model.
+	back, err := migration.FromGraphSpec(result, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
+	require.NoError(t, err)
+	require.NotEmpty(t, back)
 }
 
 func TestGraphSpecToV3Migration(t *testing.T) {

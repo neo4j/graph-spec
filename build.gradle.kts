@@ -42,16 +42,13 @@ kotlin {
         generateTypeScriptDefinitions()
     }
     macosArm64 {
-        binaries.sharedLib()
-        binaries.staticLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "graphdatamodel" }
     }
     linuxX64 {
-        binaries.sharedLib()
-        binaries.staticLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "graphdatamodel" }
     }
     linuxArm64 {
-        binaries.sharedLib()
-        binaries.staticLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "graphdatamodel" }
     }
 
     applyDefaultHierarchyTemplate()
