@@ -59,7 +59,7 @@ class JsEdgeCaseTests {
             nodes = mutableMapOf(
                 "PersonNode" to Node(
                     labels = Labels("Person"),
-                    properties = mutableMapOf("born" to Property(Neo4jType.INTEGER)),
+                    properties = mutableMapOf("born" to Property(Neo4jType.INTEGER, mustExist = true)),
                     name = "Person",
                 )
             ),

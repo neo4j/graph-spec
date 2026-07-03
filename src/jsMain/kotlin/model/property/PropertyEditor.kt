@@ -26,8 +26,8 @@ class PropertyEditor {
         }
 
         @JsStatic
-        fun setNullable(property: PropertyJs, nullable: Boolean) {
-            property.nullable = nullable
+        fun setMustExist(property: PropertyJs, mustExist: Boolean) {
+            property.mustExist = mustExist
         }
 
         @JsStatic

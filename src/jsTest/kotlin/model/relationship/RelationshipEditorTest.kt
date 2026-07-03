@@ -1,8 +1,6 @@
 package model.relationship
 
 import kotlin.test.*
-import js.objects.Record
-import js.objects.get
 import js.objects.recordOf
 import model.GraphModelJs
 import model.extension.StringValue
@@ -68,12 +66,12 @@ class RelationshipEditorTest {
         // Update Property
         RelationshipEditor.setPropertyName(model, relId, propId, "NewName")
         RelationshipEditor.setPropertyType(model, relId, propId, "STRING")
-        RelationshipEditor.setPropertyNullable(model, relId, propId, true)
+        RelationshipEditor.setPropertyMustExist(model, relId, propId, true)
 
         val prop = rel.properties[propId]!!
         assertEquals("NewName", prop.name)
         assertEquals("STRING", prop.type)
-        assertTrue(prop.nullable)
+        assertTrue(prop.mustExist)
 
         // Remove Property
         RelationshipEditor.removeProperty(model, relId, propId)

@@ -101,9 +101,9 @@ class GraphSpecDataModelV3Migration :
             val properties = node.mapOfMapsOrNull("properties") ?: continue
             val keyProperties = mutableSetOf<String>()
             for ((propertyId, property) in properties) {
-                val nullable = property.boolOrNull("nullable") == true
+                val mustExist = property.boolOrNull("mustExist") == true
                 val unique = property.boolOrNull("unique") == true
-                if (!nullable && unique) {
+                if (mustExist && unique) {
                     keyProperties.add(propertyId)
                 }
             }
@@ -330,9 +330,9 @@ class GraphSpecDataModelV3Migration :
         return properties.map { (propId, prop) ->
             schemaMapOf(
                 "\$id" to propId,
-                "token" to (prop.literalOrNull("name")?.string ?: propId),
+                "token" to (prop.stringOrNull("name") ?: propId),
                 "type" to propertyType(prop.string("type")),
-                "nullable" to (prop.literalOrNull("nullable")?.string?.toBooleanStrictOrNull() ?: false)
+                "nullable" to (prop.stringOrNull("mustExist") != "true")
             )
         }
     }

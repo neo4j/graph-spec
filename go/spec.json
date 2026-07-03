@@ -249,7 +249,7 @@
                 "type": {
                     "$ref": "#/$defs/Neo4jType"
                 },
-                "nullable": {
+                "mustExist": {
                     "type": "boolean"
                 },
                 "unique": {
