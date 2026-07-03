@@ -329,7 +329,7 @@ class GraphSpecDataModelV3Migration :
             val map = schemaMapOf(
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
-                "type" to propertyType(prop.string("type")),
+                "type" to propertyType(prop.string("type"))
             )
             if (prop.stringOrNull("key") == "true") {
                 map["nullable"] = false
