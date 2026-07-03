@@ -28,11 +28,24 @@ class PropertyEditor {
         @JsStatic
         fun setMustExist(property: PropertyJs, mustExist: Boolean) {
             property.mustExist = mustExist
+            if (!mustExist) {
+                property.key = null
+            }
         }
 
         @JsStatic
         fun setUnique(property: PropertyJs, unique: Boolean) {
             property.unique = unique
+            if (!unique) {
+                property.key = null
+            }
+        }
+
+        @JsStatic
+        fun setKey(property: PropertyJs, key: Boolean) {
+            property.key = key
+            property.unique = null
+            property.mustExist = null
         }
 
         @JsStatic
