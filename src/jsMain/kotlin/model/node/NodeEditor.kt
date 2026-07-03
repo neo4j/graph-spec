@@ -112,6 +112,12 @@ class NodeEditor {
             PropertyEditor.setUnique(property, unique)
         }
 
+        @JsStatic
+        fun setPropertyKey(model: GraphModelJs, nodeId: String, propertyId: String, key: Boolean) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setKey(property, key)
+        }
+
         private fun getProperty(model: GraphModelJs, nodeId: String, propertyId: String): PropertyJs {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             val property = node.properties.getOrThrow(propertyId, "Property")

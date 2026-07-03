@@ -250,10 +250,16 @@
                     "$ref": "#/$defs/Neo4jType"
                 },
                 "mustExist": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "nullable": true
                 },
                 "unique": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "nullable": true
+                },
+                "key": {
+                    "type": "boolean",
+                    "nullable": true
                 },
                 "extensions": {
                     "type": "object",

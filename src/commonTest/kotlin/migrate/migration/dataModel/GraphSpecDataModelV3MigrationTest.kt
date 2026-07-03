@@ -246,14 +246,15 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `convertExtensions identifies key properties only when non-mustExist and unique`() {
+    fun `convertExtensions identifies key properties`() {
         val input = schemaMapOf(
             "nodes" to schemaMapOf(
                 "n1" to schemaMapOf(
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("mustExist" to true, "unique" to true), // Key
-                        "p2" to schemaMapOf("mustExist" to false, "unique" to true), // Not Key (mustExist)
-                        "p3" to schemaMapOf("mustExist" to true, "unique" to false) // Not Key (not unique)
+                        "p1" to schemaMapOf("key" to true), // Key
+                        "p2" to schemaMapOf("mustExist" to true, "unique" to true), // Not Key (but equivalent)
+                        "p3" to schemaMapOf("mustExist" to false, "unique" to true), // Not Key (mustExist)
+                        "p4" to schemaMapOf("mustExist" to true, "unique" to false) // Not Key (not unique)
                     )
                 )
             )

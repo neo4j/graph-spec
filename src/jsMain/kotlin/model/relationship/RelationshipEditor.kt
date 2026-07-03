@@ -113,6 +113,12 @@ class RelationshipEditor {
             PropertyEditor.setUnique(property, unique)
         }
 
+        @JsStatic
+        fun setPropertyKey(model: GraphModelJs, relationshipId: String, propertyId: String, key: Boolean) {
+            val property = getProperty(model, relationshipId, propertyId)
+            PropertyEditor.setKey(property, key)
+        }
+
         private fun getProperty(model: GraphModelJs, relationshipId: String, propertyId: String): PropertyJs {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             val property = relationship.properties.getOrThrow(propertyId, "Property")

@@ -3,7 +3,7 @@ nodes:
   categories:
     label: "categories"
     properties:
-      categoryid: { type: "INTEGER", mustExist: true, unique: true }
+      categoryid: { type: "INTEGER", key: true }
       categoryname: { type: "STRING", mustExist: true }
       description: { type: "STRING", mustExist: true }
       picture: { type: "STRING", mustExist: true }
@@ -20,7 +20,7 @@ nodes:
   products:
     label: "products"
     properties:
-      productid: { type: "INTEGER", mustExist: true, unique: true }
+      productid: { type: "INTEGER", key: true }
       productname: { type: "STRING", mustExist: true }
       quantityperunit: { type: "STRING", mustExist: true }
       unitprice: { type: "FLOAT", mustExist: true }
@@ -41,7 +41,7 @@ nodes:
   suppliers:
     label: "suppliers"
     properties:
-      supplierid: { type: "INTEGER", mustExist: true, unique: true }
+      supplierid: { type: "INTEGER", key: true }
       companyname: { type: "STRING", mustExist: true }
       contactname: { type: "STRING", mustExist: true }
       contacttitle: { type: "STRING", mustExist: true }
