@@ -261,9 +261,10 @@ class GraphSpecDataModelV3MigrationTest {
             "relationships" to schemaMapOf(
                 "r1" to schemaMapOf(
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("nullable" to false, "unique" to true), // Key
-                        "p2" to schemaMapOf("nullable" to true, "unique" to true), // Not Key (nullable)
-                        "p3" to schemaMapOf("nullable" to false, "unique" to false) // Not Key (not unique)
+                        "p1" to schemaMapOf("key" to true), // Key
+                        "p2" to schemaMapOf("nullable" to false, "unique" to true), // Not Key (but equivalent)
+                        "p3" to schemaMapOf("nullable" to true, "unique" to true), // Not Key (nullable)
+                        "p4" to schemaMapOf("nullable" to false, "unique" to false) // Not Key (not unique)
                     )
                 )
             )
