@@ -288,6 +288,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
+        val relKeys = mapOf("relObj1" to setOf("p1"))
         val result = migration.migrateRelationships(graphSchema, constraints, emptyMap(), relKeys)
 
         assertTrue(result.containsKey("relObj1"))
@@ -296,6 +297,7 @@ class DataModelV3GraphSpecMigrationTest {
         assertEquals("FOLLOWS", rel.string("type"))
         assertEquals("nodeA", rel.map("from").string("node"))
         assertEquals("ZONED DATETIME", rel.map("properties").map("p1").string("type"))
+        assertTrue(rel.map("properties").map("p1").bool("key"))
         assertNotNull(rel.map("constraints")["c1"])
     }
 
