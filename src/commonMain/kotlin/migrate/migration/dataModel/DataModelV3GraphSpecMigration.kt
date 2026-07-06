@@ -19,7 +19,6 @@ package migrate.migration.dataModel
 import codec.schema.SchemaElement
 import codec.schema.SchemaLiteral
 import codec.schema.SchemaMap
-import codec.schema.SchemaPrimitive
 import codec.schema.schemaMapOf
 import codec.schema.toNotEmpty
 import migrate.Migration
@@ -70,7 +69,7 @@ class DataModelV3GraphSpecMigration :
         return schemaMapOf(
             "version" to schema.literal("version"),
             "nodes" to nodes,
-            "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),
+            "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes, relKeys),
             "tables" toNotEmpty migrateTables(schema),
             "mappings" toNotEmpty nodeMappings(schema, nodeKeys) + relationshipMappings(schema, relKeys),
             "display" toNotEmpty visualisation(schema, nodes)
@@ -202,7 +201,8 @@ class DataModelV3GraphSpecMigration :
     internal fun migrateRelationships(
         schema: SchemaMap,
         constraints: Map<String, List<SchemaMap>>,
-        indexes: Map<String, List<SchemaMap>>
+        indexes: Map<String, List<SchemaMap>>,
+        relKeys: Map<String, Set<String>>
     ): MutableMap<String, SchemaMap> {
         val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()
@@ -213,11 +213,13 @@ class DataModelV3GraphSpecMigration :
             val typeRef = objectType.ref("type")
             val relationshipType = relationshipTypes[typeRef] ?: error("RelationshipType $typeRef not found")
             val token = relationshipType.string("token")
-            relationships[objectType.id()] = schemaMapOf(
+            val id = objectType.id()
+            val keys = relKeys[id] ?: emptySet()
+            relationships[id] = schemaMapOf(
                 "type" to token,
                 "from" to mapOf("node" to objectType.ref("from")),
                 "to" to mapOf("node" to objectType.ref("to")),
-                "properties" to convertProperties(listOf(relationshipType)),
+                "properties" to convertProperties(listOf(relationshipType), keys),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, "relationship"),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
                 "name" to uniqueRelationshipName(token, uniqueNames)
