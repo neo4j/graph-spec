@@ -53,18 +53,14 @@ func Call(op Op, inputs ...string) (string, error) {
 	// the maximum buffer size to avoid overflows when the Kotlin library writes the output. We use
 	// the length of the first input as reference as this is the graph model.
 	buf := make([]byte, 2*len(inputs[0]))
-	// The buffer is pinned for the duration of the native call so the Go GC cannot move it while the Kotlin library holds the pointer.
-	var pinner runtime.Pinner
-	pinner.Pin(&buf[0])
-	defer pinner.Unpin()
-
-	bufSize, err := b.call(op, inputs, unsafe.Pointer(&buf[0]), int32(len(buf)))
-	if err != nil {
-		return "", err
+	res, err := b.call(op, inputs, buf)
+	if err != nil && res < -1 { // buffer not large enough, retry with required size
+		buf = make([]byte, -res)
+		res, err = b.call(op, inputs, buf)
 	}
 
 	var resp Resp
-	if err := json.Unmarshal(buf[:bufSize], &resp); err != nil {
+	if err := json.Unmarshal(buf[:res], &resp); err != nil {
 		return "", fmt.Errorf("failed to parse result: %w", err)
 	}
 	if resp.ErrMsg != "" {
@@ -74,7 +70,15 @@ func Call(op Op, inputs ...string) (string, error) {
 	return resp.Data, nil
 }
 
-func (b *bridge) call(op Op, inputs []string, out unsafe.Pointer, outLen int32) (int, error) {
+func (b *bridge) call(op Op, inputs []string, buf []byte) (int, error) {
+	// The buffer is pinned for the duration of the native call so the Go GC cannot move it while the Kotlin library holds the pointer.
+	var pinner runtime.Pinner
+	pinner.Pin(&buf[0])
+	defer pinner.Unpin()
+
+	out := unsafe.Pointer(&buf[0])
+	outLen := int32(len(buf))
+
 	var res int32
 	switch op {
 	case Migrate:
