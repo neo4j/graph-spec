@@ -28,12 +28,12 @@ func TestValidate(t *testing.T) {
 	t.Log(fmt.Sprintf("Validated graph: %v", res))
 	require.Len(t, res, 2)
 
-	msgs := make([]string, len(res))
+	codes := make([]string, len(res))
 	for i := range res {
-		msgs[i] = res[i].Message
+		codes[i] = res[i].Code
 	}
 	require.ElementsMatch(t, []string{
-		"Node type constraint 'typeConstraint' must have exactly one property.",
-		"Node existence constraint 'existenceConstraint' must have exactly one property.",
-	}, msgs)
+		"invalid_node_type_constraint_property_count",
+		"invalid_node_exist_constraint_property_count",
+	}, codes)
 }

@@ -102,3 +102,12 @@ func TestCallInputValidation(t *testing.T) {
 		})
 	}
 }
+
+func TestCallRetriedIfOutputBufferNotLargeEnough(t *testing.T) {
+	// An empty graph-spec model will get transformed to a fully initialised data model which
+	// will be far larger than the input model. This test checks that the client will successfully
+	// retry with the required buffer size in cases like these.
+	res, err := Call(Migrate, `{"version":"4.0.0"}`, "graph_spec", "data_model", "3.0.0")
+	require.NotEmpty(t, res)
+	require.NoError(t, err)
+}
