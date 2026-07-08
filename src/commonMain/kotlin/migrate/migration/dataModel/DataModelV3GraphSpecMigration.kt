@@ -52,8 +52,8 @@ class DataModelV3GraphSpecMigration :
     override fun migrate(schema: SchemaMap): SchemaMap {
         val schema = unwrap(schema)
         val extensions = schema.mapOrNull("graphSchemaExtensionsRepresentation")?.listOfMapsOrNull("nodeKeyProperties")
-        // Support source-schema-only input (no graph schema): migrate just the tables. Nodes and
-        // relationships are emitted as empty maps to match the full migration path of them always being present
+        // Support source-schema-only input via migrating just the tables. Nodes and relationships
+        // are emitted as empty maps to match the full migration path of them always being present
         val graphSchema = schema.mapOrNull("graphSchemaRepresentation")?.mapOrNull("graphSchema")
             ?: return schemaMapOf(
                 "version" to schema.literal("version"),
