@@ -48,10 +48,10 @@ class GraphSpecDataModelV3Migration :
                 "graphSchemaRepresentation" to schemaMapOf(
                     "version" to "1.0.0",
                     "graphSchema" to schemaMapOf(
-                        "nodeLabels" toNotEmpty nodeData?.labelsMap,
-                        "relationshipTypes" toNotEmpty relData?.typesMap,
-                        "nodeObjectTypes" toNotEmpty nodeData?.objectTypes,
-                        "relationshipObjectTypes" toNotEmpty relData?.objectTypes,
+                        "nodeLabels" to (nodeData?.labelsMap ?: emptyList()),
+                        "relationshipTypes" to (relData?.typesMap ?: emptyList()),
+                        "nodeObjectTypes" to (nodeData?.objectTypes ?: emptyList()),
+                        "relationshipObjectTypes" to (relData?.objectTypes ?: emptyList()),
                         "constraints" to constraints,
                         "indexes" to indexes
                     )
