@@ -3,7 +3,7 @@ nodes:
   album:
     label: "album"
     properties:
-      album_id: { type: "INTEGER", key: true }
+      album_id: { type: "INTEGER", mustExist: true }
       title: { type: "STRING", mustExist: true }
     constraints:
       album:
@@ -18,7 +18,7 @@ nodes:
   artist:
     label: "artist"
     properties:
-      artist_id: { type: "INTEGER", key: true }
+      artist_id: { type: "INTEGER", mustExist: true }
       name: { type: "STRING", mustExist: true }
     constraints:
       artist:
@@ -33,7 +33,7 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER", key: true }
+      customer_id: { type: "INTEGER", mustExist: true }
       first_name: { type: "STRING", mustExist: true }
       last_name: { type: "STRING", mustExist: true }
       company: { type: "STRING", mustExist: true }
@@ -58,7 +58,7 @@ nodes:
   employee:
     label: "employee"
     properties:
-      employee_id: { type: "INTEGER", key: true }
+      employee_id: { type: "INTEGER", mustExist: true }
       last_name: { type: "STRING", mustExist: true }
       first_name: { type: "STRING", mustExist: true }
       title: { type: "STRING", mustExist: true }
@@ -85,7 +85,7 @@ nodes:
   genre:
     label: "genre"
     properties:
-      genre_id: { type: "INTEGER", key: true }
+      genre_id: { type: "INTEGER", mustExist: true }
       name: { type: "STRING", mustExist: true }
     constraints:
       genre:
@@ -100,7 +100,7 @@ nodes:
   invoice:
     label: "invoice"
     properties:
-      invoice_id: { type: "INTEGER", key: true }
+      invoice_id: { type: "INTEGER", mustExist: true }
       invoice_date: { type: "ZONED DATETIME", mustExist: true }
       billing_address: { type: "STRING", mustExist: true }
       billing_city: { type: "STRING", mustExist: true }
@@ -121,7 +121,7 @@ nodes:
   invoice_line:
     label: "invoice_line"
     properties:
-      invoice_line_id: { type: "INTEGER", key: true }
+      invoice_line_id: { type: "INTEGER", mustExist: true }
       unit_price: { type: "FLOAT", mustExist: true }
       quantity: { type: "INTEGER", mustExist: true }
     constraints:
@@ -137,7 +137,7 @@ nodes:
   media_type:
     label: "media_type"
     properties:
-      media_type_id: { type: "INTEGER", key: true }
+      media_type_id: { type: "INTEGER", mustExist: true }
       name: { type: "STRING", mustExist: true }
     constraints:
       media_type:
@@ -152,7 +152,7 @@ nodes:
   playlist:
     label: "playlist"
     properties:
-      playlist_id: { type: "INTEGER", key: true }
+      playlist_id: { type: "INTEGER", mustExist: true }
       name: { type: "STRING", mustExist: true }
     constraints:
       playlist:
@@ -167,7 +167,7 @@ nodes:
   track:
     label: "track"
     properties:
-      track_id: { type: "INTEGER", key: true }
+      track_id: { type: "INTEGER", mustExist: true }
       name: { type: "STRING", mustExist: true }
       composer: { type: "STRING", mustExist: true }
       milliseconds: { type: "INTEGER", mustExist: true }
@@ -593,11 +593,13 @@ mappings:
     properties:
       album_id: { field: "album_id" }
       title: { field: "title" }
+    key: ["album_id"]
   - node: "artist"
     table: "artist"
     properties:
       artist_id: { field: "artist_id" }
       name: { field: "name" }
+    key: ["artist_id"]
   - node: "customer"
     table: "customer"
     properties:
@@ -613,6 +615,7 @@ mappings:
       phone: { field: "phone" }
       fax: { field: "fax" }
       email: { field: "email" }
+    key: ["customer_id"]
   - node: "employee"
     table: "employee"
     properties:
@@ -630,11 +633,13 @@ mappings:
       phone: { field: "phone" }
       fax: { field: "fax" }
       email: { field: "email" }
+    key: ["employee_id"]
   - node: "genre"
     table: "genre"
     properties:
       genre_id: { field: "genre_id" }
       name: { field: "name" }
+    key: ["genre_id"]
   - node: "invoice"
     table: "invoice"
     properties:
@@ -646,22 +651,26 @@ mappings:
       billing_country: { field: "billing_country" }
       billing_postal_code: { field: "billing_postal_code" }
       total: { field: "total" }
+    key: ["invoice_id"]
   - node: "invoice_line"
     table: "invoice_line"
     properties:
       invoice_line_id: { field: "invoice_line_id" }
       unit_price: { field: "unit_price" }
       quantity: { field: "quantity" }
+    key: ["invoice_line_id"]
   - node: "media_type"
     table: "media_type"
     properties:
       media_type_id: { field: "media_type_id" }
       name: { field: "name" }
+    key: ["media_type_id"]
   - node: "playlist"
     table: "playlist"
     properties:
       playlist_id: { field: "playlist_id" }
       name: { field: "name" }
+    key: ["playlist_id"]
   - node: "track"
     table: "track"
     properties:
@@ -671,6 +680,7 @@ mappings:
       milliseconds: { field: "milliseconds" }
       bytes: { field: "bytes" }
       unit_price: { field: "unit_price" }
+    key: ["track_id"]
   - relationship: "ARTIST"
     table: "album"
     from:

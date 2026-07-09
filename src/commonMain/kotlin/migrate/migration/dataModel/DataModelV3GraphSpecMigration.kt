@@ -51,20 +51,30 @@ class DataModelV3GraphSpecMigration :
 
     override fun migrate(schema: SchemaMap): SchemaMap {
         val schema = unwrap(schema)
-        val extensions = schema.mapOrNull("graphSchemaExtensionsRepresentation")?.listOfMapsOrNull("nodeKeyProperties")
+        val extensions = schema.mapOrNull("graphSchemaExtensionsRepresentation")
+        val nodeKeys = keyProperties(extensions, "node")
+        val relationshipKeys = keyProperties(extensions, "relationship")
         val graphSchema = schema.map("graphSchemaRepresentation").map("graphSchema")
         val (nodeConstraints, relationshipConstraints) = gatherWithNames(graphSchema, "constraints")
         val (nodeIndexes, relationshipIndexes) = gatherWithNames(graphSchema, "indexes")
-        val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes, extensions)
+        val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes)
         return schemaMapOf(
             "version" to schema.literal("version"),
             "nodes" to nodes,
             "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),
             "tables" toNotEmpty migrateTables(schema),
-            "mappings" toNotEmpty nodeMappings(schema) + relationshipMappings(schema),
+            "mappings" toNotEmpty nodeMappings(schema, nodeKeys) + relationshipMappings(schema, relationshipKeys),
             "display" toNotEmpty visualisation(schema, nodes)
         )
     }
+
+    /**
+     * The entity's ID becomes the mapping's key: one key made up of one or more property parts.
+     */
+    private fun keyProperties(extensions: SchemaMap?, entity: String): Map<String, List<String>> =
+        extensions?.listOfMapsOrNull("${entity}KeyProperties")?.associate { keyProperty ->
+            keyProperty.ref(entity) to keyProperty.listOfMaps("keyProperties").map { it.ref() }
+        } ?: emptyMap()
 
     internal fun visualisation(schema: SchemaMap, nodes: MutableMap<String, SchemaMap>): SchemaMap? {
         val visualisation = schema.remove("visualisation") as? SchemaMap ?: return null
@@ -99,14 +109,10 @@ class DataModelV3GraphSpecMigration :
     internal fun migrateNodes(
         schema: SchemaMap,
         constraints: Map<String, List<SchemaMap>>,
-        indexes: Map<String, List<SchemaMap>>,
-        nodeKeyProperties: List<SchemaMap>?
+        indexes: Map<String, List<SchemaMap>>
     ): MutableMap<String, SchemaMap> {
         val nodes = mutableMapOf<String, SchemaMap>()
         val nodeLabels = schema.listOfMapsOrNull("nodeLabels")?.associateBy { it.id() } ?: return nodes
-        val nodeKeys = nodeKeyProperties?.associate { nkp ->
-            nkp.ref("node") to nkp.listOfMaps("keyProperties").map { it.ref() }.toSet()
-        } ?: emptyMap()
         val nodeObjTypes = schema.listOfMapsOrNull("nodeObjectTypes") ?: return nodes
         for (nodeObject in nodeObjTypes) {
             val labelRefs = nodeObject.listOfMaps("labels").map { it.ref() }
@@ -125,7 +131,7 @@ class DataModelV3GraphSpecMigration :
                 ),
                 "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, "node"),
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
-                "properties" toNotEmpty convertProperties(labels, nodeKeys[id] ?: emptySet()),
+                "properties" toNotEmpty convertProperties(labels),
                 "name" to tokens.firstOrNull()
             )
         }
@@ -226,10 +232,7 @@ class DataModelV3GraphSpecMigration :
         throw IllegalArgumentException("Unable to find unique relationship name for $token")
     }
 
-    internal fun convertProperties(
-        labels: List<SchemaMap>,
-        keyProperties: Set<String> = emptySet()
-    ): Map<String, SchemaMap> = labels
+    internal fun convertProperties(labels: List<SchemaMap>): Map<String, SchemaMap> = labels
         .flatMap { label -> label.listOfMaps("properties") }
         .associate { property ->
             val typeObj = property.map("type") // TODO arrays
@@ -237,30 +240,28 @@ class DataModelV3GraphSpecMigration :
                 "name" to property.literalOrNull("token"),
                 "type" to propertyType(typeObj.string("type"))
             )
-            val id = property.id()
-            if (keyProperties.contains(id)) {
-                map["key"] = true
-            } else {
-                map["mustExist"] = when (property.stringOrNull("nullable")) {
-                    "false" -> true
-                    null -> null
-                    else -> false
-                }
-                map["unique"] = property.literalOrNull("unique")
+            map["mustExist"] = when (property.stringOrNull("nullable")) {
+                "false" -> true
+                null -> null
+                else -> false
             }
-            id to map
+            map["unique"] = property.literalOrNull("unique")
+            property.id() to map
         }
 
-    internal fun relationshipMappings(schema: SchemaMap): List<SchemaMap> {
+    internal fun relationshipMappings(schema: SchemaMap, relationshipKeys: Map<String, List<String>>): List<SchemaMap> {
         val graph = schema.map("graphSchemaRepresentation").map("graphSchema")
         val relInfo = graph.listOfMapsOrNull("relationshipObjectTypes")?.associateBy { it.id() } ?: return emptyList()
         val relationshipMappings = schema
-            .map("graphMappingRepresentation")
-            .listOfMapsOrNull("relationshipMappings") ?: return emptyList()
+            .mapOrNull("graphMappingRepresentation")
+            ?.listOfMapsOrNull("relationshipMappings")
+            .orEmpty()
         val mappings = mutableListOf<SchemaMap>()
+        val mapped = mutableSetOf<String>()
         for (mapping in relationshipMappings) {
             val ref = mapping.ref("relationship")
             val obj = relInfo[ref] ?: error("Relationship $ref not found")
+            mapped.add(ref)
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.RELATIONSHIP), // needed for Kotlin/Native migrations
                 "relationship" to ref,
@@ -273,7 +274,23 @@ class DataModelV3GraphSpecMigration :
                     "properties" to mapping.entityMap("toMappings")
                 ),
                 "table" to mapping.literal("tableName"),
-                "properties" toNotEmpty migratePropertyMappings(mapping)
+                "properties" toNotEmpty migratePropertyMappings(mapping),
+                "key" toNotEmpty relationshipKeys[ref]
+            )
+        }
+        // A key can be set without a data source: a keyed relationship without a mapping gets one with an empty table
+        for ((ref, key) in relationshipKeys) {
+            if (mapped.contains(ref)) {
+                continue
+            }
+            val obj = relInfo[ref] ?: error("Relationship $ref not found")
+            mappings += schemaMapOf(
+                "type" to SchemaLiteral(MappingType.RELATIONSHIP),
+                "relationship" to ref,
+                "table" to "",
+                "from" to mapOf("node" to obj.ref("from")),
+                "to" to mapOf("node" to obj.ref("to")),
+                "key" to key
             )
         }
         return mappings
@@ -283,17 +300,34 @@ class DataModelV3GraphSpecMigration :
         key.removePrefix("#") to schemaMapOf("field" to value)
     }?.toMap() ?: emptyMap()
 
-    internal fun nodeMappings(schema: SchemaMap): List<SchemaMap> {
+    internal fun nodeMappings(schema: SchemaMap, nodeKeys: Map<String, List<String>>): List<SchemaMap> {
         val nodeMappings = schema
-            .map("graphMappingRepresentation")
-            .listOfMapsOrNull("nodeMappings") ?: return emptyList()
+            .mapOrNull("graphMappingRepresentation")
+            ?.listOfMapsOrNull("nodeMappings")
+            .orEmpty()
         val mappings = mutableListOf<SchemaMap>()
+        val mapped = mutableSetOf<String>()
         for (nodeMapping in nodeMappings) {
+            val ref = nodeMapping.ref("node")
+            mapped.add(ref)
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.NODE), // needed for Kotlin/Native migrations
-                "node" to nodeMapping.ref("node"),
+                "node" to ref,
                 "table" to nodeMapping.literal("tableName"),
-                "properties" toNotEmpty migratePropertyMappings(nodeMapping)
+                "properties" toNotEmpty migratePropertyMappings(nodeMapping),
+                "key" toNotEmpty nodeKeys[ref]
+            )
+        }
+        // A key can be set without a data source: a keyed node without a mapping gets one with an empty table
+        for ((ref, key) in nodeKeys) {
+            if (mapped.contains(ref)) {
+                continue
+            }
+            mappings += schemaMapOf(
+                "type" to SchemaLiteral(MappingType.NODE),
+                "node" to ref,
+                "table" to "",
+                "key" to key
             )
         }
         return mappings

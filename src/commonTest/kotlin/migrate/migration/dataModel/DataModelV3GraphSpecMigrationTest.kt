@@ -111,7 +111,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyList())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap())
 
         val node = nodes["nodeObj"]
         assertNotNull(node)
@@ -148,7 +148,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyList())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap())
 
         val migratedNode = nodes["nodeObj1"]
         assertNotNull(migratedNode)
@@ -316,7 +316,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertProperties(labels, emptySet())
+        val result = migration.convertProperties(labels)
 
         assertEquals("STRING", result["p1"]?.string("type"))
         assertEquals("INTEGER", result["p2"]?.string("type"))
@@ -353,7 +353,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.relationshipMappings(unwrap(input))
+        val result = migration.relationshipMappings(unwrap(input), emptyMap())
 
         val mapping = result.first()
         assertEquals("obj1", mapping.string("relationship"))
@@ -381,7 +381,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Relationship missingRel not found") {
-            migration.relationshipMappings(unwrap(schema))
+            migration.relationshipMappings(unwrap(schema), emptyMap())
         }
     }
 
@@ -404,13 +404,87 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.nodeMappings(unwrap(input))
+        val result = migration.nodeMappings(unwrap(input), emptyMap())
 
         assertEquals(1, result.size)
         val mapping = result.first()
         assertEquals("node1", mapping.string("node"))
         assertEquals("USERS_TABLE", mapping.string("table"))
         assertEquals("USER_NAME", mapping.map("properties").map("prop1").string("field"))
+    }
+
+    @Test
+    fun `nodeMappings adds key from node key properties`() {
+        // ARRANGE
+        val input = schemaMapOf(
+            "graphMappingRepresentation" to mapOf(
+                "nodeMappings" to listOf(
+                    schemaMapOf(
+                        "node" to mapOf("\$ref" to "#node1"),
+                        "tableName" to "USERS_TABLE",
+                        "propertyMappings" to emptyList<Any>()
+                    )
+                )
+            )
+        )
+
+        // ACT
+        val result = migration.nodeMappings(unwrap(input), mapOf("node1" to listOf("prop1", "prop2")))
+
+        // ASSERT
+        assertEquals(1, result.size)
+        assertEquals(listOf("prop1", "prop2"), result.first().list("key").map { it.toString() })
+    }
+
+    @Test
+    fun `nodeMappings creates mapping with empty table for keyed node without data source`() {
+        // ARRANGE
+        val input = schemaMapOf(
+            "graphMappingRepresentation" to mapOf(
+                "nodeMappings" to emptyList<Any>()
+            )
+        )
+
+        // ACT
+        val result = migration.nodeMappings(unwrap(input), mapOf("node1" to listOf("prop1")))
+
+        // ASSERT
+        assertEquals(1, result.size)
+        val mapping = result.first()
+        assertEquals("node1", mapping.string("node"))
+        assertEquals("", mapping.string("table"), "Mapping without data source should have an empty table")
+        assertEquals(listOf("prop1"), mapping.list("key").map { it.toString() })
+    }
+
+    @Test
+    fun `relationshipMappings creates mapping with empty table for keyed relationship without data source`() {
+        // ARRANGE
+        val input = schemaMapOf(
+            "graphSchemaRepresentation" to mapOf(
+                "graphSchema" to mapOf(
+                    "relationshipObjectTypes" to listOf(
+                        schemaMapOf(
+                            "\$id" to "obj1",
+                            "type" to mapOf("\$ref" to "#type1"),
+                            "from" to mapOf("\$ref" to "#A"),
+                            "to" to mapOf("\$ref" to "#B")
+                        )
+                    )
+                )
+            )
+        )
+
+        // ACT
+        val result = migration.relationshipMappings(unwrap(input), mapOf("obj1" to listOf("prop1")))
+
+        // ASSERT
+        assertEquals(1, result.size)
+        val mapping = result.first()
+        assertEquals("obj1", mapping.string("relationship"))
+        assertEquals("", mapping.string("table"), "Mapping without data source should have an empty table")
+        assertEquals("A", mapping.map("from").string("node"))
+        assertEquals("B", mapping.map("to").string("node"))
+        assertEquals(listOf("prop1"), mapping.list("key").map { it.toString() })
     }
 
     @Test

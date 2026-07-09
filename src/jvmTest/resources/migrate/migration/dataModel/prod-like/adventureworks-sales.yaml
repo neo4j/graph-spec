@@ -3,7 +3,7 @@ nodes:
   creditcard:
     label: "creditcard"
     properties:
-      creditcardid: { type: "INTEGER", key: true }
+      creditcardid: { type: "INTEGER", mustExist: true }
       cardtype: { type: "STRING", mustExist: true }
       cardnumber: { type: "STRING", mustExist: true }
       expmonth: { type: "INTEGER", mustExist: true }
@@ -22,7 +22,7 @@ nodes:
   currency:
     label: "currency"
     properties:
-      currencycode: { type: "STRING", key: true }
+      currencycode: { type: "STRING", mustExist: true }
       modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       currency:
@@ -37,7 +37,7 @@ nodes:
   currencyrate:
     label: "currencyrate"
     properties:
-      currencyrateid: { type: "INTEGER", key: true }
+      currencyrateid: { type: "INTEGER", mustExist: true }
       currencyratedate: { type: "ZONED DATETIME", mustExist: true }
       averagerate: { type: "FLOAT", mustExist: true }
       endofdayrate: { type: "FLOAT", mustExist: true }
@@ -55,7 +55,7 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customerid: { type: "INTEGER", key: true }
+      customerid: { type: "INTEGER", mustExist: true }
       rowguid: { type: "STRING", mustExist: true }
       modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
@@ -71,7 +71,7 @@ nodes:
   salesorderheader:
     label: "salesorderheader"
     properties:
-      salesorderid: { type: "INTEGER", key: true }
+      salesorderid: { type: "INTEGER", mustExist: true }
       revisionnumber: { type: "INTEGER", mustExist: true }
       orderdate: { type: "ZONED DATETIME", mustExist: true }
       duedate: { type: "ZONED DATETIME", mustExist: true }
@@ -98,7 +98,7 @@ nodes:
   salesperson:
     label: "salesperson"
     properties:
-      businessentityid: { type: "INTEGER", key: true }
+      businessentityid: { type: "INTEGER", mustExist: true }
       salesquota: { type: "FLOAT", mustExist: true }
       bonus: { type: "FLOAT", mustExist: true }
       commissionpct: { type: "FLOAT", mustExist: true }
@@ -119,7 +119,7 @@ nodes:
   salesreason:
     label: "salesreason"
     properties:
-      salesreasonid: { type: "INTEGER", key: true }
+      salesreasonid: { type: "INTEGER", mustExist: true }
       modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       salesreason:
@@ -134,7 +134,7 @@ nodes:
   salestaxrate:
     label: "salestaxrate"
     properties:
-      salestaxrateid: { type: "INTEGER", key: true }
+      salestaxrateid: { type: "INTEGER", mustExist: true }
       taxtype: { type: "INTEGER", mustExist: true }
       taxrate: { type: "FLOAT", mustExist: true }
       rowguid: { type: "STRING", mustExist: true }
@@ -152,7 +152,7 @@ nodes:
   salesterritory:
     label: "salesterritory"
     properties:
-      territoryid: { type: "INTEGER", key: true }
+      territoryid: { type: "INTEGER", mustExist: true }
       group: { type: "STRING", mustExist: true }
       salesytd: { type: "FLOAT", mustExist: true }
       saleslastyear: { type: "FLOAT", mustExist: true }
@@ -173,7 +173,7 @@ nodes:
   shoppingcartitem:
     label: "shoppingcartitem"
     properties:
-      shoppingcartitemid: { type: "INTEGER", key: true }
+      shoppingcartitemid: { type: "INTEGER", mustExist: true }
       shoppingcartid: { type: "STRING", mustExist: true }
       quantity: { type: "INTEGER", mustExist: true }
       datecreated: { type: "ZONED DATETIME", mustExist: true }
@@ -191,7 +191,7 @@ nodes:
   specialoffer:
     label: "specialoffer"
     properties:
-      specialofferid: { type: "INTEGER", key: true }
+      specialofferid: { type: "INTEGER", mustExist: true }
       description: { type: "STRING", mustExist: true }
       discountpct: { type: "FLOAT", mustExist: true }
       type: { type: "STRING", mustExist: true }
@@ -215,7 +215,7 @@ nodes:
   store:
     label: "store"
     properties:
-      businessentityid: { type: "INTEGER", key: true }
+      businessentityid: { type: "INTEGER", mustExist: true }
       rowguid: { type: "STRING", mustExist: true }
       modifieddate: { type: "ZONED DATETIME", mustExist: true }
     constraints:
@@ -1404,11 +1404,13 @@ mappings:
       expmonth: { field: "expmonth" }
       expyear: { field: "expyear" }
       modifieddate: { field: "modifieddate" }
+    key: ["creditcardid"]
   - node: "currency"
     table: "currency"
     properties:
       currencycode: { field: "currencycode" }
       modifieddate: { field: "modifieddate" }
+    key: ["currencycode"]
   - node: "currencyrate"
     table: "currencyrate"
     properties:
@@ -1417,12 +1419,14 @@ mappings:
       averagerate: { field: "averagerate" }
       endofdayrate: { field: "endofdayrate" }
       modifieddate: { field: "modifieddate" }
+    key: ["currencyrateid"]
   - node: "customer"
     table: "customer"
     properties:
       customerid: { field: "customerid" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    key: ["customerid"]
   - node: "salesorderheader"
     table: "salesorderheader"
     properties:
@@ -1440,6 +1444,7 @@ mappings:
       comment: { field: "comment" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    key: ["salesorderid"]
   - node: "salesperson"
     table: "salesperson"
     properties:
@@ -1451,11 +1456,13 @@ mappings:
       saleslastyear: { field: "saleslastyear" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    key: ["businessentityid"]
   - node: "salesreason"
     table: "salesreason"
     properties:
       salesreasonid: { field: "salesreasonid" }
       modifieddate: { field: "modifieddate" }
+    key: ["salesreasonid"]
   - node: "salestaxrate"
     table: "salestaxrate"
     properties:
@@ -1464,6 +1471,7 @@ mappings:
       taxrate: { field: "taxrate" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    key: ["salestaxrateid"]
   - node: "salesterritory"
     table: "salesterritory"
     properties:
@@ -1475,6 +1483,7 @@ mappings:
       costlastyear: { field: "costlastyear" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    key: ["territoryid"]
   - node: "shoppingcartitem"
     table: "shoppingcartitem"
     properties:
@@ -1483,6 +1492,7 @@ mappings:
       quantity: { field: "quantity" }
       datecreated: { field: "datecreated" }
       modifieddate: { field: "modifieddate" }
+    key: ["shoppingcartitemid"]
   - node: "specialoffer"
     table: "specialoffer"
     properties:
@@ -1497,12 +1507,14 @@ mappings:
       maxqty: { field: "maxqty" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    key: ["specialofferid"]
   - node: "store"
     table: "store"
     properties:
       businessentityid: { field: "businessentityid" }
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
+    key: ["businessentityid"]
   - relationship: "SALESTERRITORY"
     table: "customer"
     from:

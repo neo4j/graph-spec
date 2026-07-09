@@ -246,29 +246,92 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `convertExtensions identifies key properties`() {
+    fun `convertExtensions identifies node key properties from mapping key`() {
+        // ARRANGE
         val input = schemaMapOf(
             "nodes" to schemaMapOf(
                 "n1" to schemaMapOf(
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("key" to true), // Key
-                        "p2" to schemaMapOf("mustExist" to true, "unique" to true), // Not Key (but equivalent)
-                        "p3" to schemaMapOf("mustExist" to false, "unique" to true), // Not Key (mustExist)
-                        "p4" to schemaMapOf("mustExist" to true, "unique" to false) // Not Key (not unique)
+                        "p1" to schemaMapOf("key" to true), // Constraint shorthand, not ID
+                        "p2" to schemaMapOf("mustExist" to true, "unique" to true) // Not ID either
                     )
+                )
+            ),
+            "mappings" to listOf(
+                schemaMapOf(
+                    "type" to "node",
+                    "node" to "n1",
+                    "key" to listOf("p2")
                 )
             )
         )
 
+        // ACT
         val result = migration.convertExtensions(input)
+
+        // ASSERT
         assertNotNull(result)
         val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
-
         assertEquals(1, nodeKeyProps.size)
         assertEquals("#n1", nodeKeyProps[0].map("node").string("\$ref"))
         val keys = nodeKeyProps[0].listOfMaps("keyProperties")
         assertEquals(1, keys.size)
-        assertEquals("#p1", keys[0].string("\$ref"))
+        assertEquals("#p2", keys[0].string("\$ref"))
+    }
+
+    @Test
+    fun `convertExtensions identifies relationship key properties from mapping key`() {
+        // ARRANGE
+        val input = schemaMapOf(
+            "mappings" to listOf(
+                schemaMapOf(
+                    "type" to "relationship",
+                    "relationship" to "r1",
+                    "from" to schemaMapOf("node" to "n1"),
+                    "to" to schemaMapOf("node" to "n2"),
+                    "key" to listOf("p1", "p2") // One composite key with two parts
+                )
+            )
+        )
+
+        // ACT
+        val result = migration.convertExtensions(input)
+
+        // ASSERT
+        assertNotNull(result)
+        val relKeyProps = result.listOfMaps("relationshipKeyProperties")
+        assertEquals(1, relKeyProps.size)
+        assertEquals("#r1", relKeyProps[0].map("relationship").string("\$ref"))
+        val keys = relKeyProps[0].listOfMaps("keyProperties")
+        assertEquals(listOf("#p1", "#p2"), keys.map { it.string("\$ref") })
+    }
+
+    @Test
+    fun `convertExtensions ignores property key flags and mappings without key`() {
+        // ARRANGE
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "properties" to schemaMapOf(
+                        "p1" to schemaMapOf("key" to true) // Constraint shorthand only, no mapping key
+                    )
+                )
+            ),
+            "mappings" to listOf(
+                schemaMapOf(
+                    "type" to "node",
+                    "node" to "n1",
+                    "table" to "users"
+                )
+            )
+        )
+
+        // ACT
+        val result = migration.convertExtensions(input)
+
+        // ASSERT
+        assertNotNull(result)
+        assertEquals(emptyList(), result.listOfMaps("nodeKeyProperties"))
     }
 
     @Test
