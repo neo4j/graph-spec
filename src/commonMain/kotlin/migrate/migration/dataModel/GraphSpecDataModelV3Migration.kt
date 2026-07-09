@@ -32,7 +32,11 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     Migration(
         fromType = Type.GRAPH_SPEC,
         from = Version.LATEST,
-        toType = if (wrapped) { Type.DATA_MODEL_WRAPPED } else { Type.DATA_MODEL },
+        toType = if (wrapped) {
+            Type.DATA_MODEL_WRAPPED
+        } else {
+            Type.DATA_MODEL
+        },
         to = Version.DATA_MODEL_V30
     ) {
 
