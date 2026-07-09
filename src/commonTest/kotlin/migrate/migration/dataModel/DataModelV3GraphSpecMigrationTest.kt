@@ -472,4 +472,29 @@ class DataModelV3GraphSpecMigrationTest {
         assertFalse(table.containsKey("primaryKeys"), "primaryKeys should be omitted if empty")
         assertFalse(table.containsKey("foreignKeys"), "foreignKeys should be omitted if empty")
     }
+
+    @Test
+    fun `migrate supports source-schema-only input without graph schema`() {
+        val input = schemaMapOf(
+            "version" to "3.0.0",
+            "graphMappingRepresentation" to mapOf(
+                "dataSourceSchema" to schemaMapOf(
+                    "type" to "cloud",
+                    "tableSchemas" to listOf(
+                        schemaMapOf(
+                            "name" to "users",
+                            "fields" to listOf(schemaMapOf("name" to "id", "rawType" to "INT"))
+                        )
+                    )
+                )
+            )
+        )
+
+        val result = migration.migrate(input)
+
+        assertNotNull(result.mapOfMaps("tables")["users"])
+        assertTrue(result.mapOfMaps("nodes").isEmpty(), "nodes should be present but empty")
+        assertTrue(result.mapOfMaps("relationships").isEmpty(), "relationships should be present but empty")
+        assertFalse(result.containsKey("mappings"), "mappings should be omitted when empty")
+    }
 }

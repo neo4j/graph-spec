@@ -21,7 +21,6 @@ import codec.schema.SchemaNull
 import codec.schema.schemaMapOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
@@ -458,9 +457,10 @@ class GraphSpecDataModelV3MigrationTest {
             .map("graphSchemaRepresentation")
             .map("graphSchema")
 
-        // toNotEmpty should cause these to be missing or empty depending on implementation
-        assertFalse(graphSchema.containsKey("nodeLabels"))
-        assertFalse(graphSchema.containsKey("relationshipTypes"))
+        assertEquals(0, graphSchema.listOfMaps("nodeLabels").size)
+        assertEquals(0, graphSchema.listOfMaps("relationshipTypes").size)
+        assertEquals(0, graphSchema.listOfMaps("nodeObjectTypes").size)
+        assertEquals(0, graphSchema.listOfMaps("relationshipObjectTypes").size)
         assertEquals(0, graphSchema.listOfMaps("constraints").size)
         assertEquals(0, graphSchema.listOfMaps("indexes").size)
     }
