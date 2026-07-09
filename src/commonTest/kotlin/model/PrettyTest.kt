@@ -172,6 +172,53 @@ class PrettyTest {
     }
 
     @Test
+    fun `test translates mapping key parts to property names`() {
+        // ARRANGE
+        val internalModel = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "node0" to Node(
+                    name = "Person",
+                    properties = mutableMapOf("nodeProperty0" to Property(name = "id"))
+                )
+            ),
+            relationships = mutableMapOf(
+                "relationship0" to Relationship(
+                    name = "KNOWS",
+                    type = "KNOWS",
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
+                    properties = mutableMapOf("relationshipProperty0" to Property(name = "since"))
+                )
+            ),
+            mappings = mutableListOf(
+                NodeMapping(
+                    node = "node0",
+                    table = "",
+                    properties = mutableMapOf(),
+                    key = mutableSetOf("nodeProperty0")
+                ),
+                RelationshipMapping(
+                    relationship = "relationship0",
+                    table = "",
+                    from = TargetMapping(node = "node0"),
+                    to = TargetMapping(node = "node0"),
+                    key = mutableSetOf("relationshipProperty0")
+                )
+            )
+        )
+
+        // ACT
+        internalModel.prettify()
+
+        // ASSERT
+        val nodeMapping = internalModel.mappings.filterIsInstance<NodeMapping>().first()
+        assertEquals(setOf("id"), nodeMapping.key, "Node mapping key parts should revert to human readable")
+        val relMapping = internalModel.mappings.filterIsInstance<RelationshipMapping>().first()
+        assertEquals(setOf("since"), relMapping.key, "Relationship mapping key parts should revert to human readable")
+    }
+
+    @Test
     fun `test ignores missing mapping references gracefully`() {
         val model = GraphModel(
             version = "1.0",
