@@ -65,6 +65,7 @@ fun defaultConfig(format: Format): GraphSpecConfig {
     builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V24))
     builder.migrate(DataModelV3GraphSpecMigration())
     builder.migrate(GraphSpecDataModelV3Migration())
+    builder.migrate(GraphSpecDataModelV3Migration(wrapped = true))
     return builder.build()
 }
 

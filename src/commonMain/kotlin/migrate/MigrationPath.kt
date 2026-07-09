@@ -24,7 +24,7 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
     fun migrate(schema: SchemaMap, type: String, targetVersion: String, targetType: String): SchemaMap {
         val from = version(schema, type)
         val to = version(targetVersion, targetType)
-        val path = findPath(from, to) ?: error("Unsupported $type version: $from")
+        val path = findPath(from, to) ?: error("Unsupported migration from $from to $to")
         var map = schema
         for (migration in path) {
             map = migration.migrate(map)

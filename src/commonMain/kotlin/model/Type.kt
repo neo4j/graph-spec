@@ -17,8 +17,11 @@
 package model
 
 object Type {
-    // The Aura Data Importer graph data model
+    // The Aura Data Importer graph data model (flat)
     const val DATA_MODEL = "data_model"
+
+    // The Aura Data Importer graph data model (wrapped)
+    const val DATA_MODEL_WRAPPED = "data_model_wrapped"
 
     // The Connectors ImportSpec
     const val IMPORT_SPEC = "import_spec"

@@ -21,6 +21,7 @@ import codec.schema.SchemaNull
 import codec.schema.schemaMapOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
@@ -48,7 +49,7 @@ class GraphSpecDataModelV3MigrationTest {
         val result = migration.migrate(input)
 
         // Verify Node Labels
-        val nodeLabels = result.map("dataModel")
+        val nodeLabels = result
             .map("graphSchemaRepresentation")
             .map("graphSchema")
             .listOfMaps("nodeLabels")
@@ -62,7 +63,7 @@ class GraphSpecDataModelV3MigrationTest {
         assertEquals("string", props[0].map("type").string("type"))
 
         // Verify Object Type
-        val nodeObjectTypes = result.map("dataModel")
+        val nodeObjectTypes = result
             .map("graphSchemaRepresentation")
             .map("graphSchema")
             .listOfMaps("nodeObjectTypes")
@@ -88,7 +89,6 @@ class GraphSpecDataModelV3MigrationTest {
 
         val result = migration.migrate(input)
         val nodeLabels = result
-            .map("dataModel")
             .map("graphSchemaRepresentation")
             .map("graphSchema")
             .listOfMaps("nodeLabels")
@@ -117,7 +117,7 @@ class GraphSpecDataModelV3MigrationTest {
         )
 
         val result = migration.migrate(input)
-        val schema = result.map("dataModel").map("graphSchemaRepresentation").map("graphSchema")
+        val schema = result.map("graphSchemaRepresentation").map("graphSchema")
 
         // Verify Relationship Type
         val relTypes = schema.listOfMaps("relationshipTypes")
@@ -146,7 +146,7 @@ class GraphSpecDataModelV3MigrationTest {
         )
 
         val result = migration.migrate(input)
-        val constraints = result.map("dataModel").map("graphSchemaRepresentation")
+        val constraints = result.map("graphSchemaRepresentation")
             .map("graphSchema").listOfMaps("constraints")
 
         val relConstraint = constraints[0]
@@ -174,7 +174,7 @@ class GraphSpecDataModelV3MigrationTest {
         )
 
         val result = migration.migrate(input)
-        val graphSchema = result.map("dataModel").map("graphSchemaRepresentation").map("graphSchema")
+        val graphSchema = result.map("graphSchemaRepresentation").map("graphSchema")
 
         val constraint = graphSchema.listOfMaps("constraints")[0]
         assertEquals("uniqueness", constraint.string("constraintType"))
@@ -214,7 +214,6 @@ class GraphSpecDataModelV3MigrationTest {
 
         val result = migration.migrate(input)
         val relMappings = result
-            .map("dataModel")
             .map("graphMappingRepresentation")
             .listOfMaps("relationshipMappings")
 
@@ -238,7 +237,7 @@ class GraphSpecDataModelV3MigrationTest {
         )
 
         val result = migration.migrate(input)
-        val relMappings = result.map("dataModel")
+        val relMappings = result
             .map("graphMappingRepresentation")
             .listOfMapsOrNull("relationshipMappings")
         assertEquals(emptyList(), relMappings)
@@ -291,7 +290,6 @@ class GraphSpecDataModelV3MigrationTest {
 
         val result = migration.migrate(input)
         val tableSchemas = result
-            .map("dataModel")
             .map("graphMappingRepresentation")
             .map("dataSourceSchema")
             .listOfMaps("tableSchemas")
@@ -374,7 +372,7 @@ class GraphSpecDataModelV3MigrationTest {
         )
 
         val result = migration.migrate(input)
-        val mapping = result.map("dataModel").map("graphMappingRepresentation")
+        val mapping = result.map("graphMappingRepresentation")
 
         assertTrue(mapping.containsKey("dataSourceSchema"), "dataSourceSchema must always be present")
         val dataSourceSchema = mapping.map("dataSourceSchema")
@@ -398,7 +396,7 @@ class GraphSpecDataModelV3MigrationTest {
         )
 
         val result = migration.migrate(input)
-        val mapping = result.map("dataModel").map("graphMappingRepresentation")
+        val mapping = result.map("graphMappingRepresentation")
 
         assertTrue(mapping.containsKey("dataSourceSchema"), "dataSourceSchema must be present even for empty tables")
         val dataSourceSchema = mapping.map("dataSourceSchema")
@@ -418,7 +416,7 @@ class GraphSpecDataModelV3MigrationTest {
         )
 
         val result = migration.migrate(input)
-        val dataModel = result.map("dataModel")
+        val dataModel = result
 
         assertTrue(dataModel.containsKey("configurations"), "configurations must always be present")
         val configurations = dataModel.map("configurations")
@@ -441,7 +439,6 @@ class GraphSpecDataModelV3MigrationTest {
 
         val result = migration.migrate(input)
         val tableSchemas = result
-            .map("dataModel")
             .map("graphMappingRepresentation")
             .map("dataSourceSchema")
             .listOfMaps("tableSchemas")
@@ -458,7 +455,6 @@ class GraphSpecDataModelV3MigrationTest {
         val result = migration.migrate(emptyInput)
 
         val graphSchema = result
-            .map("dataModel")
             .map("graphSchemaRepresentation")
             .map("graphSchema")
 
@@ -468,5 +464,35 @@ class GraphSpecDataModelV3MigrationTest {
         assertEquals(0, graphSchema.listOfMaps("relationshipObjectTypes").size)
         assertEquals(0, graphSchema.listOfMaps("constraints").size)
         assertEquals(0, graphSchema.listOfMaps("indexes").size)
+    }
+
+    @Test
+    fun `migrate emits the flat data model by default and the wrapped model file when wrapped`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf("labels" to schemaMapOf("identifier" to "Person"))
+            ),
+            "display" to schemaMapOf(
+                "nodes" to schemaMapOf(
+                    "node1" to schemaMapOf("x" to 100.23, "y" to 200.12)
+                )
+            )
+        )
+
+        // Default DATA_MODEL is flat with no visualisation
+        val flat = migration.migrate(input)
+        assertFalse(flat.containsKey("dataModel"), "flat output must not be wrapped")
+        assertTrue(flat.containsKey("graphSchemaRepresentation"))
+        assertTrue(flat.containsKey("graphMappingRepresentation"))
+        assertFalse(flat.containsKey("visualisation"))
+
+        // DATA_MODEL_WRAPPED wraps the same data model under a top-level dataModel key and includes visualisation
+        val wrapped = GraphSpecDataModelV3Migration(wrapped = true).migrate(input)
+        assertFalse(wrapped.containsKey("graphSchemaRepresentation"))
+        assertTrue(wrapped.containsKey("visualisation"))
+        val dataModel = wrapped.map("dataModel")
+        assertTrue(dataModel.containsKey("graphSchemaRepresentation"))
+        assertTrue(dataModel.containsKey("graphMappingRepresentation"))
+        assertTrue(dataModel.containsKey("configurations"))
     }
 }
