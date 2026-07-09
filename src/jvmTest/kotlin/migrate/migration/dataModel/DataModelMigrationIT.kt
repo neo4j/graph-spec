@@ -34,10 +34,9 @@ class DataModelMigrationIT {
                 }
                 val output = graphSpec.encodeToString(graphModel, Type.DATA_MODEL, Version.DATA_MODEL_V30)
                 val expected = graphSpec.configuration.format.decodeFromString(input) as SchemaMap
-                var actual = graphSpec.configuration.format.decodeFromString(output) as SchemaMap
+                val actual = graphSpec.configuration.format.decodeFromString(output) as SchemaMap
                 // Remove unused configurations
                 removeDefaultSizes(actual)
-                actual = actual.map("dataModel") // Unwrap
                 // Remove fields we don't mind losing in the round-trip
                 expected.remove("configurations")
                 actual.remove("configurations")
@@ -67,7 +66,6 @@ class DataModelMigrationIT {
     private fun removeDefaultSizes(actual: SchemaMap) {
         // Remove default size: -1
         actual
-            .map("dataModel")
             .map("graphMappingRepresentation")
             .map("dataSourceSchema")
             .listOfMaps("tableSchemas")

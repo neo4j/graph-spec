@@ -28,11 +28,11 @@ import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
 
-class GraphSpecDataModelV3Migration :
+class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     Migration(
         fromType = Type.GRAPH_SPEC,
         from = Version.LATEST,
-        toType = Type.DATA_MODEL,
+        toType = if (wrapped) { Type.DATA_MODEL_WRAPPED } else { Type.DATA_MODEL },
         to = Version.DATA_MODEL_V30
     ) {
 
@@ -41,25 +41,29 @@ class GraphSpecDataModelV3Migration :
         val indexes = mutableListOf<SchemaMap>()
         val nodeData = convertNodes(schema, constraints, indexes)
         val relData = convertRelationships(schema, constraints, indexes)
+        val dataModel = schemaMapOf(
+            "version" to "3.0.0",
+            "graphSchemaRepresentation" to schemaMapOf(
+                "version" to "1.0.0",
+                "graphSchema" to schemaMapOf(
+                    "nodeLabels" toNotEmpty nodeData?.labelsMap,
+                    "relationshipTypes" toNotEmpty relData?.typesMap,
+                    "nodeObjectTypes" toNotEmpty nodeData?.objectTypes,
+                    "relationshipObjectTypes" toNotEmpty relData?.objectTypes,
+                    "constraints" to constraints,
+                    "indexes" to indexes
+                )
+            ),
+            "graphSchemaExtensionsRepresentation" to convertExtensions(schema),
+            "graphMappingRepresentation" to convertGraphMapping(schema),
+            "configurations" to schemaMapOf("idsToIgnore" to emptyList<String>())
+        )
+        if (!wrapped) {
+            return dataModel
+        }
         return schemaMapOf(
             "version" to "3.0.0",
-            "dataModel" to schemaMapOf(
-                "version" to "3.0.0",
-                "graphSchemaRepresentation" to schemaMapOf(
-                    "version" to "1.0.0",
-                    "graphSchema" to schemaMapOf(
-                        "nodeLabels" toNotEmpty nodeData?.labelsMap,
-                        "relationshipTypes" toNotEmpty relData?.typesMap,
-                        "nodeObjectTypes" toNotEmpty nodeData?.objectTypes,
-                        "relationshipObjectTypes" toNotEmpty relData?.objectTypes,
-                        "constraints" to constraints,
-                        "indexes" to indexes
-                    )
-                ),
-                "graphMappingRepresentation" to convertGraphMapping(schema),
-                "graphSchemaExtensionsRepresentation" to convertExtensions(schema),
-                "configurations" to schemaMapOf("idsToIgnore" to emptyList<String>())
-            ),
+            "dataModel" to dataModel,
             "visualisation" toNotEmpty convertVisualisation(schema)
         )
     }

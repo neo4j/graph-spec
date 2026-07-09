@@ -12,9 +12,10 @@ type ModelType string
 type ModelVersion string
 
 const (
-	ModelTypeDataModel  ModelType = "data_model"
-	ModelTypeImportSpec ModelType = "import_spec"
-	ModelTypeGraphSpec  ModelType = "graph_spec"
+	ModelTypeDataModel        ModelType = "data_model"
+	ModelTypeDataModelWrapped ModelType = "data_model_wrapped"
+	ModelTypeImportSpec       ModelType = "import_spec"
+	ModelTypeGraphSpec        ModelType = "graph_spec"
 
 	ModelVersionGraphSpecLatest ModelVersion = "4.0.0"
 	ModelVersionDataModelV23    ModelVersion = "2.3.0"
