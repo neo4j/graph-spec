@@ -129,15 +129,16 @@ class DataModelV3GraphSpecMigration :
             val labelRef = labelRefs.firstOrNull() // TODO loop all
             val primaryLabel = tokens.first()
             val id = nodeObject.id()
+            val constraints = convertConstraints(constraints, labelRef, primaryLabel, "node")
             nodes[id] = schemaMapOf(
                 "labels" to schemaMapOf(
                     "identifier" to primaryLabel,
                     "implied" toNotEmpty tokens.drop(1)
                     // TODO optional
                 ),
-                "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, "node"),
+                "constraints" toNotEmpty constraints,
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
-                "properties" toNotEmpty convertProperties(labels, nodeKeys[id] ?: emptySet()),
+                "properties" toNotEmpty convertProperties(labels, nodeKeys[id] ?: emptySet(), constraints),
                 "name" to tokens.firstOrNull()
             )
         }
@@ -177,6 +178,12 @@ class DataModelV3GraphSpecMigration :
         var index = 0
         return constraints[labelRef]?.associate { constraint ->
             index++
+            /*
+              This creates duplicate constraints for all graph_spec property shorthand constraints
+              so that data like constraint id/name are persisted. It is verbose but should not cause issues
+              as duplicate constraints should be easily resolved.
+              Note: This might conflict with validations added later.
+             */
             val properties = constraint.listOfMapsOrNull("properties")
             val constraintType = constraintType(constraint)
             if (properties != null && properties.size > 1 && constraintType == PROPERTY_TYPE) {
@@ -215,12 +222,13 @@ class DataModelV3GraphSpecMigration :
             val token = relationshipType.string("token")
             val id = objectType.id()
             val keys = relKeys[id] ?: emptySet()
+            val constraints = convertConstraints(constraints, typeRef, token, "relationship")
             relationships[id] = schemaMapOf(
                 "type" to token,
                 "from" to mapOf("node" to objectType.ref("from")),
                 "to" to mapOf("node" to objectType.ref("to")),
-                "properties" to convertProperties(listOf(relationshipType), keys),
-                "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, "relationship"),
+                "properties" to convertProperties(listOf(relationshipType), keys, constraints),
+                "constraints" toNotEmpty constraints,
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
                 "name" to uniqueRelationshipName(token, uniqueNames)
             )
@@ -243,25 +251,48 @@ class DataModelV3GraphSpecMigration :
 
     internal fun convertProperties(
         labels: List<SchemaMap>,
-        keyProperties: Set<String> = emptySet()
+        keyProperties: Set<String> = emptySet(),
+        constraints: Map<String, SchemaMap>?
     ): Map<String, SchemaMap> = labels
         .flatMap { label -> label.listOfMaps("properties") }
         .associate { property ->
             val typeObj = property.map("type") // TODO arrays
+            val name = property.stringOrNull("token")
             val map = schemaMapOf(
-                "name" to property.literalOrNull("token"),
+                "name" to name,
                 "type" to propertyType(typeObj.string("type"))
             )
+            val constraintTypes = constraints?.values?.filter {
+                val properties = it.listOrNull("properties")
+                (properties?.singleOrNull() as? SchemaLiteral)?.string == name
+            }?.map { it.string("type") }?.toSet() ?: emptySet()
             val id = property.id()
-            if (keyProperties.contains(id)) {
+            if (keyProperties.contains(id) || constraintTypes.contains(KEY.name)) {
                 map["key"] = true
             } else {
-                map["mustExist"] = when (property.stringOrNull("nullable")) {
-                    "false" -> true
-                    null -> null
-                    else -> false
+                /*
+                    We're intentionally ignoring nullable from the data_model as it's not used correctly in importer today.
+                    The nullable field is false by default which means every property _should_ also have an existence constraint.
+                    However, none of the data_models produced (via UI or candidate graph) have them populated.
+                    If we did convert nullable to mustExist then every property would be given a constraint.
+                    A data_model produced by a `data_model -> graph_spec -> data_model` round trip would produce x10 the
+                    number of constraints which is currently expected and that would be a change in behaviour which could
+                    have adverse affects with importing.
+                    This is further backed up by the fact that Connectors also ignore nullable and only use the constraints list provided.
+                 */
+                // map["mustExist"] = when (property.stringOrNull("nullable")) {
+                //     "false" -> true
+                //     null -> null
+                //     else -> false
+                // }
+                if (constraintTypes.contains(EXISTS.name)) {
+                    map["mustExist"] = true
                 }
-                map["unique"] = property.literalOrNull("unique")
+                if (constraintTypes.contains(UNIQUE.name)) {
+                    map["unique"] = true
+                } else {
+                    map["unique"] = property.literalOrNull("unique")
+                }
             }
             id to map
         }

@@ -320,7 +320,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertProperties(labels, emptySet())
+        val result = migration.convertProperties(labels, constraints = emptyMap())
 
         assertEquals("STRING", result["p1"]?.string("type"))
         assertEquals("INTEGER", result["p2"]?.string("type"))
