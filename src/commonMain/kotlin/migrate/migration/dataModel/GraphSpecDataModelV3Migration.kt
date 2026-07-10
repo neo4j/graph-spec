@@ -139,8 +139,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val toNode = mapping.map("to").string("node")
         return relationships.entries.firstOrNull { (key, rel) ->
             key == id &&
-                    rel.map("from").string("node") == fromNode &&
-                    rel.map("to").string("node") == toNode
+                rel.map("from").string("node") == fromNode &&
+                rel.map("to").string("node") == toNode
         }?.key
     }
 
@@ -197,7 +197,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     entityType = "relationship",
                     refId = typeId,
                     typeKey = "constraintType",
-                    typeTransform = ::constraintType,
+                    typeTransform = ::constraintType
                 )
             )
             addNonDuplicateConstraints(constraints, propertyConstraints)
@@ -207,7 +207,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     entityType = "relationship",
                     refId = typeId,
                     typeKey = "indexType",
-                    typeTransform = ::indexType,
+                    typeTransform = ::indexType
                 )
             )
         }
@@ -372,18 +372,16 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         if (properties.isNullOrEmpty()) {
             return emptyList()
         }
-        fun constr(propId: String, type: String): SchemaMap {
-            return schemaMapOf(
-                // There isn't really an easy way to make a unique id as this information is lost in shorthand
-                "\$id" to "propertyConstraint${constraints.size}",
-                "name" to name,
-                "constraintType" to type,
-                "entityType" to entityType,
-                "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
-                "properties" to schemaListOf(refOf(propId)),
-                "relationshipType" to if (entityType == "relationship") refOf(typeId) else SchemaNull()
-            )
-        }
+        fun constr(propId: String, type: String): SchemaMap = schemaMapOf(
+            // There isn't really an easy way to make a unique id as this information is lost in shorthand
+            "\$id" to "propertyConstraint${constraints.size}",
+            "name" to name,
+            "constraintType" to type,
+            "entityType" to entityType,
+            "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
+            "properties" to schemaListOf(refOf(propId)),
+            "relationshipType" to if (entityType == "relationship") refOf(typeId) else SchemaNull()
+        )
 
         return properties.map { (propId, prop) ->
             val name = prop.stringOrNull("name") ?: propId
@@ -397,7 +395,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 We're ignoring nullable as it's not correctly used in importer today.
                 See DataModelV3GraphSpecMigration.kt for more info.
                 "nullable" to (prop.stringOrNull("key") == "true" || prop.stringOrNull("mustExist") != "true")
-            */
+             */
             )
             if (prop.stringOrNull("key") == "true") {
                 constraints.add(constr(propId, "key"))
@@ -418,7 +416,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         entityType: String,
         refId: String,
         typeKey: String,
-        typeTransform: (String) -> String,
+        typeTransform: (String) -> String
     ): List<SchemaMap> {
         if (elements.isNullOrEmpty()) {
             return emptyList()
