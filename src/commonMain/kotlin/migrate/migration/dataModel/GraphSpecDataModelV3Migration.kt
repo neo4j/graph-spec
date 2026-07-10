@@ -161,12 +161,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val relationshipObjectTypes = mutableListOf<SchemaMap>()
         for ((relId, rel) in relationships) {
             val typeToken = rel.string("type")
-            //            var typeId = relTypes[typeToken]
-            //            if (typeId == null) {
             // TODO if we look-up existing tokens then all relationships get combined
             //      if do don't then joint relationships always get separated
             val typeId = "rt:${relationTypes.size}"
-            //                relTypes[typeToken] = typeId
             val propertyConstraints = mutableListOf<SchemaMap>()
             relationTypes.add(
                 schemaMapOf(
@@ -220,10 +217,11 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     }
 
     private fun addNonDuplicateConstraints(target: MutableList<SchemaMap>, source: List<SchemaMap>) {
-        fun getConstraintKey(constraint: SchemaMap): Pair<String?, Set<*>> {
+        fun getConstraintKey(constraint: SchemaMap): Triple<String?, String?, Set<*>> {
+            val name = constraint.stringOrNull("name")
             val type = constraint.stringOrNull("constraintType")
             val props = constraint.listOrNull("properties")?.content?.toSet() ?: emptySet<Any>()
-            return Pair(type, props)
+            return Triple(name, type, props)
         }
 
         val existingKeys = target.mapTo(HashSet()) { getConstraintKey(it) }
@@ -374,7 +372,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         }
         fun constr(propId: String, type: String): SchemaMap = schemaMapOf(
             // There isn't really an easy way to make a unique id as this information is lost in shorthand
-            "\$id" to "propertyConstraint${constraints.size}",
+            "\$id" to "${entityType}PropertyConstraint_${name}_${propId}",
             "name" to name,
             "constraintType" to type,
             "entityType" to entityType,
