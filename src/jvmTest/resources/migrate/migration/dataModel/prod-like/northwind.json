@@ -224,7 +224,16 @@
         {
           "$id": "rt:1",
           "token": "SUPPLIERS",
-          "properties": []
+          "properties": [
+            {
+              "$id": "p:1_1",
+              "token": "productname",
+              "type": {
+                "type": "string"
+              },
+              "nullable": false
+            }
+          ]
         }
       ],
       "nodeObjectTypes": [
@@ -324,7 +333,22 @@
               "$ref": "#p:2_0"
             }
           ]
-        }
+        },
+        {
+            "$id": "c:3",
+            "name": "productname_SUPPLIERS_key",
+            "constraintType": "key",
+            "entityType": "relationship",
+            "nodeLabel": null,
+            "relationshipType": {
+              "$ref": "#rt:1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:1_1"
+              }
+            ]
+          }
       ],
       "indexes": [
         {
@@ -404,6 +428,18 @@
         "keyProperties": [
           {
             "$ref": "#p:2_0"
+          }
+        ]
+      }
+    ],
+    "relationshipKeyProperties": [
+      {
+        "relationship": {
+          "$ref": "#r:1"
+        },
+        "keyProperties": [
+          {
+            "$ref": "#p:1_1"
           }
         ]
       }
@@ -1145,7 +1181,14 @@
         "toMappings": {
           "#p:2_0": "supplierid"
         },
-        "propertyMappings": []
+        "propertyMappings": [
+          {
+            "fieldName": "productname",
+            "property": {
+              "$ref": "#p:1_1"
+            }
+          }
+        ]
       }
     ]
   },

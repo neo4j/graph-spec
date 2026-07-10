@@ -3,14 +3,14 @@ nodes:
   Comment:
     label: "Comment"
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
-      id: { type: "INTEGER", key: true }
-      locationIP: { type: "STRING", mustExist: true }
-      browserUsed: { type: "STRING", mustExist: true }
-      content: { type: "STRING", mustExist: true }
-      length: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER", unique: true }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      content: { type: "STRING" }
+      length: { type: "INTEGER" }
     constraints:
       Comment:
         type: "UNIQUE"
@@ -24,11 +24,11 @@ nodes:
   Forum:
     label: "Forum"
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
-      id: { type: "INTEGER", key: true }
-      title: { type: "STRING", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER", unique: true }
+      title: { type: "STRING" }
     constraints:
       Forum:
         type: "UNIQUE"
@@ -42,10 +42,10 @@ nodes:
   Organisation:
     label: "Organisation"
     properties:
-      id: { type: "INTEGER", key: true }
-      type: { type: "STRING", mustExist: true }
-      name: { type: "STRING", mustExist: true }
-      url: { type: "STRING", mustExist: true }
+      id: { type: "INTEGER", unique: true }
+      type: { type: "STRING" }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
     constraints:
       Organisation:
         type: "UNIQUE"
@@ -59,18 +59,18 @@ nodes:
   Person:
     label: "Person"
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
-      id: { type: "INTEGER", key: true }
-      firstName: { type: "STRING", mustExist: true }
-      lastName: { type: "STRING", mustExist: true }
-      gender: { type: "STRING", mustExist: true }
-      birthday: { type: "INTEGER", mustExist: true }
-      locationIP: { type: "STRING", mustExist: true }
-      browserUsed: { type: "STRING", mustExist: true }
-      language: { type: "STRING", mustExist: true }
-      email: { type: "STRING", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER", unique: true }
+      firstName: { type: "STRING" }
+      lastName: { type: "STRING" }
+      gender: { type: "STRING" }
+      birthday: { type: "INTEGER" }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      language: { type: "STRING" }
+      email: { type: "STRING" }
     constraints:
       Person:
         type: "UNIQUE"
@@ -84,10 +84,10 @@ nodes:
   Place:
     label: "Place"
     properties:
-      id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      url: { type: "STRING", mustExist: true }
-      type: { type: "STRING", mustExist: true }
+      id: { type: "INTEGER", unique: true }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
+      type: { type: "STRING" }
     constraints:
       Place:
         type: "UNIQUE"
@@ -101,16 +101,16 @@ nodes:
   Post:
     label: "Post"
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
-      id: { type: "INTEGER", key: true }
-      imageFile: { type: "STRING", mustExist: true }
-      locationIP: { type: "STRING", mustExist: true }
-      browserUsed: { type: "STRING", mustExist: true }
-      language: { type: "STRING", mustExist: true }
-      content: { type: "STRING", mustExist: true }
-      length: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER", unique: true }
+      imageFile: { type: "STRING" }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      language: { type: "STRING" }
+      content: { type: "STRING" }
+      length: { type: "INTEGER" }
     constraints:
       Post:
         type: "UNIQUE"
@@ -124,9 +124,9 @@ nodes:
   Tag:
     label: "Tag"
     properties:
-      id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      url: { type: "STRING", mustExist: true }
+      id: { type: "INTEGER", unique: true }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
     constraints:
       Tag:
         type: "UNIQUE"
@@ -140,9 +140,9 @@ nodes:
   TagClass:
     label: "TagClass"
     properties:
-      id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      url: { type: "STRING", mustExist: true }
+      id: { type: "INTEGER", unique: true }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
     constraints:
       TagClass:
         type: "UNIQUE"
@@ -175,8 +175,8 @@ relationships:
     from: { node: "Comment" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
   MODERATED_BY:
     type: "MODERATED_BY"
     from: { node: "Forum" }
@@ -186,16 +186,16 @@ relationships:
     from: { node: "Person" }
     to: { node: "Forum" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
   HAS_TAG2:
     type: "HAS_TAG"
     from: { node: "Forum" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
   LOCATED_IN:
     type: "LOCATED_IN"
     from: { node: "Organisation" }
@@ -209,48 +209,48 @@ relationships:
     from: { node: "Person" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
   KNOWS:
     type: "KNOWS"
     from: { node: "Person" }
     to: { node: "Person" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
   LIKED:
     type: "LIKED"
     from: { node: "Person" }
     to: { node: "Comment" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
   LIKED2:
     type: "LIKED"
     from: { node: "Person" }
     to: { node: "Post" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
   STUDIES_AT:
     type: "STUDIES_AT"
     from: { node: "Person" }
     to: { node: "Organisation" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      classYear: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      classYear: { type: "INTEGER" }
   WORKS_AT:
     type: "WORKS_AT"
     from: { node: "Person" }
     to: { node: "Organisation" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      workFrom: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      workFrom: { type: "INTEGER" }
   IS_SIMILAR_TO:
     type: "IS_SIMILAR_TO"
     from: { node: "Place" }
@@ -272,8 +272,8 @@ relationships:
     from: { node: "Post" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
   HAS_CLASS:
     type: "HAS_CLASS"
     from: { node: "Tag" }
@@ -781,6 +781,7 @@ mappings:
       browserUsed: { field: "browserUsed" }
       content: { field: "content" }
       length: { field: "length" }
+    keys: ["id"]
   - node: "Forum"
     table: "Forum"
     properties:
@@ -789,6 +790,7 @@ mappings:
       explicitlyDeleted: { field: "explicitlyDeleted" }
       id: { field: "id" }
       title: { field: "title" }
+    keys: ["id"]
   - node: "Organisation"
     table: "Organisation"
     properties:
@@ -796,6 +798,7 @@ mappings:
       type: { field: "type" }
       name: { field: "name" }
       url: { field: "url" }
+    keys: ["id"]
   - node: "Person"
     table: "Person"
     properties:
@@ -811,6 +814,7 @@ mappings:
       browserUsed: { field: "browserUsed" }
       language: { field: "language" }
       email: { field: "email" }
+    keys: ["id"]
   - node: "Place"
     table: "Place"
     properties:
@@ -818,6 +822,7 @@ mappings:
       name: { field: "name" }
       url: { field: "url" }
       type: { field: "type" }
+    keys: ["id"]
   - node: "Post"
     table: "Post"
     properties:
@@ -831,18 +836,21 @@ mappings:
       language: { field: "language" }
       content: { field: "content" }
       length: { field: "length" }
+    keys: ["id"]
   - node: "Tag"
     table: "Tag"
     properties:
       id: { field: "id" }
       name: { field: "name" }
       url: { field: "url" }
+    keys: ["id"]
   - node: "TagClass"
     table: "TagClass"
     properties:
       id: { field: "id" }
       name: { field: "name" }
       url: { field: "url" }
+    keys: ["id"]
   - relationship: "AUTHORED_BY"
     table: "Comment"
     from:

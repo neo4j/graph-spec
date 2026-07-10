@@ -19,11 +19,13 @@ package migrate.migration.dataModel
 import codec.schema.SchemaLiteral
 import codec.schema.SchemaMap
 import codec.schema.SchemaNull
+import codec.schema.schemaListOf
 import codec.schema.schemaMapOf
 import codec.schema.toNotEmpty
 import migrate.Migration
 import model.Type
 import model.Version
+import model.type.ConstraintType
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
@@ -102,31 +104,30 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         )
     }
 
-    internal fun convertExtensions(schema: SchemaMap): SchemaMap? {
-        val nodes = schema.mapOfMapsOrNull("nodes") ?: return null
-        val nodeKeyProperties = mutableListOf<SchemaMap>()
-        for ((nodeId, node) in nodes) {
-            val properties = node.mapOfMapsOrNull("properties") ?: continue
-            val keyProperties = mutableSetOf<String>()
-            for ((propertyId, property) in properties) {
-                if (property.boolOrNull("key") == true) {
-                    keyProperties.add(propertyId)
-                }
+    internal fun convertExtensions(schema: SchemaMap): SchemaMap = schemaMapOf(
+        "nodeKeyProperties" to convertKeyProperties(schema, "node"),
+        "relationshipKeyProperties" toNotEmpty convertKeyProperties(schema, "relationship")
+    )
+
+    internal fun convertKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
+        val entityKeyProperties = mutableListOf<SchemaMap>()
+        val mappings = schema.listOfMapsOrNull("mappings") ?: return entityKeyProperties
+        for (mapping in mappings) {
+            val entity = mapping.stringOrNull(singular) ?: continue
+            val keys = mapping.listOrNull("keys") ?: continue
+            if (keys.isEmpty()) {
+                continue
             }
-            if (keyProperties.isNotEmpty()) {
-                nodeKeyProperties.add(
-                    schemaMapOf(
-                        "node" to refOf(nodeId),
-                        "keyProperties" to keyProperties.map { id ->
-                            refOf(id)
-                        }
-                    )
+            entityKeyProperties.add(
+                schemaMapOf(
+                    singular to refOf(entity),
+                    "keyProperties" to keys.map { id ->
+                        refOf((id as SchemaLiteral).string)
+                    }
                 )
-            }
+            )
         }
-        return schemaMapOf(
-            "nodeKeyProperties" to nodeKeyProperties
-        )
+        return entityKeyProperties
     }
 
     /**
@@ -160,20 +161,27 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val relationshipObjectTypes = mutableListOf<SchemaMap>()
         for ((relId, rel) in relationships) {
             val typeToken = rel.string("type")
-//            var typeId = relTypes[typeToken]
-//            if (typeId == null) {
+            //            var typeId = relTypes[typeToken]
+            //            if (typeId == null) {
             // TODO if we look-up existing tokens then all relationships get combined
             //      if do don't then joint relationships always get separated
             val typeId = "rt:${relationTypes.size}"
-//                relTypes[typeToken] = typeId
+            //                relTypes[typeToken] = typeId
+            val propertyConstraints = mutableListOf<SchemaMap>()
             relationTypes.add(
                 schemaMapOf(
                     "\$id" to typeId,
                     "token" to typeToken,
-                    "properties" to convertProperties(rel.mapOfMapsOrNull("properties"))
+                    "properties" to convertProperties(
+                        rel.mapOfMapsOrNull("properties"),
+                        propertyConstraints,
+                        "relationship",
+                        typeId,
+                        typeToken
+                    )
                 )
             )
-//            }
+            //            }
 
             relationshipObjectTypes.add(
                 schemaMapOf(
@@ -183,7 +191,6 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     "to" to refOf(rel.map("to").string("node"))
                 )
             )
-
             constraints.addAll(
                 convertElements(
                     elements = rel.mapOfMapsOrNull("constraints"),
@@ -193,6 +200,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     typeTransform = ::constraintType
                 )
             )
+            addNonDuplicateConstraints(constraints, propertyConstraints)
             indexes.addAll(
                 convertElements(
                     elements = rel.mapOfMapsOrNull("indexes"),
@@ -209,6 +217,23 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             constraints = constraints,
             indexes = indexes
         )
+    }
+
+    private fun addNonDuplicateConstraints(target: MutableList<SchemaMap>, source: List<SchemaMap>) {
+        fun getConstraintKey(constraint: SchemaMap): Pair<String?, Set<*>> {
+            val type = constraint.stringOrNull("constraintType")
+            val props = constraint.listOrNull("properties")?.content?.toSet() ?: emptySet<Any>()
+            return Pair(type, props)
+        }
+
+        val existingKeys = target.mapTo(HashSet()) { getConstraintKey(it) }
+
+        for (constraint in source) {
+            val key = getConstraintKey(constraint)
+            if (existingKeys.add(key)) {
+                target.add(constraint)
+            }
+        }
     }
 
     private data class NodeData(
@@ -238,6 +263,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             val optionalLabels = labelsInfo.listOrNull("optional")?.map { it.toString() } ?: emptyList()
             val allLabels = listOf(primaryLabel) + impliedLabels + optionalLabels
 
+            val propertyConstraints = mutableListOf<SchemaMap>()
             var primaryLabelId = "nl:null"
             val labelRefs = allLabels.map { label ->
                 var labelId = nodeLabelsMap[label]
@@ -248,7 +274,13 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                         schemaMapOf(
                             "\$id" to labelId,
                             "token" to label,
-                            "properties" to convertProperties(node.mapOfMapsOrNull("properties"))
+                            "properties" to convertProperties(
+                                node.mapOfMapsOrNull("properties"),
+                                propertyConstraints,
+                                "node",
+                                labelId,
+                                node.stringOrNull("name") ?: nodeId
+                            )
                         )
                     )
                 }
@@ -272,6 +304,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     typeTransform = ::constraintType
                 )
             )
+            addNonDuplicateConstraints(constraints, propertyConstraints)
             indexes.addAll(
                 convertElements(
                     elements = node.mapOfMapsOrNull("indexes"),
@@ -329,21 +362,51 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         )
     }
 
-    internal fun convertProperties(properties: Map<String, SchemaMap>?): List<SchemaMap> {
+    internal fun convertProperties(
+        properties: Map<String, SchemaMap>?,
+        constraints: MutableList<SchemaMap>,
+        entityType: String,
+        typeId: String,
+        name: String
+    ): List<SchemaMap> {
         if (properties.isNullOrEmpty()) {
             return emptyList()
         }
+        fun constr(propId: String, type: String): SchemaMap = schemaMapOf(
+            // There isn't really an easy way to make a unique id as this information is lost in shorthand
+            "\$id" to "propertyConstraint${constraints.size}",
+            "name" to name,
+            "constraintType" to type,
+            "entityType" to entityType,
+            "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
+            "properties" to schemaListOf(refOf(propId)),
+            "relationshipType" to if (entityType == "relationship") refOf(typeId) else SchemaNull()
+        )
+
         return properties.map { (propId, prop) ->
+            val name = prop.stringOrNull("name") ?: propId
+            val type = prop.string("type")
             val map = schemaMapOf(
                 "\$id" to propId,
-                "token" to (prop.stringOrNull("name") ?: propId),
-                "type" to propertyType(prop.string("type")),
-                "nullable" to if (prop.stringOrNull("key") == "true") {
-                    false
-                } else {
-                    prop.stringOrNull("mustExist") != "true"
-                }
+                "token" to name,
+                "type" to propertyType(type),
+                "nullable" to false
+            /*
+                We're ignoring nullable as it's not correctly used in importer today.
+                See DataModelV3GraphSpecMigration.kt for more info.
+                "nullable" to (prop.stringOrNull("key") == "true" || prop.stringOrNull("mustExist") != "true")
+             */
             )
+            if (prop.stringOrNull("key") == "true") {
+                constraints.add(constr(propId, "key"))
+            } else {
+                if (prop.stringOrNull("mustExist") == "true") {
+                    constraints.add(constr(propId, "propertyExistence"))
+                }
+                if (prop.stringOrNull("unique") == "true") {
+                    constraints.add(constr(propId, "uniqueness"))
+                }
+            }
             map
         }
     }

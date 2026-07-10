@@ -3,10 +3,10 @@ nodes:
   categories:
     label: "categories"
     properties:
-      categoryid: { type: "INTEGER", key: true }
-      categoryname: { type: "STRING", mustExist: true }
-      description: { type: "STRING", mustExist: true }
-      picture: { type: "STRING", mustExist: true }
+      categoryid: { type: "INTEGER", unique: true }
+      categoryname: { type: "STRING" }
+      description: { type: "STRING" }
+      picture: { type: "STRING" }
     constraints:
       categories:
         type: "UNIQUE"
@@ -20,14 +20,14 @@ nodes:
   products:
     label: "products"
     properties:
-      productid: { type: "INTEGER", key: true }
-      productname: { type: "STRING", mustExist: true }
-      quantityperunit: { type: "STRING", mustExist: true }
-      unitprice: { type: "FLOAT", mustExist: true }
-      unitsinstock: { type: "INTEGER", mustExist: true }
-      unitsonorder: { type: "INTEGER", mustExist: true }
-      reorderlevel: { type: "INTEGER", mustExist: true }
-      discontinued: { type: "INTEGER", mustExist: true }
+      productid: { type: "INTEGER", unique: true }
+      productname: { type: "STRING" }
+      quantityperunit: { type: "STRING" }
+      unitprice: { type: "FLOAT" }
+      unitsinstock: { type: "INTEGER" }
+      unitsonorder: { type: "INTEGER" }
+      reorderlevel: { type: "INTEGER" }
+      discontinued: { type: "INTEGER" }
     constraints:
       products:
         type: "UNIQUE"
@@ -41,18 +41,18 @@ nodes:
   suppliers:
     label: "suppliers"
     properties:
-      supplierid: { type: "INTEGER", key: true }
-      companyname: { type: "STRING", mustExist: true }
-      contactname: { type: "STRING", mustExist: true }
-      contacttitle: { type: "STRING", mustExist: true }
-      address: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      region: { type: "STRING", mustExist: true }
-      postalcode: { type: "STRING", mustExist: true }
-      country: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      fax: { type: "STRING", mustExist: true }
-      homepage: { type: "STRING", mustExist: true }
+      supplierid: { type: "INTEGER", unique: true }
+      companyname: { type: "STRING" }
+      contactname: { type: "STRING" }
+      contacttitle: { type: "STRING" }
+      address: { type: "STRING" }
+      city: { type: "STRING" }
+      region: { type: "STRING" }
+      postalcode: { type: "STRING" }
+      country: { type: "STRING" }
+      phone: { type: "STRING" }
+      fax: { type: "STRING" }
+      homepage: { type: "STRING" }
     constraints:
       suppliers:
         type: "UNIQUE"
@@ -72,6 +72,12 @@ relationships:
     type: "SUPPLIERS"
     from: { node: "products" }
     to: { node: "suppliers" }
+    properties:
+      productname: { type: "STRING", key: true }
+    constraints:
+      productname_SUPPLIERS_key:
+        type: "KEY"
+        properties: ["productname"]
 tables:
   categories:
     source: "cloud"
@@ -238,6 +244,7 @@ mappings:
       categoryname: { field: "categoryname" }
       description: { field: "description" }
       picture: { field: "picture" }
+    keys: ["categoryid"]
   - node: "products"
     table: "products"
     properties:
@@ -249,6 +256,7 @@ mappings:
       unitsonorder: { field: "unitsonorder" }
       reorderlevel: { field: "reorderlevel" }
       discontinued: { field: "discontinued" }
+    keys: ["productid"]
   - node: "suppliers"
     table: "suppliers"
     properties:
@@ -264,6 +272,7 @@ mappings:
       phone: { field: "phone" }
       fax: { field: "fax" }
       homepage: { field: "homepage" }
+    keys: ["supplierid"]
   - relationship: "CATEGORIES"
     table: "products"
     from:
@@ -284,3 +293,6 @@ mappings:
       node: "suppliers"
       properties:
         supplierid: { field: "supplierid" }
+    properties:
+      productname: { field: "productname" }
+    keys: ["productname"]
