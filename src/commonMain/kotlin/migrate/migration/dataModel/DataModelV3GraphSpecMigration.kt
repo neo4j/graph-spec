@@ -296,7 +296,7 @@ class DataModelV3GraphSpecMigration :
             if (properties == null || properties.size > 1) { // Shorthand must have exactly 1 property
                 continue
             }
-            if ((properties.first() as? SchemaLiteral)?.string == id) {
+            if ((properties.firstOrNull() as? SchemaLiteral)?.string == id) {
                 types.add(constraint.string("type"))
             }
         }
@@ -348,7 +348,7 @@ class DataModelV3GraphSpecMigration :
                 "node" to ref,
                 "table" to nodeMapping.literal("tableName"),
                 "properties" toNotEmpty migratePropertyMappings(nodeMapping),
-                "keys" to migrateKeyProperties(nodeMapping, nodeKeys[ref] ?: emptySet())
+                "keys" toNotEmpty migrateKeyProperties(nodeMapping, nodeKeys[ref] ?: emptySet())
             )
         }
         return mappings
