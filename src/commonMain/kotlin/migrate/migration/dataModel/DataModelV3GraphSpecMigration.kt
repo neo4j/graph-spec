@@ -60,7 +60,7 @@ class DataModelV3GraphSpecMigration :
                 "relationships" to emptyMap<String, SchemaMap>(),
                 "tables" toNotEmpty migrateTables(schema)
             )
-        val extensions = schema.mapOrNull("graphSchemaExtensionsRepresentation")?.listOfMapsOrNull("nodeKeyProperties")
+        val extensions = schema.mapOrNull("graphSchemaExtensionsRepresentation")
         val nodeKeys = keyProperties(extensions, "node")
         val relKeys = keyProperties(extensions, "relationship")
         val (nodeConstraints, relationshipConstraints) = gatherWithNames(graphSchema, "constraints")
