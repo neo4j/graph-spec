@@ -246,26 +246,28 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `convertExtensions identifies key properties`() {
+    fun `convertExtensions identifies key properties from mappings`() {
         val input = schemaMapOf(
-            "nodes" to schemaMapOf(
-                "n1" to schemaMapOf(
+            "mappings" to schemaListOf(
+                schemaMapOf(
+                    "node" to "node1",
+                    "table" to "table1",
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("key" to true), // Key
-                        "p2" to schemaMapOf("mustExist" to true, "unique" to true), // Not Key (but equivalent)
-                        "p3" to schemaMapOf("mustExist" to false, "unique" to true), // Not Key (mustExist)
-                        "p4" to schemaMapOf("mustExist" to true, "unique" to false) // Not Key (not unique)
-                    )
-                )
-            ),
-            "relationships" to schemaMapOf(
-                "r1" to schemaMapOf(
+                        "p1" to schemaMapOf("field" to "field1"),
+                        "p2" to schemaMapOf("field" to "field2"),
+                        "p3" to schemaMapOf("field" to "field3")
+                    ),
+                    "keys" to schemaListOf("p1"),
+                ),
+                schemaMapOf(
+                    "relationship" to "relationship1",
+                    "table" to "table2",
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("key" to true), // Key
-                        "p2" to schemaMapOf("nullable" to false, "unique" to true), // Not Key (but equivalent)
-                        "p3" to schemaMapOf("nullable" to true, "unique" to true), // Not Key (nullable)
-                        "p4" to schemaMapOf("nullable" to false, "unique" to false) // Not Key (not unique)
-                    )
+                        "p1" to schemaMapOf("field" to "field1"),
+                        "p2" to schemaMapOf("field" to "field2"),
+                        "p3" to schemaMapOf("field" to "field3")
+                    ),
+                    "keys" to schemaListOf("p2", "p3"),
                 )
             )
         )
@@ -275,69 +277,16 @@ class GraphSpecDataModelV3MigrationTest {
 
         val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
         assertEquals(1, nodeKeyProps.size)
-        assertEquals("#n1", nodeKeyProps[0].map("node").string("\$ref"))
+        assertEquals("#node1", nodeKeyProps[0].map("node").string("\$ref"))
         val nodeKeys = nodeKeyProps[0].listOfMaps("keyProperties")
         assertEquals(1, nodeKeys.size)
         assertEquals("#p1", nodeKeys[0].string("\$ref"))
 
         val relationshipKeyProps = result.listOfMaps("relationshipKeyProperties")
         assertEquals(1, relationshipKeyProps.size)
-        assertEquals("#r1", relationshipKeyProps[0].map("relationship").string("\$ref"))
+        assertEquals("#relationship1", relationshipKeyProps[0].map("relationship").string("\$ref"))
         val relKeys = relationshipKeyProps[0].listOfMaps("keyProperties")
-        assertEquals(1, relKeys.size)
-        assertEquals("#p1", relKeys[0].string("\$ref"))
-    }
-
-    @Test
-    fun `convertExtensions identifies key properties from constraints`() {
-        val input = schemaMapOf(
-            "nodes" to schemaMapOf(
-                "n1" to schemaMapOf(
-                    "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("nullable" to false),
-                        "p2" to schemaMapOf("nullable" to true),
-                        "p3" to schemaMapOf("nullable" to false)
-                    ),
-                    "constraints" to schemaMapOf(
-                        "const" to schemaMapOf(
-                            "type" to "KEY",
-                            "properties" to schemaListOf("p2")
-                        )
-                    )
-                )
-            ),
-            "relationships" to schemaMapOf(
-                "r1" to schemaMapOf(
-                    "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("nullable" to false),
-                        "p2" to schemaMapOf("nullable" to true),
-                        "p3" to schemaMapOf("nullable" to false)
-                    ),
-                    "constraints" to schemaMapOf(
-                        "const" to schemaMapOf(
-                            "type" to "KEY",
-                            "properties" to schemaListOf("p2")
-                        )
-                    )
-                )
-            )
-        )
-
-        val result = migration.convertExtensions(input)
-        assertNotNull(result)
-
-        val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
-        assertEquals(1, nodeKeyProps.size)
-        assertEquals("#n1", nodeKeyProps[0].map("node").string("\$ref"))
-        val nodeKeys = nodeKeyProps[0].listOfMaps("keyProperties")
-        assertEquals(1, nodeKeys.size)
-        assertEquals("#p2", nodeKeys[0].string("\$ref"))
-
-        val relationshipKeyProps = result.listOfMaps("relationshipKeyProperties")
-        assertEquals(1, relationshipKeyProps.size)
-        assertEquals("#r1", relationshipKeyProps[0].map("relationship").string("\$ref"))
-        val relKeys = relationshipKeyProps[0].listOfMaps("keyProperties")
-        assertEquals(1, relKeys.size)
+        assertEquals(2, relKeys.size)
         assertEquals("#p2", relKeys[0].string("\$ref"))
     }
 

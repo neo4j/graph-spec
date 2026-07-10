@@ -113,7 +113,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyMap())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap())
 
         val node = nodes["nodeObj"]
         assertNotNull(node)
@@ -150,7 +150,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyMap())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap())
 
         val migratedNode = nodes["nodeObj1"]
         assertNotNull(migratedNode)
@@ -160,7 +160,6 @@ class DataModelV3GraphSpecMigrationTest {
         val props = migratedNode.map("properties")
         assertNotNull(props["prop1"])
         assertEquals("STRING", props.map("prop1").string("type"))
-        assertEquals("true", props.map("prop1").string("mustExist"))
     }
 
     @Test
@@ -288,8 +287,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val relKeys = mapOf("relObj1" to setOf("p1"))
-        val result = migration.migrateRelationships(graphSchema, constraints, emptyMap(), relKeys)
+        val result = migration.migrateRelationships(graphSchema, constraints, emptyMap())
 
         assertTrue(result.containsKey("relObj1"))
         val rel = result["relObj1"]
@@ -297,7 +295,6 @@ class DataModelV3GraphSpecMigrationTest {
         assertEquals("FOLLOWS", rel.string("type"))
         assertEquals("nodeA", rel.map("from").string("node"))
         assertEquals("ZONED DATETIME", rel.map("properties").map("p1").string("type"))
-        assertTrue(rel.map("properties").map("p1").bool("key"))
         assertNotNull(rel.map("constraints")["c1"])
     }
 

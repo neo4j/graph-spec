@@ -231,7 +231,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": true
+              "nullable": false
             }
           ]
         }
