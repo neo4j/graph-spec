@@ -29,5 +29,8 @@ data class NodeMapping(
     val properties: MutableMap<String, PropertyMapping>,
     var mode: MappingMode = MappingMode.MERGE,
     var matchLabel: String? = null,
-    val keys: MutableSet<String> = mutableSetOf()
+    /**
+     * The single key identifying the node, made up of one or more property parts that together form the key.
+     */
+    val key: MutableSet<String> = mutableSetOf()
 ) : Mapping

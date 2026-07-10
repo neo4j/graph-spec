@@ -33,7 +33,7 @@ external interface RelationshipMappingJs : MappingJs {
     val properties: Record<String, PropertyMappingJs>
     var mode: String
     var matchLabel: String?
-    var keys: Array<String>
+    var key: Array<String>
 }
 
 fun relationshipMappingJs(
@@ -44,7 +44,7 @@ fun relationshipMappingJs(
     properties: Record<String, PropertyMappingJs>,
     mode: String,
     matchLabel: String?,
-    keys: Array<String>
+    key: Array<String>
 ): RelationshipMappingJs = jso {
     this.type = MappingType.RELATIONSHIP
     this.relationship = relationship
@@ -54,7 +54,7 @@ fun relationshipMappingJs(
     this.properties = properties
     this.mode = mode
     this.matchLabel = matchLabel
-    this.keys = keys
+    this.key = key
 }
 
 fun RelationshipMapping.toJs() = relationshipMappingJs(
@@ -65,7 +65,7 @@ fun RelationshipMapping.toJs() = relationshipMappingJs(
     properties = properties.map { it.key to it.value.toJs() }.toMap().toRecord(),
     mode = mode.name,
     matchLabel = matchLabel,
-    keys = keys.toTypedArray()
+    key = key.toTypedArray()
 )
 
 fun RelationshipMappingJs.toClass() = RelationshipMapping(
@@ -76,5 +76,5 @@ fun RelationshipMappingJs.toClass() = RelationshipMapping(
     properties = properties.associateBy { _, value -> value.toClass() },
     mode = MappingMode.valueOf(mode),
     matchLabel = matchLabel,
-    keys = keys.toMutableSet()
+    key = key.toMutableSet()
 )
