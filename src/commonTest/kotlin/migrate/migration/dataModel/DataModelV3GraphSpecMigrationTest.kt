@@ -474,6 +474,57 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
+    fun `migrateTables converts array and vector types to their element type`() {
+        val inputSchema = schemaMapOf(
+            "graphMappingRepresentation" to mapOf(
+                "dataSourceSchema" to schemaMapOf(
+                    "tableSchemas" to listOf(
+                        schemaMapOf(
+                            "name" to "film",
+                            "fields" to listOf(
+                                schemaMapOf(
+                                    "name" to "special_features",
+                                    "rawType" to "SET",
+                                    "recommendedType" to mapOf("type" to "string"),
+                                    "supportedTypes" to listOf(
+                                        mapOf("type" to "string"),
+                                        mapOf("type" to "array", "items" to mapOf("type" to "string"))
+                                    )
+                                ),
+                                schemaMapOf(
+                                    "name" to "embedding",
+                                    "rawType" to "VECTOR",
+                                    "recommendedType" to mapOf("type" to "vector", "items" to mapOf("type" to "float")),
+                                    "supportedTypes" to listOf(
+                                        mapOf("type" to "vector", "items" to mapOf("type" to "float")),
+                                        mapOf("type" to "vector", "items" to mapOf("type" to "float32"))
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
+        val fields = migration.migrateTables(unwrap(inputSchema))["film"]!!.mapOfMaps("fields")
+
+        val arrayField = fields["special_features"]!!
+        assertEquals("STRING", arrayField.string("suggested"))
+        assertEquals(
+            listOf("STRING", "LIST<STRING>"),
+            arrayField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
+        )
+
+        val vectorField = fields["embedding"]!!
+        assertEquals("VECTOR<FLOAT>", vectorField.string("suggested"))
+        assertEquals(
+            listOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"),
+            vectorField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
+        )
+    }
+
+    @Test
     fun `migrate supports source-schema-only input without graph schema`() {
         val input = schemaMapOf(
             "version" to "3.0.0",

@@ -240,10 +240,10 @@ class DataModelV3GraphSpecMigration :
     ): Map<String, SchemaMap> = labels
         .flatMap { label -> label.listOfMaps("properties") }
         .associate { property ->
-            val typeObj = property.map("type") // TODO arrays
+            val typeObj = property.map("type")
             val map = schemaMapOf(
                 "name" to property.literalOrNull("token"),
-                "type" to propertyType(typeObj.string("type"))
+                "type" to neo4jType(typeObj)
             )
             val id = property.id()
             if (keyProperties.contains(id)) {
@@ -355,10 +355,9 @@ class DataModelV3GraphSpecMigration :
                 "name" to field.literal("name"),
                 "type" to field.literalOrNull("rawType"),
                 "size" to field.literalOrNull("size"),
-                "suggested" to propertyType(field.mapOrNull("recommendedType")?.string("type")),
+                "suggested" to neo4jType(field.mapOrNull("recommendedType")),
                 "supported" to field.listOfMapsOrNull("supportedTypes")?.map {
-                    // FIXME array types
-                    propertyType(it.string("type"))
+                    neo4jType(it)
                 }
             )
         }
@@ -366,18 +365,27 @@ class DataModelV3GraphSpecMigration :
     }
 
     companion object {
-        private fun propertyType(string: String?): String? = when (string?.lowercase()) {
+        private fun neo4jType(type: SchemaMap?): String? {
+            val base = type?.stringOrNull("type")?.lowercase() ?: return null
+            return when (base) {
+                "array" -> itemType(type)?.let { "LIST<$it>" }
+                "vector" -> itemType(type)?.let { "VECTOR<$it>" }
+                else -> scalarType(base)
+            }
+        }
+
+        private fun itemType(type: SchemaMap): String? = scalarType(type.mapOrNull("items")?.stringOrNull("type"))
+
+        private fun scalarType(string: String?): String? = when (val lower = string?.lowercase()) {
+            null -> null
+            // spaced and renamed types are not a simple uppercasing
             "localdatetime" -> "LOCAL DATETIME"
             "datetime" -> "ZONED DATETIME"
-            "string" -> "STRING"
-            "integer" -> "INTEGER"
-            "float" -> "FLOAT"
-            "date" -> "DATE"
-            "boolean" -> "BOOLEAN"
-            "time" -> "ZONED TIME"
-            "point" -> "POINT"
             "localtime" -> "LOCAL TIME"
-            else -> string
+            "time" -> "ZONED TIME"
+            // everything else (string, integer, float, boolean, point, date, duration
+            // and the vector coordinate variants like float32) is just its uppercase name
+            else -> lower.uppercase()
         }
 
         private fun indexType(name: String): IndexType? = when (name) {
