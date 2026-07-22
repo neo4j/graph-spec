@@ -323,7 +323,7 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
-    fun `convertProperties converts array and vector types to their element type`() {
+    fun `convertProperties converts array and vector types to their graph spec type`() {
         val labels = listOf(
             schemaMapOf(
                 "properties" to listOf(
@@ -499,7 +499,7 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
-    fun `migrateTables converts array and vector types to their element type`() {
+    fun `migrateTables converts array and vector types to their graph spec type`() {
         val inputSchema = schemaMapOf(
             "graphMappingRepresentation" to mapOf(
                 "dataSourceSchema" to schemaMapOf(
