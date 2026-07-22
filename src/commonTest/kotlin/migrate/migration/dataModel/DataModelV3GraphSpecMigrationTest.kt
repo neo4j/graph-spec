@@ -323,6 +323,31 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
+    fun `convertProperties converts array and vector types to their graph spec type`() {
+        val labels = listOf(
+            schemaMapOf(
+                "properties" to listOf(
+                    schemaMapOf(
+                        "\$id" to "p1",
+                        "token" to "tags",
+                        "type" to mapOf("type" to "array", "items" to mapOf("type" to "string"))
+                    ),
+                    schemaMapOf(
+                        "\$id" to "p2",
+                        "token" to "embedding",
+                        "type" to mapOf("type" to "vector", "items" to mapOf("type" to "float"))
+                    )
+                )
+            )
+        )
+
+        val result = migration.convertProperties(labels, emptySet())
+
+        assertEquals("LIST<STRING>", result["p1"]?.string("type"))
+        assertEquals("VECTOR<FLOAT>", result["p2"]?.string("type"))
+    }
+
+    @Test
     fun `relationshipMappings joins object types and tokens correctly`() {
         val input = schemaMapOf(
             "graphSchemaRepresentation" to mapOf(
@@ -471,6 +496,57 @@ class DataModelV3GraphSpecMigrationTest {
 
         assertFalse(table.containsKey("primaryKeys"), "primaryKeys should be omitted if empty")
         assertFalse(table.containsKey("foreignKeys"), "foreignKeys should be omitted if empty")
+    }
+
+    @Test
+    fun `migrateTables converts array and vector types to their graph spec type`() {
+        val inputSchema = schemaMapOf(
+            "graphMappingRepresentation" to mapOf(
+                "dataSourceSchema" to schemaMapOf(
+                    "tableSchemas" to listOf(
+                        schemaMapOf(
+                            "name" to "film",
+                            "fields" to listOf(
+                                schemaMapOf(
+                                    "name" to "special_features",
+                                    "rawType" to "SET",
+                                    "recommendedType" to mapOf("type" to "string"),
+                                    "supportedTypes" to listOf(
+                                        mapOf("type" to "string"),
+                                        mapOf("type" to "array", "items" to mapOf("type" to "string"))
+                                    )
+                                ),
+                                schemaMapOf(
+                                    "name" to "embedding",
+                                    "rawType" to "VECTOR",
+                                    "recommendedType" to mapOf("type" to "vector", "items" to mapOf("type" to "float")),
+                                    "supportedTypes" to listOf(
+                                        mapOf("type" to "vector", "items" to mapOf("type" to "float")),
+                                        mapOf("type" to "vector", "items" to mapOf("type" to "float32"))
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
+        val fields = migration.migrateTables(unwrap(inputSchema))["film"]!!.mapOfMaps("fields")
+
+        val arrayField = fields["special_features"]!!
+        assertEquals("STRING", arrayField.string("suggested"))
+        assertEquals(
+            listOf("STRING", "LIST<STRING>"),
+            arrayField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
+        )
+
+        val vectorField = fields["embedding"]!!
+        assertEquals("VECTOR<FLOAT>", vectorField.string("suggested"))
+        assertEquals(
+            listOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"),
+            vectorField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
+        )
     }
 
     @Test
