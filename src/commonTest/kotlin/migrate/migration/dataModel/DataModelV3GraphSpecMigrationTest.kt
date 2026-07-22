@@ -323,6 +323,31 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
+    fun `convertProperties converts array and vector types to their element type`() {
+        val labels = listOf(
+            schemaMapOf(
+                "properties" to listOf(
+                    schemaMapOf(
+                        "\$id" to "p1",
+                        "token" to "tags",
+                        "type" to mapOf("type" to "array", "items" to mapOf("type" to "string"))
+                    ),
+                    schemaMapOf(
+                        "\$id" to "p2",
+                        "token" to "embedding",
+                        "type" to mapOf("type" to "vector", "items" to mapOf("type" to "float"))
+                    )
+                )
+            )
+        )
+
+        val result = migration.convertProperties(labels, emptySet())
+
+        assertEquals("LIST<STRING>", result["p1"]?.string("type"))
+        assertEquals("VECTOR<FLOAT>", result["p2"]?.string("type"))
+    }
+
+    @Test
     fun `relationshipMappings joins object types and tokens correctly`() {
         val input = schemaMapOf(
             "graphSchemaRepresentation" to mapOf(
