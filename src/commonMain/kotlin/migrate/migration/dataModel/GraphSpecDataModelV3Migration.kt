@@ -465,19 +465,20 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 Neo4jTypeKind.VECTOR -> {
                     val vector = schemaMapOf(
                         "type" to "vector",
-                        "items" to schemaMapOf("type" to type(graphType.mapOrNull("items")?.stringOrNull("type")))
+                        "items" to schemaMapOf("type" to type(graphType.stringOrNull("items")))
                     )
                     graphType.literalOrNull("dimension")?.let { vector["dimension"] = it }
                     vector
                 }
                 Neo4jTypeKind.LIST -> schemaMapOf(
                     "type" to "array",
-                    "items" to schemaMapOf("type" to type(graphType.mapOrNull("items")?.stringOrNull("type")))
+                    "items" to schemaMapOf("type" to type(graphType.stringOrNull("items")))
                 )
-                else -> when (val scalar = type(graphType.stringOrNull("type"))) {
+                Neo4jTypeKind.SCALAR -> when (val scalar = type(graphType.stringOrNull("scalar"))) {
                     null -> SchemaNull()
                     else -> schemaMapOf("type" to scalar)
                 }
+                else -> SchemaNull()
             }
         }
 

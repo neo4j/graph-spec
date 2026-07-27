@@ -43,7 +43,7 @@ class GraphSpecDataModelV3MigrationTest {
                         "p1" to
                             schemaMapOf(
                                 "name" to "name",
-                                "type" to schemaMapOf("type" to "STRING"),
+                                "type" to schemaMapOf("type" to "ScalarType", "scalar" to "STRING"),
                                 "mustExist" to true
                             )
                     )
@@ -84,12 +84,24 @@ class GraphSpecDataModelV3MigrationTest {
                 "n1" to schemaMapOf(
                     "labels" to schemaMapOf("identifier" to "Person"),
                     "properties" to
-                        schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to schemaMapOf("type" to "STRING")))
+                        schemaMapOf(
+                            "p1" to
+                                schemaMapOf(
+                                    "name" to "name",
+                                    "type" to schemaMapOf("type" to "ScalarType", "scalar" to "STRING")
+                                )
+                        )
                 ),
                 "n2" to schemaMapOf(
                     "labels" to schemaMapOf("identifier" to "Person"),
                     "properties" to
-                        schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to schemaMapOf("type" to "STRING")))
+                        schemaMapOf(
+                            "p1" to
+                                schemaMapOf(
+                                    "name" to "name",
+                                    "type" to schemaMapOf("type" to "ScalarType", "scalar" to "STRING")
+                                )
+                        )
                 )
             )
         )
@@ -117,7 +129,11 @@ class GraphSpecDataModelV3MigrationTest {
                     "from" to schemaMapOf("node" to "n1"),
                     "to" to schemaMapOf("node" to "n2"),
                     "properties" to schemaMapOf(
-                        "since" to schemaMapOf("name" to "since", "type" to schemaMapOf("type" to "INTEGER"))
+                        "since" to
+                            schemaMapOf(
+                                "name" to "since",
+                                "type" to schemaMapOf("type" to "ScalarType", "scalar" to "INTEGER")
+                            )
                     )
                 )
             )
@@ -317,8 +333,15 @@ class GraphSpecDataModelV3MigrationTest {
         val fieldsInput = mapOf(
             "f1" to schemaMapOf(
                 "name" to "first_name",
-                "suggested" to schemaMapOf("type" to "STRING"),
-                "supported" to listOf(schemaMapOf("type" to "STRING"), schemaMapOf("type" to "INTEGER"))
+                "suggested" to schemaMapOf("type" to "ScalarType", "scalar" to "STRING"),
+                "supported" to
+                    listOf(
+                        schemaMapOf("type" to "ScalarType", "scalar" to "STRING"),
+                        schemaMapOf(
+                            "type" to "ScalarType",
+                            "scalar" to "INTEGER"
+                        )
+                    )
             )
         )
 
@@ -438,7 +461,11 @@ class GraphSpecDataModelV3MigrationTest {
                 "users" to schemaMapOf(
                     "source" to "local",
                     "fields" to schemaMapOf(
-                        "id" to schemaMapOf("name" to "id", "type" to schemaMapOf("type" to "INTEGER"))
+                        "id" to
+                            schemaMapOf(
+                                "name" to "id",
+                                "type" to schemaMapOf("type" to "ScalarType", "scalar" to "INTEGER")
+                            )
                     )
                 )
             )

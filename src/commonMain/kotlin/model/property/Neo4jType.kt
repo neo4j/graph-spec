@@ -14,51 +14,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:OptIn(ExperimentalSerializationApi::class)
-
 package model.property
 
-import kotlinx.serialization.EncodeDefault
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
-/** Discriminator values for the container [Neo4jType] variants. Scalars are discriminated by their own name. */
+/** Discriminator (`type`) values for the [Neo4jType] variants. */
 object Neo4jTypeKind {
-    const val LIST = "LIST"
-    const val VECTOR = "VECTOR"
+    const val SCALAR = "ScalarType"
+    const val LIST = "ListType"
+    const val VECTOR = "VectorType"
 }
 
 /**
- * A Neo4j property type. Represented as a discriminated object keyed on a `type` field:
- * - [ScalarType] — `{ "type": "STRING" }`
- * - [ListType]   — `{ "type": "LIST", "items": { "type": "STRING" } }`
- * - [VectorType] — `{ "type": "VECTOR", "items": { "type": "FLOAT" }, "dimension": 4 }`
+ * A Neo4j property type, serialized as a discriminated union keyed on `type`:
+ * - [ScalarType] — `{ "type": "ScalarType", "scalar": "STRING" }`
+ * - [ListType]   — `{ "type": "ListType", "items": "STRING" }`
+ * - [VectorType] — `{ "type": "VectorType", "items": "FLOAT", "dimension": 4 }`
+ *
+ * A list/vector element is always a scalar ([Neo4jScalar]); a `dimension` exists only on a vector.
  */
 @JsExport
-@Serializable(with = Neo4jTypeSerializer::class)
+@Serializable
 @SerialName("Neo4jType")
 sealed class Neo4jType
 
 @JsExport
 @Serializable
-@SerialName("ScalarType")
-data class ScalarType(val type: Neo4jScalar) : Neo4jType()
+@SerialName(Neo4jTypeKind.SCALAR)
+data class ScalarType(val scalar: Neo4jScalar) : Neo4jType()
 
 @JsExport
 @Serializable
-@SerialName("ListType")
-data class ListType(
-    val items: ScalarType,
-    @EncodeDefault(EncodeDefault.Mode.ALWAYS) val type: String = Neo4jTypeKind.LIST
-) : Neo4jType()
+@SerialName(Neo4jTypeKind.LIST)
+data class ListType(val items: Neo4jScalar) : Neo4jType()
 
 @JsExport
 @Serializable
-@SerialName("VectorType")
-data class VectorType(
-    val items: ScalarType,
-    val dimension: Int? = null,
-    @EncodeDefault(EncodeDefault.Mode.ALWAYS) val type: String = Neo4jTypeKind.VECTOR
-) : Neo4jType()
+@SerialName(Neo4jTypeKind.VECTOR)
+data class VectorType(val items: Neo4jScalar, val dimension: Int? = null) : Neo4jType()

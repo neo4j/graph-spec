@@ -3,14 +3,14 @@ nodes:
   Comment:
     label: "Comment"
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      explicitlyDeleted: { type: { type: "BOOLEAN" }, mustExist: true }
-      id: { type: { type: "INTEGER" }, key: true }
-      locationIP: { type: { type: "STRING" }, mustExist: true }
-      browserUsed: { type: { type: "STRING" }, mustExist: true }
-      content: { type: { type: "STRING" }, mustExist: true }
-      length: { type: { type: "INTEGER" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      explicitlyDeleted: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
+      id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      locationIP: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      browserUsed: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      content: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      length: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
     constraints:
       Comment:
         type: "UNIQUE"
@@ -24,11 +24,11 @@ nodes:
   Forum:
     label: "Forum"
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      explicitlyDeleted: { type: { type: "BOOLEAN" }, mustExist: true }
-      id: { type: { type: "INTEGER" }, key: true }
-      title: { type: { type: "STRING" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      explicitlyDeleted: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
+      id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      title: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
     constraints:
       Forum:
         type: "UNIQUE"
@@ -42,10 +42,10 @@ nodes:
   Organisation:
     label: "Organisation"
     properties:
-      id: { type: { type: "INTEGER" }, key: true }
-      type: { type: { type: "STRING" }, mustExist: true }
-      name: { type: { type: "STRING" }, mustExist: true }
-      url: { type: { type: "STRING" }, mustExist: true }
+      id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      type: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      url: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
     constraints:
       Organisation:
         type: "UNIQUE"
@@ -59,18 +59,18 @@ nodes:
   Person:
     label: "Person"
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      explicitlyDeleted: { type: { type: "BOOLEAN" }, mustExist: true }
-      id: { type: { type: "INTEGER" }, key: true }
-      firstName: { type: { type: "STRING" }, mustExist: true }
-      lastName: { type: { type: "STRING" }, mustExist: true }
-      gender: { type: { type: "STRING" }, mustExist: true }
-      birthday: { type: { type: "INTEGER" }, mustExist: true }
-      locationIP: { type: { type: "STRING" }, mustExist: true }
-      browserUsed: { type: { type: "STRING" }, mustExist: true }
-      language: { type: { type: "STRING" }, mustExist: true }
-      email: { type: { type: "STRING" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      explicitlyDeleted: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
+      id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      firstName: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      lastName: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      gender: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      birthday: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      locationIP: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      browserUsed: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      language: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      email: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
     constraints:
       Person:
         type: "UNIQUE"
@@ -84,10 +84,10 @@ nodes:
   Place:
     label: "Place"
     properties:
-      id: { type: { type: "INTEGER" }, key: true }
-      name: { type: { type: "STRING" }, mustExist: true }
-      url: { type: { type: "STRING" }, mustExist: true }
-      type: { type: { type: "STRING" }, mustExist: true }
+      id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      url: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      type: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
     constraints:
       Place:
         type: "UNIQUE"
@@ -101,16 +101,16 @@ nodes:
   Post:
     label: "Post"
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      explicitlyDeleted: { type: { type: "BOOLEAN" }, mustExist: true }
-      id: { type: { type: "INTEGER" }, key: true }
-      imageFile: { type: { type: "STRING" }, mustExist: true }
-      locationIP: { type: { type: "STRING" }, mustExist: true }
-      browserUsed: { type: { type: "STRING" }, mustExist: true }
-      language: { type: { type: "STRING" }, mustExist: true }
-      content: { type: { type: "STRING" }, mustExist: true }
-      length: { type: { type: "INTEGER" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      explicitlyDeleted: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
+      id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      imageFile: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      locationIP: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      browserUsed: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      language: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      content: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      length: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
     constraints:
       Post:
         type: "UNIQUE"
@@ -124,9 +124,9 @@ nodes:
   Tag:
     label: "Tag"
     properties:
-      id: { type: { type: "INTEGER" }, key: true }
-      name: { type: { type: "STRING" }, mustExist: true }
-      url: { type: { type: "STRING" }, mustExist: true }
+      id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      url: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
     constraints:
       Tag:
         type: "UNIQUE"
@@ -140,9 +140,9 @@ nodes:
   TagClass:
     label: "TagClass"
     properties:
-      id: { type: { type: "INTEGER" }, key: true }
-      name: { type: { type: "STRING" }, mustExist: true }
-      url: { type: { type: "STRING" }, mustExist: true }
+      id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      url: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
     constraints:
       TagClass:
         type: "UNIQUE"
@@ -175,8 +175,8 @@ relationships:
     from: { node: "Comment" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
   MODERATED_BY:
     type: "MODERATED_BY"
     from: { node: "Forum" }
@@ -186,16 +186,16 @@ relationships:
     from: { node: "Person" }
     to: { node: "Forum" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      explicitlyDeleted: { type: { type: "BOOLEAN" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      explicitlyDeleted: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
   HAS_TAG2:
     type: "HAS_TAG"
     from: { node: "Forum" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
   LOCATED_IN:
     type: "LOCATED_IN"
     from: { node: "Organisation" }
@@ -209,48 +209,48 @@ relationships:
     from: { node: "Person" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
   KNOWS:
     type: "KNOWS"
     from: { node: "Person" }
     to: { node: "Person" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      explicitlyDeleted: { type: { type: "BOOLEAN" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      explicitlyDeleted: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
   LIKED:
     type: "LIKED"
     from: { node: "Person" }
     to: { node: "Comment" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      explicitlyDeleted: { type: { type: "BOOLEAN" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      explicitlyDeleted: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
   LIKED2:
     type: "LIKED"
     from: { node: "Person" }
     to: { node: "Post" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      explicitlyDeleted: { type: { type: "BOOLEAN" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      explicitlyDeleted: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
   STUDIES_AT:
     type: "STUDIES_AT"
     from: { node: "Person" }
     to: { node: "Organisation" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      classYear: { type: { type: "INTEGER" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      classYear: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
   WORKS_AT:
     type: "WORKS_AT"
     from: { node: "Person" }
     to: { node: "Organisation" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
-      workFrom: { type: { type: "INTEGER" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      workFrom: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
   IS_SIMILAR_TO:
     type: "IS_SIMILAR_TO"
     from: { node: "Place" }
@@ -272,8 +272,8 @@ relationships:
     from: { node: "Post" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: { type: "INTEGER" }, mustExist: true }
-      deletionDate: { type: { type: "INTEGER" }, mustExist: true }
+      creationDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      deletionDate: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
   HAS_CLASS:
     type: "HAS_CLASS"
     from: { node: "Tag" }
@@ -289,594 +289,702 @@ tables:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       explicitlyDeleted:
         type: "BOOLEAN"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       id:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       locationIP:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       browserUsed:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       content:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       length:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       CreatorPersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       LocationCountryId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       ParentPostId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       ParentCommentId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   CommentHasTag:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       CommentId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       TagId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   Forum:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       explicitlyDeleted:
         type: "BOOLEAN"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       id:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       title:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       ModeratorPersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   ForumHasMember:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       explicitlyDeleted:
         type: "BOOLEAN"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       ForumId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       PersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   ForumHasTag:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       ForumId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       TagId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   Organisation:
     source: "cloud"
     fields:
       id:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       type:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       name:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       url:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       LocationPlaceId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   Person:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       explicitlyDeleted:
         type: "BOOLEAN"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       id:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       firstName:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       lastName:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       gender:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       birthday:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       locationIP:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       browserUsed:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       LocationCityId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       language:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       email:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
   PersonHasInterest:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       PersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       TagId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   PersonKnowsPerson:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       explicitlyDeleted:
         type: "BOOLEAN"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       Person1Id:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       Person2Id:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   PersonLikesComment:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       explicitlyDeleted:
         type: "BOOLEAN"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       PersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       CommentId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   PersonLikesPost:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       explicitlyDeleted:
         type: "BOOLEAN"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       PersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       PostId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   PersonStudiesAt:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       PersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       UniversityId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       classYear:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   PersonWorksAt:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       PersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       CompanyId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       workFrom:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   Place:
     source: "cloud"
     fields:
       id:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       name:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       url:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       type:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       PartOfPlaceId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   Post:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       explicitlyDeleted:
         type: "BOOLEAN"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       id:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       imageFile:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       locationIP:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       browserUsed:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       language:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       content:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       length:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       CreatorPersonId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       ContainerForumId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       LocationCountryId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   PostHasTag:
     source: "cloud"
     fields:
       creationDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       deletionDate:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       PostId:
         type: "BIGINT"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       TagId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   Tag:
     source: "cloud"
     fields:
       id:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       name:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       url:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       TypeTagClassId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   TagClass:
     source: "cloud"
     fields:
       id:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       name:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       url:
         type: "VARCHAR"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       SubclassOfTagClassId:
         type: "INTEGER"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
 mappings:
   - node: "Comment"
     table: "Comment"

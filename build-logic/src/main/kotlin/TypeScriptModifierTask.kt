@@ -53,7 +53,9 @@ abstract class TypeScriptModifierTask : DefaultTask() {
         // Neo4jType
         unions.create("Neo4jScalar", "Neo4jScalarJs")
         unions.rename("Neo4jScalarJs") { it.replace("_", " ") }
-        types.replace("ScalarTypeJs", "type", "string", "Neo4jScalarJs")
+        types.replace("ScalarTypeJs", "scalar", "string", "Neo4jScalarJs")
+        types.replace("ListTypeJs", "items", "string", "Neo4jScalarJs")
+        types.replace("VectorTypeJs", "items", "string", "Neo4jScalarJs")
 
         val input = typescriptFile.readText()
         var result = unions.run(input)

@@ -328,89 +328,128 @@ type NodeIndex struct {
 	Type       IndexType                 `json:"type"`
 }
 
-type Neo4jType string
+type Neo4jScalar string
 
 const (
-	Neo4jTypeAny               Neo4jType = "ANY"
-	Neo4jTypeBoolean           Neo4jType = "BOOLEAN"
-	Neo4jTypeListBoolean       Neo4jType = "LIST<BOOLEAN>"
-	Neo4jTypeDate              Neo4jType = "DATE"
-	Neo4jTypeListDate          Neo4jType = "LIST<DATE>"
-	Neo4jTypeDuration          Neo4jType = "DURATION"
-	Neo4jTypeListDuration      Neo4jType = "LIST<DURATION>"
-	Neo4jTypeFloat32           Neo4jType = "FLOAT32"
-	Neo4jTypeListFloat32       Neo4jType = "LIST<FLOAT32>"
-	Neo4jTypeFloat             Neo4jType = "FLOAT"
-	Neo4jTypeListFloat         Neo4jType = "LIST<FLOAT>"
-	Neo4jTypeInteger8          Neo4jType = "INTEGER8"
-	Neo4jTypeListInteger8      Neo4jType = "LIST<INTEGER8>"
-	Neo4jTypeInteger16         Neo4jType = "INTEGER16"
-	Neo4jTypeListInteger16     Neo4jType = "LIST<INTEGER16>"
-	Neo4jTypeInteger32         Neo4jType = "INTEGER32"
-	Neo4jTypeListInteger32     Neo4jType = "LIST<INTEGER32>"
-	Neo4jTypeInteger           Neo4jType = "INTEGER"
-	Neo4jTypeListInteger       Neo4jType = "LIST<INTEGER>"
-	Neo4jTypeLocalDatetime     Neo4jType = "LOCAL DATETIME"
-	Neo4jTypeListLocalDatetime Neo4jType = "LIST<LOCAL DATETIME>"
-	Neo4jTypeLocalTime         Neo4jType = "LOCAL TIME"
-	Neo4jTypeListLocalTime     Neo4jType = "LIST<LOCAL TIME>"
-	Neo4jTypePoint             Neo4jType = "POINT"
-	Neo4jTypeListPoint         Neo4jType = "LIST<POINT>"
-	Neo4jTypeString            Neo4jType = "STRING"
-	Neo4jTypeListString        Neo4jType = "LIST<STRING>"
-	Neo4jTypeVectorFloat       Neo4jType = "VECTOR<FLOAT>"
-	Neo4jTypeVectorFloat32     Neo4jType = "VECTOR<FLOAT32>"
-	Neo4jTypeVectorInteger     Neo4jType = "VECTOR<INTEGER>"
-	Neo4jTypeVectorInteger32   Neo4jType = "VECTOR<INTEGER32>"
-	Neo4jTypeVectorInteger16   Neo4jType = "VECTOR<INTEGER16>"
-	Neo4jTypeVectorInteger8    Neo4jType = "VECTOR<INTEGER8>"
-	Neo4jTypeZonedDatetime     Neo4jType = "ZONED DATETIME"
-	Neo4jTypeListZonedDatetime Neo4jType = "LIST<ZONED DATETIME>"
-	Neo4jTypeZonedTime         Neo4jType = "ZONED TIME"
-	Neo4jTypeListZonedTime     Neo4jType = "LIST<ZONED TIME>"
-	Neo4jTypeUUID              Neo4jType = "UUID"
+	Neo4jScalarAny           Neo4jScalar = "ANY"
+	Neo4jScalarBoolean       Neo4jScalar = "BOOLEAN"
+	Neo4jScalarString        Neo4jScalar = "STRING"
+	Neo4jScalarInteger       Neo4jScalar = "INTEGER"
+	Neo4jScalarInteger8      Neo4jScalar = "INTEGER8"
+	Neo4jScalarInteger16     Neo4jScalar = "INTEGER16"
+	Neo4jScalarInteger32     Neo4jScalar = "INTEGER32"
+	Neo4jScalarFloat         Neo4jScalar = "FLOAT"
+	Neo4jScalarFloat32       Neo4jScalar = "FLOAT32"
+	Neo4jScalarDate          Neo4jScalar = "DATE"
+	Neo4jScalarDuration      Neo4jScalar = "DURATION"
+	Neo4jScalarPoint         Neo4jScalar = "POINT"
+	Neo4jScalarUUID          Neo4jScalar = "UUID"
+	Neo4jScalarLocalDatetime Neo4jScalar = "LOCAL DATETIME"
+	Neo4jScalarLocalTime     Neo4jScalar = "LOCAL TIME"
+	Neo4jScalarZonedDatetime Neo4jScalar = "ZONED DATETIME"
+	Neo4jScalarZonedTime     Neo4jScalar = "ZONED TIME"
 )
 
-var Neo4jTypeValues = []Neo4jType{
-	Neo4jTypeAny,
-	Neo4jTypeBoolean,
-	Neo4jTypeListBoolean,
-	Neo4jTypeDate,
-	Neo4jTypeListDate,
-	Neo4jTypeDuration,
-	Neo4jTypeListDuration,
-	Neo4jTypeFloat32,
-	Neo4jTypeListFloat32,
-	Neo4jTypeFloat,
-	Neo4jTypeListFloat,
-	Neo4jTypeInteger8,
-	Neo4jTypeListInteger8,
-	Neo4jTypeInteger16,
-	Neo4jTypeListInteger16,
-	Neo4jTypeInteger32,
-	Neo4jTypeListInteger32,
-	Neo4jTypeInteger,
-	Neo4jTypeListInteger,
-	Neo4jTypeLocalDatetime,
-	Neo4jTypeListLocalDatetime,
-	Neo4jTypeLocalTime,
-	Neo4jTypeListLocalTime,
-	Neo4jTypePoint,
-	Neo4jTypeListPoint,
-	Neo4jTypeString,
-	Neo4jTypeListString,
-	Neo4jTypeVectorFloat,
-	Neo4jTypeVectorFloat32,
-	Neo4jTypeVectorInteger,
-	Neo4jTypeVectorInteger32,
-	Neo4jTypeVectorInteger16,
-	Neo4jTypeVectorInteger8,
-	Neo4jTypeZonedDatetime,
-	Neo4jTypeListZonedDatetime,
-	Neo4jTypeZonedTime,
-	Neo4jTypeListZonedTime,
-	Neo4jTypeUUID,
+var Neo4jScalarValues = []Neo4jScalar{
+	Neo4jScalarAny,
+	Neo4jScalarBoolean,
+	Neo4jScalarString,
+	Neo4jScalarInteger,
+	Neo4jScalarInteger8,
+	Neo4jScalarInteger16,
+	Neo4jScalarInteger32,
+	Neo4jScalarFloat,
+	Neo4jScalarFloat32,
+	Neo4jScalarDate,
+	Neo4jScalarDuration,
+	Neo4jScalarPoint,
+	Neo4jScalarUUID,
+	Neo4jScalarLocalDatetime,
+	Neo4jScalarLocalTime,
+	Neo4jScalarZonedDatetime,
+	Neo4jScalarZonedTime,
 }
+
+type Neo4jTypeUnion interface {
+	Neo4jTypeType() string
+	isNeo4jType()
+}
+
+type Neo4jType struct {
+	Neo4jTypeUnion
+}
+
+func (w Neo4jType) MarshalJSON() ([]byte, error) {
+	if w.Neo4jTypeUnion == nil {
+		return []byte("null"), nil
+	}
+	return json.Marshal(w.Neo4jTypeUnion)
+}
+
+func (w *Neo4jType) UnmarshalJSON(data []byte) error {
+	data = bytes.TrimSpace(data)
+	if bytes.Equal(data, []byte("null")) {
+		w.Neo4jTypeUnion = nil
+		return nil
+	}
+
+	var peek struct {
+		Type string `json:"type"`
+	}
+	if err := json.Unmarshal(data, &peek); err != nil {
+		return fmt.Errorf("Neo4jType: invalid JSON: %w", err)
+	}
+	if peek.Type == "" {
+		return fmt.Errorf("Neo4jType: missing discriminator field %q", "type")
+	}
+
+	var v Neo4jTypeUnion
+	switch peek.Type {
+	case "ListType":
+		v = &ListType{}
+	case "ScalarType":
+		v = &ScalarType{}
+	case "VectorType":
+		v = &VectorType{}
+	default:
+		return fmt.Errorf("Neo4jType: unknown type %q", peek.Type)
+	}
+
+	if err := json.Unmarshal(data, v); err != nil {
+		return fmt.Errorf("Neo4jType: invalid %q payload: %w", peek.Type, err)
+	}
+
+	w.Neo4jTypeUnion = v
+	return nil
+}
+
+type ListType struct {
+	Items Neo4jScalar `json:"items"`
+	Type  string      `json:"type"`
+}
+
+func (ListType) isNeo4jType() {}
+
+func (ListType) Neo4jTypeType() string { return "ListType" }
+
+type ScalarType struct {
+	Scalar Neo4jScalar `json:"scalar"`
+	Type   string      `json:"type"`
+}
+
+func (ScalarType) isNeo4jType() {}
+
+func (ScalarType) Neo4jTypeType() string { return "ScalarType" }
+
+type VectorType struct {
+	Dimension *int        `json:"dimension,omitempty"`
+	Items     Neo4jScalar `json:"items"`
+	Type      string      `json:"type"`
+}
+
+func (VectorType) isNeo4jType() {}
+
+func (VectorType) Neo4jTypeType() string { return "VectorType" }
 
 type Property struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`

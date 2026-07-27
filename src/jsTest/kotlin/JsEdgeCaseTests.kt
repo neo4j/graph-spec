@@ -15,7 +15,6 @@ import model.property.Property
 import model.property.ScalarType
 import model.property.listTypeJs
 import model.property.propertyJs
-import model.property.scalarTypeJs
 import kotlin.test.Test
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
@@ -33,7 +32,7 @@ class JsEdgeCaseTests {
                     name = "Movie",
                     labels = labelsJs("Movie"),
                     properties = recordOf(
-                        "p:n1:1" to propertyJs(listTypeJs(scalarTypeJs("STRING")), name = "genres", id = "p:n1:1"),
+                        "p:n1:1" to propertyJs(listTypeJs("STRING"), name = "genres", id = "p:n1:1"),
                     ),
                     id = "n:1",
                 )

@@ -3,6 +3,7 @@ package model.source
 import model.mapping.JsMappingTest
 import model.property.Neo4jScalar
 import model.property.ScalarType
+import model.property.ScalarTypeJs
 import model.extension.StringValue
 import model.extension.stringValueJs
 import kotlin.test.assertContentEquals
@@ -26,8 +27,11 @@ class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
     override fun verifyJsObject(jsObject: TableFieldJs) {
         assertEquals("field_type", jsObject.type)
         assertEquals(10, jsObject.size)
-        assertEquals("STRING", jsObject.suggested.type)
-        assertContentEquals(arrayOf("STRING", "INTEGER"), jsObject.supported.map { it.type }.toTypedArray())
+        assertEquals("STRING", (jsObject.suggested as ScalarTypeJs).scalar)
+        assertContentEquals(
+            arrayOf("STRING", "INTEGER"),
+            jsObject.supported.map { (it as ScalarTypeJs).scalar }.toTypedArray()
+        )
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
         assertEquals("Field name", jsObject.name)
     }

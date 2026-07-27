@@ -3,10 +3,10 @@ nodes:
   actor:
     label: "actor"
     properties:
-      actor_id: { type: { type: "INTEGER" }, key: true }
-      first_name: { type: { type: "STRING" }, mustExist: true }
-      last_name: { type: { type: "STRING" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      actor_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      first_name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       actor:
         type: "UNIQUE"
@@ -20,13 +20,13 @@ nodes:
   address:
     label: "address"
     properties:
-      address_id: { type: { type: "INTEGER" }, key: true }
-      address: { type: { type: "STRING" }, mustExist: true }
-      address2: { type: { type: "STRING" }, mustExist: true }
-      district: { type: { type: "STRING" }, mustExist: true }
-      postal_code: { type: { type: "STRING" }, mustExist: true }
-      phone: { type: { type: "STRING" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      address_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      address: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      address2: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      district: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      postal_code: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      phone: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       address:
         type: "UNIQUE"
@@ -40,9 +40,9 @@ nodes:
   category:
     label: "category"
     properties:
-      category_id: { type: { type: "INTEGER" }, key: true }
-      name: { type: { type: "STRING" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      category_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       category:
         type: "UNIQUE"
@@ -56,9 +56,9 @@ nodes:
   city:
     label: "city"
     properties:
-      city_id: { type: { type: "INTEGER" }, key: true }
-      city: { type: { type: "STRING" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      city_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      city: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       city:
         type: "UNIQUE"
@@ -72,9 +72,9 @@ nodes:
   country:
     label: "country"
     properties:
-      country_id: { type: { type: "INTEGER" }, key: true }
-      country: { type: { type: "STRING" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      country_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      country: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       country:
         type: "UNIQUE"
@@ -88,15 +88,15 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: { type: "INTEGER" }, key: true }
-      store_id: { type: { type: "INTEGER" }, mustExist: true }
-      first_name: { type: { type: "STRING" }, mustExist: true }
-      last_name: { type: { type: "STRING" }, mustExist: true }
-      email: { type: { type: "STRING" }, mustExist: true }
-      activebool: { type: { type: "BOOLEAN" }, mustExist: true }
-      create_date: { type: { type: "DATE" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
-      active: { type: { type: "INTEGER" }, mustExist: true }
+      customer_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      store_id: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      first_name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      email: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      activebool: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
+      create_date: { type: { type: "ScalarType", scalar: "DATE" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
+      active: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
     constraints:
       customer:
         type: "UNIQUE"
@@ -110,15 +110,15 @@ nodes:
   film:
     label: "film"
     properties:
-      film_id: { type: { type: "INTEGER" }, key: true }
-      title: { type: { type: "STRING" }, mustExist: true }
-      description: { type: { type: "STRING" }, mustExist: true }
-      rental_duration: { type: { type: "INTEGER" }, mustExist: true }
-      rental_rate: { type: { type: "FLOAT" }, mustExist: true }
-      length: { type: { type: "INTEGER" }, mustExist: true }
-      replacement_cost: { type: { type: "FLOAT" }, mustExist: true }
-      rating: { type: { type: "STRING" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      film_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      title: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      description: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      rental_duration: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      rental_rate: { type: { type: "ScalarType", scalar: "FLOAT" }, mustExist: true }
+      length: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      replacement_cost: { type: { type: "ScalarType", scalar: "FLOAT" }, mustExist: true }
+      rating: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       film:
         type: "UNIQUE"
@@ -132,9 +132,9 @@ nodes:
   inventory:
     label: "inventory"
     properties:
-      inventory_id: { type: { type: "INTEGER" }, key: true }
-      store_id: { type: { type: "INTEGER" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      inventory_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      store_id: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       inventory:
         type: "UNIQUE"
@@ -148,9 +148,9 @@ nodes:
   language:
     label: "language"
     properties:
-      language_id: { type: { type: "INTEGER" }, key: true }
-      name: { type: { type: "STRING" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      language_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       language:
         type: "UNIQUE"
@@ -164,9 +164,9 @@ nodes:
   payment:
     label: "payment"
     properties:
-      payment_id: { type: { type: "INTEGER" }, key: true }
-      amount: { type: { type: "FLOAT" }, mustExist: true }
-      payment_date: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      payment_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      amount: { type: { type: "ScalarType", scalar: "FLOAT" }, mustExist: true }
+      payment_date: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       payment:
         type: "UNIQUE"
@@ -180,10 +180,10 @@ nodes:
   rental:
     label: "rental"
     properties:
-      rental_id: { type: { type: "INTEGER" }, key: true }
-      rental_date: { type: { type: "ZONED DATETIME" }, mustExist: true }
-      return_date: { type: { type: "ZONED DATETIME" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      rental_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      rental_date: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
+      return_date: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       rental:
         type: "UNIQUE"
@@ -197,15 +197,15 @@ nodes:
   staff:
     label: "staff"
     properties:
-      staff_id: { type: { type: "INTEGER" }, key: true }
-      first_name: { type: { type: "STRING" }, mustExist: true }
-      last_name: { type: { type: "STRING" }, mustExist: true }
-      email: { type: { type: "STRING" }, mustExist: true }
-      store_id: { type: { type: "INTEGER" }, mustExist: true }
-      active: { type: { type: "BOOLEAN" }, mustExist: true }
-      username: { type: { type: "STRING" }, mustExist: true }
-      password: { type: { type: "STRING" }, mustExist: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      staff_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      first_name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_name: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      email: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      store_id: { type: { type: "ScalarType", scalar: "INTEGER" }, mustExist: true }
+      active: { type: { type: "ScalarType", scalar: "BOOLEAN" }, mustExist: true }
+      username: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      password: { type: { type: "ScalarType", scalar: "STRING" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       staff:
         type: "UNIQUE"
@@ -219,8 +219,8 @@ nodes:
   store:
     label: "store"
     properties:
-      store_id: { type: { type: "INTEGER" }, key: true }
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      store_id: { type: { type: "ScalarType", scalar: "INTEGER" }, key: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
     constraints:
       store:
         type: "UNIQUE"
@@ -253,13 +253,13 @@ relationships:
     from: { node: "actor" }
     to: { node: "film" }
     properties:
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
   RELATED_TO_FILM2:
     type: "RELATED_TO_FILM"
     from: { node: "category" }
     to: { node: "film" }
     properties:
-      last_update: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      last_update: { type: { type: "ScalarType", scalar: "ZONED DATETIME" }, mustExist: true }
   RELATED_TO_FILM3:
     type: "RELATED_TO_FILM"
     from: { node: "inventory" }
@@ -307,23 +307,27 @@ tables:
       actor_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       first_name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["actor_id"]
   actor_info:
     source: "cloud"
@@ -331,66 +335,78 @@ tables:
       actor_id:
         type: "int4"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       first_name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       film_info:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
   address:
     source: "cloud"
     fields:
       address_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       address:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       address2:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       district:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       city_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       postal_code:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       phone:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["address_id"]
     foreignKeys:
       foreignKey1:
@@ -404,18 +420,21 @@ tables:
       category_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["category_id"]
   city:
     source: "cloud"
@@ -423,23 +442,27 @@ tables:
       city_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       city:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       country_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["city_id"]
     foreignKeys:
       foreignKey1:
@@ -453,18 +476,21 @@ tables:
       country_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       country:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["country_id"]
   customer:
     source: "cloud"
@@ -472,53 +498,63 @@ tables:
       customer_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       store_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       first_name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       email:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       address_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       activebool:
         type: "bool"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       create_date:
         type: "date"
         suggested:
-          type: "DATE"
-        supported: [{ type: "DATE" }]
+          type: "ScalarType"
+          scalar: "DATE"
+        supported: [{ type: "ScalarType", scalar: "DATE" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
       active:
         type: "int4"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
     primaryKeys: ["customer_id"]
     foreignKeys:
       foreignKey1:
@@ -532,103 +568,122 @@ tables:
       id:
         type: "int4"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       name:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       address:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       zip code:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       phone:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       city:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       country:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       notes:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       sid:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   film:
     source: "cloud"
     fields:
       film_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       title:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       description:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       release_year:
         type: "year"
       language_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       rental_duration:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       rental_rate:
         type: "numeric"
         suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "FLOAT"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       length:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       replacement_cost:
         type: "numeric"
         suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "FLOAT"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       rating:
         type: "mpaa_rating"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
       special_features:
         type: "_text"
       fulltext:
@@ -646,18 +701,21 @@ tables:
       actor_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       film_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["actor_id", "film_id"]
     foreignKeys:
       foreignKey1:
@@ -676,18 +734,21 @@ tables:
       film_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       category_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["film_id", "category_id"]
     foreignKeys:
       foreignKey1:
@@ -706,66 +767,78 @@ tables:
       fid:
         type: "int4"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       title:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       description:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       category:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       price:
         type: "numeric"
         suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "FLOAT"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       length:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       rating:
         type: "mpaa_rating"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       actors:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
   inventory:
     source: "cloud"
     fields:
       inventory_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       film_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       store_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["inventory_id"]
     foreignKeys:
       foreignKey1:
@@ -779,18 +852,21 @@ tables:
       language_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       name:
         type: "bpchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["language_id"]
   nicer_but_slower_film_list:
     source: "cloud"
@@ -798,76 +874,90 @@ tables:
       fid:
         type: "int4"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       title:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       description:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       category:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       price:
         type: "numeric"
         suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "FLOAT"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       length:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       rating:
         type: "mpaa_rating"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       actors:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
   payment:
     source: "cloud"
     fields:
       payment_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       customer_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       staff_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       rental_id:
         type: "int4"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       amount:
         type: "numeric"
         suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "FLOAT"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       payment_date:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["payment_id"]
     foreignKeys:
       foreignKey1:
@@ -891,38 +981,45 @@ tables:
       rental_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       rental_date:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
       inventory_id:
         type: "int4"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       customer_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       return_date:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
       staff_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["rental_id"]
     foreignKeys:
       foreignKey1:
@@ -946,84 +1043,99 @@ tables:
       category:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       total_sales:
         type: "numeric"
         suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "FLOAT"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   sales_by_store:
     source: "cloud"
     fields:
       store:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       manager:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       total_sales:
         type: "numeric"
         suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "FLOAT"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   staff:
     source: "cloud"
     fields:
       staff_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       first_name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_name:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       address_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       email:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       store_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       active:
         type: "bool"
         suggested:
-          type: "BOOLEAN"
-        supported: [{ type: "STRING" }, { type: "BOOLEAN" }]
+          type: "ScalarType"
+          scalar: "BOOLEAN"
+        supported: [{ type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "BOOLEAN" }]
       username:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       password:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
       picture:
         type: "bytea"
     primaryKeys: ["staff_id"]
@@ -1039,66 +1151,78 @@ tables:
       id:
         type: "int4"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       name:
         type: "text"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       address:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       zip code:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       phone:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       city:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       country:
         type: "varchar"
         suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+          type: "ScalarType"
+          scalar: "STRING"
+        supported: [{ type: "ScalarType", scalar: "STRING" }]
       sid:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
   store:
     source: "cloud"
     fields:
       store_id:
         type: "serial"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       manager_staff_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       address_id:
         type: "int2"
         suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+          type: "ScalarType"
+          scalar: "INTEGER"
+        supported: [{ type: "ScalarType", scalar: "INTEGER" }, { type: "ScalarType", scalar: "STRING" }, { type: "ScalarType", scalar: "FLOAT" }]
       last_update:
         type: "timestamp"
         suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "LOCAL DATETIME" }]
+          type: "ScalarType"
+          scalar: "ZONED DATETIME"
+        supported: [{ type: "ScalarType", scalar: "DATE" }, { type: "ScalarType", scalar: "ZONED DATETIME" }, { type: "ScalarType", scalar: "LOCAL DATETIME" }]
     primaryKeys: ["store_id"]
     foreignKeys:
       foreignKey1:

@@ -6,6 +6,7 @@ import model.GraphModelJs
 import model.extension.StringValue
 import model.extension.toJs
 import model.graphModelJs
+import model.property.ScalarTypeJs
 import model.property.scalarTypeJs
 
 class RelationshipEditorTest {
@@ -71,7 +72,7 @@ class RelationshipEditorTest {
 
         val prop = rel.properties[propId]!!
         assertEquals("NewName", prop.name)
-        assertEquals("STRING", prop.type.type)
+        assertEquals("STRING", (prop.type as ScalarTypeJs).scalar)
         assertTrue(prop.mustExist!!)
 
         // Remove Property

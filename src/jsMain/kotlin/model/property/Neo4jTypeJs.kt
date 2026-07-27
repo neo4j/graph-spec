@@ -29,53 +29,51 @@ external interface Neo4jTypeJs {
 @JsPlainObject
 external interface ScalarTypeJs : Neo4jTypeJs {
     override val type: String
+    val scalar: String
 }
 
 @JsExport
 @JsPlainObject
 external interface ListTypeJs : Neo4jTypeJs {
     override val type: String
-    val items: ScalarTypeJs
+    val items: String
 }
 
 @JsExport
 @JsPlainObject
 external interface VectorTypeJs : Neo4jTypeJs {
     override val type: String
-    val items: ScalarTypeJs
+    val items: String
     val dimension: Int?
 }
 
-fun scalarTypeJs(type: String): ScalarTypeJs = jso {
-    this.type = type
+fun scalarTypeJs(scalar: String): ScalarTypeJs = jso {
+    this.type = Neo4jTypeKind.SCALAR
+    this.scalar = scalar
 }
 
-fun listTypeJs(items: ScalarTypeJs): ListTypeJs = jso {
+fun listTypeJs(items: String): ListTypeJs = jso {
     this.type = Neo4jTypeKind.LIST
     this.items = items
 }
 
-fun vectorTypeJs(items: ScalarTypeJs, dimension: Int?): VectorTypeJs = jso {
+fun vectorTypeJs(items: String, dimension: Int?): VectorTypeJs = jso {
     this.type = Neo4jTypeKind.VECTOR
     this.items = items
     this.dimension = dimension
 }
 
 fun Neo4jType.toJs(): Neo4jTypeJs = when (this) {
-    is ScalarType -> scalarTypeJs(Neo4jScalar.toString(type))
-    is ListType -> listTypeJs(scalarTypeJs(Neo4jScalar.toString(items.type)))
-    is VectorType -> vectorTypeJs(scalarTypeJs(Neo4jScalar.toString(items.type)), dimension)
+    is ScalarType -> scalarTypeJs(Neo4jScalar.toString(scalar))
+    is ListType -> listTypeJs(Neo4jScalar.toString(items))
+    is VectorType -> vectorTypeJs(Neo4jScalar.toString(items), dimension)
 }
 
 fun Neo4jTypeJs.toClass(): Neo4jType = when (type) {
-    Neo4jTypeKind.VECTOR -> (this as VectorTypeJs).let {
-        VectorType(items = ScalarType(scalar(it.items.type)), dimension = it.dimension)
-    }
-    Neo4jTypeKind.LIST -> (this as ListTypeJs).let {
-        ListType(items = ScalarType(scalar(it.items.type)))
-    }
-    else -> ScalarType(scalar(type))
+    Neo4jTypeKind.VECTOR -> (this as VectorTypeJs).let { VectorType(toScalar(it.items), it.dimension) }
+    Neo4jTypeKind.LIST -> ListType(toScalar((this as ListTypeJs).items))
+    else -> ScalarType(toScalar((this as ScalarTypeJs).scalar))
 }
 
-private fun scalar(name: String): Neo4jScalar =
+private fun toScalar(name: String): Neo4jScalar =
     Neo4jScalar.fromString(name) ?: error("Invalid Neo4j scalar type '$name'")

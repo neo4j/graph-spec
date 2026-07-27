@@ -369,18 +369,17 @@ class DataModelV3GraphSpecMigration :
         private fun neo4jType(type: SchemaMap?): SchemaMap? {
             val base = type?.stringOrNull("type")?.lowercase() ?: return null
             return when (base) {
-                "array" -> itemType(type)?.let { schemaMapOf("type" to Neo4jTypeKind.LIST, "items" to it) }
-                "vector" -> itemType(type)?.let { items ->
+                "array" -> itemScalar(type)?.let { schemaMapOf("type" to Neo4jTypeKind.LIST, "items" to it) }
+                "vector" -> itemScalar(type)?.let { items ->
                     val vector = schemaMapOf("type" to Neo4jTypeKind.VECTOR, "items" to items)
                     type.literalOrNull("dimension")?.let { vector["dimension"] = it }
                     vector
                 }
-                else -> scalarType(base)?.let { schemaMapOf("type" to it) }
+                else -> scalarType(base)?.let { schemaMapOf("type" to Neo4jTypeKind.SCALAR, "scalar" to it) }
             }
         }
 
-        private fun itemType(type: SchemaMap): SchemaMap? =
-            scalarType(type.mapOrNull("items")?.stringOrNull("type"))?.let { schemaMapOf("type" to it) }
+        private fun itemScalar(type: SchemaMap): String? = scalarType(type.mapOrNull("items")?.stringOrNull("type"))
 
         private fun scalarType(string: String?): String? = when (val lower = string?.lowercase()) {
             null -> null

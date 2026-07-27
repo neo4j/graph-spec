@@ -276,47 +276,97 @@
             "additionalProperties": false
         },
         "Neo4jType": {
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/ListType"
+                },
+                {
+                    "$ref": "#/$defs/ScalarType"
+                },
+                {
+                    "$ref": "#/$defs/VectorType"
+                }
+            ],
+            "discriminator": {
+                "propertyName": "type"
+            }
+        },
+        "Neo4jScalar": {
             "type": "string",
             "enum": [
                 "ANY",
                 "BOOLEAN",
-                "LIST<BOOLEAN>",
-                "DATE",
-                "LIST<DATE>",
-                "DURATION",
-                "LIST<DURATION>",
-                "FLOAT32",
-                "LIST<FLOAT32>",
-                "FLOAT",
-                "LIST<FLOAT>",
-                "INTEGER8",
-                "LIST<INTEGER8>",
-                "INTEGER16",
-                "LIST<INTEGER16>",
-                "INTEGER32",
-                "LIST<INTEGER32>",
-                "INTEGER",
-                "LIST<INTEGER>",
-                "LOCAL DATETIME",
-                "LIST<LOCAL DATETIME>",
-                "LOCAL TIME",
-                "LIST<LOCAL TIME>",
-                "POINT",
-                "LIST<POINT>",
                 "STRING",
-                "LIST<STRING>",
-                "VECTOR<FLOAT>",
-                "VECTOR<FLOAT32>",
-                "VECTOR<INTEGER>",
-                "VECTOR<INTEGER32>",
-                "VECTOR<INTEGER16>",
-                "VECTOR<INTEGER8>",
+                "INTEGER",
+                "INTEGER8",
+                "INTEGER16",
+                "INTEGER32",
+                "FLOAT",
+                "FLOAT32",
+                "DATE",
+                "DURATION",
+                "POINT",
+                "UUID",
+                "LOCAL DATETIME",
+                "LOCAL TIME",
                 "ZONED DATETIME",
-                "LIST<ZONED DATETIME>",
-                "ZONED TIME",
-                "LIST<ZONED TIME>",
-                "UUID"
+                "ZONED TIME"
             ]
+        },
+        "ListType": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "ListType"
+                },
+                "items": {
+                    "$ref": "#/$defs/Neo4jScalar"
+                }
+            },
+            "required": [
+                "type",
+                "items"
+            ],
+            "additionalProperties": false
+        },
+        "ScalarType": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "ScalarType"
+                },
+                "scalar": {
+                    "$ref": "#/$defs/Neo4jScalar"
+                }
+            },
+            "required": [
+                "type",
+                "scalar"
+            ],
+            "additionalProperties": false
+        },
+        "VectorType": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "VectorType"
+                },
+                "items": {
+                    "$ref": "#/$defs/Neo4jScalar"
+                },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
+                }
+            },
+            "required": [
+                "type",
+                "items"
+            ],
+            "additionalProperties": false
         },
         "NodeConstraint": {
             "type": "object",

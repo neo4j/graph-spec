@@ -594,9 +594,9 @@ class DataModelV3GraphSpecMigrationTest {
     }
 }
 
-/** Renders a graph-spec structured type object back to its legacy string form for concise assertions. */
-private fun SchemaMap.typeString(): String? = when (val kind = stringOrNull("type")) {
-    "LIST" -> "LIST<${map("items").string("type")}>"
-    "VECTOR" -> "VECTOR<${map("items").string("type")}>"
-    else -> kind
+/** Renders a graph-spec type object back to a compact string form for concise assertions. */
+private fun SchemaMap.typeString(): String? = when (stringOrNull("type")) {
+    "ListType" -> "LIST<${string("items")}>"
+    "VectorType" -> "VECTOR<${string("items")}>"
+    else -> stringOrNull("scalar")
 }
