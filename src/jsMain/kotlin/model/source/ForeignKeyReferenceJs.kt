@@ -25,7 +25,6 @@ import model.extension.toClass
 import model.extension.toJs
 import model.jso
 import model.mapping.PropertyMapping
-import model.property.Neo4jType
 import kotlin.String
 
 @JsExport

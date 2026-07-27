@@ -25,16 +25,19 @@ import model.extension.toClass
 import model.extension.toJs
 import model.jso
 import model.mapping.PropertyMapping
-import model.property.Neo4jType
+import model.property.Neo4jTypeJs
+import model.property.scalarTypeJs
 import kotlin.String
+import model.property.toClass as toTypeClass
+import model.property.toJs as toTypeJs
 
 @JsExport
 @JsPlainObject
 external interface TableFieldJs {
     var type: String
     var size: Int
-    val suggested: String
-    val supported: Array<String>
+    val suggested: Neo4jTypeJs
+    val supported: Array<Neo4jTypeJs>
     val extensions: Record<String, ExtensionValueJs>
     val name: String
 }
@@ -42,8 +45,8 @@ external interface TableFieldJs {
 fun tableFieldJs(
     type: String,
     size: Int = -1,
-    suggested: String = "ANY",
-    supported: Array<String> = emptyArray(),
+    suggested: Neo4jTypeJs = scalarTypeJs("ANY"),
+    supported: Array<Neo4jTypeJs> = emptyArray(),
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String = ""
 ): TableFieldJs = jso {
@@ -58,8 +61,8 @@ fun tableFieldJs(
 fun TableField.toJs(key: String) = tableFieldJs(
     type = type,
     size = size,
-    suggested = suggested.name,
-    supported = supported.map { it.name }.toTypedArray(),
+    suggested = suggested.toTypeJs(),
+    supported = supported.map { it.toTypeJs() }.toTypedArray(),
     extensions = extensions.associateBy { _, value -> value.toJs() },
     name = name ?: key
 )
@@ -67,8 +70,8 @@ fun TableField.toJs(key: String) = tableFieldJs(
 fun TableFieldJs.toClass() = TableField(
     type = type,
     size = size,
-    suggested = suggested.let { Neo4jType.valueOf(it) },
-    supported = supported.map { Neo4jType.valueOf(it) }.toSet(),
+    suggested = suggested.toTypeClass(),
+    supported = supported.map { it.toTypeClass() }.toSet(),
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
     name = name
 )

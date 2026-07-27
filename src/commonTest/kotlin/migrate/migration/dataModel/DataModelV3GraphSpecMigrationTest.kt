@@ -16,6 +16,7 @@
  */
 package migrate.migration.dataModel
 
+import codec.schema.SchemaMap
 import codec.schema.schemaMapOf
 import codec.schema.toSchemaElement
 import kotlin.test.Test
@@ -157,7 +158,7 @@ class DataModelV3GraphSpecMigrationTest {
         assertEquals("Person", labels.stringOrNull("identifier"))
         val props = migratedNode.map("properties")
         assertNotNull(props["prop1"])
-        assertEquals("STRING", props.map("prop1").string("type"))
+        assertEquals("STRING", props.map("prop1").map("type").typeString())
         assertEquals("true", props.map("prop1").string("mustExist"))
     }
 
@@ -293,7 +294,7 @@ class DataModelV3GraphSpecMigrationTest {
         assertNotNull(rel)
         assertEquals("FOLLOWS", rel.string("type"))
         assertEquals("nodeA", rel.map("from").string("node"))
-        assertEquals("ZONED DATETIME", rel.map("properties").map("p1").string("type"))
+        assertEquals("ZONED DATETIME", rel.map("properties").map("p1").map("type").typeString())
         assertNotNull(rel.map("constraints")["c1"])
     }
 
@@ -318,8 +319,8 @@ class DataModelV3GraphSpecMigrationTest {
 
         val result = migration.convertProperties(labels, emptySet())
 
-        assertEquals("STRING", result["p1"]?.string("type"))
-        assertEquals("INTEGER", result["p2"]?.string("type"))
+        assertEquals("STRING", result["p1"]?.map("type")?.typeString())
+        assertEquals("INTEGER", result["p2"]?.map("type")?.typeString())
     }
 
     @Test
@@ -335,7 +336,7 @@ class DataModelV3GraphSpecMigrationTest {
                     schemaMapOf(
                         "\$id" to "p2",
                         "token" to "embedding",
-                        "type" to mapOf("type" to "vector", "items" to mapOf("type" to "float"))
+                        "type" to mapOf("type" to "vector", "items" to mapOf("type" to "float"), "dimension" to 4)
                     )
                 )
             )
@@ -343,8 +344,10 @@ class DataModelV3GraphSpecMigrationTest {
 
         val result = migration.convertProperties(labels, emptySet())
 
-        assertEquals("LIST<STRING>", result["p1"]?.string("type"))
-        assertEquals("VECTOR<FLOAT>", result["p2"]?.string("type"))
+        assertEquals("LIST<STRING>", result["p1"]?.map("type")?.typeString())
+        assertEquals("VECTOR<FLOAT>", result["p2"]?.map("type")?.typeString())
+        // the vector dimension must be carried through to the graph spec type
+        assertEquals(4, result["p2"]?.map("type")?.int("dimension"))
     }
 
     @Test
@@ -519,10 +522,23 @@ class DataModelV3GraphSpecMigrationTest {
                                 schemaMapOf(
                                     "name" to "embedding",
                                     "rawType" to "VECTOR",
-                                    "recommendedType" to mapOf("type" to "vector", "items" to mapOf("type" to "float")),
+                                    "recommendedType" to
+                                        mapOf(
+                                            "type" to "vector",
+                                            "items" to mapOf("type" to "float"),
+                                            "dimension" to 4
+                                        ),
                                     "supportedTypes" to listOf(
-                                        mapOf("type" to "vector", "items" to mapOf("type" to "float")),
-                                        mapOf("type" to "vector", "items" to mapOf("type" to "float32"))
+                                        mapOf(
+                                            "type" to "vector",
+                                            "items" to mapOf("type" to "float"),
+                                            "dimension" to 4
+                                        ),
+                                        mapOf(
+                                            "type" to "vector",
+                                            "items" to mapOf("type" to "float32"),
+                                            "dimension" to 4
+                                        )
                                     )
                                 )
                             )
@@ -535,18 +551,21 @@ class DataModelV3GraphSpecMigrationTest {
         val fields = migration.migrateTables(unwrap(inputSchema))["film"]!!.mapOfMaps("fields")
 
         val arrayField = fields["special_features"]!!
-        assertEquals("STRING", arrayField.string("suggested"))
+        assertEquals("STRING", arrayField.map("suggested").typeString())
         assertEquals(
             listOf("STRING", "LIST<STRING>"),
-            arrayField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
+            arrayField.list("supported").map { (it as SchemaMap).typeString() }
         )
 
         val vectorField = fields["embedding"]!!
-        assertEquals("VECTOR<FLOAT>", vectorField.string("suggested"))
+        assertEquals("VECTOR<FLOAT>", vectorField.map("suggested").typeString())
         assertEquals(
             listOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"),
-            vectorField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
+            vectorField.list("supported").map { (it as SchemaMap).typeString() }
         )
+        // the vector dimension must be carried through on the table field's suggested/supported types
+        assertEquals(4, vectorField.map("suggested").int("dimension"))
+        assertEquals(4, (vectorField.list("supported")[0] as SchemaMap).int("dimension"))
     }
 
     @Test
@@ -573,4 +592,11 @@ class DataModelV3GraphSpecMigrationTest {
         assertTrue(result.mapOfMaps("relationships").isEmpty(), "relationships should be present but empty")
         assertFalse(result.containsKey("mappings"), "mappings should be omitted when empty")
     }
+}
+
+/** Renders a graph-spec structured type object back to its legacy string form for concise assertions. */
+private fun SchemaMap.typeString(): String? = when (val kind = stringOrNull("type")) {
+    "LIST" -> "LIST<${map("items").string("type")}>"
+    "VECTOR" -> "VECTOR<${map("items").string("type")}>"
+    else -> kind
 }

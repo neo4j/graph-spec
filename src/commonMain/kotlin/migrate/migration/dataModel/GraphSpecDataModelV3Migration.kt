@@ -16,6 +16,7 @@
  */
 package migrate.migration.dataModel
 
+import codec.schema.SchemaElement
 import codec.schema.SchemaLiteral
 import codec.schema.SchemaMap
 import codec.schema.SchemaNull
@@ -24,6 +25,7 @@ import codec.schema.toNotEmpty
 import migrate.Migration
 import model.Type
 import model.Version
+import model.property.Neo4jTypeKind
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
@@ -337,7 +339,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             val map = schemaMapOf(
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
-                "type" to propertyType(prop.string("type")),
+                "type" to dataModelType(prop.mapOrNull("type")),
                 "nullable" to if (prop.stringOrNull("key") == "true") {
                     false
                 } else {
@@ -383,11 +385,11 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "name" to field.literalOrNull("name"),
                 "rawType" to field.literalOrNull("type"),
                 "size" to field.literalOrNull("size"),
-                "recommendedType" to field.literalOrNull("suggested")?.let {
-                    propertyType(it.string)
+                "recommendedType" to field.mapOrNull("suggested")?.let {
+                    dataModelType(it)
                 },
-                "supportedTypes" to field.listOrNull("supported")?.map {
-                    propertyType((it as SchemaLiteral).string)
+                "supportedTypes" to field.listOfMapsOrNull("supported")?.map {
+                    dataModelType(it)
                 }
             )
         }
@@ -454,17 +456,29 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             else -> string?.lowercase()
         }
 
-        private fun propertyType(propertyType: String?) = when {
-            propertyType == "ANY" -> SchemaNull()
-            propertyType != null && propertyType.startsWith("VECTOR") -> schemaMapOf(
-                "type" to "vector",
-                "items" to schemaMapOf("type" to type(propertyType.removePrefix("VECTOR<").removeSuffix(">")))
-            )
-            propertyType != null && propertyType.startsWith("LIST") -> schemaMapOf(
-                "type" to "array",
-                "items" to schemaMapOf("type" to type(propertyType.removePrefix("LIST<").removeSuffix(">")))
-            )
-            else -> schemaMapOf("type" to type(propertyType))
+        // Converts a graph-spec structured type object back to the data model's structured
+        // type (lowercase vocabulary, "array" for lists, null for ANY). The vector dimension
+        // is carried through when present.
+        private fun dataModelType(graphType: SchemaMap?): SchemaElement {
+            if (graphType == null) return SchemaNull()
+            return when (graphType.stringOrNull("type")) {
+                Neo4jTypeKind.VECTOR -> {
+                    val vector = schemaMapOf(
+                        "type" to "vector",
+                        "items" to schemaMapOf("type" to type(graphType.mapOrNull("items")?.stringOrNull("type")))
+                    )
+                    graphType.literalOrNull("dimension")?.let { vector["dimension"] = it }
+                    vector
+                }
+                Neo4jTypeKind.LIST -> schemaMapOf(
+                    "type" to "array",
+                    "items" to schemaMapOf("type" to type(graphType.mapOrNull("items")?.stringOrNull("type")))
+                )
+                else -> when (val scalar = type(graphType.stringOrNull("type"))) {
+                    null -> SchemaNull()
+                    else -> schemaMapOf("type" to scalar)
+                }
+            }
         }
 
         private fun constraintType(name: String): String = when (name) {

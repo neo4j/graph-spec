@@ -5,6 +5,7 @@ import model.GraphModelJs
 import model.extension.StringValue
 import model.extension.toJs
 import model.graphModelJs
+import model.property.scalarTypeJs
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -66,7 +67,7 @@ class NodeEditorTest {
 
         // Set Property Attributes
         NodeEditor.setPropertyName(model, nodeId, propId, "age")
-        NodeEditor.setPropertyType(model, nodeId, propId, "Integer")
+        NodeEditor.setPropertyType(model, nodeId, propId, scalarTypeJs("INTEGER"))
         NodeEditor.setPropertyMustExist(model, nodeId, propId, false)
         NodeEditor.setPropertyUnique(model, nodeId, propId, true)
 

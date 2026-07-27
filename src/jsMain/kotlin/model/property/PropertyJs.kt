@@ -29,7 +29,7 @@ import model.jso
 @JsExport
 @JsPlainObject
 external interface PropertyJs {
-    var type: String
+    var type: Neo4jTypeJs
     var mustExist: Boolean?
     var unique: Boolean?
     var key: Boolean?
@@ -39,7 +39,7 @@ external interface PropertyJs {
 }
 
 fun propertyJs(
-    type: String = "ANY",
+    type: Neo4jTypeJs = scalarTypeJs("ANY"),
     mustExist: Boolean? = null,
     unique: Boolean? = null,
     key: Boolean? = null,
@@ -57,7 +57,7 @@ fun propertyJs(
 }
 
 fun Property.toJs(key: String) = propertyJs(
-    type = Neo4jType.toString(type),
+    type = type.toJs(),
     mustExist = mustExist,
     unique = unique,
     key = this.key,
@@ -66,16 +66,11 @@ fun Property.toJs(key: String) = propertyJs(
     id = key
 )
 
-fun PropertyJs.toClass(parent: String, property: String): Property {
-    val type = type
-    val neo4jType = Neo4jType.entries.firstOrNull { Neo4jType.toString(it) == type }
-        ?: error("Invalid neo4j type '$type' for $parent.properties.$property")
-    return Property(
-        type = neo4jType,
-        mustExist = mustExist,
-        unique = unique,
-        key = key,
-        extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
-        name = name
-    )
-}
+fun PropertyJs.toClass(parent: String, property: String): Property = Property(
+    type = type.toClass(),
+    mustExist = mustExist,
+    unique = unique,
+    key = key,
+    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    name = name
+)

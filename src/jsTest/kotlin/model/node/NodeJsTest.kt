@@ -3,9 +3,11 @@ package model.node
 import model.mapping.JsMappingTest
 import model.extension.StringValue
 import model.extension.stringValueJs
-import model.property.Neo4jType
+import model.property.Neo4jScalar
 import model.property.Property
+import model.property.ScalarType
 import model.property.propertyJs
+import model.property.scalarTypeJs
 import model.type.ConstraintType
 import model.type.IndexType
 import kotlin.test.assertEquals
@@ -14,7 +16,7 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
 
     override fun createClass() = Node(
         labels = Labels("label"),
-        properties = mutableMapOf("prop" to Property(Neo4jType.STRING, name = "propertyName")),
+        properties = mutableMapOf("prop" to Property(ScalarType(Neo4jScalar.STRING), name = "propertyName")),
         constraints = mutableMapOf("constraint" to NodeConstraint(ConstraintType.EXISTS, "label", mutableSetOf("prop"))),
         indexes = mutableMapOf("index" to NodeIndex(IndexType.RANGE, mutableSetOf("label"), mutableSetOf("prop"))),
         extensions = mutableMapOf("key1" to StringValue("val1")),
@@ -27,7 +29,7 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
 
     override fun verifyJsObject(jsObject: NodeJs) {
         assertEquals("label", jsObject.labels.identifier)
-        assertJsEquals(propertyJs("STRING", id = "prop", name = "propertyName"), jsObject.properties["prop"])
+        assertJsEquals(propertyJs(scalarTypeJs("STRING"), id = "prop", name = "propertyName"), jsObject.properties["prop"])
         assertJsEquals(nodeConstraintJs("EXISTS", "label", arrayOf("prop")), jsObject.constraints["constraint"])
         assertJsEquals(nodeIndexJs("RANGE", arrayOf("label"), arrayOf("prop")), jsObject.indexes["index"])
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
