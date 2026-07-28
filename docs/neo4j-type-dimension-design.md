@@ -114,49 +114,75 @@ an optional `dimension` value.
   ```json
   "properties": {
     "flightId": {
-      "type": {
-        "type": "ScalarType",
-        "scalar": "INTEGER",
-        "key": true
-      } 
+      "type": { "type": "ScalarType", "scalar": "INTEGER"},
+      "key": true 
     }
   }
   ...
   "fields": {
     "embedding": {
       "type": "VECTOR",
-      "suggested": { 
-        "type": {
-          "type": "VectorType",
-          "scalar": "FLOAT",
-          "dimension": 4
-        } 
-      }
+      "suggested": { "type": "VectorType", "scalar": "FLOAT", "dimension": 4 },
       "supported": [
-        {
-          "type": "VectorType",
-          "scalar": "FLOAT",
-          "dimension": 4
-        },
-        {
-          "type": "VectorType",
-          "scalar": "FLOAT32",
-          "dimension": 8
-        }
+        { "type": "VectorType", "scalar": "FLOAT", "dimension": 4 },
+        { "type": "VectorType", "scalar": "FLOAT32", "dimension": 8 }
+      ]
     }
   }
   ```
 
-## Chosen path: Option D
+### Option E: structured union keyed on the full type name (single discriminator field)
+
+A variant of Option D that keeps the discriminated-union-of-objects shape but trims the per-object verbosity.
+Instead of three variants (`ScalarType`/`ListType`/`VectorType`), each carrying a separate element field 
+(`scalar`/`items`), reuse graph-spec's existing full type names (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>`, ...) 
+directly as the discriminator `const`. Every type name is its own variant and only the vector variants declare 
+`dimension`. E.g.
+
+```json
+"properties": {
+  "flightId": {
+    "type": { "type": "INTEGER" },
+    "key": true
+  }
+}
+...
+"fields": {
+  "embedding": {
+    "type": "VECTOR",
+    "suggested": { "type": "VECTOR<FLOAT>", "dimension": 4 },
+    "supported": [
+      { "type": "VECTOR<FLOAT>", "dimension": 4 },
+      { "type": "VECTOR<FLOAT32>", "dimension": 8 }
+    ]
+  }
+}
+```
+
+- **Pros:** Same guarantees and benefits as Option D - dimension is only associated to the vector type, it is
+  schema-enforced, and all use-cases are supported. It's less verbose per object than D and easier to read without
+  the `scalar`/`items` field. It keeps graph-spec's existing `VECTOR<FLOAT>` spelling verbatim which were chosen
+  as they tie in with Neo4j types. It also enables easily adding to existing types in the future if needed.
+  
+- **Cons:** The main downside is the verbosity in the spec and auto-generated code - the discriminator must carry 
+  the full type identity, so the union expands to ~37 variants instead of option D's three. The auto-generated Go 
+  gets ~37 flat structs rather than three typed variants (`ScalarType`/`ListType`/`VectorType`). It also still shares
+  option D's largest cost in the verbosity - `type` becomes an object for every property, and (because the field is 
+  literally named `type`) the scalar case reads as the doubly-nested `"type": { "type": "STRING" }`.
+
+## Chosen path: Option E
 
 Given that:
 * Option A is hacky and not clear to the user or developer
 * Option B is nice for the spec, but brittle and requires more custom serialization
-* Option C is unclear and can't support use-cases where multiple dimensions exist across values in supported fields 
+* Option C is unclear and can't support use-cases where multiple dimensions exist across values in supported fields
 
-It seems like option D is the main option. This ties dimension to only the vector type in a structured way, makes things
-clear from the JSON schema spec and should support all possible cases. The big downsides are the complexity of the 
-implementation and the increased verbosity in the JSON/YAML graph-spec representations.  
+It seems like these options are not viable. 
+
+Therefore, the main options are D and E. They both tie dimension to only the vector type in a schema-enforced way. 
+They are both very similar but trade off verbosity between internal implemenation and user examples - option D is 
+is more verbose for examples but simpler in implementation and option E is the reverse. I think, given the 
+implementation simplification is not that great for option D, option E is the best path.
 
 ### Vocabulary
 
@@ -186,16 +212,23 @@ The goal on the Go/JVM side was a proper, typed model — distinct `ScalarType`/
 `VectorType` structs and a shared `Neo4jScalar` enum — not a single loose struct. That is only
 achievable as a discriminated `oneOf`, which drove three choices:
 
-- **Native sealed polymorphism, not a custom serializer.** The Go JSON-schema generator
-  (`generateGraphModelJsonSchema`) walks `GraphModel.serializer().descriptor`. A
-  `JsonContentPolymorphicSerializer` (as `ExtensionValue`/`Mapping` use) exposes a descriptor
-  with no field structure and crashes it (`ArrayIndexOutOfBoundsException`); a flat *surrogate*
-  serializer avoids the crash but collapses the three variants into one struct and erases the
-  scalar enum. Native sealed polymorphism gives the generator a proper `PolymorphicKind.SEALED`
-  descriptor, so it emits `Neo4jType` as `oneOf: [ScalarType, ListType, VectorType]` with
-  `discriminator: { propertyName: "type" }`, each variant a distinct schema, and `Neo4jScalar`
-  as a reusable string enum. No custom serializer means no `@EncodeDefault` /
-  `@OptIn(ExperimentalSerializationApi)` either — the discriminator is injected by the framework.
+- **Native sealed polymorphism (an ergonomics choice, not a necessity).** A custom
+  `JsonContentPolymorphicSerializer` is *not* off the table: `ExtensionValue` and `Mapping` both
+  use one today and generate a clean `oneOf` + `discriminator: { propertyName: "type" }` through
+  the Go JSON-schema generator (`generateGraphModelJsonSchema`, which walks
+  `GraphModel.serializer().descriptor`). The trick is that each supplies a hand-built
+  `buildSerialDescriptor(…, PolymorphicKind.SEALED) { … }`; the generator only crashes
+  (`ArrayIndexOutOfBoundsException`) on a *bare* `JsonContentPolymorphicSerializer` whose default
+  descriptor has no field structure. So the choice between native sealed polymorphism and a
+  custom serializer is about ergonomics, not feasibility — both auto-generate cleanly in Go.
+  Native polymorphism is preferred because the framework injects the discriminator and derives
+  the descriptor, so there is no hand-maintained descriptor or `selectDeserializer` to keep in
+  sync (and no `@EncodeDefault` / `@OptIn(ExperimentalSerializationApi)`). It emits `Neo4jType`
+  as `oneOf: [ScalarType, ListType, VectorType]` with `discriminator: { propertyName: "type" }`,
+  each variant a distinct schema, and `Neo4jScalar` as a reusable string enum. A custom
+  serializer would only be the tool of choice for a different wire *layout* (e.g. Option E's
+  single-discriminator form); it cannot escape the objects-with-a-discriminator shape that Go
+  auto-generation requires.
 - **A dedicated `ScalarType` variant** (rather than a bare scalar or the `{type:"STRING"}` form)
   so all three branches are objects with a fixed discriminator const — the shape a discriminated
   `oneOf` requires.
