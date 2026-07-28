@@ -93,7 +93,9 @@ an optional `dimension` value.
   extra validation is needed. Fully supports all possible use-cases.
 - **Cons:** The largest wire-format change - `type` becomes an object for every property, not just vectors,
   so every consumer that reads a property type as a string must change. It also makes a JSON/YAML file far 
-  more verbose than the existing graph-spec for types. E.g. instead of the existing 
+  more verbose than the existing graph-spec for types as each is now an object. Also, because the field is
+  literally named `type`, the scalar case reads as the doubly-nested `"type": { "type": "STRING" }`. We could 
+  get around this by instead calling the nested value `kind`, but it's still verbose. E.g. instead of the existing 
   ```json
   "properties": {
     "flightId": { 
@@ -167,8 +169,7 @@ directly as the discriminator `const`. Every type name is its own variant and on
 - **Cons:** The main downside is the verbosity in the spec and auto-generated code - the discriminator must carry 
   the full type identity, so the union expands to ~37 variants instead of option D's three. The auto-generated Go 
   gets ~37 flat structs rather than three typed variants (`ScalarType`/`ListType`/`VectorType`). It also still shares
-  option D's largest cost in the verbosity - `type` becomes an object for every property, and (because the field is 
-  literally named `type`) the scalar case reads as the doubly-nested `"type": { "type": "STRING" }`.
+  option D's largest cost in the verbosity - `type` becomes an object for every property. 
 
 ## Chosen path: Option E
 
@@ -186,76 +187,38 @@ implementation simplification is not that great for option D, option E is the be
 
 ### Vocabulary
 
-We kept graph-spec's own uppercase vocabulary inside the new object
-(`VECTOR`/`LIST`/`FLOAT`, `ZONED DATETIME`, `ANY`) rather than adopting the data model's
-lowercase spelling (`vector`/`array`/`float`, `datetime`, `null`-for-any). This changes only
-the *shape*, not the spelling, so graph-spec consumers see a smaller conceptual break and the
-migrations keep doing the vocabulary translation they already did (`array`↔`LIST`,
-`datetime`↔`ZONED DATETIME`, `null`↔`ANY`, case).
+We keep graph-spec's own uppercase type names (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>`, `ZONED DATETIME`, `ANY`) 
+as the discriminator values rather than adopting the data model's lowercase spelling (`vector`/`array`/`float`, 
+`datetime`, `null`). Option E reuses these existing names verbatim, so this is only a shape change (string to object),
+not a spelling change.
 
-### Kotlin model
+### Implementation notes (Option E)
 
-- `Neo4jScalar` — a new enum of the scalar element types (the old enum minus the `LIST_*`
-  and `VECTOR_*` variants), with `@SerialName` for the spaced names.
-- `Neo4jType` — a `@Serializable sealed class` with three subtypes, serialized by kotlinx's
-  **native sealed polymorphism** (no custom serializer):
-  - `ScalarType(scalar: Neo4jScalar)` — `@SerialName("ScalarType")`
-  - `ListType(items: Neo4jScalar)` — `@SerialName("ListType")`
-  - `VectorType(items: Neo4jScalar, dimension: Int? = null)` — `@SerialName("VectorType")`
-  The default class discriminator (`type`) supplies the wire discriminator, so each variant is
-  `{ "type": "<SerialName>", … }`. The sealed hierarchy gives the compile-time guarantees:
-  `dimension` exists only on `VectorType`, and a list/vector element is always a `Neo4jScalar`.
+The type system must serialize as a discriminated union of objects - each variant an object
+with a shared `type` discriminator const, only the vector variants carrying `dimension`. This is a
+hard constraint of the codegen pipeline, not a stylistic choice (see below), and it is the shape
+that gives us the schema-enforced "dimension only applies to vectors" guarantee.
 
-### Why a discriminated union (and native polymorphism)
-
-The goal on the Go/JVM side was a proper, typed model — distinct `ScalarType`/`ListType`/
-`VectorType` structs and a shared `Neo4jScalar` enum — not a single loose struct. That is only
-achievable as a discriminated `oneOf`, which drove three choices:
-
-- **Native sealed polymorphism (an ergonomics choice, not a necessity).** A custom
-  `JsonContentPolymorphicSerializer` is *not* off the table: `ExtensionValue` and `Mapping` both
-  use one today and generate a clean `oneOf` + `discriminator: { propertyName: "type" }` through
-  the Go JSON-schema generator (`generateGraphModelJsonSchema`, which walks
-  `GraphModel.serializer().descriptor`). The trick is that each supplies a hand-built
-  `buildSerialDescriptor(…, PolymorphicKind.SEALED) { … }`; the generator only crashes
-  (`ArrayIndexOutOfBoundsException`) on a *bare* `JsonContentPolymorphicSerializer` whose default
-  descriptor has no field structure. So the choice between native sealed polymorphism and a
-  custom serializer is about ergonomics, not feasibility — both auto-generate cleanly in Go.
-  Native polymorphism is preferred because the framework injects the discriminator and derives
-  the descriptor, so there is no hand-maintained descriptor or `selectDeserializer` to keep in
-  sync (and no `@EncodeDefault` / `@OptIn(ExperimentalSerializationApi)`). It emits `Neo4jType`
-  as `oneOf: [ScalarType, ListType, VectorType]` with `discriminator: { propertyName: "type" }`,
-  each variant a distinct schema, and `Neo4jScalar` as a reusable string enum. A custom
-  serializer would only be the tool of choice for a different wire *layout* (e.g. Option E's
-  single-discriminator form); it cannot escape the objects-with-a-discriminator shape that Go
-  auto-generation requires.
-- **A dedicated `ScalarType` variant** (rather than a bare scalar or the `{type:"STRING"}` form)
-  so all three branches are objects with a fixed discriminator const — the shape a discriminated
-  `oneOf` requires.
-- **`@SerialName("ScalarType"/"ListType"/"VectorType")`** matches the existing `Mapping →
-  NodeMapping`/… convention, so the generated Go types get clean names instead of `SCALAR`/`LIST`/
-  `VECTOR`.
-
-The trade-off is verbosity for scalars (`{ "type": "ScalarType", "scalar": "STRING" }` vs the
-old `"STRING"`), accepted in exchange for a clean, typed cross-language model.
-
-### JS package
-
-`Neo4jType` is exported to JS/TypeScript as a real discriminated-object union — the same
-`@JsExport @JsPlainObject external interface` + `toJs`/`toClass` pattern already used by
-`ExtensionValueJs` and `MappingJs`:
-
-- `Neo4jTypeJs { type: string }` with `ScalarTypeJs { scalar }` / `ListTypeJs { items }` /
-  `VectorTypeJs { items, dimension?: number }` — `scalar`/`items` are the scalar-name string.
-- `PropertyJs.type`, `TableFieldJs.suggested`/`supported` now use `Neo4jTypeJs`.
-- The `PropertyEditor`/`NodeEditor`/`RelationshipEditor` `setPropertyType` methods take a
-  `Neo4jTypeJs` (previously a loosely-typed `String`).
-
-Because the union is now a first-class exported type, the `generateTsUnions` build hack no
-longer force-converts `Neo4jType` from an enum. It only surfaces the `Neo4jScalar` enum as a
-string union (`Neo4jScalarJs`) applied to the scalar-name fields (`ScalarTypeJs.scalar`,
-`ListTypeJs.items`, `VectorTypeJs.items`), giving frontend type-safety on the scalar name (with
-the spaced serial names, e.g. `"LOCAL DATETIME"`).
+- **Serialization.** E has one variant per type name (~37), so modeling it as native sealed
+  polymorphism (~37 handwritten subclasses) is impractical. Instead `Neo4jType` is implemented as
+  a custom `JsonContentPolymorphicSerializer` with a hand-built `PolymorphicKind.SEALED` descriptor
+  enumerating the variants - the same pattern `Mapping` and `ExtensionValue` already use. This is
+  why the "a custom serializer is viable" point matters: a hand-built `SEALED` descriptor produces
+  exactly the same clean `oneOf` + `discriminator` output as native polymorphism (the generator
+  only crashes on a *bare* serializer with no structured descriptor).
+- **Why an object union at all.** The pipeline is Kotlin → JSON Schema (`kotlinx-schema`) → Go
+  (`schemancer`). `schemancer` was chosen because it preserves discriminated polymorphism instead
+  of collapsing variants into one super-struct - but it only does so for a discriminated union of
+  objects. A bare string, a parameterized string (Option B) or a mixed string-or-object union
+  (Option F) all fall outside this and would require hand-written Go (de)serialization, the
+  cross-language burden we are avoiding.
+- **Surfaces.**
+  - *Go / JSON Schema* - `Neo4jType` becomes `oneOf: [ ... ]` over the ~37 variant schemas with
+    `discriminator: { propertyName: "type" }`; only vector variants declare `dimension`.
+  - *JS/TS* - `Neo4jType` is exported as a discriminated-object union via the existing
+    `@JsExport @JsPlainObject external interface` + `toJs`/`toClass` pattern (as `ExtensionValueJs`/
+    `MappingJs` do), replacing the loosely-typed `String` on `PropertyJs.type` and
+    `TableFieldJs.suggested`/`supported`.
 
 ### Migrations
 
