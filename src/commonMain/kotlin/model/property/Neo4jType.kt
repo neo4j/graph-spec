@@ -84,196 +84,234 @@ sealed interface Neo4jType {
 
 // --- Scalars ---
 
-@JsExport @Serializable @SerialName("ANY")
+@JsExport @Serializable
+@SerialName("ANY")
 data object AnyType : Neo4jType {
     override val typeName get() = "ANY"
 }
 
-@JsExport @Serializable @SerialName("BOOLEAN")
+@JsExport @Serializable
+@SerialName("BOOLEAN")
 data object BooleanType : Neo4jType {
     override val typeName get() = "BOOLEAN"
 }
 
-@JsExport @Serializable @SerialName("DATE")
+@JsExport @Serializable
+@SerialName("DATE")
 data object DateType : Neo4jType {
     override val typeName get() = "DATE"
 }
 
-@JsExport @Serializable @SerialName("DURATION")
+@JsExport @Serializable
+@SerialName("DURATION")
 data object DurationType : Neo4jType {
     override val typeName get() = "DURATION"
 }
 
-@JsExport @Serializable @SerialName("FLOAT32")
+@JsExport @Serializable
+@SerialName("FLOAT32")
 data object Float32Type : Neo4jType {
     override val typeName get() = "FLOAT32"
 }
 
-@JsExport @Serializable @SerialName("FLOAT")
+@JsExport @Serializable
+@SerialName("FLOAT")
 data object FloatType : Neo4jType {
     override val typeName get() = "FLOAT"
 }
 
-@JsExport @Serializable @SerialName("INTEGER8")
+@JsExport @Serializable
+@SerialName("INTEGER8")
 data object Integer8Type : Neo4jType {
     override val typeName get() = "INTEGER8"
 }
 
-@JsExport @Serializable @SerialName("INTEGER16")
+@JsExport @Serializable
+@SerialName("INTEGER16")
 data object Integer16Type : Neo4jType {
     override val typeName get() = "INTEGER16"
 }
 
-@JsExport @Serializable @SerialName("INTEGER32")
+@JsExport @Serializable
+@SerialName("INTEGER32")
 data object Integer32Type : Neo4jType {
     override val typeName get() = "INTEGER32"
 }
 
-@JsExport @Serializable @SerialName("INTEGER")
+@JsExport @Serializable
+@SerialName("INTEGER")
 data object IntegerType : Neo4jType {
     override val typeName get() = "INTEGER"
 }
 
-@JsExport @Serializable @SerialName("LOCAL DATETIME")
+@JsExport @Serializable
+@SerialName("LOCAL DATETIME")
 data object LocalDateTimeType : Neo4jType {
     override val typeName get() = "LOCAL DATETIME"
 }
 
-@JsExport @Serializable @SerialName("LOCAL TIME")
+@JsExport @Serializable
+@SerialName("LOCAL TIME")
 data object LocalTimeType : Neo4jType {
     override val typeName get() = "LOCAL TIME"
 }
 
-@JsExport @Serializable @SerialName("POINT")
+@JsExport @Serializable
+@SerialName("POINT")
 data object PointType : Neo4jType {
     override val typeName get() = "POINT"
 }
 
-@JsExport @Serializable @SerialName("STRING")
+@JsExport @Serializable
+@SerialName("STRING")
 data object StringType : Neo4jType {
     override val typeName get() = "STRING"
 }
 
-@JsExport @Serializable @SerialName("ZONED DATETIME")
+@JsExport @Serializable
+@SerialName("ZONED DATETIME")
 data object ZonedDateTimeType : Neo4jType {
     override val typeName get() = "ZONED DATETIME"
 }
 
-@JsExport @Serializable @SerialName("ZONED TIME")
+@JsExport @Serializable
+@SerialName("ZONED TIME")
 data object ZonedTimeType : Neo4jType {
     override val typeName get() = "ZONED TIME"
 }
 
-@JsExport @Serializable @SerialName("UUID")
+@JsExport @Serializable
+@SerialName("UUID")
 data object UuidType : Neo4jType {
     override val typeName get() = "UUID"
 }
 
 // --- Lists ---
 
-@JsExport @Serializable @SerialName("LIST<BOOLEAN>")
+@JsExport @Serializable
+@SerialName("LIST<BOOLEAN>")
 data object ListBooleanType : Neo4jType {
     override val typeName get() = "LIST<BOOLEAN>"
 }
 
-@JsExport @Serializable @SerialName("LIST<DATE>")
+@JsExport @Serializable
+@SerialName("LIST<DATE>")
 data object ListDateType : Neo4jType {
     override val typeName get() = "LIST<DATE>"
 }
 
-@JsExport @Serializable @SerialName("LIST<DURATION>")
+@JsExport @Serializable
+@SerialName("LIST<DURATION>")
 data object ListDurationType : Neo4jType {
     override val typeName get() = "LIST<DURATION>"
 }
 
-@JsExport @Serializable @SerialName("LIST<FLOAT32>")
+@JsExport @Serializable
+@SerialName("LIST<FLOAT32>")
 data object ListFloat32Type : Neo4jType {
     override val typeName get() = "LIST<FLOAT32>"
 }
 
-@JsExport @Serializable @SerialName("LIST<FLOAT>")
+@JsExport @Serializable
+@SerialName("LIST<FLOAT>")
 data object ListFloatType : Neo4jType {
     override val typeName get() = "LIST<FLOAT>"
 }
 
-@JsExport @Serializable @SerialName("LIST<INTEGER8>")
+@JsExport @Serializable
+@SerialName("LIST<INTEGER8>")
 data object ListInteger8Type : Neo4jType {
     override val typeName get() = "LIST<INTEGER8>"
 }
 
-@JsExport @Serializable @SerialName("LIST<INTEGER16>")
+@JsExport @Serializable
+@SerialName("LIST<INTEGER16>")
 data object ListInteger16Type : Neo4jType {
     override val typeName get() = "LIST<INTEGER16>"
 }
 
-@JsExport @Serializable @SerialName("LIST<INTEGER32>")
+@JsExport @Serializable
+@SerialName("LIST<INTEGER32>")
 data object ListInteger32Type : Neo4jType {
     override val typeName get() = "LIST<INTEGER32>"
 }
 
-@JsExport @Serializable @SerialName("LIST<INTEGER>")
+@JsExport @Serializable
+@SerialName("LIST<INTEGER>")
 data object ListIntegerType : Neo4jType {
     override val typeName get() = "LIST<INTEGER>"
 }
 
-@JsExport @Serializable @SerialName("LIST<LOCAL DATETIME>")
+@JsExport @Serializable
+@SerialName("LIST<LOCAL DATETIME>")
 data object ListLocalDateTimeType : Neo4jType {
     override val typeName get() = "LIST<LOCAL DATETIME>"
 }
 
-@JsExport @Serializable @SerialName("LIST<LOCAL TIME>")
+@JsExport @Serializable
+@SerialName("LIST<LOCAL TIME>")
 data object ListLocalTimeType : Neo4jType {
     override val typeName get() = "LIST<LOCAL TIME>"
 }
 
-@JsExport @Serializable @SerialName("LIST<POINT>")
+@JsExport @Serializable
+@SerialName("LIST<POINT>")
 data object ListPointType : Neo4jType {
     override val typeName get() = "LIST<POINT>"
 }
 
-@JsExport @Serializable @SerialName("LIST<STRING>")
+@JsExport @Serializable
+@SerialName("LIST<STRING>")
 data object ListStringType : Neo4jType {
     override val typeName get() = "LIST<STRING>"
 }
 
-@JsExport @Serializable @SerialName("LIST<ZONED DATETIME>")
+@JsExport @Serializable
+@SerialName("LIST<ZONED DATETIME>")
 data object ListZonedDateTimeType : Neo4jType {
     override val typeName get() = "LIST<ZONED DATETIME>"
 }
 
-@JsExport @Serializable @SerialName("LIST<ZONED TIME>")
+@JsExport @Serializable
+@SerialName("LIST<ZONED TIME>")
 data object ListZonedTimeType : Neo4jType {
     override val typeName get() = "LIST<ZONED TIME>"
 }
 
 // --- Vectors ---
 
-@JsExport @Serializable @SerialName("VECTOR<FLOAT>")
+@JsExport @Serializable
+@SerialName("VECTOR<FLOAT>")
 data class VectorFloatType(val dimension: Int? = null) : Neo4jType {
     override val typeName get() = "VECTOR<FLOAT>"
 }
 
-@JsExport @Serializable @SerialName("VECTOR<FLOAT32>")
+@JsExport @Serializable
+@SerialName("VECTOR<FLOAT32>")
 data class VectorFloat32Type(val dimension: Int? = null) : Neo4jType {
     override val typeName get() = "VECTOR<FLOAT32>"
 }
 
-@JsExport @Serializable @SerialName("VECTOR<INTEGER>")
+@JsExport @Serializable
+@SerialName("VECTOR<INTEGER>")
 data class VectorIntegerType(val dimension: Int? = null) : Neo4jType {
     override val typeName get() = "VECTOR<INTEGER>"
 }
 
-@JsExport @Serializable @SerialName("VECTOR<INTEGER32>")
+@JsExport @Serializable
+@SerialName("VECTOR<INTEGER32>")
 data class VectorInteger32Type(val dimension: Int? = null) : Neo4jType {
     override val typeName get() = "VECTOR<INTEGER32>"
 }
 
-@JsExport @Serializable @SerialName("VECTOR<INTEGER16>")
+@JsExport @Serializable
+@SerialName("VECTOR<INTEGER16>")
 data class VectorInteger16Type(val dimension: Int? = null) : Neo4jType {
     override val typeName get() = "VECTOR<INTEGER16>"
 }
 
-@JsExport @Serializable @SerialName("VECTOR<INTEGER8>")
+@JsExport @Serializable
+@SerialName("VECTOR<INTEGER8>")
 data class VectorInteger8Type(val dimension: Int? = null) : Neo4jType {
     override val typeName get() = "VECTOR<INTEGER8>"
 }

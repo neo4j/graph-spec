@@ -521,7 +521,12 @@ class DataModelV3GraphSpecMigrationTest {
                                 schemaMapOf(
                                     "name" to "embedding",
                                     "rawType" to "VECTOR",
-                                    "recommendedType" to mapOf("type" to "vector", "items" to mapOf("type" to "float"), "dimension" to 4),
+                                    "recommendedType" to
+                                        mapOf(
+                                            "type" to "vector",
+                                            "items" to mapOf("type" to "float"),
+                                            "dimension" to 4
+                                        ),
                                     "supportedTypes" to listOf(
                                         mapOf("type" to "vector", "items" to mapOf("type" to "float")),
                                         mapOf("type" to "vector", "items" to mapOf("type" to "float32"))

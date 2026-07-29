@@ -37,5 +37,4 @@ fun neo4jTypeJs(type: String, dimension: Int? = null): Neo4jTypeJs = jso {
 
 fun Neo4jType.toJs(): Neo4jTypeJs = neo4jTypeJs(typeName, Neo4jType.dimensionOf(this))
 
-fun Neo4jTypeJs.toClass(): Neo4jType =
-    Neo4jType.of(type, dimension) ?: error("Invalid neo4j type '$type'")
+fun Neo4jTypeJs.toClass(): Neo4jType = Neo4jType.of(type, dimension) ?: error("Invalid neo4j type '$type'")
