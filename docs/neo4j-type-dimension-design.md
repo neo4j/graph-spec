@@ -171,65 +171,59 @@ directly as the discriminator `const`. Every type name is its own variant and on
   gets ~37 flat structs rather than three typed variants (`ScalarType`/`ListType`/`VectorType`). It also still shares
   option D's largest cost in the verbosity - `type` becomes an object for every property. 
 
-## Chosen path: Option E
+## Best Path
 
 Given that:
-* Option A is hacky and not clear to the user or developer
-* Option B is nice for the spec, but brittle and requires more custom serialization
+* Option A is brittle, hacky and not clear to the user or developer
+* Option B is concise within a spec, but implementation is brittle and requires more custom serialization and validation
 * Option C is unclear and can't support use-cases where multiple dimensions exist across values in supported fields
 
 It seems like these options are not viable. 
 
 Therefore, the main options are D and E. They both tie dimension to only the vector type in a schema-enforced way. 
 They are both very similar but trade off verbosity between internal implemenation and user examples - option D is 
-is more verbose for examples but simpler in implementation and option E is the reverse. I think, given the 
-implementation simplification is not that great for option D, option E is the best path.
+more verbose for examples but simpler in implementation and option E is the reverse. 
 
-### Vocabulary
-
-We keep graph-spec's own uppercase type names (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>`, `ZONED DATETIME`, `ANY`) 
-as the discriminator values rather than adopting the data model's lowercase spelling (`vector`/`array`/`float`, 
-`datetime`, `null`). Option E reuses these existing names verbatim, so this is only a shape change (string to object),
-not a spelling change.
+**I think, given verbosity within the internal implementation is preferred over verbosity in the spec, option E is the
+best path.**
 
 ### Implementation notes (Option E)
 
-The type system must serialize as a discriminated union of objects - each variant an object
-with a shared `type` discriminator const, only the vector variants carrying `dimension`. This is a
-hard constraint of the codegen pipeline, not a stylistic choice (see below), and it is the shape
-that gives us the schema-enforced "dimension only applies to vectors" guarantee.
+The type system must serialize as a discriminated union of objects - each variant an object with a shared `type` 
+discriminator const, only the vector variants carrying `dimension`. This is a hard constraint of the codegen pipeline 
+as we rely on auto-generated Go and TS code which requires this, and it also ensures the "dimension only applies to 
+vectors" guarantee is schema-enforced.
 
-- **Serialization.** E has one variant per type name (~37), so modeling it as native sealed
-  polymorphism (~37 handwritten subclasses) is impractical. Instead `Neo4jType` is implemented as
-  a custom `JsonContentPolymorphicSerializer` with a hand-built `PolymorphicKind.SEALED` descriptor
-  enumerating the variants - the same pattern `Mapping` and `ExtensionValue` already use. This is
-  why the "a custom serializer is viable" point matters: a hand-built `SEALED` descriptor produces
-  exactly the same clean `oneOf` + `discriminator` output as native polymorphism (the generator
-  only crashes on a *bare* serializer with no structured descriptor).
-- **Why an object union at all.** The pipeline is Kotlin → JSON Schema (`kotlinx-schema`) → Go
-  (`schemancer`). `schemancer` was chosen because it preserves discriminated polymorphism instead
-  of collapsing variants into one super-struct - but it only does so for a discriminated union of
-  objects. A bare string, a parameterized string (Option B) or a mixed string-or-object union
-  (Option F) all fall outside this and would require hand-written Go (de)serialization, the
-  cross-language burden we are avoiding.
-- **Surfaces.**
-  - *Go / JSON Schema* - `Neo4jType` becomes `oneOf: [ ... ]` over the ~37 variant schemas with
-    `discriminator: { propertyName: "type" }`; only vector variants declare `dimension`.
-  - *JS/TS* - `Neo4jType` is exported as a discriminated-object union via the existing
-    `@JsExport @JsPlainObject external interface` + `toJs`/`toClass` pattern (as `ExtensionValueJs`/
-    `MappingJs` do), replacing the loosely-typed `String` on `PropertyJs.type` and
-    `TableFieldJs.suggested`/`supported`.
-
-### Migrations
-
-Both migrations become near pass-throughs for the type shape:
-- forward carries `items` + `dimension` through, translating vocabulary to uppercase;
-- reverse reads the structured object and translates back to the data model's lowercase
-  `{type, items, dimension}` (with `null` for `ANY`).
+- **Serialization.** The current ground-truth `Neo4jType` enum type in Kotlin changes to a top-level sealed interface,
+  and has one concrete data sub-class per type (~38). Each types `@SerialName` remains unchanged from before (e.g. 
+  `"STRING"`, `"VECTOR<FLOAT>"`, ...) which is used as the `type` discriminator value when deserializing.
+- **JSON Schema / Go** - `Neo4jType` is emitted as `oneOf` over the ~38 variant schemas with 
+  `discriminator: { propertyName: "type" }`. Polymorphism in the Go structs is handled in the idiomatic Go way, similar
+  to how different constraint types are currently handled.
+  The JSON Schema type goes from:
+  ```json
+  "Neo4jType": {
+    "type": "string",
+      "enum": [
+        "ANY",
+        "BOOLEAN",
+        "LIST<BOOLEAN>",
+        "DATE",
+        ...  
+  ```
+  to
+  ```json
+  "Neo4jType": {
+    "oneOf": [
+      { "$ref": "#/$defs/ANY" },
+      { "$ref": "#/$defs/BOOLEAN" },
+      { "$ref": "#/$defs/LIST<BOOLEAN>" },
+      { "$ref": "#/$defs/DATE" },
+      ...
+  ```
 
 ### Backward compatibility
 
-graph-spec is pre-release (`v4.0.0-alpha.*`) and there are no persisted older graph-spec
-documents to be compatible with, so I've not worried about backwards compatibility for the old 
-flat-string type form. `Neo4jType` reads and writes the object form only. Interaction with the
-data model format are unaffected.
+graph-spec is pre-release (`v4.0.0-alpha.*`) and there are no persisted older graph-spec documents to be compatible 
+with, so I've not worried about backwards compatibility for the old flat-string type form. `Neo4jType` reads and writes 
+the object form only. Interaction with the data model format are unaffected.
