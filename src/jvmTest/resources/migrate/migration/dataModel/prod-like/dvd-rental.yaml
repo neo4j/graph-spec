@@ -3,7 +3,7 @@ nodes:
   actor:
     label: "actor"
     properties:
-      actor_id: { type: "INTEGER", unique: true }
+      actor_id: { type: "INTEGER" }
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
@@ -20,7 +20,7 @@ nodes:
   address:
     label: "address"
     properties:
-      address_id: { type: "INTEGER", unique: true }
+      address_id: { type: "INTEGER" }
       address: { type: "STRING" }
       address2: { type: "STRING" }
       district: { type: "STRING" }
@@ -40,7 +40,7 @@ nodes:
   category:
     label: "category"
     properties:
-      category_id: { type: "INTEGER", unique: true }
+      category_id: { type: "INTEGER" }
       name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
     constraints:
@@ -56,7 +56,7 @@ nodes:
   city:
     label: "city"
     properties:
-      city_id: { type: "INTEGER", unique: true }
+      city_id: { type: "INTEGER" }
       city: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
     constraints:
@@ -72,7 +72,7 @@ nodes:
   country:
     label: "country"
     properties:
-      country_id: { type: "INTEGER", unique: true }
+      country_id: { type: "INTEGER" }
       country: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
     constraints:
@@ -88,7 +88,7 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER", unique: true }
+      customer_id: { type: "INTEGER" }
       store_id: { type: "INTEGER" }
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
@@ -110,7 +110,7 @@ nodes:
   film:
     label: "film"
     properties:
-      film_id: { type: "INTEGER", unique: true }
+      film_id: { type: "INTEGER" }
       title: { type: "STRING" }
       description: { type: "STRING" }
       rental_duration: { type: "INTEGER" }
@@ -132,7 +132,7 @@ nodes:
   inventory:
     label: "inventory"
     properties:
-      inventory_id: { type: "INTEGER", unique: true }
+      inventory_id: { type: "INTEGER" }
       store_id: { type: "INTEGER" }
       last_update: { type: "ZONED DATETIME" }
     constraints:
@@ -148,7 +148,7 @@ nodes:
   language:
     label: "language"
     properties:
-      language_id: { type: "INTEGER", unique: true }
+      language_id: { type: "INTEGER" }
       name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
     constraints:
@@ -164,7 +164,7 @@ nodes:
   payment:
     label: "payment"
     properties:
-      payment_id: { type: "INTEGER", unique: true }
+      payment_id: { type: "INTEGER" }
       amount: { type: "FLOAT" }
       payment_date: { type: "ZONED DATETIME" }
     constraints:
@@ -180,7 +180,7 @@ nodes:
   rental:
     label: "rental"
     properties:
-      rental_id: { type: "INTEGER", unique: true }
+      rental_id: { type: "INTEGER" }
       rental_date: { type: "ZONED DATETIME" }
       return_date: { type: "ZONED DATETIME" }
       last_update: { type: "ZONED DATETIME" }
@@ -197,7 +197,7 @@ nodes:
   staff:
     label: "staff"
     properties:
-      staff_id: { type: "INTEGER", unique: true }
+      staff_id: { type: "INTEGER" }
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
       email: { type: "STRING" }
@@ -219,7 +219,7 @@ nodes:
   store:
     label: "store"
     properties:
-      store_id: { type: "INTEGER", unique: true }
+      store_id: { type: "INTEGER" }
       last_update: { type: "ZONED DATETIME" }
     constraints:
       store:

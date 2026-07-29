@@ -6,7 +6,7 @@ nodes:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-      id: { type: "INTEGER", unique: true }
+      id: { type: "INTEGER" }
       locationIP: { type: "STRING" }
       browserUsed: { type: "STRING" }
       content: { type: "STRING" }
@@ -27,7 +27,7 @@ nodes:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-      id: { type: "INTEGER", unique: true }
+      id: { type: "INTEGER" }
       title: { type: "STRING" }
     constraints:
       Forum:
@@ -42,7 +42,7 @@ nodes:
   Organisation:
     label: "Organisation"
     properties:
-      id: { type: "INTEGER", unique: true }
+      id: { type: "INTEGER" }
       type: { type: "STRING" }
       name: { type: "STRING" }
       url: { type: "STRING" }
@@ -62,7 +62,7 @@ nodes:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-      id: { type: "INTEGER", unique: true }
+      id: { type: "INTEGER" }
       firstName: { type: "STRING" }
       lastName: { type: "STRING" }
       gender: { type: "STRING" }
@@ -84,7 +84,7 @@ nodes:
   Place:
     label: "Place"
     properties:
-      id: { type: "INTEGER", unique: true }
+      id: { type: "INTEGER" }
       name: { type: "STRING" }
       url: { type: "STRING" }
       type: { type: "STRING" }
@@ -104,7 +104,7 @@ nodes:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-      id: { type: "INTEGER", unique: true }
+      id: { type: "INTEGER" }
       imageFile: { type: "STRING" }
       locationIP: { type: "STRING" }
       browserUsed: { type: "STRING" }
@@ -124,7 +124,7 @@ nodes:
   Tag:
     label: "Tag"
     properties:
-      id: { type: "INTEGER", unique: true }
+      id: { type: "INTEGER" }
       name: { type: "STRING" }
       url: { type: "STRING" }
     constraints:
@@ -140,7 +140,7 @@ nodes:
   TagClass:
     label: "TagClass"
     properties:
-      id: { type: "INTEGER", unique: true }
+      id: { type: "INTEGER" }
       name: { type: "STRING" }
       url: { type: "STRING" }
     constraints:
