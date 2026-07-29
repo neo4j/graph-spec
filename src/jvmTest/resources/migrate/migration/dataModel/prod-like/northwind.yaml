@@ -3,10 +3,10 @@ nodes:
   categories:
     label: "categories"
     properties:
-      categoryid: { type: "INTEGER", key: true }
-      categoryname: { type: "STRING", mustExist: true }
-      description: { type: "STRING", mustExist: true }
-      picture: { type: "STRING", mustExist: true }
+      categoryid: { type: { type: "INTEGER" }, key: true }
+      categoryname: { type: { type: "STRING" }, mustExist: true }
+      description: { type: { type: "STRING" }, mustExist: true }
+      picture: { type: { type: "STRING" }, mustExist: true }
     constraints:
       categories:
         type: "UNIQUE"
@@ -20,14 +20,14 @@ nodes:
   products:
     label: "products"
     properties:
-      productid: { type: "INTEGER", key: true }
-      productname: { type: "STRING", mustExist: true }
-      quantityperunit: { type: "STRING", mustExist: true }
-      unitprice: { type: "FLOAT", mustExist: true }
-      unitsinstock: { type: "INTEGER", mustExist: true }
-      unitsonorder: { type: "INTEGER", mustExist: true }
-      reorderlevel: { type: "INTEGER", mustExist: true }
-      discontinued: { type: "INTEGER", mustExist: true }
+      productid: { type: { type: "INTEGER" }, key: true }
+      productname: { type: { type: "STRING" }, mustExist: true }
+      quantityperunit: { type: { type: "STRING" }, mustExist: true }
+      unitprice: { type: { type: "FLOAT" }, mustExist: true }
+      unitsinstock: { type: { type: "INTEGER" }, mustExist: true }
+      unitsonorder: { type: { type: "INTEGER" }, mustExist: true }
+      reorderlevel: { type: { type: "INTEGER" }, mustExist: true }
+      discontinued: { type: { type: "INTEGER" }, mustExist: true }
     constraints:
       products:
         type: "UNIQUE"
@@ -41,18 +41,18 @@ nodes:
   suppliers:
     label: "suppliers"
     properties:
-      supplierid: { type: "INTEGER", key: true }
-      companyname: { type: "STRING", mustExist: true }
-      contactname: { type: "STRING", mustExist: true }
-      contacttitle: { type: "STRING", mustExist: true }
-      address: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      region: { type: "STRING", mustExist: true }
-      postalcode: { type: "STRING", mustExist: true }
-      country: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      fax: { type: "STRING", mustExist: true }
-      homepage: { type: "STRING", mustExist: true }
+      supplierid: { type: { type: "INTEGER" }, key: true }
+      companyname: { type: { type: "STRING" }, mustExist: true }
+      contactname: { type: { type: "STRING" }, mustExist: true }
+      contacttitle: { type: { type: "STRING" }, mustExist: true }
+      address: { type: { type: "STRING" }, mustExist: true }
+      city: { type: { type: "STRING" }, mustExist: true }
+      region: { type: { type: "STRING" }, mustExist: true }
+      postalcode: { type: { type: "STRING" }, mustExist: true }
+      country: { type: { type: "STRING" }, mustExist: true }
+      phone: { type: { type: "STRING" }, mustExist: true }
+      fax: { type: { type: "STRING" }, mustExist: true }
+      homepage: { type: { type: "STRING" }, mustExist: true }
     constraints:
       suppliers:
         type: "UNIQUE"
@@ -78,44 +78,53 @@ tables:
     fields:
       categoryid:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       categoryname:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       description:
         type: "TEXT"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       picture:
         type: "TEXT"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
     primaryKeys: ["categoryid"]
   orders:
     source: "cloud"
     fields:
       orderid:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       productid:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       unitprice:
         type: "DOUBLE"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "FLOAT"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       quantity:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       discount:
         type: "DOUBLE"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "FLOAT"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
     primaryKeys: ["orderid", "productid"]
     foreignKeys:
       foreignKey1:
@@ -128,44 +137,54 @@ tables:
     fields:
       productid:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       productname:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       supplierid:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       categoryid:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       quantityperunit:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       unitprice:
         type: "DOUBLE"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "FLOAT"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       unitsinstock:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       unitsonorder:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       reorderlevel:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       discontinued:
         type: "BIT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT", "BOOLEAN"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }, { type: "BOOLEAN" }]
     primaryKeys: ["productid"]
     foreignKeys:
       foreignKey1:
@@ -183,52 +202,64 @@ tables:
     fields:
       supplierid:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       companyname:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       contactname:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       contacttitle:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       address:
         type: "TEXT"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       city:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       region:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       postalcode:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       country:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       phone:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       fax:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       homepage:
         type: "TEXT"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
     primaryKeys: ["supplierid"]
 mappings:
   - node: "categories"

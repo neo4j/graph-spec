@@ -16,6 +16,7 @@
  */
 package migrate.migration.dataModel
 
+import codec.schema.SchemaElement
 import codec.schema.SchemaLiteral
 import codec.schema.SchemaMap
 import codec.schema.SchemaNull
@@ -337,7 +338,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             val map = schemaMapOf(
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
-                "type" to propertyType(prop.string("type")),
+                "type" to propertyTypeOf(prop.mapOrNull("type")),
                 "nullable" to if (prop.stringOrNull("key") == "true") {
                     false
                 } else {
@@ -383,11 +384,11 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "name" to field.literalOrNull("name"),
                 "rawType" to field.literalOrNull("type"),
                 "size" to field.literalOrNull("size"),
-                "recommendedType" to field.literalOrNull("suggested")?.let {
-                    propertyType(it.string)
+                "recommendedType" to field.mapOrNull("suggested")?.let {
+                    propertyTypeOf(it)
                 },
-                "supportedTypes" to field.listOrNull("supported")?.map {
-                    propertyType((it as SchemaLiteral).string)
+                "supportedTypes" to field.listOfMapsOrNull("supported")?.map {
+                    propertyTypeOf(it)
                 }
             )
         }
@@ -454,17 +455,21 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             else -> string?.lowercase()
         }
 
-        private fun propertyType(propertyType: String?) = when {
-            propertyType == "ANY" -> SchemaNull()
-            propertyType != null && propertyType.startsWith("VECTOR") -> schemaMapOf(
+        private fun propertyTypeOf(type: SchemaMap?): SchemaElement =
+            propertyType(type?.stringOrNull("type") ?: "ANY", type?.intOrNull("dimension"))
+
+        private fun propertyType(name: String?, dimension: Int? = null): SchemaElement = when {
+            name == "ANY" -> SchemaNull()
+            name != null && name.startsWith("VECTOR") -> schemaMapOf(
                 "type" to "vector",
-                "items" to schemaMapOf("type" to type(propertyType.removePrefix("VECTOR<").removeSuffix(">")))
+                "items" to schemaMapOf("type" to type(name.removePrefix("VECTOR<").removeSuffix(">"))),
+                "dimension" to dimension
             )
-            propertyType != null && propertyType.startsWith("LIST") -> schemaMapOf(
+            name != null && name.startsWith("LIST") -> schemaMapOf(
                 "type" to "array",
-                "items" to schemaMapOf("type" to type(propertyType.removePrefix("LIST<").removeSuffix(">")))
+                "items" to schemaMapOf("type" to type(name.removePrefix("LIST<").removeSuffix(">")))
             )
-            else -> schemaMapOf("type" to type(propertyType))
+            else -> schemaMapOf("type" to type(name))
         }
 
         private fun constraintType(name: String): String = when (name) {

@@ -10,8 +10,10 @@ import model.node.Labels
 import model.node.Node
 import model.node.labelsJs
 import model.node.nodeJs
-import model.property.Neo4jType
+import model.property.IntegerType
 import model.property.Property
+import model.property.StringType
+import model.property.neo4jTypeJs
 import model.property.propertyJs
 import kotlin.test.Test
 import kotlin.test.assertContains
@@ -30,7 +32,7 @@ class JsEdgeCaseTests {
                     name = "Movie",
                     labels = labelsJs("Movie"),
                     properties = recordOf(
-                        "p:n1:1" to propertyJs("LIST<STRING>", name = "genres", id = "p:n1:1"),
+                        "p:n1:1" to propertyJs(neo4jTypeJs("LIST<STRING>"), name = "genres", id = "p:n1:1"),
                     ),
                     id = "n:1",
                 )
@@ -59,7 +61,7 @@ class JsEdgeCaseTests {
             nodes = mutableMapOf(
                 "PersonNode" to Node(
                     labels = Labels("Person"),
-                    properties = mutableMapOf("born" to Property(Neo4jType.INTEGER, mustExist = true)),
+                    properties = mutableMapOf("born" to Property(IntegerType, mustExist = true)),
                     name = "Person",
                 )
             ),
@@ -85,7 +87,7 @@ class JsEdgeCaseTests {
             nodes = mutableMapOf(
                 "Person" to Node(
                     label = "Person",
-                    properties = mutableMapOf("name" to Property(Neo4jType.STRING)),
+                    properties = mutableMapOf("name" to Property(StringType)),
                 )
             ),
             pretty = true

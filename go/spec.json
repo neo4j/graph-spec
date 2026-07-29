@@ -276,47 +276,643 @@
             "additionalProperties": false
         },
         "Neo4jType": {
-            "type": "string",
-            "enum": [
-                "ANY",
-                "BOOLEAN",
-                "LIST<BOOLEAN>",
-                "DATE",
-                "LIST<DATE>",
-                "DURATION",
-                "LIST<DURATION>",
-                "FLOAT32",
-                "LIST<FLOAT32>",
-                "FLOAT",
-                "LIST<FLOAT>",
-                "INTEGER8",
-                "LIST<INTEGER8>",
-                "INTEGER16",
-                "LIST<INTEGER16>",
-                "INTEGER32",
-                "LIST<INTEGER32>",
-                "INTEGER",
-                "LIST<INTEGER>",
-                "LOCAL DATETIME",
-                "LIST<LOCAL DATETIME>",
-                "LOCAL TIME",
-                "LIST<LOCAL TIME>",
-                "POINT",
-                "LIST<POINT>",
-                "STRING",
-                "LIST<STRING>",
-                "VECTOR<FLOAT>",
-                "VECTOR<FLOAT32>",
-                "VECTOR<INTEGER>",
-                "VECTOR<INTEGER32>",
-                "VECTOR<INTEGER16>",
-                "VECTOR<INTEGER8>",
-                "ZONED DATETIME",
-                "LIST<ZONED DATETIME>",
-                "ZONED TIME",
-                "LIST<ZONED TIME>",
-                "UUID"
-            ]
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/ANY"
+                },
+                {
+                    "$ref": "#/$defs/BOOLEAN"
+                },
+                {
+                    "$ref": "#/$defs/DATE"
+                },
+                {
+                    "$ref": "#/$defs/DURATION"
+                },
+                {
+                    "$ref": "#/$defs/FLOAT32"
+                },
+                {
+                    "$ref": "#/$defs/FLOAT"
+                },
+                {
+                    "$ref": "#/$defs/INTEGER16"
+                },
+                {
+                    "$ref": "#/$defs/INTEGER32"
+                },
+                {
+                    "$ref": "#/$defs/INTEGER8"
+                },
+                {
+                    "$ref": "#/$defs/INTEGER"
+                },
+                {
+                    "$ref": "#/$defs/LIST<BOOLEAN>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<DATE>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<DURATION>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<FLOAT32>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<FLOAT>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<INTEGER16>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<INTEGER32>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<INTEGER8>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<INTEGER>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<LOCAL DATETIME>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<LOCAL TIME>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<POINT>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<STRING>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<ZONED DATETIME>"
+                },
+                {
+                    "$ref": "#/$defs/LIST<ZONED TIME>"
+                },
+                {
+                    "$ref": "#/$defs/LOCAL DATETIME"
+                },
+                {
+                    "$ref": "#/$defs/LOCAL TIME"
+                },
+                {
+                    "$ref": "#/$defs/POINT"
+                },
+                {
+                    "$ref": "#/$defs/STRING"
+                },
+                {
+                    "$ref": "#/$defs/UUID"
+                },
+                {
+                    "$ref": "#/$defs/VECTOR<FLOAT32>"
+                },
+                {
+                    "$ref": "#/$defs/VECTOR<FLOAT>"
+                },
+                {
+                    "$ref": "#/$defs/VECTOR<INTEGER16>"
+                },
+                {
+                    "$ref": "#/$defs/VECTOR<INTEGER32>"
+                },
+                {
+                    "$ref": "#/$defs/VECTOR<INTEGER8>"
+                },
+                {
+                    "$ref": "#/$defs/VECTOR<INTEGER>"
+                },
+                {
+                    "$ref": "#/$defs/ZONED DATETIME"
+                },
+                {
+                    "$ref": "#/$defs/ZONED TIME"
+                }
+            ],
+            "discriminator": {
+                "propertyName": "type"
+            }
+        },
+        "ANY": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "ANY"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "BOOLEAN": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "BOOLEAN"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "DATE": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "DATE"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "DURATION": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "DURATION"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "FLOAT32": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "FLOAT32"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "FLOAT": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "FLOAT"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "INTEGER16": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "INTEGER16"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "INTEGER32": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "INTEGER32"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "INTEGER8": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "INTEGER8"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "INTEGER": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "INTEGER"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<BOOLEAN>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<BOOLEAN>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<DATE>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<DATE>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<DURATION>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<DURATION>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<FLOAT32>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<FLOAT32>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<FLOAT>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<FLOAT>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<INTEGER16>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<INTEGER16>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<INTEGER32>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<INTEGER32>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<INTEGER8>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<INTEGER8>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<INTEGER>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<INTEGER>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<LOCAL DATETIME>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<LOCAL DATETIME>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<LOCAL TIME>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<LOCAL TIME>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<POINT>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<POINT>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<STRING>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<STRING>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<ZONED DATETIME>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<ZONED DATETIME>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LIST<ZONED TIME>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LIST<ZONED TIME>"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LOCAL DATETIME": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LOCAL DATETIME"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "LOCAL TIME": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LOCAL TIME"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "POINT": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "POINT"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "STRING": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "STRING"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "UUID": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "UUID"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VECTOR<FLOAT32>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "VECTOR<FLOAT32>"
+                },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VECTOR<FLOAT>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "VECTOR<FLOAT>"
+                },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VECTOR<INTEGER16>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "VECTOR<INTEGER16>"
+                },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VECTOR<INTEGER32>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "VECTOR<INTEGER32>"
+                },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VECTOR<INTEGER8>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "VECTOR<INTEGER8>"
+                },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VECTOR<INTEGER>": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "VECTOR<INTEGER>"
+                },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "ZONED DATETIME": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "ZONED DATETIME"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "ZONED TIME": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "ZONED TIME"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
         },
         "NodeConstraint": {
             "type": "object",

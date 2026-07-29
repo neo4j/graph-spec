@@ -50,18 +50,6 @@ abstract class TypeScriptModifierTask : DefaultTask() {
         unions.create("MappingMode", "MappingModeJs")
         types.replace("NodeMappingJs", "mode", "string", "MappingModeJs")
 
-        // Neo4jType
-        unions.create("Neo4jType", "Neo4jTypeJs")
-        types.replace("PropertyJs", "type", "string", "Neo4jTypeJs")
-        types.replace("TableFieldJs", "suggested", "string", "Neo4jTypeJs")
-        types.replace("TableFieldJs", "supported", "Array<string>", "array<Neo4jTypeJs>")
-        unions.rename("Neo4jTypeJs") { name ->
-            if (name.startsWith("LIST_")) {
-                "${name.replace("LIST_", "LIST<")}>"
-            } else {
-                name
-            }.replace("_", " ")
-        }
         val input = typescriptFile.readText()
         var result = unions.run(input)
         result = types.run(result)
