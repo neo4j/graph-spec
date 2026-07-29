@@ -599,4 +599,29 @@ class GraphSpecDataModelV3MigrationTest {
             "Constraint should appear in exactly ONE place (shorthand OR long-form), but appeared in $appearanceCount places (shorthand=$hasShorthand, longForm=$hasLongForm)"
         )
     }
+
+    @Test
+    fun `shorthand constraint is preserved as shorthand through a round-trip`() {
+        // ARRANGE - Graph Spec expressing the constraint as property shorthand (unique: true)
+        val input = schemaMapOf(
+            "version" to "2.0",
+            "nodes" to schemaMapOf(
+                "user" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING", "unique" to true)
+                    )
+                )
+            )
+        )
+
+        // ACT - Round-trip: Graph Spec -> Data Model -> Graph Spec
+        val dataModel = migration.migrate(input)
+        val result = DataModelV3GraphSpecMigration().migrate(dataModel)
+        val userNode = result.map("nodes").map("user")
+
+        // ASSERT - shorthand survives as shorthand, and is NOT promoted to a long-form constraints entry
+        assertEquals(true, userNode.map("properties").map("email").boolOrNull("unique"))
+        assertNull(userNode.mapOrNull("constraints"), "shorthand must not also be emitted as long-form")
+    }
 }
