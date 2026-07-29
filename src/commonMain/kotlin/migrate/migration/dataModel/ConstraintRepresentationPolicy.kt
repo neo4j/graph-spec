@@ -16,24 +16,8 @@
  */
 package migrate.migration.dataModel
 
-import codec.schema.SchemaMap
-import codec.schema.schemaMapOf
+private const val SHORTHAND_PREFIX = "graphspec_shorthand_"
 
-internal fun SchemaMap.ref() = string("\$ref").removePrefix("#")
+internal fun shorthandOriginId(rawId: String): String = "$SHORTHAND_PREFIX$rawId"
 
-internal fun SchemaMap.ref(key: String) = map(key).ref()
-
-internal fun SchemaMap.id() = string("\$id")
-
-internal fun unwrap(schema: SchemaMap): SchemaMap {
-    if (schema.containsKey("dataModel")) {
-        val model = schema.map("dataModel")
-        schema.remove("dataModel")
-        schema.remove("version")
-        model.putAll(schema)
-        return model
-    }
-    return schema
-}
-
-internal fun refOf(id: String) = schemaMapOf("\$ref" to "#${id.removePrefix("#")}")
+internal fun isShorthandOriginId(constraintId: String): Boolean = constraintId.startsWith(SHORTHAND_PREFIX)

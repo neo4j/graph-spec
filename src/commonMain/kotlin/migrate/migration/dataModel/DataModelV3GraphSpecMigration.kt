@@ -199,13 +199,13 @@ class DataModelV3GraphSpecMigration :
     }
 
     /**
-     * Drops long-form constraints that were auto-generated from Graph Spec property shorthand.
-     * These are still used to emit the property shorthand (`unique`/`key`/`mustExist`), but must not
-     * also appear in the long-form `constraints` map, otherwise the same constraint is duplicated
-     * in the Graph Spec output. The map key is the constraint `$id`.
+     * Drops long-form constraints that are represented as property shorthand instead
+     * (see [ConstraintRepresentationPolicy]). They are still used to emit the property shorthand
+     * (`unique`/`key`/`mustExist`); keeping them here too would duplicate the constraint in the
+     * Graph Spec output. The map key is the constraint `$id`.
      */
     private fun Map<String, SchemaMap>?.withoutGeneratedShorthand(): Map<String, SchemaMap>? =
-        this?.filterKeys { !it.startsWith(GRAPHSPEC_SHORTHAND_PREFIX) }
+        this?.filterKeys { !isShorthandOriginId(it) }
 
     internal fun migrateRelationships(
         schema: SchemaMap,
