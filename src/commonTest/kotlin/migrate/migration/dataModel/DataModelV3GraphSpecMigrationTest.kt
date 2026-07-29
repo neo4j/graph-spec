@@ -345,7 +345,6 @@ class DataModelV3GraphSpecMigrationTest {
 
         assertEquals("LIST<STRING>", result["p1"]?.map("type")?.string("type"))
         assertEquals("VECTOR<FLOAT>", result["p2"]?.map("type")?.string("type"))
-        // vector dimension is carried through to the graph-spec type object
         assertEquals("4", result["p2"]?.map("type")?.string("dimension"))
     }
 
@@ -550,7 +549,7 @@ class DataModelV3GraphSpecMigrationTest {
 
         val vectorField = fields["embedding"]!!
         assertEquals("VECTOR<FLOAT>", vectorField.map("suggested").string("type"))
-        assertEquals(4, vectorField.map("suggested").int("dimension"))
+        assertEquals("4", vectorField.map("suggested").string("dimension"))
         assertEquals(
             listOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"),
             vectorField.list("supported").map { (it as codec.schema.SchemaMap).string("type") }

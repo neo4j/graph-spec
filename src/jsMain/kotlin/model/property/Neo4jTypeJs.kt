@@ -19,10 +19,6 @@ package model.property
 import kotlinx.js.JsPlainObject
 import model.jso
 
-/**
- * JS view of [Neo4jType]: a plain object carrying the type name in [type] and, for `VECTOR<*>`
- * types, an optional [dimension]. Mirrors the discriminated-object wire form.
- */
 @JsExport
 @JsPlainObject
 external interface Neo4jTypeJs {

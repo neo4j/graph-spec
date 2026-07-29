@@ -326,7 +326,6 @@ class GraphSpecDataModelV3MigrationTest {
         val supported = fields[0].listOfMaps("supportedTypes")
         assertEquals("string", supported[0].string("type"))
         assertEquals("integer", supported[1].string("type"))
-        // vector dimension is carried back into the data model type object
         assertEquals("vector", supported[2].string("type"))
         assertEquals("float", supported[2].map("items").string("type"))
         assertEquals("4", supported[2].string("dimension"))
