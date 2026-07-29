@@ -1,29 +1,27 @@
-# Design: representing vector dimension in the property type system
+# Design: Adding vector dimension support to Graph-Spec
 
 ## Context
 
-Neo4j `VECTOR` property types have an optional dimension value (the number of elements in the
-vector, e.g. `4`). The external "data model" format the UI produces represents a
-type as a structured object and already carries this:
+Neo4j `VECTOR` property types have an optional dimension value (the number of elements in the vector, e.g. `4`). The 
+current data model format used within the UI represents a type as a structured object and already carries this:
 
 ```json
 {"type": "vector", "items": {"type": "float"}, "dimension": 4}
 ```
 
-Graph-spec, however, currently represents a property type as a single flat enum string
-(`Neo4jType`), e.g. `"STRING"`, `"LIST<STRING>"`, `"VECTOR<FLOAT>"`, with no capacity to store 
-dimension. Therefore, when migrating from data-model to graph-spec this value is lost, 
-and on a roundtrip data-model → graph-spec → data-model migration:
+Graph-spec, however, currently represents a property type as a single flat enum string (`Neo4jType`), e.g. `"STRING"`,
+`"LIST<STRING>"`, `"VECTOR<FLOAT>"`, with no capacity to store dimension. Therefore, when migrating from data-model to
+graph-spec this value is lost, and on a roundtrip migration:
 
-- `DataModelV3GraphSpecMigration.neo4jType` collapses `{"type": "vector", "items": {"type": "float"}, "dimension": 4}` to the string `"VECTOR<FLOAT>"`, reading only `items.type`
-- `GraphSpecDataModelV3Migration.propertyType` rebuilds `{"type": "vector", "items": {"type": "float"}}` from the string, with no dimension to recover
+- data-model -> graph-spec (`DataModelV3GraphSpecMigration`) collapses `{"type": "vector", "items": {"type": "float"}, "dimension": 4}` to the string `"VECTOR<FLOAT>"`, reading only `items.type`
+- graph-spec -> data-model (`GraphSpecDataModelV3Migration`) rebuilds `{"type": "vector", "items": {"type": "float"}}` from the string, with no dimension to recover
 
-We currently perform a roundtrip migration in staging for the candidate graph endpoint, and
-as we integrate graph-spec further, more roundtrip migrations will be added. This is an 
-issue for the list and vector type support project we want to complete.
+We currently perform a roundtrip migration in staging for the candidate graph endpoint, and as we integrate graph-spec 
+further, more roundtrip migrations will be added. This is an issue for the list and vector type support project we want 
+to complete.
 
-This affects both the generated graph model's node/relationship property types and the
-table-field `suggested`/`supported` types.
+This affects both the generated graph model's node/relationship property types and the table-field 
+`suggested`/`supported` types.
 
 ## Goal
 
@@ -74,13 +72,11 @@ fields:
     dimension: 4
 ```
 
-- **Pros:** Type enum stays closed so works nicely with JS, Go + JSON Schema. Type-safe and a small, 
-  localized change.
-- **Cons:** Dimension will be at a level that is above the desired level. It is specific to a type, and
-  in theory `Property` or `TableField` can have multiple vector types with different dimensions, so this
-  approach will only model simplified use-cases. It is also not clear or enforced from the spec/model that 
-  dimension only applies to vector types. Separate validation will need to be added to validate dimension 
-  is only present for vector types. 
+- **Pros:** Type enum stays closed so works nicely with JS, Go + JSON Schema. Type-safe and a small, localized change.
+- **Cons:** Dimension will be at a level that is above the desired level. It is specific to a type, and in theory 
+  `Property` or `TableField` can have multiple vector types with different dimensions, so this approach will only
+  model simplified use-cases. It is also not clear or enforced from the spec/model that dimension only applies to 
+  vector types. Separate validation will need to be added to validate dimension is only present for vector types. 
 
 ### Option D: structured / nested type object
 
@@ -166,10 +162,10 @@ directly as the discriminator `const`. Every type name is its own variant and on
   the `scalar`/`items` field. It keeps graph-spec's existing `VECTOR<FLOAT>` spelling verbatim which were chosen
   as they tie in with Neo4j types. It also enables easily adding to existing types in the future if needed.
   
-- **Cons:** The main downside is the verbosity in the spec and auto-generated code - the discriminator must carry 
-  the full type identity, so the union expands to ~37 variants instead of option D's three. The auto-generated Go 
-  gets ~37 flat structs rather than three typed variants (`ScalarType`/`ListType`/`VectorType`). It also still shares
-  option D's largest cost in the verbosity - `type` becomes an object for every property. 
+- **Cons:** The main downside is the verbosity in the implementation and auto-generated code - the discriminator must 
+  carry the full type identity, so the union expands to ~37 variant types instead of option D's three. The 
+  auto-generated Go gets ~37 flat structs rather than three typed variants (`ScalarType`/`ListType`/`VectorType`). It 
+  also still shares option D's verbosity in the spec - `type` becomes an object for every property. 
 
 ## Best Path
 
