@@ -40,7 +40,7 @@ class GraphSpecDataModelV3MigrationTest {
                         "implied" to listOf("Entity")
                     ),
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("name" to "name", "type" to "STRING", "mustExist" to true)
+                        "p1" to schemaMapOf("name" to "name", "type" to mapOf("type" to "STRING"), "mustExist" to true)
                     )
                 )
             )
@@ -310,8 +310,12 @@ class GraphSpecDataModelV3MigrationTest {
         val fieldsInput = mapOf(
             "f1" to schemaMapOf(
                 "name" to "first_name",
-                "suggested" to "STRING",
-                "supported" to listOf(SchemaLiteral("STRING"), SchemaLiteral("INTEGER"))
+                "suggested" to mapOf("type" to "STRING"),
+                "supported" to listOf(
+                    mapOf("type" to "STRING"),
+                    mapOf("type" to "INTEGER"),
+                    mapOf("type" to "VECTOR<FLOAT>", "dimension" to 4)
+                )
             )
         )
 
@@ -322,6 +326,9 @@ class GraphSpecDataModelV3MigrationTest {
         val supported = fields[0].listOfMaps("supportedTypes")
         assertEquals("string", supported[0].string("type"))
         assertEquals("integer", supported[1].string("type"))
+        assertEquals("vector", supported[2].string("type"))
+        assertEquals("float", supported[2].map("items").string("type"))
+        assertEquals("4", supported[2].string("dimension"))
     }
 
     @Test
