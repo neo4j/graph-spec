@@ -614,12 +614,13 @@ class GraphSpecDataModelV3MigrationTest {
         val result = DataModelV3GraphSpecMigration().migrate(dataModel)
         val userNode = result.map("nodes").map("user")
 
-        // ASSERT - long-form only: no property shorthand, one UNIQUE constraint on email
+        // ASSERT - long-form only (no shorthand), one UNIQUE constraint on email, UPX-style name
         assertNull(userNode.map("properties").map("email").boolOrNull("unique"), "shorthand must not be emitted")
-        val hasLongForm = userNode.mapOfMapsOrNull("constraints")?.values?.any { c ->
+        val constraint = userNode.mapOfMapsOrNull("constraints")?.values?.single { c ->
             c.stringOrNull("type") == "UNIQUE" &&
                 c.listOrNull("properties")?.any { (it as? SchemaLiteral)?.string == "email" } == true
-        } == true
-        assertEquals(true, hasLongForm, "constraint must be emitted as long-form")
+        }
+        assertNotNull(constraint, "constraint must be emitted as long-form")
+        assertEquals("email_User_uniq", constraint.string("name"), "name must follow UPX auto-naming")
     }
 }
