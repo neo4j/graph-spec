@@ -19,6 +19,13 @@ package migrate.migration.dataModel
 import codec.schema.SchemaMap
 import codec.schema.schemaMapOf
 
+/**
+ * Marks a Data Model constraint that was auto-generated from Graph Spec property shorthand
+ * (`unique`/`key`/`mustExist`). Used to restore the original shorthand-only representation on the
+ * way back out (DM->GS) instead of emitting both shorthand and long-form.
+ */
+internal const val GRAPHSPEC_SHORTHAND_PREFIX = "graphspec_shorthand_"
+
 internal fun SchemaMap.ref() = string("\$ref").removePrefix("#")
 
 internal fun SchemaMap.ref(key: String) = map(key).ref()

@@ -135,7 +135,7 @@ class DataModelV3GraphSpecMigration :
                     "implied" toNotEmpty tokens.drop(1)
                     // TODO optional
                 ),
-                "constraints" toNotEmpty constraints,
+                "constraints" toNotEmpty constraints.withoutGeneratedShorthand(),
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
                 "properties" toNotEmpty convertProperties(labels, constraints),
                 "name" to tokens.firstOrNull()
@@ -177,12 +177,6 @@ class DataModelV3GraphSpecMigration :
         var index = 0
         return constraints[labelRef]?.associate { constraint ->
             index++
-            /*
-              This creates duplicate constraints for all graph_spec property shorthand constraints
-              so that data like constraint id/name are persisted. It is verbose but should not cause issues
-              as duplicate constraints should be easily resolved.
-              Note: This might conflict with validations added later.
-             */
             val properties = constraint.listOfMapsOrNull("properties")
             val constraintType = constraintType(constraint)
             if (properties != null && properties.size > 1 && constraintType == PROPERTY_TYPE) {
@@ -203,6 +197,15 @@ class DataModelV3GraphSpecMigration :
         return constraintType(type)
             ?: error("Unknown constraint type: $type at ${constraint.path}.${constraint.string("name")}")
     }
+
+    /**
+     * Drops long-form constraints that were auto-generated from Graph Spec property shorthand.
+     * These are still used to emit the property shorthand (`unique`/`key`/`mustExist`), but must not
+     * also appear in the long-form `constraints` map, otherwise the same constraint is duplicated
+     * in the Graph Spec output. The map key is the constraint `$id`.
+     */
+    private fun Map<String, SchemaMap>?.withoutGeneratedShorthand(): Map<String, SchemaMap>? =
+        this?.filterKeys { !it.startsWith(GRAPHSPEC_SHORTHAND_PREFIX) }
 
     internal fun migrateRelationships(
         schema: SchemaMap,
@@ -225,7 +228,7 @@ class DataModelV3GraphSpecMigration :
                 "from" to mapOf("node" to objectType.ref("from")),
                 "to" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType), constraints),
-                "constraints" toNotEmpty constraints,
+                "constraints" toNotEmpty constraints.withoutGeneratedShorthand(),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
                 "name" to uniqueRelationshipName(token, uniqueNames)
             )

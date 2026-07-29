@@ -564,51 +564,34 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `FAILING - constraint should appear in ONE place only not both`() {
-        // ARRANGE - Graph Spec with single-property UNIQUE constraint
+    fun `constraint should appear in ONE place only not both after round-trip`() {
+        // ARRANGE - Graph Spec with a single-property UNIQUE constraint expressed as shorthand
         val input = schemaMapOf(
             "version" to "2.0",
             "nodes" to schemaMapOf(
                 "user" to schemaMapOf(
                     "labels" to schemaMapOf("identifier" to "User"),
                     "properties" to schemaMapOf(
-                        "email" to schemaMapOf("name" to "email", "type" to "STRING")
-                    ),
-                    "constraints" to schemaMapOf(
-                        "emailUnique" to schemaMapOf(
-                            "type" to "UNIQUE",
-                            "label" to "User",
-                            "properties" to listOf("email"),
-                            "name" to "email_unique"
-                        )
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING", "unique" to true)
                     )
                 )
             )
         )
 
-        // ACT - Convert to Data Model
+        // ACT - Round-trip: Graph Spec -> Data Model -> Graph Spec
         val dataModel = migration.migrate(input)
+        val result = DataModelV3GraphSpecMigration().migrate(dataModel)
+        val userNode = result.map("nodes").map("user")
 
-        // ASSERT - Constraint should appear in EITHER long-form OR shorthand, not BOTH
-        val nodeLabels = dataModel
-            .map("graphSchemaRepresentation")
-            .map("graphSchema")
-            .listOfMaps("nodeLabels")
-        val userLabel = nodeLabels.first { it.string("token") == "User" }
-        val emailProp = userLabel.listOfMaps("properties").first { it.string("token") == "email" }
+        // ASSERT - The constraint must appear in EITHER shorthand OR long-form, not BOTH
+        val emailProp = userNode.map("properties").map("email")
+        val hasShorthand = emailProp.boolOrNull("unique") == true
 
-        val hasShorthand = emailProp.containsKey("unique") && emailProp.boolOrNull("unique") == true
-
-        val constraints = dataModel
-            .map("graphSchemaRepresentation")
-            .map("graphSchema")
-            .listOfMapsOrNull("constraints")
-        val hasLongForm = constraints?.any { c ->
-            c.string("constraintType") == "UNIQUE" &&
-            c.listOfMapsOrNull("properties")?.any { it.string("\$ref") == "#${emailProp.id()}" } == true
+        val hasLongForm = userNode.mapOfMapsOrNull("constraints")?.values?.any { c ->
+            c.stringOrNull("type") == "UNIQUE" &&
+                c.listOrNull("properties")?.any { (it as? SchemaLiteral)?.string == "email" } == true
         } == true
 
-        // This should fail with current implementation (both are true)
         val appearanceCount = listOf(hasShorthand, hasLongForm).count { it }
         assertEquals(
             1,

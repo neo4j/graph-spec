@@ -371,8 +371,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             return emptyList()
         }
         fun constr(propId: String, type: String): SchemaMap = schemaMapOf(
-            // There isn't really an easy way to make a unique id as this information is lost in shorthand
-            "\$id" to "${entityType}PropertyConstraint_${name}_$propId",
+            // There isn't really an easy way to make a unique id as this information is lost in shorthand.
+            // The prefix marks this constraint as generated from shorthand so DM->GS restores shorthand only.
+            "\$id" to "$GRAPHSPEC_SHORTHAND_PREFIX${entityType}PropertyConstraint_${name}_$propId",
             "name" to name,
             "constraintType" to type,
             "entityType" to entityType,
