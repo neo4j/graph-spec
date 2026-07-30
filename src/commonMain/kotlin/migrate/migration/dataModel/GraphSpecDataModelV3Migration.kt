@@ -371,8 +371,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             return emptyList()
         }
         fun constr(propId: String, type: String): SchemaMap = schemaMapOf(
-            // There isn't really an easy way to make a unique id as this information is lost in shorthand
-            "\$id" to "${entityType}PropertyConstraint_${name}_$propId",
+            // typeId (nl:N / rt:N) is globally unique per label/relationship-type, and propId is
+            // unique within it, so this id can't collide - unlike deriving it from the token name.
+            "\$id" to "${typeId}_${propId}_$type",
             "name" to name,
             "constraintType" to type,
             "entityType" to entityType,
