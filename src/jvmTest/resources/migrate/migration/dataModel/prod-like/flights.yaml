@@ -3,7 +3,7 @@ nodes:
   Aircraft:
     label: "Aircraft"
     properties:
-      aircraftCode: { type: "STRING", unique: true }
+      aircraftCode: { type: "STRING" }
       model: { type: "STRING" }
       aircraftRange: { type: "INTEGER" }
     constraints:
@@ -19,7 +19,7 @@ nodes:
   Airport:
     label: "Airport"
     properties:
-      airportCode: { type: "STRING", unique: true }
+      airportCode: { type: "STRING" }
       airportName: { type: "STRING" }
       city: { type: "STRING" }
       coordinates: { type: "POINT" }
@@ -37,7 +37,7 @@ nodes:
   Booking:
     label: "Booking"
     properties:
-      bookRef: { type: "STRING", unique: true }
+      bookRef: { type: "STRING" }
       bookDate: { type: "ZONED DATETIME" }
       totalAmount: { type: "FLOAT" }
     constraints:
@@ -53,7 +53,7 @@ nodes:
   Flight:
     label: "Flight"
     properties:
-      flightId: { type: "INTEGER", unique: true }
+      flightId: { type: "INTEGER" }
       flightNo: { type: "STRING" }
       scheduledDeparture: { type: "ZONED DATETIME" }
       scheduledArrival: { type: "ZONED DATETIME" }
@@ -73,7 +73,7 @@ nodes:
   Ticket:
     label: "Ticket"
     properties:
-      ticketNo: { type: "STRING", unique: true }
+      ticketNo: { type: "STRING" }
       passengerId: { type: "STRING" }
       passengerName: { type: "STRING" }
       contactData: { type: "STRING" }

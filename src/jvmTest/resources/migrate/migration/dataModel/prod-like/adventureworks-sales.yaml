@@ -3,7 +3,7 @@ nodes:
   creditcard:
     label: "creditcard"
     properties:
-      creditcardid: { type: "INTEGER", unique: true }
+      creditcardid: { type: "INTEGER" }
       cardtype: { type: "STRING" }
       cardnumber: { type: "STRING" }
       expmonth: { type: "INTEGER" }
@@ -22,7 +22,7 @@ nodes:
   currency:
     label: "currency"
     properties:
-      currencycode: { type: "STRING", unique: true }
+      currencycode: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
     constraints:
       currency:
@@ -37,7 +37,7 @@ nodes:
   currencyrate:
     label: "currencyrate"
     properties:
-      currencyrateid: { type: "INTEGER", unique: true }
+      currencyrateid: { type: "INTEGER" }
       currencyratedate: { type: "ZONED DATETIME" }
       averagerate: { type: "FLOAT" }
       endofdayrate: { type: "FLOAT" }
@@ -55,7 +55,7 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customerid: { type: "INTEGER", unique: true }
+      customerid: { type: "INTEGER" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
     constraints:
@@ -71,7 +71,7 @@ nodes:
   salesorderheader:
     label: "salesorderheader"
     properties:
-      salesorderid: { type: "INTEGER", unique: true }
+      salesorderid: { type: "INTEGER" }
       revisionnumber: { type: "INTEGER" }
       orderdate: { type: "ZONED DATETIME" }
       duedate: { type: "ZONED DATETIME" }
@@ -98,7 +98,7 @@ nodes:
   salesperson:
     label: "salesperson"
     properties:
-      businessentityid: { type: "INTEGER", unique: true }
+      businessentityid: { type: "INTEGER" }
       salesquota: { type: "FLOAT" }
       bonus: { type: "FLOAT" }
       commissionpct: { type: "FLOAT" }
@@ -119,7 +119,7 @@ nodes:
   salesreason:
     label: "salesreason"
     properties:
-      salesreasonid: { type: "INTEGER", unique: true }
+      salesreasonid: { type: "INTEGER" }
       modifieddate: { type: "ZONED DATETIME" }
     constraints:
       salesreason:
@@ -134,7 +134,7 @@ nodes:
   salestaxrate:
     label: "salestaxrate"
     properties:
-      salestaxrateid: { type: "INTEGER", unique: true }
+      salestaxrateid: { type: "INTEGER" }
       taxtype: { type: "INTEGER" }
       taxrate: { type: "FLOAT" }
       rowguid: { type: "STRING" }
@@ -152,7 +152,7 @@ nodes:
   salesterritory:
     label: "salesterritory"
     properties:
-      territoryid: { type: "INTEGER", unique: true }
+      territoryid: { type: "INTEGER" }
       group: { type: "STRING" }
       salesytd: { type: "FLOAT" }
       saleslastyear: { type: "FLOAT" }
@@ -173,7 +173,7 @@ nodes:
   shoppingcartitem:
     label: "shoppingcartitem"
     properties:
-      shoppingcartitemid: { type: "INTEGER", unique: true }
+      shoppingcartitemid: { type: "INTEGER" }
       shoppingcartid: { type: "STRING" }
       quantity: { type: "INTEGER" }
       datecreated: { type: "ZONED DATETIME" }
@@ -191,7 +191,7 @@ nodes:
   specialoffer:
     label: "specialoffer"
     properties:
-      specialofferid: { type: "INTEGER", unique: true }
+      specialofferid: { type: "INTEGER" }
       description: { type: "STRING" }
       discountpct: { type: "FLOAT" }
       type: { type: "STRING" }
@@ -215,7 +215,7 @@ nodes:
   store:
     label: "store"
     properties:
-      businessentityid: { type: "INTEGER", unique: true }
+      businessentityid: { type: "INTEGER" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
     constraints:
