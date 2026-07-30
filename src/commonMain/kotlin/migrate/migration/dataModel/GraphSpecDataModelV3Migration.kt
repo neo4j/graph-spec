@@ -277,7 +277,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                                 propertyConstraints,
                                 "node",
                                 labelId,
-                                node.stringOrNull("name") ?: nodeId
+                                label
                             )
                         )
                     )
@@ -365,15 +365,15 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         constraints: MutableList<SchemaMap>,
         entityType: String,
         typeId: String,
-        name: String
+        label: String
     ): List<SchemaMap> {
         if (properties.isNullOrEmpty()) {
             return emptyList()
         }
-        fun constr(propId: String, type: String): SchemaMap = schemaMapOf(
+        fun constr(propId: String, propertyName: String, type: String): SchemaMap = schemaMapOf(
             // There isn't really an easy way to make a unique id as this information is lost in shorthand
-            "\$id" to "${entityType}PropertyConstraint_${name}_$propId",
-            "name" to name,
+            "\$id" to "${entityType}PropertyConstraint_${label}_$propId",
+            "name" to shorthandConstraintName(propertyName, label, type),
             "constraintType" to type,
             "entityType" to entityType,
             "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
@@ -396,17 +396,25 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
              */
             )
             if (prop.stringOrNull("key") == "true") {
-                constraints.add(constr(propId, "key"))
+                constraints.add(constr(propId, name, "key"))
             } else {
                 if (prop.stringOrNull("mustExist") == "true") {
-                    constraints.add(constr(propId, "propertyExistence"))
+                    constraints.add(constr(propId, name, "propertyExistence"))
                 }
                 if (prop.stringOrNull("unique") == "true") {
-                    constraints.add(constr(propId, "uniqueness"))
+                    constraints.add(constr(propId, name, "uniqueness"))
                 }
             }
             map
         }
+    }
+
+    private fun shorthandConstraintName(propertyToken: String, label: String, type: String): String {
+        val sanitisedProperty = propertyToken.replace(" ", "_")
+        val sanitisedLabel = label.replace(" ", "_")
+        val baseName = if (sanitisedLabel.isEmpty()) sanitisedProperty else "${sanitisedProperty}_$sanitisedLabel"
+        val typeSuffix = if (type == "uniqueness") "uniq" else type
+        return "${baseName}_$typeSuffix"
     }
 
     internal fun convertElements(

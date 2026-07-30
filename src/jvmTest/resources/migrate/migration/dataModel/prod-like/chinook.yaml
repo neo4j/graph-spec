@@ -3,7 +3,7 @@ nodes:
   album:
     label: "album"
     properties:
-      album_id: { type: "INTEGER", unique: true }
+      album_id: { type: "INTEGER" }
       title: { type: "STRING" }
     constraints:
       album:
@@ -18,7 +18,7 @@ nodes:
   artist:
     label: "artist"
     properties:
-      artist_id: { type: "INTEGER", unique: true }
+      artist_id: { type: "INTEGER" }
       name: { type: "STRING" }
     constraints:
       artist:
@@ -33,7 +33,7 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER", unique: true }
+      customer_id: { type: "INTEGER" }
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
       company: { type: "STRING" }
@@ -58,7 +58,7 @@ nodes:
   employee:
     label: "employee"
     properties:
-      employee_id: { type: "INTEGER", unique: true }
+      employee_id: { type: "INTEGER" }
       last_name: { type: "STRING" }
       first_name: { type: "STRING" }
       title: { type: "STRING" }
@@ -85,7 +85,7 @@ nodes:
   genre:
     label: "genre"
     properties:
-      genre_id: { type: "INTEGER", unique: true }
+      genre_id: { type: "INTEGER" }
       name: { type: "STRING" }
     constraints:
       genre:
@@ -100,7 +100,7 @@ nodes:
   invoice:
     label: "invoice"
     properties:
-      invoice_id: { type: "INTEGER", unique: true }
+      invoice_id: { type: "INTEGER" }
       invoice_date: { type: "ZONED DATETIME" }
       billing_address: { type: "STRING" }
       billing_city: { type: "STRING" }
@@ -121,7 +121,7 @@ nodes:
   invoice_line:
     label: "invoice_line"
     properties:
-      invoice_line_id: { type: "INTEGER", unique: true }
+      invoice_line_id: { type: "INTEGER" }
       unit_price: { type: "FLOAT" }
       quantity: { type: "INTEGER" }
     constraints:
@@ -137,7 +137,7 @@ nodes:
   media_type:
     label: "media_type"
     properties:
-      media_type_id: { type: "INTEGER", unique: true }
+      media_type_id: { type: "INTEGER" }
       name: { type: "STRING" }
     constraints:
       media_type:
@@ -152,7 +152,7 @@ nodes:
   playlist:
     label: "playlist"
     properties:
-      playlist_id: { type: "INTEGER", unique: true }
+      playlist_id: { type: "INTEGER" }
       name: { type: "STRING" }
     constraints:
       playlist:
@@ -167,7 +167,7 @@ nodes:
   track:
     label: "track"
     properties:
-      track_id: { type: "INTEGER", unique: true }
+      track_id: { type: "INTEGER" }
       name: { type: "STRING" }
       composer: { type: "STRING" }
       milliseconds: { type: "INTEGER" }
