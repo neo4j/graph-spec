@@ -218,7 +218,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
 
     private fun addNonDuplicateConstraints(target: MutableList<SchemaMap>, source: List<SchemaMap>) {
         fun getConstraintKey(constraint: SchemaMap): Triple<String?, String?, Set<*>> {
-            val name = constraint.stringOrNull("nodeLabel") ?: constraint.stringOrNull("relationshipType")
+            val name = constraint.mapOrNull("nodeLabel")?.ref() ?: constraint.mapOrNull("relationshipType")?.ref()
             val type = constraint.stringOrNull("constraintType")
             val props = constraint.listOrNull("properties")?.content?.toSet() ?: emptySet<Any>()
             return Triple(name, type, props)

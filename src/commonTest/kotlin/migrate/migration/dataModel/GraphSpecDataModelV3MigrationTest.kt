@@ -525,4 +525,36 @@ class GraphSpecDataModelV3MigrationTest {
         assertTrue(dataModel.containsKey("graphMappingRepresentation"))
         assertTrue(dataModel.containsKey("configurations"))
     }
+
+    @Test
+    fun `migrate preserves uniqueness constraints on same-named property across different node labels`() {
+        val input = schemaMapOf(
+            "version" to "2.0",
+            "nodes" to schemaMapOf(
+                "user" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING", "unique" to true)
+                    )
+                ),
+                "company" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "Company"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING", "unique" to true)
+                    )
+                )
+            )
+        )
+
+        val result = migration.migrate(input)
+        val constraints = result
+            .map("graphSchemaRepresentation")
+            .map("graphSchema")
+            .listOfMaps("constraints")
+            .filter { it.stringOrNull("constraintType") == "uniqueness" }
+
+        assertEquals(2, constraints.size, "expected uniqueness constraints for both User and Company")
+        val nodeLabelRefs = constraints.mapNotNull { it.mapOrNull("nodeLabel")?.ref() }
+        assertEquals(2, nodeLabelRefs.toSet().size, "constraints must belong to distinct node labels: $nodeLabelRefs")
+    }
 }
