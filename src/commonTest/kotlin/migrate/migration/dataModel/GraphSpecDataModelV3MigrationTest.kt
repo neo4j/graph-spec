@@ -17,6 +17,7 @@
 package migrate.migration.dataModel
 
 import codec.schema.SchemaLiteral
+import codec.schema.SchemaMap
 import codec.schema.SchemaNull
 import codec.schema.schemaListOf
 import codec.schema.schemaMapOf
@@ -524,6 +525,135 @@ class GraphSpecDataModelV3MigrationTest {
         assertTrue(dataModel.containsKey("graphSchemaRepresentation"))
         assertTrue(dataModel.containsKey("graphMappingRepresentation"))
         assertTrue(dataModel.containsKey("configurations"))
+    }
+
+    @Test
+    fun `long-form constraint id and name are preserved through a round-trip`() {
+        // ARRANGE - Graph Spec with a long-form UNIQUE constraint (custom id and name)
+        val input = schemaMapOf(
+            "version" to "2.0",
+            "nodes" to schemaMapOf(
+                "user" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING")
+                    ),
+                    "constraints" to schemaMapOf(
+                        "emailUnique" to schemaMapOf(
+                            "type" to "UNIQUE",
+                            "label" to "User",
+                            "properties" to listOf("email"),
+                            "name" to "email_unique_constraint"
+                        )
+                    )
+                )
+            )
+        )
+
+        // ACT - Round-trip: Graph Spec → Data Model → Graph Spec
+        val dataModel = migration.migrate(input)
+        val result = DataModelV3GraphSpecMigration().migrate(dataModel)
+
+        // ASSERT - Custom constraint ID and name are preserved
+        val userNode = result.map("nodes").map("user")
+        val constraints = userNode.mapOrNull("constraints")
+        assertNotNull(constraints, "Constraints should be preserved")
+        val emailConstraint = constraints.mapOrNull("emailUnique")
+        assertNotNull(emailConstraint, "Custom constraint ID 'emailUnique' should be preserved")
+        assertEquals("email_unique_constraint", emailConstraint.string("name"))
+        assertEquals("UNIQUE", emailConstraint.string("type"))
+    }
+
+    @Test
+    fun `shorthand input is still parsed into a Data Model constraint`() {
+        // ARRANGE - Graph Spec input using property shorthand (public format must keep working)
+        val input = schemaMapOf(
+            "version" to "2.0",
+            "nodes" to schemaMapOf(
+                "user" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING", "unique" to true)
+                    )
+                )
+            )
+        )
+
+        // ACT - GS -> DM
+        val dataModel = migration.migrate(input)
+
+        // ASSERT - the shorthand produced a uniqueness constraint on email in the Data Model
+        val constraints = dataModel
+            .map("graphSchemaRepresentation")
+            .map("graphSchema")
+            .listOfMapsOrNull("constraints")
+        val hasUniqueness = constraints?.any { c ->
+            c.stringOrNull("constraintType") == "uniqueness" &&
+                c.listOrNull("properties")?.any { (it as? SchemaMap)?.ref() == "email" } == true
+        } == true
+        assertEquals(true, hasUniqueness, "shorthand input must still create a Data Model constraint")
+    }
+
+    @Test
+    fun `shorthand constraint input is emitted as long-form through a round-trip`() {
+        // ARRANGE - Graph Spec expressing the constraint as property shorthand (unique: true)
+        val input = schemaMapOf(
+            "version" to "2.0",
+            "nodes" to schemaMapOf(
+                "user" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING", "unique" to true)
+                    )
+                )
+            )
+        )
+
+        // ACT - Round-trip: Graph Spec -> Data Model -> Graph Spec
+        val dataModel = migration.migrate(input)
+        val result = DataModelV3GraphSpecMigration().migrate(dataModel)
+        val userNode = result.map("nodes").map("user")
+
+        // ASSERT - long-form only (no shorthand), one UNIQUE constraint on email, UPX-style name
+        assertNull(userNode.map("properties").map("email").boolOrNull("unique"), "shorthand must not be emitted")
+        val constraint = userNode.mapOfMapsOrNull("constraints")?.values?.single { c ->
+            c.stringOrNull("type") == "UNIQUE" &&
+                c.listOrNull("properties")?.any { (it as? SchemaLiteral)?.string == "email" } == true
+        }
+        assertNotNull(constraint, "constraint must be emitted as long-form")
+        assertEquals("email_User_uniq", constraint.string("name"), "name must follow UPX auto-naming")
+    }
+
+    @Test
+    fun `migrate preserves uniqueness constraints on same-named property across different node labels`() {
+        val input = schemaMapOf(
+            "version" to "2.0",
+            "nodes" to schemaMapOf(
+                "user" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING", "unique" to true)
+                    )
+                ),
+                "company" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "Company"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf("name" to "email", "type" to "STRING", "unique" to true)
+                    )
+                )
+            )
+        )
+
+        val result = migration.migrate(input)
+        val constraints = result
+            .map("graphSchemaRepresentation")
+            .map("graphSchema")
+            .listOfMaps("constraints")
+            .filter { it.stringOrNull("constraintType") == "uniqueness" }
+
+        assertEquals(2, constraints.size, "expected uniqueness constraints for both User and Company")
+        val nodeLabelRefs = constraints.mapNotNull { it.mapOrNull("nodeLabel")?.ref() }
+        assertEquals(2, nodeLabelRefs.toSet().size, "constraints must belong to distinct node labels: $nodeLabelRefs")
     }
 
     @Test

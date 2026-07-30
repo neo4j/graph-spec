@@ -218,7 +218,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
 
     private fun addNonDuplicateConstraints(target: MutableList<SchemaMap>, source: List<SchemaMap>) {
         fun getConstraintKey(constraint: SchemaMap): Triple<String?, String?, Set<*>> {
-            val name = constraint.stringOrNull("nodeLabel") ?: constraint.stringOrNull("relationshipType")
+            val name = constraint.mapOrNull("nodeLabel")?.ref() ?: constraint.mapOrNull("relationshipType")?.ref()
             val type = constraint.stringOrNull("constraintType")
             val props = constraint.listOrNull("properties")?.content?.toSet() ?: emptySet<Any>()
             return Triple(name, type, props)
@@ -277,7 +277,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                                 propertyConstraints,
                                 "node",
                                 labelId,
-                                node.stringOrNull("name") ?: nodeId
+                                label
                             )
                         )
                     )
@@ -365,16 +365,16 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         constraints: MutableList<SchemaMap>,
         entityType: String,
         typeId: String,
-        name: String
+        label: String
     ): List<SchemaMap> {
         if (properties.isNullOrEmpty()) {
             return emptyList()
         }
-        fun constr(propId: String, type: String): SchemaMap = schemaMapOf(
+        fun constr(propId: String, propertyName: String, type: String): SchemaMap = schemaMapOf(
             // typeId (nl:N / rt:N) is globally unique per label/relationship-type, and propId is
             // unique within it, so this id can't collide - unlike deriving it from the token name.
             "\$id" to "${typeId}_${propId}_$type",
-            "name" to name,
+            "name" to shorthandConstraintName(propertyName, label, type),
             "constraintType" to type,
             "entityType" to entityType,
             "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
@@ -397,17 +397,25 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
              */
             )
             if (prop.stringOrNull("key") == "true") {
-                constraints.add(constr(propId, "key"))
+                constraints.add(constr(propId, name, "key"))
             } else {
                 if (prop.stringOrNull("mustExist") == "true") {
-                    constraints.add(constr(propId, "propertyExistence"))
+                    constraints.add(constr(propId, name, "propertyExistence"))
                 }
                 if (prop.stringOrNull("unique") == "true") {
-                    constraints.add(constr(propId, "uniqueness"))
+                    constraints.add(constr(propId, name, "uniqueness"))
                 }
             }
             map
         }
+    }
+
+    private fun shorthandConstraintName(propertyToken: String, label: String, type: String): String {
+        val sanitisedProperty = propertyToken.replace(" ", "_")
+        val sanitisedLabel = label.replace(" ", "_")
+        val baseName = if (sanitisedLabel.isEmpty()) sanitisedProperty else "${sanitisedProperty}_$sanitisedLabel"
+        val typeSuffix = if (type == "uniqueness") "uniq" else type
+        return "${baseName}_$typeSuffix"
     }
 
     internal fun convertElements(
