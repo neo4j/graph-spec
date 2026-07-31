@@ -14,7 +14,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:0_1",
@@ -22,7 +22,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -36,7 +36,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:1_1",
@@ -44,7 +44,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -58,7 +58,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_1",
@@ -66,7 +66,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_2",
@@ -74,7 +74,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_3",
@@ -82,7 +82,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_4",
@@ -90,7 +90,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_5",
@@ -98,7 +98,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_6",
@@ -106,7 +106,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_7",
@@ -114,7 +114,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_8",
@@ -122,7 +122,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_9",
@@ -130,7 +130,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_10",
@@ -138,7 +138,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:2_11",
@@ -146,7 +146,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -160,7 +160,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_1",
@@ -168,7 +168,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_2",
@@ -176,7 +176,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_3",
@@ -184,7 +184,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_5",
@@ -192,7 +192,7 @@
               "type": {
                 "type": "datetime"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_6",
@@ -200,7 +200,7 @@
               "type": {
                 "type": "datetime"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_7",
@@ -208,7 +208,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_8",
@@ -216,7 +216,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_9",
@@ -224,7 +224,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_10",
@@ -232,7 +232,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_11",
@@ -240,7 +240,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_12",
@@ -248,7 +248,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_13",
@@ -256,7 +256,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:3_14",
@@ -264,7 +264,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -278,7 +278,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:4_1",
@@ -286,7 +286,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -300,7 +300,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:5_2",
@@ -308,7 +308,7 @@
               "type": {
                 "type": "datetime"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:5_3",
@@ -316,7 +316,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:5_4",
@@ -324,7 +324,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:5_5",
@@ -332,7 +332,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:5_6",
@@ -340,7 +340,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:5_7",
@@ -348,7 +348,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:5_8",
@@ -356,7 +356,7 @@
               "type": {
                 "type": "float"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -370,7 +370,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:6_3",
@@ -378,7 +378,7 @@
               "type": {
                 "type": "float"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:6_4",
@@ -386,7 +386,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -400,7 +400,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:7_1",
@@ -408,7 +408,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -422,7 +422,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:8_1",
@@ -430,7 +430,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         },
@@ -444,7 +444,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:9_1",
@@ -452,7 +452,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:9_5",
@@ -460,7 +460,7 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:9_6",
@@ -468,7 +468,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:9_7",
@@ -476,7 +476,7 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": true
             },
             {
               "$id": "p:9_8",
@@ -484,7 +484,7 @@
               "type": {
                 "type": "float"
               },
-              "nullable": false
+              "nullable": true
             }
           ]
         }

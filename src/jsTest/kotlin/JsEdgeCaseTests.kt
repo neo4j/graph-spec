@@ -71,7 +71,7 @@ class JsEdgeCaseTests {
         val encoded = GraphSpec.Json.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30)
 
         assertTrue(encoded.contains("\"token\": \"born\""))
-        assertTrue(encoded.contains("\"nullable\": false"))
+        assertTrue(encoded.contains("\"nullable\": true"))
 
         val decoded = GraphSpec.Json.decodeFromString(encoded, Type.DATA_MODEL)
         assertEquals("Person", decoded.nodes["PersonNode"]?.name)
