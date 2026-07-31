@@ -372,8 +372,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         }
         fun constr(propId: String, propertyName: String, type: String): SchemaMap {
             val readableName = shorthandConstraintName(propertyName, label, type)
-            // readableName bakes in the constraint type, so pairing it with typeId guarantees
-            // a globally-unique id — unlike the token-only approach which lost type information.
+            // Unsupported edge case: property/label names differing only by space-vs-underscore (e.g. "prop label"
+            // vs "prop_label") break id and name uniqueness, since sanitisation just replaces spaces with underscores.
             return schemaMapOf(
                 "\$id" to "${typeId}_$readableName",
                 "name" to readableName,
