@@ -370,17 +370,20 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         if (properties.isNullOrEmpty()) {
             return emptyList()
         }
-        fun constr(propId: String, propertyName: String, type: String): SchemaMap = schemaMapOf(
-            // typeId (nl:N / rt:N) is globally unique per label/relationship-type, and propId is
-            // unique within it, so this id can't collide - unlike deriving it from the token name.
-            "\$id" to "${typeId}_${propId}_$type",
-            "name" to shorthandConstraintName(propertyName, label, type),
-            "constraintType" to type,
-            "entityType" to entityType,
-            "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
-            "properties" to schemaListOf(refOf(propId)),
-            "relationshipType" to if (entityType == "relationship") refOf(typeId) else SchemaNull()
-        )
+        fun constr(propId: String, propertyName: String, type: String): SchemaMap {
+            val readableName = shorthandConstraintName(propertyName, label, type)
+            // readableName bakes in the constraint type, so pairing it with typeId guarantees
+            // a globally-unique id — unlike the token-only approach which lost type information.
+            return schemaMapOf(
+                "\$id" to "${typeId}_$readableName",
+                "name" to readableName,
+                "constraintType" to type,
+                "entityType" to entityType,
+                "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
+                "properties" to schemaListOf(refOf(propId)),
+                "relationshipType" to if (entityType == "relationship") refOf(typeId) else SchemaNull()
+            )
+        }
 
         return properties.map { (propId, prop) ->
             val name = prop.stringOrNull("name") ?: propId
