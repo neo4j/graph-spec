@@ -655,4 +655,43 @@ class GraphSpecDataModelV3MigrationTest {
         val nodeLabelRefs = constraints.mapNotNull { it.mapOrNull("nodeLabel")?.ref() }
         assertEquals(2, nodeLabelRefs.toSet().size, "constraints must belong to distinct node labels: $nodeLabelRefs")
     }
+
+    @Test
+    fun `shorthand constraints on the same property get unique ids`() {
+        // ARRANGE - one property that is both mandatory and unique produces TWO constraints
+        // (a property existence constraint and a uniqueness constraint)
+        val input = schemaMapOf(
+            "version" to "2.0",
+            "nodes" to schemaMapOf(
+                "user" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "properties" to schemaMapOf(
+                        "email" to schemaMapOf(
+                            "name" to "email",
+                            "type" to "STRING",
+                            "mustExist" to true,
+                            "unique" to true
+                        )
+                    )
+                )
+            )
+        )
+
+        // ACT - GS -> DM
+        val dataModel = migration.migrate(input)
+        val emailConstraints = dataModel
+            .map("graphSchemaRepresentation")
+            .map("graphSchema")
+            .listOfMaps("constraints")
+            .filter { c -> c.listOfMapsOrNull("properties")?.any { it.ref() == "email" } == true }
+
+        // ASSERT - both constraints exist, and each has a UNIQUE \$id
+        assertEquals(2, emailConstraints.size, "expected an existence and a uniqueness constraint")
+        val ids = emailConstraints.map { it.string("\$id") }
+        assertEquals(
+            ids.size,
+            ids.toSet().size,
+            "constraint \$ids must be unique, but they collide: $ids"
+        )
+    }
 }

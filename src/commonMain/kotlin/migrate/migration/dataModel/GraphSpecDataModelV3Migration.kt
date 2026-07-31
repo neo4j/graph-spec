@@ -370,16 +370,20 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         if (properties.isNullOrEmpty()) {
             return emptyList()
         }
-        fun constr(propId: String, propertyName: String, type: String): SchemaMap = schemaMapOf(
-            // There isn't really an easy way to make a unique id as this information is lost in shorthand
-            "\$id" to "${entityType}PropertyConstraint_${label}_$propId",
-            "name" to shorthandConstraintName(propertyName, label, type),
-            "constraintType" to type,
-            "entityType" to entityType,
-            "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
-            "properties" to schemaListOf(refOf(propId)),
-            "relationshipType" to if (entityType == "relationship") refOf(typeId) else SchemaNull()
-        )
+        fun constr(propId: String, propertyName: String, type: String): SchemaMap {
+            val readableName = shorthandConstraintName(propertyName, label, type)
+            // Unsupported edge case: property/label names differing only by space-vs-underscore (e.g. "prop label"
+            // vs "prop_label") break id and name uniqueness, since sanitisation just replaces spaces with underscores.
+            return schemaMapOf(
+                "\$id" to "${typeId}_$readableName",
+                "name" to readableName,
+                "constraintType" to type,
+                "entityType" to entityType,
+                "nodeLabel" to if (entityType == "node") refOf(typeId) else SchemaNull(),
+                "properties" to schemaListOf(refOf(propId)),
+                "relationshipType" to if (entityType == "relationship") refOf(typeId) else SchemaNull()
+            )
+        }
 
         return properties.map { (propId, prop) ->
             val name = prop.stringOrNull("name") ?: propId
