@@ -20,6 +20,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
 import model.extension.Extensions
+import model.property.AnyType
 import model.property.Neo4jType
 import model.type.Named
 import kotlin.js.JsExport
@@ -30,7 +31,7 @@ import kotlin.js.JsExport
 data class TableField(
     var type: String = "",
     var size: Int = -1,
-    val suggested: Neo4jType = Neo4jType.ANY,
+    val suggested: Neo4jType = AnyType,
     val supported: Set<Neo4jType> = emptySet(),
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null

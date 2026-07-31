@@ -16,22 +16,21 @@
  */
 package model.property
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
-import model.type.Named
-import kotlin.js.JsExport
+import kotlinx.js.JsPlainObject
+import model.jso
 
 @JsExport
-@Serializable
-@SerialName("Property")
-data class Property(
-    var type: Neo4jType = AnyType,
-    var mustExist: Boolean? = null,
-    var unique: Boolean? = null,
-    var key: Boolean? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
-    override var name: String? = null
-) : Extensions,
-    Named
+@JsPlainObject
+external interface Neo4jTypeJs {
+    val type: String
+    val dimension: Int?
+}
+
+fun neo4jTypeJs(type: String, dimension: Int? = null): Neo4jTypeJs = jso {
+    this.type = type
+    if (dimension != null) this.dimension = dimension
+}
+
+fun Neo4jType.toJs(): Neo4jTypeJs = neo4jTypeJs(typeName, Neo4jType.dimensionOf(this))
+
+fun Neo4jTypeJs.toClass(): Neo4jType = Neo4jType.of(type, dimension) ?: error("Invalid neo4j type '$type'")
