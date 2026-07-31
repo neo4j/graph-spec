@@ -198,7 +198,6 @@ class DataModelV3GraphSpecMigration :
             ?: error("Unknown constraint type: $type at ${constraint.path}.${constraint.string("name")}")
     }
 
-
     internal fun migrateRelationships(
         schema: SchemaMap,
         constraints: Map<String, List<SchemaMap>>,
