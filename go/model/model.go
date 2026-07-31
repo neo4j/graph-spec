@@ -364,81 +364,81 @@ func (w *Neo4jType) UnmarshalJSON(data []byte) error {
 	var v Neo4jTypeUnion
 	switch peek.Type {
 	case "ANY":
-		v = &ANY{}
+		v = &AnyType{}
 	case "BOOLEAN":
-		v = &BOOLEAN{}
+		v = &BooleanType{}
 	case "DATE":
-		v = &DATE{}
+		v = &DateType{}
 	case "DURATION":
-		v = &DURATION{}
+		v = &DurationType{}
 	case "FLOAT32":
-		v = &FLOAT32{}
+		v = &Float32Type{}
 	case "FLOAT":
-		v = &FLOAT{}
+		v = &FloatType{}
 	case "INTEGER16":
-		v = &INTEGER16{}
+		v = &Integer16Type{}
 	case "INTEGER32":
-		v = &INTEGER32{}
+		v = &Integer32Type{}
 	case "INTEGER8":
-		v = &INTEGER8{}
+		v = &Integer8Type{}
 	case "INTEGER":
-		v = &INTEGER{}
+		v = &IntegerType{}
 	case "LIST<BOOLEAN>":
-		v = &ListBoolean{}
+		v = &ListBooleanType{}
 	case "LIST<DATE>":
-		v = &ListDate{}
+		v = &ListDateType{}
 	case "LIST<DURATION>":
-		v = &ListDuration{}
+		v = &ListDurationType{}
 	case "LIST<FLOAT32>":
-		v = &ListFloat32{}
+		v = &ListFloat32Type{}
 	case "LIST<FLOAT>":
-		v = &ListFloat{}
+		v = &ListFloatType{}
 	case "LIST<INTEGER16>":
-		v = &ListInteger16{}
+		v = &ListInteger16Type{}
 	case "LIST<INTEGER32>":
-		v = &ListInteger32{}
+		v = &ListInteger32Type{}
 	case "LIST<INTEGER8>":
-		v = &ListInteger8{}
+		v = &ListInteger8Type{}
 	case "LIST<INTEGER>":
-		v = &ListInteger{}
+		v = &ListIntegerType{}
 	case "LIST<LOCAL DATETIME>":
-		v = &ListLocalDatetime{}
+		v = &ListLocalDateTimeType{}
 	case "LIST<LOCAL TIME>":
-		v = &ListLocalTime{}
+		v = &ListLocalTimeType{}
 	case "LIST<POINT>":
-		v = &ListPoint{}
+		v = &ListPointType{}
 	case "LIST<STRING>":
-		v = &ListString{}
+		v = &ListStringType{}
 	case "LIST<ZONED DATETIME>":
-		v = &ListZonedDatetime{}
+		v = &ListZonedDateTimeType{}
 	case "LIST<ZONED TIME>":
-		v = &ListZonedTime{}
+		v = &ListZonedTimeType{}
 	case "LOCAL DATETIME":
-		v = &LocalDatetime{}
+		v = &LocalDateTimeType{}
 	case "LOCAL TIME":
-		v = &LocalTime{}
+		v = &LocalTimeType{}
 	case "POINT":
-		v = &POINT{}
+		v = &PointType{}
 	case "STRING":
-		v = &STRING{}
+		v = &StringType{}
 	case "UUID":
-		v = &UUID{}
+		v = &UuidType{}
 	case "VECTOR<FLOAT32>":
-		v = &VectorFloat32{}
+		v = &VectorFloat32Type{}
 	case "VECTOR<FLOAT>":
-		v = &VectorFloat{}
+		v = &VectorFloatType{}
 	case "VECTOR<INTEGER16>":
-		v = &VectorInteger16{}
+		v = &VectorInteger16Type{}
 	case "VECTOR<INTEGER32>":
-		v = &VectorInteger32{}
+		v = &VectorInteger32Type{}
 	case "VECTOR<INTEGER8>":
-		v = &VectorInteger8{}
+		v = &VectorInteger8Type{}
 	case "VECTOR<INTEGER>":
-		v = &VectorInteger{}
+		v = &VectorIntegerType{}
 	case "ZONED DATETIME":
-		v = &ZonedDatetime{}
+		v = &ZonedDateTimeType{}
 	case "ZONED TIME":
-		v = &ZonedTime{}
+		v = &ZonedTimeType{}
 	default:
 		return fmt.Errorf("Neo4jType: unknown type %q", peek.Type)
 	}
@@ -451,351 +451,315 @@ func (w *Neo4jType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-type ANY struct {
+type AnyType struct {
 	Type string `json:"type"`
 }
 
-func (ANY) isNeo4jType() {}
+func (AnyType) isNeo4jType() {}
 
-func (ANY) Neo4jTypeType() string { return "ANY" }
+func (AnyType) Neo4jTypeType() string { return "ANY" }
 
-type BOOLEAN struct {
+type BooleanType struct {
 	Type string `json:"type"`
 }
 
-func (BOOLEAN) isNeo4jType() {}
+func (BooleanType) isNeo4jType() {}
 
-func (BOOLEAN) Neo4jTypeType() string { return "BOOLEAN" }
+func (BooleanType) Neo4jTypeType() string { return "BOOLEAN" }
 
-type DATE struct {
+type DateType struct {
 	Type string `json:"type"`
 }
 
-func (DATE) isNeo4jType() {}
+func (DateType) isNeo4jType() {}
 
-func (DATE) Neo4jTypeType() string { return "DATE" }
+func (DateType) Neo4jTypeType() string { return "DATE" }
 
-type DURATION struct {
+type DurationType struct {
 	Type string `json:"type"`
 }
 
-func (DURATION) isNeo4jType() {}
+func (DurationType) isNeo4jType() {}
 
-func (DURATION) Neo4jTypeType() string { return "DURATION" }
+func (DurationType) Neo4jTypeType() string { return "DURATION" }
 
-type FLOAT32 struct {
+type Float32Type struct {
 	Type string `json:"type"`
 }
 
-func (FLOAT32) isNeo4jType() {}
+func (Float32Type) isNeo4jType() {}
 
-func (FLOAT32) Neo4jTypeType() string { return "FLOAT32" }
+func (Float32Type) Neo4jTypeType() string { return "FLOAT32" }
 
-type FLOAT struct {
+type FloatType struct {
 	Type string `json:"type"`
 }
 
-func (FLOAT) isNeo4jType() {}
+func (FloatType) isNeo4jType() {}
 
-func (FLOAT) Neo4jTypeType() string { return "FLOAT" }
+func (FloatType) Neo4jTypeType() string { return "FLOAT" }
 
-type INTEGER16 struct {
+type Integer16Type struct {
 	Type string `json:"type"`
 }
 
-func (INTEGER16) isNeo4jType() {}
+func (Integer16Type) isNeo4jType() {}
 
-func (INTEGER16) Neo4jTypeType() string { return "INTEGER16" }
+func (Integer16Type) Neo4jTypeType() string { return "INTEGER16" }
 
-type INTEGER32 struct {
+type Integer32Type struct {
 	Type string `json:"type"`
 }
 
-func (INTEGER32) isNeo4jType() {}
+func (Integer32Type) isNeo4jType() {}
 
-func (INTEGER32) Neo4jTypeType() string { return "INTEGER32" }
+func (Integer32Type) Neo4jTypeType() string { return "INTEGER32" }
 
-type INTEGER8 struct {
+type Integer8Type struct {
 	Type string `json:"type"`
 }
 
-func (INTEGER8) isNeo4jType() {}
+func (Integer8Type) isNeo4jType() {}
 
-func (INTEGER8) Neo4jTypeType() string { return "INTEGER8" }
+func (Integer8Type) Neo4jTypeType() string { return "INTEGER8" }
 
-type INTEGER struct {
+type IntegerType struct {
 	Type string `json:"type"`
 }
 
-func (INTEGER) isNeo4jType() {}
+func (IntegerType) isNeo4jType() {}
 
-func (INTEGER) Neo4jTypeType() string { return "INTEGER" }
+func (IntegerType) Neo4jTypeType() string { return "INTEGER" }
 
-type ListBoolean struct {
+type ListBooleanType struct {
 	Type string `json:"type"`
 }
 
-func (ListBoolean) isNeo4jType() {}
+func (ListBooleanType) isNeo4jType() {}
 
-func (ListBoolean) Neo4jTypeType() string {
-	return "LIST<BOOLEAN>"
-}
+func (ListBooleanType) Neo4jTypeType() string { return "LIST<BOOLEAN>" }
 
-type ListDate struct {
+type ListDateType struct {
 	Type string `json:"type"`
 }
 
-func (ListDate) isNeo4jType() {}
+func (ListDateType) isNeo4jType() {}
 
-func (ListDate) Neo4jTypeType() string { return "LIST<DATE>" }
+func (ListDateType) Neo4jTypeType() string { return "LIST<DATE>" }
 
-type ListDuration struct {
+type ListDurationType struct {
 	Type string `json:"type"`
 }
 
-func (ListDuration) isNeo4jType() {}
+func (ListDurationType) isNeo4jType() {}
 
-func (ListDuration) Neo4jTypeType() string {
-	return "LIST<DURATION>"
-}
+func (ListDurationType) Neo4jTypeType() string { return "LIST<DURATION>" }
 
-type ListFloat32 struct {
+type ListFloat32Type struct {
 	Type string `json:"type"`
 }
 
-func (ListFloat32) isNeo4jType() {}
+func (ListFloat32Type) isNeo4jType() {}
 
-func (ListFloat32) Neo4jTypeType() string {
-	return "LIST<FLOAT32>"
-}
+func (ListFloat32Type) Neo4jTypeType() string { return "LIST<FLOAT32>" }
 
-type ListFloat struct {
+type ListFloatType struct {
 	Type string `json:"type"`
 }
 
-func (ListFloat) isNeo4jType() {}
+func (ListFloatType) isNeo4jType() {}
 
-func (ListFloat) Neo4jTypeType() string { return "LIST<FLOAT>" }
+func (ListFloatType) Neo4jTypeType() string { return "LIST<FLOAT>" }
 
-type ListInteger16 struct {
+type ListInteger16Type struct {
 	Type string `json:"type"`
 }
 
-func (ListInteger16) isNeo4jType() {}
+func (ListInteger16Type) isNeo4jType() {}
 
-func (ListInteger16) Neo4jTypeType() string {
-	return "LIST<INTEGER16>"
-}
+func (ListInteger16Type) Neo4jTypeType() string { return "LIST<INTEGER16>" }
 
-type ListInteger32 struct {
+type ListInteger32Type struct {
 	Type string `json:"type"`
 }
 
-func (ListInteger32) isNeo4jType() {}
+func (ListInteger32Type) isNeo4jType() {}
 
-func (ListInteger32) Neo4jTypeType() string {
-	return "LIST<INTEGER32>"
-}
+func (ListInteger32Type) Neo4jTypeType() string { return "LIST<INTEGER32>" }
 
-type ListInteger8 struct {
+type ListInteger8Type struct {
 	Type string `json:"type"`
 }
 
-func (ListInteger8) isNeo4jType() {}
+func (ListInteger8Type) isNeo4jType() {}
 
-func (ListInteger8) Neo4jTypeType() string {
-	return "LIST<INTEGER8>"
-}
+func (ListInteger8Type) Neo4jTypeType() string { return "LIST<INTEGER8>" }
 
-type ListInteger struct {
+type ListIntegerType struct {
 	Type string `json:"type"`
 }
 
-func (ListInteger) isNeo4jType() {}
+func (ListIntegerType) isNeo4jType() {}
 
-func (ListInteger) Neo4jTypeType() string {
-	return "LIST<INTEGER>"
-}
+func (ListIntegerType) Neo4jTypeType() string { return "LIST<INTEGER>" }
 
-type ListLocalDatetime struct {
+type ListLocalDateTimeType struct {
 	Type string `json:"type"`
 }
 
-func (ListLocalDatetime) isNeo4jType() {}
+func (ListLocalDateTimeType) isNeo4jType() {}
 
-func (ListLocalDatetime) Neo4jTypeType() string {
-	return "LIST<LOCAL DATETIME>"
-}
+func (ListLocalDateTimeType) Neo4jTypeType() string { return "LIST<LOCAL DATETIME>" }
 
-type ListLocalTime struct {
+type ListLocalTimeType struct {
 	Type string `json:"type"`
 }
 
-func (ListLocalTime) isNeo4jType() {}
+func (ListLocalTimeType) isNeo4jType() {}
 
-func (ListLocalTime) Neo4jTypeType() string {
-	return "LIST<LOCAL TIME>"
-}
+func (ListLocalTimeType) Neo4jTypeType() string { return "LIST<LOCAL TIME>" }
 
-type ListPoint struct {
+type ListPointType struct {
 	Type string `json:"type"`
 }
 
-func (ListPoint) isNeo4jType() {}
+func (ListPointType) isNeo4jType() {}
 
-func (ListPoint) Neo4jTypeType() string { return "LIST<POINT>" }
+func (ListPointType) Neo4jTypeType() string { return "LIST<POINT>" }
 
-type ListString struct {
+type ListStringType struct {
 	Type string `json:"type"`
 }
 
-func (ListString) isNeo4jType() {}
+func (ListStringType) isNeo4jType() {}
 
-func (ListString) Neo4jTypeType() string {
-	return "LIST<STRING>"
-}
+func (ListStringType) Neo4jTypeType() string { return "LIST<STRING>" }
 
-type ListZonedDatetime struct {
+type ListZonedDateTimeType struct {
 	Type string `json:"type"`
 }
 
-func (ListZonedDatetime) isNeo4jType() {}
+func (ListZonedDateTimeType) isNeo4jType() {}
 
-func (ListZonedDatetime) Neo4jTypeType() string {
-	return "LIST<ZONED DATETIME>"
-}
+func (ListZonedDateTimeType) Neo4jTypeType() string { return "LIST<ZONED DATETIME>" }
 
-type ListZonedTime struct {
+type ListZonedTimeType struct {
 	Type string `json:"type"`
 }
 
-func (ListZonedTime) isNeo4jType() {}
+func (ListZonedTimeType) isNeo4jType() {}
 
-func (ListZonedTime) Neo4jTypeType() string {
-	return "LIST<ZONED TIME>"
-}
+func (ListZonedTimeType) Neo4jTypeType() string { return "LIST<ZONED TIME>" }
 
-type LocalDatetime struct {
+type LocalDateTimeType struct {
 	Type string `json:"type"`
 }
 
-func (LocalDatetime) isNeo4jType() {}
+func (LocalDateTimeType) isNeo4jType() {}
 
-func (LocalDatetime) Neo4jTypeType() string { return "LOCAL DATETIME" }
+func (LocalDateTimeType) Neo4jTypeType() string { return "LOCAL DATETIME" }
 
-type LocalTime struct {
+type LocalTimeType struct {
 	Type string `json:"type"`
 }
 
-func (LocalTime) isNeo4jType() {}
+func (LocalTimeType) isNeo4jType() {}
 
-func (LocalTime) Neo4jTypeType() string { return "LOCAL TIME" }
+func (LocalTimeType) Neo4jTypeType() string { return "LOCAL TIME" }
 
-type POINT struct {
+type PointType struct {
 	Type string `json:"type"`
 }
 
-func (POINT) isNeo4jType() {}
+func (PointType) isNeo4jType() {}
 
-func (POINT) Neo4jTypeType() string { return "POINT" }
+func (PointType) Neo4jTypeType() string { return "POINT" }
 
-type STRING struct {
+type StringType struct {
 	Type string `json:"type"`
 }
 
-func (STRING) isNeo4jType() {}
+func (StringType) isNeo4jType() {}
 
-func (STRING) Neo4jTypeType() string { return "STRING" }
+func (StringType) Neo4jTypeType() string { return "STRING" }
 
-type UUID struct {
+type UuidType struct {
 	Type string `json:"type"`
 }
 
-func (UUID) isNeo4jType() {}
+func (UuidType) isNeo4jType() {}
 
-func (UUID) Neo4jTypeType() string { return "UUID" }
+func (UuidType) Neo4jTypeType() string { return "UUID" }
 
-type VectorFloat32 struct {
+type VectorFloat32Type struct {
 	Dimension *int   `json:"dimension,omitempty"`
 	Type      string `json:"type"`
 }
 
-func (VectorFloat32) isNeo4jType() {}
+func (VectorFloat32Type) isNeo4jType() {}
 
-func (VectorFloat32) Neo4jTypeType() string {
-	return "VECTOR<FLOAT32>"
-}
+func (VectorFloat32Type) Neo4jTypeType() string { return "VECTOR<FLOAT32>" }
 
-type VectorFloat struct {
+type VectorFloatType struct {
 	Dimension *int   `json:"dimension,omitempty"`
 	Type      string `json:"type"`
 }
 
-func (VectorFloat) isNeo4jType() {}
+func (VectorFloatType) isNeo4jType() {}
 
-func (VectorFloat) Neo4jTypeType() string {
-	return "VECTOR<FLOAT>"
-}
+func (VectorFloatType) Neo4jTypeType() string { return "VECTOR<FLOAT>" }
 
-type VectorInteger16 struct {
+type VectorInteger16Type struct {
 	Dimension *int   `json:"dimension,omitempty"`
 	Type      string `json:"type"`
 }
 
-func (VectorInteger16) isNeo4jType() {}
+func (VectorInteger16Type) isNeo4jType() {}
 
-func (VectorInteger16) Neo4jTypeType() string {
-	return "VECTOR<INTEGER16>"
-}
+func (VectorInteger16Type) Neo4jTypeType() string { return "VECTOR<INTEGER16>" }
 
-type VectorInteger32 struct {
+type VectorInteger32Type struct {
 	Dimension *int   `json:"dimension,omitempty"`
 	Type      string `json:"type"`
 }
 
-func (VectorInteger32) isNeo4jType() {}
+func (VectorInteger32Type) isNeo4jType() {}
 
-func (VectorInteger32) Neo4jTypeType() string {
-	return "VECTOR<INTEGER32>"
-}
+func (VectorInteger32Type) Neo4jTypeType() string { return "VECTOR<INTEGER32>" }
 
-type VectorInteger8 struct {
+type VectorInteger8Type struct {
 	Dimension *int   `json:"dimension,omitempty"`
 	Type      string `json:"type"`
 }
 
-func (VectorInteger8) isNeo4jType() {}
+func (VectorInteger8Type) isNeo4jType() {}
 
-func (VectorInteger8) Neo4jTypeType() string {
-	return "VECTOR<INTEGER8>"
-}
+func (VectorInteger8Type) Neo4jTypeType() string { return "VECTOR<INTEGER8>" }
 
-type VectorInteger struct {
+type VectorIntegerType struct {
 	Dimension *int   `json:"dimension,omitempty"`
 	Type      string `json:"type"`
 }
 
-func (VectorInteger) isNeo4jType() {}
+func (VectorIntegerType) isNeo4jType() {}
 
-func (VectorInteger) Neo4jTypeType() string {
-	return "VECTOR<INTEGER>"
-}
+func (VectorIntegerType) Neo4jTypeType() string { return "VECTOR<INTEGER>" }
 
-type ZonedDatetime struct {
+type ZonedDateTimeType struct {
 	Type string `json:"type"`
 }
 
-func (ZonedDatetime) isNeo4jType() {}
+func (ZonedDateTimeType) isNeo4jType() {}
 
-func (ZonedDatetime) Neo4jTypeType() string { return "ZONED DATETIME" }
+func (ZonedDateTimeType) Neo4jTypeType() string { return "ZONED DATETIME" }
 
-type ZonedTime struct {
+type ZonedTimeType struct {
 	Type string `json:"type"`
 }
 
-func (ZonedTime) isNeo4jType() {}
+func (ZonedTimeType) isNeo4jType() {}
 
-func (ZonedTime) Neo4jTypeType() string { return "ZONED TIME" }
+func (ZonedTimeType) Neo4jTypeType() string { return "ZONED TIME" }
 
 type Property struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`

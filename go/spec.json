@@ -278,125 +278,125 @@
         "Neo4jType": {
             "oneOf": [
                 {
-                    "$ref": "#/$defs/ANY"
+                    "$ref": "#/$defs/AnyType"
                 },
                 {
-                    "$ref": "#/$defs/BOOLEAN"
+                    "$ref": "#/$defs/BooleanType"
                 },
                 {
-                    "$ref": "#/$defs/DATE"
+                    "$ref": "#/$defs/DateType"
                 },
                 {
-                    "$ref": "#/$defs/DURATION"
+                    "$ref": "#/$defs/DurationType"
                 },
                 {
-                    "$ref": "#/$defs/FLOAT32"
+                    "$ref": "#/$defs/Float32Type"
                 },
                 {
-                    "$ref": "#/$defs/FLOAT"
+                    "$ref": "#/$defs/FloatType"
                 },
                 {
-                    "$ref": "#/$defs/INTEGER16"
+                    "$ref": "#/$defs/Integer16Type"
                 },
                 {
-                    "$ref": "#/$defs/INTEGER32"
+                    "$ref": "#/$defs/Integer32Type"
                 },
                 {
-                    "$ref": "#/$defs/INTEGER8"
+                    "$ref": "#/$defs/Integer8Type"
                 },
                 {
-                    "$ref": "#/$defs/INTEGER"
+                    "$ref": "#/$defs/IntegerType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<BOOLEAN>"
+                    "$ref": "#/$defs/ListBooleanType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<DATE>"
+                    "$ref": "#/$defs/ListDateType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<DURATION>"
+                    "$ref": "#/$defs/ListDurationType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<FLOAT32>"
+                    "$ref": "#/$defs/ListFloat32Type"
                 },
                 {
-                    "$ref": "#/$defs/LIST<FLOAT>"
+                    "$ref": "#/$defs/ListFloatType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<INTEGER16>"
+                    "$ref": "#/$defs/ListInteger16Type"
                 },
                 {
-                    "$ref": "#/$defs/LIST<INTEGER32>"
+                    "$ref": "#/$defs/ListInteger32Type"
                 },
                 {
-                    "$ref": "#/$defs/LIST<INTEGER8>"
+                    "$ref": "#/$defs/ListInteger8Type"
                 },
                 {
-                    "$ref": "#/$defs/LIST<INTEGER>"
+                    "$ref": "#/$defs/ListIntegerType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<LOCAL DATETIME>"
+                    "$ref": "#/$defs/ListLocalDateTimeType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<LOCAL TIME>"
+                    "$ref": "#/$defs/ListLocalTimeType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<POINT>"
+                    "$ref": "#/$defs/ListPointType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<STRING>"
+                    "$ref": "#/$defs/ListStringType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<ZONED DATETIME>"
+                    "$ref": "#/$defs/ListZonedDateTimeType"
                 },
                 {
-                    "$ref": "#/$defs/LIST<ZONED TIME>"
+                    "$ref": "#/$defs/ListZonedTimeType"
                 },
                 {
-                    "$ref": "#/$defs/LOCAL DATETIME"
+                    "$ref": "#/$defs/LocalDateTimeType"
                 },
                 {
-                    "$ref": "#/$defs/LOCAL TIME"
+                    "$ref": "#/$defs/LocalTimeType"
                 },
                 {
-                    "$ref": "#/$defs/POINT"
+                    "$ref": "#/$defs/PointType"
                 },
                 {
-                    "$ref": "#/$defs/STRING"
+                    "$ref": "#/$defs/StringType"
                 },
                 {
-                    "$ref": "#/$defs/UUID"
+                    "$ref": "#/$defs/UuidType"
                 },
                 {
-                    "$ref": "#/$defs/VECTOR<FLOAT32>"
+                    "$ref": "#/$defs/VectorFloat32Type"
                 },
                 {
-                    "$ref": "#/$defs/VECTOR<FLOAT>"
+                    "$ref": "#/$defs/VectorFloatType"
                 },
                 {
-                    "$ref": "#/$defs/VECTOR<INTEGER16>"
+                    "$ref": "#/$defs/VectorInteger16Type"
                 },
                 {
-                    "$ref": "#/$defs/VECTOR<INTEGER32>"
+                    "$ref": "#/$defs/VectorInteger32Type"
                 },
                 {
-                    "$ref": "#/$defs/VECTOR<INTEGER8>"
+                    "$ref": "#/$defs/VectorInteger8Type"
                 },
                 {
-                    "$ref": "#/$defs/VECTOR<INTEGER>"
+                    "$ref": "#/$defs/VectorIntegerType"
                 },
                 {
-                    "$ref": "#/$defs/ZONED DATETIME"
+                    "$ref": "#/$defs/ZonedDateTimeType"
                 },
                 {
-                    "$ref": "#/$defs/ZONED TIME"
+                    "$ref": "#/$defs/ZonedTimeType"
                 }
             ],
             "discriminator": {
                 "propertyName": "type"
             }
         },
-        "ANY": {
+        "AnyType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -409,7 +409,7 @@
             ],
             "additionalProperties": false
         },
-        "BOOLEAN": {
+        "BooleanType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -422,7 +422,7 @@
             ],
             "additionalProperties": false
         },
-        "DATE": {
+        "DateType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -435,7 +435,7 @@
             ],
             "additionalProperties": false
         },
-        "DURATION": {
+        "DurationType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -448,7 +448,7 @@
             ],
             "additionalProperties": false
         },
-        "FLOAT32": {
+        "Float32Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -461,7 +461,7 @@
             ],
             "additionalProperties": false
         },
-        "FLOAT": {
+        "FloatType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -474,7 +474,7 @@
             ],
             "additionalProperties": false
         },
-        "INTEGER16": {
+        "Integer16Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -487,7 +487,7 @@
             ],
             "additionalProperties": false
         },
-        "INTEGER32": {
+        "Integer32Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -500,7 +500,7 @@
             ],
             "additionalProperties": false
         },
-        "INTEGER8": {
+        "Integer8Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -513,7 +513,7 @@
             ],
             "additionalProperties": false
         },
-        "INTEGER": {
+        "IntegerType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -526,7 +526,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<BOOLEAN>": {
+        "ListBooleanType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -539,7 +539,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<DATE>": {
+        "ListDateType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -552,7 +552,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<DURATION>": {
+        "ListDurationType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -565,7 +565,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<FLOAT32>": {
+        "ListFloat32Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -578,7 +578,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<FLOAT>": {
+        "ListFloatType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -591,7 +591,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<INTEGER16>": {
+        "ListInteger16Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -604,7 +604,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<INTEGER32>": {
+        "ListInteger32Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -617,7 +617,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<INTEGER8>": {
+        "ListInteger8Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -630,7 +630,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<INTEGER>": {
+        "ListIntegerType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -643,7 +643,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<LOCAL DATETIME>": {
+        "ListLocalDateTimeType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -656,7 +656,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<LOCAL TIME>": {
+        "ListLocalTimeType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -669,7 +669,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<POINT>": {
+        "ListPointType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -682,7 +682,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<STRING>": {
+        "ListStringType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -695,7 +695,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<ZONED DATETIME>": {
+        "ListZonedDateTimeType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -708,7 +708,7 @@
             ],
             "additionalProperties": false
         },
-        "LIST<ZONED TIME>": {
+        "ListZonedTimeType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -721,7 +721,7 @@
             ],
             "additionalProperties": false
         },
-        "LOCAL DATETIME": {
+        "LocalDateTimeType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -734,7 +734,7 @@
             ],
             "additionalProperties": false
         },
-        "LOCAL TIME": {
+        "LocalTimeType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -747,7 +747,7 @@
             ],
             "additionalProperties": false
         },
-        "POINT": {
+        "PointType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -760,7 +760,7 @@
             ],
             "additionalProperties": false
         },
-        "STRING": {
+        "StringType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -773,7 +773,7 @@
             ],
             "additionalProperties": false
         },
-        "UUID": {
+        "UuidType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -786,7 +786,7 @@
             ],
             "additionalProperties": false
         },
-        "VECTOR<FLOAT32>": {
+        "VectorFloat32Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -803,7 +803,7 @@
             ],
             "additionalProperties": false
         },
-        "VECTOR<FLOAT>": {
+        "VectorFloatType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -820,7 +820,7 @@
             ],
             "additionalProperties": false
         },
-        "VECTOR<INTEGER16>": {
+        "VectorInteger16Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -837,7 +837,7 @@
             ],
             "additionalProperties": false
         },
-        "VECTOR<INTEGER32>": {
+        "VectorInteger32Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -854,7 +854,7 @@
             ],
             "additionalProperties": false
         },
-        "VECTOR<INTEGER8>": {
+        "VectorInteger8Type": {
             "type": "object",
             "properties": {
                 "type": {
@@ -871,7 +871,7 @@
             ],
             "additionalProperties": false
         },
-        "VECTOR<INTEGER>": {
+        "VectorIntegerType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -888,7 +888,7 @@
             ],
             "additionalProperties": false
         },
-        "ZONED DATETIME": {
+        "ZonedDateTimeType": {
             "type": "object",
             "properties": {
                 "type": {
@@ -901,7 +901,7 @@
             ],
             "additionalProperties": false
         },
-        "ZONED TIME": {
+        "ZonedTimeType": {
             "type": "object",
             "properties": {
                 "type": {

@@ -20,8 +20,6 @@ cd "$REPO_ROOT/go"
 cp "$INPUT_SPEC" "$TEMP_SPEC"
 # Ensure "title" is present in the spec which is needed for Go generation of top-level model
 jq '.title //= .["$id"]' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
-# Replace angled brackets with placeholders to enable Go generation
-perl -pi -e 's/"([^"]+)<([^>]+)>"/"$1_LEFTBRACK_$2_RIGHTBRACK_"/g' "$TEMP_SPEC"
 echo "✓ JSON spec sanitised"
 
 
@@ -35,10 +33,6 @@ SCHEMANCER_BIN=$(go env GOPATH)/bin/schemancer
 echo "✓ Go models generated"
 
 
-# Replace placeholders in Go enum strings back to angled brackets
-perl -pi -e 's/"([^"]+)_LEFTBRACK_([^"]+)_RIGHTBRACK_"/"$1<$2>"/g' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
-# Remove placeholders from Go enum names
-perl -pi -e 's/Leftbrack//gi; s/Rightbrack//gi' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
 # Final Go formatting
 go fmt "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
 # Cleanup temporary sanitised json spec file

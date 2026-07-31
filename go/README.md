@@ -87,9 +87,6 @@ in the `go/models` package. The pipeline for generating these types is:
 
 _Kotlin_ → _JSON Schema_ → _Go_
 
-Some temporary sanitising is needed to ensure there are no issues relating to Go enum variable names when generating
-Neo4jTypes. The script handles this.
-
 > [!NOTE]
 > The deployment pipeline automatically checks the Go types are up-to-date. If you receive a pipeline failure relating
 > to out-of-date types then rerun the above script.
@@ -103,6 +100,12 @@ If you want to update the JSON schema separately you can run the individual Grad
 ```
 
 JSON Schema is generated automatically from the Kotlin source of truth via the `kotlinx-schema` library.
+
+`kotlinx-schema` keys each definition by its `@SerialName`. For `Neo4jType` that is the graph-spec type name, e.g.
+`STRING` or `LIST<STRING>`, which makes for poor type names in generated code. `GenerateGraphModelJsonSchema` therefore 
+keys those definitions by their Kotlin class name instead (`StringType`, `ListStringType`), so generated code lines up 
+with the Kotlin and TypeScript models. The `const` discriminator values still hold the graph-spec type name, so the 
+serialised form is unaffected.
 
 #### Go type generation
 
