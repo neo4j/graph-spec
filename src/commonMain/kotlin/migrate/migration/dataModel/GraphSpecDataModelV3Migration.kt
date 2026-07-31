@@ -392,11 +392,10 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "\$id" to propId,
                 "token" to name,
                 "type" to propertyType(type),
-                "nullable" to false
+                "nullable" to true
             /*
                 We're ignoring nullable as it's not correctly used in importer today.
                 See DataModelV3GraphSpecMigration.kt for more info.
-                "nullable" to (prop.stringOrNull("key") == "true" || prop.stringOrNull("mustExist") != "true")
              */
             )
             if (prop.stringOrNull("key") == "true") {
