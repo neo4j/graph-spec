@@ -1,0 +1,41 @@
+version: "4.0.0"
+nodes:
+  document:
+    label: "document"
+    properties:
+      documentid: { type: { type: "INTEGER" }, key: true }
+      embedding: { type: { type: "VECTOR<FLOAT>", dimension: 123 }, mustExist: true }
+      legacyembedding: { type: { type: "VECTOR<FLOAT>" }, mustExist: true }
+    indexes:
+      document_embedding:
+        type: "VECTOR"
+        labels: ["document"]
+        properties: ["embedding"]
+tables:
+  document:
+    source: "cloud"
+    fields:
+      documentid:
+        type: "INT"
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }]
+      embedding:
+        type: "VECTOR"
+        suggested:
+          type: "VECTOR<FLOAT>"
+          dimension: 123
+        supported: [{ type: "VECTOR<FLOAT>", dimension: 123 }, { type: "VECTOR<FLOAT32>", dimension: 123 }]
+      legacyembedding:
+        type: "VECTOR"
+        suggested:
+          type: "VECTOR<FLOAT>"
+        supported: [{ type: "VECTOR<FLOAT>" }]
+    primaryKeys: ["documentid"]
+mappings:
+  - node: "document"
+    table: "document"
+    properties:
+      documentid: { field: "documentid" }
+      embedding: { field: "embedding" }
+      legacyembedding: { field: "legacyembedding" }

@@ -3,8 +3,8 @@ nodes:
   album:
     label: "album"
     properties:
-      album_id: { type: "INTEGER", key: true }
-      title: { type: "STRING", mustExist: true }
+      album_id: { type: { type: "INTEGER" }, key: true }
+      title: { type: { type: "STRING" }, mustExist: true }
     constraints:
       album:
         type: "UNIQUE"
@@ -18,8 +18,8 @@ nodes:
   artist:
     label: "artist"
     properties:
-      artist_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
+      artist_id: { type: { type: "INTEGER" }, key: true }
+      name: { type: { type: "STRING" }, mustExist: true }
     constraints:
       artist:
         type: "UNIQUE"
@@ -33,18 +33,18 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER", key: true }
-      first_name: { type: "STRING", mustExist: true }
-      last_name: { type: "STRING", mustExist: true }
-      company: { type: "STRING", mustExist: true }
-      address: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      state: { type: "STRING", mustExist: true }
-      country: { type: "STRING", mustExist: true }
-      postal_code: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      fax: { type: "STRING", mustExist: true }
-      email: { type: "STRING", mustExist: true }
+      customer_id: { type: { type: "INTEGER" }, key: true }
+      first_name: { type: { type: "STRING" }, mustExist: true }
+      last_name: { type: { type: "STRING" }, mustExist: true }
+      company: { type: { type: "STRING" }, mustExist: true }
+      address: { type: { type: "STRING" }, mustExist: true }
+      city: { type: { type: "STRING" }, mustExist: true }
+      state: { type: { type: "STRING" }, mustExist: true }
+      country: { type: { type: "STRING" }, mustExist: true }
+      postal_code: { type: { type: "STRING" }, mustExist: true }
+      phone: { type: { type: "STRING" }, mustExist: true }
+      fax: { type: { type: "STRING" }, mustExist: true }
+      email: { type: { type: "STRING" }, mustExist: true }
     constraints:
       customer:
         type: "UNIQUE"
@@ -58,20 +58,20 @@ nodes:
   employee:
     label: "employee"
     properties:
-      employee_id: { type: "INTEGER", key: true }
-      last_name: { type: "STRING", mustExist: true }
-      first_name: { type: "STRING", mustExist: true }
-      title: { type: "STRING", mustExist: true }
-      birth_date: { type: "ZONED DATETIME", mustExist: true }
-      hire_date: { type: "ZONED DATETIME", mustExist: true }
-      address: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      state: { type: "STRING", mustExist: true }
-      country: { type: "STRING", mustExist: true }
-      postal_code: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      fax: { type: "STRING", mustExist: true }
-      email: { type: "STRING", mustExist: true }
+      employee_id: { type: { type: "INTEGER" }, key: true }
+      last_name: { type: { type: "STRING" }, mustExist: true }
+      first_name: { type: { type: "STRING" }, mustExist: true }
+      title: { type: { type: "STRING" }, mustExist: true }
+      birth_date: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      hire_date: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      address: { type: { type: "STRING" }, mustExist: true }
+      city: { type: { type: "STRING" }, mustExist: true }
+      state: { type: { type: "STRING" }, mustExist: true }
+      country: { type: { type: "STRING" }, mustExist: true }
+      postal_code: { type: { type: "STRING" }, mustExist: true }
+      phone: { type: { type: "STRING" }, mustExist: true }
+      fax: { type: { type: "STRING" }, mustExist: true }
+      email: { type: { type: "STRING" }, mustExist: true }
     constraints:
       employee:
         type: "UNIQUE"
@@ -85,8 +85,8 @@ nodes:
   genre:
     label: "genre"
     properties:
-      genre_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
+      genre_id: { type: { type: "INTEGER" }, key: true }
+      name: { type: { type: "STRING" }, mustExist: true }
     constraints:
       genre:
         type: "UNIQUE"
@@ -100,14 +100,14 @@ nodes:
   invoice:
     label: "invoice"
     properties:
-      invoice_id: { type: "INTEGER", key: true }
-      invoice_date: { type: "ZONED DATETIME", mustExist: true }
-      billing_address: { type: "STRING", mustExist: true }
-      billing_city: { type: "STRING", mustExist: true }
-      billing_state: { type: "STRING", mustExist: true }
-      billing_country: { type: "STRING", mustExist: true }
-      billing_postal_code: { type: "STRING", mustExist: true }
-      total: { type: "FLOAT", mustExist: true }
+      invoice_id: { type: { type: "INTEGER" }, key: true }
+      invoice_date: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      billing_address: { type: { type: "STRING" }, mustExist: true }
+      billing_city: { type: { type: "STRING" }, mustExist: true }
+      billing_state: { type: { type: "STRING" }, mustExist: true }
+      billing_country: { type: { type: "STRING" }, mustExist: true }
+      billing_postal_code: { type: { type: "STRING" }, mustExist: true }
+      total: { type: { type: "FLOAT" }, mustExist: true }
     constraints:
       invoice:
         type: "UNIQUE"
@@ -121,9 +121,9 @@ nodes:
   invoice_line:
     label: "invoice_line"
     properties:
-      invoice_line_id: { type: "INTEGER", key: true }
-      unit_price: { type: "FLOAT", mustExist: true }
-      quantity: { type: "INTEGER", mustExist: true }
+      invoice_line_id: { type: { type: "INTEGER" }, key: true }
+      unit_price: { type: { type: "FLOAT" }, mustExist: true }
+      quantity: { type: { type: "INTEGER" }, mustExist: true }
     constraints:
       invoice_line:
         type: "UNIQUE"
@@ -137,8 +137,8 @@ nodes:
   media_type:
     label: "media_type"
     properties:
-      media_type_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
+      media_type_id: { type: { type: "INTEGER" }, key: true }
+      name: { type: { type: "STRING" }, mustExist: true }
     constraints:
       media_type:
         type: "UNIQUE"
@@ -152,8 +152,8 @@ nodes:
   playlist:
     label: "playlist"
     properties:
-      playlist_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
+      playlist_id: { type: { type: "INTEGER" }, key: true }
+      name: { type: { type: "STRING" }, mustExist: true }
     constraints:
       playlist:
         type: "UNIQUE"
@@ -167,12 +167,12 @@ nodes:
   track:
     label: "track"
     properties:
-      track_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      composer: { type: "STRING", mustExist: true }
-      milliseconds: { type: "INTEGER", mustExist: true }
-      bytes: { type: "INTEGER", mustExist: true }
-      unit_price: { type: "FLOAT", mustExist: true }
+      track_id: { type: { type: "INTEGER" }, key: true }
+      name: { type: { type: "STRING" }, mustExist: true }
+      composer: { type: { type: "STRING" }, mustExist: true }
+      milliseconds: { type: { type: "INTEGER" }, mustExist: true }
+      bytes: { type: { type: "INTEGER" }, mustExist: true }
+      unit_price: { type: { type: "FLOAT" }, mustExist: true }
     constraints:
       track:
         type: "UNIQUE"
@@ -230,16 +230,19 @@ tables:
     fields:
       album_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       title:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       artist_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
     primaryKeys: ["album_id"]
     foreignKeys:
       foreignKey1:
@@ -252,68 +255,83 @@ tables:
     fields:
       artist_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
     primaryKeys: ["artist_id"]
   customer:
     source: "cloud"
     fields:
       customer_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       first_name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       last_name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       company:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       address:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       city:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       state:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       country:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       postal_code:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       phone:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       fax:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       email:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       support_rep_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
     primaryKeys: ["customer_id"]
     foreignKeys:
       foreignKey1:
@@ -326,64 +344,79 @@ tables:
     fields:
       employee_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       last_name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       first_name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       title:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       reports_to:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       birth_date:
         type: "DATETIME"
-        suggested: "ZONED DATETIME"
-        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+        suggested:
+          type: "ZONED DATETIME"
+        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "ZONED TIME" }, { type: "LOCAL TIME" }, { type: "LOCAL DATETIME" }]
       hire_date:
         type: "DATETIME"
-        suggested: "ZONED DATETIME"
-        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+        suggested:
+          type: "ZONED DATETIME"
+        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "ZONED TIME" }, { type: "LOCAL TIME" }, { type: "LOCAL DATETIME" }]
       address:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       city:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       state:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       country:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       postal_code:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       phone:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       fax:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       email:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
     primaryKeys: ["employee_id"]
     foreignKeys:
       foreignKey1:
@@ -396,52 +429,63 @@ tables:
     fields:
       genre_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
     primaryKeys: ["genre_id"]
   invoice:
     source: "cloud"
     fields:
       invoice_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       customer_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       invoice_date:
         type: "TIMESTAMP"
-        suggested: "ZONED DATETIME"
-        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+        suggested:
+          type: "ZONED DATETIME"
+        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "ZONED TIME" }, { type: "LOCAL TIME" }, { type: "LOCAL DATETIME" }]
       billing_address:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       billing_city:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       billing_state:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       billing_country:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       billing_postal_code:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       total:
         type: "DECIMAL"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "FLOAT"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
     primaryKeys: ["invoice_id"]
     foreignKeys:
       foreignKey1:
@@ -454,24 +498,29 @@ tables:
     fields:
       invoice_line_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       invoice_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       track_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       unit_price:
         type: "DECIMAL"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "FLOAT"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       quantity:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
     primaryKeys: ["invoice_line_id"]
     foreignKeys:
       foreignKey1:
@@ -489,36 +538,42 @@ tables:
     fields:
       media_type_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
     primaryKeys: ["media_type_id"]
   playlist:
     source: "cloud"
     fields:
       playlist_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
     primaryKeys: ["playlist_id"]
   playlist_track:
     source: "cloud"
     fields:
       playlist_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       track_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
     primaryKeys: ["playlist_id", "track_id"]
     foreignKeys:
       foreignKey1:
@@ -536,40 +591,49 @@ tables:
     fields:
       track_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       name:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       album_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       media_type_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       genre_id:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       composer:
         type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
+        suggested:
+          type: "STRING"
+        supported: [{ type: "STRING" }]
       milliseconds:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       bytes:
         type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "INTEGER"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
       unit_price:
         type: "DECIMAL"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
+        suggested:
+          type: "FLOAT"
+        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
     primaryKeys: ["track_id"]
     foreignKeys:
       foreignKey1:
