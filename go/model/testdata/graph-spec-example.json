@@ -24,6 +24,15 @@
           "mustExist": false,
           "unique": false,
           "extensions": {}
+        },
+        "embedding": {
+          "type": {
+            "type": "VECTOR<FLOAT>",
+            "dimension": 123
+          },
+          "mustExist": false,
+          "unique": false,
+          "extensions": {}
         }
       },
       "constraints": {},

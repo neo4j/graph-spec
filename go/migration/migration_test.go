@@ -30,6 +30,9 @@ func TestV3ToGraphSpecMigration(t *testing.T) {
 	back, err := migration.FromGraphSpec(result, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
 	require.NoError(t, err)
 	require.NotEmpty(t, back)
+
+	var v3 map[string]any
+	require.NoError(t, json.Unmarshal([]byte(back), &v3), "migrated payload is not valid JSON")
 }
 
 func TestGraphSpecToV3Migration(t *testing.T) {
@@ -42,6 +45,9 @@ func TestGraphSpecToV3Migration(t *testing.T) {
 
 	res, err := migration.FromGraphSpec(graph, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
 	require.NoError(t, err)
-	require.NotNil(t, res)
+	require.NotEmpty(t, res)
+
+	var back map[string]any
+	require.NoError(t, json.Unmarshal([]byte(res), &back), "migrated payload is not valid JSON")
 	t.Log(fmt.Sprintf("Transformed graph: %v", res))
 }
