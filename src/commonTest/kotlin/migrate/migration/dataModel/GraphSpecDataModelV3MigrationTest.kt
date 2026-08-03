@@ -349,7 +349,8 @@ class GraphSpecDataModelV3MigrationTest {
         val fields = migration.convertFields(fieldsInput)
 
         assertEquals(123, fields[0].map("recommendedType").intOrNull("dimension"))
-        assertEquals(listOf(123, 123),
+        assertEquals(
+            listOf(123, 123),
             fields[0].listOfMaps("supportedTypes").map { it.intOrNull("dimension") }
         )
 
