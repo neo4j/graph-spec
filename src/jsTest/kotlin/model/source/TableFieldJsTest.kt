@@ -4,10 +4,8 @@ import model.mapping.JsMappingTest
 import model.property.Neo4jType
 import model.extension.StringValue
 import model.extension.stringValueJs
-import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
 

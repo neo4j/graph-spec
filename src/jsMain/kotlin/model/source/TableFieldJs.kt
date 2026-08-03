@@ -61,8 +61,8 @@ fun tableFieldJs(
 fun TableField.toJs(key: String) = tableFieldJs(
     type = type,
     size = size,
-    suggested = suggested.name,
-    supported = supported.map { it.name }.toTypedArray(),
+    suggested = Neo4jType.toString(suggested),
+    supported = supported.map { Neo4jType.toString(it) }.toTypedArray(),
     dimension = dimension,
     extensions = extensions.associateBy { _, value -> value.toJs() },
     name = name ?: key
@@ -71,9 +71,12 @@ fun TableField.toJs(key: String) = tableFieldJs(
 fun TableFieldJs.toClass() = TableField(
     type = type,
     size = size,
-    suggested = suggested.let { Neo4jType.valueOf(it) },
-    supported = supported.map { Neo4jType.valueOf(it) }.toSet(),
+    suggested = neo4jType(suggested),
+    supported = supported.map { neo4jType(it) }.toSet(),
     dimension = dimension,
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
     name = name
 )
+
+private fun TableFieldJs.neo4jType(type: String) = Neo4jType.fromString(type)
+    ?: error("Invalid neo4j type '$type' for field '$name'")
