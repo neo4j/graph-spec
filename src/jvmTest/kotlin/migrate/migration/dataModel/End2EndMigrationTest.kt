@@ -17,8 +17,7 @@ class End2EndMigrationTest {
         "flights.json",
         "ldbc.json",
         "northwind.json",
-        "pandc.json",
-        "vector-embeddings.json"
+        "pandc.json"
     ).map { name ->
         dynamicTest(name.removeSuffix(".json")) {
             val input = End2EndMigrationTest::class.resourceAsString("prod-like/$name")

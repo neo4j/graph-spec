@@ -3,9 +3,9 @@ nodes:
   Aircraft:
     label: "Aircraft"
     properties:
-      aircraftCode: { type: { type: "STRING" }, key: true }
-      model: { type: { type: "STRING" }, mustExist: true }
-      aircraftRange: { type: { type: "INTEGER" }, mustExist: true }
+      aircraftCode: { type: "STRING", key: true }
+      model: { type: "STRING", mustExist: true }
+      aircraftRange: { type: "INTEGER", mustExist: true }
     constraints:
       aircrafts_data:
         type: "UNIQUE"
@@ -19,11 +19,11 @@ nodes:
   Airport:
     label: "Airport"
     properties:
-      airportCode: { type: { type: "STRING" }, key: true }
-      airportName: { type: { type: "STRING" }, mustExist: true }
-      city: { type: { type: "STRING" }, mustExist: true }
-      coordinates: { type: { type: "POINT" }, mustExist: true }
-      timezone: { type: { type: "STRING" }, mustExist: true }
+      airportCode: { type: "STRING", key: true }
+      airportName: { type: "STRING", mustExist: true }
+      city: { type: "STRING", mustExist: true }
+      coordinates: { type: "POINT", mustExist: true }
+      timezone: { type: "STRING", mustExist: true }
     constraints:
       airports_data:
         type: "UNIQUE"
@@ -37,9 +37,9 @@ nodes:
   Booking:
     label: "Booking"
     properties:
-      bookRef: { type: { type: "STRING" }, key: true }
-      bookDate: { type: { type: "ZONED DATETIME" }, mustExist: true }
-      totalAmount: { type: { type: "FLOAT" }, mustExist: true }
+      bookRef: { type: "STRING", key: true }
+      bookDate: { type: "ZONED DATETIME", mustExist: true }
+      totalAmount: { type: "FLOAT", mustExist: true }
     constraints:
       bookings:
         type: "UNIQUE"
@@ -53,13 +53,13 @@ nodes:
   Flight:
     label: "Flight"
     properties:
-      flightId: { type: { type: "INTEGER" }, key: true }
-      flightNo: { type: { type: "STRING" }, mustExist: true }
-      scheduledDeparture: { type: { type: "ZONED DATETIME" }, mustExist: true }
-      scheduledArrival: { type: { type: "ZONED DATETIME" }, mustExist: true }
-      status: { type: { type: "STRING" }, mustExist: true }
-      actualDeparture: { type: { type: "ZONED DATETIME" }, mustExist: true }
-      actualArrival: { type: { type: "ZONED DATETIME" }, mustExist: true }
+      flightId: { type: "INTEGER", key: true }
+      flightNo: { type: "STRING", mustExist: true }
+      scheduledDeparture: { type: "ZONED DATETIME", mustExist: true }
+      scheduledArrival: { type: "ZONED DATETIME", mustExist: true }
+      status: { type: "STRING", mustExist: true }
+      actualDeparture: { type: "ZONED DATETIME", mustExist: true }
+      actualArrival: { type: "ZONED DATETIME", mustExist: true }
     constraints:
       flights:
         type: "UNIQUE"
@@ -73,10 +73,10 @@ nodes:
   Ticket:
     label: "Ticket"
     properties:
-      ticketNo: { type: { type: "STRING" }, key: true }
-      passengerId: { type: { type: "STRING" }, mustExist: true }
-      passengerName: { type: { type: "STRING" }, mustExist: true }
-      contactData: { type: { type: "STRING" }, mustExist: true }
+      ticketNo: { type: "STRING", key: true }
+      passengerId: { type: "STRING", mustExist: true }
+      passengerName: { type: "STRING", mustExist: true }
+      contactData: { type: "STRING", mustExist: true }
     constraints:
       tickets:
         type: "UNIQUE"
@@ -105,8 +105,8 @@ relationships:
     from: { node: "Flight" }
     to: { node: "Ticket" }
     properties:
-      fare_conditions: { type: { type: "STRING" }, mustExist: true }
-      amount: { type: { type: "FLOAT" }, mustExist: true }
+      fare_conditions: { type: "STRING", mustExist: true }
+      amount: { type: "FLOAT", mustExist: true }
   TICKET_BELONGS_TO_BOOKING:
     type: "TICKET_BELONGS_TO_BOOKING"
     from: { node: "Ticket" }
@@ -117,72 +117,60 @@ tables:
     fields:
       aircraft_code:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       model:
         type: "JSON"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       aircrafts_range:
         type: "INT"
-        suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
     primaryKeys: ["aircraft_code"]
   airports_data:
     source: "cloud"
     fields:
       airport_code:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       airport_name:
         type: "JSON"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       city:
         type: "JSON"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       coordinates:
         type: "GEOMETRY"
-        suggested:
-          type: "POINT"
-        supported: [{ type: "POINT" }]
+        suggested: "POINT"
+        supported: ["POINT"]
       timezone:
         type: "TEXT"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
     primaryKeys: ["airport_code"]
   boarding_passes:
     source: "cloud"
     fields:
       ticket_no:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       flight_id:
         type: "INT"
-        suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
       boarding_no:
         type: "INT"
-        suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
       seat_no:
         type: "VARCHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
     primaryKeys: ["flight_id", "ticket_no"]
     foreignKeys:
       foreignKey1:
@@ -195,73 +183,60 @@ tables:
     fields:
       book_ref:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       book_date:
         type: "TIMESTAMP"
-        suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "ZONED TIME" }, { type: "LOCAL TIME" }, { type: "LOCAL DATETIME" }]
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
       total_amount:
         type: "DECIMAL"
-        suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
     primaryKeys: ["book_ref"]
   flights:
     source: "cloud"
     fields:
       flight_id:
         type: "INT"
-        suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
       flight_no:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       scheduled_departure:
         type: "TIMESTAMP"
-        suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "ZONED TIME" }, { type: "LOCAL TIME" }, { type: "LOCAL DATETIME" }]
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
       scheduled_arrival:
         type: "TIMESTAMP"
-        suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "ZONED TIME" }, { type: "LOCAL TIME" }, { type: "LOCAL DATETIME" }]
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
       departure_airport:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       arrival_airport:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       status:
         type: "TEXT"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       aircraft_code:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       actual_departure:
         type: "TIMESTAMP"
-        suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "ZONED TIME" }, { type: "LOCAL TIME" }, { type: "LOCAL DATETIME" }]
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
       actual_arrival:
         type: "TIMESTAMP"
-        suggested:
-          type: "ZONED DATETIME"
-        supported: [{ type: "DATE" }, { type: "ZONED DATETIME" }, { type: "ZONED TIME" }, { type: "LOCAL TIME" }, { type: "LOCAL DATETIME" }]
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
     primaryKeys: ["flight_id"]
     foreignKeys:
       foreignKey1:
@@ -279,19 +254,16 @@ tables:
     fields:
       aircraft_code:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       seat_no:
         type: "VARCHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       fare_conditions:
         type: "VARCHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
     primaryKeys: ["aircraft_code", "seat_no"]
     foreignKeys:
       foreignKey1:
@@ -304,24 +276,20 @@ tables:
     fields:
       ticket_no:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       flight_id:
         type: "INT"
-        suggested:
-          type: "INTEGER"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
       fare_conditions:
         type: "VARCHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       amount:
         type: "DECIMAL"
-        suggested:
-          type: "FLOAT"
-        supported: [{ type: "INTEGER" }, { type: "STRING" }, { type: "FLOAT" }]
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
     primaryKeys: ["flight_id", "ticket_no"]
     foreignKeys:
       foreignKey1:
@@ -339,29 +307,24 @@ tables:
     fields:
       ticket_no:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       book_ref:
         type: "CHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       passenger_id:
         type: "VARCHAR"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       passenger_name:
         type: "TEXT"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
       contact_data:
         type: "JSON"
-        suggested:
-          type: "STRING"
-        supported: [{ type: "STRING" }]
+        suggested: "STRING"
+        supported: ["STRING"]
     primaryKeys: ["ticket_no"]
     foreignKeys:
       foreignKey1:

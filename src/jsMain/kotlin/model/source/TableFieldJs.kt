@@ -26,8 +26,6 @@ import model.extension.toJs
 import model.jso
 import model.mapping.PropertyMapping
 import model.property.Neo4jType
-import model.property.Neo4jTypeJs
-import model.property.neo4jTypeJs
 import kotlin.String
 
 @JsExport
@@ -35,8 +33,8 @@ import kotlin.String
 external interface TableFieldJs {
     var type: String
     var size: Int
-    val suggested: Neo4jTypeJs
-    val supported: Array<Neo4jTypeJs>
+    val suggested: String
+    val supported: Array<String>
     val extensions: Record<String, ExtensionValueJs>
     val name: String
 }
@@ -44,8 +42,8 @@ external interface TableFieldJs {
 fun tableFieldJs(
     type: String,
     size: Int = -1,
-    suggested: Neo4jTypeJs = neo4jTypeJs("ANY"),
-    supported: Array<Neo4jTypeJs> = emptyArray(),
+    suggested: String = "ANY",
+    supported: Array<String> = emptyArray(),
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String = ""
 ): TableFieldJs = jso {
@@ -60,8 +58,8 @@ fun tableFieldJs(
 fun TableField.toJs(key: String) = tableFieldJs(
     type = type,
     size = size,
-    suggested = neo4jTypeJs(suggested.typeName, Neo4jType.dimensionOf(suggested)),
-    supported = supported.map { neo4jTypeJs(it.typeName, Neo4jType.dimensionOf(it)) }.toTypedArray(),
+    suggested = suggested.name,
+    supported = supported.map { it.name }.toTypedArray(),
     extensions = extensions.associateBy { _, value -> value.toJs() },
     name = name ?: key
 )
@@ -69,11 +67,8 @@ fun TableField.toJs(key: String) = tableFieldJs(
 fun TableFieldJs.toClass() = TableField(
     type = type,
     size = size,
-    suggested = Neo4jType.of(suggested.type, suggested.dimension)
-        ?: error("Invalid neo4j type '${suggested.type}'"),
-    supported = supported.map {
-        Neo4jType.of(it.type, it.dimension) ?: error("Invalid neo4j type '${it.type}'")
-    }.toSet(),
+    suggested = suggested.let { Neo4jType.valueOf(it) },
+    supported = supported.map { Neo4jType.valueOf(it) }.toSet(),
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
     name = name
 )

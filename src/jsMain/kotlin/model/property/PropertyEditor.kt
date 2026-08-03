@@ -21,7 +21,7 @@ class PropertyEditor {
     companion object {
 
         @JsStatic
-        fun setType(property: PropertyJs, type: Neo4jTypeJs) {
+        fun setType(property: PropertyJs, type: String) { // TODO neo4jtype
             property.type = type
         }
 

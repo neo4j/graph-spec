@@ -1,9 +1,7 @@
 package model.source
 
 import model.mapping.JsMappingTest
-import model.property.IntegerType
-import model.property.StringType
-import model.property.VectorFloatType
+import model.property.Neo4jType
 import model.extension.StringValue
 import model.extension.stringValueJs
 import kotlin.test.assertContentEquals
@@ -14,8 +12,8 @@ class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
     override fun createClass() = TableField(
         type = "field_type",
         size = 10,
-        suggested = StringType,
-        supported = setOf(StringType, IntegerType, VectorFloatType(123)),
+        suggested = Neo4jType.STRING,
+        supported = setOf(Neo4jType.STRING, Neo4jType.INTEGER),
         extensions = mutableMapOf("key1" to StringValue("val1")),
         name = "Field name"
     )
@@ -27,12 +25,8 @@ class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
     override fun verifyJsObject(jsObject: TableFieldJs) {
         assertEquals("field_type", jsObject.type)
         assertEquals(10, jsObject.size)
-        assertEquals("STRING", jsObject.suggested.type)
-        assertContentEquals(
-            arrayOf("STRING", "INTEGER", "VECTOR<FLOAT>"),
-            jsObject.supported.map { it.type }.toTypedArray()
-        )
-        assertContentEquals(arrayOf(null, null, 123), jsObject.supported.map { it.dimension }.toTypedArray())
+        assertEquals("STRING", jsObject.suggested)
+        assertContentEquals(arrayOf("STRING", "INTEGER"), jsObject.supported)
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
         assertEquals("Field name", jsObject.name)
     }
