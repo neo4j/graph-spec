@@ -249,6 +249,10 @@
                 "type": {
                     "$ref": "#/$defs/Neo4jType"
                 },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
+                },
                 "mustExist": {
                     "type": "boolean",
                     "nullable": true
@@ -600,6 +604,10 @@
                     "items": {
                         "$ref": "#/$defs/Neo4jType"
                     }
+                },
+                "dimension": {
+                    "type": "integer",
+                    "nullable": true
                 },
                 "extensions": {
                     "type": "object",
