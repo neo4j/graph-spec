@@ -325,22 +325,21 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `convertFields applies the field dimension to every vector type`() {
+    fun `convertFields writes dimension field for vector types`() {
         val fieldsInput = mapOf(
             "f1" to schemaMapOf(
-                "name" to "embedding",
+                "name" to "embeddingWithDim",
                 "suggested" to "VECTOR<FLOAT>",
                 "supported" to listOf(SchemaLiteral("VECTOR<FLOAT>"), SchemaLiteral("VECTOR<FLOAT32>")),
-                "dimension" to 1536
+                "dimension" to 123
             ),
             "f2" to schemaMapOf(
-                "name" to "legacyembedding",
+                "name" to "embedding",
                 "suggested" to "VECTOR<FLOAT>",
                 "supported" to listOf(SchemaLiteral("VECTOR<FLOAT>"))
             ),
-            // dimension is meaningless here so it should not survive the round trip
             "f3" to schemaMapOf(
-                "name" to "title",
+                "name" to "stringWithDim",
                 "suggested" to "STRING",
                 "supported" to listOf(SchemaLiteral("STRING")),
                 "dimension" to 8
@@ -349,9 +348,8 @@ class GraphSpecDataModelV3MigrationTest {
 
         val fields = migration.convertFields(fieldsInput)
 
-        assertEquals(1536, fields[0].map("recommendedType").intOrNull("dimension"))
-        assertEquals(
-            listOf(1536, 1536),
+        assertEquals(123, fields[0].map("recommendedType").intOrNull("dimension"))
+        assertEquals(listOf(123, 123),
             fields[0].listOfMaps("supportedTypes").map { it.intOrNull("dimension") }
         )
 
@@ -360,18 +358,18 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `convertProperties moves the dimension inside the vector type`() {
+    fun `convertProperties writes dimension field for vector types`() {
         val properties = mapOf(
-            "p1" to schemaMapOf("token" to "embedding", "type" to "VECTOR<FLOAT>", "dimension" to 1536),
-            "p2" to schemaMapOf("token" to "legacyembedding", "type" to "VECTOR<FLOAT>"),
-            "p3" to schemaMapOf("token" to "tags", "type" to "LIST<STRING>", "dimension" to 4)
+            "p1" to schemaMapOf("token" to "embeddingWithDim", "type" to "VECTOR<FLOAT>", "dimension" to 123),
+            "p2" to schemaMapOf("token" to "embedding", "type" to "VECTOR<FLOAT>"),
+            "p3" to schemaMapOf("token" to "stringWithDim", "type" to "LIST<STRING>", "dimension" to 4)
         )
 
         val converted = migration.convertProperties(properties).associateBy { it.string("\$id") }
 
         val vector = converted["p1"]!!.map("type")
         assertEquals("vector", vector.string("type"))
-        assertEquals(1536, vector.intOrNull("dimension"))
+        assertEquals(123, vector.intOrNull("dimension"))
 
         assertFalse(converted["p2"]!!.map("type").containsKey("dimension"))
         assertFalse(converted["p3"]!!.map("type").containsKey("dimension"))
