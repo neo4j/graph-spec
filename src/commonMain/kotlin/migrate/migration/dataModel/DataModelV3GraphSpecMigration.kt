@@ -365,17 +365,13 @@ class DataModelV3GraphSpecMigration :
     }
 
     companion object {
-        private fun neo4jType(type: SchemaMap?): SchemaMap? {
+        private fun neo4jType(type: SchemaMap?): String? {
             val base = type?.stringOrNull("type")?.lowercase() ?: return null
-            val name = when (base) {
+            return when (base) {
                 "array" -> itemType(type)?.let { "LIST<$it>" }
                 "vector" -> itemType(type)?.let { "VECTOR<$it>" }
                 else -> scalarType(base)
-            } ?: return null
-            return schemaMapOf(
-                "type" to name,
-                "dimension" to if (base == "vector") type.intOrNull("dimension") else null
-            )
+            }
         }
 
         private fun itemType(type: SchemaMap): String? = scalarType(type.mapOrNull("items")?.stringOrNull("type"))

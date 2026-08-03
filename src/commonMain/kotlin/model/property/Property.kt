@@ -27,7 +27,7 @@ import kotlin.js.JsExport
 @Serializable
 @SerialName("Property")
 data class Property(
-    var type: Neo4jType = AnyType,
+    var type: Neo4jType = Neo4jType.ANY,
     var mustExist: Boolean? = null,
     var unique: Boolean? = null,
     var key: Boolean? = null,

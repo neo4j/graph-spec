@@ -22,7 +22,6 @@ import model.addUnique
 import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.getOrThrow
-import model.property.Neo4jTypeJs
 import model.property.PropertyEditor
 import model.property.PropertyJs
 import model.property.propertyJs
@@ -95,8 +94,9 @@ class RelationshipEditor {
             PropertyEditor.setName(property, name)
         }
 
+        // TODO neo4j type
         @JsStatic
-        fun setPropertyType(model: GraphModelJs, relationshipId: String, propertyId: String, type: Neo4jTypeJs) {
+        fun setPropertyType(model: GraphModelJs, relationshipId: String, propertyId: String, type: String) {
             val property = getProperty(model, relationshipId, propertyId)
             PropertyEditor.setType(property, type)
         }

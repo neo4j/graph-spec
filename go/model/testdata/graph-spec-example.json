@@ -10,26 +10,13 @@
       },
       "properties": {
         "id": {
-          "type": {
-            "type": "STRING"
-          },
+          "type": "STRING",
           "mustExist": false,
           "unique": true,
           "extensions": {}
         },
         "name": {
-          "type": {
-            "type": "STRING"
-          },
-          "mustExist": false,
-          "unique": false,
-          "extensions": {}
-        },
-        "embedding": {
-          "type": {
-            "type": "VECTOR<FLOAT>",
-            "dimension": 123
-          },
+          "type": "STRING",
           "mustExist": false,
           "unique": false,
           "extensions": {}
@@ -48,9 +35,7 @@
       },
       "properties": {
         "id": {
-          "type": {
-            "type": "STRING"
-          },
+          "type": "STRING",
           "mustExist": false,
           "unique": true,
           "extensions": {}
@@ -76,9 +61,7 @@
       },
       "properties": {
         "roles": {
-          "type": {
-            "type": "STRING"
-          },
+          "type": "STRING",
           "mustExist": false,
           "unique": false,
           "extensions": {}
@@ -96,26 +79,18 @@
         "actor_id": {
           "type": "varchar",
           "size": 255,
-          "suggested": {
-            "type": "STRING"
-          },
+          "suggested": "STRING",
           "supported": [
-            {
-              "type": "STRING"
-            }
+            "STRING"
           ],
           "extensions": {}
         },
         "actor_name": {
           "type": "varchar",
           "size": 255,
-          "suggested": {
-            "type": "STRING"
-          },
+          "suggested": "STRING",
           "supported": [
-            {
-              "type": "STRING"
-            }
+            "STRING"
           ],
           "extensions": {}
         }
@@ -159,26 +134,18 @@
         "id": {
           "type": "varchar",
           "size": 255,
-          "suggested": {
-            "type": "STRING"
-          },
+          "suggested": "STRING",
           "supported": [
-            {
-              "type": "STRING"
-            }
+            "STRING"
           ],
           "extensions": {}
         },
         "field_1": {
           "type": "varchar",
           "size": 255,
-          "suggested": {
-            "type": "STRING"
-          },
+          "suggested": "STRING",
           "supported": [
-            {
-              "type": "STRING"
-            }
+            "STRING"
           ],
           "extensions": {}
         }
@@ -209,39 +176,27 @@
         "actor_id": {
           "type": "varchar",
           "size": 255,
-          "suggested": {
-            "type": "STRING"
-          },
+          "suggested": "STRING",
           "supported": [
-            {
-              "type": "STRING"
-            }
+            "STRING"
           ],
           "extensions": {}
         },
         "movie_id": {
           "type": "varchar",
           "size": 255,
-          "suggested": {
-            "type": "STRING"
-          },
+          "suggested": "STRING",
           "supported": [
-            {
-              "type": "STRING"
-            }
+            "STRING"
           ],
           "extensions": {}
         },
         "field_1": {
           "type": "varchar",
           "size": 255,
-          "suggested": {
-            "type": "STRING"
-          },
+          "suggested": "STRING",
           "supported": [
-            {
-              "type": "STRING"
-            }
+            "STRING"
           ],
           "extensions": {}
         }

@@ -6,7 +6,6 @@ import model.GraphModelJs
 import model.extension.StringValue
 import model.extension.toJs
 import model.graphModelJs
-import model.property.neo4jTypeJs
 
 class RelationshipEditorTest {
 
@@ -66,12 +65,12 @@ class RelationshipEditorTest {
 
         // Update Property
         RelationshipEditor.setPropertyName(model, relId, propId, "NewName")
-        RelationshipEditor.setPropertyType(model, relId, propId, neo4jTypeJs("STRING"))
+        RelationshipEditor.setPropertyType(model, relId, propId, "STRING")
         RelationshipEditor.setPropertyMustExist(model, relId, propId, true)
 
         val prop = rel.properties[propId]!!
         assertEquals("NewName", prop.name)
-        assertEquals("STRING", prop.type.type)
+        assertEquals("STRING", prop.type)
         assertTrue(prop.mustExist!!)
 
         // Remove Property
