@@ -348,6 +348,51 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
+    fun `convertProperties carries the vector dimension alongside the type`() {
+        val labels = listOf(
+            schemaMapOf(
+                "properties" to listOf(
+                    schemaMapOf(
+                        "\$id" to "p1",
+                        "token" to "embedding",
+                        "type" to mapOf(
+                            "type" to "vector",
+                            "items" to mapOf("type" to "float"),
+                            "dimension" to 1536
+                        )
+                    ),
+                    schemaMapOf(
+                        "\$id" to "p2",
+                        "token" to "legacyembedding",
+                        "type" to mapOf("type" to "vector", "items" to mapOf("type" to "float"))
+                    ),
+                    schemaMapOf(
+                        "\$id" to "p3",
+                        "token" to "tags",
+                        "type" to mapOf(
+                            "type" to "array",
+                            "items" to mapOf("type" to "string"),
+                            "dimension" to 4
+                        )
+                    )
+                )
+            )
+        )
+
+        val result = migration.convertProperties(labels, emptySet())
+
+        assertEquals(1536, result["p1"]?.intOrNull("dimension"))
+        assertFalse(
+            result["p2"]!!.containsKey("dimension"),
+            "dimension should be omitted when the source vector does not declare one"
+        )
+        assertFalse(
+            result["p3"]!!.containsKey("dimension"),
+            "dimension should be dropped for non-vector types"
+        )
+    }
+
+    @Test
     fun `relationshipMappings joins object types and tokens correctly`() {
         val input = schemaMapOf(
             "graphSchemaRepresentation" to mapOf(
@@ -546,6 +591,74 @@ class DataModelV3GraphSpecMigrationTest {
         assertEquals(
             listOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"),
             vectorField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
+        )
+    }
+
+    @Test
+    fun `migrateTables carries the vector dimension onto the field`() {
+        val inputSchema = schemaMapOf(
+            "graphMappingRepresentation" to mapOf(
+                "dataSourceSchema" to schemaMapOf(
+                    "tableSchemas" to listOf(
+                        schemaMapOf(
+                            "name" to "document",
+                            "fields" to listOf(
+                                schemaMapOf(
+                                    "name" to "embedding",
+                                    "rawType" to "VECTOR",
+                                    "recommendedType" to mapOf(
+                                        "type" to "vector",
+                                        "items" to mapOf("type" to "float"),
+                                        "dimension" to 1536
+                                    ),
+                                    "supportedTypes" to listOf(
+                                        mapOf(
+                                            "type" to "vector",
+                                            "items" to mapOf("type" to "float"),
+                                            "dimension" to 1536
+                                        )
+                                    )
+                                ),
+                                // no recommendedType, so the dimension comes from the supported types
+                                schemaMapOf(
+                                    "name" to "supportedonly",
+                                    "rawType" to "VECTOR",
+                                    "supportedTypes" to listOf(
+                                        mapOf(
+                                            "type" to "vector",
+                                            "items" to mapOf("type" to "float32"),
+                                            "dimension" to 768
+                                        )
+                                    )
+                                ),
+                                schemaMapOf(
+                                    "name" to "legacyembedding",
+                                    "rawType" to "VECTOR",
+                                    "recommendedType" to mapOf("type" to "vector", "items" to mapOf("type" to "float"))
+                                ),
+                                schemaMapOf(
+                                    "name" to "title",
+                                    "rawType" to "VARCHAR",
+                                    "recommendedType" to mapOf("type" to "string", "dimension" to 8)
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
+        val fields = migration.migrateTables(unwrap(inputSchema))["document"]!!.mapOfMaps("fields")
+
+        assertEquals(1536, fields["embedding"]?.intOrNull("dimension"))
+        assertEquals(768, fields["supportedonly"]?.intOrNull("dimension"))
+        assertFalse(
+            fields["legacyembedding"]!!.containsKey("dimension"),
+            "dimension should be omitted when the source vector does not declare one"
+        )
+        assertFalse(
+            fields["title"]!!.containsKey("dimension"),
+            "dimension should be dropped for non-vector types"
         )
     }
 

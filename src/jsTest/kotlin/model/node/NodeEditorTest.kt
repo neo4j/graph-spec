@@ -67,11 +67,16 @@ class NodeEditorTest {
         // Set Property Attributes
         NodeEditor.setPropertyName(model, nodeId, propId, "age")
         NodeEditor.setPropertyType(model, nodeId, propId, "Integer")
+        NodeEditor.setPropertyDimension(model, nodeId, propId, 1536)
         NodeEditor.setPropertyMustExist(model, nodeId, propId, false)
         NodeEditor.setPropertyUnique(model, nodeId, propId, true)
 
         val prop = model.nodes[nodeId]?.properties?.get(propId)
         assertEquals("age", prop?.name)
+        assertEquals(1536, prop?.dimension)
+
+        NodeEditor.setPropertyDimension(model, nodeId, propId, null)
+        assertNull(model.nodes[nodeId]?.properties?.get(propId)?.dimension)
 
         // Remove Property
         NodeEditor.removeProperty(model, nodeId, propId)

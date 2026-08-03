@@ -65,13 +65,18 @@ class RelationshipEditorTest {
 
         // Update Property
         RelationshipEditor.setPropertyName(model, relId, propId, "NewName")
-        RelationshipEditor.setPropertyType(model, relId, propId, "STRING")
+        RelationshipEditor.setPropertyType(model, relId, propId, "VECTOR<FLOAT>")
+        RelationshipEditor.setPropertyDimension(model, relId, propId, 1536)
         RelationshipEditor.setPropertyMustExist(model, relId, propId, true)
 
         val prop = rel.properties[propId]!!
         assertEquals("NewName", prop.name)
-        assertEquals("STRING", prop.type)
+        assertEquals("VECTOR<FLOAT>", prop.type)
+        assertEquals(1536, prop.dimension)
         assertTrue(prop.mustExist!!)
+
+        RelationshipEditor.setPropertyDimension(model, relId, propId, null)
+        assertNull(rel.properties[propId]?.dimension)
 
         // Remove Property
         RelationshipEditor.removeProperty(model, relId, propId)

@@ -35,6 +35,7 @@ external interface TableFieldJs {
     var size: Int
     val suggested: String
     val supported: Array<String>
+    val dimension: Int?
     val extensions: Record<String, ExtensionValueJs>
     val name: String
 }
@@ -44,6 +45,7 @@ fun tableFieldJs(
     size: Int = -1,
     suggested: String = "ANY",
     supported: Array<String> = emptyArray(),
+    dimension: Int? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String = ""
 ): TableFieldJs = jso {
@@ -51,6 +53,7 @@ fun tableFieldJs(
     this.size = size
     this.suggested = suggested
     this.supported = supported
+    this.dimension = dimension
     this.extensions = extensions
     this.name = name
 }
@@ -60,6 +63,7 @@ fun TableField.toJs(key: String) = tableFieldJs(
     size = size,
     suggested = suggested.name,
     supported = supported.map { it.name }.toTypedArray(),
+    dimension = dimension,
     extensions = extensions.associateBy { _, value -> value.toJs() },
     name = name ?: key
 )
@@ -69,6 +73,7 @@ fun TableFieldJs.toClass() = TableField(
     size = size,
     suggested = suggested.let { Neo4jType.valueOf(it) },
     supported = supported.map { Neo4jType.valueOf(it) }.toSet(),
+    dimension = dimension,
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
     name = name
 )

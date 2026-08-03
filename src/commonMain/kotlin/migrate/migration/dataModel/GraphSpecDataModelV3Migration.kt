@@ -337,7 +337,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             val map = schemaMapOf(
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
-                "type" to propertyType(prop.string("type")),
+                "type" to propertyType(prop.string("type"), prop.intOrNull("dimension")),
                 "nullable" to if (prop.stringOrNull("key") == "true") {
                     false
                 } else {
@@ -384,10 +384,10 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "rawType" to field.literalOrNull("type"),
                 "size" to field.literalOrNull("size"),
                 "recommendedType" to field.literalOrNull("suggested")?.let {
-                    propertyType(it.string)
+                    propertyType(it.string, field.intOrNull("dimension"))
                 },
                 "supportedTypes" to field.listOrNull("supported")?.map {
-                    propertyType((it as SchemaLiteral).string)
+                    propertyType((it as SchemaLiteral).string, field.intOrNull("dimension"))
                 }
             )
         }
@@ -454,11 +454,12 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             else -> string?.lowercase()
         }
 
-        private fun propertyType(propertyType: String?) = when {
+        private fun propertyType(propertyType: String?, dimension: Int? = null) = when {
             propertyType == "ANY" -> SchemaNull()
             propertyType != null && propertyType.startsWith("VECTOR") -> schemaMapOf(
                 "type" to "vector",
-                "items" to schemaMapOf("type" to type(propertyType.removePrefix("VECTOR<").removeSuffix(">")))
+                "items" to schemaMapOf("type" to type(propertyType.removePrefix("VECTOR<").removeSuffix(">"))),
+                "dimension" to dimension
             )
             propertyType != null && propertyType.startsWith("LIST") -> schemaMapOf(
                 "type" to "array",
