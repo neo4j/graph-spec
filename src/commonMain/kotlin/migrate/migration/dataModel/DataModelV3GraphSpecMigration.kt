@@ -243,7 +243,8 @@ class DataModelV3GraphSpecMigration :
             val typeObj = property.map("type")
             val map = schemaMapOf(
                 "name" to property.literalOrNull("token"),
-                "type" to neo4jType(typeObj)
+                "type" to neo4jType(typeObj),
+                "dimension" to dimension(typeObj)
             )
             val id = property.id()
             if (keyProperties.contains(id)) {
@@ -358,7 +359,11 @@ class DataModelV3GraphSpecMigration :
                 "suggested" to neo4jType(field.mapOrNull("recommendedType")),
                 "supported" to field.listOfMapsOrNull("supportedTypes")?.map {
                     neo4jType(it)
-                }
+                },
+                "dimension" to (
+                    dimension(field.mapOrNull("recommendedType"))
+                        ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
+                    )
             )
         }
         return fields
@@ -373,6 +378,9 @@ class DataModelV3GraphSpecMigration :
                 else -> scalarType(base)
             }
         }
+
+        private fun dimension(type: SchemaMap?): Int? =
+            if (type?.stringOrNull("type")?.lowercase() == "vector") type.intOrNull("dimension") else null
 
         private fun itemType(type: SchemaMap): String? = scalarType(type.mapOrNull("items")?.stringOrNull("type"))
 

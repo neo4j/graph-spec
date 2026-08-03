@@ -26,6 +26,11 @@ class PropertyEditor {
         }
 
         @JsStatic
+        fun setDimension(property: PropertyJs, dimension: Int?) {
+            property.dimension = dimension
+        }
+
+        @JsStatic
         fun setMustExist(property: PropertyJs, mustExist: Boolean) {
             property.mustExist = mustExist
             property.key = null

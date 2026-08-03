@@ -413,6 +413,7 @@ var Neo4jTypeValues = []Neo4jType{
 }
 
 type Property struct {
+	Dimension  *int                      `json:"dimension,omitempty"`
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
 	Key        *bool                     `json:"key,omitempty"`
 	MustExist  *bool                     `json:"mustExist,omitempty"`
@@ -465,6 +466,7 @@ type Relationship struct {
 }
 
 type TableField struct {
+	Dimension  *int                      `json:"dimension,omitempty"`
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
 	Name       *string                   `json:"name,omitempty"`
 	Size       *int                      `json:"size,omitempty"`

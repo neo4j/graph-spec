@@ -30,6 +30,7 @@ import model.jso
 @JsPlainObject
 external interface PropertyJs {
     var type: String
+    var dimension: Int?
     var mustExist: Boolean?
     var unique: Boolean?
     var key: Boolean?
@@ -40,6 +41,7 @@ external interface PropertyJs {
 
 fun propertyJs(
     type: String = "ANY",
+    dimension: Int? = null,
     mustExist: Boolean? = null,
     unique: Boolean? = null,
     key: Boolean? = null,
@@ -48,6 +50,7 @@ fun propertyJs(
     id: String
 ): PropertyJs = jso {
     this.type = type
+    this.dimension = dimension
     this.mustExist = mustExist
     this.unique = unique
     this.key = key
@@ -58,6 +61,7 @@ fun propertyJs(
 
 fun Property.toJs(key: String) = propertyJs(
     type = Neo4jType.toString(type),
+    dimension = dimension,
     mustExist = mustExist,
     unique = unique,
     key = this.key,
@@ -72,6 +76,7 @@ fun PropertyJs.toClass(parent: String, property: String): Property {
         ?: error("Invalid neo4j type '$type' for $parent.properties.$property")
     return Property(
         type = neo4jType,
+        dimension = dimension,
         mustExist = mustExist,
         unique = unique,
         key = key,

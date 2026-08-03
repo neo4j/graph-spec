@@ -328,14 +328,24 @@ class DataModelV3GraphSpecMigrationTest {
             schemaMapOf(
                 "properties" to listOf(
                     schemaMapOf(
-                        "\$id" to "p1",
+                        "\$id" to "arrProp",
                         "token" to "tags",
                         "type" to mapOf("type" to "array", "items" to mapOf("type" to "string"))
                     ),
                     schemaMapOf(
-                        "\$id" to "p2",
+                        "\$id" to "vecProp",
                         "token" to "embedding",
                         "type" to mapOf("type" to "vector", "items" to mapOf("type" to "float"))
+                    ),
+                    schemaMapOf(
+                        "\$id" to "vecPropWithDim",
+                        "token" to "embedding2",
+                        "type" to mapOf("type" to "vector", "items" to mapOf("type" to "float"), "dimension" to 123)
+                    ),
+                    schemaMapOf(
+                        "\$id" to "arrPropWithDim",
+                        "token" to "tags2",
+                        "type" to mapOf("type" to "array", "items" to mapOf("type" to "string"), "dimension" to 4)
                     )
                 )
             )
@@ -343,8 +353,15 @@ class DataModelV3GraphSpecMigrationTest {
 
         val result = migration.convertProperties(labels, emptySet())
 
-        assertEquals("LIST<STRING>", result["p1"]?.string("type"))
-        assertEquals("VECTOR<FLOAT>", result["p2"]?.string("type"))
+        assertEquals("LIST<STRING>", result["arrProp"]?.string("type"))
+        assertEquals("VECTOR<FLOAT>", result["vecProp"]?.string("type"))
+        assertEquals("VECTOR<FLOAT>", result["vecPropWithDim"]?.string("type"))
+        assertEquals("LIST<STRING>", result["arrPropWithDim"]?.string("type"))
+        // dimension only relevant for vector properties
+        assertFalse(result["arrProp"]!!.containsKey("dimension"))
+        assertFalse(result["vecProp"]!!.containsKey("dimension"))
+        assertEquals(123, result["vecPropWithDim"]!!.intOrNull("dimension"))
+        assertFalse(result["arrPropWithDim"]!!.containsKey("dimension"))
     }
 
     @Test
@@ -547,6 +564,68 @@ class DataModelV3GraphSpecMigrationTest {
             listOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"),
             vectorField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
         )
+    }
+
+    @Test
+    fun `migrateTables processes vector dimension`() {
+        val inputSchema = schemaMapOf(
+            "graphMappingRepresentation" to mapOf(
+                "dataSourceSchema" to schemaMapOf(
+                    "tableSchemas" to listOf(
+                        schemaMapOf(
+                            "name" to "document",
+                            "fields" to listOf(
+                                schemaMapOf(
+                                    "name" to "embeddingWithDim",
+                                    "rawType" to "VECTOR",
+                                    "recommendedType" to mapOf(
+                                        "type" to "vector",
+                                        "items" to mapOf("type" to "float"),
+                                        "dimension" to 123
+                                    ),
+                                    "supportedTypes" to listOf(
+                                        mapOf(
+                                            "type" to "vector",
+                                            "items" to mapOf("type" to "float"),
+                                            "dimension" to 123
+                                        )
+                                    )
+                                ),
+                                // no recommendedType, so the dimension comes from the supported types
+                                schemaMapOf(
+                                    "name" to "supportedOnly",
+                                    "rawType" to "VECTOR",
+                                    "supportedTypes" to listOf(
+                                        mapOf(
+                                            "type" to "vector",
+                                            "items" to mapOf("type" to "float32"),
+                                            "dimension" to 456
+                                        )
+                                    )
+                                ),
+                                schemaMapOf(
+                                    "name" to "embedding",
+                                    "rawType" to "VECTOR",
+                                    "recommendedType" to mapOf("type" to "vector", "items" to mapOf("type" to "float"))
+                                ),
+                                schemaMapOf(
+                                    "name" to "stringWithDim",
+                                    "rawType" to "VARCHAR",
+                                    "recommendedType" to mapOf("type" to "string", "dimension" to 8)
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
+        val fields = migration.migrateTables(unwrap(inputSchema))["document"]!!.mapOfMaps("fields")
+
+        assertEquals(123, fields["embeddingWithDim"]?.intOrNull("dimension"))
+        assertEquals(456, fields["supportedOnly"]?.intOrNull("dimension"))
+        assertFalse(fields["embedding"]!!.containsKey("dimension"))
+        assertFalse(fields["stringWithDim"]!!.containsKey("dimension"))
     }
 
     @Test

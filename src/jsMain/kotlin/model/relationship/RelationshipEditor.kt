@@ -102,6 +102,12 @@ class RelationshipEditor {
         }
 
         @JsStatic
+        fun setPropertyDimension(model: GraphModelJs, relationshipId: String, propertyId: String, dimension: Int?) {
+            val property = getProperty(model, relationshipId, propertyId)
+            PropertyEditor.setDimension(property, dimension)
+        }
+
+        @JsStatic
         fun setPropertyMustExist(model: GraphModelJs, relationshipId: String, propertyId: String, mustExist: Boolean) {
             val property = getProperty(model, relationshipId, propertyId)
             PropertyEditor.setMustExist(property, mustExist)

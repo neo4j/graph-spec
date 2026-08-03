@@ -9,7 +9,8 @@ import kotlin.test.assertTrue
 class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
 
     override fun createClass() = Property(
-        type = Neo4jType.BOOLEAN,
+        type = Neo4jType.VECTOR_FLOAT,
+        dimension = 8,
         mustExist = true,
         unique = true,
         key = true,
@@ -22,6 +23,8 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
     override fun toClass(js: PropertyJs): Property = js.toClass("parent", "propertyId")
 
     override fun verifyJsObject(jsObject: PropertyJs) {
+        assertEquals("VECTOR<FLOAT>", jsObject.type)
+        assertEquals(8, jsObject.dimension)
         assertTrue(jsObject.mustExist!!)
         assertTrue(jsObject.unique!!)
         assertTrue(jsObject.key!!)

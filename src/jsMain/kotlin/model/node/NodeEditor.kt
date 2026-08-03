@@ -101,6 +101,12 @@ class NodeEditor {
         }
 
         @JsStatic
+        fun setPropertyDimension(model: GraphModelJs, nodeId: String, propertyId: String, dimension: Int?) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setDimension(property, dimension)
+        }
+
+        @JsStatic
         fun setPropertyMustExist(model: GraphModelJs, nodeId: String, propertyId: String, mustExist: Boolean) {
             val property = getProperty(model, nodeId, propertyId)
             PropertyEditor.setMustExist(property, mustExist)
