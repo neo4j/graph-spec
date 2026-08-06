@@ -338,7 +338,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
                 "type" to propertyType(prop.string("type"), prop.intOrNull("dimension")),
-                "nullable" to if (prop.stringOrNull("key") == "true") {
+                "nullable" to if (prop.stringOrNull("key") == "true") { // TODO remove
                     false
                 } else {
                     prop.stringOrNull("mustExist") != "true"

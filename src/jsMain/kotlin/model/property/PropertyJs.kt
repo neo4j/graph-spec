@@ -31,9 +31,9 @@ import model.jso
 external interface PropertyJs {
     var type: String
     var dimension: Int?
-    var mustExist: Boolean?
-    var unique: Boolean?
-    var key: Boolean?
+    var mustExist: Boolean? // TODO remove
+    var unique: Boolean? // TODO remove
+    var key: Boolean? // TODO remove
     val extensions: Record<String, ExtensionValueJs>
     var name: String
     val id: String
@@ -42,18 +42,18 @@ external interface PropertyJs {
 fun propertyJs(
     type: String = "ANY",
     dimension: Int? = null,
-    mustExist: Boolean? = null,
-    unique: Boolean? = null,
-    key: Boolean? = null,
+    mustExist: Boolean? = null, // TODO remove
+    unique: Boolean? = null, // TODO remove
+    key: Boolean? = null, // TODO remove
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String,
     id: String
 ): PropertyJs = jso {
     this.type = type
     this.dimension = dimension
-    this.mustExist = mustExist
-    this.unique = unique
-    this.key = key
+    this.mustExist = mustExist // TODO remove
+    this.unique = unique // TODO remove
+    this.key = key // TODO remove
     this.extensions = extensions
     this.name = name
     this.id = id
@@ -62,9 +62,9 @@ fun propertyJs(
 fun Property.toJs(key: String) = propertyJs(
     type = Neo4jType.toString(type),
     dimension = dimension,
-    mustExist = mustExist,
-    unique = unique,
-    key = this.key,
+    mustExist = mustExist, // TODO remove
+    unique = unique, // TODO remove
+    key = this.key, // TODO remove
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: key,
     id = key
@@ -77,9 +77,9 @@ fun PropertyJs.toClass(parent: String, property: String): Property {
     return Property(
         type = neo4jType,
         dimension = dimension,
-        mustExist = mustExist,
-        unique = unique,
-        key = key,
+        mustExist = mustExist, // TODO remove
+        unique = unique, // TODO remove
+        key = key, // TODO remove
         extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
         name = name
     )

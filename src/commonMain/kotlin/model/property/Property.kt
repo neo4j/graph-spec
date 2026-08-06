@@ -29,9 +29,9 @@ import kotlin.js.JsExport
 data class Property(
     var type: Neo4jType = Neo4jType.ANY,
     var dimension: Int? = null,
-    var mustExist: Boolean? = null,
-    var unique: Boolean? = null,
-    var key: Boolean? = null,
+    var mustExist: Boolean? = null, // TODO remove
+    var unique: Boolean? = null, // TODO remove
+    var key: Boolean? = null, // TODO remove
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
 ) : Extensions,
