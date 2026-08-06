@@ -3,13 +3,15 @@ nodes:
   album:
     label: "album"
     properties:
-      album_id: { type: "INTEGER", key: true }
-      title: { type: "STRING", mustExist: true }
+      album_id: { type: "INTEGER" }
+      title: { type: "STRING" }
     constraints:
-      album:
-        type: "UNIQUE"
-        label: "album"
+      album_id_key:
+        type: "KEY"
         properties: ["album_id"]
+      title_exists:
+        type: "EXISTS"
+        properties: ["title"]
     indexes:
       album:
         type: "TEXT"
@@ -18,13 +20,15 @@ nodes:
   artist:
     label: "artist"
     properties:
-      artist_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
+      artist_id: { type: "INTEGER" }
+      name: { type: "STRING" }
     constraints:
-      artist:
-        type: "UNIQUE"
-        label: "artist"
+      artist_id_key:
+        type: "KEY"
         properties: ["artist_id"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
     indexes:
       artist:
         type: "TEXT"
@@ -33,23 +37,55 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER", key: true }
-      first_name: { type: "STRING", mustExist: true }
-      last_name: { type: "STRING", mustExist: true }
-      company: { type: "STRING", mustExist: true }
-      address: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      state: { type: "STRING", mustExist: true }
-      country: { type: "STRING", mustExist: true }
-      postal_code: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      fax: { type: "STRING", mustExist: true }
-      email: { type: "STRING", mustExist: true }
+      customer_id: { type: "INTEGER" }
+      first_name: { type: "STRING" }
+      last_name: { type: "STRING" }
+      company: { type: "STRING" }
+      address: { type: "STRING" }
+      city: { type: "STRING" }
+      state: { type: "STRING" }
+      country: { type: "STRING" }
+      postal_code: { type: "STRING" }
+      phone: { type: "STRING" }
+      fax: { type: "STRING" }
+      email: { type: "STRING" }
     constraints:
-      customer:
-        type: "UNIQUE"
-        label: "customer"
+      customer_id_key:
+        type: "KEY"
         properties: ["customer_id"]
+      first_name_exists:
+        type: "EXISTS"
+        properties: ["first_name"]
+      last_name_exists:
+        type: "EXISTS"
+        properties: ["last_name"]
+      company_exists:
+        type: "EXISTS"
+        properties: ["company"]
+      address_exists:
+        type: "EXISTS"
+        properties: ["address"]
+      city_exists:
+        type: "EXISTS"
+        properties: ["city"]
+      state_exists:
+        type: "EXISTS"
+        properties: ["state"]
+      country_exists:
+        type: "EXISTS"
+        properties: ["country"]
+      postal_code_exists:
+        type: "EXISTS"
+        properties: ["postal_code"]
+      phone_exists:
+        type: "EXISTS"
+        properties: ["phone"]
+      fax_exists:
+        type: "EXISTS"
+        properties: ["fax"]
+      email_exists:
+        type: "EXISTS"
+        properties: ["email"]
     indexes:
       customer:
         type: "TEXT"
@@ -58,25 +94,63 @@ nodes:
   employee:
     label: "employee"
     properties:
-      employee_id: { type: "INTEGER", key: true }
-      last_name: { type: "STRING", mustExist: true }
-      first_name: { type: "STRING", mustExist: true }
-      title: { type: "STRING", mustExist: true }
-      birth_date: { type: "ZONED DATETIME", mustExist: true }
-      hire_date: { type: "ZONED DATETIME", mustExist: true }
-      address: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      state: { type: "STRING", mustExist: true }
-      country: { type: "STRING", mustExist: true }
-      postal_code: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      fax: { type: "STRING", mustExist: true }
-      email: { type: "STRING", mustExist: true }
+      employee_id: { type: "INTEGER" }
+      last_name: { type: "STRING" }
+      first_name: { type: "STRING" }
+      title: { type: "STRING" }
+      birth_date: { type: "ZONED DATETIME" }
+      hire_date: { type: "ZONED DATETIME" }
+      address: { type: "STRING" }
+      city: { type: "STRING" }
+      state: { type: "STRING" }
+      country: { type: "STRING" }
+      postal_code: { type: "STRING" }
+      phone: { type: "STRING" }
+      fax: { type: "STRING" }
+      email: { type: "STRING" }
     constraints:
-      employee:
-        type: "UNIQUE"
-        label: "employee"
+      employee_id_key:
+        type: "KEY"
         properties: ["employee_id"]
+      last_name_exists:
+        type: "EXISTS"
+        properties: ["last_name"]
+      first_name_exists:
+        type: "EXISTS"
+        properties: ["first_name"]
+      title_exists:
+        type: "EXISTS"
+        properties: ["title"]
+      birth_date_exists:
+        type: "EXISTS"
+        properties: ["birth_date"]
+      hire_date_exists:
+        type: "EXISTS"
+        properties: ["hire_date"]
+      address_exists:
+        type: "EXISTS"
+        properties: ["address"]
+      city_exists:
+        type: "EXISTS"
+        properties: ["city"]
+      state_exists:
+        type: "EXISTS"
+        properties: ["state"]
+      country_exists:
+        type: "EXISTS"
+        properties: ["country"]
+      postal_code_exists:
+        type: "EXISTS"
+        properties: ["postal_code"]
+      phone_exists:
+        type: "EXISTS"
+        properties: ["phone"]
+      fax_exists:
+        type: "EXISTS"
+        properties: ["fax"]
+      email_exists:
+        type: "EXISTS"
+        properties: ["email"]
     indexes:
       employee:
         type: "TEXT"
@@ -85,13 +159,15 @@ nodes:
   genre:
     label: "genre"
     properties:
-      genre_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
+      genre_id: { type: "INTEGER" }
+      name: { type: "STRING" }
     constraints:
-      genre:
-        type: "UNIQUE"
-        label: "genre"
+      genre_id_key:
+        type: "KEY"
         properties: ["genre_id"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
     indexes:
       genre:
         type: "TEXT"
@@ -100,19 +176,39 @@ nodes:
   invoice:
     label: "invoice"
     properties:
-      invoice_id: { type: "INTEGER", key: true }
-      invoice_date: { type: "ZONED DATETIME", mustExist: true }
-      billing_address: { type: "STRING", mustExist: true }
-      billing_city: { type: "STRING", mustExist: true }
-      billing_state: { type: "STRING", mustExist: true }
-      billing_country: { type: "STRING", mustExist: true }
-      billing_postal_code: { type: "STRING", mustExist: true }
-      total: { type: "FLOAT", mustExist: true }
+      invoice_id: { type: "INTEGER" }
+      invoice_date: { type: "ZONED DATETIME" }
+      billing_address: { type: "STRING" }
+      billing_city: { type: "STRING" }
+      billing_state: { type: "STRING" }
+      billing_country: { type: "STRING" }
+      billing_postal_code: { type: "STRING" }
+      total: { type: "FLOAT" }
     constraints:
-      invoice:
-        type: "UNIQUE"
-        label: "invoice"
+      invoice_id_key:
+        type: "KEY"
         properties: ["invoice_id"]
+      invoice_date_exists:
+        type: "EXISTS"
+        properties: ["invoice_date"]
+      billing_address_exists:
+        type: "EXISTS"
+        properties: ["billing_address"]
+      billing_city_exists:
+        type: "EXISTS"
+        properties: ["billing_city"]
+      billing_state_exists:
+        type: "EXISTS"
+        properties: ["billing_state"]
+      billing_country_exists:
+        type: "EXISTS"
+        properties: ["billing_country"]
+      billing_postal_code_exists:
+        type: "EXISTS"
+        properties: ["billing_postal_code"]
+      total_exists:
+        type: "EXISTS"
+        properties: ["total"]
     indexes:
       invoice:
         type: "TEXT"
@@ -121,14 +217,19 @@ nodes:
   invoice_line:
     label: "invoice_line"
     properties:
-      invoice_line_id: { type: "INTEGER", key: true }
-      unit_price: { type: "FLOAT", mustExist: true }
-      quantity: { type: "INTEGER", mustExist: true }
+      invoice_line_id: { type: "INTEGER" }
+      unit_price: { type: "FLOAT" }
+      quantity: { type: "INTEGER" }
     constraints:
-      invoice_line:
-        type: "UNIQUE"
-        label: "invoice_line"
+      invoice_line_id_key:
+        type: "KEY"
         properties: ["invoice_line_id"]
+      unit_price_exists:
+        type: "EXISTS"
+        properties: ["unit_price"]
+      quantity_exists:
+        type: "EXISTS"
+        properties: ["quantity"]
     indexes:
       invoice_line:
         type: "TEXT"
@@ -137,13 +238,15 @@ nodes:
   media_type:
     label: "media_type"
     properties:
-      media_type_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
+      media_type_id: { type: "INTEGER" }
+      name: { type: "STRING" }
     constraints:
-      media_type:
-        type: "UNIQUE"
-        label: "media_type"
+      media_type_id_key:
+        type: "KEY"
         properties: ["media_type_id"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
     indexes:
       media_type:
         type: "TEXT"
@@ -152,13 +255,15 @@ nodes:
   playlist:
     label: "playlist"
     properties:
-      playlist_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
+      playlist_id: { type: "INTEGER" }
+      name: { type: "STRING" }
     constraints:
-      playlist:
-        type: "UNIQUE"
-        label: "playlist"
+      playlist_id_key:
+        type: "KEY"
         properties: ["playlist_id"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
     indexes:
       playlist:
         type: "TEXT"
@@ -167,17 +272,31 @@ nodes:
   track:
     label: "track"
     properties:
-      track_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      composer: { type: "STRING", mustExist: true }
-      milliseconds: { type: "INTEGER", mustExist: true }
-      bytes: { type: "INTEGER", mustExist: true }
-      unit_price: { type: "FLOAT", mustExist: true }
+      track_id: { type: "INTEGER" }
+      name: { type: "STRING" }
+      composer: { type: "STRING" }
+      milliseconds: { type: "INTEGER" }
+      bytes: { type: "INTEGER" }
+      unit_price: { type: "FLOAT" }
     constraints:
-      track:
-        type: "UNIQUE"
-        label: "track"
+      track_id_key:
+        type: "KEY"
         properties: ["track_id"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
+      composer_exists:
+        type: "EXISTS"
+        properties: ["composer"]
+      milliseconds_exists:
+        type: "EXISTS"
+        properties: ["milliseconds"]
+      bytes_exists:
+        type: "EXISTS"
+        properties: ["bytes"]
+      unit_price_exists:
+        type: "EXISTS"
+        properties: ["unit_price"]
     indexes:
       track:
         type: "TEXT"

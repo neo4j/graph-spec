@@ -3,14 +3,19 @@ nodes:
   Aircraft:
     label: "Aircraft"
     properties:
-      aircraftCode: { type: "STRING", key: true }
-      model: { type: "STRING", mustExist: true }
-      aircraftRange: { type: "INTEGER", mustExist: true }
+      aircraftCode: { type: "STRING" }
+      model: { type: "STRING" }
+      aircraftRange: { type: "INTEGER" }
     constraints:
-      aircrafts_data:
-        type: "UNIQUE"
-        label: "Aircraft"
+      aircraftCode_key:
+        type: "KEY"
         properties: ["aircraftCode"]
+      model_exists:
+        type: "EXISTS"
+        properties: ["model"]
+      aircraftRange_exists:
+        type: "EXISTS"
+        properties: ["aircraftRange"]
     indexes:
       "aircrafts_data-text":
         type: "TEXT"
@@ -19,16 +24,27 @@ nodes:
   Airport:
     label: "Airport"
     properties:
-      airportCode: { type: "STRING", key: true }
-      airportName: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      coordinates: { type: "POINT", mustExist: true }
-      timezone: { type: "STRING", mustExist: true }
+      airportCode: { type: "STRING" }
+      airportName: { type: "STRING" }
+      city: { type: "STRING" }
+      coordinates: { type: "POINT" }
+      timezone: { type: "STRING" }
     constraints:
-      airports_data:
-        type: "UNIQUE"
-        label: "Airport"
+      airportCode_key:
+        type: "KEY"
         properties: ["airportCode"]
+      airportName_exists:
+        type: "EXISTS"
+        properties: ["airportName"]
+      city_exists:
+        type: "EXISTS"
+        properties: ["city"]
+      coordinates_exists:
+        type: "EXISTS"
+        properties: ["coordinates"]
+      timezone_exists:
+        type: "EXISTS"
+        properties: ["timezone"]
     indexes:
       "airports_data-text":
         type: "TEXT"
@@ -37,14 +53,19 @@ nodes:
   Booking:
     label: "Booking"
     properties:
-      bookRef: { type: "STRING", key: true }
-      bookDate: { type: "ZONED DATETIME", mustExist: true }
-      totalAmount: { type: "FLOAT", mustExist: true }
+      bookRef: { type: "STRING" }
+      bookDate: { type: "ZONED DATETIME" }
+      totalAmount: { type: "FLOAT" }
     constraints:
-      bookings:
-        type: "UNIQUE"
-        label: "Booking"
+      bookRef_key:
+        type: "KEY"
         properties: ["bookRef"]
+      bookDate_exists:
+        type: "EXISTS"
+        properties: ["bookDate"]
+      totalAmount_exists:
+        type: "EXISTS"
+        properties: ["totalAmount"]
     indexes:
       "bookings-text":
         type: "TEXT"
@@ -53,18 +74,35 @@ nodes:
   Flight:
     label: "Flight"
     properties:
-      flightId: { type: "INTEGER", key: true }
-      flightNo: { type: "STRING", mustExist: true }
-      scheduledDeparture: { type: "ZONED DATETIME", mustExist: true }
-      scheduledArrival: { type: "ZONED DATETIME", mustExist: true }
-      status: { type: "STRING", mustExist: true }
-      actualDeparture: { type: "ZONED DATETIME", mustExist: true }
-      actualArrival: { type: "ZONED DATETIME", mustExist: true }
+      flightId: { type: "INTEGER" }
+      flightNo: { type: "STRING" }
+      scheduledDeparture: { type: "ZONED DATETIME" }
+      scheduledArrival: { type: "ZONED DATETIME" }
+      status: { type: "STRING" }
+      actualDeparture: { type: "ZONED DATETIME" }
+      actualArrival: { type: "ZONED DATETIME" }
     constraints:
-      flights:
-        type: "UNIQUE"
-        label: "Flight"
+      flightId_key:
+        type: "KEY"
         properties: ["flightId"]
+      flightNo_exists:
+        type: "EXISTS"
+        properties: ["flightNo"]
+      scheduledDeparture_exists:
+        type: "EXISTS"
+        properties: ["scheduledDeparture"]
+      scheduledArrival_exists:
+        type: "EXISTS"
+        properties: ["scheduledArrival"]
+      status_exists:
+        type: "EXISTS"
+        properties: ["status"]
+      actualDeparture_exists:
+        type: "EXISTS"
+        properties: ["actualDeparture"]
+      actualArrival_exists:
+        type: "EXISTS"
+        properties: ["actualArrival"]
     indexes:
       flights:
         type: "TEXT"
@@ -73,15 +111,23 @@ nodes:
   Ticket:
     label: "Ticket"
     properties:
-      ticketNo: { type: "STRING", key: true }
-      passengerId: { type: "STRING", mustExist: true }
-      passengerName: { type: "STRING", mustExist: true }
-      contactData: { type: "STRING", mustExist: true }
+      ticketNo: { type: "STRING" }
+      passengerId: { type: "STRING" }
+      passengerName: { type: "STRING" }
+      contactData: { type: "STRING" }
     constraints:
-      tickets:
-        type: "UNIQUE"
-        label: "Ticket"
+      ticketNo_key:
+        type: "KEY"
         properties: ["ticketNo"]
+      passengerId_exists:
+        type: "EXISTS"
+        properties: ["passengerId"]
+      passengerName_exists:
+        type: "EXISTS"
+        properties: ["passengerName"]
+      contactData_exists:
+        type: "EXISTS"
+        properties: ["contactData"]
     indexes:
       "tickets-text":
         type: "TEXT"
@@ -105,8 +151,15 @@ relationships:
     from: { node: "Flight" }
     to: { node: "Ticket" }
     properties:
-      fare_conditions: { type: "STRING", mustExist: true }
-      amount: { type: "FLOAT", mustExist: true }
+      fare_conditions: { type: "STRING" }
+      amount: { type: "FLOAT" }
+    constraints:
+      fare_conditions_exists:
+        type: "EXISTS"
+        properties: ["fare_conditions"]
+      amount_exists:
+        type: "EXISTS"
+        properties: ["amount"]
   TICKET_BELONGS_TO_BOOKING:
     type: "TICKET_BELONGS_TO_BOOKING"
     from: { node: "Ticket" }

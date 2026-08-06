@@ -51,7 +51,10 @@ class DataModelV3GraphSpecMigration :
 
     override fun migrate(schema: SchemaMap): SchemaMap {
         val schema = unwrap(schema)
-        val extensions = schema.mapOrNull("graphSchemaExtensionsRepresentation")?.listOfMapsOrNull("nodeKeyProperties")
+        val nodeExtensions =
+            schema.mapOrNull("graphSchemaExtensionsRepresentation")?.listOfMapsOrNull("nodeKeyProperties")
+        val relationshipExtensions =
+            schema.mapOrNull("graphSchemaExtensionsRepresentation")?.listOfMapsOrNull("relationshipKeyProperties")
         // Support source-schema-only input via migrating just the tables. Nodes and relationships
         // are emitted as empty maps to match the full migration path of them always being present
         val graphSchema = schema.mapOrNull("graphSchemaRepresentation")?.mapOrNull("graphSchema")
@@ -63,11 +66,16 @@ class DataModelV3GraphSpecMigration :
             )
         val (nodeConstraints, relationshipConstraints) = gatherWithNames(graphSchema, "constraints")
         val (nodeIndexes, relationshipIndexes) = gatherWithNames(graphSchema, "indexes")
-        val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes, extensions)
+        val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes, nodeExtensions)
         return schemaMapOf(
             "version" to schema.literal("version"),
             "nodes" to nodes,
-            "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),
+            "relationships" to migrateRelationships(
+                graphSchema,
+                relationshipConstraints,
+                relationshipIndexes,
+                relationshipExtensions
+            ),
             "tables" toNotEmpty migrateTables(schema),
             "mappings" toNotEmpty nodeMappings(schema) + relationshipMappings(schema),
             "display" toNotEmpty visualisation(schema, nodes)
@@ -131,9 +139,16 @@ class DataModelV3GraphSpecMigration :
                     "implied" toNotEmpty tokens.drop(1)
                     // TODO optional
                 ),
-                "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, "node"),
+                "constraints" toNotEmpty convertConstraints(
+                    constraints,
+                    labelRef,
+                    primaryLabel,
+                    "node",
+                    labels,
+                    nodeKeys[id] ?: emptySet()
+                ),
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
-                "properties" toNotEmpty convertProperties(labels, nodeKeys[id] ?: emptySet()),
+                "properties" toNotEmpty convertProperties(labels),
                 "name" to tokens.firstOrNull()
             )
         }
@@ -168,10 +183,13 @@ class DataModelV3GraphSpecMigration :
         constraints: Map<String, List<SchemaMap>>,
         labelRef: String?,
         label: String,
-        type: String
+        type: String,
+        labels: List<SchemaMap>,
+        keyProperties: Set<String> = emptySet()
     ): Map<String, SchemaMap>? {
         var index = 0
-        return constraints[labelRef]?.associate { constraint ->
+        val map = mutableMapOf<String, SchemaMap>()
+        constraints[labelRef]?.forEach { constraint ->
             index++
             val properties = constraint.listOfMapsOrNull("properties")
             val constraintType = constraintType(constraint)
@@ -179,13 +197,55 @@ class DataModelV3GraphSpecMigration :
                 error("Type constraints not supported on multiple properties.")
             }
             val id = constraint.id()
-            id to schemaMapOf(
+            map[id] = schemaMapOf(
                 "type" to constraintType.name,
                 "label" to label,
                 "properties" toNotEmpty properties?.map { it.ref() },
                 "name" to (constraint.stringOrNull("name") ?: "${type}Constraint${index - 1}")
             )
         }
+        labels
+            .flatMap { label -> label.listOfMaps("properties") }
+            .forEach { property ->
+                val typeObj = property.map("type")
+                val type = neo4jType(typeObj)
+                val map = schemaMapOf(
+                    "name" to property.literalOrNull("token"),
+                    "type" to type,
+                    "dimension" to dimension(typeObj)
+                )
+                val id = property.id()
+                val constraintId = "${property.string("token")}_${label}_${type}"
+                if (keyProperties.contains(id)) {
+                    index++
+                    map["${constraintId}_key"] = schemaMapOf(
+                        "type" to KEY.name,
+                        "label" to label,
+                        "properties" toNotEmpty setOf(property),
+                        "name" to "keyConstraint${index - 1}",
+                    )
+                    return@forEach
+                }
+                if (property.stringOrNull("nullable") == "false") {
+                    index++
+                    map["${constraintId}_exists"] = schemaMapOf(
+                        "type" to EXISTS.name,
+                        "label" to label,
+                        "properties" toNotEmpty setOf(property),
+                        "name" to "keyConstraint${index - 1}",
+                    )
+                }
+                if (property.stringOrNull("unique") == "true") {
+                    index++
+                    map["${constraintId}_unique"] = schemaMapOf(
+                        "type" to UNIQUE.name,
+                        "label" to label,
+                        "properties" toNotEmpty setOf(property),
+                        "name" to "keyConstraint${index - 1}",
+                    )
+                }
+            }
+        return map
     }
 
     private fun constraintType(constraint: SchemaMap): ConstraintType {
@@ -197,23 +257,35 @@ class DataModelV3GraphSpecMigration :
     internal fun migrateRelationships(
         schema: SchemaMap,
         constraints: Map<String, List<SchemaMap>>,
-        indexes: Map<String, List<SchemaMap>>
+        indexes: Map<String, List<SchemaMap>>,
+        relationshipKeyProperties: List<SchemaMap>?
     ): MutableMap<String, SchemaMap> {
         val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()
         val relationshipTypes =
             schema.listOfMapsOrNull("relationshipTypes")?.associateBy { it.id() } ?: return relationships
         val relObjTypes = schema.listOfMapsOrNull("relationshipObjectTypes") ?: return relationships
+        val relationshipKeys = relationshipKeyProperties?.associate { nkp ->
+            nkp.ref("relationship") to nkp.listOfMaps("keyProperties").map { it.ref() }.toSet()
+        } ?: emptyMap()
         for (objectType in relObjTypes) {
             val typeRef = objectType.ref("type")
             val relationshipType = relationshipTypes[typeRef] ?: error("RelationshipType $typeRef not found")
             val token = relationshipType.string("token")
-            relationships[objectType.id()] = schemaMapOf(
+            val id = objectType.id()
+            relationships[id] = schemaMapOf(
                 "type" to token,
                 "from" to mapOf("node" to objectType.ref("from")),
                 "to" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType)),
-                "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, "relationship"),
+                "constraints" toNotEmpty convertConstraints(
+                    constraints,
+                    typeRef,
+                    token,
+                    "relationship",
+                    listOf(relationshipType),
+                    relationshipKeys[id] ?: emptySet()
+                ),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
                 "name" to uniqueRelationshipName(token, uniqueNames)
             )
@@ -234,30 +306,15 @@ class DataModelV3GraphSpecMigration :
         throw IllegalArgumentException("Unable to find unique relationship name for $token")
     }
 
-    internal fun convertProperties(
-        labels: List<SchemaMap>,
-        keyProperties: Set<String> = emptySet()
-    ): Map<String, SchemaMap> = labels
+    internal fun convertProperties(labels: List<SchemaMap>): Map<String, SchemaMap> = labels
         .flatMap { label -> label.listOfMaps("properties") }
         .associate { property ->
             val typeObj = property.map("type")
-            val map = schemaMapOf(
+            property.id() to schemaMapOf(
                 "name" to property.literalOrNull("token"),
                 "type" to neo4jType(typeObj),
                 "dimension" to dimension(typeObj)
             )
-            val id = property.id()
-            if (keyProperties.contains(id)) {
-                map["key"] = true
-            } else {
-                map["mustExist"] = when (property.stringOrNull("nullable")) {
-                    "false" -> true
-                    null -> null
-                    else -> false
-                }
-                map["unique"] = property.literalOrNull("unique")
-            }
-            id to map
         }
 
     internal fun relationshipMappings(schema: SchemaMap): List<SchemaMap> {
@@ -361,9 +418,9 @@ class DataModelV3GraphSpecMigration :
                     neo4jType(it)
                 },
                 "dimension" to (
-                    dimension(field.mapOrNull("recommendedType"))
-                        ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
-                    )
+                        dimension(field.mapOrNull("recommendedType"))
+                            ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
+                        )
             )
         }
         return fields

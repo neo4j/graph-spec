@@ -3,19 +3,39 @@ nodes:
   Comment:
     label: "Comment"
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
-      id: { type: "INTEGER", key: true }
-      locationIP: { type: "STRING", mustExist: true }
-      browserUsed: { type: "STRING", mustExist: true }
-      content: { type: "STRING", mustExist: true }
-      length: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER" }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      content: { type: "STRING" }
+      length: { type: "INTEGER" }
     constraints:
-      Comment:
-        type: "UNIQUE"
-        label: "Comment"
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      explicitlyDeleted_exists:
+        type: "EXISTS"
+        properties: ["explicitlyDeleted"]
+      id_key:
+        type: "KEY"
         properties: ["id"]
+      locationIP_exists:
+        type: "EXISTS"
+        properties: ["locationIP"]
+      browserUsed_exists:
+        type: "EXISTS"
+        properties: ["browserUsed"]
+      content_exists:
+        type: "EXISTS"
+        properties: ["content"]
+      length_exists:
+        type: "EXISTS"
+        properties: ["length"]
     indexes:
       Comment:
         type: "TEXT"
@@ -24,16 +44,27 @@ nodes:
   Forum:
     label: "Forum"
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
-      id: { type: "INTEGER", key: true }
-      title: { type: "STRING", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER" }
+      title: { type: "STRING" }
     constraints:
-      Forum:
-        type: "UNIQUE"
-        label: "Forum"
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      explicitlyDeleted_exists:
+        type: "EXISTS"
+        properties: ["explicitlyDeleted"]
+      id_key:
+        type: "KEY"
         properties: ["id"]
+      title_exists:
+        type: "EXISTS"
+        properties: ["title"]
     indexes:
       Forum:
         type: "TEXT"
@@ -42,15 +73,23 @@ nodes:
   Organisation:
     label: "Organisation"
     properties:
-      id: { type: "INTEGER", key: true }
-      type: { type: "STRING", mustExist: true }
-      name: { type: "STRING", mustExist: true }
-      url: { type: "STRING", mustExist: true }
+      id: { type: "INTEGER" }
+      type: { type: "STRING" }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
     constraints:
-      Organisation:
-        type: "UNIQUE"
-        label: "Organisation"
+      id_key:
+        type: "KEY"
         properties: ["id"]
+      type_exists:
+        type: "EXISTS"
+        properties: ["type"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
+      url_exists:
+        type: "EXISTS"
+        properties: ["url"]
     indexes:
       Organisation:
         type: "TEXT"
@@ -59,23 +98,55 @@ nodes:
   Person:
     label: "Person"
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
-      id: { type: "INTEGER", key: true }
-      firstName: { type: "STRING", mustExist: true }
-      lastName: { type: "STRING", mustExist: true }
-      gender: { type: "STRING", mustExist: true }
-      birthday: { type: "INTEGER", mustExist: true }
-      locationIP: { type: "STRING", mustExist: true }
-      browserUsed: { type: "STRING", mustExist: true }
-      language: { type: "STRING", mustExist: true }
-      email: { type: "STRING", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER" }
+      firstName: { type: "STRING" }
+      lastName: { type: "STRING" }
+      gender: { type: "STRING" }
+      birthday: { type: "INTEGER" }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      language: { type: "STRING" }
+      email: { type: "STRING" }
     constraints:
-      Person:
-        type: "UNIQUE"
-        label: "Person"
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      explicitlyDeleted_exists:
+        type: "EXISTS"
+        properties: ["explicitlyDeleted"]
+      id_key:
+        type: "KEY"
         properties: ["id"]
+      firstName_exists:
+        type: "EXISTS"
+        properties: ["firstName"]
+      lastName_exists:
+        type: "EXISTS"
+        properties: ["lastName"]
+      gender_exists:
+        type: "EXISTS"
+        properties: ["gender"]
+      birthday_exists:
+        type: "EXISTS"
+        properties: ["birthday"]
+      locationIP_exists:
+        type: "EXISTS"
+        properties: ["locationIP"]
+      browserUsed_exists:
+        type: "EXISTS"
+        properties: ["browserUsed"]
+      language_exists:
+        type: "EXISTS"
+        properties: ["language"]
+      email_exists:
+        type: "EXISTS"
+        properties: ["email"]
     indexes:
       Person:
         type: "TEXT"
@@ -84,15 +155,23 @@ nodes:
   Place:
     label: "Place"
     properties:
-      id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      url: { type: "STRING", mustExist: true }
-      type: { type: "STRING", mustExist: true }
+      id: { type: "INTEGER" }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
+      type: { type: "STRING" }
     constraints:
-      Place:
-        type: "UNIQUE"
-        label: "Place"
+      id_key:
+        type: "KEY"
         properties: ["id"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
+      url_exists:
+        type: "EXISTS"
+        properties: ["url"]
+      type_exists:
+        type: "EXISTS"
+        properties: ["type"]
     indexes:
       Place:
         type: "TEXT"
@@ -101,21 +180,47 @@ nodes:
   Post:
     label: "Post"
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
-      id: { type: "INTEGER", key: true }
-      imageFile: { type: "STRING", mustExist: true }
-      locationIP: { type: "STRING", mustExist: true }
-      browserUsed: { type: "STRING", mustExist: true }
-      language: { type: "STRING", mustExist: true }
-      content: { type: "STRING", mustExist: true }
-      length: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+      id: { type: "INTEGER" }
+      imageFile: { type: "STRING" }
+      locationIP: { type: "STRING" }
+      browserUsed: { type: "STRING" }
+      language: { type: "STRING" }
+      content: { type: "STRING" }
+      length: { type: "INTEGER" }
     constraints:
-      Post:
-        type: "UNIQUE"
-        label: "Post"
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      explicitlyDeleted_exists:
+        type: "EXISTS"
+        properties: ["explicitlyDeleted"]
+      id_key:
+        type: "KEY"
         properties: ["id"]
+      imageFile_exists:
+        type: "EXISTS"
+        properties: ["imageFile"]
+      locationIP_exists:
+        type: "EXISTS"
+        properties: ["locationIP"]
+      browserUsed_exists:
+        type: "EXISTS"
+        properties: ["browserUsed"]
+      language_exists:
+        type: "EXISTS"
+        properties: ["language"]
+      content_exists:
+        type: "EXISTS"
+        properties: ["content"]
+      length_exists:
+        type: "EXISTS"
+        properties: ["length"]
     indexes:
       Post:
         type: "TEXT"
@@ -124,14 +229,19 @@ nodes:
   Tag:
     label: "Tag"
     properties:
-      id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      url: { type: "STRING", mustExist: true }
+      id: { type: "INTEGER" }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
     constraints:
-      Tag:
-        type: "UNIQUE"
-        label: "Tag"
+      id_key:
+        type: "KEY"
         properties: ["id"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
+      url_exists:
+        type: "EXISTS"
+        properties: ["url"]
     indexes:
       Tag:
         type: "TEXT"
@@ -140,14 +250,19 @@ nodes:
   TagClass:
     label: "TagClass"
     properties:
-      id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      url: { type: "STRING", mustExist: true }
+      id: { type: "INTEGER" }
+      name: { type: "STRING" }
+      url: { type: "STRING" }
     constraints:
-      TagClass:
-        type: "UNIQUE"
-        label: "TagClass"
+      id_key:
+        type: "KEY"
         properties: ["id"]
+      name_exists:
+        type: "EXISTS"
+        properties: ["name"]
+      url_exists:
+        type: "EXISTS"
+        properties: ["url"]
     indexes:
       TagClass:
         type: "TEXT"
@@ -175,8 +290,15 @@ relationships:
     from: { node: "Comment" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
   MODERATED_BY:
     type: "MODERATED_BY"
     from: { node: "Forum" }
@@ -186,16 +308,33 @@ relationships:
     from: { node: "Person" }
     to: { node: "Forum" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      explicitlyDeleted_exists:
+        type: "EXISTS"
+        properties: ["explicitlyDeleted"]
   HAS_TAG2:
     type: "HAS_TAG"
     from: { node: "Forum" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
   LOCATED_IN:
     type: "LOCATED_IN"
     from: { node: "Organisation" }
@@ -209,48 +348,105 @@ relationships:
     from: { node: "Person" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
   KNOWS:
     type: "KNOWS"
     from: { node: "Person" }
     to: { node: "Person" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      explicitlyDeleted_exists:
+        type: "EXISTS"
+        properties: ["explicitlyDeleted"]
   LIKED:
     type: "LIKED"
     from: { node: "Person" }
     to: { node: "Comment" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      explicitlyDeleted_exists:
+        type: "EXISTS"
+        properties: ["explicitlyDeleted"]
   LIKED2:
     type: "LIKED"
     from: { node: "Person" }
     to: { node: "Post" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      explicitlyDeleted: { type: "BOOLEAN", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      explicitlyDeleted: { type: "BOOLEAN" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      explicitlyDeleted_exists:
+        type: "EXISTS"
+        properties: ["explicitlyDeleted"]
   STUDIES_AT:
     type: "STUDIES_AT"
     from: { node: "Person" }
     to: { node: "Organisation" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      classYear: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      classYear: { type: "INTEGER" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      classYear_exists:
+        type: "EXISTS"
+        properties: ["classYear"]
   WORKS_AT:
     type: "WORKS_AT"
     from: { node: "Person" }
     to: { node: "Organisation" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
-      workFrom: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+      workFrom: { type: "INTEGER" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
+      workFrom_exists:
+        type: "EXISTS"
+        properties: ["workFrom"]
   IS_SIMILAR_TO:
     type: "IS_SIMILAR_TO"
     from: { node: "Place" }
@@ -272,8 +468,15 @@ relationships:
     from: { node: "Post" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
-      deletionDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER" }
+      deletionDate: { type: "INTEGER" }
+    constraints:
+      creationDate_exists:
+        type: "EXISTS"
+        properties: ["creationDate"]
+      deletionDate_exists:
+        type: "EXISTS"
+        properties: ["deletionDate"]
   HAS_CLASS:
     type: "HAS_CLASS"
     from: { node: "Tag" }

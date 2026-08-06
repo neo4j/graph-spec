@@ -3,15 +3,23 @@ nodes:
   categories:
     label: "categories"
     properties:
-      categoryid: { type: "INTEGER", key: true }
-      categoryname: { type: "STRING", mustExist: true }
-      description: { type: "STRING", mustExist: true }
-      picture: { type: "STRING", mustExist: true }
+      categoryid: { type: "INTEGER" }
+      categoryname: { type: "STRING" }
+      description: { type: "STRING" }
+      picture: { type: "STRING" }
     constraints:
-      categories:
-        type: "UNIQUE"
-        label: "categories"
+      categoryid_key:
+        type: "KEY"
         properties: ["categoryid"]
+      categoryname_exists:
+        type: "EXISTS"
+        properties: ["categoryname"]
+      description_exists:
+        type: "EXISTS"
+        properties: ["description"]
+      picture_exists:
+        type: "EXISTS"
+        properties: ["picture"]
     indexes:
       categories:
         type: "TEXT"
@@ -20,19 +28,39 @@ nodes:
   products:
     label: "products"
     properties:
-      productid: { type: "INTEGER", key: true }
-      productname: { type: "STRING", mustExist: true }
-      quantityperunit: { type: "STRING", mustExist: true }
-      unitprice: { type: "FLOAT", mustExist: true }
-      unitsinstock: { type: "INTEGER", mustExist: true }
-      unitsonorder: { type: "INTEGER", mustExist: true }
-      reorderlevel: { type: "INTEGER", mustExist: true }
-      discontinued: { type: "INTEGER", mustExist: true }
+      productid: { type: "INTEGER" }
+      productname: { type: "STRING" }
+      quantityperunit: { type: "STRING" }
+      unitprice: { type: "FLOAT" }
+      unitsinstock: { type: "INTEGER" }
+      unitsonorder: { type: "INTEGER" }
+      reorderlevel: { type: "INTEGER" }
+      discontinued: { type: "INTEGER" }
     constraints:
-      products:
-        type: "UNIQUE"
-        label: "products"
+      productid_key:
+        type: "KEY"
         properties: ["productid"]
+      productname_exists:
+        type: "EXISTS"
+        properties: ["productname"]
+      quantityperunit_exists:
+        type: "EXISTS"
+        properties: ["quantityperunit"]
+      unitprice_exists:
+        type: "EXISTS"
+        properties: ["unitprice"]
+      unitsinstock_exists:
+        type: "EXISTS"
+        properties: ["unitsinstock"]
+      unitsonorder_exists:
+        type: "EXISTS"
+        properties: ["unitsonorder"]
+      reorderlevel_exists:
+        type: "EXISTS"
+        properties: ["reorderlevel"]
+      discontinued_exists:
+        type: "EXISTS"
+        properties: ["discontinued"]
     indexes:
       products:
         type: "TEXT"
@@ -41,23 +69,55 @@ nodes:
   suppliers:
     label: "suppliers"
     properties:
-      supplierid: { type: "INTEGER", key: true }
-      companyname: { type: "STRING", mustExist: true }
-      contactname: { type: "STRING", mustExist: true }
-      contacttitle: { type: "STRING", mustExist: true }
-      address: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      region: { type: "STRING", mustExist: true }
-      postalcode: { type: "STRING", mustExist: true }
-      country: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      fax: { type: "STRING", mustExist: true }
-      homepage: { type: "STRING", mustExist: true }
+      supplierid: { type: "INTEGER" }
+      companyname: { type: "STRING" }
+      contactname: { type: "STRING" }
+      contacttitle: { type: "STRING" }
+      address: { type: "STRING" }
+      city: { type: "STRING" }
+      region: { type: "STRING" }
+      postalcode: { type: "STRING" }
+      country: { type: "STRING" }
+      phone: { type: "STRING" }
+      fax: { type: "STRING" }
+      homepage: { type: "STRING" }
     constraints:
-      suppliers:
-        type: "UNIQUE"
-        label: "suppliers"
+      supplierid_key:
+        type: "KEY"
         properties: ["supplierid"]
+      companyname_exists:
+        type: "EXISTS"
+        properties: ["companyname"]
+      contactname_exists:
+        type: "EXISTS"
+        properties: ["contactname"]
+      contacttitle_exists:
+        type: "EXISTS"
+        properties: ["contacttitle"]
+      address_exists:
+        type: "EXISTS"
+        properties: ["address"]
+      city_exists:
+        type: "EXISTS"
+        properties: ["city"]
+      region_exists:
+        type: "EXISTS"
+        properties: ["region"]
+      postalcode_exists:
+        type: "EXISTS"
+        properties: ["postalcode"]
+      country_exists:
+        type: "EXISTS"
+        properties: ["country"]
+      phone_exists:
+        type: "EXISTS"
+        properties: ["phone"]
+      fax_exists:
+        type: "EXISTS"
+        properties: ["fax"]
+      homepage_exists:
+        type: "EXISTS"
+        properties: ["homepage"]
     indexes:
       suppliers:
         type: "TEXT"

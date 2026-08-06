@@ -18,9 +18,13 @@ package model
 
 import model.mapping.NodeMapping
 import model.mapping.RelationshipMapping
+import model.node.NodeConstraint
+import model.relationship.RelationshipConstraint
+import model.type.ConstraintType
 import model.type.Named
 import kotlin.collections.component1
 import kotlin.collections.component2
+import kotlin.collections.iterator
 
 /**
  * Removes any stable ids in favour of human-readable [Named.name]'s.
@@ -106,6 +110,34 @@ object Pretty {
             node.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
+            for ((key, property) in node.properties) {
+                if (property.key == true) {
+                    val duplicate = node.constraints.toList().firstOrNull { it.second.type == ConstraintType.UNIQUE || it.second.type == ConstraintType.EXISTS && it.second.properties.singleOrNull() == key }
+                    if (duplicate != null) {
+                        node.constraints.remove(duplicate.first)
+                    }
+                    node.constraints["${key}_key"] = NodeConstraint(
+                        ConstraintType.KEY,
+                        properties = mutableSetOf(key),
+                    )
+                    property.key = null
+                } else {
+                    if (property.unique == true) {
+                        node.constraints["${key}_unique"] = NodeConstraint(
+                            ConstraintType.UNIQUE,
+                            properties = mutableSetOf(key),
+                        )
+                        property.unique = null
+                    }
+                    if (property.mustExist == true) {
+                        node.constraints["${key}_exists"] = NodeConstraint(
+                            ConstraintType.EXISTS,
+                            properties = mutableSetOf(key),
+                        )
+                        property.mustExist = null
+                    }
+                }
+            }
         }
         renameNodeMappingProperties(this, renames)
     }
@@ -148,6 +180,34 @@ object Pretty {
             }
             relationship.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
+            }
+            for ((key, property) in relationship.properties) {
+                if (property.key == true) {
+                    val duplicate = relationship.constraints.toList().firstOrNull { it.second.type == ConstraintType.UNIQUE || it.second.type == ConstraintType.EXISTS && it.second.properties.singleOrNull() == key }
+                    if (duplicate != null) {
+                        relationship.constraints.remove(duplicate.first)
+                    }
+                    relationship.constraints["${key}_key"] = RelationshipConstraint(
+                        ConstraintType.KEY,
+                        properties = mutableSetOf(key),
+                    )
+                    property.key = null
+                } else {
+                    if (property.unique == true) {
+                        relationship.constraints["${key}_unique"] = RelationshipConstraint(
+                            ConstraintType.UNIQUE,
+                            properties = mutableSetOf(key),
+                        )
+                        property.unique = null
+                    }
+                    if (property.mustExist == true) {
+                        relationship.constraints["${key}_exists"] = RelationshipConstraint(
+                            ConstraintType.EXISTS,
+                            properties = mutableSetOf(key),
+                        )
+                        property.mustExist = null
+                    }
+                }
             }
         }
         renameRelationshipMappingProperties(this, renames)
