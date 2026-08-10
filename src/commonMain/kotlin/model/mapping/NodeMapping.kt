@@ -29,5 +29,5 @@ data class NodeMapping(
     val properties: MutableMap<String, PropertyMapping>,
     var mode: MappingMode = MappingMode.MERGE,
     var matchLabel: String? = null,
-    val keys: MutableSet<String> = mutableSetOf()
+    val key: MutableSet<String> = mutableSetOf()
 ) : Mapping

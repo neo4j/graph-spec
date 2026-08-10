@@ -220,7 +220,7 @@
         }
       },
       "mode": "MERGE",
-      "keys": [
+      "key": [
         "id"
       ]
     },
@@ -234,7 +234,7 @@
         }
       },
       "mode": "MERGE",
-      "keys": [
+      "key": [
         "id"
       ]
     },
@@ -266,7 +266,7 @@
         }
       },
       "mode": "MERGE",
-      "keys": []
+      "key": []
     }
   ]
 }

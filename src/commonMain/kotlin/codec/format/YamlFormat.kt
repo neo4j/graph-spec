@@ -96,7 +96,7 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                     "tables.*.foreignKeys.*.fields",
                     "tables.*.foreignKeys.*.references.fields",
                     "mappings[*].properties.*",
-                    "mappings[*].keys",
+                    "mappings[*].key",
                     "mappings[*].from.properties.*",
                     "mappings[*].to.properties.*"
                 )
