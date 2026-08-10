@@ -111,7 +111,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyList())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyMap())
 
         val node = nodes["nodeObj"]
         assertNotNull(node)
@@ -121,7 +121,7 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
-    fun `migrateNodes transforms labels and properties`() {
+    fun `migrateNodes transforms labels, properties and keys`() {
         val labelId = "lbl1"
         val nodeLabels = schemaMapOf(
             labelId to schemaMapOf(
@@ -148,7 +148,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyList())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), mapOf("nodeObj1" to setOf("prop1")))
 
         val migratedNode = nodes["nodeObj1"]
         assertNotNull(migratedNode)
@@ -158,7 +158,7 @@ class DataModelV3GraphSpecMigrationTest {
         val props = migratedNode.map("properties")
         assertNotNull(props["prop1"])
         assertEquals("STRING", props.map("prop1").string("type"))
-        assertEquals("true", props.map("prop1").string("mustExist"))
+        assertEquals("true", props.map("prop1").string("key"))
     }
 
     @Test
@@ -286,7 +286,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.migrateRelationships(graphSchema, constraints, emptyMap())
+        val result = migration.migrateRelationships(graphSchema, constraints, emptyMap(), mapOf("relObj1" to setOf("p1")))
 
         assertTrue(result.containsKey("relObj1"))
         val rel = result["relObj1"]
