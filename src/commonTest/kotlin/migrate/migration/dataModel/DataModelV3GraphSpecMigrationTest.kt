@@ -121,7 +121,7 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
-    fun `migrateNodes transforms labels, properties and keys`() {
+    fun `migrateNodes transforms labels properties and keys`() {
         val labelId = "lbl1"
         val nodeLabels = schemaMapOf(
             labelId to schemaMapOf(
