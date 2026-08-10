@@ -202,7 +202,7 @@ class DataModelV3GraphSpecMigration :
         schema: SchemaMap,
         constraints: Map<String, List<SchemaMap>>,
         indexes: Map<String, List<SchemaMap>>,
-        relationshipKeys: Map<String, Set<String>>,
+        relationshipKeys: Map<String, Set<String>>
     ): MutableMap<String, SchemaMap> {
         val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()
