@@ -102,31 +102,30 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         )
     }
 
-    internal fun convertExtensions(schema: SchemaMap): SchemaMap? {
-        val nodes = schema.mapOfMapsOrNull("nodes") ?: return null
-        val nodeKeyProperties = mutableListOf<SchemaMap>()
-        for ((nodeId, node) in nodes) {
-            val properties = node.mapOfMapsOrNull("properties") ?: continue
-            val keyProperties = mutableSetOf<String>()
-            for ((propertyId, property) in properties) {
-                if (property.boolOrNull("key") == true) {
-                    keyProperties.add(propertyId)
-                }
+    internal fun convertExtensions(schema: SchemaMap): SchemaMap = schemaMapOf(
+        "nodeKeyProperties" to convertKeyProperties(schema, "node"),
+        "relationshipKeyProperties" toNotEmpty convertKeyProperties(schema, "relationship")
+    )
+
+    internal fun convertKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
+        val entityKeyProperties = mutableListOf<SchemaMap>()
+        val mappings = schema.listOfMapsOrNull("mappings") ?: return entityKeyProperties
+        for (mapping in mappings) {
+            val entity = mapping.stringOrNull(singular) ?: continue
+            val keys = mapping.listOrNull("keys") ?: continue
+            if (keys.isEmpty()) {
+                continue
             }
-            if (keyProperties.isNotEmpty()) {
-                nodeKeyProperties.add(
-                    schemaMapOf(
-                        "node" to refOf(nodeId),
-                        "keyProperties" to keyProperties.map { id ->
-                            refOf(id)
-                        }
-                    )
+            entityKeyProperties.add(
+                schemaMapOf(
+                    singular to refOf(entity),
+                    "keyProperties" to keys.map { id ->
+                        refOf((id as SchemaLiteral).string)
+                    }
                 )
-            }
+            )
         }
-        return schemaMapOf(
-            "nodeKeyProperties" to nodeKeyProperties
-        )
+        return entityKeyProperties
     }
 
     /**
