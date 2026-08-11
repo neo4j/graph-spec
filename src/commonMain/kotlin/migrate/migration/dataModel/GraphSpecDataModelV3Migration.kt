@@ -108,15 +108,35 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     )
 
     internal fun convertKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
-        val entityKeyProperties = mutableListOf<SchemaMap>()
-        val mappings = schema.listOfMapsOrNull("mappings") ?: return entityKeyProperties
+        val keyProperties = mutableListOf<SchemaMap>()
+        val elements = schema.mapOfMapsOrNull("${singular}s")
+        if (elements != null) {
+            for ((entity, element) in elements) {
+                val properties = element.mapOfMapsOrNull("properties") ?: continue
+                val keys = mutableListOf<SchemaMap>()
+                for ((key, property) in properties) {
+                    if (property.boolOrNull("key") == true) {
+                        keys.add(refOf(key))
+                    }
+                }
+                if (keys.isNotEmpty()) {
+                    keyProperties.add(
+                        schemaMapOf(
+                            singular to refOf(entity),
+                            "keyProperties" to keys
+                        )
+                    )
+                }
+            }
+        }
+        val mappings = schema.listOfMapsOrNull("mappings") ?: return keyProperties
         for (mapping in mappings) {
             val entity = mapping.stringOrNull(singular) ?: continue
             val keys = mapping.listOrNull("keys") ?: continue
             if (keys.isEmpty()) {
                 continue
             }
-            entityKeyProperties.add(
+            keyProperties.add(
                 schemaMapOf(
                     singular to refOf(entity),
                     "keyProperties" to keys.map { id ->
@@ -125,7 +145,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 )
             )
         }
-        return entityKeyProperties
+        return keyProperties
     }
 
     /**

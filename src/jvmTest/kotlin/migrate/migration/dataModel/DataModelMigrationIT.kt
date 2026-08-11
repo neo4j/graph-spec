@@ -32,6 +32,7 @@ class DataModelMigrationIT {
                         prettyPrint = true
                     }
                 }
+                println(graphModel)
                 val output = graphSpec.encodeToString(graphModel, Type.DATA_MODEL, Version.DATA_MODEL_V30)
                 val expected = graphSpec.configuration.format.decodeFromString(input) as SchemaMap
                 val actual = graphSpec.configuration.format.decodeFromString(output) as SchemaMap

@@ -400,7 +400,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.relationshipMappings(unwrap(input))
+        val result = migration.relationshipMappings(unwrap(input), emptyMap())
 
         val mapping = result.first()
         assertEquals("obj1", mapping.string("relationship"))
@@ -428,7 +428,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Relationship missingRel not found") {
-            migration.relationshipMappings(unwrap(schema))
+            migration.relationshipMappings(unwrap(schema), emptyMap())
         }
     }
 
@@ -451,7 +451,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.nodeMappings(unwrap(input))
+        val result = migration.nodeMappings(unwrap(input), emptyMap())
 
         assertEquals(1, result.size)
         val mapping = result.first()
