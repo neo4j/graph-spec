@@ -31,5 +31,5 @@ data class RelationshipMapping(
     var matchLabel: String? = null,
     val properties: MutableMap<String, PropertyMapping> = mutableMapOf(),
     var mode: MappingMode = MappingMode.MERGE,
-    val keys: MutableSet<String> = mutableSetOf()
+    val key: MutableSet<String> = mutableSetOf()
 ) : Mapping

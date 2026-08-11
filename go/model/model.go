@@ -235,7 +235,7 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 }
 
 type NodeMapping struct {
-	Keys       []string                   `json:"keys,omitempty"`
+	Key        []string                   `json:"key,omitempty"`
 	MatchLabel *string                    `json:"matchLabel,omitempty"`
 	Mode       *MappingMode               `json:"mode,omitempty"`
 	Node       string                     `json:"node"`
@@ -250,7 +250,7 @@ func (NodeMapping) MappingType() string { return "NodeMapping" }
 
 type RelationshipMapping struct {
 	From         TargetMapping              `json:"from"`
-	Keys         []string                   `json:"keys,omitempty"`
+	Key          []string                   `json:"key,omitempty"`
 	MatchLabel   *string                    `json:"matchLabel,omitempty"`
 	Mode         *MappingMode               `json:"mode,omitempty"`
 	Properties   map[string]PropertyMapping `json:"properties,omitempty"`

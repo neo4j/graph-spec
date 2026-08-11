@@ -736,7 +736,7 @@
                     "type": "string",
                     "nullable": true
                 },
-                "keys": {
+                "key": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -802,7 +802,7 @@
                 "mode": {
                     "$ref": "#/$defs/MappingMode"
                 },
-                "keys": {
+                "key": {
                     "type": "array",
                     "items": {
                         "type": "string"
