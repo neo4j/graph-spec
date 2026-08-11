@@ -175,7 +175,7 @@ relationships:
     from: { node: "Comment" }
     to: { node: "Tag" }
     properties:
-      creationDate: { type: "INTEGER", mustExist: true }
+      creationDate: { type: "INTEGER", key: true }
       deletionDate: { type: "INTEGER", mustExist: true }
   MODERATED_BY:
     type: "MODERATED_BY"

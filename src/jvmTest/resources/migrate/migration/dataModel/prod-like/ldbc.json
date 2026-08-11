@@ -1452,6 +1452,18 @@
           }
         ]
       }
+    ],
+    "relationshipKeyProperties": [
+      {
+        "relationship": {
+          "$ref": "#r:4"
+        },
+        "keyProperties": [
+          {
+            "$ref": "#p:4_0"
+          }
+        ]
+      }
     ]
   },
   "graphMappingRepresentation": {
