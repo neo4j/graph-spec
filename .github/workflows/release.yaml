@@ -225,6 +225,7 @@ jobs:
           fi
 
   publish-maven:
+    if: false
     needs: [determine-version, validate-kotlin]
     runs-on: macos-latest  # mac-os host is needed to build and compile macosArm64 targets
     steps:
