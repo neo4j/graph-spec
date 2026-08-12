@@ -325,11 +325,11 @@ class DataModelV3GraphSpecMigration :
             )
         }
 
-    private fun migrateKeyProperties(entity: SchemaMap, nodeKeys: Set<String>) = entity
+    private fun migrateKeyProperties(entity: SchemaMap, keys: Set<String>) = entity
         .listOfMaps("propertyMappings")
         .mapNotNull { mapping ->
             val ref = mapping.ref("property")
-            if (nodeKeys.contains(ref)) ref else null
+            if (keys.contains(ref)) ref else null
         }
 
     internal fun migrateTables(schema: SchemaMap): MutableMap<String, SchemaMap> {
