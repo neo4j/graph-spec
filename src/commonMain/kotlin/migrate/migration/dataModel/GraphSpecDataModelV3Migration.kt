@@ -24,6 +24,7 @@ import codec.schema.toNotEmpty
 import migrate.Migration
 import model.Type
 import model.Version
+import model.type.ConstraintType
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
@@ -108,7 +109,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     )
 
     internal fun convertKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
-        val keyProperties = mutableListOf<SchemaMap>()
+        val keyProperties = mutableSetOf<SchemaMap>()
         val elements = schema.mapOfMapsOrNull("${singular}s")
         if (elements != null) {
             for ((entity, element) in elements) {
@@ -127,9 +128,24 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                         )
                     )
                 }
+                val constraints = element.mapOfMapsOrNull("constraints") ?: continue
+                for ((_, constraint) in constraints) {
+                    val type = constraint.stringOrNull("type") ?: continue
+                    if (type != ConstraintType.KEY.name) {
+                        continue
+                    }
+                    val properties = constraint.listOrNull("properties") ?: continue
+                    val keys = properties.map { (it as SchemaLiteral).string }
+                    keyProperties.add(
+                        schemaMapOf(
+                            singular to refOf(entity),
+                            "keyProperties" to keys
+                        )
+                    )
+                }
             }
         }
-        val mappings = schema.listOfMapsOrNull("mappings") ?: return keyProperties
+        val mappings = schema.listOfMapsOrNull("mappings") ?: return keyProperties.toList()
         for (mapping in mappings) {
             val entity = mapping.stringOrNull(singular) ?: continue
             val keys = mapping.listOrNull("keys") ?: continue
@@ -145,7 +161,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 )
             )
         }
-        return keyProperties
+        return keyProperties.toList()
     }
 
     /**
