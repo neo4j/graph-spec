@@ -58,9 +58,24 @@ object Internal {
     private fun GraphModel.internaliseNodeProperties() {
         val renames = mutableMapOf<String, String>()
         nodes.forEach { (key, node) ->
-            renames.putAll(node.properties.identify("nodeProperty", key))
+            val propertyRenames = node.properties.identify("nodeProperty", key)
+            renames.putAll(propertyRenames)
+            internaliseProperties(node.constraints.map { it.key to it.value.properties }.toMap(), propertyRenames)
+            internaliseProperties(node.indexes.map { it.key to it.value.properties }.toMap(), propertyRenames)
         }
         Pretty.renameNodeMappingProperties(this, renames)
+    }
+
+    private fun internaliseProperties(indexes: Map<String, MutableSet<String>>, renames: Map<String, String>) {
+        for ((_, properties) in indexes) {
+            for ((propKey, to) in renames) {
+                val from = propKey.substringAfter(":")
+                if (properties.contains(from)) {
+                    properties.remove(from)
+                    properties.add(to)
+                }
+            }
+        }
     }
 
     /*
@@ -79,7 +94,10 @@ object Internal {
     private fun GraphModel.internaliseRelationshipProperties() {
         val renames = mutableMapOf<String, String>()
         relationships.forEach { (key, relationship) ->
-            renames.putAll(relationship.properties.identify("relationshipProperty", key))
+            val propertyRenames = relationship.properties.identify("relationshipProperty", key)
+            renames.putAll(propertyRenames)
+            internaliseProperties(relationship.constraints.map { it.key to it.value.properties }.toMap(), propertyRenames)
+            internaliseProperties(relationship.indexes.map { it.key to it.value.properties }.toMap(), propertyRenames)
         }
         Pretty.renameRelationshipMappingProperties(this, renames)
     }
