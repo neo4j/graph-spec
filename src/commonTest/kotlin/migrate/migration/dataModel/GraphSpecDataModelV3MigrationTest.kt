@@ -257,7 +257,7 @@ class GraphSpecDataModelV3MigrationTest {
                         "p2" to schemaMapOf("field" to "field2"),
                         "p3" to schemaMapOf("field" to "field3")
                     ),
-                    "keys" to schemaListOf("p1")
+                    "key" to schemaListOf("p1")
                 ),
                 schemaMapOf(
                     "relationship" to "relationship1",
@@ -267,7 +267,7 @@ class GraphSpecDataModelV3MigrationTest {
                         "p2" to schemaMapOf("field" to "field2"),
                         "p3" to schemaMapOf("field" to "field3")
                     ),
-                    "keys" to schemaListOf("p2", "p3")
+                    "key" to schemaListOf("p2", "p3")
                 )
             )
         )

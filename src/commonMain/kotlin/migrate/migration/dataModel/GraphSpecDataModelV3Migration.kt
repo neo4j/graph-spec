@@ -135,7 +135,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                         continue
                     }
                     val properties = constraint.listOrNull("properties") ?: continue
-                    val keys = properties.map { (it as SchemaLiteral).string }
+                    val keys = properties.map { refOf((it as SchemaLiteral).string) }
                     keyProperties.add(
                         schemaMapOf(
                             singular to refOf(entity),
@@ -148,7 +148,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val mappings = schema.listOfMapsOrNull("mappings") ?: return keyProperties.toList()
         for (mapping in mappings) {
             val entity = mapping.stringOrNull(singular) ?: continue
-            val keys = mapping.listOrNull("keys") ?: continue
+            val keys = mapping.listOrNull("key") ?: continue
             if (keys.isEmpty()) {
                 continue
             }
