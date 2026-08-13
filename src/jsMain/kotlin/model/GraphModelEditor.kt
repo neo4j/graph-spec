@@ -46,6 +46,8 @@ class GraphModelEditor {
             }
             return graphModelJs(
                 version = model.version,
+                name = model.name,
+                description = model.description,
                 nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
                 relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
                     .toRecord(),
@@ -58,6 +60,8 @@ class GraphModelEditor {
         @JsStatic
         fun model(model: GraphModelJs): GraphModel = GraphModel(
             version = model.version,
+            name = model.name,
+            description = model.description,
             nodes = model.nodes.associateBy { id, js -> js.toClass(id) },
             relationships = model.relationships.associateBy { id, js -> js.toClass(id) },
             tables = model.tables.associateBy { _, js -> js.toClass() },

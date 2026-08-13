@@ -34,6 +34,7 @@ data class Node(
     val constraints: MutableMap<String, NodeConstraint> = mutableMapOf(),
     val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
-    override var name: String? = null
+    override var name: String? = null,
+    val description: String = ""
 ) : Extensions,
     Named

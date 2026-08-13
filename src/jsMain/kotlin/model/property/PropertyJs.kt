@@ -37,6 +37,7 @@ external interface PropertyJs {
     val extensions: Record<String, ExtensionValueJs>
     var name: String
     val id: String
+    val description: String
 }
 
 fun propertyJs(
@@ -47,7 +48,8 @@ fun propertyJs(
     key: Boolean? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String,
-    id: String
+    id: String,
+    description: String = ""
 ): PropertyJs = jso {
     this.type = type
     this.dimension = dimension
@@ -57,6 +59,7 @@ fun propertyJs(
     this.extensions = extensions
     this.name = name
     this.id = id
+    this.description = description
 }
 
 fun Property.toJs(key: String) = propertyJs(
@@ -67,7 +70,8 @@ fun Property.toJs(key: String) = propertyJs(
     key = this.key,
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: key,
-    id = key
+    id = key,
+    description = description
 )
 
 fun PropertyJs.toClass(parent: String, property: String): Property {
@@ -81,6 +85,7 @@ fun PropertyJs.toClass(parent: String, property: String): Property {
         unique = unique,
         key = key,
         extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
-        name = name
+        name = name,
+        description = description
     )
 }

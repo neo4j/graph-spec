@@ -42,6 +42,7 @@ external interface RelationshipJs {
     val extensions: Record<String, ExtensionValueJs>
     var name: String
     val id: String
+    val description: String
 }
 
 fun relationshipJs(
@@ -53,7 +54,8 @@ fun relationshipJs(
     indexes: Record<String, RelationshipIndexJs> = emptyRecord(),
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String,
-    id: String
+    id: String,
+    description: String = ""
 ): RelationshipJs = jso {
     this.type = type
     this.from = from
@@ -64,6 +66,7 @@ fun relationshipJs(
     this.extensions = extensions
     this.name = name
     this.id = id
+    this.description = description
 }
 
 fun Relationship.toJs(id: String) = relationshipJs(
@@ -75,7 +78,8 @@ fun Relationship.toJs(id: String) = relationshipJs(
     indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: id,
-    id = id
+    id = id,
+    description = description
 )
 
 fun RelationshipJs.toClass(id: String) = Relationship(
@@ -86,5 +90,6 @@ fun RelationshipJs.toClass(id: String) = Relationship(
     constraints = constraints.associateBy { _, constraint -> constraint.toClass() },
     indexes = indexes.associateBy { _, index -> index.toClass() },
     extensions = extensions.associateBy { _, value -> value.toClass() },
-    name = name
+    name = name,
+    description = description
 )

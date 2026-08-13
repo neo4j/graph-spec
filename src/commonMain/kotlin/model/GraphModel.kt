@@ -35,6 +35,8 @@ import kotlin.js.JsStatic
 @SerialName("GraphModel")
 data class GraphModel(
     val version: String,
+    val name: String = "",
+    val description: String = "",
     val nodes: MutableMap<String, Node> = mutableMapOf(),
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
     val tables: MutableMap<String, Table> = mutableMapOf(),

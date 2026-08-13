@@ -41,6 +41,7 @@ external interface NodeJs {
     val extensions: Record<String, ExtensionValueJs>
     var name: String
     val id: String
+    val description: String
 }
 
 fun nodeJs(
@@ -50,7 +51,8 @@ fun nodeJs(
     indexes: Record<String, NodeIndexJs> = emptyRecord(),
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String,
-    id: String
+    id: String,
+    description: String = ""
 ): NodeJs = jso {
     this.labels = labels
     this.properties = properties
@@ -59,6 +61,7 @@ fun nodeJs(
     this.extensions = extensions
     this.name = name
     this.id = id
+    this.description = description
 }
 
 fun Node.toJs(key: String) = nodeJs(
@@ -68,7 +71,8 @@ fun Node.toJs(key: String) = nodeJs(
     indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: key,
-    id = key
+    id = key,
+    description = description
 )
 
 fun NodeJs.toClass(id: String): Node = Node(
@@ -77,5 +81,6 @@ fun NodeJs.toClass(id: String): Node = Node(
     constraints = constraints.associateBy { _, value -> value.toClass() },
     indexes = indexes.associateBy { _, value -> value.toClass() },
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
-    name = name
+    name = name,
+    description = description
 )
