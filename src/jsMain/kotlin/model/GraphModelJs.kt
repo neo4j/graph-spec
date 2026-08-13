@@ -29,6 +29,8 @@ import model.source.TableJs
 @JsPlainObject
 external interface GraphModelJs {
     val version: String
+    val name: String
+    val description: String
     val nodes: Record<String, NodeJs>
     val relationships: Record<String, RelationshipJs>
     val tables: Record<String, TableJs>
@@ -38,6 +40,8 @@ external interface GraphModelJs {
 
 fun graphModelJs(
     version: String,
+    name: String = "",
+    description: String = "",
     nodes: Record<String, NodeJs> = emptyRecord(),
     relationships: Record<String, RelationshipJs> = emptyRecord(),
     tables: Record<String, TableJs> = emptyRecord(),
@@ -45,6 +49,8 @@ fun graphModelJs(
     display: DisplayJs = displayJs()
 ): GraphModelJs = jso {
     this.version = version
+    this.name = name
+    this.description = description
     this.nodes = nodes
     this.relationships = relationships
     this.tables = tables
