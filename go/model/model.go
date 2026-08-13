@@ -413,17 +413,19 @@ var Neo4jTypeValues = []Neo4jType{
 }
 
 type Property struct {
-	Dimension  *int                      `json:"dimension,omitempty"`
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Key        *bool                     `json:"key,omitempty"`
-	MustExist  *bool                     `json:"mustExist,omitempty"`
-	Name       *string                   `json:"name,omitempty"`
-	Type       *Neo4jType                `json:"type,omitempty"`
-	Unique     *bool                     `json:"unique,omitempty"`
+	Description *string                   `json:"description,omitempty"`
+	Dimension   *int                      `json:"dimension,omitempty"`
+	Extensions  map[string]ExtensionValue `json:"extensions,omitempty"`
+	Key         *bool                     `json:"key,omitempty"`
+	MustExist   *bool                     `json:"mustExist,omitempty"`
+	Name        *string                   `json:"name,omitempty"`
+	Type        *Neo4jType                `json:"type,omitempty"`
+	Unique      *bool                     `json:"unique,omitempty"`
 }
 
 type Node struct {
 	Constraints map[string]NodeConstraint `json:"constraints,omitempty"`
+	Description *string                   `json:"description,omitempty"`
 	Extensions  map[string]ExtensionValue `json:"extensions,omitempty"`
 	Indexes     map[string]NodeIndex      `json:"indexes,omitempty"`
 	Label       *string                   `json:"label,omitempty"`
@@ -456,6 +458,7 @@ type RelationshipTarget struct {
 
 type Relationship struct {
 	Constraints map[string]RelationshipConstraint `json:"constraints,omitempty"`
+	Description *string                           `json:"description,omitempty"`
 	Extensions  map[string]ExtensionValue         `json:"extensions,omitempty"`
 	From        RelationshipTarget                `json:"from"`
 	Indexes     map[string]RelationshipIndex      `json:"indexes,omitempty"`
@@ -484,8 +487,10 @@ type Table struct {
 }
 
 type GraphModel struct {
+	Description   *string                 `json:"description,omitempty"`
 	Display       *Display                `json:"display,omitempty"`
 	Mappings      []Mapping               `json:"mappings,omitempty"`
+	Name          *string                 `json:"name,omitempty"`
 	Nodes         map[string]Node         `json:"nodes,omitempty"`
 	Relationships map[string]Relationship `json:"relationships,omitempty"`
 	Tables        map[string]Table        `json:"tables,omitempty"`

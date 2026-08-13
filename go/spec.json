@@ -6,6 +6,12 @@
         "version": {
             "type": "string"
         },
+        "name": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
         "nodes": {
             "type": "object",
             "additionalProperties": {
@@ -76,6 +82,9 @@
                 "name": {
                     "type": "string",
                     "nullable": true
+                },
+                "description": {
+                    "type": "string"
                 }
             },
             "required": [],
@@ -274,6 +283,9 @@
                 "name": {
                     "type": "string",
                     "nullable": true
+                },
+                "description": {
+                    "type": "string"
                 }
             },
             "required": [],
@@ -456,6 +468,9 @@
                 "name": {
                     "type": "string",
                     "nullable": true
+                },
+                "description": {
+                    "type": "string"
                 }
             },
             "required": [
