@@ -117,6 +117,20 @@ object Pretty {
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
             mapping.from.properties.rename(renames, mapping.from.node)
             mapping.to.properties.rename(renames, mapping.to.node)
+            for (key in mapping.key.toList()) {
+                // TODO what about from/to labels?
+                if (renames.containsKey("${mapping.from.node}:${key}")) {
+                    val to = renames["${mapping.from.node}:${key}"] ?: continue
+                    mapping.key.remove(key)
+                    mapping.key.add(to)
+                }
+                if (renames.containsKey("${mapping.to.node}:${key}")) {
+                    val to = renames["${mapping.to.node}:${key}"] ?: continue
+                    mapping.key.remove(key)
+                    mapping.key.add(to)
+                }
+            }
+
         }
     }
 
@@ -156,6 +170,12 @@ object Pretty {
     internal fun renameRelationshipMappingProperties(model: GraphModel, renames: Map<String, String>) {
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
             mapping.properties.rename(renames, mapping.relationship)
+            for (key in mapping.key.toList()) {
+                val to = renames["${mapping.relationship}:${key}"] ?: continue
+                println("Rename $key to $to")
+                mapping.key.remove(key)
+                mapping.key.add(to)
+            }
         }
     }
 
