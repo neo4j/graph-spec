@@ -71,7 +71,7 @@ fun Property.toJs(key: String) = propertyJs(
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: key,
     id = key,
-    description = description,
+    description = description
 )
 
 fun PropertyJs.toClass(parent: String, property: String): Property {

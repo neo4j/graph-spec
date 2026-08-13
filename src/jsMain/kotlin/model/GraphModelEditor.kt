@@ -66,7 +66,7 @@ class GraphModelEditor {
             relationships = model.relationships.associateBy { id, js -> js.toClass(id) },
             tables = model.tables.associateBy { _, js -> js.toClass() },
             mappings = model.mappings.map { it.toClass() }.toMutableList(),
-            display = model.display.toClass(),
+            display = model.display.toClass()
         )
 
         @JsStatic

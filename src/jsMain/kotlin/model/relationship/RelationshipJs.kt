@@ -79,7 +79,7 @@ fun Relationship.toJs(id: String) = relationshipJs(
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: id,
     id = id,
-    description = description,
+    description = description
 )
 
 fun RelationshipJs.toClass(id: String) = Relationship(
@@ -91,5 +91,5 @@ fun RelationshipJs.toClass(id: String) = Relationship(
     indexes = indexes.associateBy { _, index -> index.toClass() },
     extensions = extensions.associateBy { _, value -> value.toClass() },
     name = name,
-    description = description,
+    description = description
 )

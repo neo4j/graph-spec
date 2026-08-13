@@ -38,6 +38,6 @@ data class Relationship(
     val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf(),
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null,
-    val description: String = "",
+    val description: String = ""
 ) : Extensions,
     Named

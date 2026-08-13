@@ -72,7 +72,7 @@ fun Node.toJs(key: String) = nodeJs(
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: key,
     id = key,
-    description = description,
+    description = description
 )
 
 fun NodeJs.toClass(id: String): Node = Node(
@@ -82,5 +82,5 @@ fun NodeJs.toClass(id: String): Node = Node(
     indexes = indexes.associateBy { _, value -> value.toClass() },
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
     name = name,
-    description = description,
+    description = description
 )
