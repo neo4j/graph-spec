@@ -53,6 +53,14 @@ object Internal {
             node.constraints.identify("nodeConstraint")
             node.indexes.identify("nodeIndex")
         }
+        relationships.values.forEach { relationship ->
+            if (renames.containsKey(relationship.from.node)) {
+                relationship.from.node = renames[relationship.from.node]!!
+            }
+            if (renames.containsKey(relationship.to.node)) {
+                relationship.to.node = renames[relationship.to.node]!!
+            }
+        }
     }
 
     private fun GraphModel.internaliseNodeProperties() {
@@ -96,7 +104,10 @@ object Internal {
         relationships.forEach { (key, relationship) ->
             val propertyRenames = relationship.properties.identify("relationshipProperty", key)
             renames.putAll(propertyRenames)
-            internaliseProperties(relationship.constraints.map { it.key to it.value.properties }.toMap(), propertyRenames)
+            internaliseProperties(
+                relationship.constraints.map { it.key to it.value.properties }.toMap(),
+                propertyRenames
+            )
             internaliseProperties(relationship.indexes.map { it.key to it.value.properties }.toMap(), propertyRenames)
         }
         Pretty.renameRelationshipMappingProperties(this, renames)
