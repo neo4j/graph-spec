@@ -84,6 +84,10 @@ object Pretty {
                 relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
             }
         }
+        display.nodes.keys.forEach { node ->
+            val rename = renames[node] ?: return@forEach
+            display.nodes[rename] = display.nodes.remove(node) ?: return@forEach
+        }
     }
 
     internal fun renameNodeMappings(model: GraphModel, renames: Map<String, String>) {

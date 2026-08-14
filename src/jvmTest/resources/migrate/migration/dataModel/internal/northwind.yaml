@@ -298,3 +298,8 @@ mappings:
       node: "node2"
       properties:
         nodeProperty0: { field: "supplierid" }
+display:
+  nodes:
+    node0:
+      x: -100.123
+      y: 200.0

@@ -284,3 +284,8 @@ mappings:
       node: "suppliers"
       properties:
         supplierid: { field: "supplierid" }
+display:
+  nodes:
+    categories:
+      x: "-100.123"
+      y: 200.0

@@ -61,6 +61,10 @@ object Internal {
                 relationship.to.node = renames[relationship.to.node]!!
             }
         }
+        display.nodes.keys.forEach { node ->
+            val rename = renames[node] ?: return@forEach
+            display.nodes[rename] = display.nodes.remove(node) ?: return@forEach
+        }
     }
 
     private fun GraphModel.internaliseNodeProperties() {

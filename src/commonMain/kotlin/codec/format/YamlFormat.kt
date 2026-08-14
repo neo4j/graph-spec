@@ -39,7 +39,11 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
 
     override fun encodeToString(element: SchemaElement) = writer.write(element)
 
-    override fun decodeFromString(string: String) = schemaElement(yaml.decodeYamlFromString(string))
+    override fun decodeFromString(string: String): SchemaElement {
+        val yaml = yaml.decodeYamlFromString(string)
+        println(yaml)
+        return schemaElement(yaml)
+    }
 
     override fun encodeToSchema(model: GraphModel) = json.encodeToSchema(model)
 
