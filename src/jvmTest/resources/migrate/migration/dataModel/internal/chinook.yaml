@@ -1,0 +1,823 @@
+version: "4.0.0"
+nodes:
+  node0:
+    labels:
+      identifier: "album"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "album_id" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "title" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "album"
+        properties: ["nodeProperty0"]
+        name: "album"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["album"]
+        properties: ["nodeProperty0"]
+        name: "album"
+    name: "album"
+  node1:
+    labels:
+      identifier: "artist"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "artist_id" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "artist"
+        properties: ["nodeProperty0"]
+        name: "artist"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["artist"]
+        properties: ["nodeProperty0"]
+        name: "artist"
+    name: "artist"
+  node2:
+    labels:
+      identifier: "customer"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "customer_id" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "first_name" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "last_name" }
+      nodeProperty3: { type: "STRING", mustExist: true, name: "company" }
+      nodeProperty4: { type: "STRING", mustExist: true, name: "address" }
+      nodeProperty5: { type: "STRING", mustExist: true, name: "city" }
+      nodeProperty6: { type: "STRING", mustExist: true, name: "state" }
+      nodeProperty7: { type: "STRING", mustExist: true, name: "country" }
+      nodeProperty8: { type: "STRING", mustExist: true, name: "postal_code" }
+      nodeProperty9: { type: "STRING", mustExist: true, name: "phone" }
+      nodeProperty10: { type: "STRING", mustExist: true, name: "fax" }
+      nodeProperty11: { type: "STRING", mustExist: true, name: "email" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "customer"
+        properties: ["nodeProperty0"]
+        name: "customer"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["customer"]
+        properties: ["nodeProperty0"]
+        name: "customer"
+    name: "customer"
+  node3:
+    labels:
+      identifier: "employee"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "employee_id" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "last_name" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "first_name" }
+      nodeProperty3: { type: "STRING", mustExist: true, name: "title" }
+      nodeProperty4: { type: "ZONED DATETIME", mustExist: true, name: "birth_date" }
+      nodeProperty5: { type: "ZONED DATETIME", mustExist: true, name: "hire_date" }
+      nodeProperty6: { type: "STRING", mustExist: true, name: "address" }
+      nodeProperty7: { type: "STRING", mustExist: true, name: "city" }
+      nodeProperty8: { type: "STRING", mustExist: true, name: "state" }
+      nodeProperty9: { type: "STRING", mustExist: true, name: "country" }
+      nodeProperty10: { type: "STRING", mustExist: true, name: "postal_code" }
+      nodeProperty11: { type: "STRING", mustExist: true, name: "phone" }
+      nodeProperty12: { type: "STRING", mustExist: true, name: "fax" }
+      nodeProperty13: { type: "STRING", mustExist: true, name: "email" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "employee"
+        properties: ["nodeProperty0"]
+        name: "employee"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["employee"]
+        properties: ["nodeProperty0"]
+        name: "employee"
+    name: "employee"
+  node4:
+    labels:
+      identifier: "genre"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "genre_id" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "genre"
+        properties: ["nodeProperty0"]
+        name: "genre"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["genre"]
+        properties: ["nodeProperty0"]
+        name: "genre"
+    name: "genre"
+  node5:
+    labels:
+      identifier: "invoice"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "invoice_id" }
+      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "invoice_date" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "billing_address" }
+      nodeProperty3: { type: "STRING", mustExist: true, name: "billing_city" }
+      nodeProperty4: { type: "STRING", mustExist: true, name: "billing_state" }
+      nodeProperty5: { type: "STRING", mustExist: true, name: "billing_country" }
+      nodeProperty6: { type: "STRING", mustExist: true, name: "billing_postal_code" }
+      nodeProperty7: { type: "FLOAT", mustExist: true, name: "total" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "invoice"
+        properties: ["nodeProperty0"]
+        name: "invoice"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["invoice"]
+        properties: ["nodeProperty0"]
+        name: "invoice"
+    name: "invoice"
+  node6:
+    labels:
+      identifier: "invoice_line"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "invoice_line_id" }
+      nodeProperty1: { type: "FLOAT", mustExist: true, name: "unit_price" }
+      nodeProperty2: { type: "INTEGER", mustExist: true, name: "quantity" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "invoice_line"
+        properties: ["nodeProperty0"]
+        name: "invoice_line"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["invoice_line"]
+        properties: ["nodeProperty0"]
+        name: "invoice_line"
+    name: "invoice_line"
+  node7:
+    labels:
+      identifier: "media_type"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "media_type_id" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "media_type"
+        properties: ["nodeProperty0"]
+        name: "media_type"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["media_type"]
+        properties: ["nodeProperty0"]
+        name: "media_type"
+    name: "media_type"
+  node8:
+    labels:
+      identifier: "playlist"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "playlist_id" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "playlist"
+        properties: ["nodeProperty0"]
+        name: "playlist"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["playlist"]
+        properties: ["nodeProperty0"]
+        name: "playlist"
+    name: "playlist"
+  node9:
+    labels:
+      identifier: "track"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "track_id" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "composer" }
+      nodeProperty3: { type: "INTEGER", mustExist: true, name: "milliseconds" }
+      nodeProperty4: { type: "INTEGER", mustExist: true, name: "bytes" }
+      nodeProperty5: { type: "FLOAT", mustExist: true, name: "unit_price" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "track"
+        properties: ["nodeProperty0"]
+        name: "track"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["track"]
+        properties: ["nodeProperty0"]
+        name: "track"
+    name: "track"
+relationships:
+  relationship0:
+    type: "ARTIST"
+    from: { node: "node0" }
+    to: { node: "node1" }
+    name: "ARTIST"
+  relationship1:
+    type: "EMPLOYEE"
+    from: { node: "node2" }
+    to: { node: "node3" }
+    name: "EMPLOYEE"
+  relationship2:
+    type: "EMPLOYEE"
+    from: { node: "node3" }
+    to: { node: "node3" }
+    name: "EMPLOYEE2"
+  relationship3:
+    type: "CUSTOMER"
+    from: { node: "node5" }
+    to: { node: "node2" }
+    name: "CUSTOMER"
+  relationship4:
+    type: "INVOICE"
+    from: { node: "node6" }
+    to: { node: "node5" }
+    name: "INVOICE"
+  relationship5:
+    type: "TRACK"
+    from: { node: "node6" }
+    to: { node: "node9" }
+    name: "TRACK"
+  relationship6:
+    type: "TRACK"
+    from: { node: "node8" }
+    to: { node: "node9" }
+    name: "TRACK2"
+  relationship7:
+    type: "ALBUM"
+    from: { node: "node9" }
+    to: { node: "node0" }
+    name: "ALBUM"
+  relationship8:
+    type: "GENRE"
+    from: { node: "node9" }
+    to: { node: "node4" }
+    name: "GENRE"
+  relationship9:
+    type: "MEDIA_TYPE"
+    from: { node: "node9" }
+    to: { node: "node7" }
+    name: "MEDIA_TYPE"
+tables:
+  album:
+    source: "cloud"
+    fields:
+      album_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      title:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      artist_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["album_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["artist_id"]
+        references:
+          table: "artist"
+          fields: ["artist_id"]
+  artist:
+    source: "cloud"
+    fields:
+      artist_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["artist_id"]
+  customer:
+    source: "cloud"
+    fields:
+      customer_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      first_name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      last_name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      company:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      address:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      city:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      state:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      country:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      postal_code:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      phone:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      fax:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      email:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      support_rep_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["customer_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["support_rep_id"]
+        references:
+          table: "employee"
+          fields: ["employee_id"]
+  employee:
+    source: "cloud"
+    fields:
+      employee_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      last_name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      first_name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      title:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      reports_to:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      birth_date:
+        type: "DATETIME"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+      hire_date:
+        type: "DATETIME"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+      address:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      city:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      state:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      country:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      postal_code:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      phone:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      fax:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      email:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["employee_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["reports_to"]
+        references:
+          table: "employee"
+          fields: ["employee_id"]
+  genre:
+    source: "cloud"
+    fields:
+      genre_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["genre_id"]
+  invoice:
+    source: "cloud"
+    fields:
+      invoice_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      customer_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      invoice_date:
+        type: "TIMESTAMP"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+      billing_address:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      billing_city:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      billing_state:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      billing_country:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      billing_postal_code:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      total:
+        type: "DECIMAL"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["invoice_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["customer_id"]
+        references:
+          table: "customer"
+          fields: ["customer_id"]
+  invoice_line:
+    source: "cloud"
+    fields:
+      invoice_line_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      invoice_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      track_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      unit_price:
+        type: "DECIMAL"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      quantity:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["invoice_line_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["invoice_id"]
+        references:
+          table: "invoice"
+          fields: ["invoice_id"]
+      foreignKey2:
+        fields: ["track_id"]
+        references:
+          table: "track"
+          fields: ["track_id"]
+  media_type:
+    source: "cloud"
+    fields:
+      media_type_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["media_type_id"]
+  playlist:
+    source: "cloud"
+    fields:
+      playlist_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["playlist_id"]
+  playlist_track:
+    source: "cloud"
+    fields:
+      playlist_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      track_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["playlist_id", "track_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["playlist_id"]
+        references:
+          table: "playlist"
+          fields: ["playlist_id"]
+      foreignKey2:
+        fields: ["track_id"]
+        references:
+          table: "track"
+          fields: ["track_id"]
+  track:
+    source: "cloud"
+    fields:
+      track_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      name:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      album_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      media_type_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      genre_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      composer:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      milliseconds:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      bytes:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      unit_price:
+        type: "DECIMAL"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["track_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["album_id"]
+        references:
+          table: "album"
+          fields: ["album_id"]
+      foreignKey2:
+        fields: ["genre_id"]
+        references:
+          table: "genre"
+          fields: ["genre_id"]
+      foreignKey3:
+        fields: ["media_type_id"]
+        references:
+          table: "media_type"
+          fields: ["media_type_id"]
+mappings:
+  - node: "node0"
+    table: "album"
+    properties:
+      nodeProperty0: { field: "album_id" }
+      nodeProperty1: { field: "title" }
+  - node: "node1"
+    table: "artist"
+    properties:
+      nodeProperty0: { field: "artist_id" }
+      nodeProperty1: { field: "name" }
+  - node: "node2"
+    table: "customer"
+    properties:
+      nodeProperty0: { field: "customer_id" }
+      nodeProperty1: { field: "first_name" }
+      nodeProperty2: { field: "last_name" }
+      nodeProperty3: { field: "company" }
+      nodeProperty4: { field: "address" }
+      nodeProperty5: { field: "city" }
+      nodeProperty6: { field: "state" }
+      nodeProperty7: { field: "country" }
+      nodeProperty8: { field: "postal_code" }
+      nodeProperty9: { field: "phone" }
+      nodeProperty10: { field: "fax" }
+      nodeProperty11: { field: "email" }
+  - node: "node3"
+    table: "employee"
+    properties:
+      nodeProperty0: { field: "employee_id" }
+      nodeProperty1: { field: "last_name" }
+      nodeProperty2: { field: "first_name" }
+      nodeProperty3: { field: "title" }
+      nodeProperty4: { field: "birth_date" }
+      nodeProperty5: { field: "hire_date" }
+      nodeProperty6: { field: "address" }
+      nodeProperty7: { field: "city" }
+      nodeProperty8: { field: "state" }
+      nodeProperty9: { field: "country" }
+      nodeProperty10: { field: "postal_code" }
+      nodeProperty11: { field: "phone" }
+      nodeProperty12: { field: "fax" }
+      nodeProperty13: { field: "email" }
+  - node: "node4"
+    table: "genre"
+    properties:
+      nodeProperty0: { field: "genre_id" }
+      nodeProperty1: { field: "name" }
+  - node: "node5"
+    table: "invoice"
+    properties:
+      nodeProperty0: { field: "invoice_id" }
+      nodeProperty1: { field: "invoice_date" }
+      nodeProperty2: { field: "billing_address" }
+      nodeProperty3: { field: "billing_city" }
+      nodeProperty4: { field: "billing_state" }
+      nodeProperty5: { field: "billing_country" }
+      nodeProperty6: { field: "billing_postal_code" }
+      nodeProperty7: { field: "total" }
+  - node: "node6"
+    table: "invoice_line"
+    properties:
+      nodeProperty0: { field: "invoice_line_id" }
+      nodeProperty1: { field: "unit_price" }
+      nodeProperty2: { field: "quantity" }
+  - node: "node7"
+    table: "media_type"
+    properties:
+      nodeProperty0: { field: "media_type_id" }
+      nodeProperty1: { field: "name" }
+  - node: "node8"
+    table: "playlist"
+    properties:
+      nodeProperty0: { field: "playlist_id" }
+      nodeProperty1: { field: "name" }
+  - node: "node9"
+    table: "track"
+    properties:
+      nodeProperty0: { field: "track_id" }
+      nodeProperty1: { field: "name" }
+      nodeProperty2: { field: "composer" }
+      nodeProperty3: { field: "milliseconds" }
+      nodeProperty4: { field: "bytes" }
+      nodeProperty5: { field: "unit_price" }
+  - relationship: "relationship0"
+    table: "album"
+    from:
+      node: "node0"
+      properties:
+        nodeProperty0: { field: "album_id" }
+    to:
+      node: "node1"
+      properties:
+        nodeProperty0: { field: "artist_id" }
+  - relationship: "relationship1"
+    table: "customer"
+    from:
+      node: "node2"
+      properties:
+        nodeProperty0: { field: "customer_id" }
+    to:
+      node: "node3"
+      properties:
+        nodeProperty0: { field: "support_rep_id" }
+  - relationship: "relationship2"
+    table: "employee"
+    from:
+      node: "node3"
+      properties:
+        nodeProperty0: { field: "employee_id" }
+    to:
+      node: "node3"
+      properties:
+        nodeProperty0: { field: "reports_to" }
+  - relationship: "relationship3"
+    table: "invoice"
+    from:
+      node: "node5"
+      properties:
+        nodeProperty0: { field: "invoice_id" }
+    to:
+      node: "node2"
+      properties:
+        nodeProperty0: { field: "customer_id" }
+  - relationship: "relationship4"
+    table: "invoice_line"
+    from:
+      node: "node6"
+      properties:
+        nodeProperty0: { field: "invoice_line_id" }
+    to:
+      node: "node5"
+      properties:
+        nodeProperty0: { field: "invoice_id" }
+  - relationship: "relationship5"
+    table: "invoice_line"
+    from:
+      node: "node6"
+      properties:
+        nodeProperty0: { field: "invoice_line_id" }
+    to:
+      node: "node9"
+      properties:
+        nodeProperty0: { field: "track_id" }
+  - relationship: "relationship6"
+    table: "playlist_track"
+    from:
+      node: "node8"
+      properties:
+        nodeProperty0: { field: "playlist_id" }
+    to:
+      node: "node9"
+      properties:
+        nodeProperty0: { field: "track_id" }
+  - relationship: "relationship7"
+    table: "track"
+    from:
+      node: "node9"
+      properties:
+        nodeProperty0: { field: "track_id" }
+    to:
+      node: "node0"
+      properties:
+        nodeProperty0: { field: "album_id" }
+  - relationship: "relationship8"
+    table: "track"
+    from:
+      node: "node9"
+      properties:
+        nodeProperty0: { field: "track_id" }
+    to:
+      node: "node4"
+      properties:
+        nodeProperty0: { field: "genre_id" }
+  - relationship: "relationship9"
+    table: "track"
+    from:
+      node: "node9"
+      properties:
+        nodeProperty0: { field: "track_id" }
+    to:
+      node: "node7"
+      properties:
+        nodeProperty0: { field: "media_type_id" }

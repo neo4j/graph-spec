@@ -1,0 +1,450 @@
+version: "4.0.0"
+nodes:
+  node0:
+    labels:
+      identifier: "Aircraft"
+    properties:
+      nodeProperty0: { type: "STRING", key: true, name: "aircraftCode" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "model" }
+      nodeProperty2: { type: "INTEGER", mustExist: true, name: "aircraftRange" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "Aircraft"
+        properties: ["nodeProperty0"]
+        name: "aircrafts_data"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["Aircraft"]
+        properties: ["nodeProperty0"]
+        name: "aircrafts_data-text"
+    name: "Aircraft"
+  node1:
+    labels:
+      identifier: "Airport"
+    properties:
+      nodeProperty0: { type: "STRING", key: true, name: "airportCode" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "airportName" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "city" }
+      nodeProperty3: { type: "POINT", mustExist: true, name: "coordinates" }
+      nodeProperty4: { type: "STRING", mustExist: true, name: "timezone" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "Airport"
+        properties: ["nodeProperty0"]
+        name: "airports_data"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["Airport"]
+        properties: ["nodeProperty0"]
+        name: "airports_data-text"
+    name: "Airport"
+  node2:
+    labels:
+      identifier: "Booking"
+    properties:
+      nodeProperty0: { type: "STRING", key: true, name: "bookRef" }
+      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "bookDate" }
+      nodeProperty2: { type: "FLOAT", mustExist: true, name: "totalAmount" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "Booking"
+        properties: ["nodeProperty0"]
+        name: "bookings"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["Booking"]
+        properties: ["nodeProperty0"]
+        name: "bookings-text"
+    name: "Booking"
+  node3:
+    labels:
+      identifier: "Flight"
+    properties:
+      nodeProperty0: { type: "INTEGER", key: true, name: "flightId" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "flightNo" }
+      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "scheduledDeparture" }
+      nodeProperty3: { type: "ZONED DATETIME", mustExist: true, name: "scheduledArrival" }
+      nodeProperty4: { type: "STRING", mustExist: true, name: "status" }
+      nodeProperty5: { type: "ZONED DATETIME", mustExist: true, name: "actualDeparture" }
+      nodeProperty6: { type: "ZONED DATETIME", mustExist: true, name: "actualArrival" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "Flight"
+        properties: ["nodeProperty0"]
+        name: "flights"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["Flight"]
+        properties: ["nodeProperty0"]
+        name: "flights"
+    name: "Flight"
+  node4:
+    labels:
+      identifier: "Ticket"
+    properties:
+      nodeProperty0: { type: "STRING", key: true, name: "ticketNo" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "passengerId" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "passengerName" }
+      nodeProperty3: { type: "STRING", mustExist: true, name: "contactData" }
+    constraints:
+      nodeConstraint0:
+        type: "UNIQUE"
+        label: "Ticket"
+        properties: ["nodeProperty0"]
+        name: "tickets"
+    indexes:
+      nodeIndex0:
+        type: "TEXT"
+        labels: ["Ticket"]
+        properties: ["nodeProperty0"]
+        name: "tickets-text"
+    name: "Ticket"
+relationships:
+  relationship0:
+    type: "FLIGHT_USES_AIRCRAFT"
+    from: { node: "node3" }
+    to: { node: "node0" }
+    name: "FLIGHT_USES_AIRCRAFT"
+  relationship1:
+    type: "FLIGHT_DEPARTS_FROM_AIRPORT"
+    from: { node: "node3" }
+    to: { node: "node1" }
+    name: "FLIGHT_DEPARTS_FROM_AIRPORT"
+  relationship2:
+    type: "FLIGHT_ARRIVES_AT_AIRPORT"
+    from: { node: "node3" }
+    to: { node: "node1" }
+    name: "FLIGHT_ARRIVES_AT_AIRPORT"
+  relationship3:
+    type: "FLIGHT_HAS_TICKET"
+    from: { node: "node3" }
+    to: { node: "node4" }
+    properties:
+      relationshipProperty0: { type: "STRING", mustExist: true, name: "fare_conditions" }
+      relationshipProperty1: { type: "FLOAT", mustExist: true, name: "amount" }
+    name: "FLIGHT_HAS_TICKET"
+  relationship4:
+    type: "TICKET_BELONGS_TO_BOOKING"
+    from: { node: "node4" }
+    to: { node: "node2" }
+    name: "TICKET_BELONGS_TO_BOOKING"
+tables:
+  aircrafts_data:
+    source: "cloud"
+    fields:
+      aircraft_code:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      model:
+        type: "JSON"
+        suggested: "STRING"
+        supported: ["STRING"]
+      aircrafts_range:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["aircraft_code"]
+  airports_data:
+    source: "cloud"
+    fields:
+      airport_code:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      airport_name:
+        type: "JSON"
+        suggested: "STRING"
+        supported: ["STRING"]
+      city:
+        type: "JSON"
+        suggested: "STRING"
+        supported: ["STRING"]
+      coordinates:
+        type: "GEOMETRY"
+        suggested: "POINT"
+        supported: ["POINT"]
+      timezone:
+        type: "TEXT"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["airport_code"]
+  boarding_passes:
+    source: "cloud"
+    fields:
+      ticket_no:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      flight_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      boarding_no:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      seat_no:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["flight_id", "ticket_no"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["ticket_no", "flight_id"]
+        references:
+          table: "ticket_flights"
+          fields: ["ticket_no", "flight_id"]
+  bookings:
+    source: "cloud"
+    fields:
+      book_ref:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      book_date:
+        type: "TIMESTAMP"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+      total_amount:
+        type: "DECIMAL"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["book_ref"]
+  flights:
+    source: "cloud"
+    fields:
+      flight_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      flight_no:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      scheduled_departure:
+        type: "TIMESTAMP"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+      scheduled_arrival:
+        type: "TIMESTAMP"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+      departure_airport:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      arrival_airport:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      status:
+        type: "TEXT"
+        suggested: "STRING"
+        supported: ["STRING"]
+      aircraft_code:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      actual_departure:
+        type: "TIMESTAMP"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+      actual_arrival:
+        type: "TIMESTAMP"
+        suggested: "ZONED DATETIME"
+        supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
+    primaryKeys: ["flight_id"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["aircraft_code"]
+        references:
+          table: "aircrafts_data"
+          fields: ["aircraft_code"]
+      foreignKey2:
+        fields: ["departure_airport", "arrival_airport"]
+        references:
+          table: "airports_data"
+          fields: ["airport_code"]
+  seats:
+    source: "cloud"
+    fields:
+      aircraft_code:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      seat_no:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      fare_conditions:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["aircraft_code", "seat_no"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["aircraft_code"]
+        references:
+          table: "aircrafts_data"
+          fields: ["aircraft_code"]
+  ticket_flights:
+    source: "cloud"
+    fields:
+      ticket_no:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      flight_id:
+        type: "INT"
+        suggested: "INTEGER"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+      fare_conditions:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      amount:
+        type: "DECIMAL"
+        suggested: "FLOAT"
+        supported: ["INTEGER", "STRING", "FLOAT"]
+    primaryKeys: ["flight_id", "ticket_no"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["flight_id"]
+        references:
+          table: "flights"
+          fields: ["flight_id"]
+      foreignKey2:
+        fields: ["ticket_no"]
+        references:
+          table: "tickets"
+          fields: ["ticket_no"]
+  tickets:
+    source: "cloud"
+    fields:
+      ticket_no:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      book_ref:
+        type: "CHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      passenger_id:
+        type: "VARCHAR"
+        suggested: "STRING"
+        supported: ["STRING"]
+      passenger_name:
+        type: "TEXT"
+        suggested: "STRING"
+        supported: ["STRING"]
+      contact_data:
+        type: "JSON"
+        suggested: "STRING"
+        supported: ["STRING"]
+    primaryKeys: ["ticket_no"]
+    foreignKeys:
+      foreignKey1:
+        fields: ["book_ref"]
+        references:
+          table: "bookings"
+          fields: ["book_ref"]
+mappings:
+  - node: "node0"
+    table: "aircrafts_data"
+    properties:
+      nodeProperty0: { field: "aircraft_code" }
+      nodeProperty1: { field: "model" }
+      nodeProperty2: { field: "aircrafts_range" }
+  - node: "node1"
+    table: "airports_data"
+    properties:
+      nodeProperty0: { field: "airport_code" }
+      nodeProperty1: { field: "airport_name" }
+      nodeProperty2: { field: "city" }
+      nodeProperty3: { field: "coordinates" }
+      nodeProperty4: { field: "timezone" }
+  - node: "node2"
+    table: "bookings"
+    properties:
+      nodeProperty0: { field: "book_ref" }
+      nodeProperty1: { field: "book_date" }
+      nodeProperty2: { field: "total_amount" }
+  - node: "node3"
+    table: "flights"
+    properties:
+      nodeProperty0: { field: "flight_id" }
+      nodeProperty1: { field: "flight_no" }
+      nodeProperty2: { field: "scheduled_departure" }
+      nodeProperty3: { field: "scheduled_arrival" }
+      nodeProperty4: { field: "status" }
+      nodeProperty5: { field: "actual_departure" }
+      nodeProperty6: { field: "actual_arrival" }
+  - node: "node4"
+    table: "tickets"
+    properties:
+      nodeProperty0: { field: "ticket_no" }
+      nodeProperty1: { field: "passenger_id" }
+      nodeProperty2: { field: "passenger_name" }
+      nodeProperty3: { field: "contact_data" }
+  - relationship: "relationship0"
+    table: "flights"
+    from:
+      node: "node3"
+      properties:
+        nodeProperty0: { field: "flight_id" }
+    to:
+      node: "node0"
+      properties:
+        nodeProperty0: { field: "aircraft_code" }
+  - relationship: "relationship1"
+    table: "flights"
+    from:
+      node: "node3"
+      properties:
+        nodeProperty0: { field: "flight_id" }
+    to:
+      node: "node1"
+      properties:
+        nodeProperty0: { field: "departure_airport" }
+  - relationship: "relationship2"
+    table: "flights"
+    from:
+      node: "node3"
+      properties:
+        nodeProperty0: { field: "flight_id" }
+    to:
+      node: "node1"
+      properties:
+        nodeProperty0: { field: "arrival_airport" }
+  - relationship: "relationship3"
+    table: "ticket_flights"
+    from:
+      node: "node3"
+      properties:
+        nodeProperty0: { field: "flight_id" }
+    to:
+      node: "node4"
+      properties:
+        nodeProperty0: { field: "ticket_no" }
+    properties:
+      relationshipProperty0: { field: "fare_conditions" }
+      relationshipProperty1: { field: "amount" }
+  - relationship: "relationship4"
+    table: "tickets"
+    from:
+      node: "node4"
+      properties:
+        nodeProperty0: { field: "ticket_no" }
+    to:
+      node: "node2"
+      properties:
+        nodeProperty0: { field: "book_ref" }
