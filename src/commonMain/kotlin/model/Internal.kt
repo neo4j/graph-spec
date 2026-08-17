@@ -54,12 +54,8 @@ object Internal {
             node.indexes.identify("nodeIndex")
         }
         relationships.values.forEach { relationship ->
-            if (renames.containsKey(relationship.from.node)) {
-                relationship.from.node = renames[relationship.from.node]!!
-            }
-            if (renames.containsKey(relationship.to.node)) {
-                relationship.to.node = renames[relationship.to.node]!!
-            }
+            relationship.from.node = renames[relationship.from.node] ?: relationship.from.node
+            relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
         }
         display.nodes.keys.forEach { node ->
             val rename = renames[node] ?: return@forEach
