@@ -76,6 +76,7 @@ object Internal {
             internaliseProperties(node.indexes.map { it.key to it.value.properties }.toMap(), propertyRenames)
         }
         Pretty.renameNodeMappingProperties(this, renames)
+        Pretty.renameTargetNodeProperties(this, renames)
     }
 
     private fun internaliseProperties(indexes: Map<String, MutableSet<String>>, renames: Map<String, String>) {

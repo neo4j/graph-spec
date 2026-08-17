@@ -112,6 +112,14 @@ object Pretty {
             }
         }
         renameNodeMappingProperties(this, renames)
+        renameTargetNodeProperties(this, renames)
+    }
+
+    internal fun renameTargetNodeProperties(model: GraphModel, renames: MutableMap<String, String>) {
+        model.relationships.values.forEach { relationship ->
+            relationship.from.property = renames["${relationship.from.node}:${relationship.from.property}"] ?: relationship.from.property
+            relationship.to.property = renames["${relationship.to.node}:${relationship.to.property}"] ?: relationship.to.property
+        }
     }
 
     internal fun renameNodeMappingProperties(model: GraphModel, renames: Map<String, String>) {
