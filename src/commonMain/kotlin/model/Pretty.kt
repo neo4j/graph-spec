@@ -84,10 +84,7 @@ object Pretty {
                 relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
             }
         }
-        display.nodes.keys.forEach { node ->
-            val rename = renames[node] ?: return@forEach
-            display.nodes[rename] = display.nodes.remove(node) ?: return@forEach
-        }
+        display.nodes.rename(renames)
     }
 
     internal fun renameNodeMappings(model: GraphModel, renames: Map<String, String>) {
@@ -193,7 +190,7 @@ object Pretty {
      * Goes through a MutableMap, replacing the keys with replacements from [renames]
      * @param parent optionally used to look up the replacement key
      */
-    private fun <T> MutableMap<String, T>.rename(renames: Map<String, String>, parent: String? = null) {
+    internal fun <T> MutableMap<String, T>.rename(renames: Map<String, String>, parent: String? = null) {
         val original = toMutableMap()
         clear()
         for ((og, value) in original) {

@@ -16,6 +16,7 @@
  */
 package model
 
+import model.Pretty.rename
 import model.type.Named
 
 /**
@@ -57,10 +58,7 @@ object Internal {
             relationship.from.node = renames[relationship.from.node] ?: relationship.from.node
             relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
         }
-        display.nodes.keys.forEach { node ->
-            val rename = renames[node] ?: return@forEach
-            display.nodes[rename] = display.nodes.remove(node) ?: return@forEach
-        }
+        display.nodes.rename(renames)
     }
 
     private fun GraphModel.internaliseNodeProperties() {
