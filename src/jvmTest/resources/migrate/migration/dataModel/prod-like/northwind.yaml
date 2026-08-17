@@ -287,5 +287,5 @@ mappings:
 display:
   nodes:
     categories:
-      x: "-100.123"
+      x: -100.123
       y: 200.0
