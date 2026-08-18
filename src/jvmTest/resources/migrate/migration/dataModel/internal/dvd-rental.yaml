@@ -1063,6 +1063,7 @@ mappings:
       nodeProperty1: { field: "first_name" }
       nodeProperty2: { field: "last_name" }
       nodeProperty3: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "address"
     properties:
@@ -1073,24 +1074,28 @@ mappings:
       nodeProperty4: { field: "postal_code" }
       nodeProperty5: { field: "phone" }
       nodeProperty6: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "category"
     properties:
       nodeProperty0: { field: "category_id" }
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "city"
     properties:
       nodeProperty0: { field: "city_id" }
       nodeProperty1: { field: "city" }
       nodeProperty2: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node4"
     table: "country"
     properties:
       nodeProperty0: { field: "country_id" }
       nodeProperty1: { field: "country" }
       nodeProperty2: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node5"
     table: "customer"
     properties:
@@ -1103,6 +1108,7 @@ mappings:
       nodeProperty6: { field: "create_date" }
       nodeProperty7: { field: "last_update" }
       nodeProperty8: { field: "active" }
+    key: ["nodeProperty0"]
   - node: "node6"
     table: "film"
     properties:
@@ -1115,24 +1121,28 @@ mappings:
       nodeProperty6: { field: "replacement_cost" }
       nodeProperty7: { field: "rating" }
       nodeProperty8: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node7"
     table: "inventory"
     properties:
       nodeProperty0: { field: "inventory_id" }
       nodeProperty1: { field: "store_id" }
       nodeProperty2: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node8"
     table: "language"
     properties:
       nodeProperty0: { field: "language_id" }
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node9"
     table: "payment"
     properties:
       nodeProperty0: { field: "payment_id" }
       nodeProperty1: { field: "amount" }
       nodeProperty2: { field: "payment_date" }
+    key: ["nodeProperty0"]
   - node: "node10"
     table: "rental"
     properties:
@@ -1140,6 +1150,7 @@ mappings:
       nodeProperty1: { field: "rental_date" }
       nodeProperty2: { field: "return_date" }
       nodeProperty3: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node11"
     table: "staff"
     properties:
@@ -1152,11 +1163,13 @@ mappings:
       nodeProperty6: { field: "username" }
       nodeProperty7: { field: "password" }
       nodeProperty8: { field: "last_update" }
+    key: ["nodeProperty0"]
   - node: "node12"
     table: "store"
     properties:
       nodeProperty0: { field: "store_id" }
       nodeProperty1: { field: "last_update" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "address"
     from:

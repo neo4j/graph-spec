@@ -1462,11 +1462,13 @@ mappings:
       nodeProperty3: { field: "expmonth" }
       nodeProperty4: { field: "expyear" }
       nodeProperty5: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "currency"
     properties:
       nodeProperty0: { field: "currencycode" }
       nodeProperty1: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "currencyrate"
     properties:
@@ -1475,12 +1477,14 @@ mappings:
       nodeProperty2: { field: "averagerate" }
       nodeProperty3: { field: "endofdayrate" }
       nodeProperty4: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "customer"
     properties:
       nodeProperty0: { field: "customerid" }
       nodeProperty1: { field: "rowguid" }
       nodeProperty2: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node4"
     table: "salesorderheader"
     properties:
@@ -1498,6 +1502,7 @@ mappings:
       nodeProperty11: { field: "comment" }
       nodeProperty12: { field: "rowguid" }
       nodeProperty13: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node5"
     table: "salesperson"
     properties:
@@ -1509,11 +1514,13 @@ mappings:
       nodeProperty5: { field: "saleslastyear" }
       nodeProperty6: { field: "rowguid" }
       nodeProperty7: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node6"
     table: "salesreason"
     properties:
       nodeProperty0: { field: "salesreasonid" }
       nodeProperty1: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node7"
     table: "salestaxrate"
     properties:
@@ -1522,6 +1529,7 @@ mappings:
       nodeProperty2: { field: "taxrate" }
       nodeProperty3: { field: "rowguid" }
       nodeProperty4: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node8"
     table: "salesterritory"
     properties:
@@ -1533,6 +1541,7 @@ mappings:
       nodeProperty5: { field: "costlastyear" }
       nodeProperty6: { field: "rowguid" }
       nodeProperty7: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node9"
     table: "shoppingcartitem"
     properties:
@@ -1541,6 +1550,7 @@ mappings:
       nodeProperty2: { field: "quantity" }
       nodeProperty3: { field: "datecreated" }
       nodeProperty4: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node10"
     table: "specialoffer"
     properties:
@@ -1555,12 +1565,14 @@ mappings:
       nodeProperty8: { field: "maxqty" }
       nodeProperty9: { field: "rowguid" }
       nodeProperty10: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - node: "node11"
     table: "store"
     properties:
       nodeProperty0: { field: "businessentityid" }
       nodeProperty1: { field: "rowguid" }
       nodeProperty2: { field: "modifieddate" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "customer"
     from:

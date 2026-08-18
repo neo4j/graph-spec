@@ -643,11 +643,13 @@ mappings:
     properties:
       nodeProperty0: { field: "album_id" }
       nodeProperty1: { field: "title" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "artist"
     properties:
       nodeProperty0: { field: "artist_id" }
       nodeProperty1: { field: "name" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "customer"
     properties:
@@ -663,6 +665,7 @@ mappings:
       nodeProperty9: { field: "phone" }
       nodeProperty10: { field: "fax" }
       nodeProperty11: { field: "email" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "employee"
     properties:
@@ -680,11 +683,13 @@ mappings:
       nodeProperty11: { field: "phone" }
       nodeProperty12: { field: "fax" }
       nodeProperty13: { field: "email" }
+    key: ["nodeProperty0"]
   - node: "node4"
     table: "genre"
     properties:
       nodeProperty0: { field: "genre_id" }
       nodeProperty1: { field: "name" }
+    key: ["nodeProperty0"]
   - node: "node5"
     table: "invoice"
     properties:
@@ -696,22 +701,26 @@ mappings:
       nodeProperty5: { field: "billing_country" }
       nodeProperty6: { field: "billing_postal_code" }
       nodeProperty7: { field: "total" }
+    key: ["nodeProperty0"]
   - node: "node6"
     table: "invoice_line"
     properties:
       nodeProperty0: { field: "invoice_line_id" }
       nodeProperty1: { field: "unit_price" }
       nodeProperty2: { field: "quantity" }
+    key: ["nodeProperty0"]
   - node: "node7"
     table: "media_type"
     properties:
       nodeProperty0: { field: "media_type_id" }
       nodeProperty1: { field: "name" }
+    key: ["nodeProperty0"]
   - node: "node8"
     table: "playlist"
     properties:
       nodeProperty0: { field: "playlist_id" }
       nodeProperty1: { field: "name" }
+    key: ["nodeProperty0"]
   - node: "node9"
     table: "track"
     properties:
@@ -721,6 +730,7 @@ mappings:
       nodeProperty3: { field: "milliseconds" }
       nodeProperty4: { field: "bytes" }
       nodeProperty5: { field: "unit_price" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "album"
     from:

@@ -252,6 +252,7 @@ mappings:
       nodeProperty1: { field: "categoryname" }
       nodeProperty2: { field: "description" }
       nodeProperty3: { field: "picture" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "products"
     properties:
@@ -263,6 +264,7 @@ mappings:
       nodeProperty5: { field: "unitsonorder" }
       nodeProperty6: { field: "reorderlevel" }
       nodeProperty7: { field: "discontinued" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "suppliers"
     properties:
@@ -278,6 +280,7 @@ mappings:
       nodeProperty9: { field: "phone" }
       nodeProperty10: { field: "fax" }
       nodeProperty11: { field: "homepage" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "products"
     from:

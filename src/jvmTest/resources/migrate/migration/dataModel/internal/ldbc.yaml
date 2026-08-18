@@ -836,6 +836,7 @@ mappings:
       nodeProperty5: { field: "browserUsed" }
       nodeProperty6: { field: "content" }
       nodeProperty7: { field: "length" }
+    key: ["nodeProperty3"]
   - node: "node1"
     table: "Forum"
     properties:
@@ -844,6 +845,7 @@ mappings:
       nodeProperty2: { field: "explicitlyDeleted" }
       nodeProperty3: { field: "id" }
       nodeProperty4: { field: "title" }
+    key: ["nodeProperty3"]
   - node: "node2"
     table: "Organisation"
     properties:
@@ -851,6 +853,7 @@ mappings:
       nodeProperty1: { field: "type" }
       nodeProperty2: { field: "name" }
       nodeProperty3: { field: "url" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "Person"
     properties:
@@ -866,6 +869,7 @@ mappings:
       nodeProperty9: { field: "browserUsed" }
       nodeProperty10: { field: "language" }
       nodeProperty11: { field: "email" }
+    key: ["nodeProperty3"]
   - node: "node4"
     table: "Place"
     properties:
@@ -873,6 +877,7 @@ mappings:
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "url" }
       nodeProperty3: { field: "type" }
+    key: ["nodeProperty0"]
   - node: "node5"
     table: "Post"
     properties:
@@ -886,18 +891,21 @@ mappings:
       nodeProperty7: { field: "language" }
       nodeProperty8: { field: "content" }
       nodeProperty9: { field: "length" }
+    key: ["nodeProperty3"]
   - node: "node6"
     table: "Tag"
     properties:
       nodeProperty0: { field: "id" }
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "url" }
+    key: ["nodeProperty0"]
   - node: "node7"
     table: "TagClass"
     properties:
       nodeProperty0: { field: "id" }
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "url" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "Comment"
     from:
@@ -951,6 +959,7 @@ mappings:
     properties:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
+    key: ["nodeProperty0"]
   - relationship: "relationship5"
     table: "Forum"
     from:

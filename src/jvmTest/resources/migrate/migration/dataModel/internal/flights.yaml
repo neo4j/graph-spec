@@ -364,6 +364,7 @@ mappings:
       nodeProperty0: { field: "aircraft_code" }
       nodeProperty1: { field: "model" }
       nodeProperty2: { field: "aircrafts_range" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "airports_data"
     properties:
@@ -372,12 +373,14 @@ mappings:
       nodeProperty2: { field: "city" }
       nodeProperty3: { field: "coordinates" }
       nodeProperty4: { field: "timezone" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "bookings"
     properties:
       nodeProperty0: { field: "book_ref" }
       nodeProperty1: { field: "book_date" }
       nodeProperty2: { field: "total_amount" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "flights"
     properties:
@@ -388,6 +391,7 @@ mappings:
       nodeProperty4: { field: "status" }
       nodeProperty5: { field: "actual_departure" }
       nodeProperty6: { field: "actual_arrival" }
+    key: ["nodeProperty0"]
   - node: "node4"
     table: "tickets"
     properties:
@@ -395,6 +399,7 @@ mappings:
       nodeProperty1: { field: "passenger_id" }
       nodeProperty2: { field: "passenger_name" }
       nodeProperty3: { field: "contact_data" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "flights"
     from:

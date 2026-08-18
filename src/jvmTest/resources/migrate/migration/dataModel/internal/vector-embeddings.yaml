@@ -39,3 +39,4 @@ mappings:
       nodeProperty0: { field: "documentid" }
       nodeProperty1: { field: "embedding" }
       nodeProperty2: { field: "legacyembedding" }
+    key: ["nodeProperty0"]
