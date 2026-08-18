@@ -30,7 +30,7 @@ object RelationshipType : RelationshipValidation {
         if (relationship.type.isBlank()) {
             issues.add(
                 Issue(
-                    code = "missing_relationship_type",
+                    code = "missing_relation_type",
                     message = "Missing type for relationship '$relationshipId'",
                     path = "relationships.$relationshipId.type"
                 )

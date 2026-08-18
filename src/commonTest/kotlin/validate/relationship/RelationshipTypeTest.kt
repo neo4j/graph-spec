@@ -55,6 +55,6 @@ class RelationshipTypeTest {
         validator.validateRelationship(model, "blankRel", relationship, issues)
 
         assertEquals(1, issues.size)
-        assertEquals("missing_relationship_type", issues.first().code)
+        assertEquals("missing_relation_type", issues.first().code)
     }
 }
