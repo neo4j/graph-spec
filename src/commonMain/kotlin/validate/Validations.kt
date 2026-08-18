@@ -16,13 +16,17 @@
  */
 package validate
 
+import validate.node.NodeConstraintCoverage
 import validate.node.NodeConstraints
 import validate.node.NodeIndexesExists
+import validate.node.NodeLabel
+import validate.node.NodeProperties
 import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeTypeConstraint
 import validate.relationship.RelationshipConstraints
 import validate.relationship.RelationshipIndexes
 import validate.relationship.RelationshipNodes
+import validate.relationship.RelationshipType
 import validate.relationship.constraint.RelationshipExistenceConstraint
 import validate.relationship.constraint.RelationshipTypeConstraint
 import kotlin.js.JsExport
@@ -36,6 +40,9 @@ class Validations {
             // Nodes
             NodeConstraints,
             NodeIndexesExists,
+            NodeLabel,
+            NodeProperties,
+            NodeConstraintCoverage,
             NodeTypeConstraint,
             NodeExistenceConstraint,
 
@@ -43,6 +50,7 @@ class Validations {
             RelationshipNodes,
             RelationshipIndexes,
             RelationshipConstraints,
+            RelationshipType,
             RelationshipExistenceConstraint,
             RelationshipTypeConstraint
         )
