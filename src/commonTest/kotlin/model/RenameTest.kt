@@ -53,7 +53,7 @@ class RenameTest {
     }
 
     @Test
-    fun `map rename with parent falls back to original key, not the parent-prefixed one, when missing`() {
+    fun `map rename with parent falls back to original key not the parent-prefixed one when missing`() {
         val map = mutableMapOf("a" to 1)
         // Even though renames has an entry for plain "a", the parent-scoped
         // lookup only ever checks "parent:a" - the plain-key entry must be ignored.
