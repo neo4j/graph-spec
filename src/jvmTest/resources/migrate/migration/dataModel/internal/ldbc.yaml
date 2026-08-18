@@ -211,7 +211,7 @@ relationships:
     from: { node: "node0" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
+      relationshipProperty0: { type: "INTEGER", key: true, name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
     name: "HAS_TAG"
   relationship5:

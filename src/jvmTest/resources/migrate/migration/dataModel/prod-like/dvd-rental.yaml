@@ -995,6 +995,7 @@ mappings:
       first_name: { field: "first_name" }
       last_name: { field: "last_name" }
       last_update: { field: "last_update" }
+    key: ["actor_id"]
   - node: "address"
     table: "address"
     properties:
@@ -1005,24 +1006,28 @@ mappings:
       postal_code: { field: "postal_code" }
       phone: { field: "phone" }
       last_update: { field: "last_update" }
+    key: ["address_id"]
   - node: "category"
     table: "category"
     properties:
       category_id: { field: "category_id" }
       name: { field: "name" }
       last_update: { field: "last_update" }
+    key: ["category_id"]
   - node: "city"
     table: "city"
     properties:
       city_id: { field: "city_id" }
       city: { field: "city" }
       last_update: { field: "last_update" }
+    key: ["city_id"]
   - node: "country"
     table: "country"
     properties:
       country_id: { field: "country_id" }
       country: { field: "country" }
       last_update: { field: "last_update" }
+    key: ["country_id"]
   - node: "customer"
     table: "customer"
     properties:
@@ -1035,6 +1040,7 @@ mappings:
       create_date: { field: "create_date" }
       last_update: { field: "last_update" }
       active: { field: "active" }
+    key: ["customer_id"]
   - node: "film"
     table: "film"
     properties:
@@ -1047,24 +1053,28 @@ mappings:
       replacement_cost: { field: "replacement_cost" }
       rating: { field: "rating" }
       last_update: { field: "last_update" }
+    key: ["film_id"]
   - node: "inventory"
     table: "inventory"
     properties:
       inventory_id: { field: "inventory_id" }
       store_id: { field: "store_id" }
       last_update: { field: "last_update" }
+    key: ["inventory_id"]
   - node: "language"
     table: "language"
     properties:
       language_id: { field: "language_id" }
       name: { field: "name" }
       last_update: { field: "last_update" }
+    key: ["language_id"]
   - node: "payment"
     table: "payment"
     properties:
       payment_id: { field: "payment_id" }
       amount: { field: "amount" }
       payment_date: { field: "payment_date" }
+    key: ["payment_id"]
   - node: "rental"
     table: "rental"
     properties:
@@ -1072,6 +1082,7 @@ mappings:
       rental_date: { field: "rental_date" }
       return_date: { field: "return_date" }
       last_update: { field: "last_update" }
+    key: ["rental_id"]
   - node: "staff"
     table: "staff"
     properties:
@@ -1084,11 +1095,13 @@ mappings:
       username: { field: "username" }
       password: { field: "password" }
       last_update: { field: "last_update" }
+    key: ["staff_id"]
   - node: "store"
     table: "store"
     properties:
       store_id: { field: "store_id" }
       last_update: { field: "last_update" }
+    key: ["store_id"]
   - relationship: "RELATED_TO_CITY"
     table: "address"
     from:

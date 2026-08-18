@@ -36,3 +36,4 @@ mappings:
       documentid: { field: "documentid" }
       embedding: { field: "embedding" }
       legacyembedding: { field: "legacyembedding" }
+    key: ["documentid"]

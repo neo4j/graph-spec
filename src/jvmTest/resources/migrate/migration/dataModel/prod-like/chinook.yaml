@@ -593,11 +593,13 @@ mappings:
     properties:
       album_id: { field: "album_id" }
       title: { field: "title" }
+    key: ["album_id"]
   - node: "artist"
     table: "artist"
     properties:
       artist_id: { field: "artist_id" }
       name: { field: "name" }
+    key: ["artist_id"]
   - node: "customer"
     table: "customer"
     properties:
@@ -613,6 +615,7 @@ mappings:
       phone: { field: "phone" }
       fax: { field: "fax" }
       email: { field: "email" }
+    key: ["customer_id"]
   - node: "employee"
     table: "employee"
     properties:
@@ -630,11 +633,13 @@ mappings:
       phone: { field: "phone" }
       fax: { field: "fax" }
       email: { field: "email" }
+    key: ["employee_id"]
   - node: "genre"
     table: "genre"
     properties:
       genre_id: { field: "genre_id" }
       name: { field: "name" }
+    key: ["genre_id"]
   - node: "invoice"
     table: "invoice"
     properties:
@@ -646,22 +651,26 @@ mappings:
       billing_country: { field: "billing_country" }
       billing_postal_code: { field: "billing_postal_code" }
       total: { field: "total" }
+    key: ["invoice_id"]
   - node: "invoice_line"
     table: "invoice_line"
     properties:
       invoice_line_id: { field: "invoice_line_id" }
       unit_price: { field: "unit_price" }
       quantity: { field: "quantity" }
+    key: ["invoice_line_id"]
   - node: "media_type"
     table: "media_type"
     properties:
       media_type_id: { field: "media_type_id" }
       name: { field: "name" }
+    key: ["media_type_id"]
   - node: "playlist"
     table: "playlist"
     properties:
       playlist_id: { field: "playlist_id" }
       name: { field: "name" }
+    key: ["playlist_id"]
   - node: "track"
     table: "track"
     properties:
@@ -671,6 +680,7 @@ mappings:
       milliseconds: { field: "milliseconds" }
       bytes: { field: "bytes" }
       unit_price: { field: "unit_price" }
+    key: ["track_id"]
   - relationship: "ARTIST"
     table: "album"
     from:

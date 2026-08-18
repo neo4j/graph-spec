@@ -781,6 +781,7 @@ mappings:
       browserUsed: { field: "browserUsed" }
       content: { field: "content" }
       length: { field: "length" }
+    key: ["id"]
   - node: "Forum"
     table: "Forum"
     properties:
@@ -789,6 +790,7 @@ mappings:
       explicitlyDeleted: { field: "explicitlyDeleted" }
       id: { field: "id" }
       title: { field: "title" }
+    key: ["id"]
   - node: "Organisation"
     table: "Organisation"
     properties:
@@ -796,6 +798,7 @@ mappings:
       type: { field: "type" }
       name: { field: "name" }
       url: { field: "url" }
+    key: ["id"]
   - node: "Person"
     table: "Person"
     properties:
@@ -811,6 +814,7 @@ mappings:
       browserUsed: { field: "browserUsed" }
       language: { field: "language" }
       email: { field: "email" }
+    key: ["id"]
   - node: "Place"
     table: "Place"
     properties:
@@ -818,6 +822,7 @@ mappings:
       name: { field: "name" }
       url: { field: "url" }
       type: { field: "type" }
+    key: ["id"]
   - node: "Post"
     table: "Post"
     properties:
@@ -831,18 +836,21 @@ mappings:
       language: { field: "language" }
       content: { field: "content" }
       length: { field: "length" }
+    key: ["id"]
   - node: "Tag"
     table: "Tag"
     properties:
       id: { field: "id" }
       name: { field: "name" }
       url: { field: "url" }
+    key: ["id"]
   - node: "TagClass"
     table: "TagClass"
     properties:
       id: { field: "id" }
       name: { field: "name" }
       url: { field: "url" }
+    key: ["id"]
   - relationship: "AUTHORED_BY"
     table: "Comment"
     from:
@@ -896,6 +904,7 @@ mappings:
     properties:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
+    key: ["creationDate"]
   - relationship: "MODERATED_BY"
     table: "Forum"
     from:

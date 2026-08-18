@@ -238,6 +238,7 @@ mappings:
       categoryname: { field: "categoryname" }
       description: { field: "description" }
       picture: { field: "picture" }
+    key: ["categoryid"]
   - node: "products"
     table: "products"
     properties:
@@ -249,6 +250,7 @@ mappings:
       unitsonorder: { field: "unitsonorder" }
       reorderlevel: { field: "reorderlevel" }
       discontinued: { field: "discontinued" }
+    key: ["productid"]
   - node: "suppliers"
     table: "suppliers"
     properties:
@@ -264,6 +266,7 @@ mappings:
       phone: { field: "phone" }
       fax: { field: "fax" }
       homepage: { field: "homepage" }
+    key: ["supplierid"]
   - relationship: "CATEGORIES"
     table: "products"
     from:
