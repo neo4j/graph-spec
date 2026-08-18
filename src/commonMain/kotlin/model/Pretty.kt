@@ -126,6 +126,7 @@ object Pretty {
     internal fun renameNodeMappingProperties(model: GraphModel, renames: Map<String, String>) {
         model.mappings.filterIsInstance<NodeMapping>().forEach { mapping ->
             mapping.properties.rename(renames, mapping.node)
+            mapping.key.rename(renames, mapping.node)
         }
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
             mapping.from.properties.rename(renames, mapping.from.node)
