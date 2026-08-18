@@ -39,7 +39,24 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
 
     override fun encodeToString(element: SchemaElement) = writer.write(element)
 
-    override fun decodeFromString(string: String) = schemaElement(yaml.decodeYamlFromString(string))
+    private val regex = Regex(": (-[0-9.]+)")
+
+    override fun decodeFromString(string: String): SchemaElement {
+        /*
+            The current YAML library fails to parse negative numbers correctly i.e. `: -100`
+            Becomes [100] instead of -100.
+            Luckily strings get auto interpreted as doubles/integers so we can do a basic find and replace to wrap
+            quotation marks around all negative numbers in maps to make it processable.
+            This is likely to miss edge-cases especially regarding extensions.
+            This is a short-term hack as the library is no longer maintained so longer term either:
+              1. We'll need to fork and maintain ourselves
+              2. Write our own multi-platform yaml library
+              3. Drop yaml support
+         */
+        val amended = string.replace(regex, ": \"$1\"")
+        val yaml = yaml.decodeYamlFromString(amended)
+        return schemaElement(yaml)
+    }
 
     override fun encodeToSchema(model: GraphModel) = json.encodeToSchema(model)
 

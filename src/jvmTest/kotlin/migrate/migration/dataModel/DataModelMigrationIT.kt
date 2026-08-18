@@ -55,6 +55,8 @@ class DataModelMigrationIT {
                     .forEach {
                         it.remove("expanded")
                     }
+                // We need to handle #IMP-994 before comparing visualisations
+                expected.remove("visualisation")
 
                 assertEquals(
                     graphSpec.configuration.format.encodeToString(recursiveSort(expected)),

@@ -1151,5 +1151,16 @@
   },
   "configurations": {
     "idsToIgnore": []
+  },
+  "visualisation": {
+    "nodes": [
+      {
+        "id": "#n:0",
+        "position": {
+            "x": -100.123,
+            "y": 200
+        }
+      }
+    ]
   }
 }

@@ -1,77 +1,91 @@
 version: "4.0.0"
 nodes:
-  categories:
-    label: "categories"
+  node0:
+    labels:
+      identifier: "categories"
     properties:
-      categoryid: { type: "INTEGER", key: true }
-      categoryname: { type: "STRING", mustExist: true }
-      description: { type: "STRING", mustExist: true }
-      picture: { type: "STRING", mustExist: true }
+      nodeProperty0: { type: "INTEGER", key: true, name: "categoryid" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "categoryname" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "description" }
+      nodeProperty3: { type: "STRING", mustExist: true, name: "picture" }
     constraints:
-      categories:
+      nodeConstraint0:
         type: "UNIQUE"
         label: "categories"
-        properties: ["categoryid"]
+        properties: ["nodeProperty0"]
+        name: "categories"
     indexes:
-      categories:
+      nodeIndex0:
         type: "TEXT"
         labels: ["categories"]
-        properties: ["categoryid"]
-  products:
-    label: "products"
+        properties: ["nodeProperty0"]
+        name: "categories"
+    name: "categories"
+  node1:
+    labels:
+      identifier: "products"
     properties:
-      productid: { type: "INTEGER", key: true }
-      productname: { type: "STRING", mustExist: true }
-      quantityperunit: { type: "STRING", mustExist: true }
-      unitprice: { type: "FLOAT", mustExist: true }
-      unitsinstock: { type: "INTEGER", mustExist: true }
-      unitsonorder: { type: "INTEGER", mustExist: true }
-      reorderlevel: { type: "INTEGER", mustExist: true }
-      discontinued: { type: "INTEGER", mustExist: true }
+      nodeProperty0: { type: "INTEGER", key: true, name: "productid" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "productname" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "quantityperunit" }
+      nodeProperty3: { type: "FLOAT", mustExist: true, name: "unitprice" }
+      nodeProperty4: { type: "INTEGER", mustExist: true, name: "unitsinstock" }
+      nodeProperty5: { type: "INTEGER", mustExist: true, name: "unitsonorder" }
+      nodeProperty6: { type: "INTEGER", mustExist: true, name: "reorderlevel" }
+      nodeProperty7: { type: "INTEGER", mustExist: true, name: "discontinued" }
     constraints:
-      products:
+      nodeConstraint0:
         type: "UNIQUE"
         label: "products"
-        properties: ["productid"]
+        properties: ["nodeProperty0"]
+        name: "products"
     indexes:
-      products:
+      nodeIndex0:
         type: "TEXT"
         labels: ["products"]
-        properties: ["productid"]
-  suppliers:
-    label: "suppliers"
+        properties: ["nodeProperty0"]
+        name: "products"
+    name: "products"
+  node2:
+    labels:
+      identifier: "suppliers"
     properties:
-      supplierid: { type: "INTEGER", key: true }
-      companyname: { type: "STRING", mustExist: true }
-      contactname: { type: "STRING", mustExist: true }
-      contacttitle: { type: "STRING", mustExist: true }
-      address: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      region: { type: "STRING", mustExist: true }
-      postalcode: { type: "STRING", mustExist: true }
-      country: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      fax: { type: "STRING", mustExist: true }
-      homepage: { type: "STRING", mustExist: true }
+      nodeProperty0: { type: "INTEGER", key: true, name: "supplierid" }
+      nodeProperty1: { type: "STRING", mustExist: true, name: "companyname" }
+      nodeProperty2: { type: "STRING", mustExist: true, name: "contactname" }
+      nodeProperty3: { type: "STRING", mustExist: true, name: "contacttitle" }
+      nodeProperty4: { type: "STRING", mustExist: true, name: "address" }
+      nodeProperty5: { type: "STRING", mustExist: true, name: "city" }
+      nodeProperty6: { type: "STRING", mustExist: true, name: "region" }
+      nodeProperty7: { type: "STRING", mustExist: true, name: "postalcode" }
+      nodeProperty8: { type: "STRING", mustExist: true, name: "country" }
+      nodeProperty9: { type: "STRING", mustExist: true, name: "phone" }
+      nodeProperty10: { type: "STRING", mustExist: true, name: "fax" }
+      nodeProperty11: { type: "STRING", mustExist: true, name: "homepage" }
     constraints:
-      suppliers:
+      nodeConstraint0:
         type: "UNIQUE"
         label: "suppliers"
-        properties: ["supplierid"]
+        properties: ["nodeProperty0"]
+        name: "suppliers"
     indexes:
-      suppliers:
+      nodeIndex0:
         type: "TEXT"
         labels: ["suppliers"]
-        properties: ["supplierid"]
+        properties: ["nodeProperty0"]
+        name: "suppliers"
+    name: "suppliers"
 relationships:
-  CATEGORIES:
+  relationship0:
     type: "CATEGORIES"
-    from: { node: "products" }
-    to: { node: "categories" }
-  SUPPLIERS:
+    from: { node: "node1" }
+    to: { node: "node0" }
+    name: "CATEGORIES"
+  relationship1:
     type: "SUPPLIERS"
-    from: { node: "products" }
-    to: { node: "suppliers" }
+    from: { node: "node1" }
+    to: { node: "node2" }
+    name: "SUPPLIERS"
 tables:
   categories:
     source: "cloud"
@@ -231,61 +245,61 @@ tables:
         supported: ["STRING"]
     primaryKeys: ["supplierid"]
 mappings:
-  - node: "categories"
+  - node: "node0"
     table: "categories"
     properties:
-      categoryid: { field: "categoryid" }
-      categoryname: { field: "categoryname" }
-      description: { field: "description" }
-      picture: { field: "picture" }
-  - node: "products"
+      nodeProperty0: { field: "categoryid" }
+      nodeProperty1: { field: "categoryname" }
+      nodeProperty2: { field: "description" }
+      nodeProperty3: { field: "picture" }
+  - node: "node1"
     table: "products"
     properties:
-      productid: { field: "productid" }
-      productname: { field: "productname" }
-      quantityperunit: { field: "quantityperunit" }
-      unitprice: { field: "unitprice" }
-      unitsinstock: { field: "unitsinstock" }
-      unitsonorder: { field: "unitsonorder" }
-      reorderlevel: { field: "reorderlevel" }
-      discontinued: { field: "discontinued" }
-  - node: "suppliers"
+      nodeProperty0: { field: "productid" }
+      nodeProperty1: { field: "productname" }
+      nodeProperty2: { field: "quantityperunit" }
+      nodeProperty3: { field: "unitprice" }
+      nodeProperty4: { field: "unitsinstock" }
+      nodeProperty5: { field: "unitsonorder" }
+      nodeProperty6: { field: "reorderlevel" }
+      nodeProperty7: { field: "discontinued" }
+  - node: "node2"
     table: "suppliers"
     properties:
-      supplierid: { field: "supplierid" }
-      companyname: { field: "companyname" }
-      contactname: { field: "contactname" }
-      contacttitle: { field: "contacttitle" }
-      address: { field: "address" }
-      city: { field: "city" }
-      region: { field: "region" }
-      postalcode: { field: "postalcode" }
-      country: { field: "country" }
-      phone: { field: "phone" }
-      fax: { field: "fax" }
-      homepage: { field: "homepage" }
-  - relationship: "CATEGORIES"
+      nodeProperty0: { field: "supplierid" }
+      nodeProperty1: { field: "companyname" }
+      nodeProperty2: { field: "contactname" }
+      nodeProperty3: { field: "contacttitle" }
+      nodeProperty4: { field: "address" }
+      nodeProperty5: { field: "city" }
+      nodeProperty6: { field: "region" }
+      nodeProperty7: { field: "postalcode" }
+      nodeProperty8: { field: "country" }
+      nodeProperty9: { field: "phone" }
+      nodeProperty10: { field: "fax" }
+      nodeProperty11: { field: "homepage" }
+  - relationship: "relationship0"
     table: "products"
     from:
-      node: "products"
+      node: "node1"
       properties:
-        productid: { field: "productid" }
+        nodeProperty0: { field: "productid" }
     to:
-      node: "categories"
+      node: "node0"
       properties:
-        categoryid: { field: "categoryid" }
-  - relationship: "SUPPLIERS"
+        nodeProperty0: { field: "categoryid" }
+  - relationship: "relationship1"
     table: "products"
     from:
-      node: "products"
+      node: "node1"
       properties:
-        productid: { field: "productid" }
+        nodeProperty0: { field: "productid" }
     to:
-      node: "suppliers"
+      node: "node2"
       properties:
-        supplierid: { field: "supplierid" }
+        nodeProperty0: { field: "supplierid" }
 display:
   nodes:
-    categories:
+    node0:
       x: -100.123
       y: 200.0

@@ -16,6 +16,8 @@
  */
 package model
 
+import model.Rename.identify
+import model.Rename.rename
 import model.type.Named
 
 /**
@@ -53,14 +55,23 @@ object Internal {
             node.constraints.identify("nodeConstraint")
             node.indexes.identify("nodeIndex")
         }
+        relationships.values.forEach { relationship ->
+            relationship.from.node = renames[relationship.from.node] ?: relationship.from.node
+            relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
+        }
+        display.nodes.rename(renames)
     }
 
     private fun GraphModel.internaliseNodeProperties() {
         val renames = mutableMapOf<String, String>()
         nodes.forEach { (key, node) ->
-            renames.putAll(node.properties.identify("nodeProperty", key))
+            val propertyRenames = node.properties.identify("nodeProperty", key)
+            renames.putAll(propertyRenames)
+            node.constraints.values.forEach { it.properties.rename(renames, key) }
+            node.indexes.values.forEach { it.properties.rename(renames, key) }
         }
         Pretty.renameNodeMappingProperties(this, renames)
+        Pretty.renameTargetNodeProperties(this, renames)
     }
 
     /*
@@ -79,39 +90,11 @@ object Internal {
     private fun GraphModel.internaliseRelationshipProperties() {
         val renames = mutableMapOf<String, String>()
         relationships.forEach { (key, relationship) ->
-            renames.putAll(relationship.properties.identify("relationshipProperty", key))
+            val propertyRenames = relationship.properties.identify("relationshipProperty", key)
+            renames.putAll(propertyRenames)
+            relationship.constraints.values.forEach { it.properties.rename(renames, key) }
+            relationship.indexes.values.forEach { it.properties.rename(renames, key) }
         }
         Pretty.renameRelationshipMappingProperties(this, renames)
-    }
-
-    /**
-     * Replaces every key in the MutableMap with a predictable stable id.
-     * Pushing existing keys into [Named.name]
-     *
-     * @param type The type of field in use to prefix the stable id e.g: node0, node1, node2 etc...
-     * @param parent The parent field type to avoid stable id conflicts in a global map node0:property1, node0:property1
-     * @return Map of original keys to their replacements
-     */
-    private fun <T : Named> MutableMap<String, T>.identify(type: String, parent: String? = null): Map<String, String> {
-        val original = toMutableMap()
-        clear()
-        var i = 0
-        val changes = mutableMapOf<String, String>()
-        for ((name, node) in original) {
-            if (node.name != null) {
-                this[name] = node
-                continue
-            }
-            node.name = name
-            val key = "${type}${i++}"
-            this[key] = node
-            val changeKey = if (parent != null) {
-                "$parent:$name"
-            } else {
-                name
-            }
-            changes[changeKey] = key
-        }
-        return changes
     }
 }

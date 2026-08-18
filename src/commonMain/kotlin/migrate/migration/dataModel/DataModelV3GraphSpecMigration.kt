@@ -78,7 +78,7 @@ class DataModelV3GraphSpecMigration :
         val visualisation = schema.remove("visualisation") as? SchemaMap ?: return null
         val display = mutableMapOf<String, SchemaMap>()
         for (vis in visualisation.listOfMaps("nodes")) {
-            val ref = vis.string("id")
+            val ref = vis.string("id").removePrefix("#")
             nodes[ref] ?: error("Unknown node $ref")
             val position = vis.map("position")
             display[ref] = schemaMapOf(
