@@ -209,7 +209,7 @@ object Pretty {
      * Goes through a MutableSet, replacing the keys with replacements from [renames]
      * @param parent optionally used to look up the replacement key
      */
-    private fun MutableSet<String>.rename(renames: Map<String, String>, parent: String? = null) {
+    internal fun MutableSet<String>.rename(renames: Map<String, String>, parent: String? = null) {
         val original = toMutableSet()
         clear()
         for (og in original) {
