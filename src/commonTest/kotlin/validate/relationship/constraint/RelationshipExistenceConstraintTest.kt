@@ -77,4 +77,18 @@ class RelationshipExistenceConstraintTest {
         assertEquals("invalid_relation_exist_constraint_property_count", issue.code)
         assertEquals("relationships.actedIn.constraints.exist_multi.properties", issue.path)
     }
+
+    @Test
+    fun `fail when EXISTS constraint has zero properties`() {
+        val constraint = RelationshipConstraint(
+            type = ConstraintType.EXISTS,
+            properties = mutableSetOf()
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateConstraint(model, "actedIn", relationshipDummy, "exist_empty", constraint, issues)
+
+        assertEquals(1, issues.size)
+        assertEquals("invalid_relation_exist_constraint_property_count", issues.first().code)
+    }
 }
