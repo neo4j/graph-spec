@@ -16,6 +16,8 @@
  */
 package model
 
+import model.Rename.prettify
+import model.Rename.rename
 import model.mapping.NodeMapping
 import model.mapping.RelationshipMapping
 import model.type.Named
@@ -171,65 +173,5 @@ object Pretty {
             mapping.properties.rename(renames, mapping.relationship)
             mapping.key.rename(renames, mapping.relationship)
         }
-    }
-
-    /**
-     * Goes through a MutableMap, replacing the keys with replacements from [renames]
-     * @param parent optionally used to look up the replacement key
-     */
-    internal fun <T> MutableMap<String, T>.rename(renames: Map<String, String>, parent: String? = null) {
-        val original = toMutableMap()
-        clear()
-        for ((og, value) in original) {
-            val key = if (parent != null) {
-                renames["$parent:$og"]
-            } else {
-                renames[og]
-            } ?: og
-            this[key] = value
-        }
-    }
-
-    /**
-     * Goes through a MutableSet, replacing the keys with replacements from [renames]
-     * @param parent optionally used to look up the replacement key
-     */
-    internal fun MutableSet<String>.rename(renames: Map<String, String>, parent: String? = null) {
-        val original = toMutableSet()
-        clear()
-        for (og in original) {
-            val key = if (parent != null) {
-                renames["$parent:$og"]
-            } else {
-                renames[og]
-            } ?: og
-            add(key)
-        }
-    }
-
-    /**
-     * Removes any [Named.name]'s and places them as the key in the MutableMap
-     * @param parent name to use as a key prefix in the @return map
-     * @return Map of original keys to their replacements
-     */
-    private fun <T : Named> MutableMap<String, T>.prettify(parent: String? = null): Map<String, String> {
-        val original = toMutableMap()
-        clear()
-        val changes = mutableMapOf<String, String>()
-        for ((og, node) in original) {
-            val key = node.name
-            if (key == null) {
-                this[og] = node
-                continue
-            }
-            node.name = null
-            this[key] = node
-            if (parent != null) {
-                changes["$parent:$og"] = key
-            } else {
-                changes[og] = key
-            }
-        }
-        return changes
     }
 }

@@ -16,7 +16,8 @@
  */
 package model
 
-import model.Pretty.rename
+import model.Rename.identify
+import model.Rename.rename
 import model.type.Named
 
 /**
@@ -95,36 +96,5 @@ object Internal {
             relationship.indexes.values.forEach { it.properties.rename(renames, key) }
         }
         Pretty.renameRelationshipMappingProperties(this, renames)
-    }
-
-    /**
-     * Replaces every key in the MutableMap with a predictable stable id.
-     * Pushing existing keys into [Named.name]
-     *
-     * @param type The type of field in use to prefix the stable id e.g: node0, node1, node2 etc...
-     * @param parent The parent field type to avoid stable id conflicts in a global map node0:property1, node0:property1
-     * @return Map of original keys to their replacements
-     */
-    private fun <T : Named> MutableMap<String, T>.identify(type: String, parent: String? = null): Map<String, String> {
-        val original = toMutableMap()
-        clear()
-        var i = 0
-        val changes = mutableMapOf<String, String>()
-        for ((name, node) in original) {
-            if (node.name != null) {
-                this[name] = node
-                continue
-            }
-            node.name = name
-            val key = "${type}${i++}"
-            this[key] = node
-            val changeKey = if (parent != null) {
-                "$parent:$name"
-            } else {
-                name
-            }
-            changes[changeKey] = key
-        }
-        return changes
     }
 }
