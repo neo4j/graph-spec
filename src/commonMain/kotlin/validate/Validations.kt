@@ -22,12 +22,14 @@ import validate.node.NodeIndexesExists
 import validate.node.NodeLabel
 import validate.node.NodeProperties
 import validate.node.constraint.NodeExistenceConstraint
+import validate.node.constraint.NodeKeyOverlap
 import validate.node.constraint.NodeTypeConstraint
 import validate.relationship.RelationshipConstraints
 import validate.relationship.RelationshipIndexes
 import validate.relationship.RelationshipNodes
 import validate.relationship.RelationshipType
 import validate.relationship.constraint.RelationshipExistenceConstraint
+import validate.relationship.constraint.RelationshipKeyOverlap
 import validate.relationship.constraint.RelationshipTypeConstraint
 import kotlin.js.JsExport
 import kotlin.js.JsStatic
@@ -45,6 +47,7 @@ class Validations {
             NodeConstraintCoverage,
             NodeTypeConstraint,
             NodeExistenceConstraint,
+            NodeKeyOverlap,
 
             // Relationships
             RelationshipNodes,
@@ -52,7 +55,8 @@ class Validations {
             RelationshipConstraints,
             RelationshipType,
             RelationshipExistenceConstraint,
-            RelationshipTypeConstraint
+            RelationshipTypeConstraint,
+            RelationshipKeyOverlap
         )
     }
 }
