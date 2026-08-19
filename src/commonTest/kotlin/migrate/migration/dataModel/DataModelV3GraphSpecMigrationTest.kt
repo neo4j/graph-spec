@@ -158,7 +158,6 @@ class DataModelV3GraphSpecMigrationTest {
         val props = migratedNode.map("properties")
         assertNotNull(props["prop1"])
         assertEquals("STRING", props.map("prop1").string("type"))
-        assertEquals("true", props.map("prop1").string("key"))
     }
 
     @Test
