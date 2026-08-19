@@ -20,6 +20,7 @@ import validate.node.NodeConstraintCoverage
 import validate.node.NodeConstraints
 import validate.node.NodeIndexesExists
 import validate.node.NodeKeyProperty
+import validate.node.NodeKeyPropertyType
 import validate.node.NodeLabel
 import validate.node.NodeLabelToken
 import validate.node.NodeProperties
@@ -48,6 +49,7 @@ class Validations {
             NodeProperties,
             NodeConstraintCoverage,
             NodeKeyProperty,
+            NodeKeyPropertyType,
             NodeTypeConstraint,
             NodeExistenceConstraint,
 

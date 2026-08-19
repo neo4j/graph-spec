@@ -26,13 +26,13 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class NodeKeyPropertyTest {
+class NodeKeyPropertyTypeTest {
 
-    private val validator = NodeKeyProperty
+    private val validator = NodeKeyPropertyType
     private val model = GraphModel("4.0.0")
 
     @Test
-    fun `pass when node has a key property`() {
+    fun `pass when key property is STRING`() {
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf("id" to Property(type = Neo4jType.STRING, key = true))
@@ -41,20 +41,33 @@ class NodeKeyPropertyTest {
 
         validator.validateNode(model, "personNode", node, issues)
 
-        assertTrue(issues.isEmpty(), "Expected no issues when node has a key property")
+        assertTrue(issues.isEmpty(), "Expected no issues when key property is STRING")
     }
 
     @Test
-    fun `fail when node has no key property`() {
+    fun `pass when key property is INTEGER`() {
         val node = Node(
             labels = Labels(identifier = "Person"),
-            properties = mutableMapOf("name" to Property(type = Neo4jType.STRING))
+            properties = mutableMapOf("id" to Property(type = Neo4jType.INTEGER, key = true))
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateNode(model, "personNode", node, issues)
+
+        assertTrue(issues.isEmpty(), "Expected no issues when key property is INTEGER")
+    }
+
+    @Test
+    fun `fail when key property is FLOAT`() {
+        val node = Node(
+            labels = Labels(identifier = "Person"),
+            properties = mutableMapOf("id" to Property(type = Neo4jType.FLOAT, key = true))
         )
         val issues = mutableListOf<Issue>()
 
         validator.validateNode(model, "personNode", node, issues)
 
         assertEquals(1, issues.size)
-        assertEquals("missing_node_key_property", issues.first().code)
+        assertEquals("invalid_node_key_property_type", issues.first().code)
     }
 }
