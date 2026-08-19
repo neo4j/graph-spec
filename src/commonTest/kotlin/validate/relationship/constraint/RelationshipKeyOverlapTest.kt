@@ -17,10 +17,10 @@
 package validate.relationship.constraint
 
 import model.GraphModel
+import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipConstraint
 import model.relationship.RelationshipTarget
-import model.property.Property
 import model.type.ConstraintType
 import validate.Issue
 import kotlin.test.Test
