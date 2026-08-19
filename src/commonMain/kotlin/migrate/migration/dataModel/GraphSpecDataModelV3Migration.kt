@@ -109,59 +109,38 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     )
 
     internal fun convertKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
-        val keyProperties = mutableSetOf<SchemaMap>()
-        val elements = schema.mapOfMapsOrNull("${singular}s")
-        if (elements != null) {
-            for ((entity, element) in elements) {
-                val properties = element.mapOfMapsOrNull("properties") ?: continue
-                val keys = mutableListOf<SchemaMap>()
-                for ((key, property) in properties) {
-                    if (property.boolOrNull("key") == true) {
-                        keys.add(refOf(key))
+        val list = mutableMapOf<String, List<String>>()
+        for ((entity, element) in schema.mapOfMapsOrNull("${singular}s").orEmpty()) {
+            val keys = element.mapOfMapsOrNull("properties")?.mapNotNull { (key, property) ->
+                if (property.boolOrNull("key") == true) key else null
+            } ?: emptyList()
+            if (keys.isNotEmpty()) {
+                list[entity] = keys
+            }
+            element.mapOfMapsOrNull("constraints")?.forEach { (_, constraint) ->
+                if (constraint.stringOrNull("type") == ConstraintType.KEY.name) {
+                    val keys = constraint.listOrNull("properties")
+                        ?.map { (it as SchemaLiteral).string }
+                        ?: return@forEach
+                    if (keys.isNotEmpty()) {
+                        list[entity] = keys
                     }
-                }
-                if (keys.isNotEmpty()) {
-                    keyProperties.add(
-                        schemaMapOf(
-                            singular to refOf(entity),
-                            "keyProperties" to keys
-                        )
-                    )
-                }
-                val constraints = element.mapOfMapsOrNull("constraints") ?: continue
-                for ((_, constraint) in constraints) {
-                    val type = constraint.stringOrNull("type") ?: continue
-                    if (type != ConstraintType.KEY.name) {
-                        continue
-                    }
-                    val properties = constraint.listOrNull("properties") ?: continue
-                    val keys = properties.map { refOf((it as SchemaLiteral).string) }
-                    keyProperties.add(
-                        schemaMapOf(
-                            singular to refOf(entity),
-                            "keyProperties" to keys
-                        )
-                    )
                 }
             }
         }
-        val mappings = schema.listOfMapsOrNull("mappings") ?: return keyProperties.toList()
-        for (mapping in mappings) {
+        for (mapping in schema.listOfMapsOrNull("mappings").orEmpty()) {
             val entity = mapping.stringOrNull(singular) ?: continue
             val keys = mapping.listOrNull("key") ?: continue
-            if (keys.isEmpty()) {
-                continue
+            if (keys.isNotEmpty()) {
+                list[entity] = keys.map { id -> (id as SchemaLiteral).string }
             }
-            keyProperties.add(
-                schemaMapOf(
-                    singular to refOf(entity),
-                    "keyProperties" to keys.map { id ->
-                        refOf((id as SchemaLiteral).string)
-                    }
-                )
+        }
+        return list.map { (entity, keys) ->
+            schemaMapOf(
+                singular to refOf(entity),
+                "keyProperties" to keys.map { refOf(it) }
             )
         }
-        return keyProperties.toList()
     }
 
     /**
@@ -195,12 +174,12 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val relationshipObjectTypes = mutableListOf<SchemaMap>()
         for ((relId, rel) in relationships) {
             val typeToken = rel.string("type")
-//            var typeId = relTypes[typeToken]
-//            if (typeId == null) {
+            //            var typeId = relTypes[typeToken]
+            //            if (typeId == null) {
             // TODO if we look-up existing tokens then all relationships get combined
             //      if do don't then joint relationships always get separated
             val typeId = "rt:${relationTypes.size}"
-//                relTypes[typeToken] = typeId
+            //                relTypes[typeToken] = typeId
             relationTypes.add(
                 schemaMapOf(
                     "\$id" to typeId,
@@ -208,7 +187,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     "properties" to convertProperties(rel.mapOfMapsOrNull("properties"))
                 )
             )
-//            }
+            //            }
 
             relationshipObjectTypes.add(
                 schemaMapOf(

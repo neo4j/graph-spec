@@ -333,8 +333,6 @@ class GraphSpecDataModelV3MigrationTest {
         val result = migration.convertExtensions(input)
         assertNotNull(result)
 
-        println(result)
-
         val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
         assertEquals(2, nodeKeyProps.size)
         assertEquals("#node1", nodeKeyProps[0].map("node").string("\$ref"))
