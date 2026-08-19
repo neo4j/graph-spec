@@ -221,7 +221,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Type constraints not supported on multiple properties") {
-            migration.convertConstraints(constraints, "L1", "Person", "node")
+            migration.convertConstraints(constraints, "L1", "Person", "node", emptySet())
         }
     }
 
@@ -238,12 +238,25 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertConstraints(constraints, "label1", "Person", "node")
+        val result = migration.convertConstraints(constraints, "label1", "Person", "node", emptySet())
 
         assertNotNull(result)
         val constraint = result["c:1"]
         assertNotNull(constraint)
         assertEquals("UNIQUE", constraint.string("type"))
+        assertEquals("Person", constraint.string("label"))
+        assertEquals(listOf("p1", "p2").toSchemaElement(), constraint.list("properties"))
+    }
+
+    @Test
+    fun `convertConstraints handles key properties`() {
+        val keyProperties = setOf("p1", "p2")
+        val result = migration.convertConstraints(emptyMap(), "label1", "Person", "node", keyProperties)
+
+        assertNotNull(result)
+        val constraint = result["constraint0"]
+        assertNotNull(constraint)
+        assertEquals("KEY", constraint.string("type"))
         assertEquals("Person", constraint.string("label"))
         assertEquals(listOf("p1", "p2").toSchemaElement(), constraint.list("properties"))
     }
@@ -321,7 +334,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertProperties(labels, emptySet())
+        val result = migration.convertProperties(labels)
 
         assertEquals("STRING", result["p1"]?.string("type"))
         assertEquals("INTEGER", result["p2"]?.string("type"))
@@ -356,7 +369,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertProperties(labels, emptySet())
+        val result = migration.convertProperties(labels)
 
         assertEquals("LIST<STRING>", result["arrProp"]?.string("type"))
         assertEquals("VECTOR<FLOAT>", result["vecProp"]?.string("type"))

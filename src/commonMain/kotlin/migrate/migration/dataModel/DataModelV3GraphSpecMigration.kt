@@ -129,15 +129,16 @@ class DataModelV3GraphSpecMigration :
             val labelRef = labelRefs.firstOrNull() // TODO loop all
             val primaryLabel = tokens.first()
             val id = nodeObject.id()
+            val keys = nodeKeys[id] ?: emptySet()
             nodes[id] = schemaMapOf(
                 "labels" to schemaMapOf(
                     "identifier" to primaryLabel,
                     "implied" toNotEmpty tokens.drop(1)
                     // TODO optional
                 ),
-                "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, "node"),
+                "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, "node", keys),
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
-                "properties" toNotEmpty convertProperties(labels, nodeKeys[id] ?: emptySet()),
+                "properties" toNotEmpty convertProperties(labels),
                 "name" to tokens.firstOrNull()
             )
         }
@@ -172,10 +173,21 @@ class DataModelV3GraphSpecMigration :
         constraints: Map<String, List<SchemaMap>>,
         labelRef: String?,
         label: String,
-        type: String
-    ): Map<String, SchemaMap>? {
+        type: String,
+        keyProperties: Set<String>
+    ): Map<String, SchemaMap> {
         var index = 0
-        return constraints[labelRef]?.associate { constraint ->
+        val constraintMap = mutableMapOf<String, SchemaMap>()
+        if (keyProperties.isNotEmpty()) {
+            index++
+            constraintMap["constraint0"] = schemaMapOf(
+                "type" to KEY.name,
+                "label" to label,
+                "properties" to keyProperties,
+                "name" to "${type}Constraint${index - 1}"
+            )
+        }
+        constraints[labelRef]?.forEach { constraint ->
             index++
             val properties = constraint.listOfMapsOrNull("properties")
             val constraintType = constraintType(constraint)
@@ -183,13 +195,14 @@ class DataModelV3GraphSpecMigration :
                 error("Type constraints not supported on multiple properties.")
             }
             val id = constraint.id()
-            id to schemaMapOf(
+            constraintMap[id] = schemaMapOf(
                 "type" to constraintType.name,
                 "label" to label,
                 "properties" toNotEmpty properties?.map { it.ref() },
                 "name" to (constraint.stringOrNull("name") ?: "${type}Constraint${index - 1}")
             )
         }
+        return constraintMap
     }
 
     private fun constraintType(constraint: SchemaMap): ConstraintType {
@@ -214,12 +227,13 @@ class DataModelV3GraphSpecMigration :
             val relationshipType = relationshipTypes[typeRef] ?: error("RelationshipType $typeRef not found")
             val token = relationshipType.string("token")
             val id = objectType.id()
+            val keys = relationshipKeys[id] ?: emptySet()
             relationships[id] = schemaMapOf(
                 "type" to token,
                 "from" to mapOf("node" to objectType.ref("from")),
                 "to" to mapOf("node" to objectType.ref("to")),
-                "properties" to convertProperties(listOf(relationshipType), relationshipKeys[id] ?: emptySet()),
-                "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, "relationship"),
+                "properties" to convertProperties(listOf(relationshipType)),
+                "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, "relationship", keys),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
                 "name" to uniqueRelationshipName(token, uniqueNames)
             )
@@ -240,10 +254,7 @@ class DataModelV3GraphSpecMigration :
         throw IllegalArgumentException("Unable to find unique relationship name for $token")
     }
 
-    internal fun convertProperties(
-        labels: List<SchemaMap>,
-        keyProperties: Set<String> = emptySet()
-    ): Map<String, SchemaMap> = labels
+    internal fun convertProperties(labels: List<SchemaMap>): Map<String, SchemaMap> = labels
         .flatMap { label -> label.listOfMaps("properties") }
         .associate { property ->
             val typeObj = property.map("type")
