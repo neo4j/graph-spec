@@ -117,7 +117,9 @@ class NodeConstraintNameConflictTest {
 
         validator.validateNode(model, "personNode", node, issues)
 
-        assertEquals(1, issues.size)
-        assertEquals("duplicate_node_constraint_name", issues.first().code)
+        assertEquals(2, issues.size)
+        val codes = issues.map { it.code }.toSet()
+        assertTrue("duplicate_node_constraint_name" in codes)
+        assertTrue("duplicate_node_index_name" in codes)
     }
 }

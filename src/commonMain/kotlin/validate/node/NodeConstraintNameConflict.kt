@@ -53,6 +53,18 @@ object NodeConstraintNameConflict : NodeValidation {
                 )
             }
         }
+        for ((indexId, index) in node.indexes) {
+            val name = index.name ?: continue
+            if (name in namesWithError) {
+                issues.add(
+                    Issue(
+                        code = "duplicate_node_index_name",
+                        message = "Index '$indexId' name '$name' conflicts with another index/constraint",
+                        path = "nodes.$nodeId.indexes.$indexId"
+                    )
+                )
+            }
+        }
     }
 
     private fun createPropertyLabelTypeKey(properties: Set<String>, nodeId: String, type: String): String {
