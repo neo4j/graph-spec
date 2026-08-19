@@ -38,7 +38,8 @@ object NodeKeyOverlap : NodeValidation {
                 issues.add(
                     Issue(
                         code = "redundant_node_constraint_key_overlap",
-                        message = "Constraint '$constraintId' (${constraint.type}) is redundant - a KEY constraint already covers the same properties on node '$nodeId'",
+                        message = "Constraint '$constraintId' (${constraint.type}) is redundant - " +
+                            "a KEY constraint already covers the same properties on node '$nodeId'",
                         path = "nodes.$nodeId.constraints.$constraintId"
                     )
                 )
