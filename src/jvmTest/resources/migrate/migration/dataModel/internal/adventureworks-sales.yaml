@@ -4,12 +4,12 @@ nodes:
     labels:
       identifier: "creditcard"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "creditcardid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "cardtype" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "cardnumber" }
-      nodeProperty3: { type: "INTEGER", mustExist: true, name: "expmonth" }
-      nodeProperty4: { type: "INTEGER", mustExist: true, name: "expyear" }
-      nodeProperty5: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "creditcardid" }
+      nodeProperty1: { type: "STRING", name: "cardtype" }
+      nodeProperty2: { type: "STRING", name: "cardnumber" }
+      nodeProperty3: { type: "INTEGER", name: "expmonth" }
+      nodeProperty4: { type: "INTEGER", name: "expyear" }
+      nodeProperty5: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -27,8 +27,8 @@ nodes:
     labels:
       identifier: "currency"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "currencycode" }
-      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "STRING", name: "currencycode" }
+      nodeProperty1: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -46,11 +46,11 @@ nodes:
     labels:
       identifier: "currencyrate"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "currencyrateid" }
-      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "currencyratedate" }
-      nodeProperty2: { type: "FLOAT", mustExist: true, name: "averagerate" }
-      nodeProperty3: { type: "FLOAT", mustExist: true, name: "endofdayrate" }
-      nodeProperty4: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "currencyrateid" }
+      nodeProperty1: { type: "ZONED DATETIME", name: "currencyratedate" }
+      nodeProperty2: { type: "FLOAT", name: "averagerate" }
+      nodeProperty3: { type: "FLOAT", name: "endofdayrate" }
+      nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -68,9 +68,9 @@ nodes:
     labels:
       identifier: "customer"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "customerid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "rowguid" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "customerid" }
+      nodeProperty1: { type: "STRING", name: "rowguid" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -88,20 +88,20 @@ nodes:
     labels:
       identifier: "salesorderheader"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "salesorderid" }
-      nodeProperty1: { type: "INTEGER", mustExist: true, name: "revisionnumber" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "orderdate" }
-      nodeProperty3: { type: "ZONED DATETIME", mustExist: true, name: "duedate" }
-      nodeProperty4: { type: "ZONED DATETIME", mustExist: true, name: "shipdate" }
-      nodeProperty5: { type: "INTEGER", mustExist: true, name: "status" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "creditcardapprovalcode" }
-      nodeProperty7: { type: "FLOAT", mustExist: true, name: "subtotal" }
-      nodeProperty8: { type: "FLOAT", mustExist: true, name: "taxamt" }
-      nodeProperty9: { type: "FLOAT", mustExist: true, name: "freight" }
-      nodeProperty10: { type: "FLOAT", mustExist: true, name: "totaldue" }
-      nodeProperty11: { type: "STRING", mustExist: true, name: "comment" }
-      nodeProperty12: { type: "STRING", mustExist: true, name: "rowguid" }
-      nodeProperty13: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "salesorderid" }
+      nodeProperty1: { type: "INTEGER", name: "revisionnumber" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "orderdate" }
+      nodeProperty3: { type: "ZONED DATETIME", name: "duedate" }
+      nodeProperty4: { type: "ZONED DATETIME", name: "shipdate" }
+      nodeProperty5: { type: "INTEGER", name: "status" }
+      nodeProperty6: { type: "STRING", name: "creditcardapprovalcode" }
+      nodeProperty7: { type: "FLOAT", name: "subtotal" }
+      nodeProperty8: { type: "FLOAT", name: "taxamt" }
+      nodeProperty9: { type: "FLOAT", name: "freight" }
+      nodeProperty10: { type: "FLOAT", name: "totaldue" }
+      nodeProperty11: { type: "STRING", name: "comment" }
+      nodeProperty12: { type: "STRING", name: "rowguid" }
+      nodeProperty13: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -119,14 +119,14 @@ nodes:
     labels:
       identifier: "salesperson"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "businessentityid" }
-      nodeProperty1: { type: "FLOAT", mustExist: true, name: "salesquota" }
-      nodeProperty2: { type: "FLOAT", mustExist: true, name: "bonus" }
-      nodeProperty3: { type: "FLOAT", mustExist: true, name: "commissionpct" }
-      nodeProperty4: { type: "FLOAT", mustExist: true, name: "salesytd" }
-      nodeProperty5: { type: "FLOAT", mustExist: true, name: "saleslastyear" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "rowguid" }
-      nodeProperty7: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "businessentityid" }
+      nodeProperty1: { type: "FLOAT", name: "salesquota" }
+      nodeProperty2: { type: "FLOAT", name: "bonus" }
+      nodeProperty3: { type: "FLOAT", name: "commissionpct" }
+      nodeProperty4: { type: "FLOAT", name: "salesytd" }
+      nodeProperty5: { type: "FLOAT", name: "saleslastyear" }
+      nodeProperty6: { type: "STRING", name: "rowguid" }
+      nodeProperty7: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -144,8 +144,8 @@ nodes:
     labels:
       identifier: "salesreason"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "salesreasonid" }
-      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "salesreasonid" }
+      nodeProperty1: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -163,11 +163,11 @@ nodes:
     labels:
       identifier: "salestaxrate"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "salestaxrateid" }
-      nodeProperty1: { type: "INTEGER", mustExist: true, name: "taxtype" }
-      nodeProperty2: { type: "FLOAT", mustExist: true, name: "taxrate" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "rowguid" }
-      nodeProperty4: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "salestaxrateid" }
+      nodeProperty1: { type: "INTEGER", name: "taxtype" }
+      nodeProperty2: { type: "FLOAT", name: "taxrate" }
+      nodeProperty3: { type: "STRING", name: "rowguid" }
+      nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -185,14 +185,14 @@ nodes:
     labels:
       identifier: "salesterritory"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "territoryid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "group" }
-      nodeProperty2: { type: "FLOAT", mustExist: true, name: "salesytd" }
-      nodeProperty3: { type: "FLOAT", mustExist: true, name: "saleslastyear" }
-      nodeProperty4: { type: "FLOAT", mustExist: true, name: "costytd" }
-      nodeProperty5: { type: "FLOAT", mustExist: true, name: "costlastyear" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "rowguid" }
-      nodeProperty7: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "territoryid" }
+      nodeProperty1: { type: "STRING", name: "group" }
+      nodeProperty2: { type: "FLOAT", name: "salesytd" }
+      nodeProperty3: { type: "FLOAT", name: "saleslastyear" }
+      nodeProperty4: { type: "FLOAT", name: "costytd" }
+      nodeProperty5: { type: "FLOAT", name: "costlastyear" }
+      nodeProperty6: { type: "STRING", name: "rowguid" }
+      nodeProperty7: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -210,11 +210,11 @@ nodes:
     labels:
       identifier: "shoppingcartitem"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "shoppingcartitemid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "shoppingcartid" }
-      nodeProperty2: { type: "INTEGER", mustExist: true, name: "quantity" }
-      nodeProperty3: { type: "ZONED DATETIME", mustExist: true, name: "datecreated" }
-      nodeProperty4: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "shoppingcartitemid" }
+      nodeProperty1: { type: "STRING", name: "shoppingcartid" }
+      nodeProperty2: { type: "INTEGER", name: "quantity" }
+      nodeProperty3: { type: "ZONED DATETIME", name: "datecreated" }
+      nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -232,17 +232,17 @@ nodes:
     labels:
       identifier: "specialoffer"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "specialofferid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "description" }
-      nodeProperty2: { type: "FLOAT", mustExist: true, name: "discountpct" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "type" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "category" }
-      nodeProperty5: { type: "ZONED DATETIME", mustExist: true, name: "startdate" }
-      nodeProperty6: { type: "ZONED DATETIME", mustExist: true, name: "enddate" }
-      nodeProperty7: { type: "INTEGER", mustExist: true, name: "minqty" }
-      nodeProperty8: { type: "INTEGER", mustExist: true, name: "maxqty" }
-      nodeProperty9: { type: "STRING", mustExist: true, name: "rowguid" }
-      nodeProperty10: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "specialofferid" }
+      nodeProperty1: { type: "STRING", name: "description" }
+      nodeProperty2: { type: "FLOAT", name: "discountpct" }
+      nodeProperty3: { type: "STRING", name: "type" }
+      nodeProperty4: { type: "STRING", name: "category" }
+      nodeProperty5: { type: "ZONED DATETIME", name: "startdate" }
+      nodeProperty6: { type: "ZONED DATETIME", name: "enddate" }
+      nodeProperty7: { type: "INTEGER", name: "minqty" }
+      nodeProperty8: { type: "INTEGER", name: "maxqty" }
+      nodeProperty9: { type: "STRING", name: "rowguid" }
+      nodeProperty10: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -260,9 +260,9 @@ nodes:
     labels:
       identifier: "store"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "businessentityid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "rowguid" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      nodeProperty0: { type: "INTEGER", name: "businessentityid" }
+      nodeProperty1: { type: "STRING", name: "rowguid" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -317,7 +317,7 @@ relationships:
     from: { node: "node4" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "ZONED DATETIME", mustExist: true, name: "modifieddate" }
+      relationshipProperty0: { type: "ZONED DATETIME", name: "modifieddate" }
     name: "SALESREASON"
   relationship8:
     type: "SALESTERRITORY"

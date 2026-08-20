@@ -4,10 +4,10 @@ nodes:
     labels:
       identifier: "actor"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "actor_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "first_name" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "last_name" }
-      nodeProperty3: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "actor_id" }
+      nodeProperty1: { type: "STRING", name: "first_name" }
+      nodeProperty2: { type: "STRING", name: "last_name" }
+      nodeProperty3: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -25,13 +25,13 @@ nodes:
     labels:
       identifier: "address"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "address_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "address" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "address2" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "district" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "postal_code" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "phone" }
-      nodeProperty6: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "address_id" }
+      nodeProperty1: { type: "STRING", name: "address" }
+      nodeProperty2: { type: "STRING", name: "address2" }
+      nodeProperty3: { type: "STRING", name: "district" }
+      nodeProperty4: { type: "STRING", name: "postal_code" }
+      nodeProperty5: { type: "STRING", name: "phone" }
+      nodeProperty6: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -49,9 +49,9 @@ nodes:
     labels:
       identifier: "category"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "category_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "category_id" }
+      nodeProperty1: { type: "STRING", name: "name" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -69,9 +69,9 @@ nodes:
     labels:
       identifier: "city"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "city_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "city" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "city_id" }
+      nodeProperty1: { type: "STRING", name: "city" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -89,9 +89,9 @@ nodes:
     labels:
       identifier: "country"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "country_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "country" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "country_id" }
+      nodeProperty1: { type: "STRING", name: "country" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -109,15 +109,15 @@ nodes:
     labels:
       identifier: "customer"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "customer_id" }
-      nodeProperty1: { type: "INTEGER", mustExist: true, name: "store_id" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "first_name" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "last_name" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "email" }
-      nodeProperty5: { type: "BOOLEAN", mustExist: true, name: "activebool" }
-      nodeProperty6: { type: "DATE", mustExist: true, name: "create_date" }
-      nodeProperty7: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
-      nodeProperty8: { type: "INTEGER", mustExist: true, name: "active" }
+      nodeProperty0: { type: "INTEGER", name: "customer_id" }
+      nodeProperty1: { type: "INTEGER", name: "store_id" }
+      nodeProperty2: { type: "STRING", name: "first_name" }
+      nodeProperty3: { type: "STRING", name: "last_name" }
+      nodeProperty4: { type: "STRING", name: "email" }
+      nodeProperty5: { type: "BOOLEAN", name: "activebool" }
+      nodeProperty6: { type: "DATE", name: "create_date" }
+      nodeProperty7: { type: "ZONED DATETIME", name: "last_update" }
+      nodeProperty8: { type: "INTEGER", name: "active" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -135,15 +135,15 @@ nodes:
     labels:
       identifier: "film"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "film_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "title" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "description" }
-      nodeProperty3: { type: "INTEGER", mustExist: true, name: "rental_duration" }
-      nodeProperty4: { type: "FLOAT", mustExist: true, name: "rental_rate" }
-      nodeProperty5: { type: "INTEGER", mustExist: true, name: "length" }
-      nodeProperty6: { type: "FLOAT", mustExist: true, name: "replacement_cost" }
-      nodeProperty7: { type: "STRING", mustExist: true, name: "rating" }
-      nodeProperty8: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "film_id" }
+      nodeProperty1: { type: "STRING", name: "title" }
+      nodeProperty2: { type: "STRING", name: "description" }
+      nodeProperty3: { type: "INTEGER", name: "rental_duration" }
+      nodeProperty4: { type: "FLOAT", name: "rental_rate" }
+      nodeProperty5: { type: "INTEGER", name: "length" }
+      nodeProperty6: { type: "FLOAT", name: "replacement_cost" }
+      nodeProperty7: { type: "STRING", name: "rating" }
+      nodeProperty8: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -161,9 +161,9 @@ nodes:
     labels:
       identifier: "inventory"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "inventory_id" }
-      nodeProperty1: { type: "INTEGER", mustExist: true, name: "store_id" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "inventory_id" }
+      nodeProperty1: { type: "INTEGER", name: "store_id" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -181,9 +181,9 @@ nodes:
     labels:
       identifier: "language"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "language_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "language_id" }
+      nodeProperty1: { type: "STRING", name: "name" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -201,9 +201,9 @@ nodes:
     labels:
       identifier: "payment"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "payment_id" }
-      nodeProperty1: { type: "FLOAT", mustExist: true, name: "amount" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "payment_date" }
+      nodeProperty0: { type: "INTEGER", name: "payment_id" }
+      nodeProperty1: { type: "FLOAT", name: "amount" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "payment_date" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -221,10 +221,10 @@ nodes:
     labels:
       identifier: "rental"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "rental_id" }
-      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "rental_date" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "return_date" }
-      nodeProperty3: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "rental_id" }
+      nodeProperty1: { type: "ZONED DATETIME", name: "rental_date" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "return_date" }
+      nodeProperty3: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -242,15 +242,15 @@ nodes:
     labels:
       identifier: "staff"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "staff_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "first_name" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "last_name" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "email" }
-      nodeProperty4: { type: "INTEGER", mustExist: true, name: "store_id" }
-      nodeProperty5: { type: "BOOLEAN", mustExist: true, name: "active" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "username" }
-      nodeProperty7: { type: "STRING", mustExist: true, name: "password" }
-      nodeProperty8: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "staff_id" }
+      nodeProperty1: { type: "STRING", name: "first_name" }
+      nodeProperty2: { type: "STRING", name: "last_name" }
+      nodeProperty3: { type: "STRING", name: "email" }
+      nodeProperty4: { type: "INTEGER", name: "store_id" }
+      nodeProperty5: { type: "BOOLEAN", name: "active" }
+      nodeProperty6: { type: "STRING", name: "username" }
+      nodeProperty7: { type: "STRING", name: "password" }
+      nodeProperty8: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -268,8 +268,8 @@ nodes:
     labels:
       identifier: "store"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "store_id" }
-      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      nodeProperty0: { type: "INTEGER", name: "store_id" }
+      nodeProperty1: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
@@ -309,14 +309,14 @@ relationships:
     from: { node: "node0" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      relationshipProperty0: { type: "ZONED DATETIME", name: "last_update" }
     name: "RELATED_TO_FILM"
   relationship5:
     type: "RELATED_TO_FILM"
     from: { node: "node2" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "ZONED DATETIME", mustExist: true, name: "last_update" }
+      relationshipProperty0: { type: "ZONED DATETIME", name: "last_update" }
     name: "RELATED_TO_FILM2"
   relationship6:
     type: "RELATED_TO_FILM"

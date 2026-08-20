@@ -4,9 +4,9 @@ nodes:
     labels:
       identifier: "document"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "documentid" }
-      nodeProperty1: { type: "VECTOR<FLOAT>", dimension: 123, mustExist: true, name: "embedding" }
-      nodeProperty2: { type: "VECTOR<FLOAT>", mustExist: true, name: "legacyembedding" }
+      nodeProperty0: { type: "INTEGER", name: "documentid" }
+      nodeProperty1: { type: "VECTOR<FLOAT>", dimension: 123, name: "embedding" }
+      nodeProperty2: { type: "VECTOR<FLOAT>", name: "legacyembedding" }
     indexes:
       nodeIndex0:
         type: "VECTOR"
