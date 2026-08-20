@@ -86,6 +86,12 @@ object Internal {
         Pretty.renameTargetNodeProperties(this, renames)
     }
 
+    /**
+     * Converts shorthand constraints into long-hand
+     * 1. Doesn't check or transform (e.g. for overlapping)
+     * 2. Should be called before other internal calls to avoid using
+     *  internal names in predictableId
+     */
     private fun <C : Constraint> internaliseProperties(
         constraints: MutableMap<String, C>,
         properties: MutableMap<String, Property>,
@@ -95,10 +101,12 @@ object Internal {
             if (property.key == true) {
                 property.key = null
                 addConstraint(constraints, key, constraint, ConstraintType.KEY)
-            } else if (property.unique == true) {
+            }
+            if (property.unique == true) {
                 property.unique = null
                 addConstraint(constraints, key, constraint, ConstraintType.UNIQUE)
-            } else if (property.mustExist == true) {
+            }
+            if (property.mustExist == true) {
                 property.mustExist = null
                 addConstraint(constraints, key, constraint, ConstraintType.EXISTS)
             }

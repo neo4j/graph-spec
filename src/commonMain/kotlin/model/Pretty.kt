@@ -34,7 +34,7 @@ import kotlin.collections.component2
  */
 object Pretty {
     fun prettify(model: GraphModel) {
-        // Property changes must occur before labels as constraints reference label long-hands
+        // Property changes must occur before labels as constraints reference label long-handed location.
         model.prettifyNodeProperties()
         model.prettifyNodeLabels()
         model.prettifyNodes()
@@ -124,6 +124,12 @@ object Pretty {
         renameTargetNodeProperties(this, renames)
     }
 
+    /**
+     * Converts longhand constraints into shorthand if they meet the right
+     * [check] conditions.
+     * Note: Must be called after other prettify calls to avoid issues
+     * with property id resolving
+     */
     private fun <C : Constraint> prettifyProperties(
         constraints: MutableMap<String, C>,
         properties: MutableMap<String, Property>,
