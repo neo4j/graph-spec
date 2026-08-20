@@ -114,7 +114,7 @@ class DataModelV3GraphSpecMigration :
     internal fun migrateNodes(
         schema: SchemaMap,
         constraints: Map<String, List<SchemaMap>>,
-        indexes: Map<String, List<SchemaMap>>,
+        indexes: Map<String, List<SchemaMap>>
     ): MutableMap<String, SchemaMap> {
         val nodes = mutableMapOf<String, SchemaMap>()
         val nodeLabels = schema.listOfMapsOrNull("nodeLabels")?.associateBy { it.id() } ?: return nodes
@@ -171,7 +171,7 @@ class DataModelV3GraphSpecMigration :
         constraints: Map<String, List<SchemaMap>>,
         labelRef: String?,
         label: String,
-        type: String,
+        type: String
     ): Map<String, SchemaMap>? {
         var index = 0
         return constraints[labelRef]?.associate { constraint ->
@@ -200,7 +200,7 @@ class DataModelV3GraphSpecMigration :
     internal fun migrateRelationships(
         schema: SchemaMap,
         constraints: Map<String, List<SchemaMap>>,
-        indexes: Map<String, List<SchemaMap>>,
+        indexes: Map<String, List<SchemaMap>>
     ): MutableMap<String, SchemaMap> {
         val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()

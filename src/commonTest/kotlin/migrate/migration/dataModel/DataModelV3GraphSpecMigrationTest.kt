@@ -288,7 +288,7 @@ class DataModelV3GraphSpecMigrationTest {
         val result = migration.migrateRelationships(
             graphSchema,
             constraints,
-            emptyMap(),
+            emptyMap()
         )
 
         assertTrue(result.containsKey("relObj1"))
