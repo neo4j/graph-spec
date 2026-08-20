@@ -3,9 +3,9 @@ nodes:
   Aircraft:
     label: "Aircraft"
     properties:
-      aircraftCode: { type: "STRING", key: true }
-      model: { type: "STRING", mustExist: true }
-      aircraftRange: { type: "INTEGER", mustExist: true }
+      aircraftCode: { type: "STRING" }
+      model: { type: "STRING" }
+      aircraftRange: { type: "INTEGER" }
     constraints:
       aircrafts_data:
         type: "UNIQUE"
@@ -19,11 +19,11 @@ nodes:
   Airport:
     label: "Airport"
     properties:
-      airportCode: { type: "STRING", key: true }
-      airportName: { type: "STRING", mustExist: true }
-      city: { type: "STRING", mustExist: true }
-      coordinates: { type: "POINT", mustExist: true }
-      timezone: { type: "STRING", mustExist: true }
+      airportCode: { type: "STRING" }
+      airportName: { type: "STRING" }
+      city: { type: "STRING" }
+      coordinates: { type: "POINT" }
+      timezone: { type: "STRING" }
     constraints:
       airports_data:
         type: "UNIQUE"
@@ -37,9 +37,9 @@ nodes:
   Booking:
     label: "Booking"
     properties:
-      bookRef: { type: "STRING", key: true }
-      bookDate: { type: "ZONED DATETIME", mustExist: true }
-      totalAmount: { type: "FLOAT", mustExist: true }
+      bookRef: { type: "STRING" }
+      bookDate: { type: "ZONED DATETIME" }
+      totalAmount: { type: "FLOAT" }
     constraints:
       bookings:
         type: "UNIQUE"
@@ -53,13 +53,13 @@ nodes:
   Flight:
     label: "Flight"
     properties:
-      flightId: { type: "INTEGER", key: true }
-      flightNo: { type: "STRING", mustExist: true }
-      scheduledDeparture: { type: "ZONED DATETIME", mustExist: true }
-      scheduledArrival: { type: "ZONED DATETIME", mustExist: true }
-      status: { type: "STRING", mustExist: true }
-      actualDeparture: { type: "ZONED DATETIME", mustExist: true }
-      actualArrival: { type: "ZONED DATETIME", mustExist: true }
+      flightId: { type: "INTEGER" }
+      flightNo: { type: "STRING" }
+      scheduledDeparture: { type: "ZONED DATETIME" }
+      scheduledArrival: { type: "ZONED DATETIME" }
+      status: { type: "STRING" }
+      actualDeparture: { type: "ZONED DATETIME" }
+      actualArrival: { type: "ZONED DATETIME" }
     constraints:
       flights:
         type: "UNIQUE"
@@ -73,10 +73,10 @@ nodes:
   Ticket:
     label: "Ticket"
     properties:
-      ticketNo: { type: "STRING", key: true }
-      passengerId: { type: "STRING", mustExist: true }
-      passengerName: { type: "STRING", mustExist: true }
-      contactData: { type: "STRING", mustExist: true }
+      ticketNo: { type: "STRING" }
+      passengerId: { type: "STRING" }
+      passengerName: { type: "STRING" }
+      contactData: { type: "STRING" }
     constraints:
       tickets:
         type: "UNIQUE"
@@ -105,8 +105,8 @@ relationships:
     from: { node: "Flight" }
     to: { node: "Ticket" }
     properties:
-      fare_conditions: { type: "STRING", mustExist: true }
-      amount: { type: "FLOAT", mustExist: true }
+      fare_conditions: { type: "STRING" }
+      amount: { type: "FLOAT" }
   TICKET_BELONGS_TO_BOOKING:
     type: "TICKET_BELONGS_TO_BOOKING"
     from: { node: "Ticket" }

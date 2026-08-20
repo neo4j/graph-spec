@@ -3,10 +3,10 @@ nodes:
   actor:
     label: "actor"
     properties:
-      actor_id: { type: "INTEGER", key: true }
-      first_name: { type: "STRING", mustExist: true }
-      last_name: { type: "STRING", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      actor_id: { type: "INTEGER" }
+      first_name: { type: "STRING" }
+      last_name: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       actor:
         type: "UNIQUE"
@@ -20,13 +20,13 @@ nodes:
   address:
     label: "address"
     properties:
-      address_id: { type: "INTEGER", key: true }
-      address: { type: "STRING", mustExist: true }
-      address2: { type: "STRING", mustExist: true }
-      district: { type: "STRING", mustExist: true }
-      postal_code: { type: "STRING", mustExist: true }
-      phone: { type: "STRING", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      address_id: { type: "INTEGER" }
+      address: { type: "STRING" }
+      address2: { type: "STRING" }
+      district: { type: "STRING" }
+      postal_code: { type: "STRING" }
+      phone: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       address:
         type: "UNIQUE"
@@ -40,9 +40,9 @@ nodes:
   category:
     label: "category"
     properties:
-      category_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      category_id: { type: "INTEGER" }
+      name: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       category:
         type: "UNIQUE"
@@ -56,9 +56,9 @@ nodes:
   city:
     label: "city"
     properties:
-      city_id: { type: "INTEGER", key: true }
-      city: { type: "STRING", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      city_id: { type: "INTEGER" }
+      city: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       city:
         type: "UNIQUE"
@@ -72,9 +72,9 @@ nodes:
   country:
     label: "country"
     properties:
-      country_id: { type: "INTEGER", key: true }
-      country: { type: "STRING", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      country_id: { type: "INTEGER" }
+      country: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       country:
         type: "UNIQUE"
@@ -88,15 +88,15 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER", key: true }
-      store_id: { type: "INTEGER", mustExist: true }
-      first_name: { type: "STRING", mustExist: true }
-      last_name: { type: "STRING", mustExist: true }
-      email: { type: "STRING", mustExist: true }
-      activebool: { type: "BOOLEAN", mustExist: true }
-      create_date: { type: "DATE", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
-      active: { type: "INTEGER", mustExist: true }
+      customer_id: { type: "INTEGER" }
+      store_id: { type: "INTEGER" }
+      first_name: { type: "STRING" }
+      last_name: { type: "STRING" }
+      email: { type: "STRING" }
+      activebool: { type: "BOOLEAN" }
+      create_date: { type: "DATE" }
+      last_update: { type: "ZONED DATETIME" }
+      active: { type: "INTEGER" }
     constraints:
       customer:
         type: "UNIQUE"
@@ -110,15 +110,15 @@ nodes:
   film:
     label: "film"
     properties:
-      film_id: { type: "INTEGER", key: true }
-      title: { type: "STRING", mustExist: true }
-      description: { type: "STRING", mustExist: true }
-      rental_duration: { type: "INTEGER", mustExist: true }
-      rental_rate: { type: "FLOAT", mustExist: true }
-      length: { type: "INTEGER", mustExist: true }
-      replacement_cost: { type: "FLOAT", mustExist: true }
-      rating: { type: "STRING", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      film_id: { type: "INTEGER" }
+      title: { type: "STRING" }
+      description: { type: "STRING" }
+      rental_duration: { type: "INTEGER" }
+      rental_rate: { type: "FLOAT" }
+      length: { type: "INTEGER" }
+      replacement_cost: { type: "FLOAT" }
+      rating: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       film:
         type: "UNIQUE"
@@ -132,9 +132,9 @@ nodes:
   inventory:
     label: "inventory"
     properties:
-      inventory_id: { type: "INTEGER", key: true }
-      store_id: { type: "INTEGER", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      inventory_id: { type: "INTEGER" }
+      store_id: { type: "INTEGER" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       inventory:
         type: "UNIQUE"
@@ -148,9 +148,9 @@ nodes:
   language:
     label: "language"
     properties:
-      language_id: { type: "INTEGER", key: true }
-      name: { type: "STRING", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      language_id: { type: "INTEGER" }
+      name: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       language:
         type: "UNIQUE"
@@ -164,9 +164,9 @@ nodes:
   payment:
     label: "payment"
     properties:
-      payment_id: { type: "INTEGER", key: true }
-      amount: { type: "FLOAT", mustExist: true }
-      payment_date: { type: "ZONED DATETIME", mustExist: true }
+      payment_id: { type: "INTEGER" }
+      amount: { type: "FLOAT" }
+      payment_date: { type: "ZONED DATETIME" }
     constraints:
       payment:
         type: "UNIQUE"
@@ -180,10 +180,10 @@ nodes:
   rental:
     label: "rental"
     properties:
-      rental_id: { type: "INTEGER", key: true }
-      rental_date: { type: "ZONED DATETIME", mustExist: true }
-      return_date: { type: "ZONED DATETIME", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      rental_id: { type: "INTEGER" }
+      rental_date: { type: "ZONED DATETIME" }
+      return_date: { type: "ZONED DATETIME" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       rental:
         type: "UNIQUE"
@@ -197,15 +197,15 @@ nodes:
   staff:
     label: "staff"
     properties:
-      staff_id: { type: "INTEGER", key: true }
-      first_name: { type: "STRING", mustExist: true }
-      last_name: { type: "STRING", mustExist: true }
-      email: { type: "STRING", mustExist: true }
-      store_id: { type: "INTEGER", mustExist: true }
-      active: { type: "BOOLEAN", mustExist: true }
-      username: { type: "STRING", mustExist: true }
-      password: { type: "STRING", mustExist: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      staff_id: { type: "INTEGER" }
+      first_name: { type: "STRING" }
+      last_name: { type: "STRING" }
+      email: { type: "STRING" }
+      store_id: { type: "INTEGER" }
+      active: { type: "BOOLEAN" }
+      username: { type: "STRING" }
+      password: { type: "STRING" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       staff:
         type: "UNIQUE"
@@ -219,8 +219,8 @@ nodes:
   store:
     label: "store"
     properties:
-      store_id: { type: "INTEGER", key: true }
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      store_id: { type: "INTEGER" }
+      last_update: { type: "ZONED DATETIME" }
     constraints:
       store:
         type: "UNIQUE"
@@ -253,13 +253,13 @@ relationships:
     from: { node: "actor" }
     to: { node: "film" }
     properties:
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      last_update: { type: "ZONED DATETIME" }
   RELATED_TO_FILM2:
     type: "RELATED_TO_FILM"
     from: { node: "category" }
     to: { node: "film" }
     properties:
-      last_update: { type: "ZONED DATETIME", mustExist: true }
+      last_update: { type: "ZONED DATETIME" }
   RELATED_TO_FILM3:
     type: "RELATED_TO_FILM"
     from: { node: "inventory" }
