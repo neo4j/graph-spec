@@ -18,6 +18,11 @@ package model
 
 import model.Rename.identify
 import model.Rename.rename
+import model.node.Constraint
+import model.node.NodeConstraint
+import model.property.Property
+import model.relationship.RelationshipConstraint
+import model.type.ConstraintType
 import model.type.Named
 
 /**
@@ -69,9 +74,36 @@ object Internal {
             renames.putAll(propertyRenames)
             node.constraints.values.forEach { it.properties.rename(renames, key) }
             node.indexes.values.forEach { it.properties.rename(renames, key) }
+            internaliseProperties(node.constraints, node.properties) { type, props ->
+                NodeConstraint(
+                    type,
+                    node.labels.identifier,
+                    props
+                )
+            }
         }
         Pretty.renameNodeMappingProperties(this, renames)
         Pretty.renameTargetNodeProperties(this, renames)
+    }
+
+    private fun <C : Constraint> internaliseProperties(
+        constraints: MutableMap<String, C>,
+        properties: MutableMap<String, Property>,
+        constraint: (type: ConstraintType, properties: MutableSet<String>) -> C
+    ) {
+        for ((key, property) in properties) {
+            if (property.key == true) {
+                property.key = null
+                // TODO proper predictable id
+                constraints["key_constraint_$key"] = constraint(ConstraintType.KEY, mutableSetOf(key))
+            } else if (property.unique == true) {
+                property.unique = null
+                constraints["unique_constraint_$key"] = constraint(ConstraintType.UNIQUE, mutableSetOf(key))
+            } else if (property.mustExist == true) {
+                property.mustExist = null
+                constraints["exists_constraint_$key"] = constraint(ConstraintType.EXISTS, mutableSetOf(key))
+            }
+        }
     }
 
     /*
@@ -94,6 +126,9 @@ object Internal {
             renames.putAll(propertyRenames)
             relationship.constraints.values.forEach { it.properties.rename(renames, key) }
             relationship.indexes.values.forEach { it.properties.rename(renames, key) }
+            internaliseProperties(relationship.constraints, relationship.properties) { type, props ->
+                RelationshipConstraint(type, props)
+            }
         }
         Pretty.renameRelationshipMappingProperties(this, renames)
     }

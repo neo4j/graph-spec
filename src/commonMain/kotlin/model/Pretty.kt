@@ -20,6 +20,11 @@ import model.Rename.prettify
 import model.Rename.rename
 import model.mapping.NodeMapping
 import model.mapping.RelationshipMapping
+import model.node.Constraint
+import model.node.Node
+import model.property.Property
+import model.relationship.Relationship
+import model.type.ConstraintType
 import model.type.Named
 import kotlin.collections.component1
 import kotlin.collections.component2
@@ -109,9 +114,39 @@ object Pretty {
             node.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
+            prettifyProperties(node.constraints, node.properties) { constraint ->
+                node.labels.identifier ==
+                    constraint.label
+            }
         }
         renameNodeMappingProperties(this, renames)
         renameTargetNodeProperties(this, renames)
+    }
+
+    private fun <C : Constraint> prettifyProperties(
+        constraints: MutableMap<String, C>,
+        properties: MutableMap<String, Property>,
+        check: (C) -> Boolean = {
+            true
+        }
+    ) {
+        val prettifiedConstraints = mutableSetOf<String>()
+        for ((key, constraint) in constraints) {
+            if (constraint.properties.size == 1 && check(constraint)) { // TODO and using generated constraint name
+                val propertyId = constraint.properties.first()
+                val property = properties[propertyId] ?: continue
+                when (constraint.type) {
+                    ConstraintType.EXISTS -> property.mustExist = true
+                    ConstraintType.KEY -> property.key = true
+                    ConstraintType.UNIQUE -> property.unique = true
+                    else -> continue
+                }
+                prettifiedConstraints.add(key)
+            }
+        }
+        prettifiedConstraints.forEach { key ->
+            constraints.remove(key)
+        }
     }
 
     internal fun renameTargetNodeProperties(model: GraphModel, renames: MutableMap<String, String>) {
@@ -165,6 +200,7 @@ object Pretty {
             relationship.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
+            prettifyProperties(relationship.constraints, relationship.properties)
         }
         renameRelationshipMappingProperties(this, renames)
     }
