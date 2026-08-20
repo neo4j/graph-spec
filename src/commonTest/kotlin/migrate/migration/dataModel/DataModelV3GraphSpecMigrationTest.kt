@@ -111,7 +111,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyMap())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap())
 
         val node = nodes["nodeObj"]
         assertNotNull(node)
@@ -148,7 +148,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), mapOf("nodeObj1" to setOf("prop1")))
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap())
 
         val migratedNode = nodes["nodeObj1"]
         assertNotNull(migratedNode)
@@ -220,7 +220,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Type constraints not supported on multiple properties") {
-            migration.convertConstraints(constraints, "L1", "Person", "node", emptySet())
+            migration.convertConstraints(constraints, "L1", "Person", "node")
         }
     }
 
@@ -237,25 +237,12 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertConstraints(constraints, "label1", "Person", "node", emptySet())
+        val result = migration.convertConstraints(constraints, "label1", "Person", "node")
 
         assertNotNull(result)
         val constraint = result["c:1"]
         assertNotNull(constraint)
         assertEquals("UNIQUE", constraint.string("type"))
-        assertEquals("Person", constraint.string("label"))
-        assertEquals(listOf("p1", "p2").toSchemaElement(), constraint.list("properties"))
-    }
-
-    @Test
-    fun `convertConstraints handles key properties`() {
-        val keyProperties = setOf("p1", "p2")
-        val result = migration.convertConstraints(emptyMap(), "label1", "Person", "node", keyProperties)
-
-        assertNotNull(result)
-        val constraint = result["constraint0"]
-        assertNotNull(constraint)
-        assertEquals("KEY", constraint.string("type"))
         assertEquals("Person", constraint.string("label"))
         assertEquals(listOf("p1", "p2").toSchemaElement(), constraint.list("properties"))
     }
@@ -302,7 +289,6 @@ class DataModelV3GraphSpecMigrationTest {
             graphSchema,
             constraints,
             emptyMap(),
-            mapOf("relObj1" to setOf("p1"))
         )
 
         assertTrue(result.containsKey("relObj1"))

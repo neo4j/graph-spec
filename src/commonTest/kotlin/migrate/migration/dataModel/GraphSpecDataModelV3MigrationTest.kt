@@ -291,66 +291,6 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `convertExtensions identifies key properties from constraints`() {
-        val input = schemaMapOf(
-            "nodes" to schemaMapOf(
-                "node1" to schemaMapOf(
-                    "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("key" to true),
-                        "p2" to schemaMapOf("key" to false),
-                        "p3" to schemaMapOf("unique" to true),
-                        "p4" to schemaMapOf()
-                    ),
-                    "constraints" to schemaMapOf(
-                        "p2_const" to schemaMapOf(
-                            "type" to "KEY",
-                            "properties" to schemaListOf("p2")
-                        ),
-                        "p4_const" to schemaMapOf(
-                            "type" to "UNIQUE",
-                            "properties" to schemaListOf("p4")
-                        )
-                    )
-                )
-            ),
-            "relationships" to schemaMapOf(
-                "relationship1" to schemaMapOf(
-                    "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("key" to false),
-                        "p3" to schemaMapOf("unique" to true),
-                        "p2" to schemaMapOf("key" to true)
-                    ),
-                    "constraints" to schemaMapOf(
-                        "p1_const" to schemaMapOf(
-                            "type" to "KEY",
-                            "properties" to schemaListOf("p1")
-                        )
-                    )
-                )
-            )
-        )
-
-        val result = migration.convertExtensions(input)
-        assertNotNull(result)
-
-        val nodeKeyProps = result.listOfMaps("nodeKeyProperties")
-        assertEquals(2, nodeKeyProps.size)
-        assertEquals("#node1", nodeKeyProps[0].map("node").string("\$ref"))
-        val nodeKeys = nodeKeyProps[0].listOfMaps("keyProperties")
-        assertEquals(1, nodeKeys.size)
-        assertEquals("#p1", nodeKeys[0].string("\$ref"))
-        assertEquals("#p2", nodeKeyProps[1].listOfMaps("keyProperties")[0].string("\$ref"))
-
-        val relationshipKeyProps = result.listOfMaps("relationshipKeyProperties")
-        assertEquals(2, relationshipKeyProps.size)
-        assertEquals("#relationship1", relationshipKeyProps[0].map("relationship").string("\$ref"))
-        val relKeys = relationshipKeyProps[0].listOfMaps("keyProperties")
-        assertEquals(1, relKeys.size)
-        assertEquals("#p2", relKeys[0].string("\$ref"))
-        assertEquals("#p1", relationshipKeyProps[1].listOfMaps("keyProperties")[0].string("\$ref"))
-    }
-
-    @Test
     fun `convertSourceSchema handles complex foreign keys correctly`() {
         val input = schemaMapOf(
             "tables" to schemaMapOf(
