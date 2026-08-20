@@ -26,6 +26,7 @@ import model.node.NodeConstraint
 import model.node.NodeIndex
 import model.property.Property
 import model.relationship.Relationship
+import model.relationship.RelationshipConstraint
 import model.relationship.RelationshipTarget
 import model.type.ConstraintType
 import model.type.IndexType
@@ -186,5 +187,161 @@ class PrettyTest {
         val mapping = model.mappings.first() as NodeMapping
         // Because "node0" isn't matched to a real node to extract its Name, it stays as is.
         assertEquals("node0", mapping.node)
+    }
+
+    @Test
+    fun `test folds single-property node key constraint into property flag`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "node0" to Node(
+                    name = "User",
+                    properties = mutableMapOf("nodeProperty0" to Property(name = "id")),
+                    constraints = mutableMapOf(
+                        "nodeConstraint0" to NodeConstraint(
+                            ConstraintType.KEY,
+                            label = null,
+                            properties = mutableSetOf("nodeProperty0")
+                        )
+                    )
+                )
+            )
+        )
+
+        model.prettify()
+
+        val node = model.nodes["User"]!!
+        val property = node.properties["id"]!!
+        assertEquals(true, property.key, "Key flag should be restored onto the property")
+        assertTrue(node.constraints.isEmpty(), "Folded constraint should be removed")
+    }
+
+    @Test
+    fun `test folds single-property node unique and exists constraints into property flags`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "node0" to Node(
+                    name = "User",
+                    properties = mutableMapOf(
+                        "nodeProperty0" to Property(name = "email"),
+                        "nodeProperty1" to Property(name = "createdAt")
+                    ),
+                    constraints = mutableMapOf(
+                        "nodeConstraint0" to NodeConstraint(
+                            ConstraintType.UNIQUE,
+                            label = null,
+                            properties = mutableSetOf("nodeProperty0")
+                        ),
+                        "nodeConstraint1" to NodeConstraint(
+                            ConstraintType.EXISTS,
+                            label = null,
+                            properties = mutableSetOf("nodeProperty1")
+                        )
+                    )
+                )
+            )
+        )
+
+        model.prettify()
+
+        val node = model.nodes["User"]!!
+        assertEquals(true, node.properties["email"]?.unique, "Unique flag should be restored onto the property")
+        assertEquals(
+            true,
+            node.properties["createdAt"]?.mustExist,
+            "MustExist flag should be restored onto the property"
+        )
+        assertTrue(node.constraints.isEmpty(), "Folded constraints should be removed")
+    }
+
+    @Test
+    fun `test does not fold node constraint whose label differs from the node's identifier`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "node0" to Node(
+                    name = "User",
+                    labels = Labels(identifier = "UserLabel", implied = mutableSetOf("Person")),
+                    properties = mutableMapOf("nodeProperty0" to Property(name = "id")),
+                    constraints = mutableMapOf(
+                        "nodeConstraint0" to NodeConstraint(
+                            ConstraintType.KEY,
+                            label = "Person",
+                            properties = mutableSetOf("nodeProperty0")
+                        )
+                    )
+                )
+            )
+        )
+
+        model.prettify()
+
+        val node = model.nodes["User"]!!
+        assertNull(node.properties["id"]?.key, "Key flag should not be restored when the constraint label differs")
+        assertTrue(node.constraints.containsKey("nodeConstraint0"), "Mismatched constraint should be left in place")
+        assertEquals(
+            mutableSetOf("id"),
+            node.constraints["nodeConstraint0"]?.properties,
+            "Constraint's property reference should still be renamed to the human-readable name"
+        )
+    }
+
+    @Test
+    fun `test does not fold node constraint covering multiple properties`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "node0" to Node(
+                    name = "User",
+                    properties = mutableMapOf(
+                        "nodeProperty0" to Property(name = "first"),
+                        "nodeProperty1" to Property(name = "last")
+                    ),
+                    constraints = mutableMapOf(
+                        "nodeConstraint0" to NodeConstraint(
+                            ConstraintType.KEY,
+                            label = null,
+                            properties = mutableSetOf("nodeProperty0", "nodeProperty1")
+                        )
+                    )
+                )
+            )
+        )
+
+        model.prettify()
+
+        val node = model.nodes["User"]!!
+        assertNull(node.properties["first"]?.key)
+        assertNull(node.properties["last"]?.key)
+        assertTrue(node.constraints.containsKey("nodeConstraint0"), "Multi-property constraint should be left in place")
+    }
+
+    @Test
+    fun `test folds single-property relationship constraint into property flag`() {
+        val model = GraphModel(
+            version = "1.0",
+            relationships = mutableMapOf(
+                "relationship0" to Relationship(
+                    name = "FRIENDS_WITH",
+                    type = "KNOWS",
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
+                    properties = mutableMapOf("relationshipProperty0" to Property(name = "since")),
+                    constraints = mutableMapOf(
+                        "relationshipConstraint0" to RelationshipConstraint(
+                            ConstraintType.UNIQUE,
+                            properties = mutableSetOf("relationshipProperty0")
+                        )
+                    )
+                )
+            )
+        )
+
+        model.prettify()
+
+        val relationship = model.relationships["FRIENDS_WITH"]!!
+        assertEquals(true, relationship.properties["since"]?.unique, "Unique flag should be restored onto the property")
+        assertTrue(relationship.constraints.isEmpty(), "Folded constraint should be removed")
     }
 }
