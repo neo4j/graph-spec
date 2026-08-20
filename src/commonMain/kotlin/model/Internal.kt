@@ -114,9 +114,8 @@ object Internal {
         constraints[predictableId(type, key)] = constraint(type, mutableSetOf(key))
     }
 
-    internal fun predictableId(type: ConstraintType, vararg properties: String): String {
-        return "${type.name.lowercase()}_${properties.distinct().sorted().joinToString("_")}"
-    }
+    internal fun predictableId(type: ConstraintType, vararg properties: String): String =
+        "${type.name.lowercase()}_${properties.distinct().sorted().joinToString("_")}"
 
     /*
         Relationships

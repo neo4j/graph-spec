@@ -187,10 +187,12 @@ class DataModelV3GraphSpecMigration :
                 "type" to constraintType.name,
                 "label" to label,
                 "properties" toNotEmpty properties?.map { it.ref() },
-                "name" to (constraint.stringOrNull("name") ?: Internal.predictableId(
-                    constraintType,
-                    *properties?.map { it.string("token") }?.toTypedArray() ?: emptyArray()
-                ))
+                "name" to (
+                    constraint.stringOrNull("name") ?: Internal.predictableId(
+                        constraintType,
+                        *properties?.map { it.string("token") }?.toTypedArray() ?: emptyArray()
+                    )
+                    )
             )
         }
     }
@@ -365,9 +367,9 @@ class DataModelV3GraphSpecMigration :
                     neo4jType(it)
                 },
                 "dimension" to (
-                        dimension(field.mapOrNull("recommendedType"))
-                            ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
-                        )
+                    dimension(field.mapOrNull("recommendedType"))
+                        ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
+                    )
             )
         }
         return fields

@@ -104,38 +104,20 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     }
 
     internal fun convertExtensions(schema: SchemaMap): SchemaMap = schemaMapOf(
-        "nodeKeyProperties" to convertKeyProperties(schema, "node"),
-        "relationshipKeyProperties" toNotEmpty convertKeyProperties(schema, "relationship")
+        "nodeKeyProperties" to convertMappingKeyProperties(schema, "node"),
+        "relationshipKeyProperties" toNotEmpty convertMappingKeyProperties(schema, "relationship")
     )
 
-    internal fun convertKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
-        val list = mutableMapOf<String, List<String>>()
-        for ((entity, element) in schema.mapOfMapsOrNull("${singular}s").orEmpty()) {
-            val keys = element.mapOfMapsOrNull("properties")?.mapNotNull { (key, property) ->
-                if (property.boolOrNull("key") == true) key else null
-            } ?: emptyList()
-            if (keys.isNotEmpty()) {
-                list[entity] = keys
-            }
-            element.mapOfMapsOrNull("constraints")?.forEach { (_, constraint) ->
-                if (constraint.stringOrNull("type") == ConstraintType.KEY.name) {
-                    val keys = constraint.listOrNull("properties")
-                        ?.map { (it as SchemaLiteral).string }
-                        ?: return@forEach
-                    if (keys.isNotEmpty()) {
-                        list[entity] = keys
-                    }
-                }
-            }
-        }
+    internal fun convertMappingKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
+        val keyProperties = mutableMapOf<String, List<String>>()
         for (mapping in schema.listOfMapsOrNull("mappings").orEmpty()) {
             val entity = mapping.stringOrNull(singular) ?: continue
             val keys = mapping.listOrNull("key") ?: continue
             if (keys.isNotEmpty()) {
-                list[entity] = keys.map { id -> (id as SchemaLiteral).string }
+                keyProperties[entity] = keys.map { id -> (id as SchemaLiteral).string }
             }
         }
-        return list.map { (entity, keys) ->
+        return keyProperties.map { (entity, keys) ->
             schemaMapOf(
                 singular to refOf(entity),
                 "keyProperties" to keys.map { refOf(it) }
