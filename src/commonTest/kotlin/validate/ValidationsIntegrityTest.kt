@@ -17,6 +17,9 @@
 package validate
 
 import model.GraphModel
+import model.node.Labels
+import model.node.Node
+import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipTarget
 import kotlin.test.Test
@@ -52,5 +55,44 @@ class ValidationsIntegrityTest {
 
         // ASSERT
         assertTrue(issues.any { it.code == "missing_relation_type" })
+    }
+
+    @Test
+    fun `integrity catches corrupt model with dangling node reference`() {
+        // ARRANGE
+        val model = GraphModel("4.0.0").apply {
+            relationships["broken"] = Relationship(
+                type = "ACTED_IN",
+                from = RelationshipTarget(node = "nonexistent"),
+                to = RelationshipTarget(node = "also_nonexistent")
+            )
+        }
+        val issues = model.validate(Validations.integrity)
+
+        // ASSERT
+        assertTrue(issues.any { it.code == "missing_relation_from_node" })
+    }
+
+    @Test
+    fun `integrity passes on valid model`() {
+        // ARRANGE
+        val model = GraphModel("4.0.0").apply {
+            nodes["person"] = Node(
+                labels = Labels(identifier = "Person"),
+                properties = mutableMapOf("name" to Property())
+            )
+            nodes["movie"] = Node(
+                labels = Labels(identifier = "Movie"),
+                properties = mutableMapOf("title" to Property())
+            )
+            relationships["acted_in"] = Relationship(
+                type = "ACTED_IN",
+                from = RelationshipTarget(node = "person"),
+                to = RelationshipTarget(node = "movie")
+            )
+        }
+        val issues = model.validate(Validations.integrity)
+        // ASSERT
+        assertTrue(issues.isEmpty(), "Expected no issues on valid model, got: ${issues.size}")
     }
 }
