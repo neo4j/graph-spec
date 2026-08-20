@@ -86,8 +86,8 @@ class NodeMappingKeyTest {
 
         validator.validateNode(model, "person", node, issues)
 
+        // Replaced legacy code: missing_node_key_property
         assertEquals(1, issues.size)
         assertEquals("missing_node_mapping_key", issues.first().code)
-        assertEquals("missing_node_key_property", issues.first().legacyCode)
     }
 }

@@ -27,10 +27,10 @@ object NodeMappingKey : NodeValidation {
         if (nodeMapping != null && nodeMapping.key.isEmpty()) {
             issues.add(
                 Issue(
+                    // Replaced legacy code: missing_node_key_property
                     code = "missing_node_mapping_key",
                     message = "Node '$nodeId' has no mapping key defined",
-                    path = "mappings.$nodeId.key",
-                    legacyCode = "missing_node_key_property"
+                    path = "mappings.$nodeId.key"
                 )
             )
         }

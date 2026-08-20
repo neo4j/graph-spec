@@ -95,8 +95,8 @@ class NodeMappingKeyTypeTest {
 
         validator.validateNode(model, "person", node, issues)
 
+        // Replaced legacy code: invalid_node_key_property_type
         assertEquals(1, issues.size)
         assertEquals("invalid_node_mapping_key_type", issues.first().code)
-        assertEquals("invalid_node_key_property_type", issues.first().legacyCode)
     }
 }

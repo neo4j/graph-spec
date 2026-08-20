@@ -31,10 +31,10 @@ object NodeMappingKeyType : NodeValidation {
                 if (property.type != Neo4jType.STRING && property.type != Neo4jType.INTEGER) {
                     issues.add(
                         Issue(
+                            // Replaced legacy code: invalid_node_key_property_type
                             code = "invalid_node_mapping_key_type",
                             message = "Mapping key '$propertyId' on node '$nodeId' must be STRING or INTEGER",
-                            path = "mappings.$nodeId.key.$propertyId",
-                            legacyCode = "invalid_node_key_property_type"
+                            path = "mappings.$nodeId.key.$propertyId"
                         )
                     )
                 }
