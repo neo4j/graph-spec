@@ -19,10 +19,10 @@ package validate
 import validate.node.NodeConstraintCoverage
 import validate.node.NodeConstraints
 import validate.node.NodeIndexesExists
-import validate.node.NodeKeyProperty
-import validate.node.NodeKeyPropertyType
 import validate.node.NodeLabel
 import validate.node.NodeLabelToken
+import validate.node.NodeMappingKey
+import validate.node.NodeMappingKeyType
 import validate.node.NodeProperties
 import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeTypeConstraint
@@ -40,7 +40,7 @@ import kotlin.js.JsStatic
 class Validations {
     companion object {
         @JsStatic
-        val all: List<Validation> = listOf(
+        val core: List<Validation> = listOf(
             // Nodes
             NodeConstraints,
             NodeIndexesExists,
@@ -48,8 +48,6 @@ class Validations {
             NodeLabelToken,
             NodeProperties,
             NodeConstraintCoverage,
-            NodeKeyProperty,
-            NodeKeyPropertyType,
             NodeTypeConstraint,
             NodeExistenceConstraint,
 
@@ -62,5 +60,21 @@ class Validations {
             RelationshipExistenceConstraint,
             RelationshipTypeConstraint
         )
+
+        @JsStatic
+        val integrity: List<Validation> = listOf(
+            NodeLabel,
+            RelationshipType,
+            RelationshipNodes
+        )
+
+        @JsStatic
+        val mapping: List<Validation> = core + listOf(
+            NodeMappingKey,
+            NodeMappingKeyType
+        )
+
+        @JsStatic
+        val all: List<Validation> = (core + integrity + mapping).distinct()
     }
 }
