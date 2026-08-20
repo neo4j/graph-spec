@@ -13,7 +13,7 @@ nodes:
         type: "UNIQUE"
         label: "actor"
         properties: ["nodeProperty0"]
-        name: "actor"
+        name: "unique_actor_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -37,7 +37,7 @@ nodes:
         type: "UNIQUE"
         label: "address"
         properties: ["nodeProperty0"]
-        name: "address"
+        name: "unique_address_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -57,7 +57,7 @@ nodes:
         type: "UNIQUE"
         label: "category"
         properties: ["nodeProperty0"]
-        name: "category"
+        name: "unique_category_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -77,7 +77,7 @@ nodes:
         type: "UNIQUE"
         label: "city"
         properties: ["nodeProperty0"]
-        name: "city"
+        name: "unique_city_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -97,7 +97,7 @@ nodes:
         type: "UNIQUE"
         label: "country"
         properties: ["nodeProperty0"]
-        name: "country"
+        name: "unique_country_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -123,7 +123,7 @@ nodes:
         type: "UNIQUE"
         label: "customer"
         properties: ["nodeProperty0"]
-        name: "customer"
+        name: "unique_customer_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -149,7 +149,7 @@ nodes:
         type: "UNIQUE"
         label: "film"
         properties: ["nodeProperty0"]
-        name: "film"
+        name: "unique_film_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -169,7 +169,7 @@ nodes:
         type: "UNIQUE"
         label: "inventory"
         properties: ["nodeProperty0"]
-        name: "inventory"
+        name: "unique_inventory_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -189,7 +189,7 @@ nodes:
         type: "UNIQUE"
         label: "language"
         properties: ["nodeProperty0"]
-        name: "language"
+        name: "unique_language_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -209,7 +209,7 @@ nodes:
         type: "UNIQUE"
         label: "payment"
         properties: ["nodeProperty0"]
-        name: "payment"
+        name: "unique_payment_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -230,7 +230,7 @@ nodes:
         type: "UNIQUE"
         label: "rental"
         properties: ["nodeProperty0"]
-        name: "rental"
+        name: "unique_rental_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -256,7 +256,7 @@ nodes:
         type: "UNIQUE"
         label: "staff"
         properties: ["nodeProperty0"]
-        name: "staff"
+        name: "unique_staff_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -275,7 +275,7 @@ nodes:
         type: "UNIQUE"
         label: "store"
         properties: ["nodeProperty0"]
-        name: "store"
+        name: "unique_store_id"
     indexes:
       nodeIndex0:
         type: "TEXT"

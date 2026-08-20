@@ -3,15 +3,10 @@ nodes:
   categories:
     label: "categories"
     properties:
-      categoryid: { type: "INTEGER" }
+      categoryid: { type: "INTEGER", unique: true }
       categoryname: { type: "STRING" }
       description: { type: "STRING" }
       picture: { type: "STRING" }
-    constraints:
-      categories:
-        type: "UNIQUE"
-        label: "categories"
-        properties: ["categoryid"]
     indexes:
       categories:
         type: "TEXT"
@@ -20,7 +15,7 @@ nodes:
   products:
     label: "products"
     properties:
-      productid: { type: "INTEGER" }
+      productid: { type: "INTEGER", unique: true }
       productname: { type: "STRING" }
       quantityperunit: { type: "STRING" }
       unitprice: { type: "FLOAT" }
@@ -28,11 +23,6 @@ nodes:
       unitsonorder: { type: "INTEGER" }
       reorderlevel: { type: "INTEGER" }
       discontinued: { type: "INTEGER" }
-    constraints:
-      products:
-        type: "UNIQUE"
-        label: "products"
-        properties: ["productid"]
     indexes:
       products:
         type: "TEXT"
@@ -41,7 +31,7 @@ nodes:
   suppliers:
     label: "suppliers"
     properties:
-      supplierid: { type: "INTEGER" }
+      supplierid: { type: "INTEGER", unique: true }
       companyname: { type: "STRING" }
       contactname: { type: "STRING" }
       contacttitle: { type: "STRING" }
@@ -53,11 +43,6 @@ nodes:
       phone: { type: "STRING" }
       fax: { type: "STRING" }
       homepage: { type: "STRING" }
-    constraints:
-      suppliers:
-        type: "UNIQUE"
-        label: "suppliers"
-        properties: ["supplierid"]
     indexes:
       suppliers:
         type: "TEXT"

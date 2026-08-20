@@ -3,14 +3,9 @@ nodes:
   Aircraft:
     label: "Aircraft"
     properties:
-      aircraftCode: { type: "STRING" }
+      aircraftCode: { type: "STRING", unique: true }
       model: { type: "STRING" }
       aircraftRange: { type: "INTEGER" }
-    constraints:
-      aircrafts_data:
-        type: "UNIQUE"
-        label: "Aircraft"
-        properties: ["aircraftCode"]
     indexes:
       "aircrafts_data-text":
         type: "TEXT"
@@ -19,16 +14,11 @@ nodes:
   Airport:
     label: "Airport"
     properties:
-      airportCode: { type: "STRING" }
+      airportCode: { type: "STRING", unique: true }
       airportName: { type: "STRING" }
       city: { type: "STRING" }
       coordinates: { type: "POINT" }
       timezone: { type: "STRING" }
-    constraints:
-      airports_data:
-        type: "UNIQUE"
-        label: "Airport"
-        properties: ["airportCode"]
     indexes:
       "airports_data-text":
         type: "TEXT"
@@ -37,14 +27,9 @@ nodes:
   Booking:
     label: "Booking"
     properties:
-      bookRef: { type: "STRING" }
+      bookRef: { type: "STRING", unique: true }
       bookDate: { type: "ZONED DATETIME" }
       totalAmount: { type: "FLOAT" }
-    constraints:
-      bookings:
-        type: "UNIQUE"
-        label: "Booking"
-        properties: ["bookRef"]
     indexes:
       "bookings-text":
         type: "TEXT"
@@ -53,18 +38,13 @@ nodes:
   Flight:
     label: "Flight"
     properties:
-      flightId: { type: "INTEGER" }
+      flightId: { type: "INTEGER", unique: true }
       flightNo: { type: "STRING" }
       scheduledDeparture: { type: "ZONED DATETIME" }
       scheduledArrival: { type: "ZONED DATETIME" }
       status: { type: "STRING" }
       actualDeparture: { type: "ZONED DATETIME" }
       actualArrival: { type: "ZONED DATETIME" }
-    constraints:
-      flights:
-        type: "UNIQUE"
-        label: "Flight"
-        properties: ["flightId"]
     indexes:
       flights:
         type: "TEXT"
@@ -73,15 +53,10 @@ nodes:
   Ticket:
     label: "Ticket"
     properties:
-      ticketNo: { type: "STRING" }
+      ticketNo: { type: "STRING", unique: true }
       passengerId: { type: "STRING" }
       passengerName: { type: "STRING" }
       contactData: { type: "STRING" }
-    constraints:
-      tickets:
-        type: "UNIQUE"
-        label: "Ticket"
-        properties: ["ticketNo"]
     indexes:
       "tickets-text":
         type: "TEXT"

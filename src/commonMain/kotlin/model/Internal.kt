@@ -70,10 +70,6 @@ object Internal {
     private fun GraphModel.internaliseNodeProperties() {
         val renames = mutableMapOf<String, String>()
         nodes.forEach { (key, node) ->
-            val propertyRenames = node.properties.identify("nodeProperty", key)
-            renames.putAll(propertyRenames)
-            node.constraints.values.forEach { it.properties.rename(renames, key) }
-            node.indexes.values.forEach { it.properties.rename(renames, key) }
             internaliseProperties(node.constraints, node.properties) { type, props ->
                 NodeConstraint(
                     type,
@@ -81,6 +77,10 @@ object Internal {
                     props
                 )
             }
+            val propertyRenames = node.properties.identify("nodeProperty", key)
+            renames.putAll(propertyRenames)
+            node.constraints.values.forEach { it.properties.rename(renames, key) }
+            node.indexes.values.forEach { it.properties.rename(renames, key) }
         }
         Pretty.renameNodeMappingProperties(this, renames)
         Pretty.renameTargetNodeProperties(this, renames)
@@ -94,16 +94,28 @@ object Internal {
         for ((key, property) in properties) {
             if (property.key == true) {
                 property.key = null
-                // TODO proper predictable id
-                constraints["key_constraint_$key"] = constraint(ConstraintType.KEY, mutableSetOf(key))
+                addConstraint(constraints, key, constraint, ConstraintType.KEY)
             } else if (property.unique == true) {
                 property.unique = null
-                constraints["unique_constraint_$key"] = constraint(ConstraintType.UNIQUE, mutableSetOf(key))
+                addConstraint(constraints, key, constraint, ConstraintType.UNIQUE)
             } else if (property.mustExist == true) {
                 property.mustExist = null
-                constraints["exists_constraint_$key"] = constraint(ConstraintType.EXISTS, mutableSetOf(key))
+                addConstraint(constraints, key, constraint, ConstraintType.EXISTS)
             }
         }
+    }
+
+    private fun <C : Constraint> addConstraint(
+        constraints: MutableMap<String, C>,
+        key: String,
+        constraint: (ConstraintType, MutableSet<String>) -> C,
+        type: ConstraintType
+    ) {
+        constraints[predictableId(type, key)] = constraint(type, mutableSetOf(key))
+    }
+
+    internal fun predictableId(type: ConstraintType, vararg properties: String): String {
+        return "${type.name.lowercase()}_${properties.distinct().sorted().joinToString("_")}"
     }
 
     /*
@@ -122,13 +134,13 @@ object Internal {
     private fun GraphModel.internaliseRelationshipProperties() {
         val renames = mutableMapOf<String, String>()
         relationships.forEach { (key, relationship) ->
+            internaliseProperties(relationship.constraints, relationship.properties) { type, props ->
+                RelationshipConstraint(type, props)
+            }
             val propertyRenames = relationship.properties.identify("relationshipProperty", key)
             renames.putAll(propertyRenames)
             relationship.constraints.values.forEach { it.properties.rename(renames, key) }
             relationship.indexes.values.forEach { it.properties.rename(renames, key) }
-            internaliseProperties(relationship.constraints, relationship.properties) { type, props ->
-                RelationshipConstraint(type, props)
-            }
         }
         Pretty.renameRelationshipMappingProperties(this, renames)
     }

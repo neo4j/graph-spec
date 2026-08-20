@@ -3,17 +3,12 @@ nodes:
   creditcard:
     label: "creditcard"
     properties:
-      creditcardid: { type: "INTEGER" }
+      creditcardid: { type: "INTEGER", unique: true }
       cardtype: { type: "STRING" }
       cardnumber: { type: "STRING" }
       expmonth: { type: "INTEGER" }
       expyear: { type: "INTEGER" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      creditcard:
-        type: "UNIQUE"
-        label: "creditcard"
-        properties: ["creditcardid"]
     indexes:
       creditcard:
         type: "TEXT"
@@ -22,13 +17,8 @@ nodes:
   currency:
     label: "currency"
     properties:
-      currencycode: { type: "STRING" }
+      currencycode: { type: "STRING", unique: true }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      currency:
-        type: "UNIQUE"
-        label: "currency"
-        properties: ["currencycode"]
     indexes:
       "currency-text":
         type: "TEXT"
@@ -37,16 +27,11 @@ nodes:
   currencyrate:
     label: "currencyrate"
     properties:
-      currencyrateid: { type: "INTEGER" }
+      currencyrateid: { type: "INTEGER", unique: true }
       currencyratedate: { type: "ZONED DATETIME" }
       averagerate: { type: "FLOAT" }
       endofdayrate: { type: "FLOAT" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      currencyrate:
-        type: "UNIQUE"
-        label: "currencyrate"
-        properties: ["currencyrateid"]
     indexes:
       currencyrate:
         type: "TEXT"
@@ -55,14 +40,9 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customerid: { type: "INTEGER" }
+      customerid: { type: "INTEGER", unique: true }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      customer:
-        type: "UNIQUE"
-        label: "customer"
-        properties: ["customerid"]
     indexes:
       customer:
         type: "TEXT"
@@ -71,7 +51,7 @@ nodes:
   salesorderheader:
     label: "salesorderheader"
     properties:
-      salesorderid: { type: "INTEGER" }
+      salesorderid: { type: "INTEGER", unique: true }
       revisionnumber: { type: "INTEGER" }
       orderdate: { type: "ZONED DATETIME" }
       duedate: { type: "ZONED DATETIME" }
@@ -85,11 +65,6 @@ nodes:
       comment: { type: "STRING" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      salesorderheader:
-        type: "UNIQUE"
-        label: "salesorderheader"
-        properties: ["salesorderid"]
     indexes:
       salesorderheader:
         type: "TEXT"
@@ -98,7 +73,7 @@ nodes:
   salesperson:
     label: "salesperson"
     properties:
-      businessentityid: { type: "INTEGER" }
+      businessentityid: { type: "INTEGER", unique: true }
       salesquota: { type: "FLOAT" }
       bonus: { type: "FLOAT" }
       commissionpct: { type: "FLOAT" }
@@ -106,11 +81,6 @@ nodes:
       saleslastyear: { type: "FLOAT" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      salesperson:
-        type: "UNIQUE"
-        label: "salesperson"
-        properties: ["businessentityid"]
     indexes:
       salesperson:
         type: "TEXT"
@@ -119,13 +89,8 @@ nodes:
   salesreason:
     label: "salesreason"
     properties:
-      salesreasonid: { type: "INTEGER" }
+      salesreasonid: { type: "INTEGER", unique: true }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      salesreason:
-        type: "UNIQUE"
-        label: "salesreason"
-        properties: ["salesreasonid"]
     indexes:
       salesreason:
         type: "TEXT"
@@ -134,16 +99,11 @@ nodes:
   salestaxrate:
     label: "salestaxrate"
     properties:
-      salestaxrateid: { type: "INTEGER" }
+      salestaxrateid: { type: "INTEGER", unique: true }
       taxtype: { type: "INTEGER" }
       taxrate: { type: "FLOAT" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      salestaxrate:
-        type: "UNIQUE"
-        label: "salestaxrate"
-        properties: ["salestaxrateid"]
     indexes:
       salestaxrate:
         type: "TEXT"
@@ -152,7 +112,7 @@ nodes:
   salesterritory:
     label: "salesterritory"
     properties:
-      territoryid: { type: "INTEGER" }
+      territoryid: { type: "INTEGER", unique: true }
       group: { type: "STRING" }
       salesytd: { type: "FLOAT" }
       saleslastyear: { type: "FLOAT" }
@@ -160,11 +120,6 @@ nodes:
       costlastyear: { type: "FLOAT" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      salesterritory:
-        type: "UNIQUE"
-        label: "salesterritory"
-        properties: ["territoryid"]
     indexes:
       salesterritory:
         type: "TEXT"
@@ -173,16 +128,11 @@ nodes:
   shoppingcartitem:
     label: "shoppingcartitem"
     properties:
-      shoppingcartitemid: { type: "INTEGER" }
+      shoppingcartitemid: { type: "INTEGER", unique: true }
       shoppingcartid: { type: "STRING" }
       quantity: { type: "INTEGER" }
       datecreated: { type: "ZONED DATETIME" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      shoppingcartitem:
-        type: "UNIQUE"
-        label: "shoppingcartitem"
-        properties: ["shoppingcartitemid"]
     indexes:
       shoppingcartitem:
         type: "TEXT"
@@ -191,7 +141,7 @@ nodes:
   specialoffer:
     label: "specialoffer"
     properties:
-      specialofferid: { type: "INTEGER" }
+      specialofferid: { type: "INTEGER", unique: true }
       description: { type: "STRING" }
       discountpct: { type: "FLOAT" }
       type: { type: "STRING" }
@@ -202,11 +152,6 @@ nodes:
       maxqty: { type: "INTEGER" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      specialoffer:
-        type: "UNIQUE"
-        label: "specialoffer"
-        properties: ["specialofferid"]
     indexes:
       specialoffer:
         type: "TEXT"
@@ -215,14 +160,9 @@ nodes:
   store:
     label: "store"
     properties:
-      businessentityid: { type: "INTEGER" }
+      businessentityid: { type: "INTEGER", unique: true }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    constraints:
-      store:
-        type: "UNIQUE"
-        label: "store"
-        properties: ["businessentityid"]
     indexes:
       store:
         type: "TEXT"

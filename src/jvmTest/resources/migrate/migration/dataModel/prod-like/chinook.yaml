@@ -3,13 +3,8 @@ nodes:
   album:
     label: "album"
     properties:
-      album_id: { type: "INTEGER" }
+      album_id: { type: "INTEGER", unique: true }
       title: { type: "STRING" }
-    constraints:
-      album:
-        type: "UNIQUE"
-        label: "album"
-        properties: ["album_id"]
     indexes:
       album:
         type: "TEXT"
@@ -18,13 +13,8 @@ nodes:
   artist:
     label: "artist"
     properties:
-      artist_id: { type: "INTEGER" }
+      artist_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-    constraints:
-      artist:
-        type: "UNIQUE"
-        label: "artist"
-        properties: ["artist_id"]
     indexes:
       artist:
         type: "TEXT"
@@ -33,7 +23,7 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER" }
+      customer_id: { type: "INTEGER", unique: true }
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
       company: { type: "STRING" }
@@ -45,11 +35,6 @@ nodes:
       phone: { type: "STRING" }
       fax: { type: "STRING" }
       email: { type: "STRING" }
-    constraints:
-      customer:
-        type: "UNIQUE"
-        label: "customer"
-        properties: ["customer_id"]
     indexes:
       customer:
         type: "TEXT"
@@ -58,7 +43,7 @@ nodes:
   employee:
     label: "employee"
     properties:
-      employee_id: { type: "INTEGER" }
+      employee_id: { type: "INTEGER", unique: true }
       last_name: { type: "STRING" }
       first_name: { type: "STRING" }
       title: { type: "STRING" }
@@ -72,11 +57,6 @@ nodes:
       phone: { type: "STRING" }
       fax: { type: "STRING" }
       email: { type: "STRING" }
-    constraints:
-      employee:
-        type: "UNIQUE"
-        label: "employee"
-        properties: ["employee_id"]
     indexes:
       employee:
         type: "TEXT"
@@ -85,13 +65,8 @@ nodes:
   genre:
     label: "genre"
     properties:
-      genre_id: { type: "INTEGER" }
+      genre_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-    constraints:
-      genre:
-        type: "UNIQUE"
-        label: "genre"
-        properties: ["genre_id"]
     indexes:
       genre:
         type: "TEXT"
@@ -100,7 +75,7 @@ nodes:
   invoice:
     label: "invoice"
     properties:
-      invoice_id: { type: "INTEGER" }
+      invoice_id: { type: "INTEGER", unique: true }
       invoice_date: { type: "ZONED DATETIME" }
       billing_address: { type: "STRING" }
       billing_city: { type: "STRING" }
@@ -108,11 +83,6 @@ nodes:
       billing_country: { type: "STRING" }
       billing_postal_code: { type: "STRING" }
       total: { type: "FLOAT" }
-    constraints:
-      invoice:
-        type: "UNIQUE"
-        label: "invoice"
-        properties: ["invoice_id"]
     indexes:
       invoice:
         type: "TEXT"
@@ -121,14 +91,9 @@ nodes:
   invoice_line:
     label: "invoice_line"
     properties:
-      invoice_line_id: { type: "INTEGER" }
+      invoice_line_id: { type: "INTEGER", unique: true }
       unit_price: { type: "FLOAT" }
       quantity: { type: "INTEGER" }
-    constraints:
-      invoice_line:
-        type: "UNIQUE"
-        label: "invoice_line"
-        properties: ["invoice_line_id"]
     indexes:
       invoice_line:
         type: "TEXT"
@@ -137,13 +102,8 @@ nodes:
   media_type:
     label: "media_type"
     properties:
-      media_type_id: { type: "INTEGER" }
+      media_type_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-    constraints:
-      media_type:
-        type: "UNIQUE"
-        label: "media_type"
-        properties: ["media_type_id"]
     indexes:
       media_type:
         type: "TEXT"
@@ -152,13 +112,8 @@ nodes:
   playlist:
     label: "playlist"
     properties:
-      playlist_id: { type: "INTEGER" }
+      playlist_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-    constraints:
-      playlist:
-        type: "UNIQUE"
-        label: "playlist"
-        properties: ["playlist_id"]
     indexes:
       playlist:
         type: "TEXT"
@@ -167,17 +122,12 @@ nodes:
   track:
     label: "track"
     properties:
-      track_id: { type: "INTEGER" }
+      track_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       composer: { type: "STRING" }
       milliseconds: { type: "INTEGER" }
       bytes: { type: "INTEGER" }
       unit_price: { type: "FLOAT" }
-    constraints:
-      track:
-        type: "UNIQUE"
-        label: "track"
-        properties: ["track_id"]
     indexes:
       track:
         type: "TEXT"

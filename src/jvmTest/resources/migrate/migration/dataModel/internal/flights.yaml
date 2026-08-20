@@ -12,7 +12,7 @@ nodes:
         type: "UNIQUE"
         label: "Aircraft"
         properties: ["nodeProperty0"]
-        name: "aircrafts_data"
+        name: "unique_aircraftCode"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -34,7 +34,7 @@ nodes:
         type: "UNIQUE"
         label: "Airport"
         properties: ["nodeProperty0"]
-        name: "airports_data"
+        name: "unique_airportCode"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -54,7 +54,7 @@ nodes:
         type: "UNIQUE"
         label: "Booking"
         properties: ["nodeProperty0"]
-        name: "bookings"
+        name: "unique_bookRef"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -78,7 +78,7 @@ nodes:
         type: "UNIQUE"
         label: "Flight"
         properties: ["nodeProperty0"]
-        name: "flights"
+        name: "unique_flightId"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -99,7 +99,7 @@ nodes:
         type: "UNIQUE"
         label: "Ticket"
         properties: ["nodeProperty0"]
-        name: "tickets"
+        name: "unique_ticketNo"
     indexes:
       nodeIndex0:
         type: "TEXT"

@@ -15,7 +15,7 @@ nodes:
         type: "UNIQUE"
         label: "creditcard"
         properties: ["nodeProperty0"]
-        name: "creditcard"
+        name: "unique_creditcardid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -34,7 +34,7 @@ nodes:
         type: "UNIQUE"
         label: "currency"
         properties: ["nodeProperty0"]
-        name: "currency"
+        name: "unique_currencycode"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -56,7 +56,7 @@ nodes:
         type: "UNIQUE"
         label: "currencyrate"
         properties: ["nodeProperty0"]
-        name: "currencyrate"
+        name: "unique_currencyrateid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -76,7 +76,7 @@ nodes:
         type: "UNIQUE"
         label: "customer"
         properties: ["nodeProperty0"]
-        name: "customer"
+        name: "unique_customerid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -107,7 +107,7 @@ nodes:
         type: "UNIQUE"
         label: "salesorderheader"
         properties: ["nodeProperty0"]
-        name: "salesorderheader"
+        name: "unique_salesorderid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -132,7 +132,7 @@ nodes:
         type: "UNIQUE"
         label: "salesperson"
         properties: ["nodeProperty0"]
-        name: "salesperson"
+        name: "unique_businessentityid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -151,7 +151,7 @@ nodes:
         type: "UNIQUE"
         label: "salesreason"
         properties: ["nodeProperty0"]
-        name: "salesreason"
+        name: "unique_salesreasonid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -173,7 +173,7 @@ nodes:
         type: "UNIQUE"
         label: "salestaxrate"
         properties: ["nodeProperty0"]
-        name: "salestaxrate"
+        name: "unique_salestaxrateid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -198,7 +198,7 @@ nodes:
         type: "UNIQUE"
         label: "salesterritory"
         properties: ["nodeProperty0"]
-        name: "salesterritory"
+        name: "unique_territoryid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -220,7 +220,7 @@ nodes:
         type: "UNIQUE"
         label: "shoppingcartitem"
         properties: ["nodeProperty0"]
-        name: "shoppingcartitem"
+        name: "unique_shoppingcartitemid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -248,7 +248,7 @@ nodes:
         type: "UNIQUE"
         label: "specialoffer"
         properties: ["nodeProperty0"]
-        name: "specialoffer"
+        name: "unique_specialofferid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -268,7 +268,7 @@ nodes:
         type: "UNIQUE"
         label: "store"
         properties: ["nodeProperty0"]
-        name: "store"
+        name: "unique_businessentityid"
     indexes:
       nodeIndex0:
         type: "TEXT"

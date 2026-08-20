@@ -3,14 +3,9 @@ nodes:
   ACCOUNT:
     label: "ACCOUNT"
     properties:
-      ACCOUNT_IDENTIFIER: { type: "FLOAT" }
+      ACCOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
       ACCOUNT_TYPE_CODE: { type: "STRING" }
       ACCOUNT_NAME: { type: "STRING" }
-    constraints:
-      ACCOUNT:
-        type: "UNIQUE"
-        label: "ACCOUNT"
-        properties: ["ACCOUNT_IDENTIFIER"]
     indexes:
       ACCOUNT:
         type: "TEXT"
@@ -19,12 +14,7 @@ nodes:
   ADMINISTRATIVE_ORGANIZATION_UNIT:
     label: "ADMINISTRATIVE_ORGANIZATION_UNIT"
     properties:
-      ORGANIZATION_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      ADMINISTRATIVE_ORGANIZATION_UNIT:
-        type: "UNIQUE"
-        label: "ADMINISTRATIVE_ORGANIZATION_UNIT"
-        properties: ["ORGANIZATION_IDENTIFIER"]
+      ORGANIZATION_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       ADMINISTRATIVE_ORGANIZATION_UNIT:
         type: "TEXT"
@@ -33,12 +23,7 @@ nodes:
   AGENCY_CONTRACT:
     label: "AGENCY_CONTRACT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      AGENCY_CONTRACT:
-        type: "UNIQUE"
-        label: "AGENCY_CONTRACT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       AGENCY_CONTRACT:
         type: "TEXT"
@@ -47,15 +32,10 @@ nodes:
   AGREEMENT:
     label: "AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
       AGREEMENT_NAME: { type: "STRING" }
       AGREEMENT_ORIGINAL_INCEPTION_DATE: { type: "LOCAL DATETIME" }
       AGREEMENT_TYPE_CODE: { type: "STRING" }
-    constraints:
-      AGREEMENT:
-        type: "UNIQUE"
-        label: "AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
     indexes:
       AGREEMENT:
         type: "TEXT"
@@ -64,12 +44,7 @@ nodes:
   ANIMAL:
     label: "ANIMAL"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      ANIMAL:
-        type: "UNIQUE"
-        label: "ANIMAL"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       ANIMAL:
         type: "TEXT"
@@ -78,12 +53,7 @@ nodes:
   APPROVAL:
     label: "APPROVAL"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      APPROVAL:
-        type: "UNIQUE"
-        label: "APPROVAL"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       APPROVAL:
         type: "TEXT"
@@ -92,13 +62,8 @@ nodes:
   ARBITRATION:
     label: "ARBITRATION"
     properties:
-      ARBITRATION_IDENTIFIER: { type: "FLOAT" }
+      ARBITRATION_IDENTIFIER: { type: "FLOAT", unique: true }
       ARBITRATION_DESCRIPTION: { type: "STRING" }
-    constraints:
-      ARBITRATION:
-        type: "UNIQUE"
-        label: "ARBITRATION"
-        properties: ["ARBITRATION_IDENTIFIER"]
     indexes:
       ARBITRATION:
         type: "TEXT"
@@ -107,16 +72,11 @@ nodes:
   ASSESSMENT:
     label: "ASSESSMENT"
     properties:
-      ASSESSMENT_IDENTIFIER: { type: "FLOAT" }
+      ASSESSMENT_IDENTIFIER: { type: "FLOAT", unique: true }
       BEGIN_DATE: { type: "LOCAL DATETIME" }
       ASSESSMENT_DESCRIPTION: { type: "STRING" }
       END_DATE: { type: "LOCAL DATETIME" }
       ASSESSMENT_REASON_DESCRIPTION: { type: "STRING" }
-    constraints:
-      ASSESSMENT:
-        type: "UNIQUE"
-        label: "ASSESSMENT"
-        properties: ["ASSESSMENT_IDENTIFIER"]
     indexes:
       ASSESSMENT:
         type: "TEXT"
@@ -125,13 +85,8 @@ nodes:
   ASSESSMENT_RESULT:
     label: "ASSESSMENT_RESULT"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
       ASSESSMENT_RESULT_TYPE_CODE: { type: "STRING" }
-    constraints:
-      ASSESSMENT_RESULT:
-        type: "UNIQUE"
-        label: "ASSESSMENT_RESULT"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
     indexes:
       ASSESSMENT_RESULT:
         type: "TEXT"
@@ -140,12 +95,7 @@ nodes:
   ASSUMED_CLAIM_AMOUNT:
     label: "ASSUMED_CLAIM_AMOUNT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      ASSUMED_CLAIM_AMOUNT:
-        type: "UNIQUE"
-        label: "ASSUMED_CLAIM_AMOUNT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       ASSUMED_CLAIM_AMOUNT:
         type: "TEXT"
@@ -154,12 +104,7 @@ nodes:
   ASSUMED_POLICY_AMOUNT:
     label: "ASSUMED_POLICY_AMOUNT"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      ASSUMED_POLICY_AMOUNT:
-        type: "UNIQUE"
-        label: "ASSUMED_POLICY_AMOUNT"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       ASSUMED_POLICY_AMOUNT:
         type: "TEXT"
@@ -168,12 +113,7 @@ nodes:
   AUTOMOBILE:
     label: "AUTOMOBILE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      AUTOMOBILE:
-        type: "UNIQUE"
-        label: "AUTOMOBILE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       AUTOMOBILE:
         type: "TEXT"
@@ -182,12 +122,7 @@ nodes:
   AUTO_REPAIR_SHOP_CONTRACT:
     label: "AUTO_REPAIR_SHOP_CONTRACT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      AUTO_REPAIR_SHOP_CONTRACT:
-        type: "UNIQUE"
-        label: "AUTO_REPAIR_SHOP_CONTRACT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       AUTO_REPAIR_SHOP_CONTRACT:
         type: "TEXT"
@@ -196,12 +131,7 @@ nodes:
   BINDING:
     label: "BINDING"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      BINDING:
-        type: "UNIQUE"
-        label: "BINDING"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       BINDING:
         type: "TEXT"
@@ -210,12 +140,7 @@ nodes:
   BOAT:
     label: "BOAT"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      BOAT:
-        type: "UNIQUE"
-        label: "BOAT"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       BOAT:
         type: "TEXT"
@@ -224,12 +149,7 @@ nodes:
   BODY_OBJECT:
     label: "BODY_OBJECT"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      BODY_OBJECT:
-        type: "UNIQUE"
-        label: "BODY_OBJECT"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       BODY_OBJECT:
         type: "TEXT"
@@ -238,12 +158,7 @@ nodes:
   BROKERAGE_CONTRACT:
     label: "BROKERAGE_CONTRACT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      BROKERAGE_CONTRACT:
-        type: "UNIQUE"
-        label: "BROKERAGE_CONTRACT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       BROKERAGE_CONTRACT:
         type: "TEXT"
@@ -252,12 +167,7 @@ nodes:
   BUS:
     label: "BUS"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      BUS:
-        type: "UNIQUE"
-        label: "BUS"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       BUS:
         type: "TEXT"
@@ -266,12 +176,7 @@ nodes:
   BUSINESS_EVENT:
     label: "BUSINESS_EVENT"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      BUSINESS_EVENT:
-        type: "UNIQUE"
-        label: "BUSINESS_EVENT"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       BUSINESS_EVENT:
         type: "TEXT"
@@ -280,12 +185,7 @@ nodes:
   CANCEL:
     label: "CANCEL"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CANCEL:
-        type: "UNIQUE"
-        label: "CANCEL"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CANCEL:
         type: "TEXT"
@@ -294,16 +194,11 @@ nodes:
   CATASTROPHE:
     label: "CATASTROPHE"
     properties:
-      CATASTROPHE_IDENTIFIER: { type: "FLOAT" }
+      CATASTROPHE_IDENTIFIER: { type: "FLOAT", unique: true }
       CATASTROPHE_TYPE_CODE: { type: "STRING" }
       CATASTROPHE_NAME: { type: "STRING" }
       INDUSTRY_CATASTROPHE_CODE: { type: "STRING" }
       COMPANY_CATASTROPHE_CODE: { type: "STRING" }
-    constraints:
-      CATASTROPHE:
-        type: "UNIQUE"
-        label: "CATASTROPHE"
-        properties: ["CATASTROPHE_IDENTIFIER"]
     indexes:
       CATASTROPHE:
         type: "TEXT"
@@ -312,12 +207,7 @@ nodes:
   CEDED_CLAIM_AMOUNT:
     label: "CEDED_CLAIM_AMOUNT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CEDED_CLAIM_AMOUNT:
-        type: "UNIQUE"
-        label: "CEDED_CLAIM_AMOUNT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CEDED_CLAIM_AMOUNT:
         type: "TEXT"
@@ -326,12 +216,7 @@ nodes:
   CEDED_POLICY_AMOUNT:
     label: "CEDED_POLICY_AMOUNT"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CEDED_POLICY_AMOUNT:
-        type: "UNIQUE"
-        label: "CEDED_POLICY_AMOUNT"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CEDED_POLICY_AMOUNT:
         type: "TEXT"
@@ -340,12 +225,7 @@ nodes:
   CHANNEL_SCORE:
     label: "CHANNEL_SCORE"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CHANNEL_SCORE:
-        type: "UNIQUE"
-        label: "CHANNEL_SCORE"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CHANNEL_SCORE:
         type: "TEXT"
@@ -354,7 +234,7 @@ nodes:
   CLAIM:
     label: "CLAIM"
     properties:
-      CLAIM_IDENTIFIER: { type: "FLOAT" }
+      CLAIM_IDENTIFIER: { type: "FLOAT", unique: true }
       CLAIM_DESCRIPTION: { type: "STRING" }
       CLAIMS_MADE_DATE: { type: "LOCAL DATETIME" }
       COMPANY_CLAIM_NUMBER: { type: "STRING" }
@@ -365,11 +245,6 @@ nodes:
       CLAIM_REOPEN_DATE: { type: "LOCAL DATETIME" }
       CLAIM_STATUS_CODE: { type: "STRING" }
       CLAIM_REPORTED_DATE: { type: "LOCAL DATETIME" }
-    constraints:
-      CLAIM:
-        type: "UNIQUE"
-        label: "CLAIM"
-        properties: ["CLAIM_IDENTIFIER"]
     indexes:
       CLAIM:
         type: "TEXT"
@@ -378,16 +253,11 @@ nodes:
   CLAIM_AMOUNT:
     label: "CLAIM_AMOUNT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
       AMOUNT_TYPE_CODE: { type: "STRING" }
       EVENT_DATE: { type: "LOCAL DATETIME" }
       CLAIM_AMOUNT: { type: "FLOAT" }
       INSURANCE_TYPE_CODE: { type: "STRING" }
-    constraints:
-      CLAIM_AMOUNT:
-        type: "UNIQUE"
-        label: "CLAIM_AMOUNT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
     indexes:
       CLAIM_AMOUNT:
         type: "TEXT"
@@ -396,12 +266,7 @@ nodes:
   CLAIM_EVALUATION_RESULT:
     label: "CLAIM_EVALUATION_RESULT"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CLAIM_EVALUATION_RESULT:
-        type: "UNIQUE"
-        label: "CLAIM_EVALUATION_RESULT"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CLAIM_EVALUATION_RESULT:
         type: "TEXT"
@@ -410,12 +275,7 @@ nodes:
   CLAIM_EVENT:
     label: "CLAIM_EVENT"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CLAIM_EVENT:
-        type: "UNIQUE"
-        label: "CLAIM_EVENT"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CLAIM_EVENT:
         type: "TEXT"
@@ -424,13 +284,8 @@ nodes:
   CLAIM_FOLDER:
     label: "CLAIM_FOLDER"
     properties:
-      CLAIM_IDENTIFIER: { type: "FLOAT" }
+      CLAIM_IDENTIFIER: { type: "FLOAT", unique: true }
       CLAIM_FOLDER_LABEL_NAME: { type: "STRING" }
-    constraints:
-      CLAIM_FOLDER:
-        type: "UNIQUE"
-        label: "CLAIM_FOLDER"
-        properties: ["CLAIM_IDENTIFIER"]
     indexes:
       CLAIM_FOLDER:
         type: "TEXT"
@@ -439,14 +294,9 @@ nodes:
   CLAIM_OFFER:
     label: "CLAIM_OFFER"
     properties:
-      CLAIM_OFFER_IDENTIFIER: { type: "FLOAT" }
+      CLAIM_OFFER_IDENTIFIER: { type: "FLOAT", unique: true }
       SETTLEMENT_OFFER_AMOUNT: { type: "FLOAT" }
       SETTLEMENT_OFFER_PROVISION_DESCRIPTION: { type: "STRING" }
-    constraints:
-      CLAIM_OFFER:
-        type: "UNIQUE"
-        label: "CLAIM_OFFER"
-        properties: ["CLAIM_OFFER_IDENTIFIER"]
     indexes:
       CLAIM_OFFER:
         type: "TEXT"
@@ -455,12 +305,7 @@ nodes:
   CLAIM_PAYMENT:
     label: "CLAIM_PAYMENT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CLAIM_PAYMENT:
-        type: "UNIQUE"
-        label: "CLAIM_PAYMENT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CLAIM_PAYMENT:
         type: "TEXT"
@@ -469,12 +314,7 @@ nodes:
   CLAIM_RESERVE:
     label: "CLAIM_RESERVE"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CLAIM_RESERVE:
-        type: "UNIQUE"
-        label: "CLAIM_RESERVE"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CLAIM_RESERVE:
         type: "TEXT"
@@ -483,12 +323,7 @@ nodes:
   COMBINATION_STRUCTURE:
     label: "COMBINATION_STRUCTURE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      COMBINATION_STRUCTURE:
-        type: "UNIQUE"
-        label: "COMBINATION_STRUCTURE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       COMBINATION_STRUCTURE:
         type: "TEXT"
@@ -497,12 +332,7 @@ nodes:
   COMBINE:
     label: "COMBINE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      COMBINE:
-        type: "UNIQUE"
-        label: "COMBINE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       COMBINE:
         type: "TEXT"
@@ -511,12 +341,7 @@ nodes:
   COMMERCIAL_AGREEMENT:
     label: "COMMERCIAL_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      COMMERCIAL_AGREEMENT:
-        type: "UNIQUE"
-        label: "COMMERCIAL_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       COMMERCIAL_AGREEMENT:
         type: "TEXT"
@@ -525,12 +350,7 @@ nodes:
   COMMERCIAL_STRUCTURE:
     label: "COMMERCIAL_STRUCTURE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      COMMERCIAL_STRUCTURE:
-        type: "UNIQUE"
-        label: "COMMERCIAL_STRUCTURE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       COMMERCIAL_STRUCTURE:
         type: "TEXT"
@@ -539,15 +359,10 @@ nodes:
   COMMUNICATION_IDENTITY:
     label: "COMMUNICATION_IDENTITY"
     properties:
-      COMMUNICATION_IDENTIFIER: { type: "FLOAT" }
+      COMMUNICATION_IDENTIFIER: { type: "FLOAT", unique: true }
       COMMUNICATION_TYPE_CODE: { type: "STRING" }
       COMMUNICATION_VALUE: { type: "STRING" }
       COMMUNICATION_QUALIFIER_VALUE: { type: "STRING" }
-    constraints:
-      COMMUNICATION_IDENTITY:
-        type: "UNIQUE"
-        label: "COMMUNICATION_IDENTITY"
-        properties: ["COMMUNICATION_IDENTIFIER"]
     indexes:
       COMMUNICATION_IDENTITY:
         type: "TEXT"
@@ -556,12 +371,7 @@ nodes:
   COMMUTATION_AGREEMENT:
     label: "COMMUTATION_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      COMMUTATION_AGREEMENT:
-        type: "UNIQUE"
-        label: "COMMUTATION_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       COMMUTATION_AGREEMENT:
         type: "TEXT"
@@ -570,15 +380,10 @@ nodes:
   COMPANY:
     label: "COMPANY"
     properties:
-      COMPANY_IDENTIFIER: { type: "FLOAT" }
+      COMPANY_IDENTIFIER: { type: "FLOAT", unique: true }
       COMPANY_CODE: { type: "STRING" }
       COMPANY_DESCRIPTION: { type: "STRING" }
       COMPANY_NAME: { type: "STRING" }
-    constraints:
-      COMPANY:
-        type: "UNIQUE"
-        label: "COMPANY"
-        properties: ["COMPANY_IDENTIFIER"]
     indexes:
       COMPANY:
         type: "TEXT"
@@ -587,12 +392,7 @@ nodes:
   CONSTRUCTION_VEHICLE:
     label: "CONSTRUCTION_VEHICLE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CONSTRUCTION_VEHICLE:
-        type: "UNIQUE"
-        label: "CONSTRUCTION_VEHICLE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CONSTRUCTION_VEHICLE:
         type: "TEXT"
@@ -601,12 +401,7 @@ nodes:
   CONSULTANT_CONTRACT:
     label: "CONSULTANT_CONTRACT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CONSULTANT_CONTRACT:
-        type: "UNIQUE"
-        label: "CONSULTANT_CONTRACT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CONSULTANT_CONTRACT:
         type: "TEXT"
@@ -615,14 +410,9 @@ nodes:
   COVERAGE:
     label: "COVERAGE"
     properties:
-      COVERAGE_IDENTIFIER: { type: "FLOAT" }
+      COVERAGE_IDENTIFIER: { type: "FLOAT", unique: true }
       COVERAGE_DESCRIPTION: { type: "STRING" }
       COVERAGE_NAME: { type: "STRING" }
-    constraints:
-      COVERAGE:
-        type: "UNIQUE"
-        label: "COVERAGE"
-        properties: ["COVERAGE_IDENTIFIER"]
     indexes:
       COVERAGE:
         type: "TEXT"
@@ -631,14 +421,9 @@ nodes:
   COVERAGE_GROUP:
     label: "COVERAGE_GROUP"
     properties:
-      COVERAGE_GROUP_IDENTIFIER: { type: "FLOAT" }
+      COVERAGE_GROUP_IDENTIFIER: { type: "FLOAT", unique: true }
       COVERAGE_GROUP_DESCRIPTION: { type: "STRING" }
       COVERAGE_GROUP_NAME: { type: "STRING" }
-    constraints:
-      COVERAGE_GROUP:
-        type: "UNIQUE"
-        label: "COVERAGE_GROUP"
-        properties: ["COVERAGE_GROUP_IDENTIFIER"]
     indexes:
       COVERAGE_GROUP:
         type: "TEXT"
@@ -647,14 +432,9 @@ nodes:
   COVERAGE_LIMIT_TYPE:
     label: "COVERAGE_LIMIT_TYPE"
     properties:
-      COVERAGE_LIMIT_TYPE_IDENTIFIER: { type: "FLOAT" }
+      COVERAGE_LIMIT_TYPE_IDENTIFIER: { type: "FLOAT", unique: true }
       COVERAGE_LIMIT_NAME: { type: "STRING" }
       COVERAGE_LIMIT_DESCRIPTION: { type: "STRING" }
-    constraints:
-      COVERAGE_LIMIT_TYPE:
-        type: "UNIQUE"
-        label: "COVERAGE_LIMIT_TYPE"
-        properties: ["COVERAGE_LIMIT_TYPE_IDENTIFIER"]
     indexes:
       COVERAGE_LIMIT_TYPE:
         type: "TEXT"
@@ -663,13 +443,8 @@ nodes:
   COVERAGE_PART:
     label: "COVERAGE_PART"
     properties:
-      COVERAGE_PART_CODE: { type: "STRING" }
+      COVERAGE_PART_CODE: { type: "STRING", unique: true }
       COVERAGE_PART_NAME: { type: "STRING" }
-    constraints:
-      COVERAGE_PART:
-        type: "UNIQUE"
-        label: "COVERAGE_PART"
-        properties: ["COVERAGE_PART_CODE"]
     indexes:
       "COVERAGE_PART-text":
         type: "TEXT"
@@ -678,14 +453,9 @@ nodes:
   COVERAGE_TYPE:
     label: "COVERAGE_TYPE"
     properties:
-      COVERAGE_TYPE_IDENTIFIER: { type: "FLOAT" }
+      COVERAGE_TYPE_IDENTIFIER: { type: "FLOAT", unique: true }
       COVERAGE_TYPE_DESCRIPTION: { type: "STRING" }
       COVERAGE_TYPE_NAME: { type: "STRING" }
-    constraints:
-      COVERAGE_TYPE:
-        type: "UNIQUE"
-        label: "COVERAGE_TYPE"
-        properties: ["COVERAGE_TYPE_IDENTIFIER"]
     indexes:
       COVERAGE_TYPE:
         type: "TEXT"
@@ -694,12 +464,7 @@ nodes:
   CREDIT_CLAIM_AMOUNT:
     label: "CREDIT_CLAIM_AMOUNT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CREDIT_CLAIM_AMOUNT:
-        type: "UNIQUE"
-        label: "CREDIT_CLAIM_AMOUNT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CREDIT_CLAIM_AMOUNT:
         type: "TEXT"
@@ -708,12 +473,7 @@ nodes:
   CREDIT_POLICY_AMOUNT:
     label: "CREDIT_POLICY_AMOUNT"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CREDIT_POLICY_AMOUNT:
-        type: "UNIQUE"
-        label: "CREDIT_POLICY_AMOUNT"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CREDIT_POLICY_AMOUNT:
         type: "TEXT"
@@ -722,12 +482,7 @@ nodes:
   CREDIT_RATING:
     label: "CREDIT_RATING"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CREDIT_RATING:
-        type: "UNIQUE"
-        label: "CREDIT_RATING"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CREDIT_RATING:
         type: "TEXT"
@@ -736,12 +491,7 @@ nodes:
   CUSTOMER_SCORE:
     label: "CUSTOMER_SCORE"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      CUSTOMER_SCORE:
-        type: "UNIQUE"
-        label: "CUSTOMER_SCORE"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       CUSTOMER_SCORE:
         type: "TEXT"
@@ -750,12 +500,7 @@ nodes:
   DEBIT_CLAIM_AMOUNT:
     label: "DEBIT_CLAIM_AMOUNT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      DEBIT_CLAIM_AMOUNT:
-        type: "UNIQUE"
-        label: "DEBIT_CLAIM_AMOUNT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       DEBIT_CLAIM_AMOUNT:
         type: "TEXT"
@@ -764,12 +509,7 @@ nodes:
   DEBIT_POLICY_AMOUNT:
     label: "DEBIT_POLICY_AMOUNT"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      DEBIT_POLICY_AMOUNT:
-        type: "UNIQUE"
-        label: "DEBIT_POLICY_AMOUNT"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       DEBIT_POLICY_AMOUNT:
         type: "TEXT"
@@ -778,12 +518,7 @@ nodes:
   DEDUCTIBLE_RECOVERY:
     label: "DEDUCTIBLE_RECOVERY"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      DEDUCTIBLE_RECOVERY:
-        type: "UNIQUE"
-        label: "DEDUCTIBLE_RECOVERY"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       DEDUCTIBLE_RECOVERY:
         type: "TEXT"
@@ -792,12 +527,7 @@ nodes:
   DEMOGRAPHIC_SCORE:
     label: "DEMOGRAPHIC_SCORE"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      DEMOGRAPHIC_SCORE:
-        type: "UNIQUE"
-        label: "DEMOGRAPHIC_SCORE"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       DEMOGRAPHIC_SCORE:
         type: "TEXT"
@@ -806,12 +536,7 @@ nodes:
   DERIVATIVE_CONTRACT:
     label: "DERIVATIVE_CONTRACT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      DERIVATIVE_CONTRACT:
-        type: "UNIQUE"
-        label: "DERIVATIVE_CONTRACT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       DERIVATIVE_CONTRACT:
         type: "TEXT"
@@ -820,12 +545,7 @@ nodes:
   DIRECT_CLAIM_AMOUNT:
     label: "DIRECT_CLAIM_AMOUNT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      DIRECT_CLAIM_AMOUNT:
-        type: "UNIQUE"
-        label: "DIRECT_CLAIM_AMOUNT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       DIRECT_CLAIM_AMOUNT:
         type: "TEXT"
@@ -834,12 +554,7 @@ nodes:
   DIRECT_POLICY_AMOUNT:
     label: "DIRECT_POLICY_AMOUNT"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      DIRECT_POLICY_AMOUNT:
-        type: "UNIQUE"
-        label: "DIRECT_POLICY_AMOUNT"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       DIRECT_POLICY_AMOUNT:
         type: "TEXT"
@@ -848,12 +563,7 @@ nodes:
   DWELLING:
     label: "DWELLING"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      DWELLING:
-        type: "UNIQUE"
-        label: "DWELLING"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       DWELLING:
         type: "TEXT"
@@ -862,12 +572,7 @@ nodes:
   EMPLOYMENT_AGREEMENT:
     label: "EMPLOYMENT_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      EMPLOYMENT_AGREEMENT:
-        type: "UNIQUE"
-        label: "EMPLOYMENT_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       EMPLOYMENT_AGREEMENT:
         type: "TEXT"
@@ -876,12 +581,7 @@ nodes:
   ENDORSEMENT:
     label: "ENDORSEMENT"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      ENDORSEMENT:
-        type: "UNIQUE"
-        label: "ENDORSEMENT"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       ENDORSEMENT:
         type: "TEXT"
@@ -890,12 +590,7 @@ nodes:
   EVENT:
     label: "EVENT"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      EVENT:
-        type: "UNIQUE"
-        label: "EVENT"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       EVENT:
         type: "TEXT"
@@ -904,12 +599,7 @@ nodes:
   EXPENSE_PAYMENT:
     label: "EXPENSE_PAYMENT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      EXPENSE_PAYMENT:
-        type: "UNIQUE"
-        label: "EXPENSE_PAYMENT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       EXPENSE_PAYMENT:
         type: "TEXT"
@@ -918,12 +608,7 @@ nodes:
   EXPENSE_RECOVERY:
     label: "EXPENSE_RECOVERY"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      EXPENSE_RECOVERY:
-        type: "UNIQUE"
-        label: "EXPENSE_RECOVERY"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       EXPENSE_RECOVERY:
         type: "TEXT"
@@ -932,12 +617,7 @@ nodes:
   EXPENSE_RESERVE:
     label: "EXPENSE_RESERVE"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      EXPENSE_RESERVE:
-        type: "UNIQUE"
-        label: "EXPENSE_RESERVE"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       EXPENSE_RESERVE:
         type: "TEXT"
@@ -946,12 +626,7 @@ nodes:
   FARM_EQUIPMENT:
     label: "FARM_EQUIPMENT"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FARM_EQUIPMENT:
-        type: "UNIQUE"
-        label: "FARM_EQUIPMENT"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FARM_EQUIPMENT:
         type: "TEXT"
@@ -960,12 +635,7 @@ nodes:
   FEE:
     label: "FEE"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FEE:
-        type: "UNIQUE"
-        label: "FEE"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FEE:
         type: "TEXT"
@@ -974,12 +644,7 @@ nodes:
   FIELD_ORGANIZATION_UNIT:
     label: "FIELD_ORGANIZATION_UNIT"
     properties:
-      ORGANIZATION_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FIELD_ORGANIZATION_UNIT:
-        type: "UNIQUE"
-        label: "FIELD_ORGANIZATION_UNIT"
-        properties: ["ORGANIZATION_IDENTIFIER"]
+      ORGANIZATION_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FIELD_ORGANIZATION_UNIT:
         type: "TEXT"
@@ -988,12 +653,7 @@ nodes:
   FINANCIAL_ACCOUNT_AGREEMENT:
     label: "FINANCIAL_ACCOUNT_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FINANCIAL_ACCOUNT_AGREEMENT:
-        type: "UNIQUE"
-        label: "FINANCIAL_ACCOUNT_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FINANCIAL_ACCOUNT_AGREEMENT:
         type: "TEXT"
@@ -1002,12 +662,7 @@ nodes:
   FINANCIAL_SERVICES_ASSESSMENT:
     label: "FINANCIAL_SERVICES_ASSESSMENT"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FINANCIAL_SERVICES_ASSESSMENT:
-        type: "UNIQUE"
-        label: "FINANCIAL_SERVICES_ASSESSMENT"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FINANCIAL_SERVICES_ASSESSMENT:
         type: "TEXT"
@@ -1016,12 +671,7 @@ nodes:
   FINANCIAL_VALUATION:
     label: "FINANCIAL_VALUATION"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FINANCIAL_VALUATION:
-        type: "UNIQUE"
-        label: "FINANCIAL_VALUATION"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FINANCIAL_VALUATION:
         type: "TEXT"
@@ -1030,12 +680,7 @@ nodes:
   FLAT:
     label: "FLAT"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FLAT:
-        type: "UNIQUE"
-        label: "FLAT"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FLAT:
         type: "TEXT"
@@ -1044,12 +689,7 @@ nodes:
   FOR_PROFIT_ORGANIZATION:
     label: "FOR_PROFIT_ORGANIZATION"
     properties:
-      ORGANIZATION_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FOR_PROFIT_ORGANIZATION:
-        type: "UNIQUE"
-        label: "FOR_PROFIT_ORGANIZATION"
-        properties: ["ORGANIZATION_IDENTIFIER"]
+      ORGANIZATION_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FOR_PROFIT_ORGANIZATION:
         type: "TEXT"
@@ -1058,12 +698,7 @@ nodes:
   FRAUD_ASSESSMENT:
     label: "FRAUD_ASSESSMENT"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FRAUD_ASSESSMENT:
-        type: "UNIQUE"
-        label: "FRAUD_ASSESSMENT"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FRAUD_ASSESSMENT:
         type: "TEXT"
@@ -1072,12 +707,7 @@ nodes:
   FREIGHT_GROUP:
     label: "FREIGHT_GROUP"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FREIGHT_GROUP:
-        type: "UNIQUE"
-        label: "FREIGHT_GROUP"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FREIGHT_GROUP:
         type: "TEXT"
@@ -1086,12 +716,7 @@ nodes:
   FULL_TERM:
     label: "FULL_TERM"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      FULL_TERM:
-        type: "UNIQUE"
-        label: "FULL_TERM"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       FULL_TERM:
         type: "TEXT"
@@ -1100,16 +725,11 @@ nodes:
   GEOGRAPHIC_LOCATION:
     label: "GEOGRAPHIC_LOCATION"
     properties:
-      GEOGRAPHIC_LOCATION_IDENTIFIER: { type: "FLOAT" }
+      GEOGRAPHIC_LOCATION_IDENTIFIER: { type: "FLOAT", unique: true }
       GEOGRAPHIC_LOCATION_TYPE_CODE: { type: "STRING" }
       LOCATION_CODE: { type: "STRING" }
       LOCATION_NAME: { type: "STRING" }
       LOCATION_NUMBER: { type: "STRING" }
-    constraints:
-      GEOGRAPHIC_LOCATION:
-        type: "UNIQUE"
-        label: "GEOGRAPHIC_LOCATION"
-        properties: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
     indexes:
       GEOGRAPHIC_LOCATION:
         type: "TEXT"
@@ -1118,12 +738,7 @@ nodes:
   GOVERNMENT_ORGANIZATION:
     label: "GOVERNMENT_ORGANIZATION"
     properties:
-      ORGANIZATION_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      GOVERNMENT_ORGANIZATION:
-        type: "UNIQUE"
-        label: "GOVERNMENT_ORGANIZATION"
-        properties: ["ORGANIZATION_IDENTIFIER"]
+      ORGANIZATION_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       GOVERNMENT_ORGANIZATION:
         type: "TEXT"
@@ -1132,13 +747,8 @@ nodes:
   GROUPING:
     label: "GROUPING"
     properties:
-      GROUPING_IDENTIFIER: { type: "FLOAT" }
+      GROUPING_IDENTIFIER: { type: "FLOAT", unique: true }
       GROUPING_NAME: { type: "STRING" }
-    constraints:
-      GROUPING:
-        type: "UNIQUE"
-        label: "GROUPING"
-        properties: ["GROUPING_IDENTIFIER"]
     indexes:
       GROUPING:
         type: "TEXT"
@@ -1147,12 +757,7 @@ nodes:
   GROUP_AGREEMENT:
     label: "GROUP_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      GROUP_AGREEMENT:
-        type: "UNIQUE"
-        label: "GROUP_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       GROUP_AGREEMENT:
         type: "TEXT"
@@ -1161,12 +766,7 @@ nodes:
   HOUSEHOLD:
     label: "HOUSEHOLD"
     properties:
-      HOUSEHOLD_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      HOUSEHOLD:
-        type: "UNIQUE"
-        label: "HOUSEHOLD"
-        properties: ["HOUSEHOLD_IDENTIFIER"]
+      HOUSEHOLD_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       HOUSEHOLD:
         type: "TEXT"
@@ -1175,12 +775,7 @@ nodes:
   HOUSEHOLD_CONTENT:
     label: "HOUSEHOLD_CONTENT"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      HOUSEHOLD_CONTENT:
-        type: "UNIQUE"
-        label: "HOUSEHOLD_CONTENT"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       HOUSEHOLD_CONTENT:
         type: "TEXT"
@@ -1189,12 +784,7 @@ nodes:
   INDIVIDUAL_AGREEMENT:
     label: "INDIVIDUAL_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      INDIVIDUAL_AGREEMENT:
-        type: "UNIQUE"
-        label: "INDIVIDUAL_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       INDIVIDUAL_AGREEMENT:
         type: "TEXT"
@@ -1203,13 +793,8 @@ nodes:
   INSURABLE_OBJECT:
     label: "INSURABLE_OBJECT"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
       INSURABLE_OBJECT_TYPE_CODE: { type: "STRING" }
-    constraints:
-      INSURABLE_OBJECT:
-        type: "UNIQUE"
-        label: "INSURABLE_OBJECT"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
     indexes:
       INSURABLE_OBJECT:
         type: "TEXT"
@@ -1218,14 +803,9 @@ nodes:
   INSURANCE_CLASS:
     label: "INSURANCE_CLASS"
     properties:
-      INSURANCE_CLASS_IDENTIFIER: { type: "FLOAT" }
+      INSURANCE_CLASS_IDENTIFIER: { type: "FLOAT", unique: true }
       INSURANCE_CLASS_NAME: { type: "STRING" }
       INSURANCE_CLASS_DESCRIPTION: { type: "STRING" }
-    constraints:
-      INSURANCE_CLASS:
-        type: "UNIQUE"
-        label: "INSURANCE_CLASS"
-        properties: ["INSURANCE_CLASS_IDENTIFIER"]
     indexes:
       INSURANCE_CLASS:
         type: "TEXT"
@@ -1234,12 +814,7 @@ nodes:
   INSURED_ACCOUNT:
     label: "INSURED_ACCOUNT"
     properties:
-      ACCOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      INSURED_ACCOUNT:
-        type: "UNIQUE"
-        label: "INSURED_ACCOUNT"
-        properties: ["ACCOUNT_IDENTIFIER"]
+      ACCOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       INSURED_ACCOUNT:
         type: "TEXT"
@@ -1248,12 +823,7 @@ nodes:
   INTERMEDIARY_AGREEMENT:
     label: "INTERMEDIARY_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      INTERMEDIARY_AGREEMENT:
-        type: "UNIQUE"
-        label: "INTERMEDIARY_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       INTERMEDIARY_AGREEMENT:
         type: "TEXT"
@@ -1262,15 +832,10 @@ nodes:
   LEGAL_JURISDICTION:
     label: "LEGAL_JURISDICTION"
     properties:
-      LEGAL_JURISDICTION_IDENTIFIER: { type: "FLOAT" }
+      LEGAL_JURISDICTION_IDENTIFIER: { type: "FLOAT", unique: true }
       LEGAL_JURISDICTION_NAME: { type: "STRING" }
       LEGAL_JURISDICTION_DESCRIPTION: { type: "STRING" }
       RULES_REFERENCE_DESCRIPTION: { type: "STRING" }
-    constraints:
-      LEGAL_JURISDICTION:
-        type: "UNIQUE"
-        label: "LEGAL_JURISDICTION"
-        properties: ["LEGAL_JURISDICTION_IDENTIFIER"]
     indexes:
       LEGAL_JURISDICTION:
         type: "TEXT"
@@ -1279,12 +844,7 @@ nodes:
   LIFE_EVENT:
     label: "LIFE_EVENT"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      LIFE_EVENT:
-        type: "UNIQUE"
-        label: "LIFE_EVENT"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       LIFE_EVENT:
         type: "TEXT"
@@ -1293,15 +853,10 @@ nodes:
   LINE_OF_BUSINESS:
     label: "LINE_OF_BUSINESS"
     properties:
-      LINE_OF_BUSINESS_IDENTIFIER: { type: "FLOAT" }
+      LINE_OF_BUSINESS_IDENTIFIER: { type: "FLOAT", unique: true }
       LINE_OF_BUSINESS_NAME: { type: "STRING" }
       LINE_OF_BUSINESS_DESCRIPTION: { type: "STRING" }
       LINE_OF_BUSINESS_CODE: { type: "STRING" }
-    constraints:
-      LINE_OF_BUSINESS:
-        type: "UNIQUE"
-        label: "LINE_OF_BUSINESS"
-        properties: ["LINE_OF_BUSINESS_IDENTIFIER"]
     indexes:
       LINE_OF_BUSINESS:
         type: "TEXT"
@@ -1310,14 +865,9 @@ nodes:
   LINE_OF_BUSINESS_GROUP:
     label: "LINE_OF_BUSINESS_GROUP"
     properties:
-      LINE_OF_BUSINESS_GROUP_IDENTIFIER: { type: "FLOAT" }
+      LINE_OF_BUSINESS_GROUP_IDENTIFIER: { type: "FLOAT", unique: true }
       LINE_OF_BUSINESS_GROUP_NAME: { type: "STRING" }
       LINE_OF_BUSINESS_GROUP_DESCRIPTION: { type: "STRING" }
-    constraints:
-      LINE_OF_BUSINESS_GROUP:
-        type: "UNIQUE"
-        label: "LINE_OF_BUSINESS_GROUP"
-        properties: ["LINE_OF_BUSINESS_GROUP_IDENTIFIER"]
     indexes:
       LINE_OF_BUSINESS_GROUP:
         type: "TEXT"
@@ -1326,13 +876,8 @@ nodes:
   LITIGATION:
     label: "LITIGATION"
     properties:
-      LITIGATION_IDENTIFIER: { type: "FLOAT" }
+      LITIGATION_IDENTIFIER: { type: "FLOAT", unique: true }
       LITIGATION_DESCRIPTION: { type: "STRING" }
-    constraints:
-      LITIGATION:
-        type: "UNIQUE"
-        label: "LITIGATION"
-        properties: ["LITIGATION_IDENTIFIER"]
     indexes:
       LITIGATION:
         type: "TEXT"
@@ -1341,7 +886,7 @@ nodes:
   LOCATION_ADDRESS:
     label: "LOCATION_ADDRESS"
     properties:
-      LOCATION_ADDRESS_IDENTIFIER: { type: "FLOAT" }
+      LOCATION_ADDRESS_IDENTIFIER: { type: "FLOAT", unique: true }
       LINE_1_ADDRESS: { type: "STRING" }
       MUNICIPALITY_NAME: { type: "STRING" }
       LINE_2_ADDRESS: { type: "STRING" }
@@ -1349,11 +894,6 @@ nodes:
       COUNTRY_CODE: { type: "STRING" }
       BEGIN_DATE: { type: "LOCAL DATETIME" }
       END_DATE: { type: "LOCAL DATETIME" }
-    constraints:
-      LOCATION_ADDRESS:
-        type: "UNIQUE"
-        label: "LOCATION_ADDRESS"
-        properties: ["LOCATION_ADDRESS_IDENTIFIER"]
     indexes:
       LOCATION_ADDRESS:
         type: "TEXT"
@@ -1362,12 +902,7 @@ nodes:
   LOSS_PAYMENT:
     label: "LOSS_PAYMENT"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      LOSS_PAYMENT:
-        type: "UNIQUE"
-        label: "LOSS_PAYMENT"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       LOSS_PAYMENT:
         type: "TEXT"
@@ -1376,12 +911,7 @@ nodes:
   LOSS_RECOVERY:
     label: "LOSS_RECOVERY"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      LOSS_RECOVERY:
-        type: "UNIQUE"
-        label: "LOSS_RECOVERY"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       LOSS_RECOVERY:
         type: "TEXT"
@@ -1390,12 +920,7 @@ nodes:
   LOSS_RESERVE:
     label: "LOSS_RESERVE"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      LOSS_RESERVE:
-        type: "UNIQUE"
-        label: "LOSS_RESERVE"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       LOSS_RESERVE:
         type: "TEXT"
@@ -1404,12 +929,7 @@ nodes:
   MANUFACTURED_OBJECT:
     label: "MANUFACTURED_OBJECT"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      MANUFACTURED_OBJECT:
-        type: "UNIQUE"
-        label: "MANUFACTURED_OBJECT"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       MANUFACTURED_OBJECT:
         type: "TEXT"
@@ -1418,12 +938,7 @@ nodes:
   MEDICAL_CONDITION:
     label: "MEDICAL_CONDITION"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      MEDICAL_CONDITION:
-        type: "UNIQUE"
-        label: "MEDICAL_CONDITION"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       MEDICAL_CONDITION:
         type: "TEXT"
@@ -1432,12 +947,7 @@ nodes:
   MID_TERM:
     label: "MID_TERM"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      MID_TERM:
-        type: "UNIQUE"
-        label: "MID_TERM"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       MID_TERM:
         type: "TEXT"
@@ -1446,12 +956,7 @@ nodes:
   MILKING_MACHINE:
     label: "MILKING_MACHINE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      MILKING_MACHINE:
-        type: "UNIQUE"
-        label: "MILKING_MACHINE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       MILKING_MACHINE:
         type: "TEXT"
@@ -1460,12 +965,7 @@ nodes:
   MOBILE_HOME:
     label: "MOBILE_HOME"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      MOBILE_HOME:
-        type: "UNIQUE"
-        label: "MOBILE_HOME"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       MOBILE_HOME:
         type: "TEXT"
@@ -1474,12 +974,7 @@ nodes:
   MOTORCYCLE:
     label: "MOTORCYCLE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      MOTORCYCLE:
-        type: "UNIQUE"
-        label: "MOTORCYCLE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       MOTORCYCLE:
         type: "TEXT"
@@ -1488,12 +983,7 @@ nodes:
   NEW_BUSINESS:
     label: "NEW_BUSINESS"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      NEW_BUSINESS:
-        type: "UNIQUE"
-        label: "NEW_BUSINESS"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       NEW_BUSINESS:
         type: "TEXT"
@@ -1502,12 +992,7 @@ nodes:
   NOT_FOR_PROFIT_ORGANIZATION:
     label: "NOT_FOR_PROFIT_ORGANIZATION"
     properties:
-      ORGANIZATION_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      NOT_FOR_PROFIT_ORGANIZATION:
-        type: "UNIQUE"
-        label: "NOT_FOR_PROFIT_ORGANIZATION"
-        properties: ["ORGANIZATION_IDENTIFIER"]
+      ORGANIZATION_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       NOT_FOR_PROFIT_ORGANIZATION:
         type: "TEXT"
@@ -1516,18 +1001,13 @@ nodes:
   OCCURRENCE:
     label: "OCCURRENCE"
     properties:
-      OCCURRENCE_IDENTIFIER: { type: "FLOAT" }
+      OCCURRENCE_IDENTIFIER: { type: "FLOAT", unique: true }
       CATASTROPHIC_EVENT_INDICATOR: { type: "STRING" }
       OCCURRENCE_BEGIN_DATE: { type: "LOCAL DATETIME" }
       OCCURRENCE_END_DATE: { type: "LOCAL DATETIME" }
       OCCURRENCE_BEGIN_TIME: { type: "LOCAL DATETIME" }
       OCCURRENCE_END_TIME: { type: "LOCAL DATETIME" }
       OCCURRENCE_NAME: { type: "STRING" }
-    constraints:
-      OCCURRENCE:
-        type: "UNIQUE"
-        label: "OCCURRENCE"
-        properties: ["OCCURRENCE_IDENTIFIER"]
     indexes:
       OCCURRENCE:
         type: "TEXT"
@@ -1536,7 +1016,7 @@ nodes:
   ORGANIZATION:
     label: "ORGANIZATION"
     properties:
-      ORGANIZATION_IDENTIFIER: { type: "FLOAT" }
+      ORGANIZATION_IDENTIFIER: { type: "FLOAT", unique: true }
       INDUSTRY_CODE: { type: "STRING" }
       ORGANIZATION_NAME: { type: "STRING" }
       DUN_AND_BRADSTREET_IDENTIFIER: { type: "FLOAT" }
@@ -1545,11 +1025,6 @@ nodes:
       ORGANIZATION_DESCRIPTION: { type: "STRING" }
       ACRONYM_NAME: { type: "STRING" }
       INDUSTRY_TYPE_CODE: { type: "STRING" }
-    constraints:
-      ORGANIZATION:
-        type: "UNIQUE"
-        label: "ORGANIZATION"
-        properties: ["ORGANIZATION_IDENTIFIER"]
     indexes:
       ORGANIZATION:
         type: "TEXT"
@@ -1558,17 +1033,12 @@ nodes:
   ORGANIZATION_UNIT:
     label: "ORGANIZATION_UNIT"
     properties:
-      ORGANIZATION_IDENTIFIER: { type: "FLOAT" }
+      ORGANIZATION_IDENTIFIER: { type: "FLOAT", unique: true }
       ORGANIZATION_UNIT_NAME: { type: "STRING" }
       ORGANIZATION_UNIT_DESCRIPTION: { type: "STRING" }
       INDUSTRY_CODE: { type: "STRING" }
       ACCOUNTING_CODE: { type: "STRING" }
       WORK_SITE_TYPE_CODE: { type: "STRING" }
-    constraints:
-      ORGANIZATION_UNIT:
-        type: "UNIQUE"
-        label: "ORGANIZATION_UNIT"
-        properties: ["ORGANIZATION_IDENTIFIER"]
     indexes:
       ORGANIZATION_UNIT:
         type: "TEXT"
@@ -1577,12 +1047,7 @@ nodes:
   OTHER_ASSESSMENT_RESULT:
     label: "OTHER_ASSESSMENT_RESULT"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      OTHER_ASSESSMENT_RESULT:
-        type: "UNIQUE"
-        label: "OTHER_ASSESSMENT_RESULT"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       OTHER_ASSESSMENT_RESULT:
         type: "TEXT"
@@ -1591,16 +1056,11 @@ nodes:
   PARTY:
     label: "PARTY"
     properties:
-      PARTY_IDENTIFIER: { type: "FLOAT" }
+      PARTY_IDENTIFIER: { type: "FLOAT", unique: true }
       PARTY_NAME: { type: "STRING" }
       BEGIN_DATE: { type: "LOCAL DATETIME" }
       END_DATE: { type: "LOCAL DATETIME" }
       PARTY_TYPE_CODE: { type: "STRING" }
-    constraints:
-      PARTY:
-        type: "UNIQUE"
-        label: "PARTY"
-        properties: ["PARTY_IDENTIFIER"]
     indexes:
       PARTY:
         type: "TEXT"
@@ -1609,13 +1069,8 @@ nodes:
   PARTY_PREFERENCE:
     label: "PARTY_PREFERENCE"
     properties:
-      PARTY_IDENTIFIER: { type: "FLOAT" }
+      PARTY_IDENTIFIER: { type: "FLOAT", unique: true }
       PREFERRED_LANGUAGE_CODE: { type: "STRING" }
-    constraints:
-      PARTY_PREFERENCE:
-        type: "UNIQUE"
-        label: "PARTY_PREFERENCE"
-        properties: ["PARTY_IDENTIFIER"]
     indexes:
       PARTY_PREFERENCE:
         type: "TEXT"
@@ -1624,14 +1079,9 @@ nodes:
   PARTY_ROLE:
     label: "PARTY_ROLE"
     properties:
-      PARTY_ROLE_CODE: { type: "STRING" }
+      PARTY_ROLE_CODE: { type: "STRING", unique: true }
       PARTY_ROLE_NAME: { type: "STRING" }
       PARTY_ROLE_DESCRIPTION: { type: "STRING" }
-    constraints:
-      PARTY_ROLE:
-        type: "UNIQUE"
-        label: "PARTY_ROLE"
-        properties: ["PARTY_ROLE_CODE"]
     indexes:
       "PARTY_ROLE-text":
         type: "TEXT"
@@ -1640,7 +1090,7 @@ nodes:
   PERSON:
     label: "PERSON"
     properties:
-      PERSON_IDENTIFIER: { type: "FLOAT" }
+      PERSON_IDENTIFIER: { type: "FLOAT", unique: true }
       FIRST_NAME: { type: "STRING" }
       MIDDLE_NAME: { type: "STRING" }
       LAST_NAME: { type: "STRING" }
@@ -1651,11 +1101,6 @@ nodes:
       BIRTH_PLACE_NAME: { type: "STRING" }
       GENDER_CODE: { type: "STRING" }
       PREFIX_NAME: { type: "STRING" }
-    constraints:
-      PERSON:
-        type: "UNIQUE"
-        label: "PERSON"
-        properties: ["PERSON_IDENTIFIER"]
     indexes:
       PERSON:
         type: "TEXT"
@@ -1664,13 +1109,8 @@ nodes:
   PERSON_PROFESSION:
     label: "PERSON_PROFESSION"
     properties:
-      PERSON_IDENTIFIER: { type: "FLOAT" }
+      PERSON_IDENTIFIER: { type: "FLOAT", unique: true }
       PROFESSION_NAME: { type: "STRING" }
-    constraints:
-      PERSON_PROFESSION:
-        type: "UNIQUE"
-        label: "PERSON_PROFESSION"
-        properties: ["PERSON_IDENTIFIER"]
     indexes:
       PERSON_PROFESSION:
         type: "TEXT"
@@ -1679,7 +1119,7 @@ nodes:
   PHYSICAL_LOCATION:
     label: "PHYSICAL_LOCATION"
     properties:
-      PHYSICAL_LOCATION_IDENTIFIER: { type: "FLOAT" }
+      PHYSICAL_LOCATION_IDENTIFIER: { type: "FLOAT", unique: true }
       PHYSICAL_LOCATION_NAME: { type: "STRING" }
       LATITUDE_VALUE: { type: "STRING" }
       LONGITUDE_VALUE: { type: "STRING" }
@@ -1688,11 +1128,6 @@ nodes:
       HORIZONTAL_ACCURACY_VALUE: { type: "STRING" }
       VERTICAL_ACCURACY_VALUE: { type: "STRING" }
       TRAVEL_DIRECTION_DESCRIPTION: { type: "STRING" }
-    constraints:
-      PHYSICAL_LOCATION:
-        type: "UNIQUE"
-        label: "PHYSICAL_LOCATION"
-        properties: ["PHYSICAL_LOCATION_IDENTIFIER"]
     indexes:
       PHYSICAL_LOCATION:
         type: "TEXT"
@@ -1701,12 +1136,7 @@ nodes:
   PHYSICAL_OBJECT_ASSESSMENT:
     label: "PHYSICAL_OBJECT_ASSESSMENT"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PHYSICAL_OBJECT_ASSESSMENT:
-        type: "UNIQUE"
-        label: "PHYSICAL_OBJECT_ASSESSMENT"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PHYSICAL_OBJECT_ASSESSMENT:
         type: "TEXT"
@@ -1715,12 +1145,7 @@ nodes:
   PLACE_ASSESSMENT:
     label: "PLACE_ASSESSMENT"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PLACE_ASSESSMENT:
-        type: "UNIQUE"
-        label: "PLACE_ASSESSMENT"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PLACE_ASSESSMENT:
         type: "TEXT"
@@ -1729,16 +1154,11 @@ nodes:
   POLICY:
     label: "POLICY"
     properties:
-      POLICY_IDENTIFIER: { type: "FLOAT" }
+      POLICY_IDENTIFIER: { type: "FLOAT", unique: true }
       EFFECTIVE_DATE: { type: "LOCAL DATETIME" }
       EXPIRATION_DATE: { type: "LOCAL DATETIME" }
       POLICY_NUMBER: { type: "STRING" }
       STATUS_CODE: { type: "STRING" }
-    constraints:
-      POLICY:
-        type: "UNIQUE"
-        label: "POLICY"
-        properties: ["POLICY_IDENTIFIER"]
     indexes:
       POLICY:
         type: "TEXT"
@@ -1747,17 +1167,12 @@ nodes:
   POLICY_AMOUNT:
     label: "POLICY_AMOUNT"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
       AMOUNT_TYPE_CODE: { type: "STRING" }
       EARNING_BEGIN_DATE: { type: "LOCAL DATETIME" }
       EARNING_END_DATE: { type: "LOCAL DATETIME" }
       POLICY_AMOUNT: { type: "FLOAT" }
       INSURANCE_TYPE_CODE: { type: "STRING" }
-    constraints:
-      POLICY_AMOUNT:
-        type: "UNIQUE"
-        label: "POLICY_AMOUNT"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
     indexes:
       POLICY_AMOUNT:
         type: "TEXT"
@@ -1766,15 +1181,10 @@ nodes:
   POLICY_DEDUCTIBLE:
     label: "POLICY_DEDUCTIBLE"
     properties:
-      POLICY_DEDUCTIBLE_IDENTIFIER: { type: "FLOAT" }
+      POLICY_DEDUCTIBLE_IDENTIFIER: { type: "FLOAT", unique: true }
       DEDUCTIBLE_TYPE_CODE: { type: "STRING" }
       DEDUCTIBLE_VALUE: { type: "STRING" }
       DEDUCTIBLE_BASIS_CODE: { type: "STRING" }
-    constraints:
-      POLICY_DEDUCTIBLE:
-        type: "UNIQUE"
-        label: "POLICY_DEDUCTIBLE"
-        properties: ["POLICY_DEDUCTIBLE_IDENTIFIER"]
     indexes:
       POLICY_DEDUCTIBLE:
         type: "TEXT"
@@ -1783,16 +1193,11 @@ nodes:
   POLICY_EVENT:
     label: "POLICY_EVENT"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
       EVENT_DATE: { type: "LOCAL DATETIME" }
       EFFECTIVE_DATE: { type: "LOCAL DATETIME" }
       EVENT_TYPE_CODE: { type: "STRING" }
       EVENT_SUB_TYPE_CODE: { type: "STRING" }
-    constraints:
-      POLICY_EVENT:
-        type: "UNIQUE"
-        label: "POLICY_EVENT"
-        properties: ["EVENT_IDENTIFIER"]
     indexes:
       POLICY_EVENT:
         type: "TEXT"
@@ -1801,15 +1206,10 @@ nodes:
   POLICY_LIMIT:
     label: "POLICY_LIMIT"
     properties:
-      POLICY_LIMIT_IDENTIFIER: { type: "FLOAT" }
+      POLICY_LIMIT_IDENTIFIER: { type: "FLOAT", unique: true }
       LIMIT_TYPE_CODE: { type: "STRING" }
       LIMIT_VALUE: { type: "STRING" }
       LIMIT_BASIS_CODE: { type: "STRING" }
-    constraints:
-      POLICY_LIMIT:
-        type: "UNIQUE"
-        label: "POLICY_LIMIT"
-        properties: ["POLICY_LIMIT_IDENTIFIER"]
     indexes:
       POLICY_LIMIT:
         type: "TEXT"
@@ -1818,12 +1218,7 @@ nodes:
   PREMIUM:
     label: "PREMIUM"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PREMIUM:
-        type: "UNIQUE"
-        label: "PREMIUM"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PREMIUM:
         type: "TEXT"
@@ -1832,12 +1227,7 @@ nodes:
   PRE_QUALIFICATION:
     label: "PRE_QUALIFICATION"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PRE_QUALIFICATION:
-        type: "UNIQUE"
-        label: "PRE_QUALIFICATION"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PRE_QUALIFICATION:
         type: "TEXT"
@@ -1846,14 +1236,9 @@ nodes:
   PRODUCT:
     label: "PRODUCT"
     properties:
-      PRODUCT_IDENTIFIER: { type: "FLOAT" }
+      PRODUCT_IDENTIFIER: { type: "FLOAT", unique: true }
       LICENSED_PRODUCT_NAME: { type: "STRING" }
       PRODUCT_DESCRIPTION: { type: "STRING" }
-    constraints:
-      PRODUCT:
-        type: "UNIQUE"
-        label: "PRODUCT"
-        properties: ["PRODUCT_IDENTIFIER"]
     indexes:
       PRODUCT:
         type: "TEXT"
@@ -1862,12 +1247,7 @@ nodes:
   PROFESSIONAL_GROUP:
     label: "PROFESSIONAL_GROUP"
     properties:
-      GROUPING_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PROFESSIONAL_GROUP:
-        type: "UNIQUE"
-        label: "PROFESSIONAL_GROUP"
-        properties: ["GROUPING_IDENTIFIER"]
+      GROUPING_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PROFESSIONAL_GROUP:
         type: "TEXT"
@@ -1876,12 +1256,7 @@ nodes:
   PROJECT:
     label: "PROJECT"
     properties:
-      GROUPING_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PROJECT:
-        type: "UNIQUE"
-        label: "PROJECT"
-        properties: ["GROUPING_IDENTIFIER"]
+      GROUPING_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PROJECT:
         type: "TEXT"
@@ -1890,12 +1265,7 @@ nodes:
   PROPERTY_IN_TRANSIT:
     label: "PROPERTY_IN_TRANSIT"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PROPERTY_IN_TRANSIT:
-        type: "UNIQUE"
-        label: "PROPERTY_IN_TRANSIT"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PROPERTY_IN_TRANSIT:
         type: "TEXT"
@@ -1904,12 +1274,7 @@ nodes:
   PROVIDER_AGREEMENT:
     label: "PROVIDER_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PROVIDER_AGREEMENT:
-        type: "UNIQUE"
-        label: "PROVIDER_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PROVIDER_AGREEMENT:
         type: "TEXT"
@@ -1918,12 +1283,7 @@ nodes:
   PRO_RATA:
     label: "PRO_RATA"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      PRO_RATA:
-        type: "UNIQUE"
-        label: "PRO_RATA"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       PRO_RATA:
         type: "TEXT"
@@ -1932,12 +1292,7 @@ nodes:
   QUOTE:
     label: "QUOTE"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      QUOTE:
-        type: "UNIQUE"
-        label: "QUOTE"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       QUOTE:
         type: "TEXT"
@@ -1946,15 +1301,10 @@ nodes:
   RATING_TERRITORY:
     label: "RATING_TERRITORY"
     properties:
-      RATING_TERRITORY_IDENTIFIER: { type: "FLOAT" }
+      RATING_TERRITORY_IDENTIFIER: { type: "FLOAT", unique: true }
       RATING_TERRITORY_ASSIGNING_ORGANIZATION_IDENTIFIER: { type: "FLOAT" }
       RATING_TERRITORY_CODE: { type: "STRING" }
       RATING_TERRITORY_CODE_SET_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      RATING_TERRITORY:
-        type: "UNIQUE"
-        label: "RATING_TERRITORY"
-        properties: ["RATING_TERRITORY_IDENTIFIER"]
     indexes:
       RATING_TERRITORY:
         type: "TEXT"
@@ -1963,12 +1313,7 @@ nodes:
   RECOVERY:
     label: "RECOVERY"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      RECOVERY:
-        type: "UNIQUE"
-        label: "RECOVERY"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       RECOVERY:
         type: "TEXT"
@@ -1977,12 +1322,7 @@ nodes:
   RECREATIONAL_VEHICLE:
     label: "RECREATIONAL_VEHICLE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      RECREATIONAL_VEHICLE:
-        type: "UNIQUE"
-        label: "RECREATIONAL_VEHICLE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       RECREATIONAL_VEHICLE:
         type: "TEXT"
@@ -1991,12 +1331,7 @@ nodes:
   REINSTATEMENT:
     label: "REINSTATEMENT"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      REINSTATEMENT:
-        type: "UNIQUE"
-        label: "REINSTATEMENT"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       REINSTATEMENT:
         type: "TEXT"
@@ -2005,12 +1340,7 @@ nodes:
   REINSURANCE_AGREEMENT:
     label: "REINSURANCE_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      REINSURANCE_AGREEMENT:
-        type: "UNIQUE"
-        label: "REINSURANCE_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       REINSURANCE_AGREEMENT:
         type: "TEXT"
@@ -2019,12 +1349,7 @@ nodes:
   REINSURANCE_RECOVERY:
     label: "REINSURANCE_RECOVERY"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      REINSURANCE_RECOVERY:
-        type: "UNIQUE"
-        label: "REINSURANCE_RECOVERY"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       REINSURANCE_RECOVERY:
         type: "TEXT"
@@ -2033,12 +1358,7 @@ nodes:
   RENEWAL:
     label: "RENEWAL"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      RENEWAL:
-        type: "UNIQUE"
-        label: "RENEWAL"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       RENEWAL:
         type: "TEXT"
@@ -2047,12 +1367,7 @@ nodes:
   RESIDENTIAL_STRUCTURE:
     label: "RESIDENTIAL_STRUCTURE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      RESIDENTIAL_STRUCTURE:
-        type: "UNIQUE"
-        label: "RESIDENTIAL_STRUCTURE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       RESIDENTIAL_STRUCTURE:
         type: "TEXT"
@@ -2061,12 +1376,7 @@ nodes:
   RISK_FACTOR_SCORE:
     label: "RISK_FACTOR_SCORE"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      RISK_FACTOR_SCORE:
-        type: "UNIQUE"
-        label: "RISK_FACTOR_SCORE"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       RISK_FACTOR_SCORE:
         type: "TEXT"
@@ -2075,12 +1385,7 @@ nodes:
   SALVAGE:
     label: "SALVAGE"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      SALVAGE:
-        type: "UNIQUE"
-        label: "SALVAGE"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       SALVAGE:
         type: "TEXT"
@@ -2089,12 +1394,7 @@ nodes:
   SCHEDULED_ITEM:
     label: "SCHEDULED_ITEM"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      SCHEDULED_ITEM:
-        type: "UNIQUE"
-        label: "SCHEDULED_ITEM"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       SCHEDULED_ITEM:
         type: "TEXT"
@@ -2103,12 +1403,7 @@ nodes:
   SHORT_RATE:
     label: "SHORT_RATE"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      SHORT_RATE:
-        type: "UNIQUE"
-        label: "SHORT_RATE"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       SHORT_RATE:
         type: "TEXT"
@@ -2117,12 +1412,7 @@ nodes:
   STAFFING_AGREEMENT:
     label: "STAFFING_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      STAFFING_AGREEMENT:
-        type: "UNIQUE"
-        label: "STAFFING_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       STAFFING_AGREEMENT:
         type: "TEXT"
@@ -2131,14 +1421,9 @@ nodes:
   STAFF_CLASSIFICATION:
     label: "STAFF_CLASSIFICATION"
     properties:
-      STAFF_CLASSIFICATION_CODE: { type: "STRING" }
+      STAFF_CLASSIFICATION_CODE: { type: "STRING", unique: true }
       STAFF_CLASSIFICATION_NAME: { type: "STRING" }
       STAFF_CLASSIFICATION_DESCRIPTION: { type: "STRING" }
-    constraints:
-      STAFF_CLASSIFICATION:
-        type: "UNIQUE"
-        label: "STAFF_CLASSIFICATION"
-        properties: ["STAFF_CLASSIFICATION_CODE"]
     indexes:
       "STAFF_CLASSIFICATION-text":
         type: "TEXT"
@@ -2147,14 +1432,9 @@ nodes:
   STAFF_POSITION:
     label: "STAFF_POSITION"
     properties:
-      STAFF_POSITION_IDENTIFIER: { type: "FLOAT" }
+      STAFF_POSITION_IDENTIFIER: { type: "FLOAT", unique: true }
       STAFF_POSITION_NAME: { type: "STRING" }
       STAFF_POSITION_DESCRIPTION: { type: "STRING" }
-    constraints:
-      STAFF_POSITION:
-        type: "UNIQUE"
-        label: "STAFF_POSITION"
-        properties: ["STAFF_POSITION_IDENTIFIER"]
     indexes:
       STAFF_POSITION:
         type: "TEXT"
@@ -2163,13 +1443,8 @@ nodes:
   STATE:
     label: "STATE"
     properties:
-      STATE_CODE: { type: "STRING" }
+      STATE_CODE: { type: "STRING", unique: true }
       STATE_NAME: { type: "STRING" }
-    constraints:
-      STATE:
-        type: "UNIQUE"
-        label: "STATE"
-        properties: ["STATE_CODE"]
     indexes:
       "STATE-text":
         type: "TEXT"
@@ -2178,12 +1453,7 @@ nodes:
   STRUCTURE:
     label: "STRUCTURE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      STRUCTURE:
-        type: "UNIQUE"
-        label: "STRUCTURE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       STRUCTURE:
         type: "TEXT"
@@ -2192,12 +1462,7 @@ nodes:
   SUBROGATION:
     label: "SUBROGATION"
     properties:
-      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      SUBROGATION:
-        type: "UNIQUE"
-        label: "SUBROGATION"
-        properties: ["CLAIM_AMOUNT_IDENTIFIER"]
+      CLAIM_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       SUBROGATION:
         type: "TEXT"
@@ -2206,12 +1471,7 @@ nodes:
   SURCHARGE:
     label: "SURCHARGE"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      SURCHARGE:
-        type: "UNIQUE"
-        label: "SURCHARGE"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       SURCHARGE:
         type: "TEXT"
@@ -2220,12 +1480,7 @@ nodes:
   TAX:
     label: "TAX"
     properties:
-      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      TAX:
-        type: "UNIQUE"
-        label: "TAX"
-        properties: ["POLICY_AMOUNT_IDENTIFIER"]
+      POLICY_AMOUNT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       TAX:
         type: "TEXT"
@@ -2234,12 +1489,7 @@ nodes:
   TEAM:
     label: "TEAM"
     properties:
-      GROUPING_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      TEAM:
-        type: "UNIQUE"
-        label: "TEAM"
-        properties: ["GROUPING_IDENTIFIER"]
+      GROUPING_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       TEAM:
         type: "TEXT"
@@ -2248,12 +1498,7 @@ nodes:
   THIRD_PARTY_STAFFING_AGREEMENT:
     label: "THIRD_PARTY_STAFFING_AGREEMENT"
     properties:
-      AGREEMENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      THIRD_PARTY_STAFFING_AGREEMENT:
-        type: "UNIQUE"
-        label: "THIRD_PARTY_STAFFING_AGREEMENT"
-        properties: ["AGREEMENT_IDENTIFIER"]
+      AGREEMENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       THIRD_PARTY_STAFFING_AGREEMENT:
         type: "TEXT"
@@ -2262,12 +1507,7 @@ nodes:
   TRACTOR:
     label: "TRACTOR"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      TRACTOR:
-        type: "UNIQUE"
-        label: "TRACTOR"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       TRACTOR:
         type: "TEXT"
@@ -2276,12 +1516,7 @@ nodes:
   TRAILER:
     label: "TRAILER"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      TRAILER:
-        type: "UNIQUE"
-        label: "TRAILER"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       TRAILER:
         type: "TEXT"
@@ -2290,12 +1525,7 @@ nodes:
   TRANSPORTATION_CLASS:
     label: "TRANSPORTATION_CLASS"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      TRANSPORTATION_CLASS:
-        type: "UNIQUE"
-        label: "TRANSPORTATION_CLASS"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       TRANSPORTATION_CLASS:
         type: "TEXT"
@@ -2304,12 +1534,7 @@ nodes:
   TRUCK:
     label: "TRUCK"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      TRUCK:
-        type: "UNIQUE"
-        label: "TRUCK"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       TRUCK:
         type: "TEXT"
@@ -2318,12 +1543,7 @@ nodes:
   UNDERWRITING_ASSESSMENT:
     label: "UNDERWRITING_ASSESSMENT"
     properties:
-      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      UNDERWRITING_ASSESSMENT:
-        type: "UNIQUE"
-        label: "UNDERWRITING_ASSESSMENT"
-        properties: ["ASSESSMENT_RESULT_IDENTIFIER"]
+      ASSESSMENT_RESULT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       UNDERWRITING_ASSESSMENT:
         type: "TEXT"
@@ -2332,12 +1552,7 @@ nodes:
   VAN:
     label: "VAN"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      VAN:
-        type: "UNIQUE"
-        label: "VAN"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       VAN:
         type: "TEXT"
@@ -2346,17 +1561,12 @@ nodes:
   VEHICLE:
     label: "VEHICLE"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
       VEHICLE_MODEL_YEAR: { type: "FLOAT" }
       VEHICLE_MODEL_NAME: { type: "STRING" }
       VEHICLE_DRIVING_WHEEL_QUANTITY: { type: "FLOAT" }
       VEHICLE_MAKE_NAME: { type: "STRING" }
       VEHICLE_IDENTIFICATION_NUMBER: { type: "STRING" }
-    constraints:
-      VEHICLE:
-        type: "UNIQUE"
-        label: "VEHICLE"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
     indexes:
       VEHICLE:
         type: "TEXT"
@@ -2365,12 +1575,7 @@ nodes:
   WATERCRAFT:
     label: "WATERCRAFT"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      WATERCRAFT:
-        type: "UNIQUE"
-        label: "WATERCRAFT"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       WATERCRAFT:
         type: "TEXT"
@@ -2379,12 +1584,7 @@ nodes:
   WORKERS_COMP_CLASS:
     label: "WORKERS_COMP_CLASS"
     properties:
-      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      WORKERS_COMP_CLASS:
-        type: "UNIQUE"
-        label: "WORKERS_COMP_CLASS"
-        properties: ["INSURABLE_OBJECT_IDENTIFIER"]
+      INSURABLE_OBJECT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       WORKERS_COMP_CLASS:
         type: "TEXT"
@@ -2393,12 +1593,7 @@ nodes:
   audit:
     label: "audit"
     properties:
-      EVENT_IDENTIFIER: { type: "FLOAT" }
-    constraints:
-      audit:
-        type: "UNIQUE"
-        label: "audit"
-        properties: ["EVENT_IDENTIFIER"]
+      EVENT_IDENTIFIER: { type: "FLOAT", unique: true }
     indexes:
       audit:
         type: "TEXT"

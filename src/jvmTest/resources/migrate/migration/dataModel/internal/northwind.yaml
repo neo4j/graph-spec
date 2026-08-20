@@ -13,7 +13,7 @@ nodes:
         type: "UNIQUE"
         label: "categories"
         properties: ["nodeProperty0"]
-        name: "categories"
+        name: "unique_categoryid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -38,7 +38,7 @@ nodes:
         type: "UNIQUE"
         label: "products"
         properties: ["nodeProperty0"]
-        name: "products"
+        name: "unique_productid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -67,7 +67,7 @@ nodes:
         type: "UNIQUE"
         label: "suppliers"
         properties: ["nodeProperty0"]
-        name: "suppliers"
+        name: "unique_supplierid"
     indexes:
       nodeIndex0:
         type: "TEXT"

@@ -6,16 +6,11 @@ nodes:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-      id: { type: "INTEGER" }
+      id: { type: "INTEGER", unique: true }
       locationIP: { type: "STRING" }
       browserUsed: { type: "STRING" }
       content: { type: "STRING" }
       length: { type: "INTEGER" }
-    constraints:
-      Comment:
-        type: "UNIQUE"
-        label: "Comment"
-        properties: ["id"]
     indexes:
       Comment:
         type: "TEXT"
@@ -27,13 +22,8 @@ nodes:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-      id: { type: "INTEGER" }
+      id: { type: "INTEGER", unique: true }
       title: { type: "STRING" }
-    constraints:
-      Forum:
-        type: "UNIQUE"
-        label: "Forum"
-        properties: ["id"]
     indexes:
       Forum:
         type: "TEXT"
@@ -42,15 +32,10 @@ nodes:
   Organisation:
     label: "Organisation"
     properties:
-      id: { type: "INTEGER" }
+      id: { type: "INTEGER", unique: true }
       type: { type: "STRING" }
       name: { type: "STRING" }
       url: { type: "STRING" }
-    constraints:
-      Organisation:
-        type: "UNIQUE"
-        label: "Organisation"
-        properties: ["id"]
     indexes:
       Organisation:
         type: "TEXT"
@@ -62,7 +47,7 @@ nodes:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-      id: { type: "INTEGER" }
+      id: { type: "INTEGER", unique: true }
       firstName: { type: "STRING" }
       lastName: { type: "STRING" }
       gender: { type: "STRING" }
@@ -71,11 +56,6 @@ nodes:
       browserUsed: { type: "STRING" }
       language: { type: "STRING" }
       email: { type: "STRING" }
-    constraints:
-      Person:
-        type: "UNIQUE"
-        label: "Person"
-        properties: ["id"]
     indexes:
       Person:
         type: "TEXT"
@@ -84,15 +64,10 @@ nodes:
   Place:
     label: "Place"
     properties:
-      id: { type: "INTEGER" }
+      id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       url: { type: "STRING" }
       type: { type: "STRING" }
-    constraints:
-      Place:
-        type: "UNIQUE"
-        label: "Place"
-        properties: ["id"]
     indexes:
       Place:
         type: "TEXT"
@@ -104,18 +79,13 @@ nodes:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
-      id: { type: "INTEGER" }
+      id: { type: "INTEGER", unique: true }
       imageFile: { type: "STRING" }
       locationIP: { type: "STRING" }
       browserUsed: { type: "STRING" }
       language: { type: "STRING" }
       content: { type: "STRING" }
       length: { type: "INTEGER" }
-    constraints:
-      Post:
-        type: "UNIQUE"
-        label: "Post"
-        properties: ["id"]
     indexes:
       Post:
         type: "TEXT"
@@ -124,14 +94,9 @@ nodes:
   Tag:
     label: "Tag"
     properties:
-      id: { type: "INTEGER" }
+      id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       url: { type: "STRING" }
-    constraints:
-      Tag:
-        type: "UNIQUE"
-        label: "Tag"
-        properties: ["id"]
     indexes:
       Tag:
         type: "TEXT"
@@ -140,14 +105,9 @@ nodes:
   TagClass:
     label: "TagClass"
     properties:
-      id: { type: "INTEGER" }
+      id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       url: { type: "STRING" }
-    constraints:
-      TagClass:
-        type: "UNIQUE"
-        label: "TagClass"
-        properties: ["id"]
     indexes:
       TagClass:
         type: "TEXT"

@@ -3,15 +3,10 @@ nodes:
   actor:
     label: "actor"
     properties:
-      actor_id: { type: "INTEGER" }
+      actor_id: { type: "INTEGER", unique: true }
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      actor:
-        type: "UNIQUE"
-        label: "actor"
-        properties: ["actor_id"]
     indexes:
       actor:
         type: "TEXT"
@@ -20,18 +15,13 @@ nodes:
   address:
     label: "address"
     properties:
-      address_id: { type: "INTEGER" }
+      address_id: { type: "INTEGER", unique: true }
       address: { type: "STRING" }
       address2: { type: "STRING" }
       district: { type: "STRING" }
       postal_code: { type: "STRING" }
       phone: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      address:
-        type: "UNIQUE"
-        label: "address"
-        properties: ["address_id"]
     indexes:
       address:
         type: "TEXT"
@@ -40,14 +30,9 @@ nodes:
   category:
     label: "category"
     properties:
-      category_id: { type: "INTEGER" }
+      category_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      category:
-        type: "UNIQUE"
-        label: "category"
-        properties: ["category_id"]
     indexes:
       category:
         type: "TEXT"
@@ -56,14 +41,9 @@ nodes:
   city:
     label: "city"
     properties:
-      city_id: { type: "INTEGER" }
+      city_id: { type: "INTEGER", unique: true }
       city: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      city:
-        type: "UNIQUE"
-        label: "city"
-        properties: ["city_id"]
     indexes:
       city:
         type: "TEXT"
@@ -72,14 +52,9 @@ nodes:
   country:
     label: "country"
     properties:
-      country_id: { type: "INTEGER" }
+      country_id: { type: "INTEGER", unique: true }
       country: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      country:
-        type: "UNIQUE"
-        label: "country"
-        properties: ["country_id"]
     indexes:
       country:
         type: "TEXT"
@@ -88,7 +63,7 @@ nodes:
   customer:
     label: "customer"
     properties:
-      customer_id: { type: "INTEGER" }
+      customer_id: { type: "INTEGER", unique: true }
       store_id: { type: "INTEGER" }
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
@@ -97,11 +72,6 @@ nodes:
       create_date: { type: "DATE" }
       last_update: { type: "ZONED DATETIME" }
       active: { type: "INTEGER" }
-    constraints:
-      customer:
-        type: "UNIQUE"
-        label: "customer"
-        properties: ["customer_id"]
     indexes:
       customer:
         type: "TEXT"
@@ -110,7 +80,7 @@ nodes:
   film:
     label: "film"
     properties:
-      film_id: { type: "INTEGER" }
+      film_id: { type: "INTEGER", unique: true }
       title: { type: "STRING" }
       description: { type: "STRING" }
       rental_duration: { type: "INTEGER" }
@@ -119,11 +89,6 @@ nodes:
       replacement_cost: { type: "FLOAT" }
       rating: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      film:
-        type: "UNIQUE"
-        label: "film"
-        properties: ["film_id"]
     indexes:
       film:
         type: "TEXT"
@@ -132,14 +97,9 @@ nodes:
   inventory:
     label: "inventory"
     properties:
-      inventory_id: { type: "INTEGER" }
+      inventory_id: { type: "INTEGER", unique: true }
       store_id: { type: "INTEGER" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      inventory:
-        type: "UNIQUE"
-        label: "inventory"
-        properties: ["inventory_id"]
     indexes:
       inventory:
         type: "TEXT"
@@ -148,14 +108,9 @@ nodes:
   language:
     label: "language"
     properties:
-      language_id: { type: "INTEGER" }
+      language_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      language:
-        type: "UNIQUE"
-        label: "language"
-        properties: ["language_id"]
     indexes:
       language:
         type: "TEXT"
@@ -164,14 +119,9 @@ nodes:
   payment:
     label: "payment"
     properties:
-      payment_id: { type: "INTEGER" }
+      payment_id: { type: "INTEGER", unique: true }
       amount: { type: "FLOAT" }
       payment_date: { type: "ZONED DATETIME" }
-    constraints:
-      payment:
-        type: "UNIQUE"
-        label: "payment"
-        properties: ["payment_id"]
     indexes:
       payment:
         type: "TEXT"
@@ -180,15 +130,10 @@ nodes:
   rental:
     label: "rental"
     properties:
-      rental_id: { type: "INTEGER" }
+      rental_id: { type: "INTEGER", unique: true }
       rental_date: { type: "ZONED DATETIME" }
       return_date: { type: "ZONED DATETIME" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      rental:
-        type: "UNIQUE"
-        label: "rental"
-        properties: ["rental_id"]
     indexes:
       rental:
         type: "TEXT"
@@ -197,7 +142,7 @@ nodes:
   staff:
     label: "staff"
     properties:
-      staff_id: { type: "INTEGER" }
+      staff_id: { type: "INTEGER", unique: true }
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
       email: { type: "STRING" }
@@ -206,11 +151,6 @@ nodes:
       username: { type: "STRING" }
       password: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      staff:
-        type: "UNIQUE"
-        label: "staff"
-        properties: ["staff_id"]
     indexes:
       staff:
         type: "TEXT"
@@ -219,13 +159,8 @@ nodes:
   store:
     label: "store"
     properties:
-      store_id: { type: "INTEGER" }
+      store_id: { type: "INTEGER", unique: true }
       last_update: { type: "ZONED DATETIME" }
-    constraints:
-      store:
-        type: "UNIQUE"
-        label: "store"
-        properties: ["store_id"]
     indexes:
       store:
         type: "TEXT"

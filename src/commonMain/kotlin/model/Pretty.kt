@@ -34,8 +34,9 @@ import kotlin.collections.component2
  */
 object Pretty {
     fun prettify(model: GraphModel) {
-        model.prettifyNodeLabels()
+        // Property changes must occur before labels as constraints reference label long-hands
         model.prettifyNodeProperties()
+        model.prettifyNodeLabels()
         model.prettifyNodes()
         model.prettifyRelationshipProperties()
         model.prettifyRelationships()
@@ -126,13 +127,11 @@ object Pretty {
     private fun <C : Constraint> prettifyProperties(
         constraints: MutableMap<String, C>,
         properties: MutableMap<String, Property>,
-        check: (C) -> Boolean = {
-            true
-        }
+        check: (C) -> Boolean = { true }
     ) {
         val prettifiedConstraints = mutableSetOf<String>()
         for ((key, constraint) in constraints) {
-            if (constraint.properties.size == 1 && check(constraint)) { // TODO and using generated constraint name
+            if (constraint.properties.size == 1 && check(constraint)) {
                 val propertyId = constraint.properties.first()
                 val property = properties[propertyId] ?: continue
                 when (constraint.type) {
