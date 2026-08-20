@@ -20,15 +20,20 @@ import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
 
-data class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMapOf(), override val path: String = "") :
+class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMapOf(), path: String = "") :
     SchemaElement,
     Map<String, SchemaElement> by content {
-    override fun equals(other: Any?): Boolean = content == other
 
-    override fun repath(newPath: String) = SchemaMap(
-        content.map { (key, element) -> key to element.repath("$newPath.$key") }.toMap().toMutableMap(),
-        newPath
-    )
+    override var parent: SchemaElement? = null
+    override var identifier: String = path
+
+    init {
+        for ((key, element) in content) adopt(element, key)
+    }
+
+    override fun repath(newPath: String): SchemaMap = reroot(newPath)
+
+    override fun equals(other: Any?): Boolean = content == other
 
     constructor(content: MutableMap<String, out SchemaElement>) : this(content as MutableMap<String, SchemaElement>)
 
@@ -48,7 +53,7 @@ data class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMap
     )
 
     operator fun set(key: String, value: Any?) {
-        content[key] = value.toSchemaElement(path(key))
+        content[key] = adopt(value.toSchemaElement(), key)
     }
 
     fun remove(key: String) = content.remove(key)
@@ -58,7 +63,7 @@ data class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMap
         return map as? SchemaMap ?: error("Expected map, found invalid type ${map::class.simpleName} at ${path(key)}")
     }
 
-    fun put(key: String, value: SchemaElement): SchemaElement? = content.put(key, value.repath(path(key)))
+    fun put(key: String, value: SchemaElement): SchemaElement? = content.put(key, adopt(value, key))
 
     fun putAll(from: Map<out String, SchemaElement>) {
         for ((key, value) in from) {
@@ -81,7 +86,7 @@ data class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMap
 
     fun mapOrNull(key: String): SchemaMap? = content[key]?.let { it as? SchemaMap }
 
-    fun mapOrPut(key: String): SchemaMap = content.getOrPut(key) { SchemaMap(path = path(key)) } as SchemaMap
+    fun mapOrPut(key: String): SchemaMap = content.getOrPut(key) { adopt(SchemaMap(), key) } as SchemaMap
 
     fun literal(key: String): SchemaPrimitive {
         val literal = content[key] ?: error("Missing required literal at ${path(key)}")
@@ -146,7 +151,7 @@ data class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMap
 fun schemaMapOf(vararg pairs: Pair<String, Any?>) = SchemaMap(
     pairs
         .filter { it.second != null }
-        .associate { it.first to it.second!!.toSchemaElement() }.toMutableMap()
+        .associateTo(mutableMapOf()) { it.first to it.second!!.toSchemaElement() }
 )
 
 infix fun <A> A.toNotEmpty(that: Map<String, Any>?): Pair<A, Map<String, Any>?> = Pair(
@@ -162,17 +167,3 @@ infix fun <A> A.toNotEmpty(that: Collection<Any>?): Pair<A, Collection<Any>?> = 
         it.isNotEmpty()
     }
 )
-
-fun buildSchemaMap(block: MutableMap<String, Any?>.() -> Unit): SchemaMap {
-    val map = mutableMapOf<String, Any?>()
-    map.block()
-
-    val schemaData = map
-        .filterValues { it != null }
-        .entries
-        .associate { (key, value) ->
-            key to value.toSchemaElement().repath(key)
-        }
-        .toMutableMap()
-    return SchemaMap(schemaData.toMutableMap())
-}

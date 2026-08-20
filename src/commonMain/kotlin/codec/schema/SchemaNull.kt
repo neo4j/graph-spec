@@ -16,8 +16,15 @@
  */
 package codec.schema
 
-data class SchemaNull(override val path: String = "") : SchemaPrimitive() {
-    override fun repath(newPath: String) = SchemaNull(newPath)
+class SchemaNull(path: String = "") : SchemaPrimitive() {
+    override var parent: SchemaElement? = null
+    override var identifier: String = path
+
+    override fun equals(other: Any?): Boolean = other is SchemaNull
+
+    override fun hashCode(): Int = toString().hashCode()
+
+    override fun repath(newPath: String): SchemaNull = reroot(newPath)
 
     override fun toString() = "null"
 
