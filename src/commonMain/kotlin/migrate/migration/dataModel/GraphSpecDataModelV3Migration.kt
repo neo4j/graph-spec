@@ -350,18 +350,14 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         if (elements.isNullOrEmpty()) {
             return emptyList()
         }
-        return elements.mapNotNull { (name, element) ->
+        return elements.map { (name, element) ->
             val properties = element.listOrNull("properties")?.map { propId ->
                 refOf((propId as SchemaLiteral).string)
             } ?: emptyList()
-            val type = element.string("type")
-            if (type == ConstraintType.KEY.name) {
-                return@mapNotNull null
-            }
             schemaMapOf(
                 "\$id" to name,
                 "name" to (element.stringOrNull("name") ?: name),
-                typeKey to typeTransform(type),
+                typeKey to typeTransform(element.string("type")),
                 "entityType" to entityType,
                 "nodeLabel" to if (entityType == "node") refOf(refId) else SchemaNull(),
                 "properties" to properties,
