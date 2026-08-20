@@ -61,7 +61,8 @@ class Validations {
 
         @JsStatic
         val integrity: List<Validation> = listOf(
-            NodeLabel
+            NodeLabel,
+            RelationshipType
         )
     }
 }

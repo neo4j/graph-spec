@@ -16,6 +16,9 @@
  */
 package validate
 
+import model.GraphModel
+import model.relationship.Relationship
+import model.relationship.RelationshipTarget
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -33,5 +36,21 @@ class ValidationsIntegrityTest {
             integrityCodes.all { it in allCodes },
             "every integrity validator should be in all: ${integrityCodes - allCodes}"
         )
+    }
+
+    @Test
+    fun `integrity catches corrupt model with blank relationship type`() {
+        // ARRANGE
+        val model = GraphModel("4.0.0").apply {
+            relationships["broken"] = Relationship(
+                type = "  ",
+                from = RelationshipTarget(),
+                to = RelationshipTarget()
+            )
+        }
+        val issues = model.validate(Validations.integrity)
+
+        // ASSERT
+        assertTrue(issues.any { it.code == "missing_relation_type" })
     }
 }
