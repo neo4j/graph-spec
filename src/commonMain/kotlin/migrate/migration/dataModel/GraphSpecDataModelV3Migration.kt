@@ -109,12 +109,13 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     )
 
     internal fun convertMappingKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
-        val keyProperties = mutableMapOf<String, List<String>>()
+        val keyProperties = mutableMapOf<String, MutableSet<String>>()
         for (mapping in schema.listOfMapsOrNull("mappings").orEmpty()) {
             val entity = mapping.stringOrNull(singular) ?: continue
             val keys = mapping.listOrNull("key") ?: continue
             if (keys.isNotEmpty()) {
-                keyProperties[entity] = keys.map { id -> (id as SchemaLiteral).string }
+                val set = keyProperties.getOrPut(entity) { mutableSetOf() }
+                set.addAll(keys.map { id -> (id as SchemaLiteral).string })
             }
         }
         return keyProperties.map { (entity, keys) ->
@@ -156,12 +157,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val relationshipObjectTypes = mutableListOf<SchemaMap>()
         for ((relId, rel) in relationships) {
             val typeToken = rel.string("type")
-            //            var typeId = relTypes[typeToken]
-            //            if (typeId == null) {
-            // TODO if we look-up existing tokens then all relationships get combined
+            // FIXME if we look-up existing tokens then all relationships get combined
             //      if do don't then joint relationships always get separated
             val typeId = "rt:${relationTypes.size}"
-            //                relTypes[typeToken] = typeId
             relationTypes.add(
                 schemaMapOf(
                     "\$id" to typeId,
@@ -169,7 +167,6 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     "properties" to convertProperties(rel.mapOfMapsOrNull("properties"))
                 )
             )
-            //            }
 
             relationshipObjectTypes.add(
                 schemaMapOf(
