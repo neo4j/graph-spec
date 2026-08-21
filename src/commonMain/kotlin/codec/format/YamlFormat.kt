@@ -64,25 +64,16 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
     override fun decodeFromSchema(element: SchemaElement) = json.decodeFromSchema(element)
 
     fun schemaElement(yaml: YamlElement, parent: String = ""): SchemaElement = when (yaml) {
-        is YamlList -> SchemaList(
-            yaml.mapIndexed { index, element -> schemaElement(element, "$parent[$index]") }
-                .toMutableList()
+        is YamlList -> SchemaList(yaml.mapTo(mutableListOf()) { schemaElement(it) }, parent)
+        is YamlMap -> SchemaMap(
+            yaml.content.entries.associateTo(mutableMapOf()) { (key, value) ->
+                if (key !is YamlLiteral) {
+                    error("Failed to parse yaml: non-string key not supported: $key")
+                }
+                key.content to schemaElement(value)
+            },
+            parent
         )
-        is YamlMap -> {
-            val content =
-                yaml.content
-                    .map { (key, value) ->
-                        if (key !is YamlLiteral) {
-                            error("Failed to parse yaml: non-string key not supported: $key")
-                        }
-                        val element =
-                            schemaElement(value, if (parent == "") key.content else "$parent.${key.content}")
-                        Pair(key.content, element)
-                    }
-                    .toMap()
-                    .toMutableMap()
-            SchemaMap(content, parent)
-        }
         is YamlPrimitive -> yaml.content?.let { SchemaLiteral(it, parent, isString = true) } ?: SchemaNull(parent)
         is YamlLiteral -> SchemaLiteral(yaml.content, parent, isString = false)
         YamlNull -> SchemaNull(parent)
