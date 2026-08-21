@@ -25,6 +25,7 @@ import model.node.NodeConstraint
 import model.node.NodeIndex
 import model.property.Property
 import model.relationship.Relationship
+import model.relationship.RelationshipConstraint
 import model.relationship.RelationshipTarget
 import model.type.ConstraintType
 import model.type.IndexType
@@ -163,5 +164,124 @@ class InternalTest {
 
         val mapping = model.mappings.first() as NodeMapping
         assertEquals("GhostNode", mapping.node)
+    }
+
+    @Test
+    fun `test converts key property flag into a node key constraint`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "User" to Node(
+                    label = "User",
+                    properties = mutableMapOf("id" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node = model.nodes["node0"]!!
+        val property = node.properties["nodeProperty0"]!!
+        assertNull(property.key, "Key flag should be cleared from the property")
+
+        val constraint = node.constraints["key_User_id"]
+        assertNotNull(constraint, "A key constraint should be generated for the property")
+        assertEquals(ConstraintType.KEY, constraint.type)
+        assertEquals("User", constraint.label, "Constraint should reference the node's label")
+        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+    }
+
+    @Test
+    fun `test converts unique property flag into a node unique constraint`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "User" to Node(
+                    properties = mutableMapOf("email" to Property(unique = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node = model.nodes["node0"]!!
+        val property = node.properties["nodeProperty0"]!!
+        assertNull(property.unique, "Unique flag should be cleared from the property")
+
+        val constraint = node.constraints["unique_User_email"]
+        assertNotNull(constraint, "A unique constraint should be generated for the property")
+        assertEquals(ConstraintType.UNIQUE, constraint.type)
+        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+    }
+
+    @Test
+    fun `test converts mustExist property flag into a node exists constraint`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "User" to Node(
+                    properties = mutableMapOf("email" to Property(mustExist = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node = model.nodes["node0"]!!
+        val property = node.properties["nodeProperty0"]!!
+        assertNull(property.mustExist, "MustExist flag should be cleared from the property")
+
+        val constraint = node.constraints["exists_User_email"]
+        assertNotNull(constraint, "An exists constraint should be generated for the property")
+        assertEquals(ConstraintType.EXISTS, constraint.type)
+        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+    }
+
+    @Test
+    fun `test converts key property flag into a relationship key constraint`() {
+        val model = GraphModel(
+            version = "1.0",
+            relationships = mutableMapOf(
+                "KNOWS" to Relationship(
+                    type = "KNOWS",
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
+                    properties = mutableMapOf("since" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val relationship = model.relationships["relationship0"]!!
+        val property = relationship.properties["relationshipProperty0"]!!
+        assertNull(property.key, "Key flag should be cleared from the property")
+
+        val constraint: RelationshipConstraint? = relationship.constraints["key_KNOWS_since"]
+        assertNotNull(constraint, "A key constraint should be generated for the property")
+        assertEquals(ConstraintType.KEY, constraint.type)
+        assertEquals(mutableSetOf("relationshipProperty0"), constraint.properties)
+    }
+
+    @Test
+    fun `test leaves properties without flags unconstrained`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "User" to Node(
+                    properties = mutableMapOf("name" to Property())
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node = model.nodes["node0"]!!
+        assertTrue(node.constraints.isEmpty(), "No constraint should be generated for an unflagged property")
     }
 }

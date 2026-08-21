@@ -24,6 +24,7 @@ import codec.schema.toNotEmpty
 import migrate.Migration
 import model.Type
 import model.Version
+import model.type.ConstraintType
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
@@ -102,31 +103,27 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         )
     }
 
-    internal fun convertExtensions(schema: SchemaMap): SchemaMap? {
-        val nodes = schema.mapOfMapsOrNull("nodes") ?: return null
-        val nodeKeyProperties = mutableListOf<SchemaMap>()
-        for ((nodeId, node) in nodes) {
-            val properties = node.mapOfMapsOrNull("properties") ?: continue
-            val keyProperties = mutableSetOf<String>()
-            for ((propertyId, property) in properties) {
-                if (property.boolOrNull("key") == true) {
-                    keyProperties.add(propertyId)
-                }
-            }
-            if (keyProperties.isNotEmpty()) {
-                nodeKeyProperties.add(
-                    schemaMapOf(
-                        "node" to refOf(nodeId),
-                        "keyProperties" to keyProperties.map { id ->
-                            refOf(id)
-                        }
-                    )
-                )
+    internal fun convertExtensions(schema: SchemaMap): SchemaMap = schemaMapOf(
+        "nodeKeyProperties" to convertMappingKeyProperties(schema, "node"),
+        "relationshipKeyProperties" toNotEmpty convertMappingKeyProperties(schema, "relationship")
+    )
+
+    internal fun convertMappingKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
+        val keyProperties = mutableMapOf<String, MutableSet<String>>()
+        for (mapping in schema.listOfMapsOrNull("mappings").orEmpty()) {
+            val entity = mapping.stringOrNull(singular) ?: continue
+            val keys = mapping.listOrNull("key") ?: continue
+            if (keys.isNotEmpty()) {
+                val set = keyProperties.getOrPut(entity) { mutableSetOf() }
+                set.addAll(keys.map { id -> (id as SchemaLiteral).string })
             }
         }
-        return schemaMapOf(
-            "nodeKeyProperties" to nodeKeyProperties
-        )
+        return keyProperties.map { (entity, keys) ->
+            schemaMapOf(
+                singular to refOf(entity),
+                "keyProperties" to keys.map { refOf(it) }
+            )
+        }
     }
 
     /**
@@ -160,12 +157,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val relationshipObjectTypes = mutableListOf<SchemaMap>()
         for ((relId, rel) in relationships) {
             val typeToken = rel.string("type")
-//            var typeId = relTypes[typeToken]
-//            if (typeId == null) {
-            // TODO if we look-up existing tokens then all relationships get combined
+            // FIXME if we look-up existing tokens then all relationships get combined
             //      if do don't then joint relationships always get separated
             val typeId = "rt:${relationTypes.size}"
-//                relTypes[typeToken] = typeId
             relationTypes.add(
                 schemaMapOf(
                     "\$id" to typeId,
@@ -173,7 +167,6 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     "properties" to convertProperties(rel.mapOfMapsOrNull("properties"))
                 )
             )
-//            }
 
             relationshipObjectTypes.add(
                 schemaMapOf(
@@ -338,11 +331,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
                 "type" to propertyType(prop.string("type"), prop.intOrNull("dimension")),
-                "nullable" to if (prop.stringOrNull("key") == "true") {
-                    false
-                } else {
-                    prop.stringOrNull("mustExist") != "true"
-                }
+                "nullable" to false
             )
             map
         }

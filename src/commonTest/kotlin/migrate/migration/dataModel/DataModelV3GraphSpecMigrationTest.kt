@@ -111,7 +111,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyList())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap())
 
         val node = nodes["nodeObj"]
         assertNotNull(node)
@@ -121,7 +121,7 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
-    fun `migrateNodes transforms labels and properties`() {
+    fun `migrateNodes transforms labels properties and keys`() {
         val labelId = "lbl1"
         val nodeLabels = schemaMapOf(
             labelId to schemaMapOf(
@@ -148,7 +148,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap(), emptyList())
+        val nodes = migration.migrateNodes(graphSchema, emptyMap(), emptyMap())
 
         val migratedNode = nodes["nodeObj1"]
         assertNotNull(migratedNode)
@@ -158,7 +158,6 @@ class DataModelV3GraphSpecMigrationTest {
         val props = migratedNode.map("properties")
         assertNotNull(props["prop1"])
         assertEquals("STRING", props.map("prop1").string("type"))
-        assertEquals("true", props.map("prop1").string("mustExist"))
     }
 
     @Test
@@ -221,7 +220,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Type constraints not supported on multiple properties") {
-            migration.convertConstraints(constraints, "L1", "Person", "node")
+            migration.convertConstraints(constraints, "L1", "Person")
         }
     }
 
@@ -238,7 +237,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertConstraints(constraints, "label1", "Person", "node")
+        val result = migration.convertConstraints(constraints, "label1", "Person")
 
         assertNotNull(result)
         val constraint = result["c:1"]
@@ -286,7 +285,11 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.migrateRelationships(graphSchema, constraints, emptyMap())
+        val result = migration.migrateRelationships(
+            graphSchema,
+            constraints,
+            emptyMap()
+        )
 
         assertTrue(result.containsKey("relObj1"))
         val rel = result["relObj1"]
@@ -316,7 +319,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertProperties(labels, emptySet())
+        val result = migration.convertProperties(labels)
 
         assertEquals("STRING", result["p1"]?.string("type"))
         assertEquals("INTEGER", result["p2"]?.string("type"))
@@ -351,7 +354,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertProperties(labels, emptySet())
+        val result = migration.convertProperties(labels)
 
         assertEquals("LIST<STRING>", result["arrProp"]?.string("type"))
         assertEquals("VECTOR<FLOAT>", result["vecProp"]?.string("type"))
@@ -395,7 +398,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.relationshipMappings(unwrap(input))
+        val result = migration.relationshipMappings(unwrap(input), emptyMap())
 
         val mapping = result.first()
         assertEquals("obj1", mapping.string("relationship"))
@@ -423,7 +426,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Relationship missingRel not found") {
-            migration.relationshipMappings(unwrap(schema))
+            migration.relationshipMappings(unwrap(schema), emptyMap())
         }
     }
 
@@ -446,7 +449,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.nodeMappings(unwrap(input))
+        val result = migration.nodeMappings(unwrap(input), emptyMap())
 
         assertEquals(1, result.size)
         val mapping = result.first()

@@ -20,6 +20,11 @@ import model.Rename.prettify
 import model.Rename.rename
 import model.mapping.NodeMapping
 import model.mapping.RelationshipMapping
+import model.node.Constraint
+import model.node.Node
+import model.property.Property
+import model.relationship.Relationship
+import model.type.ConstraintType
 import model.type.Named
 import kotlin.collections.component1
 import kotlin.collections.component2
@@ -29,8 +34,9 @@ import kotlin.collections.component2
  */
 object Pretty {
     fun prettify(model: GraphModel) {
-        model.prettifyNodeLabels()
+        // Property changes must occur before labels as constraints reference label long-handed location.
         model.prettifyNodeProperties()
+        model.prettifyNodeLabels()
         model.prettifyNodes()
         model.prettifyRelationshipProperties()
         model.prettifyRelationships()
@@ -109,9 +115,43 @@ object Pretty {
             node.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
+            prettifyProperties(node.constraints, node.properties) { constraint ->
+                node.labels.identifier ==
+                    constraint.label
+            }
         }
         renameNodeMappingProperties(this, renames)
         renameTargetNodeProperties(this, renames)
+    }
+
+    /**
+     * Converts longhand constraints into shorthand if they meet the right
+     * [check] conditions.
+     * Note: Must be called after other prettify calls to avoid issues
+     * with property id resolving
+     */
+    private fun <C : Constraint> prettifyProperties(
+        constraints: MutableMap<String, C>,
+        properties: MutableMap<String, Property>,
+        check: (C) -> Boolean = { true }
+    ) {
+        val prettifiedConstraints = mutableSetOf<String>()
+        for ((key, constraint) in constraints) {
+            if (constraint.properties.size == 1 && check(constraint)) {
+                val propertyId = constraint.properties.first()
+                val property = properties[propertyId] ?: continue
+                when (constraint.type) {
+                    ConstraintType.EXISTS -> property.mustExist = true
+                    ConstraintType.KEY -> property.key = true
+                    ConstraintType.UNIQUE -> property.unique = true
+                    else -> continue
+                }
+                prettifiedConstraints.add(key)
+            }
+        }
+        prettifiedConstraints.forEach { key ->
+            constraints.remove(key)
+        }
     }
 
     internal fun renameTargetNodeProperties(model: GraphModel, renames: MutableMap<String, String>) {
@@ -126,6 +166,7 @@ object Pretty {
     internal fun renameNodeMappingProperties(model: GraphModel, renames: Map<String, String>) {
         model.mappings.filterIsInstance<NodeMapping>().forEach { mapping ->
             mapping.properties.rename(renames, mapping.node)
+            mapping.key.rename(renames, mapping.node)
         }
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
             mapping.from.properties.rename(renames, mapping.from.node)
@@ -164,6 +205,7 @@ object Pretty {
             relationship.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
+            prettifyProperties(relationship.constraints, relationship.properties)
         }
         renameRelationshipMappingProperties(this, renames)
     }

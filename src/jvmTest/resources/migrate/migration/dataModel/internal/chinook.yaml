@@ -4,14 +4,14 @@ nodes:
     labels:
       identifier: "album"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "album_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "title" }
+      nodeProperty0: { type: "INTEGER", name: "album_id" }
+      nodeProperty1: { type: "STRING", name: "title" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "album"
         properties: ["nodeProperty0"]
-        name: "album"
+        name: "unique_album_album_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -23,14 +23,14 @@ nodes:
     labels:
       identifier: "artist"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "artist_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+      nodeProperty0: { type: "INTEGER", name: "artist_id" }
+      nodeProperty1: { type: "STRING", name: "name" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "artist"
         properties: ["nodeProperty0"]
-        name: "artist"
+        name: "unique_artist_artist_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -42,24 +42,24 @@ nodes:
     labels:
       identifier: "customer"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "customer_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "first_name" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "last_name" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "company" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "address" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "city" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "state" }
-      nodeProperty7: { type: "STRING", mustExist: true, name: "country" }
-      nodeProperty8: { type: "STRING", mustExist: true, name: "postal_code" }
-      nodeProperty9: { type: "STRING", mustExist: true, name: "phone" }
-      nodeProperty10: { type: "STRING", mustExist: true, name: "fax" }
-      nodeProperty11: { type: "STRING", mustExist: true, name: "email" }
+      nodeProperty0: { type: "INTEGER", name: "customer_id" }
+      nodeProperty1: { type: "STRING", name: "first_name" }
+      nodeProperty2: { type: "STRING", name: "last_name" }
+      nodeProperty3: { type: "STRING", name: "company" }
+      nodeProperty4: { type: "STRING", name: "address" }
+      nodeProperty5: { type: "STRING", name: "city" }
+      nodeProperty6: { type: "STRING", name: "state" }
+      nodeProperty7: { type: "STRING", name: "country" }
+      nodeProperty8: { type: "STRING", name: "postal_code" }
+      nodeProperty9: { type: "STRING", name: "phone" }
+      nodeProperty10: { type: "STRING", name: "fax" }
+      nodeProperty11: { type: "STRING", name: "email" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "customer"
         properties: ["nodeProperty0"]
-        name: "customer"
+        name: "unique_customer_customer_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -71,26 +71,26 @@ nodes:
     labels:
       identifier: "employee"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "employee_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "last_name" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "first_name" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "title" }
-      nodeProperty4: { type: "ZONED DATETIME", mustExist: true, name: "birth_date" }
-      nodeProperty5: { type: "ZONED DATETIME", mustExist: true, name: "hire_date" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "address" }
-      nodeProperty7: { type: "STRING", mustExist: true, name: "city" }
-      nodeProperty8: { type: "STRING", mustExist: true, name: "state" }
-      nodeProperty9: { type: "STRING", mustExist: true, name: "country" }
-      nodeProperty10: { type: "STRING", mustExist: true, name: "postal_code" }
-      nodeProperty11: { type: "STRING", mustExist: true, name: "phone" }
-      nodeProperty12: { type: "STRING", mustExist: true, name: "fax" }
-      nodeProperty13: { type: "STRING", mustExist: true, name: "email" }
+      nodeProperty0: { type: "INTEGER", name: "employee_id" }
+      nodeProperty1: { type: "STRING", name: "last_name" }
+      nodeProperty2: { type: "STRING", name: "first_name" }
+      nodeProperty3: { type: "STRING", name: "title" }
+      nodeProperty4: { type: "ZONED DATETIME", name: "birth_date" }
+      nodeProperty5: { type: "ZONED DATETIME", name: "hire_date" }
+      nodeProperty6: { type: "STRING", name: "address" }
+      nodeProperty7: { type: "STRING", name: "city" }
+      nodeProperty8: { type: "STRING", name: "state" }
+      nodeProperty9: { type: "STRING", name: "country" }
+      nodeProperty10: { type: "STRING", name: "postal_code" }
+      nodeProperty11: { type: "STRING", name: "phone" }
+      nodeProperty12: { type: "STRING", name: "fax" }
+      nodeProperty13: { type: "STRING", name: "email" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "employee"
         properties: ["nodeProperty0"]
-        name: "employee"
+        name: "unique_employee_employee_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -102,14 +102,14 @@ nodes:
     labels:
       identifier: "genre"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "genre_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+      nodeProperty0: { type: "INTEGER", name: "genre_id" }
+      nodeProperty1: { type: "STRING", name: "name" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "genre"
         properties: ["nodeProperty0"]
-        name: "genre"
+        name: "unique_genre_genre_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -121,20 +121,20 @@ nodes:
     labels:
       identifier: "invoice"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "invoice_id" }
-      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "invoice_date" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "billing_address" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "billing_city" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "billing_state" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "billing_country" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "billing_postal_code" }
-      nodeProperty7: { type: "FLOAT", mustExist: true, name: "total" }
+      nodeProperty0: { type: "INTEGER", name: "invoice_id" }
+      nodeProperty1: { type: "ZONED DATETIME", name: "invoice_date" }
+      nodeProperty2: { type: "STRING", name: "billing_address" }
+      nodeProperty3: { type: "STRING", name: "billing_city" }
+      nodeProperty4: { type: "STRING", name: "billing_state" }
+      nodeProperty5: { type: "STRING", name: "billing_country" }
+      nodeProperty6: { type: "STRING", name: "billing_postal_code" }
+      nodeProperty7: { type: "FLOAT", name: "total" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "invoice"
         properties: ["nodeProperty0"]
-        name: "invoice"
+        name: "unique_invoice_invoice_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -146,15 +146,15 @@ nodes:
     labels:
       identifier: "invoice_line"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "invoice_line_id" }
-      nodeProperty1: { type: "FLOAT", mustExist: true, name: "unit_price" }
-      nodeProperty2: { type: "INTEGER", mustExist: true, name: "quantity" }
+      nodeProperty0: { type: "INTEGER", name: "invoice_line_id" }
+      nodeProperty1: { type: "FLOAT", name: "unit_price" }
+      nodeProperty2: { type: "INTEGER", name: "quantity" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "invoice_line"
         properties: ["nodeProperty0"]
-        name: "invoice_line"
+        name: "unique_invoice_line_invoice_line_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -166,14 +166,14 @@ nodes:
     labels:
       identifier: "media_type"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "media_type_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+      nodeProperty0: { type: "INTEGER", name: "media_type_id" }
+      nodeProperty1: { type: "STRING", name: "name" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "media_type"
         properties: ["nodeProperty0"]
-        name: "media_type"
+        name: "unique_media_type_media_type_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -185,14 +185,14 @@ nodes:
     labels:
       identifier: "playlist"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "playlist_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
+      nodeProperty0: { type: "INTEGER", name: "playlist_id" }
+      nodeProperty1: { type: "STRING", name: "name" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "playlist"
         properties: ["nodeProperty0"]
-        name: "playlist"
+        name: "unique_playlist_playlist_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -204,18 +204,18 @@ nodes:
     labels:
       identifier: "track"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "track_id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "composer" }
-      nodeProperty3: { type: "INTEGER", mustExist: true, name: "milliseconds" }
-      nodeProperty4: { type: "INTEGER", mustExist: true, name: "bytes" }
-      nodeProperty5: { type: "FLOAT", mustExist: true, name: "unit_price" }
+      nodeProperty0: { type: "INTEGER", name: "track_id" }
+      nodeProperty1: { type: "STRING", name: "name" }
+      nodeProperty2: { type: "STRING", name: "composer" }
+      nodeProperty3: { type: "INTEGER", name: "milliseconds" }
+      nodeProperty4: { type: "INTEGER", name: "bytes" }
+      nodeProperty5: { type: "FLOAT", name: "unit_price" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "track"
         properties: ["nodeProperty0"]
-        name: "track"
+        name: "unique_track_track_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -643,11 +643,13 @@ mappings:
     properties:
       nodeProperty0: { field: "album_id" }
       nodeProperty1: { field: "title" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "artist"
     properties:
       nodeProperty0: { field: "artist_id" }
       nodeProperty1: { field: "name" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "customer"
     properties:
@@ -663,6 +665,7 @@ mappings:
       nodeProperty9: { field: "phone" }
       nodeProperty10: { field: "fax" }
       nodeProperty11: { field: "email" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "employee"
     properties:
@@ -680,11 +683,13 @@ mappings:
       nodeProperty11: { field: "phone" }
       nodeProperty12: { field: "fax" }
       nodeProperty13: { field: "email" }
+    key: ["nodeProperty0"]
   - node: "node4"
     table: "genre"
     properties:
       nodeProperty0: { field: "genre_id" }
       nodeProperty1: { field: "name" }
+    key: ["nodeProperty0"]
   - node: "node5"
     table: "invoice"
     properties:
@@ -696,22 +701,26 @@ mappings:
       nodeProperty5: { field: "billing_country" }
       nodeProperty6: { field: "billing_postal_code" }
       nodeProperty7: { field: "total" }
+    key: ["nodeProperty0"]
   - node: "node6"
     table: "invoice_line"
     properties:
       nodeProperty0: { field: "invoice_line_id" }
       nodeProperty1: { field: "unit_price" }
       nodeProperty2: { field: "quantity" }
+    key: ["nodeProperty0"]
   - node: "node7"
     table: "media_type"
     properties:
       nodeProperty0: { field: "media_type_id" }
       nodeProperty1: { field: "name" }
+    key: ["nodeProperty0"]
   - node: "node8"
     table: "playlist"
     properties:
       nodeProperty0: { field: "playlist_id" }
       nodeProperty1: { field: "name" }
+    key: ["nodeProperty0"]
   - node: "node9"
     table: "track"
     properties:
@@ -721,6 +730,7 @@ mappings:
       nodeProperty3: { field: "milliseconds" }
       nodeProperty4: { field: "bytes" }
       nodeProperty5: { field: "unit_price" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "album"
     from:

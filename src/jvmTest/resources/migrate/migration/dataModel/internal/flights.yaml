@@ -4,15 +4,15 @@ nodes:
     labels:
       identifier: "Aircraft"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "aircraftCode" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "model" }
-      nodeProperty2: { type: "INTEGER", mustExist: true, name: "aircraftRange" }
+      nodeProperty0: { type: "STRING", name: "aircraftCode" }
+      nodeProperty1: { type: "STRING", name: "model" }
+      nodeProperty2: { type: "INTEGER", name: "aircraftRange" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Aircraft"
         properties: ["nodeProperty0"]
-        name: "aircrafts_data"
+        name: "unique_Aircraft_aircraftCode"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -24,17 +24,17 @@ nodes:
     labels:
       identifier: "Airport"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "airportCode" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "airportName" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "city" }
-      nodeProperty3: { type: "POINT", mustExist: true, name: "coordinates" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "timezone" }
+      nodeProperty0: { type: "STRING", name: "airportCode" }
+      nodeProperty1: { type: "STRING", name: "airportName" }
+      nodeProperty2: { type: "STRING", name: "city" }
+      nodeProperty3: { type: "POINT", name: "coordinates" }
+      nodeProperty4: { type: "STRING", name: "timezone" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Airport"
         properties: ["nodeProperty0"]
-        name: "airports_data"
+        name: "unique_Airport_airportCode"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -46,15 +46,15 @@ nodes:
     labels:
       identifier: "Booking"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "bookRef" }
-      nodeProperty1: { type: "ZONED DATETIME", mustExist: true, name: "bookDate" }
-      nodeProperty2: { type: "FLOAT", mustExist: true, name: "totalAmount" }
+      nodeProperty0: { type: "STRING", name: "bookRef" }
+      nodeProperty1: { type: "ZONED DATETIME", name: "bookDate" }
+      nodeProperty2: { type: "FLOAT", name: "totalAmount" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Booking"
         properties: ["nodeProperty0"]
-        name: "bookings"
+        name: "unique_Booking_bookRef"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -66,19 +66,19 @@ nodes:
     labels:
       identifier: "Flight"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "flightId" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "flightNo" }
-      nodeProperty2: { type: "ZONED DATETIME", mustExist: true, name: "scheduledDeparture" }
-      nodeProperty3: { type: "ZONED DATETIME", mustExist: true, name: "scheduledArrival" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "status" }
-      nodeProperty5: { type: "ZONED DATETIME", mustExist: true, name: "actualDeparture" }
-      nodeProperty6: { type: "ZONED DATETIME", mustExist: true, name: "actualArrival" }
+      nodeProperty0: { type: "INTEGER", name: "flightId" }
+      nodeProperty1: { type: "STRING", name: "flightNo" }
+      nodeProperty2: { type: "ZONED DATETIME", name: "scheduledDeparture" }
+      nodeProperty3: { type: "ZONED DATETIME", name: "scheduledArrival" }
+      nodeProperty4: { type: "STRING", name: "status" }
+      nodeProperty5: { type: "ZONED DATETIME", name: "actualDeparture" }
+      nodeProperty6: { type: "ZONED DATETIME", name: "actualArrival" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Flight"
         properties: ["nodeProperty0"]
-        name: "flights"
+        name: "unique_Flight_flightId"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -90,16 +90,16 @@ nodes:
     labels:
       identifier: "Ticket"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "ticketNo" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "passengerId" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "passengerName" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "contactData" }
+      nodeProperty0: { type: "STRING", name: "ticketNo" }
+      nodeProperty1: { type: "STRING", name: "passengerId" }
+      nodeProperty2: { type: "STRING", name: "passengerName" }
+      nodeProperty3: { type: "STRING", name: "contactData" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Ticket"
         properties: ["nodeProperty0"]
-        name: "tickets"
+        name: "unique_Ticket_ticketNo"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -128,8 +128,8 @@ relationships:
     from: { node: "node3" }
     to: { node: "node4" }
     properties:
-      relationshipProperty0: { type: "STRING", mustExist: true, name: "fare_conditions" }
-      relationshipProperty1: { type: "FLOAT", mustExist: true, name: "amount" }
+      relationshipProperty0: { type: "STRING", name: "fare_conditions" }
+      relationshipProperty1: { type: "FLOAT", name: "amount" }
     name: "FLIGHT_HAS_TICKET"
   relationship4:
     type: "TICKET_BELONGS_TO_BOOKING"
@@ -364,6 +364,7 @@ mappings:
       nodeProperty0: { field: "aircraft_code" }
       nodeProperty1: { field: "model" }
       nodeProperty2: { field: "aircrafts_range" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "airports_data"
     properties:
@@ -372,12 +373,14 @@ mappings:
       nodeProperty2: { field: "city" }
       nodeProperty3: { field: "coordinates" }
       nodeProperty4: { field: "timezone" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "bookings"
     properties:
       nodeProperty0: { field: "book_ref" }
       nodeProperty1: { field: "book_date" }
       nodeProperty2: { field: "total_amount" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "flights"
     properties:
@@ -388,6 +391,7 @@ mappings:
       nodeProperty4: { field: "status" }
       nodeProperty5: { field: "actual_departure" }
       nodeProperty6: { field: "actual_arrival" }
+    key: ["nodeProperty0"]
   - node: "node4"
     table: "tickets"
     properties:
@@ -395,6 +399,7 @@ mappings:
       nodeProperty1: { field: "passenger_id" }
       nodeProperty2: { field: "passenger_name" }
       nodeProperty3: { field: "contact_data" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "flights"
     from:

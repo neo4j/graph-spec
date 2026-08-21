@@ -4,16 +4,16 @@ nodes:
     labels:
       identifier: "categories"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "categoryid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "categoryname" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "description" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "picture" }
+      nodeProperty0: { type: "INTEGER", name: "categoryid" }
+      nodeProperty1: { type: "STRING", name: "categoryname" }
+      nodeProperty2: { type: "STRING", name: "description" }
+      nodeProperty3: { type: "STRING", name: "picture" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "categories"
         properties: ["nodeProperty0"]
-        name: "categories"
+        name: "unique_categories_categoryid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -25,20 +25,20 @@ nodes:
     labels:
       identifier: "products"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "productid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "productname" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "quantityperunit" }
-      nodeProperty3: { type: "FLOAT", mustExist: true, name: "unitprice" }
-      nodeProperty4: { type: "INTEGER", mustExist: true, name: "unitsinstock" }
-      nodeProperty5: { type: "INTEGER", mustExist: true, name: "unitsonorder" }
-      nodeProperty6: { type: "INTEGER", mustExist: true, name: "reorderlevel" }
-      nodeProperty7: { type: "INTEGER", mustExist: true, name: "discontinued" }
+      nodeProperty0: { type: "INTEGER", name: "productid" }
+      nodeProperty1: { type: "STRING", name: "productname" }
+      nodeProperty2: { type: "STRING", name: "quantityperunit" }
+      nodeProperty3: { type: "FLOAT", name: "unitprice" }
+      nodeProperty4: { type: "INTEGER", name: "unitsinstock" }
+      nodeProperty5: { type: "INTEGER", name: "unitsonorder" }
+      nodeProperty6: { type: "INTEGER", name: "reorderlevel" }
+      nodeProperty7: { type: "INTEGER", name: "discontinued" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "products"
         properties: ["nodeProperty0"]
-        name: "products"
+        name: "unique_products_productid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -50,24 +50,24 @@ nodes:
     labels:
       identifier: "suppliers"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "supplierid" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "companyname" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "contactname" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "contacttitle" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "address" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "city" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "region" }
-      nodeProperty7: { type: "STRING", mustExist: true, name: "postalcode" }
-      nodeProperty8: { type: "STRING", mustExist: true, name: "country" }
-      nodeProperty9: { type: "STRING", mustExist: true, name: "phone" }
-      nodeProperty10: { type: "STRING", mustExist: true, name: "fax" }
-      nodeProperty11: { type: "STRING", mustExist: true, name: "homepage" }
+      nodeProperty0: { type: "INTEGER", name: "supplierid" }
+      nodeProperty1: { type: "STRING", name: "companyname" }
+      nodeProperty2: { type: "STRING", name: "contactname" }
+      nodeProperty3: { type: "STRING", name: "contacttitle" }
+      nodeProperty4: { type: "STRING", name: "address" }
+      nodeProperty5: { type: "STRING", name: "city" }
+      nodeProperty6: { type: "STRING", name: "region" }
+      nodeProperty7: { type: "STRING", name: "postalcode" }
+      nodeProperty8: { type: "STRING", name: "country" }
+      nodeProperty9: { type: "STRING", name: "phone" }
+      nodeProperty10: { type: "STRING", name: "fax" }
+      nodeProperty11: { type: "STRING", name: "homepage" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "suppliers"
         properties: ["nodeProperty0"]
-        name: "suppliers"
+        name: "unique_suppliers_supplierid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -252,6 +252,7 @@ mappings:
       nodeProperty1: { field: "categoryname" }
       nodeProperty2: { field: "description" }
       nodeProperty3: { field: "picture" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "products"
     properties:
@@ -263,6 +264,7 @@ mappings:
       nodeProperty5: { field: "unitsonorder" }
       nodeProperty6: { field: "reorderlevel" }
       nodeProperty7: { field: "discontinued" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "suppliers"
     properties:
@@ -278,6 +280,7 @@ mappings:
       nodeProperty9: { field: "phone" }
       nodeProperty10: { field: "fax" }
       nodeProperty11: { field: "homepage" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "products"
     from:

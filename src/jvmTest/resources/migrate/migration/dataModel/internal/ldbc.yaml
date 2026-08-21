@@ -4,20 +4,20 @@ nodes:
     labels:
       identifier: "Comment"
     properties:
-      nodeProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      nodeProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      nodeProperty2: { type: "BOOLEAN", mustExist: true, name: "explicitlyDeleted" }
-      nodeProperty3: { type: "INTEGER", key: true, name: "id" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "locationIP" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "browserUsed" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "content" }
-      nodeProperty7: { type: "INTEGER", mustExist: true, name: "length" }
+      nodeProperty0: { type: "INTEGER", name: "creationDate" }
+      nodeProperty1: { type: "INTEGER", name: "deletionDate" }
+      nodeProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      nodeProperty3: { type: "INTEGER", name: "id" }
+      nodeProperty4: { type: "STRING", name: "locationIP" }
+      nodeProperty5: { type: "STRING", name: "browserUsed" }
+      nodeProperty6: { type: "STRING", name: "content" }
+      nodeProperty7: { type: "INTEGER", name: "length" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Comment"
         properties: ["nodeProperty3"]
-        name: "Comment"
+        name: "unique_Comment_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -29,17 +29,17 @@ nodes:
     labels:
       identifier: "Forum"
     properties:
-      nodeProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      nodeProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      nodeProperty2: { type: "BOOLEAN", mustExist: true, name: "explicitlyDeleted" }
-      nodeProperty3: { type: "INTEGER", key: true, name: "id" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "title" }
+      nodeProperty0: { type: "INTEGER", name: "creationDate" }
+      nodeProperty1: { type: "INTEGER", name: "deletionDate" }
+      nodeProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      nodeProperty3: { type: "INTEGER", name: "id" }
+      nodeProperty4: { type: "STRING", name: "title" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Forum"
         properties: ["nodeProperty3"]
-        name: "Forum"
+        name: "unique_Forum_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -51,16 +51,16 @@ nodes:
     labels:
       identifier: "Organisation"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "type" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "name" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "url" }
+      nodeProperty0: { type: "INTEGER", name: "id" }
+      nodeProperty1: { type: "STRING", name: "type" }
+      nodeProperty2: { type: "STRING", name: "name" }
+      nodeProperty3: { type: "STRING", name: "url" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Organisation"
         properties: ["nodeProperty0"]
-        name: "Organisation"
+        name: "unique_Organisation_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -72,24 +72,24 @@ nodes:
     labels:
       identifier: "Person"
     properties:
-      nodeProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      nodeProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      nodeProperty2: { type: "BOOLEAN", mustExist: true, name: "explicitlyDeleted" }
-      nodeProperty3: { type: "INTEGER", key: true, name: "id" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "firstName" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "lastName" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "gender" }
-      nodeProperty7: { type: "INTEGER", mustExist: true, name: "birthday" }
-      nodeProperty8: { type: "STRING", mustExist: true, name: "locationIP" }
-      nodeProperty9: { type: "STRING", mustExist: true, name: "browserUsed" }
-      nodeProperty10: { type: "STRING", mustExist: true, name: "language" }
-      nodeProperty11: { type: "STRING", mustExist: true, name: "email" }
+      nodeProperty0: { type: "INTEGER", name: "creationDate" }
+      nodeProperty1: { type: "INTEGER", name: "deletionDate" }
+      nodeProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      nodeProperty3: { type: "INTEGER", name: "id" }
+      nodeProperty4: { type: "STRING", name: "firstName" }
+      nodeProperty5: { type: "STRING", name: "lastName" }
+      nodeProperty6: { type: "STRING", name: "gender" }
+      nodeProperty7: { type: "INTEGER", name: "birthday" }
+      nodeProperty8: { type: "STRING", name: "locationIP" }
+      nodeProperty9: { type: "STRING", name: "browserUsed" }
+      nodeProperty10: { type: "STRING", name: "language" }
+      nodeProperty11: { type: "STRING", name: "email" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Person"
         properties: ["nodeProperty3"]
-        name: "Person"
+        name: "unique_Person_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -101,16 +101,16 @@ nodes:
     labels:
       identifier: "Place"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "url" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "type" }
+      nodeProperty0: { type: "INTEGER", name: "id" }
+      nodeProperty1: { type: "STRING", name: "name" }
+      nodeProperty2: { type: "STRING", name: "url" }
+      nodeProperty3: { type: "STRING", name: "type" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Place"
         properties: ["nodeProperty0"]
-        name: "Place"
+        name: "unique_Place_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -122,22 +122,22 @@ nodes:
     labels:
       identifier: "Post"
     properties:
-      nodeProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      nodeProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      nodeProperty2: { type: "BOOLEAN", mustExist: true, name: "explicitlyDeleted" }
-      nodeProperty3: { type: "INTEGER", key: true, name: "id" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "imageFile" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "locationIP" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "browserUsed" }
-      nodeProperty7: { type: "STRING", mustExist: true, name: "language" }
-      nodeProperty8: { type: "STRING", mustExist: true, name: "content" }
-      nodeProperty9: { type: "INTEGER", mustExist: true, name: "length" }
+      nodeProperty0: { type: "INTEGER", name: "creationDate" }
+      nodeProperty1: { type: "INTEGER", name: "deletionDate" }
+      nodeProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      nodeProperty3: { type: "INTEGER", name: "id" }
+      nodeProperty4: { type: "STRING", name: "imageFile" }
+      nodeProperty5: { type: "STRING", name: "locationIP" }
+      nodeProperty6: { type: "STRING", name: "browserUsed" }
+      nodeProperty7: { type: "STRING", name: "language" }
+      nodeProperty8: { type: "STRING", name: "content" }
+      nodeProperty9: { type: "INTEGER", name: "length" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Post"
         properties: ["nodeProperty3"]
-        name: "Post"
+        name: "unique_Post_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -149,15 +149,15 @@ nodes:
     labels:
       identifier: "Tag"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "url" }
+      nodeProperty0: { type: "INTEGER", name: "id" }
+      nodeProperty1: { type: "STRING", name: "name" }
+      nodeProperty2: { type: "STRING", name: "url" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Tag"
         properties: ["nodeProperty0"]
-        name: "Tag"
+        name: "unique_Tag_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -169,15 +169,15 @@ nodes:
     labels:
       identifier: "TagClass"
     properties:
-      nodeProperty0: { type: "INTEGER", key: true, name: "id" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "name" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "url" }
+      nodeProperty0: { type: "INTEGER", name: "id" }
+      nodeProperty1: { type: "STRING", name: "name" }
+      nodeProperty2: { type: "STRING", name: "url" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "TagClass"
         properties: ["nodeProperty0"]
-        name: "TagClass"
+        name: "unique_TagClass_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -211,8 +211,8 @@ relationships:
     from: { node: "node0" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG"
   relationship5:
     type: "MODERATED_BY"
@@ -224,17 +224,17 @@ relationships:
     from: { node: "node3" }
     to: { node: "node1" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      relationshipProperty2: { type: "BOOLEAN", mustExist: true, name: "explicitlyDeleted" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationshipProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
     name: "MEMBER_OF"
   relationship7:
     type: "HAS_TAG"
     from: { node: "node1" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG2"
   relationship8:
     type: "LOCATED_IN"
@@ -251,53 +251,53 @@ relationships:
     from: { node: "node3" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
     name: "INTERESTED_IN"
   relationship11:
     type: "KNOWS"
     from: { node: "node3" }
     to: { node: "node3" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      relationshipProperty2: { type: "BOOLEAN", mustExist: true, name: "explicitlyDeleted" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationshipProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
     name: "KNOWS"
   relationship12:
     type: "LIKED"
     from: { node: "node3" }
     to: { node: "node0" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      relationshipProperty2: { type: "BOOLEAN", mustExist: true, name: "explicitlyDeleted" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationshipProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
     name: "LIKED"
   relationship13:
     type: "LIKED"
     from: { node: "node3" }
     to: { node: "node5" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      relationshipProperty2: { type: "BOOLEAN", mustExist: true, name: "explicitlyDeleted" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationshipProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
     name: "LIKED2"
   relationship14:
     type: "STUDIES_AT"
     from: { node: "node3" }
     to: { node: "node2" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      relationshipProperty2: { type: "INTEGER", mustExist: true, name: "classYear" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationshipProperty2: { type: "INTEGER", name: "classYear" }
     name: "STUDIES_AT"
   relationship15:
     type: "WORKS_AT"
     from: { node: "node3" }
     to: { node: "node2" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
-      relationshipProperty2: { type: "INTEGER", mustExist: true, name: "workFrom" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationshipProperty2: { type: "INTEGER", name: "workFrom" }
     name: "WORKS_AT"
   relationship16:
     type: "IS_SIMILAR_TO"
@@ -324,8 +324,8 @@ relationships:
     from: { node: "node5" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", mustExist: true, name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", mustExist: true, name: "deletionDate" }
+      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
+      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG3"
   relationship21:
     type: "HAS_CLASS"
@@ -836,6 +836,7 @@ mappings:
       nodeProperty5: { field: "browserUsed" }
       nodeProperty6: { field: "content" }
       nodeProperty7: { field: "length" }
+    key: ["nodeProperty3"]
   - node: "node1"
     table: "Forum"
     properties:
@@ -844,6 +845,7 @@ mappings:
       nodeProperty2: { field: "explicitlyDeleted" }
       nodeProperty3: { field: "id" }
       nodeProperty4: { field: "title" }
+    key: ["nodeProperty3"]
   - node: "node2"
     table: "Organisation"
     properties:
@@ -851,6 +853,7 @@ mappings:
       nodeProperty1: { field: "type" }
       nodeProperty2: { field: "name" }
       nodeProperty3: { field: "url" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "Person"
     properties:
@@ -866,6 +869,7 @@ mappings:
       nodeProperty9: { field: "browserUsed" }
       nodeProperty10: { field: "language" }
       nodeProperty11: { field: "email" }
+    key: ["nodeProperty3"]
   - node: "node4"
     table: "Place"
     properties:
@@ -873,6 +877,7 @@ mappings:
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "url" }
       nodeProperty3: { field: "type" }
+    key: ["nodeProperty0"]
   - node: "node5"
     table: "Post"
     properties:
@@ -886,18 +891,21 @@ mappings:
       nodeProperty7: { field: "language" }
       nodeProperty8: { field: "content" }
       nodeProperty9: { field: "length" }
+    key: ["nodeProperty3"]
   - node: "node6"
     table: "Tag"
     properties:
       nodeProperty0: { field: "id" }
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "url" }
+    key: ["nodeProperty0"]
   - node: "node7"
     table: "TagClass"
     properties:
       nodeProperty0: { field: "id" }
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "url" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "Comment"
     from:
@@ -951,6 +959,7 @@ mappings:
     properties:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
+    key: ["nodeProperty0"]
   - relationship: "relationship5"
     table: "Forum"
     from:

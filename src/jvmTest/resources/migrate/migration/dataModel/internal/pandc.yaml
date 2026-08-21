@@ -4,15 +4,15 @@ nodes:
     labels:
       identifier: "ACCOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ACCOUNT_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "ACCOUNT_TYPE_CODE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "ACCOUNT_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "ACCOUNT_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "ACCOUNT_TYPE_CODE" }
+      nodeProperty2: { type: "STRING", name: "ACCOUNT_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ACCOUNT"
         properties: ["nodeProperty0"]
-        name: "ACCOUNT"
+        name: "unique_ACCOUNT_ACCOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -24,13 +24,13 @@ nodes:
     labels:
       identifier: "ADMINISTRATIVE_ORGANIZATION_UNIT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ORGANIZATION_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ORGANIZATION_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ADMINISTRATIVE_ORGANIZATION_UNIT"
         properties: ["nodeProperty0"]
-        name: "ADMINISTRATIVE_ORGANIZATION_UNIT"
+        name: "unique_ADMINISTRATIVE_ORGANIZATION_UNIT_ORGANIZATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -42,13 +42,13 @@ nodes:
     labels:
       identifier: "AGENCY_CONTRACT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "AGENCY_CONTRACT"
         properties: ["nodeProperty0"]
-        name: "AGENCY_CONTRACT"
+        name: "unique_AGENCY_CONTRACT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -60,16 +60,16 @@ nodes:
     labels:
       identifier: "AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "AGREEMENT_NAME" }
-      nodeProperty2: { type: "LOCAL DATETIME", mustExist: true, name: "AGREEMENT_ORIGINAL_INCEPTION_DATE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "AGREEMENT_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "AGREEMENT_NAME" }
+      nodeProperty2: { type: "LOCAL DATETIME", name: "AGREEMENT_ORIGINAL_INCEPTION_DATE" }
+      nodeProperty3: { type: "STRING", name: "AGREEMENT_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "AGREEMENT"
+        name: "unique_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -81,13 +81,13 @@ nodes:
     labels:
       identifier: "ANIMAL"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ANIMAL"
         properties: ["nodeProperty0"]
-        name: "ANIMAL"
+        name: "unique_ANIMAL_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -99,13 +99,13 @@ nodes:
     labels:
       identifier: "APPROVAL"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "APPROVAL"
         properties: ["nodeProperty0"]
-        name: "APPROVAL"
+        name: "unique_APPROVAL_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -117,14 +117,14 @@ nodes:
     labels:
       identifier: "ARBITRATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ARBITRATION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "ARBITRATION_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "ARBITRATION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "ARBITRATION_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ARBITRATION"
         properties: ["nodeProperty0"]
-        name: "ARBITRATION"
+        name: "unique_ARBITRATION_ARBITRATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -136,17 +136,17 @@ nodes:
     labels:
       identifier: "ASSESSMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_IDENTIFIER" }
-      nodeProperty1: { type: "LOCAL DATETIME", mustExist: true, name: "BEGIN_DATE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "ASSESSMENT_DESCRIPTION" }
-      nodeProperty3: { type: "LOCAL DATETIME", mustExist: true, name: "END_DATE" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "ASSESSMENT_REASON_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_IDENTIFIER" }
+      nodeProperty1: { type: "LOCAL DATETIME", name: "BEGIN_DATE" }
+      nodeProperty2: { type: "STRING", name: "ASSESSMENT_DESCRIPTION" }
+      nodeProperty3: { type: "LOCAL DATETIME", name: "END_DATE" }
+      nodeProperty4: { type: "STRING", name: "ASSESSMENT_REASON_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ASSESSMENT"
         properties: ["nodeProperty0"]
-        name: "ASSESSMENT"
+        name: "unique_ASSESSMENT_ASSESSMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -158,14 +158,14 @@ nodes:
     labels:
       identifier: "ASSESSMENT_RESULT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "ASSESSMENT_RESULT_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "ASSESSMENT_RESULT_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ASSESSMENT_RESULT"
         properties: ["nodeProperty0"]
-        name: "ASSESSMENT_RESULT"
+        name: "unique_ASSESSMENT_RESULT_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -177,13 +177,13 @@ nodes:
     labels:
       identifier: "ASSUMED_CLAIM_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ASSUMED_CLAIM_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "ASSUMED_CLAIM_AMOUNT"
+        name: "unique_ASSUMED_CLAIM_AMOUNT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -195,13 +195,13 @@ nodes:
     labels:
       identifier: "ASSUMED_POLICY_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ASSUMED_POLICY_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "ASSUMED_POLICY_AMOUNT"
+        name: "unique_ASSUMED_POLICY_AMOUNT_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -213,13 +213,13 @@ nodes:
     labels:
       identifier: "AUTOMOBILE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "AUTOMOBILE"
         properties: ["nodeProperty0"]
-        name: "AUTOMOBILE"
+        name: "unique_AUTOMOBILE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -231,13 +231,13 @@ nodes:
     labels:
       identifier: "AUTO_REPAIR_SHOP_CONTRACT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "AUTO_REPAIR_SHOP_CONTRACT"
         properties: ["nodeProperty0"]
-        name: "AUTO_REPAIR_SHOP_CONTRACT"
+        name: "unique_AUTO_REPAIR_SHOP_CONTRACT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -249,13 +249,13 @@ nodes:
     labels:
       identifier: "BINDING"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "BINDING"
         properties: ["nodeProperty0"]
-        name: "BINDING"
+        name: "unique_BINDING_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -267,13 +267,13 @@ nodes:
     labels:
       identifier: "BOAT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "BOAT"
         properties: ["nodeProperty0"]
-        name: "BOAT"
+        name: "unique_BOAT_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -285,13 +285,13 @@ nodes:
     labels:
       identifier: "BODY_OBJECT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "BODY_OBJECT"
         properties: ["nodeProperty0"]
-        name: "BODY_OBJECT"
+        name: "unique_BODY_OBJECT_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -303,13 +303,13 @@ nodes:
     labels:
       identifier: "BROKERAGE_CONTRACT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "BROKERAGE_CONTRACT"
         properties: ["nodeProperty0"]
-        name: "BROKERAGE_CONTRACT"
+        name: "unique_BROKERAGE_CONTRACT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -321,13 +321,13 @@ nodes:
     labels:
       identifier: "BUS"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "BUS"
         properties: ["nodeProperty0"]
-        name: "BUS"
+        name: "unique_BUS_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -339,13 +339,13 @@ nodes:
     labels:
       identifier: "BUSINESS_EVENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "BUSINESS_EVENT"
         properties: ["nodeProperty0"]
-        name: "BUSINESS_EVENT"
+        name: "unique_BUSINESS_EVENT_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -357,13 +357,13 @@ nodes:
     labels:
       identifier: "CANCEL"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CANCEL"
         properties: ["nodeProperty0"]
-        name: "CANCEL"
+        name: "unique_CANCEL_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -375,17 +375,17 @@ nodes:
     labels:
       identifier: "CATASTROPHE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CATASTROPHE_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "CATASTROPHE_TYPE_CODE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "CATASTROPHE_NAME" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "INDUSTRY_CATASTROPHE_CODE" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "COMPANY_CATASTROPHE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "CATASTROPHE_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "CATASTROPHE_TYPE_CODE" }
+      nodeProperty2: { type: "STRING", name: "CATASTROPHE_NAME" }
+      nodeProperty3: { type: "STRING", name: "INDUSTRY_CATASTROPHE_CODE" }
+      nodeProperty4: { type: "STRING", name: "COMPANY_CATASTROPHE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CATASTROPHE"
         properties: ["nodeProperty0"]
-        name: "CATASTROPHE"
+        name: "unique_CATASTROPHE_CATASTROPHE_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -397,13 +397,13 @@ nodes:
     labels:
       identifier: "CEDED_CLAIM_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CEDED_CLAIM_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "CEDED_CLAIM_AMOUNT"
+        name: "unique_CEDED_CLAIM_AMOUNT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -415,13 +415,13 @@ nodes:
     labels:
       identifier: "CEDED_POLICY_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CEDED_POLICY_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "CEDED_POLICY_AMOUNT"
+        name: "unique_CEDED_POLICY_AMOUNT_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -433,13 +433,13 @@ nodes:
     labels:
       identifier: "CHANNEL_SCORE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CHANNEL_SCORE"
         properties: ["nodeProperty0"]
-        name: "CHANNEL_SCORE"
+        name: "unique_CHANNEL_SCORE_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -451,23 +451,23 @@ nodes:
     labels:
       identifier: "CLAIM"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "CLAIM_DESCRIPTION" }
-      nodeProperty2: { type: "LOCAL DATETIME", mustExist: true, name: "CLAIMS_MADE_DATE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "COMPANY_CLAIM_NUMBER" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "COMPANY_SUBCLAIM_NUMBER" }
-      nodeProperty5: { type: "LOCAL DATETIME", mustExist: true, name: "ENTRY_INTO_CLAIMS_MADE_PROGRAM_DATE" }
-      nodeProperty6: { type: "LOCAL DATETIME", mustExist: true, name: "CLAIM_OPEN_DATE" }
-      nodeProperty7: { type: "LOCAL DATETIME", mustExist: true, name: "CLAIM_CLOSE_DATE" }
-      nodeProperty8: { type: "LOCAL DATETIME", mustExist: true, name: "CLAIM_REOPEN_DATE" }
-      nodeProperty9: { type: "STRING", mustExist: true, name: "CLAIM_STATUS_CODE" }
-      nodeProperty10: { type: "LOCAL DATETIME", mustExist: true, name: "CLAIM_REPORTED_DATE" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "CLAIM_DESCRIPTION" }
+      nodeProperty2: { type: "LOCAL DATETIME", name: "CLAIMS_MADE_DATE" }
+      nodeProperty3: { type: "STRING", name: "COMPANY_CLAIM_NUMBER" }
+      nodeProperty4: { type: "STRING", name: "COMPANY_SUBCLAIM_NUMBER" }
+      nodeProperty5: { type: "LOCAL DATETIME", name: "ENTRY_INTO_CLAIMS_MADE_PROGRAM_DATE" }
+      nodeProperty6: { type: "LOCAL DATETIME", name: "CLAIM_OPEN_DATE" }
+      nodeProperty7: { type: "LOCAL DATETIME", name: "CLAIM_CLOSE_DATE" }
+      nodeProperty8: { type: "LOCAL DATETIME", name: "CLAIM_REOPEN_DATE" }
+      nodeProperty9: { type: "STRING", name: "CLAIM_STATUS_CODE" }
+      nodeProperty10: { type: "LOCAL DATETIME", name: "CLAIM_REPORTED_DATE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CLAIM"
         properties: ["nodeProperty0"]
-        name: "CLAIM"
+        name: "unique_CLAIM_CLAIM_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -479,17 +479,17 @@ nodes:
     labels:
       identifier: "CLAIM_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "AMOUNT_TYPE_CODE" }
-      nodeProperty2: { type: "LOCAL DATETIME", mustExist: true, name: "EVENT_DATE" }
-      nodeProperty3: { type: "FLOAT", mustExist: true, name: "CLAIM_AMOUNT" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "INSURANCE_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "AMOUNT_TYPE_CODE" }
+      nodeProperty2: { type: "LOCAL DATETIME", name: "EVENT_DATE" }
+      nodeProperty3: { type: "FLOAT", name: "CLAIM_AMOUNT" }
+      nodeProperty4: { type: "STRING", name: "INSURANCE_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CLAIM_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "CLAIM_AMOUNT"
+        name: "unique_CLAIM_AMOUNT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -501,13 +501,13 @@ nodes:
     labels:
       identifier: "CLAIM_EVALUATION_RESULT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CLAIM_EVALUATION_RESULT"
         properties: ["nodeProperty0"]
-        name: "CLAIM_EVALUATION_RESULT"
+        name: "unique_CLAIM_EVALUATION_RESULT_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -519,13 +519,13 @@ nodes:
     labels:
       identifier: "CLAIM_EVENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CLAIM_EVENT"
         properties: ["nodeProperty0"]
-        name: "CLAIM_EVENT"
+        name: "unique_CLAIM_EVENT_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -537,14 +537,14 @@ nodes:
     labels:
       identifier: "CLAIM_FOLDER"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "CLAIM_FOLDER_LABEL_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "CLAIM_FOLDER_LABEL_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CLAIM_FOLDER"
         properties: ["nodeProperty0"]
-        name: "CLAIM_FOLDER"
+        name: "unique_CLAIM_FOLDER_CLAIM_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -556,15 +556,15 @@ nodes:
     labels:
       identifier: "CLAIM_OFFER"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_OFFER_IDENTIFIER" }
-      nodeProperty1: { type: "FLOAT", mustExist: true, name: "SETTLEMENT_OFFER_AMOUNT" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "SETTLEMENT_OFFER_PROVISION_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_OFFER_IDENTIFIER" }
+      nodeProperty1: { type: "FLOAT", name: "SETTLEMENT_OFFER_AMOUNT" }
+      nodeProperty2: { type: "STRING", name: "SETTLEMENT_OFFER_PROVISION_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CLAIM_OFFER"
         properties: ["nodeProperty0"]
-        name: "CLAIM_OFFER"
+        name: "unique_CLAIM_OFFER_CLAIM_OFFER_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -576,13 +576,13 @@ nodes:
     labels:
       identifier: "CLAIM_PAYMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CLAIM_PAYMENT"
         properties: ["nodeProperty0"]
-        name: "CLAIM_PAYMENT"
+        name: "unique_CLAIM_PAYMENT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -594,13 +594,13 @@ nodes:
     labels:
       identifier: "CLAIM_RESERVE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CLAIM_RESERVE"
         properties: ["nodeProperty0"]
-        name: "CLAIM_RESERVE"
+        name: "unique_CLAIM_RESERVE_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -612,13 +612,13 @@ nodes:
     labels:
       identifier: "COMBINATION_STRUCTURE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COMBINATION_STRUCTURE"
         properties: ["nodeProperty0"]
-        name: "COMBINATION_STRUCTURE"
+        name: "unique_COMBINATION_STRUCTURE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -630,13 +630,13 @@ nodes:
     labels:
       identifier: "COMBINE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COMBINE"
         properties: ["nodeProperty0"]
-        name: "COMBINE"
+        name: "unique_COMBINE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -648,13 +648,13 @@ nodes:
     labels:
       identifier: "COMMERCIAL_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COMMERCIAL_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "COMMERCIAL_AGREEMENT"
+        name: "unique_COMMERCIAL_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -666,13 +666,13 @@ nodes:
     labels:
       identifier: "COMMERCIAL_STRUCTURE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COMMERCIAL_STRUCTURE"
         properties: ["nodeProperty0"]
-        name: "COMMERCIAL_STRUCTURE"
+        name: "unique_COMMERCIAL_STRUCTURE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -684,16 +684,16 @@ nodes:
     labels:
       identifier: "COMMUNICATION_IDENTITY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "COMMUNICATION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "COMMUNICATION_TYPE_CODE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "COMMUNICATION_VALUE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "COMMUNICATION_QUALIFIER_VALUE" }
+      nodeProperty0: { type: "FLOAT", name: "COMMUNICATION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "COMMUNICATION_TYPE_CODE" }
+      nodeProperty2: { type: "STRING", name: "COMMUNICATION_VALUE" }
+      nodeProperty3: { type: "STRING", name: "COMMUNICATION_QUALIFIER_VALUE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COMMUNICATION_IDENTITY"
         properties: ["nodeProperty0"]
-        name: "COMMUNICATION_IDENTITY"
+        name: "unique_COMMUNICATION_IDENTITY_COMMUNICATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -705,13 +705,13 @@ nodes:
     labels:
       identifier: "COMMUTATION_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COMMUTATION_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "COMMUTATION_AGREEMENT"
+        name: "unique_COMMUTATION_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -723,16 +723,16 @@ nodes:
     labels:
       identifier: "COMPANY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "COMPANY_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "COMPANY_CODE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "COMPANY_DESCRIPTION" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "COMPANY_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "COMPANY_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "COMPANY_CODE" }
+      nodeProperty2: { type: "STRING", name: "COMPANY_DESCRIPTION" }
+      nodeProperty3: { type: "STRING", name: "COMPANY_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COMPANY"
         properties: ["nodeProperty0"]
-        name: "COMPANY"
+        name: "unique_COMPANY_COMPANY_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -744,13 +744,13 @@ nodes:
     labels:
       identifier: "CONSTRUCTION_VEHICLE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CONSTRUCTION_VEHICLE"
         properties: ["nodeProperty0"]
-        name: "CONSTRUCTION_VEHICLE"
+        name: "unique_CONSTRUCTION_VEHICLE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -762,13 +762,13 @@ nodes:
     labels:
       identifier: "CONSULTANT_CONTRACT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CONSULTANT_CONTRACT"
         properties: ["nodeProperty0"]
-        name: "CONSULTANT_CONTRACT"
+        name: "unique_CONSULTANT_CONTRACT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -780,15 +780,15 @@ nodes:
     labels:
       identifier: "COVERAGE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "COVERAGE_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "COVERAGE_DESCRIPTION" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "COVERAGE_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "COVERAGE_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "COVERAGE_DESCRIPTION" }
+      nodeProperty2: { type: "STRING", name: "COVERAGE_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COVERAGE"
         properties: ["nodeProperty0"]
-        name: "COVERAGE"
+        name: "unique_COVERAGE_COVERAGE_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -800,15 +800,15 @@ nodes:
     labels:
       identifier: "COVERAGE_GROUP"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "COVERAGE_GROUP_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "COVERAGE_GROUP_DESCRIPTION" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "COVERAGE_GROUP_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "COVERAGE_GROUP_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "COVERAGE_GROUP_DESCRIPTION" }
+      nodeProperty2: { type: "STRING", name: "COVERAGE_GROUP_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COVERAGE_GROUP"
         properties: ["nodeProperty0"]
-        name: "COVERAGE_GROUP"
+        name: "unique_COVERAGE_GROUP_COVERAGE_GROUP_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -820,15 +820,15 @@ nodes:
     labels:
       identifier: "COVERAGE_LIMIT_TYPE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "COVERAGE_LIMIT_TYPE_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "COVERAGE_LIMIT_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "COVERAGE_LIMIT_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "COVERAGE_LIMIT_TYPE_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "COVERAGE_LIMIT_NAME" }
+      nodeProperty2: { type: "STRING", name: "COVERAGE_LIMIT_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COVERAGE_LIMIT_TYPE"
         properties: ["nodeProperty0"]
-        name: "COVERAGE_LIMIT_TYPE"
+        name: "unique_COVERAGE_LIMIT_TYPE_COVERAGE_LIMIT_TYPE_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -840,14 +840,14 @@ nodes:
     labels:
       identifier: "COVERAGE_PART"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "COVERAGE_PART_CODE" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "COVERAGE_PART_NAME" }
+      nodeProperty0: { type: "STRING", name: "COVERAGE_PART_CODE" }
+      nodeProperty1: { type: "STRING", name: "COVERAGE_PART_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COVERAGE_PART"
         properties: ["nodeProperty0"]
-        name: "COVERAGE_PART"
+        name: "unique_COVERAGE_PART_COVERAGE_PART_CODE"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -859,15 +859,15 @@ nodes:
     labels:
       identifier: "COVERAGE_TYPE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "COVERAGE_TYPE_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "COVERAGE_TYPE_DESCRIPTION" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "COVERAGE_TYPE_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "COVERAGE_TYPE_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "COVERAGE_TYPE_DESCRIPTION" }
+      nodeProperty2: { type: "STRING", name: "COVERAGE_TYPE_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "COVERAGE_TYPE"
         properties: ["nodeProperty0"]
-        name: "COVERAGE_TYPE"
+        name: "unique_COVERAGE_TYPE_COVERAGE_TYPE_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -879,13 +879,13 @@ nodes:
     labels:
       identifier: "CREDIT_CLAIM_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CREDIT_CLAIM_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "CREDIT_CLAIM_AMOUNT"
+        name: "unique_CREDIT_CLAIM_AMOUNT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -897,13 +897,13 @@ nodes:
     labels:
       identifier: "CREDIT_POLICY_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CREDIT_POLICY_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "CREDIT_POLICY_AMOUNT"
+        name: "unique_CREDIT_POLICY_AMOUNT_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -915,13 +915,13 @@ nodes:
     labels:
       identifier: "CREDIT_RATING"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CREDIT_RATING"
         properties: ["nodeProperty0"]
-        name: "CREDIT_RATING"
+        name: "unique_CREDIT_RATING_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -933,13 +933,13 @@ nodes:
     labels:
       identifier: "CUSTOMER_SCORE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "CUSTOMER_SCORE"
         properties: ["nodeProperty0"]
-        name: "CUSTOMER_SCORE"
+        name: "unique_CUSTOMER_SCORE_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -951,13 +951,13 @@ nodes:
     labels:
       identifier: "DEBIT_CLAIM_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "DEBIT_CLAIM_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "DEBIT_CLAIM_AMOUNT"
+        name: "unique_DEBIT_CLAIM_AMOUNT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -969,13 +969,13 @@ nodes:
     labels:
       identifier: "DEBIT_POLICY_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "DEBIT_POLICY_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "DEBIT_POLICY_AMOUNT"
+        name: "unique_DEBIT_POLICY_AMOUNT_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -987,13 +987,13 @@ nodes:
     labels:
       identifier: "DEDUCTIBLE_RECOVERY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "DEDUCTIBLE_RECOVERY"
         properties: ["nodeProperty0"]
-        name: "DEDUCTIBLE_RECOVERY"
+        name: "unique_DEDUCTIBLE_RECOVERY_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1005,13 +1005,13 @@ nodes:
     labels:
       identifier: "DEMOGRAPHIC_SCORE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "DEMOGRAPHIC_SCORE"
         properties: ["nodeProperty0"]
-        name: "DEMOGRAPHIC_SCORE"
+        name: "unique_DEMOGRAPHIC_SCORE_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1023,13 +1023,13 @@ nodes:
     labels:
       identifier: "DERIVATIVE_CONTRACT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "DERIVATIVE_CONTRACT"
         properties: ["nodeProperty0"]
-        name: "DERIVATIVE_CONTRACT"
+        name: "unique_DERIVATIVE_CONTRACT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1041,13 +1041,13 @@ nodes:
     labels:
       identifier: "DIRECT_CLAIM_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "DIRECT_CLAIM_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "DIRECT_CLAIM_AMOUNT"
+        name: "unique_DIRECT_CLAIM_AMOUNT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1059,13 +1059,13 @@ nodes:
     labels:
       identifier: "DIRECT_POLICY_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "DIRECT_POLICY_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "DIRECT_POLICY_AMOUNT"
+        name: "unique_DIRECT_POLICY_AMOUNT_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1077,13 +1077,13 @@ nodes:
     labels:
       identifier: "DWELLING"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "DWELLING"
         properties: ["nodeProperty0"]
-        name: "DWELLING"
+        name: "unique_DWELLING_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1095,13 +1095,13 @@ nodes:
     labels:
       identifier: "EMPLOYMENT_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "EMPLOYMENT_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "EMPLOYMENT_AGREEMENT"
+        name: "unique_EMPLOYMENT_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1113,13 +1113,13 @@ nodes:
     labels:
       identifier: "ENDORSEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ENDORSEMENT"
         properties: ["nodeProperty0"]
-        name: "ENDORSEMENT"
+        name: "unique_ENDORSEMENT_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1131,13 +1131,13 @@ nodes:
     labels:
       identifier: "EVENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "EVENT"
         properties: ["nodeProperty0"]
-        name: "EVENT"
+        name: "unique_EVENT_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1149,13 +1149,13 @@ nodes:
     labels:
       identifier: "EXPENSE_PAYMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "EXPENSE_PAYMENT"
         properties: ["nodeProperty0"]
-        name: "EXPENSE_PAYMENT"
+        name: "unique_EXPENSE_PAYMENT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1167,13 +1167,13 @@ nodes:
     labels:
       identifier: "EXPENSE_RECOVERY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "EXPENSE_RECOVERY"
         properties: ["nodeProperty0"]
-        name: "EXPENSE_RECOVERY"
+        name: "unique_EXPENSE_RECOVERY_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1185,13 +1185,13 @@ nodes:
     labels:
       identifier: "EXPENSE_RESERVE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "EXPENSE_RESERVE"
         properties: ["nodeProperty0"]
-        name: "EXPENSE_RESERVE"
+        name: "unique_EXPENSE_RESERVE_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1203,13 +1203,13 @@ nodes:
     labels:
       identifier: "FARM_EQUIPMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FARM_EQUIPMENT"
         properties: ["nodeProperty0"]
-        name: "FARM_EQUIPMENT"
+        name: "unique_FARM_EQUIPMENT_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1221,13 +1221,13 @@ nodes:
     labels:
       identifier: "FEE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FEE"
         properties: ["nodeProperty0"]
-        name: "FEE"
+        name: "unique_FEE_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1239,13 +1239,13 @@ nodes:
     labels:
       identifier: "FIELD_ORGANIZATION_UNIT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ORGANIZATION_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ORGANIZATION_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FIELD_ORGANIZATION_UNIT"
         properties: ["nodeProperty0"]
-        name: "FIELD_ORGANIZATION_UNIT"
+        name: "unique_FIELD_ORGANIZATION_UNIT_ORGANIZATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1257,13 +1257,13 @@ nodes:
     labels:
       identifier: "FINANCIAL_ACCOUNT_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FINANCIAL_ACCOUNT_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "FINANCIAL_ACCOUNT_AGREEMENT"
+        name: "unique_FINANCIAL_ACCOUNT_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1275,13 +1275,13 @@ nodes:
     labels:
       identifier: "FINANCIAL_SERVICES_ASSESSMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FINANCIAL_SERVICES_ASSESSMENT"
         properties: ["nodeProperty0"]
-        name: "FINANCIAL_SERVICES_ASSESSMENT"
+        name: "unique_FINANCIAL_SERVICES_ASSESSMENT_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1293,13 +1293,13 @@ nodes:
     labels:
       identifier: "FINANCIAL_VALUATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FINANCIAL_VALUATION"
         properties: ["nodeProperty0"]
-        name: "FINANCIAL_VALUATION"
+        name: "unique_FINANCIAL_VALUATION_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1311,13 +1311,13 @@ nodes:
     labels:
       identifier: "FLAT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FLAT"
         properties: ["nodeProperty0"]
-        name: "FLAT"
+        name: "unique_FLAT_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1329,13 +1329,13 @@ nodes:
     labels:
       identifier: "FOR_PROFIT_ORGANIZATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ORGANIZATION_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ORGANIZATION_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FOR_PROFIT_ORGANIZATION"
         properties: ["nodeProperty0"]
-        name: "FOR_PROFIT_ORGANIZATION"
+        name: "unique_FOR_PROFIT_ORGANIZATION_ORGANIZATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1347,13 +1347,13 @@ nodes:
     labels:
       identifier: "FRAUD_ASSESSMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FRAUD_ASSESSMENT"
         properties: ["nodeProperty0"]
-        name: "FRAUD_ASSESSMENT"
+        name: "unique_FRAUD_ASSESSMENT_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1365,13 +1365,13 @@ nodes:
     labels:
       identifier: "FREIGHT_GROUP"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FREIGHT_GROUP"
         properties: ["nodeProperty0"]
-        name: "FREIGHT_GROUP"
+        name: "unique_FREIGHT_GROUP_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1383,13 +1383,13 @@ nodes:
     labels:
       identifier: "FULL_TERM"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "FULL_TERM"
         properties: ["nodeProperty0"]
-        name: "FULL_TERM"
+        name: "unique_FULL_TERM_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1401,17 +1401,17 @@ nodes:
     labels:
       identifier: "GEOGRAPHIC_LOCATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "GEOGRAPHIC_LOCATION_TYPE_CODE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "LOCATION_CODE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "LOCATION_NAME" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "LOCATION_NUMBER" }
+      nodeProperty0: { type: "FLOAT", name: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "GEOGRAPHIC_LOCATION_TYPE_CODE" }
+      nodeProperty2: { type: "STRING", name: "LOCATION_CODE" }
+      nodeProperty3: { type: "STRING", name: "LOCATION_NAME" }
+      nodeProperty4: { type: "STRING", name: "LOCATION_NUMBER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "GEOGRAPHIC_LOCATION"
         properties: ["nodeProperty0"]
-        name: "GEOGRAPHIC_LOCATION"
+        name: "unique_GEOGRAPHIC_LOCATION_GEOGRAPHIC_LOCATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1423,13 +1423,13 @@ nodes:
     labels:
       identifier: "GOVERNMENT_ORGANIZATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ORGANIZATION_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ORGANIZATION_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "GOVERNMENT_ORGANIZATION"
         properties: ["nodeProperty0"]
-        name: "GOVERNMENT_ORGANIZATION"
+        name: "unique_GOVERNMENT_ORGANIZATION_ORGANIZATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1441,14 +1441,14 @@ nodes:
     labels:
       identifier: "GROUPING"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "GROUPING_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "GROUPING_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "GROUPING_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "GROUPING_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "GROUPING"
         properties: ["nodeProperty0"]
-        name: "GROUPING"
+        name: "unique_GROUPING_GROUPING_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1460,13 +1460,13 @@ nodes:
     labels:
       identifier: "GROUP_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "GROUP_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "GROUP_AGREEMENT"
+        name: "unique_GROUP_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1478,13 +1478,13 @@ nodes:
     labels:
       identifier: "HOUSEHOLD"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "HOUSEHOLD_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "HOUSEHOLD_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "HOUSEHOLD"
         properties: ["nodeProperty0"]
-        name: "HOUSEHOLD"
+        name: "unique_HOUSEHOLD_HOUSEHOLD_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1496,13 +1496,13 @@ nodes:
     labels:
       identifier: "HOUSEHOLD_CONTENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "HOUSEHOLD_CONTENT"
         properties: ["nodeProperty0"]
-        name: "HOUSEHOLD_CONTENT"
+        name: "unique_HOUSEHOLD_CONTENT_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1514,13 +1514,13 @@ nodes:
     labels:
       identifier: "INDIVIDUAL_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "INDIVIDUAL_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "INDIVIDUAL_AGREEMENT"
+        name: "unique_INDIVIDUAL_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1532,14 +1532,14 @@ nodes:
     labels:
       identifier: "INSURABLE_OBJECT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "INSURABLE_OBJECT_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "INSURABLE_OBJECT_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "INSURABLE_OBJECT"
         properties: ["nodeProperty0"]
-        name: "INSURABLE_OBJECT"
+        name: "unique_INSURABLE_OBJECT_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1551,15 +1551,15 @@ nodes:
     labels:
       identifier: "INSURANCE_CLASS"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURANCE_CLASS_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "INSURANCE_CLASS_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "INSURANCE_CLASS_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "INSURANCE_CLASS_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "INSURANCE_CLASS_NAME" }
+      nodeProperty2: { type: "STRING", name: "INSURANCE_CLASS_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "INSURANCE_CLASS"
         properties: ["nodeProperty0"]
-        name: "INSURANCE_CLASS"
+        name: "unique_INSURANCE_CLASS_INSURANCE_CLASS_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1571,13 +1571,13 @@ nodes:
     labels:
       identifier: "INSURED_ACCOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ACCOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ACCOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "INSURED_ACCOUNT"
         properties: ["nodeProperty0"]
-        name: "INSURED_ACCOUNT"
+        name: "unique_INSURED_ACCOUNT_ACCOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1589,13 +1589,13 @@ nodes:
     labels:
       identifier: "INTERMEDIARY_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "INTERMEDIARY_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "INTERMEDIARY_AGREEMENT"
+        name: "unique_INTERMEDIARY_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1607,16 +1607,16 @@ nodes:
     labels:
       identifier: "LEGAL_JURISDICTION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "LEGAL_JURISDICTION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "LEGAL_JURISDICTION_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "LEGAL_JURISDICTION_DESCRIPTION" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "RULES_REFERENCE_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "LEGAL_JURISDICTION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "LEGAL_JURISDICTION_NAME" }
+      nodeProperty2: { type: "STRING", name: "LEGAL_JURISDICTION_DESCRIPTION" }
+      nodeProperty3: { type: "STRING", name: "RULES_REFERENCE_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LEGAL_JURISDICTION"
         properties: ["nodeProperty0"]
-        name: "LEGAL_JURISDICTION"
+        name: "unique_LEGAL_JURISDICTION_LEGAL_JURISDICTION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1628,13 +1628,13 @@ nodes:
     labels:
       identifier: "LIFE_EVENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LIFE_EVENT"
         properties: ["nodeProperty0"]
-        name: "LIFE_EVENT"
+        name: "unique_LIFE_EVENT_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1646,16 +1646,16 @@ nodes:
     labels:
       identifier: "LINE_OF_BUSINESS"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "LINE_OF_BUSINESS_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "LINE_OF_BUSINESS_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "LINE_OF_BUSINESS_DESCRIPTION" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "LINE_OF_BUSINESS_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "LINE_OF_BUSINESS_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "LINE_OF_BUSINESS_NAME" }
+      nodeProperty2: { type: "STRING", name: "LINE_OF_BUSINESS_DESCRIPTION" }
+      nodeProperty3: { type: "STRING", name: "LINE_OF_BUSINESS_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LINE_OF_BUSINESS"
         properties: ["nodeProperty0"]
-        name: "LINE_OF_BUSINESS"
+        name: "unique_LINE_OF_BUSINESS_LINE_OF_BUSINESS_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1667,15 +1667,15 @@ nodes:
     labels:
       identifier: "LINE_OF_BUSINESS_GROUP"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "LINE_OF_BUSINESS_GROUP_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "LINE_OF_BUSINESS_GROUP_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "LINE_OF_BUSINESS_GROUP_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "LINE_OF_BUSINESS_GROUP_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "LINE_OF_BUSINESS_GROUP_NAME" }
+      nodeProperty2: { type: "STRING", name: "LINE_OF_BUSINESS_GROUP_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LINE_OF_BUSINESS_GROUP"
         properties: ["nodeProperty0"]
-        name: "LINE_OF_BUSINESS_GROUP"
+        name: "unique_LINE_OF_BUSINESS_GROUP_LINE_OF_BUSINESS_GROUP_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1687,14 +1687,14 @@ nodes:
     labels:
       identifier: "LITIGATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "LITIGATION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "LITIGATION_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "LITIGATION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "LITIGATION_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LITIGATION"
         properties: ["nodeProperty0"]
-        name: "LITIGATION"
+        name: "unique_LITIGATION_LITIGATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1706,20 +1706,20 @@ nodes:
     labels:
       identifier: "LOCATION_ADDRESS"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "LOCATION_ADDRESS_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "LINE_1_ADDRESS" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "MUNICIPALITY_NAME" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "LINE_2_ADDRESS" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "POSTAL_CODE" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "COUNTRY_CODE" }
-      nodeProperty6: { type: "LOCAL DATETIME", mustExist: true, name: "BEGIN_DATE" }
-      nodeProperty7: { type: "LOCAL DATETIME", mustExist: true, name: "END_DATE" }
+      nodeProperty0: { type: "FLOAT", name: "LOCATION_ADDRESS_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "LINE_1_ADDRESS" }
+      nodeProperty2: { type: "STRING", name: "MUNICIPALITY_NAME" }
+      nodeProperty3: { type: "STRING", name: "LINE_2_ADDRESS" }
+      nodeProperty4: { type: "STRING", name: "POSTAL_CODE" }
+      nodeProperty5: { type: "STRING", name: "COUNTRY_CODE" }
+      nodeProperty6: { type: "LOCAL DATETIME", name: "BEGIN_DATE" }
+      nodeProperty7: { type: "LOCAL DATETIME", name: "END_DATE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LOCATION_ADDRESS"
         properties: ["nodeProperty0"]
-        name: "LOCATION_ADDRESS"
+        name: "unique_LOCATION_ADDRESS_LOCATION_ADDRESS_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1731,13 +1731,13 @@ nodes:
     labels:
       identifier: "LOSS_PAYMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LOSS_PAYMENT"
         properties: ["nodeProperty0"]
-        name: "LOSS_PAYMENT"
+        name: "unique_LOSS_PAYMENT_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1749,13 +1749,13 @@ nodes:
     labels:
       identifier: "LOSS_RECOVERY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LOSS_RECOVERY"
         properties: ["nodeProperty0"]
-        name: "LOSS_RECOVERY"
+        name: "unique_LOSS_RECOVERY_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1767,13 +1767,13 @@ nodes:
     labels:
       identifier: "LOSS_RESERVE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "LOSS_RESERVE"
         properties: ["nodeProperty0"]
-        name: "LOSS_RESERVE"
+        name: "unique_LOSS_RESERVE_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1785,13 +1785,13 @@ nodes:
     labels:
       identifier: "MANUFACTURED_OBJECT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "MANUFACTURED_OBJECT"
         properties: ["nodeProperty0"]
-        name: "MANUFACTURED_OBJECT"
+        name: "unique_MANUFACTURED_OBJECT_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1803,13 +1803,13 @@ nodes:
     labels:
       identifier: "MEDICAL_CONDITION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "MEDICAL_CONDITION"
         properties: ["nodeProperty0"]
-        name: "MEDICAL_CONDITION"
+        name: "unique_MEDICAL_CONDITION_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1821,13 +1821,13 @@ nodes:
     labels:
       identifier: "MID_TERM"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "MID_TERM"
         properties: ["nodeProperty0"]
-        name: "MID_TERM"
+        name: "unique_MID_TERM_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1839,13 +1839,13 @@ nodes:
     labels:
       identifier: "MILKING_MACHINE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "MILKING_MACHINE"
         properties: ["nodeProperty0"]
-        name: "MILKING_MACHINE"
+        name: "unique_MILKING_MACHINE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1857,13 +1857,13 @@ nodes:
     labels:
       identifier: "MOBILE_HOME"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "MOBILE_HOME"
         properties: ["nodeProperty0"]
-        name: "MOBILE_HOME"
+        name: "unique_MOBILE_HOME_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1875,13 +1875,13 @@ nodes:
     labels:
       identifier: "MOTORCYCLE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "MOTORCYCLE"
         properties: ["nodeProperty0"]
-        name: "MOTORCYCLE"
+        name: "unique_MOTORCYCLE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1893,13 +1893,13 @@ nodes:
     labels:
       identifier: "NEW_BUSINESS"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "NEW_BUSINESS"
         properties: ["nodeProperty0"]
-        name: "NEW_BUSINESS"
+        name: "unique_NEW_BUSINESS_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1911,13 +1911,13 @@ nodes:
     labels:
       identifier: "NOT_FOR_PROFIT_ORGANIZATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ORGANIZATION_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ORGANIZATION_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "NOT_FOR_PROFIT_ORGANIZATION"
         properties: ["nodeProperty0"]
-        name: "NOT_FOR_PROFIT_ORGANIZATION"
+        name: "unique_NOT_FOR_PROFIT_ORGANIZATION_ORGANIZATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1929,19 +1929,19 @@ nodes:
     labels:
       identifier: "OCCURRENCE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "OCCURRENCE_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "CATASTROPHIC_EVENT_INDICATOR" }
-      nodeProperty2: { type: "LOCAL DATETIME", mustExist: true, name: "OCCURRENCE_BEGIN_DATE" }
-      nodeProperty3: { type: "LOCAL DATETIME", mustExist: true, name: "OCCURRENCE_END_DATE" }
-      nodeProperty4: { type: "LOCAL DATETIME", mustExist: true, name: "OCCURRENCE_BEGIN_TIME" }
-      nodeProperty5: { type: "LOCAL DATETIME", mustExist: true, name: "OCCURRENCE_END_TIME" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "OCCURRENCE_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "OCCURRENCE_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "CATASTROPHIC_EVENT_INDICATOR" }
+      nodeProperty2: { type: "LOCAL DATETIME", name: "OCCURRENCE_BEGIN_DATE" }
+      nodeProperty3: { type: "LOCAL DATETIME", name: "OCCURRENCE_END_DATE" }
+      nodeProperty4: { type: "LOCAL DATETIME", name: "OCCURRENCE_BEGIN_TIME" }
+      nodeProperty5: { type: "LOCAL DATETIME", name: "OCCURRENCE_END_TIME" }
+      nodeProperty6: { type: "STRING", name: "OCCURRENCE_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "OCCURRENCE"
         properties: ["nodeProperty0"]
-        name: "OCCURRENCE"
+        name: "unique_OCCURRENCE_OCCURRENCE_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1953,21 +1953,21 @@ nodes:
     labels:
       identifier: "ORGANIZATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ORGANIZATION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "INDUSTRY_CODE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "ORGANIZATION_NAME" }
-      nodeProperty3: { type: "FLOAT", mustExist: true, name: "DUN_AND_BRADSTREET_IDENTIFIER" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "ORGANIZATION_TYPE_CODE" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "ALTERNATE_NAME" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "ORGANIZATION_DESCRIPTION" }
-      nodeProperty7: { type: "STRING", mustExist: true, name: "ACRONYM_NAME" }
-      nodeProperty8: { type: "STRING", mustExist: true, name: "INDUSTRY_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "ORGANIZATION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "INDUSTRY_CODE" }
+      nodeProperty2: { type: "STRING", name: "ORGANIZATION_NAME" }
+      nodeProperty3: { type: "FLOAT", name: "DUN_AND_BRADSTREET_IDENTIFIER" }
+      nodeProperty4: { type: "STRING", name: "ORGANIZATION_TYPE_CODE" }
+      nodeProperty5: { type: "STRING", name: "ALTERNATE_NAME" }
+      nodeProperty6: { type: "STRING", name: "ORGANIZATION_DESCRIPTION" }
+      nodeProperty7: { type: "STRING", name: "ACRONYM_NAME" }
+      nodeProperty8: { type: "STRING", name: "INDUSTRY_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ORGANIZATION"
         properties: ["nodeProperty0"]
-        name: "ORGANIZATION"
+        name: "unique_ORGANIZATION_ORGANIZATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -1979,18 +1979,18 @@ nodes:
     labels:
       identifier: "ORGANIZATION_UNIT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ORGANIZATION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "ORGANIZATION_UNIT_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "ORGANIZATION_UNIT_DESCRIPTION" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "INDUSTRY_CODE" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "ACCOUNTING_CODE" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "WORK_SITE_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "ORGANIZATION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "ORGANIZATION_UNIT_NAME" }
+      nodeProperty2: { type: "STRING", name: "ORGANIZATION_UNIT_DESCRIPTION" }
+      nodeProperty3: { type: "STRING", name: "INDUSTRY_CODE" }
+      nodeProperty4: { type: "STRING", name: "ACCOUNTING_CODE" }
+      nodeProperty5: { type: "STRING", name: "WORK_SITE_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "ORGANIZATION_UNIT"
         properties: ["nodeProperty0"]
-        name: "ORGANIZATION_UNIT"
+        name: "unique_ORGANIZATION_UNIT_ORGANIZATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2002,13 +2002,13 @@ nodes:
     labels:
       identifier: "OTHER_ASSESSMENT_RESULT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "OTHER_ASSESSMENT_RESULT"
         properties: ["nodeProperty0"]
-        name: "OTHER_ASSESSMENT_RESULT"
+        name: "unique_OTHER_ASSESSMENT_RESULT_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2020,17 +2020,17 @@ nodes:
     labels:
       identifier: "PARTY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "PARTY_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "PARTY_NAME" }
-      nodeProperty2: { type: "LOCAL DATETIME", mustExist: true, name: "BEGIN_DATE" }
-      nodeProperty3: { type: "LOCAL DATETIME", mustExist: true, name: "END_DATE" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "PARTY_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "PARTY_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "PARTY_NAME" }
+      nodeProperty2: { type: "LOCAL DATETIME", name: "BEGIN_DATE" }
+      nodeProperty3: { type: "LOCAL DATETIME", name: "END_DATE" }
+      nodeProperty4: { type: "STRING", name: "PARTY_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PARTY"
         properties: ["nodeProperty0"]
-        name: "PARTY"
+        name: "unique_PARTY_PARTY_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2042,14 +2042,14 @@ nodes:
     labels:
       identifier: "PARTY_PREFERENCE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "PARTY_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "PREFERRED_LANGUAGE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "PARTY_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "PREFERRED_LANGUAGE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PARTY_PREFERENCE"
         properties: ["nodeProperty0"]
-        name: "PARTY_PREFERENCE"
+        name: "unique_PARTY_PREFERENCE_PARTY_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2061,15 +2061,15 @@ nodes:
     labels:
       identifier: "PARTY_ROLE"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "PARTY_ROLE_CODE" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "PARTY_ROLE_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "PARTY_ROLE_DESCRIPTION" }
+      nodeProperty0: { type: "STRING", name: "PARTY_ROLE_CODE" }
+      nodeProperty1: { type: "STRING", name: "PARTY_ROLE_NAME" }
+      nodeProperty2: { type: "STRING", name: "PARTY_ROLE_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PARTY_ROLE"
         properties: ["nodeProperty0"]
-        name: "PARTY_ROLE"
+        name: "unique_PARTY_ROLE_PARTY_ROLE_CODE"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2081,23 +2081,23 @@ nodes:
     labels:
       identifier: "PERSON"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "PERSON_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "FIRST_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "MIDDLE_NAME" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "LAST_NAME" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "FULL_LEGAL_NAME" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "NICKNAME" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "SUFFIX_NAME" }
-      nodeProperty7: { type: "LOCAL DATETIME", mustExist: true, name: "BIRTH_DATE" }
-      nodeProperty8: { type: "STRING", mustExist: true, name: "BIRTH_PLACE_NAME" }
-      nodeProperty9: { type: "STRING", mustExist: true, name: "GENDER_CODE" }
-      nodeProperty10: { type: "STRING", mustExist: true, name: "PREFIX_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "PERSON_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "FIRST_NAME" }
+      nodeProperty2: { type: "STRING", name: "MIDDLE_NAME" }
+      nodeProperty3: { type: "STRING", name: "LAST_NAME" }
+      nodeProperty4: { type: "STRING", name: "FULL_LEGAL_NAME" }
+      nodeProperty5: { type: "STRING", name: "NICKNAME" }
+      nodeProperty6: { type: "STRING", name: "SUFFIX_NAME" }
+      nodeProperty7: { type: "LOCAL DATETIME", name: "BIRTH_DATE" }
+      nodeProperty8: { type: "STRING", name: "BIRTH_PLACE_NAME" }
+      nodeProperty9: { type: "STRING", name: "GENDER_CODE" }
+      nodeProperty10: { type: "STRING", name: "PREFIX_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PERSON"
         properties: ["nodeProperty0"]
-        name: "PERSON"
+        name: "unique_PERSON_PERSON_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2109,14 +2109,14 @@ nodes:
     labels:
       identifier: "PERSON_PROFESSION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "PERSON_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "PROFESSION_NAME" }
+      nodeProperty0: { type: "FLOAT", name: "PERSON_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "PROFESSION_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PERSON_PROFESSION"
         properties: ["nodeProperty0"]
-        name: "PERSON_PROFESSION"
+        name: "unique_PERSON_PROFESSION_PERSON_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2128,21 +2128,21 @@ nodes:
     labels:
       identifier: "PHYSICAL_LOCATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "PHYSICAL_LOCATION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "PHYSICAL_LOCATION_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "LATITUDE_VALUE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "LONGITUDE_VALUE" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "ALTITUDE_VALUE" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "ALTITUDE_MEAN_SEA_LEVEL_VALUE" }
-      nodeProperty6: { type: "STRING", mustExist: true, name: "HORIZONTAL_ACCURACY_VALUE" }
-      nodeProperty7: { type: "STRING", mustExist: true, name: "VERTICAL_ACCURACY_VALUE" }
-      nodeProperty8: { type: "STRING", mustExist: true, name: "TRAVEL_DIRECTION_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "PHYSICAL_LOCATION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "PHYSICAL_LOCATION_NAME" }
+      nodeProperty2: { type: "STRING", name: "LATITUDE_VALUE" }
+      nodeProperty3: { type: "STRING", name: "LONGITUDE_VALUE" }
+      nodeProperty4: { type: "STRING", name: "ALTITUDE_VALUE" }
+      nodeProperty5: { type: "STRING", name: "ALTITUDE_MEAN_SEA_LEVEL_VALUE" }
+      nodeProperty6: { type: "STRING", name: "HORIZONTAL_ACCURACY_VALUE" }
+      nodeProperty7: { type: "STRING", name: "VERTICAL_ACCURACY_VALUE" }
+      nodeProperty8: { type: "STRING", name: "TRAVEL_DIRECTION_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PHYSICAL_LOCATION"
         properties: ["nodeProperty0"]
-        name: "PHYSICAL_LOCATION"
+        name: "unique_PHYSICAL_LOCATION_PHYSICAL_LOCATION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2154,13 +2154,13 @@ nodes:
     labels:
       identifier: "PHYSICAL_OBJECT_ASSESSMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PHYSICAL_OBJECT_ASSESSMENT"
         properties: ["nodeProperty0"]
-        name: "PHYSICAL_OBJECT_ASSESSMENT"
+        name: "unique_PHYSICAL_OBJECT_ASSESSMENT_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2172,13 +2172,13 @@ nodes:
     labels:
       identifier: "PLACE_ASSESSMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PLACE_ASSESSMENT"
         properties: ["nodeProperty0"]
-        name: "PLACE_ASSESSMENT"
+        name: "unique_PLACE_ASSESSMENT_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2190,17 +2190,17 @@ nodes:
     labels:
       identifier: "POLICY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_IDENTIFIER" }
-      nodeProperty1: { type: "LOCAL DATETIME", mustExist: true, name: "EFFECTIVE_DATE" }
-      nodeProperty2: { type: "LOCAL DATETIME", mustExist: true, name: "EXPIRATION_DATE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "POLICY_NUMBER" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "STATUS_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_IDENTIFIER" }
+      nodeProperty1: { type: "LOCAL DATETIME", name: "EFFECTIVE_DATE" }
+      nodeProperty2: { type: "LOCAL DATETIME", name: "EXPIRATION_DATE" }
+      nodeProperty3: { type: "STRING", name: "POLICY_NUMBER" }
+      nodeProperty4: { type: "STRING", name: "STATUS_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "POLICY"
         properties: ["nodeProperty0"]
-        name: "POLICY"
+        name: "unique_POLICY_POLICY_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2212,18 +2212,18 @@ nodes:
     labels:
       identifier: "POLICY_AMOUNT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "AMOUNT_TYPE_CODE" }
-      nodeProperty2: { type: "LOCAL DATETIME", mustExist: true, name: "EARNING_BEGIN_DATE" }
-      nodeProperty3: { type: "LOCAL DATETIME", mustExist: true, name: "EARNING_END_DATE" }
-      nodeProperty4: { type: "FLOAT", mustExist: true, name: "POLICY_AMOUNT" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "INSURANCE_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "AMOUNT_TYPE_CODE" }
+      nodeProperty2: { type: "LOCAL DATETIME", name: "EARNING_BEGIN_DATE" }
+      nodeProperty3: { type: "LOCAL DATETIME", name: "EARNING_END_DATE" }
+      nodeProperty4: { type: "FLOAT", name: "POLICY_AMOUNT" }
+      nodeProperty5: { type: "STRING", name: "INSURANCE_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "POLICY_AMOUNT"
         properties: ["nodeProperty0"]
-        name: "POLICY_AMOUNT"
+        name: "unique_POLICY_AMOUNT_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2235,16 +2235,16 @@ nodes:
     labels:
       identifier: "POLICY_DEDUCTIBLE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_DEDUCTIBLE_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "DEDUCTIBLE_TYPE_CODE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "DEDUCTIBLE_VALUE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "DEDUCTIBLE_BASIS_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_DEDUCTIBLE_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "DEDUCTIBLE_TYPE_CODE" }
+      nodeProperty2: { type: "STRING", name: "DEDUCTIBLE_VALUE" }
+      nodeProperty3: { type: "STRING", name: "DEDUCTIBLE_BASIS_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "POLICY_DEDUCTIBLE"
         properties: ["nodeProperty0"]
-        name: "POLICY_DEDUCTIBLE"
+        name: "unique_POLICY_DEDUCTIBLE_POLICY_DEDUCTIBLE_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2256,17 +2256,17 @@ nodes:
     labels:
       identifier: "POLICY_EVENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
-      nodeProperty1: { type: "LOCAL DATETIME", mustExist: true, name: "EVENT_DATE" }
-      nodeProperty2: { type: "LOCAL DATETIME", mustExist: true, name: "EFFECTIVE_DATE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "EVENT_TYPE_CODE" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "EVENT_SUB_TYPE_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
+      nodeProperty1: { type: "LOCAL DATETIME", name: "EVENT_DATE" }
+      nodeProperty2: { type: "LOCAL DATETIME", name: "EFFECTIVE_DATE" }
+      nodeProperty3: { type: "STRING", name: "EVENT_TYPE_CODE" }
+      nodeProperty4: { type: "STRING", name: "EVENT_SUB_TYPE_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "POLICY_EVENT"
         properties: ["nodeProperty0"]
-        name: "POLICY_EVENT"
+        name: "unique_POLICY_EVENT_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2278,16 +2278,16 @@ nodes:
     labels:
       identifier: "POLICY_LIMIT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_LIMIT_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "LIMIT_TYPE_CODE" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "LIMIT_VALUE" }
-      nodeProperty3: { type: "STRING", mustExist: true, name: "LIMIT_BASIS_CODE" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_LIMIT_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "LIMIT_TYPE_CODE" }
+      nodeProperty2: { type: "STRING", name: "LIMIT_VALUE" }
+      nodeProperty3: { type: "STRING", name: "LIMIT_BASIS_CODE" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "POLICY_LIMIT"
         properties: ["nodeProperty0"]
-        name: "POLICY_LIMIT"
+        name: "unique_POLICY_LIMIT_POLICY_LIMIT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2299,13 +2299,13 @@ nodes:
     labels:
       identifier: "PREMIUM"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PREMIUM"
         properties: ["nodeProperty0"]
-        name: "PREMIUM"
+        name: "unique_PREMIUM_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2317,13 +2317,13 @@ nodes:
     labels:
       identifier: "PRE_QUALIFICATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PRE_QUALIFICATION"
         properties: ["nodeProperty0"]
-        name: "PRE_QUALIFICATION"
+        name: "unique_PRE_QUALIFICATION_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2335,15 +2335,15 @@ nodes:
     labels:
       identifier: "PRODUCT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "PRODUCT_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "LICENSED_PRODUCT_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "PRODUCT_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "PRODUCT_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "LICENSED_PRODUCT_NAME" }
+      nodeProperty2: { type: "STRING", name: "PRODUCT_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PRODUCT"
         properties: ["nodeProperty0"]
-        name: "PRODUCT"
+        name: "unique_PRODUCT_PRODUCT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2355,13 +2355,13 @@ nodes:
     labels:
       identifier: "PROFESSIONAL_GROUP"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "GROUPING_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "GROUPING_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PROFESSIONAL_GROUP"
         properties: ["nodeProperty0"]
-        name: "PROFESSIONAL_GROUP"
+        name: "unique_PROFESSIONAL_GROUP_GROUPING_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2373,13 +2373,13 @@ nodes:
     labels:
       identifier: "PROJECT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "GROUPING_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "GROUPING_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PROJECT"
         properties: ["nodeProperty0"]
-        name: "PROJECT"
+        name: "unique_PROJECT_GROUPING_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2391,13 +2391,13 @@ nodes:
     labels:
       identifier: "PROPERTY_IN_TRANSIT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PROPERTY_IN_TRANSIT"
         properties: ["nodeProperty0"]
-        name: "PROPERTY_IN_TRANSIT"
+        name: "unique_PROPERTY_IN_TRANSIT_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2409,13 +2409,13 @@ nodes:
     labels:
       identifier: "PROVIDER_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PROVIDER_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "PROVIDER_AGREEMENT"
+        name: "unique_PROVIDER_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2427,13 +2427,13 @@ nodes:
     labels:
       identifier: "PRO_RATA"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "PRO_RATA"
         properties: ["nodeProperty0"]
-        name: "PRO_RATA"
+        name: "unique_PRO_RATA_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2445,13 +2445,13 @@ nodes:
     labels:
       identifier: "QUOTE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "QUOTE"
         properties: ["nodeProperty0"]
-        name: "QUOTE"
+        name: "unique_QUOTE_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2463,16 +2463,16 @@ nodes:
     labels:
       identifier: "RATING_TERRITORY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "RATING_TERRITORY_IDENTIFIER" }
-      nodeProperty1: { type: "FLOAT", mustExist: true, name: "RATING_TERRITORY_ASSIGNING_ORGANIZATION_IDENTIFIER" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "RATING_TERRITORY_CODE" }
-      nodeProperty3: { type: "FLOAT", mustExist: true, name: "RATING_TERRITORY_CODE_SET_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "RATING_TERRITORY_IDENTIFIER" }
+      nodeProperty1: { type: "FLOAT", name: "RATING_TERRITORY_ASSIGNING_ORGANIZATION_IDENTIFIER" }
+      nodeProperty2: { type: "STRING", name: "RATING_TERRITORY_CODE" }
+      nodeProperty3: { type: "FLOAT", name: "RATING_TERRITORY_CODE_SET_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "RATING_TERRITORY"
         properties: ["nodeProperty0"]
-        name: "RATING_TERRITORY"
+        name: "unique_RATING_TERRITORY_RATING_TERRITORY_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2484,13 +2484,13 @@ nodes:
     labels:
       identifier: "RECOVERY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "RECOVERY"
         properties: ["nodeProperty0"]
-        name: "RECOVERY"
+        name: "unique_RECOVERY_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2502,13 +2502,13 @@ nodes:
     labels:
       identifier: "RECREATIONAL_VEHICLE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "RECREATIONAL_VEHICLE"
         properties: ["nodeProperty0"]
-        name: "RECREATIONAL_VEHICLE"
+        name: "unique_RECREATIONAL_VEHICLE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2520,13 +2520,13 @@ nodes:
     labels:
       identifier: "REINSTATEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "REINSTATEMENT"
         properties: ["nodeProperty0"]
-        name: "REINSTATEMENT"
+        name: "unique_REINSTATEMENT_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2538,13 +2538,13 @@ nodes:
     labels:
       identifier: "REINSURANCE_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "REINSURANCE_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "REINSURANCE_AGREEMENT"
+        name: "unique_REINSURANCE_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2556,13 +2556,13 @@ nodes:
     labels:
       identifier: "REINSURANCE_RECOVERY"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "REINSURANCE_RECOVERY"
         properties: ["nodeProperty0"]
-        name: "REINSURANCE_RECOVERY"
+        name: "unique_REINSURANCE_RECOVERY_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2574,13 +2574,13 @@ nodes:
     labels:
       identifier: "RENEWAL"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "RENEWAL"
         properties: ["nodeProperty0"]
-        name: "RENEWAL"
+        name: "unique_RENEWAL_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2592,13 +2592,13 @@ nodes:
     labels:
       identifier: "RESIDENTIAL_STRUCTURE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "RESIDENTIAL_STRUCTURE"
         properties: ["nodeProperty0"]
-        name: "RESIDENTIAL_STRUCTURE"
+        name: "unique_RESIDENTIAL_STRUCTURE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2610,13 +2610,13 @@ nodes:
     labels:
       identifier: "RISK_FACTOR_SCORE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "RISK_FACTOR_SCORE"
         properties: ["nodeProperty0"]
-        name: "RISK_FACTOR_SCORE"
+        name: "unique_RISK_FACTOR_SCORE_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2628,13 +2628,13 @@ nodes:
     labels:
       identifier: "SALVAGE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "SALVAGE"
         properties: ["nodeProperty0"]
-        name: "SALVAGE"
+        name: "unique_SALVAGE_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2646,13 +2646,13 @@ nodes:
     labels:
       identifier: "SCHEDULED_ITEM"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "SCHEDULED_ITEM"
         properties: ["nodeProperty0"]
-        name: "SCHEDULED_ITEM"
+        name: "unique_SCHEDULED_ITEM_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2664,13 +2664,13 @@ nodes:
     labels:
       identifier: "SHORT_RATE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "SHORT_RATE"
         properties: ["nodeProperty0"]
-        name: "SHORT_RATE"
+        name: "unique_SHORT_RATE_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2682,13 +2682,13 @@ nodes:
     labels:
       identifier: "STAFFING_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "STAFFING_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "STAFFING_AGREEMENT"
+        name: "unique_STAFFING_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2700,15 +2700,15 @@ nodes:
     labels:
       identifier: "STAFF_CLASSIFICATION"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "STAFF_CLASSIFICATION_CODE" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "STAFF_CLASSIFICATION_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "STAFF_CLASSIFICATION_DESCRIPTION" }
+      nodeProperty0: { type: "STRING", name: "STAFF_CLASSIFICATION_CODE" }
+      nodeProperty1: { type: "STRING", name: "STAFF_CLASSIFICATION_NAME" }
+      nodeProperty2: { type: "STRING", name: "STAFF_CLASSIFICATION_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "STAFF_CLASSIFICATION"
         properties: ["nodeProperty0"]
-        name: "STAFF_CLASSIFICATION"
+        name: "unique_STAFF_CLASSIFICATION_STAFF_CLASSIFICATION_CODE"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2720,15 +2720,15 @@ nodes:
     labels:
       identifier: "STAFF_POSITION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "STAFF_POSITION_IDENTIFIER" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "STAFF_POSITION_NAME" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "STAFF_POSITION_DESCRIPTION" }
+      nodeProperty0: { type: "FLOAT", name: "STAFF_POSITION_IDENTIFIER" }
+      nodeProperty1: { type: "STRING", name: "STAFF_POSITION_NAME" }
+      nodeProperty2: { type: "STRING", name: "STAFF_POSITION_DESCRIPTION" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "STAFF_POSITION"
         properties: ["nodeProperty0"]
-        name: "STAFF_POSITION"
+        name: "unique_STAFF_POSITION_STAFF_POSITION_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2740,14 +2740,14 @@ nodes:
     labels:
       identifier: "STATE"
     properties:
-      nodeProperty0: { type: "STRING", key: true, name: "STATE_CODE" }
-      nodeProperty1: { type: "STRING", mustExist: true, name: "STATE_NAME" }
+      nodeProperty0: { type: "STRING", name: "STATE_CODE" }
+      nodeProperty1: { type: "STRING", name: "STATE_NAME" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "STATE"
         properties: ["nodeProperty0"]
-        name: "STATE"
+        name: "unique_STATE_STATE_CODE"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2759,13 +2759,13 @@ nodes:
     labels:
       identifier: "STRUCTURE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "STRUCTURE"
         properties: ["nodeProperty0"]
-        name: "STRUCTURE"
+        name: "unique_STRUCTURE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2777,13 +2777,13 @@ nodes:
     labels:
       identifier: "SUBROGATION"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "CLAIM_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "CLAIM_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "SUBROGATION"
         properties: ["nodeProperty0"]
-        name: "SUBROGATION"
+        name: "unique_SUBROGATION_CLAIM_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2795,13 +2795,13 @@ nodes:
     labels:
       identifier: "SURCHARGE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "SURCHARGE"
         properties: ["nodeProperty0"]
-        name: "SURCHARGE"
+        name: "unique_SURCHARGE_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2813,13 +2813,13 @@ nodes:
     labels:
       identifier: "TAX"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "POLICY_AMOUNT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "POLICY_AMOUNT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "TAX"
         properties: ["nodeProperty0"]
-        name: "TAX"
+        name: "unique_TAX_POLICY_AMOUNT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2831,13 +2831,13 @@ nodes:
     labels:
       identifier: "TEAM"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "GROUPING_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "GROUPING_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "TEAM"
         properties: ["nodeProperty0"]
-        name: "TEAM"
+        name: "unique_TEAM_GROUPING_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2849,13 +2849,13 @@ nodes:
     labels:
       identifier: "THIRD_PARTY_STAFFING_AGREEMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "AGREEMENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "AGREEMENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "THIRD_PARTY_STAFFING_AGREEMENT"
         properties: ["nodeProperty0"]
-        name: "THIRD_PARTY_STAFFING_AGREEMENT"
+        name: "unique_THIRD_PARTY_STAFFING_AGREEMENT_AGREEMENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2867,13 +2867,13 @@ nodes:
     labels:
       identifier: "TRACTOR"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "TRACTOR"
         properties: ["nodeProperty0"]
-        name: "TRACTOR"
+        name: "unique_TRACTOR_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2885,13 +2885,13 @@ nodes:
     labels:
       identifier: "TRAILER"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "TRAILER"
         properties: ["nodeProperty0"]
-        name: "TRAILER"
+        name: "unique_TRAILER_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2903,13 +2903,13 @@ nodes:
     labels:
       identifier: "TRANSPORTATION_CLASS"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "TRANSPORTATION_CLASS"
         properties: ["nodeProperty0"]
-        name: "TRANSPORTATION_CLASS"
+        name: "unique_TRANSPORTATION_CLASS_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2921,13 +2921,13 @@ nodes:
     labels:
       identifier: "TRUCK"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "TRUCK"
         properties: ["nodeProperty0"]
-        name: "TRUCK"
+        name: "unique_TRUCK_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2939,13 +2939,13 @@ nodes:
     labels:
       identifier: "UNDERWRITING_ASSESSMENT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "ASSESSMENT_RESULT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "ASSESSMENT_RESULT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "UNDERWRITING_ASSESSMENT"
         properties: ["nodeProperty0"]
-        name: "UNDERWRITING_ASSESSMENT"
+        name: "unique_UNDERWRITING_ASSESSMENT_ASSESSMENT_RESULT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2957,13 +2957,13 @@ nodes:
     labels:
       identifier: "VAN"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "VAN"
         properties: ["nodeProperty0"]
-        name: "VAN"
+        name: "unique_VAN_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2975,18 +2975,18 @@ nodes:
     labels:
       identifier: "VEHICLE"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
-      nodeProperty1: { type: "FLOAT", mustExist: true, name: "VEHICLE_MODEL_YEAR" }
-      nodeProperty2: { type: "STRING", mustExist: true, name: "VEHICLE_MODEL_NAME" }
-      nodeProperty3: { type: "FLOAT", mustExist: true, name: "VEHICLE_DRIVING_WHEEL_QUANTITY" }
-      nodeProperty4: { type: "STRING", mustExist: true, name: "VEHICLE_MAKE_NAME" }
-      nodeProperty5: { type: "STRING", mustExist: true, name: "VEHICLE_IDENTIFICATION_NUMBER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty1: { type: "FLOAT", name: "VEHICLE_MODEL_YEAR" }
+      nodeProperty2: { type: "STRING", name: "VEHICLE_MODEL_NAME" }
+      nodeProperty3: { type: "FLOAT", name: "VEHICLE_DRIVING_WHEEL_QUANTITY" }
+      nodeProperty4: { type: "STRING", name: "VEHICLE_MAKE_NAME" }
+      nodeProperty5: { type: "STRING", name: "VEHICLE_IDENTIFICATION_NUMBER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "VEHICLE"
         properties: ["nodeProperty0"]
-        name: "VEHICLE"
+        name: "unique_VEHICLE_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -2998,13 +2998,13 @@ nodes:
     labels:
       identifier: "WATERCRAFT"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "WATERCRAFT"
         properties: ["nodeProperty0"]
-        name: "WATERCRAFT"
+        name: "unique_WATERCRAFT_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -3016,13 +3016,13 @@ nodes:
     labels:
       identifier: "WORKERS_COMP_CLASS"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "INSURABLE_OBJECT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "INSURABLE_OBJECT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "WORKERS_COMP_CLASS"
         properties: ["nodeProperty0"]
-        name: "WORKERS_COMP_CLASS"
+        name: "unique_WORKERS_COMP_CLASS_INSURABLE_OBJECT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -3034,13 +3034,13 @@ nodes:
     labels:
       identifier: "audit"
     properties:
-      nodeProperty0: { type: "FLOAT", key: true, name: "EVENT_IDENTIFIER" }
+      nodeProperty0: { type: "FLOAT", name: "EVENT_IDENTIFIER" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "audit"
         properties: ["nodeProperty0"]
-        name: "audit"
+        name: "unique_audit_EVENT_IDENTIFIER"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -3524,9 +3524,9 @@ relationships:
     from: { node: "node86" }
     to: { node: "node107" }
     properties:
-      relationshipProperty0: { type: "STRING", mustExist: true, name: "LEGAL_ENTITY_TYPE_CODE" }
-      relationshipProperty1: { type: "STRING", mustExist: true, name: "LEGAL_CLASSIFICATION_CODE" }
-      relationshipProperty2: { type: "FLOAT", mustExist: true, name: "LEGAL_JURISDICTION_PARTY_IDENTIFIER" }
+      relationshipProperty0: { type: "STRING", name: "LEGAL_ENTITY_TYPE_CODE" }
+      relationshipProperty1: { type: "STRING", name: "LEGAL_CLASSIFICATION_CODE" }
+      relationshipProperty2: { type: "FLOAT", name: "LEGAL_JURISDICTION_PARTY_IDENTIFIER" }
     name: "PARTY2"
   relationship95:
     type: "EVENT"
@@ -8091,14 +8091,17 @@ mappings:
       nodeProperty0: { field: "ACCOUNT_IDENTIFIER" }
       nodeProperty1: { field: "ACCOUNT_TYPE_CODE" }
       nodeProperty2: { field: "ACCOUNT_NAME" }
+    key: ["nodeProperty0"]
   - node: "node1"
     table: "ADMINISTRATIVE_ORGANIZATION_UNIT"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node2"
     table: "AGENCY_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node3"
     table: "AGREEMENT"
     properties:
@@ -8106,19 +8109,23 @@ mappings:
       nodeProperty1: { field: "AGREEMENT_NAME" }
       nodeProperty2: { field: "AGREEMENT_ORIGINAL_INCEPTION_DATE" }
       nodeProperty3: { field: "AGREEMENT_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node4"
     table: "ANIMAL"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node5"
     table: "APPROVAL"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node6"
     table: "ARBITRATION"
     properties:
       nodeProperty0: { field: "ARBITRATION_IDENTIFIER" }
       nodeProperty1: { field: "ARBITRATION_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node7"
     table: "ASSESSMENT"
     properties:
@@ -8127,55 +8134,68 @@ mappings:
       nodeProperty2: { field: "ASSESSMENT_DESCRIPTION" }
       nodeProperty3: { field: "END_DATE" }
       nodeProperty4: { field: "ASSESSMENT_REASON_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node8"
     table: "ASSESSMENT_RESULT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
       nodeProperty1: { field: "ASSESSMENT_RESULT_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node9"
     table: "ASSUMED_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node10"
     table: "ASSUMED_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node11"
     table: "AUTOMOBILE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node12"
     table: "AUTO_REPAIR_SHOP_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node13"
     table: "BINDING"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node14"
     table: "BOAT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node15"
     table: "BODY_OBJECT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node16"
     table: "BROKERAGE_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node17"
     table: "BUS"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node18"
     table: "BUSINESS_EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node19"
     table: "CANCEL"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node20"
     table: "CATASTROPHE"
     properties:
@@ -8184,18 +8204,22 @@ mappings:
       nodeProperty2: { field: "CATASTROPHE_NAME" }
       nodeProperty3: { field: "INDUSTRY_CATASTROPHE_CODE" }
       nodeProperty4: { field: "COMPANY_CATASTROPHE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node21"
     table: "CEDED_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node22"
     table: "CEDED_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node23"
     table: "CHANNEL_SCORE"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node24"
     table: "CLAIM"
     properties:
@@ -8210,6 +8234,7 @@ mappings:
       nodeProperty8: { field: "CLAIM_REOPEN_DATE" }
       nodeProperty9: { field: "CLAIM_STATUS_CODE" }
       nodeProperty10: { field: "CLAIM_REPORTED_DATE" }
+    key: ["nodeProperty0"]
   - node: "node25"
     table: "CLAIM_AMOUNT"
     properties:
@@ -8218,49 +8243,60 @@ mappings:
       nodeProperty2: { field: "EVENT_DATE" }
       nodeProperty3: { field: "CLAIM_AMOUNT" }
       nodeProperty4: { field: "INSURANCE_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node26"
     table: "CLAIM_EVALUATION_RESULT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node27"
     table: "CLAIM_EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node28"
     table: "CLAIM_FOLDER"
     properties:
       nodeProperty0: { field: "CLAIM_IDENTIFIER" }
       nodeProperty1: { field: "CLAIM_FOLDER_LABEL_NAME" }
+    key: ["nodeProperty0"]
   - node: "node29"
     table: "CLAIM_OFFER"
     properties:
       nodeProperty0: { field: "CLAIM_OFFER_IDENTIFIER" }
       nodeProperty1: { field: "SETTLEMENT_OFFER_AMOUNT" }
       nodeProperty2: { field: "SETTLEMENT_OFFER_PROVISION_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node30"
     table: "CLAIM_PAYMENT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node31"
     table: "CLAIM_RESERVE"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node32"
     table: "COMBINATION_STRUCTURE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node33"
     table: "COMBINE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node34"
     table: "COMMERCIAL_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node35"
     table: "COMMERCIAL_STRUCTURE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node36"
     table: "COMMUNICATION_IDENTITY"
     properties:
@@ -8268,10 +8304,12 @@ mappings:
       nodeProperty1: { field: "COMMUNICATION_TYPE_CODE" }
       nodeProperty2: { field: "COMMUNICATION_VALUE" }
       nodeProperty3: { field: "COMMUNICATION_QUALIFIER_VALUE" }
+    key: ["nodeProperty0"]
   - node: "node37"
     table: "COMMUTATION_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node38"
     table: "COMPANY"
     properties:
@@ -8279,159 +8317,196 @@ mappings:
       nodeProperty1: { field: "COMPANY_CODE" }
       nodeProperty2: { field: "COMPANY_DESCRIPTION" }
       nodeProperty3: { field: "COMPANY_NAME" }
+    key: ["nodeProperty0"]
   - node: "node39"
     table: "CONSTRUCTION_VEHICLE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node40"
     table: "CONSULTANT_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node41"
     table: "COVERAGE"
     properties:
       nodeProperty0: { field: "COVERAGE_IDENTIFIER" }
       nodeProperty1: { field: "COVERAGE_DESCRIPTION" }
       nodeProperty2: { field: "COVERAGE_NAME" }
+    key: ["nodeProperty0"]
   - node: "node42"
     table: "COVERAGE_GROUP"
     properties:
       nodeProperty0: { field: "COVERAGE_GROUP_IDENTIFIER" }
       nodeProperty1: { field: "COVERAGE_GROUP_DESCRIPTION" }
       nodeProperty2: { field: "COVERAGE_GROUP_NAME" }
+    key: ["nodeProperty0"]
   - node: "node43"
     table: "COVERAGE_LIMIT_TYPE"
     properties:
       nodeProperty0: { field: "COVERAGE_LIMIT_TYPE_IDENTIFIER" }
       nodeProperty1: { field: "COVERAGE_LIMIT_NAME" }
       nodeProperty2: { field: "COVERAGE_LIMIT_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node44"
     table: "COVERAGE_PART"
     properties:
       nodeProperty0: { field: "COVERAGE_PART_CODE" }
       nodeProperty1: { field: "COVERAGE_PART_NAME" }
+    key: ["nodeProperty0"]
   - node: "node45"
     table: "COVERAGE_TYPE"
     properties:
       nodeProperty0: { field: "COVERAGE_TYPE_IDENTIFIER" }
       nodeProperty1: { field: "COVERAGE_TYPE_DESCRIPTION" }
       nodeProperty2: { field: "COVERAGE_TYPE_NAME" }
+    key: ["nodeProperty0"]
   - node: "node46"
     table: "CREDIT_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node47"
     table: "CREDIT_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node48"
     table: "CREDIT_RATING"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node49"
     table: "CUSTOMER_SCORE"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node50"
     table: "DEBIT_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node51"
     table: "DEBIT_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node52"
     table: "DEDUCTIBLE_RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node53"
     table: "DEMOGRAPHIC_SCORE"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node54"
     table: "DERIVATIVE_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node55"
     table: "DIRECT_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node56"
     table: "DIRECT_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node57"
     table: "DWELLING"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node58"
     table: "EMPLOYMENT_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node59"
     table: "ENDORSEMENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node60"
     table: "EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node61"
     table: "EXPENSE_PAYMENT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node62"
     table: "EXPENSE_RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node63"
     table: "EXPENSE_RESERVE"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node64"
     table: "FARM_EQUIPMENT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node65"
     table: "FEE"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node66"
     table: "FIELD_ORGANIZATION_UNIT"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node67"
     table: "FINANCIAL_ACCOUNT_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node68"
     table: "FINANCIAL_SERVICES_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node69"
     table: "FINANCIAL_VALUATION"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node70"
     table: "FLAT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node71"
     table: "FOR_PROFIT_ORGANIZATION"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node72"
     table: "FRAUD_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node73"
     table: "FREIGHT_GROUP"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node74"
     table: "FULL_TERM"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node75"
     table: "GEOGRAPHIC_LOCATION"
     properties:
@@ -8440,50 +8515,61 @@ mappings:
       nodeProperty2: { field: "LOCATION_CODE" }
       nodeProperty3: { field: "LOCATION_NAME" }
       nodeProperty4: { field: "LOCATION_NUMBER" }
+    key: ["nodeProperty0"]
   - node: "node76"
     table: "GOVERNMENT_ORGANIZATION"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node77"
     table: "GROUPING"
     properties:
       nodeProperty0: { field: "GROUPING_IDENTIFIER" }
       nodeProperty1: { field: "GROUPING_NAME" }
+    key: ["nodeProperty0"]
   - node: "node78"
     table: "GROUP_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node79"
     table: "HOUSEHOLD"
     properties:
       nodeProperty0: { field: "HOUSEHOLD_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node80"
     table: "HOUSEHOLD_CONTENT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node81"
     table: "INDIVIDUAL_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node82"
     table: "INSURABLE_OBJECT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
       nodeProperty1: { field: "INSURABLE_OBJECT_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node83"
     table: "INSURANCE_CLASS"
     properties:
       nodeProperty0: { field: "INSURANCE_CLASS_IDENTIFIER" }
       nodeProperty1: { field: "INSURANCE_CLASS_NAME" }
       nodeProperty2: { field: "INSURANCE_CLASS_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node84"
     table: "INSURED_ACCOUNT"
     properties:
       nodeProperty0: { field: "ACCOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node85"
     table: "INTERMEDIARY_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node86"
     table: "LEGAL_JURISDICTION"
     properties:
@@ -8491,10 +8577,12 @@ mappings:
       nodeProperty1: { field: "LEGAL_JURISDICTION_NAME" }
       nodeProperty2: { field: "LEGAL_JURISDICTION_DESCRIPTION" }
       nodeProperty3: { field: "RULES_REFERENCE_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node87"
     table: "LIFE_EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node88"
     table: "LINE_OF_BUSINESS"
     properties:
@@ -8502,17 +8590,20 @@ mappings:
       nodeProperty1: { field: "LINE_OF_BUSINESS_NAME" }
       nodeProperty2: { field: "LINE_OF_BUSINESS_DESCRIPTION" }
       nodeProperty3: { field: "LINE_OF_BUSINESS_CODE" }
+    key: ["nodeProperty0"]
   - node: "node89"
     table: "LINE_OF_BUSINESS_GROUP"
     properties:
       nodeProperty0: { field: "LINE_OF_BUSINESS_GROUP_IDENTIFIER" }
       nodeProperty1: { field: "LINE_OF_BUSINESS_GROUP_NAME" }
       nodeProperty2: { field: "LINE_OF_BUSINESS_GROUP_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node90"
     table: "LITIGATION"
     properties:
       nodeProperty0: { field: "LITIGATION_IDENTIFIER" }
       nodeProperty1: { field: "LITIGATION_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node91"
     table: "LOCATION_ADDRESS"
     properties:
@@ -8524,50 +8615,62 @@ mappings:
       nodeProperty5: { field: "COUNTRY_CODE" }
       nodeProperty6: { field: "BEGIN_DATE" }
       nodeProperty7: { field: "END_DATE" }
+    key: ["nodeProperty0"]
   - node: "node92"
     table: "LOSS_PAYMENT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node93"
     table: "LOSS_RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node94"
     table: "LOSS_RESERVE"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node95"
     table: "MANUFACTURED_OBJECT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node96"
     table: "MEDICAL_CONDITION"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node97"
     table: "MID_TERM"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node98"
     table: "MILKING_MACHINE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node99"
     table: "MOBILE_HOME"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node100"
     table: "MOTORCYCLE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node101"
     table: "NEW_BUSINESS"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node102"
     table: "NOT_FOR_PROFIT_ORGANIZATION"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node103"
     table: "OCCURRENCE"
     properties:
@@ -8578,6 +8681,7 @@ mappings:
       nodeProperty4: { field: "OCCURRENCE_BEGIN_TIME" }
       nodeProperty5: { field: "OCCURRENCE_END_TIME" }
       nodeProperty6: { field: "OCCURRENCE_NAME" }
+    key: ["nodeProperty0"]
   - node: "node104"
     table: "ORGANIZATION"
     properties:
@@ -8590,6 +8694,7 @@ mappings:
       nodeProperty6: { field: "ORGANIZATION_DESCRIPTION" }
       nodeProperty7: { field: "ACRONYM_NAME" }
       nodeProperty8: { field: "INDUSTRY_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node105"
     table: "ORGANIZATION_UNIT"
     properties:
@@ -8599,10 +8704,12 @@ mappings:
       nodeProperty3: { field: "INDUSTRY_CODE" }
       nodeProperty4: { field: "ACCOUNTING_CODE" }
       nodeProperty5: { field: "WORK_SITE_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node106"
     table: "OTHER_ASSESSMENT_RESULT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node107"
     table: "PARTY"
     properties:
@@ -8611,17 +8718,20 @@ mappings:
       nodeProperty2: { field: "BEGIN_DATE" }
       nodeProperty3: { field: "END_DATE" }
       nodeProperty4: { field: "PARTY_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node108"
     table: "PARTY_PREFERENCE"
     properties:
       nodeProperty0: { field: "PARTY_IDENTIFIER" }
       nodeProperty1: { field: "PREFERRED_LANGUAGE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node109"
     table: "PARTY_ROLE"
     properties:
       nodeProperty0: { field: "PARTY_ROLE_CODE" }
       nodeProperty1: { field: "PARTY_ROLE_NAME" }
       nodeProperty2: { field: "PARTY_ROLE_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node110"
     table: "PERSON"
     properties:
@@ -8636,11 +8746,13 @@ mappings:
       nodeProperty8: { field: "BIRTH_PLACE_NAME" }
       nodeProperty9: { field: "GENDER_CODE" }
       nodeProperty10: { field: "PREFIX_NAME" }
+    key: ["nodeProperty0"]
   - node: "node111"
     table: "PERSON_PROFESSION"
     properties:
       nodeProperty0: { field: "PERSON_IDENTIFIER" }
       nodeProperty1: { field: "PROFESSION_NAME" }
+    key: ["nodeProperty0"]
   - node: "node112"
     table: "PHYSICAL_LOCATION"
     properties:
@@ -8653,14 +8765,17 @@ mappings:
       nodeProperty6: { field: "HORIZONTAL_ACCURACY_VALUE" }
       nodeProperty7: { field: "VERTICAL_ACCURACY_VALUE" }
       nodeProperty8: { field: "TRAVEL_DIRECTION_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node113"
     table: "PHYSICAL_OBJECT_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node114"
     table: "PLACE_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node115"
     table: "POLICY"
     properties:
@@ -8669,6 +8784,7 @@ mappings:
       nodeProperty2: { field: "EXPIRATION_DATE" }
       nodeProperty3: { field: "POLICY_NUMBER" }
       nodeProperty4: { field: "STATUS_CODE" }
+    key: ["nodeProperty0"]
   - node: "node116"
     table: "POLICY_AMOUNT"
     properties:
@@ -8678,6 +8794,7 @@ mappings:
       nodeProperty3: { field: "EARNING_END_DATE" }
       nodeProperty4: { field: "POLICY_AMOUNT" }
       nodeProperty5: { field: "INSURANCE_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node117"
     table: "POLICY_DEDUCTIBLE"
     properties:
@@ -8685,6 +8802,7 @@ mappings:
       nodeProperty1: { field: "DEDUCTIBLE_TYPE_CODE" }
       nodeProperty2: { field: "DEDUCTIBLE_VALUE" }
       nodeProperty3: { field: "DEDUCTIBLE_BASIS_CODE" }
+    key: ["nodeProperty0"]
   - node: "node118"
     table: "POLICY_EVENT"
     properties:
@@ -8693,6 +8811,7 @@ mappings:
       nodeProperty2: { field: "EFFECTIVE_DATE" }
       nodeProperty3: { field: "EVENT_TYPE_CODE" }
       nodeProperty4: { field: "EVENT_SUB_TYPE_CODE" }
+    key: ["nodeProperty0"]
   - node: "node119"
     table: "POLICY_LIMIT"
     properties:
@@ -8700,44 +8819,54 @@ mappings:
       nodeProperty1: { field: "LIMIT_TYPE_CODE" }
       nodeProperty2: { field: "LIMIT_VALUE" }
       nodeProperty3: { field: "LIMIT_BASIS_CODE" }
+    key: ["nodeProperty0"]
   - node: "node120"
     table: "PREMIUM"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node121"
     table: "PRE_QUALIFICATION"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node122"
     table: "PRODUCT"
     properties:
       nodeProperty0: { field: "PRODUCT_IDENTIFIER" }
       nodeProperty1: { field: "LICENSED_PRODUCT_NAME" }
       nodeProperty2: { field: "PRODUCT_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node123"
     table: "PROFESSIONAL_GROUP"
     properties:
       nodeProperty0: { field: "GROUPING_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node124"
     table: "PROJECT"
     properties:
       nodeProperty0: { field: "GROUPING_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node125"
     table: "PROPERTY_IN_TRANSIT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node126"
     table: "PROVIDER_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node127"
     table: "PRO_RATA"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node128"
     table: "QUOTE"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node129"
     table: "RATING_TERRITORY"
     properties:
@@ -8745,119 +8874,147 @@ mappings:
       nodeProperty1: { field: "RATING_TERRITORY_ASSIGNING_ORGANIZATION_IDENTIFIER" }
       nodeProperty2: { field: "RATING_TERRITORY_CODE" }
       nodeProperty3: { field: "RATING_TERRITORY_CODE_SET_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node130"
     table: "RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node131"
     table: "RECREATIONAL_VEHICLE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node132"
     table: "REINSTATEMENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node133"
     table: "REINSURANCE_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node134"
     table: "REINSURANCE_RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node135"
     table: "RENEWAL"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node136"
     table: "RESIDENTIAL_STRUCTURE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node137"
     table: "RISK_FACTOR_SCORE"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node138"
     table: "SALVAGE"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node139"
     table: "SCHEDULED_ITEM"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node140"
     table: "SHORT_RATE"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node141"
     table: "STAFFING_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node142"
     table: "STAFF_CLASSIFICATION"
     properties:
       nodeProperty0: { field: "STAFF_CLASSIFICATION_CODE" }
       nodeProperty1: { field: "STAFF_CLASSIFICATION_NAME" }
       nodeProperty2: { field: "STAFF_CLASSIFICATION_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node143"
     table: "STAFF_POSITION"
     properties:
       nodeProperty0: { field: "STAFF_POSITION_IDENTIFIER" }
       nodeProperty1: { field: "STAFF_POSITION_NAME" }
       nodeProperty2: { field: "STAFF_POSITION_DESCRIPTION" }
+    key: ["nodeProperty0"]
   - node: "node144"
     table: "STATE"
     properties:
       nodeProperty0: { field: "STATE_CODE" }
       nodeProperty1: { field: "STATE_NAME" }
+    key: ["nodeProperty0"]
   - node: "node145"
     table: "STRUCTURE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node146"
     table: "SUBROGATION"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node147"
     table: "SURCHARGE"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node148"
     table: "TAX"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node149"
     table: "TEAM"
     properties:
       nodeProperty0: { field: "GROUPING_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node150"
     table: "THIRD_PARTY_STAFFING_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node151"
     table: "TRACTOR"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node152"
     table: "TRAILER"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node153"
     table: "TRANSPORTATION_CLASS"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node154"
     table: "TRUCK"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node155"
     table: "UNDERWRITING_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node156"
     table: "VAN"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node157"
     table: "VEHICLE"
     properties:
@@ -8867,18 +9024,22 @@ mappings:
       nodeProperty3: { field: "VEHICLE_DRIVING_WHEEL_QUANTITY" }
       nodeProperty4: { field: "VEHICLE_MAKE_NAME" }
       nodeProperty5: { field: "VEHICLE_IDENTIFICATION_NUMBER" }
+    key: ["nodeProperty0"]
   - node: "node158"
     table: "WATERCRAFT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node159"
     table: "WORKERS_COMP_CLASS"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - node: "node160"
     table: "audit"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
+    key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "ACCOUNT_AGREEMENT"
     from:

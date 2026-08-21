@@ -3,9 +3,9 @@ nodes:
   document:
     label: "document"
     properties:
-      documentid: { type: "INTEGER", key: true }
-      embedding: { type: "VECTOR<FLOAT>", dimension: 123, mustExist: true }
-      legacyembedding: { type: "VECTOR<FLOAT>", mustExist: true }
+      documentid: { type: "INTEGER" }
+      embedding: { type: "VECTOR<FLOAT>", dimension: 123 }
+      legacyembedding: { type: "VECTOR<FLOAT>" }
     indexes:
       document_embedding:
         type: "VECTOR"
@@ -36,3 +36,4 @@ mappings:
       documentid: { field: "documentid" }
       embedding: { field: "embedding" }
       legacyembedding: { field: "legacyembedding" }
+    key: ["documentid"]
