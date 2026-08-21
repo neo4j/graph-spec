@@ -58,5 +58,12 @@ class Validations {
             RelationshipTypeConstraint,
             RelationshipKeyOverlap
         )
+
+        @JsStatic
+        val integrity: List<Validation> = listOf(
+            NodeLabel,
+            RelationshipType,
+            RelationshipNodes
+        )
     }
 }
