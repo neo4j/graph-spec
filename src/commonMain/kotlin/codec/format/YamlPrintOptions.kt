@@ -23,37 +23,37 @@ class YamlPrintOptions(
     val alwaysQuoteStrings: Boolean = false,
     val inlinePaths: Set<String> = emptySet()
 ) {
-    fun shouldInline(element: SchemaElement): Boolean = inlinePaths.any { pattern -> matchPath(pattern, element.path) }
+    private val matchers = inlinePaths.map { pattern -> pattern to Regex(patternToRegex(pattern)) }
 
-    private fun matchPath(pattern: String, path: String): Boolean {
-        if (pattern == path) {
-            return true
-        }
-        val regexStr = buildString {
-            append("^")
-            var i = 0
-            while (i < pattern.length) {
-                if (pattern.startsWith("**", i)) {
-                    // match any characters across multiple hierarchy levels
-                    append(".*")
-                    i += 2
-                } else if (pattern.startsWith("*", i)) {
-                    // matches single key/index level
-                    append("[^.]+")
-                    i += 1
+    fun shouldInline(element: SchemaElement): Boolean {
+        if (matchers.isEmpty()) return false
+        val path = element.path
+        return matchers.any { (pattern, regex) -> pattern == path || regex.matches(path) }
+    }
+
+    private fun patternToRegex(pattern: String): String = buildString {
+        append("^")
+        var i = 0
+        while (i < pattern.length) {
+            if (pattern.startsWith("**", i)) {
+                // match any characters across multiple hierarchy levels
+                append(".*")
+                i += 2
+            } else if (pattern.startsWith("*", i)) {
+                // matches single key/index level
+                append("[^.]+")
+                i += 1
+            } else {
+                val char = pattern[i]
+                // Escape standard regex special characters
+                if ("\\^$.|?+()[]{}".contains(char)) {
+                    append('\\').append(char)
                 } else {
-                    val char = pattern[i]
-                    // Escape standard regex special characters
-                    if ("\\^$.|?+()[]{}".contains(char)) {
-                        append('\\').append(char)
-                    } else {
-                        append(char)
-                    }
-                    i += 1
+                    append(char)
                 }
+                i += 1
             }
-            append("$")
         }
-        return path.matches(Regex(regexStr))
+        append("$")
     }
 }

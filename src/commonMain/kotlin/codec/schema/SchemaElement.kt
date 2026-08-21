@@ -17,30 +17,59 @@
 package codec.schema
 
 /**
- * A format agnostic AST used for transforms and migrations
+ * A format agnostic AST used for transforms and migrations.
+ *
+ * Elements know their location in the tree via a link to their [parent] plus their own
+ * [identifier]. [path] is derived from that chain on demand to keep the memory footprint
+ * down to a minimum and ensure that [repath] doesn't require a deep copy of the subtree.
  *
  * @see [codec.format.Format] for conversions
  * @see [migrate.Migration] for usages
  */
 sealed interface SchemaElement {
-    val path: String
+    /** The element that owns this one, or null when this element is a tree root. */
+    var parent: SchemaElement?
+
+    /** This element's location relative to [parent]: a key for maps, `[i]` for lists. */
+    var identifier: String
+
+    val path: String get() {
+        val prefix = parent?.path
+        return when {
+            prefix.isNullOrEmpty() -> identifier
+            identifier.startsWith('[') -> prefix + identifier
+            else -> "$prefix.$identifier"
+        }
+    }
+
+    /** Re-roots this element at [newPath]. Descendants follow via their parent links. */
     fun repath(newPath: String): SchemaElement
+
     override fun toString(): String
 }
 
-/**
- * Recursively convert anything to a SchemaElement
- */
+/** Re-roots [this] at [newPath] in place. Descendants follow via their parent links. */
+internal fun <T : SchemaElement> T.reroot(newPath: String): T {
+    parent = null
+    identifier = newPath
+    return this
+}
+
+/** Adopts [child] so its [SchemaElement.path] resolves through this element. */
+internal fun <T : SchemaElement> SchemaElement.adopt(child: T, identifier: String): T {
+    child.parent = this
+    child.identifier = identifier
+    return child
+}
+
 fun Any?.toSchemaElement(path: String = ""): SchemaElement = when (this) {
     null -> SchemaNull(path)
     is SchemaElement -> this.repath(path)
     is Map<*, *> -> SchemaMap(
-        entries.associate { (k, v) ->
-            k.toString() to v.toSchemaElement().repath(k.toString())
-        }.toMutableMap(),
+        entries.associateTo(mutableMapOf()) { (k, v) -> k.toString() to v.toSchemaElement() },
         path
     )
-    is Iterable<*> -> SchemaList(map { it.toSchemaElement() }.toMutableList(), path)
+    is Iterable<*> -> SchemaList(mapTo(mutableListOf()) { it.toSchemaElement() }, path)
     is String -> SchemaLiteral(toString(), path, isString = true)
     else -> SchemaLiteral(toString(), path, isString = false)
 }

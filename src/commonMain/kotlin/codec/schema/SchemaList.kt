@@ -16,14 +16,18 @@
  */
 package codec.schema
 
-data class SchemaList(val content: MutableList<SchemaElement>, override val path: String = "") :
+class SchemaList(val content: MutableList<SchemaElement>, path: String = "") :
     SchemaElement,
     MutableList<SchemaElement> by content {
 
-    override fun repath(newPath: String) = SchemaList(
-        content.mapIndexed { index, element -> element.repath("$newPath[$index]") }.toMutableList(),
-        newPath
-    )
+    override var parent: SchemaElement? = null
+    override var identifier: String = path
+
+    init {
+        content.forEachIndexed { index, element -> adopt(element, "[$index]") }
+    }
+
+    override fun repath(newPath: String): SchemaList = reroot(newPath)
 
     override fun equals(other: Any?): Boolean = content == other
 

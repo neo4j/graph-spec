@@ -43,20 +43,8 @@ class JsonFormat(private val json: Json) : Format {
     override fun decodeFromSchema(element: SchemaElement) = json.decodeFromJsonElement<GraphModel>(element.toJson())
 
     private fun schemaElement(json: JsonElement, parent: String = ""): SchemaElement = when (json) {
-        is JsonArray -> SchemaList(
-            json.mapIndexed { index, element -> schemaElement(element, "$parent[$index]") }
-                .toMutableList(),
-            parent
-        )
-        is JsonObject -> SchemaMap(
-            json.mapValues { (key, value) ->
-                schemaElement(
-                    value,
-                    if (parent == "") key else "$parent.$key"
-                )
-            }.toMutableMap(),
-            parent
-        )
+        is JsonArray -> SchemaList(json.mapTo(mutableListOf()) { schemaElement(it) }, parent)
+        is JsonObject -> SchemaMap(json.mapValuesTo(mutableMapOf()) { (_, v) -> schemaElement(v) }, parent)
         is JsonPrimitive -> json.contentOrNull?.let {
             SchemaLiteral(it, parent, json.isString)
         } ?: SchemaNull(parent)
