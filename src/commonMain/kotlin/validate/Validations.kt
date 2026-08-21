@@ -17,10 +17,16 @@
 package validate
 
 import validate.node.NodeConstraintCoverage
+import validate.node.NodeConstraintNameConflict
 import validate.node.NodeConstraints
 import validate.node.NodeIndexesExists
 import validate.node.NodeLabel
 import validate.node.NodeProperties
+import validate.node.constraint.NodeCompositeConstraint
+import validate.node.constraint.NodeCompositeConstraintPropertyType
+import validate.node.constraint.NodeConstraintDuplicatePropertySet
+import validate.node.constraint.NodeConstraintProperties
+import validate.node.constraint.NodeExistenceCompositeConflict
 import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeKeyOverlap
 import validate.node.constraint.NodeTypeConstraint
@@ -41,6 +47,12 @@ class Validations {
         val all: List<Validation> = listOf(
             // Nodes
             NodeConstraints,
+            NodeConstraintProperties,
+            NodeCompositeConstraint,
+            NodeConstraintDuplicatePropertySet,
+            NodeExistenceCompositeConflict,
+            NodeCompositeConstraintPropertyType,
+            NodeConstraintNameConflict,
             NodeIndexesExists,
             NodeLabel,
             NodeProperties,
