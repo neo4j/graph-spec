@@ -220,7 +220,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Type constraints not supported on multiple properties") {
-            migration.convertConstraints(constraints, "L1", "Person", "node")
+            migration.convertConstraints(constraints, "L1", "Person")
         }
     }
 
@@ -237,7 +237,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertConstraints(constraints, "label1", "Person", "node")
+        val result = migration.convertConstraints(constraints, "label1", "Person")
 
         assertNotNull(result)
         val constraint = result["c:1"]
