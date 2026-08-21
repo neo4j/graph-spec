@@ -15,7 +15,7 @@ nodes:
         type: "UNIQUE"
         label: "creditcard"
         properties: ["nodeProperty0"]
-        name: "unique_creditcardid"
+        name: "unique_creditcard_creditcardid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -34,7 +34,7 @@ nodes:
         type: "UNIQUE"
         label: "currency"
         properties: ["nodeProperty0"]
-        name: "unique_currencycode"
+        name: "unique_currency_currencycode"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -56,7 +56,7 @@ nodes:
         type: "UNIQUE"
         label: "currencyrate"
         properties: ["nodeProperty0"]
-        name: "unique_currencyrateid"
+        name: "unique_currencyrate_currencyrateid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -76,7 +76,7 @@ nodes:
         type: "UNIQUE"
         label: "customer"
         properties: ["nodeProperty0"]
-        name: "unique_customerid"
+        name: "unique_customer_customerid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -107,7 +107,7 @@ nodes:
         type: "UNIQUE"
         label: "salesorderheader"
         properties: ["nodeProperty0"]
-        name: "unique_salesorderid"
+        name: "unique_salesorderheader_salesorderid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -132,7 +132,7 @@ nodes:
         type: "UNIQUE"
         label: "salesperson"
         properties: ["nodeProperty0"]
-        name: "unique_businessentityid"
+        name: "unique_salesperson_businessentityid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -151,7 +151,7 @@ nodes:
         type: "UNIQUE"
         label: "salesreason"
         properties: ["nodeProperty0"]
-        name: "unique_salesreasonid"
+        name: "unique_salesreason_salesreasonid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -173,7 +173,7 @@ nodes:
         type: "UNIQUE"
         label: "salestaxrate"
         properties: ["nodeProperty0"]
-        name: "unique_salestaxrateid"
+        name: "unique_salestaxrate_salestaxrateid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -198,7 +198,7 @@ nodes:
         type: "UNIQUE"
         label: "salesterritory"
         properties: ["nodeProperty0"]
-        name: "unique_territoryid"
+        name: "unique_salesterritory_territoryid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -220,7 +220,7 @@ nodes:
         type: "UNIQUE"
         label: "shoppingcartitem"
         properties: ["nodeProperty0"]
-        name: "unique_shoppingcartitemid"
+        name: "unique_shoppingcartitem_shoppingcartitemid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -248,7 +248,7 @@ nodes:
         type: "UNIQUE"
         label: "specialoffer"
         properties: ["nodeProperty0"]
-        name: "unique_specialofferid"
+        name: "unique_specialoffer_specialofferid"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -268,7 +268,7 @@ nodes:
         type: "UNIQUE"
         label: "store"
         properties: ["nodeProperty0"]
-        name: "unique_businessentityid"
+        name: "unique_store_businessentityid"
     indexes:
       nodeIndex0:
         type: "TEXT"

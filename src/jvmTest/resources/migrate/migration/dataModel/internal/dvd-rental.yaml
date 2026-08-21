@@ -13,7 +13,7 @@ nodes:
         type: "UNIQUE"
         label: "actor"
         properties: ["nodeProperty0"]
-        name: "unique_actor_id"
+        name: "unique_actor_actor_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -37,7 +37,7 @@ nodes:
         type: "UNIQUE"
         label: "address"
         properties: ["nodeProperty0"]
-        name: "unique_address_id"
+        name: "unique_address_address_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -57,7 +57,7 @@ nodes:
         type: "UNIQUE"
         label: "category"
         properties: ["nodeProperty0"]
-        name: "unique_category_id"
+        name: "unique_category_category_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -77,7 +77,7 @@ nodes:
         type: "UNIQUE"
         label: "city"
         properties: ["nodeProperty0"]
-        name: "unique_city_id"
+        name: "unique_city_city_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -97,7 +97,7 @@ nodes:
         type: "UNIQUE"
         label: "country"
         properties: ["nodeProperty0"]
-        name: "unique_country_id"
+        name: "unique_country_country_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -123,7 +123,7 @@ nodes:
         type: "UNIQUE"
         label: "customer"
         properties: ["nodeProperty0"]
-        name: "unique_customer_id"
+        name: "unique_customer_customer_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -149,7 +149,7 @@ nodes:
         type: "UNIQUE"
         label: "film"
         properties: ["nodeProperty0"]
-        name: "unique_film_id"
+        name: "unique_film_film_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -169,7 +169,7 @@ nodes:
         type: "UNIQUE"
         label: "inventory"
         properties: ["nodeProperty0"]
-        name: "unique_inventory_id"
+        name: "unique_inventory_inventory_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -189,7 +189,7 @@ nodes:
         type: "UNIQUE"
         label: "language"
         properties: ["nodeProperty0"]
-        name: "unique_language_id"
+        name: "unique_language_language_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -209,7 +209,7 @@ nodes:
         type: "UNIQUE"
         label: "payment"
         properties: ["nodeProperty0"]
-        name: "unique_payment_id"
+        name: "unique_payment_payment_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -230,7 +230,7 @@ nodes:
         type: "UNIQUE"
         label: "rental"
         properties: ["nodeProperty0"]
-        name: "unique_rental_id"
+        name: "unique_rental_rental_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -256,7 +256,7 @@ nodes:
         type: "UNIQUE"
         label: "staff"
         properties: ["nodeProperty0"]
-        name: "unique_staff_id"
+        name: "unique_staff_staff_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
@@ -275,7 +275,7 @@ nodes:
         type: "UNIQUE"
         label: "store"
         properties: ["nodeProperty0"]
-        name: "unique_store_id"
+        name: "unique_store_store_id"
     indexes:
       nodeIndex0:
         type: "TEXT"
