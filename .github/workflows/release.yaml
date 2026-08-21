@@ -252,7 +252,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
 
   publish-tags:
-    needs: [determine-version, validate-go, publish-npm, publish-maven]
+    needs: [determine-version, validate-go, publish-npm]
     runs-on: ubuntu-latest
     permissions:
       contents: write
