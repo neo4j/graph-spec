@@ -27,12 +27,12 @@ object RelationshipTypeToken : RelationshipValidation {
         relationship: Relationship,
         issues: MutableList<Issue>
     ) {
-        val token = relationship.type
-        if (token.contains(":") || token.contains("=")) {
+        val type = relationship.type
+        if (type.contains(":") || type.contains("=")) {
             issues.add(
                 Issue(
                     code = "invalid_relation_type_token",
-                    message = "Relationship type '$token' contains invalid characters (: or =) for bulk import",
+                    message = "Relationship type '$type' contains invalid characters (: or =) for bulk import",
                     path = "relationships.$relationshipId.type"
                 )
             )
