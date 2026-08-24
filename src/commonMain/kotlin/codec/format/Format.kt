@@ -28,16 +28,7 @@ interface Format {
 
     fun decodeFromSchema(element: SchemaElement): GraphModel
 
-    /**
-     * Parses the given [content] directly as a [GraphModel].
-     *
-     * The default implementation here goes through the standard string > schema > model pipeline which
-     * involves migration. For formats whose text maps onto [GraphModel] directly, this method can be
-     * overridden to avoid building the unnecessary intermediary step.
-     */
     fun decodeModelFromString(content: String): GraphModel = decodeFromSchema(decodeFromString(content))
 
-    /** Writes the given [model] out directly to a string. A mirror of [decodeModelFromString], providing an
-     * overridable method for formats to skip the intermediary schema translation step. */
     fun encodeModelToString(model: GraphModel): String = encodeToString(encodeToSchema(model))
 }
