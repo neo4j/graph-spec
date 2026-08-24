@@ -33,6 +33,9 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
         return map
     }
 
+    fun requiresMigration(version: String, type: String, targetVersion: String, targetType: String): Boolean =
+        version(version, type) != version(targetVersion, targetType)
+
     private fun version(version: String, type: String): String {
         var semver = version.substringBefore('-').substringBefore('+')
         if (semver.count { it == '.' } > 1) {
