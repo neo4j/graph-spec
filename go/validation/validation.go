@@ -25,7 +25,7 @@ func Validate(model model.GraphModel) ([]Issue, error) {
 		return nil, err
 	}
 	var issues []Issue
-	if err := json.Unmarshal([]byte(res), &issues); err != nil {
+	if err := json.Unmarshal(res, &issues); err != nil {
 		return nil, fmt.Errorf("error parsing validation issues: %w", err)
 	}
 	return issues, nil

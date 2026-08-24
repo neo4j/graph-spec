@@ -50,6 +50,16 @@ go build -tags graphspec_noembed ./...
 > The shared native lib must be provided either via automatic embedding or the `GRAPHDATAMODEL_LIB_PATH` var. If not 
 > available, e.g. for an unsupported platform and no `GRAPHDATAMODEL_LIB_PATH`, an error will be returned when run.
 
+### Configuring Memory
+
+The Kotlin/Native environment has its own garbage collector and optimisations. This runs outside of the Go runtime, and
+is not influenced by the Go runtime. It also does not have wider knowledge of the environment it is being run in unless
+explicitly configured. One major drawback of this is that, without configuration, there is no memory cap so for very 
+large input the native libraries can hit and breach hard memory requirements in the environment.
+
+The max heap size can be configured via the `GRAPHSPEC_MAX_HEAP_BYTES` environment variable. If set, this will ensure 
+the Kotlin/Native GC will proactively clear memory an remain under this limit.
+
 ## Development
 
 ### Building and testing

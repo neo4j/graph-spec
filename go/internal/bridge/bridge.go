@@ -1,7 +1,6 @@
 package bridge
 
 import (
-	"encoding/json"
 	"fmt"
 	"runtime"
 	"sync"
@@ -10,10 +9,12 @@ import (
 	"github.com/ebitengine/purego"
 )
 
-type Resp struct {
-	Data   string `json:"data"`
-	ErrMsg string `json:"error"`
-}
+// The native library writes a single status byte followed by the raw UTF-8 payload, representing the result on
+// success and the error message on failure. It returns the number of total bytes written, so the payload is buf[1:res].
+const (
+	statusOK    byte = 0
+	statusError byte = 1
+)
 
 type Op string
 
@@ -33,18 +34,18 @@ type bridge struct {
 
 var loadBridge = sync.OnceValues(bindBridge)
 
-func Call(op Op, inputs ...string) (string, error) {
+func Call(op Op, inputs ...string) ([]byte, error) {
 	b, err := loadBridge()
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	if len(inputs) == 0 {
-		return "", fmt.Errorf("empty input provided")
+		return nil, fmt.Errorf("empty input provided")
 	}
 	for i, input := range inputs {
 		if len(input) == 0 {
-			return "", fmt.Errorf("empty input provided [%d]", i)
+			return nil, fmt.Errorf("empty input provided [%d]", i)
 		}
 	}
 
@@ -59,18 +60,20 @@ func Call(op Op, inputs ...string) (string, error) {
 		res, err = b.call(op, inputs, buf)
 	}
 	if err != nil {
-		return "", err
+		return nil, err
+	}
+	if res < 1 {
+		return nil, fmt.Errorf("bridge returned a malformed response of %d bytes", res)
 	}
 
-	var resp Resp
-	if err := json.Unmarshal(buf[:res], &resp); err != nil {
-		return "", fmt.Errorf("failed to parse result: %w", err)
+	status, payload := buf[0], buf[1:res]
+	if status == statusError {
+		return nil, fmt.Errorf("received error from library: %s", payload)
 	}
-	if resp.ErrMsg != "" {
-		return "", fmt.Errorf("received error from library: %s", resp.ErrMsg)
+	if status != statusOK {
+		return nil, fmt.Errorf("bridge returned unknown status byte %d", status)
 	}
-
-	return resp.Data, nil
+	return payload, nil
 }
 
 func (b *bridge) call(op Op, inputs []string, buf []byte) (int, error) {
