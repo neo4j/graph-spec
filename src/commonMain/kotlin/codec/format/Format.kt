@@ -27,4 +27,8 @@ interface Format {
     fun encodeToSchema(model: GraphModel): SchemaElement
 
     fun decodeFromSchema(element: SchemaElement): GraphModel
+
+    fun decodeModelFromString(content: String): GraphModel = decodeFromSchema(decodeFromString(content))
+
+    fun encodeModelToString(model: GraphModel): String = encodeToString(encodeToSchema(model))
 }

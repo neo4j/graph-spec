@@ -39,6 +39,9 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
         if (targetType != Type.GRAPH_SPEC) { // Migrations expect internalised graph spec models.
             model.internalise()
         }
+        if (!path.requiresMigration(model.version, Type.GRAPH_SPEC, targetVersion, targetType)) {
+            return configuration.format.encodeModelToString(model)
+        }
         val schema = configuration.format.encodeToSchema(model)
         var map = schema as? SchemaMap ?: error("Schema format expected")
         map = path.migrate(map, Type.GRAPH_SPEC, targetVersion, targetType)
@@ -46,12 +49,22 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
     }
 
     fun decodeFromString(content: String, type: String = Type.GRAPH_SPEC): GraphModel {
+        val graphModel = decodeModel(content, type)
+        graphModel.internalise()
+        return graphModel
+    }
+
+    private fun decodeModel(content: String, type: String): GraphModel {
+        if (type == Type.GRAPH_SPEC) {
+            val model = configuration.format.decodeModelFromString(content)
+            if (!path.requiresMigration(model.version, type, Version.LATEST, Type.GRAPH_SPEC)) {
+                return model
+            }
+        }
         val schema = configuration.format.decodeFromString(content)
         var map = schema as? SchemaMap ?: error("Schema format expected")
         map = path.migrate(map, type, Version.LATEST, Type.GRAPH_SPEC)
-        val graphModel = configuration.format.decodeFromSchema(map)
-        graphModel.internalise()
-        return graphModel
+        return configuration.format.decodeFromSchema(map)
     }
 
     object Json : GraphSpec(defaultConfig(JsonFormat.default))
