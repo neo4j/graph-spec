@@ -53,9 +53,7 @@ private val runtimeConfigured: Boolean by lazy {
 
 @OptIn(ExperimentalForeignApi::class)
 class BridgeInput internal constructor(private val arguments: Array<out CPointer<ByteVar>?>) {
-
     val size: Int get() = arguments.size
-
     operator fun get(index: Int): String = arguments[index]!!.toKString()
 }
 

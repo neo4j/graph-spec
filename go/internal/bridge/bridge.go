@@ -1,6 +1,7 @@
 package bridge
 
 import (
+	"errors"
 	"fmt"
 	"math"
 	"runtime"
@@ -10,22 +11,15 @@ import (
 	"github.com/ebitengine/purego"
 )
 
-// The native library writes a single status byte followed by the raw UTF-8 payload, representing the result on
-// success and the error message on failure. It returns the number of total bytes written, so the payload is buf[1:res].
 const (
+	// Status bytes written to the first entry in the output buffer. The payload/error message follows this (buf[1:res])
 	statusOK    byte = 0
 	statusError byte = 1
 
-	// The library returns the negative size the output buffer needs to be when the one we provided was too small.
-	// These two codes are not sizes: -1 is a generic argument failure and internalError means the library could not
-	// allocate a response at all, so neither is retryable.
-	argError      = -1
-	internalError = math.MinInt32
+	// Non-retryable error response codes when the native lib could not write to the output buffer
+	invalidInputError = -1
+	internalError     = math.MinInt32
 )
-
-// MaxHeapEnv is read by the native library, on its first call, to cap its heap. It is documented for callers in
-// the README, and named here only so failures to allocate can point at it.
-const MaxHeapEnv = "GRAPHSPEC_MAX_HEAP_BYTES"
 
 type Op string
 
@@ -68,7 +62,7 @@ func Call(op Op, model []byte, args ...string) ([]byte, error) {
 	// the length of the model as reference.
 	buf := make([]byte, 2*len(model))
 	res, err := b.call(op, cModel, args, buf)
-	if err != nil && res < argError && res != internalError { // buffer not large enough, retry with required size
+	if err != nil && res < invalidInputError && res != internalError { // buffer not large enough, retry with required size
 		buf = make([]byte, -res)
 		res, err = b.call(op, cModel, args, buf)
 	}
@@ -105,20 +99,20 @@ func (b *bridge) call(op Op, model []byte, args []string, buf []byte) (int, erro
 	switch op {
 	case Migrate:
 		if len(args) != 3 {
-			return argError, fmt.Errorf("migrate requires 3 arguments, got %d", len(args))
+			return invalidInputError, fmt.Errorf("migrate requires 3 arguments, got %d", len(args))
 		}
 		res = b.migrate(in, args[0], args[1], args[2], out, outLen)
 	case Validate:
 		if len(args) != 0 {
-			return argError, fmt.Errorf("validate requires 0 arguments, got %d", len(args))
+			return invalidInputError, fmt.Errorf("validate requires 0 arguments, got %d", len(args))
 		}
 		res = b.validate(in, out, outLen)
 	default:
-		return argError, fmt.Errorf("unknown bridge call: %s", op)
+		return invalidInputError, fmt.Errorf("unknown bridge call: %s", op)
 	}
 
 	if res == internalError {
-		return internalError, fmt.Errorf("library could not allocate a response, the input likely exceeds the heap allowed by %s", MaxHeapEnv)
+		return internalError, errors.New("library could not allocate a response, the input likely exceeds the heap allowed by GRAPHSPEC_MAX_HEAP_BYTES")
 	}
 	if res < 0 {
 		return int(res), fmt.Errorf("bridge error (buffer too small or internal failure): code %d", res)
