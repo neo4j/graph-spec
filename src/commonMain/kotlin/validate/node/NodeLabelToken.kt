@@ -14,21 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package codec.format
+package validate.node
 
-import codec.schema.SchemaElement
 import model.GraphModel
+import model.node.Node
+import validate.Issue
 
-interface Format {
-    fun encodeToString(element: SchemaElement): String
-
-    fun decodeFromString(string: String): SchemaElement
-
-    fun encodeToSchema(model: GraphModel): SchemaElement
-
-    fun decodeFromSchema(element: SchemaElement): GraphModel
-
-    fun decodeModelFromString(content: String): GraphModel = decodeFromSchema(decodeFromString(content))
-
-    fun encodeModelToString(model: GraphModel): String = encodeToString(encodeToSchema(model))
+object NodeLabelToken : NodeValidation {
+    override fun validateNode(model: GraphModel, nodeId: String, node: Node, issues: MutableList<Issue>) {
+        val token = node.labels.identifier
+        if (token != null && (token.contains(":") || token.contains("="))) {
+            issues.add(
+                Issue(
+                    code = "invalid_node_label_token",
+                    message = "Node label '$token' contains invalid characters (: or =) for bulk import",
+                    path = "nodes.$nodeId.labels.identifier"
+                )
+            )
+        }
+    }
 }

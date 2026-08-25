@@ -42,6 +42,10 @@ class JsonFormat(private val json: Json) : Format {
 
     override fun decodeFromSchema(element: SchemaElement) = json.decodeFromJsonElement<GraphModel>(element.toJson())
 
+    override fun decodeModelFromString(content: String) = json.decodeFromString<GraphModel>(content)
+
+    override fun encodeModelToString(model: GraphModel) = json.encodeToString(model)
+
     private fun schemaElement(json: JsonElement, parent: String = ""): SchemaElement = when (json) {
         is JsonArray -> SchemaList(json.mapTo(mutableListOf()) { schemaElement(it) }, parent)
         is JsonObject -> SchemaMap(json.mapValuesTo(mutableMapOf()) { (_, v) -> schemaElement(v) }, parent)

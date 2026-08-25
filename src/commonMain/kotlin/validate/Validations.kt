@@ -20,6 +20,9 @@ import validate.node.NodeConstraintCoverage
 import validate.node.NodeConstraints
 import validate.node.NodeIndexesExists
 import validate.node.NodeLabel
+import validate.node.NodeLabelToken
+import validate.node.NodeMappingKey
+import validate.node.NodeMappingKeyType
 import validate.node.NodeProperties
 import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeKeyOverlap
@@ -28,6 +31,7 @@ import validate.relationship.RelationshipConstraints
 import validate.relationship.RelationshipIndexes
 import validate.relationship.RelationshipNodes
 import validate.relationship.RelationshipType
+import validate.relationship.RelationshipTypeToken
 import validate.relationship.constraint.RelationshipExistenceConstraint
 import validate.relationship.constraint.RelationshipKeyOverlap
 import validate.relationship.constraint.RelationshipTypeConstraint
@@ -38,11 +42,12 @@ import kotlin.js.JsStatic
 class Validations {
     companion object {
         @JsStatic
-        val all: List<Validation> = listOf(
+        val core: List<Validation> = listOf(
             // Nodes
             NodeConstraints,
             NodeIndexesExists,
             NodeLabel,
+            NodeLabelToken,
             NodeProperties,
             NodeConstraintCoverage,
             NodeTypeConstraint,
@@ -54,9 +59,26 @@ class Validations {
             RelationshipIndexes,
             RelationshipConstraints,
             RelationshipType,
+            RelationshipTypeToken,
             RelationshipExistenceConstraint,
             RelationshipTypeConstraint,
             RelationshipKeyOverlap
         )
+
+        @JsStatic
+        val integrity: List<Validation> = listOf(
+            NodeLabel,
+            RelationshipType,
+            RelationshipNodes
+        )
+
+        @JsStatic
+        val mapping: List<Validation> = core + listOf(
+            NodeMappingKey,
+            NodeMappingKeyType
+        )
+
+        @JsStatic
+        val all: List<Validation> = (core + integrity + mapping).distinct()
     }
 }
