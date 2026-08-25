@@ -134,7 +134,8 @@ class BridgeTest {
             val inputPtr = "{}".cstr.getPointer(this)
             val outputBuffer = allocArray<ByteVar>(bufferSize)
 
-            val resultSize = invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) { responsePayload }
+            val resultSize =
+                invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) { responsePayload }
 
             // The size from the response should be bytes, not characters
             assertEquals(byteArraySize + 1, resultSize)
