@@ -39,8 +39,8 @@ const val MAX_HEAP_ENV = "GRAPHSPEC_MAX_HEAP_BYTES"
 private val runtimeConfigured: Boolean by lazy {
     getenv(MAX_HEAP_ENV)?.toKString()?.toLongOrNull()?.let { ceiling ->
         GC.maxHeapBytes = ceiling
-        // Leave pauseOnTargetHeapOverflow off. A ceiling below what a model genuinely needs then surfaces as an
-        // error the caller can report, rather than the calling thread stalling waiting on the collector to free memory.
+        // pauseOnTargetHeapOverflow is explicitly left off. A ceiling below what a model genuinely needs then surfaces
+        // as an error the caller can report, rather than thread stalling waiting on the collector to free memory.
         GC.pauseOnTargetHeapOverflow = false
     }
     true
