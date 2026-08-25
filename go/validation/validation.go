@@ -20,7 +20,7 @@ func Validate(model model.GraphModel) ([]Issue, error) {
 	if err != nil {
 		return nil, err
 	}
-	res, err := bridge.Call(bridge.Validate, string(bytes))
+	res, err := bridge.Call(bridge.Validate, bytes)
 	if err != nil {
 		return nil, err
 	}

@@ -32,9 +32,6 @@ import kotlin.test.assertTrue
 @OptIn(ExperimentalForeignApi::class)
 class BridgeTest {
 
-    private fun response(buffer: CArrayPointer<ByteVar>, size: Int): Pair<Byte, String> =
-        buffer[0] to ByteArray(size - 1) { buffer[it + 1] }.decodeToString()
-
     @Test
     fun testSuccessfulBridgeCallWithSingleInput() {
         val input = "{\"version\":\"1\", \"data\":\"test\"}"
@@ -130,7 +127,7 @@ class BridgeTest {
     @Test
     fun testMultiByteUtf8Payload() {
         val responsePayload = "aé€😀" // multi-byte characters (1+2+3+4=10bytes)
-        val expected = responsePayload.encodeToByteArray()
+        val byteArraySize = responsePayload.encodeToByteArray().size
         val bufferSize = 1024
 
         memScoped {
@@ -140,31 +137,52 @@ class BridgeTest {
             val resultSize = invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) { responsePayload }
 
             // The size from the response should be bytes, not characters
-            assertEquals(expected.size + 1, resultSize)
-            assertTrue(expected.size > responsePayload.length)
+            assertEquals(byteArraySize + 1, resultSize)
+            assertTrue(byteArraySize > responsePayload.length)
             val (status, text) = response(outputBuffer, resultSize)
             assertEquals(STATUS_OK, status)
-            assertEquals(expected.decodeToString(), text)
+            assertEquals(responsePayload, text)
         }
     }
 
     @Test
     fun testKotlinExceptionThrownInAction() {
-        val input = "{\"version\":\"1\", \"data\":\"test\"}"
         val bufferSize = 1024
 
         memScoped {
-            val inputPtr = input.cstr.getPointer(this)
+            val inputPtr = "{}".cstr.getPointer(this)
+            val outputBuffer = allocArray<ByteVar>(bufferSize)
+
+            val exceptionResult = invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) {
+                throw RuntimeException("Something went wrong")
+            }
+
+            assertTrue(exceptionResult > 0)
+            val (status, payload) = response(outputBuffer, exceptionResult)
+            assertEquals(STATUS_ERROR, status)
+            assertEquals("Something went wrong", payload)
+        }
+    }
+
+    @Test
+    fun testKotlinErrorThrownInAction() {
+        val bufferSize = 1024
+
+        memScoped {
+            val inputPtr = "{}".cstr.getPointer(this)
             val outputBuffer = allocArray<ByteVar>(bufferSize)
 
             val resultSize = invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) {
-                throw RuntimeException("Something went wrong")
+                throw OutOfMemoryError("heap exhausted")
             }
 
             assertTrue(resultSize > 0)
             val (status, payload) = response(outputBuffer, resultSize)
             assertEquals(STATUS_ERROR, status)
-            assertEquals("Something went wrong", payload)
+            assertEquals("heap exhausted", payload)
         }
     }
+
+    private fun response(buffer: CArrayPointer<ByteVar>, size: Int): Pair<Byte, String> =
+        buffer[0] to ByteArray(size - 1) { buffer[it + 1] }.decodeToString()
 }

@@ -29,8 +29,13 @@ import platform.posix.memcpy
 import kotlin.native.runtime.GC
 import kotlin.native.runtime.NativeRuntimeApi
 
+// Status bytes written to output buffer indicating success or failure
 const val STATUS_OK: Byte = 0
 const val STATUS_ERROR: Byte = 1
+
+// Error response codes returned if output buffer cannot be written to
+const val INVALID_INPUTS = -1
+const val INTERNAL_ERROR = Int.MIN_VALUE
 
 // Optional env var, set by callers of the library, to cap the Kotlin/Native heap
 const val MAX_HEAP_ENV = "GRAPHSPEC_MAX_HEAP_BYTES"
@@ -54,7 +59,6 @@ class BridgeInput internal constructor(private val arguments: Array<out CPointer
     operator fun get(index: Int): String = arguments[index]!!.toKString()
 }
 
-
 /*
 Handles the Kotlin/Native bridge operations to safely invoke Kotlin methods from C.
 Converts the input to a Kotlin string, invokes the passed [action] and writes the
@@ -67,19 +71,21 @@ fun invokeBridge(
     bufferSize: Int,
     action: (BridgeInput) -> String
 ): Int {
-    if (input.any { it == null } || outputBuffer == null || bufferSize < 1) return -1
-    check(runtimeConfigured)
+    if (input.any { it == null } || outputBuffer == null || bufferSize < 1) return INVALID_INPUTS
 
     var status = STATUS_OK
-    var payload = ""
-    runCatching {
-        payload = action(BridgeInput(input))
-    }.onFailure { failure ->
+    val bytes = try {
+        check(runtimeConfigured)
+        action(BridgeInput(input)).encodeToByteArray()
+    } catch (failure: Throwable) {
         status = STATUS_ERROR
-        payload = failure.message ?: "Unknown Kotlin error"
+        try {
+            (failure.message ?: "Unknown Kotlin error").encodeToByteArray()
+        } catch (_: Throwable) {
+            return INTERNAL_ERROR
+        }
     }
 
-    val bytes = payload.encodeToByteArray()
     val required = bytes.size + 1
     // Check that the output buffer is large enough before writing. We return the negative required size
     // if buffer insufficient to allow caller to adjust.
