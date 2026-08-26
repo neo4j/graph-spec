@@ -85,20 +85,16 @@ class Validations {
             RelationshipType
         )
 
-        @JsStatic
-        val mapping: List<Validation> = importReady + listOf(
-            NodeMappingKeyType
-        )
-
         // UPX `apps/import/.../data-model.utils.ts` - import-app-only bulk pass.
         @JsStatic
         val bulkImportReady: List<Validation> = listOf(
             NodeLabelToken,
-            RelationshipTypeToken
+            RelationshipTypeToken,
+            NodeMappingKeyType
         )
 
         @JsStatic
         val all: List<Validation> =
-            (core + kgbuilderReady + importReady + integrity + mapping + bulkImportReady).distinct()
+            (core + kgbuilderReady + importReady + integrity + bulkImportReady).distinct()
     }
 }
