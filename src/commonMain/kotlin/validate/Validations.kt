@@ -79,8 +79,10 @@ class Validations {
             NodeMappingKey
         )
 
+        // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
+        // model, called by both apps whenever a saved model is loaded/uploaded.
         @JsStatic
-        val integrity: List<Validation> = listOf(
+        val importParseIntegrity: List<Validation> = listOf(
             NodeLabel,
             RelationshipType
         )
@@ -95,6 +97,6 @@ class Validations {
 
         @JsStatic
         val all: List<Validation> =
-            (core + kgbuilderReady + importReady + integrity + bulkImportReady).distinct()
+            (core + kgbuilderReady + importReady + importParseIntegrity + bulkImportReady).distinct()
     }
 }
