@@ -54,50 +54,56 @@ func TestCallInputValidation(t *testing.T) {
 	testCases := []struct {
 		name    string
 		op      Op
-		inputs  []string
+		model   []byte
+		args    []string
 		wantErr string
 	}{
 		{
-			name:    "zero inputs",
+			name:    "empty model",
 			op:      Migrate,
-			inputs:  []string{},
+			model:   []byte{},
+			args:    []string{"0", "1", "2"},
 			wantErr: "empty input provided",
 		},
 		{
-			name:    "inputs containing empty value",
+			name:    "args containing empty value",
 			op:      Migrate,
-			inputs:  []string{"0", "1", "2", ""},
+			model:   []byte("0"),
+			args:    []string{"1", "2", ""},
 			wantErr: "empty input provided [3]",
 		},
 		{
-			name:    "not enough inputs",
+			name:    "not enough args",
 			op:      Migrate,
-			inputs:  []string{"0"},
-			wantErr: "migrate requires 4 inputs",
+			model:   []byte("0"),
+			args:    []string{"1"},
+			wantErr: "migrate requires 3 arguments",
 		},
 		{
-			name:    "too many inputs for migrate",
+			name:    "too many args for migrate",
 			op:      Migrate,
-			inputs:  []string{"0", "1", "2", "4", "5"},
-			wantErr: "migrate requires 4 inputs",
+			model:   []byte("0"),
+			args:    []string{"1", "2", "3", "4"},
+			wantErr: "migrate requires 3 arguments",
 		},
 		{
-			name:    "too many inputs for validate",
+			name:    "too many args for validate",
 			op:      Validate,
-			inputs:  []string{"0", "1"},
-			wantErr: "validate requires 1 input",
+			model:   []byte("0"),
+			args:    []string{"1"},
+			wantErr: "validate requires 0 arguments",
 		},
 		{
 			name:    "unknown operation",
 			op:      Op("unknown-op"),
-			inputs:  []string{"0"},
+			model:   []byte("0"),
 			wantErr: "unknown bridge call",
 		},
 	}
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			_, err := Call(tc.op, tc.inputs...)
+			_, err := Call(tc.op, tc.model, tc.args...)
 			require.ErrorContains(t, err, tc.wantErr)
 		})
 	}
@@ -107,7 +113,7 @@ func TestCallRetriedIfOutputBufferNotLargeEnough(t *testing.T) {
 	// An empty graph-spec model will get transformed to a fully initialised data model which
 	// will be far larger than the input model. This test checks that the client will successfully
 	// retry with the required buffer size in cases like these.
-	res, err := Call(Migrate, `{"version":"4.0.0"}`, "graph_spec", "data_model", "3.0.0")
+	res, err := Call(Migrate, []byte(`{"version":"4.0.0"}`), "graph_spec", "data_model", "3.0.0")
 	require.NotEmpty(t, res)
 	require.NoError(t, err)
 }

@@ -50,6 +50,43 @@ go build -tags graphspec_noembed ./...
 > The shared native lib must be provided either via automatic embedding or the `GRAPHDATAMODEL_LIB_PATH` var. If not 
 > available, e.g. for an unsupported platform and no `GRAPHDATAMODEL_LIB_PATH`, an error will be returned when run.
 
+### Configuring Memory
+
+Migration and validation run inside the Kotlin/Native library, which has its own heap and garbage collector. That heap
+is separate from the Go heap, so is invisible to `runtime.MemStats` and it is not bounded by `GOGC` or `GOMEMLIMIT`. 
+It _does_ count against the memory limit of the process or container, so a service that looks healthy in its own heap 
+profile can still be killed for exceeding that limit.
+
+The dominant cost is the object graph the library builds while transforming a document, not the document itself. A
+model is almost all structure and short strings, so the peak footprint runs at many multiples of the input size (up 
+to 80x). Size the memory limit from the largest model expected, rather than from Go heap measurements.
+
+That footprint is per call. Concurrent calls each hold their own, so N migrations in flight need N times the memory,
+and the heap ceiling below cannot help with it. A caller migrating large models concurrently should bound that 
+concurrency itself.
+
+#### Capping the native heap
+
+The native collector auto-tunes its heap target upwards as the heap grows. By default it has no an upper bound, so 
+transient garbage from a very large input model accumulates well past what the model needs. 
+
+The optional `GRAPHSPEC_MAX_HEAP_BYTES` environment variable bounds how far this autotuning goes. It can be helpful
+to ensure the native GC proactively clears garbage to avoid significant memory bloat, which becomes more of a problem
+with very large inputs.
+
+The value is in decimal bytes, and anything that is not a plain number (`512MB`, `512m`) is ignored without an error.
+
+```shell
+GRAPHSPEC_MAX_HEAP_BYTES=536870912   # 512MiB
+```
+
+The value is read once, on the first call into the library, and applies for the lifetime of the process. Setting it
+from Go with `os.Setenv` works, provided it happens before the first migration or validation call, but setting it in
+the container or service definition avoids the ordering question entirely.
+
+> [!NOTE]
+> Setting this too low can cause thrashing of the GC, adding significant latency.
+
 ## Development
 
 ### Building and testing

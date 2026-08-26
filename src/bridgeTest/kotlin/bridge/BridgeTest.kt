@@ -19,17 +19,14 @@ package bridge
 import codec.format.JsonFormat
 import codec.schema.SchemaMap
 import kotlinx.cinterop.ByteVar
+import kotlinx.cinterop.CArrayPointer
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.allocArray
 import kotlinx.cinterop.cstr
+import kotlinx.cinterop.get
 import kotlinx.cinterop.memScoped
-import kotlinx.cinterop.toKString
-import kotlinx.serialization.json.Json
 import kotlin.test.Test
-import kotlin.test.assertContains
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 @OptIn(ExperimentalForeignApi::class)
@@ -52,10 +49,9 @@ class BridgeTest {
             }
 
             assertTrue(resultSize > 0)
-            val response = Json.decodeFromString(BridgeResponse.serializer(), outputBuffer.toKString())
-            assertNull(response.error)
-            assertNotNull(response.data)
-            val output = format.decodeFromString(response.data) as SchemaMap
+            val (status, payload) = response(outputBuffer, resultSize)
+            assertEquals(STATUS_OK, status)
+            val output = format.decodeFromString(payload) as SchemaMap
             assertEquals(output["data"].toString(), "test")
             assertEquals(output["version"].toString(), "2")
         }
@@ -81,10 +77,9 @@ class BridgeTest {
                 }
 
             assertTrue(resultSize > 0)
-            val response = Json.decodeFromString(BridgeResponse.serializer(), outputBuffer.toKString())
-            assertNull(response.error)
-            assertNotNull(response.data)
-            val output = format.decodeFromString(response.data) as SchemaMap
+            val (status, payload) = response(outputBuffer, resultSize)
+            assertEquals(STATUS_OK, status)
+            val output = format.decodeFromString(payload) as SchemaMap
             assertEquals(output["data"].toString(), "test")
             assertEquals(output["version"].toString(), inputVersion)
         }
@@ -125,29 +120,70 @@ class BridgeTest {
             val resultSize = invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) { it[0] }
 
             // Should return a negative number indicating the required size
-            // As the response is wrapped in a BridgeResponse model it is bigger than input
-            assertTrue(resultSize <= input.length * -1)
+            assertEquals(-(input.encodeToByteArray().size + 1), resultSize)
+        }
+    }
+
+    @Test
+    fun testMultiByteUtf8Payload() {
+        val responsePayload = "aé€😀" // multi-byte characters (1+2+3+4=10bytes)
+        val byteArraySize = responsePayload.encodeToByteArray().size
+        val bufferSize = 1024
+
+        memScoped {
+            val inputPtr = "{}".cstr.getPointer(this)
+            val outputBuffer = allocArray<ByteVar>(bufferSize)
+
+            val resultSize =
+                invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) { responsePayload }
+
+            // The size from the response should be bytes, not characters
+            assertEquals(byteArraySize + 1, resultSize)
+            assertTrue(byteArraySize > responsePayload.length)
+            val (status, text) = response(outputBuffer, resultSize)
+            assertEquals(STATUS_OK, status)
+            assertEquals(responsePayload, text)
         }
     }
 
     @Test
     fun testKotlinExceptionThrownInAction() {
-        val input = "{\"version\":\"1\", \"data\":\"test\"}"
         val bufferSize = 1024
 
         memScoped {
-            val inputPtr = input.cstr.getPointer(this)
+            val inputPtr = "{}".cstr.getPointer(this)
             val outputBuffer = allocArray<ByteVar>(bufferSize)
 
-            val resultSize = invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) {
+            val exceptionResult = invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) {
                 throw RuntimeException("Something went wrong")
             }
 
-            assertTrue(resultSize > 0)
-            val response = Json.decodeFromString(BridgeResponse.serializer(), outputBuffer.toKString())
-            assertNull(response.data)
-            assertNotNull(response.error)
-            assertContains(response.error, "Something went wrong")
+            assertTrue(exceptionResult > 0)
+            val (status, payload) = response(outputBuffer, exceptionResult)
+            assertEquals(STATUS_ERROR, status)
+            assertEquals("Something went wrong", payload)
         }
     }
+
+    @Test
+    fun testKotlinErrorThrownInAction() {
+        val bufferSize = 1024
+
+        memScoped {
+            val inputPtr = "{}".cstr.getPointer(this)
+            val outputBuffer = allocArray<ByteVar>(bufferSize)
+
+            val resultSize = invokeBridge(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize) {
+                throw OutOfMemoryError("heap exhausted")
+            }
+
+            assertTrue(resultSize > 0)
+            val (status, payload) = response(outputBuffer, resultSize)
+            assertEquals(STATUS_ERROR, status)
+            assertEquals("heap exhausted", payload)
+        }
+    }
+
+    private fun response(buffer: CArrayPointer<ByteVar>, size: Int): Pair<Byte, String> =
+        buffer[0] to ByteArray(size - 1) { buffer[it + 1] }.decodeToString()
 }

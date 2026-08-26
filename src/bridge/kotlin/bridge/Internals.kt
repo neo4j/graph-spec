@@ -19,15 +19,43 @@ package bridge
 import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.cstr
-import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.addressOf
+import kotlinx.cinterop.plus
+import kotlinx.cinterop.set
 import kotlinx.cinterop.toKString
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
+import kotlinx.cinterop.usePinned
+import platform.posix.getenv
 import platform.posix.memcpy
+import kotlin.native.runtime.GC
+import kotlin.native.runtime.NativeRuntimeApi
 
-@Serializable
-data class BridgeResponse(val data: String? = null, val error: String? = null)
+// Status bytes written to output buffer indicating success or failure
+const val STATUS_OK: Byte = 0
+const val STATUS_ERROR: Byte = 1
+
+// Error response codes returned if output buffer cannot be written to
+const val INVALID_INPUTS = -1
+const val INTERNAL_ERROR = Int.MIN_VALUE
+
+// Optional env var, set by callers of the library, to cap the Kotlin/Native heap
+const val MAX_HEAP_ENV = "GRAPHSPEC_MAX_HEAP_BYTES"
+
+@OptIn(ExperimentalForeignApi::class, NativeRuntimeApi::class, ExperimentalStdlibApi::class)
+private val runtimeConfigured: Boolean by lazy {
+    getenv(MAX_HEAP_ENV)?.toKString()?.toLongOrNull()?.let { ceiling ->
+        GC.maxHeapBytes = ceiling
+        // pauseOnTargetHeapOverflow is explicitly left off. A ceiling below what a model genuinely needs then surfaces
+        // as an error the caller can report, rather than thread stalling waiting on the collector to free memory.
+        GC.pauseOnTargetHeapOverflow = false
+    }
+    true
+}
+
+@OptIn(ExperimentalForeignApi::class)
+class BridgeInput internal constructor(private val arguments: Array<out CPointer<ByteVar>?>) {
+    val size: Int get() = arguments.size
+    operator fun get(index: Int): String = arguments[index]!!.toKString()
+}
 
 /*
 Handles the Kotlin/Native bridge operations to safely invoke Kotlin methods from C.
@@ -39,39 +67,31 @@ fun invokeBridge(
     vararg input: CPointer<ByteVar>?,
     outputBuffer: CPointer<ByteVar>?,
     bufferSize: Int,
-    action: (List<String>) -> String
+    action: (BridgeInput) -> String
 ): Int {
-    if (input.any { it == null } || outputBuffer == null || bufferSize < 1) return -1
+    if (input.any { it == null } || outputBuffer == null || bufferSize < 1) return INVALID_INPUTS
 
-    val response = runCatching {
-        action(input.map { it!!.toKString() }.toList())
-    }.fold(
-        onSuccess = { data ->
-            BridgeResponse(data = data)
-        },
-        onFailure = { exception ->
-            BridgeResponse(error = exception.message ?: "Unknown Kotlin error")
+    var status = STATUS_OK
+    val bytes = try {
+        check(runtimeConfigured)
+        action(BridgeInput(input)).encodeToByteArray()
+    } catch (failure: Throwable) {
+        status = STATUS_ERROR
+        try {
+            (failure.message ?: "Unknown Kotlin error").encodeToByteArray()
+        } catch (_: Throwable) {
+            return INTERNAL_ERROR
         }
-    )
-
-    val jsonResp = Json.encodeToString(response)
-
-    // we use memScoped here to ensure that we don't need to do any manual memory management
-    // .cstr and getPointer() will allocate memory outside of Kotlin's GC scope, but memScoped
-    // automatically handles the freeing of memory when the block exits
-    return memScoped {
-        // convert to c-compatible null-terminated utf-8 string
-        val cstr = jsonResp.cstr
-
-        // check that the output buffer is large enough before writing as memScoped is a blunt tool
-        // we return the negative required size if buffer insufficient to allow caller to adjust
-        if (bufferSize < cstr.size) return@memScoped -cstr.size
-
-        // write to output buffer
-        memcpy(outputBuffer, cstr.getPointer(this), cstr.size.toULong())
-
-        // return the number of bytes the caller should actually care about (the JSON length)
-        // cstr.size includes the null terminator, so size - 1 is the JSON text length
-        cstr.size - 1
     }
+
+    val required = bytes.size + 1
+    // Check that the output buffer is large enough before writing. We return the negative required size
+    // if buffer insufficient to allow caller to adjust.
+    if (bufferSize < required) return -required
+
+    outputBuffer[0] = status
+    if (bytes.isNotEmpty()) {
+        bytes.usePinned { memcpy(outputBuffer + 1, it.addressOf(0), bytes.size.toULong()) }
+    }
+    return required
 }

@@ -29,13 +29,13 @@ const (
 // from [modelType] to graph model is not supported or the input model is malformed an error will
 // be returned.
 func ToGraphSpec(jsonModel string, modelType ModelType) (model.GraphModel, error) {
-	res, err := bridge.Call(bridge.Migrate, jsonModel, string(modelType), string(ModelTypeGraphSpec), string(ModelVersionGraphSpecLatest))
+	res, err := bridge.Call(bridge.Migrate, []byte(jsonModel), string(modelType), string(ModelTypeGraphSpec), string(ModelVersionGraphSpecLatest))
 	if err != nil {
 		return model.GraphModel{}, err
 	}
 
 	var graph model.GraphModel
-	if err := json.Unmarshal([]byte(res), &graph); err != nil {
+	if err := json.Unmarshal(res, &graph); err != nil {
 		return model.GraphModel{}, fmt.Errorf("failed to unmarshal into graph model: %s", err)
 	}
 	return graph, nil
@@ -49,9 +49,9 @@ func FromGraphSpec(model model.GraphModel, targetType ModelType, targetVersion M
 	if err != nil {
 		return "", err
 	}
-	res, err := bridge.Call(bridge.Migrate, string(bytes), string(ModelTypeGraphSpec), string(targetType), string(targetVersion))
+	res, err := bridge.Call(bridge.Migrate, bytes, string(ModelTypeGraphSpec), string(targetType), string(targetVersion))
 	if err != nil {
 		return "", err
 	}
-	return res, nil
+	return string(res), nil
 }
