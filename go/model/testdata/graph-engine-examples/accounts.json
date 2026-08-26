@@ -59,7 +59,7 @@
       },
       "key": [
         {
-          "column": "id"
+          "field": "id"
         }
       ]
     },
@@ -94,7 +94,7 @@
       },
       "key": [
         {
-          "column": "id"
+          "field": "id"
         }
       ]
     }
