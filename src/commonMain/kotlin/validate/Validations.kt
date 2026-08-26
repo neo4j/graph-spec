@@ -41,44 +41,64 @@ import kotlin.js.JsStatic
 @JsExport
 class Validations {
     companion object {
+        // Graph-spec validators added independent of any UPX call site.
         @JsStatic
         val core: List<Validation> = listOf(
-            // Nodes
+            NodeTypeConstraint,
+            RelationshipTypeConstraint,
             NodeConstraints,
+            RelationshipConstraints,
             NodeIndexesExists,
+            RelationshipIndexes,
+            NodeExistenceConstraint,
+            RelationshipExistenceConstraint,
+            RelationshipNodes
+        )
+
+        // UPX kg-builder `validateStructuredSchema` (schemas-validators/) - gates accepting
+        // an AI-generated schema before it's applied to the model.
+        @JsStatic
+        val kgbuilderReady: List<Validation> = listOf(
             NodeLabel,
-            NodeLabelToken,
             NodeProperties,
             NodeConstraintCoverage,
-            NodeTypeConstraint,
-            NodeExistenceConstraint,
             NodeKeyOverlap,
-
-            // Relationships
-            RelationshipNodes,
-            RelationshipIndexes,
-            RelationshipConstraints,
+            NodeExistenceConstraint,
             RelationshipType,
-            RelationshipTypeToken,
+            RelationshipKeyOverlap,
             RelationshipExistenceConstraint,
-            RelationshipTypeConstraint,
-            RelationshipKeyOverlap
+            RelationshipNodes
+        )
+
+        // UPX `getDataModelErrors` (errors.ts) - shared call site, gates "Run Import"
+        // in both kg-builder's data-model-slice.ts and import's data-model.ts.
+        @JsStatic
+        val importReady: List<Validation> = listOf(
+            NodeLabel,
+            RelationshipType,
+            NodeMappingKey
         )
 
         @JsStatic
         val integrity: List<Validation> = listOf(
             NodeLabel,
-            RelationshipType,
-            RelationshipNodes
+            RelationshipType
         )
 
         @JsStatic
-        val mapping: List<Validation> = core + listOf(
-            NodeMappingKey,
+        val mapping: List<Validation> = importReady + listOf(
             NodeMappingKeyType
         )
 
+        // UPX `apps/import/.../data-model.utils.ts` - import-app-only bulk pass.
         @JsStatic
-        val all: List<Validation> = (core + integrity + mapping).distinct()
+        val bulkImportReady: List<Validation> = listOf(
+            NodeLabelToken,
+            RelationshipTypeToken
+        )
+
+        @JsStatic
+        val all: List<Validation> =
+            (core + kgbuilderReady + importReady + integrity + mapping + bulkImportReady).distinct()
     }
 }
