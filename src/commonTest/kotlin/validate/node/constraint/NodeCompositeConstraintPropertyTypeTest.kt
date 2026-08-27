@@ -82,7 +82,7 @@ class NodeCompositeConstraintPropertyTypeTest {
 
     @Test
     fun `fail once per constraint when multiple properties are invalid`() {
-        // ARRANGE - the subject of the error is the constraint, not the properties
+        // the subject of the error is the constraint, not the properties
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf(
@@ -99,10 +99,9 @@ class NodeCompositeConstraintPropertyTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateConstraint(model, "personNode", node, "comp", node.constraints["comp"]!!, issues)
 
-        // ASSERT - one issue per constraint, not per property
+        // one issue per constraint, not per property
         assertEquals(1, issues.size)
         assertEquals("invalid_node_composite_constraint_property_type", issues.first().code)
         assertEquals("nodes.personNode.constraints.comp", issues.first().path)
@@ -110,7 +109,7 @@ class NodeCompositeConstraintPropertyTypeTest {
 
     @Test
     fun `pass when 1 property no name constraint has invalid type - draft composites are not type checked`() {
-        // ARRANGE - UPX: getBulkImportCompositeConstraintErrors filters properties.length >= 2 only
+        // UPX: getBulkImportCompositeConstraintErrors filters properties.length >= 2 only
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf("score" to Property(type = Neo4jType.FLOAT)),
@@ -124,10 +123,8 @@ class NodeCompositeConstraintPropertyTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateConstraint(model, "personNode", node, "comp", node.constraints["comp"]!!, issues)
 
-        // ASSERT
         assertTrue(
             issues.isEmpty(),
             "Expected no issues - draft composites (1 prop, no name) are not type checked in UPX"
@@ -136,7 +133,7 @@ class NodeCompositeConstraintPropertyTypeTest {
 
     @Test
     fun `fail when composite property is a list type`() {
-        // ARRANGE - UPX: Array.isArray(property.type) is invalid even for LIST<STRING>
+        // UPX: Array.isArray(property.type) is invalid even for LIST<STRING>
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf(
@@ -153,17 +150,15 @@ class NodeCompositeConstraintPropertyTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateConstraint(model, "personNode", node, "comp", node.constraints["comp"]!!, issues)
 
-        // ASSERT
         assertEquals(1, issues.size)
         assertEquals("invalid_node_composite_constraint_property_type", issues.first().code)
     }
 
     @Test
     fun `pass when composite references a missing property - skipped like UPX`() {
-        // ARRANGE - UPX logs an error and treats the missing ref as not invalid
+        // UPX logs an error and treats the missing ref as not invalid
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf("email" to Property(type = Neo4jType.STRING)),
@@ -177,10 +172,8 @@ class NodeCompositeConstraintPropertyTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateConstraint(model, "personNode", node, "comp", node.constraints["comp"]!!, issues)
 
-        // ASSERT
         assertTrue(issues.isEmpty(), "Expected no issues - missing property refs are skipped like UPX")
     }
 }
