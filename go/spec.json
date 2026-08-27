@@ -700,7 +700,19 @@
                 "propertyName": "type"
             }
         },
-        "FieldMapping": {
+        "PropertyName": {
+            "type": "object",
+            "properties": {
+                "property": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "property"
+            ],
+            "additionalProperties": false
+        },
+        "Field": {
             "type": "object",
             "properties": {
                 "column": {
@@ -719,30 +731,6 @@
                 "CREATE"
             ]
         },
-        "KeyProperty": {
-            "type": "object",
-            "properties": {
-                "property": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "property"
-            ],
-            "additionalProperties": false
-        },
-        "KeyField": {
-            "type": "object",
-            "properties": {
-                "field": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "field"
-            ],
-            "additionalProperties": false
-        },
         "NodeMapping": {
             "type": "object",
             "properties": {
@@ -759,7 +747,7 @@
                 "properties": {
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/$defs/FieldMapping"
+                        "$ref": "#/$defs/Field"
                     }
                 },
                 "mode": {
@@ -779,14 +767,14 @@
                             "type": "array",
                             "minItems": 1,
                             "items": {
-                                "$ref": "#/$defs/KeyProperty"
+                                "$ref": "#/$defs/PropertyName"
                             }
                         },
                         {
                             "type": "array",
                             "minItems": 1,
                             "items": {
-                                "$ref": "#/$defs/KeyField"
+                                "$ref": "#/$defs/Field"
                             }
                         }
                     ]
@@ -812,13 +800,13 @@
                 "propertyMappings": {
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/$defs/FieldMapping"
+                        "$ref": "#/$defs/Field"
                     }
                 },
                 "fieldMappings": {
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/$defs/FieldMapping"
+                        "$ref": "#/$defs/Field"
                     }
                 }
             },
@@ -863,7 +851,7 @@
                 "properties": {
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/$defs/FieldMapping"
+                        "$ref": "#/$defs/Field"
                     }
                 },
                 "mode": {
@@ -879,14 +867,14 @@
                             "type": "array",
                             "minItems": 1,
                             "items": {
-                                "$ref": "#/$defs/KeyProperty"
+                                "$ref": "#/$defs/PropertyName"
                             }
                         },
                         {
                             "type": "array",
                             "minItems": 1,
                             "items": {
-                                "$ref": "#/$defs/KeyField"
+                                "$ref": "#/$defs/Field"
                             }
                         }
                     ]
