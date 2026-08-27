@@ -85,7 +85,7 @@ class NodeConstraintDuplicatePropertySetTest {
 
     @Test
     fun `fail when property sets are equal in different order`() {
-        // ARRANGE - order-independent comparison like UPX isSamePropertyList
+        // order-independent comparison like UPX isSamePropertyList
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf("email" to Property(), "name" to Property()),
@@ -104,16 +104,14 @@ class NodeConstraintDuplicatePropertySetTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateNode(model, "personNode", node, issues)
 
-        // ASSERT
         assertEquals(2, issues.size)
     }
 
     @Test
     fun `pass when two single-property constraints share the same property`() {
-        // ARRANGE - 1-prop constraints are never checked (UPX: propertyIds.length < 2 returns false)
+        // 1-prop constraints are never checked (UPX: propertyIds.length < 2 returns false)
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf("email" to Property()),
@@ -132,10 +130,8 @@ class NodeConstraintDuplicatePropertySetTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateNode(model, "personNode", node, issues)
 
-        // ASSERT
         assertTrue(issues.isEmpty(), "1-prop constraints are never checked for duplicates")
     }
 }

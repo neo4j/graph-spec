@@ -24,6 +24,7 @@ import validate.node.NodeLabelToken
 import validate.node.NodeMappingKey
 import validate.node.NodeMappingKeyType
 import validate.node.NodeProperties
+import validate.node.constraint.NodeConstraintDuplicatePropertySet
 import validate.node.constraint.NodeConstraintProperties
 import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeKeyOverlap
@@ -78,7 +79,8 @@ class Validations {
             NodeLabel,
             RelationshipType,
             NodeMappingKey,
-            NodeConstraintProperties
+            NodeConstraintProperties,
+            NodeConstraintDuplicatePropertySet
         )
 
         // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
