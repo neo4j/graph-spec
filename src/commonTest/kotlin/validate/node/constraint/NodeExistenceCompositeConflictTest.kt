@@ -85,7 +85,7 @@ class NodeExistenceCompositeConflictTest {
 
     @Test
     fun `pass when other constraint has only 1 property`() {
-        // ARRANGE - UPX: other constraint must have properties.length >= 2 to conflict
+        // UPX: other constraint must have properties.length >= 2 to conflict
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf("email" to Property()),
@@ -104,16 +104,14 @@ class NodeExistenceCompositeConflictTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateNode(model, "personNode", node, issues)
 
-        // ASSERT
         assertTrue(issues.isEmpty(), "1-prop constraint is not composite, no conflict")
     }
 
     @Test
     fun `pass when other constraint is also existence type`() {
-        // ARRANGE - UPX: otherConstraint.constraintType !== 'propertyExistence' required
+        // UPX: otherConstraint.constraintType !== 'propertyExistence' required
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf("email" to Property(), "name" to Property()),
@@ -132,10 +130,8 @@ class NodeExistenceCompositeConflictTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateNode(model, "personNode", node, issues)
 
-        // ASSERT
         assertTrue(issues.isEmpty(), "Existence vs existence is not a composite conflict")
     }
 }
