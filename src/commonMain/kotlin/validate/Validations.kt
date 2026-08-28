@@ -24,6 +24,7 @@ import validate.node.NodeLabelToken
 import validate.node.NodeMappingKey
 import validate.node.NodeMappingKeyType
 import validate.node.NodeProperties
+import validate.node.constraint.NodeCompositeConstraintPropertyType
 import validate.node.constraint.NodeConstraintDuplicatePropertySet
 import validate.node.constraint.NodeConstraintProperties
 import validate.node.constraint.NodeExistenceCompositeConflict
@@ -98,7 +99,8 @@ class Validations {
         val bulkImportReady: List<Validation> = listOf(
             NodeLabelToken,
             RelationshipTypeToken,
-            NodeMappingKeyType
+            NodeMappingKeyType,
+            NodeCompositeConstraintPropertyType
         )
 
         @JsStatic
