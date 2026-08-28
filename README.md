@@ -44,3 +44,13 @@ go get github.com/neo4j/graph-spec/go/vX@vX.Y.Z
 > The Go library comes bundled with the Kotlin/Native library which is embedded and loaded automatically. 
 > The runtime needs `glibc` and `libstdc++`. The Go library can also be run without automatic embedding if needed 
 > (e.g. due to runtime restrictions) - see the [Go README](go/README.md).
+
+## Releasing
+
+Releases are automated via the Release workflow, triggered by merging a PR to `main` with one of these labels:
+
+| Label | Effect |
+|---|---|
+| `release:alpha` | Increment or create the dangling alpha line on the current base |
+
+No manual `npm publish` or Gradle task is needed - just merge a labelled PR.
