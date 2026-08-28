@@ -17,6 +17,3 @@
 package validate.constraint
 
 fun isCompositeConstraint(properties: Set<String>): Boolean = properties.size >= 2
-
-fun isDraftCompositeConstraint(properties: Set<String>, name: String?): Boolean =
-    properties.size == 1 && name.isNullOrBlank()

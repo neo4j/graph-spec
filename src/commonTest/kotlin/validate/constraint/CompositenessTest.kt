@@ -23,46 +23,17 @@ import kotlin.test.assertTrue
 class CompositenessTest {
 
     @Test
-    fun `0 properties is neither draft nor composite - it is empty`() {
-        // ARRANGE
-        val properties = emptySet<String>()
-        val name: String? = null
-
-        // ACT & ASSERT
-        assertFalse(isDraftCompositeConstraint(properties, name))
-        assertFalse(isCompositeConstraint(properties))
+    fun `0 properties is not composite`() {
+        assertFalse(isCompositeConstraint(emptySet()))
     }
 
     @Test
-    fun `1 property no name is draft composite not composite`() {
-        // ARRANGE
-        val properties = setOf("email")
-        val name: String? = null
-
-        // ACT & ASSERT
-        assertTrue(isDraftCompositeConstraint(properties, name))
-        assertFalse(isCompositeConstraint(properties))
+    fun `1 property is not composite`() {
+        assertFalse(isCompositeConstraint(setOf("email")))
     }
 
     @Test
-    fun `1 property with name is neither draft nor composite`() {
-        // ARRANGE
-        val properties = setOf("email")
-        val name = "uniq_email"
-
-        // ACT & ASSERT
-        assertFalse(isDraftCompositeConstraint(properties, name))
-        assertFalse(isCompositeConstraint(properties))
-    }
-
-    @Test
-    fun `2+ properties is composite not draft`() {
-        // ARRANGE
-        val properties = setOf("email", "name")
-        val name: String? = null
-
-        // ACT & ASSERT
-        assertTrue(isCompositeConstraint(properties))
-        assertFalse(isDraftCompositeConstraint(properties, name))
+    fun `2+ properties is composite`() {
+        assertTrue(isCompositeConstraint(setOf("email", "name")))
     }
 }
