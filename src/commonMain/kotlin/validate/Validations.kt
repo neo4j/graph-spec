@@ -24,6 +24,7 @@ import validate.node.NodeLabelToken
 import validate.node.NodeMappingKey
 import validate.node.NodeMappingKeyType
 import validate.node.NodeProperties
+import validate.node.constraint.NodeConstraintProperties
 import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeKeyOverlap
 import validate.node.constraint.NodeTypeConstraint
@@ -76,7 +77,8 @@ class Validations {
         val importReady: List<Validation> = listOf(
             NodeLabel,
             RelationshipType,
-            NodeMappingKey
+            NodeMappingKey,
+            NodeConstraintProperties
         )
 
         // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
