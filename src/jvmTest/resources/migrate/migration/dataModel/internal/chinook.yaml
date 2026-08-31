@@ -7,13 +7,13 @@ nodes:
       nodeProperty0: { type: "INTEGER", name: "album_id" }
       nodeProperty1: { type: "STRING", name: "title" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node0_0:
         type: "UNIQUE"
         label: "album"
         properties: ["nodeProperty0"]
         name: "unique_album_album_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node0_0:
         type: "TEXT"
         labels: ["album"]
         properties: ["nodeProperty0"]
@@ -26,13 +26,13 @@ nodes:
       nodeProperty0: { type: "INTEGER", name: "artist_id" }
       nodeProperty1: { type: "STRING", name: "name" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node1_0:
         type: "UNIQUE"
         label: "artist"
         properties: ["nodeProperty0"]
         name: "unique_artist_artist_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node1_0:
         type: "TEXT"
         labels: ["artist"]
         properties: ["nodeProperty0"]
@@ -55,13 +55,13 @@ nodes:
       nodeProperty10: { type: "STRING", name: "fax" }
       nodeProperty11: { type: "STRING", name: "email" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node2_0:
         type: "UNIQUE"
         label: "customer"
         properties: ["nodeProperty0"]
         name: "unique_customer_customer_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node2_0:
         type: "TEXT"
         labels: ["customer"]
         properties: ["nodeProperty0"]
@@ -86,13 +86,13 @@ nodes:
       nodeProperty12: { type: "STRING", name: "fax" }
       nodeProperty13: { type: "STRING", name: "email" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node3_0:
         type: "UNIQUE"
         label: "employee"
         properties: ["nodeProperty0"]
         name: "unique_employee_employee_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node3_0:
         type: "TEXT"
         labels: ["employee"]
         properties: ["nodeProperty0"]
@@ -105,13 +105,13 @@ nodes:
       nodeProperty0: { type: "INTEGER", name: "genre_id" }
       nodeProperty1: { type: "STRING", name: "name" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node4_0:
         type: "UNIQUE"
         label: "genre"
         properties: ["nodeProperty0"]
         name: "unique_genre_genre_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node4_0:
         type: "TEXT"
         labels: ["genre"]
         properties: ["nodeProperty0"]
@@ -130,13 +130,13 @@ nodes:
       nodeProperty6: { type: "STRING", name: "billing_postal_code" }
       nodeProperty7: { type: "FLOAT", name: "total" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node5_0:
         type: "UNIQUE"
         label: "invoice"
         properties: ["nodeProperty0"]
         name: "unique_invoice_invoice_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node5_0:
         type: "TEXT"
         labels: ["invoice"]
         properties: ["nodeProperty0"]
@@ -150,13 +150,13 @@ nodes:
       nodeProperty1: { type: "FLOAT", name: "unit_price" }
       nodeProperty2: { type: "INTEGER", name: "quantity" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node6_0:
         type: "UNIQUE"
         label: "invoice_line"
         properties: ["nodeProperty0"]
         name: "unique_invoice_line_invoice_line_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node6_0:
         type: "TEXT"
         labels: ["invoice_line"]
         properties: ["nodeProperty0"]
@@ -169,13 +169,13 @@ nodes:
       nodeProperty0: { type: "INTEGER", name: "media_type_id" }
       nodeProperty1: { type: "STRING", name: "name" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node7_0:
         type: "UNIQUE"
         label: "media_type"
         properties: ["nodeProperty0"]
         name: "unique_media_type_media_type_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node7_0:
         type: "TEXT"
         labels: ["media_type"]
         properties: ["nodeProperty0"]
@@ -188,13 +188,13 @@ nodes:
       nodeProperty0: { type: "INTEGER", name: "playlist_id" }
       nodeProperty1: { type: "STRING", name: "name" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node8_0:
         type: "UNIQUE"
         label: "playlist"
         properties: ["nodeProperty0"]
         name: "unique_playlist_playlist_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node8_0:
         type: "TEXT"
         labels: ["playlist"]
         properties: ["nodeProperty0"]
@@ -211,13 +211,13 @@ nodes:
       nodeProperty4: { type: "INTEGER", name: "bytes" }
       nodeProperty5: { type: "FLOAT", name: "unit_price" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node9_0:
         type: "UNIQUE"
         label: "track"
         properties: ["nodeProperty0"]
         name: "unique_track_track_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node9_0:
         type: "TEXT"
         labels: ["track"]
         properties: ["nodeProperty0"]
