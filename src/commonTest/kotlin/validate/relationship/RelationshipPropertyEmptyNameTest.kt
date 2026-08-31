@@ -1,0 +1,80 @@
+/*
+ * Copyright (c) "Neo4j"
+ * Neo4j Sweden AB [https://neo4j.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package validate.relationship
+
+import model.GraphModel
+import model.property.Property
+import model.relationship.Relationship
+import model.relationship.RelationshipTarget
+import validate.Issue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
+
+class RelationshipPropertyEmptyNameTest {
+
+    private val validator = RelationshipPropertyEmptyName
+    private val model = GraphModel("4.0.0")
+    private val target = RelationshipTarget(node = "n:1", label = "Person")
+
+    @Test
+    fun `fail when property name is blank`() {
+        val rel = Relationship(
+            type = "KNOWS",
+            from = target,
+            to = target,
+            properties = mutableMapOf("p:1" to Property(name = ""))
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateProperty(model, "r:1", rel, "p:1", rel.properties["p:1"]!!, issues)
+
+        assertEquals(1, issues.size)
+        assertEquals("missing_property_name", issues.first().code)
+    }
+
+    @Test
+    fun `fail when property name is null`() {
+        val rel = Relationship(
+            type = "KNOWS",
+            from = target,
+            to = target,
+            properties = mutableMapOf("p:1" to Property(name = null))
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateProperty(model, "r:1", rel, "p:1", rel.properties["p:1"]!!, issues)
+
+        assertEquals(1, issues.size)
+        assertEquals("missing_property_name", issues.first().code)
+    }
+
+    @Test
+    fun `pass when property has a valid name`() {
+        val rel = Relationship(
+            type = "KNOWS",
+            from = target,
+            to = target,
+            properties = mutableMapOf("p:1" to Property(name = "since"))
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateProperty(model, "r:1", rel, "p:1", rel.properties["p:1"]!!, issues)
+
+        assertTrue(issues.isEmpty())
+    }
+}
