@@ -100,14 +100,6 @@ class RelationshipEditorTest {
 
         RelationshipEditor.removeConstraintProperty(model, relId, constraintId, "p1")
         assertFalse(constraint.properties.contains("p1"))
-
-        // Modify Options
-        val dummy = StringValue("val").toJs()
-        RelationshipEditor.setConstraintOption(model, relId, constraintId, "key1", dummy)
-        assertEquals(dummy, constraint.options["key1"])
-
-        RelationshipEditor.removeConstraintOption(model, relId, constraintId, "key1")
-        assertNull(constraint.options["key1"])
     }
 
     @Test
@@ -123,11 +115,6 @@ class RelationshipEditorTest {
         // Add Property
         RelationshipEditor.addIndexProperty(model, relId, indexId, "b")
         assertEquals(2, index.properties.size)
-
-        // Set Option
-        val optVal = StringValue("spatial").toJs()
-        RelationshipEditor.setIndexOption(model, relId, indexId, "type", optVal)
-        assertEquals(optVal, index.options["type"])
     }
 
     @Test

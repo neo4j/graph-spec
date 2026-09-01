@@ -20,7 +20,7 @@ class RelationshipIndexEditorTest {
         assertEquals(type, index.type)
         assertEquals(1, index.properties.size)
         assertEquals("prop1", index.properties[0])
-        assertNotNull(index.options)
+        assertNull(index.options)
         assertNotNull(index.extensions)
     }
 
@@ -60,39 +60,6 @@ class RelationshipIndexEditorTest {
         // Remove non-existent property
         RelationshipIndexEditor.removeProperty(index, "not_here")
         assertEquals(2, index.properties.size)
-    }
-
-    @Test
-    fun testSetOption() {
-        val index = relationshipIndexJs("test", arrayOf())
-        val dummyValue = StringValue("val1").toJs()
-
-        // Set a new option
-        RelationshipIndexEditor.setOption(index, "provider", dummyValue)
-        assertEquals(dummyValue, index.options["provider"])
-
-        // Overwrite an existing option
-        val newValue = StringValue("val2").toJs()
-        RelationshipIndexEditor.setOption(index, "provider", newValue)
-        assertEquals(newValue, index.options["provider"])
-        assertEquals(1, keys(index.options).size)
-    }
-
-    @Test
-    fun testRemoveOption() {
-        val index = relationshipIndexJs("test", arrayOf())
-        val dummyValue = StringValue("val1").toJs()
-
-        RelationshipIndexEditor.setOption(index, "config", dummyValue)
-        assertTrue(keys(index.options).contains("config"))
-
-        // Remove the option
-        RelationshipIndexEditor.removeOption(index, "config")
-        assertFalse(keys(index.options).contains("config"))
-        assertEquals(0, keys(index.options).size)
-
-        // Ensure removing a non-existent key doesn't throw
-        RelationshipIndexEditor.removeOption(index, "non-existent")
     }
 
     @Test

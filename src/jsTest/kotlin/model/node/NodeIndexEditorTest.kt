@@ -81,22 +81,4 @@ class NodeIndexEditorTest {
         assertEquals(1, index.properties.size)
     }
 
-    @Test
-    fun testOptionsOperations() {
-        val index = createIndex()
-        val dummyValue = StringValue("test").toJs()
-
-        // Set Option
-        NodeIndexEditor.setOption(index, "spatial", dummyValue)
-        assertNotNull(index.options["spatial"])
-
-        // Update Option
-        val newValue = StringValue("new").toJs()
-        NodeIndexEditor.setOption(index, "spatial", newValue)
-        assertEquals(newValue, index.options["spatial"])
-
-        // Remove Option
-        NodeIndexEditor.removeOption(index, "spatial")
-        assertNull(index.options["spatial"])
-    }
 }

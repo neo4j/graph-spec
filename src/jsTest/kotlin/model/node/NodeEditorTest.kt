@@ -5,6 +5,8 @@ import model.GraphModelJs
 import model.extension.StringValue
 import model.extension.toJs
 import model.graphModelJs
+import model.index.FullTextIndexOptionJs
+import model.index.fullTextIndexOptionJs
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -143,12 +145,11 @@ class NodeEditorTest {
         assertNotEquals(true, node.indexes[indexId]?.properties?.contains("username"))
 
         // Test Options (ExtensionValueJs)
-        val dummyValue = StringValue("test").toJs()
-        NodeEditor.setIndexOption(model, nodeId, indexId, "analyzer", dummyValue)
-        assertNotNull(node.indexes[indexId]?.options?.get("analyzer"))
+        NodeEditor.setIndexOption(model, nodeId, indexId, fullTextIndexOptionJs(analyzer = "analyzer"))
+        assertEquals("analyzer", (node.indexes[indexId]?.options as? FullTextIndexOptionJs)?.analyzer)
 
-        NodeEditor.removeIndexOption(model, nodeId, indexId, "analyzer")
-        assertNull(node.indexes[indexId]?.options?.get("analyzer"))
+        NodeEditor.removeIndexOption(model, nodeId, indexId)
+        assertNull(node.indexes[indexId]?.options)
     }
 
     @Test
