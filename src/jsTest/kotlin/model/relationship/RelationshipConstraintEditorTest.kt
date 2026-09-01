@@ -20,7 +20,6 @@ class RelationshipConstraintEditorTest {
         assertEquals(type, constraint.type)
         assertEquals(2, constraint.properties.size)
         assertTrue(constraint.properties.contains("prop1"))
-        assertEquals(0, keys(constraint.options).size)
         assertEquals(0, keys(constraint.extensions).size)
     }
 
@@ -71,44 +70,10 @@ class RelationshipConstraintEditorTest {
     }
 
     @Test
-    fun testSetOption() {
-        val constraint = relationshipConstraintJs(type = "test")
-        val val1 = StringValue("value1").toJs()
-        val val2 = StringValue("value2").toJs()
-
-        // Set new option
-        RelationshipConstraintEditor.setOption(constraint, "limit", val1)
-        assertEquals(val1, constraint.options["limit"])
-
-        // Update existing option
-        RelationshipConstraintEditor.setOption(constraint, "limit", val2)
-        assertEquals(val2, constraint.options["limit"])
-        assertEquals(1, keys(constraint.options).size)
-    }
-
-    @Test
-    fun testRemoveOption() {
-        val constraint = relationshipConstraintJs(type = "test")
-        val val1 = StringValue("value1").toJs()
-
-        RelationshipConstraintEditor.setOption(constraint, "timeout", val1)
-        assertTrue(keys(constraint.options).contains("timeout"))
-
-        // Remove existing
-        RelationshipConstraintEditor.removeOption(constraint, "timeout")
-        assertFalse(keys(constraint.options).contains("timeout"))
-        assertEquals(0, keys(constraint.options).size)
-
-        // Remove non-existent (should not throw)
-        RelationshipConstraintEditor.removeOption(constraint, "anything")
-    }
-
-    @Test
     fun testEmptyDefaults() {
         val constraint = relationshipConstraintJs(type = "minimal")
 
         assertNotNull(constraint.properties)
-        assertNotNull(constraint.options)
         assertNotNull(constraint.extensions)
         assertEquals(0, constraint.properties.size)
     }

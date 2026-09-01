@@ -43,15 +43,5 @@ class RelationshipConstraintEditor {
                 constraint.properties = constraint.properties.dropAt(index)
             }
         }
-
-        @JsStatic
-        fun setOption(constraint: RelationshipConstraintJs, key: String, value: ExtensionValueJs) {
-            constraint.options[key] = value
-        }
-
-        @JsStatic
-        fun removeOption(constraint: RelationshipConstraintJs, key: String) {
-            constraint.options.remove(key)
-        }
     }
 }
