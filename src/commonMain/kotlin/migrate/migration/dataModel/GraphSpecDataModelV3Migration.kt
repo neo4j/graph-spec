@@ -358,7 +358,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "entityType" to entityType,
                 "nodeLabel" to if (entityType == "node") refOf(refId) else SchemaNull(),
                 "properties" to properties,
-                "relationshipType" to if (entityType == "relationship") refOf(refId) else SchemaNull()
+                "relationshipType" to if (entityType == "relationship") refOf(refId) else SchemaNull(),
+                "options" toNotEmpty element.mapOrNull("options")
             )
         }
     }

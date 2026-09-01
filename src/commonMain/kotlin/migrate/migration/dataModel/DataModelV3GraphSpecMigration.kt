@@ -158,7 +158,8 @@ class DataModelV3GraphSpecMigration :
                 "type" to indexType(index).name,
                 "labels" to listOf(label),
                 "properties" to index.listOfMapsOrNull("properties")?.map { it.ref() },
-                "name" to (index.stringOrNull("name") ?: "${type}Index${count - 1}")
+                "options" toNotEmpty index.mapOrNull("options"),
+                "name" to (index.stringOrNull("name") ?: "${type}Index${count - 1}"),
             )
         }
     }
