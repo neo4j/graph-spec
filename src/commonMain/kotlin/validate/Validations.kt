@@ -18,6 +18,7 @@ package validate
 
 import validate.node.NodeConstraintCoverage
 import validate.node.NodeConstraints
+import validate.node.NodeIndexConstraintNameConflict
 import validate.node.NodeIndexProperties
 import validate.node.NodeIndexesExists
 import validate.node.NodeLabel
@@ -91,6 +92,7 @@ class Validations {
             NodeConstraintProperties,
             NodeConstraintDuplicatePropertySet,
             NodeExistenceCompositeConflict,
+            NodeIndexConstraintNameConflict,
             TableFieldEmptyName,
             TableFieldDuplicateName,
             TableFieldType
