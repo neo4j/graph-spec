@@ -159,7 +159,7 @@ class DataModelV3GraphSpecMigration :
                 "labels" to listOf(label),
                 "properties" to index.listOfMapsOrNull("properties")?.map { it.ref() },
                 "options" toNotEmpty index.mapOrNull("options"),
-                "name" to (index.stringOrNull("name") ?: "${type}Index${count - 1}"),
+                "name" to (index.stringOrNull("name") ?: "${type}Index${count - 1}")
             )
         }
     }
