@@ -22,6 +22,7 @@ import model.addUnique
 import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.getOrThrow
+import model.index.IndexOptionJs
 import model.property.PropertyEditor
 import model.property.PropertyJs
 import model.property.propertyJs
@@ -190,7 +191,7 @@ class NodeEditor {
             type: String,
             labels: Array<String> = emptyArray(),
             properties: Array<String> = emptyArray(),
-            options: Record<String, ExtensionValueJs> = emptyRecord(),
+            options: IndexOptionJs? = null,
             extensions: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
@@ -230,15 +231,15 @@ class NodeEditor {
         }
 
         @JsStatic
-        fun setIndexOption(model: GraphModelJs, nodeId: String, indexId: String, key: String, value: ExtensionValueJs) {
+        fun setIndexOption(model: GraphModelJs, nodeId: String, indexId: String, options: IndexOptionJs) {
             val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.setOption(index, key, value)
+            NodeIndexEditor.setOption(index, options)
         }
 
         @JsStatic
-        fun removeIndexOption(model: GraphModelJs, nodeId: String, indexId: String, key: String) {
+        fun removeIndexOption(model: GraphModelJs, nodeId: String, indexId: String) {
             val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.removeOption(index, key)
+            NodeIndexEditor.removeOption(index)
         }
 
         private fun getIndex(model: GraphModelJs, nodeId: String, indexId: String): NodeIndexJs {
