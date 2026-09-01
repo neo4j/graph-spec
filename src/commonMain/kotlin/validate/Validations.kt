@@ -31,6 +31,7 @@ import validate.node.constraint.NodeExistenceCompositeConflict
 import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeKeyOverlap
 import validate.node.constraint.NodeTypeConstraint
+import validate.node.index.NodeIndexDuplicatePropertySet
 import validate.relationship.RelationshipConstraints
 import validate.relationship.RelationshipIndexes
 import validate.relationship.RelationshipNodes
@@ -86,6 +87,7 @@ class Validations {
             NodeMappingKey,
             NodeConstraintProperties,
             NodeConstraintDuplicatePropertySet,
+            NodeIndexDuplicatePropertySet,
             NodeExistenceCompositeConflict,
             TableFieldEmptyName,
             TableFieldDuplicateName,
