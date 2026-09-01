@@ -28,6 +28,7 @@ import validate.node.NodeMappingKeyType
 import validate.node.NodeProperties
 import validate.node.NodePropertyDuplicateName
 import validate.node.NodePropertyEmptyName
+import validate.node.NodePropertyVectorDimension
 import validate.node.constraint.NodeCompositeConstraintPropertyType
 import validate.node.constraint.NodeConstraintDuplicatePropertySet
 import validate.node.constraint.NodeConstraintProperties
@@ -41,6 +42,7 @@ import validate.relationship.RelationshipIndexes
 import validate.relationship.RelationshipNodes
 import validate.relationship.RelationshipPropertyDuplicateName
 import validate.relationship.RelationshipPropertyEmptyName
+import validate.relationship.RelationshipPropertyVectorDimension
 import validate.relationship.RelationshipType
 import validate.relationship.RelationshipTypeToken
 import validate.relationship.constraint.RelationshipExistenceConstraint
@@ -97,13 +99,15 @@ class Validations {
             NodeConstraintDuplicatePropertySet,
             NodeExistenceCompositeConflict,
             NodeIndexConstraintNameConflict,
-            TableColumnEmptyName,
-            TableColumnDuplicateName,
-            TableColumnType,
             NodePropertyEmptyName,
             NodePropertyDuplicateName,
+            NodePropertyVectorDimension,
             RelationshipPropertyEmptyName,
-            RelationshipPropertyDuplicateName
+            RelationshipPropertyDuplicateName,
+            RelationshipPropertyVectorDimension,
+            TableColumnEmptyName,
+            TableColumnDuplicateName,
+            TableColumnType
         )
 
         // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
