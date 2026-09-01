@@ -226,12 +226,7 @@ class RelationshipEditor {
         }
 
         @JsStatic
-        fun setIndexOption(
-            model: GraphModelJs,
-            relationshipId: String,
-            indexId: String,
-            options: IndexOptionJs
-        ) {
+        fun setIndexOption(model: GraphModelJs, relationshipId: String, indexId: String, options: IndexOptionJs) {
             val constraint = getIndex(model, relationshipId, indexId)
             RelationshipIndexEditor.setOption(constraint, options)
         }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) "Neo4j"
+ * Neo4j Sweden AB [https://neo4j.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package model.index
 
 import kotlinx.js.JsPlainObject
@@ -24,7 +40,7 @@ fun pointIndexOptionJs(
     wgs84Min: Array<Double> = arrayOf(-180.0, -90.0),
     wgs84Max: Array<Double> = arrayOf(180.0, 90.0),
     wgs843DMin: Array<Double> = arrayOf(-180.0, -90.0, -1000000.0),
-    wgs843DMax: Array<Double> = arrayOf(180.0, 90.0, 1000000.0),
+    wgs843DMax: Array<Double> = arrayOf(180.0, 90.0, 1000000.0)
 ): PointIndexOptionJs = jso {
     this.type = "POINT"
     this.cartesianMin = cartesianMin
@@ -45,7 +61,7 @@ fun PointIndexOption.toJs() = pointIndexOptionJs(
     wgs84Min = wgs84Min.toTypedArray(),
     wgs84Max = wgs84Max.toTypedArray(),
     wgs843DMin = wgs843DMin.toTypedArray(),
-    wgs843DMax = wgs843DMax.toTypedArray(),
+    wgs843DMax = wgs843DMax.toTypedArray()
 )
 
 fun PointIndexOptionJs.toClass() = PointIndexOption(
@@ -56,5 +72,5 @@ fun PointIndexOptionJs.toClass() = PointIndexOption(
     wgs84Min = wgs84Min.toDoubleArray(),
     wgs84Max = wgs84Max.toDoubleArray(),
     wgs843DMin = wgs843DMin.toDoubleArray(),
-    wgs843DMax = wgs843DMax.toDoubleArray(),
+    wgs843DMax = wgs843DMax.toDoubleArray()
 )
