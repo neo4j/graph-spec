@@ -23,6 +23,8 @@ import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
+import model.index.IndexOptionJs
+import model.index.toClass
 import model.jso
 import model.type.ConstraintType
 
@@ -31,32 +33,27 @@ import model.type.ConstraintType
 external interface RelationshipConstraintJs {
     var type: String
     var properties: Array<String>
-    val options: Record<String, ExtensionValueJs>
     val extensions: Record<String, ExtensionValueJs>
 }
 
 fun relationshipConstraintJs(
     type: String,
     properties: Array<String> = emptyArray(),
-    options: Record<String, ExtensionValueJs> = emptyRecord(),
     extensions: Record<String, ExtensionValueJs> = emptyRecord()
 ): RelationshipConstraintJs = jso {
     this.type = type
     this.properties = properties
-    this.options = options
     this.extensions = extensions
 }
 
 fun RelationshipConstraint.toJs() = relationshipConstraintJs(
     type = type.name,
     properties = properties.toTypedArray(),
-    options = options.associateBy { _, value -> value.toJs() },
     extensions = extensions.associateBy { _, value -> value.toJs() }
 )
 
 fun RelationshipConstraintJs.toClass() = RelationshipConstraint(
     type = ConstraintType.valueOf(type),
     properties = properties.toMutableSet(),
-    options = options.associateBy { _, value -> value.toClass() },
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
 )
