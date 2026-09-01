@@ -23,6 +23,9 @@ import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
+import model.index.IndexOptionJs
+import model.index.toClass
+import model.index.toJs
 import model.jso
 import model.type.IndexType
 
@@ -32,7 +35,7 @@ external interface NodeIndexJs {
     var type: String
     var labels: Array<String>
     var properties: Array<String>
-    val options: Record<String, ExtensionValueJs>
+    var options: IndexOptionJs?
     val extensions: Record<String, ExtensionValueJs>
 }
 
@@ -40,7 +43,7 @@ fun nodeIndexJs(
     type: String,
     labels: Array<String> = emptyArray(),
     properties: Array<String> = emptyArray(),
-    options: Record<String, ExtensionValueJs> = emptyRecord(),
+    options: IndexOptionJs? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord()
 ): NodeIndexJs = jso {
     this.type = type
@@ -54,7 +57,7 @@ fun NodeIndex.toJs() = nodeIndexJs(
     type = type.name,
     labels = labels.toTypedArray(),
     properties = properties.toTypedArray(),
-    options = options.associateBy { _, value -> value.toJs() },
+    options = options?.toJs(),
     extensions = extensions.associateBy { _, value -> value.toJs() }
 )
 
@@ -62,6 +65,6 @@ fun NodeIndexJs.toClass() = NodeIndex(
     type = IndexType.valueOf(type),
     labels = labels.toMutableSet(),
     properties = properties.toMutableSet(),
-    options = options.associateBy { _, value -> value.toClass() },
+    options = options?.toClass(),
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

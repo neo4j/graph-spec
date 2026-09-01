@@ -22,6 +22,7 @@ import model.addUnique
 import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.getOrThrow
+import model.index.IndexOptionJs
 import model.property.PropertyEditor
 import model.property.PropertyJs
 import model.property.propertyJs
@@ -141,12 +142,11 @@ class RelationshipEditor {
             relationshipId: String,
             type: String,
             properties: Array<String> = emptyArray(),
-            options: Record<String, ExtensionValueJs> = emptyRecord(),
             extensions: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             return relationship.constraints.addUnique("constraint") {
-                relationshipConstraintJs(type, properties, options, extensions)
+                relationshipConstraintJs(type, properties, extensions)
             }
         }
 
@@ -178,24 +178,6 @@ class RelationshipEditor {
             RelationshipConstraintEditor.removeProperty(constraint, propertyId)
         }
 
-        @JsStatic
-        fun setConstraintOption(
-            model: GraphModelJs,
-            relationshipId: String,
-            constraintId: String,
-            key: String,
-            value: ExtensionValueJs
-        ) {
-            val constraint = getConstraint(model, relationshipId, constraintId)
-            RelationshipConstraintEditor.setOption(constraint, key, value)
-        }
-
-        @JsStatic
-        fun removeConstraintOption(model: GraphModelJs, relationshipId: String, constraintId: String, key: String) {
-            val constraint = getConstraint(model, relationshipId, constraintId)
-            RelationshipConstraintEditor.removeOption(constraint, key)
-        }
-
         private fun getConstraint(
             model: GraphModelJs,
             relationshipId: String,
@@ -216,7 +198,7 @@ class RelationshipEditor {
             relationshipId: String,
             type: String,
             properties: Array<String> = emptyArray(),
-            options: Record<String, ExtensionValueJs> = emptyRecord(),
+            options: IndexOptionJs? = null,
             extensions: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
@@ -244,21 +226,15 @@ class RelationshipEditor {
         }
 
         @JsStatic
-        fun setIndexOption(
-            model: GraphModelJs,
-            relationshipId: String,
-            indexId: String,
-            key: String,
-            value: ExtensionValueJs
-        ) {
+        fun setIndexOption(model: GraphModelJs, relationshipId: String, indexId: String, options: IndexOptionJs) {
             val constraint = getIndex(model, relationshipId, indexId)
-            RelationshipIndexEditor.setOption(constraint, key, value)
+            RelationshipIndexEditor.setOption(constraint, options)
         }
 
         @JsStatic
-        fun removeIndexOption(model: GraphModelJs, relationshipId: String, indexId: String, key: String) {
+        fun removeIndexOption(model: GraphModelJs, relationshipId: String, indexId: String) {
             val constraint = getIndex(model, relationshipId, indexId)
-            RelationshipIndexEditor.removeOption(constraint, key)
+            RelationshipIndexEditor.removeOption(constraint)
         }
 
         private fun getIndex(model: GraphModelJs, relationshipId: String, indexId: String): RelationshipIndexJs {

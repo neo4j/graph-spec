@@ -18,6 +18,7 @@ package model.relationship
 
 import model.dropAt
 import model.extension.ExtensionValueJs
+import model.index.IndexOptionJs
 import model.remove
 import kotlin.collections.plus
 
@@ -45,13 +46,13 @@ class RelationshipIndexEditor {
         }
 
         @JsStatic
-        fun setOption(constraint: RelationshipIndexJs, key: String, value: ExtensionValueJs) {
-            constraint.options[key] = value
+        fun setOption(constraint: RelationshipIndexJs, options: IndexOptionJs) {
+            constraint.options = options
         }
 
         @JsStatic
-        fun removeOption(constraint: RelationshipIndexJs, key: String) {
-            constraint.options.remove(key)
+        fun removeOption(constraint: RelationshipIndexJs) {
+            constraint.options = null
         }
     }
 }

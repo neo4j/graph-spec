@@ -14,25 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.relationship
+package model.index
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
-import model.index.IndexOption
 import model.type.IndexType
-import model.type.Named
 import kotlin.js.JsExport
 
+@Serializable(with = IndexOptionSerializer::class)
 @JsExport
-@Serializable
-@SerialName("RelationshipIndex")
-data class RelationshipIndex(
-    var type: IndexType,
-    val properties: MutableSet<String>,
-    val options: IndexOption? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
-    override var name: String? = null
-) : Extensions,
-    Named
+@SerialName("IndexOption")
+sealed interface IndexOption {
+    val type: IndexType
+}

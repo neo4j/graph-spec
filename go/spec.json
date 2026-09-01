@@ -395,10 +395,14 @@
                     }
                 },
                 "options": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/$defs/IndexOption"
+                        }
+                    ]
                 },
                 "extensions": {
                     "type": "object",
@@ -428,6 +432,151 @@
                 "VECTOR",
                 "LOOKUP"
             ]
+        },
+        "IndexOption": {
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/FullTextIndexOption"
+                },
+                {
+                    "$ref": "#/$defs/PointIndexOption"
+                },
+                {
+                    "$ref": "#/$defs/VectorIndexOption"
+                }
+            ],
+            "discriminator": {
+                "propertyName": "type"
+            }
+        },
+        "FullTextIndexOption": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/IndexType"
+                },
+                "fulltext.default_analyzer": {
+                    "type": "string"
+                },
+                "fulltext.analyzer": {
+                    "type": "string",
+                    "nullable": true
+                },
+                "fulltext.eventually_consistent": {
+                    "type": "boolean"
+                },
+                "fulltext.eventually_consistent_apply_parallelism": {
+                    "type": "integer"
+                },
+                "fulltext.eventually_consistent_refresh_interval": {
+                    "type": "string"
+                },
+                "fulltext.eventually_consistent_refresh_parallelism": {
+                    "type": "integer"
+                },
+                "fulltext.eventually_consistent_index_update_queue_max_length": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "PointIndexOption": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/IndexType"
+                },
+                "spatial.cartesian.min": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "spatial.cartesian.max": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "spatial.cartesian-3d.min": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "spatial.cartesian-3d.max": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "spatial.wgs-84.min": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "spatial.wgs-84.max": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "spatial.wgs-84-3d.min": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "spatial.wgs-84-3d.max": {
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
+        "VectorIndexOption": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/IndexType"
+                },
+                "vector.dimensions": {
+                    "type": "integer",
+                    "nullable": true
+                },
+                "vector.similarity_function": {
+                    "type": "string"
+                },
+                "vector.default_search_expansion_factor": {
+                    "type": "number",
+                    "nullable": true
+                },
+                "vector.quantization.enabled": {
+                    "type": "boolean"
+                },
+                "vector.quantization.type": {
+                    "type": "string"
+                },
+                "vector.hnsw.m": {
+                    "type": "integer"
+                },
+                "vector.hnsw.ef_construction": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
         },
         "Relationship": {
             "type": "object",
@@ -508,12 +657,6 @@
                         "type": "string"
                     }
                 },
-                "options": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
-                },
                 "extensions": {
                     "type": "object",
                     "additionalProperties": {
@@ -544,10 +687,14 @@
                     }
                 },
                 "options": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/$defs/IndexOption"
+                        }
+                    ]
                 },
                 "extensions": {
                     "type": "object",
