@@ -1,6 +1,9 @@
 package migrate.migration.dataModel
 
 import GraphSpec
+import kotlinx.serialization.json.Json
+import model.index.IndexOption
+import model.index.VectorIndexOption
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import java.io.File

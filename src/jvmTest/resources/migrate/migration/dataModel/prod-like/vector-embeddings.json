@@ -46,7 +46,17 @@
           "entityType": "node",
           "nodeLabel": { "$ref": "#nl:0" },
           "relationshipType": null,
-          "properties": [{ "$ref": "#p:0_1" }]
+          "properties": [{ "$ref": "#p:0_1" }],
+          "options": {
+            "type": "VECTOR",
+            "vector.default_search_expansion_factor": null,
+            "vector.dimensions": 123,
+            "vector.hnsw.ef_construction": 100,
+            "vector.hnsw.m": 16,
+            "vector.quantization.enabled": true,
+            "vector.quantization.type": "scalar",
+            "vector.similarity_function": "euclidean"
+          }
         }
       ]
     }
