@@ -177,7 +177,7 @@ relationships:
 tables:
   album:
     source: "cloud"
-    fields:
+    columns:
       album_id:
         type: "INT"
         suggested: "INTEGER"
@@ -193,13 +193,13 @@ tables:
     primaryKeys: ["album_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["artist_id"]
+        columns: ["artist_id"]
         references:
           table: "artist"
-          fields: ["artist_id"]
+          columns: ["artist_id"]
   artist:
     source: "cloud"
-    fields:
+    columns:
       artist_id:
         type: "INT"
         suggested: "INTEGER"
@@ -211,7 +211,7 @@ tables:
     primaryKeys: ["artist_id"]
   customer:
     source: "cloud"
-    fields:
+    columns:
       customer_id:
         type: "INT"
         suggested: "INTEGER"
@@ -267,13 +267,13 @@ tables:
     primaryKeys: ["customer_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["support_rep_id"]
+        columns: ["support_rep_id"]
         references:
           table: "employee"
-          fields: ["employee_id"]
+          columns: ["employee_id"]
   employee:
     source: "cloud"
-    fields:
+    columns:
       employee_id:
         type: "INT"
         suggested: "INTEGER"
@@ -337,13 +337,13 @@ tables:
     primaryKeys: ["employee_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["reports_to"]
+        columns: ["reports_to"]
         references:
           table: "employee"
-          fields: ["employee_id"]
+          columns: ["employee_id"]
   genre:
     source: "cloud"
-    fields:
+    columns:
       genre_id:
         type: "INT"
         suggested: "INTEGER"
@@ -355,7 +355,7 @@ tables:
     primaryKeys: ["genre_id"]
   invoice:
     source: "cloud"
-    fields:
+    columns:
       invoice_id:
         type: "INT"
         suggested: "INTEGER"
@@ -395,13 +395,13 @@ tables:
     primaryKeys: ["invoice_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["customer_id"]
+        columns: ["customer_id"]
         references:
           table: "customer"
-          fields: ["customer_id"]
+          columns: ["customer_id"]
   invoice_line:
     source: "cloud"
-    fields:
+    columns:
       invoice_line_id:
         type: "INT"
         suggested: "INTEGER"
@@ -425,18 +425,18 @@ tables:
     primaryKeys: ["invoice_line_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["invoice_id"]
+        columns: ["invoice_id"]
         references:
           table: "invoice"
-          fields: ["invoice_id"]
+          columns: ["invoice_id"]
       foreignKey2:
-        fields: ["track_id"]
+        columns: ["track_id"]
         references:
           table: "track"
-          fields: ["track_id"]
+          columns: ["track_id"]
   media_type:
     source: "cloud"
-    fields:
+    columns:
       media_type_id:
         type: "INT"
         suggested: "INTEGER"
@@ -448,7 +448,7 @@ tables:
     primaryKeys: ["media_type_id"]
   playlist:
     source: "cloud"
-    fields:
+    columns:
       playlist_id:
         type: "INT"
         suggested: "INTEGER"
@@ -460,7 +460,7 @@ tables:
     primaryKeys: ["playlist_id"]
   playlist_track:
     source: "cloud"
-    fields:
+    columns:
       playlist_id:
         type: "INT"
         suggested: "INTEGER"
@@ -472,18 +472,18 @@ tables:
     primaryKeys: ["playlist_id", "track_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["playlist_id"]
+        columns: ["playlist_id"]
         references:
           table: "playlist"
-          fields: ["playlist_id"]
+          columns: ["playlist_id"]
       foreignKey2:
-        fields: ["track_id"]
+        columns: ["track_id"]
         references:
           table: "track"
-          fields: ["track_id"]
+          columns: ["track_id"]
   track:
     source: "cloud"
-    fields:
+    columns:
       track_id:
         type: "INT"
         suggested: "INTEGER"
@@ -523,211 +523,211 @@ tables:
     primaryKeys: ["track_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["album_id"]
+        columns: ["album_id"]
         references:
           table: "album"
-          fields: ["album_id"]
+          columns: ["album_id"]
       foreignKey2:
-        fields: ["genre_id"]
+        columns: ["genre_id"]
         references:
           table: "genre"
-          fields: ["genre_id"]
+          columns: ["genre_id"]
       foreignKey3:
-        fields: ["media_type_id"]
+        columns: ["media_type_id"]
         references:
           table: "media_type"
-          fields: ["media_type_id"]
+          columns: ["media_type_id"]
 mappings:
   - node: "album"
     table: "album"
     properties:
-      album_id: { field: "album_id" }
-      title: { field: "title" }
+      album_id: { column: "album_id" }
+      title: { column: "title" }
     key: ["album_id"]
   - node: "artist"
     table: "artist"
     properties:
-      artist_id: { field: "artist_id" }
-      name: { field: "name" }
+      artist_id: { column: "artist_id" }
+      name: { column: "name" }
     key: ["artist_id"]
   - node: "customer"
     table: "customer"
     properties:
-      customer_id: { field: "customer_id" }
-      first_name: { field: "first_name" }
-      last_name: { field: "last_name" }
-      company: { field: "company" }
-      address: { field: "address" }
-      city: { field: "city" }
-      state: { field: "state" }
-      country: { field: "country" }
-      postal_code: { field: "postal_code" }
-      phone: { field: "phone" }
-      fax: { field: "fax" }
-      email: { field: "email" }
+      customer_id: { column: "customer_id" }
+      first_name: { column: "first_name" }
+      last_name: { column: "last_name" }
+      company: { column: "company" }
+      address: { column: "address" }
+      city: { column: "city" }
+      state: { column: "state" }
+      country: { column: "country" }
+      postal_code: { column: "postal_code" }
+      phone: { column: "phone" }
+      fax: { column: "fax" }
+      email: { column: "email" }
     key: ["customer_id"]
   - node: "employee"
     table: "employee"
     properties:
-      employee_id: { field: "employee_id" }
-      last_name: { field: "last_name" }
-      first_name: { field: "first_name" }
-      title: { field: "title" }
-      birth_date: { field: "birth_date" }
-      hire_date: { field: "hire_date" }
-      address: { field: "address" }
-      city: { field: "city" }
-      state: { field: "state" }
-      country: { field: "country" }
-      postal_code: { field: "postal_code" }
-      phone: { field: "phone" }
-      fax: { field: "fax" }
-      email: { field: "email" }
+      employee_id: { column: "employee_id" }
+      last_name: { column: "last_name" }
+      first_name: { column: "first_name" }
+      title: { column: "title" }
+      birth_date: { column: "birth_date" }
+      hire_date: { column: "hire_date" }
+      address: { column: "address" }
+      city: { column: "city" }
+      state: { column: "state" }
+      country: { column: "country" }
+      postal_code: { column: "postal_code" }
+      phone: { column: "phone" }
+      fax: { column: "fax" }
+      email: { column: "email" }
     key: ["employee_id"]
   - node: "genre"
     table: "genre"
     properties:
-      genre_id: { field: "genre_id" }
-      name: { field: "name" }
+      genre_id: { column: "genre_id" }
+      name: { column: "name" }
     key: ["genre_id"]
   - node: "invoice"
     table: "invoice"
     properties:
-      invoice_id: { field: "invoice_id" }
-      invoice_date: { field: "invoice_date" }
-      billing_address: { field: "billing_address" }
-      billing_city: { field: "billing_city" }
-      billing_state: { field: "billing_state" }
-      billing_country: { field: "billing_country" }
-      billing_postal_code: { field: "billing_postal_code" }
-      total: { field: "total" }
+      invoice_id: { column: "invoice_id" }
+      invoice_date: { column: "invoice_date" }
+      billing_address: { column: "billing_address" }
+      billing_city: { column: "billing_city" }
+      billing_state: { column: "billing_state" }
+      billing_country: { column: "billing_country" }
+      billing_postal_code: { column: "billing_postal_code" }
+      total: { column: "total" }
     key: ["invoice_id"]
   - node: "invoice_line"
     table: "invoice_line"
     properties:
-      invoice_line_id: { field: "invoice_line_id" }
-      unit_price: { field: "unit_price" }
-      quantity: { field: "quantity" }
+      invoice_line_id: { column: "invoice_line_id" }
+      unit_price: { column: "unit_price" }
+      quantity: { column: "quantity" }
     key: ["invoice_line_id"]
   - node: "media_type"
     table: "media_type"
     properties:
-      media_type_id: { field: "media_type_id" }
-      name: { field: "name" }
+      media_type_id: { column: "media_type_id" }
+      name: { column: "name" }
     key: ["media_type_id"]
   - node: "playlist"
     table: "playlist"
     properties:
-      playlist_id: { field: "playlist_id" }
-      name: { field: "name" }
+      playlist_id: { column: "playlist_id" }
+      name: { column: "name" }
     key: ["playlist_id"]
   - node: "track"
     table: "track"
     properties:
-      track_id: { field: "track_id" }
-      name: { field: "name" }
-      composer: { field: "composer" }
-      milliseconds: { field: "milliseconds" }
-      bytes: { field: "bytes" }
-      unit_price: { field: "unit_price" }
+      track_id: { column: "track_id" }
+      name: { column: "name" }
+      composer: { column: "composer" }
+      milliseconds: { column: "milliseconds" }
+      bytes: { column: "bytes" }
+      unit_price: { column: "unit_price" }
     key: ["track_id"]
   - relationship: "ARTIST"
     table: "album"
     from:
       node: "album"
       properties:
-        album_id: { field: "album_id" }
+        album_id: { column: "album_id" }
     to:
       node: "artist"
       properties:
-        artist_id: { field: "artist_id" }
+        artist_id: { column: "artist_id" }
   - relationship: "EMPLOYEE"
     table: "customer"
     from:
       node: "customer"
       properties:
-        customer_id: { field: "customer_id" }
+        customer_id: { column: "customer_id" }
     to:
       node: "employee"
       properties:
-        employee_id: { field: "support_rep_id" }
+        employee_id: { column: "support_rep_id" }
   - relationship: "EMPLOYEE2"
     table: "employee"
     from:
       node: "employee"
       properties:
-        employee_id: { field: "employee_id" }
+        employee_id: { column: "employee_id" }
     to:
       node: "employee"
       properties:
-        employee_id: { field: "reports_to" }
+        employee_id: { column: "reports_to" }
   - relationship: "CUSTOMER"
     table: "invoice"
     from:
       node: "invoice"
       properties:
-        invoice_id: { field: "invoice_id" }
+        invoice_id: { column: "invoice_id" }
     to:
       node: "customer"
       properties:
-        customer_id: { field: "customer_id" }
+        customer_id: { column: "customer_id" }
   - relationship: "INVOICE"
     table: "invoice_line"
     from:
       node: "invoice_line"
       properties:
-        invoice_line_id: { field: "invoice_line_id" }
+        invoice_line_id: { column: "invoice_line_id" }
     to:
       node: "invoice"
       properties:
-        invoice_id: { field: "invoice_id" }
+        invoice_id: { column: "invoice_id" }
   - relationship: "TRACK"
     table: "invoice_line"
     from:
       node: "invoice_line"
       properties:
-        invoice_line_id: { field: "invoice_line_id" }
+        invoice_line_id: { column: "invoice_line_id" }
     to:
       node: "track"
       properties:
-        track_id: { field: "track_id" }
+        track_id: { column: "track_id" }
   - relationship: "TRACK2"
     table: "playlist_track"
     from:
       node: "playlist"
       properties:
-        playlist_id: { field: "playlist_id" }
+        playlist_id: { column: "playlist_id" }
     to:
       node: "track"
       properties:
-        track_id: { field: "track_id" }
+        track_id: { column: "track_id" }
   - relationship: "ALBUM"
     table: "track"
     from:
       node: "track"
       properties:
-        track_id: { field: "track_id" }
+        track_id: { column: "track_id" }
     to:
       node: "album"
       properties:
-        album_id: { field: "album_id" }
+        album_id: { column: "album_id" }
   - relationship: "GENRE"
     table: "track"
     from:
       node: "track"
       properties:
-        track_id: { field: "track_id" }
+        track_id: { column: "track_id" }
     to:
       node: "genre"
       properties:
-        genre_id: { field: "genre_id" }
+        genre_id: { column: "genre_id" }
   - relationship: "MEDIA_TYPE"
     table: "track"
     from:
       node: "track"
       properties:
-        track_id: { field: "track_id" }
+        track_id: { column: "track_id" }
     to:
       node: "media_type"
       properties:
-        media_type_id: { field: "media_type_id" }
+        media_type_id: { column: "media_type_id" }

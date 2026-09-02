@@ -18,24 +18,30 @@ package validate.table
 
 import model.GraphModel
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 
-object TableFieldEmptyName : TableValidation {
-    override fun validateTableField(
+object TableColumnDuplicateName : TableValidation {
+    override fun validateTableColumn(
         model: GraphModel,
         tableId: String,
         table: Table,
-        fieldId: String,
-        field: TableField,
+        columnId: String,
+        column: TableColumn,
         issues: MutableList<Issue>
     ) {
-        if (field.name.isNullOrBlank()) {
+        val name = column.name ?: return
+        if (name.isBlank()) return
+        // UPX findArrayDuplicates + includes flags ALL fields with a duplicated name
+        val isDuplicate = table.columns.any { (otherId, other) ->
+            otherId != columnId && other.name == name
+        }
+        if (isDuplicate) {
             issues.add(
                 Issue(
-                    code = "missing_table_field_name",
-                    message = "Missing name for table field '$fieldId'",
-                    path = "tables.$tableId.fields.$fieldId.name"
+                    code = "duplicate_table_column_name",
+                    message = "Duplicate column name '$name' in table '$tableId'",
+                    path = "tables.$tableId.columns.$columnId.name"
                 )
             )
         }

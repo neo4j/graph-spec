@@ -8,37 +8,37 @@ import kotlin.test.assertTrue
 class ForeignKeyEditorTest {
 
     @Test
-    fun testAddField_whenNew_addsField() {
+    fun testAddColumn_whenNew_addsColumn() {
         val fk = foreignKeyJs(arrayOf("user_id"), foreignKeyReferenceJs("users"))
-        ForeignKeyEditor.addField(fk, "org_id")
+        ForeignKeyEditor.addColumn(fk, "org_id")
 
-        assertEquals(2, fk.fields.size)
-        assertTrue(fk.fields.contains("org_id"))
+        assertEquals(2, fk.columns.size)
+        assertTrue(fk.columns.contains("org_id"))
     }
 
     @Test
-    fun testAddField_whenDuplicate_doesNotAdd() {
+    fun testAddColumn_whenDuplicate_doesNotAdd() {
         val fk = foreignKeyJs(arrayOf("user_id"), foreignKeyReferenceJs("users"))
-        ForeignKeyEditor.addField(fk, "user_id")
+        ForeignKeyEditor.addColumn(fk, "user_id")
 
-        assertEquals(1, fk.fields.size)
+        assertEquals(1, fk.columns.size)
     }
 
     @Test
-    fun testRemoveField_whenExisting_removesField() {
+    fun testRemoveColumn_whenExisting_removesColumn() {
         val fk = foreignKeyJs(arrayOf("user_id", "org_id"), foreignKeyReferenceJs("users"))
-        ForeignKeyEditor.removeField(fk, "user_id")
+        ForeignKeyEditor.removeColumn(fk, "user_id")
 
-        assertEquals(1, fk.fields.size)
-        assertFalse(fk.fields.contains("user_id"))
+        assertEquals(1, fk.columns.size)
+        assertFalse(fk.columns.contains("user_id"))
     }
 
     @Test
-    fun testRemoveField_whenNonExisting_doesNothing() {
+    fun testRemoveColumn_whenNonExisting_doesNothing() {
         val fk = foreignKeyJs(arrayOf("user_id"), foreignKeyReferenceJs("users"))
-        ForeignKeyEditor.removeField(fk, "non_existent")
+        ForeignKeyEditor.removeColumn(fk, "non_existent")
 
-        assertEquals(1, fk.fields.size)
+        assertEquals(1, fk.columns.size)
     }
 
     @Test
@@ -50,20 +50,20 @@ class ForeignKeyEditorTest {
     }
 
     @Test
-    fun testAddReferenceField() {
+    fun testAddReferenceColumn() {
         val fk = foreignKeyJs(emptyArray(), foreignKeyReferenceJs("users", arrayOf("id")))
-        ForeignKeyEditor.addReferenceField(fk, "uuid")
+        ForeignKeyEditor.addReferenceColumn(fk, "uuid")
 
-        assertEquals(2, fk.references.fields.size)
-        assertTrue(fk.references.fields.contains("uuid"))
+        assertEquals(2, fk.references.columns.size)
+        assertTrue(fk.references.columns.contains("uuid"))
     }
 
     @Test
-    fun testRemoveReferenceField() {
+    fun testRemoveReferenceColumn() {
         val fk = foreignKeyJs(emptyArray(), foreignKeyReferenceJs("users", arrayOf("id", "uuid")))
-        ForeignKeyEditor.removeReferenceField(fk, "id")
+        ForeignKeyEditor.removeReferenceColumn(fk, "id")
 
-        assertEquals(1, fk.references.fields.size)
-        assertFalse(fk.references.fields.contains("id"))
+        assertEquals(1, fk.references.columns.size)
+        assertFalse(fk.references.columns.contains("id"))
     }
 }

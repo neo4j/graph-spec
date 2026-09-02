@@ -238,7 +238,7 @@ relationships:
 tables:
   actor:
     source: "cloud"
-    fields:
+    columns:
       actor_id:
         type: "serial"
         suggested: "INTEGER"
@@ -258,7 +258,7 @@ tables:
     primaryKeys: ["actor_id"]
   actor_info:
     source: "cloud"
-    fields:
+    columns:
       actor_id:
         type: "int4"
         suggested: "INTEGER"
@@ -277,7 +277,7 @@ tables:
         supported: ["STRING"]
   address:
     source: "cloud"
-    fields:
+    columns:
       address_id:
         type: "serial"
         suggested: "INTEGER"
@@ -313,13 +313,13 @@ tables:
     primaryKeys: ["address_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["city_id"]
+        columns: ["city_id"]
         references:
           table: "city"
-          fields: ["city_id"]
+          columns: ["city_id"]
   category:
     source: "cloud"
-    fields:
+    columns:
       category_id:
         type: "serial"
         suggested: "INTEGER"
@@ -335,7 +335,7 @@ tables:
     primaryKeys: ["category_id"]
   city:
     source: "cloud"
-    fields:
+    columns:
       city_id:
         type: "serial"
         suggested: "INTEGER"
@@ -355,13 +355,13 @@ tables:
     primaryKeys: ["city_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["country_id"]
+        columns: ["country_id"]
         references:
           table: "country"
-          fields: ["country_id"]
+          columns: ["country_id"]
   country:
     source: "cloud"
-    fields:
+    columns:
       country_id:
         type: "serial"
         suggested: "INTEGER"
@@ -377,7 +377,7 @@ tables:
     primaryKeys: ["country_id"]
   customer:
     source: "cloud"
-    fields:
+    columns:
       customer_id:
         type: "serial"
         suggested: "INTEGER"
@@ -421,13 +421,13 @@ tables:
     primaryKeys: ["customer_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["address_id"]
+        columns: ["address_id"]
         references:
           table: "address"
-          fields: ["address_id"]
+          columns: ["address_id"]
   customer_list:
     source: "cloud"
-    fields:
+    columns:
       id:
         type: "int4"
         suggested: "INTEGER"
@@ -466,7 +466,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   film:
     source: "cloud"
-    fields:
+    columns:
       film_id:
         type: "serial"
         suggested: "INTEGER"
@@ -516,13 +516,13 @@ tables:
     primaryKeys: ["film_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["language_id"]
+        columns: ["language_id"]
         references:
           table: "language"
-          fields: ["language_id"]
+          columns: ["language_id"]
   film_actor:
     source: "cloud"
-    fields:
+    columns:
       actor_id:
         type: "int2"
         suggested: "INTEGER"
@@ -538,18 +538,18 @@ tables:
     primaryKeys: ["actor_id", "film_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["actor_id"]
+        columns: ["actor_id"]
         references:
           table: "actor"
-          fields: ["actor_id"]
+          columns: ["actor_id"]
       foreignKey2:
-        fields: ["film_id"]
+        columns: ["film_id"]
         references:
           table: "film"
-          fields: ["film_id"]
+          columns: ["film_id"]
   film_category:
     source: "cloud"
-    fields:
+    columns:
       film_id:
         type: "int2"
         suggested: "INTEGER"
@@ -565,18 +565,18 @@ tables:
     primaryKeys: ["film_id", "category_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["category_id"]
+        columns: ["category_id"]
         references:
           table: "category"
-          fields: ["category_id"]
+          columns: ["category_id"]
       foreignKey2:
-        fields: ["film_id"]
+        columns: ["film_id"]
         references:
           table: "film"
-          fields: ["film_id"]
+          columns: ["film_id"]
   film_list:
     source: "cloud"
-    fields:
+    columns:
       fid:
         type: "int4"
         suggested: "INTEGER"
@@ -611,7 +611,7 @@ tables:
         supported: ["STRING"]
   inventory:
     source: "cloud"
-    fields:
+    columns:
       inventory_id:
         type: "serial"
         suggested: "INTEGER"
@@ -631,13 +631,13 @@ tables:
     primaryKeys: ["inventory_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["film_id"]
+        columns: ["film_id"]
         references:
           table: "film"
-          fields: ["film_id"]
+          columns: ["film_id"]
   language:
     source: "cloud"
-    fields:
+    columns:
       language_id:
         type: "serial"
         suggested: "INTEGER"
@@ -653,7 +653,7 @@ tables:
     primaryKeys: ["language_id"]
   nicer_but_slower_film_list:
     source: "cloud"
-    fields:
+    columns:
       fid:
         type: "int4"
         suggested: "INTEGER"
@@ -688,7 +688,7 @@ tables:
         supported: ["STRING"]
   payment:
     source: "cloud"
-    fields:
+    columns:
       payment_id:
         type: "serial"
         suggested: "INTEGER"
@@ -716,23 +716,23 @@ tables:
     primaryKeys: ["payment_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["customer_id"]
+        columns: ["customer_id"]
         references:
           table: "customer"
-          fields: ["customer_id"]
+          columns: ["customer_id"]
       foreignKey2:
-        fields: ["rental_id"]
+        columns: ["rental_id"]
         references:
           table: "rental"
-          fields: ["rental_id"]
+          columns: ["rental_id"]
       foreignKey3:
-        fields: ["staff_id"]
+        columns: ["staff_id"]
         references:
           table: "staff"
-          fields: ["staff_id"]
+          columns: ["staff_id"]
   rental:
     source: "cloud"
-    fields:
+    columns:
       rental_id:
         type: "serial"
         suggested: "INTEGER"
@@ -764,23 +764,23 @@ tables:
     primaryKeys: ["rental_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["customer_id"]
+        columns: ["customer_id"]
         references:
           table: "customer"
-          fields: ["customer_id"]
+          columns: ["customer_id"]
       foreignKey2:
-        fields: ["inventory_id"]
+        columns: ["inventory_id"]
         references:
           table: "inventory"
-          fields: ["inventory_id"]
+          columns: ["inventory_id"]
       foreignKey3:
-        fields: ["staff_id"]
+        columns: ["staff_id"]
         references:
           table: "staff"
-          fields: ["staff_id"]
+          columns: ["staff_id"]
   sales_by_film_category:
     source: "cloud"
-    fields:
+    columns:
       category:
         type: "varchar"
         suggested: "STRING"
@@ -791,7 +791,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   sales_by_store:
     source: "cloud"
-    fields:
+    columns:
       store:
         type: "text"
         suggested: "STRING"
@@ -806,7 +806,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   staff:
     source: "cloud"
-    fields:
+    columns:
       staff_id:
         type: "serial"
         suggested: "INTEGER"
@@ -852,13 +852,13 @@ tables:
     primaryKeys: ["staff_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["address_id"]
+        columns: ["address_id"]
         references:
           table: "address"
-          fields: ["address_id"]
+          columns: ["address_id"]
   staff_list:
     source: "cloud"
-    fields:
+    columns:
       id:
         type: "int4"
         suggested: "INTEGER"
@@ -893,7 +893,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   store:
     source: "cloud"
-    fields:
+    columns:
       store_id:
         type: "serial"
         suggested: "INTEGER"
@@ -913,291 +913,291 @@ tables:
     primaryKeys: ["store_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["address_id"]
+        columns: ["address_id"]
         references:
           table: "address"
-          fields: ["address_id"]
+          columns: ["address_id"]
       foreignKey2:
-        fields: ["manager_staff_id"]
+        columns: ["manager_staff_id"]
         references:
           table: "staff"
-          fields: ["staff_id"]
+          columns: ["staff_id"]
 mappings:
   - node: "actor"
     table: "actor"
     properties:
-      actor_id: { field: "actor_id" }
-      first_name: { field: "first_name" }
-      last_name: { field: "last_name" }
-      last_update: { field: "last_update" }
+      actor_id: { column: "actor_id" }
+      first_name: { column: "first_name" }
+      last_name: { column: "last_name" }
+      last_update: { column: "last_update" }
     key: ["actor_id"]
   - node: "address"
     table: "address"
     properties:
-      address_id: { field: "address_id" }
-      address: { field: "address" }
-      address2: { field: "address2" }
-      district: { field: "district" }
-      postal_code: { field: "postal_code" }
-      phone: { field: "phone" }
-      last_update: { field: "last_update" }
+      address_id: { column: "address_id" }
+      address: { column: "address" }
+      address2: { column: "address2" }
+      district: { column: "district" }
+      postal_code: { column: "postal_code" }
+      phone: { column: "phone" }
+      last_update: { column: "last_update" }
     key: ["address_id"]
   - node: "category"
     table: "category"
     properties:
-      category_id: { field: "category_id" }
-      name: { field: "name" }
-      last_update: { field: "last_update" }
+      category_id: { column: "category_id" }
+      name: { column: "name" }
+      last_update: { column: "last_update" }
     key: ["category_id"]
   - node: "city"
     table: "city"
     properties:
-      city_id: { field: "city_id" }
-      city: { field: "city" }
-      last_update: { field: "last_update" }
+      city_id: { column: "city_id" }
+      city: { column: "city" }
+      last_update: { column: "last_update" }
     key: ["city_id"]
   - node: "country"
     table: "country"
     properties:
-      country_id: { field: "country_id" }
-      country: { field: "country" }
-      last_update: { field: "last_update" }
+      country_id: { column: "country_id" }
+      country: { column: "country" }
+      last_update: { column: "last_update" }
     key: ["country_id"]
   - node: "customer"
     table: "customer"
     properties:
-      customer_id: { field: "customer_id" }
-      store_id: { field: "store_id" }
-      first_name: { field: "first_name" }
-      last_name: { field: "last_name" }
-      email: { field: "email" }
-      activebool: { field: "activebool" }
-      create_date: { field: "create_date" }
-      last_update: { field: "last_update" }
-      active: { field: "active" }
+      customer_id: { column: "customer_id" }
+      store_id: { column: "store_id" }
+      first_name: { column: "first_name" }
+      last_name: { column: "last_name" }
+      email: { column: "email" }
+      activebool: { column: "activebool" }
+      create_date: { column: "create_date" }
+      last_update: { column: "last_update" }
+      active: { column: "active" }
     key: ["customer_id"]
   - node: "film"
     table: "film"
     properties:
-      film_id: { field: "film_id" }
-      title: { field: "title" }
-      description: { field: "description" }
-      rental_duration: { field: "rental_duration" }
-      rental_rate: { field: "rental_rate" }
-      length: { field: "length" }
-      replacement_cost: { field: "replacement_cost" }
-      rating: { field: "rating" }
-      last_update: { field: "last_update" }
+      film_id: { column: "film_id" }
+      title: { column: "title" }
+      description: { column: "description" }
+      rental_duration: { column: "rental_duration" }
+      rental_rate: { column: "rental_rate" }
+      length: { column: "length" }
+      replacement_cost: { column: "replacement_cost" }
+      rating: { column: "rating" }
+      last_update: { column: "last_update" }
     key: ["film_id"]
   - node: "inventory"
     table: "inventory"
     properties:
-      inventory_id: { field: "inventory_id" }
-      store_id: { field: "store_id" }
-      last_update: { field: "last_update" }
+      inventory_id: { column: "inventory_id" }
+      store_id: { column: "store_id" }
+      last_update: { column: "last_update" }
     key: ["inventory_id"]
   - node: "language"
     table: "language"
     properties:
-      language_id: { field: "language_id" }
-      name: { field: "name" }
-      last_update: { field: "last_update" }
+      language_id: { column: "language_id" }
+      name: { column: "name" }
+      last_update: { column: "last_update" }
     key: ["language_id"]
   - node: "payment"
     table: "payment"
     properties:
-      payment_id: { field: "payment_id" }
-      amount: { field: "amount" }
-      payment_date: { field: "payment_date" }
+      payment_id: { column: "payment_id" }
+      amount: { column: "amount" }
+      payment_date: { column: "payment_date" }
     key: ["payment_id"]
   - node: "rental"
     table: "rental"
     properties:
-      rental_id: { field: "rental_id" }
-      rental_date: { field: "rental_date" }
-      return_date: { field: "return_date" }
-      last_update: { field: "last_update" }
+      rental_id: { column: "rental_id" }
+      rental_date: { column: "rental_date" }
+      return_date: { column: "return_date" }
+      last_update: { column: "last_update" }
     key: ["rental_id"]
   - node: "staff"
     table: "staff"
     properties:
-      staff_id: { field: "staff_id" }
-      first_name: { field: "first_name" }
-      last_name: { field: "last_name" }
-      email: { field: "email" }
-      store_id: { field: "store_id" }
-      active: { field: "active" }
-      username: { field: "username" }
-      password: { field: "password" }
-      last_update: { field: "last_update" }
+      staff_id: { column: "staff_id" }
+      first_name: { column: "first_name" }
+      last_name: { column: "last_name" }
+      email: { column: "email" }
+      store_id: { column: "store_id" }
+      active: { column: "active" }
+      username: { column: "username" }
+      password: { column: "password" }
+      last_update: { column: "last_update" }
     key: ["staff_id"]
   - node: "store"
     table: "store"
     properties:
-      store_id: { field: "store_id" }
-      last_update: { field: "last_update" }
+      store_id: { column: "store_id" }
+      last_update: { column: "last_update" }
     key: ["store_id"]
   - relationship: "RELATED_TO_CITY"
     table: "address"
     from:
       node: "address"
       properties:
-        address_id: { field: "address_id" }
+        address_id: { column: "address_id" }
     to:
       node: "city"
       properties:
-        city_id: { field: "city_id" }
+        city_id: { column: "city_id" }
   - relationship: "RELATED_TO_COUNTRY"
     table: "city"
     from:
       node: "city"
       properties:
-        city_id: { field: "city_id" }
+        city_id: { column: "city_id" }
     to:
       node: "country"
       properties:
-        country_id: { field: "country_id" }
+        country_id: { column: "country_id" }
   - relationship: "RELATED_TO_ADDRESS"
     table: "customer"
     from:
       node: "customer"
       properties:
-        customer_id: { field: "customer_id" }
+        customer_id: { column: "customer_id" }
     to:
       node: "address"
       properties:
-        address_id: { field: "address_id" }
+        address_id: { column: "address_id" }
   - relationship: "RELATED_TO_LANGUAGE"
     table: "film"
     from:
       node: "film"
       properties:
-        film_id: { field: "film_id" }
+        film_id: { column: "film_id" }
     to:
       node: "language"
       properties:
-        language_id: { field: "language_id" }
+        language_id: { column: "language_id" }
   - relationship: "RELATED_TO_FILM"
     table: "film_actor"
     from:
       node: "actor"
       properties:
-        actor_id: { field: "actor_id" }
+        actor_id: { column: "actor_id" }
     to:
       node: "film"
       properties:
-        film_id: { field: "film_id" }
+        film_id: { column: "film_id" }
     properties:
-      last_update: { field: "last_update" }
+      last_update: { column: "last_update" }
   - relationship: "RELATED_TO_FILM2"
     table: "film_category"
     from:
       node: "category"
       properties:
-        category_id: { field: "category_id" }
+        category_id: { column: "category_id" }
     to:
       node: "film"
       properties:
-        film_id: { field: "film_id" }
+        film_id: { column: "film_id" }
     properties:
-      last_update: { field: "last_update" }
+      last_update: { column: "last_update" }
   - relationship: "RELATED_TO_FILM3"
     table: "inventory"
     from:
       node: "inventory"
       properties:
-        inventory_id: { field: "inventory_id" }
+        inventory_id: { column: "inventory_id" }
     to:
       node: "film"
       properties:
-        film_id: { field: "film_id" }
+        film_id: { column: "film_id" }
   - relationship: "RELATED_TO_CUSTOMER"
     table: "payment"
     from:
       node: "payment"
       properties:
-        payment_id: { field: "payment_id" }
+        payment_id: { column: "payment_id" }
     to:
       node: "customer"
       properties:
-        customer_id: { field: "customer_id" }
+        customer_id: { column: "customer_id" }
   - relationship: "RELATED_TO_RENTAL"
     table: "payment"
     from:
       node: "payment"
       properties:
-        payment_id: { field: "payment_id" }
+        payment_id: { column: "payment_id" }
     to:
       node: "rental"
       properties:
-        rental_id: { field: "rental_id" }
+        rental_id: { column: "rental_id" }
   - relationship: "RELATED_TO_STAFF"
     table: "payment"
     from:
       node: "payment"
       properties:
-        payment_id: { field: "payment_id" }
+        payment_id: { column: "payment_id" }
     to:
       node: "staff"
       properties:
-        staff_id: { field: "staff_id" }
+        staff_id: { column: "staff_id" }
   - relationship: "RELATED_TO_CUSTOMER2"
     table: "rental"
     from:
       node: "rental"
       properties:
-        rental_id: { field: "rental_id" }
+        rental_id: { column: "rental_id" }
     to:
       node: "customer"
       properties:
-        customer_id: { field: "customer_id" }
+        customer_id: { column: "customer_id" }
   - relationship: "RELATED_TO_INVENTORY"
     table: "rental"
     from:
       node: "rental"
       properties:
-        rental_id: { field: "rental_id" }
+        rental_id: { column: "rental_id" }
     to:
       node: "inventory"
       properties:
-        inventory_id: { field: "inventory_id" }
+        inventory_id: { column: "inventory_id" }
   - relationship: "RELATED_TO_STAFF2"
     table: "rental"
     from:
       node: "rental"
       properties:
-        rental_id: { field: "rental_id" }
+        rental_id: { column: "rental_id" }
     to:
       node: "staff"
       properties:
-        staff_id: { field: "staff_id" }
+        staff_id: { column: "staff_id" }
   - relationship: "RELATED_TO_ADDRESS2"
     table: "staff"
     from:
       node: "staff"
       properties:
-        staff_id: { field: "staff_id" }
+        staff_id: { column: "staff_id" }
     to:
       node: "address"
       properties:
-        address_id: { field: "address_id" }
+        address_id: { column: "address_id" }
   - relationship: "RELATED_TO_ADDRESS3"
     table: "store"
     from:
       node: "store"
       properties:
-        store_id: { field: "store_id" }
+        store_id: { column: "store_id" }
     to:
       node: "address"
       properties:
-        address_id: { field: "address_id" }
+        address_id: { column: "address_id" }
   - relationship: "RELATED_TO_STAFF3"
     table: "store"
     from:
       node: "store"
       properties:
-        store_id: { field: "store_id" }
+        store_id: { column: "store_id" }
     to:
       node: "staff"
       properties:
-        staff_id: { field: "manager_staff_id" }
+        staff_id: { column: "manager_staff_id" }

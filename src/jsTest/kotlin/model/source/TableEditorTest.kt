@@ -12,44 +12,44 @@ class TableEditorTest {
     }
 
     @Test
-    fun testAddAndRemoveField() {
+    fun testAddAndRemoveColumn() {
         val table = tableJs(source = "users")
 
         // Test Add
-        val fieldId = TableEditor.addField(table, "STRING")
-        assertTrue(fieldId.isNotEmpty(), "Add field should return an ID.")
+        val columnId = TableEditor.addColumn(table, "STRING")
+        assertTrue(columnId.isNotEmpty(), "Add column should return an ID.")
 
-        // Assert field exists using dynamic access for JS plain object
-        val addedField = table.fields[fieldId]
-        assertNotNull(addedField, "Field should exist in Record.")
-        assertEquals("STRING", addedField.type)
+        // Assert column exists using dynamic access for JS plain object
+        val addedColumn = table.columns[columnId]
+        assertNotNull(addedColumn, "Column should exist in Record.")
+        assertEquals("STRING", addedColumn.type)
 
         // Test Remove
-        TableEditor.removeField(table, fieldId)
-        val removedField = table.fields[fieldId]
-        assertNull(removedField, "Field should be removed from Record.")
+        TableEditor.removeColumn(table, columnId)
+        val removedColumn = table.columns[columnId]
+        assertNull(removedColumn, "Column should be removed from Record.")
     }
 
     @Test
-    fun testSetFieldType() {
+    fun testSetColumnType() {
         val table = tableJs(source = "users")
-        val fieldId = TableEditor.addField(table, "STRING")
+        val columnId = TableEditor.addColumn(table, "STRING")
 
-        TableEditor.setFieldType(table, fieldId, "INTEGER")
+        TableEditor.setColumnType(table, columnId, "INTEGER")
 
-        val field = table.fields[fieldId]
-        assertEquals("INTEGER", field?.type)
+        val column = table.columns[columnId]
+        assertEquals("INTEGER", column?.type)
     }
 
     @Test
-    fun testSetFieldSize() {
+    fun testSetColumnSize() {
         val table = tableJs(source = "users")
-        val fieldId = TableEditor.addField(table, "STRING")
+        val columnId = TableEditor.addColumn(table, "STRING")
 
-        TableEditor.setFieldSize(table, fieldId, 128)
+        TableEditor.setColumnSize(table, columnId, 128)
 
-        val field = table.fields[fieldId]
-        assertEquals(128, field?.size)
+        val column = table.columns[columnId]
+        assertEquals(128, column?.size)
     }
 
     @Test

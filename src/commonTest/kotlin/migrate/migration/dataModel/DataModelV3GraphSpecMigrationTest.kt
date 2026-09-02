@@ -406,7 +406,7 @@ class DataModelV3GraphSpecMigrationTest {
 
         val fromProps = mapping.map("from").map("properties")
         assertTrue(fromProps.containsKey("propA"))
-        assertEquals("COL_A", fromProps.map("propA").string("field"))
+        assertEquals("COL_A", fromProps.map("propA").string("column"))
     }
 
     @Test
@@ -455,7 +455,7 @@ class DataModelV3GraphSpecMigrationTest {
         val mapping = result.first()
         assertEquals("node1", mapping.string("node"))
         assertEquals("USERS_TABLE", mapping.string("table"))
-        assertEquals("USER_NAME", mapping.map("properties").map("prop1").string("field"))
+        assertEquals("USER_NAME", mapping.map("properties").map("prop1").string("column"))
     }
 
     @Test
@@ -552,16 +552,16 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val fields = migration.migrateTables(unwrap(inputSchema))["film"]!!.mapOfMaps("fields")
+        val columns = migration.migrateTables(unwrap(inputSchema))["film"]!!.mapOfMaps("columns")
 
-        val arrayField = fields["special_features"]!!
+        val arrayField = columns["special_features"]!!
         assertEquals("STRING", arrayField.string("suggested"))
         assertEquals(
             listOf("STRING", "LIST<STRING>"),
             arrayField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
         )
 
-        val vectorField = fields["embedding"]!!
+        val vectorField = columns["embedding"]!!
         assertEquals("VECTOR<FLOAT>", vectorField.string("suggested"))
         assertEquals(
             listOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"),
@@ -623,7 +623,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val fields = migration.migrateTables(unwrap(inputSchema))["document"]!!.mapOfMaps("fields")
+        val fields = migration.migrateTables(unwrap(inputSchema))["document"]!!.mapOfMaps("columns")
 
         assertEquals(123, fields["embeddingWithDim"]?.intOrNull("dimension"))
         assertEquals(456, fields["supportedOnly"]?.intOrNull("dimension"))

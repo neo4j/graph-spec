@@ -10,7 +10,6 @@ class RelationshipTargetEditorTest {
 
         assertEquals("", target.node)
         assertEquals("", target.label)
-        assertEquals("", target.property)
     }
 
     @Test
@@ -18,12 +17,10 @@ class RelationshipTargetEditorTest {
         val target = relationshipTargetJs(
             node = "NodeA",
             label = "LabelA",
-            property = "PropA"
         )
 
         assertEquals("NodeA", target.node)
         assertEquals("LabelA", target.label)
-        assertEquals("PropA", target.property)
     }
 
     @Test
@@ -50,18 +47,6 @@ class RelationshipTargetEditorTest {
 
         assertEquals("NewLabel", target.label)
         assertEquals("", target.node, "Node should be cleared when label is set")
-    }
-
-    @Test
-    fun testSetProperty() {
-        val target = relationshipTargetJs(node = "NodeA", label = "LabelA", property = "OldProp")
-
-        RelationshipTargetEditor.setProperty(target, "NewProp")
-
-        assertEquals("NewProp", target.property)
-        // Ensure other fields were NOT affected
-        assertEquals("NodeA", target.node)
-        assertEquals("LabelA", target.label)
     }
 
     @Test

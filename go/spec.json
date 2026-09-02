@@ -488,9 +488,6 @@
                 },
                 "label": {
                     "type": "string"
-                },
-                "property": {
-                    "type": "string"
                 }
             },
             "required": [],
@@ -572,10 +569,10 @@
                 "source": {
                     "type": "string"
                 },
-                "fields": {
+                "columns": {
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/$defs/TableField"
+                        "$ref": "#/$defs/TableColumn"
                     }
                 },
                 "primaryKeys": {
@@ -602,7 +599,7 @@
             ],
             "additionalProperties": false
         },
-        "TableField": {
+        "TableColumn": {
             "type": "object",
             "properties": {
                 "type": {
@@ -641,7 +638,7 @@
         "ForeignKey": {
             "type": "object",
             "properties": {
-                "fields": {
+                "columns": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -658,7 +655,7 @@
                 }
             },
             "required": [
-                "fields",
+                "columns",
                 "references"
             ],
             "additionalProperties": false
@@ -669,7 +666,7 @@
                 "table": {
                     "type": "string"
                 },
-                "fields": {
+                "columns": {
                     "type": "array",
                     "items": {
                         "type": "string"
@@ -697,9 +694,6 @@
                 },
                 {
                     "$ref": "#/$defs/QueryMapping"
-                },
-                {
-                    "$ref": "#/$defs/LabelMapping"
                 }
             ],
             "discriminator": {
@@ -709,12 +703,12 @@
         "PropertyMapping": {
             "type": "object",
             "properties": {
-                "field": {
+                "column": {
                     "type": "string"
                 }
             },
             "required": [
-                "field"
+                "column"
             ],
             "additionalProperties": false
         },
@@ -851,27 +845,6 @@
                 "type",
                 "table",
                 "query"
-            ],
-            "additionalProperties": false
-        },
-        "LabelMapping": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "LabelMapping"
-                },
-                "table": {
-                    "type": "string"
-                },
-                "field": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type",
-                "table",
-                "field"
             ],
             "additionalProperties": false
         },

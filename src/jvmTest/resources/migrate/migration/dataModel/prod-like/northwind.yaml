@@ -60,7 +60,7 @@ relationships:
 tables:
   categories:
     source: "cloud"
-    fields:
+    columns:
       categoryid:
         type: "INT"
         suggested: "INTEGER"
@@ -80,7 +80,7 @@ tables:
     primaryKeys: ["categoryid"]
   orders:
     source: "cloud"
-    fields:
+    columns:
       orderid:
         type: "INT"
         suggested: "INTEGER"
@@ -104,13 +104,13 @@ tables:
     primaryKeys: ["orderid", "productid"]
     foreignKeys:
       foreignKey1:
-        fields: ["productid"]
+        columns: ["productid"]
         references:
           table: "products"
-          fields: ["productid"]
+          columns: ["productid"]
   products:
     source: "cloud"
-    fields:
+    columns:
       productid:
         type: "INT"
         suggested: "INTEGER"
@@ -154,18 +154,18 @@ tables:
     primaryKeys: ["productid"]
     foreignKeys:
       foreignKey1:
-        fields: ["categoryid"]
+        columns: ["categoryid"]
         references:
           table: "categories"
-          fields: ["categoryid"]
+          columns: ["categoryid"]
       foreignKey2:
-        fields: ["supplierid"]
+        columns: ["supplierid"]
         references:
           table: "suppliers"
-          fields: ["supplierid"]
+          columns: ["supplierid"]
   suppliers:
     source: "cloud"
-    fields:
+    columns:
       supplierid:
         type: "INT"
         suggested: "INTEGER"
@@ -219,59 +219,59 @@ mappings:
   - node: "categories"
     table: "categories"
     properties:
-      categoryid: { field: "categoryid" }
-      categoryname: { field: "categoryname" }
-      description: { field: "description" }
-      picture: { field: "picture" }
+      categoryid: { column: "categoryid" }
+      categoryname: { column: "categoryname" }
+      description: { column: "description" }
+      picture: { column: "picture" }
     key: ["categoryid"]
   - node: "products"
     table: "products"
     properties:
-      productid: { field: "productid" }
-      productname: { field: "productname" }
-      quantityperunit: { field: "quantityperunit" }
-      unitprice: { field: "unitprice" }
-      unitsinstock: { field: "unitsinstock" }
-      unitsonorder: { field: "unitsonorder" }
-      reorderlevel: { field: "reorderlevel" }
-      discontinued: { field: "discontinued" }
+      productid: { column: "productid" }
+      productname: { column: "productname" }
+      quantityperunit: { column: "quantityperunit" }
+      unitprice: { column: "unitprice" }
+      unitsinstock: { column: "unitsinstock" }
+      unitsonorder: { column: "unitsonorder" }
+      reorderlevel: { column: "reorderlevel" }
+      discontinued: { column: "discontinued" }
     key: ["productid"]
   - node: "suppliers"
     table: "suppliers"
     properties:
-      supplierid: { field: "supplierid" }
-      companyname: { field: "companyname" }
-      contactname: { field: "contactname" }
-      contacttitle: { field: "contacttitle" }
-      address: { field: "address" }
-      city: { field: "city" }
-      region: { field: "region" }
-      postalcode: { field: "postalcode" }
-      country: { field: "country" }
-      phone: { field: "phone" }
-      fax: { field: "fax" }
-      homepage: { field: "homepage" }
+      supplierid: { column: "supplierid" }
+      companyname: { column: "companyname" }
+      contactname: { column: "contactname" }
+      contacttitle: { column: "contacttitle" }
+      address: { column: "address" }
+      city: { column: "city" }
+      region: { column: "region" }
+      postalcode: { column: "postalcode" }
+      country: { column: "country" }
+      phone: { column: "phone" }
+      fax: { column: "fax" }
+      homepage: { column: "homepage" }
     key: ["supplierid"]
   - relationship: "CATEGORIES"
     table: "products"
     from:
       node: "products"
       properties:
-        productid: { field: "productid" }
+        productid: { column: "productid" }
     to:
       node: "categories"
       properties:
-        categoryid: { field: "categoryid" }
+        categoryid: { column: "categoryid" }
   - relationship: "SUPPLIERS"
     table: "products"
     from:
       node: "products"
       properties:
-        productid: { field: "productid" }
+        productid: { column: "productid" }
     to:
       node: "suppliers"
       properties:
-        supplierid: { field: "supplierid" }
+        supplierid: { column: "supplierid" }
 display:
   nodes:
     categories:

@@ -18,54 +18,54 @@ package validate.table
 
 import model.GraphModel
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class TableFieldEmptyNameTest {
+class TableColumnEmptyNameTest {
 
-    private val validator = TableFieldEmptyName
+    private val validator = TableColumnEmptyName
     private val model = GraphModel("4.0.0")
 
     @Test
-    fun `fail when field name is blank`() {
+    fun `fail when column name is blank`() {
         val table = Table(
             source = "local",
-            fields = mutableMapOf("f:1" to TableField(name = ""))
+            columns = mutableMapOf("f:1" to TableColumn(name = ""))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
-        assertEquals("missing_table_field_name", issues.first().code)
+        assertEquals("missing_table_column_name", issues.first().code)
     }
 
     @Test
-    fun `fail when field name is null`() {
+    fun `fail when column name is null`() {
         val table = Table(
             source = "local",
-            fields = mutableMapOf("f:1" to TableField(name = null))
+            columns = mutableMapOf("f:1" to TableColumn(name = null))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
-        assertEquals("missing_table_field_name", issues.first().code)
+        assertEquals("missing_table_column_name", issues.first().code)
     }
 
     @Test
-    fun `pass when field has a valid name`() {
+    fun `pass when column has a valid name`() {
         val table = Table(
             source = "local",
-            fields = mutableMapOf("f:1" to TableField(name = "email"))
+            columns = mutableMapOf("f:1" to TableColumn(name = "email"))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }

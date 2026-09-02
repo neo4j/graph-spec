@@ -14,31 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.mapping
-
-import kotlinx.js.JsPlainObject
-import model.jso
+package model.source
 
 @JsExport
-@JsPlainObject
-external interface LabelMappingJs : MappingJs {
-    override val type: String
-    var table: String
-    var field: String
+class TableColumnEditor {
+    companion object {
+        @JsStatic
+        fun setType(column: TableColumnJs, type: String) {
+            column.type = type
+        }
+
+        @JsStatic
+        fun setSize(column: TableColumnJs, size: Int) {
+            column.size = size
+        }
+    }
 }
-
-fun labelMappingJs(table: String, field: String): LabelMappingJs = jso {
-    this.type = MappingType.LABEL
-    this.table = table
-    this.field = field
-}
-
-fun LabelMapping.toJs() = labelMappingJs(
-    table = table,
-    field = field
-)
-
-fun LabelMappingJs.toClass() = LabelMapping(
-    table = table,
-    field = field
-)

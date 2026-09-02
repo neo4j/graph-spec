@@ -27,7 +27,7 @@ import kotlin.js.JsExport
 @SerialName("Table")
 data class Table(
     var source: String,
-    val fields: MutableMap<String, TableField> = mutableMapOf(),
+    val columns: MutableMap<String, TableColumn> = mutableMapOf(),
     val primaryKeys: MutableSet<String> = mutableSetOf(),
     val foreignKeys: MutableMap<String, ForeignKey> = mutableMapOf(),
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()

@@ -8,7 +8,6 @@ class RelationshipTargetJsTest : JsMappingTest<RelationshipTarget, RelationshipT
     override fun createClass() = RelationshipTarget(
         node = "nodeId",
         label = "label",
-        property = "property",
     )
 
     override fun toJs(k: RelationshipTarget): RelationshipTargetJs = k.toJs()
@@ -18,7 +17,6 @@ class RelationshipTargetJsTest : JsMappingTest<RelationshipTarget, RelationshipT
     override fun verifyJsObject(jsObject: RelationshipTargetJs) {
         assertEquals("nodeId", jsObject.node)
         assertEquals("label", jsObject.label)
-        assertEquals("property", jsObject.property)
     }
 
 }

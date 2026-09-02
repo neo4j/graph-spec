@@ -146,14 +146,14 @@ type Display struct {
 }
 
 type ForeignKeyReference struct {
+	Columns    []string                  `json:"columns,omitempty"`
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Fields     []string                  `json:"fields,omitempty"`
 	Table      string                    `json:"table"`
 }
 
 type ForeignKey struct {
+	Columns    []string                  `json:"columns"`
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Fields     []string                  `json:"fields"`
 	References ForeignKeyReference       `json:"references"`
 }
 
@@ -170,7 +170,7 @@ var MappingModeValues = []MappingMode{
 }
 
 type PropertyMapping struct {
-	Field string `json:"field"`
+	Column string `json:"column"`
 }
 
 type TargetMapping struct {
@@ -220,8 +220,6 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 		v = &RelationshipMapping{}
 	case "QueryMapping":
 		v = &QueryMapping{}
-	case "LabelMapping":
-		v = &LabelMapping{}
 	default:
 		return fmt.Errorf("Mapping: unknown type %q", peek.Type)
 	}
@@ -273,16 +271,6 @@ type QueryMapping struct {
 func (QueryMapping) isMapping() {}
 
 func (QueryMapping) MappingType() string { return "QueryMapping" }
-
-type LabelMapping struct {
-	Field string `json:"field"`
-	Table string `json:"table"`
-	Type  string `json:"type"`
-}
-
-func (LabelMapping) isMapping() {}
-
-func (LabelMapping) MappingType() string { return "LabelMapping" }
 
 type Labels struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
@@ -451,9 +439,8 @@ type RelationshipIndex struct {
 }
 
 type RelationshipTarget struct {
-	Label    *string `json:"label,omitempty"`
-	Node     *string `json:"node,omitempty"`
-	Property *string `json:"property,omitempty"`
+	Label *string `json:"label,omitempty"`
+	Node  *string `json:"node,omitempty"`
 }
 
 type Relationship struct {
@@ -468,7 +455,7 @@ type Relationship struct {
 	Type        string                            `json:"type"`
 }
 
-type TableField struct {
+type TableColumn struct {
 	Dimension  *int                      `json:"dimension,omitempty"`
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
 	Name       *string                   `json:"name,omitempty"`
@@ -479,8 +466,8 @@ type TableField struct {
 }
 
 type Table struct {
+	Columns     map[string]TableColumn    `json:"columns,omitempty"`
 	Extensions  map[string]ExtensionValue `json:"extensions,omitempty"`
-	Fields      map[string]TableField     `json:"fields,omitempty"`
 	ForeignKeys map[string]ForeignKey     `json:"foreignKeys,omitempty"`
 	PrimaryKeys []string                  `json:"primaryKeys,omitempty"`
 	Source      string                    `json:"source"`

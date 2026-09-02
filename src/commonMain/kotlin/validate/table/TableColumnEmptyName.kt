@@ -18,29 +18,24 @@ package validate.table
 
 import model.GraphModel
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 
-object TableFieldType : TableValidation {
-    override fun validateTableField(
+object TableColumnEmptyName : TableValidation {
+    override fun validateTableColumn(
         model: GraphModel,
         tableId: String,
         table: Table,
-        fieldId: String,
-        field: TableField,
+        columnId: String,
+        column: TableColumn,
         issues: MutableList<Issue>
     ) {
-        // UPX: only cloud fields (TableSchemaCloudField) are checked.
-        // graph-spec uses table.source != "local" as the cloud discriminator.
-        if (table.source == "local") return
-        // UPX: isNullish(recommendedType) || supportedTypes?.length === 0
-        // suggested is non-nullable so the null check is not testable - only supported.isEmpty() is checked
-        if (field.supported.isEmpty()) {
+        if (column.name.isNullOrBlank()) {
             issues.add(
                 Issue(
-                    code = "missing_table_field_type",
-                    message = "Missing suggested type for table field '$fieldId'",
-                    path = "tables.$tableId.fields.$fieldId.type"
+                    code = "missing_table_column_name",
+                    message = "Missing name for table column '$columnId'",
+                    path = "tables.$tableId.columns.$columnId.name"
                 )
             )
         }

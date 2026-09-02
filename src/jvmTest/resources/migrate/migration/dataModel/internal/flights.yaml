@@ -139,7 +139,7 @@ relationships:
 tables:
   aircrafts_data:
     source: "cloud"
-    fields:
+    columns:
       aircraft_code:
         type: "CHAR"
         suggested: "STRING"
@@ -155,7 +155,7 @@ tables:
     primaryKeys: ["aircraft_code"]
   airports_data:
     source: "cloud"
-    fields:
+    columns:
       airport_code:
         type: "CHAR"
         suggested: "STRING"
@@ -179,7 +179,7 @@ tables:
     primaryKeys: ["airport_code"]
   boarding_passes:
     source: "cloud"
-    fields:
+    columns:
       ticket_no:
         type: "CHAR"
         suggested: "STRING"
@@ -199,13 +199,13 @@ tables:
     primaryKeys: ["flight_id", "ticket_no"]
     foreignKeys:
       foreignKey1:
-        fields: ["ticket_no", "flight_id"]
+        columns: ["ticket_no", "flight_id"]
         references:
           table: "ticket_flights"
-          fields: ["ticket_no", "flight_id"]
+          columns: ["ticket_no", "flight_id"]
   bookings:
     source: "cloud"
-    fields:
+    columns:
       book_ref:
         type: "CHAR"
         suggested: "STRING"
@@ -221,7 +221,7 @@ tables:
     primaryKeys: ["book_ref"]
   flights:
     source: "cloud"
-    fields:
+    columns:
       flight_id:
         type: "INT"
         suggested: "INTEGER"
@@ -265,18 +265,18 @@ tables:
     primaryKeys: ["flight_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["aircraft_code"]
+        columns: ["aircraft_code"]
         references:
           table: "aircrafts_data"
-          fields: ["aircraft_code"]
+          columns: ["aircraft_code"]
       foreignKey2:
-        fields: ["departure_airport", "arrival_airport"]
+        columns: ["departure_airport", "arrival_airport"]
         references:
           table: "airports_data"
-          fields: ["airport_code"]
+          columns: ["airport_code"]
   seats:
     source: "cloud"
-    fields:
+    columns:
       aircraft_code:
         type: "CHAR"
         suggested: "STRING"
@@ -292,13 +292,13 @@ tables:
     primaryKeys: ["aircraft_code", "seat_no"]
     foreignKeys:
       foreignKey1:
-        fields: ["aircraft_code"]
+        columns: ["aircraft_code"]
         references:
           table: "aircrafts_data"
-          fields: ["aircraft_code"]
+          columns: ["aircraft_code"]
   ticket_flights:
     source: "cloud"
-    fields:
+    columns:
       ticket_no:
         type: "CHAR"
         suggested: "STRING"
@@ -318,18 +318,18 @@ tables:
     primaryKeys: ["flight_id", "ticket_no"]
     foreignKeys:
       foreignKey1:
-        fields: ["flight_id"]
+        columns: ["flight_id"]
         references:
           table: "flights"
-          fields: ["flight_id"]
+          columns: ["flight_id"]
       foreignKey2:
-        fields: ["ticket_no"]
+        columns: ["ticket_no"]
         references:
           table: "tickets"
-          fields: ["ticket_no"]
+          columns: ["ticket_no"]
   tickets:
     source: "cloud"
-    fields:
+    columns:
       ticket_no:
         type: "CHAR"
         suggested: "STRING"
@@ -353,103 +353,103 @@ tables:
     primaryKeys: ["ticket_no"]
     foreignKeys:
       foreignKey1:
-        fields: ["book_ref"]
+        columns: ["book_ref"]
         references:
           table: "bookings"
-          fields: ["book_ref"]
+          columns: ["book_ref"]
 mappings:
   - node: "node0"
     table: "aircrafts_data"
     properties:
-      nodeProperty0: { field: "aircraft_code" }
-      nodeProperty1: { field: "model" }
-      nodeProperty2: { field: "aircrafts_range" }
+      nodeProperty0: { column: "aircraft_code" }
+      nodeProperty1: { column: "model" }
+      nodeProperty2: { column: "aircrafts_range" }
     key: ["nodeProperty0"]
   - node: "node1"
     table: "airports_data"
     properties:
-      nodeProperty0: { field: "airport_code" }
-      nodeProperty1: { field: "airport_name" }
-      nodeProperty2: { field: "city" }
-      nodeProperty3: { field: "coordinates" }
-      nodeProperty4: { field: "timezone" }
+      nodeProperty0: { column: "airport_code" }
+      nodeProperty1: { column: "airport_name" }
+      nodeProperty2: { column: "city" }
+      nodeProperty3: { column: "coordinates" }
+      nodeProperty4: { column: "timezone" }
     key: ["nodeProperty0"]
   - node: "node2"
     table: "bookings"
     properties:
-      nodeProperty0: { field: "book_ref" }
-      nodeProperty1: { field: "book_date" }
-      nodeProperty2: { field: "total_amount" }
+      nodeProperty0: { column: "book_ref" }
+      nodeProperty1: { column: "book_date" }
+      nodeProperty2: { column: "total_amount" }
     key: ["nodeProperty0"]
   - node: "node3"
     table: "flights"
     properties:
-      nodeProperty0: { field: "flight_id" }
-      nodeProperty1: { field: "flight_no" }
-      nodeProperty2: { field: "scheduled_departure" }
-      nodeProperty3: { field: "scheduled_arrival" }
-      nodeProperty4: { field: "status" }
-      nodeProperty5: { field: "actual_departure" }
-      nodeProperty6: { field: "actual_arrival" }
+      nodeProperty0: { column: "flight_id" }
+      nodeProperty1: { column: "flight_no" }
+      nodeProperty2: { column: "scheduled_departure" }
+      nodeProperty3: { column: "scheduled_arrival" }
+      nodeProperty4: { column: "status" }
+      nodeProperty5: { column: "actual_departure" }
+      nodeProperty6: { column: "actual_arrival" }
     key: ["nodeProperty0"]
   - node: "node4"
     table: "tickets"
     properties:
-      nodeProperty0: { field: "ticket_no" }
-      nodeProperty1: { field: "passenger_id" }
-      nodeProperty2: { field: "passenger_name" }
-      nodeProperty3: { field: "contact_data" }
+      nodeProperty0: { column: "ticket_no" }
+      nodeProperty1: { column: "passenger_id" }
+      nodeProperty2: { column: "passenger_name" }
+      nodeProperty3: { column: "contact_data" }
     key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "flights"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { field: "flight_id" }
+        nodeProperty0: { column: "flight_id" }
     to:
       node: "node0"
       properties:
-        nodeProperty0: { field: "aircraft_code" }
+        nodeProperty0: { column: "aircraft_code" }
   - relationship: "relationship1"
     table: "flights"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { field: "flight_id" }
+        nodeProperty0: { column: "flight_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { field: "departure_airport" }
+        nodeProperty0: { column: "departure_airport" }
   - relationship: "relationship2"
     table: "flights"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { field: "flight_id" }
+        nodeProperty0: { column: "flight_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { field: "arrival_airport" }
+        nodeProperty0: { column: "arrival_airport" }
   - relationship: "relationship3"
     table: "ticket_flights"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { field: "flight_id" }
+        nodeProperty0: { column: "flight_id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { field: "ticket_no" }
+        nodeProperty0: { column: "ticket_no" }
     properties:
-      relationshipProperty0: { field: "fare_conditions" }
-      relationshipProperty1: { field: "amount" }
+      relationshipProperty0: { column: "fare_conditions" }
+      relationshipProperty1: { column: "amount" }
   - relationship: "relationship4"
     table: "tickets"
     from:
       node: "node4"
       properties:
-        nodeProperty0: { field: "ticket_no" }
+        nodeProperty0: { column: "ticket_no" }
     to:
       node: "node2"
       properties:
-        nodeProperty0: { field: "book_ref" }
+        nodeProperty0: { column: "book_ref" }

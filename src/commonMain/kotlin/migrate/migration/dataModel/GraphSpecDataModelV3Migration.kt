@@ -24,7 +24,6 @@ import codec.schema.toNotEmpty
 import migrate.Migration
 import model.Type
 import model.Version
-import model.type.ConstraintType
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
@@ -295,7 +294,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 schemaMapOf(
                     "name" to tableName,
                     "expanded" to true,
-                    "fields" to convertFields(table.mapOfMapsOrNull("fields")),
+                    "fields" to convertFields(table.mapOfMapsOrNull("columns")),
                     "primaryKeys" to table.listOrNull("primaryKeys"),
                     "foreignKeys" to convertForeignKeys(table.mapOfMapsOrNull("foreignKeys"))
                 )
@@ -387,14 +386,14 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             return emptyList()
         }
         return foreignKeys.values.map { fk ->
-            val fields = fk.list("fields").map { it.toString() }
+            val columns = fk.list("columns").map { it.toString() }
             val references = fk.map("references")
-            val referencedFields = references.list("fields").map { it.toString() }
+            val referencedColumns = references.list("columns").map { it.toString() }
 
-            val fieldMaps = fields.indices.map { i ->
+            val fieldMaps = columns.indices.map { i ->
                 schemaMapOf(
-                    "field" to fields[i],
-                    "referencedField" to (referencedFields.getOrNull(i) ?: referencedFields.last())
+                    "field" to columns[i],
+                    "referencedField" to (referencedColumns.getOrNull(i) ?: referencedColumns.last())
                     // TODO set or list with duplicates?
                 )
             }
@@ -412,7 +411,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         }
         return properties.map { (propId, propDef) ->
             schemaMapOf(
-                "fieldName" to propDef.literal("field"),
+                "fieldName" to propDef.literal("column"),
                 "property" to refOf(propId)
             )
         }
@@ -423,7 +422,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             return emptyMap()
         }
         return properties.entries.associate { (key, value) ->
-            "#$key" to value.literal("field")
+            "#$key" to value.literal("column")
         }
     }
 

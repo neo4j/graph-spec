@@ -15,38 +15,38 @@ class ForeignKeyReferenceEditorTest {
     }
 
     @Test
-    fun testAddField_whenNew_addsField() {
-        val reference = foreignKeyReferenceJs(table = "users", fields = arrayOf("id"))
-        ForeignKeyReferenceEditor.addField(reference, "uuid")
+    fun testAddColumn_whenNew_addsColumn() {
+        val reference = foreignKeyReferenceJs(table = "users", columns = arrayOf("id"))
+        ForeignKeyReferenceEditor.addColumn(reference, "uuid")
 
-        assertEquals(2, reference.fields.size)
-        assertTrue(reference.fields.contains("uuid"), "New field should be added.")
+        assertEquals(2, reference.columns.size)
+        assertTrue(reference.columns.contains("uuid"), "New column should be added.")
     }
 
     @Test
-    fun testAddField_whenDuplicate_doesNotAdd() {
-        val reference = foreignKeyReferenceJs(table = "users", fields = arrayOf("id"))
-        ForeignKeyReferenceEditor.addField(reference, "id")
+    fun testAddColumn_whenDuplicate_doesNotAdd() {
+        val reference = foreignKeyReferenceJs(table = "users", columns = arrayOf("id"))
+        ForeignKeyReferenceEditor.addColumn(reference, "id")
 
-        assertEquals(1, reference.fields.size, "Duplicate field should not be added.")
+        assertEquals(1, reference.columns.size, "Duplicate column should not be added.")
     }
 
     @Test
-    fun testRemoveField_whenExisting_removesField() {
-        val reference = foreignKeyReferenceJs(table = "users", fields = arrayOf("id", "uuid"))
-        ForeignKeyReferenceEditor.removeField(reference, "id")
+    fun testRemoveColumn_whenExisting_removesColumn() {
+        val reference = foreignKeyReferenceJs(table = "users", columns = arrayOf("id", "uuid"))
+        ForeignKeyReferenceEditor.removeColumn(reference, "id")
 
-        assertEquals(1, reference.fields.size)
-        assertFalse(reference.fields.contains("id"), "Existing field should be removed.")
-        assertTrue(reference.fields.contains("uuid"))
+        assertEquals(1, reference.columns.size)
+        assertFalse(reference.columns.contains("id"), "Existing column should be removed.")
+        assertTrue(reference.columns.contains("uuid"))
     }
 
     @Test
-    fun testRemoveField_whenNonExisting_doesNothing() {
-        val reference = foreignKeyReferenceJs(table = "users", fields = arrayOf("id"))
-        ForeignKeyReferenceEditor.removeField(reference, "uuid") // Doesn't exist
+    fun testRemoveColumn_whenNonExisting_doesNothing() {
+        val reference = foreignKeyReferenceJs(table = "users", columns = arrayOf("id"))
+        ForeignKeyReferenceEditor.removeColumn(reference, "uuid") // Doesn't exist
 
-        assertEquals(1, reference.fields.size, "Array size should remain unchanged.")
-        assertTrue(reference.fields.contains("id"))
+        assertEquals(1, reference.columns.size, "Array size should remain unchanged.")
+        assertTrue(reference.columns.contains("id"))
     }
 }

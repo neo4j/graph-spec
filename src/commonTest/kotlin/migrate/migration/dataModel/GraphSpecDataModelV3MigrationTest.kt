@@ -203,12 +203,12 @@ class GraphSpecDataModelV3MigrationTest {
                     "from" to
                         schemaMapOf(
                             "node" to "User",
-                            "properties" to schemaMapOf("uid" to schemaMapOf("field" to "from_id"))
+                            "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
                         ),
                     "to" to
                         schemaMapOf(
                             "node" to "User",
-                            "properties" to schemaMapOf("uid" to schemaMapOf("field" to "to_id"))
+                            "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
                         )
                 )
             )
@@ -298,10 +298,10 @@ class GraphSpecDataModelV3MigrationTest {
                     "source" to "SQL",
                     "foreignKeys" to schemaMapOf(
                         "fk_customer" to schemaMapOf(
-                            "fields" to listOf("cust_id", "region_id"),
+                            "columns" to listOf("cust_id", "region_id"),
                             "references" to schemaMapOf(
                                 "table" to "Customers",
-                                "fields" to listOf("id", "reg_id")
+                                "columns" to listOf("id", "reg_id")
                             )
                         )
                     )

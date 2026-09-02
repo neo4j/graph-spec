@@ -214,7 +214,7 @@ relationships:
 tables:
   countryregioncurrency:
     source: "cloud"
-    fields:
+    columns:
       countryregioncode:
         type: "varchar"
         suggested: "STRING"
@@ -230,18 +230,18 @@ tables:
     primaryKeys: ["countryregioncode", "currencycode"]
     foreignKeys:
       foreignKey1:
-        fields: ["countryregioncode"]
+        columns: ["countryregioncode"]
         references:
           table: "countryregion"
-          fields: ["countryregioncode"]
+          columns: ["countryregioncode"]
       foreignKey2:
-        fields: ["currencycode"]
+        columns: ["currencycode"]
         references:
           table: "currency"
-          fields: ["currencycode"]
+          columns: ["currencycode"]
   creditcard:
     source: "cloud"
-    fields:
+    columns:
       creditcardid:
         type: "serial"
         suggested: "INTEGER"
@@ -269,7 +269,7 @@ tables:
     primaryKeys: ["creditcardid"]
   currency:
     source: "cloud"
-    fields:
+    columns:
       currencycode:
         type: "bpchar"
         suggested: "STRING"
@@ -283,7 +283,7 @@ tables:
     primaryKeys: ["currencycode"]
   currencyrate:
     source: "cloud"
-    fields:
+    columns:
       currencyrateid:
         type: "serial"
         suggested: "INTEGER"
@@ -315,13 +315,13 @@ tables:
     primaryKeys: ["currencyrateid"]
     foreignKeys:
       foreignKey1:
-        fields: ["fromcurrencycode", "tocurrencycode"]
+        columns: ["fromcurrencycode", "tocurrencycode"]
         references:
           table: "currency"
-          fields: ["currencycode"]
+          columns: ["currencycode"]
   customer:
     source: "cloud"
-    fields:
+    columns:
       customerid:
         type: "serial"
         suggested: "INTEGER"
@@ -349,23 +349,23 @@ tables:
     primaryKeys: ["customerid"]
     foreignKeys:
       foreignKey1:
-        fields: ["personid"]
+        columns: ["personid"]
         references:
           table: "person"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["territoryid"]
+        columns: ["territoryid"]
         references:
           table: "salesterritory"
-          fields: ["territoryid"]
+          columns: ["territoryid"]
       foreignKey3:
-        fields: ["storeid"]
+        columns: ["storeid"]
         references:
           table: "store"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
   personcreditcard:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -381,18 +381,18 @@ tables:
     primaryKeys: ["businessentityid", "creditcardid"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "person"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["creditcardid"]
+        columns: ["creditcardid"]
         references:
           table: "creditcard"
-          fields: ["creditcardid"]
+          columns: ["creditcardid"]
   salesorderdetail:
     source: "cloud"
-    fields:
+    columns:
       salesorderid:
         type: "int4"
         suggested: "INTEGER"
@@ -436,18 +436,18 @@ tables:
     primaryKeys: ["salesorderid", "salesorderdetailid"]
     foreignKeys:
       foreignKey1:
-        fields: ["salesorderid"]
+        columns: ["salesorderid"]
         references:
           table: "salesorderheader"
-          fields: ["salesorderid"]
+          columns: ["salesorderid"]
       foreignKey2:
-        fields: ["specialofferid", "productid"]
+        columns: ["specialofferid", "productid"]
         references:
           table: "specialofferproduct"
-          fields: ["specialofferid", "productid"]
+          columns: ["specialofferid", "productid"]
   salesorderheader:
     source: "cloud"
-    fields:
+    columns:
       salesorderid:
         type: "serial"
         suggested: "INTEGER"
@@ -545,43 +545,43 @@ tables:
     primaryKeys: ["salesorderid"]
     foreignKeys:
       foreignKey1:
-        fields: ["billtoaddressid", "shiptoaddressid"]
+        columns: ["billtoaddressid", "shiptoaddressid"]
         references:
           table: "address"
-          fields: ["addressid"]
+          columns: ["addressid"]
       foreignKey2:
-        fields: ["shipmethodid"]
+        columns: ["shipmethodid"]
         references:
           table: "shipmethod"
-          fields: ["shipmethodid"]
+          columns: ["shipmethodid"]
       foreignKey3:
-        fields: ["creditcardid"]
+        columns: ["creditcardid"]
         references:
           table: "creditcard"
-          fields: ["creditcardid"]
+          columns: ["creditcardid"]
       foreignKey4:
-        fields: ["currencyrateid"]
+        columns: ["currencyrateid"]
         references:
           table: "currencyrate"
-          fields: ["currencyrateid"]
+          columns: ["currencyrateid"]
       foreignKey5:
-        fields: ["customerid"]
+        columns: ["customerid"]
         references:
           table: "customer"
-          fields: ["customerid"]
+          columns: ["customerid"]
       foreignKey6:
-        fields: ["salespersonid"]
+        columns: ["salespersonid"]
         references:
           table: "salesperson"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey7:
-        fields: ["territoryid"]
+        columns: ["territoryid"]
         references:
           table: "salesterritory"
-          fields: ["territoryid"]
+          columns: ["territoryid"]
   salesorderheadersalesreason:
     source: "cloud"
-    fields:
+    columns:
       salesorderid:
         type: "int4"
         suggested: "INTEGER"
@@ -597,18 +597,18 @@ tables:
     primaryKeys: ["salesorderid", "salesreasonid"]
     foreignKeys:
       foreignKey1:
-        fields: ["salesorderid"]
+        columns: ["salesorderid"]
         references:
           table: "salesorderheader"
-          fields: ["salesorderid"]
+          columns: ["salesorderid"]
       foreignKey2:
-        fields: ["salesreasonid"]
+        columns: ["salesreasonid"]
         references:
           table: "salesreason"
-          fields: ["salesreasonid"]
+          columns: ["salesreasonid"]
   salesperson:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -648,18 +648,18 @@ tables:
     primaryKeys: ["businessentityid"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "employee"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["territoryid"]
+        columns: ["territoryid"]
         references:
           table: "salesterritory"
-          fields: ["territoryid"]
+          columns: ["territoryid"]
   salespersonquotahistory:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -683,13 +683,13 @@ tables:
     primaryKeys: ["businessentityid", "quotadate"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "salesperson"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
   salesreason:
     source: "cloud"
-    fields:
+    columns:
       salesreasonid:
         type: "serial"
         suggested: "INTEGER"
@@ -705,7 +705,7 @@ tables:
     primaryKeys: ["salesreasonid"]
   salestaxrate:
     source: "cloud"
-    fields:
+    columns:
       salestaxrateid:
         type: "serial"
         suggested: "INTEGER"
@@ -735,13 +735,13 @@ tables:
     primaryKeys: ["salestaxrateid"]
     foreignKeys:
       foreignKey1:
-        fields: ["stateprovinceid"]
+        columns: ["stateprovinceid"]
         references:
           table: "stateprovince"
-          fields: ["stateprovinceid"]
+          columns: ["stateprovinceid"]
   salesterritory:
     source: "cloud"
-    fields:
+    columns:
       territoryid:
         type: "serial"
         suggested: "INTEGER"
@@ -783,13 +783,13 @@ tables:
     primaryKeys: ["territoryid"]
     foreignKeys:
       foreignKey1:
-        fields: ["countryregioncode"]
+        columns: ["countryregioncode"]
         references:
           table: "countryregion"
-          fields: ["countryregioncode"]
+          columns: ["countryregioncode"]
   salesterritoryhistory:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -817,18 +817,18 @@ tables:
     primaryKeys: ["businessentityid", "startdate", "territoryid"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "salesperson"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["territoryid"]
+        columns: ["territoryid"]
         references:
           table: "salesterritory"
-          fields: ["territoryid"]
+          columns: ["territoryid"]
   shoppingcartitem:
     source: "cloud"
-    fields:
+    columns:
       shoppingcartitemid:
         type: "serial"
         suggested: "INTEGER"
@@ -856,13 +856,13 @@ tables:
     primaryKeys: ["shoppingcartitemid"]
     foreignKeys:
       foreignKey1:
-        fields: ["productid"]
+        columns: ["productid"]
         references:
           table: "product"
-          fields: ["productid"]
+          columns: ["productid"]
   specialoffer:
     source: "cloud"
-    fields:
+    columns:
       specialofferid:
         type: "serial"
         suggested: "INTEGER"
@@ -910,7 +910,7 @@ tables:
     primaryKeys: ["specialofferid"]
   specialofferproduct:
     source: "cloud"
-    fields:
+    columns:
       specialofferid:
         type: "int4"
         suggested: "INTEGER"
@@ -930,18 +930,18 @@ tables:
     primaryKeys: ["specialofferid", "productid"]
     foreignKeys:
       foreignKey1:
-        fields: ["productid"]
+        columns: ["productid"]
         references:
           table: "product"
-          fields: ["productid"]
+          columns: ["productid"]
       foreignKey2:
-        fields: ["specialofferid"]
+        columns: ["specialofferid"]
         references:
           table: "specialoffer"
-          fields: ["specialofferid"]
+          columns: ["specialofferid"]
   store:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -965,18 +965,18 @@ tables:
     primaryKeys: ["businessentityid"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "businessentity"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["salespersonid"]
+        columns: ["salespersonid"]
         references:
           table: "salesperson"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
   vindividualcustomer:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1033,7 +1033,7 @@ tables:
         type: "xml"
   vpersondemographics:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1088,7 +1088,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vsalesperson:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1163,7 +1163,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vsalespersonsalesbyfiscalyears:
     source: "cloud"
-    fields:
+    columns:
       SalesPersonID:
         type: "int4"
         suggested: "INTEGER"
@@ -1194,7 +1194,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vsalespersonsalesbyfiscalyearsdata:
     source: "cloud"
-    fields:
+    columns:
       salespersonid:
         type: "int4"
         suggested: "INTEGER"
@@ -1219,7 +1219,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vstorewithaddresses:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1250,7 +1250,7 @@ tables:
         type: "Name"
   vstorewithcontacts:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1287,7 +1287,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vstorewithdemographics:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1338,222 +1338,222 @@ mappings:
   - node: "creditcard"
     table: "creditcard"
     properties:
-      creditcardid: { field: "creditcardid" }
-      cardtype: { field: "cardtype" }
-      cardnumber: { field: "cardnumber" }
-      expmonth: { field: "expmonth" }
-      expyear: { field: "expyear" }
-      modifieddate: { field: "modifieddate" }
+      creditcardid: { column: "creditcardid" }
+      cardtype: { column: "cardtype" }
+      cardnumber: { column: "cardnumber" }
+      expmonth: { column: "expmonth" }
+      expyear: { column: "expyear" }
+      modifieddate: { column: "modifieddate" }
     key: ["creditcardid"]
   - node: "currency"
     table: "currency"
     properties:
-      currencycode: { field: "currencycode" }
-      modifieddate: { field: "modifieddate" }
+      currencycode: { column: "currencycode" }
+      modifieddate: { column: "modifieddate" }
     key: ["currencycode"]
   - node: "currencyrate"
     table: "currencyrate"
     properties:
-      currencyrateid: { field: "currencyrateid" }
-      currencyratedate: { field: "currencyratedate" }
-      averagerate: { field: "averagerate" }
-      endofdayrate: { field: "endofdayrate" }
-      modifieddate: { field: "modifieddate" }
+      currencyrateid: { column: "currencyrateid" }
+      currencyratedate: { column: "currencyratedate" }
+      averagerate: { column: "averagerate" }
+      endofdayrate: { column: "endofdayrate" }
+      modifieddate: { column: "modifieddate" }
     key: ["currencyrateid"]
   - node: "customer"
     table: "customer"
     properties:
-      customerid: { field: "customerid" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      customerid: { column: "customerid" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["customerid"]
   - node: "salesorderheader"
     table: "salesorderheader"
     properties:
-      salesorderid: { field: "salesorderid" }
-      revisionnumber: { field: "revisionnumber" }
-      orderdate: { field: "orderdate" }
-      duedate: { field: "duedate" }
-      shipdate: { field: "shipdate" }
-      status: { field: "status" }
-      creditcardapprovalcode: { field: "creditcardapprovalcode" }
-      subtotal: { field: "subtotal" }
-      taxamt: { field: "taxamt" }
-      freight: { field: "freight" }
-      totaldue: { field: "totaldue" }
-      comment: { field: "comment" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      salesorderid: { column: "salesorderid" }
+      revisionnumber: { column: "revisionnumber" }
+      orderdate: { column: "orderdate" }
+      duedate: { column: "duedate" }
+      shipdate: { column: "shipdate" }
+      status: { column: "status" }
+      creditcardapprovalcode: { column: "creditcardapprovalcode" }
+      subtotal: { column: "subtotal" }
+      taxamt: { column: "taxamt" }
+      freight: { column: "freight" }
+      totaldue: { column: "totaldue" }
+      comment: { column: "comment" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["salesorderid"]
   - node: "salesperson"
     table: "salesperson"
     properties:
-      businessentityid: { field: "businessentityid" }
-      salesquota: { field: "salesquota" }
-      bonus: { field: "bonus" }
-      commissionpct: { field: "commissionpct" }
-      salesytd: { field: "salesytd" }
-      saleslastyear: { field: "saleslastyear" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      businessentityid: { column: "businessentityid" }
+      salesquota: { column: "salesquota" }
+      bonus: { column: "bonus" }
+      commissionpct: { column: "commissionpct" }
+      salesytd: { column: "salesytd" }
+      saleslastyear: { column: "saleslastyear" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["businessentityid"]
   - node: "salesreason"
     table: "salesreason"
     properties:
-      salesreasonid: { field: "salesreasonid" }
-      modifieddate: { field: "modifieddate" }
+      salesreasonid: { column: "salesreasonid" }
+      modifieddate: { column: "modifieddate" }
     key: ["salesreasonid"]
   - node: "salestaxrate"
     table: "salestaxrate"
     properties:
-      salestaxrateid: { field: "salestaxrateid" }
-      taxtype: { field: "taxtype" }
-      taxrate: { field: "taxrate" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      salestaxrateid: { column: "salestaxrateid" }
+      taxtype: { column: "taxtype" }
+      taxrate: { column: "taxrate" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["salestaxrateid"]
   - node: "salesterritory"
     table: "salesterritory"
     properties:
-      territoryid: { field: "territoryid" }
-      group: { field: "group" }
-      salesytd: { field: "salesytd" }
-      saleslastyear: { field: "saleslastyear" }
-      costytd: { field: "costytd" }
-      costlastyear: { field: "costlastyear" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      territoryid: { column: "territoryid" }
+      group: { column: "group" }
+      salesytd: { column: "salesytd" }
+      saleslastyear: { column: "saleslastyear" }
+      costytd: { column: "costytd" }
+      costlastyear: { column: "costlastyear" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["territoryid"]
   - node: "shoppingcartitem"
     table: "shoppingcartitem"
     properties:
-      shoppingcartitemid: { field: "shoppingcartitemid" }
-      shoppingcartid: { field: "shoppingcartid" }
-      quantity: { field: "quantity" }
-      datecreated: { field: "datecreated" }
-      modifieddate: { field: "modifieddate" }
+      shoppingcartitemid: { column: "shoppingcartitemid" }
+      shoppingcartid: { column: "shoppingcartid" }
+      quantity: { column: "quantity" }
+      datecreated: { column: "datecreated" }
+      modifieddate: { column: "modifieddate" }
     key: ["shoppingcartitemid"]
   - node: "specialoffer"
     table: "specialoffer"
     properties:
-      specialofferid: { field: "specialofferid" }
-      description: { field: "description" }
-      discountpct: { field: "discountpct" }
-      type: { field: "type" }
-      category: { field: "category" }
-      startdate: { field: "startdate" }
-      enddate: { field: "enddate" }
-      minqty: { field: "minqty" }
-      maxqty: { field: "maxqty" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      specialofferid: { column: "specialofferid" }
+      description: { column: "description" }
+      discountpct: { column: "discountpct" }
+      type: { column: "type" }
+      category: { column: "category" }
+      startdate: { column: "startdate" }
+      enddate: { column: "enddate" }
+      minqty: { column: "minqty" }
+      maxqty: { column: "maxqty" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["specialofferid"]
   - node: "store"
     table: "store"
     properties:
-      businessentityid: { field: "businessentityid" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      businessentityid: { column: "businessentityid" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["businessentityid"]
   - relationship: "SALESTERRITORY"
     table: "customer"
     from:
       node: "customer"
       properties:
-        customerid: { field: "customerid" }
+        customerid: { column: "customerid" }
     to:
       node: "salesterritory"
       properties:
-        territoryid: { field: "territoryid" }
+        territoryid: { column: "territoryid" }
   - relationship: "STORE"
     table: "customer"
     from:
       node: "customer"
       properties:
-        customerid: { field: "customerid" }
+        customerid: { column: "customerid" }
     to:
       node: "store"
       properties:
-        businessentityid: { field: "storeid" }
+        businessentityid: { column: "storeid" }
   - relationship: "CREDITCARD"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "creditcard"
       properties:
-        creditcardid: { field: "creditcardid" }
+        creditcardid: { column: "creditcardid" }
   - relationship: "CURRENCYRATE"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "currencyrate"
       properties:
-        currencyrateid: { field: "currencyrateid" }
+        currencyrateid: { column: "currencyrateid" }
   - relationship: "CUSTOMER"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "customer"
       properties:
-        customerid: { field: "customerid" }
+        customerid: { column: "customerid" }
   - relationship: "SALESPERSON"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "salesperson"
       properties:
-        businessentityid: { field: "salespersonid" }
+        businessentityid: { column: "salespersonid" }
   - relationship: "SALESTERRITORY2"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "salesterritory"
       properties:
-        territoryid: { field: "territoryid" }
+        territoryid: { column: "territoryid" }
   - relationship: "SALESREASON"
     table: "salesorderheadersalesreason"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "salesreason"
       properties:
-        salesreasonid: { field: "salesreasonid" }
+        salesreasonid: { column: "salesreasonid" }
     properties:
-      modifieddate: { field: "modifieddate" }
+      modifieddate: { column: "modifieddate" }
   - relationship: "SALESTERRITORY3"
     table: "salesperson"
     from:
       node: "salesperson"
       properties:
-        businessentityid: { field: "businessentityid" }
+        businessentityid: { column: "businessentityid" }
     to:
       node: "salesterritory"
       properties:
-        territoryid: { field: "territoryid" }
+        territoryid: { column: "territoryid" }
   - relationship: "SALESPERSON2"
     table: "store"
     from:
       node: "store"
       properties:
-        businessentityid: { field: "businessentityid" }
+        businessentityid: { column: "businessentityid" }
     to:
       node: "salesperson"
       properties:
-        businessentityid: { field: "salespersonid" }
+        businessentityid: { column: "salespersonid" }

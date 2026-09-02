@@ -16,17 +16,24 @@
  */
 package model.source
 
-@JsExport
-class TableFieldEditor {
-    companion object {
-        @JsStatic
-        fun setType(field: TableFieldJs, type: String) {
-            field.type = type
-        }
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import model.extension.ExtensionValue
+import model.extension.Extensions
+import model.property.Neo4jType
+import model.type.Named
+import kotlin.js.JsExport
 
-        @JsStatic
-        fun setSize(field: TableFieldJs, size: Int) {
-            field.size = size
-        }
-    }
-}
+@JsExport
+@Serializable
+@SerialName("TableColumn")
+data class TableColumn(
+    var type: String = "",
+    var size: Int = -1,
+    val suggested: Neo4jType = Neo4jType.ANY,
+    val supported: Set<Neo4jType> = emptySet(),
+    val dimension: Int? = null,
+    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    override var name: String? = null
+) : Extensions,
+    Named

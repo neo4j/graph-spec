@@ -7,9 +7,9 @@ import model.extension.stringValueJs
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
-class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
+class TableColumnJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
 
-    override fun createClass() = TableField(
+    override fun createClass() = TableColumn(
         type = "field_type",
         size = 10,
         suggested = Neo4jType.VECTOR_FLOAT,
@@ -19,11 +19,11 @@ class TableFieldJsTest : JsMappingTest<TableField, TableFieldJs>() {
         name = "Field name"
     )
 
-    override fun toJs(k: TableField): TableFieldJs = k.toJs("fieldId")
+    override fun toJs(k: TableColumn): TableColumnJs = k.toJs("columnId")
 
-    override fun toClass(js: TableFieldJs): TableField = js.toClass()
+    override fun toClass(js: TableColumnJs): TableColumn = js.toClass()
 
-    override fun verifyJsObject(jsObject: TableFieldJs) {
+    override fun verifyJsObject(jsObject: TableColumnJs) {
         assertEquals("field_type", jsObject.type)
         assertEquals(10, jsObject.size)
         assertEquals("VECTOR<FLOAT>", jsObject.suggested)

@@ -21,9 +21,7 @@ import model.Rename.rename
 import model.mapping.NodeMapping
 import model.mapping.RelationshipMapping
 import model.node.Constraint
-import model.node.Node
 import model.property.Property
-import model.relationship.Relationship
 import model.type.ConstraintType
 import model.type.Named
 import kotlin.collections.component1
@@ -58,7 +56,7 @@ object Pretty {
             relationship.name = null
         }
         model.tables.values.forEach { table ->
-            table.fields.values.forEach { it.name = null }
+            table.columns.values.forEach { it.name = null }
         }
     }
 
@@ -121,7 +119,6 @@ object Pretty {
             }
         }
         renameNodeMappingProperties(this, renames)
-        renameTargetNodeProperties(this, renames)
     }
 
     /**
@@ -151,15 +148,6 @@ object Pretty {
         }
         prettifiedConstraints.forEach { key ->
             constraints.remove(key)
-        }
-    }
-
-    internal fun renameTargetNodeProperties(model: GraphModel, renames: MutableMap<String, String>) {
-        model.relationships.values.forEach { relationship ->
-            relationship.from.property =
-                renames["${relationship.from.node}:${relationship.from.property}"] ?: relationship.from.property
-            relationship.to.property =
-                renames["${relationship.to.node}:${relationship.to.property}"] ?: relationship.to.property
         }
     }
 

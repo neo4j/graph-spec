@@ -283,7 +283,7 @@ class DataModelV3GraphSpecMigration :
     }
 
     internal fun SchemaMap.entityMap(key: String) = mapOrNull(key)?.map { (key, value) ->
-        key.removePrefix("#") to schemaMapOf("field" to value)
+        key.removePrefix("#") to schemaMapOf("column" to value)
     }?.toMap() ?: emptyMap()
 
     internal fun nodeMappings(schema: SchemaMap, nodeKeys: Map<String, Set<String>>): List<SchemaMap> {
@@ -308,7 +308,7 @@ class DataModelV3GraphSpecMigration :
         .listOfMaps("propertyMappings")
         .associate { mapping ->
             mapping.ref("property") to mapOf(
-                "field" to mapping.literal("fieldName")
+                "column" to mapping.literal("fieldName")
             )
         }
 
@@ -326,7 +326,7 @@ class DataModelV3GraphSpecMigration :
             val name = table.string("name")
             tables[name] = schemaMapOf(
                 "source" to sourceSchema.literalOrNull("type"),
-                "fields" to migrateFields(table),
+                "columns" to migrateColumns(table),
                 "primaryKeys" toNotEmpty table.listOrNull("primaryKeys"),
                 "foreignKeys" toNotEmpty migrateForeignKeys(table)
             )
@@ -338,24 +338,24 @@ class DataModelV3GraphSpecMigration :
         val foreign = table.listOfMapsOrNull("foreignKeys") ?: return null
         val foreignKeys = mutableMapOf<String, SchemaElement>()
         for (foreignKey in foreign) {
-            val fields = foreignKey.listOfMaps("fields").map { it.string("field") }
-            val referencedFields = foreignKey.listOfMaps("fields").map { it.string("referencedField") }
+            val columns = foreignKey.listOfMaps("fields").map { it.string("field") }
+            val referencedColumns = foreignKey.listOfMaps("fields").map { it.string("referencedField") }
             foreignKeys["foreignKey${foreignKeys.size + 1}"] = schemaMapOf(
-                "fields" to fields,
+                "columns" to columns,
                 "references" to mapOf(
                     "table" to foreignKey.literal("referencedTable"),
-                    "fields" to referencedFields
+                    "columns" to referencedColumns
                 )
             )
         }
         return foreignKeys
     }
 
-    private fun migrateFields(table: SchemaMap): MutableMap<String, SchemaElement> {
-        val fields = mutableMapOf<String, SchemaElement>()
+    private fun migrateColumns(table: SchemaMap): MutableMap<String, SchemaElement> {
+        val columns = mutableMapOf<String, SchemaElement>()
         for (field in table.listOfMaps("fields")) {
             val name = field.string("name")
-            fields[name] = schemaMapOf(
+            columns[name] = schemaMapOf(
                 "name" to field.literal("name"),
                 "type" to field.literalOrNull("rawType"),
                 "size" to field.literalOrNull("size"),
@@ -369,7 +369,7 @@ class DataModelV3GraphSpecMigration :
                     )
             )
         }
-        return fields
+        return columns
     }
 
     companion object {

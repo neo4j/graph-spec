@@ -41,7 +41,6 @@ object MappingSerializer : JsonContentPolymorphicSerializer<Mapping>(Mapping::cl
                 element(MappingType.NODE, NodeMapping.serializer().descriptor)
                 element(MappingType.RELATIONSHIP, RelationshipMapping.serializer().descriptor)
                 element(MappingType.QUERY, QueryMapping.serializer().descriptor)
-                element(MappingType.LABEL, LabelMapping.serializer().descriptor)
             }
         )
     }
@@ -52,7 +51,6 @@ object MappingSerializer : JsonContentPolymorphicSerializer<Mapping>(Mapping::cl
             "node" in jsonObject -> NodeMapping.serializer()
             "relationship" in jsonObject -> RelationshipMapping.serializer()
             "query" in jsonObject -> QueryMapping.serializer()
-            "field" in jsonObject -> LabelMapping.serializer()
             else -> throw SerializationException("Unknown Mapping type for object: $jsonObject")
         }
     }

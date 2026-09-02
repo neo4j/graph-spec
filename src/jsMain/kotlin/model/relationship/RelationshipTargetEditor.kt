@@ -30,10 +30,5 @@ class RelationshipTargetEditor {
             target.label = label
             target.node = ""
         }
-
-        @JsStatic
-        fun setProperty(target: RelationshipTargetJs, property: String) {
-            target.property = property
-        }
     }
 }

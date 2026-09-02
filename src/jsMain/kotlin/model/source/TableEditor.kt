@@ -30,25 +30,25 @@ class TableEditor {
         }
 
         @JsStatic
-        fun setFieldType(table: TableJs, fieldId: String, type: String) {
-            val field = table.fields.getOrThrow(fieldId, "Field")
-            TableFieldEditor.setType(field, type)
+        fun setColumnType(table: TableJs, columnId: String, type: String) {
+            val column = table.columns.getOrThrow(columnId, "Column")
+            TableColumnEditor.setType(column, type)
         }
 
         @JsStatic
-        fun setFieldSize(table: TableJs, fieldId: String, size: Int) {
-            val field = table.fields.getOrThrow(fieldId, "Field")
-            TableFieldEditor.setSize(field, size)
+        fun setColumnSize(table: TableJs, columnId: String, size: Int) {
+            val column = table.columns.getOrThrow(columnId, "Column")
+            TableColumnEditor.setSize(column, size)
         }
 
         @JsStatic
-        fun addField(table: TableJs, type: String): String = table.fields.addUnique("field") {
-            tableFieldJs(type)
+        fun addColumn(table: TableJs, type: String): String = table.columns.addUnique("column") {
+            tableColumnJs(type)
         }
 
         @JsStatic
-        fun removeField(table: TableJs, fieldId: String) {
-            table.fields.remove(fieldId)
+        fun removeColumn(table: TableJs, columnId: String) {
+            table.columns.remove(columnId)
         }
 
         @JsStatic
@@ -67,9 +67,9 @@ class TableEditor {
         }
 
         @JsStatic
-        fun addForeignKey(table: TableJs, fields: Array<String>, reference: ForeignKeyReferenceJs): String =
+        fun addForeignKey(table: TableJs, columns: Array<String>, reference: ForeignKeyReferenceJs): String =
             table.foreignKeys.addUnique("foreignKey") {
-                foreignKeyJs(fields, reference)
+                foreignKeyJs(columns, reference)
             }
 
         @JsStatic
