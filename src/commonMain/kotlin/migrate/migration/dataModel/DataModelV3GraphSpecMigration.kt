@@ -326,7 +326,7 @@ class DataModelV3GraphSpecMigration :
             val name = table.string("name")
             tables[name] = schemaMapOf(
                 "source" to sourceSchema.literalOrNull("type"),
-                "columns" to migrateFields(table),
+                "columns" to migrateColumns(table),
                 "primaryKeys" toNotEmpty table.listOrNull("primaryKeys"),
                 "foreignKeys" toNotEmpty migrateForeignKeys(table)
             )
@@ -351,11 +351,11 @@ class DataModelV3GraphSpecMigration :
         return foreignKeys
     }
 
-    private fun migrateFields(table: SchemaMap): MutableMap<String, SchemaElement> {
-        val fields = mutableMapOf<String, SchemaElement>()
+    private fun migrateColumns(table: SchemaMap): MutableMap<String, SchemaElement> {
+        val columns = mutableMapOf<String, SchemaElement>()
         for (field in table.listOfMaps("fields")) {
             val name = field.string("name")
-            fields[name] = schemaMapOf(
+            columns[name] = schemaMapOf(
                 "name" to field.literal("name"),
                 "type" to field.literalOrNull("rawType"),
                 "size" to field.literalOrNull("size"),
@@ -369,7 +369,7 @@ class DataModelV3GraphSpecMigration :
                     )
             )
         }
-        return fields
+        return columns
     }
 
     companion object {
