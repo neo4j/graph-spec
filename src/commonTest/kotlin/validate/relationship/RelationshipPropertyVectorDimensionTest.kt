@@ -56,7 +56,9 @@ class RelationshipPropertyVectorDimensionTest {
 
         // ASSERT
         assertEquals(1, issues.size)
-        assertEquals("missing_vector_dimension", issues.first().code)
+        val issue = issues.first()
+        assertEquals("missing_vector_dimension", issue.code)
+        assertEquals("relationships.actedIn.properties.embedding.dimension", issue.path)
     }
 
     @Test
