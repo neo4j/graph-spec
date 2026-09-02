@@ -77,8 +77,8 @@ class NodeIndexConstraintNameConflictTest {
     }
 
     @Test
-    fun `pass when indexes sharing a name have identical definitions`() {
-        // UPX probe case A: duplicates allowed when the whole definition is identical
+    fun `fail when indexes sharing a name have identical definitions`() {
+        // Graph-spec does not carry UPX's identical-definition exception; any duplicate name is flagged.
         // ARRANGE
         val node = node(
             indexes = mapOf(
@@ -91,12 +91,16 @@ class NodeIndexConstraintNameConflictTest {
         val issues = validate("personNode" to node)
 
         // ASSERT
-        assertTrue(issues.isEmpty(), "Identical index definitions may share a name")
+        assertEquals(2, issues.size)
+        assertTrue(issues.all { it.code == "duplicate_index_constraint_name" })
+        assertEquals(
+            setOf("nodes.personNode.indexes.i1.name", "nodes.personNode.indexes.i2.name"),
+            issues.mapNotNull { it.path }.toSet()
+        )
     }
 
     @Test
-    fun `pass when property order differs`() {
-        // UPX probe case B: property tokens are sorted before comparison
+    fun `fail when indexes sharing a name differ only in property order`() {
         // ARRANGE
         val node = node(
             indexes = mapOf(
@@ -109,7 +113,7 @@ class NodeIndexConstraintNameConflictTest {
         val issues = validate("personNode" to node)
 
         // ASSERT
-        assertTrue(issues.isEmpty(), "Property order is not part of the definition")
+        assertEquals(2, issues.size)
     }
 
     @Test
@@ -136,8 +140,7 @@ class NodeIndexConstraintNameConflictTest {
     }
 
     @Test
-    fun `fail when indexes sharing a name have different properties`() {
-        // UPX probe case E: two identical plus one different flags all three
+    fun `fail when three indexes share a name`() {
         // ARRANGE
         val node = node(
             indexes = mapOf(
@@ -155,8 +158,8 @@ class NodeIndexConstraintNameConflictTest {
     }
 
     @Test
-    fun `fail when indexes on different nodes share a name with different labels`() {
-        // UPX probe case D: name scope is the whole model, the label is part of the definition
+    fun `fail when indexes on different nodes share a name`() {
+        // Name scope is the whole model.
         // ARRANGE
         val personNode = node(indexes = mapOf("i1" to index("dup", setOf("id"), label = "Person")))
         val movieNode = node(
@@ -176,8 +179,7 @@ class NodeIndexConstraintNameConflictTest {
     }
 
     @Test
-    fun `pass when constraints sharing a name have identical definitions`() {
-        // UPX probe case F
+    fun `fail when constraints sharing a name have identical definitions`() {
         // ARRANGE
         val node = node(
             constraints = mapOf(
@@ -190,7 +192,11 @@ class NodeIndexConstraintNameConflictTest {
         val issues = validate("personNode" to node)
 
         // ASSERT
-        assertTrue(issues.isEmpty(), "Identical constraint definitions may share a name")
+        assertEquals(2, issues.size)
+        assertEquals(
+            setOf("nodes.personNode.constraints.c1.name", "nodes.personNode.constraints.c2.name"),
+            issues.mapNotNull { it.path }.toSet()
+        )
     }
 
     @Test

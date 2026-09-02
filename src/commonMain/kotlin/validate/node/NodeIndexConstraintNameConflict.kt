@@ -21,23 +21,26 @@ import model.node.Node
 import validate.Issue
 
 /**
- * Ported from UPX `getNonUniqueNames` (import-shared/src/data-model/errors.ts).
+ * Index and constraint names must be unique across the whole model. Any name used by more than one
+ * index or constraint is a `duplicate_index_constraint_name`, attached to every index and constraint
+ * carrying that name. Blank and missing names are skipped.
  *
- * A name may be reused only when the whole definition is identical (same properties, label, and
- * index/constraint type). This supports mapping multiple files or columns to the same node.
+ * Ported from UPX `getNonUniqueNames` (import-shared/src/data-model/errors.ts). Graph-spec supports
+ * mapping multiple files or columns to the same node natively, so it does not carry UPX's
+ * "identical definition may reuse a name" exception - all duplicate names are flagged.
  */
 object NodeIndexConstraintNameConflict : NodeValidation {
     override fun validateNode(model: GraphModel, nodeId: String, node: Node, issues: MutableList<Issue>) {
-        val conflicting = conflictingNames(model)
+        val duplicateNames = duplicateNames(model)
 
         for ((indexId, index) in node.indexes) {
-            val name = index.name ?: continue
-            if (name in conflicting) {
+            val name = index.name
+            if (!name.isNullOrEmpty() && name in duplicateNames) {
                 issues.add(
                     Issue(
                         code = "duplicate_index_constraint_name",
                         message = "Index '$indexId' on node '$nodeId' reuses name '$name' " +
-                            "for a different index or constraint definition",
+                            "already used by another index or constraint",
                         path = "nodes.$nodeId.indexes.$indexId.name"
                     )
                 )
@@ -45,13 +48,13 @@ object NodeIndexConstraintNameConflict : NodeValidation {
         }
 
         for ((constraintId, constraint) in node.constraints) {
-            val name = constraint.name ?: continue
-            if (name in conflicting) {
+            val name = constraint.name
+            if (!name.isNullOrEmpty() && name in duplicateNames) {
                 issues.add(
                     Issue(
                         code = "duplicate_index_constraint_name",
                         message = "Constraint '$constraintId' on node '$nodeId' reuses name '$name' " +
-                            "for a different index or constraint definition",
+                            "already used by another index or constraint",
                         path = "nodes.$nodeId.constraints.$constraintId.name"
                     )
                 )
@@ -59,33 +62,22 @@ object NodeIndexConstraintNameConflict : NodeValidation {
         }
     }
 
-    private fun conflictingNames(model: GraphModel): Set<String> {
-        val definitionsByName = mutableMapOf<String, MutableSet<String>>()
+    private fun duplicateNames(model: GraphModel): Set<String> {
+        val seen = mutableMapOf<String, Int>()
         for (node in model.nodes.values) {
             for (index in node.indexes.values) {
                 val name = index.name
-                if (name.isNullOrEmpty()) continue
-                definitionsByName.getOrPut(name) { mutableSetOf() }
-                    .add(definition("index", index.properties, index.labels, index.type.name))
+                if (!name.isNullOrEmpty()) {
+                    seen[name] = (seen[name] ?: 0) + 1
+                }
             }
             for (constraint in node.constraints.values) {
                 val name = constraint.name
-                if (name.isNullOrEmpty()) continue
-                definitionsByName.getOrPut(name) { mutableSetOf() }
-                    .add(
-                        definition(
-                            "constraint",
-                            constraint.properties,
-                            setOfNotNull(constraint.label),
-                            constraint.type.name
-                        )
-                    )
+                if (!name.isNullOrEmpty()) {
+                    seen[name] = (seen[name] ?: 0) + 1
+                }
             }
         }
-        // An index and a constraint sharing a name always conflict, hence the kind in the definition.
-        return definitionsByName.filterValues { it.size > 1 }.keys
+        return seen.filterValues { it > 1 }.keys
     }
-
-    private fun definition(kind: String, properties: Set<String>, labels: Set<String>, type: String): String =
-        "$kind:${properties.sorted().joinToString("_")}:${labels.sorted().joinToString("_")}:$type"
 }
