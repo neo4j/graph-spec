@@ -26,7 +26,7 @@ func TestValidate(t *testing.T) {
 	require.NoError(t, err)
 
 	t.Log(fmt.Sprintf("Validated graph: %v", res))
-	require.Len(t, res, 3)
+	require.Len(t, res, 5)
 
 	codes := make([]string, len(res))
 	for i := range res {
@@ -36,5 +36,7 @@ func TestValidate(t *testing.T) {
 		"invalid_node_type_constraint_property_count",
 		"invalid_node_exist_constraint_property_count",
 		"missing_node_properties",
+		"missing_node_constraint_properties",
+		"missing_node_constraint_properties",
 	}, codes)
 }
