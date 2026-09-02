@@ -39,9 +39,9 @@ object TableColumnDuplicateName : TableValidation {
         if (isDuplicate) {
             issues.add(
                 Issue(
-                    code = "duplicate_table_field_name",
-                    message = "Duplicate field name '$name' in table '$tableId'",
-                    path = "tables.$tableId.fields.$columnId.name"
+                    code = "duplicate_table_coulmn_name",
+                    message = "Duplicate column name '$name' in table '$tableId'",
+                    path = "tables.$tableId.columns.$columnId.name"
                 )
             )
         }

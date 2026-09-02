@@ -33,9 +33,9 @@ object TableColumnEmptyName : TableValidation {
         if (column.name.isNullOrBlank()) {
             issues.add(
                 Issue(
-                    code = "missing_table_field_name",
-                    message = "Missing name for table field '$columnId'",
-                    path = "tables.$tableId.fields.$columnId.name"
+                    code = "missing_table_column_name",
+                    message = "Missing name for table column '$columnId'",
+                    path = "tables.$tableId.columns.$columnId.name"
                 )
             )
         }

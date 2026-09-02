@@ -44,7 +44,7 @@ class TableColumnTypeTest {
         validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
-        assertEquals("missing_table_field_type", issues.first().code)
+        assertEquals("missing_table_column_type", issues.first().code)
     }
 
     @Test
@@ -92,6 +92,6 @@ class TableColumnTypeTest {
         validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
-        assertEquals("missing_table_field_type", issues.first().code)
+        assertEquals("missing_table_column_type", issues.first().code)
     }
 }

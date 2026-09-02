@@ -38,9 +38,9 @@ object TableColumnType : TableValidation {
         if (column.supported.isEmpty()) {
             issues.add(
                 Issue(
-                    code = "missing_table_field_type",
-                    message = "Missing suggested type for table field '$columnId'",
-                    path = "tables.$tableId.fields.$columnId.type"
+                    code = "missing_table_column_type",
+                    message = "Missing suggested type for table column '$columnId'",
+                    path = "tables.$tableId.columns.$columnId.type"
                 )
             )
         }

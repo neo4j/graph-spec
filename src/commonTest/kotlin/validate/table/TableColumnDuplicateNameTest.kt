@@ -47,9 +47,9 @@ class TableColumnDuplicateNameTest {
         validator.validateTableColumn(model, "t:1", table, "f:3", table.columns["f:3"]!!, issuesThird)
 
         assertEquals(1, issuesFirst.size, "First occurrence should also be flagged as duplicate")
-        assertEquals("duplicate_table_field_name", issuesFirst.first().code)
+        assertEquals("duplicate_table_column_name", issuesFirst.first().code)
         assertEquals(1, issuesThird.size)
-        assertEquals("duplicate_table_field_name", issuesThird.first().code)
+        assertEquals("duplicate_table_column_name", issuesThird.first().code)
     }
 
     @Test
