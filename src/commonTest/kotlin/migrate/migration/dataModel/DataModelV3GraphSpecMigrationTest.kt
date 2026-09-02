@@ -132,9 +132,10 @@ class DataModelV3GraphSpecMigrationTest {
                         "\$id" to "prop1",
                         "token" to "name",
                         "type" to mapOf("type" to "string"),
-                        "nullable" to false
+                        "nullable" to false,
+                        "description" to "prop description"
                     )
-                )
+                ),
             )
         )
 
@@ -143,7 +144,8 @@ class DataModelV3GraphSpecMigrationTest {
             "nodeObjectTypes" to listOf(
                 schemaMapOf(
                     "\$id" to "nodeObj1",
-                    "labels" to listOf(mapOf("\$ref" to "#$labelId"))
+                    "labels" to listOf(mapOf("\$ref" to "#$labelId")),
+                    "description" to "a description"
                 )
             )
         )
@@ -152,12 +154,14 @@ class DataModelV3GraphSpecMigrationTest {
 
         val migratedNode = nodes["nodeObj1"]
         assertNotNull(migratedNode)
+        assertEquals("a description", migratedNode.stringOrNull("description"))
         val labels = migratedNode.map("labels")
-
         assertEquals("Person", labels.stringOrNull("identifier"))
         val props = migratedNode.map("properties")
         assertNotNull(props["prop1"])
-        assertEquals("STRING", props.map("prop1").string("type"))
+        val prop = props.map("prop1")
+        assertEquals("STRING", prop.string("type"))
+        assertEquals("prop description", prop.stringOrNull("description"))
     }
 
     @Test
@@ -259,7 +263,8 @@ class DataModelV3GraphSpecMigrationTest {
                         schemaMapOf(
                             "\$id" to "p1",
                             "token" to "since",
-                            "type" to mapOf("type" to "datetime")
+                            "type" to mapOf("type" to "datetime"),
+                            "description" to "prop description"
                         )
                     )
                 )
@@ -269,7 +274,8 @@ class DataModelV3GraphSpecMigrationTest {
                     "\$id" to "relObj1",
                     "type" to mapOf("\$ref" to "#$relTypeRef"),
                     "from" to mapOf("\$ref" to "#nodeA"),
-                    "to" to mapOf("\$ref" to "#nodeB")
+                    "to" to mapOf("\$ref" to "#nodeB"),
+                    "description" to "a description"
                 )
             )
         )
@@ -296,7 +302,10 @@ class DataModelV3GraphSpecMigrationTest {
         assertNotNull(rel)
         assertEquals("FOLLOWS", rel.string("type"))
         assertEquals("nodeA", rel.map("from").string("node"))
-        assertEquals("ZONED DATETIME", rel.map("properties").map("p1").string("type"))
+        assertEquals("a description", rel.string("description"))
+        val prop = rel.map("properties").map("p1")
+        assertEquals("ZONED DATETIME", prop.string("type"))
+        assertEquals("prop description", prop.string("description"))
         assertNotNull(rel.map("constraints")["c1"])
     }
 

@@ -172,7 +172,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     "\$id" to relId,
                     "type" to refOf(typeId),
                     "from" to refOf(rel.map("from").string("node")),
-                    "to" to refOf(rel.map("to").string("node"))
+                    "to" to refOf(rel.map("to").string("node")),
+                    "description" to rel.literalOrNull("description"),
                 )
             )
 
@@ -252,7 +253,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             nodeObjectTypes.add(
                 schemaMapOf(
                     "\$id" to nodeId,
-                    "labels" to labelRefs
+                    "labels" to labelRefs,
+                    "description" to node.literalOrNull("description"),
                 )
             )
             constraints.addAll(
@@ -330,7 +332,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "\$id" to propId,
                 "token" to (prop.stringOrNull("name") ?: propId),
                 "type" to propertyType(prop.string("type"), prop.intOrNull("dimension")),
-                "nullable" to false
+                "nullable" to false,
+                "description" to prop.literalOrNull("description"),
             )
             map
         }
