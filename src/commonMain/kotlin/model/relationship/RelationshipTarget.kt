@@ -26,6 +26,4 @@ import kotlin.js.JsExport
 data class RelationshipTarget(
     var node: String = "",
     var label: String = "",
-    var property: String = ""
-    // TODO: Not sure if property is necessary or not
 )

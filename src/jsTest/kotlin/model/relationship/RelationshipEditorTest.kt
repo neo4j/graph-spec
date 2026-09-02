@@ -49,9 +49,6 @@ class RelationshipEditorTest {
         assertEquals("Label1", rel.from.label)
         assertEquals("", rel.from.node) // RelationshipTargetEditor logic: setting label clears node
 
-        // Test Target (to) delegation
-        RelationshipEditor.setTargetProperty(rel, "propX")
-        assertEquals("propX", rel.to.property)
     }
 
     @Test

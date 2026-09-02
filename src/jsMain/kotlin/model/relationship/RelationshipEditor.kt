@@ -51,11 +51,6 @@ class RelationshipEditor {
         }
 
         @JsStatic
-        fun setSourceProperty(relationship: RelationshipJs, property: String) {
-            RelationshipTargetEditor.setProperty(relationship.from, property)
-        }
-
-        @JsStatic
         fun setTargetNode(relationship: RelationshipJs, node: String) {
             RelationshipTargetEditor.setNode(relationship.to, node)
         }
@@ -63,11 +58,6 @@ class RelationshipEditor {
         @JsStatic
         fun setTargetLabel(relationship: RelationshipJs, label: String) {
             RelationshipTargetEditor.setLabel(relationship.to, label)
-        }
-
-        @JsStatic
-        fun setTargetProperty(relationship: RelationshipJs, property: String) {
-            RelationshipTargetEditor.setProperty(relationship.to, property)
         }
 
         /*

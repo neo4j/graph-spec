@@ -119,7 +119,6 @@ object Pretty {
             }
         }
         renameNodeMappingProperties(this, renames)
-        renameTargetNodeProperties(this, renames)
     }
 
     /**
@@ -149,15 +148,6 @@ object Pretty {
         }
         prettifiedConstraints.forEach { key ->
             constraints.remove(key)
-        }
-    }
-
-    internal fun renameTargetNodeProperties(model: GraphModel, renames: MutableMap<String, String>) {
-        model.relationships.values.forEach { relationship ->
-            relationship.from.property =
-                renames["${relationship.from.node}:${relationship.from.property}"] ?: relationship.from.property
-            relationship.to.property =
-                renames["${relationship.to.node}:${relationship.to.property}"] ?: relationship.to.property
         }
     }
 

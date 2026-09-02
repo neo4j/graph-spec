@@ -79,7 +79,6 @@ object Internal {
             node.indexes.values.forEach { it.properties.rename(renames, key) }
         }
         Pretty.renameNodeMappingProperties(this, renames)
-        Pretty.renameTargetNodeProperties(this, renames)
     }
 
     /**

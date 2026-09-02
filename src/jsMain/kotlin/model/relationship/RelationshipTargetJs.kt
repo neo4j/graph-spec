@@ -24,23 +24,19 @@ import model.jso
 external interface RelationshipTargetJs {
     var node: String
     var label: String
-    var property: String
 }
 
-fun relationshipTargetJs(node: String = "", label: String = "", property: String = ""): RelationshipTargetJs = jso {
+fun relationshipTargetJs(node: String = "", label: String = ""): RelationshipTargetJs = jso {
     this.node = node
     this.label = label
-    this.property = property
 }
 
 fun RelationshipTarget.toJs() = relationshipTargetJs(
     node = node,
     label = label,
-    property = property
 )
 
 fun RelationshipTargetJs.toClass() = RelationshipTarget(
     node = node,
     label = label,
-    property = property
 )
