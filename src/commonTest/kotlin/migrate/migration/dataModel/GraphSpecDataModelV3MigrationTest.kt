@@ -49,7 +49,7 @@ class GraphSpecDataModelV3MigrationTest {
                             "description" to "prop description"
                         )
                     ),
-                    "description" to "a description",
+                    "description" to "a description"
                 )
             )
         )
@@ -126,7 +126,7 @@ class GraphSpecDataModelV3MigrationTest {
                             "description" to "prop description"
                         )
                     ),
-                    "description" to "a description",
+                    "description" to "a description"
                 )
             )
         )

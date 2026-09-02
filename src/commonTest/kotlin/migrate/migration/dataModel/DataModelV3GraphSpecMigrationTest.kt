@@ -135,7 +135,7 @@ class DataModelV3GraphSpecMigrationTest {
                         "nullable" to false,
                         "description" to "prop description"
                     )
-                ),
+                )
             )
         )
 
