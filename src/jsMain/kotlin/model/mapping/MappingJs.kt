@@ -25,14 +25,12 @@ external interface MappingJs {
 }
 
 fun Mapping.toJs(): MappingJs = when (this) {
-    is LabelMapping -> toJs()
     is NodeMapping -> toJs()
     is QueryMapping -> toJs()
     is RelationshipMapping -> toJs()
 }
 
 fun MappingJs.toClass(): Mapping = when (this.type) {
-    MappingType.LABEL -> (this as LabelMappingJs).toClass()
     MappingType.QUERY -> (this as QueryMappingJs).toClass()
     MappingType.NODE -> (this as NodeMappingJs).toClass()
     MappingType.RELATIONSHIP -> (this as RelationshipMappingJs).toClass()
