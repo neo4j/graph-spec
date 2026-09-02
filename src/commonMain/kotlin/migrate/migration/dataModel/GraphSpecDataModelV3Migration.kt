@@ -68,7 +68,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         return schemaMapOf(
             "version" to "3.0.0",
             "dataModel" to dataModel,
-            "visualisation" toNotEmpty convertVisualisation(schema)
+            "visualisation" toNotEmpty convertVisualisation(schema),
+            "description" to schema.literalOrNull("description")
         )
     }
 

@@ -573,7 +573,8 @@ class GraphSpecDataModelV3MigrationTest {
                 "nodes" to schemaMapOf(
                     "node1" to schemaMapOf("x" to 100.23, "y" to 200.12)
                 )
-            )
+            ),
+            "description" to "a description"
         )
 
         // Default DATA_MODEL is flat with no visualisation
@@ -591,5 +592,6 @@ class GraphSpecDataModelV3MigrationTest {
         assertTrue(dataModel.containsKey("graphSchemaRepresentation"))
         assertTrue(dataModel.containsKey("graphMappingRepresentation"))
         assertTrue(dataModel.containsKey("configurations"))
+        assertTrue(wrapped.containsKey("description"))
     }
 }
