@@ -24,36 +24,34 @@ import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
 import model.jso
-import model.mapping.PropertyMapping
-import model.property.Neo4jType
 import kotlin.String
 
 @JsExport
 @JsPlainObject
 external interface ForeignKeyJs {
-    var fields: Array<String>
+    var columns: Array<String>
     val references: ForeignKeyReferenceJs
     val extensions: Record<String, ExtensionValueJs>
 }
 
 fun foreignKeyJs(
-    fields: Array<String>,
+    columns: Array<String>,
     references: ForeignKeyReferenceJs,
     extensions: Record<String, ExtensionValueJs> = emptyRecord()
 ): ForeignKeyJs = jso {
-    this.fields = fields
+    this.columns = columns
     this.references = references
     this.extensions = extensions
 }
 
 fun ForeignKey.toJs() = foreignKeyJs(
-    fields = fields.toTypedArray(),
+    columns = columns.toTypedArray(),
     references = references.toJs(),
     extensions = extensions.associateBy { _, value -> value.toJs() }
 )
 
 fun ForeignKeyJs.toClass() = ForeignKey(
-    fields = fields.toMutableSet(),
+    columns = columns.toMutableSet(),
     references = references.toClass(),
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

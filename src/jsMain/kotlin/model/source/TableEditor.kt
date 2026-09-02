@@ -31,24 +31,24 @@ class TableEditor {
 
         @JsStatic
         fun setFieldType(table: TableJs, fieldId: String, type: String) {
-            val field = table.fields.getOrThrow(fieldId, "Field")
+            val field = table.columns.getOrThrow(fieldId, "Field")
             TableFieldEditor.setType(field, type)
         }
 
         @JsStatic
         fun setFieldSize(table: TableJs, fieldId: String, size: Int) {
-            val field = table.fields.getOrThrow(fieldId, "Field")
+            val field = table.columns.getOrThrow(fieldId, "Field")
             TableFieldEditor.setSize(field, size)
         }
 
         @JsStatic
-        fun addField(table: TableJs, type: String): String = table.fields.addUnique("field") {
+        fun addField(table: TableJs, type: String): String = table.columns.addUnique("field") {
             tableFieldJs(type)
         }
 
         @JsStatic
         fun removeField(table: TableJs, fieldId: String) {
-            table.fields.remove(fieldId)
+            table.columns.remove(fieldId)
         }
 
         @JsStatic

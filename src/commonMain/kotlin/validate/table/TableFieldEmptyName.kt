@@ -18,7 +18,7 @@ package validate.table
 
 import model.GraphModel
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 
 object TableFieldEmptyName : TableValidation {
@@ -27,7 +27,7 @@ object TableFieldEmptyName : TableValidation {
         tableId: String,
         table: Table,
         fieldId: String,
-        field: TableField,
+        field: TableColumn,
         issues: MutableList<Issue>
     ) {
         if (field.name.isNullOrBlank()) {

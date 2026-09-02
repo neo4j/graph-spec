@@ -18,13 +18,13 @@ package validate.table
 
 import model.GraphModel
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class TableFieldDuplicateNameTest {
+class TableColumnDuplicateNameTest {
 
     private val validator = TableFieldDuplicateName
     private val model = GraphModel("4.0.0")
@@ -34,17 +34,17 @@ class TableFieldDuplicateNameTest {
         // UPX findArrayDuplicates + includes flags ALL fields with a duplicated name
         val table = Table(
             source = "local",
-            fields = mutableMapOf(
-                "f:1" to TableField(name = "name"),
-                "f:2" to TableField(name = "email"),
-                "f:3" to TableField(name = "name")
+            columns = mutableMapOf(
+                "f:1" to TableColumn(name = "name"),
+                "f:2" to TableColumn(name = "email"),
+                "f:3" to TableColumn(name = "name")
             )
         )
         val issuesFirst = mutableListOf<Issue>()
         val issuesThird = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issuesFirst)
-        validator.validateTableField(model, "t:1", table, "f:3", table.fields["f:3"]!!, issuesThird)
+        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issuesFirst)
+        validator.validateTableField(model, "t:1", table, "f:3", table.columns["f:3"]!!, issuesThird)
 
         assertEquals(1, issuesFirst.size, "First occurrence should also be flagged as duplicate")
         assertEquals("duplicate_table_field_name", issuesFirst.first().code)
@@ -56,15 +56,15 @@ class TableFieldDuplicateNameTest {
     fun `pass when all field names are unique`() {
         val table = Table(
             source = "local",
-            fields = mutableMapOf(
-                "f:1" to TableField(name = "name"),
-                "f:2" to TableField(name = "email")
+            columns = mutableMapOf(
+                "f:1" to TableColumn(name = "name"),
+                "f:2" to TableColumn(name = "email")
             )
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
-        validator.validateTableField(model, "t:1", table, "f:2", table.fields["f:2"]!!, issues)
+        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableField(model, "t:1", table, "f:2", table.columns["f:2"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -74,11 +74,11 @@ class TableFieldDuplicateNameTest {
         // blank names are the empty-name validator's concern, not this one
         val table = Table(
             source = "local",
-            fields = mutableMapOf("f:1" to TableField(name = ""))
+            columns = mutableMapOf("f:1" to TableColumn(name = ""))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
+        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }

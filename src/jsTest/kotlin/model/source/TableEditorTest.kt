@@ -20,13 +20,13 @@ class TableEditorTest {
         assertTrue(fieldId.isNotEmpty(), "Add field should return an ID.")
 
         // Assert field exists using dynamic access for JS plain object
-        val addedField = table.fields[fieldId]
+        val addedField = table.columns[fieldId]
         assertNotNull(addedField, "Field should exist in Record.")
         assertEquals("STRING", addedField.type)
 
         // Test Remove
         TableEditor.removeField(table, fieldId)
-        val removedField = table.fields[fieldId]
+        val removedField = table.columns[fieldId]
         assertNull(removedField, "Field should be removed from Record.")
     }
 
@@ -37,7 +37,7 @@ class TableEditorTest {
 
         TableEditor.setFieldType(table, fieldId, "INTEGER")
 
-        val field = table.fields[fieldId]
+        val field = table.columns[fieldId]
         assertEquals("INTEGER", field?.type)
     }
 
@@ -48,7 +48,7 @@ class TableEditorTest {
 
         TableEditor.setFieldSize(table, fieldId, 128)
 
-        val field = table.fields[fieldId]
+        val field = table.columns[fieldId]
         assertEquals(128, field?.size)
     }
 

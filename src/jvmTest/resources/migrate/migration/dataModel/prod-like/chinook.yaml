@@ -177,7 +177,7 @@ relationships:
 tables:
   album:
     source: "cloud"
-    fields:
+    columns:
       album_id:
         type: "INT"
         suggested: "INTEGER"
@@ -193,13 +193,13 @@ tables:
     primaryKeys: ["album_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["artist_id"]
+        columns: ["artist_id"]
         references:
           table: "artist"
-          fields: ["artist_id"]
+          columns: ["artist_id"]
   artist:
     source: "cloud"
-    fields:
+    columns:
       artist_id:
         type: "INT"
         suggested: "INTEGER"
@@ -211,7 +211,7 @@ tables:
     primaryKeys: ["artist_id"]
   customer:
     source: "cloud"
-    fields:
+    columns:
       customer_id:
         type: "INT"
         suggested: "INTEGER"
@@ -267,13 +267,13 @@ tables:
     primaryKeys: ["customer_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["support_rep_id"]
+        columns: ["support_rep_id"]
         references:
           table: "employee"
-          fields: ["employee_id"]
+          columns: ["employee_id"]
   employee:
     source: "cloud"
-    fields:
+    columns:
       employee_id:
         type: "INT"
         suggested: "INTEGER"
@@ -337,13 +337,13 @@ tables:
     primaryKeys: ["employee_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["reports_to"]
+        columns: ["reports_to"]
         references:
           table: "employee"
-          fields: ["employee_id"]
+          columns: ["employee_id"]
   genre:
     source: "cloud"
-    fields:
+    columns:
       genre_id:
         type: "INT"
         suggested: "INTEGER"
@@ -355,7 +355,7 @@ tables:
     primaryKeys: ["genre_id"]
   invoice:
     source: "cloud"
-    fields:
+    columns:
       invoice_id:
         type: "INT"
         suggested: "INTEGER"
@@ -395,13 +395,13 @@ tables:
     primaryKeys: ["invoice_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["customer_id"]
+        columns: ["customer_id"]
         references:
           table: "customer"
-          fields: ["customer_id"]
+          columns: ["customer_id"]
   invoice_line:
     source: "cloud"
-    fields:
+    columns:
       invoice_line_id:
         type: "INT"
         suggested: "INTEGER"
@@ -425,18 +425,18 @@ tables:
     primaryKeys: ["invoice_line_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["invoice_id"]
+        columns: ["invoice_id"]
         references:
           table: "invoice"
-          fields: ["invoice_id"]
+          columns: ["invoice_id"]
       foreignKey2:
-        fields: ["track_id"]
+        columns: ["track_id"]
         references:
           table: "track"
-          fields: ["track_id"]
+          columns: ["track_id"]
   media_type:
     source: "cloud"
-    fields:
+    columns:
       media_type_id:
         type: "INT"
         suggested: "INTEGER"
@@ -448,7 +448,7 @@ tables:
     primaryKeys: ["media_type_id"]
   playlist:
     source: "cloud"
-    fields:
+    columns:
       playlist_id:
         type: "INT"
         suggested: "INTEGER"
@@ -460,7 +460,7 @@ tables:
     primaryKeys: ["playlist_id"]
   playlist_track:
     source: "cloud"
-    fields:
+    columns:
       playlist_id:
         type: "INT"
         suggested: "INTEGER"
@@ -472,18 +472,18 @@ tables:
     primaryKeys: ["playlist_id", "track_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["playlist_id"]
+        columns: ["playlist_id"]
         references:
           table: "playlist"
-          fields: ["playlist_id"]
+          columns: ["playlist_id"]
       foreignKey2:
-        fields: ["track_id"]
+        columns: ["track_id"]
         references:
           table: "track"
-          fields: ["track_id"]
+          columns: ["track_id"]
   track:
     source: "cloud"
-    fields:
+    columns:
       track_id:
         type: "INT"
         suggested: "INTEGER"
@@ -523,20 +523,20 @@ tables:
     primaryKeys: ["track_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["album_id"]
+        columns: ["album_id"]
         references:
           table: "album"
-          fields: ["album_id"]
+          columns: ["album_id"]
       foreignKey2:
-        fields: ["genre_id"]
+        columns: ["genre_id"]
         references:
           table: "genre"
-          fields: ["genre_id"]
+          columns: ["genre_id"]
       foreignKey3:
-        fields: ["media_type_id"]
+        columns: ["media_type_id"]
         references:
           table: "media_type"
-          fields: ["media_type_id"]
+          columns: ["media_type_id"]
 mappings:
   - node: "album"
     table: "album"

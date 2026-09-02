@@ -18,7 +18,7 @@ package validate.table
 
 import model.GraphModel
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 
 object TableFieldType : TableValidation {
@@ -27,7 +27,7 @@ object TableFieldType : TableValidation {
         tableId: String,
         table: Table,
         fieldId: String,
-        field: TableField,
+        field: TableColumn,
         issues: MutableList<Issue>
     ) {
         // UPX: only cloud fields (TableSchemaCloudField) are checked.

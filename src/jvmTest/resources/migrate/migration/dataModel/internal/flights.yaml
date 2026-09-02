@@ -139,7 +139,7 @@ relationships:
 tables:
   aircrafts_data:
     source: "cloud"
-    fields:
+    columns:
       aircraft_code:
         type: "CHAR"
         suggested: "STRING"
@@ -155,7 +155,7 @@ tables:
     primaryKeys: ["aircraft_code"]
   airports_data:
     source: "cloud"
-    fields:
+    columns:
       airport_code:
         type: "CHAR"
         suggested: "STRING"
@@ -179,7 +179,7 @@ tables:
     primaryKeys: ["airport_code"]
   boarding_passes:
     source: "cloud"
-    fields:
+    columns:
       ticket_no:
         type: "CHAR"
         suggested: "STRING"
@@ -199,13 +199,13 @@ tables:
     primaryKeys: ["flight_id", "ticket_no"]
     foreignKeys:
       foreignKey1:
-        fields: ["ticket_no", "flight_id"]
+        columns: ["ticket_no", "flight_id"]
         references:
           table: "ticket_flights"
-          fields: ["ticket_no", "flight_id"]
+          columns: ["ticket_no", "flight_id"]
   bookings:
     source: "cloud"
-    fields:
+    columns:
       book_ref:
         type: "CHAR"
         suggested: "STRING"
@@ -221,7 +221,7 @@ tables:
     primaryKeys: ["book_ref"]
   flights:
     source: "cloud"
-    fields:
+    columns:
       flight_id:
         type: "INT"
         suggested: "INTEGER"
@@ -265,18 +265,18 @@ tables:
     primaryKeys: ["flight_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["aircraft_code"]
+        columns: ["aircraft_code"]
         references:
           table: "aircrafts_data"
-          fields: ["aircraft_code"]
+          columns: ["aircraft_code"]
       foreignKey2:
-        fields: ["departure_airport", "arrival_airport"]
+        columns: ["departure_airport", "arrival_airport"]
         references:
           table: "airports_data"
-          fields: ["airport_code"]
+          columns: ["airport_code"]
   seats:
     source: "cloud"
-    fields:
+    columns:
       aircraft_code:
         type: "CHAR"
         suggested: "STRING"
@@ -292,13 +292,13 @@ tables:
     primaryKeys: ["aircraft_code", "seat_no"]
     foreignKeys:
       foreignKey1:
-        fields: ["aircraft_code"]
+        columns: ["aircraft_code"]
         references:
           table: "aircrafts_data"
-          fields: ["aircraft_code"]
+          columns: ["aircraft_code"]
   ticket_flights:
     source: "cloud"
-    fields:
+    columns:
       ticket_no:
         type: "CHAR"
         suggested: "STRING"
@@ -318,18 +318,18 @@ tables:
     primaryKeys: ["flight_id", "ticket_no"]
     foreignKeys:
       foreignKey1:
-        fields: ["flight_id"]
+        columns: ["flight_id"]
         references:
           table: "flights"
-          fields: ["flight_id"]
+          columns: ["flight_id"]
       foreignKey2:
-        fields: ["ticket_no"]
+        columns: ["ticket_no"]
         references:
           table: "tickets"
-          fields: ["ticket_no"]
+          columns: ["ticket_no"]
   tickets:
     source: "cloud"
-    fields:
+    columns:
       ticket_no:
         type: "CHAR"
         suggested: "STRING"
@@ -353,10 +353,10 @@ tables:
     primaryKeys: ["ticket_no"]
     foreignKeys:
       foreignKey1:
-        fields: ["book_ref"]
+        columns: ["book_ref"]
         references:
           table: "bookings"
-          fields: ["book_ref"]
+          columns: ["book_ref"]
 mappings:
   - node: "node0"
     table: "aircrafts_data"

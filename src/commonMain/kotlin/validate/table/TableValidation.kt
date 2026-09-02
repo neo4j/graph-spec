@@ -18,7 +18,7 @@ package validate.table
 
 import model.GraphModel
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 import validate.Validation
 import kotlin.collections.iterator
@@ -29,7 +29,7 @@ interface TableValidation : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
         for ((tableId, table) in model.tables) {
             validateTable(model, tableId, table, issues)
-            for ((fieldId, field) in table.fields) {
+            for ((fieldId, field) in table.columns) {
                 validateTableField(model, tableId, table, fieldId, field, issues)
             }
         }
@@ -43,7 +43,7 @@ interface TableValidation : Validation {
         tableId: String,
         table: Table,
         fieldId: String,
-        field: TableField,
+        field: TableColumn,
         issues: MutableList<Issue>
     ) {
     }

@@ -19,13 +19,13 @@ package validate.table
 import model.GraphModel
 import model.property.Neo4jType
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class TableFieldTypeTest {
+class TableColumnTypeTest {
 
     private val validator = TableFieldType
     private val model = GraphModel("4.0.0")
@@ -35,13 +35,13 @@ class TableFieldTypeTest {
         // UPX: supportedTypes?.length === 0
         val table = Table(
             source = "sql/postgres",
-            fields = mutableMapOf(
-                "f:1" to TableField(name = "email", suggested = Neo4jType.STRING, supported = emptySet())
+            columns = mutableMapOf(
+                "f:1" to TableColumn(name = "email", suggested = Neo4jType.STRING, supported = emptySet())
             )
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
+        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_field_type", issues.first().code)
@@ -51,8 +51,8 @@ class TableFieldTypeTest {
     fun `pass on cloud field with non-empty supported types`() {
         val table = Table(
             source = "sql/postgres",
-            fields = mutableMapOf(
-                "f:1" to TableField(
+            columns = mutableMapOf(
+                "f:1" to TableColumn(
                     name = "email",
                     suggested = Neo4jType.STRING,
                     supported = setOf(Neo4jType.STRING)
@@ -61,7 +61,7 @@ class TableFieldTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
+        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -71,11 +71,11 @@ class TableFieldTypeTest {
         // rule skipped for local tables - only cloud fields are checked
         val table = Table(
             source = "local",
-            fields = mutableMapOf("f:1" to TableField(name = "email", supported = emptySet()))
+            columns = mutableMapOf("f:1" to TableColumn(name = "email", supported = emptySet()))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
+        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -85,11 +85,11 @@ class TableFieldTypeTest {
         // type check is independent of name check - both can fire
         val table = Table(
             source = "sql/postgres",
-            fields = mutableMapOf("f:1" to TableField(name = "", supported = emptySet()))
+            columns = mutableMapOf("f:1" to TableColumn(name = "", supported = emptySet()))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.fields["f:1"]!!, issues)
+        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_field_type", issues.first().code)

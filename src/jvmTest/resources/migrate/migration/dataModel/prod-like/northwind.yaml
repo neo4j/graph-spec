@@ -60,7 +60,7 @@ relationships:
 tables:
   categories:
     source: "cloud"
-    fields:
+    columns:
       categoryid:
         type: "INT"
         suggested: "INTEGER"
@@ -80,7 +80,7 @@ tables:
     primaryKeys: ["categoryid"]
   orders:
     source: "cloud"
-    fields:
+    columns:
       orderid:
         type: "INT"
         suggested: "INTEGER"
@@ -104,13 +104,13 @@ tables:
     primaryKeys: ["orderid", "productid"]
     foreignKeys:
       foreignKey1:
-        fields: ["productid"]
+        columns: ["productid"]
         references:
           table: "products"
-          fields: ["productid"]
+          columns: ["productid"]
   products:
     source: "cloud"
-    fields:
+    columns:
       productid:
         type: "INT"
         suggested: "INTEGER"
@@ -154,18 +154,18 @@ tables:
     primaryKeys: ["productid"]
     foreignKeys:
       foreignKey1:
-        fields: ["categoryid"]
+        columns: ["categoryid"]
         references:
           table: "categories"
-          fields: ["categoryid"]
+          columns: ["categoryid"]
       foreignKey2:
-        fields: ["supplierid"]
+        columns: ["supplierid"]
         references:
           table: "suppliers"
-          fields: ["supplierid"]
+          columns: ["supplierid"]
   suppliers:
     source: "cloud"
-    fields:
+    columns:
       supplierid:
         type: "INT"
         suggested: "INTEGER"

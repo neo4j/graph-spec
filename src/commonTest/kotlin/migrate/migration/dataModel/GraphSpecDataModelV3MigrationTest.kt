@@ -298,10 +298,10 @@ class GraphSpecDataModelV3MigrationTest {
                     "source" to "SQL",
                     "foreignKeys" to schemaMapOf(
                         "fk_customer" to schemaMapOf(
-                            "fields" to listOf("cust_id", "region_id"),
+                            "columns" to listOf("cust_id", "region_id"),
                             "references" to schemaMapOf(
                                 "table" to "Customers",
-                                "fields" to listOf("id", "reg_id")
+                                "columns" to listOf("id", "reg_id")
                             )
                         )
                     )

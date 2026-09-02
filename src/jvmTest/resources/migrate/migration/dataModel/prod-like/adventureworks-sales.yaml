@@ -214,7 +214,7 @@ relationships:
 tables:
   countryregioncurrency:
     source: "cloud"
-    fields:
+    columns:
       countryregioncode:
         type: "varchar"
         suggested: "STRING"
@@ -230,18 +230,18 @@ tables:
     primaryKeys: ["countryregioncode", "currencycode"]
     foreignKeys:
       foreignKey1:
-        fields: ["countryregioncode"]
+        columns: ["countryregioncode"]
         references:
           table: "countryregion"
-          fields: ["countryregioncode"]
+          columns: ["countryregioncode"]
       foreignKey2:
-        fields: ["currencycode"]
+        columns: ["currencycode"]
         references:
           table: "currency"
-          fields: ["currencycode"]
+          columns: ["currencycode"]
   creditcard:
     source: "cloud"
-    fields:
+    columns:
       creditcardid:
         type: "serial"
         suggested: "INTEGER"
@@ -269,7 +269,7 @@ tables:
     primaryKeys: ["creditcardid"]
   currency:
     source: "cloud"
-    fields:
+    columns:
       currencycode:
         type: "bpchar"
         suggested: "STRING"
@@ -283,7 +283,7 @@ tables:
     primaryKeys: ["currencycode"]
   currencyrate:
     source: "cloud"
-    fields:
+    columns:
       currencyrateid:
         type: "serial"
         suggested: "INTEGER"
@@ -315,13 +315,13 @@ tables:
     primaryKeys: ["currencyrateid"]
     foreignKeys:
       foreignKey1:
-        fields: ["fromcurrencycode", "tocurrencycode"]
+        columns: ["fromcurrencycode", "tocurrencycode"]
         references:
           table: "currency"
-          fields: ["currencycode"]
+          columns: ["currencycode"]
   customer:
     source: "cloud"
-    fields:
+    columns:
       customerid:
         type: "serial"
         suggested: "INTEGER"
@@ -349,23 +349,23 @@ tables:
     primaryKeys: ["customerid"]
     foreignKeys:
       foreignKey1:
-        fields: ["personid"]
+        columns: ["personid"]
         references:
           table: "person"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["territoryid"]
+        columns: ["territoryid"]
         references:
           table: "salesterritory"
-          fields: ["territoryid"]
+          columns: ["territoryid"]
       foreignKey3:
-        fields: ["storeid"]
+        columns: ["storeid"]
         references:
           table: "store"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
   personcreditcard:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -381,18 +381,18 @@ tables:
     primaryKeys: ["businessentityid", "creditcardid"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "person"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["creditcardid"]
+        columns: ["creditcardid"]
         references:
           table: "creditcard"
-          fields: ["creditcardid"]
+          columns: ["creditcardid"]
   salesorderdetail:
     source: "cloud"
-    fields:
+    columns:
       salesorderid:
         type: "int4"
         suggested: "INTEGER"
@@ -436,18 +436,18 @@ tables:
     primaryKeys: ["salesorderid", "salesorderdetailid"]
     foreignKeys:
       foreignKey1:
-        fields: ["salesorderid"]
+        columns: ["salesorderid"]
         references:
           table: "salesorderheader"
-          fields: ["salesorderid"]
+          columns: ["salesorderid"]
       foreignKey2:
-        fields: ["specialofferid", "productid"]
+        columns: ["specialofferid", "productid"]
         references:
           table: "specialofferproduct"
-          fields: ["specialofferid", "productid"]
+          columns: ["specialofferid", "productid"]
   salesorderheader:
     source: "cloud"
-    fields:
+    columns:
       salesorderid:
         type: "serial"
         suggested: "INTEGER"
@@ -545,43 +545,43 @@ tables:
     primaryKeys: ["salesorderid"]
     foreignKeys:
       foreignKey1:
-        fields: ["billtoaddressid", "shiptoaddressid"]
+        columns: ["billtoaddressid", "shiptoaddressid"]
         references:
           table: "address"
-          fields: ["addressid"]
+          columns: ["addressid"]
       foreignKey2:
-        fields: ["shipmethodid"]
+        columns: ["shipmethodid"]
         references:
           table: "shipmethod"
-          fields: ["shipmethodid"]
+          columns: ["shipmethodid"]
       foreignKey3:
-        fields: ["creditcardid"]
+        columns: ["creditcardid"]
         references:
           table: "creditcard"
-          fields: ["creditcardid"]
+          columns: ["creditcardid"]
       foreignKey4:
-        fields: ["currencyrateid"]
+        columns: ["currencyrateid"]
         references:
           table: "currencyrate"
-          fields: ["currencyrateid"]
+          columns: ["currencyrateid"]
       foreignKey5:
-        fields: ["customerid"]
+        columns: ["customerid"]
         references:
           table: "customer"
-          fields: ["customerid"]
+          columns: ["customerid"]
       foreignKey6:
-        fields: ["salespersonid"]
+        columns: ["salespersonid"]
         references:
           table: "salesperson"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey7:
-        fields: ["territoryid"]
+        columns: ["territoryid"]
         references:
           table: "salesterritory"
-          fields: ["territoryid"]
+          columns: ["territoryid"]
   salesorderheadersalesreason:
     source: "cloud"
-    fields:
+    columns:
       salesorderid:
         type: "int4"
         suggested: "INTEGER"
@@ -597,18 +597,18 @@ tables:
     primaryKeys: ["salesorderid", "salesreasonid"]
     foreignKeys:
       foreignKey1:
-        fields: ["salesorderid"]
+        columns: ["salesorderid"]
         references:
           table: "salesorderheader"
-          fields: ["salesorderid"]
+          columns: ["salesorderid"]
       foreignKey2:
-        fields: ["salesreasonid"]
+        columns: ["salesreasonid"]
         references:
           table: "salesreason"
-          fields: ["salesreasonid"]
+          columns: ["salesreasonid"]
   salesperson:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -648,18 +648,18 @@ tables:
     primaryKeys: ["businessentityid"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "employee"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["territoryid"]
+        columns: ["territoryid"]
         references:
           table: "salesterritory"
-          fields: ["territoryid"]
+          columns: ["territoryid"]
   salespersonquotahistory:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -683,13 +683,13 @@ tables:
     primaryKeys: ["businessentityid", "quotadate"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "salesperson"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
   salesreason:
     source: "cloud"
-    fields:
+    columns:
       salesreasonid:
         type: "serial"
         suggested: "INTEGER"
@@ -705,7 +705,7 @@ tables:
     primaryKeys: ["salesreasonid"]
   salestaxrate:
     source: "cloud"
-    fields:
+    columns:
       salestaxrateid:
         type: "serial"
         suggested: "INTEGER"
@@ -735,13 +735,13 @@ tables:
     primaryKeys: ["salestaxrateid"]
     foreignKeys:
       foreignKey1:
-        fields: ["stateprovinceid"]
+        columns: ["stateprovinceid"]
         references:
           table: "stateprovince"
-          fields: ["stateprovinceid"]
+          columns: ["stateprovinceid"]
   salesterritory:
     source: "cloud"
-    fields:
+    columns:
       territoryid:
         type: "serial"
         suggested: "INTEGER"
@@ -783,13 +783,13 @@ tables:
     primaryKeys: ["territoryid"]
     foreignKeys:
       foreignKey1:
-        fields: ["countryregioncode"]
+        columns: ["countryregioncode"]
         references:
           table: "countryregion"
-          fields: ["countryregioncode"]
+          columns: ["countryregioncode"]
   salesterritoryhistory:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -817,18 +817,18 @@ tables:
     primaryKeys: ["businessentityid", "startdate", "territoryid"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "salesperson"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["territoryid"]
+        columns: ["territoryid"]
         references:
           table: "salesterritory"
-          fields: ["territoryid"]
+          columns: ["territoryid"]
   shoppingcartitem:
     source: "cloud"
-    fields:
+    columns:
       shoppingcartitemid:
         type: "serial"
         suggested: "INTEGER"
@@ -856,13 +856,13 @@ tables:
     primaryKeys: ["shoppingcartitemid"]
     foreignKeys:
       foreignKey1:
-        fields: ["productid"]
+        columns: ["productid"]
         references:
           table: "product"
-          fields: ["productid"]
+          columns: ["productid"]
   specialoffer:
     source: "cloud"
-    fields:
+    columns:
       specialofferid:
         type: "serial"
         suggested: "INTEGER"
@@ -910,7 +910,7 @@ tables:
     primaryKeys: ["specialofferid"]
   specialofferproduct:
     source: "cloud"
-    fields:
+    columns:
       specialofferid:
         type: "int4"
         suggested: "INTEGER"
@@ -930,18 +930,18 @@ tables:
     primaryKeys: ["specialofferid", "productid"]
     foreignKeys:
       foreignKey1:
-        fields: ["productid"]
+        columns: ["productid"]
         references:
           table: "product"
-          fields: ["productid"]
+          columns: ["productid"]
       foreignKey2:
-        fields: ["specialofferid"]
+        columns: ["specialofferid"]
         references:
           table: "specialoffer"
-          fields: ["specialofferid"]
+          columns: ["specialofferid"]
   store:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -965,18 +965,18 @@ tables:
     primaryKeys: ["businessentityid"]
     foreignKeys:
       foreignKey1:
-        fields: ["businessentityid"]
+        columns: ["businessentityid"]
         references:
           table: "businessentity"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
       foreignKey2:
-        fields: ["salespersonid"]
+        columns: ["salespersonid"]
         references:
           table: "salesperson"
-          fields: ["businessentityid"]
+          columns: ["businessentityid"]
   vindividualcustomer:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1033,7 +1033,7 @@ tables:
         type: "xml"
   vpersondemographics:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1088,7 +1088,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vsalesperson:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1163,7 +1163,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vsalespersonsalesbyfiscalyears:
     source: "cloud"
-    fields:
+    columns:
       SalesPersonID:
         type: "int4"
         suggested: "INTEGER"
@@ -1194,7 +1194,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vsalespersonsalesbyfiscalyearsdata:
     source: "cloud"
-    fields:
+    columns:
       salespersonid:
         type: "int4"
         suggested: "INTEGER"
@@ -1219,7 +1219,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vstorewithaddresses:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1250,7 +1250,7 @@ tables:
         type: "Name"
   vstorewithcontacts:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"
@@ -1287,7 +1287,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   vstorewithdemographics:
     source: "cloud"
-    fields:
+    columns:
       businessentityid:
         type: "int4"
         suggested: "INTEGER"

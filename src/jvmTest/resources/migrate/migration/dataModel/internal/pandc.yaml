@@ -3901,7 +3901,7 @@ relationships:
 tables:
   ACCOUNT:
     source: "cloud"
-    fields:
+    columns:
       ACCOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -3917,7 +3917,7 @@ tables:
     primaryKeys: ["ACCOUNT_IDENTIFIER"]
   ACCOUNT_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       ACCOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -3929,18 +3929,18 @@ tables:
     primaryKeys: ["ACCOUNT_IDENTIFIER", "AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ACCOUNT_IDENTIFIER"]
+        columns: ["ACCOUNT_IDENTIFIER"]
         references:
           table: "ACCOUNT"
-          fields: ["ACCOUNT_IDENTIFIER"]
+          columns: ["ACCOUNT_IDENTIFIER"]
       foreignKey2:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   ACCOUNT_PARTY_ROLE:
     source: "cloud"
-    fields:
+    columns:
       ACCOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -3956,23 +3956,23 @@ tables:
     primaryKeys: ["ACCOUNT_IDENTIFIER", "PARTY_IDENTIFIER", "PARTY_ROLE_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["ACCOUNT_IDENTIFIER"]
+        columns: ["ACCOUNT_IDENTIFIER"]
         references:
           table: "ACCOUNT"
-          fields: ["ACCOUNT_IDENTIFIER"]
+          columns: ["ACCOUNT_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
       foreignKey3:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   ADMINISTRATIVE_ORGANIZATION_UNIT:
     source: "cloud"
-    fields:
+    columns:
       ORGANIZATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -3980,13 +3980,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ORGANIZATION_UNIT"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
   AGENCY_CONTRACT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -3994,13 +3994,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4024,13 +4024,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["PRODUCT_IDENTIFIER"]
+        columns: ["PRODUCT_IDENTIFIER"]
         references:
           table: "PRODUCT"
-          fields: ["PRODUCT_IDENTIFIER"]
+          columns: ["PRODUCT_IDENTIFIER"]
   AGREEMENT_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4042,18 +4042,18 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER", "ASSESSMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
       foreignKey2:
-        fields: ["ASSESSMENT_IDENTIFIER"]
+        columns: ["ASSESSMENT_IDENTIFIER"]
         references:
           table: "ASSESSMENT"
-          fields: ["ASSESSMENT_IDENTIFIER"]
+          columns: ["ASSESSMENT_IDENTIFIER"]
   AGREEMENT_PARTY_ROLE:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4077,23 +4077,23 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER", "EFFECTIVE_DATE", "PARTY_IDENTIFIER", "PARTY_ROLE_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
       foreignKey3:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   ANIMAL:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4101,13 +4101,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "BODY_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   APPROVAL:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4115,13 +4115,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   ARBITRATION:
     source: "cloud"
-    fields:
+    columns:
       ARBITRATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4133,7 +4133,7 @@ tables:
     primaryKeys: ["ARBITRATION_IDENTIFIER"]
   ARBITRATION_PARTY_ROLE:
     source: "cloud"
-    fields:
+    columns:
       ARBITRATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4161,28 +4161,28 @@ tables:
     primaryKeys: ["ARBITRATION_IDENTIFIER", "BEGIN_DATE", "CLAIM_IDENTIFIER", "PARTY_IDENTIFIER", "PARTY_ROLE_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["ARBITRATION_IDENTIFIER"]
+        columns: ["ARBITRATION_IDENTIFIER"]
         references:
           table: "ARBITRATION"
-          fields: ["ARBITRATION_IDENTIFIER"]
+          columns: ["ARBITRATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
       foreignKey3:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
       foreignKey4:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   ASSESMENT_PARTY_ROLE:
     source: "cloud"
-    fields:
+    columns:
       PARTY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4206,23 +4206,23 @@ tables:
     primaryKeys: ["ASSESSMENT_IDENTIFIER", "PARTY_IDENTIFIER", "PARTY_ROLE_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_IDENTIFIER"]
+        columns: ["ASSESSMENT_IDENTIFIER"]
         references:
           table: "ASSESSMENT"
-          fields: ["ASSESSMENT_IDENTIFIER"]
+          columns: ["ASSESSMENT_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
       foreignKey3:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4246,7 +4246,7 @@ tables:
     primaryKeys: ["ASSESSMENT_IDENTIFIER"]
   ASSESSMENT_RESULT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4262,13 +4262,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_IDENTIFIER"]
+        columns: ["ASSESSMENT_IDENTIFIER"]
         references:
           table: "ASSESSMENT"
-          fields: ["ASSESSMENT_IDENTIFIER"]
+          columns: ["ASSESSMENT_IDENTIFIER"]
   ASSUMED_CLAIM_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4276,13 +4276,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_AMOUNT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   ASSUMED_POLICY_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4290,13 +4290,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   AUTOMOBILE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4304,13 +4304,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   AUTO_REPAIR_SHOP_CONTRACT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4318,13 +4318,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   BINDING:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4332,13 +4332,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "POLICY_EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   BOAT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4346,13 +4346,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   BODY_OBJECT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4360,13 +4360,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   BRANCH_OFFICE:
     source: "cloud"
-    fields:
+    columns:
       BRANCH_OFFICE_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4386,13 +4386,13 @@ tables:
     primaryKeys: ["BRANCH_OFFICE_IDENTIFIER", "ORGANIZATION_IDENTIFIER", "REGIONAL_OFFICE_IDENTIFIER", "TERRITORY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["REGIONAL_OFFICE_IDENTIFIER", "TERRITORY_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
+        columns: ["REGIONAL_OFFICE_IDENTIFIER", "TERRITORY_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
         references:
           table: "REGIONAL_OFFICE"
-          fields: ["REGIONAL_OFFICE_IDENTIFIER", "TERRITORY_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
+          columns: ["REGIONAL_OFFICE_IDENTIFIER", "TERRITORY_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
   BROKERAGE_CONTRACT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4400,13 +4400,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   BUS:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4414,13 +4414,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   BUSINESS_EVENT:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4428,13 +4428,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   CANCEL:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4442,13 +4442,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "POLICY_EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   CATASTROPHE:
     source: "cloud"
-    fields:
+    columns:
       CATASTROPHE_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4472,7 +4472,7 @@ tables:
     primaryKeys: ["CATASTROPHE_IDENTIFIER"]
   CEDED_CLAIM_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4480,13 +4480,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_AMOUNT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   CEDED_POLICY_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4494,13 +4494,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   CHANNEL_SCORE:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4508,13 +4508,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   CLAIM:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4574,28 +4574,28 @@ tables:
     primaryKeys: ["CLAIM_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CATASTROPHE_IDENTIFIER"]
+        columns: ["CATASTROPHE_IDENTIFIER"]
         references:
           table: "CATASTROPHE"
-          fields: ["CATASTROPHE_IDENTIFIER"]
+          columns: ["CATASTROPHE_IDENTIFIER"]
       foreignKey2:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
       foreignKey3:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
       foreignKey4:
-        fields: ["OCCURRENCE_IDENTIFIER"]
+        columns: ["OCCURRENCE_IDENTIFIER"]
         references:
           table: "OCCURRENCE"
-          fields: ["OCCURRENCE_IDENTIFIER"]
+          columns: ["OCCURRENCE_IDENTIFIER"]
   CLAIM_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4627,18 +4627,18 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
       foreignKey2:
-        fields: ["CLAIM_OFFER_IDENTIFIER"]
+        columns: ["CLAIM_OFFER_IDENTIFIER"]
         references:
           table: "CLAIM_OFFER"
-          fields: ["CLAIM_OFFER_IDENTIFIER"]
+          columns: ["CLAIM_OFFER_IDENTIFIER"]
   CLAIM_ARBITRATION:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4650,18 +4650,18 @@ tables:
     primaryKeys: ["ARBITRATION_IDENTIFIER", "CLAIM_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ARBITRATION_IDENTIFIER"]
+        columns: ["ARBITRATION_IDENTIFIER"]
         references:
           table: "ARBITRATION"
-          fields: ["ARBITRATION_IDENTIFIER"]
+          columns: ["ARBITRATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
   CLAIM_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4673,18 +4673,18 @@ tables:
     primaryKeys: ["ASSESSMENT_IDENTIFIER", "CLAIM_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_IDENTIFIER"]
+        columns: ["ASSESSMENT_IDENTIFIER"]
         references:
           table: "ASSESSMENT"
-          fields: ["ASSESSMENT_IDENTIFIER"]
+          columns: ["ASSESSMENT_IDENTIFIER"]
       foreignKey2:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
   CLAIM_COVERAGE:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4700,18 +4700,18 @@ tables:
     primaryKeys: ["CLAIM_IDENTIFIER", "EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
       foreignKey2:
-        fields: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
+        columns: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
         references:
           table: "POLICY_COVERAGE_DETAIL"
-          fields: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
+          columns: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
   CLAIM_EVALUATION_RESULT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4719,13 +4719,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   CLAIM_EVENT:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4733,13 +4733,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   CLAIM_FOLDER:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4751,13 +4751,13 @@ tables:
     primaryKeys: ["CLAIM_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
   CLAIM_FOLDER_DOCUMENT:
     source: "cloud"
-    fields:
+    columns:
       DOCUMENT_SEQUENCE_NUMBER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4773,13 +4773,13 @@ tables:
     primaryKeys: ["CLAIM_IDENTIFIER", "DOCUMENT_SEQUENCE_NUMBER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM_FOLDER"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
   CLAIM_LITIGATION:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4791,18 +4791,18 @@ tables:
     primaryKeys: ["CLAIM_IDENTIFIER", "LITIGATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
       foreignKey2:
-        fields: ["LITIGATION_IDENTIFIER"]
+        columns: ["LITIGATION_IDENTIFIER"]
         references:
           table: "LITIGATION"
-          fields: ["LITIGATION_IDENTIFIER"]
+          columns: ["LITIGATION_IDENTIFIER"]
   CLAIM_OFFER:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_OFFER_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4830,23 +4830,23 @@ tables:
     primaryKeys: ["CLAIM_OFFER_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ARBITRATION_IDENTIFIER"]
+        columns: ["ARBITRATION_IDENTIFIER"]
         references:
           table: "ARBITRATION"
-          fields: ["ARBITRATION_IDENTIFIER"]
+          columns: ["ARBITRATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM_FOLDER"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
       foreignKey3:
-        fields: ["LITIGATION_IDENTIFIER"]
+        columns: ["LITIGATION_IDENTIFIER"]
         references:
           table: "LITIGATION"
-          fields: ["LITIGATION_IDENTIFIER"]
+          columns: ["LITIGATION_IDENTIFIER"]
   CLAIM_PARTY_ROLE:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4870,23 +4870,23 @@ tables:
     primaryKeys: ["BEGIN_DATE", "CLAIM_IDENTIFIER", "PARTY_IDENTIFIER", "PARTY_ROLE_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
       foreignKey3:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   CLAIM_PAYMENT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4894,13 +4894,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_AMOUNT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   CLAIM_RESERVE:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4908,13 +4908,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_AMOUNT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   COMBINATION_STRUCTURE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4922,13 +4922,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "STRUCTURE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   COMBINE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4936,13 +4936,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "FARM_EQUIPMENT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   COMMERCIAL_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4950,13 +4950,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   COMMERCIAL_STRUCTURE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4964,13 +4964,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "STRUCTURE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   COMMUNICATION_IDENTITY:
     source: "cloud"
-    fields:
+    columns:
       COMMUNICATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -4994,13 +4994,13 @@ tables:
     primaryKeys: ["COMMUNICATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "GEOGRAPHIC_LOCATION"
-          fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
   COMMUTATION_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5008,13 +5008,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   COMPANY:
     source: "cloud"
-    fields:
+    columns:
       COMPANY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5034,7 +5034,7 @@ tables:
     primaryKeys: ["COMPANY_IDENTIFIER"]
   COMPANY_JURISDICTION:
     source: "cloud"
-    fields:
+    columns:
       COMPANY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5046,18 +5046,18 @@ tables:
     primaryKeys: ["COMPANY_IDENTIFIER", "GEOGRAPHIC_LOCATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["COMPANY_IDENTIFIER"]
+        columns: ["COMPANY_IDENTIFIER"]
         references:
           table: "COMPANY"
-          fields: ["COMPANY_IDENTIFIER"]
+          columns: ["COMPANY_IDENTIFIER"]
       foreignKey2:
-        fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "GEOGRAPHIC_LOCATION"
-          fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
   CONSTRUCTION_VEHICLE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5065,13 +5065,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   CONSULTANT_CONTRACT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5079,13 +5079,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "STAFFING_AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   COURT_JURISDICTION:
     source: "cloud"
-    fields:
+    columns:
       COURT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5101,7 +5101,7 @@ tables:
     primaryKeys: ["COURT_IDENTIFIER", "JURISDICTION_IDENTIFIER"]
   COVERAGE:
     source: "cloud"
-    fields:
+    columns:
       COVERAGE_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5129,23 +5129,23 @@ tables:
     primaryKeys: ["COVERAGE_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["COVERAGE_GROUP_IDENTIFIER"]
+        columns: ["COVERAGE_GROUP_IDENTIFIER"]
         references:
           table: "COVERAGE_GROUP"
-          fields: ["COVERAGE_GROUP_IDENTIFIER"]
+          columns: ["COVERAGE_GROUP_IDENTIFIER"]
       foreignKey2:
-        fields: ["COVERAGE_PART_CODE"]
+        columns: ["COVERAGE_PART_CODE"]
         references:
           table: "COVERAGE_PART"
-          fields: ["COVERAGE_PART_CODE"]
+          columns: ["COVERAGE_PART_CODE"]
       foreignKey3:
-        fields: ["COVERAGE_TYPE_IDENTIFIER"]
+        columns: ["COVERAGE_TYPE_IDENTIFIER"]
         references:
           table: "COVERAGE_TYPE"
-          fields: ["COVERAGE_TYPE_IDENTIFIER"]
+          columns: ["COVERAGE_TYPE_IDENTIFIER"]
   COVERAGE_GROUP:
     source: "cloud"
-    fields:
+    columns:
       COVERAGE_GROUP_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5161,7 +5161,7 @@ tables:
     primaryKeys: ["COVERAGE_GROUP_IDENTIFIER"]
   COVERAGE_LEVEL:
     source: "cloud"
-    fields:
+    columns:
       COVERAGE_LEVEL_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5197,18 +5197,18 @@ tables:
     primaryKeys: ["COVERAGE_IDENTIFIER", "COVERAGE_LEVEL_IDENTIFIER", "COVERAGE_LIMIT_TYPE_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["COVERAGE_IDENTIFIER"]
+        columns: ["COVERAGE_IDENTIFIER"]
         references:
           table: "COVERAGE"
-          fields: ["COVERAGE_IDENTIFIER"]
+          columns: ["COVERAGE_IDENTIFIER"]
       foreignKey2:
-        fields: ["COVERAGE_LIMIT_TYPE_IDENTIFIER"]
+        columns: ["COVERAGE_LIMIT_TYPE_IDENTIFIER"]
         references:
           table: "COVERAGE_LIMIT_TYPE"
-          fields: ["COVERAGE_LIMIT_TYPE_IDENTIFIER"]
+          columns: ["COVERAGE_LIMIT_TYPE_IDENTIFIER"]
   COVERAGE_LIMIT_TYPE:
     source: "cloud"
-    fields:
+    columns:
       COVERAGE_LIMIT_TYPE_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5224,7 +5224,7 @@ tables:
     primaryKeys: ["COVERAGE_LIMIT_TYPE_IDENTIFIER"]
   COVERAGE_PART:
     source: "cloud"
-    fields:
+    columns:
       COVERAGE_PART_CODE:
         type: "VARCHAR2"
         suggested: "STRING"
@@ -5236,7 +5236,7 @@ tables:
     primaryKeys: ["COVERAGE_PART_CODE"]
   COVERAGE_TYPE:
     source: "cloud"
-    fields:
+    columns:
       COVERAGE_TYPE_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5252,7 +5252,7 @@ tables:
     primaryKeys: ["COVERAGE_TYPE_IDENTIFIER"]
   CREDIT_CLAIM_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5260,13 +5260,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_AMOUNT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   CREDIT_POLICY_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5274,13 +5274,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   CREDIT_RATING:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5288,13 +5288,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   CUSTOMER_SCORE:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5302,13 +5302,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   DEBIT_CLAIM_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5316,13 +5316,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_AMOUNT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   DEBIT_POLICY_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5330,13 +5330,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   DEDUCTIBLE_RECOVERY:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5344,13 +5344,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "RECOVERY"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   DEMOGRAPHIC_SCORE:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5358,13 +5358,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   DEPARTMENT:
     source: "cloud"
-    fields:
+    columns:
       DEPARTMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5376,13 +5376,13 @@ tables:
     primaryKeys: ["DEPARTMENT_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ADMINISTRATIVE_ORGANIZATION_UNIT"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
   DERIVATIVE_CONTRACT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5390,13 +5390,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   DIRECT_CLAIM_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5404,13 +5404,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_AMOUNT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   DIRECT_POLICY_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5418,13 +5418,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   DWELLING:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5432,13 +5432,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "RESIDENTIAL_STRUCTURE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   EMPLOYMENT_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5446,13 +5446,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "STAFFING_AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   ENDORSEMENT:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5460,13 +5460,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "POLICY_EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   EVENT:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5474,7 +5474,7 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
   EXPENSE_PAYMENT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5482,13 +5482,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_PAYMENT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   EXPENSE_RECOVERY:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5496,13 +5496,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "RECOVERY"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   EXPENSE_RESERVE:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5510,13 +5510,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_RESERVE"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   FARM_EQUIPMENT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5524,13 +5524,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   FEE:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5538,13 +5538,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   FIELD_ORGANIZATION_UNIT:
     source: "cloud"
-    fields:
+    columns:
       ORGANIZATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5552,13 +5552,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ORGANIZATION_UNIT"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
   FINANCIAL_ACCOUNT_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5566,13 +5566,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   FINANCIAL_SERVICES_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5580,13 +5580,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   FINANCIAL_VALUATION:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5594,13 +5594,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   FLAT:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5608,13 +5608,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "CANCEL"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   FOR_PROFIT_ORGANIZATION:
     source: "cloud"
-    fields:
+    columns:
       ORGANIZATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5622,13 +5622,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ORGANIZATION"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
   FRAUD_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5636,13 +5636,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   FREIGHT_GROUP:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5650,13 +5650,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "TRANSPORTATION_CLASS"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   FULL_TERM:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5664,13 +5664,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "ENDORSEMENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   GEOGRAPHIC_LOCATION:
     source: "cloud"
-    fields:
+    columns:
       GEOGRAPHIC_LOCATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5710,28 +5710,28 @@ tables:
     primaryKeys: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["PARENT_GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["PARENT_GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "GEOGRAPHIC_LOCATION"
-          fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["LOCATION_ADDRESS_IDENTIFIER"]
+        columns: ["LOCATION_ADDRESS_IDENTIFIER"]
         references:
           table: "LOCATION_ADDRESS"
-          fields: ["LOCATION_ADDRESS_IDENTIFIER"]
+          columns: ["LOCATION_ADDRESS_IDENTIFIER"]
       foreignKey3:
-        fields: ["PHYSICAL_LOCATION_IDENTIFIER"]
+        columns: ["PHYSICAL_LOCATION_IDENTIFIER"]
         references:
           table: "PHYSICAL_LOCATION"
-          fields: ["PHYSICAL_LOCATION_IDENTIFIER"]
+          columns: ["PHYSICAL_LOCATION_IDENTIFIER"]
       foreignKey4:
-        fields: ["STATE_CODE"]
+        columns: ["STATE_CODE"]
         references:
           table: "STATE"
-          fields: ["STATE_CODE"]
+          columns: ["STATE_CODE"]
   GOVERNMENT_ORGANIZATION:
     source: "cloud"
-    fields:
+    columns:
       ORGANIZATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5739,13 +5739,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ORGANIZATION"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
   GROUPING:
     source: "cloud"
-    fields:
+    columns:
       GROUPING_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5757,13 +5757,13 @@ tables:
     primaryKeys: ["GROUPING_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GROUPING_IDENTIFIER"]
+        columns: ["GROUPING_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
   GROUP_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5771,13 +5771,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   HOUSEHOLD:
     source: "cloud"
-    fields:
+    columns:
       HOUSEHOLD_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5785,13 +5785,13 @@ tables:
     primaryKeys: ["HOUSEHOLD_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["HOUSEHOLD_IDENTIFIER"]
+        columns: ["HOUSEHOLD_IDENTIFIER"]
         references:
           table: "GROUPING"
-          fields: ["GROUPING_IDENTIFIER"]
+          columns: ["GROUPING_IDENTIFIER"]
   HOUSEHOLD_CONTENT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5803,18 +5803,18 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["HOUSEHOLD_IDENTIFIER"]
+        columns: ["HOUSEHOLD_IDENTIFIER"]
         references:
           table: "HOUSEHOLD"
-          fields: ["HOUSEHOLD_IDENTIFIER"]
+          columns: ["HOUSEHOLD_IDENTIFIER"]
       foreignKey2:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "TRANSPORTATION_CLASS"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   HOUSEHOLD_PERSON:
     source: "cloud"
-    fields:
+    columns:
       HOUSEHOLD_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5826,18 +5826,18 @@ tables:
     primaryKeys: ["HOUSEHOLD_IDENTIFIER", "PERSON_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["HOUSEHOLD_IDENTIFIER"]
+        columns: ["HOUSEHOLD_IDENTIFIER"]
         references:
           table: "HOUSEHOLD"
-          fields: ["HOUSEHOLD_IDENTIFIER"]
+          columns: ["HOUSEHOLD_IDENTIFIER"]
       foreignKey2:
-        fields: ["PERSON_IDENTIFIER"]
+        columns: ["PERSON_IDENTIFIER"]
         references:
           table: "PERSON"
-          fields: ["PERSON_IDENTIFIER"]
+          columns: ["PERSON_IDENTIFIER"]
   HOUSEHOLD_PERSON_ROLE:
     source: "cloud"
-    fields:
+    columns:
       HOUSEHOLD_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5861,18 +5861,18 @@ tables:
     primaryKeys: ["BEGIN_DATE", "HOUSEHOLD_IDENTIFIER", "PARTY_ROLE_CODE", "PERSON_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["HOUSEHOLD_IDENTIFIER", "PERSON_IDENTIFIER"]
+        columns: ["HOUSEHOLD_IDENTIFIER", "PERSON_IDENTIFIER"]
         references:
           table: "HOUSEHOLD_PERSON"
-          fields: ["HOUSEHOLD_IDENTIFIER", "PERSON_IDENTIFIER"]
+          columns: ["HOUSEHOLD_IDENTIFIER", "PERSON_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   INDIVIDUAL_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5880,13 +5880,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   INSURABLE_OBJECT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5902,13 +5902,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "GEOGRAPHIC_LOCATION"
-          fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
   INSURABLE_OBJECT_PARTY_ROLE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5932,23 +5932,23 @@ tables:
     primaryKeys: ["EFFECTIVE_DATE", "INSURABLE_OBJECT_IDENTIFIER", "PARTY_IDENTIFIER", "PARTY_ROLE_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
       foreignKey3:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   INSURANCE_CLASS:
     source: "cloud"
-    fields:
+    columns:
       INSURANCE_CLASS_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5964,7 +5964,7 @@ tables:
     primaryKeys: ["INSURANCE_CLASS_IDENTIFIER"]
   INSURED_ACCOUNT:
     source: "cloud"
-    fields:
+    columns:
       ACCOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5972,13 +5972,13 @@ tables:
     primaryKeys: ["ACCOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ACCOUNT_IDENTIFIER"]
+        columns: ["ACCOUNT_IDENTIFIER"]
         references:
           table: "ACCOUNT"
-          fields: ["ACCOUNT_IDENTIFIER"]
+          columns: ["ACCOUNT_IDENTIFIER"]
   INTERMEDIARY_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -5986,13 +5986,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   LEGAL_JURISDICTION:
     source: "cloud"
-    fields:
+    columns:
       LEGAL_JURISDICTION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6012,7 +6012,7 @@ tables:
     primaryKeys: ["LEGAL_JURISDICTION_IDENTIFIER"]
   LEGAL_JURISDICTION_PARTY_IDENTITY:
     source: "cloud"
-    fields:
+    columns:
       PARTY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6036,18 +6036,18 @@ tables:
     primaryKeys: ["LEGAL_JURISDICTION_IDENTIFIER", "PARTY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["LEGAL_JURISDICTION_IDENTIFIER"]
+        columns: ["LEGAL_JURISDICTION_IDENTIFIER"]
         references:
           table: "LEGAL_JURISDICTION"
-          fields: ["LEGAL_JURISDICTION_IDENTIFIER"]
+          columns: ["LEGAL_JURISDICTION_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
   LIFE_EVENT:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6055,13 +6055,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   LINE_OF_BUSINESS:
     source: "cloud"
-    fields:
+    columns:
       LINE_OF_BUSINESS_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6089,18 +6089,18 @@ tables:
     primaryKeys: ["LINE_OF_BUSINESS_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURANCE_CLASS_IDENTIFIER"]
+        columns: ["INSURANCE_CLASS_IDENTIFIER"]
         references:
           table: "INSURANCE_CLASS"
-          fields: ["INSURANCE_CLASS_IDENTIFIER"]
+          columns: ["INSURANCE_CLASS_IDENTIFIER"]
       foreignKey2:
-        fields: ["LINE_OF_BUSINESS_GROUP_IDENTIFIER"]
+        columns: ["LINE_OF_BUSINESS_GROUP_IDENTIFIER"]
         references:
           table: "LINE_OF_BUSINESS_GROUP"
-          fields: ["LINE_OF_BUSINESS_GROUP_IDENTIFIER"]
+          columns: ["LINE_OF_BUSINESS_GROUP_IDENTIFIER"]
   LINE_OF_BUSINESS_GROUP:
     source: "cloud"
-    fields:
+    columns:
       LINE_OF_BUSINESS_GROUP_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6116,7 +6116,7 @@ tables:
     primaryKeys: ["LINE_OF_BUSINESS_GROUP_IDENTIFIER"]
   LITIGATION:
     source: "cloud"
-    fields:
+    columns:
       LITIGATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6136,13 +6136,13 @@ tables:
     primaryKeys: ["LITIGATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["COURT_IDENTIFIER", "JURISDICTION_IDENTIFIER"]
+        columns: ["COURT_IDENTIFIER", "JURISDICTION_IDENTIFIER"]
         references:
           table: "COURT_JURISDICTION"
-          fields: ["COURT_IDENTIFIER", "JURISDICTION_IDENTIFIER"]
+          columns: ["COURT_IDENTIFIER", "JURISDICTION_IDENTIFIER"]
   LITIGATION_PARTY_ROLE:
     source: "cloud"
-    fields:
+    columns:
       LITIGATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6170,28 +6170,28 @@ tables:
     primaryKeys: ["BEGIN_DATE", "CLAIM_IDENTIFIER", "LITIGATION_IDENTIFIER", "PARTY_IDENTIFIER", "PARTY_ROLE_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_IDENTIFIER"]
+        columns: ["CLAIM_IDENTIFIER"]
         references:
           table: "CLAIM"
-          fields: ["CLAIM_IDENTIFIER"]
+          columns: ["CLAIM_IDENTIFIER"]
       foreignKey2:
-        fields: ["LITIGATION_IDENTIFIER"]
+        columns: ["LITIGATION_IDENTIFIER"]
         references:
           table: "LITIGATION"
-          fields: ["LITIGATION_IDENTIFIER"]
+          columns: ["LITIGATION_IDENTIFIER"]
       foreignKey3:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
       foreignKey4:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   LOCATION_ADDRESS:
     source: "cloud"
-    fields:
+    columns:
       LOCATION_ADDRESS_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6231,13 +6231,13 @@ tables:
     primaryKeys: ["LOCATION_ADDRESS_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["STATE_CODE"]
+        columns: ["STATE_CODE"]
         references:
           table: "STATE"
-          fields: ["STATE_CODE"]
+          columns: ["STATE_CODE"]
   LOSS_PAYMENT:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6245,13 +6245,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_PAYMENT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   LOSS_RECOVERY:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6259,13 +6259,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "RECOVERY"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   LOSS_RESERVE:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6273,13 +6273,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_RESERVE"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   MANUFACTURED_OBJECT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6287,13 +6287,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   MEDICAL_CONDITION:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6301,13 +6301,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   MID_TERM:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6315,13 +6315,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "ENDORSEMENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   MILKING_MACHINE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6329,13 +6329,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "FARM_EQUIPMENT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   MOBILE_HOME:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6343,13 +6343,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "RESIDENTIAL_STRUCTURE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   MOTORCYCLE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6357,13 +6357,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   NEW_BUSINESS:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6371,13 +6371,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "POLICY_EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   NOT_FOR_PROFIT_ORGANIZATION:
     source: "cloud"
-    fields:
+    columns:
       ORGANIZATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6385,13 +6385,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ORGANIZATION"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
   OBJECT_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6403,18 +6403,18 @@ tables:
     primaryKeys: ["ASSESSMENT_IDENTIFIER", "INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_IDENTIFIER"]
+        columns: ["ASSESSMENT_IDENTIFIER"]
         references:
           table: "ASSESSMENT"
-          fields: ["ASSESSMENT_IDENTIFIER"]
+          columns: ["ASSESSMENT_IDENTIFIER"]
       foreignKey2:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   OCCURRENCE:
     source: "cloud"
-    fields:
+    columns:
       OCCURRENCE_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6450,13 +6450,13 @@ tables:
     primaryKeys: ["OCCURRENCE_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "GEOGRAPHIC_LOCATION"
-          fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
   ORGANIZATION:
     source: "cloud"
-    fields:
+    columns:
       ORGANIZATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6496,13 +6496,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
   ORGANIZATION_UNIT:
     source: "cloud"
-    fields:
+    columns:
       ORGANIZATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6530,13 +6530,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ORGANIZATION"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
   OTHER_ASSESSMENT_RESULT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6544,13 +6544,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   PARTY:
     source: "cloud"
-    fields:
+    columns:
       PARTY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6574,7 +6574,7 @@ tables:
     primaryKeys: ["PARTY_IDENTIFIER"]
   PARTY_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       PERSON_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6590,23 +6590,23 @@ tables:
     primaryKeys: ["ASSESSMENT_IDENTIFIER", "PARTY_IDENTIFIER", "PERSON_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_IDENTIFIER"]
+        columns: ["ASSESSMENT_IDENTIFIER"]
         references:
           table: "ASSESSMENT"
-          fields: ["ASSESSMENT_IDENTIFIER"]
+          columns: ["ASSESSMENT_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
       foreignKey3:
-        fields: ["PERSON_IDENTIFIER"]
+        columns: ["PERSON_IDENTIFIER"]
         references:
           table: "PERSON"
-          fields: ["PERSON_IDENTIFIER"]
+          columns: ["PERSON_IDENTIFIER"]
   PARTY_COMMUNICATION:
     source: "cloud"
-    fields:
+    columns:
       BEGIN_DATE:
         type: "TIMESTAMP(6)"
         suggested: "LOCAL DATETIME"
@@ -6642,18 +6642,18 @@ tables:
     primaryKeys: ["BEGIN_DATE", "COMMUNICATION_IDENTIFIER", "PARTY_IDENTIFIER", "PARTY_LOCALITY_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["COMMUNICATION_IDENTIFIER"]
+        columns: ["COMMUNICATION_IDENTIFIER"]
         references:
           table: "COMMUNICATION_IDENTITY"
-          fields: ["COMMUNICATION_IDENTIFIER"]
+          columns: ["COMMUNICATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
   PARTY_PREFERENCE:
     source: "cloud"
-    fields:
+    columns:
       PARTY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6665,13 +6665,13 @@ tables:
     primaryKeys: ["PARTY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
   PARTY_RELATIONSHIP:
     source: "cloud"
-    fields:
+    columns:
       PARTY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6695,13 +6695,13 @@ tables:
     primaryKeys: ["BEGIN_DATE", "PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER", "RELATIONSHIP_TYPE_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER"]
+        columns: ["PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
   PARTY_RELATIONSHIP_ROLE:
     source: "cloud"
-    fields:
+    columns:
       PARTY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6729,18 +6729,18 @@ tables:
     primaryKeys: ["PARTY_IDENTIFIER", "PARTY_ROLE_CODE", "RELATED_PARTY_IDENTIFIER", "RELATIONSHIP_BEGIN_DATE", "RELATIONSHIP_TYPE_CODE", "ROLE_BEGIN_DATE"]
     foreignKeys:
       foreignKey1:
-        fields: ["PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER", "RELATIONSHIP_TYPE_CODE", "RELATIONSHIP_BEGIN_DATE"]
+        columns: ["PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER", "RELATIONSHIP_TYPE_CODE", "RELATIONSHIP_BEGIN_DATE"]
         references:
           table: "PARTY_RELATIONSHIP"
-          fields: ["PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER", "RELATIONSHIP_TYPE_CODE", "BEGIN_DATE"]
+          columns: ["PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER", "RELATIONSHIP_TYPE_CODE", "BEGIN_DATE"]
       foreignKey2:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
   PARTY_ROLE:
     source: "cloud"
-    fields:
+    columns:
       PARTY_ROLE_CODE:
         type: "VARCHAR2"
         suggested: "STRING"
@@ -6756,7 +6756,7 @@ tables:
     primaryKeys: ["PARTY_ROLE_CODE"]
   PERSON:
     source: "cloud"
-    fields:
+    columns:
       PERSON_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6804,13 +6804,13 @@ tables:
     primaryKeys: ["PERSON_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["PERSON_IDENTIFIER"]
+        columns: ["PERSON_IDENTIFIER"]
         references:
           table: "PARTY"
-          fields: ["PARTY_IDENTIFIER"]
+          columns: ["PARTY_IDENTIFIER"]
   PERSON_PROFESSION:
     source: "cloud"
-    fields:
+    columns:
       PERSON_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6822,13 +6822,13 @@ tables:
     primaryKeys: ["PERSON_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["PERSON_IDENTIFIER"]
+        columns: ["PERSON_IDENTIFIER"]
         references:
           table: "PERSON"
-          fields: ["PERSON_IDENTIFIER"]
+          columns: ["PERSON_IDENTIFIER"]
   PHYSICAL_LOCATION:
     source: "cloud"
-    fields:
+    columns:
       PHYSICAL_LOCATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6872,13 +6872,13 @@ tables:
     primaryKeys: ["PHYSICAL_LOCATION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["LOCATION_ADDRESS_IDENTIFIER"]
+        columns: ["LOCATION_ADDRESS_IDENTIFIER"]
         references:
           table: "LOCATION_ADDRESS"
-          fields: ["LOCATION_ADDRESS_IDENTIFIER"]
+          columns: ["LOCATION_ADDRESS_IDENTIFIER"]
   PHYSICAL_OBJECT_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6886,13 +6886,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   PLACE_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6900,13 +6900,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   POLICY:
     source: "cloud"
-    fields:
+    columns:
       POLICY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6934,18 +6934,18 @@ tables:
     primaryKeys: ["POLICY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_IDENTIFIER"]
+        columns: ["POLICY_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
       foreignKey2:
-        fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "GEOGRAPHIC_LOCATION"
-          fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
   POLICY_AMOUNT:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -6993,28 +6993,28 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "GEOGRAPHIC_LOCATION"
-          fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
       foreignKey3:
-        fields: ["POLICY_IDENTIFIER"]
+        columns: ["POLICY_IDENTIFIER"]
         references:
           table: "POLICY"
-          fields: ["POLICY_IDENTIFIER"]
+          columns: ["POLICY_IDENTIFIER"]
       foreignKey4:
-        fields: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
+        columns: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
         references:
           table: "POLICY_COVERAGE_DETAIL"
-          fields: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
+          columns: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
   POLICY_COVERAGE_DETAIL:
     source: "cloud"
-    fields:
+    columns:
       EFFECTIVE_DATE:
         type: "TIMESTAMP(6)"
         suggested: "LOCAL DATETIME"
@@ -7054,23 +7054,23 @@ tables:
     primaryKeys: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["COVERAGE_IDENTIFIER"]
+        columns: ["COVERAGE_IDENTIFIER"]
         references:
           table: "COVERAGE"
-          fields: ["COVERAGE_IDENTIFIER"]
+          columns: ["COVERAGE_IDENTIFIER"]
       foreignKey2:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
       foreignKey3:
-        fields: ["COVERAGE_PART_CODE", "POLICY_IDENTIFIER"]
+        columns: ["COVERAGE_PART_CODE", "POLICY_IDENTIFIER"]
         references:
           table: "POLICY_COVERAGE_PART"
-          fields: ["COVERAGE_PART_CODE", "POLICY_IDENTIFIER"]
+          columns: ["COVERAGE_PART_CODE", "POLICY_IDENTIFIER"]
   POLICY_COVERAGE_PART:
     source: "cloud"
-    fields:
+    columns:
       COVERAGE_PART_CODE:
         type: "VARCHAR2"
         suggested: "STRING"
@@ -7082,18 +7082,18 @@ tables:
     primaryKeys: ["COVERAGE_PART_CODE", "POLICY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["COVERAGE_PART_CODE"]
+        columns: ["COVERAGE_PART_CODE"]
         references:
           table: "COVERAGE_PART"
-          fields: ["COVERAGE_PART_CODE"]
+          columns: ["COVERAGE_PART_CODE"]
       foreignKey2:
-        fields: ["POLICY_IDENTIFIER"]
+        columns: ["POLICY_IDENTIFIER"]
         references:
           table: "POLICY"
-          fields: ["POLICY_IDENTIFIER"]
+          columns: ["POLICY_IDENTIFIER"]
   POLICY_DEDUCTIBLE:
     source: "cloud"
-    fields:
+    columns:
       POLICY_DEDUCTIBLE_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7121,13 +7121,13 @@ tables:
     primaryKeys: ["POLICY_DEDUCTIBLE_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
+        columns: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
         references:
           table: "POLICY_COVERAGE_DETAIL"
-          fields: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
+          columns: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
   POLICY_EVENT:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7155,18 +7155,18 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
       foreignKey2:
-        fields: ["POLICY_IDENTIFIER"]
+        columns: ["POLICY_IDENTIFIER"]
         references:
           table: "POLICY"
-          fields: ["POLICY_IDENTIFIER"]
+          columns: ["POLICY_IDENTIFIER"]
   POLICY_FORM:
     source: "cloud"
-    fields:
+    columns:
       POLICY_FORM_NUMBER:
         type: "VARCHAR2"
         suggested: "STRING"
@@ -7182,13 +7182,13 @@ tables:
     primaryKeys: ["POLICY_FORM_NUMBER", "POLICY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_IDENTIFIER"]
+        columns: ["POLICY_IDENTIFIER"]
         references:
           table: "POLICY"
-          fields: ["POLICY_IDENTIFIER"]
+          columns: ["POLICY_IDENTIFIER"]
   POLICY_LIMIT:
     source: "cloud"
-    fields:
+    columns:
       POLICY_LIMIT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7216,13 +7216,13 @@ tables:
     primaryKeys: ["POLICY_LIMIT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
+        columns: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
         references:
           table: "POLICY_COVERAGE_DETAIL"
-          fields: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
+          columns: ["EFFECTIVE_DATE", "POLICY_COVERAGE_DETAIL_IDENTIFIER"]
   POLICY_RELATIONSHIP:
     source: "cloud"
-    fields:
+    columns:
       RELATIONSHIP_CODE:
         type: "VARCHAR2"
         suggested: "STRING"
@@ -7246,13 +7246,13 @@ tables:
     primaryKeys: ["EFFECTIVE_DATE", "POLICY_IDENTIFIER", "RELATED_POLICY_IDENTIFIER", "RELATIONSHIP_CODE"]
     foreignKeys:
       foreignKey1:
-        fields: ["RELATED_POLICY_IDENTIFIER", "POLICY_IDENTIFIER"]
+        columns: ["RELATED_POLICY_IDENTIFIER", "POLICY_IDENTIFIER"]
         references:
           table: "POLICY"
-          fields: ["POLICY_IDENTIFIER"]
+          columns: ["POLICY_IDENTIFIER"]
   PREMIUM:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7260,13 +7260,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   PRE_QUALIFICATION:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7274,13 +7274,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "POLICY_EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   PRODUCT:
     source: "cloud"
-    fields:
+    columns:
       PRODUCT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7300,13 +7300,13 @@ tables:
     primaryKeys: ["PRODUCT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["LINE_OF_BUSINESS_IDENTIFIER"]
+        columns: ["LINE_OF_BUSINESS_IDENTIFIER"]
         references:
           table: "LINE_OF_BUSINESS"
-          fields: ["LINE_OF_BUSINESS_IDENTIFIER"]
+          columns: ["LINE_OF_BUSINESS_IDENTIFIER"]
   PRODUCT_COVERAGE:
     source: "cloud"
-    fields:
+    columns:
       PRODUCT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7318,18 +7318,18 @@ tables:
     primaryKeys: ["COVERAGE_IDENTIFIER", "PRODUCT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["COVERAGE_IDENTIFIER"]
+        columns: ["COVERAGE_IDENTIFIER"]
         references:
           table: "COVERAGE"
-          fields: ["COVERAGE_IDENTIFIER"]
+          columns: ["COVERAGE_IDENTIFIER"]
       foreignKey2:
-        fields: ["PRODUCT_IDENTIFIER"]
+        columns: ["PRODUCT_IDENTIFIER"]
         references:
           table: "PRODUCT"
-          fields: ["PRODUCT_IDENTIFIER"]
+          columns: ["PRODUCT_IDENTIFIER"]
   PRODUCT_LICENSE:
     source: "cloud"
-    fields:
+    columns:
       COMPANY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7353,18 +7353,18 @@ tables:
     primaryKeys: ["COMPANY_IDENTIFIER", "GEOGRAPHIC_LOCATION_IDENTIFIER", "PRODUCT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["COMPANY_IDENTIFIER", "GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["COMPANY_IDENTIFIER", "GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "COMPANY_JURISDICTION"
-          fields: ["COMPANY_IDENTIFIER", "GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["COMPANY_IDENTIFIER", "GEOGRAPHIC_LOCATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["PRODUCT_IDENTIFIER"]
+        columns: ["PRODUCT_IDENTIFIER"]
         references:
           table: "PRODUCT"
-          fields: ["PRODUCT_IDENTIFIER"]
+          columns: ["PRODUCT_IDENTIFIER"]
   PROFESSIONAL_GROUP:
     source: "cloud"
-    fields:
+    columns:
       GROUPING_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7372,13 +7372,13 @@ tables:
     primaryKeys: ["GROUPING_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GROUPING_IDENTIFIER"]
+        columns: ["GROUPING_IDENTIFIER"]
         references:
           table: "GROUPING"
-          fields: ["GROUPING_IDENTIFIER"]
+          columns: ["GROUPING_IDENTIFIER"]
   PROJECT:
     source: "cloud"
-    fields:
+    columns:
       GROUPING_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7386,13 +7386,13 @@ tables:
     primaryKeys: ["GROUPING_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GROUPING_IDENTIFIER"]
+        columns: ["GROUPING_IDENTIFIER"]
         references:
           table: "GROUPING"
-          fields: ["GROUPING_IDENTIFIER"]
+          columns: ["GROUPING_IDENTIFIER"]
   PROPERTY_IN_TRANSIT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7400,13 +7400,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "TRANSPORTATION_CLASS"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   PROVIDER_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7414,13 +7414,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   PRO_RATA:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7428,13 +7428,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "CANCEL"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   QUOTE:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7442,13 +7442,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "POLICY_EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   RATING_TERRITORY:
     source: "cloud"
-    fields:
+    columns:
       RATING_TERRITORY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7468,7 +7468,7 @@ tables:
     primaryKeys: ["RATING_TERRITORY_IDENTIFIER"]
   RATING_TERRITORY_GEOGRAPHIC_LOCATION:
     source: "cloud"
-    fields:
+    columns:
       GEOGRAPHIC_LOCATION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7480,18 +7480,18 @@ tables:
     primaryKeys: ["GEOGRAPHIC_LOCATION_IDENTIFIER", "RATING_TERRITORY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+        columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
         references:
           table: "GEOGRAPHIC_LOCATION"
-          fields: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
+          columns: ["GEOGRAPHIC_LOCATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["RATING_TERRITORY_IDENTIFIER"]
+        columns: ["RATING_TERRITORY_IDENTIFIER"]
         references:
           table: "RATING_TERRITORY"
-          fields: ["RATING_TERRITORY_IDENTIFIER"]
+          columns: ["RATING_TERRITORY_IDENTIFIER"]
   RECOVERY:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7499,13 +7499,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "CLAIM_AMOUNT"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   RECREATIONAL_VEHICLE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7513,13 +7513,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   REGIONAL_OFFICE:
     source: "cloud"
-    fields:
+    columns:
       REGIONAL_OFFICE_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7535,13 +7535,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER", "REGIONAL_OFFICE_IDENTIFIER", "TERRITORY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["TERRITORY_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
+        columns: ["TERRITORY_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
         references:
           table: "TERRITORY"
-          fields: ["TERRITORY_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
+          columns: ["TERRITORY_IDENTIFIER", "ORGANIZATION_IDENTIFIER"]
   REINSTATEMENT:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7549,13 +7549,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "POLICY_EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   REINSURANCE_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7563,13 +7563,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   REINSURANCE_RECOVERY:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7577,13 +7577,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "RECOVERY"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   RENEWAL:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7591,13 +7591,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "POLICY_EVENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   RESIDENTIAL_STRUCTURE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7605,13 +7605,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "STRUCTURE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   RISK_FACTOR_SCORE:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7619,13 +7619,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   SALVAGE:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7633,13 +7633,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "RECOVERY"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   SCHEDULED_ITEM:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7647,13 +7647,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "TRANSPORTATION_CLASS"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   SHORT_RATE:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7661,13 +7661,13 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "CANCEL"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
   STAFFING_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7675,13 +7675,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   STAFF_CLASSIFICATION:
     source: "cloud"
-    fields:
+    columns:
       STAFF_CLASSIFICATION_CODE:
         type: "VARCHAR2"
         suggested: "STRING"
@@ -7697,7 +7697,7 @@ tables:
     primaryKeys: ["STAFF_CLASSIFICATION_CODE"]
   STAFF_POSITION:
     source: "cloud"
-    fields:
+    columns:
       STAFF_POSITION_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7717,13 +7717,13 @@ tables:
     primaryKeys: ["STAFF_POSITION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["STAFF_CLASSIFICATION_CODE"]
+        columns: ["STAFF_CLASSIFICATION_CODE"]
         references:
           table: "STAFF_CLASSIFICATION"
-          fields: ["STAFF_CLASSIFICATION_CODE"]
+          columns: ["STAFF_CLASSIFICATION_CODE"]
   STAFF_POSITION_ASSIGNMENT:
     source: "cloud"
-    fields:
+    columns:
       BEGIN_DATE:
         type: "TIMESTAMP(6)"
         suggested: "LOCAL DATETIME"
@@ -7747,23 +7747,23 @@ tables:
     primaryKeys: ["BEGIN_DATE", "ORGANIZATION_IDENTIFIER", "PERSON_IDENTIFIER", "STAFF_POSITION_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ORGANIZATION"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
       foreignKey2:
-        fields: ["PERSON_IDENTIFIER"]
+        columns: ["PERSON_IDENTIFIER"]
         references:
           table: "PERSON"
-          fields: ["PERSON_IDENTIFIER"]
+          columns: ["PERSON_IDENTIFIER"]
       foreignKey3:
-        fields: ["STAFF_POSITION_IDENTIFIER"]
+        columns: ["STAFF_POSITION_IDENTIFIER"]
         references:
           table: "STAFF_POSITION"
-          fields: ["STAFF_POSITION_IDENTIFIER"]
+          columns: ["STAFF_POSITION_IDENTIFIER"]
   STAFF_WORK_ASSIGNMENT:
     source: "cloud"
-    fields:
+    columns:
       PERSON_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7791,28 +7791,28 @@ tables:
     primaryKeys: ["BEGIN_DATE", "GROUPING_IDENTIFIER", "ORGANIZATION_IDENTIFIER", "PARTY_ROLE_CODE", "PERSON_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GROUPING_IDENTIFIER"]
+        columns: ["GROUPING_IDENTIFIER"]
         references:
           table: "GROUPING"
-          fields: ["GROUPING_IDENTIFIER"]
+          columns: ["GROUPING_IDENTIFIER"]
       foreignKey2:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "ORGANIZATION"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
       foreignKey3:
-        fields: ["PARTY_ROLE_CODE"]
+        columns: ["PARTY_ROLE_CODE"]
         references:
           table: "PARTY_ROLE"
-          fields: ["PARTY_ROLE_CODE"]
+          columns: ["PARTY_ROLE_CODE"]
       foreignKey4:
-        fields: ["PERSON_IDENTIFIER"]
+        columns: ["PERSON_IDENTIFIER"]
         references:
           table: "PERSON"
-          fields: ["PERSON_IDENTIFIER"]
+          columns: ["PERSON_IDENTIFIER"]
   STATE:
     source: "cloud"
-    fields:
+    columns:
       STATE_CODE:
         type: "CHAR"
         suggested: "STRING"
@@ -7824,7 +7824,7 @@ tables:
     primaryKeys: ["STATE_CODE"]
   STRUCTURE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7832,13 +7832,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   SUBROGATION:
     source: "cloud"
-    fields:
+    columns:
       CLAIM_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7846,13 +7846,13 @@ tables:
     primaryKeys: ["CLAIM_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+        columns: ["CLAIM_AMOUNT_IDENTIFIER"]
         references:
           table: "RECOVERY"
-          fields: ["CLAIM_AMOUNT_IDENTIFIER"]
+          columns: ["CLAIM_AMOUNT_IDENTIFIER"]
   SURCHARGE:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7860,13 +7860,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   TAX:
     source: "cloud"
-    fields:
+    columns:
       POLICY_AMOUNT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7874,13 +7874,13 @@ tables:
     primaryKeys: ["POLICY_AMOUNT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["POLICY_AMOUNT_IDENTIFIER"]
+        columns: ["POLICY_AMOUNT_IDENTIFIER"]
         references:
           table: "POLICY_AMOUNT"
-          fields: ["POLICY_AMOUNT_IDENTIFIER"]
+          columns: ["POLICY_AMOUNT_IDENTIFIER"]
   TEAM:
     source: "cloud"
-    fields:
+    columns:
       GROUPING_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7888,13 +7888,13 @@ tables:
     primaryKeys: ["GROUPING_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["GROUPING_IDENTIFIER"]
+        columns: ["GROUPING_IDENTIFIER"]
         references:
           table: "GROUPING"
-          fields: ["GROUPING_IDENTIFIER"]
+          columns: ["GROUPING_IDENTIFIER"]
   TERRITORY:
     source: "cloud"
-    fields:
+    columns:
       TERRITORY_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7906,13 +7906,13 @@ tables:
     primaryKeys: ["ORGANIZATION_IDENTIFIER", "TERRITORY_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ORGANIZATION_IDENTIFIER"]
+        columns: ["ORGANIZATION_IDENTIFIER"]
         references:
           table: "FIELD_ORGANIZATION_UNIT"
-          fields: ["ORGANIZATION_IDENTIFIER"]
+          columns: ["ORGANIZATION_IDENTIFIER"]
   THIRD_PARTY_STAFFING_AGREEMENT:
     source: "cloud"
-    fields:
+    columns:
       AGREEMENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7920,13 +7920,13 @@ tables:
     primaryKeys: ["AGREEMENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["AGREEMENT_IDENTIFIER"]
+        columns: ["AGREEMENT_IDENTIFIER"]
         references:
           table: "STAFFING_AGREEMENT"
-          fields: ["AGREEMENT_IDENTIFIER"]
+          columns: ["AGREEMENT_IDENTIFIER"]
   TRACTOR:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7934,13 +7934,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "FARM_EQUIPMENT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   TRAILER:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7948,13 +7948,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   TRANSPORTATION_CLASS:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7962,13 +7962,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   TRUCK:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7976,13 +7976,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   UNDERWRITING_ASSESSMENT:
     source: "cloud"
-    fields:
+    columns:
       ASSESSMENT_RESULT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -7990,13 +7990,13 @@ tables:
     primaryKeys: ["ASSESSMENT_RESULT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+        columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
         references:
           table: "ASSESSMENT_RESULT"
-          fields: ["ASSESSMENT_RESULT_IDENTIFIER"]
+          columns: ["ASSESSMENT_RESULT_IDENTIFIER"]
   VAN:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -8004,13 +8004,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   VEHICLE:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -8038,13 +8038,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   WATERCRAFT:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -8052,13 +8052,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "VEHICLE"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   WORKERS_COMP_CLASS:
     source: "cloud"
-    fields:
+    columns:
       INSURABLE_OBJECT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -8066,13 +8066,13 @@ tables:
     primaryKeys: ["INSURABLE_OBJECT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+        columns: ["INSURABLE_OBJECT_IDENTIFIER"]
         references:
           table: "INSURABLE_OBJECT"
-          fields: ["INSURABLE_OBJECT_IDENTIFIER"]
+          columns: ["INSURABLE_OBJECT_IDENTIFIER"]
   audit:
     source: "cloud"
-    fields:
+    columns:
       EVENT_IDENTIFIER:
         type: "NUMBER"
         suggested: "FLOAT"
@@ -8080,10 +8080,10 @@ tables:
     primaryKeys: ["EVENT_IDENTIFIER"]
     foreignKeys:
       foreignKey1:
-        fields: ["EVENT_IDENTIFIER"]
+        columns: ["EVENT_IDENTIFIER"]
         references:
           table: "ENDORSEMENT"
-          fields: ["EVENT_IDENTIFIER"]
+          columns: ["EVENT_IDENTIFIER"]
 mappings:
   - node: "node0"
     table: "ACCOUNT"

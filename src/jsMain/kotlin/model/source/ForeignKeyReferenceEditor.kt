@@ -29,16 +29,16 @@ class ForeignKeyReferenceEditor {
 
         @JsStatic
         fun addField(reference: ForeignKeyReferenceJs, field: String) {
-            if (!reference.fields.contains(field)) {
-                reference.fields += field
+            if (!reference.columns.contains(field)) {
+                reference.columns += field
             }
         }
 
         @JsStatic
         fun removeField(reference: ForeignKeyReferenceJs, field: String) {
-            val index = reference.fields.indexOf(field)
+            val index = reference.columns.indexOf(field)
             if (index != -1) {
-                reference.fields = reference.fields.dropAt(index)
+                reference.columns = reference.columns.dropAt(index)
             }
         }
     }

@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 class ForeignKeyJsTest : JsMappingTest<ForeignKey, ForeignKeyJs>() {
 
     override fun createClass() = ForeignKey(
-        fields = mutableSetOf("field1", "field2"),
+        columns = mutableSetOf("field1", "field2"),
         references = ForeignKeyReference("table"),
         extensions = mutableMapOf("key1" to StringValue("val1")),
     )
@@ -19,7 +19,7 @@ class ForeignKeyJsTest : JsMappingTest<ForeignKey, ForeignKeyJs>() {
     override fun toClass(js: ForeignKeyJs): ForeignKey = js.toClass()
 
     override fun verifyJsObject(jsObject: ForeignKeyJs) {
-        assertContentEquals(arrayOf("field1", "field2"), jsObject.fields)
+        assertContentEquals(arrayOf("field1", "field2"), jsObject.columns)
         assertEquals("table", jsObject.references.table)
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
     }

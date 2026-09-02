@@ -24,13 +24,12 @@ import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
 import model.jso
-import model.mapping.PropertyMapping
 import model.property.Neo4jType
 import kotlin.String
 
 @JsExport
 @JsPlainObject
-external interface TableFieldJs {
+external interface TableColumnJs {
     var type: String
     var size: Int
     val suggested: String
@@ -48,7 +47,7 @@ fun tableFieldJs(
     dimension: Int? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String = ""
-): TableFieldJs = jso {
+): TableColumnJs = jso {
     this.type = type
     this.size = size
     this.suggested = suggested
@@ -58,7 +57,7 @@ fun tableFieldJs(
     this.name = name
 }
 
-fun TableField.toJs(key: String) = tableFieldJs(
+fun TableColumn.toJs(key: String) = tableFieldJs(
     type = type,
     size = size,
     suggested = Neo4jType.toString(suggested),
@@ -68,7 +67,7 @@ fun TableField.toJs(key: String) = tableFieldJs(
     name = name ?: key
 )
 
-fun TableFieldJs.toClass() = TableField(
+fun TableColumnJs.toClass() = TableColumn(
     type = type,
     size = size,
     suggested = neo4jType(suggested),
@@ -78,5 +77,5 @@ fun TableFieldJs.toClass() = TableField(
     name = name
 )
 
-private fun TableFieldJs.neo4jType(type: String) = Neo4jType.fromString(type)
+private fun TableColumnJs.neo4jType(type: String) = Neo4jType.fromString(type)
     ?: error("Invalid neo4j type '$type' for field '$name'")

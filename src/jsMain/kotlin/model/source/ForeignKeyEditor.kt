@@ -24,16 +24,16 @@ class ForeignKeyEditor {
     companion object {
         @JsStatic
         fun addField(foreignKey: ForeignKeyJs, field: String) {
-            if (!foreignKey.fields.contains(field)) {
-                foreignKey.fields += field
+            if (!foreignKey.columns.contains(field)) {
+                foreignKey.columns += field
             }
         }
 
         @JsStatic
         fun removeField(foreignKey: ForeignKeyJs, field: String) {
-            val index = foreignKey.fields.indexOf(field)
+            val index = foreignKey.columns.indexOf(field)
             if (index != -1) {
-                foreignKey.fields = foreignKey.fields.dropAt(index)
+                foreignKey.columns = foreignKey.columns.dropAt(index)
             }
         }
 

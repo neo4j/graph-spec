@@ -26,7 +26,7 @@ import kotlin.js.JsExport
 @Serializable
 @SerialName("ForeignKey")
 data class ForeignKey(
-    val fields: MutableSet<String>,
+    val columns: MutableSet<String>,
     val references: ForeignKeyReference,
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
 ) : Extensions

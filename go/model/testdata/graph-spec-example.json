@@ -75,7 +75,7 @@
   "tables": {
     "actors": {
       "source": "sql/postgres",
-      "fields": {
+      "columns": {
         "actor_id": {
           "type": "varchar",
           "size": 255,
@@ -100,12 +100,12 @@
       ],
       "foreignKeys": {
         "fk_actor_id": {
-          "fields": [
+          "columns": [
             "actor_id"
           ],
           "references": {
             "table": "actors",
-            "fields": [
+            "columns": [
               "actorid"
             ],
             "extensions": {}
@@ -113,12 +113,12 @@
           "extensions": {}
         },
         "fk_actor_name": {
-          "fields": [
+          "columns": [
             "actor_name"
           ],
           "references": {
             "table": "actors",
-            "fields": [
+            "columns": [
               "actorname"
             ],
             "extensions": {}
@@ -130,7 +130,7 @@
     },
     "movies": {
       "source": "sql/postgres",
-      "fields": {
+      "columns": {
         "id": {
           "type": "varchar",
           "size": 255,
@@ -155,12 +155,12 @@
       ],
       "foreignKeys": {
         "fk_movie_actor_id": {
-          "fields": [
+          "columns": [
             "actor_id"
           ],
           "references": {
             "table": "actors",
-            "fields": [
+            "columns": [
               "actorid"
             ],
             "extensions": {}
@@ -172,7 +172,7 @@
     },
     "actors-movies": {
       "source": "sql/postgres",
-      "fields": {
+      "columns": {
         "actor_id": {
           "type": "varchar",
           "size": 255,

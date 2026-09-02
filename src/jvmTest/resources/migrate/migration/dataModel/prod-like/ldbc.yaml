@@ -245,7 +245,7 @@ relationships:
 tables:
   Comment:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -296,7 +296,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   CommentHasTag:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -315,7 +315,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   Forum:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -342,7 +342,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   ForumHasMember:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -365,7 +365,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   ForumHasTag:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -384,7 +384,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   Organisation:
     source: "cloud"
-    fields:
+    columns:
       id:
         type: "INTEGER"
         suggested: "INTEGER"
@@ -407,7 +407,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   Person:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -462,7 +462,7 @@ tables:
         supported: ["STRING"]
   PersonHasInterest:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -481,7 +481,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   PersonKnowsPerson:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -504,7 +504,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   PersonLikesComment:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -527,7 +527,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   PersonLikesPost:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -550,7 +550,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   PersonStudiesAt:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -573,7 +573,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   PersonWorksAt:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -596,7 +596,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   Place:
     source: "cloud"
-    fields:
+    columns:
       id:
         type: "INTEGER"
         suggested: "INTEGER"
@@ -619,7 +619,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   Post:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -674,7 +674,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   PostHasTag:
     source: "cloud"
-    fields:
+    columns:
       creationDate:
         type: "BIGINT"
         suggested: "INTEGER"
@@ -693,7 +693,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   Tag:
     source: "cloud"
-    fields:
+    columns:
       id:
         type: "INTEGER"
         suggested: "INTEGER"
@@ -712,7 +712,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   TagClass:
     source: "cloud"
-    fields:
+    columns:
       id:
         type: "INTEGER"
         suggested: "INTEGER"

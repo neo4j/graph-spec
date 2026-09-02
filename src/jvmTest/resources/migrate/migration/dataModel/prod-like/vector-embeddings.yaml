@@ -14,7 +14,7 @@ nodes:
 tables:
   document:
     source: "cloud"
-    fields:
+    columns:
       documentid:
         type: "INT"
         suggested: "INTEGER"

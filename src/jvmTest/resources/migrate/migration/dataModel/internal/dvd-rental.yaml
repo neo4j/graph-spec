@@ -371,7 +371,7 @@ relationships:
 tables:
   actor:
     source: "cloud"
-    fields:
+    columns:
       actor_id:
         type: "serial"
         suggested: "INTEGER"
@@ -391,7 +391,7 @@ tables:
     primaryKeys: ["actor_id"]
   actor_info:
     source: "cloud"
-    fields:
+    columns:
       actor_id:
         type: "int4"
         suggested: "INTEGER"
@@ -410,7 +410,7 @@ tables:
         supported: ["STRING"]
   address:
     source: "cloud"
-    fields:
+    columns:
       address_id:
         type: "serial"
         suggested: "INTEGER"
@@ -446,13 +446,13 @@ tables:
     primaryKeys: ["address_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["city_id"]
+        columns: ["city_id"]
         references:
           table: "city"
-          fields: ["city_id"]
+          columns: ["city_id"]
   category:
     source: "cloud"
-    fields:
+    columns:
       category_id:
         type: "serial"
         suggested: "INTEGER"
@@ -468,7 +468,7 @@ tables:
     primaryKeys: ["category_id"]
   city:
     source: "cloud"
-    fields:
+    columns:
       city_id:
         type: "serial"
         suggested: "INTEGER"
@@ -488,13 +488,13 @@ tables:
     primaryKeys: ["city_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["country_id"]
+        columns: ["country_id"]
         references:
           table: "country"
-          fields: ["country_id"]
+          columns: ["country_id"]
   country:
     source: "cloud"
-    fields:
+    columns:
       country_id:
         type: "serial"
         suggested: "INTEGER"
@@ -510,7 +510,7 @@ tables:
     primaryKeys: ["country_id"]
   customer:
     source: "cloud"
-    fields:
+    columns:
       customer_id:
         type: "serial"
         suggested: "INTEGER"
@@ -554,13 +554,13 @@ tables:
     primaryKeys: ["customer_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["address_id"]
+        columns: ["address_id"]
         references:
           table: "address"
-          fields: ["address_id"]
+          columns: ["address_id"]
   customer_list:
     source: "cloud"
-    fields:
+    columns:
       id:
         type: "int4"
         suggested: "INTEGER"
@@ -599,7 +599,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   film:
     source: "cloud"
-    fields:
+    columns:
       film_id:
         type: "serial"
         suggested: "INTEGER"
@@ -649,13 +649,13 @@ tables:
     primaryKeys: ["film_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["language_id"]
+        columns: ["language_id"]
         references:
           table: "language"
-          fields: ["language_id"]
+          columns: ["language_id"]
   film_actor:
     source: "cloud"
-    fields:
+    columns:
       actor_id:
         type: "int2"
         suggested: "INTEGER"
@@ -671,18 +671,18 @@ tables:
     primaryKeys: ["actor_id", "film_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["actor_id"]
+        columns: ["actor_id"]
         references:
           table: "actor"
-          fields: ["actor_id"]
+          columns: ["actor_id"]
       foreignKey2:
-        fields: ["film_id"]
+        columns: ["film_id"]
         references:
           table: "film"
-          fields: ["film_id"]
+          columns: ["film_id"]
   film_category:
     source: "cloud"
-    fields:
+    columns:
       film_id:
         type: "int2"
         suggested: "INTEGER"
@@ -698,18 +698,18 @@ tables:
     primaryKeys: ["film_id", "category_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["category_id"]
+        columns: ["category_id"]
         references:
           table: "category"
-          fields: ["category_id"]
+          columns: ["category_id"]
       foreignKey2:
-        fields: ["film_id"]
+        columns: ["film_id"]
         references:
           table: "film"
-          fields: ["film_id"]
+          columns: ["film_id"]
   film_list:
     source: "cloud"
-    fields:
+    columns:
       fid:
         type: "int4"
         suggested: "INTEGER"
@@ -744,7 +744,7 @@ tables:
         supported: ["STRING"]
   inventory:
     source: "cloud"
-    fields:
+    columns:
       inventory_id:
         type: "serial"
         suggested: "INTEGER"
@@ -764,13 +764,13 @@ tables:
     primaryKeys: ["inventory_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["film_id"]
+        columns: ["film_id"]
         references:
           table: "film"
-          fields: ["film_id"]
+          columns: ["film_id"]
   language:
     source: "cloud"
-    fields:
+    columns:
       language_id:
         type: "serial"
         suggested: "INTEGER"
@@ -786,7 +786,7 @@ tables:
     primaryKeys: ["language_id"]
   nicer_but_slower_film_list:
     source: "cloud"
-    fields:
+    columns:
       fid:
         type: "int4"
         suggested: "INTEGER"
@@ -821,7 +821,7 @@ tables:
         supported: ["STRING"]
   payment:
     source: "cloud"
-    fields:
+    columns:
       payment_id:
         type: "serial"
         suggested: "INTEGER"
@@ -849,23 +849,23 @@ tables:
     primaryKeys: ["payment_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["customer_id"]
+        columns: ["customer_id"]
         references:
           table: "customer"
-          fields: ["customer_id"]
+          columns: ["customer_id"]
       foreignKey2:
-        fields: ["rental_id"]
+        columns: ["rental_id"]
         references:
           table: "rental"
-          fields: ["rental_id"]
+          columns: ["rental_id"]
       foreignKey3:
-        fields: ["staff_id"]
+        columns: ["staff_id"]
         references:
           table: "staff"
-          fields: ["staff_id"]
+          columns: ["staff_id"]
   rental:
     source: "cloud"
-    fields:
+    columns:
       rental_id:
         type: "serial"
         suggested: "INTEGER"
@@ -897,23 +897,23 @@ tables:
     primaryKeys: ["rental_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["customer_id"]
+        columns: ["customer_id"]
         references:
           table: "customer"
-          fields: ["customer_id"]
+          columns: ["customer_id"]
       foreignKey2:
-        fields: ["inventory_id"]
+        columns: ["inventory_id"]
         references:
           table: "inventory"
-          fields: ["inventory_id"]
+          columns: ["inventory_id"]
       foreignKey3:
-        fields: ["staff_id"]
+        columns: ["staff_id"]
         references:
           table: "staff"
-          fields: ["staff_id"]
+          columns: ["staff_id"]
   sales_by_film_category:
     source: "cloud"
-    fields:
+    columns:
       category:
         type: "varchar"
         suggested: "STRING"
@@ -924,7 +924,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   sales_by_store:
     source: "cloud"
-    fields:
+    columns:
       store:
         type: "text"
         suggested: "STRING"
@@ -939,7 +939,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   staff:
     source: "cloud"
-    fields:
+    columns:
       staff_id:
         type: "serial"
         suggested: "INTEGER"
@@ -985,13 +985,13 @@ tables:
     primaryKeys: ["staff_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["address_id"]
+        columns: ["address_id"]
         references:
           table: "address"
-          fields: ["address_id"]
+          columns: ["address_id"]
   staff_list:
     source: "cloud"
-    fields:
+    columns:
       id:
         type: "int4"
         suggested: "INTEGER"
@@ -1026,7 +1026,7 @@ tables:
         supported: ["INTEGER", "STRING", "FLOAT"]
   store:
     source: "cloud"
-    fields:
+    columns:
       store_id:
         type: "serial"
         suggested: "INTEGER"
@@ -1046,15 +1046,15 @@ tables:
     primaryKeys: ["store_id"]
     foreignKeys:
       foreignKey1:
-        fields: ["address_id"]
+        columns: ["address_id"]
         references:
           table: "address"
-          fields: ["address_id"]
+          columns: ["address_id"]
       foreignKey2:
-        fields: ["manager_staff_id"]
+        columns: ["manager_staff_id"]
         references:
           table: "staff"
-          fields: ["staff_id"]
+          columns: ["staff_id"]
 mappings:
   - node: "node0"
     table: "actor"

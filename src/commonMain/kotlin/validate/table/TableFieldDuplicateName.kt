@@ -18,7 +18,7 @@ package validate.table
 
 import model.GraphModel
 import model.source.Table
-import model.source.TableField
+import model.source.TableColumn
 import validate.Issue
 
 object TableFieldDuplicateName : TableValidation {
@@ -27,13 +27,13 @@ object TableFieldDuplicateName : TableValidation {
         tableId: String,
         table: Table,
         fieldId: String,
-        field: TableField,
+        field: TableColumn,
         issues: MutableList<Issue>
     ) {
         val name = field.name ?: return
         if (name.isBlank()) return
         // UPX findArrayDuplicates + includes flags ALL fields with a duplicated name
-        val isDuplicate = table.fields.any { (otherId, other) ->
+        val isDuplicate = table.columns.any { (otherId, other) ->
             otherId != fieldId && other.name == name
         }
         if (isDuplicate) {
