@@ -552,16 +552,16 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val fields = migration.migrateTables(unwrap(inputSchema))["film"]!!.mapOfMaps("columns")
+        val columns = migration.migrateTables(unwrap(inputSchema))["film"]!!.mapOfMaps("columns")
 
-        val arrayField = fields["special_features"]!!
+        val arrayField = columns["special_features"]!!
         assertEquals("STRING", arrayField.string("suggested"))
         assertEquals(
             listOf("STRING", "LIST<STRING>"),
             arrayField.list("supported").map { (it as codec.schema.SchemaLiteral).string }
         )
 
-        val vectorField = fields["embedding"]!!
+        val vectorField = columns["embedding"]!!
         assertEquals("VECTOR<FLOAT>", vectorField.string("suggested"))
         assertEquals(
             listOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"),

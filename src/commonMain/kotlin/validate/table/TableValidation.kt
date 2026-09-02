@@ -30,7 +30,7 @@ interface TableValidation : Validation {
         for ((tableId, table) in model.tables) {
             validateTable(model, tableId, table, issues)
             for ((columnId, column) in table.columns) {
-                validateTableField(model, tableId, table, columnId, column, issues)
+                validateTableColumn(model, tableId, table, columnId, column, issues)
             }
         }
     }
@@ -38,7 +38,7 @@ interface TableValidation : Validation {
     fun validateTable(model: GraphModel, tableId: String, table: Table, issues: MutableList<Issue>) {
     }
 
-    fun validateTableField(
+    fun validateTableColumn(
         model: GraphModel,
         tableId: String,
         table: Table,

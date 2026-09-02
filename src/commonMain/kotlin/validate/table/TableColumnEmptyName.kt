@@ -21,8 +21,8 @@ import model.source.Table
 import model.source.TableColumn
 import validate.Issue
 
-object TableFieldEmptyName : TableValidation {
-    override fun validateTableField(
+object TableColumnEmptyName : TableValidation {
+    override fun validateTableColumn(
         model: GraphModel,
         tableId: String,
         table: Table,

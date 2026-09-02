@@ -32,13 +32,13 @@ class TableEditor {
         @JsStatic
         fun setColumnType(table: TableJs, columnId: String, type: String) {
             val column = table.columns.getOrThrow(columnId, "Column")
-            TableFieldEditor.setType(column, type)
+            TableColumnEditor.setType(column, type)
         }
 
         @JsStatic
         fun setColumnSize(table: TableJs, columnId: String, size: Int) {
             val column = table.columns.getOrThrow(columnId, "Column")
-            TableFieldEditor.setSize(column, size)
+            TableColumnEditor.setSize(column, size)
         }
 
         @JsStatic
@@ -67,9 +67,9 @@ class TableEditor {
         }
 
         @JsStatic
-        fun addForeignKey(table: TableJs, fields: Array<String>, reference: ForeignKeyReferenceJs): String =
+        fun addForeignKey(table: TableJs, columns: Array<String>, reference: ForeignKeyReferenceJs): String =
             table.foreignKeys.addUnique("foreignKey") {
-                foreignKeyJs(fields, reference)
+                foreignKeyJs(columns, reference)
             }
 
         @JsStatic

@@ -42,9 +42,9 @@ import validate.relationship.RelationshipTypeToken
 import validate.relationship.constraint.RelationshipExistenceConstraint
 import validate.relationship.constraint.RelationshipKeyOverlap
 import validate.relationship.constraint.RelationshipTypeConstraint
-import validate.table.TableFieldDuplicateName
-import validate.table.TableFieldEmptyName
-import validate.table.TableFieldType
+import validate.table.TableColumnDuplicateName
+import validate.table.TableColumnEmptyName
+import validate.table.TableColumnType
 import kotlin.js.JsExport
 import kotlin.js.JsStatic
 
@@ -93,9 +93,9 @@ class Validations {
             NodeConstraintDuplicatePropertySet,
             NodeExistenceCompositeConflict,
             NodeIndexConstraintNameConflict,
-            TableFieldEmptyName,
-            TableFieldDuplicateName,
-            TableFieldType
+            TableColumnEmptyName,
+            TableColumnDuplicateName,
+            TableColumnType
         )
 
         // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a

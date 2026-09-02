@@ -7,7 +7,7 @@ import model.extension.stringValueJs
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
-class TableFieldJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
+class TableColumnJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
 
     override fun createClass() = TableColumn(
         type = "field_type",
@@ -19,7 +19,7 @@ class TableFieldJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
         name = "Field name"
     )
 
-    override fun toJs(k: TableColumn): TableColumnJs = k.toJs("fieldId")
+    override fun toJs(k: TableColumn): TableColumnJs = k.toJs("columnId")
 
     override fun toClass(js: TableColumnJs): TableColumn = js.toClass()
 

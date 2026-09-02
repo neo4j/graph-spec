@@ -26,7 +26,7 @@ import kotlin.test.assertTrue
 
 class TableColumnDuplicateNameTest {
 
-    private val validator = TableFieldDuplicateName
+    private val validator = TableColumnDuplicateName
     private val model = GraphModel("4.0.0")
 
     @Test
@@ -43,8 +43,8 @@ class TableColumnDuplicateNameTest {
         val issuesFirst = mutableListOf<Issue>()
         val issuesThird = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issuesFirst)
-        validator.validateTableField(model, "t:1", table, "f:3", table.columns["f:3"]!!, issuesThird)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issuesFirst)
+        validator.validateTableColumn(model, "t:1", table, "f:3", table.columns["f:3"]!!, issuesThird)
 
         assertEquals(1, issuesFirst.size, "First occurrence should also be flagged as duplicate")
         assertEquals("duplicate_table_field_name", issuesFirst.first().code)
@@ -63,8 +63,8 @@ class TableColumnDuplicateNameTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
-        validator.validateTableField(model, "t:1", table, "f:2", table.columns["f:2"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:2", table.columns["f:2"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -78,7 +78,7 @@ class TableColumnDuplicateNameTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }

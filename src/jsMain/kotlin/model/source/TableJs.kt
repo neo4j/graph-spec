@@ -52,7 +52,7 @@ fun tableJs(
 
 fun Table.toJs() = tableJs(
     source = source,
-    columns = columns.associateBy { key, field -> field.toJs(key) },
+    columns = columns.associateBy { key, column -> column.toJs(key) },
     primaryKeys = primaryKeys.toTypedArray(),
     foreignKeys = foreignKeys.associateBy { _, key -> key.toJs() },
     extensions = extensions.associateBy { _, value -> value.toJs() }
@@ -60,7 +60,7 @@ fun Table.toJs() = tableJs(
 
 fun TableJs.toClass() = Table(
     source = source,
-    columns = columns.associateBy { _, field -> field.toClass() },
+    columns = columns.associateBy { _, column -> column.toClass() },
     primaryKeys = primaryKeys.toMutableSet(),
     foreignKeys = foreignKeys.associateBy { _, fk -> fk.toClass() },
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()

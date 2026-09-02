@@ -21,8 +21,8 @@ import model.source.Table
 import model.source.TableColumn
 import validate.Issue
 
-object TableFieldType : TableValidation {
-    override fun validateTableField(
+object TableColumnDuplicateName : TableValidation {
+    override fun validateTableColumn(
         model: GraphModel,
         tableId: String,
         table: Table,
@@ -30,17 +30,18 @@ object TableFieldType : TableValidation {
         column: TableColumn,
         issues: MutableList<Issue>
     ) {
-        // UPX: only cloud fields (TableSchemaCloudField) are checked.
-        // graph-spec uses table.source != "local" as the cloud discriminator.
-        if (table.source == "local") return
-        // UPX: isNullish(recommendedType) || supportedTypes?.length === 0
-        // suggested is non-nullable so the null check is not testable - only supported.isEmpty() is checked
-        if (column.supported.isEmpty()) {
+        val name = column.name ?: return
+        if (name.isBlank()) return
+        // UPX findArrayDuplicates + includes flags ALL fields with a duplicated name
+        val isDuplicate = table.columns.any { (otherId, other) ->
+            otherId != columnId && other.name == name
+        }
+        if (isDuplicate) {
             issues.add(
                 Issue(
-                    code = "missing_table_field_type",
-                    message = "Missing suggested type for table field '$columnId'",
-                    path = "tables.$tableId.fields.$columnId.type"
+                    code = "duplicate_table_field_name",
+                    message = "Duplicate field name '$name' in table '$tableId'",
+                    path = "tables.$tableId.fields.$columnId.name"
                 )
             )
         }

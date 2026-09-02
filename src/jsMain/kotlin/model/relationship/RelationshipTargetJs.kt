@@ -33,10 +33,10 @@ fun relationshipTargetJs(node: String = "", label: String = ""): RelationshipTar
 
 fun RelationshipTarget.toJs() = relationshipTargetJs(
     node = node,
-    label = label,
+    label = label
 )
 
 fun RelationshipTargetJs.toClass() = RelationshipTarget(
     node = node,
-    label = label,
+    label = label
 )

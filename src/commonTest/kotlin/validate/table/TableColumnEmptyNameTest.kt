@@ -26,7 +26,7 @@ import kotlin.test.assertTrue
 
 class TableColumnEmptyNameTest {
 
-    private val validator = TableFieldEmptyName
+    private val validator = TableColumnEmptyName
     private val model = GraphModel("4.0.0")
 
     @Test
@@ -37,7 +37,7 @@ class TableColumnEmptyNameTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_field_name", issues.first().code)
@@ -51,7 +51,7 @@ class TableColumnEmptyNameTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_field_name", issues.first().code)
@@ -65,7 +65,7 @@ class TableColumnEmptyNameTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }

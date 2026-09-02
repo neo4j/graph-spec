@@ -27,7 +27,7 @@ import kotlin.test.assertTrue
 
 class TableColumnTypeTest {
 
-    private val validator = TableFieldType
+    private val validator = TableColumnType
     private val model = GraphModel("4.0.0")
 
     @Test
@@ -41,7 +41,7 @@ class TableColumnTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_field_type", issues.first().code)
@@ -61,7 +61,7 @@ class TableColumnTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -75,7 +75,7 @@ class TableColumnTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -89,7 +89,7 @@ class TableColumnTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableField(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_field_type", issues.first().code)

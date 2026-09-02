@@ -17,7 +17,7 @@
 package model.source
 
 @JsExport
-class TableFieldEditor {
+class TableColumnEditor {
     companion object {
         @JsStatic
         fun setType(column: TableColumnJs, type: String) {

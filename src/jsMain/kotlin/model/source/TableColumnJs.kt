@@ -78,4 +78,4 @@ fun TableColumnJs.toClass() = TableColumn(
 )
 
 private fun TableColumnJs.neo4jType(type: String) = Neo4jType.fromString(type)
-    ?: error("Invalid neo4j type '$type' for field '$name'")
+    ?: error("Invalid neo4j type '$type' for column '$name'")

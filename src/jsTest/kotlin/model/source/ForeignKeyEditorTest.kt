@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 class ForeignKeyEditorTest {
 
     @Test
-    fun testAddField_whenNew_addsField() {
+    fun testAddColumn_whenNew_addsColumn() {
         val fk = foreignKeyJs(arrayOf("user_id"), foreignKeyReferenceJs("users"))
         ForeignKeyEditor.addColumn(fk, "org_id")
 
@@ -17,7 +17,7 @@ class ForeignKeyEditorTest {
     }
 
     @Test
-    fun testAddField_whenDuplicate_doesNotAdd() {
+    fun testAddColumn_whenDuplicate_doesNotAdd() {
         val fk = foreignKeyJs(arrayOf("user_id"), foreignKeyReferenceJs("users"))
         ForeignKeyEditor.addColumn(fk, "user_id")
 
@@ -25,7 +25,7 @@ class ForeignKeyEditorTest {
     }
 
     @Test
-    fun testRemoveField_whenExisting_removesField() {
+    fun testRemoveColumn_whenExisting_removesColumn() {
         val fk = foreignKeyJs(arrayOf("user_id", "org_id"), foreignKeyReferenceJs("users"))
         ForeignKeyEditor.removeColumn(fk, "user_id")
 
@@ -34,7 +34,7 @@ class ForeignKeyEditorTest {
     }
 
     @Test
-    fun testRemoveField_whenNonExisting_doesNothing() {
+    fun testRemoveColumn_whenNonExisting_doesNothing() {
         val fk = foreignKeyJs(arrayOf("user_id"), foreignKeyReferenceJs("users"))
         ForeignKeyEditor.removeColumn(fk, "non_existent")
 
@@ -50,7 +50,7 @@ class ForeignKeyEditorTest {
     }
 
     @Test
-    fun testAddReferenceField() {
+    fun testAddReferenceColumn() {
         val fk = foreignKeyJs(emptyArray(), foreignKeyReferenceJs("users", arrayOf("id")))
         ForeignKeyEditor.addReferenceColumn(fk, "uuid")
 
@@ -59,7 +59,7 @@ class ForeignKeyEditorTest {
     }
 
     @Test
-    fun testRemoveReferenceField() {
+    fun testRemoveReferenceColumn() {
         val fk = foreignKeyJs(emptyArray(), foreignKeyReferenceJs("users", arrayOf("id", "uuid")))
         ForeignKeyEditor.removeReferenceColumn(fk, "id")
 

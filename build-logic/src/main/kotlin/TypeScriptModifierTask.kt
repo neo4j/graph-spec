@@ -53,8 +53,8 @@ abstract class TypeScriptModifierTask : DefaultTask() {
         // Neo4jType
         unions.create("Neo4jType", "Neo4jTypeJs")
         types.replace("PropertyJs", "type", "string", "Neo4jTypeJs")
-        types.replace("TableFieldJs", "suggested", "string", "Neo4jTypeJs")
-        types.replace("TableFieldJs", "supported", "Array<string>", "array<Neo4jTypeJs>")
+        types.replace("TableColumnJs", "suggested", "string", "Neo4jTypeJs")
+        types.replace("TableColumnJs", "supported", "Array<string>", "array<Neo4jTypeJs>")
         unions.rename("Neo4jTypeJs") { name ->
             if (name.startsWith("LIST_")) {
                 "${name.replace("LIST_", "LIST<")}>"

@@ -26,7 +26,7 @@ import kotlin.js.JsExport
 
 @JsExport
 @Serializable
-@SerialName("TableField")
+@SerialName("TableColumn")
 data class TableColumn(
     var type: String = "",
     var size: Int = -1,
