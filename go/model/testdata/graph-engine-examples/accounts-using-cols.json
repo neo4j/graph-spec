@@ -48,18 +48,18 @@
       "table": "accounts",
       "properties": {
         "email": {
-          "field": "email"
+          "column": "email"
         },
         "name": {
-          "field": "name"
+          "column": "name"
         },
         "a_id": {
-          "field": "id"
+          "column": "id"
         }
       },
       "key": [
         {
-          "field": "id"
+          "column": "id"
         }
       ]
     },
@@ -68,33 +68,33 @@
       "relationship": "TRANSACTION",
       "table": "transactions",
       "from": {
-        "fieldMappings": {
+        "columnMappings": {
           "id": {
-            "field": "to_id"
+            "column": "to_id"
           }
         }
       },
       "to": {
-        "fieldMappings": {
+        "columnMappings": {
           "id": {
-            "field": "from_id"
+            "column": "from_id"
           }
         }
       },
       "properties": {
         "tx_id": {
-          "field": "id"
+          "column": "id"
         },
         "date": {
-          "field": "created_at"
+          "column": "created_at"
         },
         "amount": {
-          "field": "amount"
+          "column": "amount"
         }
       },
       "key": [
         {
-          "field": "id"
+          "column": "id"
         }
       ]
     }
