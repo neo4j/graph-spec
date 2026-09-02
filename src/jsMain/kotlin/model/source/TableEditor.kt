@@ -30,25 +30,25 @@ class TableEditor {
         }
 
         @JsStatic
-        fun setFieldType(table: TableJs, fieldId: String, type: String) {
-            val field = table.columns.getOrThrow(fieldId, "Field")
-            TableFieldEditor.setType(field, type)
+        fun setColumnType(table: TableJs, columnId: String, type: String) {
+            val column = table.columns.getOrThrow(columnId, "Column")
+            TableFieldEditor.setType(column, type)
         }
 
         @JsStatic
-        fun setFieldSize(table: TableJs, fieldId: String, size: Int) {
-            val field = table.columns.getOrThrow(fieldId, "Field")
-            TableFieldEditor.setSize(field, size)
+        fun setColumnSize(table: TableJs, columnId: String, size: Int) {
+            val column = table.columns.getOrThrow(columnId, "Column")
+            TableFieldEditor.setSize(column, size)
         }
 
         @JsStatic
-        fun addField(table: TableJs, type: String): String = table.columns.addUnique("field") {
-            tableFieldJs(type)
+        fun addColumn(table: TableJs, type: String): String = table.columns.addUnique("column") {
+            tableColumnJs(type)
         }
 
         @JsStatic
-        fun removeField(table: TableJs, fieldId: String) {
-            table.columns.remove(fieldId)
+        fun removeColumn(table: TableJs, columnId: String) {
+            table.columns.remove(columnId)
         }
 
         @JsStatic

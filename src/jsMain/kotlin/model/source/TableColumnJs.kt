@@ -39,7 +39,7 @@ external interface TableColumnJs {
     val name: String
 }
 
-fun tableFieldJs(
+fun tableColumnJs(
     type: String,
     size: Int = -1,
     suggested: String = "ANY",
@@ -57,7 +57,7 @@ fun tableFieldJs(
     this.name = name
 }
 
-fun TableColumn.toJs(key: String) = tableFieldJs(
+fun TableColumn.toJs(key: String) = tableColumnJs(
     type = type,
     size = size,
     suggested = Neo4jType.toString(suggested),

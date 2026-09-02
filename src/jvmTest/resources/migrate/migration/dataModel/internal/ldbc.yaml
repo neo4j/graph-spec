@@ -828,348 +828,348 @@ mappings:
   - node: "node0"
     table: "Comment"
     properties:
-      nodeProperty0: { field: "creationDate" }
-      nodeProperty1: { field: "deletionDate" }
-      nodeProperty2: { field: "explicitlyDeleted" }
-      nodeProperty3: { field: "id" }
-      nodeProperty4: { field: "locationIP" }
-      nodeProperty5: { field: "browserUsed" }
-      nodeProperty6: { field: "content" }
-      nodeProperty7: { field: "length" }
+      nodeProperty0: { column: "creationDate" }
+      nodeProperty1: { column: "deletionDate" }
+      nodeProperty2: { column: "explicitlyDeleted" }
+      nodeProperty3: { column: "id" }
+      nodeProperty4: { column: "locationIP" }
+      nodeProperty5: { column: "browserUsed" }
+      nodeProperty6: { column: "content" }
+      nodeProperty7: { column: "length" }
     key: ["nodeProperty3"]
   - node: "node1"
     table: "Forum"
     properties:
-      nodeProperty0: { field: "creationDate" }
-      nodeProperty1: { field: "deletionDate" }
-      nodeProperty2: { field: "explicitlyDeleted" }
-      nodeProperty3: { field: "id" }
-      nodeProperty4: { field: "title" }
+      nodeProperty0: { column: "creationDate" }
+      nodeProperty1: { column: "deletionDate" }
+      nodeProperty2: { column: "explicitlyDeleted" }
+      nodeProperty3: { column: "id" }
+      nodeProperty4: { column: "title" }
     key: ["nodeProperty3"]
   - node: "node2"
     table: "Organisation"
     properties:
-      nodeProperty0: { field: "id" }
-      nodeProperty1: { field: "type" }
-      nodeProperty2: { field: "name" }
-      nodeProperty3: { field: "url" }
+      nodeProperty0: { column: "id" }
+      nodeProperty1: { column: "type" }
+      nodeProperty2: { column: "name" }
+      nodeProperty3: { column: "url" }
     key: ["nodeProperty0"]
   - node: "node3"
     table: "Person"
     properties:
-      nodeProperty0: { field: "creationDate" }
-      nodeProperty1: { field: "deletionDate" }
-      nodeProperty2: { field: "explicitlyDeleted" }
-      nodeProperty3: { field: "id" }
-      nodeProperty4: { field: "firstName" }
-      nodeProperty5: { field: "lastName" }
-      nodeProperty6: { field: "gender" }
-      nodeProperty7: { field: "birthday" }
-      nodeProperty8: { field: "locationIP" }
-      nodeProperty9: { field: "browserUsed" }
-      nodeProperty10: { field: "language" }
-      nodeProperty11: { field: "email" }
+      nodeProperty0: { column: "creationDate" }
+      nodeProperty1: { column: "deletionDate" }
+      nodeProperty2: { column: "explicitlyDeleted" }
+      nodeProperty3: { column: "id" }
+      nodeProperty4: { column: "firstName" }
+      nodeProperty5: { column: "lastName" }
+      nodeProperty6: { column: "gender" }
+      nodeProperty7: { column: "birthday" }
+      nodeProperty8: { column: "locationIP" }
+      nodeProperty9: { column: "browserUsed" }
+      nodeProperty10: { column: "language" }
+      nodeProperty11: { column: "email" }
     key: ["nodeProperty3"]
   - node: "node4"
     table: "Place"
     properties:
-      nodeProperty0: { field: "id" }
-      nodeProperty1: { field: "name" }
-      nodeProperty2: { field: "url" }
-      nodeProperty3: { field: "type" }
+      nodeProperty0: { column: "id" }
+      nodeProperty1: { column: "name" }
+      nodeProperty2: { column: "url" }
+      nodeProperty3: { column: "type" }
     key: ["nodeProperty0"]
   - node: "node5"
     table: "Post"
     properties:
-      nodeProperty0: { field: "creationDate" }
-      nodeProperty1: { field: "deletionDate" }
-      nodeProperty2: { field: "explicitlyDeleted" }
-      nodeProperty3: { field: "id" }
-      nodeProperty4: { field: "imageFile" }
-      nodeProperty5: { field: "locationIP" }
-      nodeProperty6: { field: "browserUsed" }
-      nodeProperty7: { field: "language" }
-      nodeProperty8: { field: "content" }
-      nodeProperty9: { field: "length" }
+      nodeProperty0: { column: "creationDate" }
+      nodeProperty1: { column: "deletionDate" }
+      nodeProperty2: { column: "explicitlyDeleted" }
+      nodeProperty3: { column: "id" }
+      nodeProperty4: { column: "imageFile" }
+      nodeProperty5: { column: "locationIP" }
+      nodeProperty6: { column: "browserUsed" }
+      nodeProperty7: { column: "language" }
+      nodeProperty8: { column: "content" }
+      nodeProperty9: { column: "length" }
     key: ["nodeProperty3"]
   - node: "node6"
     table: "Tag"
     properties:
-      nodeProperty0: { field: "id" }
-      nodeProperty1: { field: "name" }
-      nodeProperty2: { field: "url" }
+      nodeProperty0: { column: "id" }
+      nodeProperty1: { column: "name" }
+      nodeProperty2: { column: "url" }
     key: ["nodeProperty0"]
   - node: "node7"
     table: "TagClass"
     properties:
-      nodeProperty0: { field: "id" }
-      nodeProperty1: { field: "name" }
-      nodeProperty2: { field: "url" }
+      nodeProperty0: { column: "id" }
+      nodeProperty1: { column: "name" }
+      nodeProperty2: { column: "url" }
     key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "Comment"
     from:
       node: "node0"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node3"
       properties:
-        nodeProperty3: { field: "CreatorPersonId" }
+        nodeProperty3: { column: "CreatorPersonId" }
   - relationship: "relationship1"
     table: "Comment"
     from:
       node: "node0"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { field: "LocationCountryId" }
+        nodeProperty0: { column: "LocationCountryId" }
   - relationship: "relationship2"
     table: "Comment"
     from:
       node: "node0"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node5"
       properties:
-        nodeProperty3: { field: "ParentPostId" }
+        nodeProperty3: { column: "ParentPostId" }
   - relationship: "relationship3"
     table: "Comment"
     from:
       node: "node0"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node0"
       properties:
-        nodeProperty3: { field: "ParentCommentId" }
+        nodeProperty3: { column: "ParentCommentId" }
   - relationship: "relationship4"
     table: "CommentHasTag"
     from:
       node: "node0"
       properties:
-        nodeProperty3: { field: "CommentId" }
+        nodeProperty3: { column: "CommentId" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { field: "TagId" }
+        nodeProperty0: { column: "TagId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
     key: ["nodeProperty0"]
   - relationship: "relationship5"
     table: "Forum"
     from:
       node: "node1"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node3"
       properties:
-        nodeProperty3: { field: "ModeratorPersonId" }
+        nodeProperty3: { column: "ModeratorPersonId" }
   - relationship: "relationship6"
     table: "ForumHasMember"
     from:
       node: "node3"
       properties:
-        nodeProperty3: { field: "PersonId" }
+        nodeProperty3: { column: "PersonId" }
     to:
       node: "node1"
       properties:
-        nodeProperty3: { field: "ForumId" }
+        nodeProperty3: { column: "ForumId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
-      relationshipProperty2: { field: "explicitlyDeleted" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
+      relationshipProperty2: { column: "explicitlyDeleted" }
   - relationship: "relationship7"
     table: "ForumHasTag"
     from:
       node: "node1"
       properties:
-        nodeProperty3: { field: "ForumId" }
+        nodeProperty3: { column: "ForumId" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { field: "TagId" }
+        nodeProperty0: { column: "TagId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
   - relationship: "relationship8"
     table: "Organisation"
     from:
       node: "node2"
       properties:
-        nodeProperty0: { field: "id" }
+        nodeProperty0: { column: "id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { field: "LocationPlaceId" }
+        nodeProperty0: { column: "LocationPlaceId" }
   - relationship: "relationship9"
     table: "Person"
     from:
       node: "node3"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { field: "LocationCityId" }
+        nodeProperty0: { column: "LocationCityId" }
   - relationship: "relationship10"
     table: "PersonHasInterest"
     from:
       node: "node3"
       properties:
-        nodeProperty3: { field: "PersonId" }
+        nodeProperty3: { column: "PersonId" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { field: "TagId" }
+        nodeProperty0: { column: "TagId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
   - relationship: "relationship11"
     table: "PersonKnowsPerson"
     from:
       node: "node3"
       properties:
-        nodeProperty3: { field: "Person1Id" }
+        nodeProperty3: { column: "Person1Id" }
     to:
       node: "node3"
       properties:
-        nodeProperty3: { field: "Person2Id" }
+        nodeProperty3: { column: "Person2Id" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
-      relationshipProperty2: { field: "explicitlyDeleted" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
+      relationshipProperty2: { column: "explicitlyDeleted" }
   - relationship: "relationship12"
     table: "PersonLikesComment"
     from:
       node: "node3"
       properties:
-        nodeProperty3: { field: "PersonId" }
+        nodeProperty3: { column: "PersonId" }
     to:
       node: "node0"
       properties:
-        nodeProperty3: { field: "CommentId" }
+        nodeProperty3: { column: "CommentId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
-      relationshipProperty2: { field: "explicitlyDeleted" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
+      relationshipProperty2: { column: "explicitlyDeleted" }
   - relationship: "relationship13"
     table: "PersonLikesPost"
     from:
       node: "node3"
       properties:
-        nodeProperty3: { field: "PersonId" }
+        nodeProperty3: { column: "PersonId" }
     to:
       node: "node5"
       properties:
-        nodeProperty3: { field: "PostId" }
+        nodeProperty3: { column: "PostId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
-      relationshipProperty2: { field: "explicitlyDeleted" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
+      relationshipProperty2: { column: "explicitlyDeleted" }
   - relationship: "relationship14"
     table: "PersonStudiesAt"
     from:
       node: "node3"
       properties:
-        nodeProperty3: { field: "PersonId" }
+        nodeProperty3: { column: "PersonId" }
     to:
       node: "node2"
       properties:
-        nodeProperty0: { field: "UniversityId" }
+        nodeProperty0: { column: "UniversityId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
-      relationshipProperty2: { field: "classYear" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
+      relationshipProperty2: { column: "classYear" }
   - relationship: "relationship15"
     table: "PersonWorksAt"
     from:
       node: "node3"
       properties:
-        nodeProperty3: { field: "PersonId" }
+        nodeProperty3: { column: "PersonId" }
     to:
       node: "node2"
       properties:
-        nodeProperty0: { field: "CompanyId" }
+        nodeProperty0: { column: "CompanyId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
-      relationshipProperty2: { field: "workFrom" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
+      relationshipProperty2: { column: "workFrom" }
   - relationship: "relationship16"
     table: "Place"
     from:
       node: "node4"
       properties:
-        nodeProperty0: { field: "id" }
+        nodeProperty0: { column: "id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { field: "PartOfPlaceId" }
+        nodeProperty0: { column: "PartOfPlaceId" }
   - relationship: "relationship17"
     table: "Post"
     from:
       node: "node5"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node3"
       properties:
-        nodeProperty3: { field: "CreatorPersonId" }
+        nodeProperty3: { column: "CreatorPersonId" }
   - relationship: "relationship18"
     table: "Post"
     from:
       node: "node5"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node1"
       properties:
-        nodeProperty3: { field: "ContainerForumId" }
+        nodeProperty3: { column: "ContainerForumId" }
   - relationship: "relationship19"
     table: "Post"
     from:
       node: "node5"
       properties:
-        nodeProperty3: { field: "id" }
+        nodeProperty3: { column: "id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { field: "LocationCountryId" }
+        nodeProperty0: { column: "LocationCountryId" }
   - relationship: "relationship20"
     table: "PostHasTag"
     from:
       node: "node5"
       properties:
-        nodeProperty3: { field: "PostId" }
+        nodeProperty3: { column: "PostId" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { field: "TagId" }
+        nodeProperty0: { column: "TagId" }
     properties:
-      relationshipProperty0: { field: "creationDate" }
-      relationshipProperty1: { field: "deletionDate" }
+      relationshipProperty0: { column: "creationDate" }
+      relationshipProperty1: { column: "deletionDate" }
   - relationship: "relationship21"
     table: "Tag"
     from:
       node: "node6"
       properties:
-        nodeProperty0: { field: "id" }
+        nodeProperty0: { column: "id" }
     to:
       node: "node7"
       properties:
-        nodeProperty0: { field: "TypeTagClassId" }
+        nodeProperty0: { column: "TypeTagClassId" }
   - relationship: "relationship22"
     table: "TagClass"
     from:
       node: "node7"
       properties:
-        nodeProperty0: { field: "id" }
+        nodeProperty0: { column: "id" }
     to:
       node: "node7"
       properties:
-        nodeProperty0: { field: "SubclassOfTagClassId" }
+        nodeProperty0: { column: "SubclassOfTagClassId" }

@@ -26,22 +26,22 @@ object TableFieldDuplicateName : TableValidation {
         model: GraphModel,
         tableId: String,
         table: Table,
-        fieldId: String,
-        field: TableColumn,
+        columnId: String,
+        column: TableColumn,
         issues: MutableList<Issue>
     ) {
-        val name = field.name ?: return
+        val name = column.name ?: return
         if (name.isBlank()) return
         // UPX findArrayDuplicates + includes flags ALL fields with a duplicated name
         val isDuplicate = table.columns.any { (otherId, other) ->
-            otherId != fieldId && other.name == name
+            otherId != columnId && other.name == name
         }
         if (isDuplicate) {
             issues.add(
                 Issue(
                     code = "duplicate_table_field_name",
                     message = "Duplicate field name '$name' in table '$tableId'",
-                    path = "tables.$tableId.fields.$fieldId.name"
+                    path = "tables.$tableId.fields.$columnId.name"
                 )
             )
         }

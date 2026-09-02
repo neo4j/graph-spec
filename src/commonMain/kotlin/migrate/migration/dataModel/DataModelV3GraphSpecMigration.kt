@@ -283,7 +283,7 @@ class DataModelV3GraphSpecMigration :
     }
 
     internal fun SchemaMap.entityMap(key: String) = mapOrNull(key)?.map { (key, value) ->
-        key.removePrefix("#") to schemaMapOf("field" to value)
+        key.removePrefix("#") to schemaMapOf("column" to value)
     }?.toMap() ?: emptyMap()
 
     internal fun nodeMappings(schema: SchemaMap, nodeKeys: Map<String, Set<String>>): List<SchemaMap> {
@@ -308,7 +308,7 @@ class DataModelV3GraphSpecMigration :
         .listOfMaps("propertyMappings")
         .associate { mapping ->
             mapping.ref("property") to mapOf(
-                "field" to mapping.literal("fieldName")
+                "column" to mapping.literal("fieldName")
             )
         }
 

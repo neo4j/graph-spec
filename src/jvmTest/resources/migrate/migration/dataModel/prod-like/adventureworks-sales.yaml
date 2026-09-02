@@ -1338,222 +1338,222 @@ mappings:
   - node: "creditcard"
     table: "creditcard"
     properties:
-      creditcardid: { field: "creditcardid" }
-      cardtype: { field: "cardtype" }
-      cardnumber: { field: "cardnumber" }
-      expmonth: { field: "expmonth" }
-      expyear: { field: "expyear" }
-      modifieddate: { field: "modifieddate" }
+      creditcardid: { column: "creditcardid" }
+      cardtype: { column: "cardtype" }
+      cardnumber: { column: "cardnumber" }
+      expmonth: { column: "expmonth" }
+      expyear: { column: "expyear" }
+      modifieddate: { column: "modifieddate" }
     key: ["creditcardid"]
   - node: "currency"
     table: "currency"
     properties:
-      currencycode: { field: "currencycode" }
-      modifieddate: { field: "modifieddate" }
+      currencycode: { column: "currencycode" }
+      modifieddate: { column: "modifieddate" }
     key: ["currencycode"]
   - node: "currencyrate"
     table: "currencyrate"
     properties:
-      currencyrateid: { field: "currencyrateid" }
-      currencyratedate: { field: "currencyratedate" }
-      averagerate: { field: "averagerate" }
-      endofdayrate: { field: "endofdayrate" }
-      modifieddate: { field: "modifieddate" }
+      currencyrateid: { column: "currencyrateid" }
+      currencyratedate: { column: "currencyratedate" }
+      averagerate: { column: "averagerate" }
+      endofdayrate: { column: "endofdayrate" }
+      modifieddate: { column: "modifieddate" }
     key: ["currencyrateid"]
   - node: "customer"
     table: "customer"
     properties:
-      customerid: { field: "customerid" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      customerid: { column: "customerid" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["customerid"]
   - node: "salesorderheader"
     table: "salesorderheader"
     properties:
-      salesorderid: { field: "salesorderid" }
-      revisionnumber: { field: "revisionnumber" }
-      orderdate: { field: "orderdate" }
-      duedate: { field: "duedate" }
-      shipdate: { field: "shipdate" }
-      status: { field: "status" }
-      creditcardapprovalcode: { field: "creditcardapprovalcode" }
-      subtotal: { field: "subtotal" }
-      taxamt: { field: "taxamt" }
-      freight: { field: "freight" }
-      totaldue: { field: "totaldue" }
-      comment: { field: "comment" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      salesorderid: { column: "salesorderid" }
+      revisionnumber: { column: "revisionnumber" }
+      orderdate: { column: "orderdate" }
+      duedate: { column: "duedate" }
+      shipdate: { column: "shipdate" }
+      status: { column: "status" }
+      creditcardapprovalcode: { column: "creditcardapprovalcode" }
+      subtotal: { column: "subtotal" }
+      taxamt: { column: "taxamt" }
+      freight: { column: "freight" }
+      totaldue: { column: "totaldue" }
+      comment: { column: "comment" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["salesorderid"]
   - node: "salesperson"
     table: "salesperson"
     properties:
-      businessentityid: { field: "businessentityid" }
-      salesquota: { field: "salesquota" }
-      bonus: { field: "bonus" }
-      commissionpct: { field: "commissionpct" }
-      salesytd: { field: "salesytd" }
-      saleslastyear: { field: "saleslastyear" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      businessentityid: { column: "businessentityid" }
+      salesquota: { column: "salesquota" }
+      bonus: { column: "bonus" }
+      commissionpct: { column: "commissionpct" }
+      salesytd: { column: "salesytd" }
+      saleslastyear: { column: "saleslastyear" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["businessentityid"]
   - node: "salesreason"
     table: "salesreason"
     properties:
-      salesreasonid: { field: "salesreasonid" }
-      modifieddate: { field: "modifieddate" }
+      salesreasonid: { column: "salesreasonid" }
+      modifieddate: { column: "modifieddate" }
     key: ["salesreasonid"]
   - node: "salestaxrate"
     table: "salestaxrate"
     properties:
-      salestaxrateid: { field: "salestaxrateid" }
-      taxtype: { field: "taxtype" }
-      taxrate: { field: "taxrate" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      salestaxrateid: { column: "salestaxrateid" }
+      taxtype: { column: "taxtype" }
+      taxrate: { column: "taxrate" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["salestaxrateid"]
   - node: "salesterritory"
     table: "salesterritory"
     properties:
-      territoryid: { field: "territoryid" }
-      group: { field: "group" }
-      salesytd: { field: "salesytd" }
-      saleslastyear: { field: "saleslastyear" }
-      costytd: { field: "costytd" }
-      costlastyear: { field: "costlastyear" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      territoryid: { column: "territoryid" }
+      group: { column: "group" }
+      salesytd: { column: "salesytd" }
+      saleslastyear: { column: "saleslastyear" }
+      costytd: { column: "costytd" }
+      costlastyear: { column: "costlastyear" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["territoryid"]
   - node: "shoppingcartitem"
     table: "shoppingcartitem"
     properties:
-      shoppingcartitemid: { field: "shoppingcartitemid" }
-      shoppingcartid: { field: "shoppingcartid" }
-      quantity: { field: "quantity" }
-      datecreated: { field: "datecreated" }
-      modifieddate: { field: "modifieddate" }
+      shoppingcartitemid: { column: "shoppingcartitemid" }
+      shoppingcartid: { column: "shoppingcartid" }
+      quantity: { column: "quantity" }
+      datecreated: { column: "datecreated" }
+      modifieddate: { column: "modifieddate" }
     key: ["shoppingcartitemid"]
   - node: "specialoffer"
     table: "specialoffer"
     properties:
-      specialofferid: { field: "specialofferid" }
-      description: { field: "description" }
-      discountpct: { field: "discountpct" }
-      type: { field: "type" }
-      category: { field: "category" }
-      startdate: { field: "startdate" }
-      enddate: { field: "enddate" }
-      minqty: { field: "minqty" }
-      maxqty: { field: "maxqty" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      specialofferid: { column: "specialofferid" }
+      description: { column: "description" }
+      discountpct: { column: "discountpct" }
+      type: { column: "type" }
+      category: { column: "category" }
+      startdate: { column: "startdate" }
+      enddate: { column: "enddate" }
+      minqty: { column: "minqty" }
+      maxqty: { column: "maxqty" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["specialofferid"]
   - node: "store"
     table: "store"
     properties:
-      businessentityid: { field: "businessentityid" }
-      rowguid: { field: "rowguid" }
-      modifieddate: { field: "modifieddate" }
+      businessentityid: { column: "businessentityid" }
+      rowguid: { column: "rowguid" }
+      modifieddate: { column: "modifieddate" }
     key: ["businessentityid"]
   - relationship: "SALESTERRITORY"
     table: "customer"
     from:
       node: "customer"
       properties:
-        customerid: { field: "customerid" }
+        customerid: { column: "customerid" }
     to:
       node: "salesterritory"
       properties:
-        territoryid: { field: "territoryid" }
+        territoryid: { column: "territoryid" }
   - relationship: "STORE"
     table: "customer"
     from:
       node: "customer"
       properties:
-        customerid: { field: "customerid" }
+        customerid: { column: "customerid" }
     to:
       node: "store"
       properties:
-        businessentityid: { field: "storeid" }
+        businessentityid: { column: "storeid" }
   - relationship: "CREDITCARD"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "creditcard"
       properties:
-        creditcardid: { field: "creditcardid" }
+        creditcardid: { column: "creditcardid" }
   - relationship: "CURRENCYRATE"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "currencyrate"
       properties:
-        currencyrateid: { field: "currencyrateid" }
+        currencyrateid: { column: "currencyrateid" }
   - relationship: "CUSTOMER"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "customer"
       properties:
-        customerid: { field: "customerid" }
+        customerid: { column: "customerid" }
   - relationship: "SALESPERSON"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "salesperson"
       properties:
-        businessentityid: { field: "salespersonid" }
+        businessentityid: { column: "salespersonid" }
   - relationship: "SALESTERRITORY2"
     table: "salesorderheader"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "salesterritory"
       properties:
-        territoryid: { field: "territoryid" }
+        territoryid: { column: "territoryid" }
   - relationship: "SALESREASON"
     table: "salesorderheadersalesreason"
     from:
       node: "salesorderheader"
       properties:
-        salesorderid: { field: "salesorderid" }
+        salesorderid: { column: "salesorderid" }
     to:
       node: "salesreason"
       properties:
-        salesreasonid: { field: "salesreasonid" }
+        salesreasonid: { column: "salesreasonid" }
     properties:
-      modifieddate: { field: "modifieddate" }
+      modifieddate: { column: "modifieddate" }
   - relationship: "SALESTERRITORY3"
     table: "salesperson"
     from:
       node: "salesperson"
       properties:
-        businessentityid: { field: "businessentityid" }
+        businessentityid: { column: "businessentityid" }
     to:
       node: "salesterritory"
       properties:
-        territoryid: { field: "territoryid" }
+        territoryid: { column: "territoryid" }
   - relationship: "SALESPERSON2"
     table: "store"
     from:
       node: "store"
       properties:
-        businessentityid: { field: "businessentityid" }
+        businessentityid: { column: "businessentityid" }
     to:
       node: "salesperson"
       properties:
-        businessentityid: { field: "salespersonid" }
+        businessentityid: { column: "salespersonid" }

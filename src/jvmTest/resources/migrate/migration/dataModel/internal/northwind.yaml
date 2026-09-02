@@ -248,59 +248,59 @@ mappings:
   - node: "node0"
     table: "categories"
     properties:
-      nodeProperty0: { field: "categoryid" }
-      nodeProperty1: { field: "categoryname" }
-      nodeProperty2: { field: "description" }
-      nodeProperty3: { field: "picture" }
+      nodeProperty0: { column: "categoryid" }
+      nodeProperty1: { column: "categoryname" }
+      nodeProperty2: { column: "description" }
+      nodeProperty3: { column: "picture" }
     key: ["nodeProperty0"]
   - node: "node1"
     table: "products"
     properties:
-      nodeProperty0: { field: "productid" }
-      nodeProperty1: { field: "productname" }
-      nodeProperty2: { field: "quantityperunit" }
-      nodeProperty3: { field: "unitprice" }
-      nodeProperty4: { field: "unitsinstock" }
-      nodeProperty5: { field: "unitsonorder" }
-      nodeProperty6: { field: "reorderlevel" }
-      nodeProperty7: { field: "discontinued" }
+      nodeProperty0: { column: "productid" }
+      nodeProperty1: { column: "productname" }
+      nodeProperty2: { column: "quantityperunit" }
+      nodeProperty3: { column: "unitprice" }
+      nodeProperty4: { column: "unitsinstock" }
+      nodeProperty5: { column: "unitsonorder" }
+      nodeProperty6: { column: "reorderlevel" }
+      nodeProperty7: { column: "discontinued" }
     key: ["nodeProperty0"]
   - node: "node2"
     table: "suppliers"
     properties:
-      nodeProperty0: { field: "supplierid" }
-      nodeProperty1: { field: "companyname" }
-      nodeProperty2: { field: "contactname" }
-      nodeProperty3: { field: "contacttitle" }
-      nodeProperty4: { field: "address" }
-      nodeProperty5: { field: "city" }
-      nodeProperty6: { field: "region" }
-      nodeProperty7: { field: "postalcode" }
-      nodeProperty8: { field: "country" }
-      nodeProperty9: { field: "phone" }
-      nodeProperty10: { field: "fax" }
-      nodeProperty11: { field: "homepage" }
+      nodeProperty0: { column: "supplierid" }
+      nodeProperty1: { column: "companyname" }
+      nodeProperty2: { column: "contactname" }
+      nodeProperty3: { column: "contacttitle" }
+      nodeProperty4: { column: "address" }
+      nodeProperty5: { column: "city" }
+      nodeProperty6: { column: "region" }
+      nodeProperty7: { column: "postalcode" }
+      nodeProperty8: { column: "country" }
+      nodeProperty9: { column: "phone" }
+      nodeProperty10: { column: "fax" }
+      nodeProperty11: { column: "homepage" }
     key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "products"
     from:
       node: "node1"
       properties:
-        nodeProperty0: { field: "productid" }
+        nodeProperty0: { column: "productid" }
     to:
       node: "node0"
       properties:
-        nodeProperty0: { field: "categoryid" }
+        nodeProperty0: { column: "categoryid" }
   - relationship: "relationship1"
     table: "products"
     from:
       node: "node1"
       properties:
-        nodeProperty0: { field: "productid" }
+        nodeProperty0: { column: "productid" }
     to:
       node: "node2"
       properties:
-        nodeProperty0: { field: "supplierid" }
+        nodeProperty0: { column: "supplierid" }
 display:
   nodes:
     node0:

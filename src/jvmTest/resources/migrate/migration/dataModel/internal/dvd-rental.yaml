@@ -1059,278 +1059,278 @@ mappings:
   - node: "node0"
     table: "actor"
     properties:
-      nodeProperty0: { field: "actor_id" }
-      nodeProperty1: { field: "first_name" }
-      nodeProperty2: { field: "last_name" }
-      nodeProperty3: { field: "last_update" }
+      nodeProperty0: { column: "actor_id" }
+      nodeProperty1: { column: "first_name" }
+      nodeProperty2: { column: "last_name" }
+      nodeProperty3: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node1"
     table: "address"
     properties:
-      nodeProperty0: { field: "address_id" }
-      nodeProperty1: { field: "address" }
-      nodeProperty2: { field: "address2" }
-      nodeProperty3: { field: "district" }
-      nodeProperty4: { field: "postal_code" }
-      nodeProperty5: { field: "phone" }
-      nodeProperty6: { field: "last_update" }
+      nodeProperty0: { column: "address_id" }
+      nodeProperty1: { column: "address" }
+      nodeProperty2: { column: "address2" }
+      nodeProperty3: { column: "district" }
+      nodeProperty4: { column: "postal_code" }
+      nodeProperty5: { column: "phone" }
+      nodeProperty6: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node2"
     table: "category"
     properties:
-      nodeProperty0: { field: "category_id" }
-      nodeProperty1: { field: "name" }
-      nodeProperty2: { field: "last_update" }
+      nodeProperty0: { column: "category_id" }
+      nodeProperty1: { column: "name" }
+      nodeProperty2: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node3"
     table: "city"
     properties:
-      nodeProperty0: { field: "city_id" }
-      nodeProperty1: { field: "city" }
-      nodeProperty2: { field: "last_update" }
+      nodeProperty0: { column: "city_id" }
+      nodeProperty1: { column: "city" }
+      nodeProperty2: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node4"
     table: "country"
     properties:
-      nodeProperty0: { field: "country_id" }
-      nodeProperty1: { field: "country" }
-      nodeProperty2: { field: "last_update" }
+      nodeProperty0: { column: "country_id" }
+      nodeProperty1: { column: "country" }
+      nodeProperty2: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node5"
     table: "customer"
     properties:
-      nodeProperty0: { field: "customer_id" }
-      nodeProperty1: { field: "store_id" }
-      nodeProperty2: { field: "first_name" }
-      nodeProperty3: { field: "last_name" }
-      nodeProperty4: { field: "email" }
-      nodeProperty5: { field: "activebool" }
-      nodeProperty6: { field: "create_date" }
-      nodeProperty7: { field: "last_update" }
-      nodeProperty8: { field: "active" }
+      nodeProperty0: { column: "customer_id" }
+      nodeProperty1: { column: "store_id" }
+      nodeProperty2: { column: "first_name" }
+      nodeProperty3: { column: "last_name" }
+      nodeProperty4: { column: "email" }
+      nodeProperty5: { column: "activebool" }
+      nodeProperty6: { column: "create_date" }
+      nodeProperty7: { column: "last_update" }
+      nodeProperty8: { column: "active" }
     key: ["nodeProperty0"]
   - node: "node6"
     table: "film"
     properties:
-      nodeProperty0: { field: "film_id" }
-      nodeProperty1: { field: "title" }
-      nodeProperty2: { field: "description" }
-      nodeProperty3: { field: "rental_duration" }
-      nodeProperty4: { field: "rental_rate" }
-      nodeProperty5: { field: "length" }
-      nodeProperty6: { field: "replacement_cost" }
-      nodeProperty7: { field: "rating" }
-      nodeProperty8: { field: "last_update" }
+      nodeProperty0: { column: "film_id" }
+      nodeProperty1: { column: "title" }
+      nodeProperty2: { column: "description" }
+      nodeProperty3: { column: "rental_duration" }
+      nodeProperty4: { column: "rental_rate" }
+      nodeProperty5: { column: "length" }
+      nodeProperty6: { column: "replacement_cost" }
+      nodeProperty7: { column: "rating" }
+      nodeProperty8: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node7"
     table: "inventory"
     properties:
-      nodeProperty0: { field: "inventory_id" }
-      nodeProperty1: { field: "store_id" }
-      nodeProperty2: { field: "last_update" }
+      nodeProperty0: { column: "inventory_id" }
+      nodeProperty1: { column: "store_id" }
+      nodeProperty2: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node8"
     table: "language"
     properties:
-      nodeProperty0: { field: "language_id" }
-      nodeProperty1: { field: "name" }
-      nodeProperty2: { field: "last_update" }
+      nodeProperty0: { column: "language_id" }
+      nodeProperty1: { column: "name" }
+      nodeProperty2: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node9"
     table: "payment"
     properties:
-      nodeProperty0: { field: "payment_id" }
-      nodeProperty1: { field: "amount" }
-      nodeProperty2: { field: "payment_date" }
+      nodeProperty0: { column: "payment_id" }
+      nodeProperty1: { column: "amount" }
+      nodeProperty2: { column: "payment_date" }
     key: ["nodeProperty0"]
   - node: "node10"
     table: "rental"
     properties:
-      nodeProperty0: { field: "rental_id" }
-      nodeProperty1: { field: "rental_date" }
-      nodeProperty2: { field: "return_date" }
-      nodeProperty3: { field: "last_update" }
+      nodeProperty0: { column: "rental_id" }
+      nodeProperty1: { column: "rental_date" }
+      nodeProperty2: { column: "return_date" }
+      nodeProperty3: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node11"
     table: "staff"
     properties:
-      nodeProperty0: { field: "staff_id" }
-      nodeProperty1: { field: "first_name" }
-      nodeProperty2: { field: "last_name" }
-      nodeProperty3: { field: "email" }
-      nodeProperty4: { field: "store_id" }
-      nodeProperty5: { field: "active" }
-      nodeProperty6: { field: "username" }
-      nodeProperty7: { field: "password" }
-      nodeProperty8: { field: "last_update" }
+      nodeProperty0: { column: "staff_id" }
+      nodeProperty1: { column: "first_name" }
+      nodeProperty2: { column: "last_name" }
+      nodeProperty3: { column: "email" }
+      nodeProperty4: { column: "store_id" }
+      nodeProperty5: { column: "active" }
+      nodeProperty6: { column: "username" }
+      nodeProperty7: { column: "password" }
+      nodeProperty8: { column: "last_update" }
     key: ["nodeProperty0"]
   - node: "node12"
     table: "store"
     properties:
-      nodeProperty0: { field: "store_id" }
-      nodeProperty1: { field: "last_update" }
+      nodeProperty0: { column: "store_id" }
+      nodeProperty1: { column: "last_update" }
     key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "address"
     from:
       node: "node1"
       properties:
-        nodeProperty0: { field: "address_id" }
+        nodeProperty0: { column: "address_id" }
     to:
       node: "node3"
       properties:
-        nodeProperty0: { field: "city_id" }
+        nodeProperty0: { column: "city_id" }
   - relationship: "relationship1"
     table: "city"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { field: "city_id" }
+        nodeProperty0: { column: "city_id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { field: "country_id" }
+        nodeProperty0: { column: "country_id" }
   - relationship: "relationship2"
     table: "customer"
     from:
       node: "node5"
       properties:
-        nodeProperty0: { field: "customer_id" }
+        nodeProperty0: { column: "customer_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { field: "address_id" }
+        nodeProperty0: { column: "address_id" }
   - relationship: "relationship3"
     table: "film"
     from:
       node: "node6"
       properties:
-        nodeProperty0: { field: "film_id" }
+        nodeProperty0: { column: "film_id" }
     to:
       node: "node8"
       properties:
-        nodeProperty0: { field: "language_id" }
+        nodeProperty0: { column: "language_id" }
   - relationship: "relationship4"
     table: "film_actor"
     from:
       node: "node0"
       properties:
-        nodeProperty0: { field: "actor_id" }
+        nodeProperty0: { column: "actor_id" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { field: "film_id" }
+        nodeProperty0: { column: "film_id" }
     properties:
-      relationshipProperty0: { field: "last_update" }
+      relationshipProperty0: { column: "last_update" }
   - relationship: "relationship5"
     table: "film_category"
     from:
       node: "node2"
       properties:
-        nodeProperty0: { field: "category_id" }
+        nodeProperty0: { column: "category_id" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { field: "film_id" }
+        nodeProperty0: { column: "film_id" }
     properties:
-      relationshipProperty0: { field: "last_update" }
+      relationshipProperty0: { column: "last_update" }
   - relationship: "relationship6"
     table: "inventory"
     from:
       node: "node7"
       properties:
-        nodeProperty0: { field: "inventory_id" }
+        nodeProperty0: { column: "inventory_id" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { field: "film_id" }
+        nodeProperty0: { column: "film_id" }
   - relationship: "relationship7"
     table: "payment"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { field: "payment_id" }
+        nodeProperty0: { column: "payment_id" }
     to:
       node: "node5"
       properties:
-        nodeProperty0: { field: "customer_id" }
+        nodeProperty0: { column: "customer_id" }
   - relationship: "relationship8"
     table: "payment"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { field: "payment_id" }
+        nodeProperty0: { column: "payment_id" }
     to:
       node: "node10"
       properties:
-        nodeProperty0: { field: "rental_id" }
+        nodeProperty0: { column: "rental_id" }
   - relationship: "relationship9"
     table: "payment"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { field: "payment_id" }
+        nodeProperty0: { column: "payment_id" }
     to:
       node: "node11"
       properties:
-        nodeProperty0: { field: "staff_id" }
+        nodeProperty0: { column: "staff_id" }
   - relationship: "relationship10"
     table: "rental"
     from:
       node: "node10"
       properties:
-        nodeProperty0: { field: "rental_id" }
+        nodeProperty0: { column: "rental_id" }
     to:
       node: "node5"
       properties:
-        nodeProperty0: { field: "customer_id" }
+        nodeProperty0: { column: "customer_id" }
   - relationship: "relationship11"
     table: "rental"
     from:
       node: "node10"
       properties:
-        nodeProperty0: { field: "rental_id" }
+        nodeProperty0: { column: "rental_id" }
     to:
       node: "node7"
       properties:
-        nodeProperty0: { field: "inventory_id" }
+        nodeProperty0: { column: "inventory_id" }
   - relationship: "relationship12"
     table: "rental"
     from:
       node: "node10"
       properties:
-        nodeProperty0: { field: "rental_id" }
+        nodeProperty0: { column: "rental_id" }
     to:
       node: "node11"
       properties:
-        nodeProperty0: { field: "staff_id" }
+        nodeProperty0: { column: "staff_id" }
   - relationship: "relationship13"
     table: "staff"
     from:
       node: "node11"
       properties:
-        nodeProperty0: { field: "staff_id" }
+        nodeProperty0: { column: "staff_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { field: "address_id" }
+        nodeProperty0: { column: "address_id" }
   - relationship: "relationship14"
     table: "store"
     from:
       node: "node12"
       properties:
-        nodeProperty0: { field: "store_id" }
+        nodeProperty0: { column: "store_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { field: "address_id" }
+        nodeProperty0: { column: "address_id" }
   - relationship: "relationship15"
     table: "store"
     from:
       node: "node12"
       properties:
-        nodeProperty0: { field: "store_id" }
+        nodeProperty0: { column: "store_id" }
     to:
       node: "node11"
       properties:
-        nodeProperty0: { field: "manager_staff_id" }
+        nodeProperty0: { column: "manager_staff_id" }

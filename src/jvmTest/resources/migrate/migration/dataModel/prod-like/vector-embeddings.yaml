@@ -33,7 +33,7 @@ mappings:
   - node: "document"
     table: "document"
     properties:
-      documentid: { field: "documentid" }
-      embedding: { field: "embedding" }
-      legacyembedding: { field: "legacyembedding" }
+      documentid: { column: "documentid" }
+      embedding: { column: "embedding" }
+      legacyembedding: { column: "legacyembedding" }
     key: ["documentid"]

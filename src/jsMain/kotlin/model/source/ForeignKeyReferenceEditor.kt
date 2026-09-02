@@ -28,15 +28,15 @@ class ForeignKeyReferenceEditor {
         }
 
         @JsStatic
-        fun addField(reference: ForeignKeyReferenceJs, field: String) {
-            if (!reference.columns.contains(field)) {
-                reference.columns += field
+        fun addColumn(reference: ForeignKeyReferenceJs, column: String) {
+            if (!reference.columns.contains(column)) {
+                reference.columns += column
             }
         }
 
         @JsStatic
-        fun removeField(reference: ForeignKeyReferenceJs, field: String) {
-            val index = reference.columns.indexOf(field)
+        fun removeColumn(reference: ForeignKeyReferenceJs, column: String) {
+            val index = reference.columns.indexOf(column)
             if (index != -1) {
                 reference.columns = reference.columns.dropAt(index)
             }

@@ -641,193 +641,193 @@ mappings:
   - node: "node0"
     table: "album"
     properties:
-      nodeProperty0: { field: "album_id" }
-      nodeProperty1: { field: "title" }
+      nodeProperty0: { column: "album_id" }
+      nodeProperty1: { column: "title" }
     key: ["nodeProperty0"]
   - node: "node1"
     table: "artist"
     properties:
-      nodeProperty0: { field: "artist_id" }
-      nodeProperty1: { field: "name" }
+      nodeProperty0: { column: "artist_id" }
+      nodeProperty1: { column: "name" }
     key: ["nodeProperty0"]
   - node: "node2"
     table: "customer"
     properties:
-      nodeProperty0: { field: "customer_id" }
-      nodeProperty1: { field: "first_name" }
-      nodeProperty2: { field: "last_name" }
-      nodeProperty3: { field: "company" }
-      nodeProperty4: { field: "address" }
-      nodeProperty5: { field: "city" }
-      nodeProperty6: { field: "state" }
-      nodeProperty7: { field: "country" }
-      nodeProperty8: { field: "postal_code" }
-      nodeProperty9: { field: "phone" }
-      nodeProperty10: { field: "fax" }
-      nodeProperty11: { field: "email" }
+      nodeProperty0: { column: "customer_id" }
+      nodeProperty1: { column: "first_name" }
+      nodeProperty2: { column: "last_name" }
+      nodeProperty3: { column: "company" }
+      nodeProperty4: { column: "address" }
+      nodeProperty5: { column: "city" }
+      nodeProperty6: { column: "state" }
+      nodeProperty7: { column: "country" }
+      nodeProperty8: { column: "postal_code" }
+      nodeProperty9: { column: "phone" }
+      nodeProperty10: { column: "fax" }
+      nodeProperty11: { column: "email" }
     key: ["nodeProperty0"]
   - node: "node3"
     table: "employee"
     properties:
-      nodeProperty0: { field: "employee_id" }
-      nodeProperty1: { field: "last_name" }
-      nodeProperty2: { field: "first_name" }
-      nodeProperty3: { field: "title" }
-      nodeProperty4: { field: "birth_date" }
-      nodeProperty5: { field: "hire_date" }
-      nodeProperty6: { field: "address" }
-      nodeProperty7: { field: "city" }
-      nodeProperty8: { field: "state" }
-      nodeProperty9: { field: "country" }
-      nodeProperty10: { field: "postal_code" }
-      nodeProperty11: { field: "phone" }
-      nodeProperty12: { field: "fax" }
-      nodeProperty13: { field: "email" }
+      nodeProperty0: { column: "employee_id" }
+      nodeProperty1: { column: "last_name" }
+      nodeProperty2: { column: "first_name" }
+      nodeProperty3: { column: "title" }
+      nodeProperty4: { column: "birth_date" }
+      nodeProperty5: { column: "hire_date" }
+      nodeProperty6: { column: "address" }
+      nodeProperty7: { column: "city" }
+      nodeProperty8: { column: "state" }
+      nodeProperty9: { column: "country" }
+      nodeProperty10: { column: "postal_code" }
+      nodeProperty11: { column: "phone" }
+      nodeProperty12: { column: "fax" }
+      nodeProperty13: { column: "email" }
     key: ["nodeProperty0"]
   - node: "node4"
     table: "genre"
     properties:
-      nodeProperty0: { field: "genre_id" }
-      nodeProperty1: { field: "name" }
+      nodeProperty0: { column: "genre_id" }
+      nodeProperty1: { column: "name" }
     key: ["nodeProperty0"]
   - node: "node5"
     table: "invoice"
     properties:
-      nodeProperty0: { field: "invoice_id" }
-      nodeProperty1: { field: "invoice_date" }
-      nodeProperty2: { field: "billing_address" }
-      nodeProperty3: { field: "billing_city" }
-      nodeProperty4: { field: "billing_state" }
-      nodeProperty5: { field: "billing_country" }
-      nodeProperty6: { field: "billing_postal_code" }
-      nodeProperty7: { field: "total" }
+      nodeProperty0: { column: "invoice_id" }
+      nodeProperty1: { column: "invoice_date" }
+      nodeProperty2: { column: "billing_address" }
+      nodeProperty3: { column: "billing_city" }
+      nodeProperty4: { column: "billing_state" }
+      nodeProperty5: { column: "billing_country" }
+      nodeProperty6: { column: "billing_postal_code" }
+      nodeProperty7: { column: "total" }
     key: ["nodeProperty0"]
   - node: "node6"
     table: "invoice_line"
     properties:
-      nodeProperty0: { field: "invoice_line_id" }
-      nodeProperty1: { field: "unit_price" }
-      nodeProperty2: { field: "quantity" }
+      nodeProperty0: { column: "invoice_line_id" }
+      nodeProperty1: { column: "unit_price" }
+      nodeProperty2: { column: "quantity" }
     key: ["nodeProperty0"]
   - node: "node7"
     table: "media_type"
     properties:
-      nodeProperty0: { field: "media_type_id" }
-      nodeProperty1: { field: "name" }
+      nodeProperty0: { column: "media_type_id" }
+      nodeProperty1: { column: "name" }
     key: ["nodeProperty0"]
   - node: "node8"
     table: "playlist"
     properties:
-      nodeProperty0: { field: "playlist_id" }
-      nodeProperty1: { field: "name" }
+      nodeProperty0: { column: "playlist_id" }
+      nodeProperty1: { column: "name" }
     key: ["nodeProperty0"]
   - node: "node9"
     table: "track"
     properties:
-      nodeProperty0: { field: "track_id" }
-      nodeProperty1: { field: "name" }
-      nodeProperty2: { field: "composer" }
-      nodeProperty3: { field: "milliseconds" }
-      nodeProperty4: { field: "bytes" }
-      nodeProperty5: { field: "unit_price" }
+      nodeProperty0: { column: "track_id" }
+      nodeProperty1: { column: "name" }
+      nodeProperty2: { column: "composer" }
+      nodeProperty3: { column: "milliseconds" }
+      nodeProperty4: { column: "bytes" }
+      nodeProperty5: { column: "unit_price" }
     key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "album"
     from:
       node: "node0"
       properties:
-        nodeProperty0: { field: "album_id" }
+        nodeProperty0: { column: "album_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { field: "artist_id" }
+        nodeProperty0: { column: "artist_id" }
   - relationship: "relationship1"
     table: "customer"
     from:
       node: "node2"
       properties:
-        nodeProperty0: { field: "customer_id" }
+        nodeProperty0: { column: "customer_id" }
     to:
       node: "node3"
       properties:
-        nodeProperty0: { field: "support_rep_id" }
+        nodeProperty0: { column: "support_rep_id" }
   - relationship: "relationship2"
     table: "employee"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { field: "employee_id" }
+        nodeProperty0: { column: "employee_id" }
     to:
       node: "node3"
       properties:
-        nodeProperty0: { field: "reports_to" }
+        nodeProperty0: { column: "reports_to" }
   - relationship: "relationship3"
     table: "invoice"
     from:
       node: "node5"
       properties:
-        nodeProperty0: { field: "invoice_id" }
+        nodeProperty0: { column: "invoice_id" }
     to:
       node: "node2"
       properties:
-        nodeProperty0: { field: "customer_id" }
+        nodeProperty0: { column: "customer_id" }
   - relationship: "relationship4"
     table: "invoice_line"
     from:
       node: "node6"
       properties:
-        nodeProperty0: { field: "invoice_line_id" }
+        nodeProperty0: { column: "invoice_line_id" }
     to:
       node: "node5"
       properties:
-        nodeProperty0: { field: "invoice_id" }
+        nodeProperty0: { column: "invoice_id" }
   - relationship: "relationship5"
     table: "invoice_line"
     from:
       node: "node6"
       properties:
-        nodeProperty0: { field: "invoice_line_id" }
+        nodeProperty0: { column: "invoice_line_id" }
     to:
       node: "node9"
       properties:
-        nodeProperty0: { field: "track_id" }
+        nodeProperty0: { column: "track_id" }
   - relationship: "relationship6"
     table: "playlist_track"
     from:
       node: "node8"
       properties:
-        nodeProperty0: { field: "playlist_id" }
+        nodeProperty0: { column: "playlist_id" }
     to:
       node: "node9"
       properties:
-        nodeProperty0: { field: "track_id" }
+        nodeProperty0: { column: "track_id" }
   - relationship: "relationship7"
     table: "track"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { field: "track_id" }
+        nodeProperty0: { column: "track_id" }
     to:
       node: "node0"
       properties:
-        nodeProperty0: { field: "album_id" }
+        nodeProperty0: { column: "album_id" }
   - relationship: "relationship8"
     table: "track"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { field: "track_id" }
+        nodeProperty0: { column: "track_id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { field: "genre_id" }
+        nodeProperty0: { column: "genre_id" }
   - relationship: "relationship9"
     table: "track"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { field: "track_id" }
+        nodeProperty0: { column: "track_id" }
     to:
       node: "node7"
       properties:
-        nodeProperty0: { field: "media_type_id" }
+        nodeProperty0: { column: "media_type_id" }

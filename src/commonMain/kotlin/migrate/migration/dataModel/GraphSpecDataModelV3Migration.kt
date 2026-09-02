@@ -411,7 +411,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         }
         return properties.map { (propId, propDef) ->
             schemaMapOf(
-                "fieldName" to propDef.literal("field"),
+                "fieldName" to propDef.literal("column"),
                 "property" to refOf(propId)
             )
         }
@@ -422,7 +422,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             return emptyMap()
         }
         return properties.entries.associate { (key, value) ->
-            "#$key" to value.literal("field")
+            "#$key" to value.literal("column")
         }
     }
 

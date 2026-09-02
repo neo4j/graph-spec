@@ -23,15 +23,15 @@ import kotlin.collections.plus
 class ForeignKeyEditor {
     companion object {
         @JsStatic
-        fun addField(foreignKey: ForeignKeyJs, field: String) {
-            if (!foreignKey.columns.contains(field)) {
-                foreignKey.columns += field
+        fun addColumn(foreignKey: ForeignKeyJs, column: String) {
+            if (!foreignKey.columns.contains(column)) {
+                foreignKey.columns += column
             }
         }
 
         @JsStatic
-        fun removeField(foreignKey: ForeignKeyJs, field: String) {
-            val index = foreignKey.columns.indexOf(field)
+        fun removeColumn(foreignKey: ForeignKeyJs, column: String) {
+            val index = foreignKey.columns.indexOf(column)
             if (index != -1) {
                 foreignKey.columns = foreignKey.columns.dropAt(index)
             }
@@ -43,13 +43,13 @@ class ForeignKeyEditor {
         }
 
         @JsStatic
-        fun addReferenceField(foreignKey: ForeignKeyJs, field: String) {
-            ForeignKeyReferenceEditor.addField(foreignKey.references, field)
+        fun addReferenceColumn(foreignKey: ForeignKeyJs, column: String) {
+            ForeignKeyReferenceEditor.addColumn(foreignKey.references, column)
         }
 
         @JsStatic
-        fun removeReferenceField(foreignKey: ForeignKeyJs, field: String) {
-            ForeignKeyReferenceEditor.removeField(foreignKey.references, field)
+        fun removeReferenceColumn(foreignKey: ForeignKeyJs, column: String) {
+            ForeignKeyReferenceEditor.removeColumn(foreignKey.references, column)
         }
     }
 }

@@ -26,8 +26,8 @@ object TableFieldType : TableValidation {
         model: GraphModel,
         tableId: String,
         table: Table,
-        fieldId: String,
-        field: TableColumn,
+        columnId: String,
+        column: TableColumn,
         issues: MutableList<Issue>
     ) {
         // UPX: only cloud fields (TableSchemaCloudField) are checked.
@@ -35,12 +35,12 @@ object TableFieldType : TableValidation {
         if (table.source == "local") return
         // UPX: isNullish(recommendedType) || supportedTypes?.length === 0
         // suggested is non-nullable so the null check is not testable - only supported.isEmpty() is checked
-        if (field.supported.isEmpty()) {
+        if (column.supported.isEmpty()) {
             issues.add(
                 Issue(
                     code = "missing_table_field_type",
-                    message = "Missing suggested type for table field '$fieldId'",
-                    path = "tables.$tableId.fields.$fieldId.type"
+                    message = "Missing suggested type for table field '$columnId'",
+                    path = "tables.$tableId.fields.$columnId.type"
                 )
             )
         }

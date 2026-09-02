@@ -184,7 +184,7 @@ class YamlWriterTest {
 
         val p00 = SchemaMap(
             mutableMapOf(
-                "field" to SchemaLiteral("categoryid", isString = true)
+                "column" to SchemaLiteral("categoryid", isString = true)
             ),
             path = "mappings[0].properties.p:0_0"
         )
@@ -214,7 +214,7 @@ class YamlWriterTest {
             mappings:
               - node: "n:0"
                 properties:
-                  "p:0_0": { field: categoryid }
+                  "p:0_0": { column: categoryid }
         """.trimIndent() + "\n"
 
         assertEquals(expected, writer.write(root))

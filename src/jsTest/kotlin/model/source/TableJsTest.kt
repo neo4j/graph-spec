@@ -22,7 +22,7 @@ class TableJsTest : JsMappingTest<Table, TableJs>() {
 
     override fun verifyJsObject(jsObject: TableJs) {
         assertEquals("sourceId", jsObject.source)
-        assertJsEquals(tableFieldJs("varchar", name = "Field name"), jsObject.columns["field"])
+        assertJsEquals(tableColumnJs("varchar", name = "Field name"), jsObject.columns["field"])
         assertContentEquals(arrayOf("field"), jsObject.primaryKeys)
         assertJsEquals(foreignKeyJs(arrayOf("key"), foreignKeyReferenceJs("table")), jsObject.foreignKeys["key"])
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])

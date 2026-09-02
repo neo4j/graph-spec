@@ -203,12 +203,12 @@ class GraphSpecDataModelV3MigrationTest {
                     "from" to
                         schemaMapOf(
                             "node" to "User",
-                            "properties" to schemaMapOf("uid" to schemaMapOf("field" to "from_id"))
+                            "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
                         ),
                     "to" to
                         schemaMapOf(
                             "node" to "User",
-                            "properties" to schemaMapOf("uid" to schemaMapOf("field" to "to_id"))
+                            "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
                         )
                 )
             )

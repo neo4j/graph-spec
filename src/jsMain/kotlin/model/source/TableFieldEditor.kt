@@ -20,13 +20,13 @@ package model.source
 class TableFieldEditor {
     companion object {
         @JsStatic
-        fun setType(field: TableColumnJs, type: String) {
-            field.type = type
+        fun setType(column: TableColumnJs, type: String) {
+            column.type = type
         }
 
         @JsStatic
-        fun setSize(field: TableColumnJs, size: Int) {
-            field.size = size
+        fun setSize(column: TableColumnJs, size: Int) {
+            column.size = size
         }
     }
 }

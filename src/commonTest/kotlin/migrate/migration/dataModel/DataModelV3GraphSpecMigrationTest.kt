@@ -406,7 +406,7 @@ class DataModelV3GraphSpecMigrationTest {
 
         val fromProps = mapping.map("from").map("properties")
         assertTrue(fromProps.containsKey("propA"))
-        assertEquals("COL_A", fromProps.map("propA").string("field"))
+        assertEquals("COL_A", fromProps.map("propA").string("column"))
     }
 
     @Test
@@ -455,7 +455,7 @@ class DataModelV3GraphSpecMigrationTest {
         val mapping = result.first()
         assertEquals("node1", mapping.string("node"))
         assertEquals("USERS_TABLE", mapping.string("table"))
-        assertEquals("USER_NAME", mapping.map("properties").map("prop1").string("field"))
+        assertEquals("USER_NAME", mapping.map("properties").map("prop1").string("column"))
     }
 
     @Test

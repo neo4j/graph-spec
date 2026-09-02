@@ -36,7 +36,7 @@ mappings:
   - node: "node0"
     table: "document"
     properties:
-      nodeProperty0: { field: "documentid" }
-      nodeProperty1: { field: "embedding" }
-      nodeProperty2: { field: "legacyembedding" }
+      nodeProperty0: { column: "documentid" }
+      nodeProperty1: { column: "embedding" }
+      nodeProperty2: { column: "legacyembedding" }
     key: ["nodeProperty0"]

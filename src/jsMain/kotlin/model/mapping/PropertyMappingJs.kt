@@ -22,13 +22,13 @@ import model.jso
 @JsExport
 @JsPlainObject
 external interface PropertyMappingJs {
-    var field: String
+    var column: String
 }
 
-fun propertyMappingJs(field: String): PropertyMappingJs = jso {
-    this.field = field
+fun propertyMappingJs(column: String): PropertyMappingJs = jso {
+    this.column = column
 }
 
-fun PropertyMapping.toJs() = propertyMappingJs(field)
+fun PropertyMapping.toJs() = propertyMappingJs(column)
 
-fun PropertyMappingJs.toClass() = PropertyMapping(field)
+fun PropertyMappingJs.toClass() = PropertyMapping(column)

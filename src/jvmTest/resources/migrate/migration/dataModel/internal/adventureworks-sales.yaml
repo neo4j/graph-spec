@@ -1456,222 +1456,222 @@ mappings:
   - node: "node0"
     table: "creditcard"
     properties:
-      nodeProperty0: { field: "creditcardid" }
-      nodeProperty1: { field: "cardtype" }
-      nodeProperty2: { field: "cardnumber" }
-      nodeProperty3: { field: "expmonth" }
-      nodeProperty4: { field: "expyear" }
-      nodeProperty5: { field: "modifieddate" }
+      nodeProperty0: { column: "creditcardid" }
+      nodeProperty1: { column: "cardtype" }
+      nodeProperty2: { column: "cardnumber" }
+      nodeProperty3: { column: "expmonth" }
+      nodeProperty4: { column: "expyear" }
+      nodeProperty5: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node1"
     table: "currency"
     properties:
-      nodeProperty0: { field: "currencycode" }
-      nodeProperty1: { field: "modifieddate" }
+      nodeProperty0: { column: "currencycode" }
+      nodeProperty1: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node2"
     table: "currencyrate"
     properties:
-      nodeProperty0: { field: "currencyrateid" }
-      nodeProperty1: { field: "currencyratedate" }
-      nodeProperty2: { field: "averagerate" }
-      nodeProperty3: { field: "endofdayrate" }
-      nodeProperty4: { field: "modifieddate" }
+      nodeProperty0: { column: "currencyrateid" }
+      nodeProperty1: { column: "currencyratedate" }
+      nodeProperty2: { column: "averagerate" }
+      nodeProperty3: { column: "endofdayrate" }
+      nodeProperty4: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node3"
     table: "customer"
     properties:
-      nodeProperty0: { field: "customerid" }
-      nodeProperty1: { field: "rowguid" }
-      nodeProperty2: { field: "modifieddate" }
+      nodeProperty0: { column: "customerid" }
+      nodeProperty1: { column: "rowguid" }
+      nodeProperty2: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node4"
     table: "salesorderheader"
     properties:
-      nodeProperty0: { field: "salesorderid" }
-      nodeProperty1: { field: "revisionnumber" }
-      nodeProperty2: { field: "orderdate" }
-      nodeProperty3: { field: "duedate" }
-      nodeProperty4: { field: "shipdate" }
-      nodeProperty5: { field: "status" }
-      nodeProperty6: { field: "creditcardapprovalcode" }
-      nodeProperty7: { field: "subtotal" }
-      nodeProperty8: { field: "taxamt" }
-      nodeProperty9: { field: "freight" }
-      nodeProperty10: { field: "totaldue" }
-      nodeProperty11: { field: "comment" }
-      nodeProperty12: { field: "rowguid" }
-      nodeProperty13: { field: "modifieddate" }
+      nodeProperty0: { column: "salesorderid" }
+      nodeProperty1: { column: "revisionnumber" }
+      nodeProperty2: { column: "orderdate" }
+      nodeProperty3: { column: "duedate" }
+      nodeProperty4: { column: "shipdate" }
+      nodeProperty5: { column: "status" }
+      nodeProperty6: { column: "creditcardapprovalcode" }
+      nodeProperty7: { column: "subtotal" }
+      nodeProperty8: { column: "taxamt" }
+      nodeProperty9: { column: "freight" }
+      nodeProperty10: { column: "totaldue" }
+      nodeProperty11: { column: "comment" }
+      nodeProperty12: { column: "rowguid" }
+      nodeProperty13: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node5"
     table: "salesperson"
     properties:
-      nodeProperty0: { field: "businessentityid" }
-      nodeProperty1: { field: "salesquota" }
-      nodeProperty2: { field: "bonus" }
-      nodeProperty3: { field: "commissionpct" }
-      nodeProperty4: { field: "salesytd" }
-      nodeProperty5: { field: "saleslastyear" }
-      nodeProperty6: { field: "rowguid" }
-      nodeProperty7: { field: "modifieddate" }
+      nodeProperty0: { column: "businessentityid" }
+      nodeProperty1: { column: "salesquota" }
+      nodeProperty2: { column: "bonus" }
+      nodeProperty3: { column: "commissionpct" }
+      nodeProperty4: { column: "salesytd" }
+      nodeProperty5: { column: "saleslastyear" }
+      nodeProperty6: { column: "rowguid" }
+      nodeProperty7: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node6"
     table: "salesreason"
     properties:
-      nodeProperty0: { field: "salesreasonid" }
-      nodeProperty1: { field: "modifieddate" }
+      nodeProperty0: { column: "salesreasonid" }
+      nodeProperty1: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node7"
     table: "salestaxrate"
     properties:
-      nodeProperty0: { field: "salestaxrateid" }
-      nodeProperty1: { field: "taxtype" }
-      nodeProperty2: { field: "taxrate" }
-      nodeProperty3: { field: "rowguid" }
-      nodeProperty4: { field: "modifieddate" }
+      nodeProperty0: { column: "salestaxrateid" }
+      nodeProperty1: { column: "taxtype" }
+      nodeProperty2: { column: "taxrate" }
+      nodeProperty3: { column: "rowguid" }
+      nodeProperty4: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node8"
     table: "salesterritory"
     properties:
-      nodeProperty0: { field: "territoryid" }
-      nodeProperty1: { field: "group" }
-      nodeProperty2: { field: "salesytd" }
-      nodeProperty3: { field: "saleslastyear" }
-      nodeProperty4: { field: "costytd" }
-      nodeProperty5: { field: "costlastyear" }
-      nodeProperty6: { field: "rowguid" }
-      nodeProperty7: { field: "modifieddate" }
+      nodeProperty0: { column: "territoryid" }
+      nodeProperty1: { column: "group" }
+      nodeProperty2: { column: "salesytd" }
+      nodeProperty3: { column: "saleslastyear" }
+      nodeProperty4: { column: "costytd" }
+      nodeProperty5: { column: "costlastyear" }
+      nodeProperty6: { column: "rowguid" }
+      nodeProperty7: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node9"
     table: "shoppingcartitem"
     properties:
-      nodeProperty0: { field: "shoppingcartitemid" }
-      nodeProperty1: { field: "shoppingcartid" }
-      nodeProperty2: { field: "quantity" }
-      nodeProperty3: { field: "datecreated" }
-      nodeProperty4: { field: "modifieddate" }
+      nodeProperty0: { column: "shoppingcartitemid" }
+      nodeProperty1: { column: "shoppingcartid" }
+      nodeProperty2: { column: "quantity" }
+      nodeProperty3: { column: "datecreated" }
+      nodeProperty4: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node10"
     table: "specialoffer"
     properties:
-      nodeProperty0: { field: "specialofferid" }
-      nodeProperty1: { field: "description" }
-      nodeProperty2: { field: "discountpct" }
-      nodeProperty3: { field: "type" }
-      nodeProperty4: { field: "category" }
-      nodeProperty5: { field: "startdate" }
-      nodeProperty6: { field: "enddate" }
-      nodeProperty7: { field: "minqty" }
-      nodeProperty8: { field: "maxqty" }
-      nodeProperty9: { field: "rowguid" }
-      nodeProperty10: { field: "modifieddate" }
+      nodeProperty0: { column: "specialofferid" }
+      nodeProperty1: { column: "description" }
+      nodeProperty2: { column: "discountpct" }
+      nodeProperty3: { column: "type" }
+      nodeProperty4: { column: "category" }
+      nodeProperty5: { column: "startdate" }
+      nodeProperty6: { column: "enddate" }
+      nodeProperty7: { column: "minqty" }
+      nodeProperty8: { column: "maxqty" }
+      nodeProperty9: { column: "rowguid" }
+      nodeProperty10: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - node: "node11"
     table: "store"
     properties:
-      nodeProperty0: { field: "businessentityid" }
-      nodeProperty1: { field: "rowguid" }
-      nodeProperty2: { field: "modifieddate" }
+      nodeProperty0: { column: "businessentityid" }
+      nodeProperty1: { column: "rowguid" }
+      nodeProperty2: { column: "modifieddate" }
     key: ["nodeProperty0"]
   - relationship: "relationship0"
     table: "customer"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { field: "customerid" }
+        nodeProperty0: { column: "customerid" }
     to:
       node: "node8"
       properties:
-        nodeProperty0: { field: "territoryid" }
+        nodeProperty0: { column: "territoryid" }
   - relationship: "relationship1"
     table: "customer"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { field: "customerid" }
+        nodeProperty0: { column: "customerid" }
     to:
       node: "node11"
       properties:
-        nodeProperty0: { field: "storeid" }
+        nodeProperty0: { column: "storeid" }
   - relationship: "relationship2"
     table: "salesorderheader"
     from:
       node: "node4"
       properties:
-        nodeProperty0: { field: "salesorderid" }
+        nodeProperty0: { column: "salesorderid" }
     to:
       node: "node0"
       properties:
-        nodeProperty0: { field: "creditcardid" }
+        nodeProperty0: { column: "creditcardid" }
   - relationship: "relationship3"
     table: "salesorderheader"
     from:
       node: "node4"
       properties:
-        nodeProperty0: { field: "salesorderid" }
+        nodeProperty0: { column: "salesorderid" }
     to:
       node: "node2"
       properties:
-        nodeProperty0: { field: "currencyrateid" }
+        nodeProperty0: { column: "currencyrateid" }
   - relationship: "relationship4"
     table: "salesorderheader"
     from:
       node: "node4"
       properties:
-        nodeProperty0: { field: "salesorderid" }
+        nodeProperty0: { column: "salesorderid" }
     to:
       node: "node3"
       properties:
-        nodeProperty0: { field: "customerid" }
+        nodeProperty0: { column: "customerid" }
   - relationship: "relationship5"
     table: "salesorderheader"
     from:
       node: "node4"
       properties:
-        nodeProperty0: { field: "salesorderid" }
+        nodeProperty0: { column: "salesorderid" }
     to:
       node: "node5"
       properties:
-        nodeProperty0: { field: "salespersonid" }
+        nodeProperty0: { column: "salespersonid" }
   - relationship: "relationship6"
     table: "salesorderheader"
     from:
       node: "node4"
       properties:
-        nodeProperty0: { field: "salesorderid" }
+        nodeProperty0: { column: "salesorderid" }
     to:
       node: "node8"
       properties:
-        nodeProperty0: { field: "territoryid" }
+        nodeProperty0: { column: "territoryid" }
   - relationship: "relationship7"
     table: "salesorderheadersalesreason"
     from:
       node: "node4"
       properties:
-        nodeProperty0: { field: "salesorderid" }
+        nodeProperty0: { column: "salesorderid" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { field: "salesreasonid" }
+        nodeProperty0: { column: "salesreasonid" }
     properties:
-      relationshipProperty0: { field: "modifieddate" }
+      relationshipProperty0: { column: "modifieddate" }
   - relationship: "relationship8"
     table: "salesperson"
     from:
       node: "node5"
       properties:
-        nodeProperty0: { field: "businessentityid" }
+        nodeProperty0: { column: "businessentityid" }
     to:
       node: "node8"
       properties:
-        nodeProperty0: { field: "territoryid" }
+        nodeProperty0: { column: "territoryid" }
   - relationship: "relationship9"
     table: "store"
     from:
       node: "node11"
       properties:
-        nodeProperty0: { field: "businessentityid" }
+        nodeProperty0: { column: "businessentityid" }
     to:
       node: "node5"
       properties:
-        nodeProperty0: { field: "salespersonid" }
+        nodeProperty0: { column: "salespersonid" }

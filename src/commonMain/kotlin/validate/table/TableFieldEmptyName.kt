@@ -26,16 +26,16 @@ object TableFieldEmptyName : TableValidation {
         model: GraphModel,
         tableId: String,
         table: Table,
-        fieldId: String,
-        field: TableColumn,
+        columnId: String,
+        column: TableColumn,
         issues: MutableList<Issue>
     ) {
-        if (field.name.isNullOrBlank()) {
+        if (column.name.isNullOrBlank()) {
             issues.add(
                 Issue(
                     code = "missing_table_field_name",
-                    message = "Missing name for table field '$fieldId'",
-                    path = "tables.$tableId.fields.$fieldId.name"
+                    message = "Missing name for table field '$columnId'",
+                    path = "tables.$tableId.fields.$columnId.name"
                 )
             )
         }

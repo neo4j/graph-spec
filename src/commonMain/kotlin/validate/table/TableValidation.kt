@@ -29,8 +29,8 @@ interface TableValidation : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
         for ((tableId, table) in model.tables) {
             validateTable(model, tableId, table, issues)
-            for ((fieldId, field) in table.columns) {
-                validateTableField(model, tableId, table, fieldId, field, issues)
+            for ((columnId, column) in table.columns) {
+                validateTableField(model, tableId, table, columnId, column, issues)
             }
         }
     }
@@ -42,8 +42,8 @@ interface TableValidation : Validation {
         model: GraphModel,
         tableId: String,
         table: Table,
-        fieldId: String,
-        field: TableColumn,
+        columnId: String,
+        column: TableColumn,
         issues: MutableList<Issue>
     ) {
     }

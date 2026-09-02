@@ -213,10 +213,10 @@
       "table": "actors",
       "properties": {
         "id": {
-          "field": "actor_id"
+          "column": "actor_id"
         },
         "name": {
-          "field": "actor_name"
+          "column": "actor_name"
         }
       },
       "mode": "MERGE",
@@ -230,7 +230,7 @@
       "table": "movies",
       "properties": {
         "id": {
-          "field": "id"
+          "column": "id"
         }
       },
       "mode": "MERGE",
@@ -247,7 +247,7 @@
         "label": "Actor",
         "properties": {
           "id": {
-            "field": "actor_id"
+            "column": "actor_id"
           }
         }
       },
@@ -256,13 +256,13 @@
         "label": "Movie",
         "properties": {
           "id": {
-            "field": "movie_id"
+            "column": "movie_id"
           }
         }
       },
       "properties": {
         "roles": {
-          "field": "field_1"
+          "column": "field_1"
         }
       },
       "mode": "MERGE",
