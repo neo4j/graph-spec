@@ -47,7 +47,9 @@ class NodePropertyVectorDimensionTest {
 
         // ASSERT
         assertEquals(1, issues.size)
-        assertEquals("missing_vector_dimension", issues.first().code)
+        val issue = issues.first()
+        assertEquals("missing_vector_dimension", issue.code)
+        assertEquals("nodes.personNode.properties.embedding.dimension", issue.path)
     }
 
     @Test
