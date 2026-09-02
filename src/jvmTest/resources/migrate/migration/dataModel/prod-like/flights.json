@@ -14,7 +14,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:0_1",
@@ -22,7 +23,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:0_2",
@@ -30,7 +32,8 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             }
           ]
         },
@@ -44,7 +47,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:1_1",
@@ -52,7 +56,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:1_2",
@@ -60,7 +65,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:1_3",
@@ -68,7 +74,8 @@
               "type": {
                 "type": "point"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:1_4",
@@ -76,7 +83,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             }
           ]
         },
@@ -90,7 +98,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:2_1",
@@ -98,7 +107,8 @@
               "type": {
                 "type": "datetime"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:2_2",
@@ -106,7 +116,8 @@
               "type": {
                 "type": "float"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             }
           ]
         },
@@ -120,7 +131,8 @@
               "type": {
                 "type": "integer"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:3_1",
@@ -128,7 +140,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:3_2",
@@ -136,7 +149,8 @@
               "type": {
                 "type": "datetime"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:3_3",
@@ -144,7 +158,8 @@
               "type": {
                 "type": "datetime"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:3_6",
@@ -152,7 +167,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:3_8",
@@ -160,7 +176,8 @@
               "type": {
                 "type": "datetime"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:3_9",
@@ -168,7 +185,8 @@
               "type": {
                 "type": "datetime"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             }
           ]
         },
@@ -182,7 +200,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:4_2",
@@ -190,7 +209,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:4_3",
@@ -198,7 +218,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:4_4",
@@ -206,7 +227,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             }
           ]
         }
@@ -237,7 +259,8 @@
               "type": {
                 "type": "string"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:3_1",
@@ -245,7 +268,8 @@
               "type": {
                 "type": "float"
               },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             }
           ]
         },
@@ -258,6 +282,7 @@
       "nodeObjectTypes": [
         {
           "$id": "n:0",
+          "description": "",
           "labels": [
             {
               "$ref": "#nl:0"
@@ -266,6 +291,7 @@
         },
         {
           "$id": "n:1",
+          "description": "",
           "labels": [
             {
               "$ref": "#nl:1"
@@ -274,6 +300,7 @@
         },
         {
           "$id": "n:2",
+          "description": "",
           "labels": [
             {
               "$ref": "#nl:2"
@@ -282,6 +309,7 @@
         },
         {
           "$id": "n:3",
+          "description": "",
           "labels": [
             {
               "$ref": "#nl:3"
@@ -290,6 +318,7 @@
         },
         {
           "$id": "n:4",
+          "description": "",
           "labels": [
             {
               "$ref": "#nl:4"
@@ -303,6 +332,7 @@
           "type": {
             "$ref": "#rt:0"
           },
+          "description": "",
           "from": {
             "$ref": "#n:3"
           },
@@ -315,6 +345,7 @@
           "type": {
             "$ref": "#rt:1"
           },
+          "description": "",
           "from": {
             "$ref": "#n:3"
           },
@@ -327,6 +358,7 @@
           "type": {
             "$ref": "#rt:2"
           },
+          "description": "",
           "from": {
             "$ref": "#n:3"
           },
@@ -339,6 +371,7 @@
           "type": {
             "$ref": "#rt:3"
           },
+          "description": "",
           "from": {
             "$ref": "#n:3"
           },
@@ -351,6 +384,7 @@
           "type": {
             "$ref": "#rt:4"
           },
+          "description": "",
           "from": {
             "$ref": "#n:4"
           },

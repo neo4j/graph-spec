@@ -69,6 +69,7 @@ class DataModelV3GraphSpecMigration :
         val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes)
         return schemaMapOf(
             "version" to schema.literal("version"),
+            "description" to schema.literalOrNull("description"),
             "nodes" to nodes,
             "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),
             "tables" toNotEmpty migrateTables(schema),
@@ -138,7 +139,8 @@ class DataModelV3GraphSpecMigration :
                 "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel),
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
                 "properties" toNotEmpty convertProperties(labels),
-                "name" to tokens.firstOrNull()
+                "name" to tokens.firstOrNull(),
+                "description" to nodeObject.literalOrNull("description")
             )
         }
         return nodes
@@ -222,7 +224,8 @@ class DataModelV3GraphSpecMigration :
                 "properties" to convertProperties(listOf(relationshipType)),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
-                "name" to uniqueRelationshipName(token, uniqueNames)
+                "name" to uniqueRelationshipName(token, uniqueNames),
+                "description" to objectType.literalOrNull("description")
             )
         }
         return relationships
@@ -248,7 +251,8 @@ class DataModelV3GraphSpecMigration :
             val map = schemaMapOf(
                 "name" to property.literalOrNull("token"),
                 "type" to neo4jType(typeObj),
-                "dimension" to dimension(typeObj)
+                "dimension" to dimension(typeObj),
+                "description" to property.literalOrNull("description")
             )
             property.id() to map
         }
