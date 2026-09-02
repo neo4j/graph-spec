@@ -30,7 +30,7 @@ class TableColumnEmptyNameTest {
     private val model = GraphModel("4.0.0")
 
     @Test
-    fun `fail when field name is blank`() {
+    fun `fail when column name is blank`() {
         val table = Table(
             source = "local",
             columns = mutableMapOf("f:1" to TableColumn(name = ""))
@@ -44,7 +44,7 @@ class TableColumnEmptyNameTest {
     }
 
     @Test
-    fun `fail when field name is null`() {
+    fun `fail when column name is null`() {
         val table = Table(
             source = "local",
             columns = mutableMapOf("f:1" to TableColumn(name = null))
@@ -58,7 +58,7 @@ class TableColumnEmptyNameTest {
     }
 
     @Test
-    fun `pass when field has a valid name`() {
+    fun `pass when column has a valid name`() {
         val table = Table(
             source = "local",
             columns = mutableMapOf("f:1" to TableColumn(name = "email"))

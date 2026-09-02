@@ -30,7 +30,7 @@ class TableColumnDuplicateNameTest {
     private val model = GraphModel("4.0.0")
 
     @Test
-    fun `fail on duplicate field name - all occurrences flagged`() {
+    fun `fail on duplicate column name - all occurrences flagged`() {
         // UPX findArrayDuplicates + includes flags ALL fields with a duplicated name
         val table = Table(
             source = "local",
@@ -53,7 +53,7 @@ class TableColumnDuplicateNameTest {
     }
 
     @Test
-    fun `pass when all field names are unique`() {
+    fun `pass when all column names are unique`() {
         val table = Table(
             source = "local",
             columns = mutableMapOf(
@@ -70,7 +70,7 @@ class TableColumnDuplicateNameTest {
     }
 
     @Test
-    fun `pass when field name is blank`() {
+    fun `pass when column name is blank`() {
         // blank names are the empty-name validator's concern, not this one
         val table = Table(
             source = "local",

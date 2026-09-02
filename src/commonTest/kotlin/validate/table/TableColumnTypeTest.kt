@@ -31,7 +31,7 @@ class TableColumnTypeTest {
     private val model = GraphModel("4.0.0")
 
     @Test
-    fun `fail on cloud field with empty supported types`() {
+    fun `fail on cloud column with empty supported types`() {
         // UPX: supportedTypes?.length === 0
         val table = Table(
             source = "sql/postgres",
@@ -48,7 +48,7 @@ class TableColumnTypeTest {
     }
 
     @Test
-    fun `pass on cloud field with non-empty supported types`() {
+    fun `pass on cloud column with non-empty supported types`() {
         val table = Table(
             source = "sql/postgres",
             columns = mutableMapOf(
@@ -67,8 +67,8 @@ class TableColumnTypeTest {
     }
 
     @Test
-    fun `pass on local field with empty supported types`() {
-        // rule skipped for local tables - only cloud fields are checked
+    fun `pass on local column with empty supported types`() {
+        // rule skipped for local tables - only cloud columns are checked
         val table = Table(
             source = "local",
             columns = mutableMapOf("f:1" to TableColumn(name = "email", supported = emptySet()))
@@ -81,7 +81,7 @@ class TableColumnTypeTest {
     }
 
     @Test
-    fun `fail on cloud field with blank name`() {
+    fun `fail on cloud column with blank name`() {
         // type check is independent of name check - both can fire
         val table = Table(
             source = "sql/postgres",
