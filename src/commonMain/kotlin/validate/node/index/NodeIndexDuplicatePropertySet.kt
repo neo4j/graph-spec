@@ -18,8 +18,11 @@ package validate.node.index
 
 import model.GraphModel
 import model.node.Node
+import model.node.NodeConstraint
 import model.node.NodeIndex
+import model.type.ConstraintType
 import validate.Issue
+import validate.constraint.isCompositeConstraint
 import validate.node.NodeValidation
 
 object NodeIndexDuplicatePropertySet : NodeValidation {
@@ -32,10 +35,14 @@ object NodeIndexDuplicatePropertySet : NodeValidation {
         issues: MutableList<Issue>
     ) {
         if (index.properties.isEmpty()) return
-        val isDuplicate = node.indexes.values.any { other ->
+        val duplicatesAnotherIndex = node.indexes.values.any { other ->
             other !== index && other.properties.toSet() == index.properties.toSet()
         }
-        if (isDuplicate) {
+        // UPX isCustomIndexPropertySetDuplicate: constraints imply backing
+        // indexes, so an index matching a valid-for-index-view constraint's
+        // property set is also a duplicate.
+        val duplicatesConstraint = constraintDerivedPropertySets(node).any { it == index.properties.toSet() }
+        if (duplicatesAnotherIndex || duplicatesConstraint) {
             issues.add(
                 Issue(
                     code = "duplicate_index_property_set",
@@ -45,4 +52,24 @@ object NodeIndexDuplicatePropertySet : NodeValidation {
             )
         }
     }
+
+    // UPX isValidConstraintForIndexView: a constraint implies an index when it
+    // has properties, a type other than existence, a name, and is not itself a
+    // duplicate composite.
+    private fun constraintDerivedPropertySets(node: Node): List<Set<String>> {
+        val compositeConstraints = node.constraints.values.filter { isCompositeConstraint(it.properties) }
+        return node.constraints.values
+            .filterNot { constraint ->
+                constraint.properties.isEmpty() ||
+                    constraint.type == ConstraintType.EXISTS ||
+                    constraint.name.isNullOrEmpty() ||
+                    isDuplicateComposite(constraint, compositeConstraints)
+            }
+            .map { it.properties.toSet() }
+    }
+
+    private fun isDuplicateComposite(constraint: NodeConstraint, compositeConstraints: List<NodeConstraint>): Boolean =
+        compositeConstraints.any { other ->
+            other !== constraint && other.properties.toSet() == constraint.properties.toSet()
+        }
 }
