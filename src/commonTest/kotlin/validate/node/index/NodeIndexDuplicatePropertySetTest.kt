@@ -19,8 +19,10 @@ package validate.node.index
 import model.GraphModel
 import model.node.Labels
 import model.node.Node
+import model.node.NodeConstraint
 import model.node.NodeIndex
 import model.property.Property
+import model.type.ConstraintType
 import model.type.IndexType
 import validate.Issue
 import kotlin.test.Test
@@ -152,5 +154,110 @@ class NodeIndexDuplicatePropertySetTest {
         val issues = validate(node)
 
         assertTrue(issues.isEmpty(), "A lone index cannot duplicate anything")
+    }
+
+    @Test
+    fun `fail when index property set matches a unique constraint's set`() {
+        // UPX isValidConstraintForIndexView: constraints imply backing indexes,
+        // so an index matching a constraint's property set is a duplicate
+        val node = nodeWithIndexes("idx1" to setOf("email", "name"))
+        node.constraints["uniq_email_name"] = NodeConstraint(
+            type = ConstraintType.UNIQUE,
+            label = "Person",
+            properties = mutableSetOf("email", "name"),
+            name = "uniq_email_name"
+        )
+
+        val issues = validate(node)
+
+        assertEquals(1, issues.size)
+        assertEquals("duplicate_index_property_set", issues.first().code)
+        assertEquals("nodes.personNode.indexes.idx1.properties", issues.first().path)
+    }
+
+    @Test
+    fun `fail when index property set matches a key constraint's set in any order`() {
+        val node = nodeWithIndexes("idx1" to setOf("email", "name"))
+        node.constraints["key1"] = NodeConstraint(
+            type = ConstraintType.KEY,
+            label = "Person",
+            properties = mutableSetOf("name", "email"),
+            name = "key1"
+        )
+
+        val issues = validate(node)
+
+        assertEquals(1, issues.size)
+    }
+
+    @Test
+    fun `pass when the matching constraint is an existence constraint`() {
+        // existence constraints do not create backing indexes in UPX
+        val node = nodeWithIndexes("idx1" to setOf("email"))
+        node.constraints["exists_email"] = NodeConstraint(
+            type = ConstraintType.EXISTS,
+            label = "Person",
+            properties = mutableSetOf("email"),
+            name = "exists_email"
+        )
+
+        val issues = validate(node)
+
+        assertTrue(issues.isEmpty(), "Existence constraints never imply an index")
+    }
+
+    @Test
+    fun `pass when the matching constraint has no name`() {
+        // UPX isValidConstraintForIndexView requires a non-empty name
+        val node = nodeWithIndexes("idx1" to setOf("email"))
+        node.constraints["uniq_email"] = NodeConstraint(
+            type = ConstraintType.UNIQUE,
+            label = "Person",
+            properties = mutableSetOf("email"),
+            name = null
+        )
+
+        val issues = validate(node)
+
+        assertTrue(issues.isEmpty(), "Unnamed constraints are not valid for index view")
+    }
+
+    @Test
+    fun `pass when the matching constraint has empty properties`() {
+        val node = nodeWithIndexes("idx1" to setOf("email"))
+        node.constraints["uniq_empty"] = NodeConstraint(
+            type = ConstraintType.UNIQUE,
+            label = "Person",
+            properties = mutableSetOf(),
+            name = "uniq_empty"
+        )
+
+        val issues = validate(node)
+
+        assertTrue(issues.isEmpty(), "Empty constraints are not valid for index view")
+    }
+
+    @Test
+    fun `pass when the matching constraint is itself a duplicate composite`() {
+        // UPX isValidConstraintForIndexView drops duplicate composite constraints
+        // so they don't produce phantom index sets; the constraint duplicate rule
+        // flags them instead
+        val node = nodeWithIndexes("idx1" to setOf("email", "name"))
+        node.constraints["uniq1"] = NodeConstraint(
+            type = ConstraintType.UNIQUE,
+            label = "Person",
+            properties = mutableSetOf("email", "name"),
+            name = "uniq1"
+        )
+        node.constraints["uniq2"] = NodeConstraint(
+            type = ConstraintType.UNIQUE,
+            label = "Person",
+            properties = mutableSetOf("email", "name"),
+            name = "uniq2"
+        )
+
+        val issues = validate(node)
+
+        assertTrue(issues.isEmpty(), "Duplicate composite constraints are excluded from index view")
     }
 }
