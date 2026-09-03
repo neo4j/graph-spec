@@ -20,7 +20,7 @@ import model.GraphModel
 import model.property.Property
 import model.relationship.Relationship
 import validate.Issue
-import validate.property.vectorDimensionIssue
+import validate.property.isVectorType
 
 object RelationshipPropertyVectorDimension : RelationshipValidation {
     override fun validateProperty(
@@ -31,6 +31,14 @@ object RelationshipPropertyVectorDimension : RelationshipValidation {
         property: Property,
         issues: MutableList<Issue>
     ) {
-        vectorDimensionIssue("relationships", relationshipId, propertyId, property)?.let { issues.add(it) }
+        // UPX rule 8: getVectorDimensionPropertyErrors (errors.ts lines 124-130).
+        if (!isVectorType(property.type) || property.dimension != null) return
+        issues.add(
+            Issue(
+                code = "missing_vector_dimension",
+                message = "Property '$propertyId' on '$relationshipId' is a vector type but has no dimension set",
+                path = "relationships.$relationshipId.properties.$propertyId.dimension"
+            )
+        )
     }
 }
