@@ -1,0 +1,72 @@
+{
+  "version": "4.0.0",
+  "description": "This model is valid for graph engine but not for import",
+  "nodes": {
+    "Account": {
+      "labels": {
+        "identifier": "Account"
+      },
+      "properties": {
+        "name": {
+          "type": "STRING"
+        }
+      }
+    }
+  },
+  "relationships": {
+    "TRANSACTION": {
+      "type": "TRANSACTION",
+      "from": {
+        "node": "Account"
+      },
+      "to": {
+        "node": "Account"
+      },
+      "properties": {
+      }
+    }
+  },
+  "mappings": [
+    {
+      "type": "NodeMapping",
+      "node": "Account",
+      "table": "accounts",
+      "properties": {
+        "name": {
+          "column": "name"
+        }
+      },
+      "key": [
+        {
+          "column": "id"
+        }
+      ]
+    },
+    {
+      "type": "RelationshipMapping",
+      "relationship": "TRANSACTION",
+      "table": "transactions",
+      "from": {
+        "columnMappings": {
+          "id": {
+            "column": "to_id"
+          }
+        }
+      },
+      "to": {
+        "columnMappings": {
+          "id": {
+            "column": "from_id"
+          }
+        }
+      },
+      "properties": {
+      },
+      "key": [
+        {
+          "column": "id"
+        }
+      ]
+    }
+  ]
+}
