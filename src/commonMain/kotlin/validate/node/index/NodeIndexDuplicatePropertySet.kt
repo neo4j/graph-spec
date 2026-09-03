@@ -31,8 +31,6 @@ object NodeIndexDuplicatePropertySet : NodeValidation {
         index: NodeIndex,
         issues: MutableList<Issue>
     ) {
-        // UPX isCustomIndexPropertySetDuplicate: only an empty property set is exempt;
-        // there is no composite (>= 2) gate, unlike the constraint duplicate check.
         if (index.properties.isEmpty()) return
         val isDuplicate = node.indexes.values.any { other ->
             other !== index && other.properties.toSet() == index.properties.toSet()
