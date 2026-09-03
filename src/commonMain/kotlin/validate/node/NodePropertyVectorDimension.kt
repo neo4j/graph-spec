@@ -20,7 +20,7 @@ import model.GraphModel
 import model.node.Node
 import model.property.Property
 import validate.Issue
-import validate.property.vectorDimensionIssue
+import validate.property.isVectorType
 
 object NodePropertyVectorDimension : NodeValidation {
     override fun validateProperty(
@@ -31,6 +31,14 @@ object NodePropertyVectorDimension : NodeValidation {
         property: Property,
         issues: MutableList<Issue>
     ) {
-        vectorDimensionIssue("nodes", nodeId, propertyId, property)?.let { issues.add(it) }
+        // UPX rule 8: getVectorDimensionPropertyErrors (errors.ts lines 124-130).
+        if (!isVectorType(property.type) || property.dimension != null) return
+        issues.add(
+            Issue(
+                code = "missing_vector_dimension",
+                message = "Property '$propertyId' on '$nodeId' is a vector type but has no dimension set",
+                path = "nodes.$nodeId.properties.$propertyId.dimension"
+            )
+        )
     }
 }
