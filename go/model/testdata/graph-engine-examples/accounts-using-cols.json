@@ -70,14 +70,14 @@
       "from": {
         "columnMappings": {
           "id": {
-            "column": "to_id"
+            "column": "from_id"
           }
         }
       },
       "to": {
         "columnMappings": {
           "id": {
-            "column": "from_id"
+            "column": "to_id"
           }
         }
       },
