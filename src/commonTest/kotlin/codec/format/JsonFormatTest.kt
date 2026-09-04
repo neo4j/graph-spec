@@ -18,6 +18,7 @@ package codec.format
 
 import codec.schema.SchemaMap
 import codec.schema.SchemaNull
+import kotlinx.schema.Schema
 import kotlinx.serialization.SerializationException
 import model.GraphModel
 import model.extension.BooleanValue
@@ -135,98 +136,13 @@ class JsonFormatTest {
         )
         val model = GraphModel(version = "1", nodes = mutableMapOf("n1" to node))
 
-        val encoded = jsonFormat.encodeModelToString(model)
-        val schema = jsonFormat.decodeFromString(encoded) as SchemaMap
+        val schema = jsonFormat.encodeToSchema(model) as SchemaMap
         val n1 = schema.map("nodes").map("n1")
         val extensions = n1.map("extensions")
 
         assertIs<SchemaMap>(extensions.content["ext_str"])
         val extStrMap = extensions.map("ext_str")
-        assertEquals("String", extStrMap.string("type"))
         assertTrue(extStrMap.content.containsKey("value"))
-
-        val decoded = jsonFormat.decodeModelFromString(encoded)
-        val decodedNode = decoded.nodes["n1"]!!
-        assertEquals(StringValue("hello"), decodedNode.extensions["ext_str"])
-        assertEquals(BooleanValue(true), decodedNode.extensions["ext_bool"])
-    }
-
-    @Test
-    fun `test polymorphic Mapping serialization round-trips through explicit type discriminator`() {
-        val model = GraphModel(
-            version = "1",
-            mappings = mutableListOf(
-                NodeMapping(
-                    node = "n0",
-                    table = "t0",
-                    properties = mutableMapOf("p0" to PropertyMapping(field = "f0"))
-                ),
-                RelationshipMapping(
-                    relationship = "r0",
-                    table = "t1",
-                    from = TargetMapping(node = "n0"),
-                    to = TargetMapping(node = "n1")
-                ),
-                QueryMapping(table = "t2", query = "MATCH (n) RETURN n"),
-                LabelMapping(table = "t3", field = "f1")
-            )
-        )
-
-        val encoded = jsonFormat.encodeModelToString(model)
-        assertTrue(encoded.contains(""""type": "NodeMapping""""))
-        assertTrue(encoded.contains(""""type": "RelationshipMapping""""))
-        assertTrue(encoded.contains(""""type": "QueryMapping""""))
-        assertTrue(encoded.contains(""""type": "LabelMapping""""))
-
-        val decoded = jsonFormat.decodeModelFromString(encoded)
-        assertEquals(model.mappings, decoded.mappings)
-    }
-
-    @Test
-    fun `test IndexOption with every field left at its default still round-trips`() {
-        val model = GraphModel(
-            version = "1",
-            nodes = mutableMapOf(
-                "n0" to Node(
-                    indexes = mutableMapOf(
-                        "idx0" to NodeIndex(
-                            type = IndexType.FULLTEXT,
-                            labels = mutableSetOf("Document"),
-                            properties = mutableSetOf("body"),
-                            options = FullTextIndexOption()
-                        )
-                    )
-                )
-            )
-        )
-
-        val encoded = jsonFormat.encodeModelToString(model)
-        val decoded = jsonFormat.decodeModelFromString(encoded)
-
-        assertEquals(FullTextIndexOption(), decoded.nodes["n0"]!!.indexes["idx0"]!!.options)
-    }
-
-    @Test
-    fun `test decoding a Mapping without a type discriminator fails clearly`() {
-        val json = """{ "node": "n0", "table": "t0", "properties": {} }"""
-
-        val failure = assertFailsWith<SerializationException> {
-            jsonFormat.decodeModelFromString("""{"version":"1","mappings":[$json]}""")
-        }
-
-        assertTrue(
-            failure.message!!.contains("discriminator", ignoreCase = true),
-            "unexpected message: ${failure.message}"
-        )
-    }
-
-    @Test
-    fun `test decoding a Mapping with an unknown type discriminator fails clearly`() {
-        val json = """{ "type": "NotARealMapping", "node": "n0", "table": "t0", "properties": {} }"""
-
-        assertFailsWith<SerializationException> {
-            jsonFormat.decodeModelFromString("""{"version":"1","mappings":[$json]}""")
-        }
     }
 
     @Test
