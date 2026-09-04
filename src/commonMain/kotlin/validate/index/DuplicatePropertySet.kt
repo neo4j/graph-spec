@@ -21,24 +21,12 @@ import model.type.ConstraintType
 import model.type.Named
 import validate.constraint.isCompositeConstraint
 
-// UPX isCustomIndexPropertySetDuplicate (json-helpers.ts): an index property
-// set is a duplicate when it matches another index's set on the same entity,
-// or a valid-for-index-view constraint's set - constraints imply backing
-// indexes. Only an empty set is exempt; there is no composite gate.
-
-/** True when [properties] matches another index's set in [otherIndexPropertySets]. */
+// Ported from UPX isCustomIndexPropertySetDuplicate (json-helpers.ts:474).
 fun isDuplicateIndexPropertySet(properties: Set<String>, otherIndexPropertySets: Collection<Set<String>>): Boolean =
     properties.isNotEmpty() &&
         otherIndexPropertySets.any { it == properties }
 
-/** Property sets of constraints that imply a backing index.
- *
- * UPX isValidConstraintForIndexView (json-helpers.ts): a constraint implies an
- * index when it has properties, a type other than existence, a name, and is
- * not itself a duplicate composite (those are flagged by the constraint
- * duplicate rule instead). The null constraint type check from UPX is not
- * portable - graph-spec's ConstraintType is non-nullable.
- */
+// Ported from UPX isValidConstraintForIndexView (json-helpers.ts:448).
 fun <T> constraintDerivedIndexPropertySets(
     constraints: Collection<T>
 ): List<Set<String>>

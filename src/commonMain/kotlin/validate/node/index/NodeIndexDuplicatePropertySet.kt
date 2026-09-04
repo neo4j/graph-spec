@@ -25,6 +25,7 @@ import validate.index.isDuplicateIndexPropertySet
 import validate.node.NodeValidation
 
 object NodeIndexDuplicatePropertySet : NodeValidation {
+    // Ported from UPX getIndexErrors (errors.ts:306) + isCustomIndexPropertySetDuplicate (json-helpers.ts:474).
     override fun validateIndex(
         model: GraphModel,
         nodeId: String,
