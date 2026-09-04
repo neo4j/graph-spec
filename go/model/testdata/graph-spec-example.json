@@ -26,11 +26,11 @@
       "indexes": {},
       "extensions": {
         "note": {
-          "type": "String",
+          "type": "STRING",
           "value": "lead role"
         },
         "verified": {
-          "type": "Boolean",
+          "type": "BOOLEAN",
           "value": true
         }
       }
@@ -217,7 +217,7 @@
   },
   "mappings": [
     {
-      "type": "NodeMapping",
+      "type": "NODE",
       "node": "Actor",
       "table": "actors",
       "properties": {
@@ -234,7 +234,7 @@
       ]
     },
     {
-      "type": "NodeMapping",
+      "type": "NODE",
       "node": "Movie",
       "table": "movies",
       "properties": {
@@ -248,7 +248,7 @@
       ]
     },
     {
-      "type": "RelationshipMapping",
+      "type": "RELATIONSHIP",
       "relationship": "ACTED_IN",
       "table": "actors-movies",
       "from": {

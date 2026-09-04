@@ -14,7 +14,7 @@ class DoubleValueJsTest : JsMappingTest<DoubleValue, DoubleValueJs>() {
     override fun toClass(js: DoubleValueJs): DoubleValue = js.toClass()
 
     override fun verifyJsObject(jsObject: DoubleValueJs) {
-        assertEquals("Double", jsObject.type)
+        assertEquals("DOUBLE", jsObject.type)
         assertEquals(3.1415962, jsObject.value)
     }
 

@@ -358,7 +358,7 @@ tables:
           table: "bookings"
           fields: ["book_ref"]
 mappings:
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node0"
     table: "aircrafts_data"
     properties:
@@ -366,7 +366,7 @@ mappings:
       nodeProperty1: { field: "model" }
       nodeProperty2: { field: "aircrafts_range" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node1"
     table: "airports_data"
     properties:
@@ -376,7 +376,7 @@ mappings:
       nodeProperty3: { field: "coordinates" }
       nodeProperty4: { field: "timezone" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node2"
     table: "bookings"
     properties:
@@ -384,7 +384,7 @@ mappings:
       nodeProperty1: { field: "book_date" }
       nodeProperty2: { field: "total_amount" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node3"
     table: "flights"
     properties:
@@ -396,7 +396,7 @@ mappings:
       nodeProperty5: { field: "actual_departure" }
       nodeProperty6: { field: "actual_arrival" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node4"
     table: "tickets"
     properties:
@@ -405,7 +405,7 @@ mappings:
       nodeProperty2: { field: "passenger_name" }
       nodeProperty3: { field: "contact_data" }
     key: ["nodeProperty0"]
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "flights"
     from:
@@ -416,7 +416,7 @@ mappings:
       node: "node0"
       properties:
         nodeProperty0: { field: "aircraft_code" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "flights"
     from:
@@ -427,7 +427,7 @@ mappings:
       node: "node1"
       properties:
         nodeProperty0: { field: "departure_airport" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "flights"
     from:
@@ -438,7 +438,7 @@ mappings:
       node: "node1"
       properties:
         nodeProperty0: { field: "arrival_airport" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "ticket_flights"
     from:
@@ -452,7 +452,7 @@ mappings:
     properties:
       relationshipProperty0: { field: "fare_conditions" }
       relationshipProperty1: { field: "amount" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "tickets"
     from:

@@ -1335,7 +1335,7 @@ tables:
         suggested: "INTEGER"
         supported: ["INTEGER", "STRING", "FLOAT"]
 mappings:
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "creditcard"
     table: "creditcard"
     properties:
@@ -1346,14 +1346,14 @@ mappings:
       expyear: { field: "expyear" }
       modifieddate: { field: "modifieddate" }
     key: ["creditcardid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "currency"
     table: "currency"
     properties:
       currencycode: { field: "currencycode" }
       modifieddate: { field: "modifieddate" }
     key: ["currencycode"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "currencyrate"
     table: "currencyrate"
     properties:
@@ -1363,7 +1363,7 @@ mappings:
       endofdayrate: { field: "endofdayrate" }
       modifieddate: { field: "modifieddate" }
     key: ["currencyrateid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "customer"
     table: "customer"
     properties:
@@ -1371,7 +1371,7 @@ mappings:
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
     key: ["customerid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "salesorderheader"
     table: "salesorderheader"
     properties:
@@ -1390,7 +1390,7 @@ mappings:
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
     key: ["salesorderid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "salesperson"
     table: "salesperson"
     properties:
@@ -1403,14 +1403,14 @@ mappings:
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
     key: ["businessentityid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "salesreason"
     table: "salesreason"
     properties:
       salesreasonid: { field: "salesreasonid" }
       modifieddate: { field: "modifieddate" }
     key: ["salesreasonid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "salestaxrate"
     table: "salestaxrate"
     properties:
@@ -1420,7 +1420,7 @@ mappings:
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
     key: ["salestaxrateid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "salesterritory"
     table: "salesterritory"
     properties:
@@ -1433,7 +1433,7 @@ mappings:
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
     key: ["territoryid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "shoppingcartitem"
     table: "shoppingcartitem"
     properties:
@@ -1443,7 +1443,7 @@ mappings:
       datecreated: { field: "datecreated" }
       modifieddate: { field: "modifieddate" }
     key: ["shoppingcartitemid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "specialoffer"
     table: "specialoffer"
     properties:
@@ -1459,7 +1459,7 @@ mappings:
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
     key: ["specialofferid"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "store"
     table: "store"
     properties:
@@ -1467,7 +1467,7 @@ mappings:
       rowguid: { field: "rowguid" }
       modifieddate: { field: "modifieddate" }
     key: ["businessentityid"]
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "SALESTERRITORY"
     table: "customer"
     from:
@@ -1478,7 +1478,7 @@ mappings:
       node: "salesterritory"
       properties:
         territoryid: { field: "territoryid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "STORE"
     table: "customer"
     from:
@@ -1489,7 +1489,7 @@ mappings:
       node: "store"
       properties:
         businessentityid: { field: "storeid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "CREDITCARD"
     table: "salesorderheader"
     from:
@@ -1500,7 +1500,7 @@ mappings:
       node: "creditcard"
       properties:
         creditcardid: { field: "creditcardid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "CURRENCYRATE"
     table: "salesorderheader"
     from:
@@ -1511,7 +1511,7 @@ mappings:
       node: "currencyrate"
       properties:
         currencyrateid: { field: "currencyrateid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "CUSTOMER"
     table: "salesorderheader"
     from:
@@ -1522,7 +1522,7 @@ mappings:
       node: "customer"
       properties:
         customerid: { field: "customerid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "SALESPERSON"
     table: "salesorderheader"
     from:
@@ -1533,7 +1533,7 @@ mappings:
       node: "salesperson"
       properties:
         businessentityid: { field: "salespersonid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "SALESTERRITORY2"
     table: "salesorderheader"
     from:
@@ -1544,7 +1544,7 @@ mappings:
       node: "salesterritory"
       properties:
         territoryid: { field: "territoryid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "SALESREASON"
     table: "salesorderheadersalesreason"
     from:
@@ -1557,7 +1557,7 @@ mappings:
         salesreasonid: { field: "salesreasonid" }
     properties:
       modifieddate: { field: "modifieddate" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "SALESTERRITORY3"
     table: "salesperson"
     from:
@@ -1568,7 +1568,7 @@ mappings:
       node: "salesterritory"
       properties:
         territoryid: { field: "territoryid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "SALESPERSON2"
     table: "store"
     from:

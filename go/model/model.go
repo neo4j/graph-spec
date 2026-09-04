@@ -57,18 +57,18 @@ func (w *ExtensionValue) UnmarshalJSON(data []byte) error {
 
 	var v ExtensionValueUnion
 	switch peek.Type {
-	case "Boolean":
-		v = &Boolean{}
-	case "Double":
-		v = &Double{}
-	case "List":
-		v = &List{}
-	case "Long":
-		v = &Long{}
-	case "Map":
-		v = &Map{}
-	case "String":
-		v = &String{}
+	case "BOOLEAN":
+		v = &BOOLEAN{}
+	case "DOUBLE":
+		v = &DOUBLE{}
+	case "LIST":
+		v = &LIST{}
+	case "LONG":
+		v = &LONG{}
+	case "MAP":
+		v = &MAP{}
+	case "STRING":
+		v = &STRING{}
 	default:
 		return fmt.Errorf("ExtensionValue: unknown type %q", peek.Type)
 	}
@@ -81,59 +81,59 @@ func (w *ExtensionValue) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-type Boolean struct {
+type BOOLEAN struct {
 	Type  string `json:"type"`
 	Value bool   `json:"value"`
 }
 
-func (Boolean) isExtensionValue() {}
+func (BOOLEAN) isExtensionValue() {}
 
-func (Boolean) ExtensionValueType() string { return "Boolean" }
+func (BOOLEAN) ExtensionValueType() string { return "BOOLEAN" }
 
-type Double struct {
+type DOUBLE struct {
 	Type  string  `json:"type"`
 	Value float64 `json:"value"`
 }
 
-func (Double) isExtensionValue() {}
+func (DOUBLE) isExtensionValue() {}
 
-func (Double) ExtensionValueType() string { return "Double" }
+func (DOUBLE) ExtensionValueType() string { return "DOUBLE" }
 
-type List struct {
+type LIST struct {
 	Type  string           `json:"type"`
 	Value []ExtensionValue `json:"value"`
 }
 
-func (List) isExtensionValue() {}
+func (LIST) isExtensionValue() {}
 
-func (List) ExtensionValueType() string { return "List" }
+func (LIST) ExtensionValueType() string { return "LIST" }
 
-type Long struct {
+type LONG struct {
 	Type  string `json:"type"`
 	Value int    `json:"value"`
 }
 
-func (Long) isExtensionValue() {}
+func (LONG) isExtensionValue() {}
 
-func (Long) ExtensionValueType() string { return "Long" }
+func (LONG) ExtensionValueType() string { return "LONG" }
 
-type Map struct {
+type MAP struct {
 	Type  string                    `json:"type"`
 	Value map[string]ExtensionValue `json:"value"`
 }
 
-func (Map) isExtensionValue() {}
+func (MAP) isExtensionValue() {}
 
-func (Map) ExtensionValueType() string { return "Map" }
+func (MAP) ExtensionValueType() string { return "MAP" }
 
-type String struct {
+type STRING struct {
 	Type  string `json:"type"`
 	Value string `json:"value"`
 }
 
-func (String) isExtensionValue() {}
+func (STRING) isExtensionValue() {}
 
-func (String) ExtensionValueType() string { return "String" }
+func (STRING) ExtensionValueType() string { return "STRING" }
 
 type NodeDisplay struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
@@ -214,14 +214,14 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 
 	var v MappingUnion
 	switch peek.Type {
-	case "LabelMapping":
-		v = &LabelMapping{}
-	case "NodeMapping":
-		v = &NodeMapping{}
-	case "QueryMapping":
-		v = &QueryMapping{}
-	case "RelationshipMapping":
-		v = &RelationshipMapping{}
+	case "LABEL":
+		v = &LABEL{}
+	case "NODE":
+		v = &NODE{}
+	case "QUERY":
+		v = &QUERY{}
+	case "RELATIONSHIP":
+		v = &RELATIONSHIP{}
 	default:
 		return fmt.Errorf("Mapping: unknown type %q", peek.Type)
 	}
@@ -234,17 +234,17 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-type LabelMapping struct {
+type LABEL struct {
 	Field string `json:"field"`
 	Table string `json:"table"`
 	Type  string `json:"type"`
 }
 
-func (LabelMapping) isMapping() {}
+func (LABEL) isMapping() {}
 
-func (LabelMapping) MappingType() string { return "LabelMapping" }
+func (LABEL) MappingType() string { return "LABEL" }
 
-type NodeMapping struct {
+type NODE struct {
 	Key        []string                   `json:"key,omitempty"`
 	MatchLabel *string                    `json:"matchLabel,omitempty"`
 	Mode       *MappingMode               `json:"mode,omitempty"`
@@ -254,21 +254,21 @@ type NodeMapping struct {
 	Type       string                     `json:"type"`
 }
 
-func (NodeMapping) isMapping() {}
+func (NODE) isMapping() {}
 
-func (NodeMapping) MappingType() string { return "NodeMapping" }
+func (NODE) MappingType() string { return "NODE" }
 
-type QueryMapping struct {
+type QUERY struct {
 	Query string `json:"query"`
 	Table string `json:"table"`
 	Type  string `json:"type"`
 }
 
-func (QueryMapping) isMapping() {}
+func (QUERY) isMapping() {}
 
-func (QueryMapping) MappingType() string { return "QueryMapping" }
+func (QUERY) MappingType() string { return "QUERY" }
 
-type RelationshipMapping struct {
+type RELATIONSHIP struct {
 	From         TargetMapping              `json:"from"`
 	Key          []string                   `json:"key,omitempty"`
 	MatchLabel   *string                    `json:"matchLabel,omitempty"`
@@ -280,9 +280,9 @@ type RelationshipMapping struct {
 	Type         string                     `json:"type"`
 }
 
-func (RelationshipMapping) isMapping() {}
+func (RELATIONSHIP) isMapping() {}
 
-func (RelationshipMapping) MappingType() string { return "RelationshipMapping" }
+func (RELATIONSHIP) MappingType() string { return "RELATIONSHIP" }
 
 type Labels struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`

@@ -638,21 +638,21 @@ tables:
           table: "media_type"
           fields: ["media_type_id"]
 mappings:
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node0"
     table: "album"
     properties:
       nodeProperty0: { field: "album_id" }
       nodeProperty1: { field: "title" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node1"
     table: "artist"
     properties:
       nodeProperty0: { field: "artist_id" }
       nodeProperty1: { field: "name" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node2"
     table: "customer"
     properties:
@@ -669,7 +669,7 @@ mappings:
       nodeProperty10: { field: "fax" }
       nodeProperty11: { field: "email" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node3"
     table: "employee"
     properties:
@@ -688,14 +688,14 @@ mappings:
       nodeProperty12: { field: "fax" }
       nodeProperty13: { field: "email" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node4"
     table: "genre"
     properties:
       nodeProperty0: { field: "genre_id" }
       nodeProperty1: { field: "name" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node5"
     table: "invoice"
     properties:
@@ -708,7 +708,7 @@ mappings:
       nodeProperty6: { field: "billing_postal_code" }
       nodeProperty7: { field: "total" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node6"
     table: "invoice_line"
     properties:
@@ -716,21 +716,21 @@ mappings:
       nodeProperty1: { field: "unit_price" }
       nodeProperty2: { field: "quantity" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node7"
     table: "media_type"
     properties:
       nodeProperty0: { field: "media_type_id" }
       nodeProperty1: { field: "name" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node8"
     table: "playlist"
     properties:
       nodeProperty0: { field: "playlist_id" }
       nodeProperty1: { field: "name" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node9"
     table: "track"
     properties:
@@ -741,7 +741,7 @@ mappings:
       nodeProperty4: { field: "bytes" }
       nodeProperty5: { field: "unit_price" }
     key: ["nodeProperty0"]
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "album"
     from:
@@ -752,7 +752,7 @@ mappings:
       node: "node1"
       properties:
         nodeProperty0: { field: "artist_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "customer"
     from:
@@ -763,7 +763,7 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "support_rep_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "employee"
     from:
@@ -774,7 +774,7 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "reports_to" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "invoice"
     from:
@@ -785,7 +785,7 @@ mappings:
       node: "node2"
       properties:
         nodeProperty0: { field: "customer_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "invoice_line"
     from:
@@ -796,7 +796,7 @@ mappings:
       node: "node5"
       properties:
         nodeProperty0: { field: "invoice_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship5"
     table: "invoice_line"
     from:
@@ -807,7 +807,7 @@ mappings:
       node: "node9"
       properties:
         nodeProperty0: { field: "track_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship6"
     table: "playlist_track"
     from:
@@ -818,7 +818,7 @@ mappings:
       node: "node9"
       properties:
         nodeProperty0: { field: "track_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship7"
     table: "track"
     from:
@@ -829,7 +829,7 @@ mappings:
       node: "node0"
       properties:
         nodeProperty0: { field: "album_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship8"
     table: "track"
     from:
@@ -840,7 +840,7 @@ mappings:
       node: "node4"
       properties:
         nodeProperty0: { field: "genre_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship9"
     table: "track"
     from:

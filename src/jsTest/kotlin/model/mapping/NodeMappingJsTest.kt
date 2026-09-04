@@ -19,7 +19,7 @@ class NodeMappingJsTest : JsMappingTest<NodeMapping, NodeMappingJs>() {
     override fun toClass(js: NodeMappingJs): NodeMapping = js.toClass()
 
     override fun verifyJsObject(jsObject: NodeMappingJs) {
-        assertEquals("NodeMapping", jsObject.type)
+        assertEquals("NODE", jsObject.type)
         assertEquals("table_name", jsObject.table)
         assertJsEquals(propertyMappingJs("field"), jsObject.properties["property"])
         assertEquals("CREATE", jsObject.mode)

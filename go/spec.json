@@ -122,34 +122,34 @@
         "ExtensionValue": {
             "oneOf": [
                 {
-                    "$ref": "#/$defs/Boolean"
+                    "$ref": "#/$defs/BOOLEAN"
                 },
                 {
-                    "$ref": "#/$defs/Double"
+                    "$ref": "#/$defs/DOUBLE"
                 },
                 {
-                    "$ref": "#/$defs/List"
+                    "$ref": "#/$defs/LIST"
                 },
                 {
-                    "$ref": "#/$defs/Long"
+                    "$ref": "#/$defs/LONG"
                 },
                 {
-                    "$ref": "#/$defs/Map"
+                    "$ref": "#/$defs/MAP"
                 },
                 {
-                    "$ref": "#/$defs/String"
+                    "$ref": "#/$defs/STRING"
                 }
             ],
             "discriminator": {
                 "propertyName": "type"
             }
         },
-        "Boolean": {
+        "BOOLEAN": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "Boolean"
+                    "const": "BOOLEAN"
                 },
                 "value": {
                     "type": "boolean"
@@ -161,12 +161,12 @@
             ],
             "additionalProperties": false
         },
-        "Double": {
+        "DOUBLE": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "Double"
+                    "const": "DOUBLE"
                 },
                 "value": {
                     "type": "number"
@@ -178,12 +178,12 @@
             ],
             "additionalProperties": false
         },
-        "List": {
+        "LIST": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "List"
+                    "const": "LIST"
                 },
                 "value": {
                     "type": "array",
@@ -198,12 +198,12 @@
             ],
             "additionalProperties": false
         },
-        "Long": {
+        "LONG": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "Long"
+                    "const": "LONG"
                 },
                 "value": {
                     "type": "integer"
@@ -215,12 +215,12 @@
             ],
             "additionalProperties": false
         },
-        "Map": {
+        "MAP": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "Map"
+                    "const": "MAP"
                 },
                 "value": {
                     "type": "object",
@@ -235,12 +235,12 @@
             ],
             "additionalProperties": false
         },
-        "String": {
+        "STRING": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "String"
+                    "const": "STRING"
                 },
                 "value": {
                     "type": "string"
@@ -840,28 +840,28 @@
         "Mapping": {
             "oneOf": [
                 {
-                    "$ref": "#/$defs/LabelMapping"
+                    "$ref": "#/$defs/LABEL"
                 },
                 {
-                    "$ref": "#/$defs/NodeMapping"
+                    "$ref": "#/$defs/NODE"
                 },
                 {
-                    "$ref": "#/$defs/QueryMapping"
+                    "$ref": "#/$defs/QUERY"
                 },
                 {
-                    "$ref": "#/$defs/RelationshipMapping"
+                    "$ref": "#/$defs/RELATIONSHIP"
                 }
             ],
             "discriminator": {
                 "propertyName": "type"
             }
         },
-        "LabelMapping": {
+        "LABEL": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "LabelMapping"
+                    "const": "LABEL"
                 },
                 "table": {
                     "type": "string"
@@ -896,12 +896,12 @@
                 "CREATE"
             ]
         },
-        "NodeMapping": {
+        "NODE": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "NodeMapping"
+                    "const": "NODE"
                 },
                 "node": {
                     "type": "string"
@@ -937,12 +937,12 @@
             ],
             "additionalProperties": false
         },
-        "QueryMapping": {
+        "QUERY": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "QueryMapping"
+                    "const": "QUERY"
                 },
                 "table": {
                     "type": "string"
@@ -977,12 +977,12 @@
             "required": [],
             "additionalProperties": false
         },
-        "RelationshipMapping": {
+        "RELATIONSHIP": {
             "type": "object",
             "properties": {
                 "type": {
                     "type": "string",
-                    "const": "RelationshipMapping"
+                    "const": "RELATIONSHIP"
                 },
                 "relationship": {
                     "type": "string"
