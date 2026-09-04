@@ -32,13 +32,14 @@ object NodePropertyVectorDimension : NodeValidation {
         issues: MutableList<Issue>
     ) {
         // UPX rule 8: getVectorDimensionPropertyErrors (errors.ts lines 124-130).
-        if (!isVectorType(property.type) || property.dimension != null) return
-        issues.add(
-            Issue(
-                code = "missing_vector_dimension",
-                message = "Property '$propertyId' on '$nodeId' is a vector type but has no dimension set",
-                path = "nodes.$nodeId.properties.$propertyId.dimension"
+        if (isVectorType(property.type) && property.dimension == null) {
+            issues.add(
+                Issue(
+                    code = "missing_vector_dimension",
+                    message = "Missing dimension for vector property '$propertyId' on node '$nodeId'",
+                    path = "nodes.$nodeId.properties.$propertyId.dimension"
+                )
             )
-        )
+        }
     }
 }

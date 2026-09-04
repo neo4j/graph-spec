@@ -18,9 +18,6 @@ package validate.property
 
 import model.property.Neo4jType
 
-// True when the type is any VECTOR variant. Shared by node and relationship
-// vector-dimension validators; upcoming vector-index rules (IMP-1270 15-16)
-// will reuse this predicate too.
 fun isVectorType(type: Neo4jType): Boolean = when (type) {
     Neo4jType.VECTOR_FLOAT,
     Neo4jType.VECTOR_FLOAT32,
@@ -28,5 +25,36 @@ fun isVectorType(type: Neo4jType): Boolean = when (type) {
     Neo4jType.VECTOR_INTEGER32,
     Neo4jType.VECTOR_INTEGER16,
     Neo4jType.VECTOR_INTEGER8 -> true
-    else -> false
+    Neo4jType.ANY,
+    Neo4jType.BOOLEAN,
+    Neo4jType.LIST_BOOLEAN,
+    Neo4jType.DATE,
+    Neo4jType.LIST_DATE,
+    Neo4jType.DURATION,
+    Neo4jType.LIST_DURATION,
+    Neo4jType.FLOAT32,
+    Neo4jType.LIST_FLOAT32,
+    Neo4jType.FLOAT,
+    Neo4jType.LIST_FLOAT,
+    Neo4jType.INTEGER8,
+    Neo4jType.LIST_INTEGER8,
+    Neo4jType.INTEGER16,
+    Neo4jType.LIST_INTEGER16,
+    Neo4jType.INTEGER32,
+    Neo4jType.LIST_INTEGER32,
+    Neo4jType.INTEGER,
+    Neo4jType.LIST_INTEGER,
+    Neo4jType.LOCAL_DATETIME,
+    Neo4jType.LIST_LOCAL_DATETIME,
+    Neo4jType.LOCAL_TIME,
+    Neo4jType.LIST_LOCAL_TIME,
+    Neo4jType.POINT,
+    Neo4jType.LIST_POINT,
+    Neo4jType.STRING,
+    Neo4jType.LIST_STRING,
+    Neo4jType.ZONED_DATETIME,
+    Neo4jType.LIST_ZONED_DATETIME,
+    Neo4jType.ZONED_TIME,
+    Neo4jType.LIST_ZONED_TIME,
+    Neo4jType.UUID -> false
 }
