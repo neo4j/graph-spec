@@ -20,14 +20,12 @@ cd "$REPO_ROOT/go"
 cp "$INPUT_SPEC" "$TEMP_SPEC"
 # Ensure "title" is present in the spec which is needed for Go generation of top-level model
 jq '.title //= .["$id"]' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
-# Replace angled brackets with placeholders to enable Go generation
+# Replace characters that cannot appear in Go structs with placeholders to enable Go generation
+# 1. Angled brackets in keys and values
 perl -pi -e 's/"([^"]+)<([^>]+)>"/"$1_LEFTBRACK_$2_RIGHTBRACK_"/g' "$TEMP_SPEC"
-# Replace periods with placeholders to enable Go generation
-# TODO: can we use a more generic/safer replacement like above?
-perl -pi -e 's/\./_PERIOD_/g' "$TEMP_SPEC"
-perl -pi -e 's/-/_HYPHEN_/g' "$TEMP_SPEC"
-# Just replace the schema in case the above have messed it up
-perl -pi -e 's/"\$schema".*\n/"$schema"\: "https:\/\/json-schema.org\/draft\/2020-12\/schema",/g' "$TEMP_SPEC"
+# 2. Periods and hyphens in keys
+perl -pi -e 's/\.(?=[^"]*":)/_PERIOD_/g' "$TEMP_SPEC"
+perl -pi -e 's/-(?=[^"]*":)/_HYPHEN_/g' "$TEMP_SPEC"
 echo "✓ JSON spec sanitised"
 
 
@@ -41,9 +39,9 @@ SCHEMANCER_BIN=$(go env GOPATH)/bin/schemancer
 echo "✓ Go models generated"
 
 
-# Replace placeholders in Go enum strings back to angled brackets
+# Reinstate values from placeholders within Go enum strings
 perl -pi -e 's/"([^"]+)_LEFTBRACK_([^"]+)_RIGHTBRACK_"/"$1<$2>"/g' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
-# Replace placeholders in Go enum strings back to periods and hyphens
+# Reinstate values from placeholders within Go json definition strings
 perl -pi -e 's/_PERIOD_/./g' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
 perl -pi -e 's/_HYPHEN_/-/g' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
 # Remove placeholders from Go enum names
