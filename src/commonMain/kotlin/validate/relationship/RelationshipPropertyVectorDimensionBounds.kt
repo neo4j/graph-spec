@@ -24,7 +24,7 @@ import validate.property.MAX_DIMENSION
 import validate.property.MIN_DIMENSION
 import validate.property.isVectorType
 
-object RelationshipPropertyVectorDimension : RelationshipValidation {
+object RelationshipPropertyVectorDimensionBounds : RelationshipValidation {
     override fun validateProperty(
         model: GraphModel,
         relationshipId: String,
@@ -33,13 +33,16 @@ object RelationshipPropertyVectorDimension : RelationshipValidation {
         property: Property,
         issues: MutableList<Issue>
     ) {
-        // UPX: `getVectorDimensionPropertyErrors` (errors.ts#L124-L130).
-        if (isVectorType(property.type) && property.dimension == null) {
+        // Bounds: UPX MIN_DIMENSION/MAX_DIMENSION (details-panel/constants.ts#L46-L47).
+        val dimension = property.dimension
+        if (isVectorType(property.type) && dimension != null &&
+            (dimension < MIN_DIMENSION || dimension > MAX_DIMENSION)
+        ) {
             issues.add(
                 Issue(
-                    code = "missing_vector_dimension",
-                    message = "Missing dimension for vector property '$propertyId' on " +
-                        "relationship '$relationshipId'",
+                    code = "invalid_vector_dimension",
+                    message = "Vector property '$propertyId' on relationship '$relationshipId' has dimension " +
+                        "$dimension outside $MIN_DIMENSION-$MAX_DIMENSION",
                     path = "relationships.$relationshipId.properties.$propertyId.dimension"
                 )
             )

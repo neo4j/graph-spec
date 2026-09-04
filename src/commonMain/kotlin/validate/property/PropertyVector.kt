@@ -18,6 +18,10 @@ package validate.property
 
 import model.property.Neo4jType
 
+// UPX: MIN_DIMENSION/MAX_DIMENSION (details-panel/constants.ts#L46-L47).
+const val MIN_DIMENSION = 1
+const val MAX_DIMENSION = 4096
+
 fun isVectorType(type: Neo4jType): Boolean = when (type) {
     Neo4jType.VECTOR_FLOAT,
     Neo4jType.VECTOR_FLOAT32,

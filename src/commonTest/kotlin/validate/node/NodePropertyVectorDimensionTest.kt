@@ -66,22 +66,6 @@ class NodePropertyVectorDimensionTest {
     }
 
     @Test
-    fun `pass when node vector property has dimension zero`() {
-        // 0 counts as "set" (UPX isNullish(0) is false)
-        val node = Node(
-            labels = Labels(identifier = "Person"),
-            properties = mutableMapOf(
-                "embedding" to Property(type = Neo4jType.VECTOR_FLOAT, dimension = 0)
-            )
-        )
-        val issues = mutableListOf<Issue>()
-
-        validator.validateProperty(model, "personNode", node, "embedding", node.properties["embedding"]!!, issues)
-
-        assertTrue(issues.isEmpty(), "Expected no issues when dimension is 0 (counts as set, matching UPX)")
-    }
-
-    @Test
     fun `pass when node property is a non-vector type with null dimension`() {
         val node = Node(
             labels = Labels(identifier = "Person"),
