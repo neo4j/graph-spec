@@ -14,39 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package validate.node.index
+package validate.relationship.index
 
 import model.GraphModel
-import model.node.Node
-import model.node.NodeIndex
+import model.relationship.Relationship
+import model.relationship.RelationshipIndex
 import validate.Issue
 import validate.index.constraintDerivedIndexPropertySets
 import validate.index.isDuplicateIndexPropertySet
-import validate.node.NodeValidation
+import validate.relationship.RelationshipValidation
 
-object NodeIndexDuplicatePropertySet : NodeValidation {
+object RelationshipIndexDuplicatePropertySet : RelationshipValidation {
     override fun validateIndex(
         model: GraphModel,
-        nodeId: String,
-        node: Node,
+        relationshipId: String,
+        relationship: Relationship,
         indexId: String,
-        index: NodeIndex,
+        index: RelationshipIndex,
         issues: MutableList<Issue>
     ) {
-        val otherIndexPropertySets = node.indexes.values
+        val otherIndexPropertySets = relationship.indexes.values
             .filter { it !== index }
             .map { it.properties.toSet() }
         val isDuplicate = isDuplicateIndexPropertySet(index.properties, otherIndexPropertySets) ||
             isDuplicateIndexPropertySet(
                 index.properties,
-                constraintDerivedIndexPropertySets(node.constraints.values)
+                constraintDerivedIndexPropertySets(relationship.constraints.values)
             )
         if (isDuplicate) {
             issues.add(
                 Issue(
                     code = "duplicate_index_property_set",
-                    message = "Index '$indexId' property set duplicates another index on node '$nodeId'",
-                    path = "nodes.$nodeId.indexes.$indexId.properties"
+                    message = "Index '$indexId' property set duplicates " +
+                        "another index on relationship '$relationshipId'",
+                    path = "relationships.$relationshipId.indexes.$indexId.properties"
                 )
             )
         }

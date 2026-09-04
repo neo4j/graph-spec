@@ -47,6 +47,7 @@ import validate.relationship.RelationshipTypeToken
 import validate.relationship.constraint.RelationshipExistenceConstraint
 import validate.relationship.constraint.RelationshipKeyOverlap
 import validate.relationship.constraint.RelationshipTypeConstraint
+import validate.relationship.index.RelationshipIndexDuplicatePropertySet
 import validate.table.TableColumnDuplicateName
 import validate.table.TableColumnEmptyName
 import validate.table.TableColumnType
@@ -97,6 +98,7 @@ class Validations {
             NodeConstraintProperties,
             NodeConstraintDuplicatePropertySet,
             NodeIndexDuplicatePropertySet,
+            RelationshipIndexDuplicatePropertySet,
             NodeExistenceCompositeConflict,
             NodeIndexConstraintNameConflict,
             TableColumnEmptyName,
