@@ -20,6 +20,7 @@ import model.mapping.NodeMapping
 import model.mapping.PropertyMapping
 import model.mapping.RelationshipMapping
 import model.mapping.TargetMapping
+import model.node.Labels
 import model.node.Node
 import model.node.NodeConstraint
 import model.node.NodeIndex
@@ -83,11 +84,11 @@ class InternalTest {
         val node0 = model.nodes["node0"]!!
         assertEquals("User1", node0.name)
 
-        assertTrue(node0.constraints.containsKey("nodeConstraint0"))
-        assertEquals("c1", node0.constraints["nodeConstraint0"]?.name)
+        assertTrue(node0.constraints.containsKey("nodeConstraint_node0_0"))
+        assertEquals("c1", node0.constraints["nodeConstraint_node0_0"]?.name)
 
-        assertTrue(node0.indexes.containsKey("nodeIndex0"))
-        assertEquals("i1", node0.indexes["nodeIndex0"]?.name)
+        assertTrue(node0.indexes.containsKey("nodeIndex_node0_0"))
+        assertEquals("i1", node0.indexes["nodeIndex_node0_0"]?.name)
     }
 
     @Test
@@ -283,5 +284,74 @@ class InternalTest {
 
         val node = model.nodes["node0"]!!
         assertTrue(node.constraints.isEmpty(), "No constraint should be generated for an unflagged property")
+    }
+
+    // Regression for IMP-1275: when two nodes share a constraint key, the internalise step
+    // must still produce globally unique constraint ids. Consumers flatten per-node
+    // constraint maps into a single list keyed by $id, so a collision breaks $ref resolution.
+    @Test
+    fun `test produces unique constraint ids when two nodes share a constraint key`() {
+        val model = GraphModel(
+            version = "4.0.0",
+            nodes = mutableMapOf(
+                "n:0" to Node(
+                    labels = Labels(identifier = "Patient"),
+                    properties = mutableMapOf("id" to Property(key = true))
+                ),
+                "n:1" to Node(
+                    labels = Labels(identifier = "Doctor"),
+                    properties = mutableMapOf("id" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node0 = model.nodes["node0"]!!
+        val node1 = model.nodes["node1"]!!
+
+        // Both nodes generate a key constraint, but their ids must differ.
+        val node0ConstraintIds = node0.constraints.keys
+        val node1ConstraintIds = node1.constraints.keys
+
+        assertTrue(node0ConstraintIds.isNotEmpty(), "node0 should have a key constraint")
+        assertTrue(node1ConstraintIds.isNotEmpty(), "node1 should have a key constraint")
+
+        val allIds = (node0ConstraintIds + node1ConstraintIds).toList()
+        val uniqueIds = allIds.toSet()
+        assertEquals(allIds.size, uniqueIds.size, "Constraint ids must be globally unique across nodes")
+    }
+
+    // Same collision risk applies to indexes (IMP-1275 asked to check indexes too).
+    @Test
+    fun `test produces unique index ids when two nodes share an index key`() {
+        val model = GraphModel(
+            version = "4.0.0",
+            nodes = mutableMapOf(
+                "n:0" to Node(
+                    labels = Labels(identifier = "Patient"),
+                    indexes = mutableMapOf(
+                        "idx" to NodeIndex(IndexType.RANGE, mutableSetOf("Patient"), mutableSetOf("id"))
+                    )
+                ),
+                "n:1" to Node(
+                    labels = Labels(identifier = "Doctor"),
+                    indexes = mutableMapOf(
+                        "idx" to NodeIndex(IndexType.RANGE, mutableSetOf("Doctor"), mutableSetOf("id"))
+                    )
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node0 = model.nodes["node0"]!!
+        val node1 = model.nodes["node1"]!!
+
+        val allIds = (node0.indexes.keys + node1.indexes.keys).toList()
+        val uniqueIds = allIds.toSet()
+        assertEquals(allIds.size, uniqueIds.size, "Index ids must be globally unique across nodes")
     }
 }

@@ -8,13 +8,13 @@ nodes:
       nodeProperty1: { type: "STRING", name: "model" }
       nodeProperty2: { type: "INTEGER", name: "aircraftRange" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node0_0:
         type: "UNIQUE"
         label: "Aircraft"
         properties: ["nodeProperty0"]
         name: "unique_Aircraft_aircraftCode"
     indexes:
-      nodeIndex0:
+      nodeIndex_node0_0:
         type: "TEXT"
         labels: ["Aircraft"]
         properties: ["nodeProperty0"]
@@ -30,13 +30,13 @@ nodes:
       nodeProperty3: { type: "POINT", name: "coordinates" }
       nodeProperty4: { type: "STRING", name: "timezone" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node1_0:
         type: "UNIQUE"
         label: "Airport"
         properties: ["nodeProperty0"]
         name: "unique_Airport_airportCode"
     indexes:
-      nodeIndex0:
+      nodeIndex_node1_0:
         type: "TEXT"
         labels: ["Airport"]
         properties: ["nodeProperty0"]
@@ -50,13 +50,13 @@ nodes:
       nodeProperty1: { type: "ZONED DATETIME", name: "bookDate" }
       nodeProperty2: { type: "FLOAT", name: "totalAmount" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node2_0:
         type: "UNIQUE"
         label: "Booking"
         properties: ["nodeProperty0"]
         name: "unique_Booking_bookRef"
     indexes:
-      nodeIndex0:
+      nodeIndex_node2_0:
         type: "TEXT"
         labels: ["Booking"]
         properties: ["nodeProperty0"]
@@ -74,13 +74,13 @@ nodes:
       nodeProperty5: { type: "ZONED DATETIME", name: "actualDeparture" }
       nodeProperty6: { type: "ZONED DATETIME", name: "actualArrival" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node3_0:
         type: "UNIQUE"
         label: "Flight"
         properties: ["nodeProperty0"]
         name: "unique_Flight_flightId"
     indexes:
-      nodeIndex0:
+      nodeIndex_node3_0:
         type: "TEXT"
         labels: ["Flight"]
         properties: ["nodeProperty0"]
@@ -95,13 +95,13 @@ nodes:
       nodeProperty2: { type: "STRING", name: "passengerName" }
       nodeProperty3: { type: "STRING", name: "contactData" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node4_0:
         type: "UNIQUE"
         label: "Ticket"
         properties: ["nodeProperty0"]
         name: "unique_Ticket_ticketNo"
     indexes:
-      nodeIndex0:
+      nodeIndex_node4_0:
         type: "TEXT"
         labels: ["Ticket"]
         properties: ["nodeProperty0"]
