@@ -308,14 +308,16 @@ tables:
           table: "bookings"
           columns: ["book_ref"]
 mappings:
-  - node: "Aircraft"
+  - type: "NodeMapping"
+    node: "Aircraft"
     table: "aircrafts_data"
     properties:
       aircraftCode: { column: "aircraft_code" }
       model: { column: "model" }
       aircraftRange: { column: "aircrafts_range" }
     key: ["aircraftCode"]
-  - node: "Airport"
+  - type: "NodeMapping"
+    node: "Airport"
     table: "airports_data"
     properties:
       airportCode: { column: "airport_code" }
@@ -324,14 +326,16 @@ mappings:
       coordinates: { column: "coordinates" }
       timezone: { column: "timezone" }
     key: ["airportCode"]
-  - node: "Booking"
+  - type: "NodeMapping"
+    node: "Booking"
     table: "bookings"
     properties:
       bookRef: { column: "book_ref" }
       bookDate: { column: "book_date" }
       totalAmount: { column: "total_amount" }
     key: ["bookRef"]
-  - node: "Flight"
+  - type: "NodeMapping"
+    node: "Flight"
     table: "flights"
     properties:
       flightId: { column: "flight_id" }
@@ -342,7 +346,8 @@ mappings:
       actualDeparture: { column: "actual_departure" }
       actualArrival: { column: "actual_arrival" }
     key: ["flightId"]
-  - node: "Ticket"
+  - type: "NodeMapping"
+    node: "Ticket"
     table: "tickets"
     properties:
       ticketNo: { column: "ticket_no" }
@@ -350,7 +355,8 @@ mappings:
       passengerName: { column: "passenger_name" }
       contactData: { column: "contact_data" }
     key: ["ticketNo"]
-  - relationship: "FLIGHT_USES_AIRCRAFT"
+  - type: "RelationshipMapping"
+    relationship: "FLIGHT_USES_AIRCRAFT"
     table: "flights"
     from:
       node: "Flight"
@@ -360,7 +366,8 @@ mappings:
       node: "Aircraft"
       properties:
         aircraftCode: { column: "aircraft_code" }
-  - relationship: "FLIGHT_DEPARTS_FROM_AIRPORT"
+  - type: "RelationshipMapping"
+    relationship: "FLIGHT_DEPARTS_FROM_AIRPORT"
     table: "flights"
     from:
       node: "Flight"
@@ -370,7 +377,8 @@ mappings:
       node: "Airport"
       properties:
         airportCode: { column: "departure_airport" }
-  - relationship: "FLIGHT_ARRIVES_AT_AIRPORT"
+  - type: "RelationshipMapping"
+    relationship: "FLIGHT_ARRIVES_AT_AIRPORT"
     table: "flights"
     from:
       node: "Flight"
@@ -380,7 +388,8 @@ mappings:
       node: "Airport"
       properties:
         airportCode: { column: "arrival_airport" }
-  - relationship: "FLIGHT_HAS_TICKET"
+  - type: "RelationshipMapping"
+    relationship: "FLIGHT_HAS_TICKET"
     table: "ticket_flights"
     from:
       node: "Flight"
@@ -393,7 +402,8 @@ mappings:
     properties:
       fare_conditions: { column: "fare_conditions" }
       amount: { column: "amount" }
-  - relationship: "TICKET_BELONGS_TO_BOOKING"
+  - type: "RelationshipMapping"
+    relationship: "TICKET_BELONGS_TO_BOOKING"
     table: "tickets"
     from:
       node: "Ticket"
