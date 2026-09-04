@@ -20,6 +20,8 @@ import model.GraphModel
 import model.node.Node
 import model.property.Property
 import validate.Issue
+import validate.property.MAX_DIMENSION
+import validate.property.MIN_DIMENSION
 import validate.property.isVectorType
 
 object NodePropertyVectorDimension : NodeValidation {
@@ -31,7 +33,7 @@ object NodePropertyVectorDimension : NodeValidation {
         property: Property,
         issues: MutableList<Issue>
     ) {
-        // UPX rule 8: getVectorDimensionPropertyErrors (errors.ts lines 124-130).
+        // UPX: `getVectorDimensionPropertyErrors` (errors.ts#L124-L130).
         if (isVectorType(property.type) && property.dimension == null) {
             issues.add(
                 Issue(

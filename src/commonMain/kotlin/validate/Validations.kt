@@ -25,6 +25,7 @@ import validate.node.NodeMappingKey
 import validate.node.NodeMappingKeyType
 import validate.node.NodeProperties
 import validate.node.NodePropertyVectorDimension
+import validate.node.NodePropertyVectorDimensionBounds
 import validate.node.constraint.NodeCompositeConstraintPropertyType
 import validate.node.constraint.NodeConstraintDuplicatePropertySet
 import validate.node.constraint.NodeConstraintProperties
@@ -36,6 +37,7 @@ import validate.relationship.RelationshipConstraints
 import validate.relationship.RelationshipIndexes
 import validate.relationship.RelationshipNodes
 import validate.relationship.RelationshipPropertyVectorDimension
+import validate.relationship.RelationshipPropertyVectorDimensionBounds
 import validate.relationship.RelationshipType
 import validate.relationship.RelationshipTypeToken
 import validate.relationship.constraint.RelationshipExistenceConstraint
@@ -90,7 +92,9 @@ class Validations {
             NodeConstraintDuplicatePropertySet,
             NodeExistenceCompositeConflict,
             NodePropertyVectorDimension,
+            NodePropertyVectorDimensionBounds,
             RelationshipPropertyVectorDimension,
+            RelationshipPropertyVectorDimensionBounds,
             TableFieldEmptyName,
             TableFieldDuplicateName,
             TableFieldType
