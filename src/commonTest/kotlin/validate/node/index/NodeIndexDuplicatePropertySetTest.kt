@@ -104,7 +104,6 @@ class NodeIndexDuplicatePropertySetTest {
 
     @Test
     fun `fail when two single-property indexes share the same property`() {
-        // unlike constraints, indexes have no composite gate in UPX
         val node = nodeWithIndexes("idx1" to setOf("email"), "idx2" to setOf("email"))
 
         val issues = validate(node)
@@ -158,8 +157,6 @@ class NodeIndexDuplicatePropertySetTest {
 
     @Test
     fun `fail when index property set matches a unique constraint's set`() {
-        // UPX isValidConstraintForIndexView: constraints imply backing indexes,
-        // so an index matching a constraint's property set is a duplicate
         val node = nodeWithIndexes("idx1" to setOf("email", "name"))
         node.constraints["uniq_email_name"] = NodeConstraint(
             type = ConstraintType.UNIQUE,
@@ -192,7 +189,6 @@ class NodeIndexDuplicatePropertySetTest {
 
     @Test
     fun `pass when the matching constraint is an existence constraint`() {
-        // existence constraints do not create backing indexes in UPX
         val node = nodeWithIndexes("idx1" to setOf("email"))
         node.constraints["exists_email"] = NodeConstraint(
             type = ConstraintType.EXISTS,
@@ -208,7 +204,6 @@ class NodeIndexDuplicatePropertySetTest {
 
     @Test
     fun `pass when the matching constraint has no name`() {
-        // UPX isValidConstraintForIndexView requires a non-empty name
         val node = nodeWithIndexes("idx1" to setOf("email"))
         node.constraints["uniq_email"] = NodeConstraint(
             type = ConstraintType.UNIQUE,
@@ -239,9 +234,6 @@ class NodeIndexDuplicatePropertySetTest {
 
     @Test
     fun `pass when the matching constraint is itself a duplicate composite`() {
-        // UPX isValidConstraintForIndexView drops duplicate composite constraints
-        // so they don't produce phantom index sets; the constraint duplicate rule
-        // flags them instead
         val node = nodeWithIndexes("idx1" to setOf("email", "name"))
         node.constraints["uniq1"] = NodeConstraint(
             type = ConstraintType.UNIQUE,

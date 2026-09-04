@@ -105,7 +105,6 @@ class RelationshipIndexDuplicatePropertySetTest {
 
     @Test
     fun `fail when two single-property indexes share the same property`() {
-        // unlike constraints, indexes have no composite gate in UPX
         val relationship = relationshipWithIndexes("idx1" to setOf("email"), "idx2" to setOf("email"))
 
         val issues = validate(relationship)
@@ -136,8 +135,6 @@ class RelationshipIndexDuplicatePropertySetTest {
 
     @Test
     fun `fail when index property set matches a unique constraint's set`() {
-        // constraints imply backing indexes, so an index matching a
-        // constraint's property set is a duplicate
         val relationship = relationshipWithIndexes("idx1" to setOf("email", "name"))
         relationship.constraints["uniq_email_name"] = RelationshipConstraint(
             type = ConstraintType.UNIQUE,
@@ -153,7 +150,6 @@ class RelationshipIndexDuplicatePropertySetTest {
 
     @Test
     fun `pass when the matching constraint is an existence constraint`() {
-        // existence constraints do not create backing indexes in UPX
         val relationship = relationshipWithIndexes("idx1" to setOf("email"))
         relationship.constraints["exists_email"] = RelationshipConstraint(
             type = ConstraintType.EXISTS,
