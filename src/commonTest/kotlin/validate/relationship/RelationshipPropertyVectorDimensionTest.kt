@@ -33,7 +33,6 @@ class RelationshipPropertyVectorDimensionTest {
 
     @Test
     fun `fail when relationship vector property has null dimension`() {
-        // ARRANGE
         val relationship = Relationship(
             type = "ACTED_IN",
             from = RelationshipTarget(),
@@ -44,7 +43,6 @@ class RelationshipPropertyVectorDimensionTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateProperty(
             model,
             "actedIn",
@@ -54,16 +52,15 @@ class RelationshipPropertyVectorDimensionTest {
             issues
         )
 
-        // ASSERT
         assertEquals(1, issues.size)
         val issue = issues.first()
         assertEquals("missing_vector_dimension", issue.code)
+        assertEquals("Missing dimension for vector property 'embedding' on relationship 'actedIn'", issue.message)
         assertEquals("relationships.actedIn.properties.embedding.dimension", issue.path)
     }
 
     @Test
     fun `pass when relationship vector property has a dimension set`() {
-        // ARRANGE
         val relationship = Relationship(
             type = "ACTED_IN",
             from = RelationshipTarget(),
@@ -74,7 +71,6 @@ class RelationshipPropertyVectorDimensionTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateProperty(
             model,
             "actedIn",
@@ -84,13 +80,11 @@ class RelationshipPropertyVectorDimensionTest {
             issues
         )
 
-        // ASSERT
         assertTrue(issues.isEmpty(), "Expected no issues when vector property has a dimension")
     }
 
     @Test
     fun `pass when relationship property is a non-vector type with null dimension`() {
-        // ARRANGE
         val relationship = Relationship(
             type = "ACTED_IN",
             from = RelationshipTarget(),
@@ -101,7 +95,6 @@ class RelationshipPropertyVectorDimensionTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateProperty(
             model,
             "actedIn",
@@ -111,7 +104,6 @@ class RelationshipPropertyVectorDimensionTest {
             issues
         )
 
-        // ASSERT
         assertTrue(issues.isEmpty(), "Expected no issues for non-vector type with null dimension")
     }
 }

@@ -33,7 +33,6 @@ class NodePropertyVectorDimensionTest {
 
     @Test
     fun `fail when node vector property has null dimension`() {
-        // ARRANGE
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf(
@@ -42,19 +41,17 @@ class NodePropertyVectorDimensionTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateProperty(model, "personNode", node, "embedding", node.properties["embedding"]!!, issues)
 
-        // ASSERT
         assertEquals(1, issues.size)
         val issue = issues.first()
         assertEquals("missing_vector_dimension", issue.code)
+        assertEquals("Missing dimension for vector property 'embedding' on node 'personNode'", issue.message)
         assertEquals("nodes.personNode.properties.embedding.dimension", issue.path)
     }
 
     @Test
     fun `pass when node vector property has a dimension set`() {
-        // ARRANGE
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf(
@@ -63,16 +60,29 @@ class NodePropertyVectorDimensionTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateProperty(model, "personNode", node, "embedding", node.properties["embedding"]!!, issues)
 
-        // ASSERT
         assertTrue(issues.isEmpty(), "Expected no issues when vector property has a dimension")
     }
 
     @Test
+    fun `pass when node vector property has dimension zero`() {
+        // 0 counts as "set" (UPX isNullish(0) is false)
+        val node = Node(
+            labels = Labels(identifier = "Person"),
+            properties = mutableMapOf(
+                "embedding" to Property(type = Neo4jType.VECTOR_FLOAT, dimension = 0)
+            )
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateProperty(model, "personNode", node, "embedding", node.properties["embedding"]!!, issues)
+
+        assertTrue(issues.isEmpty(), "Expected no issues when dimension is 0 (counts as set, matching UPX)")
+    }
+
+    @Test
     fun `pass when node property is a non-vector type with null dimension`() {
-        // ARRANGE
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf(
@@ -81,16 +91,13 @@ class NodePropertyVectorDimensionTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         validator.validateProperty(model, "personNode", node, "name", node.properties["name"]!!, issues)
 
-        // ASSERT
         assertTrue(issues.isEmpty(), "Expected no issues for non-vector type with null dimension")
     }
 
     @Test
     fun `fail for each node vector property missing dimension`() {
-        // ARRANGE - multiple vector properties without dimension
         val node = Node(
             labels = Labels(identifier = "Person"),
             properties = mutableMapOf(
@@ -101,19 +108,16 @@ class NodePropertyVectorDimensionTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         for ((propertyId, property) in node.properties) {
             validator.validateProperty(model, "personNode", node, propertyId, property, issues)
         }
 
-        // ASSERT
         assertEquals(2, issues.size)
         assertTrue(issues.all { it.code == "missing_vector_dimension" })
     }
 
     @Test
     fun `fail for all vector type variants when dimension is null`() {
-        // ARRANGE - each VECTOR_* variant should be flagged when dimension is null
         val vectorTypes = listOf(
             Neo4jType.VECTOR_FLOAT,
             Neo4jType.VECTOR_FLOAT32,
@@ -135,12 +139,10 @@ class NodePropertyVectorDimensionTest {
         )
         val issues = mutableListOf<Issue>()
 
-        // ACT
         for ((propertyId, property) in node.properties) {
             validator.validateProperty(model, "personNode", node, propertyId, property, issues)
         }
 
-        // ASSERT
         assertEquals(6, issues.size)
         assertTrue(issues.all { it.code == "missing_vector_dimension" })
     }
