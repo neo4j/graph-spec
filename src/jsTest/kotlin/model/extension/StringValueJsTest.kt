@@ -14,7 +14,7 @@ class StringValueJsTest : JsMappingTest<StringValue, StringValueJs>() {
     override fun toClass(js: StringValueJs): StringValue = js.toClass()
 
     override fun verifyJsObject(jsObject: StringValueJs) {
-        assertEquals("String", jsObject.type)
+        assertEquals("STRING", jsObject.type)
         assertEquals("31415962", jsObject.value)
     }
 

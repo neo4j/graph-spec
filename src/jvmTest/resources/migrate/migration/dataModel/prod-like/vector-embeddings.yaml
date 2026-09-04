@@ -34,7 +34,7 @@ tables:
         supported: ["VECTOR<FLOAT>"]
     primaryKeys: ["documentid"]
 mappings:
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "document"
     table: "document"
     properties:

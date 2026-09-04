@@ -15,7 +15,7 @@ class LabelMappingJsTest : JsMappingTest<LabelMapping, LabelMappingJs>() {
     override fun toClass(js: LabelMappingJs): LabelMapping = js.toClass()
 
     override fun verifyJsObject(jsObject: LabelMappingJs) {
-        assertEquals("LabelMapping", jsObject.type)
+        assertEquals("LABEL", jsObject.type)
         assertEquals("table_name", jsObject.table)
         assertEquals("field_name", jsObject.field)
     }

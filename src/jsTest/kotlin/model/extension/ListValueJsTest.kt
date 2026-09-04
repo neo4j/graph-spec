@@ -14,11 +14,11 @@ class ListValueJsTest : JsMappingTest<ListValue, ListValueJs>() {
     override fun toClass(js: ListValueJs): ListValue = js.toClass()
 
     override fun verifyJsObject(jsObject: ListValueJs) {
-        assertEquals("List", jsObject.type)
+        assertEquals("LIST", jsObject.type)
         val (first, second) = jsObject.value
-        assertEquals("String", first.type)
+        assertEquals("STRING", first.type)
         assertEquals("val1", (first as StringValueJs).value)
-        assertEquals("Long", second.type)
+        assertEquals("LONG", second.type)
         assertEquals(4, (second as LongValueJs).value)
     }
 

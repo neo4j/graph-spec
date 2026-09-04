@@ -730,7 +730,7 @@ tables:
         suggested: "INTEGER"
         supported: ["INTEGER", "STRING", "FLOAT"]
 mappings:
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "Comment"
     table: "Comment"
     properties:
@@ -743,7 +743,7 @@ mappings:
       content: { field: "content" }
       length: { field: "length" }
     key: ["id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "Forum"
     table: "Forum"
     properties:
@@ -753,7 +753,7 @@ mappings:
       id: { field: "id" }
       title: { field: "title" }
     key: ["id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "Organisation"
     table: "Organisation"
     properties:
@@ -762,7 +762,7 @@ mappings:
       name: { field: "name" }
       url: { field: "url" }
     key: ["id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "Person"
     table: "Person"
     properties:
@@ -779,7 +779,7 @@ mappings:
       language: { field: "language" }
       email: { field: "email" }
     key: ["id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "Place"
     table: "Place"
     properties:
@@ -788,7 +788,7 @@ mappings:
       url: { field: "url" }
       type: { field: "type" }
     key: ["id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "Post"
     table: "Post"
     properties:
@@ -803,7 +803,7 @@ mappings:
       content: { field: "content" }
       length: { field: "length" }
     key: ["id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "Tag"
     table: "Tag"
     properties:
@@ -811,7 +811,7 @@ mappings:
       name: { field: "name" }
       url: { field: "url" }
     key: ["id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "TagClass"
     table: "TagClass"
     properties:
@@ -819,7 +819,7 @@ mappings:
       name: { field: "name" }
       url: { field: "url" }
     key: ["id"]
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "AUTHORED_BY"
     table: "Comment"
     from:
@@ -830,7 +830,7 @@ mappings:
       node: "Person"
       properties:
         id: { field: "CreatorPersonId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "AUTHORED_AT"
     table: "Comment"
     from:
@@ -841,7 +841,7 @@ mappings:
       node: "Place"
       properties:
         id: { field: "LocationCountryId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "REPLIED_TO"
     table: "Comment"
     from:
@@ -852,7 +852,7 @@ mappings:
       node: "Post"
       properties:
         id: { field: "ParentPostId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "REPLIED_TO2"
     table: "Comment"
     from:
@@ -863,7 +863,7 @@ mappings:
       node: "Comment"
       properties:
         id: { field: "ParentCommentId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "HAS_TAG"
     table: "CommentHasTag"
     from:
@@ -878,7 +878,7 @@ mappings:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
     key: ["creationDate"]
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "MODERATED_BY"
     table: "Forum"
     from:
@@ -889,7 +889,7 @@ mappings:
       node: "Person"
       properties:
         id: { field: "ModeratorPersonId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "MEMBER_OF"
     table: "ForumHasMember"
     from:
@@ -904,7 +904,7 @@ mappings:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
       explicitlyDeleted: { field: "explicitlyDeleted" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "HAS_TAG2"
     table: "ForumHasTag"
     from:
@@ -918,7 +918,7 @@ mappings:
     properties:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "LOCATED_IN"
     table: "Organisation"
     from:
@@ -929,7 +929,7 @@ mappings:
       node: "Place"
       properties:
         id: { field: "LocationPlaceId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "LIVES_IN"
     table: "Person"
     from:
@@ -940,7 +940,7 @@ mappings:
       node: "Place"
       properties:
         id: { field: "LocationCityId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "INTERESTED_IN"
     table: "PersonHasInterest"
     from:
@@ -954,7 +954,7 @@ mappings:
     properties:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "KNOWS"
     table: "PersonKnowsPerson"
     from:
@@ -969,7 +969,7 @@ mappings:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
       explicitlyDeleted: { field: "explicitlyDeleted" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "LIKED"
     table: "PersonLikesComment"
     from:
@@ -984,7 +984,7 @@ mappings:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
       explicitlyDeleted: { field: "explicitlyDeleted" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "LIKED2"
     table: "PersonLikesPost"
     from:
@@ -999,7 +999,7 @@ mappings:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
       explicitlyDeleted: { field: "explicitlyDeleted" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "STUDIES_AT"
     table: "PersonStudiesAt"
     from:
@@ -1014,7 +1014,7 @@ mappings:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
       classYear: { field: "classYear" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "WORKS_AT"
     table: "PersonWorksAt"
     from:
@@ -1029,7 +1029,7 @@ mappings:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
       workFrom: { field: "workFrom" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "IS_SIMILAR_TO"
     table: "Place"
     from:
@@ -1040,7 +1040,7 @@ mappings:
       node: "Place"
       properties:
         id: { field: "PartOfPlaceId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "AUTHORED_BY2"
     table: "Post"
     from:
@@ -1051,7 +1051,7 @@ mappings:
       node: "Person"
       properties:
         id: { field: "CreatorPersonId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "POSTED_IN"
     table: "Post"
     from:
@@ -1062,7 +1062,7 @@ mappings:
       node: "Forum"
       properties:
         id: { field: "ContainerForumId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "AUTHORED_AT2"
     table: "Post"
     from:
@@ -1073,7 +1073,7 @@ mappings:
       node: "Place"
       properties:
         id: { field: "LocationCountryId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "HAS_TAG3"
     table: "PostHasTag"
     from:
@@ -1087,7 +1087,7 @@ mappings:
     properties:
       creationDate: { field: "creationDate" }
       deletionDate: { field: "deletionDate" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "HAS_CLASS"
     table: "Tag"
     from:
@@ -1098,7 +1098,7 @@ mappings:
       node: "TagClass"
       properties:
         id: { field: "TypeTagClassId" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "IS_SUBCLASS"
     table: "TagClass"
     from:

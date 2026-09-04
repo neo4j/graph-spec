@@ -1056,7 +1056,7 @@ tables:
           table: "staff"
           fields: ["staff_id"]
 mappings:
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node0"
     table: "actor"
     properties:
@@ -1065,7 +1065,7 @@ mappings:
       nodeProperty2: { field: "last_name" }
       nodeProperty3: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node1"
     table: "address"
     properties:
@@ -1077,7 +1077,7 @@ mappings:
       nodeProperty5: { field: "phone" }
       nodeProperty6: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node2"
     table: "category"
     properties:
@@ -1085,7 +1085,7 @@ mappings:
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node3"
     table: "city"
     properties:
@@ -1093,7 +1093,7 @@ mappings:
       nodeProperty1: { field: "city" }
       nodeProperty2: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node4"
     table: "country"
     properties:
@@ -1101,7 +1101,7 @@ mappings:
       nodeProperty1: { field: "country" }
       nodeProperty2: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node5"
     table: "customer"
     properties:
@@ -1115,7 +1115,7 @@ mappings:
       nodeProperty7: { field: "last_update" }
       nodeProperty8: { field: "active" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node6"
     table: "film"
     properties:
@@ -1129,7 +1129,7 @@ mappings:
       nodeProperty7: { field: "rating" }
       nodeProperty8: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node7"
     table: "inventory"
     properties:
@@ -1137,7 +1137,7 @@ mappings:
       nodeProperty1: { field: "store_id" }
       nodeProperty2: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node8"
     table: "language"
     properties:
@@ -1145,7 +1145,7 @@ mappings:
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node9"
     table: "payment"
     properties:
@@ -1153,7 +1153,7 @@ mappings:
       nodeProperty1: { field: "amount" }
       nodeProperty2: { field: "payment_date" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node10"
     table: "rental"
     properties:
@@ -1162,7 +1162,7 @@ mappings:
       nodeProperty2: { field: "return_date" }
       nodeProperty3: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node11"
     table: "staff"
     properties:
@@ -1176,14 +1176,14 @@ mappings:
       nodeProperty7: { field: "password" }
       nodeProperty8: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node12"
     table: "store"
     properties:
       nodeProperty0: { field: "store_id" }
       nodeProperty1: { field: "last_update" }
     key: ["nodeProperty0"]
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "address"
     from:
@@ -1194,7 +1194,7 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "city_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "city"
     from:
@@ -1205,7 +1205,7 @@ mappings:
       node: "node4"
       properties:
         nodeProperty0: { field: "country_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "customer"
     from:
@@ -1216,7 +1216,7 @@ mappings:
       node: "node1"
       properties:
         nodeProperty0: { field: "address_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "film"
     from:
@@ -1227,7 +1227,7 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "language_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "film_actor"
     from:
@@ -1240,7 +1240,7 @@ mappings:
         nodeProperty0: { field: "film_id" }
     properties:
       relationshipProperty0: { field: "last_update" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship5"
     table: "film_category"
     from:
@@ -1253,7 +1253,7 @@ mappings:
         nodeProperty0: { field: "film_id" }
     properties:
       relationshipProperty0: { field: "last_update" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship6"
     table: "inventory"
     from:
@@ -1264,7 +1264,7 @@ mappings:
       node: "node6"
       properties:
         nodeProperty0: { field: "film_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship7"
     table: "payment"
     from:
@@ -1275,7 +1275,7 @@ mappings:
       node: "node5"
       properties:
         nodeProperty0: { field: "customer_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship8"
     table: "payment"
     from:
@@ -1286,7 +1286,7 @@ mappings:
       node: "node10"
       properties:
         nodeProperty0: { field: "rental_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship9"
     table: "payment"
     from:
@@ -1297,7 +1297,7 @@ mappings:
       node: "node11"
       properties:
         nodeProperty0: { field: "staff_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship10"
     table: "rental"
     from:
@@ -1308,7 +1308,7 @@ mappings:
       node: "node5"
       properties:
         nodeProperty0: { field: "customer_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship11"
     table: "rental"
     from:
@@ -1319,7 +1319,7 @@ mappings:
       node: "node7"
       properties:
         nodeProperty0: { field: "inventory_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship12"
     table: "rental"
     from:
@@ -1330,7 +1330,7 @@ mappings:
       node: "node11"
       properties:
         nodeProperty0: { field: "staff_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship13"
     table: "staff"
     from:
@@ -1341,7 +1341,7 @@ mappings:
       node: "node1"
       properties:
         nodeProperty0: { field: "address_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship14"
     table: "store"
     from:
@@ -1352,7 +1352,7 @@ mappings:
       node: "node1"
       properties:
         nodeProperty0: { field: "address_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship15"
     table: "store"
     from:
