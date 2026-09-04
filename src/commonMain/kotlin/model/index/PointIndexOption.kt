@@ -26,7 +26,7 @@ import kotlin.js.JsExport
  */
 @JsExport
 @Serializable
-@SerialName("PointIndexOption")
+@SerialName("POINT")
 data class PointIndexOption(
     @SerialName("spatial.cartesian.min")
     val cartesianMin: DoubleArray = doubleArrayOf(-1000000.0, -1000000.0),
@@ -46,7 +46,7 @@ data class PointIndexOption(
     val wgs843DMax: DoubleArray = doubleArrayOf(180.0, 90.0, 1000000.0)
 ) : IndexOption {
 
-    override val type: IndexType = IndexType.POINT
+    override val type: IndexType get() = IndexType.POINT
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

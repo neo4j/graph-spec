@@ -57,18 +57,18 @@ func (w *ExtensionValue) UnmarshalJSON(data []byte) error {
 
 	var v ExtensionValueUnion
 	switch peek.Type {
-	case "String":
-		v = &String{}
 	case "Boolean":
 		v = &Boolean{}
-	case "Long":
-		v = &Long{}
 	case "Double":
 		v = &Double{}
 	case "List":
 		v = &List{}
+	case "Long":
+		v = &Long{}
 	case "Map":
 		v = &Map{}
+	case "String":
+		v = &String{}
 	default:
 		return fmt.Errorf("ExtensionValue: unknown type %q", peek.Type)
 	}
@@ -81,15 +81,6 @@ func (w *ExtensionValue) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-type String struct {
-	Type  string `json:"type"`
-	Value string `json:"value"`
-}
-
-func (String) isExtensionValue() {}
-
-func (String) ExtensionValueType() string { return "String" }
-
 type Boolean struct {
 	Type  string `json:"type"`
 	Value bool   `json:"value"`
@@ -98,15 +89,6 @@ type Boolean struct {
 func (Boolean) isExtensionValue() {}
 
 func (Boolean) ExtensionValueType() string { return "Boolean" }
-
-type Long struct {
-	Type  string `json:"type"`
-	Value int    `json:"value"`
-}
-
-func (Long) isExtensionValue() {}
-
-func (Long) ExtensionValueType() string { return "Long" }
 
 type Double struct {
 	Type  string  `json:"type"`
@@ -126,6 +108,15 @@ func (List) isExtensionValue() {}
 
 func (List) ExtensionValueType() string { return "List" }
 
+type Long struct {
+	Type  string `json:"type"`
+	Value int    `json:"value"`
+}
+
+func (Long) isExtensionValue() {}
+
+func (Long) ExtensionValueType() string { return "Long" }
+
 type Map struct {
 	Type  string                    `json:"type"`
 	Value map[string]ExtensionValue `json:"value"`
@@ -134,6 +125,15 @@ type Map struct {
 func (Map) isExtensionValue() {}
 
 func (Map) ExtensionValueType() string { return "Map" }
+
+type String struct {
+	Type  string `json:"type"`
+	Value string `json:"value"`
+}
+
+func (String) isExtensionValue() {}
+
+func (String) ExtensionValueType() string { return "String" }
 
 type NodeDisplay struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
@@ -214,14 +214,14 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 
 	var v MappingUnion
 	switch peek.Type {
-	case "NodeMapping":
-		v = &NodeMapping{}
-	case "RelationshipMapping":
-		v = &RelationshipMapping{}
-	case "QueryMapping":
-		v = &QueryMapping{}
 	case "LabelMapping":
 		v = &LabelMapping{}
+	case "NodeMapping":
+		v = &NodeMapping{}
+	case "QueryMapping":
+		v = &QueryMapping{}
+	case "RelationshipMapping":
+		v = &RelationshipMapping{}
 	default:
 		return fmt.Errorf("Mapping: unknown type %q", peek.Type)
 	}
@@ -233,6 +233,16 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 	w.MappingUnion = v
 	return nil
 }
+
+type LabelMapping struct {
+	Field string `json:"field"`
+	Table string `json:"table"`
+	Type  string `json:"type"`
+}
+
+func (LabelMapping) isMapping() {}
+
+func (LabelMapping) MappingType() string { return "LabelMapping" }
 
 type NodeMapping struct {
 	Key        []string                   `json:"key,omitempty"`
@@ -247,6 +257,16 @@ type NodeMapping struct {
 func (NodeMapping) isMapping() {}
 
 func (NodeMapping) MappingType() string { return "NodeMapping" }
+
+type QueryMapping struct {
+	Query string `json:"query"`
+	Table string `json:"table"`
+	Type  string `json:"type"`
+}
+
+func (QueryMapping) isMapping() {}
+
+func (QueryMapping) MappingType() string { return "QueryMapping" }
 
 type RelationshipMapping struct {
 	From         TargetMapping              `json:"from"`
@@ -263,26 +283,6 @@ type RelationshipMapping struct {
 func (RelationshipMapping) isMapping() {}
 
 func (RelationshipMapping) MappingType() string { return "RelationshipMapping" }
-
-type QueryMapping struct {
-	Query string `json:"query"`
-	Table string `json:"table"`
-	Type  string `json:"type"`
-}
-
-func (QueryMapping) isMapping() {}
-
-func (QueryMapping) MappingType() string { return "QueryMapping" }
-
-type LabelMapping struct {
-	Field string `json:"field"`
-	Table string `json:"table"`
-	Type  string `json:"type"`
-}
-
-func (LabelMapping) isMapping() {}
-
-func (LabelMapping) MappingType() string { return "LabelMapping" }
 
 type Labels struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
@@ -323,7 +323,7 @@ type NodeIndex struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
 	Labels     []string                  `json:"labels"`
 	Name       *string                   `json:"name,omitempty"`
-	Options    map[string]ExtensionValue `json:"options,omitempty"`
+	Options    interface{}               `json:"options,omitempty"`
 	Properties []string                  `json:"properties"`
 	Type       IndexType                 `json:"type"`
 }
@@ -437,7 +437,6 @@ type Node struct {
 type RelationshipConstraint struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
 	Name       *string                   `json:"name,omitempty"`
-	Options    map[string]ExtensionValue `json:"options,omitempty"`
 	Properties []string                  `json:"properties"`
 	Type       ConstraintType            `json:"type"`
 }
@@ -445,7 +444,7 @@ type RelationshipConstraint struct {
 type RelationshipIndex struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
 	Name       *string                   `json:"name,omitempty"`
-	Options    map[string]ExtensionValue `json:"options,omitempty"`
+	Options    interface{}               `json:"options,omitempty"`
 	Properties []string                  `json:"properties"`
 	Type       IndexType                 `json:"type"`
 }
@@ -496,3 +495,102 @@ type GraphModel struct {
 	Tables        map[string]Table        `json:"tables,omitempty"`
 	Version       string                  `json:"version"`
 }
+
+type IndexOptionUnion interface {
+	IndexOptionType() string
+	isIndexOption()
+}
+
+type IndexOption struct {
+	IndexOptionUnion
+}
+
+func (w IndexOption) MarshalJSON() ([]byte, error) {
+	if w.IndexOptionUnion == nil {
+		return []byte("null"), nil
+	}
+	return json.Marshal(w.IndexOptionUnion)
+}
+
+func (w *IndexOption) UnmarshalJSON(data []byte) error {
+	data = bytes.TrimSpace(data)
+	if bytes.Equal(data, []byte("null")) {
+		w.IndexOptionUnion = nil
+		return nil
+	}
+
+	var peek struct {
+		Type string `json:"type"`
+	}
+	if err := json.Unmarshal(data, &peek); err != nil {
+		return fmt.Errorf("IndexOption: invalid JSON: %w", err)
+	}
+	if peek.Type == "" {
+		return fmt.Errorf("IndexOption: missing discriminator field %q", "type")
+	}
+
+	var v IndexOptionUnion
+	switch peek.Type {
+	case "FULLTEXT":
+		v = &FULLTEXT{}
+	case "POINT":
+		v = &POINT{}
+	case "VECTOR":
+		v = &VECTOR{}
+	default:
+		return fmt.Errorf("IndexOption: unknown type %q", peek.Type)
+	}
+
+	if err := json.Unmarshal(data, v); err != nil {
+		return fmt.Errorf("IndexOption: invalid %q payload: %w", peek.Type, err)
+	}
+
+	w.IndexOptionUnion = v
+	return nil
+}
+
+type FULLTEXT struct {
+	FulltextAnalyzer                                      *string `json:"fulltext.analyzer,omitempty"`
+	FulltextDefaultAnalyzer                               *string `json:"fulltext.default_analyzer,omitempty"`
+	FulltextEventuallyConsistent                          *bool   `json:"fulltext.eventually_consistent,omitempty"`
+	FulltextEventuallyConsistentApplyParallelism          *int    `json:"fulltext.eventually_consistent_apply_parallelism,omitempty"`
+	FulltextEventuallyConsistentIndexUpdateQueueMaxLength *int    `json:"fulltext.eventually_consistent_index_update_queue_max_length,omitempty"`
+	FulltextEventuallyConsistentRefreshInterval           *string `json:"fulltext.eventually_consistent_refresh_interval,omitempty"`
+	FulltextEventuallyConsistentRefreshParallelism        *int    `json:"fulltext.eventually_consistent_refresh_parallelism,omitempty"`
+	Type                                                  string  `json:"type"`
+}
+
+func (FULLTEXT) isIndexOption() {}
+
+func (FULLTEXT) IndexOptionType() string { return "FULLTEXT" }
+
+type POINT struct {
+	SpatialCartesian3dMax []float64 `json:"spatial.cartesian-3d.max,omitempty"`
+	SpatialCartesian3dMin []float64 `json:"spatial.cartesian-3d.min,omitempty"`
+	SpatialCartesianMax   []float64 `json:"spatial.cartesian.max,omitempty"`
+	SpatialCartesianMin   []float64 `json:"spatial.cartesian.min,omitempty"`
+	SpatialWgs843dMax     []float64 `json:"spatial.wgs-84-3d.max,omitempty"`
+	SpatialWgs843dMin     []float64 `json:"spatial.wgs-84-3d.min,omitempty"`
+	SpatialWgs84Max       []float64 `json:"spatial.wgs-84.max,omitempty"`
+	SpatialWgs84Min       []float64 `json:"spatial.wgs-84.min,omitempty"`
+	Type                  string    `json:"type"`
+}
+
+func (POINT) isIndexOption() {}
+
+func (POINT) IndexOptionType() string { return "POINT" }
+
+type VECTOR struct {
+	Type                               string   `json:"type"`
+	VectorDefaultSearchExpansionFactor *float64 `json:"vector.default_search_expansion_factor,omitempty"`
+	VectorDimensions                   *int     `json:"vector.dimensions,omitempty"`
+	VectorHnswEfConstruction           *int     `json:"vector.hnsw.ef_construction,omitempty"`
+	VectorHnswM                        *int     `json:"vector.hnsw.m,omitempty"`
+	VectorQuantizationEnabled          *bool    `json:"vector.quantization.enabled,omitempty"`
+	VectorQuantizationType             *string  `json:"vector.quantization.type,omitempty"`
+	VectorSimilarityFunction           *string  `json:"vector.similarity_function,omitempty"`
+}
+
+func (VECTOR) isIndexOption() {}
+
+func (VECTOR) IndexOptionType() string { return "VECTOR" }

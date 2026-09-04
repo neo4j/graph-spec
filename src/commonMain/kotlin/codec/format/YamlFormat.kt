@@ -96,7 +96,6 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                     "relationships.*.from",
                     "relationships.*.to",
                     "relationships.*.constraints.*.properties",
-                    "relationships.*.constraints.*.options.*",
                     "relationships.*.indexes.*.properties",
                     "relationships.*.indexes.*.options.*",
                     "tables.*.fields.*.supported",
