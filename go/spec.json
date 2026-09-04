@@ -122,13 +122,7 @@
         "ExtensionValue": {
             "oneOf": [
                 {
-                    "$ref": "#/$defs/String"
-                },
-                {
                     "$ref": "#/$defs/Boolean"
-                },
-                {
-                    "$ref": "#/$defs/Long"
                 },
                 {
                     "$ref": "#/$defs/Double"
@@ -137,29 +131,18 @@
                     "$ref": "#/$defs/List"
                 },
                 {
+                    "$ref": "#/$defs/Long"
+                },
+                {
                     "$ref": "#/$defs/Map"
+                },
+                {
+                    "$ref": "#/$defs/String"
                 }
             ],
             "discriminator": {
                 "propertyName": "type"
             }
-        },
-        "String": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "String"
-                },
-                "value": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type",
-                "value"
-            ],
-            "additionalProperties": false
         },
         "Boolean": {
             "type": "object",
@@ -170,23 +153,6 @@
                 },
                 "value": {
                     "type": "boolean"
-                }
-            },
-            "required": [
-                "type",
-                "value"
-            ],
-            "additionalProperties": false
-        },
-        "Long": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "Long"
-                },
-                "value": {
-                    "type": "integer"
                 }
             },
             "required": [
@@ -232,6 +198,23 @@
             ],
             "additionalProperties": false
         },
+        "Long": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "Long"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "type",
+                "value"
+            ],
+            "additionalProperties": false
+        },
         "Map": {
             "type": "object",
             "properties": {
@@ -244,6 +227,23 @@
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
                     }
+                }
+            },
+            "required": [
+                "type",
+                "value"
+            ],
+            "additionalProperties": false
+        },
+        "String": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "String"
+                },
+                "value": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -436,24 +436,25 @@
         "IndexOption": {
             "oneOf": [
                 {
-                    "$ref": "#/$defs/FullTextIndexOption"
+                    "$ref": "#/$defs/FULLTEXT"
                 },
                 {
-                    "$ref": "#/$defs/PointIndexOption"
+                    "$ref": "#/$defs/POINT"
                 },
                 {
-                    "$ref": "#/$defs/VectorIndexOption"
+                    "$ref": "#/$defs/VECTOR"
                 }
             ],
             "discriminator": {
                 "propertyName": "type"
             }
         },
-        "FullTextIndexOption": {
+        "FULLTEXT": {
             "type": "object",
             "properties": {
                 "type": {
-                    "$ref": "#/$defs/IndexType"
+                    "type": "string",
+                    "const": "FULLTEXT"
                 },
                 "fulltext.default_analyzer": {
                     "type": "string"
@@ -483,11 +484,12 @@
             ],
             "additionalProperties": false
         },
-        "PointIndexOption": {
+        "POINT": {
             "type": "object",
             "properties": {
                 "type": {
-                    "$ref": "#/$defs/IndexType"
+                    "type": "string",
+                    "const": "POINT"
                 },
                 "spatial.cartesian.min": {
                     "type": "array",
@@ -543,11 +545,12 @@
             ],
             "additionalProperties": false
         },
-        "VectorIndexOption": {
+        "VECTOR": {
             "type": "object",
             "properties": {
                 "type": {
-                    "$ref": "#/$defs/IndexType"
+                    "type": "string",
+                    "const": "VECTOR"
                 },
                 "vector.dimensions": {
                     "type": "integer",
@@ -837,21 +840,42 @@
         "Mapping": {
             "oneOf": [
                 {
-                    "$ref": "#/$defs/NodeMapping"
+                    "$ref": "#/$defs/LabelMapping"
                 },
                 {
-                    "$ref": "#/$defs/RelationshipMapping"
+                    "$ref": "#/$defs/NodeMapping"
                 },
                 {
                     "$ref": "#/$defs/QueryMapping"
                 },
                 {
-                    "$ref": "#/$defs/LabelMapping"
+                    "$ref": "#/$defs/RelationshipMapping"
                 }
             ],
             "discriminator": {
                 "propertyName": "type"
             }
+        },
+        "LabelMapping": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "LabelMapping"
+                },
+                "table": {
+                    "type": "string"
+                },
+                "field": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "table",
+                "field"
+            ],
+            "additionalProperties": false
         },
         "PropertyMapping": {
             "type": "object",
@@ -910,6 +934,27 @@
                 "node",
                 "table",
                 "properties"
+            ],
+            "additionalProperties": false
+        },
+        "QueryMapping": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "QueryMapping"
+                },
+                "table": {
+                    "type": "string"
+                },
+                "query": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "table",
+                "query"
             ],
             "additionalProperties": false
         },
@@ -977,48 +1022,6 @@
                 "table",
                 "from",
                 "to"
-            ],
-            "additionalProperties": false
-        },
-        "QueryMapping": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "QueryMapping"
-                },
-                "table": {
-                    "type": "string"
-                },
-                "query": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type",
-                "table",
-                "query"
-            ],
-            "additionalProperties": false
-        },
-        "LabelMapping": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "LabelMapping"
-                },
-                "table": {
-                    "type": "string"
-                },
-                "field": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type",
-                "table",
-                "field"
             ],
             "additionalProperties": false
         },

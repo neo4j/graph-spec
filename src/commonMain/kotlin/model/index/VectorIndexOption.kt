@@ -26,7 +26,7 @@ import kotlin.js.JsExport
  */
 @JsExport
 @Serializable
-@SerialName("VectorIndexOption")
+@SerialName("VECTOR")
 data class VectorIndexOption(
     @SerialName("vector.dimensions")
     val dimensions: Int? = null,
@@ -43,5 +43,5 @@ data class VectorIndexOption(
     @SerialName("vector.hnsw.ef_construction")
     val hnswEfConstruction: Int = 100
 ) : IndexOption {
-    override val type: IndexType = IndexType.VECTOR
+    override val type: IndexType get() = IndexType.VECTOR
 }

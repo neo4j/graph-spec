@@ -825,7 +825,8 @@ tables:
         suggested: "INTEGER"
         supported: ["INTEGER", "STRING", "FLOAT"]
 mappings:
-  - node: "node0"
+  - type: "NodeMapping"
+    node: "node0"
     table: "Comment"
     properties:
       nodeProperty0: { field: "creationDate" }
@@ -837,7 +838,8 @@ mappings:
       nodeProperty6: { field: "content" }
       nodeProperty7: { field: "length" }
     key: ["nodeProperty3"]
-  - node: "node1"
+  - type: "NodeMapping"
+    node: "node1"
     table: "Forum"
     properties:
       nodeProperty0: { field: "creationDate" }
@@ -846,7 +848,8 @@ mappings:
       nodeProperty3: { field: "id" }
       nodeProperty4: { field: "title" }
     key: ["nodeProperty3"]
-  - node: "node2"
+  - type: "NodeMapping"
+    node: "node2"
     table: "Organisation"
     properties:
       nodeProperty0: { field: "id" }
@@ -854,7 +857,8 @@ mappings:
       nodeProperty2: { field: "name" }
       nodeProperty3: { field: "url" }
     key: ["nodeProperty0"]
-  - node: "node3"
+  - type: "NodeMapping"
+    node: "node3"
     table: "Person"
     properties:
       nodeProperty0: { field: "creationDate" }
@@ -870,7 +874,8 @@ mappings:
       nodeProperty10: { field: "language" }
       nodeProperty11: { field: "email" }
     key: ["nodeProperty3"]
-  - node: "node4"
+  - type: "NodeMapping"
+    node: "node4"
     table: "Place"
     properties:
       nodeProperty0: { field: "id" }
@@ -878,7 +883,8 @@ mappings:
       nodeProperty2: { field: "url" }
       nodeProperty3: { field: "type" }
     key: ["nodeProperty0"]
-  - node: "node5"
+  - type: "NodeMapping"
+    node: "node5"
     table: "Post"
     properties:
       nodeProperty0: { field: "creationDate" }
@@ -892,21 +898,24 @@ mappings:
       nodeProperty8: { field: "content" }
       nodeProperty9: { field: "length" }
     key: ["nodeProperty3"]
-  - node: "node6"
+  - type: "NodeMapping"
+    node: "node6"
     table: "Tag"
     properties:
       nodeProperty0: { field: "id" }
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "url" }
     key: ["nodeProperty0"]
-  - node: "node7"
+  - type: "NodeMapping"
+    node: "node7"
     table: "TagClass"
     properties:
       nodeProperty0: { field: "id" }
       nodeProperty1: { field: "name" }
       nodeProperty2: { field: "url" }
     key: ["nodeProperty0"]
-  - relationship: "relationship0"
+  - type: "RelationshipMapping"
+    relationship: "relationship0"
     table: "Comment"
     from:
       node: "node0"
@@ -916,7 +925,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty3: { field: "CreatorPersonId" }
-  - relationship: "relationship1"
+  - type: "RelationshipMapping"
+    relationship: "relationship1"
     table: "Comment"
     from:
       node: "node0"
@@ -926,7 +936,8 @@ mappings:
       node: "node4"
       properties:
         nodeProperty0: { field: "LocationCountryId" }
-  - relationship: "relationship2"
+  - type: "RelationshipMapping"
+    relationship: "relationship2"
     table: "Comment"
     from:
       node: "node0"
@@ -936,7 +947,8 @@ mappings:
       node: "node5"
       properties:
         nodeProperty3: { field: "ParentPostId" }
-  - relationship: "relationship3"
+  - type: "RelationshipMapping"
+    relationship: "relationship3"
     table: "Comment"
     from:
       node: "node0"
@@ -946,7 +958,8 @@ mappings:
       node: "node0"
       properties:
         nodeProperty3: { field: "ParentCommentId" }
-  - relationship: "relationship4"
+  - type: "RelationshipMapping"
+    relationship: "relationship4"
     table: "CommentHasTag"
     from:
       node: "node0"
@@ -960,7 +973,8 @@ mappings:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
     key: ["nodeProperty0"]
-  - relationship: "relationship5"
+  - type: "RelationshipMapping"
+    relationship: "relationship5"
     table: "Forum"
     from:
       node: "node1"
@@ -970,7 +984,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty3: { field: "ModeratorPersonId" }
-  - relationship: "relationship6"
+  - type: "RelationshipMapping"
+    relationship: "relationship6"
     table: "ForumHasMember"
     from:
       node: "node3"
@@ -984,7 +999,8 @@ mappings:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
       relationshipProperty2: { field: "explicitlyDeleted" }
-  - relationship: "relationship7"
+  - type: "RelationshipMapping"
+    relationship: "relationship7"
     table: "ForumHasTag"
     from:
       node: "node1"
@@ -997,7 +1013,8 @@ mappings:
     properties:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
-  - relationship: "relationship8"
+  - type: "RelationshipMapping"
+    relationship: "relationship8"
     table: "Organisation"
     from:
       node: "node2"
@@ -1007,7 +1024,8 @@ mappings:
       node: "node4"
       properties:
         nodeProperty0: { field: "LocationPlaceId" }
-  - relationship: "relationship9"
+  - type: "RelationshipMapping"
+    relationship: "relationship9"
     table: "Person"
     from:
       node: "node3"
@@ -1017,7 +1035,8 @@ mappings:
       node: "node4"
       properties:
         nodeProperty0: { field: "LocationCityId" }
-  - relationship: "relationship10"
+  - type: "RelationshipMapping"
+    relationship: "relationship10"
     table: "PersonHasInterest"
     from:
       node: "node3"
@@ -1030,7 +1049,8 @@ mappings:
     properties:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
-  - relationship: "relationship11"
+  - type: "RelationshipMapping"
+    relationship: "relationship11"
     table: "PersonKnowsPerson"
     from:
       node: "node3"
@@ -1044,7 +1064,8 @@ mappings:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
       relationshipProperty2: { field: "explicitlyDeleted" }
-  - relationship: "relationship12"
+  - type: "RelationshipMapping"
+    relationship: "relationship12"
     table: "PersonLikesComment"
     from:
       node: "node3"
@@ -1058,7 +1079,8 @@ mappings:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
       relationshipProperty2: { field: "explicitlyDeleted" }
-  - relationship: "relationship13"
+  - type: "RelationshipMapping"
+    relationship: "relationship13"
     table: "PersonLikesPost"
     from:
       node: "node3"
@@ -1072,7 +1094,8 @@ mappings:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
       relationshipProperty2: { field: "explicitlyDeleted" }
-  - relationship: "relationship14"
+  - type: "RelationshipMapping"
+    relationship: "relationship14"
     table: "PersonStudiesAt"
     from:
       node: "node3"
@@ -1086,7 +1109,8 @@ mappings:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
       relationshipProperty2: { field: "classYear" }
-  - relationship: "relationship15"
+  - type: "RelationshipMapping"
+    relationship: "relationship15"
     table: "PersonWorksAt"
     from:
       node: "node3"
@@ -1100,7 +1124,8 @@ mappings:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
       relationshipProperty2: { field: "workFrom" }
-  - relationship: "relationship16"
+  - type: "RelationshipMapping"
+    relationship: "relationship16"
     table: "Place"
     from:
       node: "node4"
@@ -1110,7 +1135,8 @@ mappings:
       node: "node4"
       properties:
         nodeProperty0: { field: "PartOfPlaceId" }
-  - relationship: "relationship17"
+  - type: "RelationshipMapping"
+    relationship: "relationship17"
     table: "Post"
     from:
       node: "node5"
@@ -1120,7 +1146,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty3: { field: "CreatorPersonId" }
-  - relationship: "relationship18"
+  - type: "RelationshipMapping"
+    relationship: "relationship18"
     table: "Post"
     from:
       node: "node5"
@@ -1130,7 +1157,8 @@ mappings:
       node: "node1"
       properties:
         nodeProperty3: { field: "ContainerForumId" }
-  - relationship: "relationship19"
+  - type: "RelationshipMapping"
+    relationship: "relationship19"
     table: "Post"
     from:
       node: "node5"
@@ -1140,7 +1168,8 @@ mappings:
       node: "node4"
       properties:
         nodeProperty0: { field: "LocationCountryId" }
-  - relationship: "relationship20"
+  - type: "RelationshipMapping"
+    relationship: "relationship20"
     table: "PostHasTag"
     from:
       node: "node5"
@@ -1153,7 +1182,8 @@ mappings:
     properties:
       relationshipProperty0: { field: "creationDate" }
       relationshipProperty1: { field: "deletionDate" }
-  - relationship: "relationship21"
+  - type: "RelationshipMapping"
+    relationship: "relationship21"
     table: "Tag"
     from:
       node: "node6"
@@ -1163,7 +1193,8 @@ mappings:
       node: "node7"
       properties:
         nodeProperty0: { field: "TypeTagClassId" }
-  - relationship: "relationship22"
+  - type: "RelationshipMapping"
+    relationship: "relationship22"
     table: "TagClass"
     from:
       node: "node7"

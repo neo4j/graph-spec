@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 import model.type.IndexType
 import kotlin.js.JsExport
 
-@Serializable(with = IndexOptionSerializer::class)
+@Serializable
 @JsExport
 @SerialName("IndexOption")
 sealed interface IndexOption {

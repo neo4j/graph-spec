@@ -12,6 +12,7 @@ nodes:
         labels: ["document"]
         properties: ["embedding"]
         options:
+          type: "VECTOR"
           vector.dimensions: 123
           vector.similarity_function: "euclidean"
 tables:
@@ -33,7 +34,8 @@ tables:
         supported: ["VECTOR<FLOAT>"]
     primaryKeys: ["documentid"]
 mappings:
-  - node: "document"
+  - type: "NodeMapping"
+    node: "document"
     table: "document"
     properties:
       documentid: { field: "documentid" }

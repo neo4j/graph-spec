@@ -21,6 +21,6 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @JsExport
-@Serializable(with = MappingSerializer::class)
+@Serializable
 @SerialName("Mapping")
 sealed interface Mapping

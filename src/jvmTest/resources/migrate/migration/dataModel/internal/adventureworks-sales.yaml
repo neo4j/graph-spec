@@ -1453,7 +1453,8 @@ tables:
         suggested: "INTEGER"
         supported: ["INTEGER", "STRING", "FLOAT"]
 mappings:
-  - node: "node0"
+  - type: "NodeMapping"
+    node: "node0"
     table: "creditcard"
     properties:
       nodeProperty0: { field: "creditcardid" }
@@ -1463,13 +1464,15 @@ mappings:
       nodeProperty4: { field: "expyear" }
       nodeProperty5: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node1"
+  - type: "NodeMapping"
+    node: "node1"
     table: "currency"
     properties:
       nodeProperty0: { field: "currencycode" }
       nodeProperty1: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node2"
+  - type: "NodeMapping"
+    node: "node2"
     table: "currencyrate"
     properties:
       nodeProperty0: { field: "currencyrateid" }
@@ -1478,14 +1481,16 @@ mappings:
       nodeProperty3: { field: "endofdayrate" }
       nodeProperty4: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node3"
+  - type: "NodeMapping"
+    node: "node3"
     table: "customer"
     properties:
       nodeProperty0: { field: "customerid" }
       nodeProperty1: { field: "rowguid" }
       nodeProperty2: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node4"
+  - type: "NodeMapping"
+    node: "node4"
     table: "salesorderheader"
     properties:
       nodeProperty0: { field: "salesorderid" }
@@ -1503,7 +1508,8 @@ mappings:
       nodeProperty12: { field: "rowguid" }
       nodeProperty13: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node5"
+  - type: "NodeMapping"
+    node: "node5"
     table: "salesperson"
     properties:
       nodeProperty0: { field: "businessentityid" }
@@ -1515,13 +1521,15 @@ mappings:
       nodeProperty6: { field: "rowguid" }
       nodeProperty7: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node6"
+  - type: "NodeMapping"
+    node: "node6"
     table: "salesreason"
     properties:
       nodeProperty0: { field: "salesreasonid" }
       nodeProperty1: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node7"
+  - type: "NodeMapping"
+    node: "node7"
     table: "salestaxrate"
     properties:
       nodeProperty0: { field: "salestaxrateid" }
@@ -1530,7 +1538,8 @@ mappings:
       nodeProperty3: { field: "rowguid" }
       nodeProperty4: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node8"
+  - type: "NodeMapping"
+    node: "node8"
     table: "salesterritory"
     properties:
       nodeProperty0: { field: "territoryid" }
@@ -1542,7 +1551,8 @@ mappings:
       nodeProperty6: { field: "rowguid" }
       nodeProperty7: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node9"
+  - type: "NodeMapping"
+    node: "node9"
     table: "shoppingcartitem"
     properties:
       nodeProperty0: { field: "shoppingcartitemid" }
@@ -1551,7 +1561,8 @@ mappings:
       nodeProperty3: { field: "datecreated" }
       nodeProperty4: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node10"
+  - type: "NodeMapping"
+    node: "node10"
     table: "specialoffer"
     properties:
       nodeProperty0: { field: "specialofferid" }
@@ -1566,14 +1577,16 @@ mappings:
       nodeProperty9: { field: "rowguid" }
       nodeProperty10: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - node: "node11"
+  - type: "NodeMapping"
+    node: "node11"
     table: "store"
     properties:
       nodeProperty0: { field: "businessentityid" }
       nodeProperty1: { field: "rowguid" }
       nodeProperty2: { field: "modifieddate" }
     key: ["nodeProperty0"]
-  - relationship: "relationship0"
+  - type: "RelationshipMapping"
+    relationship: "relationship0"
     table: "customer"
     from:
       node: "node3"
@@ -1583,7 +1596,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "territoryid" }
-  - relationship: "relationship1"
+  - type: "RelationshipMapping"
+    relationship: "relationship1"
     table: "customer"
     from:
       node: "node3"
@@ -1593,7 +1607,8 @@ mappings:
       node: "node11"
       properties:
         nodeProperty0: { field: "storeid" }
-  - relationship: "relationship2"
+  - type: "RelationshipMapping"
+    relationship: "relationship2"
     table: "salesorderheader"
     from:
       node: "node4"
@@ -1603,7 +1618,8 @@ mappings:
       node: "node0"
       properties:
         nodeProperty0: { field: "creditcardid" }
-  - relationship: "relationship3"
+  - type: "RelationshipMapping"
+    relationship: "relationship3"
     table: "salesorderheader"
     from:
       node: "node4"
@@ -1613,7 +1629,8 @@ mappings:
       node: "node2"
       properties:
         nodeProperty0: { field: "currencyrateid" }
-  - relationship: "relationship4"
+  - type: "RelationshipMapping"
+    relationship: "relationship4"
     table: "salesorderheader"
     from:
       node: "node4"
@@ -1623,7 +1640,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "customerid" }
-  - relationship: "relationship5"
+  - type: "RelationshipMapping"
+    relationship: "relationship5"
     table: "salesorderheader"
     from:
       node: "node4"
@@ -1633,7 +1651,8 @@ mappings:
       node: "node5"
       properties:
         nodeProperty0: { field: "salespersonid" }
-  - relationship: "relationship6"
+  - type: "RelationshipMapping"
+    relationship: "relationship6"
     table: "salesorderheader"
     from:
       node: "node4"
@@ -1643,7 +1662,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "territoryid" }
-  - relationship: "relationship7"
+  - type: "RelationshipMapping"
+    relationship: "relationship7"
     table: "salesorderheadersalesreason"
     from:
       node: "node4"
@@ -1655,7 +1675,8 @@ mappings:
         nodeProperty0: { field: "salesreasonid" }
     properties:
       relationshipProperty0: { field: "modifieddate" }
-  - relationship: "relationship8"
+  - type: "RelationshipMapping"
+    relationship: "relationship8"
     table: "salesperson"
     from:
       node: "node5"
@@ -1665,7 +1686,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "territoryid" }
-  - relationship: "relationship9"
+  - type: "RelationshipMapping"
+    relationship: "relationship9"
     table: "store"
     from:
       node: "node11"

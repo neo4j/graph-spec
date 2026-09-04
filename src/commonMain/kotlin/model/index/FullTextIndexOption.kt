@@ -28,7 +28,7 @@ import kotlin.js.JsExport
  */
 @JsExport
 @Serializable
-@SerialName("FullTextIndexOption")
+@SerialName("FULLTEXT")
 data class FullTextIndexOption(
     @SerialName("fulltext.default_analyzer")
     val defaultAnalyzer: String = "standard-no-stop-words",
@@ -45,5 +45,5 @@ data class FullTextIndexOption(
     @SerialName("fulltext.eventually_consistent_index_update_queue_max_length")
     val eventuallyConsistentUpdateQueueMaxLength: Int = 10_000
 ) : IndexOption {
-    override val type: IndexType = IndexType.FULLTEXT
+    override val type: IndexType get() = IndexType.FULLTEXT
 }

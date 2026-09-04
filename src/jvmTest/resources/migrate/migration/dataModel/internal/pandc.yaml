@@ -8085,24 +8085,28 @@ tables:
           table: "ENDORSEMENT"
           fields: ["EVENT_IDENTIFIER"]
 mappings:
-  - node: "node0"
+  - type: "NodeMapping"
+    node: "node0"
     table: "ACCOUNT"
     properties:
       nodeProperty0: { field: "ACCOUNT_IDENTIFIER" }
       nodeProperty1: { field: "ACCOUNT_TYPE_CODE" }
       nodeProperty2: { field: "ACCOUNT_NAME" }
     key: ["nodeProperty0"]
-  - node: "node1"
+  - type: "NodeMapping"
+    node: "node1"
     table: "ADMINISTRATIVE_ORGANIZATION_UNIT"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node2"
+  - type: "NodeMapping"
+    node: "node2"
     table: "AGENCY_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node3"
+  - type: "NodeMapping"
+    node: "node3"
     table: "AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
@@ -8110,23 +8114,27 @@ mappings:
       nodeProperty2: { field: "AGREEMENT_ORIGINAL_INCEPTION_DATE" }
       nodeProperty3: { field: "AGREEMENT_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node4"
+  - type: "NodeMapping"
+    node: "node4"
     table: "ANIMAL"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node5"
+  - type: "NodeMapping"
+    node: "node5"
     table: "APPROVAL"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node6"
+  - type: "NodeMapping"
+    node: "node6"
     table: "ARBITRATION"
     properties:
       nodeProperty0: { field: "ARBITRATION_IDENTIFIER" }
       nodeProperty1: { field: "ARBITRATION_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node7"
+  - type: "NodeMapping"
+    node: "node7"
     table: "ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_IDENTIFIER" }
@@ -8135,68 +8143,81 @@ mappings:
       nodeProperty3: { field: "END_DATE" }
       nodeProperty4: { field: "ASSESSMENT_REASON_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node8"
+  - type: "NodeMapping"
+    node: "node8"
     table: "ASSESSMENT_RESULT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
       nodeProperty1: { field: "ASSESSMENT_RESULT_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node9"
+  - type: "NodeMapping"
+    node: "node9"
     table: "ASSUMED_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node10"
+  - type: "NodeMapping"
+    node: "node10"
     table: "ASSUMED_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node11"
+  - type: "NodeMapping"
+    node: "node11"
     table: "AUTOMOBILE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node12"
+  - type: "NodeMapping"
+    node: "node12"
     table: "AUTO_REPAIR_SHOP_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node13"
+  - type: "NodeMapping"
+    node: "node13"
     table: "BINDING"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node14"
+  - type: "NodeMapping"
+    node: "node14"
     table: "BOAT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node15"
+  - type: "NodeMapping"
+    node: "node15"
     table: "BODY_OBJECT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node16"
+  - type: "NodeMapping"
+    node: "node16"
     table: "BROKERAGE_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node17"
+  - type: "NodeMapping"
+    node: "node17"
     table: "BUS"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node18"
+  - type: "NodeMapping"
+    node: "node18"
     table: "BUSINESS_EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node19"
+  - type: "NodeMapping"
+    node: "node19"
     table: "CANCEL"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node20"
+  - type: "NodeMapping"
+    node: "node20"
     table: "CATASTROPHE"
     properties:
       nodeProperty0: { field: "CATASTROPHE_IDENTIFIER" }
@@ -8205,22 +8226,26 @@ mappings:
       nodeProperty3: { field: "INDUSTRY_CATASTROPHE_CODE" }
       nodeProperty4: { field: "COMPANY_CATASTROPHE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node21"
+  - type: "NodeMapping"
+    node: "node21"
     table: "CEDED_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node22"
+  - type: "NodeMapping"
+    node: "node22"
     table: "CEDED_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node23"
+  - type: "NodeMapping"
+    node: "node23"
     table: "CHANNEL_SCORE"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node24"
+  - type: "NodeMapping"
+    node: "node24"
     table: "CLAIM"
     properties:
       nodeProperty0: { field: "CLAIM_IDENTIFIER" }
@@ -8235,7 +8260,8 @@ mappings:
       nodeProperty9: { field: "CLAIM_STATUS_CODE" }
       nodeProperty10: { field: "CLAIM_REPORTED_DATE" }
     key: ["nodeProperty0"]
-  - node: "node25"
+  - type: "NodeMapping"
+    node: "node25"
     table: "CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
@@ -8244,60 +8270,71 @@ mappings:
       nodeProperty3: { field: "CLAIM_AMOUNT" }
       nodeProperty4: { field: "INSURANCE_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node26"
+  - type: "NodeMapping"
+    node: "node26"
     table: "CLAIM_EVALUATION_RESULT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node27"
+  - type: "NodeMapping"
+    node: "node27"
     table: "CLAIM_EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node28"
+  - type: "NodeMapping"
+    node: "node28"
     table: "CLAIM_FOLDER"
     properties:
       nodeProperty0: { field: "CLAIM_IDENTIFIER" }
       nodeProperty1: { field: "CLAIM_FOLDER_LABEL_NAME" }
     key: ["nodeProperty0"]
-  - node: "node29"
+  - type: "NodeMapping"
+    node: "node29"
     table: "CLAIM_OFFER"
     properties:
       nodeProperty0: { field: "CLAIM_OFFER_IDENTIFIER" }
       nodeProperty1: { field: "SETTLEMENT_OFFER_AMOUNT" }
       nodeProperty2: { field: "SETTLEMENT_OFFER_PROVISION_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node30"
+  - type: "NodeMapping"
+    node: "node30"
     table: "CLAIM_PAYMENT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node31"
+  - type: "NodeMapping"
+    node: "node31"
     table: "CLAIM_RESERVE"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node32"
+  - type: "NodeMapping"
+    node: "node32"
     table: "COMBINATION_STRUCTURE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node33"
+  - type: "NodeMapping"
+    node: "node33"
     table: "COMBINE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node34"
+  - type: "NodeMapping"
+    node: "node34"
     table: "COMMERCIAL_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node35"
+  - type: "NodeMapping"
+    node: "node35"
     table: "COMMERCIAL_STRUCTURE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node36"
+  - type: "NodeMapping"
+    node: "node36"
     table: "COMMUNICATION_IDENTITY"
     properties:
       nodeProperty0: { field: "COMMUNICATION_IDENTIFIER" }
@@ -8305,12 +8342,14 @@ mappings:
       nodeProperty2: { field: "COMMUNICATION_VALUE" }
       nodeProperty3: { field: "COMMUNICATION_QUALIFIER_VALUE" }
     key: ["nodeProperty0"]
-  - node: "node37"
+  - type: "NodeMapping"
+    node: "node37"
     table: "COMMUTATION_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node38"
+  - type: "NodeMapping"
+    node: "node38"
     table: "COMPANY"
     properties:
       nodeProperty0: { field: "COMPANY_IDENTIFIER" }
@@ -8318,196 +8357,233 @@ mappings:
       nodeProperty2: { field: "COMPANY_DESCRIPTION" }
       nodeProperty3: { field: "COMPANY_NAME" }
     key: ["nodeProperty0"]
-  - node: "node39"
+  - type: "NodeMapping"
+    node: "node39"
     table: "CONSTRUCTION_VEHICLE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node40"
+  - type: "NodeMapping"
+    node: "node40"
     table: "CONSULTANT_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node41"
+  - type: "NodeMapping"
+    node: "node41"
     table: "COVERAGE"
     properties:
       nodeProperty0: { field: "COVERAGE_IDENTIFIER" }
       nodeProperty1: { field: "COVERAGE_DESCRIPTION" }
       nodeProperty2: { field: "COVERAGE_NAME" }
     key: ["nodeProperty0"]
-  - node: "node42"
+  - type: "NodeMapping"
+    node: "node42"
     table: "COVERAGE_GROUP"
     properties:
       nodeProperty0: { field: "COVERAGE_GROUP_IDENTIFIER" }
       nodeProperty1: { field: "COVERAGE_GROUP_DESCRIPTION" }
       nodeProperty2: { field: "COVERAGE_GROUP_NAME" }
     key: ["nodeProperty0"]
-  - node: "node43"
+  - type: "NodeMapping"
+    node: "node43"
     table: "COVERAGE_LIMIT_TYPE"
     properties:
       nodeProperty0: { field: "COVERAGE_LIMIT_TYPE_IDENTIFIER" }
       nodeProperty1: { field: "COVERAGE_LIMIT_NAME" }
       nodeProperty2: { field: "COVERAGE_LIMIT_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node44"
+  - type: "NodeMapping"
+    node: "node44"
     table: "COVERAGE_PART"
     properties:
       nodeProperty0: { field: "COVERAGE_PART_CODE" }
       nodeProperty1: { field: "COVERAGE_PART_NAME" }
     key: ["nodeProperty0"]
-  - node: "node45"
+  - type: "NodeMapping"
+    node: "node45"
     table: "COVERAGE_TYPE"
     properties:
       nodeProperty0: { field: "COVERAGE_TYPE_IDENTIFIER" }
       nodeProperty1: { field: "COVERAGE_TYPE_DESCRIPTION" }
       nodeProperty2: { field: "COVERAGE_TYPE_NAME" }
     key: ["nodeProperty0"]
-  - node: "node46"
+  - type: "NodeMapping"
+    node: "node46"
     table: "CREDIT_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node47"
+  - type: "NodeMapping"
+    node: "node47"
     table: "CREDIT_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node48"
+  - type: "NodeMapping"
+    node: "node48"
     table: "CREDIT_RATING"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node49"
+  - type: "NodeMapping"
+    node: "node49"
     table: "CUSTOMER_SCORE"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node50"
+  - type: "NodeMapping"
+    node: "node50"
     table: "DEBIT_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node51"
+  - type: "NodeMapping"
+    node: "node51"
     table: "DEBIT_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node52"
+  - type: "NodeMapping"
+    node: "node52"
     table: "DEDUCTIBLE_RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node53"
+  - type: "NodeMapping"
+    node: "node53"
     table: "DEMOGRAPHIC_SCORE"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node54"
+  - type: "NodeMapping"
+    node: "node54"
     table: "DERIVATIVE_CONTRACT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node55"
+  - type: "NodeMapping"
+    node: "node55"
     table: "DIRECT_CLAIM_AMOUNT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node56"
+  - type: "NodeMapping"
+    node: "node56"
     table: "DIRECT_POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node57"
+  - type: "NodeMapping"
+    node: "node57"
     table: "DWELLING"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node58"
+  - type: "NodeMapping"
+    node: "node58"
     table: "EMPLOYMENT_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node59"
+  - type: "NodeMapping"
+    node: "node59"
     table: "ENDORSEMENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node60"
+  - type: "NodeMapping"
+    node: "node60"
     table: "EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node61"
+  - type: "NodeMapping"
+    node: "node61"
     table: "EXPENSE_PAYMENT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node62"
+  - type: "NodeMapping"
+    node: "node62"
     table: "EXPENSE_RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node63"
+  - type: "NodeMapping"
+    node: "node63"
     table: "EXPENSE_RESERVE"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node64"
+  - type: "NodeMapping"
+    node: "node64"
     table: "FARM_EQUIPMENT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node65"
+  - type: "NodeMapping"
+    node: "node65"
     table: "FEE"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node66"
+  - type: "NodeMapping"
+    node: "node66"
     table: "FIELD_ORGANIZATION_UNIT"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node67"
+  - type: "NodeMapping"
+    node: "node67"
     table: "FINANCIAL_ACCOUNT_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node68"
+  - type: "NodeMapping"
+    node: "node68"
     table: "FINANCIAL_SERVICES_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node69"
+  - type: "NodeMapping"
+    node: "node69"
     table: "FINANCIAL_VALUATION"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node70"
+  - type: "NodeMapping"
+    node: "node70"
     table: "FLAT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node71"
+  - type: "NodeMapping"
+    node: "node71"
     table: "FOR_PROFIT_ORGANIZATION"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node72"
+  - type: "NodeMapping"
+    node: "node72"
     table: "FRAUD_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node73"
+  - type: "NodeMapping"
+    node: "node73"
     table: "FREIGHT_GROUP"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node74"
+  - type: "NodeMapping"
+    node: "node74"
     table: "FULL_TERM"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node75"
+  - type: "NodeMapping"
+    node: "node75"
     table: "GEOGRAPHIC_LOCATION"
     properties:
       nodeProperty0: { field: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
@@ -8516,61 +8592,72 @@ mappings:
       nodeProperty3: { field: "LOCATION_NAME" }
       nodeProperty4: { field: "LOCATION_NUMBER" }
     key: ["nodeProperty0"]
-  - node: "node76"
+  - type: "NodeMapping"
+    node: "node76"
     table: "GOVERNMENT_ORGANIZATION"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node77"
+  - type: "NodeMapping"
+    node: "node77"
     table: "GROUPING"
     properties:
       nodeProperty0: { field: "GROUPING_IDENTIFIER" }
       nodeProperty1: { field: "GROUPING_NAME" }
     key: ["nodeProperty0"]
-  - node: "node78"
+  - type: "NodeMapping"
+    node: "node78"
     table: "GROUP_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node79"
+  - type: "NodeMapping"
+    node: "node79"
     table: "HOUSEHOLD"
     properties:
       nodeProperty0: { field: "HOUSEHOLD_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node80"
+  - type: "NodeMapping"
+    node: "node80"
     table: "HOUSEHOLD_CONTENT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node81"
+  - type: "NodeMapping"
+    node: "node81"
     table: "INDIVIDUAL_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node82"
+  - type: "NodeMapping"
+    node: "node82"
     table: "INSURABLE_OBJECT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
       nodeProperty1: { field: "INSURABLE_OBJECT_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node83"
+  - type: "NodeMapping"
+    node: "node83"
     table: "INSURANCE_CLASS"
     properties:
       nodeProperty0: { field: "INSURANCE_CLASS_IDENTIFIER" }
       nodeProperty1: { field: "INSURANCE_CLASS_NAME" }
       nodeProperty2: { field: "INSURANCE_CLASS_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node84"
+  - type: "NodeMapping"
+    node: "node84"
     table: "INSURED_ACCOUNT"
     properties:
       nodeProperty0: { field: "ACCOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node85"
+  - type: "NodeMapping"
+    node: "node85"
     table: "INTERMEDIARY_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node86"
+  - type: "NodeMapping"
+    node: "node86"
     table: "LEGAL_JURISDICTION"
     properties:
       nodeProperty0: { field: "LEGAL_JURISDICTION_IDENTIFIER" }
@@ -8578,12 +8665,14 @@ mappings:
       nodeProperty2: { field: "LEGAL_JURISDICTION_DESCRIPTION" }
       nodeProperty3: { field: "RULES_REFERENCE_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node87"
+  - type: "NodeMapping"
+    node: "node87"
     table: "LIFE_EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node88"
+  - type: "NodeMapping"
+    node: "node88"
     table: "LINE_OF_BUSINESS"
     properties:
       nodeProperty0: { field: "LINE_OF_BUSINESS_IDENTIFIER" }
@@ -8591,20 +8680,23 @@ mappings:
       nodeProperty2: { field: "LINE_OF_BUSINESS_DESCRIPTION" }
       nodeProperty3: { field: "LINE_OF_BUSINESS_CODE" }
     key: ["nodeProperty0"]
-  - node: "node89"
+  - type: "NodeMapping"
+    node: "node89"
     table: "LINE_OF_BUSINESS_GROUP"
     properties:
       nodeProperty0: { field: "LINE_OF_BUSINESS_GROUP_IDENTIFIER" }
       nodeProperty1: { field: "LINE_OF_BUSINESS_GROUP_NAME" }
       nodeProperty2: { field: "LINE_OF_BUSINESS_GROUP_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node90"
+  - type: "NodeMapping"
+    node: "node90"
     table: "LITIGATION"
     properties:
       nodeProperty0: { field: "LITIGATION_IDENTIFIER" }
       nodeProperty1: { field: "LITIGATION_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node91"
+  - type: "NodeMapping"
+    node: "node91"
     table: "LOCATION_ADDRESS"
     properties:
       nodeProperty0: { field: "LOCATION_ADDRESS_IDENTIFIER" }
@@ -8616,62 +8708,74 @@ mappings:
       nodeProperty6: { field: "BEGIN_DATE" }
       nodeProperty7: { field: "END_DATE" }
     key: ["nodeProperty0"]
-  - node: "node92"
+  - type: "NodeMapping"
+    node: "node92"
     table: "LOSS_PAYMENT"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node93"
+  - type: "NodeMapping"
+    node: "node93"
     table: "LOSS_RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node94"
+  - type: "NodeMapping"
+    node: "node94"
     table: "LOSS_RESERVE"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node95"
+  - type: "NodeMapping"
+    node: "node95"
     table: "MANUFACTURED_OBJECT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node96"
+  - type: "NodeMapping"
+    node: "node96"
     table: "MEDICAL_CONDITION"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node97"
+  - type: "NodeMapping"
+    node: "node97"
     table: "MID_TERM"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node98"
+  - type: "NodeMapping"
+    node: "node98"
     table: "MILKING_MACHINE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node99"
+  - type: "NodeMapping"
+    node: "node99"
     table: "MOBILE_HOME"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node100"
+  - type: "NodeMapping"
+    node: "node100"
     table: "MOTORCYCLE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node101"
+  - type: "NodeMapping"
+    node: "node101"
     table: "NEW_BUSINESS"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node102"
+  - type: "NodeMapping"
+    node: "node102"
     table: "NOT_FOR_PROFIT_ORGANIZATION"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node103"
+  - type: "NodeMapping"
+    node: "node103"
     table: "OCCURRENCE"
     properties:
       nodeProperty0: { field: "OCCURRENCE_IDENTIFIER" }
@@ -8682,7 +8786,8 @@ mappings:
       nodeProperty5: { field: "OCCURRENCE_END_TIME" }
       nodeProperty6: { field: "OCCURRENCE_NAME" }
     key: ["nodeProperty0"]
-  - node: "node104"
+  - type: "NodeMapping"
+    node: "node104"
     table: "ORGANIZATION"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
@@ -8695,7 +8800,8 @@ mappings:
       nodeProperty7: { field: "ACRONYM_NAME" }
       nodeProperty8: { field: "INDUSTRY_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node105"
+  - type: "NodeMapping"
+    node: "node105"
     table: "ORGANIZATION_UNIT"
     properties:
       nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
@@ -8705,12 +8811,14 @@ mappings:
       nodeProperty4: { field: "ACCOUNTING_CODE" }
       nodeProperty5: { field: "WORK_SITE_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node106"
+  - type: "NodeMapping"
+    node: "node106"
     table: "OTHER_ASSESSMENT_RESULT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node107"
+  - type: "NodeMapping"
+    node: "node107"
     table: "PARTY"
     properties:
       nodeProperty0: { field: "PARTY_IDENTIFIER" }
@@ -8719,20 +8827,23 @@ mappings:
       nodeProperty3: { field: "END_DATE" }
       nodeProperty4: { field: "PARTY_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node108"
+  - type: "NodeMapping"
+    node: "node108"
     table: "PARTY_PREFERENCE"
     properties:
       nodeProperty0: { field: "PARTY_IDENTIFIER" }
       nodeProperty1: { field: "PREFERRED_LANGUAGE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node109"
+  - type: "NodeMapping"
+    node: "node109"
     table: "PARTY_ROLE"
     properties:
       nodeProperty0: { field: "PARTY_ROLE_CODE" }
       nodeProperty1: { field: "PARTY_ROLE_NAME" }
       nodeProperty2: { field: "PARTY_ROLE_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node110"
+  - type: "NodeMapping"
+    node: "node110"
     table: "PERSON"
     properties:
       nodeProperty0: { field: "PERSON_IDENTIFIER" }
@@ -8747,13 +8858,15 @@ mappings:
       nodeProperty9: { field: "GENDER_CODE" }
       nodeProperty10: { field: "PREFIX_NAME" }
     key: ["nodeProperty0"]
-  - node: "node111"
+  - type: "NodeMapping"
+    node: "node111"
     table: "PERSON_PROFESSION"
     properties:
       nodeProperty0: { field: "PERSON_IDENTIFIER" }
       nodeProperty1: { field: "PROFESSION_NAME" }
     key: ["nodeProperty0"]
-  - node: "node112"
+  - type: "NodeMapping"
+    node: "node112"
     table: "PHYSICAL_LOCATION"
     properties:
       nodeProperty0: { field: "PHYSICAL_LOCATION_IDENTIFIER" }
@@ -8766,17 +8879,20 @@ mappings:
       nodeProperty7: { field: "VERTICAL_ACCURACY_VALUE" }
       nodeProperty8: { field: "TRAVEL_DIRECTION_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node113"
+  - type: "NodeMapping"
+    node: "node113"
     table: "PHYSICAL_OBJECT_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node114"
+  - type: "NodeMapping"
+    node: "node114"
     table: "PLACE_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node115"
+  - type: "NodeMapping"
+    node: "node115"
     table: "POLICY"
     properties:
       nodeProperty0: { field: "POLICY_IDENTIFIER" }
@@ -8785,7 +8901,8 @@ mappings:
       nodeProperty3: { field: "POLICY_NUMBER" }
       nodeProperty4: { field: "STATUS_CODE" }
     key: ["nodeProperty0"]
-  - node: "node116"
+  - type: "NodeMapping"
+    node: "node116"
     table: "POLICY_AMOUNT"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
@@ -8795,7 +8912,8 @@ mappings:
       nodeProperty4: { field: "POLICY_AMOUNT" }
       nodeProperty5: { field: "INSURANCE_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node117"
+  - type: "NodeMapping"
+    node: "node117"
     table: "POLICY_DEDUCTIBLE"
     properties:
       nodeProperty0: { field: "POLICY_DEDUCTIBLE_IDENTIFIER" }
@@ -8803,7 +8921,8 @@ mappings:
       nodeProperty2: { field: "DEDUCTIBLE_VALUE" }
       nodeProperty3: { field: "DEDUCTIBLE_BASIS_CODE" }
     key: ["nodeProperty0"]
-  - node: "node118"
+  - type: "NodeMapping"
+    node: "node118"
     table: "POLICY_EVENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
@@ -8812,7 +8931,8 @@ mappings:
       nodeProperty3: { field: "EVENT_TYPE_CODE" }
       nodeProperty4: { field: "EVENT_SUB_TYPE_CODE" }
     key: ["nodeProperty0"]
-  - node: "node119"
+  - type: "NodeMapping"
+    node: "node119"
     table: "POLICY_LIMIT"
     properties:
       nodeProperty0: { field: "POLICY_LIMIT_IDENTIFIER" }
@@ -8820,54 +8940,64 @@ mappings:
       nodeProperty2: { field: "LIMIT_VALUE" }
       nodeProperty3: { field: "LIMIT_BASIS_CODE" }
     key: ["nodeProperty0"]
-  - node: "node120"
+  - type: "NodeMapping"
+    node: "node120"
     table: "PREMIUM"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node121"
+  - type: "NodeMapping"
+    node: "node121"
     table: "PRE_QUALIFICATION"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node122"
+  - type: "NodeMapping"
+    node: "node122"
     table: "PRODUCT"
     properties:
       nodeProperty0: { field: "PRODUCT_IDENTIFIER" }
       nodeProperty1: { field: "LICENSED_PRODUCT_NAME" }
       nodeProperty2: { field: "PRODUCT_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node123"
+  - type: "NodeMapping"
+    node: "node123"
     table: "PROFESSIONAL_GROUP"
     properties:
       nodeProperty0: { field: "GROUPING_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node124"
+  - type: "NodeMapping"
+    node: "node124"
     table: "PROJECT"
     properties:
       nodeProperty0: { field: "GROUPING_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node125"
+  - type: "NodeMapping"
+    node: "node125"
     table: "PROPERTY_IN_TRANSIT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node126"
+  - type: "NodeMapping"
+    node: "node126"
     table: "PROVIDER_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node127"
+  - type: "NodeMapping"
+    node: "node127"
     table: "PRO_RATA"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node128"
+  - type: "NodeMapping"
+    node: "node128"
     table: "QUOTE"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node129"
+  - type: "NodeMapping"
+    node: "node129"
     table: "RATING_TERRITORY"
     properties:
       nodeProperty0: { field: "RATING_TERRITORY_IDENTIFIER" }
@@ -8875,147 +9005,175 @@ mappings:
       nodeProperty2: { field: "RATING_TERRITORY_CODE" }
       nodeProperty3: { field: "RATING_TERRITORY_CODE_SET_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node130"
+  - type: "NodeMapping"
+    node: "node130"
     table: "RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node131"
+  - type: "NodeMapping"
+    node: "node131"
     table: "RECREATIONAL_VEHICLE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node132"
+  - type: "NodeMapping"
+    node: "node132"
     table: "REINSTATEMENT"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node133"
+  - type: "NodeMapping"
+    node: "node133"
     table: "REINSURANCE_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node134"
+  - type: "NodeMapping"
+    node: "node134"
     table: "REINSURANCE_RECOVERY"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node135"
+  - type: "NodeMapping"
+    node: "node135"
     table: "RENEWAL"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node136"
+  - type: "NodeMapping"
+    node: "node136"
     table: "RESIDENTIAL_STRUCTURE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node137"
+  - type: "NodeMapping"
+    node: "node137"
     table: "RISK_FACTOR_SCORE"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node138"
+  - type: "NodeMapping"
+    node: "node138"
     table: "SALVAGE"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node139"
+  - type: "NodeMapping"
+    node: "node139"
     table: "SCHEDULED_ITEM"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node140"
+  - type: "NodeMapping"
+    node: "node140"
     table: "SHORT_RATE"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node141"
+  - type: "NodeMapping"
+    node: "node141"
     table: "STAFFING_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node142"
+  - type: "NodeMapping"
+    node: "node142"
     table: "STAFF_CLASSIFICATION"
     properties:
       nodeProperty0: { field: "STAFF_CLASSIFICATION_CODE" }
       nodeProperty1: { field: "STAFF_CLASSIFICATION_NAME" }
       nodeProperty2: { field: "STAFF_CLASSIFICATION_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node143"
+  - type: "NodeMapping"
+    node: "node143"
     table: "STAFF_POSITION"
     properties:
       nodeProperty0: { field: "STAFF_POSITION_IDENTIFIER" }
       nodeProperty1: { field: "STAFF_POSITION_NAME" }
       nodeProperty2: { field: "STAFF_POSITION_DESCRIPTION" }
     key: ["nodeProperty0"]
-  - node: "node144"
+  - type: "NodeMapping"
+    node: "node144"
     table: "STATE"
     properties:
       nodeProperty0: { field: "STATE_CODE" }
       nodeProperty1: { field: "STATE_NAME" }
     key: ["nodeProperty0"]
-  - node: "node145"
+  - type: "NodeMapping"
+    node: "node145"
     table: "STRUCTURE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node146"
+  - type: "NodeMapping"
+    node: "node146"
     table: "SUBROGATION"
     properties:
       nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node147"
+  - type: "NodeMapping"
+    node: "node147"
     table: "SURCHARGE"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node148"
+  - type: "NodeMapping"
+    node: "node148"
     table: "TAX"
     properties:
       nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node149"
+  - type: "NodeMapping"
+    node: "node149"
     table: "TEAM"
     properties:
       nodeProperty0: { field: "GROUPING_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node150"
+  - type: "NodeMapping"
+    node: "node150"
     table: "THIRD_PARTY_STAFFING_AGREEMENT"
     properties:
       nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node151"
+  - type: "NodeMapping"
+    node: "node151"
     table: "TRACTOR"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node152"
+  - type: "NodeMapping"
+    node: "node152"
     table: "TRAILER"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node153"
+  - type: "NodeMapping"
+    node: "node153"
     table: "TRANSPORTATION_CLASS"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node154"
+  - type: "NodeMapping"
+    node: "node154"
     table: "TRUCK"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node155"
+  - type: "NodeMapping"
+    node: "node155"
     table: "UNDERWRITING_ASSESSMENT"
     properties:
       nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node156"
+  - type: "NodeMapping"
+    node: "node156"
     table: "VAN"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node157"
+  - type: "NodeMapping"
+    node: "node157"
     table: "VEHICLE"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
@@ -9025,22 +9183,26 @@ mappings:
       nodeProperty4: { field: "VEHICLE_MAKE_NAME" }
       nodeProperty5: { field: "VEHICLE_IDENTIFICATION_NUMBER" }
     key: ["nodeProperty0"]
-  - node: "node158"
+  - type: "NodeMapping"
+    node: "node158"
     table: "WATERCRAFT"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node159"
+  - type: "NodeMapping"
+    node: "node159"
     table: "WORKERS_COMP_CLASS"
     properties:
       nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - node: "node160"
+  - type: "NodeMapping"
+    node: "node160"
     table: "audit"
     properties:
       nodeProperty0: { field: "EVENT_IDENTIFIER" }
     key: ["nodeProperty0"]
-  - relationship: "relationship0"
+  - type: "RelationshipMapping"
+    relationship: "relationship0"
     table: "ACCOUNT_AGREEMENT"
     from:
       node: "node0"
@@ -9050,7 +9212,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship1"
+  - type: "RelationshipMapping"
+    relationship: "relationship1"
     table: "ADMINISTRATIVE_ORGANIZATION_UNIT"
     from:
       node: "node1"
@@ -9060,7 +9223,8 @@ mappings:
       node: "node105"
       properties:
         nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
-  - relationship: "relationship2"
+  - type: "RelationshipMapping"
+    relationship: "relationship2"
     table: "AGENCY_CONTRACT"
     from:
       node: "node2"
@@ -9070,7 +9234,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship3"
+  - type: "RelationshipMapping"
+    relationship: "relationship3"
     table: "AGREEMENT"
     from:
       node: "node3"
@@ -9080,7 +9245,8 @@ mappings:
       node: "node122"
       properties:
         nodeProperty0: { field: "PRODUCT_IDENTIFIER" }
-  - relationship: "relationship4"
+  - type: "RelationshipMapping"
+    relationship: "relationship4"
     table: "AGREEMENT_ASSESSMENT"
     from:
       node: "node3"
@@ -9090,7 +9256,8 @@ mappings:
       node: "node7"
       properties:
         nodeProperty0: { field: "ASSESSMENT_IDENTIFIER" }
-  - relationship: "relationship5"
+  - type: "RelationshipMapping"
+    relationship: "relationship5"
     table: "ANIMAL"
     from:
       node: "node4"
@@ -9100,7 +9267,8 @@ mappings:
       node: "node15"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship6"
+  - type: "RelationshipMapping"
+    relationship: "relationship6"
     table: "APPROVAL"
     from:
       node: "node5"
@@ -9110,7 +9278,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship7"
+  - type: "RelationshipMapping"
+    relationship: "relationship7"
     table: "ASSESSMENT_RESULT"
     from:
       node: "node8"
@@ -9120,7 +9289,8 @@ mappings:
       node: "node7"
       properties:
         nodeProperty0: { field: "ASSESSMENT_IDENTIFIER" }
-  - relationship: "relationship8"
+  - type: "RelationshipMapping"
+    relationship: "relationship8"
     table: "ASSUMED_CLAIM_AMOUNT"
     from:
       node: "node9"
@@ -9130,7 +9300,8 @@ mappings:
       node: "node25"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship9"
+  - type: "RelationshipMapping"
+    relationship: "relationship9"
     table: "ASSUMED_POLICY_AMOUNT"
     from:
       node: "node10"
@@ -9140,7 +9311,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship10"
+  - type: "RelationshipMapping"
+    relationship: "relationship10"
     table: "AUTOMOBILE"
     from:
       node: "node11"
@@ -9150,7 +9322,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship11"
+  - type: "RelationshipMapping"
+    relationship: "relationship11"
     table: "AUTO_REPAIR_SHOP_CONTRACT"
     from:
       node: "node12"
@@ -9160,7 +9333,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship12"
+  - type: "RelationshipMapping"
+    relationship: "relationship12"
     table: "BINDING"
     from:
       node: "node13"
@@ -9170,7 +9344,8 @@ mappings:
       node: "node118"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship13"
+  - type: "RelationshipMapping"
+    relationship: "relationship13"
     table: "BOAT"
     from:
       node: "node14"
@@ -9180,7 +9355,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship14"
+  - type: "RelationshipMapping"
+    relationship: "relationship14"
     table: "BODY_OBJECT"
     from:
       node: "node15"
@@ -9190,7 +9366,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship15"
+  - type: "RelationshipMapping"
+    relationship: "relationship15"
     table: "BROKERAGE_CONTRACT"
     from:
       node: "node16"
@@ -9200,7 +9377,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship16"
+  - type: "RelationshipMapping"
+    relationship: "relationship16"
     table: "BUS"
     from:
       node: "node17"
@@ -9210,7 +9388,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship17"
+  - type: "RelationshipMapping"
+    relationship: "relationship17"
     table: "BUSINESS_EVENT"
     from:
       node: "node18"
@@ -9220,7 +9399,8 @@ mappings:
       node: "node60"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship18"
+  - type: "RelationshipMapping"
+    relationship: "relationship18"
     table: "CANCEL"
     from:
       node: "node19"
@@ -9230,7 +9410,8 @@ mappings:
       node: "node118"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship19"
+  - type: "RelationshipMapping"
+    relationship: "relationship19"
     table: "CEDED_CLAIM_AMOUNT"
     from:
       node: "node21"
@@ -9240,7 +9421,8 @@ mappings:
       node: "node25"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship20"
+  - type: "RelationshipMapping"
+    relationship: "relationship20"
     table: "CEDED_POLICY_AMOUNT"
     from:
       node: "node22"
@@ -9250,7 +9432,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship21"
+  - type: "RelationshipMapping"
+    relationship: "relationship21"
     table: "CHANNEL_SCORE"
     from:
       node: "node23"
@@ -9260,7 +9443,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship22"
+  - type: "RelationshipMapping"
+    relationship: "relationship22"
     table: "CLAIM"
     from:
       node: "node24"
@@ -9270,7 +9454,8 @@ mappings:
       node: "node20"
       properties:
         nodeProperty0: { field: "CATASTROPHE_IDENTIFIER" }
-  - relationship: "relationship23"
+  - type: "RelationshipMapping"
+    relationship: "relationship23"
     table: "CLAIM"
     from:
       node: "node24"
@@ -9280,7 +9465,8 @@ mappings:
       node: "node24"
       properties:
         nodeProperty0: { field: "CLAIM_IDENTIFIER" }
-  - relationship: "relationship24"
+  - type: "RelationshipMapping"
+    relationship: "relationship24"
     table: "CLAIM"
     from:
       node: "node24"
@@ -9290,7 +9476,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship25"
+  - type: "RelationshipMapping"
+    relationship: "relationship25"
     table: "CLAIM"
     from:
       node: "node24"
@@ -9300,7 +9487,8 @@ mappings:
       node: "node103"
       properties:
         nodeProperty0: { field: "OCCURRENCE_IDENTIFIER" }
-  - relationship: "relationship26"
+  - type: "RelationshipMapping"
+    relationship: "relationship26"
     table: "CLAIM_AMOUNT"
     from:
       node: "node25"
@@ -9310,7 +9498,8 @@ mappings:
       node: "node24"
       properties:
         nodeProperty0: { field: "CLAIM_IDENTIFIER" }
-  - relationship: "relationship27"
+  - type: "RelationshipMapping"
+    relationship: "relationship27"
     table: "CLAIM_AMOUNT"
     from:
       node: "node25"
@@ -9320,7 +9509,8 @@ mappings:
       node: "node29"
       properties:
         nodeProperty0: { field: "CLAIM_OFFER_IDENTIFIER" }
-  - relationship: "relationship28"
+  - type: "RelationshipMapping"
+    relationship: "relationship28"
     table: "CLAIM_ARBITRATION"
     from:
       node: "node6"
@@ -9330,7 +9520,8 @@ mappings:
       node: "node24"
       properties:
         nodeProperty0: { field: "CLAIM_IDENTIFIER" }
-  - relationship: "relationship29"
+  - type: "RelationshipMapping"
+    relationship: "relationship29"
     table: "CLAIM_ASSESSMENT"
     from:
       node: "node7"
@@ -9340,7 +9531,8 @@ mappings:
       node: "node24"
       properties:
         nodeProperty0: { field: "CLAIM_IDENTIFIER" }
-  - relationship: "relationship30"
+  - type: "RelationshipMapping"
+    relationship: "relationship30"
     table: "CLAIM_EVALUATION_RESULT"
     from:
       node: "node26"
@@ -9350,7 +9542,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship31"
+  - type: "RelationshipMapping"
+    relationship: "relationship31"
     table: "CLAIM_EVENT"
     from:
       node: "node27"
@@ -9360,7 +9553,8 @@ mappings:
       node: "node60"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship32"
+  - type: "RelationshipMapping"
+    relationship: "relationship32"
     table: "CLAIM_FOLDER"
     from:
       node: "node28"
@@ -9370,7 +9564,8 @@ mappings:
       node: "node24"
       properties:
         nodeProperty0: { field: "CLAIM_IDENTIFIER" }
-  - relationship: "relationship33"
+  - type: "RelationshipMapping"
+    relationship: "relationship33"
     table: "CLAIM_LITIGATION"
     from:
       node: "node24"
@@ -9380,7 +9575,8 @@ mappings:
       node: "node90"
       properties:
         nodeProperty0: { field: "LITIGATION_IDENTIFIER" }
-  - relationship: "relationship34"
+  - type: "RelationshipMapping"
+    relationship: "relationship34"
     table: "CLAIM_OFFER"
     from:
       node: "node29"
@@ -9390,7 +9586,8 @@ mappings:
       node: "node6"
       properties:
         nodeProperty0: { field: "ARBITRATION_IDENTIFIER" }
-  - relationship: "relationship35"
+  - type: "RelationshipMapping"
+    relationship: "relationship35"
     table: "CLAIM_OFFER"
     from:
       node: "node29"
@@ -9400,7 +9597,8 @@ mappings:
       node: "node28"
       properties:
         nodeProperty0: { field: "CLAIM_IDENTIFIER" }
-  - relationship: "relationship36"
+  - type: "RelationshipMapping"
+    relationship: "relationship36"
     table: "CLAIM_OFFER"
     from:
       node: "node29"
@@ -9410,7 +9608,8 @@ mappings:
       node: "node90"
       properties:
         nodeProperty0: { field: "LITIGATION_IDENTIFIER" }
-  - relationship: "relationship37"
+  - type: "RelationshipMapping"
+    relationship: "relationship37"
     table: "CLAIM_PAYMENT"
     from:
       node: "node30"
@@ -9420,7 +9619,8 @@ mappings:
       node: "node25"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship38"
+  - type: "RelationshipMapping"
+    relationship: "relationship38"
     table: "CLAIM_RESERVE"
     from:
       node: "node31"
@@ -9430,7 +9630,8 @@ mappings:
       node: "node25"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship39"
+  - type: "RelationshipMapping"
+    relationship: "relationship39"
     table: "COMBINATION_STRUCTURE"
     from:
       node: "node32"
@@ -9440,7 +9641,8 @@ mappings:
       node: "node145"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship40"
+  - type: "RelationshipMapping"
+    relationship: "relationship40"
     table: "COMBINE"
     from:
       node: "node33"
@@ -9450,7 +9652,8 @@ mappings:
       node: "node64"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship41"
+  - type: "RelationshipMapping"
+    relationship: "relationship41"
     table: "COMMERCIAL_AGREEMENT"
     from:
       node: "node34"
@@ -9460,7 +9663,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship42"
+  - type: "RelationshipMapping"
+    relationship: "relationship42"
     table: "COMMERCIAL_STRUCTURE"
     from:
       node: "node35"
@@ -9470,7 +9674,8 @@ mappings:
       node: "node145"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship43"
+  - type: "RelationshipMapping"
+    relationship: "relationship43"
     table: "COMMUNICATION_IDENTITY"
     from:
       node: "node36"
@@ -9480,7 +9685,8 @@ mappings:
       node: "node75"
       properties:
         nodeProperty0: { field: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
-  - relationship: "relationship44"
+  - type: "RelationshipMapping"
+    relationship: "relationship44"
     table: "COMMUTATION_AGREEMENT"
     from:
       node: "node37"
@@ -9490,7 +9696,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship45"
+  - type: "RelationshipMapping"
+    relationship: "relationship45"
     table: "COMPANY_JURISDICTION"
     from:
       node: "node38"
@@ -9500,7 +9707,8 @@ mappings:
       node: "node75"
       properties:
         nodeProperty0: { field: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
-  - relationship: "relationship46"
+  - type: "RelationshipMapping"
+    relationship: "relationship46"
     table: "CONSTRUCTION_VEHICLE"
     from:
       node: "node39"
@@ -9510,7 +9718,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship47"
+  - type: "RelationshipMapping"
+    relationship: "relationship47"
     table: "CONSULTANT_CONTRACT"
     from:
       node: "node40"
@@ -9520,7 +9729,8 @@ mappings:
       node: "node141"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship48"
+  - type: "RelationshipMapping"
+    relationship: "relationship48"
     table: "COVERAGE"
     from:
       node: "node41"
@@ -9530,7 +9740,8 @@ mappings:
       node: "node42"
       properties:
         nodeProperty0: { field: "COVERAGE_GROUP_IDENTIFIER" }
-  - relationship: "relationship49"
+  - type: "RelationshipMapping"
+    relationship: "relationship49"
     table: "COVERAGE"
     from:
       node: "node41"
@@ -9540,7 +9751,8 @@ mappings:
       node: "node44"
       properties:
         nodeProperty0: { field: "COVERAGE_PART_CODE" }
-  - relationship: "relationship50"
+  - type: "RelationshipMapping"
+    relationship: "relationship50"
     table: "COVERAGE"
     from:
       node: "node41"
@@ -9550,7 +9762,8 @@ mappings:
       node: "node45"
       properties:
         nodeProperty0: { field: "COVERAGE_TYPE_IDENTIFIER" }
-  - relationship: "relationship51"
+  - type: "RelationshipMapping"
+    relationship: "relationship51"
     table: "CREDIT_CLAIM_AMOUNT"
     from:
       node: "node46"
@@ -9560,7 +9773,8 @@ mappings:
       node: "node25"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship52"
+  - type: "RelationshipMapping"
+    relationship: "relationship52"
     table: "CREDIT_POLICY_AMOUNT"
     from:
       node: "node47"
@@ -9570,7 +9784,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship53"
+  - type: "RelationshipMapping"
+    relationship: "relationship53"
     table: "CREDIT_RATING"
     from:
       node: "node48"
@@ -9580,7 +9795,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship54"
+  - type: "RelationshipMapping"
+    relationship: "relationship54"
     table: "CUSTOMER_SCORE"
     from:
       node: "node49"
@@ -9590,7 +9806,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship55"
+  - type: "RelationshipMapping"
+    relationship: "relationship55"
     table: "DEBIT_CLAIM_AMOUNT"
     from:
       node: "node50"
@@ -9600,7 +9817,8 @@ mappings:
       node: "node25"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship56"
+  - type: "RelationshipMapping"
+    relationship: "relationship56"
     table: "DEBIT_POLICY_AMOUNT"
     from:
       node: "node51"
@@ -9610,7 +9828,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship57"
+  - type: "RelationshipMapping"
+    relationship: "relationship57"
     table: "DEDUCTIBLE_RECOVERY"
     from:
       node: "node52"
@@ -9620,7 +9839,8 @@ mappings:
       node: "node130"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship58"
+  - type: "RelationshipMapping"
+    relationship: "relationship58"
     table: "DEMOGRAPHIC_SCORE"
     from:
       node: "node53"
@@ -9630,7 +9850,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship59"
+  - type: "RelationshipMapping"
+    relationship: "relationship59"
     table: "DERIVATIVE_CONTRACT"
     from:
       node: "node54"
@@ -9640,7 +9861,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship60"
+  - type: "RelationshipMapping"
+    relationship: "relationship60"
     table: "DIRECT_CLAIM_AMOUNT"
     from:
       node: "node55"
@@ -9650,7 +9872,8 @@ mappings:
       node: "node25"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship61"
+  - type: "RelationshipMapping"
+    relationship: "relationship61"
     table: "DIRECT_POLICY_AMOUNT"
     from:
       node: "node56"
@@ -9660,7 +9883,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship62"
+  - type: "RelationshipMapping"
+    relationship: "relationship62"
     table: "DWELLING"
     from:
       node: "node57"
@@ -9670,7 +9894,8 @@ mappings:
       node: "node136"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship63"
+  - type: "RelationshipMapping"
+    relationship: "relationship63"
     table: "EMPLOYMENT_AGREEMENT"
     from:
       node: "node58"
@@ -9680,7 +9905,8 @@ mappings:
       node: "node141"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship64"
+  - type: "RelationshipMapping"
+    relationship: "relationship64"
     table: "ENDORSEMENT"
     from:
       node: "node59"
@@ -9690,7 +9916,8 @@ mappings:
       node: "node118"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship65"
+  - type: "RelationshipMapping"
+    relationship: "relationship65"
     table: "EXPENSE_PAYMENT"
     from:
       node: "node61"
@@ -9700,7 +9927,8 @@ mappings:
       node: "node30"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship66"
+  - type: "RelationshipMapping"
+    relationship: "relationship66"
     table: "EXPENSE_RECOVERY"
     from:
       node: "node62"
@@ -9710,7 +9938,8 @@ mappings:
       node: "node130"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship67"
+  - type: "RelationshipMapping"
+    relationship: "relationship67"
     table: "EXPENSE_RESERVE"
     from:
       node: "node63"
@@ -9720,7 +9949,8 @@ mappings:
       node: "node31"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship68"
+  - type: "RelationshipMapping"
+    relationship: "relationship68"
     table: "FARM_EQUIPMENT"
     from:
       node: "node64"
@@ -9730,7 +9960,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship69"
+  - type: "RelationshipMapping"
+    relationship: "relationship69"
     table: "FEE"
     from:
       node: "node65"
@@ -9740,7 +9971,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship70"
+  - type: "RelationshipMapping"
+    relationship: "relationship70"
     table: "FIELD_ORGANIZATION_UNIT"
     from:
       node: "node66"
@@ -9750,7 +9982,8 @@ mappings:
       node: "node105"
       properties:
         nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
-  - relationship: "relationship71"
+  - type: "RelationshipMapping"
+    relationship: "relationship71"
     table: "FINANCIAL_ACCOUNT_AGREEMENT"
     from:
       node: "node67"
@@ -9760,7 +9993,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship72"
+  - type: "RelationshipMapping"
+    relationship: "relationship72"
     table: "FINANCIAL_SERVICES_ASSESSMENT"
     from:
       node: "node68"
@@ -9770,7 +10004,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship73"
+  - type: "RelationshipMapping"
+    relationship: "relationship73"
     table: "FINANCIAL_VALUATION"
     from:
       node: "node69"
@@ -9780,7 +10015,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship74"
+  - type: "RelationshipMapping"
+    relationship: "relationship74"
     table: "FLAT"
     from:
       node: "node70"
@@ -9790,7 +10026,8 @@ mappings:
       node: "node19"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship75"
+  - type: "RelationshipMapping"
+    relationship: "relationship75"
     table: "FOR_PROFIT_ORGANIZATION"
     from:
       node: "node71"
@@ -9800,7 +10037,8 @@ mappings:
       node: "node104"
       properties:
         nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
-  - relationship: "relationship76"
+  - type: "RelationshipMapping"
+    relationship: "relationship76"
     table: "FRAUD_ASSESSMENT"
     from:
       node: "node72"
@@ -9810,7 +10048,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship77"
+  - type: "RelationshipMapping"
+    relationship: "relationship77"
     table: "FREIGHT_GROUP"
     from:
       node: "node73"
@@ -9820,7 +10059,8 @@ mappings:
       node: "node153"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship78"
+  - type: "RelationshipMapping"
+    relationship: "relationship78"
     table: "FULL_TERM"
     from:
       node: "node74"
@@ -9830,7 +10070,8 @@ mappings:
       node: "node59"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship79"
+  - type: "RelationshipMapping"
+    relationship: "relationship79"
     table: "GEOGRAPHIC_LOCATION"
     from:
       node: "node75"
@@ -9840,7 +10081,8 @@ mappings:
       node: "node75"
       properties:
         nodeProperty0: { field: "PARENT_GEOGRAPHIC_LOCATION_IDENTIFIER" }
-  - relationship: "relationship80"
+  - type: "RelationshipMapping"
+    relationship: "relationship80"
     table: "GEOGRAPHIC_LOCATION"
     from:
       node: "node75"
@@ -9850,7 +10092,8 @@ mappings:
       node: "node91"
       properties:
         nodeProperty0: { field: "LOCATION_ADDRESS_IDENTIFIER" }
-  - relationship: "relationship81"
+  - type: "RelationshipMapping"
+    relationship: "relationship81"
     table: "GEOGRAPHIC_LOCATION"
     from:
       node: "node75"
@@ -9860,7 +10103,8 @@ mappings:
       node: "node112"
       properties:
         nodeProperty0: { field: "PHYSICAL_LOCATION_IDENTIFIER" }
-  - relationship: "relationship82"
+  - type: "RelationshipMapping"
+    relationship: "relationship82"
     table: "GEOGRAPHIC_LOCATION"
     from:
       node: "node75"
@@ -9870,7 +10114,8 @@ mappings:
       node: "node144"
       properties:
         nodeProperty0: { field: "STATE_CODE" }
-  - relationship: "relationship83"
+  - type: "RelationshipMapping"
+    relationship: "relationship83"
     table: "GOVERNMENT_ORGANIZATION"
     from:
       node: "node76"
@@ -9880,7 +10125,8 @@ mappings:
       node: "node104"
       properties:
         nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
-  - relationship: "relationship84"
+  - type: "RelationshipMapping"
+    relationship: "relationship84"
     table: "GROUPING"
     from:
       node: "node77"
@@ -9890,7 +10136,8 @@ mappings:
       node: "node107"
       properties:
         nodeProperty0: { field: "GROUPING_IDENTIFIER" }
-  - relationship: "relationship85"
+  - type: "RelationshipMapping"
+    relationship: "relationship85"
     table: "GROUP_AGREEMENT"
     from:
       node: "node78"
@@ -9900,7 +10147,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship86"
+  - type: "RelationshipMapping"
+    relationship: "relationship86"
     table: "HOUSEHOLD"
     from:
       node: "node79"
@@ -9910,7 +10158,8 @@ mappings:
       node: "node77"
       properties:
         nodeProperty0: { field: "HOUSEHOLD_IDENTIFIER" }
-  - relationship: "relationship87"
+  - type: "RelationshipMapping"
+    relationship: "relationship87"
     table: "HOUSEHOLD_CONTENT"
     from:
       node: "node80"
@@ -9920,7 +10169,8 @@ mappings:
       node: "node79"
       properties:
         nodeProperty0: { field: "HOUSEHOLD_IDENTIFIER" }
-  - relationship: "relationship88"
+  - type: "RelationshipMapping"
+    relationship: "relationship88"
     table: "HOUSEHOLD_CONTENT"
     from:
       node: "node80"
@@ -9930,7 +10180,8 @@ mappings:
       node: "node153"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship89"
+  - type: "RelationshipMapping"
+    relationship: "relationship89"
     table: "HOUSEHOLD_PERSON"
     from:
       node: "node79"
@@ -9940,7 +10191,8 @@ mappings:
       node: "node110"
       properties:
         nodeProperty0: { field: "PERSON_IDENTIFIER" }
-  - relationship: "relationship90"
+  - type: "RelationshipMapping"
+    relationship: "relationship90"
     table: "INDIVIDUAL_AGREEMENT"
     from:
       node: "node81"
@@ -9950,7 +10202,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship91"
+  - type: "RelationshipMapping"
+    relationship: "relationship91"
     table: "INSURABLE_OBJECT"
     from:
       node: "node82"
@@ -9960,7 +10213,8 @@ mappings:
       node: "node75"
       properties:
         nodeProperty0: { field: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
-  - relationship: "relationship92"
+  - type: "RelationshipMapping"
+    relationship: "relationship92"
     table: "INSURED_ACCOUNT"
     from:
       node: "node84"
@@ -9970,7 +10224,8 @@ mappings:
       node: "node0"
       properties:
         nodeProperty0: { field: "ACCOUNT_IDENTIFIER" }
-  - relationship: "relationship93"
+  - type: "RelationshipMapping"
+    relationship: "relationship93"
     table: "INTERMEDIARY_AGREEMENT"
     from:
       node: "node85"
@@ -9980,7 +10235,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship94"
+  - type: "RelationshipMapping"
+    relationship: "relationship94"
     table: "LEGAL_JURISDICTION_PARTY_IDENTITY"
     from:
       node: "node86"
@@ -9994,7 +10250,8 @@ mappings:
       relationshipProperty0: { field: "LEGAL_ENTITY_TYPE_CODE" }
       relationshipProperty1: { field: "LEGAL_CLASSIFICATION_CODE" }
       relationshipProperty2: { field: "LEGAL_JURISDICTION_PARTY_IDENTIFIER" }
-  - relationship: "relationship95"
+  - type: "RelationshipMapping"
+    relationship: "relationship95"
     table: "LIFE_EVENT"
     from:
       node: "node87"
@@ -10004,7 +10261,8 @@ mappings:
       node: "node60"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship96"
+  - type: "RelationshipMapping"
+    relationship: "relationship96"
     table: "LINE_OF_BUSINESS"
     from:
       node: "node88"
@@ -10014,7 +10272,8 @@ mappings:
       node: "node83"
       properties:
         nodeProperty0: { field: "INSURANCE_CLASS_IDENTIFIER" }
-  - relationship: "relationship97"
+  - type: "RelationshipMapping"
+    relationship: "relationship97"
     table: "LINE_OF_BUSINESS"
     from:
       node: "node88"
@@ -10024,7 +10283,8 @@ mappings:
       node: "node89"
       properties:
         nodeProperty0: { field: "LINE_OF_BUSINESS_GROUP_IDENTIFIER" }
-  - relationship: "relationship98"
+  - type: "RelationshipMapping"
+    relationship: "relationship98"
     table: "LOCATION_ADDRESS"
     from:
       node: "node91"
@@ -10034,7 +10294,8 @@ mappings:
       node: "node144"
       properties:
         nodeProperty0: { field: "STATE_CODE" }
-  - relationship: "relationship99"
+  - type: "RelationshipMapping"
+    relationship: "relationship99"
     table: "LOSS_PAYMENT"
     from:
       node: "node92"
@@ -10044,7 +10305,8 @@ mappings:
       node: "node30"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship100"
+  - type: "RelationshipMapping"
+    relationship: "relationship100"
     table: "LOSS_RECOVERY"
     from:
       node: "node93"
@@ -10054,7 +10316,8 @@ mappings:
       node: "node130"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship101"
+  - type: "RelationshipMapping"
+    relationship: "relationship101"
     table: "LOSS_RESERVE"
     from:
       node: "node94"
@@ -10064,7 +10327,8 @@ mappings:
       node: "node31"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship102"
+  - type: "RelationshipMapping"
+    relationship: "relationship102"
     table: "MANUFACTURED_OBJECT"
     from:
       node: "node95"
@@ -10074,7 +10338,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship103"
+  - type: "RelationshipMapping"
+    relationship: "relationship103"
     table: "MEDICAL_CONDITION"
     from:
       node: "node96"
@@ -10084,7 +10349,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship104"
+  - type: "RelationshipMapping"
+    relationship: "relationship104"
     table: "MID_TERM"
     from:
       node: "node97"
@@ -10094,7 +10360,8 @@ mappings:
       node: "node59"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship105"
+  - type: "RelationshipMapping"
+    relationship: "relationship105"
     table: "MILKING_MACHINE"
     from:
       node: "node98"
@@ -10104,7 +10371,8 @@ mappings:
       node: "node64"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship106"
+  - type: "RelationshipMapping"
+    relationship: "relationship106"
     table: "MOBILE_HOME"
     from:
       node: "node99"
@@ -10114,7 +10382,8 @@ mappings:
       node: "node136"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship107"
+  - type: "RelationshipMapping"
+    relationship: "relationship107"
     table: "MOTORCYCLE"
     from:
       node: "node100"
@@ -10124,7 +10393,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship108"
+  - type: "RelationshipMapping"
+    relationship: "relationship108"
     table: "NEW_BUSINESS"
     from:
       node: "node101"
@@ -10134,7 +10404,8 @@ mappings:
       node: "node118"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship109"
+  - type: "RelationshipMapping"
+    relationship: "relationship109"
     table: "NOT_FOR_PROFIT_ORGANIZATION"
     from:
       node: "node102"
@@ -10144,7 +10415,8 @@ mappings:
       node: "node104"
       properties:
         nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
-  - relationship: "relationship110"
+  - type: "RelationshipMapping"
+    relationship: "relationship110"
     table: "OBJECT_ASSESSMENT"
     from:
       node: "node7"
@@ -10154,7 +10426,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship111"
+  - type: "RelationshipMapping"
+    relationship: "relationship111"
     table: "OCCURRENCE"
     from:
       node: "node103"
@@ -10164,7 +10437,8 @@ mappings:
       node: "node75"
       properties:
         nodeProperty0: { field: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
-  - relationship: "relationship112"
+  - type: "RelationshipMapping"
+    relationship: "relationship112"
     table: "ORGANIZATION"
     from:
       node: "node104"
@@ -10174,7 +10448,8 @@ mappings:
       node: "node107"
       properties:
         nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
-  - relationship: "relationship113"
+  - type: "RelationshipMapping"
+    relationship: "relationship113"
     table: "ORGANIZATION_UNIT"
     from:
       node: "node105"
@@ -10184,7 +10459,8 @@ mappings:
       node: "node104"
       properties:
         nodeProperty0: { field: "ORGANIZATION_IDENTIFIER" }
-  - relationship: "relationship114"
+  - type: "RelationshipMapping"
+    relationship: "relationship114"
     table: "OTHER_ASSESSMENT_RESULT"
     from:
       node: "node106"
@@ -10194,7 +10470,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship115"
+  - type: "RelationshipMapping"
+    relationship: "relationship115"
     table: "PARTY_PREFERENCE"
     from:
       node: "node108"
@@ -10204,7 +10481,8 @@ mappings:
       node: "node107"
       properties:
         nodeProperty0: { field: "PARTY_IDENTIFIER" }
-  - relationship: "relationship116"
+  - type: "RelationshipMapping"
+    relationship: "relationship116"
     table: "PERSON"
     from:
       node: "node110"
@@ -10214,7 +10492,8 @@ mappings:
       node: "node107"
       properties:
         nodeProperty0: { field: "PERSON_IDENTIFIER" }
-  - relationship: "relationship117"
+  - type: "RelationshipMapping"
+    relationship: "relationship117"
     table: "PERSON_PROFESSION"
     from:
       node: "node111"
@@ -10224,7 +10503,8 @@ mappings:
       node: "node110"
       properties:
         nodeProperty0: { field: "PERSON_IDENTIFIER" }
-  - relationship: "relationship118"
+  - type: "RelationshipMapping"
+    relationship: "relationship118"
     table: "PHYSICAL_LOCATION"
     from:
       node: "node112"
@@ -10234,7 +10514,8 @@ mappings:
       node: "node91"
       properties:
         nodeProperty0: { field: "LOCATION_ADDRESS_IDENTIFIER" }
-  - relationship: "relationship119"
+  - type: "RelationshipMapping"
+    relationship: "relationship119"
     table: "PHYSICAL_OBJECT_ASSESSMENT"
     from:
       node: "node113"
@@ -10244,7 +10525,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship120"
+  - type: "RelationshipMapping"
+    relationship: "relationship120"
     table: "PLACE_ASSESSMENT"
     from:
       node: "node114"
@@ -10254,7 +10536,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship121"
+  - type: "RelationshipMapping"
+    relationship: "relationship121"
     table: "POLICY"
     from:
       node: "node115"
@@ -10264,7 +10547,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "POLICY_IDENTIFIER" }
-  - relationship: "relationship122"
+  - type: "RelationshipMapping"
+    relationship: "relationship122"
     table: "POLICY"
     from:
       node: "node115"
@@ -10274,7 +10558,8 @@ mappings:
       node: "node75"
       properties:
         nodeProperty0: { field: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
-  - relationship: "relationship123"
+  - type: "RelationshipMapping"
+    relationship: "relationship123"
     table: "POLICY_AMOUNT"
     from:
       node: "node116"
@@ -10284,7 +10569,8 @@ mappings:
       node: "node75"
       properties:
         nodeProperty0: { field: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
-  - relationship: "relationship124"
+  - type: "RelationshipMapping"
+    relationship: "relationship124"
     table: "POLICY_AMOUNT"
     from:
       node: "node116"
@@ -10294,7 +10580,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship125"
+  - type: "RelationshipMapping"
+    relationship: "relationship125"
     table: "POLICY_AMOUNT"
     from:
       node: "node116"
@@ -10304,7 +10591,8 @@ mappings:
       node: "node115"
       properties:
         nodeProperty0: { field: "POLICY_IDENTIFIER" }
-  - relationship: "relationship126"
+  - type: "RelationshipMapping"
+    relationship: "relationship126"
     table: "POLICY_COVERAGE_PART"
     from:
       node: "node44"
@@ -10314,7 +10602,8 @@ mappings:
       node: "node115"
       properties:
         nodeProperty0: { field: "POLICY_IDENTIFIER" }
-  - relationship: "relationship127"
+  - type: "RelationshipMapping"
+    relationship: "relationship127"
     table: "POLICY_EVENT"
     from:
       node: "node118"
@@ -10324,7 +10613,8 @@ mappings:
       node: "node60"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship128"
+  - type: "RelationshipMapping"
+    relationship: "relationship128"
     table: "POLICY_EVENT"
     from:
       node: "node118"
@@ -10334,7 +10624,8 @@ mappings:
       node: "node115"
       properties:
         nodeProperty0: { field: "POLICY_IDENTIFIER" }
-  - relationship: "relationship129"
+  - type: "RelationshipMapping"
+    relationship: "relationship129"
     table: "PREMIUM"
     from:
       node: "node120"
@@ -10344,7 +10635,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship130"
+  - type: "RelationshipMapping"
+    relationship: "relationship130"
     table: "PRE_QUALIFICATION"
     from:
       node: "node121"
@@ -10354,7 +10646,8 @@ mappings:
       node: "node118"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship131"
+  - type: "RelationshipMapping"
+    relationship: "relationship131"
     table: "PRODUCT"
     from:
       node: "node122"
@@ -10364,7 +10657,8 @@ mappings:
       node: "node88"
       properties:
         nodeProperty0: { field: "LINE_OF_BUSINESS_IDENTIFIER" }
-  - relationship: "relationship132"
+  - type: "RelationshipMapping"
+    relationship: "relationship132"
     table: "PRODUCT_COVERAGE"
     from:
       node: "node41"
@@ -10374,7 +10668,8 @@ mappings:
       node: "node122"
       properties:
         nodeProperty0: { field: "PRODUCT_IDENTIFIER" }
-  - relationship: "relationship133"
+  - type: "RelationshipMapping"
+    relationship: "relationship133"
     table: "PROFESSIONAL_GROUP"
     from:
       node: "node123"
@@ -10384,7 +10679,8 @@ mappings:
       node: "node77"
       properties:
         nodeProperty0: { field: "GROUPING_IDENTIFIER" }
-  - relationship: "relationship134"
+  - type: "RelationshipMapping"
+    relationship: "relationship134"
     table: "PROJECT"
     from:
       node: "node124"
@@ -10394,7 +10690,8 @@ mappings:
       node: "node77"
       properties:
         nodeProperty0: { field: "GROUPING_IDENTIFIER" }
-  - relationship: "relationship135"
+  - type: "RelationshipMapping"
+    relationship: "relationship135"
     table: "PROPERTY_IN_TRANSIT"
     from:
       node: "node125"
@@ -10404,7 +10701,8 @@ mappings:
       node: "node153"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship136"
+  - type: "RelationshipMapping"
+    relationship: "relationship136"
     table: "PROVIDER_AGREEMENT"
     from:
       node: "node126"
@@ -10414,7 +10712,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship137"
+  - type: "RelationshipMapping"
+    relationship: "relationship137"
     table: "PRO_RATA"
     from:
       node: "node127"
@@ -10424,7 +10723,8 @@ mappings:
       node: "node19"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship138"
+  - type: "RelationshipMapping"
+    relationship: "relationship138"
     table: "QUOTE"
     from:
       node: "node128"
@@ -10434,7 +10734,8 @@ mappings:
       node: "node118"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship139"
+  - type: "RelationshipMapping"
+    relationship: "relationship139"
     table: "RATING_TERRITORY_GEOGRAPHIC_LOCATION"
     from:
       node: "node75"
@@ -10444,7 +10745,8 @@ mappings:
       node: "node129"
       properties:
         nodeProperty0: { field: "RATING_TERRITORY_IDENTIFIER" }
-  - relationship: "relationship140"
+  - type: "RelationshipMapping"
+    relationship: "relationship140"
     table: "RECOVERY"
     from:
       node: "node130"
@@ -10454,7 +10756,8 @@ mappings:
       node: "node25"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship141"
+  - type: "RelationshipMapping"
+    relationship: "relationship141"
     table: "RECREATIONAL_VEHICLE"
     from:
       node: "node131"
@@ -10464,7 +10767,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship142"
+  - type: "RelationshipMapping"
+    relationship: "relationship142"
     table: "REINSTATEMENT"
     from:
       node: "node132"
@@ -10474,7 +10778,8 @@ mappings:
       node: "node118"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship143"
+  - type: "RelationshipMapping"
+    relationship: "relationship143"
     table: "REINSURANCE_AGREEMENT"
     from:
       node: "node133"
@@ -10484,7 +10789,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship144"
+  - type: "RelationshipMapping"
+    relationship: "relationship144"
     table: "REINSURANCE_RECOVERY"
     from:
       node: "node134"
@@ -10494,7 +10800,8 @@ mappings:
       node: "node130"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship145"
+  - type: "RelationshipMapping"
+    relationship: "relationship145"
     table: "RENEWAL"
     from:
       node: "node135"
@@ -10504,7 +10811,8 @@ mappings:
       node: "node118"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship146"
+  - type: "RelationshipMapping"
+    relationship: "relationship146"
     table: "RESIDENTIAL_STRUCTURE"
     from:
       node: "node136"
@@ -10514,7 +10822,8 @@ mappings:
       node: "node145"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship147"
+  - type: "RelationshipMapping"
+    relationship: "relationship147"
     table: "RISK_FACTOR_SCORE"
     from:
       node: "node137"
@@ -10524,7 +10833,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship148"
+  - type: "RelationshipMapping"
+    relationship: "relationship148"
     table: "SALVAGE"
     from:
       node: "node138"
@@ -10534,7 +10844,8 @@ mappings:
       node: "node130"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship149"
+  - type: "RelationshipMapping"
+    relationship: "relationship149"
     table: "SCHEDULED_ITEM"
     from:
       node: "node139"
@@ -10544,7 +10855,8 @@ mappings:
       node: "node153"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship150"
+  - type: "RelationshipMapping"
+    relationship: "relationship150"
     table: "SHORT_RATE"
     from:
       node: "node140"
@@ -10554,7 +10866,8 @@ mappings:
       node: "node19"
       properties:
         nodeProperty0: { field: "EVENT_IDENTIFIER" }
-  - relationship: "relationship151"
+  - type: "RelationshipMapping"
+    relationship: "relationship151"
     table: "STAFFING_AGREEMENT"
     from:
       node: "node141"
@@ -10564,7 +10877,8 @@ mappings:
       node: "node3"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship152"
+  - type: "RelationshipMapping"
+    relationship: "relationship152"
     table: "STAFF_POSITION"
     from:
       node: "node143"
@@ -10574,7 +10888,8 @@ mappings:
       node: "node142"
       properties:
         nodeProperty0: { field: "STAFF_CLASSIFICATION_CODE" }
-  - relationship: "relationship153"
+  - type: "RelationshipMapping"
+    relationship: "relationship153"
     table: "STRUCTURE"
     from:
       node: "node145"
@@ -10584,7 +10899,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship154"
+  - type: "RelationshipMapping"
+    relationship: "relationship154"
     table: "SUBROGATION"
     from:
       node: "node146"
@@ -10594,7 +10910,8 @@ mappings:
       node: "node130"
       properties:
         nodeProperty0: { field: "CLAIM_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship155"
+  - type: "RelationshipMapping"
+    relationship: "relationship155"
     table: "SURCHARGE"
     from:
       node: "node147"
@@ -10604,7 +10921,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship156"
+  - type: "RelationshipMapping"
+    relationship: "relationship156"
     table: "TAX"
     from:
       node: "node148"
@@ -10614,7 +10932,8 @@ mappings:
       node: "node116"
       properties:
         nodeProperty0: { field: "POLICY_AMOUNT_IDENTIFIER" }
-  - relationship: "relationship157"
+  - type: "RelationshipMapping"
+    relationship: "relationship157"
     table: "TEAM"
     from:
       node: "node149"
@@ -10624,7 +10943,8 @@ mappings:
       node: "node77"
       properties:
         nodeProperty0: { field: "GROUPING_IDENTIFIER" }
-  - relationship: "relationship158"
+  - type: "RelationshipMapping"
+    relationship: "relationship158"
     table: "THIRD_PARTY_STAFFING_AGREEMENT"
     from:
       node: "node150"
@@ -10634,7 +10954,8 @@ mappings:
       node: "node141"
       properties:
         nodeProperty0: { field: "AGREEMENT_IDENTIFIER" }
-  - relationship: "relationship159"
+  - type: "RelationshipMapping"
+    relationship: "relationship159"
     table: "TRACTOR"
     from:
       node: "node151"
@@ -10644,7 +10965,8 @@ mappings:
       node: "node64"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship160"
+  - type: "RelationshipMapping"
+    relationship: "relationship160"
     table: "TRAILER"
     from:
       node: "node152"
@@ -10654,7 +10976,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship161"
+  - type: "RelationshipMapping"
+    relationship: "relationship161"
     table: "TRANSPORTATION_CLASS"
     from:
       node: "node153"
@@ -10664,7 +10987,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship162"
+  - type: "RelationshipMapping"
+    relationship: "relationship162"
     table: "TRUCK"
     from:
       node: "node154"
@@ -10674,7 +10998,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship163"
+  - type: "RelationshipMapping"
+    relationship: "relationship163"
     table: "UNDERWRITING_ASSESSMENT"
     from:
       node: "node155"
@@ -10684,7 +11009,8 @@ mappings:
       node: "node8"
       properties:
         nodeProperty0: { field: "ASSESSMENT_RESULT_IDENTIFIER" }
-  - relationship: "relationship164"
+  - type: "RelationshipMapping"
+    relationship: "relationship164"
     table: "VAN"
     from:
       node: "node156"
@@ -10694,7 +11020,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship165"
+  - type: "RelationshipMapping"
+    relationship: "relationship165"
     table: "VEHICLE"
     from:
       node: "node157"
@@ -10704,7 +11031,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship166"
+  - type: "RelationshipMapping"
+    relationship: "relationship166"
     table: "WATERCRAFT"
     from:
       node: "node158"
@@ -10714,7 +11042,8 @@ mappings:
       node: "node157"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship167"
+  - type: "RelationshipMapping"
+    relationship: "relationship167"
     table: "WORKERS_COMP_CLASS"
     from:
       node: "node159"
@@ -10724,7 +11053,8 @@ mappings:
       node: "node82"
       properties:
         nodeProperty0: { field: "INSURABLE_OBJECT_IDENTIFIER" }
-  - relationship: "relationship168"
+  - type: "RelationshipMapping"
+    relationship: "relationship168"
     table: "audit"
     from:
       node: "node160"
