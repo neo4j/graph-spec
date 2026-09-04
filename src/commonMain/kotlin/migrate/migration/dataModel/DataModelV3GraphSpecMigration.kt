@@ -154,11 +154,12 @@ class DataModelV3GraphSpecMigration :
         return indexes[labelRef]?.associate { index ->
             count++
             val id = index.id()
+            val resolvedType = indexType(index)
             id to schemaMapOf(
-                "type" to indexType(index).name,
+                "type" to resolvedType.name,
                 "labels" to listOf(label),
                 "properties" to index.listOfMapsOrNull("properties")?.map { it.ref() },
-                "options" toNotEmpty index.mapOrNull("options"),
+                "options" toNotEmpty index.mapOrNull("options")?.also { it["type"] = resolvedType.name },
                 "name" to (index.stringOrNull("name") ?: "${type}Index${count - 1}")
             )
         }
