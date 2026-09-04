@@ -18,21 +18,10 @@ package codec.format
 
 import codec.schema.SchemaMap
 import codec.schema.SchemaNull
-import kotlinx.schema.Schema
-import kotlinx.serialization.SerializationException
 import model.GraphModel
 import model.extension.BooleanValue
 import model.extension.StringValue
-import model.index.FullTextIndexOption
-import model.mapping.LabelMapping
-import model.mapping.NodeMapping
-import model.mapping.PropertyMapping
-import model.mapping.QueryMapping
-import model.mapping.RelationshipMapping
-import model.mapping.TargetMapping
 import model.node.Node
-import model.node.NodeIndex
-import model.type.IndexType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
