@@ -74,11 +74,16 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
 
 fun defaultConfig(format: Format): GraphSpecConfig {
     val builder = GraphSpecConfig.Builder(format)
-    builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V23))
-    builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V24))
-    builder.migrate(DataModelV3GraphSpecMigration())
-    builder.migrate(GraphSpecDataModelV3Migration())
-    builder.migrate(GraphSpecDataModelV3Migration(wrapped = true))
+    builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V23, Version.DATA_MODEL_V30))
+    builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V24, Version.DATA_MODEL_V30))
+    builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V23, Version.DATA_MODEL_V31))
+    builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V24, Version.DATA_MODEL_V31))
+    builder.migrate(DataModelV3GraphSpecMigration(Version.DATA_MODEL_V30))
+    builder.migrate(DataModelV3GraphSpecMigration(Version.DATA_MODEL_V31))
+    builder.migrate(GraphSpecDataModelV3Migration(targetVersion = Version.DATA_MODEL_V30))
+    builder.migrate(GraphSpecDataModelV3Migration(wrapped = true, targetVersion = Version.DATA_MODEL_V30))
+    builder.migrate(GraphSpecDataModelV3Migration(targetVersion = Version.DATA_MODEL_V31))
+    builder.migrate(GraphSpecDataModelV3Migration(wrapped = true, targetVersion = Version.DATA_MODEL_V31))
     return builder.build()
 }
 

@@ -42,10 +42,10 @@ import model.type.IndexType.VECTOR
 /**
  * 3.0 -> Graph Spec 4.0
  */
-class DataModelV3GraphSpecMigration :
+class DataModelV3GraphSpecMigration(val version: String) :
     Migration(
         fromType = Type.DATA_MODEL,
-        from = Version.DATA_MODEL_V30,
+        from = version,
         toType = Type.GRAPH_SPEC,
         to = Version.LATEST
     ) {
@@ -60,6 +60,7 @@ class DataModelV3GraphSpecMigration :
         val graphSchema = schema.mapOrNull("graphSchemaRepresentation")?.mapOrNull("graphSchema")
             ?: return schemaMapOf(
                 "version" to schema.literal("version"),
+                "description" to schema.literalOrNull("description"),
                 "nodes" to emptyMap<String, SchemaMap>(),
                 "relationships" to emptyMap<String, SchemaMap>(),
                 "tables" toNotEmpty migrateTables(schema)

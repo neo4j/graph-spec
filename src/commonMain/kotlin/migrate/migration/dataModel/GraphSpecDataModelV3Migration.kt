@@ -28,7 +28,7 @@ import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
 
-class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
+class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false, val targetVersion: String) :
     Migration(
         fromType = Type.GRAPH_SPEC,
         from = Version.LATEST,
@@ -37,7 +37,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         } else {
             Type.DATA_MODEL
         },
-        to = Version.DATA_MODEL_V30
+        to = targetVersion
     ) {
 
     override fun migrate(schema: SchemaMap): SchemaMap {
@@ -46,7 +46,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val nodeData = convertNodes(schema, constraints, indexes)
         val relData = convertRelationships(schema, constraints, indexes)
         val dataModel = schemaMapOf(
-            "version" to "3.1.0",
+            "version" to targetVersion,
             "graphSchemaRepresentation" to schemaMapOf(
                 "version" to "1.0.0",
                 "graphSchema" to schemaMapOf(
@@ -66,7 +66,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             return dataModel
         }
         return schemaMapOf(
-            "version" to "3.1.0",
+            "version" to targetVersion,
             "dataModel" to dataModel,
             "visualisation" toNotEmpty convertVisualisation(schema),
             "description" to schema.literalOrNull("description")

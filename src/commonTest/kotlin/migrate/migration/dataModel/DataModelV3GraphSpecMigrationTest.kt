@@ -18,6 +18,7 @@ package migrate.migration.dataModel
 
 import codec.schema.schemaMapOf
 import codec.schema.toSchemaElement
+import model.Version
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -27,7 +28,7 @@ import kotlin.test.assertTrue
 
 class DataModelV3GraphSpecMigrationTest {
 
-    private val migration = DataModelV3GraphSpecMigration()
+    private val migration = DataModelV3GraphSpecMigration(Version.DATA_MODEL_V30)
 
     @Test
     fun `visualisation throws error if node reference is missing`() {

@@ -25,12 +25,12 @@ import model.Version
 /**
  * 2.X -> 3.0 adds support for multiple keys properties
  */
-class DataModelV2V3Migration(version: String) :
+class DataModelV2V3Migration(fromVersion: String, toVersion: String) :
     Migration(
         fromType = Type.DATA_MODEL,
-        from = version,
+        from = fromVersion,
         toType = Type.DATA_MODEL,
-        to = Version.DATA_MODEL_V30
+        to = toVersion
     ) {
 
     override fun migrate(schema: SchemaMap): SchemaMap {

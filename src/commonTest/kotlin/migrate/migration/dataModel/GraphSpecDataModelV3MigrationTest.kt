@@ -20,6 +20,7 @@ import codec.schema.SchemaLiteral
 import codec.schema.SchemaNull
 import codec.schema.schemaListOf
 import codec.schema.schemaMapOf
+import model.Version
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -29,7 +30,7 @@ import kotlin.test.assertTrue
 
 class GraphSpecDataModelV3MigrationTest {
 
-    private val migration = GraphSpecDataModelV3Migration()
+    private val migration = GraphSpecDataModelV3Migration(targetVersion = Version.DATA_MODEL_V30)
 
     @Test
     fun `migrate converts node labels and properties correctly`() {
@@ -585,7 +586,10 @@ class GraphSpecDataModelV3MigrationTest {
         assertFalse(flat.containsKey("visualisation"))
 
         // DATA_MODEL_WRAPPED wraps the same data model under a top-level dataModel key and includes visualisation
-        val wrapped = GraphSpecDataModelV3Migration(wrapped = true).migrate(input)
+        val wrapped = GraphSpecDataModelV3Migration(
+            wrapped = true,
+            targetVersion = Version.DATA_MODEL_V30
+        ).migrate(input)
         assertFalse(wrapped.containsKey("graphSchemaRepresentation"))
         assertTrue(wrapped.containsKey("visualisation"))
         val dataModel = wrapped.map("dataModel")
