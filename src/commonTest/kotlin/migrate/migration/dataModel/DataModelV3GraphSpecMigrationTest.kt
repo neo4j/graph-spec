@@ -644,6 +644,7 @@ class DataModelV3GraphSpecMigrationTest {
     fun `migrate supports source-schema-only input without graph schema`() {
         val input = schemaMapOf(
             "version" to "3.0.0",
+            "description" to "a description",
             "graphMappingRepresentation" to mapOf(
                 "dataSourceSchema" to schemaMapOf(
                     "type" to "cloud",
@@ -663,5 +664,6 @@ class DataModelV3GraphSpecMigrationTest {
         assertTrue(result.mapOfMaps("nodes").isEmpty(), "nodes should be present but empty")
         assertTrue(result.mapOfMaps("relationships").isEmpty(), "relationships should be present but empty")
         assertFalse(result.containsKey("mappings"), "mappings should be omitted when empty")
+        assertTrue(result.containsKey("description"), "description should be present but empty")
     }
 }
