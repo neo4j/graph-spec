@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-09-07T10:44:28Z",
+  "project": "graph-spec-pr86",
+  "scan_scope": ".",
+  "lenses_run": ["semgrep","syft","detekt","ktlint","golangci-lint"],
+  "lenses_unavailable": ["dependency-check(opt-in, DC=1)"],
+  "findings": [],
+  "total_findings": 0
+}
