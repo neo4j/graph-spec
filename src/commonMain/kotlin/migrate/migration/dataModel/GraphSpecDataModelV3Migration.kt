@@ -46,7 +46,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val nodeData = convertNodes(schema, constraints, indexes)
         val relData = convertRelationships(schema, constraints, indexes)
         val dataModel = schemaMapOf(
-            "version" to "3.0.0",
+            "version" to "3.1.0",
             "graphSchemaRepresentation" to schemaMapOf(
                 "version" to "1.0.0",
                 "graphSchema" to schemaMapOf(
@@ -66,7 +66,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             return dataModel
         }
         return schemaMapOf(
-            "version" to "3.0.0",
+            "version" to "3.1.0",
             "dataModel" to dataModel,
             "visualisation" toNotEmpty convertVisualisation(schema),
             "description" to schema.literalOrNull("description")
