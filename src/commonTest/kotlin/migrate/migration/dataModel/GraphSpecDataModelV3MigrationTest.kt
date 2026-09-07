@@ -594,4 +594,21 @@ class GraphSpecDataModelV3MigrationTest {
         assertTrue(dataModel.containsKey("configurations"))
         assertTrue(wrapped.containsKey("description"))
     }
+
+    @Test
+    fun `migrate preserves top level description value in wrapped output`() {
+        // ARRANGE
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf("labels" to schemaMapOf("identifier" to "Person"))
+            ),
+            "description" to "a description"
+        )
+
+        // ACT
+        val wrapped = GraphSpecDataModelV3Migration(wrapped = true).migrate(input)
+
+        // ASSERT
+        assertEquals("a description", wrapped.string("description"))
+    }
 }

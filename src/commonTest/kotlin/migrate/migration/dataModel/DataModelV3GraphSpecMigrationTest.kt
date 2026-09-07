@@ -664,4 +664,53 @@ class DataModelV3GraphSpecMigrationTest {
         assertTrue(result.mapOfMaps("relationships").isEmpty(), "relationships should be present but empty")
         assertFalse(result.containsKey("mappings"), "mappings should be omitted when empty")
     }
+
+    @Test
+    fun `migrate preserves non-empty descriptions including top level`() {
+        // ARRANGE
+        val schema = schemaMapOf(
+            "version" to "3.0.0",
+            "description" to "top level description",
+            "graphMappingRepresentation" to mapOf(
+                "dataSourceSchema" to schemaMapOf(
+                    "type" to "csv",
+                    "tableSchemas" to emptyList<codec.schema.SchemaMap>()
+                )
+            ),
+            "graphSchemaRepresentation" to schemaMapOf(
+                "graphSchema" to schemaMapOf(
+                    "nodeLabels" to listOf(
+                        schemaMapOf(
+                            "\$id" to "lbl1",
+                            "token" to "Person",
+                            "properties" to listOf(
+                                schemaMapOf(
+                                    "\$id" to "prop1",
+                                    "token" to "name",
+                                    "type" to mapOf("type" to "string"),
+                                    "description" to "prop description"
+                                )
+                            )
+                        )
+                    ),
+                    "nodeObjectTypes" to listOf(
+                        schemaMapOf(
+                            "\$id" to "nodeObj1",
+                            "labels" to listOf(mapOf("\$ref" to "#lbl1")),
+                            "description" to "node description"
+                        )
+                    )
+                )
+            )
+        )
+
+        // ACT
+        val migrated = migration.migrate(schema)
+
+        // ASSERT
+        assertEquals("top level description", migrated.string("description"))
+        val node = migrated.map("nodes").map("nodeObj1")
+        assertEquals("node description", node.string("description"))
+        assertEquals("prop description", node.map("properties").map("prop1").string("description"))
+    }
 }
