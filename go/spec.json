@@ -724,6 +724,17 @@
             ],
             "additionalProperties": false
         },
+        "KeyMapping": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "column": {
+                    "type": "string"
+                }
+            }
+        },
         "MappingMode": {
             "type": "string",
             "enum": [
@@ -797,33 +808,15 @@
                 "label": {
                     "type": "string"
                 },
-                "propertyMappings": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/Column"
-                    }
-                },
-                "columnMappings": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/Column"
+                "mappings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/KeyMapping"
                     }
                 }
             },
             "required": [],
-            "additionalProperties": false,
-            "oneOf": [
-                {
-                    "required": [
-                        "propertyMappings"
-                    ]
-                },
-                {
-                    "required": [
-                        "columnMappings"
-                    ]
-                }
-            ]
+            "additionalProperties": false
         },
         "RelationshipMapping": {
             "type": "object",

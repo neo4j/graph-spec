@@ -68,18 +68,20 @@
       "relationship": "TRANSACTION",
       "table": "transactions",
       "from": {
-        "propertyMappings": {
-          "a_id": {
+        "mappings": [
+          {
+            "key": "a_id",
             "column": "to_id"
           }
-        }
+        ]
       },
       "to": {
-        "propertyMappings": {
-          "a_id": {
+        "mappings": [
+          {
+            "key": "a_id",
             "column": "from_id"
           }
-        }
+        ]
       },
       "properties": {
         "tx_id": {
