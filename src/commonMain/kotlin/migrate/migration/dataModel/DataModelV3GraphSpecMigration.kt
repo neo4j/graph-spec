@@ -60,6 +60,7 @@ class DataModelV3GraphSpecMigration :
         val graphSchema = schema.mapOrNull("graphSchemaRepresentation")?.mapOrNull("graphSchema")
             ?: return schemaMapOf(
                 "version" to schema.literal("version"),
+                "description" to schema.literalOrNull("description"),
                 "nodes" to emptyMap<String, SchemaMap>(),
                 "relationships" to emptyMap<String, SchemaMap>(),
                 "tables" toNotEmpty migrateTables(schema)
