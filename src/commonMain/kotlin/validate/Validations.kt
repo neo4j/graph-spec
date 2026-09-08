@@ -123,8 +123,48 @@ class Validations {
             NodeCompositeConstraintPropertyType
         )
 
+        // UPX `apps/import/src/state/reducers/data-model.ts` - import-app draft editing,
+        // runs on every model mutation before "Run Import".
+        @JsStatic
+        val importDraft: List<Validation> = listOf(
+            NodeLabel,
+            RelationshipType,
+            NodeIndexProperties,
+            RelationshipIndexProperties,
+            NodeConstraintProperties,
+            NodeConstraintDuplicatePropertySet,
+            NodeExistenceCompositeConflict,
+            NodeIndexConstraintNameConflict,
+            NodePropertyEmptyName,
+            NodePropertyDuplicateName,
+            RelationshipPropertyEmptyName,
+            RelationshipPropertyDuplicateName
+        )
+
+        // UPX `platform/state/src/slices/ontologies/data-model-slice.ts` - ontologies app
+        // draft editing, currently has no validation.
+        @JsStatic
+        val ontologyDraft: List<Validation> = listOf(
+            NodeLabel,
+            RelationshipType,
+            NodePropertyEmptyName,
+            NodePropertyDuplicateName,
+            RelationshipPropertyEmptyName,
+            RelationshipPropertyDuplicateName,
+            NodeIndexProperties,
+            RelationshipIndexProperties,
+            NodeIndexConstraintNameConflict,
+            NodeConstraintProperties,
+            NodeConstraintDuplicatePropertySet,
+            NodeExistenceCompositeConflict,
+            NodeExistenceConstraint,
+            RelationshipExistenceConstraint,
+            RelationshipNodes
+        )
+
         @JsStatic
         val all: List<Validation> =
-            (core + kgbuilderReady + importReady + importParseIntegrity + bulkImportReady).distinct()
+            (core + kgbuilderReady + importReady + importParseIntegrity + bulkImportReady + ontologyDraft + importDraft)
+                .distinct()
     }
 }
