@@ -114,9 +114,9 @@ class RelationshipIndexOptionsTest {
         assertEquals(1, issues.size, "Expected exactly one validation issue")
 
         val issue = issues.first()
-        assertEquals("node_index_type_options_mismatch", issue.code)
+        assertEquals("relationship_index_type_options_mismatch", issue.code)
         assertEquals(
-            "Cannot use options type 'POINT' with node index 'idx_roles' type 'TEXT'",
+            "Cannot use options type 'POINT' with relationship index 'idx_roles' type 'TEXT'",
             issue.message
         )
         assertEquals("relationships.actedIn.indexes.idx_roles.options", issue.path)
@@ -148,7 +148,7 @@ class RelationshipIndexOptionsTest {
                 validator.validateIndex(model, relationshipId, relationship, indexId, index, issues)
 
                 assertEquals(1, issues.size, "Expected a mismatch issue for $indexType vs $options")
-                assertEquals("node_index_type_options_mismatch", issues.first().code)
+                assertEquals("relationship_index_type_options_mismatch", issues.first().code)
             }
         }
     }
