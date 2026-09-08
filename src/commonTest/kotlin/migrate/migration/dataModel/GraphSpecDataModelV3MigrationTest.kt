@@ -42,8 +42,14 @@ class GraphSpecDataModelV3MigrationTest {
                         "implied" to listOf("Entity")
                     ),
                     "properties" to schemaMapOf(
-                        "p1" to schemaMapOf("name" to "name", "type" to "STRING", "mustExist" to true)
-                    )
+                        "p1" to schemaMapOf(
+                            "name" to "name",
+                            "type" to "STRING",
+                            "mustExist" to true,
+                            "description" to "prop description"
+                        )
+                    ),
+                    "description" to "a description"
                 )
             )
         )
@@ -63,6 +69,7 @@ class GraphSpecDataModelV3MigrationTest {
         val props = personLabel.listOfMaps("properties")
         assertEquals("p1", props[0].string("\$id"))
         assertEquals("string", props[0].map("type").string("type"))
+        assertEquals("prop description", props[0].string("description"))
 
         // Verify Object Type
         val nodeObjectTypes = result
@@ -70,6 +77,7 @@ class GraphSpecDataModelV3MigrationTest {
             .map("graphSchema")
             .listOfMaps("nodeObjectTypes")
         assertEquals("node1", nodeObjectTypes[0].string("\$id"))
+        assertEquals("a description", nodeObjectTypes[0].string("description"))
         val labelRefs = nodeObjectTypes[0].listOfMaps("labels")
         assertEquals("#nl:0", labelRefs[0].string("\$ref"))
     }
@@ -112,8 +120,13 @@ class GraphSpecDataModelV3MigrationTest {
                     "from" to schemaMapOf("node" to "n1"),
                     "to" to schemaMapOf("node" to "n2"),
                     "properties" to schemaMapOf(
-                        "since" to schemaMapOf("name" to "since", "type" to "INTEGER")
-                    )
+                        "since" to schemaMapOf(
+                            "name" to "since",
+                            "type" to "INTEGER",
+                            "description" to "prop description"
+                        )
+                    ),
+                    "description" to "a description"
                 )
             )
         )
@@ -124,10 +137,12 @@ class GraphSpecDataModelV3MigrationTest {
         // Verify Relationship Type
         val relTypes = schema.listOfMaps("relationshipTypes")
         assertEquals("rt:0", relTypes[0].string("\$id"))
+        assertEquals("prop description", relTypes[0].listOfMaps("properties")[0].string("description"))
 
         // Verify Relationship Object Type (the link between nodes)
         val relObjectTypes = schema.listOfMaps("relationshipObjectTypes")
         assertEquals("rel1", relObjectTypes[0].string("\$id"))
+        assertEquals("a description", relObjectTypes[0].string("description"))
         assertEquals("#rt:0", relObjectTypes[0].map("type").string("\$ref"))
         assertEquals("#n1", relObjectTypes[0].map("from").string("\$ref"))
     }
@@ -558,7 +573,8 @@ class GraphSpecDataModelV3MigrationTest {
                 "nodes" to schemaMapOf(
                     "node1" to schemaMapOf("x" to 100.23, "y" to 200.12)
                 )
-            )
+            ),
+            "description" to "a description"
         )
 
         // Default DATA_MODEL is flat with no visualisation
@@ -576,5 +592,6 @@ class GraphSpecDataModelV3MigrationTest {
         assertTrue(dataModel.containsKey("graphSchemaRepresentation"))
         assertTrue(dataModel.containsKey("graphMappingRepresentation"))
         assertTrue(dataModel.containsKey("configurations"))
+        assertTrue(wrapped.containsKey("description"))
     }
 }

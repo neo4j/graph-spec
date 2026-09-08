@@ -12,19 +12,22 @@
               "$id": "p:0_0",
               "token": "documentid",
               "type": { "type": "integer" },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:0_1",
               "token": "embedding",
               "type": { "type": "vector", "items": { "type": "float" }, "dimension": 123 },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             },
             {
               "$id": "p:0_2",
               "token": "legacyembedding",
               "type": { "type": "vector", "items": { "type": "float" } },
-              "nullable": false
+              "nullable": false,
+              "description": ""
             }
           ]
         }
@@ -33,6 +36,7 @@
       "nodeObjectTypes": [
         {
           "$id": "n:0",
+          "description": "",
           "labels": [{ "$ref": "#nl:0" }]
         }
       ],
