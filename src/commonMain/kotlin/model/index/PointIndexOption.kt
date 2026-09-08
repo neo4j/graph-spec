@@ -29,52 +29,21 @@ import kotlin.js.JsExport
 @SerialName("PointIndexOption")
 data class PointIndexOption(
     @SerialName("spatial.cartesian.min")
-    val cartesianMin: DoubleArray = doubleArrayOf(-1000000.0, -1000000.0),
+    val cartesianMin: List<Double> = listOf(-1000000.0, -1000000.0),
     @SerialName("spatial.cartesian.max")
-    val cartesianMax: DoubleArray = doubleArrayOf(1000000.0, 1000000.0),
+    val cartesianMax: List<Double> = listOf(1000000.0, 1000000.0),
     @SerialName("spatial.cartesian-3d.min")
-    val cartesian3DMin: DoubleArray = doubleArrayOf(-1000000.0, -1000000.0, -1000000.0),
+    val cartesian3DMin: List<Double> = listOf(-1000000.0, -1000000.0, -1000000.0),
     @SerialName("spatial.cartesian-3d.max")
-    val cartesian3DMax: DoubleArray = doubleArrayOf(1000000.0, 1000000.0, 1000000.0),
+    val cartesian3DMax: List<Double> = listOf(1000000.0, 1000000.0, 1000000.0),
     @SerialName("spatial.wgs-84.min")
-    val wgs84Min: DoubleArray = doubleArrayOf(-180.0, -90.0),
+    val wgs84Min: List<Double> = listOf(-180.0, -90.0),
     @SerialName("spatial.wgs-84.max")
-    val wgs84Max: DoubleArray = doubleArrayOf(180.0, 90.0),
+    val wgs84Max: List<Double> = listOf(180.0, 90.0),
     @SerialName("spatial.wgs-84-3d.min")
-    val wgs843DMin: DoubleArray = doubleArrayOf(-180.0, -90.0, -1000000.0),
+    val wgs843DMin: List<Double> = listOf(-180.0, -90.0, -1000000.0),
     @SerialName("spatial.wgs-84-3d.max")
-    val wgs843DMax: DoubleArray = doubleArrayOf(180.0, 90.0, 1000000.0)
+    val wgs843DMax: List<Double> = listOf(180.0, 90.0, 1000000.0)
 ) : IndexOption {
-
     override val type: IndexType = IndexType.POINT
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || this::class != other::class) return false
-
-        other as PointIndexOption
-
-        if (!cartesianMin.contentEquals(other.cartesianMin)) return false
-        if (!cartesianMax.contentEquals(other.cartesianMax)) return false
-        if (!cartesian3DMin.contentEquals(other.cartesian3DMin)) return false
-        if (!cartesian3DMax.contentEquals(other.cartesian3DMax)) return false
-        if (!wgs84Min.contentEquals(other.wgs84Min)) return false
-        if (!wgs84Max.contentEquals(other.wgs84Max)) return false
-        if (!wgs843DMin.contentEquals(other.wgs843DMin)) return false
-        if (!wgs843DMax.contentEquals(other.wgs843DMax)) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = cartesianMin.contentHashCode()
-        result = 31 * result + cartesianMax.contentHashCode()
-        result = 31 * result + cartesian3DMin.contentHashCode()
-        result = 31 * result + cartesian3DMax.contentHashCode()
-        result = 31 * result + wgs84Min.contentHashCode()
-        result = 31 * result + wgs84Max.contentHashCode()
-        result = 31 * result + wgs843DMin.contentHashCode()
-        result = 31 * result + wgs843DMax.contentHashCode()
-        return result
-    }
 }

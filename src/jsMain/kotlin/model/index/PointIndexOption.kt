@@ -65,12 +65,12 @@ fun PointIndexOption.toJs() = pointIndexOptionJs(
 )
 
 fun PointIndexOptionJs.toClass() = PointIndexOption(
-    cartesianMin = cartesianMin.toDoubleArray(),
-    cartesianMax = cartesianMax.toDoubleArray(),
-    cartesian3DMin = cartesian3DMin.toDoubleArray(),
-    cartesian3DMax = cartesian3DMax.toDoubleArray(),
-    wgs84Min = wgs84Min.toDoubleArray(),
-    wgs84Max = wgs84Max.toDoubleArray(),
-    wgs843DMin = wgs843DMin.toDoubleArray(),
-    wgs843DMax = wgs843DMax.toDoubleArray()
+    cartesianMin = cartesianMin.toList(),
+    cartesianMax = cartesianMax.toList(),
+    cartesian3DMin = cartesian3DMin.toList(),
+    cartesian3DMax = cartesian3DMax.toList(),
+    wgs84Min = wgs84Min.toList(),
+    wgs84Max = wgs84Max.toList(),
+    wgs843DMin = wgs843DMin.toList(),
+    wgs843DMax = wgs843DMax.toList()
 )
