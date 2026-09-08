@@ -19,8 +19,8 @@ package validate
 import validate.node.NodeConstraintCoverage
 import validate.node.NodeConstraints
 import validate.node.NodeIndexConstraintNameConflict
-import validate.node.NodeIndexProperties
 import validate.node.NodeIndexOptions
+import validate.node.NodeIndexProperties
 import validate.node.NodeIndexesExists
 import validate.node.NodeLabel
 import validate.node.NodeLabelToken
@@ -35,8 +35,8 @@ import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeKeyOverlap
 import validate.node.constraint.NodeTypeConstraint
 import validate.relationship.RelationshipConstraints
-import validate.relationship.RelationshipIndexProperties
 import validate.relationship.RelationshipIndexOptions
+import validate.relationship.RelationshipIndexProperties
 import validate.relationship.RelationshipIndexes
 import validate.relationship.RelationshipNodes
 import validate.relationship.RelationshipType
