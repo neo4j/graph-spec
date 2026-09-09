@@ -76,7 +76,7 @@ class Validations {
         // UPX kg-builder `validateStructuredSchema` (schemas-validators/) - gates accepting
         // an AI-generated schema before it's applied to the model.
         @JsStatic
-        val kgbuilderReady: List<Validation> = listOf(
+        val kgbuilderComplete: List<Validation> = listOf(
             NodeLabel,
             NodeProperties,
             NodeConstraintCoverage,
@@ -91,7 +91,7 @@ class Validations {
         // UPX `getDataModelErrors` (errors.ts) - shared call site, gates "Run Import"
         // in both kg-builder's data-model-slice.ts and import's data-model.ts.
         @JsStatic
-        val importReady: List<Validation> = listOf(
+        val importComplete: List<Validation> = listOf(
             NodeLabel,
             RelationshipType,
             NodeMappingKey,
@@ -111,16 +111,16 @@ class Validations {
         )
 
         // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
-        // model, called by both apps whenever a saved model is loaded/uploaded.
+        // model, called by both import and ontologies whenever a saved model is loaded/uploaded.
         @JsStatic
-        val importParseIntegrity: List<Validation> = listOf(
+        val draft: List<Validation> = listOf(
             NodeLabel,
             RelationshipType
         )
 
         // UPX `apps/import/.../data-model.utils.ts` - import-app-only bulk pass.
         @JsStatic
-        val bulkImportReady: List<Validation> = listOf(
+        val bulkImportComplete: List<Validation> = listOf(
             NodeLabelToken,
             RelationshipTypeToken,
             NodeMappingKeyType,
@@ -129,6 +129,6 @@ class Validations {
 
         @JsStatic
         val all: List<Validation> =
-            (core + kgbuilderReady + importReady + importParseIntegrity + bulkImportReady).distinct()
+            (core + kgbuilderComplete + importComplete + draft + bulkImportComplete).distinct()
     }
 }
