@@ -840,36 +840,15 @@
                     "$ref": "#/$defs/NodeMapping"
                 },
                 {
-                    "$ref": "#/$defs/RelationshipMapping"
+                    "$ref": "#/$defs/QueryMapping"
                 },
                 {
-                    "$ref": "#/$defs/QueryMapping"
+                    "$ref": "#/$defs/RelationshipMapping"
                 }
             ],
             "discriminator": {
                 "propertyName": "type"
             }
-        },
-        "LabelMapping": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "LabelMapping"
-                },
-                "table": {
-                    "type": "string"
-                },
-                "field": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type",
-                "table",
-                "field"
-            ],
-            "additionalProperties": false
         },
         "PropertyMapping": {
             "type": "object",
@@ -1016,27 +995,6 @@
                 "table",
                 "from",
                 "to"
-            ],
-            "additionalProperties": false
-        },
-        "QueryMapping": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "QueryMapping"
-                },
-                "table": {
-                    "type": "string"
-                },
-                "query": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "type",
-                "table",
-                "query"
             ],
             "additionalProperties": false
         },

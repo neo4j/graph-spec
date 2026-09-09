@@ -214,8 +214,6 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 
 	var v MappingUnion
 	switch peek.Type {
-	case "LabelMapping":
-		v = &LabelMapping{}
 	case "NodeMapping":
 		v = &NodeMapping{}
 	case "QueryMapping":
@@ -233,16 +231,6 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 	w.MappingUnion = v
 	return nil
 }
-
-type LabelMapping struct {
-	Field string `json:"field"`
-	Table string `json:"table"`
-	Type  string `json:"type"`
-}
-
-func (LabelMapping) isMapping() {}
-
-func (LabelMapping) MappingType() string { return "LabelMapping" }
 
 type NodeMapping struct {
 	Key        []string                   `json:"key,omitempty"`
