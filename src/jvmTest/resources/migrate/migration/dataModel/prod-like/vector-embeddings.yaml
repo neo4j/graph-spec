@@ -11,6 +11,9 @@ nodes:
         type: "VECTOR"
         labels: ["document"]
         properties: ["embedding"]
+        options:
+          vector.dimensions: 123
+          vector.similarity_function: "euclidean"
 tables:
   document:
     source: "cloud"

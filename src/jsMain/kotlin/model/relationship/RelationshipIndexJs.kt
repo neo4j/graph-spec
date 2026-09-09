@@ -23,6 +23,9 @@ import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
+import model.index.IndexOptionJs
+import model.index.toClass
+import model.index.toJs
 import model.jso
 import model.type.IndexType
 
@@ -31,14 +34,14 @@ import model.type.IndexType
 external interface RelationshipIndexJs {
     var type: String
     var properties: Array<String>
-    val options: Record<String, ExtensionValueJs>
+    var options: IndexOptionJs?
     val extensions: Record<String, ExtensionValueJs>
 }
 
 fun relationshipIndexJs(
     type: String,
     properties: Array<String>,
-    options: Record<String, ExtensionValueJs> = emptyRecord(),
+    options: IndexOptionJs? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord()
 ): RelationshipIndexJs = jso {
     this.type = type
@@ -50,13 +53,13 @@ fun relationshipIndexJs(
 fun RelationshipIndex.toJs() = relationshipIndexJs(
     type = type.name,
     properties = properties.toTypedArray(),
-    options = options.associateBy { _, value -> value.toJs() },
+    options = options?.toJs(),
     extensions = extensions.associateBy { _, value -> value.toJs() }
 )
 
 fun RelationshipIndexJs.toClass() = RelationshipIndex(
     type = IndexType.valueOf(type),
     properties = properties.toMutableSet(),
-    options = options.associateBy { _, value -> value.toClass() },
+    options = options?.toClass(),
     extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

@@ -12,6 +12,9 @@ nodes:
         type: "VECTOR"
         labels: ["document"]
         properties: ["nodeProperty1"]
+        options:
+          vector.dimensions: 123
+          vector.similarity_function: "euclidean"
         name: "document_embedding"
     name: "document"
 tables:

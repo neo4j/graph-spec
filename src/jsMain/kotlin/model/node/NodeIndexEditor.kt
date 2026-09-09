@@ -18,6 +18,7 @@ package model.node
 
 import model.dropAt
 import model.extension.ExtensionValueJs
+import model.index.IndexOptionJs
 import model.remove
 import kotlin.collections.indexOf
 import kotlin.collections.plus
@@ -61,13 +62,13 @@ class NodeIndexEditor {
         }
 
         @JsStatic
-        fun setOption(index: NodeIndexJs, key: String, value: ExtensionValueJs) {
-            index.options[key] = value
+        fun setOption(index: NodeIndexJs, options: IndexOptionJs) {
+            index.options = options
         }
 
         @JsStatic
-        fun removeOption(index: NodeIndexJs, key: String) {
-            index.options.remove(key)
+        fun removeOption(index: NodeIndexJs) {
+            index.options = null
         }
     }
 }

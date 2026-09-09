@@ -14,25 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.relationship
+package model.index
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
-import model.index.IndexOption
+import kotlinx.js.JsPlainObject
 import model.type.IndexType
-import model.type.Named
-import kotlin.js.JsExport
 
 @JsExport
-@Serializable
-@SerialName("RelationshipIndex")
-data class RelationshipIndex(
-    var type: IndexType,
-    val properties: MutableSet<String>,
-    val options: IndexOption? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
-    override var name: String? = null
-) : Extensions,
-    Named
+@JsPlainObject
+external interface IndexOptionJs {
+    val type: String
+}
+
+fun IndexOption.toJs(): IndexOptionJs = when (this) {
+    is FullTextIndexOption -> toJs()
+    is PointIndexOption -> toJs()
+    is VectorIndexOption -> toJs()
+}
+
+fun IndexOptionJs.toClass(): IndexOption = when (this.type) {
+    IndexType.FULLTEXT.name -> (this as FullTextIndexOptionJs).toClass()
+    IndexType.POINT.name -> (this as PointIndexOptionJs).toClass()
+    IndexType.VECTOR.name -> (this as VectorIndexOptionJs).toClass()
+    else -> error("Unexpected mapping type: ${this.type}")
+}
