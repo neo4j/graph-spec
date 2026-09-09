@@ -222,8 +222,6 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 		v = &QueryMapping{}
 	case "RelationshipMapping":
 		v = &RelationshipMapping{}
-	case "QueryMapping":
-		v = &QueryMapping{}
 	default:
 		return fmt.Errorf("Mapping: unknown type %q", peek.Type)
 	}
@@ -285,16 +283,6 @@ type RelationshipMapping struct {
 func (RelationshipMapping) isMapping() {}
 
 func (RelationshipMapping) MappingType() string { return "RelationshipMapping" }
-
-type QueryMapping struct {
-	Query string `json:"query"`
-	Table string `json:"table"`
-	Type  string `json:"type"`
-}
-
-func (QueryMapping) isMapping() {}
-
-func (QueryMapping) MappingType() string { return "QueryMapping" }
 
 type Labels struct {
 	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
