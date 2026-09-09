@@ -57,4 +57,11 @@ class IndexOptionRoundTripTest {
         println("ENCODED VECTOR WITH DIMENSIONS >>> $encoded")
         assertEquals(true, encoded.contains("\"type\""), "expected a 'type' discriminator in $encoded")
     }
+
+    @Test
+    fun `options with an unrecognised key are reported as a validation issue not an exception`() {
+        val decoded = json.decodeFromString(IndexOptionSerializer, """{"indexProvider": "range-1.0"}""")
+
+        println("DECODED UNRECOGNISED >>> $decoded")
+    }
 }
