@@ -52,5 +52,6 @@ Releases are automated via the Release workflow, triggered by merging a PR to `m
 | Label | Effect |
 |---|---|
 | `release:alpha` | Increment or create the dangling alpha line on the current base |
+| `release:patch` | Bump patch version (stable) |
 
 No manual `npm publish` or Gradle task is needed - just merge a labelled PR.
