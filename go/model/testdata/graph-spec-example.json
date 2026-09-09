@@ -24,7 +24,16 @@
       },
       "constraints": {},
       "indexes": {},
-      "extensions": {}
+      "extensions": {
+        "note": {
+          "type": "String",
+          "value": "lead role"
+        },
+        "verified": {
+          "type": "Boolean",
+          "value": true
+        }
+      }
     },
     "Movie": {
       "labels": {

@@ -26,7 +26,7 @@ import kotlin.js.JsExport
  */
 @JsExport
 @Serializable
-@SerialName("PointIndexOption")
+@SerialName("POINT")
 data class PointIndexOption(
     @SerialName("spatial.cartesian.min")
     val cartesianMin: List<Double> = listOf(-1000000.0, -1000000.0),
@@ -45,5 +45,5 @@ data class PointIndexOption(
     @SerialName("spatial.wgs-84-3d.max")
     val wgs843DMax: List<Double> = listOf(180.0, 90.0, 1000000.0)
 ) : IndexOption {
-    override val type: IndexType = IndexType.POINT
+    override val type: IndexType get() = IndexType.POINT
 }
