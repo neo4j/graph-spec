@@ -23,12 +23,9 @@ jq '.title //= .["$id"]' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
 # Replace characters that cannot appear in Go structs with placeholders to enable Go generation
 # 1. Angled brackets in keys and values
 perl -pi -e 's/"([^"]+)<([^>]+)>"/"$1_LEFTBRACK_$2_RIGHTBRACK_"/g' "$TEMP_SPEC"
-# Replace periods with placeholders to enable Go generation
-# TODO: can we use a more generic/safer replacement like above?
-perl -pi -e 's/\./_PERIOD_/g' "$TEMP_SPEC"
-perl -pi -e 's/-/_HYPHEN_/g' "$TEMP_SPEC"
-# Just replace the schema in case the above have messed it up
-perl -pi -e 's/"\$schema".*\n/"$schema"\: "https:\/\/json-schema.org\/draft\/2020-12\/schema",/g' "$TEMP_SPEC"
+# 2. Periods and hyphens in keys
+perl -pi -e 's/\.(?=[^"]*":)/_PERIOD_/g' "$TEMP_SPEC"
+perl -pi -e 's/-(?=[^"]*":)/_HYPHEN_/g' "$TEMP_SPEC"
 echo "✓ JSON spec sanitised"
 
 
