@@ -89,11 +89,11 @@ class PrettyTest {
                 "node0" to Node(
                     name = "User1",
                     constraints = mutableMapOf(
-                        "nodeConstraint0" to
+                        "nodeConstraint_node0_0" to
                             NodeConstraint(ConstraintType.UNIQUE, properties = mutableSetOf(), name = "c1")
                     ),
                     indexes = mutableMapOf(
-                        "nodeIndex0" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf(), name = "i1")
+                        "nodeIndex_node0_0" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf(), name = "i1")
                     )
                 )
             )
@@ -198,7 +198,7 @@ class PrettyTest {
                     name = "User",
                     properties = mutableMapOf("nodeProperty0" to Property(name = "id")),
                     constraints = mutableMapOf(
-                        "nodeConstraint0" to NodeConstraint(
+                        "nodeConstraint_node0_0" to NodeConstraint(
                             ConstraintType.KEY,
                             label = null,
                             properties = mutableSetOf("nodeProperty0")
@@ -228,12 +228,12 @@ class PrettyTest {
                         "nodeProperty1" to Property(name = "createdAt")
                     ),
                     constraints = mutableMapOf(
-                        "nodeConstraint0" to NodeConstraint(
+                        "nodeConstraint_node0_0" to NodeConstraint(
                             ConstraintType.UNIQUE,
                             label = null,
                             properties = mutableSetOf("nodeProperty0")
                         ),
-                        "nodeConstraint1" to NodeConstraint(
+                        "nodeConstraint_node0_1" to NodeConstraint(
                             ConstraintType.EXISTS,
                             label = null,
                             properties = mutableSetOf("nodeProperty1")
@@ -265,7 +265,7 @@ class PrettyTest {
                     labels = Labels(identifier = "UserLabel", implied = mutableSetOf("Person")),
                     properties = mutableMapOf("nodeProperty0" to Property(name = "id")),
                     constraints = mutableMapOf(
-                        "nodeConstraint0" to NodeConstraint(
+                        "nodeConstraint_node0_0" to NodeConstraint(
                             ConstraintType.KEY,
                             label = "Person",
                             properties = mutableSetOf("nodeProperty0")
@@ -279,10 +279,13 @@ class PrettyTest {
 
         val node = model.nodes["User"]!!
         assertNull(node.properties["id"]?.key, "Key flag should not be restored when the constraint label differs")
-        assertTrue(node.constraints.containsKey("nodeConstraint0"), "Mismatched constraint should be left in place")
+        assertTrue(
+            node.constraints.containsKey("nodeConstraint_node0_0"),
+            "Mismatched constraint should be left in place"
+        )
         assertEquals(
             mutableSetOf("id"),
-            node.constraints["nodeConstraint0"]?.properties,
+            node.constraints["nodeConstraint_node0_0"]?.properties,
             "Constraint's property reference should still be renamed to the human-readable name"
         )
     }
@@ -299,7 +302,7 @@ class PrettyTest {
                         "nodeProperty1" to Property(name = "last")
                     ),
                     constraints = mutableMapOf(
-                        "nodeConstraint0" to NodeConstraint(
+                        "nodeConstraint_node0_0" to NodeConstraint(
                             ConstraintType.KEY,
                             label = null,
                             properties = mutableSetOf("nodeProperty0", "nodeProperty1")
@@ -314,7 +317,10 @@ class PrettyTest {
         val node = model.nodes["User"]!!
         assertNull(node.properties["first"]?.key)
         assertNull(node.properties["last"]?.key)
-        assertTrue(node.constraints.containsKey("nodeConstraint0"), "Multi-property constraint should be left in place")
+        assertTrue(
+            node.constraints.containsKey("nodeConstraint_node0_0"),
+            "Multi-property constraint should be left in place"
+        )
     }
 
     @Test
@@ -329,7 +335,7 @@ class PrettyTest {
                     to = RelationshipTarget(),
                     properties = mutableMapOf("relationshipProperty0" to Property(name = "since")),
                     constraints = mutableMapOf(
-                        "relationshipConstraint0" to RelationshipConstraint(
+                        "relationshipConstraint_relationship0_0" to RelationshipConstraint(
                             ConstraintType.UNIQUE,
                             properties = mutableSetOf("relationshipProperty0")
                         )

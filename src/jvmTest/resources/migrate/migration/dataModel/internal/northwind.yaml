@@ -9,13 +9,13 @@ nodes:
       nodeProperty2: { type: "STRING", name: "description" }
       nodeProperty3: { type: "STRING", name: "picture" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node0_0:
         type: "UNIQUE"
         label: "categories"
         properties: ["nodeProperty0"]
         name: "unique_categories_categoryid"
     indexes:
-      nodeIndex0:
+      nodeIndex_node0_0:
         type: "TEXT"
         labels: ["categories"]
         properties: ["nodeProperty0"]
@@ -34,13 +34,13 @@ nodes:
       nodeProperty6: { type: "INTEGER", name: "reorderlevel" }
       nodeProperty7: { type: "INTEGER", name: "discontinued" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node1_0:
         type: "UNIQUE"
         label: "products"
         properties: ["nodeProperty0"]
         name: "unique_products_productid"
     indexes:
-      nodeIndex0:
+      nodeIndex_node1_0:
         type: "TEXT"
         labels: ["products"]
         properties: ["nodeProperty0"]
@@ -63,13 +63,13 @@ nodes:
       nodeProperty10: { type: "STRING", name: "fax" }
       nodeProperty11: { type: "STRING", name: "homepage" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node2_0:
         type: "UNIQUE"
         label: "suppliers"
         properties: ["nodeProperty0"]
         name: "unique_suppliers_supplierid"
     indexes:
-      nodeIndex0:
+      nodeIndex_node2_0:
         type: "TEXT"
         labels: ["suppliers"]
         properties: ["nodeProperty0"]

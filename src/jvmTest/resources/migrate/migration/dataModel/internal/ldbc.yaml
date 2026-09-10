@@ -13,13 +13,13 @@ nodes:
       nodeProperty6: { type: "STRING", name: "content" }
       nodeProperty7: { type: "INTEGER", name: "length" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node0_0:
         type: "UNIQUE"
         label: "Comment"
         properties: ["nodeProperty3"]
         name: "unique_Comment_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node0_0:
         type: "TEXT"
         labels: ["Comment"]
         properties: ["nodeProperty3"]
@@ -35,13 +35,13 @@ nodes:
       nodeProperty3: { type: "INTEGER", name: "id" }
       nodeProperty4: { type: "STRING", name: "title" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node1_0:
         type: "UNIQUE"
         label: "Forum"
         properties: ["nodeProperty3"]
         name: "unique_Forum_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node1_0:
         type: "TEXT"
         labels: ["Forum"]
         properties: ["nodeProperty3"]
@@ -56,13 +56,13 @@ nodes:
       nodeProperty2: { type: "STRING", name: "name" }
       nodeProperty3: { type: "STRING", name: "url" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node2_0:
         type: "UNIQUE"
         label: "Organisation"
         properties: ["nodeProperty0"]
         name: "unique_Organisation_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node2_0:
         type: "TEXT"
         labels: ["Organisation"]
         properties: ["nodeProperty0"]
@@ -85,13 +85,13 @@ nodes:
       nodeProperty10: { type: "STRING", name: "language" }
       nodeProperty11: { type: "STRING", name: "email" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node3_0:
         type: "UNIQUE"
         label: "Person"
         properties: ["nodeProperty3"]
         name: "unique_Person_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node3_0:
         type: "TEXT"
         labels: ["Person"]
         properties: ["nodeProperty3"]
@@ -106,13 +106,13 @@ nodes:
       nodeProperty2: { type: "STRING", name: "url" }
       nodeProperty3: { type: "STRING", name: "type" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node4_0:
         type: "UNIQUE"
         label: "Place"
         properties: ["nodeProperty0"]
         name: "unique_Place_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node4_0:
         type: "TEXT"
         labels: ["Place"]
         properties: ["nodeProperty0"]
@@ -133,13 +133,13 @@ nodes:
       nodeProperty8: { type: "STRING", name: "content" }
       nodeProperty9: { type: "INTEGER", name: "length" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node5_0:
         type: "UNIQUE"
         label: "Post"
         properties: ["nodeProperty3"]
         name: "unique_Post_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node5_0:
         type: "TEXT"
         labels: ["Post"]
         properties: ["nodeProperty3"]
@@ -153,13 +153,13 @@ nodes:
       nodeProperty1: { type: "STRING", name: "name" }
       nodeProperty2: { type: "STRING", name: "url" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node6_0:
         type: "UNIQUE"
         label: "Tag"
         properties: ["nodeProperty0"]
         name: "unique_Tag_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node6_0:
         type: "TEXT"
         labels: ["Tag"]
         properties: ["nodeProperty0"]
@@ -173,13 +173,13 @@ nodes:
       nodeProperty1: { type: "STRING", name: "name" }
       nodeProperty2: { type: "STRING", name: "url" }
     constraints:
-      nodeConstraint0:
+      nodeConstraint_node7_0:
         type: "UNIQUE"
         label: "TagClass"
         properties: ["nodeProperty0"]
         name: "unique_TagClass_id"
     indexes:
-      nodeIndex0:
+      nodeIndex_node7_0:
         type: "TEXT"
         labels: ["TagClass"]
         properties: ["nodeProperty0"]
