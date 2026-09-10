@@ -15,14 +15,14 @@ class MapValueJsTest : JsMappingTest<MapValue, MapValueJs>() {
     override fun toClass(js: MapValueJs): MapValue = js.toClass()
 
     override fun verifyJsObject(jsObject: MapValueJs) {
-        assertEquals("Map", jsObject.type)
+        assertEquals("MAP", jsObject.type)
         val first = jsObject.value["key1"]
         val second = jsObject.value["key2"]
         assertNotNull(first)
         assertNotNull(second)
-        assertEquals("String", first.type)
+        assertEquals("STRING", first.type)
         assertEquals("val1", (first as StringValueJs).value)
-        assertEquals("Long", second.type)
+        assertEquals("LONG", second.type)
         assertEquals(4, (second as LongValueJs).value)
     }
 

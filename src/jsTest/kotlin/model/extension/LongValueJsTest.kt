@@ -14,7 +14,7 @@ class LongValueJsTest : JsMappingTest<LongValue, LongValueJs>() {
     override fun toClass(js: LongValueJs): LongValue = js.toClass()
 
     override fun verifyJsObject(jsObject: LongValueJs) {
-        assertEquals("Long", jsObject.type)
+        assertEquals("LONG", jsObject.type)
         assertEquals(31415962, jsObject.value)
     }
 

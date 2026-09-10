@@ -17,7 +17,7 @@
 package model.mapping
 
 object MappingType {
-    const val QUERY = "QueryMapping"
-    const val NODE = "NodeMapping"
-    const val RELATIONSHIP = "RelationshipMapping"
+    const val QUERY = "QUERY"
+    const val NODE = "NODE"
+    const val RELATIONSHIP = "RELATIONSHIP"
 }

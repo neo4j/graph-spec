@@ -538,21 +538,21 @@ tables:
           table: "media_type"
           columns: ["media_type_id"]
 mappings:
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "album"
     table: "album"
     properties:
       album_id: { column: "album_id" }
       title: { column: "title" }
     key: ["album_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "artist"
     table: "artist"
     properties:
       artist_id: { column: "artist_id" }
       name: { column: "name" }
     key: ["artist_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "customer"
     table: "customer"
     properties:
@@ -569,7 +569,7 @@ mappings:
       fax: { column: "fax" }
       email: { column: "email" }
     key: ["customer_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "employee"
     table: "employee"
     properties:
@@ -588,14 +588,14 @@ mappings:
       fax: { column: "fax" }
       email: { column: "email" }
     key: ["employee_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "genre"
     table: "genre"
     properties:
       genre_id: { column: "genre_id" }
       name: { column: "name" }
     key: ["genre_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "invoice"
     table: "invoice"
     properties:
@@ -608,7 +608,7 @@ mappings:
       billing_postal_code: { column: "billing_postal_code" }
       total: { column: "total" }
     key: ["invoice_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "invoice_line"
     table: "invoice_line"
     properties:
@@ -616,21 +616,21 @@ mappings:
       unit_price: { column: "unit_price" }
       quantity: { column: "quantity" }
     key: ["invoice_line_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "media_type"
     table: "media_type"
     properties:
       media_type_id: { column: "media_type_id" }
       name: { column: "name" }
     key: ["media_type_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "playlist"
     table: "playlist"
     properties:
       playlist_id: { column: "playlist_id" }
       name: { column: "name" }
     key: ["playlist_id"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "track"
     table: "track"
     properties:
@@ -641,7 +641,7 @@ mappings:
       bytes: { column: "bytes" }
       unit_price: { column: "unit_price" }
     key: ["track_id"]
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "ARTIST"
     table: "album"
     from:
@@ -652,7 +652,7 @@ mappings:
       node: "artist"
       properties:
         artist_id: { column: "artist_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "EMPLOYEE"
     table: "customer"
     from:
@@ -663,7 +663,7 @@ mappings:
       node: "employee"
       properties:
         employee_id: { column: "support_rep_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "EMPLOYEE2"
     table: "employee"
     from:
@@ -674,7 +674,7 @@ mappings:
       node: "employee"
       properties:
         employee_id: { column: "reports_to" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "CUSTOMER"
     table: "invoice"
     from:
@@ -685,7 +685,7 @@ mappings:
       node: "customer"
       properties:
         customer_id: { column: "customer_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "INVOICE"
     table: "invoice_line"
     from:
@@ -696,7 +696,7 @@ mappings:
       node: "invoice"
       properties:
         invoice_id: { column: "invoice_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "TRACK"
     table: "invoice_line"
     from:
@@ -707,7 +707,7 @@ mappings:
       node: "track"
       properties:
         track_id: { column: "track_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "TRACK2"
     table: "playlist_track"
     from:
@@ -718,7 +718,7 @@ mappings:
       node: "track"
       properties:
         track_id: { column: "track_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "ALBUM"
     table: "track"
     from:
@@ -729,7 +729,7 @@ mappings:
       node: "album"
       properties:
         album_id: { column: "album_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "GENRE"
     table: "track"
     from:
@@ -740,7 +740,7 @@ mappings:
       node: "genre"
       properties:
         genre_id: { column: "genre_id" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "MEDIA_TYPE"
     table: "track"
     from:

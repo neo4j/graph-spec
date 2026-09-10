@@ -245,7 +245,7 @@ tables:
         supported: ["STRING"]
     primaryKeys: ["supplierid"]
 mappings:
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node0"
     table: "categories"
     properties:
@@ -254,7 +254,7 @@ mappings:
       nodeProperty2: { column: "description" }
       nodeProperty3: { column: "picture" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node1"
     table: "products"
     properties:
@@ -267,7 +267,7 @@ mappings:
       nodeProperty6: { column: "reorderlevel" }
       nodeProperty7: { column: "discontinued" }
     key: ["nodeProperty0"]
-  - type: "NodeMapping"
+  - type: "NODE"
     node: "node2"
     table: "suppliers"
     properties:
@@ -284,7 +284,7 @@ mappings:
       nodeProperty10: { column: "fax" }
       nodeProperty11: { column: "homepage" }
     key: ["nodeProperty0"]
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "products"
     from:
@@ -295,7 +295,7 @@ mappings:
       node: "node0"
       properties:
         nodeProperty0: { column: "categoryid" }
-  - type: "RelationshipMapping"
+  - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "products"
     from:
