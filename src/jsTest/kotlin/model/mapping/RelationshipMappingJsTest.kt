@@ -21,7 +21,7 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
     override fun toClass(js: RelationshipMappingJs): RelationshipMapping = js.toClass()
 
     override fun verifyJsObject(jsObject: RelationshipMappingJs) {
-        assertEquals("RelationshipMapping", jsObject.type)
+        assertEquals("RELATIONSHIP", jsObject.type)
         assertEquals("table_name", jsObject.table)
         assertEquals("from_node", jsObject.from.node)
         assertEquals("to_label", jsObject.to.label)

@@ -14,7 +14,7 @@ class BooleanValueJsTest : JsMappingTest<BooleanValue, BooleanValueJs>() {
     override fun toClass(js: BooleanValueJs): BooleanValue = js.toClass()
 
     override fun verifyJsObject(jsObject: BooleanValueJs) {
-        assertEquals("Boolean", jsObject.type)
+        assertEquals("BOOLEAN", jsObject.type)
         assertEquals(true, jsObject.value)
     }
 

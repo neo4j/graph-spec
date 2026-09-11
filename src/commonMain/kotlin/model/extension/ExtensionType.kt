@@ -17,10 +17,10 @@
 package model.extension
 
 object ExtensionType {
-    const val STRING = "String"
-    const val BOOLEAN = "Boolean"
-    const val LONG = "Long"
-    const val DOUBLE = "Double"
-    const val LIST = "List"
-    const val MAP = "Map"
+    const val STRING = "STRING"
+    const val BOOLEAN = "BOOLEAN"
+    const val LONG = "LONG"
+    const val DOUBLE = "DOUBLE"
+    const val LIST = "LIST"
+    const val MAP = "MAP"
 }

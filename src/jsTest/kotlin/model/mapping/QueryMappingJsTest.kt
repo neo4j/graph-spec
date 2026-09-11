@@ -15,7 +15,7 @@ class QueryMappingJsTest : JsMappingTest<QueryMapping, QueryMappingJs>() {
     override fun toClass(js: QueryMappingJs): QueryMapping = js.toClass()
 
     override fun verifyJsObject(jsObject: QueryMappingJs) {
-        assertEquals("QueryMapping", jsObject.type)
+        assertEquals("QUERY", jsObject.type)
         assertEquals("table_name", jsObject.table)
         assertEquals("cypher query", jsObject.query)
     }
