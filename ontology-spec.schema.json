@@ -30,8 +30,13 @@
     },
     "relationships": {
       "type": "object",
-      "description": "Map key is the relationship type.",
-      "additionalProperties": { "$ref": "#/$defs/relationship" }
+      "description": "Map key is the relationship type. Value is a single entry (shorthand) or a list of entries, one per endpoint pair (normalized form). A relationship's identity is the triple (type, from, to).",
+      "additionalProperties": {
+        "oneOf": [
+          { "$ref": "#/$defs/relationshipEntry" },
+          { "type": "array", "items": { "$ref": "#/$defs/relationshipEntry" }, "minItems": 1 }
+        ]
+      }
     },
     "extensions": {
       "type": "array",
@@ -157,7 +162,7 @@
         }
       }
     },
-    "relationship": {
+    "relationshipEntry": {
       "type": "object",
       "required": ["from", "to"],
       "additionalProperties": false,

@@ -85,25 +85,35 @@ nodes:
             - region
 relationships:
   WORKS_IN:
-    from:
-      node: Employee
-    to:
-      node: Department
-    cardinality_type: MANY_TO_ONE
-    description: Current organisational home
-    properties:
-      since:
-        type: DATE
-      fte:
-        type: FLOAT
-        description: Fraction of full-time employment
-    extensions:
-      - type: tool
-        name: colleaguesOf
-        kind: canonicalQuery
-        definition:
-          description: Colleagues of an employee across their departments
-          cypher: MATCH (e:Employee)-[:WORKS_IN]->(d:Department)<-[:WORKS_IN]-(c:Employee) WHERE e.employee_id = $id RETURN c
+    - from:
+        node: Employee
+      to:
+        node: Department
+      cardinality_type: MANY_TO_ONE
+      description: Current organisational home
+      properties:
+        since:
+          type: DATE
+        fte:
+          type: FLOAT
+          description: Fraction of full-time employment
+      extensions:
+        - type: tool
+          name: colleaguesOf
+          kind: canonicalQuery
+          definition:
+            description: Colleagues of an employee across their departments
+            cypher: MATCH (e:Employee)-[:WORKS_IN]->(d:Department)<-[:WORKS_IN]-(c:Employee) WHERE e.employee_id = $id RETURN c
+    - from:
+        node: Contractor
+      to:
+        node: Department
+      cardinality_type: MANY_TO_ONE
+      description: Current organisational home
+      properties:
+        po_number:
+          type: STRING
+          pattern: ^PO-[0-9]{6}$
   MANAGES:
     from:
       node: Employee
@@ -140,10 +150,6 @@ relationships:
     to:
       node: Contractor
     cardinality_type: ONE_TO_MANY
-    properties:
-      po_number:
-        type: STRING
-        pattern: ^PO-[0-9]{6}$
 extensions:
   - type: neo4j-importer:table
     name: employees
