@@ -36,6 +36,7 @@ import validate.node.constraint.NodeExistenceCompositeConflict
 import validate.node.constraint.NodeExistenceConstraint
 import validate.node.constraint.NodeKeyOverlap
 import validate.node.constraint.NodeTypeConstraint
+import validate.node.index.NodeIndexDuplicatePropertySet
 import validate.relationship.RelationshipConstraints
 import validate.relationship.RelationshipIndexOptions
 import validate.relationship.RelationshipIndexProperties
@@ -48,6 +49,7 @@ import validate.relationship.RelationshipTypeToken
 import validate.relationship.constraint.RelationshipExistenceConstraint
 import validate.relationship.constraint.RelationshipKeyOverlap
 import validate.relationship.constraint.RelationshipTypeConstraint
+import validate.relationship.index.RelationshipIndexDuplicatePropertySet
 import validate.table.TableColumnDuplicateName
 import validate.table.TableColumnEmptyName
 import validate.table.TableColumnType
@@ -99,6 +101,8 @@ class Validations {
             RelationshipIndexProperties,
             NodeConstraintProperties,
             NodeConstraintDuplicatePropertySet,
+            NodeIndexDuplicatePropertySet,
+            RelationshipIndexDuplicatePropertySet,
             NodeExistenceCompositeConflict,
             NodeIndexConstraintNameConflict,
             TableColumnEmptyName,
