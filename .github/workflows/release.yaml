@@ -183,7 +183,7 @@ jobs:
     secrets: inherit
 
   publish-npm:
-    needs: [determine-version, validate-kotlin]
+    needs: [determine-version, validate-kotlin, validate-go]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -226,7 +226,7 @@ jobs:
 
   publish-maven:
     if: false
-    needs: [determine-version, validate-kotlin]
+    needs: [determine-version, validate-kotlin, validate-go]
     runs-on: macos-latest  # mac-os host is needed to build and compile macosArm64 targets
     steps:
       - name: Checkout Repository
