@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
+import { parse } from "yaml";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const schemaPath = join(root, "ontology-spec.schema.json");
@@ -26,11 +27,12 @@ ajv.validateSchema(schema);
 const validate = ajv.compile(schema);
 console.log(`schema: OK (${schemaPath.split("/").pop()})`);
 
-// 2. Every examples/*.json validates against the schema.
+// 2. Every examples/*.{json,yaml,yml} validates against the schema.
 let failed = 0;
-const files = readdirSync(examplesDir).filter((f) => f.endsWith(".json")).sort();
+const files = readdirSync(examplesDir).filter((f) => /\.(json|ya?ml)$/.test(f)).sort();
 for (const file of files) {
-  const doc = JSON.parse(readFileSync(join(examplesDir, file), "utf8"));
+  const text = readFileSync(join(examplesDir, file), "utf8");
+  const doc = file.endsWith(".json") ? JSON.parse(text) : parse(text);
   const ok = validate(doc);
   if (ok) {
     console.log(`example: OK (${file})`);
