@@ -155,18 +155,26 @@ for (const p of props) {
     const card = isFp && isIfp ? "ONE_TO_ONE" : isFp ? "MANY_TO_ONE" : isIfp ? "ONE_TO_MANY" : undefined;
     for (const d of doms) {
       for (const r of rangesOk) {
-        const key = doms.length > 1 || rangesOk.length > 1 ? `${relType}__${upperSnake(local(d))}__${upperSnake(local(r))}` : relType;
         const entry = { from: { node: local(d) }, to: { node: local(r) } };
         if (card) entry.cardinality_type = card;
         if (comment) entry.description = comment;
         const label = first(p, RDFS + "label");
         if (label && label !== relType) entry.aliases = [label];
         if (exts.length) entry.extensions = exts;
-        relationships[key] = entry;
-        report.relationships.push(`${key}: ${local(d)} -> ${local(r)}${card ? ` (${card})` : ""}`);
+        // one entry per endpoint pair; a type's identity is the (type, from, to) triple
+        (relationships[relType] ??= []);
+        if (!relationships[relType].some((e) => e.from.node === entry.from.node && e.to.node === entry.to.node)) {
+          relationships[relType].push(entry);
+          report.relationships.push(`${relType}: ${local(d)} -> ${local(r)}${card ? ` (${card})` : ""}`);
+        }
       }
     }
   }
+}
+
+// collapse one-entry lists to the shorthand single-object form
+for (const [k, v] of Object.entries(relationships)) {
+  if (v.length === 1) relationships[k] = v[0];
 }
 
 // --- assemble

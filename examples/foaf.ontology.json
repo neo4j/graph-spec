@@ -734,305 +734,307 @@
     }
   },
   "relationships": {
-    "HOMEPAGE__LABEL_PROPERTY__DOCUMENT": {
-      "from": {
-        "node": "LabelProperty"
-      },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+    "HOMEPAGE": [
+      {
+        "from": {
+          "node": "LabelProperty"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__PERSON__DOCUMENT": {
-      "from": {
-        "node": "Person"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Person"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__AGENT__DOCUMENT": {
-      "from": {
-        "node": "Agent"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Agent"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__DOCUMENT__DOCUMENT": {
-      "from": {
-        "node": "Document"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Document"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__ORGANIZATION__DOCUMENT": {
-      "from": {
-        "node": "Organization"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Organization"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__GROUP__DOCUMENT": {
-      "from": {
-        "node": "Group"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Group"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__PROJECT__DOCUMENT": {
-      "from": {
-        "node": "Project"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Project"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__IMAGE__DOCUMENT": {
-      "from": {
-        "node": "Image"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Image"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__PERSONAL_PROFILE_DOCUMENT__DOCUMENT": {
-      "from": {
-        "node": "PersonalProfileDocument"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "PersonalProfileDocument"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__ONLINE_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__ONLINE_GAMING_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineGamingAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineGamingAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__ONLINE_ECOMMERCE_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineEcommerceAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineEcommerceAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "HOMEPAGE__ONLINE_CHAT_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineChatAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A homepage for some thing.",
-      "aliases": [
-        "homepage"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "homepage",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineChatAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A homepage for some thing.",
+        "aliases": [
+          "homepage"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "homepage",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
+        ]
+      }
+    ],
     "WEBLOG": {
       "from": {
         "node": "Agent"
@@ -1101,292 +1103,294 @@
         }
       ]
     },
-    "MAKER__LABEL_PROPERTY__AGENT": {
-      "from": {
-        "node": "LabelProperty"
-      },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+    "MAKER": [
+      {
+        "from": {
+          "node": "LabelProperty"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__PERSON__AGENT": {
-      "from": {
-        "node": "Person"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Person"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__AGENT__AGENT": {
-      "from": {
-        "node": "Agent"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Agent"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__DOCUMENT__AGENT": {
-      "from": {
-        "node": "Document"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Document"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__ORGANIZATION__AGENT": {
-      "from": {
-        "node": "Organization"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Organization"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__GROUP__AGENT": {
-      "from": {
-        "node": "Group"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Group"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__PROJECT__AGENT": {
-      "from": {
-        "node": "Project"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Project"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__IMAGE__AGENT": {
-      "from": {
-        "node": "Image"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Image"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__PERSONAL_PROFILE_DOCUMENT__AGENT": {
-      "from": {
-        "node": "PersonalProfileDocument"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "PersonalProfileDocument"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__ONLINE_ACCOUNT__AGENT": {
-      "from": {
-        "node": "OnlineAccount"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineAccount"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__ONLINE_GAMING_ACCOUNT__AGENT": {
-      "from": {
-        "node": "OnlineGamingAccount"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineGamingAccount"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__ONLINE_ECOMMERCE_ACCOUNT__AGENT": {
-      "from": {
-        "node": "OnlineEcommerceAccount"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineEcommerceAccount"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "MAKER__ONLINE_CHAT_ACCOUNT__AGENT": {
-      "from": {
-        "node": "OnlineChatAccount"
+        ]
       },
-      "to": {
-        "node": "Agent"
-      },
-      "description": "An agent that  made this thing.",
-      "aliases": [
-        "maker"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "maker",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineChatAccount"
+        },
+        "to": {
+          "node": "Agent"
+        },
+        "description": "An agent that  made this thing.",
+        "aliases": [
+          "maker"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "maker",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
+        ]
+      }
+    ],
     "IMG": {
       "from": {
         "node": "Person"
@@ -1409,292 +1413,294 @@
         }
       ]
     },
-    "DEPICTION__LABEL_PROPERTY__IMAGE": {
-      "from": {
-        "node": "LabelProperty"
-      },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+    "DEPICTION": [
+      {
+        "from": {
+          "node": "LabelProperty"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__PERSON__IMAGE": {
-      "from": {
-        "node": "Person"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Person"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__AGENT__IMAGE": {
-      "from": {
-        "node": "Agent"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Agent"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__DOCUMENT__IMAGE": {
-      "from": {
-        "node": "Document"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Document"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__ORGANIZATION__IMAGE": {
-      "from": {
-        "node": "Organization"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Organization"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__GROUP__IMAGE": {
-      "from": {
-        "node": "Group"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Group"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__PROJECT__IMAGE": {
-      "from": {
-        "node": "Project"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Project"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__IMAGE__IMAGE": {
-      "from": {
-        "node": "Image"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Image"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__PERSONAL_PROFILE_DOCUMENT__IMAGE": {
-      "from": {
-        "node": "PersonalProfileDocument"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "PersonalProfileDocument"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__ONLINE_ACCOUNT__IMAGE": {
-      "from": {
-        "node": "OnlineAccount"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineAccount"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__ONLINE_GAMING_ACCOUNT__IMAGE": {
-      "from": {
-        "node": "OnlineGamingAccount"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineGamingAccount"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__ONLINE_ECOMMERCE_ACCOUNT__IMAGE": {
-      "from": {
-        "node": "OnlineEcommerceAccount"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineEcommerceAccount"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "DEPICTION__ONLINE_CHAT_ACCOUNT__IMAGE": {
-      "from": {
-        "node": "OnlineChatAccount"
+        ]
       },
-      "to": {
-        "node": "Image"
-      },
-      "description": "A depiction of some thing.",
-      "aliases": [
-        "depiction"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "depiction",
-            "term_status": "testing",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineChatAccount"
+        },
+        "to": {
+          "node": "Image"
+        },
+        "description": "A depiction of some thing.",
+        "aliases": [
+          "depiction"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "depiction",
+              "term_status": "testing",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
+        ]
+      }
+    ],
     "THUMBNAIL": {
       "from": {
         "node": "Image"
@@ -1849,591 +1855,595 @@
         }
       ]
     },
-    "IS_PRIMARY_TOPIC_OF__LABEL_PROPERTY__DOCUMENT": {
-      "from": {
-        "node": "LabelProperty"
-      },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+    "IS_PRIMARY_TOPIC_OF": [
+      {
+        "from": {
+          "node": "LabelProperty"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__PERSON__DOCUMENT": {
-      "from": {
-        "node": "Person"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Person"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__AGENT__DOCUMENT": {
-      "from": {
-        "node": "Agent"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Agent"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__DOCUMENT__DOCUMENT": {
-      "from": {
-        "node": "Document"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Document"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__ORGANIZATION__DOCUMENT": {
-      "from": {
-        "node": "Organization"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Organization"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__GROUP__DOCUMENT": {
-      "from": {
-        "node": "Group"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Group"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__PROJECT__DOCUMENT": {
-      "from": {
-        "node": "Project"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Project"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__IMAGE__DOCUMENT": {
-      "from": {
-        "node": "Image"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Image"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__PERSONAL_PROFILE_DOCUMENT__DOCUMENT": {
-      "from": {
-        "node": "PersonalProfileDocument"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "PersonalProfileDocument"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__ONLINE_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__ONLINE_GAMING_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineGamingAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineGamingAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__ONLINE_ECOMMERCE_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineEcommerceAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineEcommerceAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "IS_PRIMARY_TOPIC_OF__ONLINE_CHAT_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineChatAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "cardinality_type": "ONE_TO_MANY",
-      "description": "A document that this thing is the primary topic of.",
-      "aliases": [
-        "is primary topic of"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "is primary topic of",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineChatAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "cardinality_type": "ONE_TO_MANY",
+        "description": "A document that this thing is the primary topic of.",
+        "aliases": [
+          "is primary topic of"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "is primary topic of",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__LABEL_PROPERTY__DOCUMENT": {
-      "from": {
-        "node": "LabelProperty"
-      },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+        ]
+      }
+    ],
+    "PAGE": [
+      {
+        "from": {
+          "node": "LabelProperty"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__PERSON__DOCUMENT": {
-      "from": {
-        "node": "Person"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Person"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__AGENT__DOCUMENT": {
-      "from": {
-        "node": "Agent"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Agent"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__DOCUMENT__DOCUMENT": {
-      "from": {
-        "node": "Document"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Document"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__ORGANIZATION__DOCUMENT": {
-      "from": {
-        "node": "Organization"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Organization"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__GROUP__DOCUMENT": {
-      "from": {
-        "node": "Group"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Group"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__PROJECT__DOCUMENT": {
-      "from": {
-        "node": "Project"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Project"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__IMAGE__DOCUMENT": {
-      "from": {
-        "node": "Image"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "Image"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__PERSONAL_PROFILE_DOCUMENT__DOCUMENT": {
-      "from": {
-        "node": "PersonalProfileDocument"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "PersonalProfileDocument"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__ONLINE_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__ONLINE_GAMING_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineGamingAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineGamingAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__ONLINE_ECOMMERCE_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineEcommerceAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineEcommerceAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
-    "PAGE__ONLINE_CHAT_ACCOUNT__DOCUMENT": {
-      "from": {
-        "node": "OnlineChatAccount"
+        ]
       },
-      "to": {
-        "node": "Document"
-      },
-      "description": "A page or document about this thing.",
-      "aliases": [
-        "page"
-      ],
-      "extensions": [
-        {
-          "type": "rdfs:annotations",
-          "definition": {
-            "label": "page",
-            "term_status": "stable",
-            "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+      {
+        "from": {
+          "node": "OnlineChatAccount"
+        },
+        "to": {
+          "node": "Document"
+        },
+        "description": "A page or document about this thing.",
+        "aliases": [
+          "page"
+        ],
+        "extensions": [
+          {
+            "type": "rdfs:annotations",
+            "definition": {
+              "label": "page",
+              "term_status": "stable",
+              "isDefinedBy": "http://xmlns.com/foaf/0.1/"
+            }
           }
-        }
-      ]
-    },
+        ]
+      }
+    ],
     "ACCOUNT": {
       "from": {
         "node": "Agent"
