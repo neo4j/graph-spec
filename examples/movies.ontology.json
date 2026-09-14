@@ -1,0 +1,102 @@
+{
+  "$schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+  "id": "3f8a4c2e-9b1d-4e7a-a5c3-2d8f1b6e9a04",
+  "version": 3,
+  "name": "movies",
+  "description": "Movie domain ontology",
+  "nodes": {
+    "Actor": {
+      "description": "A person who acts in films",
+      "aliases": ["Performer"],
+      "properties": {
+        "id": { "type": "STRING", "key": true },
+        "name": {
+          "type": "STRING",
+          "mustExist": true,
+          "description": "Stage name"
+        },
+        "status": {
+          "type": "STRING",
+          "enum": ["active", "retired"]
+        },
+        "imdb_id": {
+          "type": "STRING",
+          "pattern": "^tt[0-9]{7,8}$",
+          "unique": true
+        }
+      },
+      "extensions": [
+        {
+          "type": "neo4j:index",
+          "name": "actor_names",
+          "definition": { "properties": ["name"] }
+        },
+        {
+          "type": "ui:display",
+          "definition": { "color": "#e06209", "caption": "name" }
+        }
+      ]
+    },
+    "Person": {
+      "properties": {
+        "id": { "type": "STRING", "key": true }
+      }
+    },
+    "Employee": {
+      "labels": {
+        "implied": ["Person"],
+        "optional": ["Contractor"]
+      },
+      "properties": {
+        "employee_id": { "type": "STRING", "key": true }
+      }
+    },
+    "Movie": {
+      "properties": {
+        "id": { "type": "STRING", "key": true },
+        "title": { "type": { "kind": "scalar", "scalar": "STRING" }, "mustExist": true },
+        "embedding": {
+          "type": { "kind": "vector", "items": "FLOAT", "dimension": 1042 },
+          "description": "Plot embedding"
+        }
+      }
+    }
+  },
+  "relationships": {
+    "ACTED_IN": {
+      "from": { "node": "Actor" },
+      "to": { "node": "Movie" },
+      "cardinality_type": "MANY_TO_ONE",
+      "description": "Filmography",
+      "properties": {
+        "roles": { "type": { "kind": "list", "items": "STRING" } }
+      },
+      "extensions": [
+        {
+          "type": "tool",
+          "name": "findCoActors",
+          "kind": "canonicalQuery",
+          "definition": {
+            "description": "Actors who shared a film with a given actor",
+            "cypher": "MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) WHERE a.name = $name RETURN co"
+          }
+        }
+      ]
+    }
+  },
+  "extensions": [
+    {
+      "type": "neo4j-importer:table",
+      "$schema": "https://neo4j.com/ontology-spec/extensions/neo4j-importer-table/0.1.0/schema.json",
+      "name": "actors",
+      "definition": {
+        "source": "sql/postgres",
+        "columns": { "actor_id": { "type": "varchar" } }
+      }
+    },
+    {
+      "type": "neo4j-importer:mapping",
+      "definition": { "kind": "node", "node": "Actor", "table": "actors", "key": ["actor_id"] }
+    }
+  ]
+}

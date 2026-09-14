@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+  "title": "Neo4j Ontology Specification v1",
+  "description": "Draft JSON Schema for the Ontology spec v1 proposal (2026-09-14 doc state). Envelope-only validation for extensions; definitions are never validated by this schema.",
+  "type": "object",
+  "required": ["$schema", "id", "version"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "Spec link including the version. Meta-level; doubles as document-type marker."
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier of the ontology."
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "The ontology's own version. Identity metadata, not lifecycle."
+    },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "nodes": {
+      "type": "object",
+      "description": "Map key is the node label.",
+      "additionalProperties": { "$ref": "#/$defs/node" }
+    },
+    "relationships": {
+      "type": "object",
+      "description": "Map key is the relationship type.",
+      "additionalProperties": { "$ref": "#/$defs/relationship" }
+    },
+    "extensions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/extension" }
+    }
+  },
+  "$defs": {
+    "scalarToken": {
+      "type": "string",
+      "enum": ["STRING", "INTEGER", "FLOAT", "BOOLEAN", "DATE", "TIME", "LOCALTIME", "DATETIME", "LOCALDATETIME", "DURATION", "POINT", "BYTES"]
+    },
+    "propertyType": {
+      "description": "A type object; scalars may use the bare-token shorthand. Element types are always scalars: no nesting.",
+      "oneOf": [
+        { "$ref": "#/$defs/scalarToken" },
+        {
+          "type": "object",
+          "required": ["kind", "scalar"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "scalar" },
+            "scalar": { "$ref": "#/$defs/scalarToken" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "items"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "list" },
+            "items": { "$ref": "#/$defs/scalarToken" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["kind", "items"],
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "vector" },
+            "items": { "$ref": "#/$defs/scalarToken" },
+            "dimension": { "type": "integer", "minimum": 1 }
+          }
+        }
+      ]
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "implied": { "type": "array", "items": { "type": "string" } },
+        "optional": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "constraint": {
+      "description": "Composite constraint objects only (multi-property keys/uniques). Shape provisional, aligned with graph-spec 4.0.0's constraint object.",
+      "type": "object",
+      "required": ["kind", "properties"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string", "enum": ["key", "unique"] },
+        "properties": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2
+        }
+      }
+    },
+    "property": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": { "$ref": "#/$defs/propertyType" },
+        "mustExist": { "type": "boolean" },
+        "unique": { "type": "boolean" },
+        "key": { "type": "boolean" },
+        "enum": { "type": "array" },
+        "pattern": { "type": "string", "format": "regex" },
+        "description": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "extensions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/extension" }
+        }
+      }
+    },
+    "endpoint": {
+      "type": "object",
+      "required": ["node"],
+      "additionalProperties": false,
+      "properties": {
+        "node": { "type": "string", "description": "A node label from the nodes map." }
+      }
+    },
+    "extension": {
+      "description": "Fixed envelope, four fields: type required; $schema, name, definition optional. definition is free-form and never validated by this spec. Unknown extra fields are carried untouched.",
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string" },
+        "$schema": { "type": "string", "format": "uri" },
+        "name": { "type": "string" },
+        "definition": true
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "labels": { "$ref": "#/$defs/labels" },
+        "description": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "properties": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/property" }
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/constraint" }
+        },
+        "extensions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/extension" }
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "required": ["from", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "from": { "$ref": "#/$defs/endpoint" },
+        "to": { "$ref": "#/$defs/endpoint" },
+        "cardinality_type": {
+          "type": "string",
+          "enum": ["ONE_TO_ONE", "ONE_TO_MANY", "MANY_TO_ONE", "MANY_TO_MANY"]
+        },
+        "description": { "type": "string" },
+        "aliases": { "type": "array", "items": { "type": "string" } },
+        "properties": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/property" }
+        },
+        "constraints": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/constraint" }
+        },
+        "extensions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/extension" }
+        }
+      }
+    }
+  }
+}

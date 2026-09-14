@@ -1,0 +1,17 @@
+{
+  "name": "ontology-spec",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Neo4j Ontology Specification v1 - JSON Schema and examples (draft)",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}
