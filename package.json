@@ -10,11 +10,15 @@
   "scripts": {
     "generate": "node scripts/generate-yaml.mjs",
     "prevalidate": "node scripts/generate-yaml.mjs",
-    "validate": "node scripts/validate.mjs"
+    "validate": "node scripts/validate.mjs",
+    "convert": "node scripts/ttl2ontology.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "yaml": "^2.8.1"
+  },
+  "dependencies": {
+    "n3": "^2.7.12"
   }
 }

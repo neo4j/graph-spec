@@ -3,8 +3,9 @@
 Draft. Mirrors the shared proposal doc's 2026-09-14 state.
 
 - `ontology-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format.
-- `examples/` - example ontologies exercising the full surface.
-- `scripts/validate.mjs` - validates the schema, then every example against it.
+- `examples/` - example ontologies exercising the full surface, plus `foaf.ttl` and its converted output.
+- `scripts/validate.mjs` - validates the schema, then every example (JSON + YAML) against it.
+- `scripts/ttl2ontology.mjs` - converts an RDFS/OWL Turtle vocabulary to the ontology format, applying the proposal's RDFS coverage table. Prints what mapped, what expanded, what was dropped and why.
 
 ## Run
 
@@ -12,7 +13,8 @@ Requires Node >= 24.
 
 ```sh
 npm install
-npm run validate
+npm run validate    # schema + all examples (regenerates YAML first)
+npm run convert     # examples/foaf.ttl -> examples/foaf.ontology.json
 ```
 
 ## Notes
