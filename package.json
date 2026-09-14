@@ -8,10 +8,13 @@
     "node": ">=24"
   },
   "scripts": {
+    "generate": "node scripts/generate-yaml.mjs",
+    "prevalidate": "node scripts/generate-yaml.mjs",
     "validate": "node scripts/validate.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.8.1"
   }
 }
