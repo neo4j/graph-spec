@@ -3,9 +3,13 @@ name: Go PR Quality Guard
 on:
   pull_request:
     branches: [main]
-    # Trigger on changes to the Go files (including the JSON schema)
+    # Trigger on changes to the Go files (including the JSON schema) or the
+    # Kotlin sources that generate them - Kotlin changes can drift go/spec.json
+    # even when no go/** file was touched in the PR.
     paths:
       - 'go/**'
+      - 'src/**'
+      - 'build-logic/**'
 
 jobs:
   validate:

@@ -183,7 +183,9 @@ jobs:
     secrets: inherit
 
   publish-npm:
-    needs: [determine-version, validate-kotlin]
+    # validate-go is required so a failed Go side blocks npm too - otherwise npm publishes
+    # while publish-tags (which needs validate-go) is skipped, desyncing the registries.
+    needs: [determine-version, validate-kotlin, validate-go]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
