@@ -162,6 +162,11 @@ nodes:
         type: { kind: vector, items: FLOAT, dimension: 1042 }
         description: Plot embedding
 
+  Studio:
+    properties:
+      id: { type: STRING, key: true }
+      name: { type: STRING, mustExist: true }
+
 relationships:
   ACTED_IN:
     from: { node: Actor }
@@ -176,6 +181,15 @@ relationships:
         definition:
           description: Actors who shared a film with a given actor
           cypher: MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) WHERE a.name = $name RETURN co
+
+  PRODUCED: # same relationship between different node types
+    - from: { node: Studio }
+      to: { node: Movie }
+      cardinality_type: ONE_TO_MANY
+    - from: { node: Person }
+      to: { node: Movie }
+      cardinality_type: MANY_TO_ONE
+      description: Individual producer credit
 
 extensions:
   - $schema: "https://<url-to-table-extension-schema>/0.1.0"   # the table type's own schema and version (owner-managed, optional)

@@ -60,6 +60,12 @@
           "description": "Plot embedding"
         }
       }
+    },
+    "Studio": {
+      "properties": {
+        "id": { "type": "STRING", "key": true },
+        "name": { "type": "STRING", "mustExist": true }
+      }
     }
   },
   "relationships": {
@@ -82,7 +88,20 @@
           }
         }
       ]
-    }
+    },
+    "PRODUCED": [
+      {
+        "from": { "node": "Studio" },
+        "to": { "node": "Movie" },
+        "cardinality_type": "ONE_TO_MANY"
+      },
+      {
+        "from": { "node": "Person" },
+        "to": { "node": "Movie" },
+        "cardinality_type": "MANY_TO_ONE",
+        "description": "Individual producer credit"
+      }
+    ]
   },
   "extensions": [
     {
