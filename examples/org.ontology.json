@@ -63,6 +63,11 @@
         {
           "type": "ui:display",
           "definition": { "color": "#4c9aff", "icon": "building" }
+        },
+        {
+          "type": "neo4j:index",
+          "name": "department_name_region",
+          "definition": { "kind": "range", "properties": ["name", "region"] }
         }
       ]
     }
