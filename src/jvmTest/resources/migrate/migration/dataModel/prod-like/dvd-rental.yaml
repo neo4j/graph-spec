@@ -1053,55 +1053,55 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_CITY"
     table: "address"
-    from:
+    start_node:
       node: "address"
       properties:
         address_id: { column: "address_id" }
-    to:
+    end_node:
       node: "city"
       properties:
         city_id: { column: "city_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_COUNTRY"
     table: "city"
-    from:
+    start_node:
       node: "city"
       properties:
         city_id: { column: "city_id" }
-    to:
+    end_node:
       node: "country"
       properties:
         country_id: { column: "country_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_ADDRESS"
     table: "customer"
-    from:
+    start_node:
       node: "customer"
       properties:
         customer_id: { column: "customer_id" }
-    to:
+    end_node:
       node: "address"
       properties:
         address_id: { column: "address_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_LANGUAGE"
     table: "film"
-    from:
+    start_node:
       node: "film"
       properties:
         film_id: { column: "film_id" }
-    to:
+    end_node:
       node: "language"
       properties:
         language_id: { column: "language_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_FILM"
     table: "film_actor"
-    from:
+    start_node:
       node: "actor"
       properties:
         actor_id: { column: "actor_id" }
-    to:
+    end_node:
       node: "film"
       properties:
         film_id: { column: "film_id" }
@@ -1110,11 +1110,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_FILM2"
     table: "film_category"
-    from:
+    start_node:
       node: "category"
       properties:
         category_id: { column: "category_id" }
-    to:
+    end_node:
       node: "film"
       properties:
         film_id: { column: "film_id" }
@@ -1123,110 +1123,110 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_FILM3"
     table: "inventory"
-    from:
+    start_node:
       node: "inventory"
       properties:
         inventory_id: { column: "inventory_id" }
-    to:
+    end_node:
       node: "film"
       properties:
         film_id: { column: "film_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_CUSTOMER"
     table: "payment"
-    from:
+    start_node:
       node: "payment"
       properties:
         payment_id: { column: "payment_id" }
-    to:
+    end_node:
       node: "customer"
       properties:
         customer_id: { column: "customer_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_RENTAL"
     table: "payment"
-    from:
+    start_node:
       node: "payment"
       properties:
         payment_id: { column: "payment_id" }
-    to:
+    end_node:
       node: "rental"
       properties:
         rental_id: { column: "rental_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_STAFF"
     table: "payment"
-    from:
+    start_node:
       node: "payment"
       properties:
         payment_id: { column: "payment_id" }
-    to:
+    end_node:
       node: "staff"
       properties:
         staff_id: { column: "staff_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_CUSTOMER2"
     table: "rental"
-    from:
+    start_node:
       node: "rental"
       properties:
         rental_id: { column: "rental_id" }
-    to:
+    end_node:
       node: "customer"
       properties:
         customer_id: { column: "customer_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_INVENTORY"
     table: "rental"
-    from:
+    start_node:
       node: "rental"
       properties:
         rental_id: { column: "rental_id" }
-    to:
+    end_node:
       node: "inventory"
       properties:
         inventory_id: { column: "inventory_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_STAFF2"
     table: "rental"
-    from:
+    start_node:
       node: "rental"
       properties:
         rental_id: { column: "rental_id" }
-    to:
+    end_node:
       node: "staff"
       properties:
         staff_id: { column: "staff_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_ADDRESS2"
     table: "staff"
-    from:
+    start_node:
       node: "staff"
       properties:
         staff_id: { column: "staff_id" }
-    to:
+    end_node:
       node: "address"
       properties:
         address_id: { column: "address_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_ADDRESS3"
     table: "store"
-    from:
+    start_node:
       node: "store"
       properties:
         store_id: { column: "store_id" }
-    to:
+    end_node:
       node: "address"
       properties:
         address_id: { column: "address_id" }
   - type: "RELATIONSHIP"
     relationship: "RELATED_TO_STAFF3"
     table: "store"
-    from:
+    start_node:
       node: "store"
       properties:
         store_id: { column: "store_id" }
-    to:
+    end_node:
       node: "staff"
       properties:
         staff_id: { column: "manager_staff_id" }

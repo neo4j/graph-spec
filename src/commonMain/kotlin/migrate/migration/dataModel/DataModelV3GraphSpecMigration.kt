@@ -273,11 +273,11 @@ class DataModelV3GraphSpecMigration :
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.RELATIONSHIP), // needed for Kotlin/Native migrations
                 "relationship" to ref,
-                "from" to mapOf(
+                "start_node" to mapOf(
                     "node" to obj.ref("from"),
                     "properties" to mapping.entityMap("fromMappings")
                 ),
-                "to" to mapOf(
+                "end_node" to mapOf(
                     "node" to obj.ref("to"),
                     "properties" to mapping.entityMap("toMappings")
                 ),

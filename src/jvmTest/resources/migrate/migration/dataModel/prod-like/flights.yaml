@@ -358,44 +358,44 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "FLIGHT_USES_AIRCRAFT"
     table: "flights"
-    from:
+    start_node:
       node: "Flight"
       properties:
         flightId: { column: "flight_id" }
-    to:
+    end_node:
       node: "Aircraft"
       properties:
         aircraftCode: { column: "aircraft_code" }
   - type: "RELATIONSHIP"
     relationship: "FLIGHT_DEPARTS_FROM_AIRPORT"
     table: "flights"
-    from:
+    start_node:
       node: "Flight"
       properties:
         flightId: { column: "flight_id" }
-    to:
+    end_node:
       node: "Airport"
       properties:
         airportCode: { column: "departure_airport" }
   - type: "RELATIONSHIP"
     relationship: "FLIGHT_ARRIVES_AT_AIRPORT"
     table: "flights"
-    from:
+    start_node:
       node: "Flight"
       properties:
         flightId: { column: "flight_id" }
-    to:
+    end_node:
       node: "Airport"
       properties:
         airportCode: { column: "arrival_airport" }
   - type: "RELATIONSHIP"
     relationship: "FLIGHT_HAS_TICKET"
     table: "ticket_flights"
-    from:
+    start_node:
       node: "Flight"
       properties:
         flightId: { column: "flight_id" }
-    to:
+    end_node:
       node: "Ticket"
       properties:
         ticketNo: { column: "ticket_no" }
@@ -405,11 +405,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "TICKET_BELONGS_TO_BOOKING"
     table: "tickets"
-    from:
+    start_node:
       node: "Ticket"
       properties:
         ticketNo: { column: "ticket_no" }
-    to:
+    end_node:
       node: "Booking"
       properties:
         bookRef: { column: "book_ref" }
