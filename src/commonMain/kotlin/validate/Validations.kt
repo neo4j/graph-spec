@@ -113,10 +113,7 @@ class Validations {
         // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
         // model, called by both import and ontologies whenever a saved model is loaded/uploaded.
         @JsStatic
-        val draft: List<Validation> = listOf(
-            NodeLabel,
-            RelationshipType
-        )
+        val draft: List<Validation> = listOf()
 
         // UPX `apps/import/.../data-model.utils.ts` - import-app-only bulk pass.
         @JsStatic
