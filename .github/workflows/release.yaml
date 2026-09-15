@@ -4,6 +4,19 @@ on:
   pull_request:
     types: [closed]
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: 'Release channel (equivalent to the PR release label) - releases from main only'
+        required: true
+        default: 'release:alpha'
+        type: choice
+        options:
+          - release:alpha
+          - release:patch
+          - release:minor
+          - release:major
+          - release:promote
 
 # Ensures only one release process runs at a time to prevent version collisions
 concurrency:
@@ -26,21 +39,31 @@ jobs:
     #   - `release:promote` with `release:alpha`
     #   - `release:promote` with any bump label
 
-    # Only run for merged PRs that explicitly request a release label.
+    # Only run for merged PRs that explicitly request a release label,
+    # or when manually dispatched (rescue path for a merge without a label).
     if: >
-      github.event.pull_request.merged == true &&
+      github.event_name == 'workflow_dispatch' ||
       (
-        contains(github.event.pull_request.labels.*.name, 'release:major') ||
-        contains(github.event.pull_request.labels.*.name, 'release:minor') ||
-        contains(github.event.pull_request.labels.*.name, 'release:patch') || 
-        contains(github.event.pull_request.labels.*.name, 'release:alpha') ||
-        contains(github.event.pull_request.labels.*.name, 'release:promote')
+        github.event.pull_request.merged == true &&
+        (
+          contains(github.event.pull_request.labels.*.name, 'release:major') ||
+          contains(github.event.pull_request.labels.*.name, 'release:minor') ||
+          contains(github.event.pull_request.labels.*.name, 'release:patch') ||
+          contains(github.event.pull_request.labels.*.name, 'release:alpha') ||
+          contains(github.event.pull_request.labels.*.name, 'release:promote')
+        )
       )
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
       sha: ${{ github.sha }}
     steps:
+      - name: Enforce main-only dispatch
+        if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/main'
+        run: |
+          echo "Dispatch refused: releases cut from main only (picked ${GITHUB_REF})." >&2
+          exit 1
+
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -51,7 +74,9 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const labels = context.payload.pull_request.labels.map(l => l.name);
+            const labels = github.event_name === "workflow_dispatch"
+              ? [github.event.inputs.channel]
+              : context.payload.pull_request.labels.map(l => l.name);
 
             const hasMajor = labels.includes("release:major");
             const hasMinor = labels.includes("release:minor");
