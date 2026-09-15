@@ -142,7 +142,10 @@ class InternalTest {
         val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("relationship0", relMapping.relationship)
         assertEquals("node0", relMapping.startNode.node)
-        assertTrue(relMapping.startNode.properties.containsKey("nodeProperty0"), "From Target property should be renamed")
+        assertTrue(
+            relMapping.startNode.properties.containsKey("nodeProperty0"),
+            "From Target property should be renamed"
+        )
         assertTrue(
             relMapping.properties.containsKey("relationshipProperty0"),
             "Relationship property should be renamed"

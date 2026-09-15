@@ -88,7 +88,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     "rel" to schemaMapOf(
                         "relationship" to refOf(relId),
                         "tableName" to mapping.literal("table"),
-                        "fromMappings" toNotEmpty convertEntityMap(mapping.map("start_node").mapOfMapsOrNull("properties")),
+                        "fromMappings" toNotEmpty
+                            convertEntityMap(mapping.map("start_node").mapOfMapsOrNull("properties")),
                         "toMappings" toNotEmpty convertEntityMap(mapping.map("end_node").mapOfMapsOrNull("properties")),
                         "propertyMappings" to convertPropertyMappings(mapping.mapOfMapsOrNull("properties"))
                     )
