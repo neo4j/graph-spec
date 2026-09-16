@@ -222,8 +222,8 @@ class DataModelV3GraphSpecMigration :
             val id = objectType.id()
             relationships[id] = schemaMapOf(
                 "type" to token,
-                "from" to mapOf("node" to objectType.ref("from")),
-                "to" to mapOf("node" to objectType.ref("to")),
+                "start" to mapOf("node" to objectType.ref("from")),
+                "end" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType)),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),

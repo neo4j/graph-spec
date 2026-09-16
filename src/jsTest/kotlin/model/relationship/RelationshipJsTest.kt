@@ -14,8 +14,8 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
 
     override fun createClass() = Relationship(
         type = "RELATIONSHIP_TYPE",
-        from = RelationshipTarget("from_node"),
-        to = RelationshipTarget("to_node"),
+        start = RelationshipTarget("from_node"),
+        end = RelationshipTarget("to_node"),
         properties = mutableMapOf("prop" to Property(Neo4jType.STRING, name = "property_name")),
         constraints = mutableMapOf("constraint" to RelationshipConstraint(ConstraintType.KEY, mutableSetOf("prop"))),
         indexes = mutableMapOf("index" to RelationshipIndex(IndexType.POINT, mutableSetOf("prop"))),
@@ -29,8 +29,8 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
 
     override fun verifyJsObject(jsObject: RelationshipJs) {
         assertEquals("RELATIONSHIP_TYPE", jsObject.type)
-        assertEquals("from_node", jsObject.from.node)
-        assertEquals("to_node", jsObject.to.node)
+        assertEquals("from_node", jsObject.start.node)
+        assertEquals("to_node", jsObject.end.node)
         assertJsEquals(propertyJs("STRING", id = "prop", name = "property_name"), jsObject.properties["prop"])
         assertJsEquals(relationshipConstraintJs("KEY", arrayOf("prop")), jsObject.constraints["constraint"])
         assertJsEquals(relationshipIndexJs("POINT", arrayOf("prop")), jsObject.indexes["index"])

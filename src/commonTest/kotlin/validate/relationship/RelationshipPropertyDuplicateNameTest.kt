@@ -36,8 +36,8 @@ class RelationshipPropertyDuplicateNameTest {
         // UPX findArrayDuplicates + includes flags ALL properties with a duplicated name
         val rel = Relationship(
             type = "KNOWS",
-            from = target,
-            to = target,
+            start = target,
+            end = target,
             properties = mutableMapOf(
                 "p:1" to Property(name = "since"),
                 "p:2" to Property(name = "weight"),
@@ -60,8 +60,8 @@ class RelationshipPropertyDuplicateNameTest {
     fun `pass when all property names are unique`() {
         val rel = Relationship(
             type = "KNOWS",
-            from = target,
-            to = target,
+            start = target,
+            end = target,
             properties = mutableMapOf(
                 "p:1" to Property(name = "since"),
                 "p:2" to Property(name = "weight")
@@ -79,8 +79,8 @@ class RelationshipPropertyDuplicateNameTest {
     fun `pass when property name is blank`() {
         val rel = Relationship(
             type = "KNOWS",
-            from = target,
-            to = target,
+            start = target,
+            end = target,
             properties = mutableMapOf("p:1" to Property(name = ""))
         )
         val issues = mutableListOf<Issue>()

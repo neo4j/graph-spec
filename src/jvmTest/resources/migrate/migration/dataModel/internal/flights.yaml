@@ -110,31 +110,31 @@ nodes:
 relationships:
   relationship0:
     type: "FLIGHT_USES_AIRCRAFT"
-    from: { node: "node3" }
-    to: { node: "node0" }
+    start: { node: "node3" }
+    end: { node: "node0" }
     name: "FLIGHT_USES_AIRCRAFT"
   relationship1:
     type: "FLIGHT_DEPARTS_FROM_AIRPORT"
-    from: { node: "node3" }
-    to: { node: "node1" }
+    start: { node: "node3" }
+    end: { node: "node1" }
     name: "FLIGHT_DEPARTS_FROM_AIRPORT"
   relationship2:
     type: "FLIGHT_ARRIVES_AT_AIRPORT"
-    from: { node: "node3" }
-    to: { node: "node1" }
+    start: { node: "node3" }
+    end: { node: "node1" }
     name: "FLIGHT_ARRIVES_AT_AIRPORT"
   relationship3:
     type: "FLIGHT_HAS_TICKET"
-    from: { node: "node3" }
-    to: { node: "node4" }
+    start: { node: "node3" }
+    end: { node: "node4" }
     properties:
       relationshipProperty0: { type: "STRING", name: "fare_conditions" }
       relationshipProperty1: { type: "FLOAT", name: "amount" }
     name: "FLIGHT_HAS_TICKET"
   relationship4:
     type: "TICKET_BELONGS_TO_BOOKING"
-    from: { node: "node4" }
-    to: { node: "node2" }
+    start: { node: "node4" }
+    end: { node: "node2" }
     name: "TICKET_BELONGS_TO_BOOKING"
 tables:
   aircrafts_data:

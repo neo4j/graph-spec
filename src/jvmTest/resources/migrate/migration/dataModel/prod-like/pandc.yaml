@@ -1602,684 +1602,684 @@ nodes:
 relationships:
   AGREEMENT:
     type: "AGREEMENT"
-    from: { node: "ACCOUNT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "ACCOUNT" }
+    end: { node: "AGREEMENT" }
   ORGANIZATION_UNIT:
     type: "ORGANIZATION_UNIT"
-    from: { node: "ADMINISTRATIVE_ORGANIZATION_UNIT" }
-    to: { node: "ORGANIZATION_UNIT" }
+    start: { node: "ADMINISTRATIVE_ORGANIZATION_UNIT" }
+    end: { node: "ORGANIZATION_UNIT" }
   AGREEMENT2:
     type: "AGREEMENT"
-    from: { node: "AGENCY_CONTRACT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "AGENCY_CONTRACT" }
+    end: { node: "AGREEMENT" }
   PRODUCT:
     type: "PRODUCT"
-    from: { node: "AGREEMENT" }
-    to: { node: "PRODUCT" }
+    start: { node: "AGREEMENT" }
+    end: { node: "PRODUCT" }
   ASSESSMENT:
     type: "ASSESSMENT"
-    from: { node: "AGREEMENT" }
-    to: { node: "ASSESSMENT" }
+    start: { node: "AGREEMENT" }
+    end: { node: "ASSESSMENT" }
   BODY_OBJECT:
     type: "BODY_OBJECT"
-    from: { node: "ANIMAL" }
-    to: { node: "BODY_OBJECT" }
+    start: { node: "ANIMAL" }
+    end: { node: "BODY_OBJECT" }
   ASSESSMENT_RESULT:
     type: "ASSESSMENT_RESULT"
-    from: { node: "APPROVAL" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "APPROVAL" }
+    end: { node: "ASSESSMENT_RESULT" }
   ASSESSMENT2:
     type: "ASSESSMENT"
-    from: { node: "ASSESSMENT_RESULT" }
-    to: { node: "ASSESSMENT" }
+    start: { node: "ASSESSMENT_RESULT" }
+    end: { node: "ASSESSMENT" }
   CLAIM_AMOUNT:
     type: "CLAIM_AMOUNT"
-    from: { node: "ASSUMED_CLAIM_AMOUNT" }
-    to: { node: "CLAIM_AMOUNT" }
+    start: { node: "ASSUMED_CLAIM_AMOUNT" }
+    end: { node: "CLAIM_AMOUNT" }
   POLICY_AMOUNT:
     type: "POLICY_AMOUNT"
-    from: { node: "ASSUMED_POLICY_AMOUNT" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "ASSUMED_POLICY_AMOUNT" }
+    end: { node: "POLICY_AMOUNT" }
   VEHICLE:
     type: "VEHICLE"
-    from: { node: "AUTOMOBILE" }
-    to: { node: "VEHICLE" }
+    start: { node: "AUTOMOBILE" }
+    end: { node: "VEHICLE" }
   AGREEMENT3:
     type: "AGREEMENT"
-    from: { node: "AUTO_REPAIR_SHOP_CONTRACT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "AUTO_REPAIR_SHOP_CONTRACT" }
+    end: { node: "AGREEMENT" }
   POLICY_EVENT:
     type: "POLICY_EVENT"
-    from: { node: "BINDING" }
-    to: { node: "POLICY_EVENT" }
+    start: { node: "BINDING" }
+    end: { node: "POLICY_EVENT" }
   VEHICLE2:
     type: "VEHICLE"
-    from: { node: "BOAT" }
-    to: { node: "VEHICLE" }
+    start: { node: "BOAT" }
+    end: { node: "VEHICLE" }
   INSURABLE_OBJECT:
     type: "INSURABLE_OBJECT"
-    from: { node: "BODY_OBJECT" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "BODY_OBJECT" }
+    end: { node: "INSURABLE_OBJECT" }
   AGREEMENT4:
     type: "AGREEMENT"
-    from: { node: "BROKERAGE_CONTRACT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "BROKERAGE_CONTRACT" }
+    end: { node: "AGREEMENT" }
   VEHICLE3:
     type: "VEHICLE"
-    from: { node: "BUS" }
-    to: { node: "VEHICLE" }
+    start: { node: "BUS" }
+    end: { node: "VEHICLE" }
   EVENT:
     type: "EVENT"
-    from: { node: "BUSINESS_EVENT" }
-    to: { node: "EVENT" }
+    start: { node: "BUSINESS_EVENT" }
+    end: { node: "EVENT" }
   POLICY_EVENT2:
     type: "POLICY_EVENT"
-    from: { node: "CANCEL" }
-    to: { node: "POLICY_EVENT" }
+    start: { node: "CANCEL" }
+    end: { node: "POLICY_EVENT" }
   CLAIM_AMOUNT2:
     type: "CLAIM_AMOUNT"
-    from: { node: "CEDED_CLAIM_AMOUNT" }
-    to: { node: "CLAIM_AMOUNT" }
+    start: { node: "CEDED_CLAIM_AMOUNT" }
+    end: { node: "CLAIM_AMOUNT" }
   POLICY_AMOUNT2:
     type: "POLICY_AMOUNT"
-    from: { node: "CEDED_POLICY_AMOUNT" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "CEDED_POLICY_AMOUNT" }
+    end: { node: "POLICY_AMOUNT" }
   ASSESSMENT_RESULT2:
     type: "ASSESSMENT_RESULT"
-    from: { node: "CHANNEL_SCORE" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "CHANNEL_SCORE" }
+    end: { node: "ASSESSMENT_RESULT" }
   CATASTROPHE:
     type: "CATASTROPHE"
-    from: { node: "CLAIM" }
-    to: { node: "CATASTROPHE" }
+    start: { node: "CLAIM" }
+    end: { node: "CATASTROPHE" }
   CLAIM:
     type: "CLAIM"
-    from: { node: "CLAIM" }
-    to: { node: "CLAIM" }
+    start: { node: "CLAIM" }
+    end: { node: "CLAIM" }
   INSURABLE_OBJECT2:
     type: "INSURABLE_OBJECT"
-    from: { node: "CLAIM" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "CLAIM" }
+    end: { node: "INSURABLE_OBJECT" }
   OCCURRENCE:
     type: "OCCURRENCE"
-    from: { node: "CLAIM" }
-    to: { node: "OCCURRENCE" }
+    start: { node: "CLAIM" }
+    end: { node: "OCCURRENCE" }
   CLAIM2:
     type: "CLAIM"
-    from: { node: "CLAIM_AMOUNT" }
-    to: { node: "CLAIM" }
+    start: { node: "CLAIM_AMOUNT" }
+    end: { node: "CLAIM" }
   CLAIM_OFFER:
     type: "CLAIM_OFFER"
-    from: { node: "CLAIM_AMOUNT" }
-    to: { node: "CLAIM_OFFER" }
+    start: { node: "CLAIM_AMOUNT" }
+    end: { node: "CLAIM_OFFER" }
   CLAIM3:
     type: "CLAIM"
-    from: { node: "ARBITRATION" }
-    to: { node: "CLAIM" }
+    start: { node: "ARBITRATION" }
+    end: { node: "CLAIM" }
   CLAIM4:
     type: "CLAIM"
-    from: { node: "ASSESSMENT" }
-    to: { node: "CLAIM" }
+    start: { node: "ASSESSMENT" }
+    end: { node: "CLAIM" }
   ASSESSMENT_RESULT3:
     type: "ASSESSMENT_RESULT"
-    from: { node: "CLAIM_EVALUATION_RESULT" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "CLAIM_EVALUATION_RESULT" }
+    end: { node: "ASSESSMENT_RESULT" }
   EVENT2:
     type: "EVENT"
-    from: { node: "CLAIM_EVENT" }
-    to: { node: "EVENT" }
+    start: { node: "CLAIM_EVENT" }
+    end: { node: "EVENT" }
   CLAIM5:
     type: "CLAIM"
-    from: { node: "CLAIM_FOLDER" }
-    to: { node: "CLAIM" }
+    start: { node: "CLAIM_FOLDER" }
+    end: { node: "CLAIM" }
   LITIGATION:
     type: "LITIGATION"
-    from: { node: "CLAIM" }
-    to: { node: "LITIGATION" }
+    start: { node: "CLAIM" }
+    end: { node: "LITIGATION" }
   ARBITRATION:
     type: "ARBITRATION"
-    from: { node: "CLAIM_OFFER" }
-    to: { node: "ARBITRATION" }
+    start: { node: "CLAIM_OFFER" }
+    end: { node: "ARBITRATION" }
   CLAIM_FOLDER:
     type: "CLAIM_FOLDER"
-    from: { node: "CLAIM_OFFER" }
-    to: { node: "CLAIM_FOLDER" }
+    start: { node: "CLAIM_OFFER" }
+    end: { node: "CLAIM_FOLDER" }
   LITIGATION2:
     type: "LITIGATION"
-    from: { node: "CLAIM_OFFER" }
-    to: { node: "LITIGATION" }
+    start: { node: "CLAIM_OFFER" }
+    end: { node: "LITIGATION" }
   CLAIM_AMOUNT3:
     type: "CLAIM_AMOUNT"
-    from: { node: "CLAIM_PAYMENT" }
-    to: { node: "CLAIM_AMOUNT" }
+    start: { node: "CLAIM_PAYMENT" }
+    end: { node: "CLAIM_AMOUNT" }
   CLAIM_AMOUNT4:
     type: "CLAIM_AMOUNT"
-    from: { node: "CLAIM_RESERVE" }
-    to: { node: "CLAIM_AMOUNT" }
+    start: { node: "CLAIM_RESERVE" }
+    end: { node: "CLAIM_AMOUNT" }
   STRUCTURE:
     type: "STRUCTURE"
-    from: { node: "COMBINATION_STRUCTURE" }
-    to: { node: "STRUCTURE" }
+    start: { node: "COMBINATION_STRUCTURE" }
+    end: { node: "STRUCTURE" }
   FARM_EQUIPMENT:
     type: "FARM_EQUIPMENT"
-    from: { node: "COMBINE" }
-    to: { node: "FARM_EQUIPMENT" }
+    start: { node: "COMBINE" }
+    end: { node: "FARM_EQUIPMENT" }
   AGREEMENT5:
     type: "AGREEMENT"
-    from: { node: "COMMERCIAL_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "COMMERCIAL_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   STRUCTURE2:
     type: "STRUCTURE"
-    from: { node: "COMMERCIAL_STRUCTURE" }
-    to: { node: "STRUCTURE" }
+    start: { node: "COMMERCIAL_STRUCTURE" }
+    end: { node: "STRUCTURE" }
   GEOGRAPHIC_LOCATION:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "COMMUNICATION_IDENTITY" }
-    to: { node: "GEOGRAPHIC_LOCATION" }
+    start: { node: "COMMUNICATION_IDENTITY" }
+    end: { node: "GEOGRAPHIC_LOCATION" }
   AGREEMENT6:
     type: "AGREEMENT"
-    from: { node: "COMMUTATION_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "COMMUTATION_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   GEOGRAPHIC_LOCATION2:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "COMPANY" }
-    to: { node: "GEOGRAPHIC_LOCATION" }
+    start: { node: "COMPANY" }
+    end: { node: "GEOGRAPHIC_LOCATION" }
   VEHICLE4:
     type: "VEHICLE"
-    from: { node: "CONSTRUCTION_VEHICLE" }
-    to: { node: "VEHICLE" }
+    start: { node: "CONSTRUCTION_VEHICLE" }
+    end: { node: "VEHICLE" }
   STAFFING_AGREEMENT:
     type: "STAFFING_AGREEMENT"
-    from: { node: "CONSULTANT_CONTRACT" }
-    to: { node: "STAFFING_AGREEMENT" }
+    start: { node: "CONSULTANT_CONTRACT" }
+    end: { node: "STAFFING_AGREEMENT" }
   COVERAGE_GROUP:
     type: "COVERAGE_GROUP"
-    from: { node: "COVERAGE" }
-    to: { node: "COVERAGE_GROUP" }
+    start: { node: "COVERAGE" }
+    end: { node: "COVERAGE_GROUP" }
   COVERAGE_PART:
     type: "COVERAGE_PART"
-    from: { node: "COVERAGE" }
-    to: { node: "COVERAGE_PART" }
+    start: { node: "COVERAGE" }
+    end: { node: "COVERAGE_PART" }
   COVERAGE_TYPE:
     type: "COVERAGE_TYPE"
-    from: { node: "COVERAGE" }
-    to: { node: "COVERAGE_TYPE" }
+    start: { node: "COVERAGE" }
+    end: { node: "COVERAGE_TYPE" }
   CLAIM_AMOUNT5:
     type: "CLAIM_AMOUNT"
-    from: { node: "CREDIT_CLAIM_AMOUNT" }
-    to: { node: "CLAIM_AMOUNT" }
+    start: { node: "CREDIT_CLAIM_AMOUNT" }
+    end: { node: "CLAIM_AMOUNT" }
   POLICY_AMOUNT3:
     type: "POLICY_AMOUNT"
-    from: { node: "CREDIT_POLICY_AMOUNT" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "CREDIT_POLICY_AMOUNT" }
+    end: { node: "POLICY_AMOUNT" }
   ASSESSMENT_RESULT4:
     type: "ASSESSMENT_RESULT"
-    from: { node: "CREDIT_RATING" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "CREDIT_RATING" }
+    end: { node: "ASSESSMENT_RESULT" }
   ASSESSMENT_RESULT5:
     type: "ASSESSMENT_RESULT"
-    from: { node: "CUSTOMER_SCORE" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "CUSTOMER_SCORE" }
+    end: { node: "ASSESSMENT_RESULT" }
   CLAIM_AMOUNT6:
     type: "CLAIM_AMOUNT"
-    from: { node: "DEBIT_CLAIM_AMOUNT" }
-    to: { node: "CLAIM_AMOUNT" }
+    start: { node: "DEBIT_CLAIM_AMOUNT" }
+    end: { node: "CLAIM_AMOUNT" }
   POLICY_AMOUNT4:
     type: "POLICY_AMOUNT"
-    from: { node: "DEBIT_POLICY_AMOUNT" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "DEBIT_POLICY_AMOUNT" }
+    end: { node: "POLICY_AMOUNT" }
   RECOVERY:
     type: "RECOVERY"
-    from: { node: "DEDUCTIBLE_RECOVERY" }
-    to: { node: "RECOVERY" }
+    start: { node: "DEDUCTIBLE_RECOVERY" }
+    end: { node: "RECOVERY" }
   ASSESSMENT_RESULT6:
     type: "ASSESSMENT_RESULT"
-    from: { node: "DEMOGRAPHIC_SCORE" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "DEMOGRAPHIC_SCORE" }
+    end: { node: "ASSESSMENT_RESULT" }
   AGREEMENT7:
     type: "AGREEMENT"
-    from: { node: "DERIVATIVE_CONTRACT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "DERIVATIVE_CONTRACT" }
+    end: { node: "AGREEMENT" }
   CLAIM_AMOUNT7:
     type: "CLAIM_AMOUNT"
-    from: { node: "DIRECT_CLAIM_AMOUNT" }
-    to: { node: "CLAIM_AMOUNT" }
+    start: { node: "DIRECT_CLAIM_AMOUNT" }
+    end: { node: "CLAIM_AMOUNT" }
   POLICY_AMOUNT5:
     type: "POLICY_AMOUNT"
-    from: { node: "DIRECT_POLICY_AMOUNT" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "DIRECT_POLICY_AMOUNT" }
+    end: { node: "POLICY_AMOUNT" }
   RESIDENTIAL_STRUCTURE:
     type: "RESIDENTIAL_STRUCTURE"
-    from: { node: "DWELLING" }
-    to: { node: "RESIDENTIAL_STRUCTURE" }
+    start: { node: "DWELLING" }
+    end: { node: "RESIDENTIAL_STRUCTURE" }
   STAFFING_AGREEMENT2:
     type: "STAFFING_AGREEMENT"
-    from: { node: "EMPLOYMENT_AGREEMENT" }
-    to: { node: "STAFFING_AGREEMENT" }
+    start: { node: "EMPLOYMENT_AGREEMENT" }
+    end: { node: "STAFFING_AGREEMENT" }
   POLICY_EVENT3:
     type: "POLICY_EVENT"
-    from: { node: "ENDORSEMENT" }
-    to: { node: "POLICY_EVENT" }
+    start: { node: "ENDORSEMENT" }
+    end: { node: "POLICY_EVENT" }
   CLAIM_PAYMENT:
     type: "CLAIM_PAYMENT"
-    from: { node: "EXPENSE_PAYMENT" }
-    to: { node: "CLAIM_PAYMENT" }
+    start: { node: "EXPENSE_PAYMENT" }
+    end: { node: "CLAIM_PAYMENT" }
   RECOVERY2:
     type: "RECOVERY"
-    from: { node: "EXPENSE_RECOVERY" }
-    to: { node: "RECOVERY" }
+    start: { node: "EXPENSE_RECOVERY" }
+    end: { node: "RECOVERY" }
   CLAIM_RESERVE:
     type: "CLAIM_RESERVE"
-    from: { node: "EXPENSE_RESERVE" }
-    to: { node: "CLAIM_RESERVE" }
+    start: { node: "EXPENSE_RESERVE" }
+    end: { node: "CLAIM_RESERVE" }
   INSURABLE_OBJECT3:
     type: "INSURABLE_OBJECT"
-    from: { node: "FARM_EQUIPMENT" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "FARM_EQUIPMENT" }
+    end: { node: "INSURABLE_OBJECT" }
   POLICY_AMOUNT6:
     type: "POLICY_AMOUNT"
-    from: { node: "FEE" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "FEE" }
+    end: { node: "POLICY_AMOUNT" }
   ORGANIZATION_UNIT2:
     type: "ORGANIZATION_UNIT"
-    from: { node: "FIELD_ORGANIZATION_UNIT" }
-    to: { node: "ORGANIZATION_UNIT" }
+    start: { node: "FIELD_ORGANIZATION_UNIT" }
+    end: { node: "ORGANIZATION_UNIT" }
   AGREEMENT8:
     type: "AGREEMENT"
-    from: { node: "FINANCIAL_ACCOUNT_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "FINANCIAL_ACCOUNT_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   ASSESSMENT_RESULT7:
     type: "ASSESSMENT_RESULT"
-    from: { node: "FINANCIAL_SERVICES_ASSESSMENT" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "FINANCIAL_SERVICES_ASSESSMENT" }
+    end: { node: "ASSESSMENT_RESULT" }
   ASSESSMENT_RESULT8:
     type: "ASSESSMENT_RESULT"
-    from: { node: "FINANCIAL_VALUATION" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "FINANCIAL_VALUATION" }
+    end: { node: "ASSESSMENT_RESULT" }
   CANCEL:
     type: "CANCEL"
-    from: { node: "FLAT" }
-    to: { node: "CANCEL" }
+    start: { node: "FLAT" }
+    end: { node: "CANCEL" }
   ORGANIZATION:
     type: "ORGANIZATION"
-    from: { node: "FOR_PROFIT_ORGANIZATION" }
-    to: { node: "ORGANIZATION" }
+    start: { node: "FOR_PROFIT_ORGANIZATION" }
+    end: { node: "ORGANIZATION" }
   ASSESSMENT_RESULT9:
     type: "ASSESSMENT_RESULT"
-    from: { node: "FRAUD_ASSESSMENT" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "FRAUD_ASSESSMENT" }
+    end: { node: "ASSESSMENT_RESULT" }
   TRANSPORTATION_CLASS:
     type: "TRANSPORTATION_CLASS"
-    from: { node: "FREIGHT_GROUP" }
-    to: { node: "TRANSPORTATION_CLASS" }
+    start: { node: "FREIGHT_GROUP" }
+    end: { node: "TRANSPORTATION_CLASS" }
   ENDORSEMENT:
     type: "ENDORSEMENT"
-    from: { node: "FULL_TERM" }
-    to: { node: "ENDORSEMENT" }
+    start: { node: "FULL_TERM" }
+    end: { node: "ENDORSEMENT" }
   GEOGRAPHIC_LOCATION3:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "GEOGRAPHIC_LOCATION" }
-    to: { node: "GEOGRAPHIC_LOCATION" }
+    start: { node: "GEOGRAPHIC_LOCATION" }
+    end: { node: "GEOGRAPHIC_LOCATION" }
   LOCATION_ADDRESS:
     type: "LOCATION_ADDRESS"
-    from: { node: "GEOGRAPHIC_LOCATION" }
-    to: { node: "LOCATION_ADDRESS" }
+    start: { node: "GEOGRAPHIC_LOCATION" }
+    end: { node: "LOCATION_ADDRESS" }
   PHYSICAL_LOCATION:
     type: "PHYSICAL_LOCATION"
-    from: { node: "GEOGRAPHIC_LOCATION" }
-    to: { node: "PHYSICAL_LOCATION" }
+    start: { node: "GEOGRAPHIC_LOCATION" }
+    end: { node: "PHYSICAL_LOCATION" }
   STATE:
     type: "STATE"
-    from: { node: "GEOGRAPHIC_LOCATION" }
-    to: { node: "STATE" }
+    start: { node: "GEOGRAPHIC_LOCATION" }
+    end: { node: "STATE" }
   ORGANIZATION2:
     type: "ORGANIZATION"
-    from: { node: "GOVERNMENT_ORGANIZATION" }
-    to: { node: "ORGANIZATION" }
+    start: { node: "GOVERNMENT_ORGANIZATION" }
+    end: { node: "ORGANIZATION" }
   PARTY:
     type: "PARTY"
-    from: { node: "GROUPING" }
-    to: { node: "PARTY" }
+    start: { node: "GROUPING" }
+    end: { node: "PARTY" }
   AGREEMENT9:
     type: "AGREEMENT"
-    from: { node: "GROUP_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "GROUP_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   GROUPING:
     type: "GROUPING"
-    from: { node: "HOUSEHOLD" }
-    to: { node: "GROUPING" }
+    start: { node: "HOUSEHOLD" }
+    end: { node: "GROUPING" }
   HOUSEHOLD:
     type: "HOUSEHOLD"
-    from: { node: "HOUSEHOLD_CONTENT" }
-    to: { node: "HOUSEHOLD" }
+    start: { node: "HOUSEHOLD_CONTENT" }
+    end: { node: "HOUSEHOLD" }
   TRANSPORTATION_CLASS2:
     type: "TRANSPORTATION_CLASS"
-    from: { node: "HOUSEHOLD_CONTENT" }
-    to: { node: "TRANSPORTATION_CLASS" }
+    start: { node: "HOUSEHOLD_CONTENT" }
+    end: { node: "TRANSPORTATION_CLASS" }
   PERSON:
     type: "PERSON"
-    from: { node: "HOUSEHOLD" }
-    to: { node: "PERSON" }
+    start: { node: "HOUSEHOLD" }
+    end: { node: "PERSON" }
   AGREEMENT10:
     type: "AGREEMENT"
-    from: { node: "INDIVIDUAL_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "INDIVIDUAL_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   GEOGRAPHIC_LOCATION4:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "INSURABLE_OBJECT" }
-    to: { node: "GEOGRAPHIC_LOCATION" }
+    start: { node: "INSURABLE_OBJECT" }
+    end: { node: "GEOGRAPHIC_LOCATION" }
   ACCOUNT:
     type: "ACCOUNT"
-    from: { node: "INSURED_ACCOUNT" }
-    to: { node: "ACCOUNT" }
+    start: { node: "INSURED_ACCOUNT" }
+    end: { node: "ACCOUNT" }
   AGREEMENT11:
     type: "AGREEMENT"
-    from: { node: "INTERMEDIARY_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "INTERMEDIARY_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   PARTY2:
     type: "PARTY"
-    from: { node: "LEGAL_JURISDICTION" }
-    to: { node: "PARTY" }
+    start: { node: "LEGAL_JURISDICTION" }
+    end: { node: "PARTY" }
     properties:
       LEGAL_ENTITY_TYPE_CODE: { type: "STRING" }
       LEGAL_CLASSIFICATION_CODE: { type: "STRING" }
       LEGAL_JURISDICTION_PARTY_IDENTIFIER: { type: "FLOAT" }
   EVENT3:
     type: "EVENT"
-    from: { node: "LIFE_EVENT" }
-    to: { node: "EVENT" }
+    start: { node: "LIFE_EVENT" }
+    end: { node: "EVENT" }
   INSURANCE_CLASS:
     type: "INSURANCE_CLASS"
-    from: { node: "LINE_OF_BUSINESS" }
-    to: { node: "INSURANCE_CLASS" }
+    start: { node: "LINE_OF_BUSINESS" }
+    end: { node: "INSURANCE_CLASS" }
   LINE_OF_BUSINESS_GROUP:
     type: "LINE_OF_BUSINESS_GROUP"
-    from: { node: "LINE_OF_BUSINESS" }
-    to: { node: "LINE_OF_BUSINESS_GROUP" }
+    start: { node: "LINE_OF_BUSINESS" }
+    end: { node: "LINE_OF_BUSINESS_GROUP" }
   STATE2:
     type: "STATE"
-    from: { node: "LOCATION_ADDRESS" }
-    to: { node: "STATE" }
+    start: { node: "LOCATION_ADDRESS" }
+    end: { node: "STATE" }
   CLAIM_PAYMENT2:
     type: "CLAIM_PAYMENT"
-    from: { node: "LOSS_PAYMENT" }
-    to: { node: "CLAIM_PAYMENT" }
+    start: { node: "LOSS_PAYMENT" }
+    end: { node: "CLAIM_PAYMENT" }
   RECOVERY3:
     type: "RECOVERY"
-    from: { node: "LOSS_RECOVERY" }
-    to: { node: "RECOVERY" }
+    start: { node: "LOSS_RECOVERY" }
+    end: { node: "RECOVERY" }
   CLAIM_RESERVE2:
     type: "CLAIM_RESERVE"
-    from: { node: "LOSS_RESERVE" }
-    to: { node: "CLAIM_RESERVE" }
+    start: { node: "LOSS_RESERVE" }
+    end: { node: "CLAIM_RESERVE" }
   INSURABLE_OBJECT4:
     type: "INSURABLE_OBJECT"
-    from: { node: "MANUFACTURED_OBJECT" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "MANUFACTURED_OBJECT" }
+    end: { node: "INSURABLE_OBJECT" }
   ASSESSMENT_RESULT10:
     type: "ASSESSMENT_RESULT"
-    from: { node: "MEDICAL_CONDITION" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "MEDICAL_CONDITION" }
+    end: { node: "ASSESSMENT_RESULT" }
   ENDORSEMENT2:
     type: "ENDORSEMENT"
-    from: { node: "MID_TERM" }
-    to: { node: "ENDORSEMENT" }
+    start: { node: "MID_TERM" }
+    end: { node: "ENDORSEMENT" }
   FARM_EQUIPMENT2:
     type: "FARM_EQUIPMENT"
-    from: { node: "MILKING_MACHINE" }
-    to: { node: "FARM_EQUIPMENT" }
+    start: { node: "MILKING_MACHINE" }
+    end: { node: "FARM_EQUIPMENT" }
   RESIDENTIAL_STRUCTURE2:
     type: "RESIDENTIAL_STRUCTURE"
-    from: { node: "MOBILE_HOME" }
-    to: { node: "RESIDENTIAL_STRUCTURE" }
+    start: { node: "MOBILE_HOME" }
+    end: { node: "RESIDENTIAL_STRUCTURE" }
   VEHICLE5:
     type: "VEHICLE"
-    from: { node: "MOTORCYCLE" }
-    to: { node: "VEHICLE" }
+    start: { node: "MOTORCYCLE" }
+    end: { node: "VEHICLE" }
   POLICY_EVENT4:
     type: "POLICY_EVENT"
-    from: { node: "NEW_BUSINESS" }
-    to: { node: "POLICY_EVENT" }
+    start: { node: "NEW_BUSINESS" }
+    end: { node: "POLICY_EVENT" }
   ORGANIZATION3:
     type: "ORGANIZATION"
-    from: { node: "NOT_FOR_PROFIT_ORGANIZATION" }
-    to: { node: "ORGANIZATION" }
+    start: { node: "NOT_FOR_PROFIT_ORGANIZATION" }
+    end: { node: "ORGANIZATION" }
   INSURABLE_OBJECT5:
     type: "INSURABLE_OBJECT"
-    from: { node: "ASSESSMENT" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "ASSESSMENT" }
+    end: { node: "INSURABLE_OBJECT" }
   GEOGRAPHIC_LOCATION5:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "OCCURRENCE" }
-    to: { node: "GEOGRAPHIC_LOCATION" }
+    start: { node: "OCCURRENCE" }
+    end: { node: "GEOGRAPHIC_LOCATION" }
   PARTY3:
     type: "PARTY"
-    from: { node: "ORGANIZATION" }
-    to: { node: "PARTY" }
+    start: { node: "ORGANIZATION" }
+    end: { node: "PARTY" }
   ORGANIZATION4:
     type: "ORGANIZATION"
-    from: { node: "ORGANIZATION_UNIT" }
-    to: { node: "ORGANIZATION" }
+    start: { node: "ORGANIZATION_UNIT" }
+    end: { node: "ORGANIZATION" }
   ASSESSMENT_RESULT11:
     type: "ASSESSMENT_RESULT"
-    from: { node: "OTHER_ASSESSMENT_RESULT" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "OTHER_ASSESSMENT_RESULT" }
+    end: { node: "ASSESSMENT_RESULT" }
   PARTY4:
     type: "PARTY"
-    from: { node: "PARTY_PREFERENCE" }
-    to: { node: "PARTY" }
+    start: { node: "PARTY_PREFERENCE" }
+    end: { node: "PARTY" }
   PARTY5:
     type: "PARTY"
-    from: { node: "PERSON" }
-    to: { node: "PARTY" }
+    start: { node: "PERSON" }
+    end: { node: "PARTY" }
   PERSON2:
     type: "PERSON"
-    from: { node: "PERSON_PROFESSION" }
-    to: { node: "PERSON" }
+    start: { node: "PERSON_PROFESSION" }
+    end: { node: "PERSON" }
   LOCATION_ADDRESS2:
     type: "LOCATION_ADDRESS"
-    from: { node: "PHYSICAL_LOCATION" }
-    to: { node: "LOCATION_ADDRESS" }
+    start: { node: "PHYSICAL_LOCATION" }
+    end: { node: "LOCATION_ADDRESS" }
   ASSESSMENT_RESULT12:
     type: "ASSESSMENT_RESULT"
-    from: { node: "PHYSICAL_OBJECT_ASSESSMENT" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "PHYSICAL_OBJECT_ASSESSMENT" }
+    end: { node: "ASSESSMENT_RESULT" }
   ASSESSMENT_RESULT13:
     type: "ASSESSMENT_RESULT"
-    from: { node: "PLACE_ASSESSMENT" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "PLACE_ASSESSMENT" }
+    end: { node: "ASSESSMENT_RESULT" }
   AGREEMENT12:
     type: "AGREEMENT"
-    from: { node: "POLICY" }
-    to: { node: "AGREEMENT" }
+    start: { node: "POLICY" }
+    end: { node: "AGREEMENT" }
   GEOGRAPHIC_LOCATION6:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "POLICY" }
-    to: { node: "GEOGRAPHIC_LOCATION" }
+    start: { node: "POLICY" }
+    end: { node: "GEOGRAPHIC_LOCATION" }
   GEOGRAPHIC_LOCATION7:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "POLICY_AMOUNT" }
-    to: { node: "GEOGRAPHIC_LOCATION" }
+    start: { node: "POLICY_AMOUNT" }
+    end: { node: "GEOGRAPHIC_LOCATION" }
   INSURABLE_OBJECT6:
     type: "INSURABLE_OBJECT"
-    from: { node: "POLICY_AMOUNT" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "POLICY_AMOUNT" }
+    end: { node: "INSURABLE_OBJECT" }
   POLICY:
     type: "POLICY"
-    from: { node: "POLICY_AMOUNT" }
-    to: { node: "POLICY" }
+    start: { node: "POLICY_AMOUNT" }
+    end: { node: "POLICY" }
   POLICY2:
     type: "POLICY"
-    from: { node: "COVERAGE_PART" }
-    to: { node: "POLICY" }
+    start: { node: "COVERAGE_PART" }
+    end: { node: "POLICY" }
   EVENT4:
     type: "EVENT"
-    from: { node: "POLICY_EVENT" }
-    to: { node: "EVENT" }
+    start: { node: "POLICY_EVENT" }
+    end: { node: "EVENT" }
   POLICY3:
     type: "POLICY"
-    from: { node: "POLICY_EVENT" }
-    to: { node: "POLICY" }
+    start: { node: "POLICY_EVENT" }
+    end: { node: "POLICY" }
   POLICY_AMOUNT7:
     type: "POLICY_AMOUNT"
-    from: { node: "PREMIUM" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "PREMIUM" }
+    end: { node: "POLICY_AMOUNT" }
   POLICY_EVENT5:
     type: "POLICY_EVENT"
-    from: { node: "PRE_QUALIFICATION" }
-    to: { node: "POLICY_EVENT" }
+    start: { node: "PRE_QUALIFICATION" }
+    end: { node: "POLICY_EVENT" }
   LINE_OF_BUSINESS:
     type: "LINE_OF_BUSINESS"
-    from: { node: "PRODUCT" }
-    to: { node: "LINE_OF_BUSINESS" }
+    start: { node: "PRODUCT" }
+    end: { node: "LINE_OF_BUSINESS" }
   PRODUCT2:
     type: "PRODUCT"
-    from: { node: "COVERAGE" }
-    to: { node: "PRODUCT" }
+    start: { node: "COVERAGE" }
+    end: { node: "PRODUCT" }
   GROUPING2:
     type: "GROUPING"
-    from: { node: "PROFESSIONAL_GROUP" }
-    to: { node: "GROUPING" }
+    start: { node: "PROFESSIONAL_GROUP" }
+    end: { node: "GROUPING" }
   GROUPING3:
     type: "GROUPING"
-    from: { node: "PROJECT" }
-    to: { node: "GROUPING" }
+    start: { node: "PROJECT" }
+    end: { node: "GROUPING" }
   TRANSPORTATION_CLASS3:
     type: "TRANSPORTATION_CLASS"
-    from: { node: "PROPERTY_IN_TRANSIT" }
-    to: { node: "TRANSPORTATION_CLASS" }
+    start: { node: "PROPERTY_IN_TRANSIT" }
+    end: { node: "TRANSPORTATION_CLASS" }
   AGREEMENT13:
     type: "AGREEMENT"
-    from: { node: "PROVIDER_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "PROVIDER_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   CANCEL2:
     type: "CANCEL"
-    from: { node: "PRO_RATA" }
-    to: { node: "CANCEL" }
+    start: { node: "PRO_RATA" }
+    end: { node: "CANCEL" }
   POLICY_EVENT6:
     type: "POLICY_EVENT"
-    from: { node: "QUOTE" }
-    to: { node: "POLICY_EVENT" }
+    start: { node: "QUOTE" }
+    end: { node: "POLICY_EVENT" }
   RATING_TERRITORY:
     type: "RATING_TERRITORY"
-    from: { node: "GEOGRAPHIC_LOCATION" }
-    to: { node: "RATING_TERRITORY" }
+    start: { node: "GEOGRAPHIC_LOCATION" }
+    end: { node: "RATING_TERRITORY" }
   CLAIM_AMOUNT8:
     type: "CLAIM_AMOUNT"
-    from: { node: "RECOVERY" }
-    to: { node: "CLAIM_AMOUNT" }
+    start: { node: "RECOVERY" }
+    end: { node: "CLAIM_AMOUNT" }
   VEHICLE6:
     type: "VEHICLE"
-    from: { node: "RECREATIONAL_VEHICLE" }
-    to: { node: "VEHICLE" }
+    start: { node: "RECREATIONAL_VEHICLE" }
+    end: { node: "VEHICLE" }
   POLICY_EVENT7:
     type: "POLICY_EVENT"
-    from: { node: "REINSTATEMENT" }
-    to: { node: "POLICY_EVENT" }
+    start: { node: "REINSTATEMENT" }
+    end: { node: "POLICY_EVENT" }
   AGREEMENT14:
     type: "AGREEMENT"
-    from: { node: "REINSURANCE_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "REINSURANCE_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   RECOVERY4:
     type: "RECOVERY"
-    from: { node: "REINSURANCE_RECOVERY" }
-    to: { node: "RECOVERY" }
+    start: { node: "REINSURANCE_RECOVERY" }
+    end: { node: "RECOVERY" }
   POLICY_EVENT8:
     type: "POLICY_EVENT"
-    from: { node: "RENEWAL" }
-    to: { node: "POLICY_EVENT" }
+    start: { node: "RENEWAL" }
+    end: { node: "POLICY_EVENT" }
   STRUCTURE3:
     type: "STRUCTURE"
-    from: { node: "RESIDENTIAL_STRUCTURE" }
-    to: { node: "STRUCTURE" }
+    start: { node: "RESIDENTIAL_STRUCTURE" }
+    end: { node: "STRUCTURE" }
   ASSESSMENT_RESULT14:
     type: "ASSESSMENT_RESULT"
-    from: { node: "RISK_FACTOR_SCORE" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "RISK_FACTOR_SCORE" }
+    end: { node: "ASSESSMENT_RESULT" }
   RECOVERY5:
     type: "RECOVERY"
-    from: { node: "SALVAGE" }
-    to: { node: "RECOVERY" }
+    start: { node: "SALVAGE" }
+    end: { node: "RECOVERY" }
   TRANSPORTATION_CLASS4:
     type: "TRANSPORTATION_CLASS"
-    from: { node: "SCHEDULED_ITEM" }
-    to: { node: "TRANSPORTATION_CLASS" }
+    start: { node: "SCHEDULED_ITEM" }
+    end: { node: "TRANSPORTATION_CLASS" }
   CANCEL3:
     type: "CANCEL"
-    from: { node: "SHORT_RATE" }
-    to: { node: "CANCEL" }
+    start: { node: "SHORT_RATE" }
+    end: { node: "CANCEL" }
   AGREEMENT15:
     type: "AGREEMENT"
-    from: { node: "STAFFING_AGREEMENT" }
-    to: { node: "AGREEMENT" }
+    start: { node: "STAFFING_AGREEMENT" }
+    end: { node: "AGREEMENT" }
   STAFF_CLASSIFICATION:
     type: "STAFF_CLASSIFICATION"
-    from: { node: "STAFF_POSITION" }
-    to: { node: "STAFF_CLASSIFICATION" }
+    start: { node: "STAFF_POSITION" }
+    end: { node: "STAFF_CLASSIFICATION" }
   INSURABLE_OBJECT7:
     type: "INSURABLE_OBJECT"
-    from: { node: "STRUCTURE" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "STRUCTURE" }
+    end: { node: "INSURABLE_OBJECT" }
   RECOVERY6:
     type: "RECOVERY"
-    from: { node: "SUBROGATION" }
-    to: { node: "RECOVERY" }
+    start: { node: "SUBROGATION" }
+    end: { node: "RECOVERY" }
   POLICY_AMOUNT8:
     type: "POLICY_AMOUNT"
-    from: { node: "SURCHARGE" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "SURCHARGE" }
+    end: { node: "POLICY_AMOUNT" }
   POLICY_AMOUNT9:
     type: "POLICY_AMOUNT"
-    from: { node: "TAX" }
-    to: { node: "POLICY_AMOUNT" }
+    start: { node: "TAX" }
+    end: { node: "POLICY_AMOUNT" }
   GROUPING4:
     type: "GROUPING"
-    from: { node: "TEAM" }
-    to: { node: "GROUPING" }
+    start: { node: "TEAM" }
+    end: { node: "GROUPING" }
   STAFFING_AGREEMENT3:
     type: "STAFFING_AGREEMENT"
-    from: { node: "THIRD_PARTY_STAFFING_AGREEMENT" }
-    to: { node: "STAFFING_AGREEMENT" }
+    start: { node: "THIRD_PARTY_STAFFING_AGREEMENT" }
+    end: { node: "STAFFING_AGREEMENT" }
   FARM_EQUIPMENT3:
     type: "FARM_EQUIPMENT"
-    from: { node: "TRACTOR" }
-    to: { node: "FARM_EQUIPMENT" }
+    start: { node: "TRACTOR" }
+    end: { node: "FARM_EQUIPMENT" }
   VEHICLE7:
     type: "VEHICLE"
-    from: { node: "TRAILER" }
-    to: { node: "VEHICLE" }
+    start: { node: "TRAILER" }
+    end: { node: "VEHICLE" }
   INSURABLE_OBJECT8:
     type: "INSURABLE_OBJECT"
-    from: { node: "TRANSPORTATION_CLASS" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "TRANSPORTATION_CLASS" }
+    end: { node: "INSURABLE_OBJECT" }
   VEHICLE8:
     type: "VEHICLE"
-    from: { node: "TRUCK" }
-    to: { node: "VEHICLE" }
+    start: { node: "TRUCK" }
+    end: { node: "VEHICLE" }
   ASSESSMENT_RESULT15:
     type: "ASSESSMENT_RESULT"
-    from: { node: "UNDERWRITING_ASSESSMENT" }
-    to: { node: "ASSESSMENT_RESULT" }
+    start: { node: "UNDERWRITING_ASSESSMENT" }
+    end: { node: "ASSESSMENT_RESULT" }
   VEHICLE9:
     type: "VEHICLE"
-    from: { node: "VAN" }
-    to: { node: "VEHICLE" }
+    start: { node: "VAN" }
+    end: { node: "VEHICLE" }
   INSURABLE_OBJECT9:
     type: "INSURABLE_OBJECT"
-    from: { node: "VEHICLE" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "VEHICLE" }
+    end: { node: "INSURABLE_OBJECT" }
   VEHICLE10:
     type: "VEHICLE"
-    from: { node: "WATERCRAFT" }
-    to: { node: "VEHICLE" }
+    start: { node: "WATERCRAFT" }
+    end: { node: "VEHICLE" }
   INSURABLE_OBJECT10:
     type: "INSURABLE_OBJECT"
-    from: { node: "WORKERS_COMP_CLASS" }
-    to: { node: "INSURABLE_OBJECT" }
+    start: { node: "WORKERS_COMP_CLASS" }
+    end: { node: "INSURABLE_OBJECT" }
   ENDORSEMENT3:
     type: "ENDORSEMENT"
-    from: { node: "audit" }
-    to: { node: "ENDORSEMENT" }
+    start: { node: "audit" }
+    end: { node: "ENDORSEMENT" }
 tables:
   ACCOUNT:
     source: "cloud"

@@ -61,8 +61,8 @@ object Internal {
             node.indexes.identify("nodeIndex")
         }
         relationships.values.forEach { relationship ->
-            relationship.from.node = renames[relationship.from.node] ?: relationship.from.node
-            relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
+            relationship.start.node = renames[relationship.start.node] ?: relationship.start.node
+            relationship.end.node = renames[relationship.end.node] ?: relationship.end.node
         }
         display.nodes.rename(renames)
     }

@@ -301,7 +301,7 @@ class DataModelV3GraphSpecMigrationTest {
         val rel = result["relObj1"]
         assertNotNull(rel)
         assertEquals("FOLLOWS", rel.string("type"))
-        assertEquals("nodeA", rel.map("from").string("node"))
+        assertEquals("nodeA", rel.map("start").string("node"))
         assertEquals("a description", rel.string("description"))
         val prop = rel.map("properties").map("p1")
         assertEquals("ZONED DATETIME", prop.string("type"))

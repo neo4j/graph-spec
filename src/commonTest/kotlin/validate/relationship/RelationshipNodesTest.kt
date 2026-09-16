@@ -37,8 +37,8 @@ class RelationshipNodesTest {
         }
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = RelationshipTarget("Person"),
-            to = RelationshipTarget("Movie")
+            start = RelationshipTarget("Person"),
+            end = RelationshipTarget("Movie")
         )
         val issues = mutableListOf<Issue>()
 
@@ -52,8 +52,8 @@ class RelationshipNodesTest {
         val model = GraphModel("4.0.0")
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = RelationshipTarget(""),
-            to = RelationshipTarget("   ")
+            start = RelationshipTarget(""),
+            end = RelationshipTarget("   ")
         )
         val issues = mutableListOf<Issue>()
 
@@ -69,8 +69,8 @@ class RelationshipNodesTest {
         }
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = RelationshipTarget("Person"),
-            to = RelationshipTarget("Movie")
+            start = RelationshipTarget("Person"),
+            end = RelationshipTarget("Movie")
         )
         val issues = mutableListOf<Issue>()
 
@@ -90,8 +90,8 @@ class RelationshipNodesTest {
         }
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = RelationshipTarget("Person"),
-            to = RelationshipTarget("Movie")
+            start = RelationshipTarget("Person"),
+            end = RelationshipTarget("Movie")
         )
         val issues = mutableListOf<Issue>()
 
@@ -110,8 +110,8 @@ class RelationshipNodesTest {
         val model = GraphModel("4.0.0") // Empty model
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = RelationshipTarget("Person"),
-            to = RelationshipTarget("Movie")
+            start = RelationshipTarget("Person"),
+            end = RelationshipTarget("Movie")
         )
         val issues = mutableListOf<Issue>()
 

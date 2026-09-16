@@ -32,8 +32,8 @@ class RelationshipTypeConstraintTest {
     private val model = GraphModel("4.0.0")
     private val relationshipDummy = Relationship(
         type = "ACTED_IN",
-        from = RelationshipTarget(),
-        to = RelationshipTarget()
+        start = RelationshipTarget(),
+        end = RelationshipTarget()
     )
 
     @Test

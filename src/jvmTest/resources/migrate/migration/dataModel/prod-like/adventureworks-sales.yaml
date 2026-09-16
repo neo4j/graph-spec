@@ -171,46 +171,46 @@ nodes:
 relationships:
   SALESTERRITORY:
     type: "SALESTERRITORY"
-    from: { node: "customer" }
-    to: { node: "salesterritory" }
+    start: { node: "customer" }
+    end: { node: "salesterritory" }
   STORE:
     type: "STORE"
-    from: { node: "customer" }
-    to: { node: "store" }
+    start: { node: "customer" }
+    end: { node: "store" }
   CREDITCARD:
     type: "CREDITCARD"
-    from: { node: "salesorderheader" }
-    to: { node: "creditcard" }
+    start: { node: "salesorderheader" }
+    end: { node: "creditcard" }
   CURRENCYRATE:
     type: "CURRENCYRATE"
-    from: { node: "salesorderheader" }
-    to: { node: "currencyrate" }
+    start: { node: "salesorderheader" }
+    end: { node: "currencyrate" }
   CUSTOMER:
     type: "CUSTOMER"
-    from: { node: "salesorderheader" }
-    to: { node: "customer" }
+    start: { node: "salesorderheader" }
+    end: { node: "customer" }
   SALESPERSON:
     type: "SALESPERSON"
-    from: { node: "salesorderheader" }
-    to: { node: "salesperson" }
+    start: { node: "salesorderheader" }
+    end: { node: "salesperson" }
   SALESTERRITORY2:
     type: "SALESTERRITORY"
-    from: { node: "salesorderheader" }
-    to: { node: "salesterritory" }
+    start: { node: "salesorderheader" }
+    end: { node: "salesterritory" }
   SALESREASON:
     type: "SALESREASON"
-    from: { node: "salesorderheader" }
-    to: { node: "salesreason" }
+    start: { node: "salesorderheader" }
+    end: { node: "salesreason" }
     properties:
       modifieddate: { type: "ZONED DATETIME" }
   SALESTERRITORY3:
     type: "SALESTERRITORY"
-    from: { node: "salesperson" }
-    to: { node: "salesterritory" }
+    start: { node: "salesperson" }
+    end: { node: "salesterritory" }
   SALESPERSON2:
     type: "SALESPERSON"
-    from: { node: "store" }
-    to: { node: "salesperson" }
+    start: { node: "store" }
+    end: { node: "salesperson" }
 tables:
   countryregioncurrency:
     source: "cloud"
