@@ -137,7 +137,7 @@ class InternalTest {
 
         val internalRel = originalModel.relationships["relationship0"]!!
         assertEquals("FRIENDS_WITH", internalRel.name)
-        assertTrue(internalRel.properties.containsKey("relationshipProperty0"))
+        assertTrue(internalRel.properties.containsKey("relationship0_property0"))
 
         // Assert Mappings Deep Translation
         val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
@@ -145,7 +145,7 @@ class InternalTest {
         assertEquals("node0", relMapping.from.node)
         assertTrue(relMapping.from.properties.containsKey("node0_property0"), "From Target property should be renamed")
         assertTrue(
-            relMapping.properties.containsKey("relationshipProperty0"),
+            relMapping.properties.containsKey("relationship0_property0"),
             "Relationship property should be renamed"
         )
         assertEquals("node0", relMapping.to.node)
@@ -259,13 +259,13 @@ class InternalTest {
         model.internalise()
 
         val relationship = model.relationships["relationship0"]!!
-        val property = relationship.properties["relationshipProperty0"]!!
+        val property = relationship.properties["relationship0_property0"]!!
         assertNull(property.key, "Key flag should be cleared from the property")
 
         val constraint: RelationshipConstraint? = relationship.constraints["key_KNOWS_since"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
-        assertEquals(mutableSetOf("relationshipProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("relationship0_property0"), constraint.properties)
     }
 
     @Test
@@ -372,5 +372,35 @@ class InternalTest {
 
         val allIds = (node0.properties.keys + node1.properties.keys).toList()
         assertEquals(allIds.size, allIds.toSet().size, "Property ids must be globally unique across nodes")
+    }
+
+    @Test
+    fun `test produces unique property ids when two relationships share a property key`() {
+        val model = GraphModel(
+            version = "4.0.0",
+            relationships = mutableMapOf(
+                "r:0" to Relationship(
+                    type = "KNOWS",
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
+                    properties = mutableMapOf("since" to Property())
+                ),
+                "r:1" to Relationship(
+                    type = "LIKES",
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
+                    properties = mutableMapOf("since" to Property())
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val rel0 = model.relationships["relationship0"]!!
+        val rel1 = model.relationships["relationship1"]!!
+
+        val allIds = (rel0.properties.keys + rel1.properties.keys).toList()
+        assertEquals(allIds.size, allIds.toSet().size, "Property ids must be globally unique across relationships")
     }
 }

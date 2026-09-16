@@ -317,7 +317,7 @@ relationships:
     from: { node: "node4" }
     to: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "ZONED DATETIME", name: "modifieddate" }
+      relationship7_property0: { type: "ZONED DATETIME", name: "modifieddate" }
     name: "SALESREASON"
   relationship8:
     type: "SALESTERRITORY"
@@ -1674,7 +1674,7 @@ mappings:
       properties:
         node6_property0: { column: "salesreasonid" }
     properties:
-      relationshipProperty0: { column: "modifieddate" }
+      relationship7_property0: { column: "modifieddate" }
   - type: "RELATIONSHIP"
     relationship: "relationship8"
     table: "salesperson"

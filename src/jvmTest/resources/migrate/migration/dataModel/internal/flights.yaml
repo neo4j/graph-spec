@@ -128,8 +128,8 @@ relationships:
     from: { node: "node3" }
     to: { node: "node4" }
     properties:
-      relationshipProperty0: { type: "STRING", name: "fare_conditions" }
-      relationshipProperty1: { type: "FLOAT", name: "amount" }
+      relationship3_property0: { type: "STRING", name: "fare_conditions" }
+      relationship3_property1: { type: "FLOAT", name: "amount" }
     name: "FLIGHT_HAS_TICKET"
   relationship4:
     type: "TICKET_BELONGS_TO_BOOKING"
@@ -450,8 +450,8 @@ mappings:
       properties:
         node4_property0: { column: "ticket_no" }
     properties:
-      relationshipProperty0: { column: "fare_conditions" }
-      relationshipProperty1: { column: "amount" }
+      relationship3_property0: { column: "fare_conditions" }
+      relationship3_property1: { column: "amount" }
   - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "tickets"

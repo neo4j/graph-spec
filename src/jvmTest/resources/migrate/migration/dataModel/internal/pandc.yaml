@@ -3524,9 +3524,9 @@ relationships:
     from: { node: "node86" }
     to: { node: "node107" }
     properties:
-      relationshipProperty0: { type: "STRING", name: "LEGAL_ENTITY_TYPE_CODE" }
-      relationshipProperty1: { type: "STRING", name: "LEGAL_CLASSIFICATION_CODE" }
-      relationshipProperty2: { type: "FLOAT", name: "LEGAL_JURISDICTION_PARTY_IDENTIFIER" }
+      relationship94_property0: { type: "STRING", name: "LEGAL_ENTITY_TYPE_CODE" }
+      relationship94_property1: { type: "STRING", name: "LEGAL_CLASSIFICATION_CODE" }
+      relationship94_property2: { type: "FLOAT", name: "LEGAL_JURISDICTION_PARTY_IDENTIFIER" }
     name: "PARTY2"
   relationship95:
     type: "EVENT"
@@ -10247,9 +10247,9 @@ mappings:
       properties:
         node107_property0: { column: "PARTY_IDENTIFIER" }
     properties:
-      relationshipProperty0: { column: "LEGAL_ENTITY_TYPE_CODE" }
-      relationshipProperty1: { column: "LEGAL_CLASSIFICATION_CODE" }
-      relationshipProperty2: { column: "LEGAL_JURISDICTION_PARTY_IDENTIFIER" }
+      relationship94_property0: { column: "LEGAL_ENTITY_TYPE_CODE" }
+      relationship94_property1: { column: "LEGAL_CLASSIFICATION_CODE" }
+      relationship94_property2: { column: "LEGAL_JURISDICTION_PARTY_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "relationship95"
     table: "LIFE_EVENT"
