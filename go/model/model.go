@@ -445,12 +445,12 @@ type RelationshipTarget struct {
 type Relationship struct {
 	Constraints map[string]RelationshipConstraint `json:"constraints,omitempty"`
 	Description *string                           `json:"description,omitempty"`
+	End         RelationshipTarget                `json:"end"`
 	Extensions  map[string]ExtensionValue         `json:"extensions,omitempty"`
-	From        RelationshipTarget                `json:"from"`
 	Indexes     map[string]RelationshipIndex      `json:"indexes,omitempty"`
 	Name        *string                           `json:"name,omitempty"`
 	Properties  map[string]Property               `json:"properties,omitempty"`
-	To          RelationshipTarget                `json:"to"`
+	Start       RelationshipTarget                `json:"start"`
 	Type        string                            `json:"type"`
 }
 

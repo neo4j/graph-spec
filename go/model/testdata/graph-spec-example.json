@@ -58,12 +58,12 @@
   "relationships": {
     "ACTED_IN": {
       "type": "ACTED_IN",
-      "from": {
+      "start": {
         "node": "Actor",
         "label": "Actor",
         "property": "id"
       },
-      "to": {
+      "end": {
         "node": "Movie",
         "label": "Movie",
         "property": "id"

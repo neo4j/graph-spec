@@ -40,8 +40,8 @@ class RelationshipConstraintsTest {
 
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = targetDummy,
-            to = targetDummy,
+            start = targetDummy,
+            end = targetDummy,
             properties = mutableMapOf(
                 "roles" to Property(),
                 "year" to Property()
@@ -65,8 +65,8 @@ class RelationshipConstraintsTest {
 
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = targetDummy,
-            to = targetDummy,
+            start = targetDummy,
+            end = targetDummy,
             properties = mutableMapOf(
                 "year" to Property() // Missing 'roles'
             )
@@ -93,8 +93,8 @@ class RelationshipConstraintsTest {
 
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = targetDummy,
-            to = targetDummy,
+            start = targetDummy,
+            end = targetDummy,
             properties = mutableMapOf() // Missing both 'roles' and 'year'
         )
         val constraint = RelationshipConstraint(
@@ -119,8 +119,8 @@ class RelationshipConstraintsTest {
 
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = targetDummy,
-            to = targetDummy,
+            start = targetDummy,
+            end = targetDummy,
             properties = mutableMapOf("year" to Property())
         )
         val constraint = RelationshipConstraint(

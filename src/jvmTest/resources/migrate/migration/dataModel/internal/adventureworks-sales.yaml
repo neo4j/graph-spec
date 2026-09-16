@@ -279,55 +279,55 @@ nodes:
 relationships:
   relationship0:
     type: "SALESTERRITORY"
-    from: { node: "node3" }
-    to: { node: "node8" }
+    start: { node: "node3" }
+    end: { node: "node8" }
     name: "SALESTERRITORY"
   relationship1:
     type: "STORE"
-    from: { node: "node3" }
-    to: { node: "node11" }
+    start: { node: "node3" }
+    end: { node: "node11" }
     name: "STORE"
   relationship2:
     type: "CREDITCARD"
-    from: { node: "node4" }
-    to: { node: "node0" }
+    start: { node: "node4" }
+    end: { node: "node0" }
     name: "CREDITCARD"
   relationship3:
     type: "CURRENCYRATE"
-    from: { node: "node4" }
-    to: { node: "node2" }
+    start: { node: "node4" }
+    end: { node: "node2" }
     name: "CURRENCYRATE"
   relationship4:
     type: "CUSTOMER"
-    from: { node: "node4" }
-    to: { node: "node3" }
+    start: { node: "node4" }
+    end: { node: "node3" }
     name: "CUSTOMER"
   relationship5:
     type: "SALESPERSON"
-    from: { node: "node4" }
-    to: { node: "node5" }
+    start: { node: "node4" }
+    end: { node: "node5" }
     name: "SALESPERSON"
   relationship6:
     type: "SALESTERRITORY"
-    from: { node: "node4" }
-    to: { node: "node8" }
+    start: { node: "node4" }
+    end: { node: "node8" }
     name: "SALESTERRITORY2"
   relationship7:
     type: "SALESREASON"
-    from: { node: "node4" }
-    to: { node: "node6" }
+    start: { node: "node4" }
+    end: { node: "node6" }
     properties:
       relationshipProperty0: { type: "ZONED DATETIME", name: "modifieddate" }
     name: "SALESREASON"
   relationship8:
     type: "SALESTERRITORY"
-    from: { node: "node5" }
-    to: { node: "node8" }
+    start: { node: "node5" }
+    end: { node: "node8" }
     name: "SALESTERRITORY3"
   relationship9:
     type: "SALESPERSON"
-    from: { node: "node11" }
-    to: { node: "node5" }
+    start: { node: "node11" }
+    end: { node: "node5" }
     name: "SALESPERSON2"
 tables:
   countryregioncurrency:

@@ -3051,478 +3051,478 @@ nodes:
 relationships:
   relationship0:
     type: "AGREEMENT"
-    from: { node: "node0" }
-    to: { node: "node3" }
+    start: { node: "node0" }
+    end: { node: "node3" }
     name: "AGREEMENT"
   relationship1:
     type: "ORGANIZATION_UNIT"
-    from: { node: "node1" }
-    to: { node: "node105" }
+    start: { node: "node1" }
+    end: { node: "node105" }
     name: "ORGANIZATION_UNIT"
   relationship2:
     type: "AGREEMENT"
-    from: { node: "node2" }
-    to: { node: "node3" }
+    start: { node: "node2" }
+    end: { node: "node3" }
     name: "AGREEMENT2"
   relationship3:
     type: "PRODUCT"
-    from: { node: "node3" }
-    to: { node: "node122" }
+    start: { node: "node3" }
+    end: { node: "node122" }
     name: "PRODUCT"
   relationship4:
     type: "ASSESSMENT"
-    from: { node: "node3" }
-    to: { node: "node7" }
+    start: { node: "node3" }
+    end: { node: "node7" }
     name: "ASSESSMENT"
   relationship5:
     type: "BODY_OBJECT"
-    from: { node: "node4" }
-    to: { node: "node15" }
+    start: { node: "node4" }
+    end: { node: "node15" }
     name: "BODY_OBJECT"
   relationship6:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node5" }
-    to: { node: "node8" }
+    start: { node: "node5" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT"
   relationship7:
     type: "ASSESSMENT"
-    from: { node: "node8" }
-    to: { node: "node7" }
+    start: { node: "node8" }
+    end: { node: "node7" }
     name: "ASSESSMENT2"
   relationship8:
     type: "CLAIM_AMOUNT"
-    from: { node: "node9" }
-    to: { node: "node25" }
+    start: { node: "node9" }
+    end: { node: "node25" }
     name: "CLAIM_AMOUNT"
   relationship9:
     type: "POLICY_AMOUNT"
-    from: { node: "node10" }
-    to: { node: "node116" }
+    start: { node: "node10" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT"
   relationship10:
     type: "VEHICLE"
-    from: { node: "node11" }
-    to: { node: "node157" }
+    start: { node: "node11" }
+    end: { node: "node157" }
     name: "VEHICLE"
   relationship11:
     type: "AGREEMENT"
-    from: { node: "node12" }
-    to: { node: "node3" }
+    start: { node: "node12" }
+    end: { node: "node3" }
     name: "AGREEMENT3"
   relationship12:
     type: "POLICY_EVENT"
-    from: { node: "node13" }
-    to: { node: "node118" }
+    start: { node: "node13" }
+    end: { node: "node118" }
     name: "POLICY_EVENT"
   relationship13:
     type: "VEHICLE"
-    from: { node: "node14" }
-    to: { node: "node157" }
+    start: { node: "node14" }
+    end: { node: "node157" }
     name: "VEHICLE2"
   relationship14:
     type: "INSURABLE_OBJECT"
-    from: { node: "node15" }
-    to: { node: "node82" }
+    start: { node: "node15" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT"
   relationship15:
     type: "AGREEMENT"
-    from: { node: "node16" }
-    to: { node: "node3" }
+    start: { node: "node16" }
+    end: { node: "node3" }
     name: "AGREEMENT4"
   relationship16:
     type: "VEHICLE"
-    from: { node: "node17" }
-    to: { node: "node157" }
+    start: { node: "node17" }
+    end: { node: "node157" }
     name: "VEHICLE3"
   relationship17:
     type: "EVENT"
-    from: { node: "node18" }
-    to: { node: "node60" }
+    start: { node: "node18" }
+    end: { node: "node60" }
     name: "EVENT"
   relationship18:
     type: "POLICY_EVENT"
-    from: { node: "node19" }
-    to: { node: "node118" }
+    start: { node: "node19" }
+    end: { node: "node118" }
     name: "POLICY_EVENT2"
   relationship19:
     type: "CLAIM_AMOUNT"
-    from: { node: "node21" }
-    to: { node: "node25" }
+    start: { node: "node21" }
+    end: { node: "node25" }
     name: "CLAIM_AMOUNT2"
   relationship20:
     type: "POLICY_AMOUNT"
-    from: { node: "node22" }
-    to: { node: "node116" }
+    start: { node: "node22" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT2"
   relationship21:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node23" }
-    to: { node: "node8" }
+    start: { node: "node23" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT2"
   relationship22:
     type: "CATASTROPHE"
-    from: { node: "node24" }
-    to: { node: "node20" }
+    start: { node: "node24" }
+    end: { node: "node20" }
     name: "CATASTROPHE"
   relationship23:
     type: "CLAIM"
-    from: { node: "node24" }
-    to: { node: "node24" }
+    start: { node: "node24" }
+    end: { node: "node24" }
     name: "CLAIM"
   relationship24:
     type: "INSURABLE_OBJECT"
-    from: { node: "node24" }
-    to: { node: "node82" }
+    start: { node: "node24" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT2"
   relationship25:
     type: "OCCURRENCE"
-    from: { node: "node24" }
-    to: { node: "node103" }
+    start: { node: "node24" }
+    end: { node: "node103" }
     name: "OCCURRENCE"
   relationship26:
     type: "CLAIM"
-    from: { node: "node25" }
-    to: { node: "node24" }
+    start: { node: "node25" }
+    end: { node: "node24" }
     name: "CLAIM2"
   relationship27:
     type: "CLAIM_OFFER"
-    from: { node: "node25" }
-    to: { node: "node29" }
+    start: { node: "node25" }
+    end: { node: "node29" }
     name: "CLAIM_OFFER"
   relationship28:
     type: "CLAIM"
-    from: { node: "node6" }
-    to: { node: "node24" }
+    start: { node: "node6" }
+    end: { node: "node24" }
     name: "CLAIM3"
   relationship29:
     type: "CLAIM"
-    from: { node: "node7" }
-    to: { node: "node24" }
+    start: { node: "node7" }
+    end: { node: "node24" }
     name: "CLAIM4"
   relationship30:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node26" }
-    to: { node: "node8" }
+    start: { node: "node26" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT3"
   relationship31:
     type: "EVENT"
-    from: { node: "node27" }
-    to: { node: "node60" }
+    start: { node: "node27" }
+    end: { node: "node60" }
     name: "EVENT2"
   relationship32:
     type: "CLAIM"
-    from: { node: "node28" }
-    to: { node: "node24" }
+    start: { node: "node28" }
+    end: { node: "node24" }
     name: "CLAIM5"
   relationship33:
     type: "LITIGATION"
-    from: { node: "node24" }
-    to: { node: "node90" }
+    start: { node: "node24" }
+    end: { node: "node90" }
     name: "LITIGATION"
   relationship34:
     type: "ARBITRATION"
-    from: { node: "node29" }
-    to: { node: "node6" }
+    start: { node: "node29" }
+    end: { node: "node6" }
     name: "ARBITRATION"
   relationship35:
     type: "CLAIM_FOLDER"
-    from: { node: "node29" }
-    to: { node: "node28" }
+    start: { node: "node29" }
+    end: { node: "node28" }
     name: "CLAIM_FOLDER"
   relationship36:
     type: "LITIGATION"
-    from: { node: "node29" }
-    to: { node: "node90" }
+    start: { node: "node29" }
+    end: { node: "node90" }
     name: "LITIGATION2"
   relationship37:
     type: "CLAIM_AMOUNT"
-    from: { node: "node30" }
-    to: { node: "node25" }
+    start: { node: "node30" }
+    end: { node: "node25" }
     name: "CLAIM_AMOUNT3"
   relationship38:
     type: "CLAIM_AMOUNT"
-    from: { node: "node31" }
-    to: { node: "node25" }
+    start: { node: "node31" }
+    end: { node: "node25" }
     name: "CLAIM_AMOUNT4"
   relationship39:
     type: "STRUCTURE"
-    from: { node: "node32" }
-    to: { node: "node145" }
+    start: { node: "node32" }
+    end: { node: "node145" }
     name: "STRUCTURE"
   relationship40:
     type: "FARM_EQUIPMENT"
-    from: { node: "node33" }
-    to: { node: "node64" }
+    start: { node: "node33" }
+    end: { node: "node64" }
     name: "FARM_EQUIPMENT"
   relationship41:
     type: "AGREEMENT"
-    from: { node: "node34" }
-    to: { node: "node3" }
+    start: { node: "node34" }
+    end: { node: "node3" }
     name: "AGREEMENT5"
   relationship42:
     type: "STRUCTURE"
-    from: { node: "node35" }
-    to: { node: "node145" }
+    start: { node: "node35" }
+    end: { node: "node145" }
     name: "STRUCTURE2"
   relationship43:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "node36" }
-    to: { node: "node75" }
+    start: { node: "node36" }
+    end: { node: "node75" }
     name: "GEOGRAPHIC_LOCATION"
   relationship44:
     type: "AGREEMENT"
-    from: { node: "node37" }
-    to: { node: "node3" }
+    start: { node: "node37" }
+    end: { node: "node3" }
     name: "AGREEMENT6"
   relationship45:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "node38" }
-    to: { node: "node75" }
+    start: { node: "node38" }
+    end: { node: "node75" }
     name: "GEOGRAPHIC_LOCATION2"
   relationship46:
     type: "VEHICLE"
-    from: { node: "node39" }
-    to: { node: "node157" }
+    start: { node: "node39" }
+    end: { node: "node157" }
     name: "VEHICLE4"
   relationship47:
     type: "STAFFING_AGREEMENT"
-    from: { node: "node40" }
-    to: { node: "node141" }
+    start: { node: "node40" }
+    end: { node: "node141" }
     name: "STAFFING_AGREEMENT"
   relationship48:
     type: "COVERAGE_GROUP"
-    from: { node: "node41" }
-    to: { node: "node42" }
+    start: { node: "node41" }
+    end: { node: "node42" }
     name: "COVERAGE_GROUP"
   relationship49:
     type: "COVERAGE_PART"
-    from: { node: "node41" }
-    to: { node: "node44" }
+    start: { node: "node41" }
+    end: { node: "node44" }
     name: "COVERAGE_PART"
   relationship50:
     type: "COVERAGE_TYPE"
-    from: { node: "node41" }
-    to: { node: "node45" }
+    start: { node: "node41" }
+    end: { node: "node45" }
     name: "COVERAGE_TYPE"
   relationship51:
     type: "CLAIM_AMOUNT"
-    from: { node: "node46" }
-    to: { node: "node25" }
+    start: { node: "node46" }
+    end: { node: "node25" }
     name: "CLAIM_AMOUNT5"
   relationship52:
     type: "POLICY_AMOUNT"
-    from: { node: "node47" }
-    to: { node: "node116" }
+    start: { node: "node47" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT3"
   relationship53:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node48" }
-    to: { node: "node8" }
+    start: { node: "node48" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT4"
   relationship54:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node49" }
-    to: { node: "node8" }
+    start: { node: "node49" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT5"
   relationship55:
     type: "CLAIM_AMOUNT"
-    from: { node: "node50" }
-    to: { node: "node25" }
+    start: { node: "node50" }
+    end: { node: "node25" }
     name: "CLAIM_AMOUNT6"
   relationship56:
     type: "POLICY_AMOUNT"
-    from: { node: "node51" }
-    to: { node: "node116" }
+    start: { node: "node51" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT4"
   relationship57:
     type: "RECOVERY"
-    from: { node: "node52" }
-    to: { node: "node130" }
+    start: { node: "node52" }
+    end: { node: "node130" }
     name: "RECOVERY"
   relationship58:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node53" }
-    to: { node: "node8" }
+    start: { node: "node53" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT6"
   relationship59:
     type: "AGREEMENT"
-    from: { node: "node54" }
-    to: { node: "node3" }
+    start: { node: "node54" }
+    end: { node: "node3" }
     name: "AGREEMENT7"
   relationship60:
     type: "CLAIM_AMOUNT"
-    from: { node: "node55" }
-    to: { node: "node25" }
+    start: { node: "node55" }
+    end: { node: "node25" }
     name: "CLAIM_AMOUNT7"
   relationship61:
     type: "POLICY_AMOUNT"
-    from: { node: "node56" }
-    to: { node: "node116" }
+    start: { node: "node56" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT5"
   relationship62:
     type: "RESIDENTIAL_STRUCTURE"
-    from: { node: "node57" }
-    to: { node: "node136" }
+    start: { node: "node57" }
+    end: { node: "node136" }
     name: "RESIDENTIAL_STRUCTURE"
   relationship63:
     type: "STAFFING_AGREEMENT"
-    from: { node: "node58" }
-    to: { node: "node141" }
+    start: { node: "node58" }
+    end: { node: "node141" }
     name: "STAFFING_AGREEMENT2"
   relationship64:
     type: "POLICY_EVENT"
-    from: { node: "node59" }
-    to: { node: "node118" }
+    start: { node: "node59" }
+    end: { node: "node118" }
     name: "POLICY_EVENT3"
   relationship65:
     type: "CLAIM_PAYMENT"
-    from: { node: "node61" }
-    to: { node: "node30" }
+    start: { node: "node61" }
+    end: { node: "node30" }
     name: "CLAIM_PAYMENT"
   relationship66:
     type: "RECOVERY"
-    from: { node: "node62" }
-    to: { node: "node130" }
+    start: { node: "node62" }
+    end: { node: "node130" }
     name: "RECOVERY2"
   relationship67:
     type: "CLAIM_RESERVE"
-    from: { node: "node63" }
-    to: { node: "node31" }
+    start: { node: "node63" }
+    end: { node: "node31" }
     name: "CLAIM_RESERVE"
   relationship68:
     type: "INSURABLE_OBJECT"
-    from: { node: "node64" }
-    to: { node: "node82" }
+    start: { node: "node64" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT3"
   relationship69:
     type: "POLICY_AMOUNT"
-    from: { node: "node65" }
-    to: { node: "node116" }
+    start: { node: "node65" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT6"
   relationship70:
     type: "ORGANIZATION_UNIT"
-    from: { node: "node66" }
-    to: { node: "node105" }
+    start: { node: "node66" }
+    end: { node: "node105" }
     name: "ORGANIZATION_UNIT2"
   relationship71:
     type: "AGREEMENT"
-    from: { node: "node67" }
-    to: { node: "node3" }
+    start: { node: "node67" }
+    end: { node: "node3" }
     name: "AGREEMENT8"
   relationship72:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node68" }
-    to: { node: "node8" }
+    start: { node: "node68" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT7"
   relationship73:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node69" }
-    to: { node: "node8" }
+    start: { node: "node69" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT8"
   relationship74:
     type: "CANCEL"
-    from: { node: "node70" }
-    to: { node: "node19" }
+    start: { node: "node70" }
+    end: { node: "node19" }
     name: "CANCEL"
   relationship75:
     type: "ORGANIZATION"
-    from: { node: "node71" }
-    to: { node: "node104" }
+    start: { node: "node71" }
+    end: { node: "node104" }
     name: "ORGANIZATION"
   relationship76:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node72" }
-    to: { node: "node8" }
+    start: { node: "node72" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT9"
   relationship77:
     type: "TRANSPORTATION_CLASS"
-    from: { node: "node73" }
-    to: { node: "node153" }
+    start: { node: "node73" }
+    end: { node: "node153" }
     name: "TRANSPORTATION_CLASS"
   relationship78:
     type: "ENDORSEMENT"
-    from: { node: "node74" }
-    to: { node: "node59" }
+    start: { node: "node74" }
+    end: { node: "node59" }
     name: "ENDORSEMENT"
   relationship79:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "node75" }
-    to: { node: "node75" }
+    start: { node: "node75" }
+    end: { node: "node75" }
     name: "GEOGRAPHIC_LOCATION3"
   relationship80:
     type: "LOCATION_ADDRESS"
-    from: { node: "node75" }
-    to: { node: "node91" }
+    start: { node: "node75" }
+    end: { node: "node91" }
     name: "LOCATION_ADDRESS"
   relationship81:
     type: "PHYSICAL_LOCATION"
-    from: { node: "node75" }
-    to: { node: "node112" }
+    start: { node: "node75" }
+    end: { node: "node112" }
     name: "PHYSICAL_LOCATION"
   relationship82:
     type: "STATE"
-    from: { node: "node75" }
-    to: { node: "node144" }
+    start: { node: "node75" }
+    end: { node: "node144" }
     name: "STATE"
   relationship83:
     type: "ORGANIZATION"
-    from: { node: "node76" }
-    to: { node: "node104" }
+    start: { node: "node76" }
+    end: { node: "node104" }
     name: "ORGANIZATION2"
   relationship84:
     type: "PARTY"
-    from: { node: "node77" }
-    to: { node: "node107" }
+    start: { node: "node77" }
+    end: { node: "node107" }
     name: "PARTY"
   relationship85:
     type: "AGREEMENT"
-    from: { node: "node78" }
-    to: { node: "node3" }
+    start: { node: "node78" }
+    end: { node: "node3" }
     name: "AGREEMENT9"
   relationship86:
     type: "GROUPING"
-    from: { node: "node79" }
-    to: { node: "node77" }
+    start: { node: "node79" }
+    end: { node: "node77" }
     name: "GROUPING"
   relationship87:
     type: "HOUSEHOLD"
-    from: { node: "node80" }
-    to: { node: "node79" }
+    start: { node: "node80" }
+    end: { node: "node79" }
     name: "HOUSEHOLD"
   relationship88:
     type: "TRANSPORTATION_CLASS"
-    from: { node: "node80" }
-    to: { node: "node153" }
+    start: { node: "node80" }
+    end: { node: "node153" }
     name: "TRANSPORTATION_CLASS2"
   relationship89:
     type: "PERSON"
-    from: { node: "node79" }
-    to: { node: "node110" }
+    start: { node: "node79" }
+    end: { node: "node110" }
     name: "PERSON"
   relationship90:
     type: "AGREEMENT"
-    from: { node: "node81" }
-    to: { node: "node3" }
+    start: { node: "node81" }
+    end: { node: "node3" }
     name: "AGREEMENT10"
   relationship91:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "node82" }
-    to: { node: "node75" }
+    start: { node: "node82" }
+    end: { node: "node75" }
     name: "GEOGRAPHIC_LOCATION4"
   relationship92:
     type: "ACCOUNT"
-    from: { node: "node84" }
-    to: { node: "node0" }
+    start: { node: "node84" }
+    end: { node: "node0" }
     name: "ACCOUNT"
   relationship93:
     type: "AGREEMENT"
-    from: { node: "node85" }
-    to: { node: "node3" }
+    start: { node: "node85" }
+    end: { node: "node3" }
     name: "AGREEMENT11"
   relationship94:
     type: "PARTY"
-    from: { node: "node86" }
-    to: { node: "node107" }
+    start: { node: "node86" }
+    end: { node: "node107" }
     properties:
       relationshipProperty0: { type: "STRING", name: "LEGAL_ENTITY_TYPE_CODE" }
       relationshipProperty1: { type: "STRING", name: "LEGAL_CLASSIFICATION_CODE" }
@@ -3530,373 +3530,373 @@ relationships:
     name: "PARTY2"
   relationship95:
     type: "EVENT"
-    from: { node: "node87" }
-    to: { node: "node60" }
+    start: { node: "node87" }
+    end: { node: "node60" }
     name: "EVENT3"
   relationship96:
     type: "INSURANCE_CLASS"
-    from: { node: "node88" }
-    to: { node: "node83" }
+    start: { node: "node88" }
+    end: { node: "node83" }
     name: "INSURANCE_CLASS"
   relationship97:
     type: "LINE_OF_BUSINESS_GROUP"
-    from: { node: "node88" }
-    to: { node: "node89" }
+    start: { node: "node88" }
+    end: { node: "node89" }
     name: "LINE_OF_BUSINESS_GROUP"
   relationship98:
     type: "STATE"
-    from: { node: "node91" }
-    to: { node: "node144" }
+    start: { node: "node91" }
+    end: { node: "node144" }
     name: "STATE2"
   relationship99:
     type: "CLAIM_PAYMENT"
-    from: { node: "node92" }
-    to: { node: "node30" }
+    start: { node: "node92" }
+    end: { node: "node30" }
     name: "CLAIM_PAYMENT2"
   relationship100:
     type: "RECOVERY"
-    from: { node: "node93" }
-    to: { node: "node130" }
+    start: { node: "node93" }
+    end: { node: "node130" }
     name: "RECOVERY3"
   relationship101:
     type: "CLAIM_RESERVE"
-    from: { node: "node94" }
-    to: { node: "node31" }
+    start: { node: "node94" }
+    end: { node: "node31" }
     name: "CLAIM_RESERVE2"
   relationship102:
     type: "INSURABLE_OBJECT"
-    from: { node: "node95" }
-    to: { node: "node82" }
+    start: { node: "node95" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT4"
   relationship103:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node96" }
-    to: { node: "node8" }
+    start: { node: "node96" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT10"
   relationship104:
     type: "ENDORSEMENT"
-    from: { node: "node97" }
-    to: { node: "node59" }
+    start: { node: "node97" }
+    end: { node: "node59" }
     name: "ENDORSEMENT2"
   relationship105:
     type: "FARM_EQUIPMENT"
-    from: { node: "node98" }
-    to: { node: "node64" }
+    start: { node: "node98" }
+    end: { node: "node64" }
     name: "FARM_EQUIPMENT2"
   relationship106:
     type: "RESIDENTIAL_STRUCTURE"
-    from: { node: "node99" }
-    to: { node: "node136" }
+    start: { node: "node99" }
+    end: { node: "node136" }
     name: "RESIDENTIAL_STRUCTURE2"
   relationship107:
     type: "VEHICLE"
-    from: { node: "node100" }
-    to: { node: "node157" }
+    start: { node: "node100" }
+    end: { node: "node157" }
     name: "VEHICLE5"
   relationship108:
     type: "POLICY_EVENT"
-    from: { node: "node101" }
-    to: { node: "node118" }
+    start: { node: "node101" }
+    end: { node: "node118" }
     name: "POLICY_EVENT4"
   relationship109:
     type: "ORGANIZATION"
-    from: { node: "node102" }
-    to: { node: "node104" }
+    start: { node: "node102" }
+    end: { node: "node104" }
     name: "ORGANIZATION3"
   relationship110:
     type: "INSURABLE_OBJECT"
-    from: { node: "node7" }
-    to: { node: "node82" }
+    start: { node: "node7" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT5"
   relationship111:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "node103" }
-    to: { node: "node75" }
+    start: { node: "node103" }
+    end: { node: "node75" }
     name: "GEOGRAPHIC_LOCATION5"
   relationship112:
     type: "PARTY"
-    from: { node: "node104" }
-    to: { node: "node107" }
+    start: { node: "node104" }
+    end: { node: "node107" }
     name: "PARTY3"
   relationship113:
     type: "ORGANIZATION"
-    from: { node: "node105" }
-    to: { node: "node104" }
+    start: { node: "node105" }
+    end: { node: "node104" }
     name: "ORGANIZATION4"
   relationship114:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node106" }
-    to: { node: "node8" }
+    start: { node: "node106" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT11"
   relationship115:
     type: "PARTY"
-    from: { node: "node108" }
-    to: { node: "node107" }
+    start: { node: "node108" }
+    end: { node: "node107" }
     name: "PARTY4"
   relationship116:
     type: "PARTY"
-    from: { node: "node110" }
-    to: { node: "node107" }
+    start: { node: "node110" }
+    end: { node: "node107" }
     name: "PARTY5"
   relationship117:
     type: "PERSON"
-    from: { node: "node111" }
-    to: { node: "node110" }
+    start: { node: "node111" }
+    end: { node: "node110" }
     name: "PERSON2"
   relationship118:
     type: "LOCATION_ADDRESS"
-    from: { node: "node112" }
-    to: { node: "node91" }
+    start: { node: "node112" }
+    end: { node: "node91" }
     name: "LOCATION_ADDRESS2"
   relationship119:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node113" }
-    to: { node: "node8" }
+    start: { node: "node113" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT12"
   relationship120:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node114" }
-    to: { node: "node8" }
+    start: { node: "node114" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT13"
   relationship121:
     type: "AGREEMENT"
-    from: { node: "node115" }
-    to: { node: "node3" }
+    start: { node: "node115" }
+    end: { node: "node3" }
     name: "AGREEMENT12"
   relationship122:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "node115" }
-    to: { node: "node75" }
+    start: { node: "node115" }
+    end: { node: "node75" }
     name: "GEOGRAPHIC_LOCATION6"
   relationship123:
     type: "GEOGRAPHIC_LOCATION"
-    from: { node: "node116" }
-    to: { node: "node75" }
+    start: { node: "node116" }
+    end: { node: "node75" }
     name: "GEOGRAPHIC_LOCATION7"
   relationship124:
     type: "INSURABLE_OBJECT"
-    from: { node: "node116" }
-    to: { node: "node82" }
+    start: { node: "node116" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT6"
   relationship125:
     type: "POLICY"
-    from: { node: "node116" }
-    to: { node: "node115" }
+    start: { node: "node116" }
+    end: { node: "node115" }
     name: "POLICY"
   relationship126:
     type: "POLICY"
-    from: { node: "node44" }
-    to: { node: "node115" }
+    start: { node: "node44" }
+    end: { node: "node115" }
     name: "POLICY2"
   relationship127:
     type: "EVENT"
-    from: { node: "node118" }
-    to: { node: "node60" }
+    start: { node: "node118" }
+    end: { node: "node60" }
     name: "EVENT4"
   relationship128:
     type: "POLICY"
-    from: { node: "node118" }
-    to: { node: "node115" }
+    start: { node: "node118" }
+    end: { node: "node115" }
     name: "POLICY3"
   relationship129:
     type: "POLICY_AMOUNT"
-    from: { node: "node120" }
-    to: { node: "node116" }
+    start: { node: "node120" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT7"
   relationship130:
     type: "POLICY_EVENT"
-    from: { node: "node121" }
-    to: { node: "node118" }
+    start: { node: "node121" }
+    end: { node: "node118" }
     name: "POLICY_EVENT5"
   relationship131:
     type: "LINE_OF_BUSINESS"
-    from: { node: "node122" }
-    to: { node: "node88" }
+    start: { node: "node122" }
+    end: { node: "node88" }
     name: "LINE_OF_BUSINESS"
   relationship132:
     type: "PRODUCT"
-    from: { node: "node41" }
-    to: { node: "node122" }
+    start: { node: "node41" }
+    end: { node: "node122" }
     name: "PRODUCT2"
   relationship133:
     type: "GROUPING"
-    from: { node: "node123" }
-    to: { node: "node77" }
+    start: { node: "node123" }
+    end: { node: "node77" }
     name: "GROUPING2"
   relationship134:
     type: "GROUPING"
-    from: { node: "node124" }
-    to: { node: "node77" }
+    start: { node: "node124" }
+    end: { node: "node77" }
     name: "GROUPING3"
   relationship135:
     type: "TRANSPORTATION_CLASS"
-    from: { node: "node125" }
-    to: { node: "node153" }
+    start: { node: "node125" }
+    end: { node: "node153" }
     name: "TRANSPORTATION_CLASS3"
   relationship136:
     type: "AGREEMENT"
-    from: { node: "node126" }
-    to: { node: "node3" }
+    start: { node: "node126" }
+    end: { node: "node3" }
     name: "AGREEMENT13"
   relationship137:
     type: "CANCEL"
-    from: { node: "node127" }
-    to: { node: "node19" }
+    start: { node: "node127" }
+    end: { node: "node19" }
     name: "CANCEL2"
   relationship138:
     type: "POLICY_EVENT"
-    from: { node: "node128" }
-    to: { node: "node118" }
+    start: { node: "node128" }
+    end: { node: "node118" }
     name: "POLICY_EVENT6"
   relationship139:
     type: "RATING_TERRITORY"
-    from: { node: "node75" }
-    to: { node: "node129" }
+    start: { node: "node75" }
+    end: { node: "node129" }
     name: "RATING_TERRITORY"
   relationship140:
     type: "CLAIM_AMOUNT"
-    from: { node: "node130" }
-    to: { node: "node25" }
+    start: { node: "node130" }
+    end: { node: "node25" }
     name: "CLAIM_AMOUNT8"
   relationship141:
     type: "VEHICLE"
-    from: { node: "node131" }
-    to: { node: "node157" }
+    start: { node: "node131" }
+    end: { node: "node157" }
     name: "VEHICLE6"
   relationship142:
     type: "POLICY_EVENT"
-    from: { node: "node132" }
-    to: { node: "node118" }
+    start: { node: "node132" }
+    end: { node: "node118" }
     name: "POLICY_EVENT7"
   relationship143:
     type: "AGREEMENT"
-    from: { node: "node133" }
-    to: { node: "node3" }
+    start: { node: "node133" }
+    end: { node: "node3" }
     name: "AGREEMENT14"
   relationship144:
     type: "RECOVERY"
-    from: { node: "node134" }
-    to: { node: "node130" }
+    start: { node: "node134" }
+    end: { node: "node130" }
     name: "RECOVERY4"
   relationship145:
     type: "POLICY_EVENT"
-    from: { node: "node135" }
-    to: { node: "node118" }
+    start: { node: "node135" }
+    end: { node: "node118" }
     name: "POLICY_EVENT8"
   relationship146:
     type: "STRUCTURE"
-    from: { node: "node136" }
-    to: { node: "node145" }
+    start: { node: "node136" }
+    end: { node: "node145" }
     name: "STRUCTURE3"
   relationship147:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node137" }
-    to: { node: "node8" }
+    start: { node: "node137" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT14"
   relationship148:
     type: "RECOVERY"
-    from: { node: "node138" }
-    to: { node: "node130" }
+    start: { node: "node138" }
+    end: { node: "node130" }
     name: "RECOVERY5"
   relationship149:
     type: "TRANSPORTATION_CLASS"
-    from: { node: "node139" }
-    to: { node: "node153" }
+    start: { node: "node139" }
+    end: { node: "node153" }
     name: "TRANSPORTATION_CLASS4"
   relationship150:
     type: "CANCEL"
-    from: { node: "node140" }
-    to: { node: "node19" }
+    start: { node: "node140" }
+    end: { node: "node19" }
     name: "CANCEL3"
   relationship151:
     type: "AGREEMENT"
-    from: { node: "node141" }
-    to: { node: "node3" }
+    start: { node: "node141" }
+    end: { node: "node3" }
     name: "AGREEMENT15"
   relationship152:
     type: "STAFF_CLASSIFICATION"
-    from: { node: "node143" }
-    to: { node: "node142" }
+    start: { node: "node143" }
+    end: { node: "node142" }
     name: "STAFF_CLASSIFICATION"
   relationship153:
     type: "INSURABLE_OBJECT"
-    from: { node: "node145" }
-    to: { node: "node82" }
+    start: { node: "node145" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT7"
   relationship154:
     type: "RECOVERY"
-    from: { node: "node146" }
-    to: { node: "node130" }
+    start: { node: "node146" }
+    end: { node: "node130" }
     name: "RECOVERY6"
   relationship155:
     type: "POLICY_AMOUNT"
-    from: { node: "node147" }
-    to: { node: "node116" }
+    start: { node: "node147" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT8"
   relationship156:
     type: "POLICY_AMOUNT"
-    from: { node: "node148" }
-    to: { node: "node116" }
+    start: { node: "node148" }
+    end: { node: "node116" }
     name: "POLICY_AMOUNT9"
   relationship157:
     type: "GROUPING"
-    from: { node: "node149" }
-    to: { node: "node77" }
+    start: { node: "node149" }
+    end: { node: "node77" }
     name: "GROUPING4"
   relationship158:
     type: "STAFFING_AGREEMENT"
-    from: { node: "node150" }
-    to: { node: "node141" }
+    start: { node: "node150" }
+    end: { node: "node141" }
     name: "STAFFING_AGREEMENT3"
   relationship159:
     type: "FARM_EQUIPMENT"
-    from: { node: "node151" }
-    to: { node: "node64" }
+    start: { node: "node151" }
+    end: { node: "node64" }
     name: "FARM_EQUIPMENT3"
   relationship160:
     type: "VEHICLE"
-    from: { node: "node152" }
-    to: { node: "node157" }
+    start: { node: "node152" }
+    end: { node: "node157" }
     name: "VEHICLE7"
   relationship161:
     type: "INSURABLE_OBJECT"
-    from: { node: "node153" }
-    to: { node: "node82" }
+    start: { node: "node153" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT8"
   relationship162:
     type: "VEHICLE"
-    from: { node: "node154" }
-    to: { node: "node157" }
+    start: { node: "node154" }
+    end: { node: "node157" }
     name: "VEHICLE8"
   relationship163:
     type: "ASSESSMENT_RESULT"
-    from: { node: "node155" }
-    to: { node: "node8" }
+    start: { node: "node155" }
+    end: { node: "node8" }
     name: "ASSESSMENT_RESULT15"
   relationship164:
     type: "VEHICLE"
-    from: { node: "node156" }
-    to: { node: "node157" }
+    start: { node: "node156" }
+    end: { node: "node157" }
     name: "VEHICLE9"
   relationship165:
     type: "INSURABLE_OBJECT"
-    from: { node: "node157" }
-    to: { node: "node82" }
+    start: { node: "node157" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT9"
   relationship166:
     type: "VEHICLE"
-    from: { node: "node158" }
-    to: { node: "node157" }
+    start: { node: "node158" }
+    end: { node: "node157" }
     name: "VEHICLE10"
   relationship167:
     type: "INSURABLE_OBJECT"
-    from: { node: "node159" }
-    to: { node: "node82" }
+    start: { node: "node159" }
+    end: { node: "node82" }
     name: "INSURABLE_OBJECT10"
   relationship168:
     type: "ENDORSEMENT"
-    from: { node: "node160" }
-    to: { node: "node59" }
+    start: { node: "node160" }
+    end: { node: "node59" }
     name: "ENDORSEMENT3"
 tables:
   ACCOUNT:

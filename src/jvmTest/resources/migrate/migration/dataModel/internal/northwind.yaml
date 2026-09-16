@@ -78,13 +78,13 @@ nodes:
 relationships:
   relationship0:
     type: "CATEGORIES"
-    from: { node: "node1" }
-    to: { node: "node0" }
+    start: { node: "node1" }
+    end: { node: "node0" }
     name: "CATEGORIES"
   relationship1:
     type: "SUPPLIERS"
-    from: { node: "node1" }
-    to: { node: "node2" }
+    start: { node: "node1" }
+    end: { node: "node2" }
     name: "SUPPLIERS"
 tables:
   categories:

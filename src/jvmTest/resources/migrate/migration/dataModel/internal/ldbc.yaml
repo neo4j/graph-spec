@@ -188,41 +188,41 @@ nodes:
 relationships:
   relationship0:
     type: "AUTHORED_BY"
-    from: { node: "node0" }
-    to: { node: "node3" }
+    start: { node: "node0" }
+    end: { node: "node3" }
     name: "AUTHORED_BY"
   relationship1:
     type: "AUTHORED_AT"
-    from: { node: "node0" }
-    to: { node: "node4" }
+    start: { node: "node0" }
+    end: { node: "node4" }
     name: "AUTHORED_AT"
   relationship2:
     type: "REPLIED_TO"
-    from: { node: "node0" }
-    to: { node: "node5" }
+    start: { node: "node0" }
+    end: { node: "node5" }
     name: "REPLIED_TO"
   relationship3:
     type: "REPLIED_TO"
-    from: { node: "node0" }
-    to: { node: "node0" }
+    start: { node: "node0" }
+    end: { node: "node0" }
     name: "REPLIED_TO2"
   relationship4:
     type: "HAS_TAG"
-    from: { node: "node0" }
-    to: { node: "node6" }
+    start: { node: "node0" }
+    end: { node: "node6" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG"
   relationship5:
     type: "MODERATED_BY"
-    from: { node: "node1" }
-    to: { node: "node3" }
+    start: { node: "node1" }
+    end: { node: "node3" }
     name: "MODERATED_BY"
   relationship6:
     type: "MEMBER_OF"
-    from: { node: "node3" }
-    to: { node: "node1" }
+    start: { node: "node3" }
+    end: { node: "node1" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
@@ -230,34 +230,34 @@ relationships:
     name: "MEMBER_OF"
   relationship7:
     type: "HAS_TAG"
-    from: { node: "node1" }
-    to: { node: "node6" }
+    start: { node: "node1" }
+    end: { node: "node6" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG2"
   relationship8:
     type: "LOCATED_IN"
-    from: { node: "node2" }
-    to: { node: "node4" }
+    start: { node: "node2" }
+    end: { node: "node4" }
     name: "LOCATED_IN"
   relationship9:
     type: "LIVES_IN"
-    from: { node: "node3" }
-    to: { node: "node4" }
+    start: { node: "node3" }
+    end: { node: "node4" }
     name: "LIVES_IN"
   relationship10:
     type: "INTERESTED_IN"
-    from: { node: "node3" }
-    to: { node: "node6" }
+    start: { node: "node3" }
+    end: { node: "node6" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
     name: "INTERESTED_IN"
   relationship11:
     type: "KNOWS"
-    from: { node: "node3" }
-    to: { node: "node3" }
+    start: { node: "node3" }
+    end: { node: "node3" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
@@ -265,8 +265,8 @@ relationships:
     name: "KNOWS"
   relationship12:
     type: "LIKED"
-    from: { node: "node3" }
-    to: { node: "node0" }
+    start: { node: "node3" }
+    end: { node: "node0" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
@@ -274,8 +274,8 @@ relationships:
     name: "LIKED"
   relationship13:
     type: "LIKED"
-    from: { node: "node3" }
-    to: { node: "node5" }
+    start: { node: "node3" }
+    end: { node: "node5" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
@@ -283,8 +283,8 @@ relationships:
     name: "LIKED2"
   relationship14:
     type: "STUDIES_AT"
-    from: { node: "node3" }
-    to: { node: "node2" }
+    start: { node: "node3" }
+    end: { node: "node2" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
@@ -292,8 +292,8 @@ relationships:
     name: "STUDIES_AT"
   relationship15:
     type: "WORKS_AT"
-    from: { node: "node3" }
-    to: { node: "node2" }
+    start: { node: "node3" }
+    end: { node: "node2" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
@@ -301,41 +301,41 @@ relationships:
     name: "WORKS_AT"
   relationship16:
     type: "IS_SIMILAR_TO"
-    from: { node: "node4" }
-    to: { node: "node4" }
+    start: { node: "node4" }
+    end: { node: "node4" }
     name: "IS_SIMILAR_TO"
   relationship17:
     type: "AUTHORED_BY"
-    from: { node: "node5" }
-    to: { node: "node3" }
+    start: { node: "node5" }
+    end: { node: "node3" }
     name: "AUTHORED_BY2"
   relationship18:
     type: "POSTED_IN"
-    from: { node: "node5" }
-    to: { node: "node1" }
+    start: { node: "node5" }
+    end: { node: "node1" }
     name: "POSTED_IN"
   relationship19:
     type: "AUTHORED_AT"
-    from: { node: "node5" }
-    to: { node: "node4" }
+    start: { node: "node5" }
+    end: { node: "node4" }
     name: "AUTHORED_AT2"
   relationship20:
     type: "HAS_TAG"
-    from: { node: "node5" }
-    to: { node: "node6" }
+    start: { node: "node5" }
+    end: { node: "node6" }
     properties:
       relationshipProperty0: { type: "INTEGER", name: "creationDate" }
       relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG3"
   relationship21:
     type: "HAS_CLASS"
-    from: { node: "node6" }
-    to: { node: "node7" }
+    start: { node: "node6" }
+    end: { node: "node7" }
     name: "HAS_CLASS"
   relationship22:
     type: "IS_SUBCLASS"
-    from: { node: "node7" }
-    to: { node: "node7" }
+    start: { node: "node7" }
+    end: { node: "node7" }
     name: "IS_SUBCLASS"
 tables:
   Comment:

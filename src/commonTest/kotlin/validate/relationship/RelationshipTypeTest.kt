@@ -33,8 +33,8 @@ class RelationshipTypeTest {
     fun `pass when relationship has a valid type`() {
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = RelationshipTarget(),
-            to = RelationshipTarget()
+            start = RelationshipTarget(),
+            end = RelationshipTarget()
         )
         val issues = mutableListOf<Issue>()
 
@@ -47,8 +47,8 @@ class RelationshipTypeTest {
     fun `fail when relationship has blank type`() {
         val relationship = Relationship(
             type = "  ",
-            from = RelationshipTarget(),
-            to = RelationshipTarget()
+            start = RelationshipTarget(),
+            end = RelationshipTarget()
         )
         val issues = mutableListOf<Issue>()
 

@@ -83,11 +83,11 @@ object Pretty {
             node.indexes.prettify()
         }
         relationships.values.forEach { relationship ->
-            if (relationship.from.node != "") {
-                relationship.from.node = renames[relationship.from.node] ?: relationship.from.node
+            if (relationship.start.node != "") {
+                relationship.start.node = renames[relationship.start.node] ?: relationship.start.node
             }
-            if (relationship.to.node != "") {
-                relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
+            if (relationship.end.node != "") {
+                relationship.end.node = renames[relationship.end.node] ?: relationship.end.node
             }
         }
         display.nodes.rename(renames)
