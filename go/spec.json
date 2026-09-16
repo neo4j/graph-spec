@@ -850,7 +850,19 @@
                 "propertyName": "type"
             }
         },
-        "PropertyMapping": {
+        "PropertyName": {
+            "type": "object",
+            "properties": {
+                "property": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "property"
+            ],
+            "additionalProperties": false
+        },
+        "Column": {
             "type": "object",
             "properties": {
                 "column": {
@@ -861,6 +873,17 @@
                 "column"
             ],
             "additionalProperties": false
+        },
+        "KeyMapping": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "column": {
+                    "type": "string"
+                }
+            }
         },
         "MappingMode": {
             "type": "string",
@@ -885,7 +908,7 @@
                 "properties": {
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/$defs/PropertyMapping"
+                        "$ref": "#/$defs/Column"
                     }
                 },
                 "mode": {
@@ -896,10 +919,26 @@
                     "nullable": true
                 },
                 "key": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "oneOf": [
+                        {
+                            "type": "array",
+                            "maxItems": 0
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "$ref": "#/$defs/PropertyName"
+                            }
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "$ref": "#/$defs/Column"
+                            }
+                        }
+                    ]
                 }
             },
             "required": [
@@ -940,10 +979,10 @@
                 "label": {
                     "type": "string"
                 },
-                "properties": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/PropertyMapping"
+                "mappings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/KeyMapping"
                     }
                 }
             },
@@ -976,17 +1015,33 @@
                 "properties": {
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/$defs/PropertyMapping"
+                        "$ref": "#/$defs/Column"
                     }
                 },
                 "mode": {
                     "$ref": "#/$defs/MappingMode"
                 },
                 "key": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
+                    "oneOf": [
+                        {
+                            "type": "array",
+                            "maxItems": 0
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "$ref": "#/$defs/PropertyName"
+                            }
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "$ref": "#/$defs/Column"
+                            }
+                        }
+                    ]
                 }
             },
             "required": [
