@@ -251,7 +251,7 @@
       "type": "RELATIONSHIP",
       "relationship": "ACTED_IN",
       "table": "actors-movies",
-      "from": {
+      "start_node": {
         "node": "Actor",
         "label": "Actor",
         "properties": {
@@ -260,7 +260,7 @@
           }
         }
       },
-      "to": {
+      "end_node": {
         "node": "Movie",
         "label": "Movie",
         "properties": {
