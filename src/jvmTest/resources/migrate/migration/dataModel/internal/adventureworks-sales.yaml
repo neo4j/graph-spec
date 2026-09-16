@@ -11,7 +11,7 @@ nodes:
       nodeProperty4: { type: "INTEGER", name: "expyear" }
       nodeProperty5: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node0_constraint0:
         type: "UNIQUE"
         label: "creditcard"
         properties: ["nodeProperty0"]
@@ -30,7 +30,7 @@ nodes:
       nodeProperty0: { type: "STRING", name: "currencycode" }
       nodeProperty1: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node1_constraint0:
         type: "UNIQUE"
         label: "currency"
         properties: ["nodeProperty0"]
@@ -52,7 +52,7 @@ nodes:
       nodeProperty3: { type: "FLOAT", name: "endofdayrate" }
       nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node2_constraint0:
         type: "UNIQUE"
         label: "currencyrate"
         properties: ["nodeProperty0"]
@@ -72,7 +72,7 @@ nodes:
       nodeProperty1: { type: "STRING", name: "rowguid" }
       nodeProperty2: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node3_constraint0:
         type: "UNIQUE"
         label: "customer"
         properties: ["nodeProperty0"]
@@ -103,7 +103,7 @@ nodes:
       nodeProperty12: { type: "STRING", name: "rowguid" }
       nodeProperty13: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node4_constraint0:
         type: "UNIQUE"
         label: "salesorderheader"
         properties: ["nodeProperty0"]
@@ -128,7 +128,7 @@ nodes:
       nodeProperty6: { type: "STRING", name: "rowguid" }
       nodeProperty7: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node5_constraint0:
         type: "UNIQUE"
         label: "salesperson"
         properties: ["nodeProperty0"]
@@ -147,7 +147,7 @@ nodes:
       nodeProperty0: { type: "INTEGER", name: "salesreasonid" }
       nodeProperty1: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node6_constraint0:
         type: "UNIQUE"
         label: "salesreason"
         properties: ["nodeProperty0"]
@@ -169,7 +169,7 @@ nodes:
       nodeProperty3: { type: "STRING", name: "rowguid" }
       nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node7_constraint0:
         type: "UNIQUE"
         label: "salestaxrate"
         properties: ["nodeProperty0"]
@@ -194,7 +194,7 @@ nodes:
       nodeProperty6: { type: "STRING", name: "rowguid" }
       nodeProperty7: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node8_constraint0:
         type: "UNIQUE"
         label: "salesterritory"
         properties: ["nodeProperty0"]
@@ -216,7 +216,7 @@ nodes:
       nodeProperty3: { type: "ZONED DATETIME", name: "datecreated" }
       nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node9_constraint0:
         type: "UNIQUE"
         label: "shoppingcartitem"
         properties: ["nodeProperty0"]
@@ -244,7 +244,7 @@ nodes:
       nodeProperty9: { type: "STRING", name: "rowguid" }
       nodeProperty10: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node10_constraint0:
         type: "UNIQUE"
         label: "specialoffer"
         properties: ["nodeProperty0"]
@@ -264,7 +264,7 @@ nodes:
       nodeProperty1: { type: "STRING", name: "rowguid" }
       nodeProperty2: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node11_constraint0:
         type: "UNIQUE"
         label: "store"
         properties: ["nodeProperty0"]

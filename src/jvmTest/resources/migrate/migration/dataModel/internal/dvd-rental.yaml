@@ -9,7 +9,7 @@ nodes:
       nodeProperty2: { type: "STRING", name: "last_name" }
       nodeProperty3: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node0_constraint0:
         type: "UNIQUE"
         label: "actor"
         properties: ["nodeProperty0"]
@@ -33,7 +33,7 @@ nodes:
       nodeProperty5: { type: "STRING", name: "phone" }
       nodeProperty6: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node1_constraint0:
         type: "UNIQUE"
         label: "address"
         properties: ["nodeProperty0"]
@@ -53,7 +53,7 @@ nodes:
       nodeProperty1: { type: "STRING", name: "name" }
       nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node2_constraint0:
         type: "UNIQUE"
         label: "category"
         properties: ["nodeProperty0"]
@@ -73,7 +73,7 @@ nodes:
       nodeProperty1: { type: "STRING", name: "city" }
       nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node3_constraint0:
         type: "UNIQUE"
         label: "city"
         properties: ["nodeProperty0"]
@@ -93,7 +93,7 @@ nodes:
       nodeProperty1: { type: "STRING", name: "country" }
       nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node4_constraint0:
         type: "UNIQUE"
         label: "country"
         properties: ["nodeProperty0"]
@@ -119,7 +119,7 @@ nodes:
       nodeProperty7: { type: "ZONED DATETIME", name: "last_update" }
       nodeProperty8: { type: "INTEGER", name: "active" }
     constraints:
-      nodeConstraint0:
+      node5_constraint0:
         type: "UNIQUE"
         label: "customer"
         properties: ["nodeProperty0"]
@@ -145,7 +145,7 @@ nodes:
       nodeProperty7: { type: "STRING", name: "rating" }
       nodeProperty8: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node6_constraint0:
         type: "UNIQUE"
         label: "film"
         properties: ["nodeProperty0"]
@@ -165,7 +165,7 @@ nodes:
       nodeProperty1: { type: "INTEGER", name: "store_id" }
       nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node7_constraint0:
         type: "UNIQUE"
         label: "inventory"
         properties: ["nodeProperty0"]
@@ -185,7 +185,7 @@ nodes:
       nodeProperty1: { type: "STRING", name: "name" }
       nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node8_constraint0:
         type: "UNIQUE"
         label: "language"
         properties: ["nodeProperty0"]
@@ -205,7 +205,7 @@ nodes:
       nodeProperty1: { type: "FLOAT", name: "amount" }
       nodeProperty2: { type: "ZONED DATETIME", name: "payment_date" }
     constraints:
-      nodeConstraint0:
+      node9_constraint0:
         type: "UNIQUE"
         label: "payment"
         properties: ["nodeProperty0"]
@@ -226,7 +226,7 @@ nodes:
       nodeProperty2: { type: "ZONED DATETIME", name: "return_date" }
       nodeProperty3: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node10_constraint0:
         type: "UNIQUE"
         label: "rental"
         properties: ["nodeProperty0"]
@@ -252,7 +252,7 @@ nodes:
       nodeProperty7: { type: "STRING", name: "password" }
       nodeProperty8: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node11_constraint0:
         type: "UNIQUE"
         label: "staff"
         properties: ["nodeProperty0"]
@@ -271,7 +271,7 @@ nodes:
       nodeProperty0: { type: "INTEGER", name: "store_id" }
       nodeProperty1: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
-      nodeConstraint0:
+      node12_constraint0:
         type: "UNIQUE"
         label: "store"
         properties: ["nodeProperty0"]

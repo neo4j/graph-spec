@@ -56,8 +56,8 @@ object Internal {
     private fun GraphModel.internaliseNodes() {
         val renames = nodes.identify("node")
         Pretty.renameNodeMappings(this, renames)
-        nodes.values.forEach { node ->
-            node.constraints.identify("nodeConstraint")
+        nodes.forEach { (key, node) ->
+            node.constraints.identify("constraint", idParent = key)
             node.indexes.identify("nodeIndex")
         }
         relationships.values.forEach { relationship ->
@@ -130,9 +130,9 @@ object Internal {
     private fun GraphModel.internaliseRelationships() {
         val renames = relationships.identify("relationship")
         Pretty.renameRelationshipMappings(this, renames)
-        relationships.values.forEach { node ->
-            node.constraints.identify("relationshipConstraint")
-            node.indexes.identify("relationshipIndex")
+        relationships.forEach { (key, relationship) ->
+            relationship.constraints.identify("constraint", idParent = key)
+            relationship.indexes.identify("relationshipIndex")
         }
     }
 

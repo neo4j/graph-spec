@@ -20,6 +20,7 @@ import model.mapping.NodeMapping
 import model.mapping.PropertyMapping
 import model.mapping.RelationshipMapping
 import model.mapping.TargetMapping
+import model.node.Labels
 import model.node.Node
 import model.node.NodeConstraint
 import model.node.NodeIndex
@@ -83,8 +84,8 @@ class InternalTest {
         val node0 = model.nodes["node0"]!!
         assertEquals("User1", node0.name)
 
-        assertTrue(node0.constraints.containsKey("nodeConstraint0"))
-        assertEquals("c1", node0.constraints["nodeConstraint0"]?.name)
+        assertTrue(node0.constraints.containsKey("node0_constraint0"))
+        assertEquals("c1", node0.constraints["node0_constraint0"]?.name)
 
         assertTrue(node0.indexes.containsKey("nodeIndex0"))
         assertEquals("i1", node0.indexes["nodeIndex0"]?.name)
@@ -283,5 +284,37 @@ class InternalTest {
 
         val node = model.nodes["node0"]!!
         assertTrue(node.constraints.isEmpty(), "No constraint should be generated for an unflagged property")
+    }
+
+    @Test
+    fun `test produces unique constraint ids when two nodes share a constraint key`() {
+        val model = GraphModel(
+            version = "4.0.0",
+            nodes = mutableMapOf(
+                "n:0" to Node(
+                    labels = Labels(identifier = "Patient"),
+                    properties = mutableMapOf("id" to Property(key = true))
+                ),
+                "n:1" to Node(
+                    labels = Labels(identifier = "Doctor"),
+                    properties = mutableMapOf("id" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node0 = model.nodes["node0"]!!
+        val node1 = model.nodes["node1"]!!
+
+        val node0ConstraintIds = node0.constraints.keys
+        val node1ConstraintIds = node1.constraints.keys
+
+        assertTrue(node0ConstraintIds.isNotEmpty(), "node0 should have a key constraint")
+        assertTrue(node1ConstraintIds.isNotEmpty(), "node1 should have a key constraint")
+
+        val allIds = (node0ConstraintIds + node1ConstraintIds).toList()
+        assertEquals(allIds.size, allIds.toSet().size, "Constraint ids must be globally unique across nodes")
     }
 }

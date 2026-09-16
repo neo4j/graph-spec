@@ -8,7 +8,7 @@ nodes:
       nodeProperty1: { type: "STRING", name: "model" }
       nodeProperty2: { type: "INTEGER", name: "aircraftRange" }
     constraints:
-      nodeConstraint0:
+      node0_constraint0:
         type: "UNIQUE"
         label: "Aircraft"
         properties: ["nodeProperty0"]
@@ -30,7 +30,7 @@ nodes:
       nodeProperty3: { type: "POINT", name: "coordinates" }
       nodeProperty4: { type: "STRING", name: "timezone" }
     constraints:
-      nodeConstraint0:
+      node1_constraint0:
         type: "UNIQUE"
         label: "Airport"
         properties: ["nodeProperty0"]
@@ -50,7 +50,7 @@ nodes:
       nodeProperty1: { type: "ZONED DATETIME", name: "bookDate" }
       nodeProperty2: { type: "FLOAT", name: "totalAmount" }
     constraints:
-      nodeConstraint0:
+      node2_constraint0:
         type: "UNIQUE"
         label: "Booking"
         properties: ["nodeProperty0"]
@@ -74,7 +74,7 @@ nodes:
       nodeProperty5: { type: "ZONED DATETIME", name: "actualDeparture" }
       nodeProperty6: { type: "ZONED DATETIME", name: "actualArrival" }
     constraints:
-      nodeConstraint0:
+      node3_constraint0:
         type: "UNIQUE"
         label: "Flight"
         properties: ["nodeProperty0"]
@@ -95,7 +95,7 @@ nodes:
       nodeProperty2: { type: "STRING", name: "passengerName" }
       nodeProperty3: { type: "STRING", name: "contactData" }
     constraints:
-      nodeConstraint0:
+      node4_constraint0:
         type: "UNIQUE"
         label: "Ticket"
         properties: ["nodeProperty0"]

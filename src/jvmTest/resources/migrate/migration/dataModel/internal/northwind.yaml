@@ -9,7 +9,7 @@ nodes:
       nodeProperty2: { type: "STRING", name: "description" }
       nodeProperty3: { type: "STRING", name: "picture" }
     constraints:
-      nodeConstraint0:
+      node0_constraint0:
         type: "UNIQUE"
         label: "categories"
         properties: ["nodeProperty0"]
@@ -34,7 +34,7 @@ nodes:
       nodeProperty6: { type: "INTEGER", name: "reorderlevel" }
       nodeProperty7: { type: "INTEGER", name: "discontinued" }
     constraints:
-      nodeConstraint0:
+      node1_constraint0:
         type: "UNIQUE"
         label: "products"
         properties: ["nodeProperty0"]
@@ -63,7 +63,7 @@ nodes:
       nodeProperty10: { type: "STRING", name: "fax" }
       nodeProperty11: { type: "STRING", name: "homepage" }
     constraints:
-      nodeConstraint0:
+      node2_constraint0:
         type: "UNIQUE"
         label: "suppliers"
         properties: ["nodeProperty0"]

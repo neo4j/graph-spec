@@ -73,14 +73,21 @@ internal object Rename {
      *
      * @param type The type of field in use to prefix the stable id e.g: node0, node1, node2 etc...
      * @param parent The parent field type to avoid stable id conflicts in a global map node0:property1, node0:property1
+     * @param idParent When set, incorporated into the generated id to make it globally unique across
+     *        entities (e.g. node0_constraint0). Use for constraints, indexes and properties that
+     *        get flattened into a global list by consumers.
      * @return Map of original keys to their replacements
      */
-    internal fun <T : Named> MutableMap<String, T>.identify(type: String, parent: String? = null): Map<String, String> {
+    internal fun <T : Named> MutableMap<String, T>.identify(
+        type: String,
+        parent: String? = null,
+        idParent: String? = null
+    ): Map<String, String> {
         var i = 0
         return transformKeys(
             parent = parent,
             skip = { it.name != null },
-            newKey = { _, _ -> "$type${i++}" },
+            newKey = { _, _ -> if (idParent != null) "${idParent}_${type}${i++}" else "$type${i++}" },
             updateName = { og, node -> node.name = og }
         )
     }
