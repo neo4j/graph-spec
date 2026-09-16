@@ -143,7 +143,10 @@ class InternalTest {
         val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("relationship0", relMapping.relationship)
         assertEquals("node0", relMapping.from.node)
-        assertTrue(relMapping.from.properties.containsKey("node0_property0"), "From Target property should be renamed")
+        assertTrue(
+            relMapping.from.properties.containsKey("node0_property0"),
+            "From Target property should be renamed"
+        )
         assertTrue(
             relMapping.properties.containsKey("relationship0_property0"),
             "Relationship property should be renamed"
@@ -402,5 +405,28 @@ class InternalTest {
 
         val allIds = (rel0.properties.keys + rel1.properties.keys).toList()
         assertEquals(allIds.size, allIds.toSet().size, "Property ids must be globally unique across relationships")
+    }
+
+    @Test
+    fun `test does not drop a kept id when a generated id would collide with it`() {
+        val model = GraphModel(
+            version = "4.0.0",
+            nodes = mutableMapOf(
+                "node0" to Node(
+                    labels = Labels(identifier = "Person"),
+                    properties = mutableMapOf(
+                        "node0_property0" to Property(name = "email"),
+                        "count" to Property()
+                    )
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val properties = model.nodes["node0"]!!.properties
+        assertEquals(2, properties.size, "The named property must not be overwritten by the generated id")
+        assertNotNull(properties.values.firstOrNull { it.name == "email" }, "email should still be present")
     }
 }

@@ -83,11 +83,22 @@ internal object Rename {
         parent: String? = null,
         idParent: String? = null
     ): Map<String, String> {
+        // Entries with a name keep their key (see skip below), so a generated key must not
+        // claim one of those keys - the map would silently drop the kept entry.
+        val keptKeys = entries.filter { it.value.name != null }.map { it.key }.toSet()
         var i = 0
+        fun nextKey(): String {
+            var candidate: String
+            do {
+                candidate = if (idParent != null) "${idParent}_${type}$i" else "$type$i"
+                i++
+            } while (candidate in keptKeys)
+            return candidate
+        }
         return transformKeys(
             parent = parent,
             skip = { it.name != null },
-            newKey = { _, _ -> if (idParent != null) "${idParent}_${type}${i++}" else "$type${i++}" },
+            newKey = { _, _ -> nextKey() },
             updateName = { og, node -> node.name = og }
         )
     }
