@@ -110,10 +110,12 @@ class Validations {
             RelationshipPropertyDuplicateName
         )
 
-        // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
-        // model, called by both import and ontologies whenever a saved model is loaded/uploaded.
+        // UPX `validateUniqueIds` (data-model.schemas.ts) - rejects a model whose ids collide
+        // across the document, so the data model consumer never has to renumber them.
         @JsStatic
-        val draft: List<Validation> = listOf()
+        val draft: List<Validation> = listOf(
+            UniqueIds
+        )
 
         // UPX `apps/import/.../data-model.utils.ts` - import-app-only bulk pass.
         @JsStatic
