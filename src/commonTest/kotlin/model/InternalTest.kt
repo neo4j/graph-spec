@@ -133,7 +133,7 @@ class InternalTest {
         // Assert Nodes and Properties
         val internalNode = originalModel.nodes["node0"]!!
         assertEquals("Person", internalNode.name)
-        assertTrue(internalNode.properties.containsKey("nodeProperty0"))
+        assertTrue(internalNode.properties.containsKey("node0_property0"))
 
         val internalRel = originalModel.relationships["relationship0"]!!
         assertEquals("FRIENDS_WITH", internalRel.name)
@@ -143,7 +143,7 @@ class InternalTest {
         val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("relationship0", relMapping.relationship)
         assertEquals("node0", relMapping.from.node)
-        assertTrue(relMapping.from.properties.containsKey("nodeProperty0"), "From Target property should be renamed")
+        assertTrue(relMapping.from.properties.containsKey("node0_property0"), "From Target property should be renamed")
         assertTrue(
             relMapping.properties.containsKey("relationshipProperty0"),
             "Relationship property should be renamed"
@@ -183,14 +183,14 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.key, "Key flag should be cleared from the property")
 
         val constraint = node.constraints["key_User_id"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
         assertEquals("User", constraint.label, "Constraint should reference the node's label")
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
     }
 
     @Test
@@ -208,13 +208,13 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.unique, "Unique flag should be cleared from the property")
 
         val constraint = node.constraints["unique_User_email"]
         assertNotNull(constraint, "A unique constraint should be generated for the property")
         assertEquals(ConstraintType.UNIQUE, constraint.type)
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
     }
 
     @Test
@@ -232,13 +232,13 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.mustExist, "MustExist flag should be cleared from the property")
 
         val constraint = node.constraints["exists_User_email"]
         assertNotNull(constraint, "An exists constraint should be generated for the property")
         assertEquals(ConstraintType.EXISTS, constraint.type)
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
     }
 
     @Test
@@ -346,5 +346,31 @@ class InternalTest {
 
         val allIds = (node0.indexes.keys + node1.indexes.keys).toList()
         assertEquals(allIds.size, allIds.toSet().size, "Index ids must be globally unique across nodes")
+    }
+
+    @Test
+    fun `test produces unique property ids when two nodes share a property key`() {
+        val model = GraphModel(
+            version = "4.0.0",
+            nodes = mutableMapOf(
+                "n:0" to Node(
+                    labels = Labels(identifier = "Patient"),
+                    properties = mutableMapOf("id" to Property())
+                ),
+                "n:1" to Node(
+                    labels = Labels(identifier = "Doctor"),
+                    properties = mutableMapOf("id" to Property())
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node0 = model.nodes["node0"]!!
+        val node1 = model.nodes["node1"]!!
+
+        val allIds = (node0.properties.keys + node1.properties.keys).toList()
+        assertEquals(allIds.size, allIds.toSet().size, "Property ids must be globally unique across nodes")
     }
 }

@@ -4,283 +4,283 @@ nodes:
     labels:
       identifier: "actor"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "actor_id" }
-      nodeProperty1: { type: "STRING", name: "first_name" }
-      nodeProperty2: { type: "STRING", name: "last_name" }
-      nodeProperty3: { type: "ZONED DATETIME", name: "last_update" }
+      node0_property0: { type: "INTEGER", name: "actor_id" }
+      node0_property1: { type: "STRING", name: "first_name" }
+      node0_property2: { type: "STRING", name: "last_name" }
+      node0_property3: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node0_constraint0:
         type: "UNIQUE"
         label: "actor"
-        properties: ["nodeProperty0"]
+        properties: ["node0_property0"]
         name: "unique_actor_actor_id"
     indexes:
       node0_index0:
         type: "TEXT"
         labels: ["actor"]
-        properties: ["nodeProperty0"]
+        properties: ["node0_property0"]
         name: "actor"
     name: "actor"
   node1:
     labels:
       identifier: "address"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "address_id" }
-      nodeProperty1: { type: "STRING", name: "address" }
-      nodeProperty2: { type: "STRING", name: "address2" }
-      nodeProperty3: { type: "STRING", name: "district" }
-      nodeProperty4: { type: "STRING", name: "postal_code" }
-      nodeProperty5: { type: "STRING", name: "phone" }
-      nodeProperty6: { type: "ZONED DATETIME", name: "last_update" }
+      node1_property0: { type: "INTEGER", name: "address_id" }
+      node1_property1: { type: "STRING", name: "address" }
+      node1_property2: { type: "STRING", name: "address2" }
+      node1_property3: { type: "STRING", name: "district" }
+      node1_property4: { type: "STRING", name: "postal_code" }
+      node1_property5: { type: "STRING", name: "phone" }
+      node1_property6: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node1_constraint0:
         type: "UNIQUE"
         label: "address"
-        properties: ["nodeProperty0"]
+        properties: ["node1_property0"]
         name: "unique_address_address_id"
     indexes:
       node1_index0:
         type: "TEXT"
         labels: ["address"]
-        properties: ["nodeProperty0"]
+        properties: ["node1_property0"]
         name: "address"
     name: "address"
   node2:
     labels:
       identifier: "category"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "category_id" }
-      nodeProperty1: { type: "STRING", name: "name" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
+      node2_property0: { type: "INTEGER", name: "category_id" }
+      node2_property1: { type: "STRING", name: "name" }
+      node2_property2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node2_constraint0:
         type: "UNIQUE"
         label: "category"
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "unique_category_category_id"
     indexes:
       node2_index0:
         type: "TEXT"
         labels: ["category"]
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "category"
     name: "category"
   node3:
     labels:
       identifier: "city"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "city_id" }
-      nodeProperty1: { type: "STRING", name: "city" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
+      node3_property0: { type: "INTEGER", name: "city_id" }
+      node3_property1: { type: "STRING", name: "city" }
+      node3_property2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node3_constraint0:
         type: "UNIQUE"
         label: "city"
-        properties: ["nodeProperty0"]
+        properties: ["node3_property0"]
         name: "unique_city_city_id"
     indexes:
       node3_index0:
         type: "TEXT"
         labels: ["city"]
-        properties: ["nodeProperty0"]
+        properties: ["node3_property0"]
         name: "city"
     name: "city"
   node4:
     labels:
       identifier: "country"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "country_id" }
-      nodeProperty1: { type: "STRING", name: "country" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
+      node4_property0: { type: "INTEGER", name: "country_id" }
+      node4_property1: { type: "STRING", name: "country" }
+      node4_property2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node4_constraint0:
         type: "UNIQUE"
         label: "country"
-        properties: ["nodeProperty0"]
+        properties: ["node4_property0"]
         name: "unique_country_country_id"
     indexes:
       node4_index0:
         type: "TEXT"
         labels: ["country"]
-        properties: ["nodeProperty0"]
+        properties: ["node4_property0"]
         name: "country"
     name: "country"
   node5:
     labels:
       identifier: "customer"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "customer_id" }
-      nodeProperty1: { type: "INTEGER", name: "store_id" }
-      nodeProperty2: { type: "STRING", name: "first_name" }
-      nodeProperty3: { type: "STRING", name: "last_name" }
-      nodeProperty4: { type: "STRING", name: "email" }
-      nodeProperty5: { type: "BOOLEAN", name: "activebool" }
-      nodeProperty6: { type: "DATE", name: "create_date" }
-      nodeProperty7: { type: "ZONED DATETIME", name: "last_update" }
-      nodeProperty8: { type: "INTEGER", name: "active" }
+      node5_property0: { type: "INTEGER", name: "customer_id" }
+      node5_property1: { type: "INTEGER", name: "store_id" }
+      node5_property2: { type: "STRING", name: "first_name" }
+      node5_property3: { type: "STRING", name: "last_name" }
+      node5_property4: { type: "STRING", name: "email" }
+      node5_property5: { type: "BOOLEAN", name: "activebool" }
+      node5_property6: { type: "DATE", name: "create_date" }
+      node5_property7: { type: "ZONED DATETIME", name: "last_update" }
+      node5_property8: { type: "INTEGER", name: "active" }
     constraints:
       node5_constraint0:
         type: "UNIQUE"
         label: "customer"
-        properties: ["nodeProperty0"]
+        properties: ["node5_property0"]
         name: "unique_customer_customer_id"
     indexes:
       node5_index0:
         type: "TEXT"
         labels: ["customer"]
-        properties: ["nodeProperty0"]
+        properties: ["node5_property0"]
         name: "customer"
     name: "customer"
   node6:
     labels:
       identifier: "film"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "film_id" }
-      nodeProperty1: { type: "STRING", name: "title" }
-      nodeProperty2: { type: "STRING", name: "description" }
-      nodeProperty3: { type: "INTEGER", name: "rental_duration" }
-      nodeProperty4: { type: "FLOAT", name: "rental_rate" }
-      nodeProperty5: { type: "INTEGER", name: "length" }
-      nodeProperty6: { type: "FLOAT", name: "replacement_cost" }
-      nodeProperty7: { type: "STRING", name: "rating" }
-      nodeProperty8: { type: "ZONED DATETIME", name: "last_update" }
+      node6_property0: { type: "INTEGER", name: "film_id" }
+      node6_property1: { type: "STRING", name: "title" }
+      node6_property2: { type: "STRING", name: "description" }
+      node6_property3: { type: "INTEGER", name: "rental_duration" }
+      node6_property4: { type: "FLOAT", name: "rental_rate" }
+      node6_property5: { type: "INTEGER", name: "length" }
+      node6_property6: { type: "FLOAT", name: "replacement_cost" }
+      node6_property7: { type: "STRING", name: "rating" }
+      node6_property8: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node6_constraint0:
         type: "UNIQUE"
         label: "film"
-        properties: ["nodeProperty0"]
+        properties: ["node6_property0"]
         name: "unique_film_film_id"
     indexes:
       node6_index0:
         type: "TEXT"
         labels: ["film"]
-        properties: ["nodeProperty0"]
+        properties: ["node6_property0"]
         name: "film"
     name: "film"
   node7:
     labels:
       identifier: "inventory"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "inventory_id" }
-      nodeProperty1: { type: "INTEGER", name: "store_id" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
+      node7_property0: { type: "INTEGER", name: "inventory_id" }
+      node7_property1: { type: "INTEGER", name: "store_id" }
+      node7_property2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node7_constraint0:
         type: "UNIQUE"
         label: "inventory"
-        properties: ["nodeProperty0"]
+        properties: ["node7_property0"]
         name: "unique_inventory_inventory_id"
     indexes:
       node7_index0:
         type: "TEXT"
         labels: ["inventory"]
-        properties: ["nodeProperty0"]
+        properties: ["node7_property0"]
         name: "inventory"
     name: "inventory"
   node8:
     labels:
       identifier: "language"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "language_id" }
-      nodeProperty1: { type: "STRING", name: "name" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "last_update" }
+      node8_property0: { type: "INTEGER", name: "language_id" }
+      node8_property1: { type: "STRING", name: "name" }
+      node8_property2: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node8_constraint0:
         type: "UNIQUE"
         label: "language"
-        properties: ["nodeProperty0"]
+        properties: ["node8_property0"]
         name: "unique_language_language_id"
     indexes:
       node8_index0:
         type: "TEXT"
         labels: ["language"]
-        properties: ["nodeProperty0"]
+        properties: ["node8_property0"]
         name: "language"
     name: "language"
   node9:
     labels:
       identifier: "payment"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "payment_id" }
-      nodeProperty1: { type: "FLOAT", name: "amount" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "payment_date" }
+      node9_property0: { type: "INTEGER", name: "payment_id" }
+      node9_property1: { type: "FLOAT", name: "amount" }
+      node9_property2: { type: "ZONED DATETIME", name: "payment_date" }
     constraints:
       node9_constraint0:
         type: "UNIQUE"
         label: "payment"
-        properties: ["nodeProperty0"]
+        properties: ["node9_property0"]
         name: "unique_payment_payment_id"
     indexes:
       node9_index0:
         type: "TEXT"
         labels: ["payment"]
-        properties: ["nodeProperty0"]
+        properties: ["node9_property0"]
         name: "payment"
     name: "payment"
   node10:
     labels:
       identifier: "rental"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "rental_id" }
-      nodeProperty1: { type: "ZONED DATETIME", name: "rental_date" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "return_date" }
-      nodeProperty3: { type: "ZONED DATETIME", name: "last_update" }
+      node10_property0: { type: "INTEGER", name: "rental_id" }
+      node10_property1: { type: "ZONED DATETIME", name: "rental_date" }
+      node10_property2: { type: "ZONED DATETIME", name: "return_date" }
+      node10_property3: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node10_constraint0:
         type: "UNIQUE"
         label: "rental"
-        properties: ["nodeProperty0"]
+        properties: ["node10_property0"]
         name: "unique_rental_rental_id"
     indexes:
       node10_index0:
         type: "TEXT"
         labels: ["rental"]
-        properties: ["nodeProperty0"]
+        properties: ["node10_property0"]
         name: "rental"
     name: "rental"
   node11:
     labels:
       identifier: "staff"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "staff_id" }
-      nodeProperty1: { type: "STRING", name: "first_name" }
-      nodeProperty2: { type: "STRING", name: "last_name" }
-      nodeProperty3: { type: "STRING", name: "email" }
-      nodeProperty4: { type: "INTEGER", name: "store_id" }
-      nodeProperty5: { type: "BOOLEAN", name: "active" }
-      nodeProperty6: { type: "STRING", name: "username" }
-      nodeProperty7: { type: "STRING", name: "password" }
-      nodeProperty8: { type: "ZONED DATETIME", name: "last_update" }
+      node11_property0: { type: "INTEGER", name: "staff_id" }
+      node11_property1: { type: "STRING", name: "first_name" }
+      node11_property2: { type: "STRING", name: "last_name" }
+      node11_property3: { type: "STRING", name: "email" }
+      node11_property4: { type: "INTEGER", name: "store_id" }
+      node11_property5: { type: "BOOLEAN", name: "active" }
+      node11_property6: { type: "STRING", name: "username" }
+      node11_property7: { type: "STRING", name: "password" }
+      node11_property8: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node11_constraint0:
         type: "UNIQUE"
         label: "staff"
-        properties: ["nodeProperty0"]
+        properties: ["node11_property0"]
         name: "unique_staff_staff_id"
     indexes:
       node11_index0:
         type: "TEXT"
         labels: ["staff"]
-        properties: ["nodeProperty0"]
+        properties: ["node11_property0"]
         name: "staff"
     name: "staff"
   node12:
     labels:
       identifier: "store"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "store_id" }
-      nodeProperty1: { type: "ZONED DATETIME", name: "last_update" }
+      node12_property0: { type: "INTEGER", name: "store_id" }
+      node12_property1: { type: "ZONED DATETIME", name: "last_update" }
     constraints:
       node12_constraint0:
         type: "UNIQUE"
         label: "store"
-        properties: ["nodeProperty0"]
+        properties: ["node12_property0"]
         name: "unique_store_store_id"
     indexes:
       node12_index0:
         type: "TEXT"
         labels: ["store"]
-        properties: ["nodeProperty0"]
+        properties: ["node12_property0"]
         name: "store"
     name: "store"
 relationships:
@@ -1060,184 +1060,184 @@ mappings:
     node: "node0"
     table: "actor"
     properties:
-      nodeProperty0: { column: "actor_id" }
-      nodeProperty1: { column: "first_name" }
-      nodeProperty2: { column: "last_name" }
-      nodeProperty3: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node0_property0: { column: "actor_id" }
+      node0_property1: { column: "first_name" }
+      node0_property2: { column: "last_name" }
+      node0_property3: { column: "last_update" }
+    key: ["node0_property0"]
   - type: "NODE"
     node: "node1"
     table: "address"
     properties:
-      nodeProperty0: { column: "address_id" }
-      nodeProperty1: { column: "address" }
-      nodeProperty2: { column: "address2" }
-      nodeProperty3: { column: "district" }
-      nodeProperty4: { column: "postal_code" }
-      nodeProperty5: { column: "phone" }
-      nodeProperty6: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node1_property0: { column: "address_id" }
+      node1_property1: { column: "address" }
+      node1_property2: { column: "address2" }
+      node1_property3: { column: "district" }
+      node1_property4: { column: "postal_code" }
+      node1_property5: { column: "phone" }
+      node1_property6: { column: "last_update" }
+    key: ["node1_property0"]
   - type: "NODE"
     node: "node2"
     table: "category"
     properties:
-      nodeProperty0: { column: "category_id" }
-      nodeProperty1: { column: "name" }
-      nodeProperty2: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node2_property0: { column: "category_id" }
+      node2_property1: { column: "name" }
+      node2_property2: { column: "last_update" }
+    key: ["node2_property0"]
   - type: "NODE"
     node: "node3"
     table: "city"
     properties:
-      nodeProperty0: { column: "city_id" }
-      nodeProperty1: { column: "city" }
-      nodeProperty2: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node3_property0: { column: "city_id" }
+      node3_property1: { column: "city" }
+      node3_property2: { column: "last_update" }
+    key: ["node3_property0"]
   - type: "NODE"
     node: "node4"
     table: "country"
     properties:
-      nodeProperty0: { column: "country_id" }
-      nodeProperty1: { column: "country" }
-      nodeProperty2: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node4_property0: { column: "country_id" }
+      node4_property1: { column: "country" }
+      node4_property2: { column: "last_update" }
+    key: ["node4_property0"]
   - type: "NODE"
     node: "node5"
     table: "customer"
     properties:
-      nodeProperty0: { column: "customer_id" }
-      nodeProperty1: { column: "store_id" }
-      nodeProperty2: { column: "first_name" }
-      nodeProperty3: { column: "last_name" }
-      nodeProperty4: { column: "email" }
-      nodeProperty5: { column: "activebool" }
-      nodeProperty6: { column: "create_date" }
-      nodeProperty7: { column: "last_update" }
-      nodeProperty8: { column: "active" }
-    key: ["nodeProperty0"]
+      node5_property0: { column: "customer_id" }
+      node5_property1: { column: "store_id" }
+      node5_property2: { column: "first_name" }
+      node5_property3: { column: "last_name" }
+      node5_property4: { column: "email" }
+      node5_property5: { column: "activebool" }
+      node5_property6: { column: "create_date" }
+      node5_property7: { column: "last_update" }
+      node5_property8: { column: "active" }
+    key: ["node5_property0"]
   - type: "NODE"
     node: "node6"
     table: "film"
     properties:
-      nodeProperty0: { column: "film_id" }
-      nodeProperty1: { column: "title" }
-      nodeProperty2: { column: "description" }
-      nodeProperty3: { column: "rental_duration" }
-      nodeProperty4: { column: "rental_rate" }
-      nodeProperty5: { column: "length" }
-      nodeProperty6: { column: "replacement_cost" }
-      nodeProperty7: { column: "rating" }
-      nodeProperty8: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node6_property0: { column: "film_id" }
+      node6_property1: { column: "title" }
+      node6_property2: { column: "description" }
+      node6_property3: { column: "rental_duration" }
+      node6_property4: { column: "rental_rate" }
+      node6_property5: { column: "length" }
+      node6_property6: { column: "replacement_cost" }
+      node6_property7: { column: "rating" }
+      node6_property8: { column: "last_update" }
+    key: ["node6_property0"]
   - type: "NODE"
     node: "node7"
     table: "inventory"
     properties:
-      nodeProperty0: { column: "inventory_id" }
-      nodeProperty1: { column: "store_id" }
-      nodeProperty2: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node7_property0: { column: "inventory_id" }
+      node7_property1: { column: "store_id" }
+      node7_property2: { column: "last_update" }
+    key: ["node7_property0"]
   - type: "NODE"
     node: "node8"
     table: "language"
     properties:
-      nodeProperty0: { column: "language_id" }
-      nodeProperty1: { column: "name" }
-      nodeProperty2: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node8_property0: { column: "language_id" }
+      node8_property1: { column: "name" }
+      node8_property2: { column: "last_update" }
+    key: ["node8_property0"]
   - type: "NODE"
     node: "node9"
     table: "payment"
     properties:
-      nodeProperty0: { column: "payment_id" }
-      nodeProperty1: { column: "amount" }
-      nodeProperty2: { column: "payment_date" }
-    key: ["nodeProperty0"]
+      node9_property0: { column: "payment_id" }
+      node9_property1: { column: "amount" }
+      node9_property2: { column: "payment_date" }
+    key: ["node9_property0"]
   - type: "NODE"
     node: "node10"
     table: "rental"
     properties:
-      nodeProperty0: { column: "rental_id" }
-      nodeProperty1: { column: "rental_date" }
-      nodeProperty2: { column: "return_date" }
-      nodeProperty3: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node10_property0: { column: "rental_id" }
+      node10_property1: { column: "rental_date" }
+      node10_property2: { column: "return_date" }
+      node10_property3: { column: "last_update" }
+    key: ["node10_property0"]
   - type: "NODE"
     node: "node11"
     table: "staff"
     properties:
-      nodeProperty0: { column: "staff_id" }
-      nodeProperty1: { column: "first_name" }
-      nodeProperty2: { column: "last_name" }
-      nodeProperty3: { column: "email" }
-      nodeProperty4: { column: "store_id" }
-      nodeProperty5: { column: "active" }
-      nodeProperty6: { column: "username" }
-      nodeProperty7: { column: "password" }
-      nodeProperty8: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node11_property0: { column: "staff_id" }
+      node11_property1: { column: "first_name" }
+      node11_property2: { column: "last_name" }
+      node11_property3: { column: "email" }
+      node11_property4: { column: "store_id" }
+      node11_property5: { column: "active" }
+      node11_property6: { column: "username" }
+      node11_property7: { column: "password" }
+      node11_property8: { column: "last_update" }
+    key: ["node11_property0"]
   - type: "NODE"
     node: "node12"
     table: "store"
     properties:
-      nodeProperty0: { column: "store_id" }
-      nodeProperty1: { column: "last_update" }
-    key: ["nodeProperty0"]
+      node12_property0: { column: "store_id" }
+      node12_property1: { column: "last_update" }
+    key: ["node12_property0"]
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "address"
     from:
       node: "node1"
       properties:
-        nodeProperty0: { column: "address_id" }
+        node1_property0: { column: "address_id" }
     to:
       node: "node3"
       properties:
-        nodeProperty0: { column: "city_id" }
+        node3_property0: { column: "city_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "city"
     from:
       node: "node3"
       properties:
-        nodeProperty0: { column: "city_id" }
+        node3_property0: { column: "city_id" }
     to:
       node: "node4"
       properties:
-        nodeProperty0: { column: "country_id" }
+        node4_property0: { column: "country_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "customer"
     from:
       node: "node5"
       properties:
-        nodeProperty0: { column: "customer_id" }
+        node5_property0: { column: "customer_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { column: "address_id" }
+        node1_property0: { column: "address_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "film"
     from:
       node: "node6"
       properties:
-        nodeProperty0: { column: "film_id" }
+        node6_property0: { column: "film_id" }
     to:
       node: "node8"
       properties:
-        nodeProperty0: { column: "language_id" }
+        node8_property0: { column: "language_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "film_actor"
     from:
       node: "node0"
       properties:
-        nodeProperty0: { column: "actor_id" }
+        node0_property0: { column: "actor_id" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { column: "film_id" }
+        node6_property0: { column: "film_id" }
     properties:
       relationshipProperty0: { column: "last_update" }
   - type: "RELATIONSHIP"
@@ -1246,11 +1246,11 @@ mappings:
     from:
       node: "node2"
       properties:
-        nodeProperty0: { column: "category_id" }
+        node2_property0: { column: "category_id" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { column: "film_id" }
+        node6_property0: { column: "film_id" }
     properties:
       relationshipProperty0: { column: "last_update" }
   - type: "RELATIONSHIP"
@@ -1259,107 +1259,107 @@ mappings:
     from:
       node: "node7"
       properties:
-        nodeProperty0: { column: "inventory_id" }
+        node7_property0: { column: "inventory_id" }
     to:
       node: "node6"
       properties:
-        nodeProperty0: { column: "film_id" }
+        node6_property0: { column: "film_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship7"
     table: "payment"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { column: "payment_id" }
+        node9_property0: { column: "payment_id" }
     to:
       node: "node5"
       properties:
-        nodeProperty0: { column: "customer_id" }
+        node5_property0: { column: "customer_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship8"
     table: "payment"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { column: "payment_id" }
+        node9_property0: { column: "payment_id" }
     to:
       node: "node10"
       properties:
-        nodeProperty0: { column: "rental_id" }
+        node10_property0: { column: "rental_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship9"
     table: "payment"
     from:
       node: "node9"
       properties:
-        nodeProperty0: { column: "payment_id" }
+        node9_property0: { column: "payment_id" }
     to:
       node: "node11"
       properties:
-        nodeProperty0: { column: "staff_id" }
+        node11_property0: { column: "staff_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship10"
     table: "rental"
     from:
       node: "node10"
       properties:
-        nodeProperty0: { column: "rental_id" }
+        node10_property0: { column: "rental_id" }
     to:
       node: "node5"
       properties:
-        nodeProperty0: { column: "customer_id" }
+        node5_property0: { column: "customer_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship11"
     table: "rental"
     from:
       node: "node10"
       properties:
-        nodeProperty0: { column: "rental_id" }
+        node10_property0: { column: "rental_id" }
     to:
       node: "node7"
       properties:
-        nodeProperty0: { column: "inventory_id" }
+        node7_property0: { column: "inventory_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship12"
     table: "rental"
     from:
       node: "node10"
       properties:
-        nodeProperty0: { column: "rental_id" }
+        node10_property0: { column: "rental_id" }
     to:
       node: "node11"
       properties:
-        nodeProperty0: { column: "staff_id" }
+        node11_property0: { column: "staff_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship13"
     table: "staff"
     from:
       node: "node11"
       properties:
-        nodeProperty0: { column: "staff_id" }
+        node11_property0: { column: "staff_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { column: "address_id" }
+        node1_property0: { column: "address_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship14"
     table: "store"
     from:
       node: "node12"
       properties:
-        nodeProperty0: { column: "store_id" }
+        node12_property0: { column: "store_id" }
     to:
       node: "node1"
       properties:
-        nodeProperty0: { column: "address_id" }
+        node1_property0: { column: "address_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship15"
     table: "store"
     from:
       node: "node12"
       properties:
-        nodeProperty0: { column: "store_id" }
+        node12_property0: { column: "store_id" }
     to:
       node: "node11"
       properties:
-        nodeProperty0: { column: "manager_staff_id" }
+        node11_property0: { column: "manager_staff_id" }

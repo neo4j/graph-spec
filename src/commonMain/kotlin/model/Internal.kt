@@ -73,7 +73,7 @@ object Internal {
             internaliseProperties(node.constraints, node.properties, node.name ?: key) { type, props ->
                 NodeConstraint(type, node.labels.identifier, props)
             }
-            val propertyRenames = node.properties.identify("nodeProperty", key)
+            val propertyRenames = node.properties.identify("property", key, idParent = key)
             renames.putAll(propertyRenames)
             node.constraints.values.forEach { it.properties.rename(renames, key) }
             node.indexes.values.forEach { it.properties.rename(renames, key) }

@@ -4,75 +4,75 @@ nodes:
     labels:
       identifier: "categories"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "categoryid" }
-      nodeProperty1: { type: "STRING", name: "categoryname" }
-      nodeProperty2: { type: "STRING", name: "description" }
-      nodeProperty3: { type: "STRING", name: "picture" }
+      node0_property0: { type: "INTEGER", name: "categoryid" }
+      node0_property1: { type: "STRING", name: "categoryname" }
+      node0_property2: { type: "STRING", name: "description" }
+      node0_property3: { type: "STRING", name: "picture" }
     constraints:
       node0_constraint0:
         type: "UNIQUE"
         label: "categories"
-        properties: ["nodeProperty0"]
+        properties: ["node0_property0"]
         name: "unique_categories_categoryid"
     indexes:
       node0_index0:
         type: "TEXT"
         labels: ["categories"]
-        properties: ["nodeProperty0"]
+        properties: ["node0_property0"]
         name: "categories"
     name: "categories"
   node1:
     labels:
       identifier: "products"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "productid" }
-      nodeProperty1: { type: "STRING", name: "productname" }
-      nodeProperty2: { type: "STRING", name: "quantityperunit" }
-      nodeProperty3: { type: "FLOAT", name: "unitprice" }
-      nodeProperty4: { type: "INTEGER", name: "unitsinstock" }
-      nodeProperty5: { type: "INTEGER", name: "unitsonorder" }
-      nodeProperty6: { type: "INTEGER", name: "reorderlevel" }
-      nodeProperty7: { type: "INTEGER", name: "discontinued" }
+      node1_property0: { type: "INTEGER", name: "productid" }
+      node1_property1: { type: "STRING", name: "productname" }
+      node1_property2: { type: "STRING", name: "quantityperunit" }
+      node1_property3: { type: "FLOAT", name: "unitprice" }
+      node1_property4: { type: "INTEGER", name: "unitsinstock" }
+      node1_property5: { type: "INTEGER", name: "unitsonorder" }
+      node1_property6: { type: "INTEGER", name: "reorderlevel" }
+      node1_property7: { type: "INTEGER", name: "discontinued" }
     constraints:
       node1_constraint0:
         type: "UNIQUE"
         label: "products"
-        properties: ["nodeProperty0"]
+        properties: ["node1_property0"]
         name: "unique_products_productid"
     indexes:
       node1_index0:
         type: "TEXT"
         labels: ["products"]
-        properties: ["nodeProperty0"]
+        properties: ["node1_property0"]
         name: "products"
     name: "products"
   node2:
     labels:
       identifier: "suppliers"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "supplierid" }
-      nodeProperty1: { type: "STRING", name: "companyname" }
-      nodeProperty2: { type: "STRING", name: "contactname" }
-      nodeProperty3: { type: "STRING", name: "contacttitle" }
-      nodeProperty4: { type: "STRING", name: "address" }
-      nodeProperty5: { type: "STRING", name: "city" }
-      nodeProperty6: { type: "STRING", name: "region" }
-      nodeProperty7: { type: "STRING", name: "postalcode" }
-      nodeProperty8: { type: "STRING", name: "country" }
-      nodeProperty9: { type: "STRING", name: "phone" }
-      nodeProperty10: { type: "STRING", name: "fax" }
-      nodeProperty11: { type: "STRING", name: "homepage" }
+      node2_property0: { type: "INTEGER", name: "supplierid" }
+      node2_property1: { type: "STRING", name: "companyname" }
+      node2_property2: { type: "STRING", name: "contactname" }
+      node2_property3: { type: "STRING", name: "contacttitle" }
+      node2_property4: { type: "STRING", name: "address" }
+      node2_property5: { type: "STRING", name: "city" }
+      node2_property6: { type: "STRING", name: "region" }
+      node2_property7: { type: "STRING", name: "postalcode" }
+      node2_property8: { type: "STRING", name: "country" }
+      node2_property9: { type: "STRING", name: "phone" }
+      node2_property10: { type: "STRING", name: "fax" }
+      node2_property11: { type: "STRING", name: "homepage" }
     constraints:
       node2_constraint0:
         type: "UNIQUE"
         label: "suppliers"
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "unique_suppliers_supplierid"
     indexes:
       node2_index0:
         type: "TEXT"
         labels: ["suppliers"]
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "suppliers"
     name: "suppliers"
 relationships:
@@ -249,63 +249,63 @@ mappings:
     node: "node0"
     table: "categories"
     properties:
-      nodeProperty0: { column: "categoryid" }
-      nodeProperty1: { column: "categoryname" }
-      nodeProperty2: { column: "description" }
-      nodeProperty3: { column: "picture" }
-    key: ["nodeProperty0"]
+      node0_property0: { column: "categoryid" }
+      node0_property1: { column: "categoryname" }
+      node0_property2: { column: "description" }
+      node0_property3: { column: "picture" }
+    key: ["node0_property0"]
   - type: "NODE"
     node: "node1"
     table: "products"
     properties:
-      nodeProperty0: { column: "productid" }
-      nodeProperty1: { column: "productname" }
-      nodeProperty2: { column: "quantityperunit" }
-      nodeProperty3: { column: "unitprice" }
-      nodeProperty4: { column: "unitsinstock" }
-      nodeProperty5: { column: "unitsonorder" }
-      nodeProperty6: { column: "reorderlevel" }
-      nodeProperty7: { column: "discontinued" }
-    key: ["nodeProperty0"]
+      node1_property0: { column: "productid" }
+      node1_property1: { column: "productname" }
+      node1_property2: { column: "quantityperunit" }
+      node1_property3: { column: "unitprice" }
+      node1_property4: { column: "unitsinstock" }
+      node1_property5: { column: "unitsonorder" }
+      node1_property6: { column: "reorderlevel" }
+      node1_property7: { column: "discontinued" }
+    key: ["node1_property0"]
   - type: "NODE"
     node: "node2"
     table: "suppliers"
     properties:
-      nodeProperty0: { column: "supplierid" }
-      nodeProperty1: { column: "companyname" }
-      nodeProperty2: { column: "contactname" }
-      nodeProperty3: { column: "contacttitle" }
-      nodeProperty4: { column: "address" }
-      nodeProperty5: { column: "city" }
-      nodeProperty6: { column: "region" }
-      nodeProperty7: { column: "postalcode" }
-      nodeProperty8: { column: "country" }
-      nodeProperty9: { column: "phone" }
-      nodeProperty10: { column: "fax" }
-      nodeProperty11: { column: "homepage" }
-    key: ["nodeProperty0"]
+      node2_property0: { column: "supplierid" }
+      node2_property1: { column: "companyname" }
+      node2_property2: { column: "contactname" }
+      node2_property3: { column: "contacttitle" }
+      node2_property4: { column: "address" }
+      node2_property5: { column: "city" }
+      node2_property6: { column: "region" }
+      node2_property7: { column: "postalcode" }
+      node2_property8: { column: "country" }
+      node2_property9: { column: "phone" }
+      node2_property10: { column: "fax" }
+      node2_property11: { column: "homepage" }
+    key: ["node2_property0"]
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "products"
     from:
       node: "node1"
       properties:
-        nodeProperty0: { column: "productid" }
+        node1_property0: { column: "productid" }
     to:
       node: "node0"
       properties:
-        nodeProperty0: { column: "categoryid" }
+        node0_property0: { column: "categoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "products"
     from:
       node: "node1"
       properties:
-        nodeProperty0: { column: "productid" }
+        node1_property0: { column: "productid" }
     to:
       node: "node2"
       properties:
-        nodeProperty0: { column: "supplierid" }
+        node2_property0: { column: "supplierid" }
 display:
   nodes:
     node0:
