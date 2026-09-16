@@ -58,7 +58,7 @@ object Internal {
         Pretty.renameNodeMappings(this, renames)
         nodes.forEach { (key, node) ->
             node.constraints.identify("constraint", idParent = key)
-            node.indexes.identify("nodeIndex")
+            node.indexes.identify("index", idParent = key)
         }
         relationships.values.forEach { relationship ->
             relationship.from.node = renames[relationship.from.node] ?: relationship.from.node
@@ -132,7 +132,7 @@ object Internal {
         Pretty.renameRelationshipMappings(this, renames)
         relationships.forEach { (key, relationship) ->
             relationship.constraints.identify("constraint", idParent = key)
-            relationship.indexes.identify("relationshipIndex")
+            relationship.indexes.identify("index", idParent = key)
         }
     }
 

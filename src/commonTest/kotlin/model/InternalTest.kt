@@ -87,8 +87,8 @@ class InternalTest {
         assertTrue(node0.constraints.containsKey("node0_constraint0"))
         assertEquals("c1", node0.constraints["node0_constraint0"]?.name)
 
-        assertTrue(node0.indexes.containsKey("nodeIndex0"))
-        assertEquals("i1", node0.indexes["nodeIndex0"]?.name)
+        assertTrue(node0.indexes.containsKey("node0_index0"))
+        assertEquals("i1", node0.indexes["node0_index0"]?.name)
     }
 
     @Test
@@ -316,5 +316,35 @@ class InternalTest {
 
         val allIds = (node0ConstraintIds + node1ConstraintIds).toList()
         assertEquals(allIds.size, allIds.toSet().size, "Constraint ids must be globally unique across nodes")
+    }
+
+    @Test
+    fun `test produces unique index ids when two nodes share an index key`() {
+        val model = GraphModel(
+            version = "4.0.0",
+            nodes = mutableMapOf(
+                "n:0" to Node(
+                    labels = Labels(identifier = "Patient"),
+                    indexes = mutableMapOf(
+                        "idx" to NodeIndex(IndexType.RANGE, mutableSetOf("Patient"), mutableSetOf("id"))
+                    )
+                ),
+                "n:1" to Node(
+                    labels = Labels(identifier = "Doctor"),
+                    indexes = mutableMapOf(
+                        "idx" to NodeIndex(IndexType.RANGE, mutableSetOf("Doctor"), mutableSetOf("id"))
+                    )
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node0 = model.nodes["node0"]!!
+        val node1 = model.nodes["node1"]!!
+
+        val allIds = (node0.indexes.keys + node1.indexes.keys).toList()
+        assertEquals(allIds.size, allIds.toSet().size, "Index ids must be globally unique across nodes")
     }
 }

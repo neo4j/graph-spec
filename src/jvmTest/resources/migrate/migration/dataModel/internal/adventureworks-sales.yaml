@@ -17,7 +17,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_creditcard_creditcardid"
     indexes:
-      nodeIndex0:
+      node0_index0:
         type: "TEXT"
         labels: ["creditcard"]
         properties: ["nodeProperty0"]
@@ -36,7 +36,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_currency_currencycode"
     indexes:
-      nodeIndex0:
+      node1_index0:
         type: "TEXT"
         labels: ["currency"]
         properties: ["nodeProperty0"]
@@ -58,7 +58,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_currencyrate_currencyrateid"
     indexes:
-      nodeIndex0:
+      node2_index0:
         type: "TEXT"
         labels: ["currencyrate"]
         properties: ["nodeProperty0"]
@@ -78,7 +78,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_customer_customerid"
     indexes:
-      nodeIndex0:
+      node3_index0:
         type: "TEXT"
         labels: ["customer"]
         properties: ["nodeProperty0"]
@@ -109,7 +109,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_salesorderheader_salesorderid"
     indexes:
-      nodeIndex0:
+      node4_index0:
         type: "TEXT"
         labels: ["salesorderheader"]
         properties: ["nodeProperty0"]
@@ -134,7 +134,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_salesperson_businessentityid"
     indexes:
-      nodeIndex0:
+      node5_index0:
         type: "TEXT"
         labels: ["salesperson"]
         properties: ["nodeProperty0"]
@@ -153,7 +153,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_salesreason_salesreasonid"
     indexes:
-      nodeIndex0:
+      node6_index0:
         type: "TEXT"
         labels: ["salesreason"]
         properties: ["nodeProperty0"]
@@ -175,7 +175,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_salestaxrate_salestaxrateid"
     indexes:
-      nodeIndex0:
+      node7_index0:
         type: "TEXT"
         labels: ["salestaxrate"]
         properties: ["nodeProperty0"]
@@ -200,7 +200,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_salesterritory_territoryid"
     indexes:
-      nodeIndex0:
+      node8_index0:
         type: "TEXT"
         labels: ["salesterritory"]
         properties: ["nodeProperty0"]
@@ -222,7 +222,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_shoppingcartitem_shoppingcartitemid"
     indexes:
-      nodeIndex0:
+      node9_index0:
         type: "TEXT"
         labels: ["shoppingcartitem"]
         properties: ["nodeProperty0"]
@@ -250,7 +250,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_specialoffer_specialofferid"
     indexes:
-      nodeIndex0:
+      node10_index0:
         type: "TEXT"
         labels: ["specialoffer"]
         properties: ["nodeProperty0"]
@@ -270,7 +270,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_store_businessentityid"
     indexes:
-      nodeIndex0:
+      node11_index0:
         type: "TEXT"
         labels: ["store"]
         properties: ["nodeProperty0"]

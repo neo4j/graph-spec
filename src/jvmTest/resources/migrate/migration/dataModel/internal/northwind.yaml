@@ -15,7 +15,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_categories_categoryid"
     indexes:
-      nodeIndex0:
+      node0_index0:
         type: "TEXT"
         labels: ["categories"]
         properties: ["nodeProperty0"]
@@ -40,7 +40,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_products_productid"
     indexes:
-      nodeIndex0:
+      node1_index0:
         type: "TEXT"
         labels: ["products"]
         properties: ["nodeProperty0"]
@@ -69,7 +69,7 @@ nodes:
         properties: ["nodeProperty0"]
         name: "unique_suppliers_supplierid"
     indexes:
-      nodeIndex0:
+      node2_index0:
         type: "TEXT"
         labels: ["suppliers"]
         properties: ["nodeProperty0"]
