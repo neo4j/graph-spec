@@ -287,22 +287,22 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "products"
-    from:
+    start_node:
       node: "node1"
       properties:
         nodeProperty0: { column: "productid" }
-    to:
+    end_node:
       node: "node0"
       properties:
         nodeProperty0: { column: "categoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "products"
-    from:
+    start_node:
       node: "node1"
       properties:
         nodeProperty0: { column: "productid" }
-    to:
+    end_node:
       node: "node2"
       properties:
         nodeProperty0: { column: "supplierid" }
