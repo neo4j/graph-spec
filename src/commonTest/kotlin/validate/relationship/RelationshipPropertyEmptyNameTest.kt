@@ -35,8 +35,8 @@ class RelationshipPropertyEmptyNameTest {
     fun `fail when property name is blank`() {
         val rel = Relationship(
             type = "KNOWS",
-            from = target,
-            to = target,
+            start = target,
+            end = target,
             properties = mutableMapOf("p:1" to Property(name = ""))
         )
         val issues = mutableListOf<Issue>()
@@ -51,8 +51,8 @@ class RelationshipPropertyEmptyNameTest {
     fun `fail when property name is null`() {
         val rel = Relationship(
             type = "KNOWS",
-            from = target,
-            to = target,
+            start = target,
+            end = target,
             properties = mutableMapOf("p:1" to Property(name = null))
         )
         val issues = mutableListOf<Issue>()
@@ -67,8 +67,8 @@ class RelationshipPropertyEmptyNameTest {
     fun `pass when property has a valid name`() {
         val rel = Relationship(
             type = "KNOWS",
-            from = target,
-            to = target,
+            start = target,
+            end = target,
             properties = mutableMapOf("p:1" to Property(name = "since"))
         )
         val issues = mutableListOf<Issue>()

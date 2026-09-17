@@ -286,87 +286,87 @@ nodes:
 relationships:
   relationship0:
     type: "RELATED_TO_CITY"
-    from: { node: "node1" }
-    to: { node: "node3" }
+    start: { node: "node1" }
+    end: { node: "node3" }
     name: "RELATED_TO_CITY"
   relationship1:
     type: "RELATED_TO_COUNTRY"
-    from: { node: "node3" }
-    to: { node: "node4" }
+    start: { node: "node3" }
+    end: { node: "node4" }
     name: "RELATED_TO_COUNTRY"
   relationship2:
     type: "RELATED_TO_ADDRESS"
-    from: { node: "node5" }
-    to: { node: "node1" }
+    start: { node: "node5" }
+    end: { node: "node1" }
     name: "RELATED_TO_ADDRESS"
   relationship3:
     type: "RELATED_TO_LANGUAGE"
-    from: { node: "node6" }
-    to: { node: "node8" }
+    start: { node: "node6" }
+    end: { node: "node8" }
     name: "RELATED_TO_LANGUAGE"
   relationship4:
     type: "RELATED_TO_FILM"
-    from: { node: "node0" }
-    to: { node: "node6" }
+    start: { node: "node0" }
+    end: { node: "node6" }
     properties:
       relationshipProperty0: { type: "ZONED DATETIME", name: "last_update" }
     name: "RELATED_TO_FILM"
   relationship5:
     type: "RELATED_TO_FILM"
-    from: { node: "node2" }
-    to: { node: "node6" }
+    start: { node: "node2" }
+    end: { node: "node6" }
     properties:
       relationshipProperty0: { type: "ZONED DATETIME", name: "last_update" }
     name: "RELATED_TO_FILM2"
   relationship6:
     type: "RELATED_TO_FILM"
-    from: { node: "node7" }
-    to: { node: "node6" }
+    start: { node: "node7" }
+    end: { node: "node6" }
     name: "RELATED_TO_FILM3"
   relationship7:
     type: "RELATED_TO_CUSTOMER"
-    from: { node: "node9" }
-    to: { node: "node5" }
+    start: { node: "node9" }
+    end: { node: "node5" }
     name: "RELATED_TO_CUSTOMER"
   relationship8:
     type: "RELATED_TO_RENTAL"
-    from: { node: "node9" }
-    to: { node: "node10" }
+    start: { node: "node9" }
+    end: { node: "node10" }
     name: "RELATED_TO_RENTAL"
   relationship9:
     type: "RELATED_TO_STAFF"
-    from: { node: "node9" }
-    to: { node: "node11" }
+    start: { node: "node9" }
+    end: { node: "node11" }
     name: "RELATED_TO_STAFF"
   relationship10:
     type: "RELATED_TO_CUSTOMER"
-    from: { node: "node10" }
-    to: { node: "node5" }
+    start: { node: "node10" }
+    end: { node: "node5" }
     name: "RELATED_TO_CUSTOMER2"
   relationship11:
     type: "RELATED_TO_INVENTORY"
-    from: { node: "node10" }
-    to: { node: "node7" }
+    start: { node: "node10" }
+    end: { node: "node7" }
     name: "RELATED_TO_INVENTORY"
   relationship12:
     type: "RELATED_TO_STAFF"
-    from: { node: "node10" }
-    to: { node: "node11" }
+    start: { node: "node10" }
+    end: { node: "node11" }
     name: "RELATED_TO_STAFF2"
   relationship13:
     type: "RELATED_TO_ADDRESS"
-    from: { node: "node11" }
-    to: { node: "node1" }
+    start: { node: "node11" }
+    end: { node: "node1" }
     name: "RELATED_TO_ADDRESS2"
   relationship14:
     type: "RELATED_TO_ADDRESS"
-    from: { node: "node12" }
-    to: { node: "node1" }
+    start: { node: "node12" }
+    end: { node: "node1" }
     name: "RELATED_TO_ADDRESS3"
   relationship15:
     type: "RELATED_TO_STAFF"
-    from: { node: "node12" }
-    to: { node: "node11" }
+    start: { node: "node12" }
+    end: { node: "node11" }
     name: "RELATED_TO_STAFF3"
 tables:
   actor:

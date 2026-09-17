@@ -28,14 +28,13 @@ import model.jso
 import model.property.PropertyJs
 import model.property.toClass
 import model.property.toJs
-import model.toMap
 
 @JsExport
 @JsPlainObject
 external interface RelationshipJs {
     var type: String
-    val from: RelationshipTargetJs
-    val to: RelationshipTargetJs
+    val start: RelationshipTargetJs
+    val end: RelationshipTargetJs
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, RelationshipConstraintJs>
     val indexes: Record<String, RelationshipIndexJs>
@@ -47,8 +46,8 @@ external interface RelationshipJs {
 
 fun relationshipJs(
     type: String,
-    from: RelationshipTargetJs = relationshipTargetJs(),
-    to: RelationshipTargetJs = relationshipTargetJs(),
+    start: RelationshipTargetJs = relationshipTargetJs(),
+    end: RelationshipTargetJs = relationshipTargetJs(),
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, RelationshipConstraintJs> = emptyRecord(),
     indexes: Record<String, RelationshipIndexJs> = emptyRecord(),
@@ -58,8 +57,8 @@ fun relationshipJs(
     description: String = ""
 ): RelationshipJs = jso {
     this.type = type
-    this.from = from
-    this.to = to
+    this.start = start
+    this.end = end
     this.properties = properties
     this.constraints = constraints
     this.indexes = indexes
@@ -71,8 +70,8 @@ fun relationshipJs(
 
 fun Relationship.toJs(id: String) = relationshipJs(
     type = type,
-    from = from.toJs(),
-    to = to.toJs(),
+    start = start.toJs(),
+    end = end.toJs(),
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
     indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
@@ -84,8 +83,8 @@ fun Relationship.toJs(id: String) = relationshipJs(
 
 fun RelationshipJs.toClass(id: String) = Relationship(
     type = type,
-    from = from.toClass(),
-    to = to.toClass(),
+    start = start.toClass(),
+    end = end.toClass(),
     properties = properties.associateBy { _, property -> property.toClass("relationships.$id", name) },
     constraints = constraints.associateBy { _, constraint -> constraint.toClass() },
     indexes = indexes.associateBy { _, index -> index.toClass() },

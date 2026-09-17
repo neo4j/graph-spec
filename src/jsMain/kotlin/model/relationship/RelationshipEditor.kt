@@ -43,22 +43,22 @@ class RelationshipEditor {
 
         @JsStatic
         fun setSourceNode(relationship: RelationshipJs, node: String) {
-            RelationshipTargetEditor.setNode(relationship.from, node)
+            RelationshipTargetEditor.setNode(relationship.start, node)
         }
 
         @JsStatic
         fun setSourceLabel(relationship: RelationshipJs, label: String) {
-            RelationshipTargetEditor.setLabel(relationship.from, label)
+            RelationshipTargetEditor.setLabel(relationship.start, label)
         }
 
         @JsStatic
         fun setTargetNode(relationship: RelationshipJs, node: String) {
-            RelationshipTargetEditor.setNode(relationship.to, node)
+            RelationshipTargetEditor.setNode(relationship.end, node)
         }
 
         @JsStatic
         fun setTargetLabel(relationship: RelationshipJs, label: String) {
-            RelationshipTargetEditor.setLabel(relationship.to, label)
+            RelationshipTargetEditor.setLabel(relationship.end, label)
         }
 
         /*

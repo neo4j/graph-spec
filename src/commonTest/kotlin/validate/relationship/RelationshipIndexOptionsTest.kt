@@ -43,8 +43,8 @@ class RelationshipIndexOptionsTest {
 
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = targetDummy,
-            to = targetDummy,
+            start = targetDummy,
+            end = targetDummy,
             properties = mutableMapOf(
                 "roles" to Property(),
                 "year" to Property()
@@ -69,8 +69,8 @@ class RelationshipIndexOptionsTest {
 
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = targetDummy,
-            to = targetDummy,
+            start = targetDummy,
+            end = targetDummy,
             properties = mutableMapOf(
                 "roles" to Property(),
                 "year" to Property()
@@ -95,8 +95,8 @@ class RelationshipIndexOptionsTest {
 
         val relationship = Relationship(
             type = "ACTED_IN",
-            from = targetDummy,
-            to = targetDummy,
+            start = targetDummy,
+            end = targetDummy,
             properties = mutableMapOf(
                 "roles" to Property(),
                 "year" to Property()
@@ -134,8 +134,8 @@ class RelationshipIndexOptionsTest {
 
                 val relationship = Relationship(
                     type = "ACTED_IN",
-                    from = targetDummy,
-                    to = targetDummy,
+                    start = targetDummy,
+                    end = targetDummy,
                     properties = mutableMapOf()
                 )
                 val index = RelationshipIndex(
@@ -165,8 +165,8 @@ class RelationshipIndexOptionsTest {
 
                 val relationship = Relationship(
                     type = "ACTED_IN",
-                    from = targetDummy,
-                    to = targetDummy,
+                    start = targetDummy,
+                    end = targetDummy,
                     properties = mutableMapOf()
                 )
                 val index = RelationshipIndex(

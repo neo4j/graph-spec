@@ -226,53 +226,53 @@ nodes:
 relationships:
   relationship0:
     type: "ARTIST"
-    from: { node: "node0" }
-    to: { node: "node1" }
+    start: { node: "node0" }
+    end: { node: "node1" }
     name: "ARTIST"
   relationship1:
     type: "EMPLOYEE"
-    from: { node: "node2" }
-    to: { node: "node3" }
+    start: { node: "node2" }
+    end: { node: "node3" }
     name: "EMPLOYEE"
   relationship2:
     type: "EMPLOYEE"
-    from: { node: "node3" }
-    to: { node: "node3" }
+    start: { node: "node3" }
+    end: { node: "node3" }
     name: "EMPLOYEE2"
   relationship3:
     type: "CUSTOMER"
-    from: { node: "node5" }
-    to: { node: "node2" }
+    start: { node: "node5" }
+    end: { node: "node2" }
     name: "CUSTOMER"
   relationship4:
     type: "INVOICE"
-    from: { node: "node6" }
-    to: { node: "node5" }
+    start: { node: "node6" }
+    end: { node: "node5" }
     name: "INVOICE"
   relationship5:
     type: "TRACK"
-    from: { node: "node6" }
-    to: { node: "node9" }
+    start: { node: "node6" }
+    end: { node: "node9" }
     name: "TRACK"
   relationship6:
     type: "TRACK"
-    from: { node: "node8" }
-    to: { node: "node9" }
+    start: { node: "node8" }
+    end: { node: "node9" }
     name: "TRACK2"
   relationship7:
     type: "ALBUM"
-    from: { node: "node9" }
-    to: { node: "node0" }
+    start: { node: "node9" }
+    end: { node: "node0" }
     name: "ALBUM"
   relationship8:
     type: "GENRE"
-    from: { node: "node9" }
-    to: { node: "node4" }
+    start: { node: "node9" }
+    end: { node: "node4" }
     name: "GENRE"
   relationship9:
     type: "MEDIA_TYPE"
-    from: { node: "node9" }
-    to: { node: "node7" }
+    start: { node: "node9" }
+    end: { node: "node7" }
     name: "MEDIA_TYPE"
 tables:
   album:

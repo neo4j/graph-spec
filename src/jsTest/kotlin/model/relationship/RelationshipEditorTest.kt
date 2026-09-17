@@ -3,8 +3,6 @@ package model.relationship
 import kotlin.test.*
 import js.objects.recordOf
 import model.GraphModelJs
-import model.extension.StringValue
-import model.extension.toJs
 import model.graphModelJs
 
 class RelationshipEditorTest {
@@ -42,12 +40,12 @@ class RelationshipEditorTest {
 
         // Test Source (from) delegation
         RelationshipEditor.setSourceNode(rel, "Node1")
-        assertEquals("Node1", rel.from.node)
-        assertEquals("", rel.from.label) // RelationshipTargetEditor logic: setting node clears label
+        assertEquals("Node1", rel.start.node)
+        assertEquals("", rel.start.label) // RelationshipTargetEditor logic: setting node clears label
 
         RelationshipEditor.setSourceLabel(rel, "Label1")
-        assertEquals("Label1", rel.from.label)
-        assertEquals("", rel.from.node) // RelationshipTargetEditor logic: setting label clears node
+        assertEquals("Label1", rel.start.label)
+        assertEquals("", rel.start.node) // RelationshipTargetEditor logic: setting label clears node
 
     }
 

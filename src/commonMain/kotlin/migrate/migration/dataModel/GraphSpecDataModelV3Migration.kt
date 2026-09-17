@@ -136,8 +136,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val toNode = mapping.map("end_node").string("node")
         return relationships.entries.firstOrNull { (key, rel) ->
             key == id &&
-                rel.map("from").string("node") == fromNode &&
-                rel.map("to").string("node") == toNode
+                rel.map("start").string("node") == fromNode &&
+                rel.map("end").string("node") == toNode
         }?.key
     }
 
@@ -173,8 +173,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 schemaMapOf(
                     "\$id" to relId,
                     "type" to refOf(typeId),
-                    "from" to refOf(rel.map("from").string("node")),
-                    "to" to refOf(rel.map("to").string("node")),
+                    "from" to refOf(rel.map("start").string("node")),
+                    "to" to refOf(rel.map("end").string("node")),
                     "description" to rel.literalOrNull("description")
                 )
             )
