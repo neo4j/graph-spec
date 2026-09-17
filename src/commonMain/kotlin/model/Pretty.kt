@@ -97,10 +97,6 @@ object Pretty {
         model.mappings.filterIsInstance<NodeMapping>().forEach { mapping ->
             mapping.node = renames[mapping.node] ?: mapping.node
         }
-        model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
-            mapping.startNode.node = renames[mapping.startNode.node] ?: mapping.startNode.node
-            mapping.endNode.node = renames[mapping.endNode.node] ?: mapping.endNode.node
-        }
     }
 
     private fun GraphModel.prettifyNodeProperties() {
@@ -157,10 +153,12 @@ object Pretty {
             mapping.key.rename(renames, mapping.node)
         }
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
-            mapping.startNode.properties.rename(renames, mapping.startNode.node)
-            mapping.endNode.properties.rename(renames, mapping.endNode.node)
-            mapping.key.rename(renames, mapping.startNode.node)
-            mapping.key.rename(renames, mapping.endNode.node)
+            val rel = model.relationships[mapping.relationship]
+                ?: throw IllegalArgumentException("No relationship '${mapping.relationship}' found for mapping.")
+            mapping.startNode.properties.rename(renames, rel.start.node)
+            mapping.endNode.properties.rename(renames, rel.end.node)
+            mapping.key.rename(renames, rel.start.node)
+            mapping.key.rename(renames, rel.end.node)
         }
     }
 

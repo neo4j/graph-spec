@@ -27,9 +27,9 @@ data class RelationshipMapping(
     var relationship: String,
     var table: String,
     @SerialName("start_node")
-    val startNode: TargetMapping,
+    val startNode: TargetMapping = TargetMapping(),
     @SerialName("end_node")
-    val endNode: TargetMapping,
+    val endNode: TargetMapping = TargetMapping(),
     var matchLabel: String? = null,
     val properties: MutableMap<String, PropertyMapping> = mutableMapOf(),
     var mode: MappingMode = MappingMode.MERGE,

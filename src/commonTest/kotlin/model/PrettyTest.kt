@@ -126,7 +126,7 @@ class PrettyTest {
                 "relationship0" to Relationship(
                     name = "FRIENDS_WITH",
                     type = "KNOWS",
-                    start = RelationshipTarget(),
+                    start = RelationshipTarget(node = "node0"),
                     end = RelationshipTarget(),
                     properties = mutableMapOf("relationshipProperty0" to Property(name = "since"))
                 )
@@ -136,12 +136,9 @@ class PrettyTest {
                     relationship = "relationship0",
                     table = "friends_table",
                     startNode = TargetMapping(
-                        node = "node0",
                         properties = mutableMapOf("nodeProperty0" to PropertyMapping("from_age"))
                     ),
-                    endNode = TargetMapping(
-                        node = "node0"
-                    ),
+                    endNode = TargetMapping(),
                     properties = mutableMapOf(
                         "relationshipProperty0" to PropertyMapping("friends_since")
                     )
@@ -163,13 +160,11 @@ class PrettyTest {
         // Assert Mappings Deep Translation
         val relMapping = internalModel.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("FRIENDS_WITH", relMapping.relationship)
-        assertEquals("Person", relMapping.startNode.node)
         assertTrue(
             relMapping.startNode.properties.containsKey("age"),
             "From Target property should revert to human readable"
         )
         assertTrue(relMapping.properties.containsKey("since"), "Relationship property should revert to human readable")
-        assertEquals("Person", relMapping.endNode.node)
     }
 
     @Test
