@@ -4,185 +4,185 @@ nodes:
     labels:
       identifier: "Comment"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "creationDate" }
-      nodeProperty1: { type: "INTEGER", name: "deletionDate" }
-      nodeProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
-      nodeProperty3: { type: "INTEGER", name: "id" }
-      nodeProperty4: { type: "STRING", name: "locationIP" }
-      nodeProperty5: { type: "STRING", name: "browserUsed" }
-      nodeProperty6: { type: "STRING", name: "content" }
-      nodeProperty7: { type: "INTEGER", name: "length" }
+      node0_property0: { type: "INTEGER", name: "creationDate" }
+      node0_property1: { type: "INTEGER", name: "deletionDate" }
+      node0_property2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      node0_property3: { type: "INTEGER", name: "id" }
+      node0_property4: { type: "STRING", name: "locationIP" }
+      node0_property5: { type: "STRING", name: "browserUsed" }
+      node0_property6: { type: "STRING", name: "content" }
+      node0_property7: { type: "INTEGER", name: "length" }
     constraints:
-      nodeConstraint0:
+      node0_constraint0:
         type: "UNIQUE"
         label: "Comment"
-        properties: ["nodeProperty3"]
+        properties: ["node0_property3"]
         name: "unique_Comment_id"
     indexes:
-      nodeIndex0:
+      node0_index0:
         type: "TEXT"
         labels: ["Comment"]
-        properties: ["nodeProperty3"]
+        properties: ["node0_property3"]
         name: "Comment"
     name: "Comment"
   node1:
     labels:
       identifier: "Forum"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "creationDate" }
-      nodeProperty1: { type: "INTEGER", name: "deletionDate" }
-      nodeProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
-      nodeProperty3: { type: "INTEGER", name: "id" }
-      nodeProperty4: { type: "STRING", name: "title" }
+      node1_property0: { type: "INTEGER", name: "creationDate" }
+      node1_property1: { type: "INTEGER", name: "deletionDate" }
+      node1_property2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      node1_property3: { type: "INTEGER", name: "id" }
+      node1_property4: { type: "STRING", name: "title" }
     constraints:
-      nodeConstraint0:
+      node1_constraint0:
         type: "UNIQUE"
         label: "Forum"
-        properties: ["nodeProperty3"]
+        properties: ["node1_property3"]
         name: "unique_Forum_id"
     indexes:
-      nodeIndex0:
+      node1_index0:
         type: "TEXT"
         labels: ["Forum"]
-        properties: ["nodeProperty3"]
+        properties: ["node1_property3"]
         name: "Forum"
     name: "Forum"
   node2:
     labels:
       identifier: "Organisation"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "id" }
-      nodeProperty1: { type: "STRING", name: "type" }
-      nodeProperty2: { type: "STRING", name: "name" }
-      nodeProperty3: { type: "STRING", name: "url" }
+      node2_property0: { type: "INTEGER", name: "id" }
+      node2_property1: { type: "STRING", name: "type" }
+      node2_property2: { type: "STRING", name: "name" }
+      node2_property3: { type: "STRING", name: "url" }
     constraints:
-      nodeConstraint0:
+      node2_constraint0:
         type: "UNIQUE"
         label: "Organisation"
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "unique_Organisation_id"
     indexes:
-      nodeIndex0:
+      node2_index0:
         type: "TEXT"
         labels: ["Organisation"]
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "Organisation"
     name: "Organisation"
   node3:
     labels:
       identifier: "Person"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "creationDate" }
-      nodeProperty1: { type: "INTEGER", name: "deletionDate" }
-      nodeProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
-      nodeProperty3: { type: "INTEGER", name: "id" }
-      nodeProperty4: { type: "STRING", name: "firstName" }
-      nodeProperty5: { type: "STRING", name: "lastName" }
-      nodeProperty6: { type: "STRING", name: "gender" }
-      nodeProperty7: { type: "INTEGER", name: "birthday" }
-      nodeProperty8: { type: "STRING", name: "locationIP" }
-      nodeProperty9: { type: "STRING", name: "browserUsed" }
-      nodeProperty10: { type: "STRING", name: "language" }
-      nodeProperty11: { type: "STRING", name: "email" }
+      node3_property0: { type: "INTEGER", name: "creationDate" }
+      node3_property1: { type: "INTEGER", name: "deletionDate" }
+      node3_property2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      node3_property3: { type: "INTEGER", name: "id" }
+      node3_property4: { type: "STRING", name: "firstName" }
+      node3_property5: { type: "STRING", name: "lastName" }
+      node3_property6: { type: "STRING", name: "gender" }
+      node3_property7: { type: "INTEGER", name: "birthday" }
+      node3_property8: { type: "STRING", name: "locationIP" }
+      node3_property9: { type: "STRING", name: "browserUsed" }
+      node3_property10: { type: "STRING", name: "language" }
+      node3_property11: { type: "STRING", name: "email" }
     constraints:
-      nodeConstraint0:
+      node3_constraint0:
         type: "UNIQUE"
         label: "Person"
-        properties: ["nodeProperty3"]
+        properties: ["node3_property3"]
         name: "unique_Person_id"
     indexes:
-      nodeIndex0:
+      node3_index0:
         type: "TEXT"
         labels: ["Person"]
-        properties: ["nodeProperty3"]
+        properties: ["node3_property3"]
         name: "Person"
     name: "Person"
   node4:
     labels:
       identifier: "Place"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "id" }
-      nodeProperty1: { type: "STRING", name: "name" }
-      nodeProperty2: { type: "STRING", name: "url" }
-      nodeProperty3: { type: "STRING", name: "type" }
+      node4_property0: { type: "INTEGER", name: "id" }
+      node4_property1: { type: "STRING", name: "name" }
+      node4_property2: { type: "STRING", name: "url" }
+      node4_property3: { type: "STRING", name: "type" }
     constraints:
-      nodeConstraint0:
+      node4_constraint0:
         type: "UNIQUE"
         label: "Place"
-        properties: ["nodeProperty0"]
+        properties: ["node4_property0"]
         name: "unique_Place_id"
     indexes:
-      nodeIndex0:
+      node4_index0:
         type: "TEXT"
         labels: ["Place"]
-        properties: ["nodeProperty0"]
+        properties: ["node4_property0"]
         name: "Place"
     name: "Place"
   node5:
     labels:
       identifier: "Post"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "creationDate" }
-      nodeProperty1: { type: "INTEGER", name: "deletionDate" }
-      nodeProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
-      nodeProperty3: { type: "INTEGER", name: "id" }
-      nodeProperty4: { type: "STRING", name: "imageFile" }
-      nodeProperty5: { type: "STRING", name: "locationIP" }
-      nodeProperty6: { type: "STRING", name: "browserUsed" }
-      nodeProperty7: { type: "STRING", name: "language" }
-      nodeProperty8: { type: "STRING", name: "content" }
-      nodeProperty9: { type: "INTEGER", name: "length" }
+      node5_property0: { type: "INTEGER", name: "creationDate" }
+      node5_property1: { type: "INTEGER", name: "deletionDate" }
+      node5_property2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      node5_property3: { type: "INTEGER", name: "id" }
+      node5_property4: { type: "STRING", name: "imageFile" }
+      node5_property5: { type: "STRING", name: "locationIP" }
+      node5_property6: { type: "STRING", name: "browserUsed" }
+      node5_property7: { type: "STRING", name: "language" }
+      node5_property8: { type: "STRING", name: "content" }
+      node5_property9: { type: "INTEGER", name: "length" }
     constraints:
-      nodeConstraint0:
+      node5_constraint0:
         type: "UNIQUE"
         label: "Post"
-        properties: ["nodeProperty3"]
+        properties: ["node5_property3"]
         name: "unique_Post_id"
     indexes:
-      nodeIndex0:
+      node5_index0:
         type: "TEXT"
         labels: ["Post"]
-        properties: ["nodeProperty3"]
+        properties: ["node5_property3"]
         name: "Post"
     name: "Post"
   node6:
     labels:
       identifier: "Tag"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "id" }
-      nodeProperty1: { type: "STRING", name: "name" }
-      nodeProperty2: { type: "STRING", name: "url" }
+      node6_property0: { type: "INTEGER", name: "id" }
+      node6_property1: { type: "STRING", name: "name" }
+      node6_property2: { type: "STRING", name: "url" }
     constraints:
-      nodeConstraint0:
+      node6_constraint0:
         type: "UNIQUE"
         label: "Tag"
-        properties: ["nodeProperty0"]
+        properties: ["node6_property0"]
         name: "unique_Tag_id"
     indexes:
-      nodeIndex0:
+      node6_index0:
         type: "TEXT"
         labels: ["Tag"]
-        properties: ["nodeProperty0"]
+        properties: ["node6_property0"]
         name: "Tag"
     name: "Tag"
   node7:
     labels:
       identifier: "TagClass"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "id" }
-      nodeProperty1: { type: "STRING", name: "name" }
-      nodeProperty2: { type: "STRING", name: "url" }
+      node7_property0: { type: "INTEGER", name: "id" }
+      node7_property1: { type: "STRING", name: "name" }
+      node7_property2: { type: "STRING", name: "url" }
     constraints:
-      nodeConstraint0:
+      node7_constraint0:
         type: "UNIQUE"
         label: "TagClass"
-        properties: ["nodeProperty0"]
+        properties: ["node7_property0"]
         name: "unique_TagClass_id"
     indexes:
-      nodeIndex0:
+      node7_index0:
         type: "TEXT"
         labels: ["TagClass"]
-        properties: ["nodeProperty0"]
+        properties: ["node7_property0"]
         name: "TagClass"
     name: "TagClass"
 relationships:
@@ -211,8 +211,8 @@ relationships:
     start: { node: "node0" }
     end: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationship4_property0: { type: "INTEGER", name: "creationDate" }
+      relationship4_property1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG"
   relationship5:
     type: "MODERATED_BY"
@@ -224,17 +224,17 @@ relationships:
     start: { node: "node3" }
     end: { node: "node1" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
-      relationshipProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      relationship6_property0: { type: "INTEGER", name: "creationDate" }
+      relationship6_property1: { type: "INTEGER", name: "deletionDate" }
+      relationship6_property2: { type: "BOOLEAN", name: "explicitlyDeleted" }
     name: "MEMBER_OF"
   relationship7:
     type: "HAS_TAG"
     start: { node: "node1" }
     end: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationship7_property0: { type: "INTEGER", name: "creationDate" }
+      relationship7_property1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG2"
   relationship8:
     type: "LOCATED_IN"
@@ -251,53 +251,53 @@ relationships:
     start: { node: "node3" }
     end: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationship10_property0: { type: "INTEGER", name: "creationDate" }
+      relationship10_property1: { type: "INTEGER", name: "deletionDate" }
     name: "INTERESTED_IN"
   relationship11:
     type: "KNOWS"
     start: { node: "node3" }
     end: { node: "node3" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
-      relationshipProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      relationship11_property0: { type: "INTEGER", name: "creationDate" }
+      relationship11_property1: { type: "INTEGER", name: "deletionDate" }
+      relationship11_property2: { type: "BOOLEAN", name: "explicitlyDeleted" }
     name: "KNOWS"
   relationship12:
     type: "LIKED"
     start: { node: "node3" }
     end: { node: "node0" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
-      relationshipProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      relationship12_property0: { type: "INTEGER", name: "creationDate" }
+      relationship12_property1: { type: "INTEGER", name: "deletionDate" }
+      relationship12_property2: { type: "BOOLEAN", name: "explicitlyDeleted" }
     name: "LIKED"
   relationship13:
     type: "LIKED"
     start: { node: "node3" }
     end: { node: "node5" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
-      relationshipProperty2: { type: "BOOLEAN", name: "explicitlyDeleted" }
+      relationship13_property0: { type: "INTEGER", name: "creationDate" }
+      relationship13_property1: { type: "INTEGER", name: "deletionDate" }
+      relationship13_property2: { type: "BOOLEAN", name: "explicitlyDeleted" }
     name: "LIKED2"
   relationship14:
     type: "STUDIES_AT"
     start: { node: "node3" }
     end: { node: "node2" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
-      relationshipProperty2: { type: "INTEGER", name: "classYear" }
+      relationship14_property0: { type: "INTEGER", name: "creationDate" }
+      relationship14_property1: { type: "INTEGER", name: "deletionDate" }
+      relationship14_property2: { type: "INTEGER", name: "classYear" }
     name: "STUDIES_AT"
   relationship15:
     type: "WORKS_AT"
     start: { node: "node3" }
     end: { node: "node2" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
-      relationshipProperty2: { type: "INTEGER", name: "workFrom" }
+      relationship15_property0: { type: "INTEGER", name: "creationDate" }
+      relationship15_property1: { type: "INTEGER", name: "deletionDate" }
+      relationship15_property2: { type: "INTEGER", name: "workFrom" }
     name: "WORKS_AT"
   relationship16:
     type: "IS_SIMILAR_TO"
@@ -324,8 +324,8 @@ relationships:
     start: { node: "node5" }
     end: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "INTEGER", name: "creationDate" }
-      relationshipProperty1: { type: "INTEGER", name: "deletionDate" }
+      relationship20_property0: { type: "INTEGER", name: "creationDate" }
+      relationship20_property1: { type: "INTEGER", name: "deletionDate" }
     name: "HAS_TAG3"
   relationship21:
     type: "HAS_CLASS"
@@ -829,378 +829,378 @@ mappings:
     node: "node0"
     table: "Comment"
     properties:
-      nodeProperty0: { column: "creationDate" }
-      nodeProperty1: { column: "deletionDate" }
-      nodeProperty2: { column: "explicitlyDeleted" }
-      nodeProperty3: { column: "id" }
-      nodeProperty4: { column: "locationIP" }
-      nodeProperty5: { column: "browserUsed" }
-      nodeProperty6: { column: "content" }
-      nodeProperty7: { column: "length" }
-    key: ["nodeProperty3"]
+      node0_property0: { column: "creationDate" }
+      node0_property1: { column: "deletionDate" }
+      node0_property2: { column: "explicitlyDeleted" }
+      node0_property3: { column: "id" }
+      node0_property4: { column: "locationIP" }
+      node0_property5: { column: "browserUsed" }
+      node0_property6: { column: "content" }
+      node0_property7: { column: "length" }
+    key: ["node0_property3"]
   - type: "NODE"
     node: "node1"
     table: "Forum"
     properties:
-      nodeProperty0: { column: "creationDate" }
-      nodeProperty1: { column: "deletionDate" }
-      nodeProperty2: { column: "explicitlyDeleted" }
-      nodeProperty3: { column: "id" }
-      nodeProperty4: { column: "title" }
-    key: ["nodeProperty3"]
+      node1_property0: { column: "creationDate" }
+      node1_property1: { column: "deletionDate" }
+      node1_property2: { column: "explicitlyDeleted" }
+      node1_property3: { column: "id" }
+      node1_property4: { column: "title" }
+    key: ["node1_property3"]
   - type: "NODE"
     node: "node2"
     table: "Organisation"
     properties:
-      nodeProperty0: { column: "id" }
-      nodeProperty1: { column: "type" }
-      nodeProperty2: { column: "name" }
-      nodeProperty3: { column: "url" }
-    key: ["nodeProperty0"]
+      node2_property0: { column: "id" }
+      node2_property1: { column: "type" }
+      node2_property2: { column: "name" }
+      node2_property3: { column: "url" }
+    key: ["node2_property0"]
   - type: "NODE"
     node: "node3"
     table: "Person"
     properties:
-      nodeProperty0: { column: "creationDate" }
-      nodeProperty1: { column: "deletionDate" }
-      nodeProperty2: { column: "explicitlyDeleted" }
-      nodeProperty3: { column: "id" }
-      nodeProperty4: { column: "firstName" }
-      nodeProperty5: { column: "lastName" }
-      nodeProperty6: { column: "gender" }
-      nodeProperty7: { column: "birthday" }
-      nodeProperty8: { column: "locationIP" }
-      nodeProperty9: { column: "browserUsed" }
-      nodeProperty10: { column: "language" }
-      nodeProperty11: { column: "email" }
-    key: ["nodeProperty3"]
+      node3_property0: { column: "creationDate" }
+      node3_property1: { column: "deletionDate" }
+      node3_property2: { column: "explicitlyDeleted" }
+      node3_property3: { column: "id" }
+      node3_property4: { column: "firstName" }
+      node3_property5: { column: "lastName" }
+      node3_property6: { column: "gender" }
+      node3_property7: { column: "birthday" }
+      node3_property8: { column: "locationIP" }
+      node3_property9: { column: "browserUsed" }
+      node3_property10: { column: "language" }
+      node3_property11: { column: "email" }
+    key: ["node3_property3"]
   - type: "NODE"
     node: "node4"
     table: "Place"
     properties:
-      nodeProperty0: { column: "id" }
-      nodeProperty1: { column: "name" }
-      nodeProperty2: { column: "url" }
-      nodeProperty3: { column: "type" }
-    key: ["nodeProperty0"]
+      node4_property0: { column: "id" }
+      node4_property1: { column: "name" }
+      node4_property2: { column: "url" }
+      node4_property3: { column: "type" }
+    key: ["node4_property0"]
   - type: "NODE"
     node: "node5"
     table: "Post"
     properties:
-      nodeProperty0: { column: "creationDate" }
-      nodeProperty1: { column: "deletionDate" }
-      nodeProperty2: { column: "explicitlyDeleted" }
-      nodeProperty3: { column: "id" }
-      nodeProperty4: { column: "imageFile" }
-      nodeProperty5: { column: "locationIP" }
-      nodeProperty6: { column: "browserUsed" }
-      nodeProperty7: { column: "language" }
-      nodeProperty8: { column: "content" }
-      nodeProperty9: { column: "length" }
-    key: ["nodeProperty3"]
+      node5_property0: { column: "creationDate" }
+      node5_property1: { column: "deletionDate" }
+      node5_property2: { column: "explicitlyDeleted" }
+      node5_property3: { column: "id" }
+      node5_property4: { column: "imageFile" }
+      node5_property5: { column: "locationIP" }
+      node5_property6: { column: "browserUsed" }
+      node5_property7: { column: "language" }
+      node5_property8: { column: "content" }
+      node5_property9: { column: "length" }
+    key: ["node5_property3"]
   - type: "NODE"
     node: "node6"
     table: "Tag"
     properties:
-      nodeProperty0: { column: "id" }
-      nodeProperty1: { column: "name" }
-      nodeProperty2: { column: "url" }
-    key: ["nodeProperty0"]
+      node6_property0: { column: "id" }
+      node6_property1: { column: "name" }
+      node6_property2: { column: "url" }
+    key: ["node6_property0"]
   - type: "NODE"
     node: "node7"
     table: "TagClass"
     properties:
-      nodeProperty0: { column: "id" }
-      nodeProperty1: { column: "name" }
-      nodeProperty2: { column: "url" }
-    key: ["nodeProperty0"]
+      node7_property0: { column: "id" }
+      node7_property1: { column: "name" }
+      node7_property2: { column: "url" }
+    key: ["node7_property0"]
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "Comment"
     start_node:
       node: "node0"
       properties:
-        nodeProperty3: { column: "id" }
+        node0_property3: { column: "id" }
     end_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "CreatorPersonId" }
+        node3_property3: { column: "CreatorPersonId" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "Comment"
     start_node:
       node: "node0"
       properties:
-        nodeProperty3: { column: "id" }
+        node0_property3: { column: "id" }
     end_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "LocationCountryId" }
+        node4_property0: { column: "LocationCountryId" }
   - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "Comment"
     start_node:
       node: "node0"
       properties:
-        nodeProperty3: { column: "id" }
+        node0_property3: { column: "id" }
     end_node:
       node: "node5"
       properties:
-        nodeProperty3: { column: "ParentPostId" }
+        node5_property3: { column: "ParentPostId" }
   - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "Comment"
     start_node:
       node: "node0"
       properties:
-        nodeProperty3: { column: "id" }
+        node0_property3: { column: "id" }
     end_node:
       node: "node0"
       properties:
-        nodeProperty3: { column: "ParentCommentId" }
+        node0_property3: { column: "ParentCommentId" }
   - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "CommentHasTag"
     start_node:
       node: "node0"
       properties:
-        nodeProperty3: { column: "CommentId" }
+        node0_property3: { column: "CommentId" }
     end_node:
       node: "node6"
       properties:
-        nodeProperty0: { column: "TagId" }
+        node6_property0: { column: "TagId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
-    key: ["nodeProperty0"]
+      relationship4_property0: { column: "creationDate" }
+      relationship4_property1: { column: "deletionDate" }
+    key: ["node0_property0"]
   - type: "RELATIONSHIP"
     relationship: "relationship5"
     table: "Forum"
     start_node:
       node: "node1"
       properties:
-        nodeProperty3: { column: "id" }
+        node1_property3: { column: "id" }
     end_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "ModeratorPersonId" }
+        node3_property3: { column: "ModeratorPersonId" }
   - type: "RELATIONSHIP"
     relationship: "relationship6"
     table: "ForumHasMember"
     start_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "PersonId" }
+        node3_property3: { column: "PersonId" }
     end_node:
       node: "node1"
       properties:
-        nodeProperty3: { column: "ForumId" }
+        node1_property3: { column: "ForumId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
-      relationshipProperty2: { column: "explicitlyDeleted" }
+      relationship6_property0: { column: "creationDate" }
+      relationship6_property1: { column: "deletionDate" }
+      relationship6_property2: { column: "explicitlyDeleted" }
   - type: "RELATIONSHIP"
     relationship: "relationship7"
     table: "ForumHasTag"
     start_node:
       node: "node1"
       properties:
-        nodeProperty3: { column: "ForumId" }
+        node1_property3: { column: "ForumId" }
     end_node:
       node: "node6"
       properties:
-        nodeProperty0: { column: "TagId" }
+        node6_property0: { column: "TagId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
+      relationship7_property0: { column: "creationDate" }
+      relationship7_property1: { column: "deletionDate" }
   - type: "RELATIONSHIP"
     relationship: "relationship8"
     table: "Organisation"
     start_node:
       node: "node2"
       properties:
-        nodeProperty0: { column: "id" }
+        node2_property0: { column: "id" }
     end_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "LocationPlaceId" }
+        node4_property0: { column: "LocationPlaceId" }
   - type: "RELATIONSHIP"
     relationship: "relationship9"
     table: "Person"
     start_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "id" }
+        node3_property3: { column: "id" }
     end_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "LocationCityId" }
+        node4_property0: { column: "LocationCityId" }
   - type: "RELATIONSHIP"
     relationship: "relationship10"
     table: "PersonHasInterest"
     start_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "PersonId" }
+        node3_property3: { column: "PersonId" }
     end_node:
       node: "node6"
       properties:
-        nodeProperty0: { column: "TagId" }
+        node6_property0: { column: "TagId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
+      relationship10_property0: { column: "creationDate" }
+      relationship10_property1: { column: "deletionDate" }
   - type: "RELATIONSHIP"
     relationship: "relationship11"
     table: "PersonKnowsPerson"
     start_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "Person1Id" }
+        node3_property3: { column: "Person1Id" }
     end_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "Person2Id" }
+        node3_property3: { column: "Person2Id" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
-      relationshipProperty2: { column: "explicitlyDeleted" }
+      relationship11_property0: { column: "creationDate" }
+      relationship11_property1: { column: "deletionDate" }
+      relationship11_property2: { column: "explicitlyDeleted" }
   - type: "RELATIONSHIP"
     relationship: "relationship12"
     table: "PersonLikesComment"
     start_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "PersonId" }
+        node3_property3: { column: "PersonId" }
     end_node:
       node: "node0"
       properties:
-        nodeProperty3: { column: "CommentId" }
+        node0_property3: { column: "CommentId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
-      relationshipProperty2: { column: "explicitlyDeleted" }
+      relationship12_property0: { column: "creationDate" }
+      relationship12_property1: { column: "deletionDate" }
+      relationship12_property2: { column: "explicitlyDeleted" }
   - type: "RELATIONSHIP"
     relationship: "relationship13"
     table: "PersonLikesPost"
     start_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "PersonId" }
+        node3_property3: { column: "PersonId" }
     end_node:
       node: "node5"
       properties:
-        nodeProperty3: { column: "PostId" }
+        node5_property3: { column: "PostId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
-      relationshipProperty2: { column: "explicitlyDeleted" }
+      relationship13_property0: { column: "creationDate" }
+      relationship13_property1: { column: "deletionDate" }
+      relationship13_property2: { column: "explicitlyDeleted" }
   - type: "RELATIONSHIP"
     relationship: "relationship14"
     table: "PersonStudiesAt"
     start_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "PersonId" }
+        node3_property3: { column: "PersonId" }
     end_node:
       node: "node2"
       properties:
-        nodeProperty0: { column: "UniversityId" }
+        node2_property0: { column: "UniversityId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
-      relationshipProperty2: { column: "classYear" }
+      relationship14_property0: { column: "creationDate" }
+      relationship14_property1: { column: "deletionDate" }
+      relationship14_property2: { column: "classYear" }
   - type: "RELATIONSHIP"
     relationship: "relationship15"
     table: "PersonWorksAt"
     start_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "PersonId" }
+        node3_property3: { column: "PersonId" }
     end_node:
       node: "node2"
       properties:
-        nodeProperty0: { column: "CompanyId" }
+        node2_property0: { column: "CompanyId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
-      relationshipProperty2: { column: "workFrom" }
+      relationship15_property0: { column: "creationDate" }
+      relationship15_property1: { column: "deletionDate" }
+      relationship15_property2: { column: "workFrom" }
   - type: "RELATIONSHIP"
     relationship: "relationship16"
     table: "Place"
     start_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "id" }
+        node4_property0: { column: "id" }
     end_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "PartOfPlaceId" }
+        node4_property0: { column: "PartOfPlaceId" }
   - type: "RELATIONSHIP"
     relationship: "relationship17"
     table: "Post"
     start_node:
       node: "node5"
       properties:
-        nodeProperty3: { column: "id" }
+        node5_property3: { column: "id" }
     end_node:
       node: "node3"
       properties:
-        nodeProperty3: { column: "CreatorPersonId" }
+        node3_property3: { column: "CreatorPersonId" }
   - type: "RELATIONSHIP"
     relationship: "relationship18"
     table: "Post"
     start_node:
       node: "node5"
       properties:
-        nodeProperty3: { column: "id" }
+        node5_property3: { column: "id" }
     end_node:
       node: "node1"
       properties:
-        nodeProperty3: { column: "ContainerForumId" }
+        node1_property3: { column: "ContainerForumId" }
   - type: "RELATIONSHIP"
     relationship: "relationship19"
     table: "Post"
     start_node:
       node: "node5"
       properties:
-        nodeProperty3: { column: "id" }
+        node5_property3: { column: "id" }
     end_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "LocationCountryId" }
+        node4_property0: { column: "LocationCountryId" }
   - type: "RELATIONSHIP"
     relationship: "relationship20"
     table: "PostHasTag"
     start_node:
       node: "node5"
       properties:
-        nodeProperty3: { column: "PostId" }
+        node5_property3: { column: "PostId" }
     end_node:
       node: "node6"
       properties:
-        nodeProperty0: { column: "TagId" }
+        node6_property0: { column: "TagId" }
     properties:
-      relationshipProperty0: { column: "creationDate" }
-      relationshipProperty1: { column: "deletionDate" }
+      relationship20_property0: { column: "creationDate" }
+      relationship20_property1: { column: "deletionDate" }
   - type: "RELATIONSHIP"
     relationship: "relationship21"
     table: "Tag"
     start_node:
       node: "node6"
       properties:
-        nodeProperty0: { column: "id" }
+        node6_property0: { column: "id" }
     end_node:
       node: "node7"
       properties:
-        nodeProperty0: { column: "TypeTagClassId" }
+        node7_property0: { column: "TypeTagClassId" }
   - type: "RELATIONSHIP"
     relationship: "relationship22"
     table: "TagClass"
     start_node:
       node: "node7"
       properties:
-        nodeProperty0: { column: "id" }
+        node7_property0: { column: "id" }
     end_node:
       node: "node7"
       properties:
-        nodeProperty0: { column: "SubclassOfTagClassId" }
+        node7_property0: { column: "SubclassOfTagClassId" }
