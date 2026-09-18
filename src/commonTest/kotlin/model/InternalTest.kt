@@ -189,7 +189,7 @@ class InternalTest {
         val property = node.properties["node0_property0"]!!
         assertNull(property.key, "Key flag should be cleared from the property")
 
-        val constraint = node.constraints["key_User_id"]
+        val constraint = node.constraints["node0_constraint0"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
         assertEquals("User", constraint.label, "Constraint should reference the node's label")
@@ -214,7 +214,7 @@ class InternalTest {
         val property = node.properties["node0_property0"]!!
         assertNull(property.unique, "Unique flag should be cleared from the property")
 
-        val constraint = node.constraints["unique_User_email"]
+        val constraint = node.constraints["node0_constraint0"]
         assertNotNull(constraint, "A unique constraint should be generated for the property")
         assertEquals(ConstraintType.UNIQUE, constraint.type)
         assertEquals(mutableSetOf("node0_property0"), constraint.properties)
@@ -238,7 +238,7 @@ class InternalTest {
         val property = node.properties["node0_property0"]!!
         assertNull(property.mustExist, "MustExist flag should be cleared from the property")
 
-        val constraint = node.constraints["exists_User_email"]
+        val constraint = node.constraints["node0_constraint0"]
         assertNotNull(constraint, "An exists constraint should be generated for the property")
         assertEquals(ConstraintType.EXISTS, constraint.type)
         assertEquals(mutableSetOf("node0_property0"), constraint.properties)
@@ -265,7 +265,7 @@ class InternalTest {
         val property = relationship.properties["relationship0_property0"]!!
         assertNull(property.key, "Key flag should be cleared from the property")
 
-        val constraint: RelationshipConstraint? = relationship.constraints["key_KNOWS_since"]
+        val constraint: RelationshipConstraint? = relationship.constraints["relationship0_constraint0"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
         assertEquals(mutableSetOf("relationship0_property0"), constraint.properties)
