@@ -309,14 +309,14 @@ relationships:
     start: { node: "node0" }
     end: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "ZONED DATETIME", name: "last_update" }
+      relationship4_property0: { type: "ZONED DATETIME", name: "last_update" }
     name: "RELATED_TO_FILM"
   relationship5:
     type: "RELATED_TO_FILM"
     start: { node: "node2" }
     end: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "ZONED DATETIME", name: "last_update" }
+      relationship5_property0: { type: "ZONED DATETIME", name: "last_update" }
     name: "RELATED_TO_FILM2"
   relationship6:
     type: "RELATED_TO_FILM"
@@ -1239,7 +1239,7 @@ mappings:
       properties:
         node6_property0: { column: "film_id" }
     properties:
-      relationshipProperty0: { column: "last_update" }
+      relationship4_property0: { column: "last_update" }
   - type: "RELATIONSHIP"
     relationship: "relationship5"
     table: "film_category"
@@ -1252,7 +1252,7 @@ mappings:
       properties:
         node6_property0: { column: "film_id" }
     properties:
-      relationshipProperty0: { column: "last_update" }
+      relationship5_property0: { column: "last_update" }
   - type: "RELATIONSHIP"
     relationship: "relationship6"
     table: "inventory"

@@ -146,7 +146,7 @@ object Internal {
                 ->
                 RelationshipConstraint(type, props)
             }
-            val propertyRenames = relationship.properties.identify("relationshipProperty", key)
+            val propertyRenames = relationship.properties.assignIds("property", key)
             renames.putAll(propertyRenames)
             relationship.constraints.values.forEach { it.properties.rename(renames, key) }
             relationship.indexes.values.forEach { it.properties.rename(renames, key) }

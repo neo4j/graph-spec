@@ -136,7 +136,7 @@ class InternalTest {
 
         val internalRel = originalModel.relationships["relationship0"]!!
         assertEquals("FRIENDS_WITH", internalRel.name)
-        assertTrue(internalRel.properties.containsKey("relationshipProperty0"))
+        assertTrue(internalRel.properties.containsKey("relationship0_property0"))
 
         // Assert Mappings Deep Translation
         val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
@@ -147,7 +147,7 @@ class InternalTest {
             "From Target property should be renamed"
         )
         assertTrue(
-            relMapping.properties.containsKey("relationshipProperty0"),
+            relMapping.properties.containsKey("relationship0_property0"),
             "Relationship property should be renamed"
         )
         assertEquals("node0", relMapping.endNode.node)
@@ -261,13 +261,13 @@ class InternalTest {
         model.internalise()
 
         val relationship = model.relationships["relationship0"]!!
-        val property = relationship.properties["relationshipProperty0"]!!
+        val property = relationship.properties["relationship0_property0"]!!
         assertNull(property.key, "Key flag should be cleared from the property")
 
         val constraint: RelationshipConstraint? = relationship.constraints["key_KNOWS_since"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
-        assertEquals(mutableSetOf("relationshipProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("relationship0_property0"), constraint.properties)
     }
 
     @Test
