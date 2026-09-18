@@ -8,7 +8,7 @@ nodes:
       node0_property1: { type: "VECTOR<FLOAT>", dimension: 123, name: "embedding" }
       node0_property2: { type: "VECTOR<FLOAT>", name: "legacyembedding" }
     indexes:
-      nodeIndex0:
+      node0_index0:
         type: "VECTOR"
         labels: ["document"]
         properties: ["node0_property1"]

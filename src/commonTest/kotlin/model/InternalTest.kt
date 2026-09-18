@@ -83,11 +83,11 @@ class InternalTest {
         val node0 = model.nodes["node0"]!!
         assertEquals("User1", node0.name)
 
-        assertTrue(node0.constraints.containsKey("nodeConstraint0"))
-        assertEquals("c1", node0.constraints["nodeConstraint0"]?.name)
+        assertTrue(node0.constraints.containsKey("node0_constraint0"))
+        assertEquals("c1", node0.constraints["node0_constraint0"]?.name)
 
-        assertTrue(node0.indexes.containsKey("nodeIndex0"))
-        assertEquals("i1", node0.indexes["nodeIndex0"]?.name)
+        assertTrue(node0.indexes.containsKey("node0_index0"))
+        assertEquals("i1", node0.indexes["node0_index0"]?.name)
     }
 
     @Test

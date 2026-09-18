@@ -11,13 +11,13 @@ nodes:
       node0_property4: { type: "INTEGER", name: "expyear" }
       node0_property5: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node0_constraint0:
         type: "UNIQUE"
         label: "creditcard"
         properties: ["node0_property0"]
         name: "unique_creditcard_creditcardid"
     indexes:
-      nodeIndex0:
+      node0_index0:
         type: "TEXT"
         labels: ["creditcard"]
         properties: ["node0_property0"]
@@ -30,13 +30,13 @@ nodes:
       node1_property0: { type: "STRING", name: "currencycode" }
       node1_property1: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node1_constraint0:
         type: "UNIQUE"
         label: "currency"
         properties: ["node1_property0"]
         name: "unique_currency_currencycode"
     indexes:
-      nodeIndex0:
+      node1_index0:
         type: "TEXT"
         labels: ["currency"]
         properties: ["node1_property0"]
@@ -52,13 +52,13 @@ nodes:
       node2_property3: { type: "FLOAT", name: "endofdayrate" }
       node2_property4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node2_constraint0:
         type: "UNIQUE"
         label: "currencyrate"
         properties: ["node2_property0"]
         name: "unique_currencyrate_currencyrateid"
     indexes:
-      nodeIndex0:
+      node2_index0:
         type: "TEXT"
         labels: ["currencyrate"]
         properties: ["node2_property0"]
@@ -72,13 +72,13 @@ nodes:
       node3_property1: { type: "STRING", name: "rowguid" }
       node3_property2: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node3_constraint0:
         type: "UNIQUE"
         label: "customer"
         properties: ["node3_property0"]
         name: "unique_customer_customerid"
     indexes:
-      nodeIndex0:
+      node3_index0:
         type: "TEXT"
         labels: ["customer"]
         properties: ["node3_property0"]
@@ -103,13 +103,13 @@ nodes:
       node4_property12: { type: "STRING", name: "rowguid" }
       node4_property13: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node4_constraint0:
         type: "UNIQUE"
         label: "salesorderheader"
         properties: ["node4_property0"]
         name: "unique_salesorderheader_salesorderid"
     indexes:
-      nodeIndex0:
+      node4_index0:
         type: "TEXT"
         labels: ["salesorderheader"]
         properties: ["node4_property0"]
@@ -128,13 +128,13 @@ nodes:
       node5_property6: { type: "STRING", name: "rowguid" }
       node5_property7: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node5_constraint0:
         type: "UNIQUE"
         label: "salesperson"
         properties: ["node5_property0"]
         name: "unique_salesperson_businessentityid"
     indexes:
-      nodeIndex0:
+      node5_index0:
         type: "TEXT"
         labels: ["salesperson"]
         properties: ["node5_property0"]
@@ -147,13 +147,13 @@ nodes:
       node6_property0: { type: "INTEGER", name: "salesreasonid" }
       node6_property1: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node6_constraint0:
         type: "UNIQUE"
         label: "salesreason"
         properties: ["node6_property0"]
         name: "unique_salesreason_salesreasonid"
     indexes:
-      nodeIndex0:
+      node6_index0:
         type: "TEXT"
         labels: ["salesreason"]
         properties: ["node6_property0"]
@@ -169,13 +169,13 @@ nodes:
       node7_property3: { type: "STRING", name: "rowguid" }
       node7_property4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node7_constraint0:
         type: "UNIQUE"
         label: "salestaxrate"
         properties: ["node7_property0"]
         name: "unique_salestaxrate_salestaxrateid"
     indexes:
-      nodeIndex0:
+      node7_index0:
         type: "TEXT"
         labels: ["salestaxrate"]
         properties: ["node7_property0"]
@@ -194,13 +194,13 @@ nodes:
       node8_property6: { type: "STRING", name: "rowguid" }
       node8_property7: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node8_constraint0:
         type: "UNIQUE"
         label: "salesterritory"
         properties: ["node8_property0"]
         name: "unique_salesterritory_territoryid"
     indexes:
-      nodeIndex0:
+      node8_index0:
         type: "TEXT"
         labels: ["salesterritory"]
         properties: ["node8_property0"]
@@ -216,13 +216,13 @@ nodes:
       node9_property3: { type: "ZONED DATETIME", name: "datecreated" }
       node9_property4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node9_constraint0:
         type: "UNIQUE"
         label: "shoppingcartitem"
         properties: ["node9_property0"]
         name: "unique_shoppingcartitem_shoppingcartitemid"
     indexes:
-      nodeIndex0:
+      node9_index0:
         type: "TEXT"
         labels: ["shoppingcartitem"]
         properties: ["node9_property0"]
@@ -244,13 +244,13 @@ nodes:
       node10_property9: { type: "STRING", name: "rowguid" }
       node10_property10: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node10_constraint0:
         type: "UNIQUE"
         label: "specialoffer"
         properties: ["node10_property0"]
         name: "unique_specialoffer_specialofferid"
     indexes:
-      nodeIndex0:
+      node10_index0:
         type: "TEXT"
         labels: ["specialoffer"]
         properties: ["node10_property0"]
@@ -264,13 +264,13 @@ nodes:
       node11_property1: { type: "STRING", name: "rowguid" }
       node11_property2: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node11_constraint0:
         type: "UNIQUE"
         label: "store"
         properties: ["node11_property0"]
         name: "unique_store_businessentityid"
     indexes:
-      nodeIndex0:
+      node11_index0:
         type: "TEXT"
         labels: ["store"]
         properties: ["node11_property0"]
