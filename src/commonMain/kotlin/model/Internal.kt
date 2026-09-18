@@ -74,6 +74,7 @@ object Internal {
             internaliseProperties(node.constraints, node.properties, node.name ?: key) { type, props ->
                 NodeConstraint(type, node.labels.identifier, props)
             }
+            node.constraints.assignIds("constraint", key)
             val propertyRenames = node.properties.assignIds("property", key)
             renames.putAll(propertyRenames)
             node.constraints.values.forEach { it.properties.rename(renames, key) }
@@ -146,6 +147,7 @@ object Internal {
                 ->
                 RelationshipConstraint(type, props)
             }
+            relationship.constraints.assignIds("constraint", key)
             val propertyRenames = relationship.properties.assignIds("property", key)
             renames.putAll(propertyRenames)
             relationship.constraints.values.forEach { it.properties.rename(renames, key) }
