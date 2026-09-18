@@ -129,7 +129,7 @@ object Internal {
      */
 
     private fun GraphModel.internaliseRelationships() {
-        val renames = relationships.identify("relationship")
+        val renames = relationships.assignIds("relationship")
         Pretty.renameRelationshipMappings(this, renames)
         relationships.values.forEach { node ->
             node.constraints.identify("relationshipConstraint")
