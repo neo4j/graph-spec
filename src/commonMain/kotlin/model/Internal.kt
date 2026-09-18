@@ -17,7 +17,6 @@
 package model
 
 import model.Rename.assignIds
-import model.Rename.identify
 import model.Rename.rename
 import model.node.Constraint
 import model.node.NodeConstraint

@@ -17,7 +17,6 @@
 package model
 
 import model.Rename.assignIds
-import model.Rename.identify
 import model.Rename.prettify
 import model.Rename.rename
 import model.node.Node
@@ -184,15 +183,15 @@ class RenameTest {
     }
 
     // ---------------------------------------------------------------------
-    // MutableMap<String, T : Named>.identify
+    // MutableMap<String, T : Named>.assignIds
     // ---------------------------------------------------------------------
 
     @Test
-    fun `identify assigns a stable id to an unnamed node and stores the original key as its name`() {
+    fun `assignIds assigns a stable id to an unnamed node and stores the original key as its name`() {
         val node = Node(name = null)
         val map = mutableMapOf("og1" to node)
 
-        val changes = map.identify(type = "node")
+        val changes = map.assignIds(type = "node")
 
         assertEquals(setOf("node0"), map.keys)
         assertEquals("og1", map.getValue("node0").name)
@@ -200,11 +199,11 @@ class RenameTest {
     }
 
     @Test
-    fun `identify leaves an already-named node untouched under its original key`() {
+    fun `assignIds leaves an already-named node untouched under its original key`() {
         val node = Node(name = "alreadyNamed")
         val map = mutableMapOf("og1" to node)
 
-        val changes = map.identify(type = "node")
+        val changes = map.assignIds(type = "node")
 
         assertEquals(setOf("og1"), map.keys)
         assertEquals("alreadyNamed", map.getValue("og1").name)
@@ -212,7 +211,7 @@ class RenameTest {
     }
 
     @Test
-    fun `identify counter only increments for nodes that actually receive a new id`() {
+    fun `assignIds counter only increments for nodes that actually receive a new id`() {
         val alreadyNamed = Node(name = "keepMe")
         val unnamed1 = Node(name = null)
         val unnamed2 = Node(name = null)
@@ -222,7 +221,7 @@ class RenameTest {
             "og3" to unnamed2
         )
 
-        val changes = map.identify(type = "node")
+        val changes = map.assignIds(type = "node")
 
         // The already-named entry must not consume a counter slot.
         assertEquals(setOf("og1", "node0", "node1"), map.keys)
@@ -232,27 +231,12 @@ class RenameTest {
     }
 
     @Test
-    fun `identify records a parent-prefixed original key in the changes map`() {
-        val node = Node(name = null)
-        val map = mutableMapOf("og1" to node)
-
-        val changes = map.identify(type = "node", parent = "parent")
-
-        assertEquals(mapOf("parent:og1" to "node0"), changes)
-        assertEquals("og1", map.getValue("node0").name)
-    }
-
-    @Test
-    fun `identify on an empty map produces no changes and stays empty`() {
+    fun `assignIds on an empty map produces no changes and stays empty`() {
         val map = mutableMapOf<String, Node>()
-        val changes = map.identify(type = "node")
+        val changes = map.assignIds(type = "node")
         assertTrue(map.isEmpty())
         assertTrue(changes.isEmpty())
     }
-
-    // ---------------------------------------------------------------------
-    // MutableMap<String, T : Named>.assignIds
-    // ---------------------------------------------------------------------
 
     @Test
     fun `assignIds records a parent-prefixed id in the changes map`() {
