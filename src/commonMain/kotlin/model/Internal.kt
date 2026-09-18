@@ -16,6 +16,7 @@
  */
 package model
 
+import model.Rename.assignIds
 import model.Rename.identify
 import model.Rename.rename
 import model.node.Constraint
@@ -54,7 +55,7 @@ object Internal {
     }
 
     private fun GraphModel.internaliseNodes() {
-        val renames = nodes.identify("node")
+        val renames = nodes.assignIds("node")
         Pretty.renameNodeMappings(this, renames)
         nodes.values.forEach { node ->
             node.constraints.identify("nodeConstraint")
