@@ -131,9 +131,9 @@ object Internal {
     private fun GraphModel.internaliseRelationships() {
         val renames = relationships.assignIds("relationship")
         Pretty.renameRelationshipMappings(this, renames)
-        relationships.values.forEach { node ->
-            node.constraints.identify("relationshipConstraint")
-            node.indexes.identify("relationshipIndex")
+        relationships.forEach { (key, relationship) ->
+            relationship.constraints.assignIds("constraint", key)
+            relationship.indexes.assignIds("index", key)
         }
     }
 
