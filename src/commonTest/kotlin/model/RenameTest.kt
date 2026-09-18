@@ -16,6 +16,7 @@
  */
 package model
 
+import model.Rename.assignIds
 import model.Rename.identify
 import model.Rename.prettify
 import model.Rename.rename
@@ -247,5 +248,32 @@ class RenameTest {
         val changes = map.identify(type = "node")
         assertTrue(map.isEmpty())
         assertTrue(changes.isEmpty())
+    }
+
+    // ---------------------------------------------------------------------
+    // MutableMap<String, T : Named>.assignIds
+    // ---------------------------------------------------------------------
+
+    @Test
+    fun `assignIds records a parent-prefixed id in the changes map`() {
+        val node = Node(name = null)
+        val map = mutableMapOf("og1" to node)
+
+        val changes = map.assignIds(type = "node", parent = "parent")
+
+        assertEquals(mapOf("parent:og1" to "parent_node0"), changes)
+        assertEquals("og1", map.getValue("parent_node0").name)
+    }
+
+    @Test
+    fun `assignIds with idParent generates an owner-prefixed id`() {
+        val node = Node()
+        val map = mutableMapOf("og1" to node)
+
+        val changes = map.assignIds(type = "property", parent = "node0")
+
+        assertEquals(setOf("node0_property0"), map.keys)
+        assertEquals("og1", map.getValue("node0_property0").name)
+        assertEquals(mapOf("node0:og1" to "node0_property0"), changes)
     }
 }

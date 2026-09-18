@@ -4,14 +4,14 @@ nodes:
     labels:
       identifier: "document"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "documentid" }
-      nodeProperty1: { type: "VECTOR<FLOAT>", dimension: 123, name: "embedding" }
-      nodeProperty2: { type: "VECTOR<FLOAT>", name: "legacyembedding" }
+      node0_property0: { type: "INTEGER", name: "documentid" }
+      node0_property1: { type: "VECTOR<FLOAT>", dimension: 123, name: "embedding" }
+      node0_property2: { type: "VECTOR<FLOAT>", name: "legacyembedding" }
     indexes:
       nodeIndex0:
         type: "VECTOR"
         labels: ["document"]
-        properties: ["nodeProperty1"]
+        properties: ["node0_property1"]
         options:
           type: "VECTOR"
           vector.dimensions: 123
@@ -41,7 +41,7 @@ mappings:
     node: "node0"
     table: "document"
     properties:
-      nodeProperty0: { column: "documentid" }
-      nodeProperty1: { column: "embedding" }
-      nodeProperty2: { column: "legacyembedding" }
-    key: ["nodeProperty0"]
+      node0_property0: { column: "documentid" }
+      node0_property1: { column: "embedding" }
+      node0_property2: { column: "legacyembedding" }
+    key: ["node0_property0"]

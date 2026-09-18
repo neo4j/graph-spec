@@ -4,107 +4,107 @@ nodes:
     labels:
       identifier: "Aircraft"
     properties:
-      nodeProperty0: { type: "STRING", name: "aircraftCode" }
-      nodeProperty1: { type: "STRING", name: "model" }
-      nodeProperty2: { type: "INTEGER", name: "aircraftRange" }
+      node0_property0: { type: "STRING", name: "aircraftCode" }
+      node0_property1: { type: "STRING", name: "model" }
+      node0_property2: { type: "INTEGER", name: "aircraftRange" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Aircraft"
-        properties: ["nodeProperty0"]
+        properties: ["node0_property0"]
         name: "unique_Aircraft_aircraftCode"
     indexes:
       nodeIndex0:
         type: "TEXT"
         labels: ["Aircraft"]
-        properties: ["nodeProperty0"]
+        properties: ["node0_property0"]
         name: "aircrafts_data-text"
     name: "Aircraft"
   node1:
     labels:
       identifier: "Airport"
     properties:
-      nodeProperty0: { type: "STRING", name: "airportCode" }
-      nodeProperty1: { type: "STRING", name: "airportName" }
-      nodeProperty2: { type: "STRING", name: "city" }
-      nodeProperty3: { type: "POINT", name: "coordinates" }
-      nodeProperty4: { type: "STRING", name: "timezone" }
+      node1_property0: { type: "STRING", name: "airportCode" }
+      node1_property1: { type: "STRING", name: "airportName" }
+      node1_property2: { type: "STRING", name: "city" }
+      node1_property3: { type: "POINT", name: "coordinates" }
+      node1_property4: { type: "STRING", name: "timezone" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Airport"
-        properties: ["nodeProperty0"]
+        properties: ["node1_property0"]
         name: "unique_Airport_airportCode"
     indexes:
       nodeIndex0:
         type: "TEXT"
         labels: ["Airport"]
-        properties: ["nodeProperty0"]
+        properties: ["node1_property0"]
         name: "airports_data-text"
     name: "Airport"
   node2:
     labels:
       identifier: "Booking"
     properties:
-      nodeProperty0: { type: "STRING", name: "bookRef" }
-      nodeProperty1: { type: "ZONED DATETIME", name: "bookDate" }
-      nodeProperty2: { type: "FLOAT", name: "totalAmount" }
+      node2_property0: { type: "STRING", name: "bookRef" }
+      node2_property1: { type: "ZONED DATETIME", name: "bookDate" }
+      node2_property2: { type: "FLOAT", name: "totalAmount" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Booking"
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "unique_Booking_bookRef"
     indexes:
       nodeIndex0:
         type: "TEXT"
         labels: ["Booking"]
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "bookings-text"
     name: "Booking"
   node3:
     labels:
       identifier: "Flight"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "flightId" }
-      nodeProperty1: { type: "STRING", name: "flightNo" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "scheduledDeparture" }
-      nodeProperty3: { type: "ZONED DATETIME", name: "scheduledArrival" }
-      nodeProperty4: { type: "STRING", name: "status" }
-      nodeProperty5: { type: "ZONED DATETIME", name: "actualDeparture" }
-      nodeProperty6: { type: "ZONED DATETIME", name: "actualArrival" }
+      node3_property0: { type: "INTEGER", name: "flightId" }
+      node3_property1: { type: "STRING", name: "flightNo" }
+      node3_property2: { type: "ZONED DATETIME", name: "scheduledDeparture" }
+      node3_property3: { type: "ZONED DATETIME", name: "scheduledArrival" }
+      node3_property4: { type: "STRING", name: "status" }
+      node3_property5: { type: "ZONED DATETIME", name: "actualDeparture" }
+      node3_property6: { type: "ZONED DATETIME", name: "actualArrival" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Flight"
-        properties: ["nodeProperty0"]
+        properties: ["node3_property0"]
         name: "unique_Flight_flightId"
     indexes:
       nodeIndex0:
         type: "TEXT"
         labels: ["Flight"]
-        properties: ["nodeProperty0"]
+        properties: ["node3_property0"]
         name: "flights"
     name: "Flight"
   node4:
     labels:
       identifier: "Ticket"
     properties:
-      nodeProperty0: { type: "STRING", name: "ticketNo" }
-      nodeProperty1: { type: "STRING", name: "passengerId" }
-      nodeProperty2: { type: "STRING", name: "passengerName" }
-      nodeProperty3: { type: "STRING", name: "contactData" }
+      node4_property0: { type: "STRING", name: "ticketNo" }
+      node4_property1: { type: "STRING", name: "passengerId" }
+      node4_property2: { type: "STRING", name: "passengerName" }
+      node4_property3: { type: "STRING", name: "contactData" }
     constraints:
       nodeConstraint0:
         type: "UNIQUE"
         label: "Ticket"
-        properties: ["nodeProperty0"]
+        properties: ["node4_property0"]
         name: "unique_Ticket_ticketNo"
     indexes:
       nodeIndex0:
         type: "TEXT"
         labels: ["Ticket"]
-        properties: ["nodeProperty0"]
+        properties: ["node4_property0"]
         name: "tickets-text"
     name: "Ticket"
 relationships:
@@ -362,93 +362,93 @@ mappings:
     node: "node0"
     table: "aircrafts_data"
     properties:
-      nodeProperty0: { column: "aircraft_code" }
-      nodeProperty1: { column: "model" }
-      nodeProperty2: { column: "aircrafts_range" }
-    key: ["nodeProperty0"]
+      node0_property0: { column: "aircraft_code" }
+      node0_property1: { column: "model" }
+      node0_property2: { column: "aircrafts_range" }
+    key: ["node0_property0"]
   - type: "NODE"
     node: "node1"
     table: "airports_data"
     properties:
-      nodeProperty0: { column: "airport_code" }
-      nodeProperty1: { column: "airport_name" }
-      nodeProperty2: { column: "city" }
-      nodeProperty3: { column: "coordinates" }
-      nodeProperty4: { column: "timezone" }
-    key: ["nodeProperty0"]
+      node1_property0: { column: "airport_code" }
+      node1_property1: { column: "airport_name" }
+      node1_property2: { column: "city" }
+      node1_property3: { column: "coordinates" }
+      node1_property4: { column: "timezone" }
+    key: ["node1_property0"]
   - type: "NODE"
     node: "node2"
     table: "bookings"
     properties:
-      nodeProperty0: { column: "book_ref" }
-      nodeProperty1: { column: "book_date" }
-      nodeProperty2: { column: "total_amount" }
-    key: ["nodeProperty0"]
+      node2_property0: { column: "book_ref" }
+      node2_property1: { column: "book_date" }
+      node2_property2: { column: "total_amount" }
+    key: ["node2_property0"]
   - type: "NODE"
     node: "node3"
     table: "flights"
     properties:
-      nodeProperty0: { column: "flight_id" }
-      nodeProperty1: { column: "flight_no" }
-      nodeProperty2: { column: "scheduled_departure" }
-      nodeProperty3: { column: "scheduled_arrival" }
-      nodeProperty4: { column: "status" }
-      nodeProperty5: { column: "actual_departure" }
-      nodeProperty6: { column: "actual_arrival" }
-    key: ["nodeProperty0"]
+      node3_property0: { column: "flight_id" }
+      node3_property1: { column: "flight_no" }
+      node3_property2: { column: "scheduled_departure" }
+      node3_property3: { column: "scheduled_arrival" }
+      node3_property4: { column: "status" }
+      node3_property5: { column: "actual_departure" }
+      node3_property6: { column: "actual_arrival" }
+    key: ["node3_property0"]
   - type: "NODE"
     node: "node4"
     table: "tickets"
     properties:
-      nodeProperty0: { column: "ticket_no" }
-      nodeProperty1: { column: "passenger_id" }
-      nodeProperty2: { column: "passenger_name" }
-      nodeProperty3: { column: "contact_data" }
-    key: ["nodeProperty0"]
+      node4_property0: { column: "ticket_no" }
+      node4_property1: { column: "passenger_id" }
+      node4_property2: { column: "passenger_name" }
+      node4_property3: { column: "contact_data" }
+    key: ["node4_property0"]
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "flights"
     start_node:
       node: "node3"
       properties:
-        nodeProperty0: { column: "flight_id" }
+        node3_property0: { column: "flight_id" }
     end_node:
       node: "node0"
       properties:
-        nodeProperty0: { column: "aircraft_code" }
+        node0_property0: { column: "aircraft_code" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "flights"
     start_node:
       node: "node3"
       properties:
-        nodeProperty0: { column: "flight_id" }
+        node3_property0: { column: "flight_id" }
     end_node:
       node: "node1"
       properties:
-        nodeProperty0: { column: "departure_airport" }
+        node1_property0: { column: "departure_airport" }
   - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "flights"
     start_node:
       node: "node3"
       properties:
-        nodeProperty0: { column: "flight_id" }
+        node3_property0: { column: "flight_id" }
     end_node:
       node: "node1"
       properties:
-        nodeProperty0: { column: "arrival_airport" }
+        node1_property0: { column: "arrival_airport" }
   - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "ticket_flights"
     start_node:
       node: "node3"
       properties:
-        nodeProperty0: { column: "flight_id" }
+        node3_property0: { column: "flight_id" }
     end_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "ticket_no" }
+        node4_property0: { column: "ticket_no" }
     properties:
       relationshipProperty0: { column: "fare_conditions" }
       relationshipProperty1: { column: "amount" }
@@ -458,8 +458,8 @@ mappings:
     start_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "ticket_no" }
+        node4_property0: { column: "ticket_no" }
     end_node:
       node: "node2"
       properties:
-        nodeProperty0: { column: "book_ref" }
+        node2_property0: { column: "book_ref" }

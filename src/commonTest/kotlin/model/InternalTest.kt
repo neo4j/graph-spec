@@ -132,7 +132,7 @@ class InternalTest {
         // Assert Nodes and Properties
         val internalNode = originalModel.nodes["node0"]!!
         assertEquals("Person", internalNode.name)
-        assertTrue(internalNode.properties.containsKey("nodeProperty0"))
+        assertTrue(internalNode.properties.containsKey("node0_property0"))
 
         val internalRel = originalModel.relationships["relationship0"]!!
         assertEquals("FRIENDS_WITH", internalRel.name)
@@ -143,7 +143,7 @@ class InternalTest {
         assertEquals("relationship0", relMapping.relationship)
         assertEquals("node0", relMapping.startNode.node)
         assertTrue(
-            relMapping.startNode.properties.containsKey("nodeProperty0"),
+            relMapping.startNode.properties.containsKey("node0_property0"),
             "From Target property should be renamed"
         )
         assertTrue(
@@ -185,14 +185,14 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.key, "Key flag should be cleared from the property")
 
         val constraint = node.constraints["key_User_id"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
         assertEquals("User", constraint.label, "Constraint should reference the node's label")
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
     }
 
     @Test
@@ -210,13 +210,13 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.unique, "Unique flag should be cleared from the property")
 
         val constraint = node.constraints["unique_User_email"]
         assertNotNull(constraint, "A unique constraint should be generated for the property")
         assertEquals(ConstraintType.UNIQUE, constraint.type)
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
     }
 
     @Test
@@ -234,13 +234,13 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.mustExist, "MustExist flag should be cleared from the property")
 
         val constraint = node.constraints["exists_User_email"]
         assertNotNull(constraint, "An exists constraint should be generated for the property")
         assertEquals(ConstraintType.EXISTS, constraint.type)
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
     }
 
     @Test

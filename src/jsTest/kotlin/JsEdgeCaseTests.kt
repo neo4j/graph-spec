@@ -75,7 +75,7 @@ class JsEdgeCaseTests {
 
         val decoded = GraphSpec.Json.decodeFromString(encoded, Type.DATA_MODEL)
         assertEquals("Person", decoded.nodes["PersonNode"]?.name)
-        assertEquals("born", decoded.nodes["PersonNode"]?.properties?.get("nodeProperty0")?.name)
+        assertEquals("born", decoded.nodes["PersonNode"]?.properties?.get("PersonNode_property0")?.name)
     }
 
     @Test
