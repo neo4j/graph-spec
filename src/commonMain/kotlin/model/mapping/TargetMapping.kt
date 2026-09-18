@@ -23,6 +23,4 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("TargetMapping")
-data class TargetMapping(
-    val properties: MutableMap<String, PropertyMapping> = mutableMapOf()
-)
+data class TargetMapping(val properties: MutableMap<String, PropertyMapping> = mutableMapOf())

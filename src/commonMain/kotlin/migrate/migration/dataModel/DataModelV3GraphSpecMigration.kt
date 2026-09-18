@@ -261,24 +261,19 @@ class DataModelV3GraphSpecMigration :
         }
 
     internal fun relationshipMappings(schema: SchemaMap, relKeys: Map<String, Set<String>>): List<SchemaMap> {
-        val graph = schema.map("graphSchemaRepresentation").map("graphSchema")
-        val relInfo = graph.listOfMapsOrNull("relationshipObjectTypes")?.associateBy { it.id() } ?: return emptyList()
         val relationshipMappings = schema
             .map("graphMappingRepresentation")
             .listOfMapsOrNull("relationshipMappings") ?: return emptyList()
         val mappings = mutableListOf<SchemaMap>()
         for (mapping in relationshipMappings) {
             val ref = mapping.ref("relationship")
-            val obj = relInfo[ref] ?: error("Relationship $ref not found")
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.RELATIONSHIP), // needed for Kotlin/Native migrations
                 "relationship" to ref,
                 "start_node" to mapOf(
-                    "node" to obj.ref("from"),
                     "properties" to mapping.entityMap("fromMappings")
                 ),
                 "end_node" to mapOf(
-                    "node" to obj.ref("to"),
                     "properties" to mapping.entityMap("toMappings")
                 ),
                 "table" to mapping.literal("tableName"),

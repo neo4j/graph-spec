@@ -84,9 +84,12 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     "propertyMappings" to convertPropertyMappings(mapping.mapOfMapsOrNull("properties"))
                 )
                 mapping.containsKey("relationship") -> {
-                    val relId = findRelationshipId(relationships, mapping) ?: return@mapNotNull null
+                    val id = mapping.string("relationship")
+                    if (!relationships.containsKey(id)) {
+                        return@mapNotNull null
+                    }
                     "rel" to schemaMapOf(
-                        "relationship" to refOf(relId),
+                        "relationship" to refOf(id),
                         "tableName" to mapping.literal("table"),
                         "fromMappings" toNotEmpty
                             convertEntityMap(mapping.map("start_node").mapOfMapsOrNull("properties")),
@@ -125,20 +128,6 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                 "keyProperties" to keys.map { refOf(it) }
             )
         }
-    }
-
-    /**
-     * Recovers the lost relationship ObjectType reference matching the unique combo of (relId, from, to)
-     */
-    private fun findRelationshipId(relationships: Map<String, SchemaMap>, mapping: SchemaMap): String? {
-        val id = mapping.string("relationship")
-        val fromNode = mapping.map("start_node").string("node")
-        val toNode = mapping.map("end_node").string("node")
-        return relationships.entries.firstOrNull { (key, rel) ->
-            key == id &&
-                rel.map("start").string("node") == fromNode &&
-                rel.map("end").string("node") == toNode
-        }?.key
     }
 
     private data class RelationshipData(

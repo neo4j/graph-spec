@@ -1589,88 +1589,72 @@ mappings:
     relationship: "relationship0"
     table: "customer"
     start_node:
-      node: "node3"
       properties:
         nodeProperty0: { column: "customerid" }
     end_node:
-      node: "node8"
       properties:
         nodeProperty0: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "customer"
     start_node:
-      node: "node3"
       properties:
         nodeProperty0: { column: "customerid" }
     end_node:
-      node: "node11"
       properties:
         nodeProperty0: { column: "storeid" }
   - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "salesorderheader"
     start_node:
-      node: "node4"
       properties:
         nodeProperty0: { column: "salesorderid" }
     end_node:
-      node: "node0"
       properties:
         nodeProperty0: { column: "creditcardid" }
   - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "salesorderheader"
     start_node:
-      node: "node4"
       properties:
         nodeProperty0: { column: "salesorderid" }
     end_node:
-      node: "node2"
       properties:
         nodeProperty0: { column: "currencyrateid" }
   - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "salesorderheader"
     start_node:
-      node: "node4"
       properties:
         nodeProperty0: { column: "salesorderid" }
     end_node:
-      node: "node3"
       properties:
         nodeProperty0: { column: "customerid" }
   - type: "RELATIONSHIP"
     relationship: "relationship5"
     table: "salesorderheader"
     start_node:
-      node: "node4"
       properties:
         nodeProperty0: { column: "salesorderid" }
     end_node:
-      node: "node5"
       properties:
         nodeProperty0: { column: "salespersonid" }
   - type: "RELATIONSHIP"
     relationship: "relationship6"
     table: "salesorderheader"
     start_node:
-      node: "node4"
       properties:
         nodeProperty0: { column: "salesorderid" }
     end_node:
-      node: "node8"
       properties:
         nodeProperty0: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship7"
     table: "salesorderheadersalesreason"
     start_node:
-      node: "node4"
       properties:
         nodeProperty0: { column: "salesorderid" }
     end_node:
-      node: "node6"
       properties:
         nodeProperty0: { column: "salesreasonid" }
     properties:
@@ -1679,21 +1663,17 @@ mappings:
     relationship: "relationship8"
     table: "salesperson"
     start_node:
-      node: "node5"
       properties:
         nodeProperty0: { column: "businessentityid" }
     end_node:
-      node: "node8"
       properties:
         nodeProperty0: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship9"
     table: "store"
     start_node:
-      node: "node11"
       properties:
         nodeProperty0: { column: "businessentityid" }
     end_node:
-      node: "node5"
       properties:
         nodeProperty0: { column: "salespersonid" }

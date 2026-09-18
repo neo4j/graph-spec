@@ -288,22 +288,18 @@ mappings:
     relationship: "relationship0"
     table: "products"
     start_node:
-      node: "node1"
       properties:
         nodeProperty0: { column: "productid" }
     end_node:
-      node: "node0"
       properties:
         nodeProperty0: { column: "categoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "products"
     start_node:
-      node: "node1"
       properties:
         nodeProperty0: { column: "productid" }
     end_node:
-      node: "node2"
       properties:
         nodeProperty0: { column: "supplierid" }
 display:

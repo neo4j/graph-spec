@@ -7587,1045 +7587,855 @@ mappings:
     relationship: "AGREEMENT"
     table: "ACCOUNT_AGREEMENT"
     start_node:
-      node: "ACCOUNT"
       properties:
         ACCOUNT_IDENTIFIER: { column: "ACCOUNT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ORGANIZATION_UNIT"
     table: "ADMINISTRATIVE_ORGANIZATION_UNIT"
     start_node:
-      node: "ADMINISTRATIVE_ORGANIZATION_UNIT"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
     end_node:
-      node: "ORGANIZATION_UNIT"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT2"
     table: "AGENCY_CONTRACT"
     start_node:
-      node: "AGENCY_CONTRACT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PRODUCT"
     table: "AGREEMENT"
     start_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "PRODUCT"
       properties:
         PRODUCT_IDENTIFIER: { column: "PRODUCT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT"
     table: "AGREEMENT_ASSESSMENT"
     start_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT"
       properties:
         ASSESSMENT_IDENTIFIER: { column: "ASSESSMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "BODY_OBJECT"
     table: "ANIMAL"
     start_node:
-      node: "ANIMAL"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "BODY_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT"
     table: "APPROVAL"
     start_node:
-      node: "APPROVAL"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT2"
     table: "ASSESSMENT_RESULT"
     start_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT"
       properties:
         ASSESSMENT_IDENTIFIER: { column: "ASSESSMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_AMOUNT"
     table: "ASSUMED_CLAIM_AMOUNT"
     start_node:
-      node: "ASSUMED_CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT"
     table: "ASSUMED_POLICY_AMOUNT"
     start_node:
-      node: "ASSUMED_POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE"
     table: "AUTOMOBILE"
     start_node:
-      node: "AUTOMOBILE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT3"
     table: "AUTO_REPAIR_SHOP_CONTRACT"
     start_node:
-      node: "AUTO_REPAIR_SHOP_CONTRACT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_EVENT"
     table: "BINDING"
     start_node:
-      node: "BINDING"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE2"
     table: "BOAT"
     start_node:
-      node: "BOAT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT"
     table: "BODY_OBJECT"
     start_node:
-      node: "BODY_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT4"
     table: "BROKERAGE_CONTRACT"
     start_node:
-      node: "BROKERAGE_CONTRACT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE3"
     table: "BUS"
     start_node:
-      node: "BUS"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "EVENT"
     table: "BUSINESS_EVENT"
     start_node:
-      node: "BUSINESS_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_EVENT2"
     table: "CANCEL"
     start_node:
-      node: "CANCEL"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_AMOUNT2"
     table: "CEDED_CLAIM_AMOUNT"
     start_node:
-      node: "CEDED_CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT2"
     table: "CEDED_POLICY_AMOUNT"
     start_node:
-      node: "CEDED_POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT2"
     table: "CHANNEL_SCORE"
     start_node:
-      node: "CHANNEL_SCORE"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CATASTROPHE"
     table: "CLAIM"
     start_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
     end_node:
-      node: "CATASTROPHE"
       properties:
         CATASTROPHE_IDENTIFIER: { column: "CATASTROPHE_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM"
     table: "CLAIM"
     start_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
     end_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT2"
     table: "CLAIM"
     start_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "OCCURRENCE"
     table: "CLAIM"
     start_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
     end_node:
-      node: "OCCURRENCE"
       properties:
         OCCURRENCE_IDENTIFIER: { column: "OCCURRENCE_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM2"
     table: "CLAIM_AMOUNT"
     start_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_OFFER"
     table: "CLAIM_AMOUNT"
     start_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_OFFER"
       properties:
         CLAIM_OFFER_IDENTIFIER: { column: "CLAIM_OFFER_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM3"
     table: "CLAIM_ARBITRATION"
     start_node:
-      node: "ARBITRATION"
       properties:
         ARBITRATION_IDENTIFIER: { column: "ARBITRATION_IDENTIFIER" }
     end_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM4"
     table: "CLAIM_ASSESSMENT"
     start_node:
-      node: "ASSESSMENT"
       properties:
         ASSESSMENT_IDENTIFIER: { column: "ASSESSMENT_IDENTIFIER" }
     end_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT3"
     table: "CLAIM_EVALUATION_RESULT"
     start_node:
-      node: "CLAIM_EVALUATION_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "EVENT2"
     table: "CLAIM_EVENT"
     start_node:
-      node: "CLAIM_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM5"
     table: "CLAIM_FOLDER"
     start_node:
-      node: "CLAIM_FOLDER"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
     end_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "LITIGATION"
     table: "CLAIM_LITIGATION"
     start_node:
-      node: "CLAIM"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
     end_node:
-      node: "LITIGATION"
       properties:
         LITIGATION_IDENTIFIER: { column: "LITIGATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ARBITRATION"
     table: "CLAIM_OFFER"
     start_node:
-      node: "CLAIM_OFFER"
       properties:
         CLAIM_OFFER_IDENTIFIER: { column: "CLAIM_OFFER_IDENTIFIER" }
     end_node:
-      node: "ARBITRATION"
       properties:
         ARBITRATION_IDENTIFIER: { column: "ARBITRATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_FOLDER"
     table: "CLAIM_OFFER"
     start_node:
-      node: "CLAIM_OFFER"
       properties:
         CLAIM_OFFER_IDENTIFIER: { column: "CLAIM_OFFER_IDENTIFIER" }
     end_node:
-      node: "CLAIM_FOLDER"
       properties:
         CLAIM_IDENTIFIER: { column: "CLAIM_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "LITIGATION2"
     table: "CLAIM_OFFER"
     start_node:
-      node: "CLAIM_OFFER"
       properties:
         CLAIM_OFFER_IDENTIFIER: { column: "CLAIM_OFFER_IDENTIFIER" }
     end_node:
-      node: "LITIGATION"
       properties:
         LITIGATION_IDENTIFIER: { column: "LITIGATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_AMOUNT3"
     table: "CLAIM_PAYMENT"
     start_node:
-      node: "CLAIM_PAYMENT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_AMOUNT4"
     table: "CLAIM_RESERVE"
     start_node:
-      node: "CLAIM_RESERVE"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STRUCTURE"
     table: "COMBINATION_STRUCTURE"
     start_node:
-      node: "COMBINATION_STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "FARM_EQUIPMENT"
     table: "COMBINE"
     start_node:
-      node: "COMBINE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "FARM_EQUIPMENT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT5"
     table: "COMMERCIAL_AGREEMENT"
     start_node:
-      node: "COMMERCIAL_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STRUCTURE2"
     table: "COMMERCIAL_STRUCTURE"
     start_node:
-      node: "COMMERCIAL_STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GEOGRAPHIC_LOCATION"
     table: "COMMUNICATION_IDENTITY"
     start_node:
-      node: "COMMUNICATION_IDENTITY"
       properties:
         COMMUNICATION_IDENTIFIER: { column: "COMMUNICATION_IDENTIFIER" }
     end_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT6"
     table: "COMMUTATION_AGREEMENT"
     start_node:
-      node: "COMMUTATION_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GEOGRAPHIC_LOCATION2"
     table: "COMPANY_JURISDICTION"
     start_node:
-      node: "COMPANY"
       properties:
         COMPANY_IDENTIFIER: { column: "COMPANY_IDENTIFIER" }
     end_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE4"
     table: "CONSTRUCTION_VEHICLE"
     start_node:
-      node: "CONSTRUCTION_VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STAFFING_AGREEMENT"
     table: "CONSULTANT_CONTRACT"
     start_node:
-      node: "CONSULTANT_CONTRACT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "STAFFING_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "COVERAGE_GROUP"
     table: "COVERAGE"
     start_node:
-      node: "COVERAGE"
       properties:
         COVERAGE_IDENTIFIER: { column: "COVERAGE_IDENTIFIER" }
     end_node:
-      node: "COVERAGE_GROUP"
       properties:
         COVERAGE_GROUP_IDENTIFIER: { column: "COVERAGE_GROUP_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "COVERAGE_PART"
     table: "COVERAGE"
     start_node:
-      node: "COVERAGE"
       properties:
         COVERAGE_IDENTIFIER: { column: "COVERAGE_IDENTIFIER" }
     end_node:
-      node: "COVERAGE_PART"
       properties:
         COVERAGE_PART_CODE: { column: "COVERAGE_PART_CODE" }
   - type: "RELATIONSHIP"
     relationship: "COVERAGE_TYPE"
     table: "COVERAGE"
     start_node:
-      node: "COVERAGE"
       properties:
         COVERAGE_IDENTIFIER: { column: "COVERAGE_IDENTIFIER" }
     end_node:
-      node: "COVERAGE_TYPE"
       properties:
         COVERAGE_TYPE_IDENTIFIER: { column: "COVERAGE_TYPE_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_AMOUNT5"
     table: "CREDIT_CLAIM_AMOUNT"
     start_node:
-      node: "CREDIT_CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT3"
     table: "CREDIT_POLICY_AMOUNT"
     start_node:
-      node: "CREDIT_POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT4"
     table: "CREDIT_RATING"
     start_node:
-      node: "CREDIT_RATING"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT5"
     table: "CUSTOMER_SCORE"
     start_node:
-      node: "CUSTOMER_SCORE"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_AMOUNT6"
     table: "DEBIT_CLAIM_AMOUNT"
     start_node:
-      node: "DEBIT_CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT4"
     table: "DEBIT_POLICY_AMOUNT"
     start_node:
-      node: "DEBIT_POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RECOVERY"
     table: "DEDUCTIBLE_RECOVERY"
     start_node:
-      node: "DEDUCTIBLE_RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT6"
     table: "DEMOGRAPHIC_SCORE"
     start_node:
-      node: "DEMOGRAPHIC_SCORE"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT7"
     table: "DERIVATIVE_CONTRACT"
     start_node:
-      node: "DERIVATIVE_CONTRACT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_AMOUNT7"
     table: "DIRECT_CLAIM_AMOUNT"
     start_node:
-      node: "DIRECT_CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT5"
     table: "DIRECT_POLICY_AMOUNT"
     start_node:
-      node: "DIRECT_POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RESIDENTIAL_STRUCTURE"
     table: "DWELLING"
     start_node:
-      node: "DWELLING"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "RESIDENTIAL_STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STAFFING_AGREEMENT2"
     table: "EMPLOYMENT_AGREEMENT"
     start_node:
-      node: "EMPLOYMENT_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "STAFFING_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_EVENT3"
     table: "ENDORSEMENT"
     start_node:
-      node: "ENDORSEMENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_PAYMENT"
     table: "EXPENSE_PAYMENT"
     start_node:
-      node: "EXPENSE_PAYMENT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_PAYMENT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RECOVERY2"
     table: "EXPENSE_RECOVERY"
     start_node:
-      node: "EXPENSE_RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_RESERVE"
     table: "EXPENSE_RESERVE"
     start_node:
-      node: "EXPENSE_RESERVE"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_RESERVE"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT3"
     table: "FARM_EQUIPMENT"
     start_node:
-      node: "FARM_EQUIPMENT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT6"
     table: "FEE"
     start_node:
-      node: "FEE"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ORGANIZATION_UNIT2"
     table: "FIELD_ORGANIZATION_UNIT"
     start_node:
-      node: "FIELD_ORGANIZATION_UNIT"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
     end_node:
-      node: "ORGANIZATION_UNIT"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT8"
     table: "FINANCIAL_ACCOUNT_AGREEMENT"
     start_node:
-      node: "FINANCIAL_ACCOUNT_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT7"
     table: "FINANCIAL_SERVICES_ASSESSMENT"
     start_node:
-      node: "FINANCIAL_SERVICES_ASSESSMENT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT8"
     table: "FINANCIAL_VALUATION"
     start_node:
-      node: "FINANCIAL_VALUATION"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CANCEL"
     table: "FLAT"
     start_node:
-      node: "FLAT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "CANCEL"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ORGANIZATION"
     table: "FOR_PROFIT_ORGANIZATION"
     start_node:
-      node: "FOR_PROFIT_ORGANIZATION"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
     end_node:
-      node: "ORGANIZATION"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT9"
     table: "FRAUD_ASSESSMENT"
     start_node:
-      node: "FRAUD_ASSESSMENT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "TRANSPORTATION_CLASS"
     table: "FREIGHT_GROUP"
     start_node:
-      node: "FREIGHT_GROUP"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "TRANSPORTATION_CLASS"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ENDORSEMENT"
     table: "FULL_TERM"
     start_node:
-      node: "FULL_TERM"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "ENDORSEMENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GEOGRAPHIC_LOCATION3"
     table: "GEOGRAPHIC_LOCATION"
     start_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
     end_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "PARENT_GEOGRAPHIC_LOCATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "LOCATION_ADDRESS"
     table: "GEOGRAPHIC_LOCATION"
     start_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
     end_node:
-      node: "LOCATION_ADDRESS"
       properties:
         LOCATION_ADDRESS_IDENTIFIER: { column: "LOCATION_ADDRESS_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PHYSICAL_LOCATION"
     table: "GEOGRAPHIC_LOCATION"
     start_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
     end_node:
-      node: "PHYSICAL_LOCATION"
       properties:
         PHYSICAL_LOCATION_IDENTIFIER: { column: "PHYSICAL_LOCATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STATE"
     table: "GEOGRAPHIC_LOCATION"
     start_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
     end_node:
-      node: "STATE"
       properties:
         STATE_CODE: { column: "STATE_CODE" }
   - type: "RELATIONSHIP"
     relationship: "ORGANIZATION2"
     table: "GOVERNMENT_ORGANIZATION"
     start_node:
-      node: "GOVERNMENT_ORGANIZATION"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
     end_node:
-      node: "ORGANIZATION"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PARTY"
     table: "GROUPING"
     start_node:
-      node: "GROUPING"
       properties:
         GROUPING_IDENTIFIER: { column: "GROUPING_IDENTIFIER" }
     end_node:
-      node: "PARTY"
       properties:
         PARTY_IDENTIFIER: { column: "GROUPING_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT9"
     table: "GROUP_AGREEMENT"
     start_node:
-      node: "GROUP_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GROUPING"
     table: "HOUSEHOLD"
     start_node:
-      node: "HOUSEHOLD"
       properties:
         HOUSEHOLD_IDENTIFIER: { column: "HOUSEHOLD_IDENTIFIER" }
     end_node:
-      node: "GROUPING"
       properties:
         GROUPING_IDENTIFIER: { column: "HOUSEHOLD_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "HOUSEHOLD"
     table: "HOUSEHOLD_CONTENT"
     start_node:
-      node: "HOUSEHOLD_CONTENT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "HOUSEHOLD"
       properties:
         HOUSEHOLD_IDENTIFIER: { column: "HOUSEHOLD_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "TRANSPORTATION_CLASS2"
     table: "HOUSEHOLD_CONTENT"
     start_node:
-      node: "HOUSEHOLD_CONTENT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "TRANSPORTATION_CLASS"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PERSON"
     table: "HOUSEHOLD_PERSON"
     start_node:
-      node: "HOUSEHOLD"
       properties:
         HOUSEHOLD_IDENTIFIER: { column: "HOUSEHOLD_IDENTIFIER" }
     end_node:
-      node: "PERSON"
       properties:
         PERSON_IDENTIFIER: { column: "PERSON_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT10"
     table: "INDIVIDUAL_AGREEMENT"
     start_node:
-      node: "INDIVIDUAL_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GEOGRAPHIC_LOCATION4"
     table: "INSURABLE_OBJECT"
     start_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ACCOUNT"
     table: "INSURED_ACCOUNT"
     start_node:
-      node: "INSURED_ACCOUNT"
       properties:
         ACCOUNT_IDENTIFIER: { column: "ACCOUNT_IDENTIFIER" }
     end_node:
-      node: "ACCOUNT"
       properties:
         ACCOUNT_IDENTIFIER: { column: "ACCOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT11"
     table: "INTERMEDIARY_AGREEMENT"
     start_node:
-      node: "INTERMEDIARY_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PARTY2"
     table: "LEGAL_JURISDICTION_PARTY_IDENTITY"
     start_node:
-      node: "LEGAL_JURISDICTION"
       properties:
         LEGAL_JURISDICTION_IDENTIFIER: { column: "LEGAL_JURISDICTION_IDENTIFIER" }
     end_node:
-      node: "PARTY"
       properties:
         PARTY_IDENTIFIER: { column: "PARTY_IDENTIFIER" }
     properties:
@@ -8636,813 +8446,665 @@ mappings:
     relationship: "EVENT3"
     table: "LIFE_EVENT"
     start_node:
-      node: "LIFE_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURANCE_CLASS"
     table: "LINE_OF_BUSINESS"
     start_node:
-      node: "LINE_OF_BUSINESS"
       properties:
         LINE_OF_BUSINESS_IDENTIFIER: { column: "LINE_OF_BUSINESS_IDENTIFIER" }
     end_node:
-      node: "INSURANCE_CLASS"
       properties:
         INSURANCE_CLASS_IDENTIFIER: { column: "INSURANCE_CLASS_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "LINE_OF_BUSINESS_GROUP"
     table: "LINE_OF_BUSINESS"
     start_node:
-      node: "LINE_OF_BUSINESS"
       properties:
         LINE_OF_BUSINESS_IDENTIFIER: { column: "LINE_OF_BUSINESS_IDENTIFIER" }
     end_node:
-      node: "LINE_OF_BUSINESS_GROUP"
       properties:
         LINE_OF_BUSINESS_GROUP_IDENTIFIER: { column: "LINE_OF_BUSINESS_GROUP_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STATE2"
     table: "LOCATION_ADDRESS"
     start_node:
-      node: "LOCATION_ADDRESS"
       properties:
         LOCATION_ADDRESS_IDENTIFIER: { column: "LOCATION_ADDRESS_IDENTIFIER" }
     end_node:
-      node: "STATE"
       properties:
         STATE_CODE: { column: "STATE_CODE" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_PAYMENT2"
     table: "LOSS_PAYMENT"
     start_node:
-      node: "LOSS_PAYMENT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_PAYMENT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RECOVERY3"
     table: "LOSS_RECOVERY"
     start_node:
-      node: "LOSS_RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_RESERVE2"
     table: "LOSS_RESERVE"
     start_node:
-      node: "LOSS_RESERVE"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_RESERVE"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT4"
     table: "MANUFACTURED_OBJECT"
     start_node:
-      node: "MANUFACTURED_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT10"
     table: "MEDICAL_CONDITION"
     start_node:
-      node: "MEDICAL_CONDITION"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ENDORSEMENT2"
     table: "MID_TERM"
     start_node:
-      node: "MID_TERM"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "ENDORSEMENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "FARM_EQUIPMENT2"
     table: "MILKING_MACHINE"
     start_node:
-      node: "MILKING_MACHINE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "FARM_EQUIPMENT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RESIDENTIAL_STRUCTURE2"
     table: "MOBILE_HOME"
     start_node:
-      node: "MOBILE_HOME"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "RESIDENTIAL_STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE5"
     table: "MOTORCYCLE"
     start_node:
-      node: "MOTORCYCLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_EVENT4"
     table: "NEW_BUSINESS"
     start_node:
-      node: "NEW_BUSINESS"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ORGANIZATION3"
     table: "NOT_FOR_PROFIT_ORGANIZATION"
     start_node:
-      node: "NOT_FOR_PROFIT_ORGANIZATION"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
     end_node:
-      node: "ORGANIZATION"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT5"
     table: "OBJECT_ASSESSMENT"
     start_node:
-      node: "ASSESSMENT"
       properties:
         ASSESSMENT_IDENTIFIER: { column: "ASSESSMENT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GEOGRAPHIC_LOCATION5"
     table: "OCCURRENCE"
     start_node:
-      node: "OCCURRENCE"
       properties:
         OCCURRENCE_IDENTIFIER: { column: "OCCURRENCE_IDENTIFIER" }
     end_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PARTY3"
     table: "ORGANIZATION"
     start_node:
-      node: "ORGANIZATION"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
     end_node:
-      node: "PARTY"
       properties:
         PARTY_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ORGANIZATION4"
     table: "ORGANIZATION_UNIT"
     start_node:
-      node: "ORGANIZATION_UNIT"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
     end_node:
-      node: "ORGANIZATION"
       properties:
         ORGANIZATION_IDENTIFIER: { column: "ORGANIZATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT11"
     table: "OTHER_ASSESSMENT_RESULT"
     start_node:
-      node: "OTHER_ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PARTY4"
     table: "PARTY_PREFERENCE"
     start_node:
-      node: "PARTY_PREFERENCE"
       properties:
         PARTY_IDENTIFIER: { column: "PARTY_IDENTIFIER" }
     end_node:
-      node: "PARTY"
       properties:
         PARTY_IDENTIFIER: { column: "PARTY_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PARTY5"
     table: "PERSON"
     start_node:
-      node: "PERSON"
       properties:
         PERSON_IDENTIFIER: { column: "PERSON_IDENTIFIER" }
     end_node:
-      node: "PARTY"
       properties:
         PARTY_IDENTIFIER: { column: "PERSON_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PERSON2"
     table: "PERSON_PROFESSION"
     start_node:
-      node: "PERSON_PROFESSION"
       properties:
         PERSON_IDENTIFIER: { column: "PERSON_IDENTIFIER" }
     end_node:
-      node: "PERSON"
       properties:
         PERSON_IDENTIFIER: { column: "PERSON_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "LOCATION_ADDRESS2"
     table: "PHYSICAL_LOCATION"
     start_node:
-      node: "PHYSICAL_LOCATION"
       properties:
         PHYSICAL_LOCATION_IDENTIFIER: { column: "PHYSICAL_LOCATION_IDENTIFIER" }
     end_node:
-      node: "LOCATION_ADDRESS"
       properties:
         LOCATION_ADDRESS_IDENTIFIER: { column: "LOCATION_ADDRESS_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT12"
     table: "PHYSICAL_OBJECT_ASSESSMENT"
     start_node:
-      node: "PHYSICAL_OBJECT_ASSESSMENT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT13"
     table: "PLACE_ASSESSMENT"
     start_node:
-      node: "PLACE_ASSESSMENT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT12"
     table: "POLICY"
     start_node:
-      node: "POLICY"
       properties:
         POLICY_IDENTIFIER: { column: "POLICY_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "POLICY_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GEOGRAPHIC_LOCATION6"
     table: "POLICY"
     start_node:
-      node: "POLICY"
       properties:
         POLICY_IDENTIFIER: { column: "POLICY_IDENTIFIER" }
     end_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GEOGRAPHIC_LOCATION7"
     table: "POLICY_AMOUNT"
     start_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT6"
     table: "POLICY_AMOUNT"
     start_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY"
     table: "POLICY_AMOUNT"
     start_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY"
       properties:
         POLICY_IDENTIFIER: { column: "POLICY_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY2"
     table: "POLICY_COVERAGE_PART"
     start_node:
-      node: "COVERAGE_PART"
       properties:
         COVERAGE_PART_CODE: { column: "COVERAGE_PART_CODE" }
     end_node:
-      node: "POLICY"
       properties:
         POLICY_IDENTIFIER: { column: "POLICY_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "EVENT4"
     table: "POLICY_EVENT"
     start_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY3"
     table: "POLICY_EVENT"
     start_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY"
       properties:
         POLICY_IDENTIFIER: { column: "POLICY_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT7"
     table: "PREMIUM"
     start_node:
-      node: "PREMIUM"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_EVENT5"
     table: "PRE_QUALIFICATION"
     start_node:
-      node: "PRE_QUALIFICATION"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "LINE_OF_BUSINESS"
     table: "PRODUCT"
     start_node:
-      node: "PRODUCT"
       properties:
         PRODUCT_IDENTIFIER: { column: "PRODUCT_IDENTIFIER" }
     end_node:
-      node: "LINE_OF_BUSINESS"
       properties:
         LINE_OF_BUSINESS_IDENTIFIER: { column: "LINE_OF_BUSINESS_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "PRODUCT2"
     table: "PRODUCT_COVERAGE"
     start_node:
-      node: "COVERAGE"
       properties:
         COVERAGE_IDENTIFIER: { column: "COVERAGE_IDENTIFIER" }
     end_node:
-      node: "PRODUCT"
       properties:
         PRODUCT_IDENTIFIER: { column: "PRODUCT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GROUPING2"
     table: "PROFESSIONAL_GROUP"
     start_node:
-      node: "PROFESSIONAL_GROUP"
       properties:
         GROUPING_IDENTIFIER: { column: "GROUPING_IDENTIFIER" }
     end_node:
-      node: "GROUPING"
       properties:
         GROUPING_IDENTIFIER: { column: "GROUPING_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GROUPING3"
     table: "PROJECT"
     start_node:
-      node: "PROJECT"
       properties:
         GROUPING_IDENTIFIER: { column: "GROUPING_IDENTIFIER" }
     end_node:
-      node: "GROUPING"
       properties:
         GROUPING_IDENTIFIER: { column: "GROUPING_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "TRANSPORTATION_CLASS3"
     table: "PROPERTY_IN_TRANSIT"
     start_node:
-      node: "PROPERTY_IN_TRANSIT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "TRANSPORTATION_CLASS"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT13"
     table: "PROVIDER_AGREEMENT"
     start_node:
-      node: "PROVIDER_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CANCEL2"
     table: "PRO_RATA"
     start_node:
-      node: "PRO_RATA"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "CANCEL"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_EVENT6"
     table: "QUOTE"
     start_node:
-      node: "QUOTE"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RATING_TERRITORY"
     table: "RATING_TERRITORY_GEOGRAPHIC_LOCATION"
     start_node:
-      node: "GEOGRAPHIC_LOCATION"
       properties:
         GEOGRAPHIC_LOCATION_IDENTIFIER: { column: "GEOGRAPHIC_LOCATION_IDENTIFIER" }
     end_node:
-      node: "RATING_TERRITORY"
       properties:
         RATING_TERRITORY_IDENTIFIER: { column: "RATING_TERRITORY_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CLAIM_AMOUNT8"
     table: "RECOVERY"
     start_node:
-      node: "RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "CLAIM_AMOUNT"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE6"
     table: "RECREATIONAL_VEHICLE"
     start_node:
-      node: "RECREATIONAL_VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_EVENT7"
     table: "REINSTATEMENT"
     start_node:
-      node: "REINSTATEMENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT14"
     table: "REINSURANCE_AGREEMENT"
     start_node:
-      node: "REINSURANCE_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RECOVERY4"
     table: "REINSURANCE_RECOVERY"
     start_node:
-      node: "REINSURANCE_RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_EVENT8"
     table: "RENEWAL"
     start_node:
-      node: "RENEWAL"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "POLICY_EVENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STRUCTURE3"
     table: "RESIDENTIAL_STRUCTURE"
     start_node:
-      node: "RESIDENTIAL_STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT14"
     table: "RISK_FACTOR_SCORE"
     start_node:
-      node: "RISK_FACTOR_SCORE"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RECOVERY5"
     table: "SALVAGE"
     start_node:
-      node: "SALVAGE"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "TRANSPORTATION_CLASS4"
     table: "SCHEDULED_ITEM"
     start_node:
-      node: "SCHEDULED_ITEM"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "TRANSPORTATION_CLASS"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "CANCEL3"
     table: "SHORT_RATE"
     start_node:
-      node: "SHORT_RATE"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "CANCEL"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "AGREEMENT15"
     table: "STAFFING_AGREEMENT"
     start_node:
-      node: "STAFFING_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STAFF_CLASSIFICATION"
     table: "STAFF_POSITION"
     start_node:
-      node: "STAFF_POSITION"
       properties:
         STAFF_POSITION_IDENTIFIER: { column: "STAFF_POSITION_IDENTIFIER" }
     end_node:
-      node: "STAFF_CLASSIFICATION"
       properties:
         STAFF_CLASSIFICATION_CODE: { column: "STAFF_CLASSIFICATION_CODE" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT7"
     table: "STRUCTURE"
     start_node:
-      node: "STRUCTURE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "RECOVERY6"
     table: "SUBROGATION"
     start_node:
-      node: "SUBROGATION"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "RECOVERY"
       properties:
         CLAIM_AMOUNT_IDENTIFIER: { column: "CLAIM_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT8"
     table: "SURCHARGE"
     start_node:
-      node: "SURCHARGE"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "POLICY_AMOUNT9"
     table: "TAX"
     start_node:
-      node: "TAX"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
     end_node:
-      node: "POLICY_AMOUNT"
       properties:
         POLICY_AMOUNT_IDENTIFIER: { column: "POLICY_AMOUNT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "GROUPING4"
     table: "TEAM"
     start_node:
-      node: "TEAM"
       properties:
         GROUPING_IDENTIFIER: { column: "GROUPING_IDENTIFIER" }
     end_node:
-      node: "GROUPING"
       properties:
         GROUPING_IDENTIFIER: { column: "GROUPING_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "STAFFING_AGREEMENT3"
     table: "THIRD_PARTY_STAFFING_AGREEMENT"
     start_node:
-      node: "THIRD_PARTY_STAFFING_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
     end_node:
-      node: "STAFFING_AGREEMENT"
       properties:
         AGREEMENT_IDENTIFIER: { column: "AGREEMENT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "FARM_EQUIPMENT3"
     table: "TRACTOR"
     start_node:
-      node: "TRACTOR"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "FARM_EQUIPMENT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE7"
     table: "TRAILER"
     start_node:
-      node: "TRAILER"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT8"
     table: "TRANSPORTATION_CLASS"
     start_node:
-      node: "TRANSPORTATION_CLASS"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE8"
     table: "TRUCK"
     start_node:
-      node: "TRUCK"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ASSESSMENT_RESULT15"
     table: "UNDERWRITING_ASSESSMENT"
     start_node:
-      node: "UNDERWRITING_ASSESSMENT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
     end_node:
-      node: "ASSESSMENT_RESULT"
       properties:
         ASSESSMENT_RESULT_IDENTIFIER: { column: "ASSESSMENT_RESULT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE9"
     table: "VAN"
     start_node:
-      node: "VAN"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT9"
     table: "VEHICLE"
     start_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "VEHICLE10"
     table: "WATERCRAFT"
     start_node:
-      node: "WATERCRAFT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "VEHICLE"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "INSURABLE_OBJECT10"
     table: "WORKERS_COMP_CLASS"
     start_node:
-      node: "WORKERS_COMP_CLASS"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
     end_node:
-      node: "INSURABLE_OBJECT"
       properties:
         INSURABLE_OBJECT_IDENTIFIER: { column: "INSURABLE_OBJECT_IDENTIFIER" }
   - type: "RELATIONSHIP"
     relationship: "ENDORSEMENT3"
     table: "audit"
     start_node:
-      node: "audit"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }
     end_node:
-      node: "ENDORSEMENT"
       properties:
         EVENT_IDENTIFIER: { column: "EVENT_IDENTIFIER" }

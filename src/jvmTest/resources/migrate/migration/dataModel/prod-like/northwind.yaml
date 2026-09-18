@@ -259,22 +259,18 @@ mappings:
     relationship: "CATEGORIES"
     table: "products"
     start_node:
-      node: "products"
       properties:
         productid: { column: "productid" }
     end_node:
-      node: "categories"
       properties:
         categoryid: { column: "categoryid" }
   - type: "RELATIONSHIP"
     relationship: "SUPPLIERS"
     table: "products"
     start_node:
-      node: "products"
       properties:
         productid: { column: "productid" }
     end_node:
-      node: "suppliers"
       properties:
         supplierid: { column: "supplierid" }
 display:
