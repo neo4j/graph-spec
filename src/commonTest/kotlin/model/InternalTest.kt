@@ -244,6 +244,30 @@ class InternalTest {
     }
 
     @Test
+    fun `test keeps an explicit node constraint alongside a shorthand one`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "User" to Node(
+                    constraints = mutableMapOf(
+                        "c1" to NodeConstraint(ConstraintType.UNIQUE, properties = mutableSetOf())
+                    ),
+                    properties = mutableMapOf("id" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val constraints = model.nodes["node0"]!!.constraints
+        assertEquals(2, constraints.size, "Both constraints should survive internalise")
+        assertEquals("c1", constraints["node0_constraint0"]?.name)
+        assertEquals(ConstraintType.UNIQUE, constraints["node0_constraint0"]?.type)
+        assertEquals(ConstraintType.KEY, constraints["node0_constraint1"]?.type)
+    }
+
+    @Test
     fun `test converts key property flag into a relationship key constraint`() {
         val model = GraphModel(
             version = "1.0",
@@ -268,6 +292,33 @@ class InternalTest {
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
         assertEquals(mutableSetOf("relationship0_property0"), constraint.properties)
+    }
+
+    @Test
+    fun `test keeps an explicit relationship constraint alongside a shorthand one`() {
+        val model = GraphModel(
+            version = "1.0",
+            relationships = mutableMapOf(
+                "KNOWS" to Relationship(
+                    type = "KNOWS",
+                    start = RelationshipTarget(),
+                    end = RelationshipTarget(),
+                    constraints = mutableMapOf(
+                        "c1" to RelationshipConstraint(ConstraintType.UNIQUE, mutableSetOf())
+                    ),
+                    properties = mutableMapOf("since" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val constraints = model.relationships["relationship0"]!!.constraints
+        assertEquals(2, constraints.size, "Both constraints should survive internalise")
+        assertEquals("c1", constraints["relationship0_constraint0"]?.name)
+        assertEquals(ConstraintType.UNIQUE, constraints["relationship0_constraint0"]?.type)
+        assertEquals(ConstraintType.KEY, constraints["relationship0_constraint1"]?.type)
     }
 
     @Test

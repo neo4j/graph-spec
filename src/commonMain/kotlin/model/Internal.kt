@@ -57,7 +57,6 @@ object Internal {
         val renames = nodes.assignIds("node")
         Pretty.renameNodeMappings(this, renames)
         nodes.forEach { (key, node) ->
-            node.constraints.assignIds("constraint", key)
             node.indexes.assignIds("index", key)
         }
         relationships.values.forEach { relationship ->
@@ -132,7 +131,6 @@ object Internal {
         val renames = relationships.assignIds("relationship")
         Pretty.renameRelationshipMappings(this, renames)
         relationships.forEach { (key, relationship) ->
-            relationship.constraints.assignIds("constraint", key)
             relationship.indexes.assignIds("index", key)
         }
     }
