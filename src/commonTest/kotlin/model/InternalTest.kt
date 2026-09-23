@@ -83,11 +83,11 @@ class InternalTest {
         val node0 = model.nodes["node0"]!!
         assertEquals("User1", node0.name)
 
-        assertTrue(node0.constraints.containsKey("nodeConstraint0"))
-        assertEquals("c1", node0.constraints["nodeConstraint0"]?.name)
+        assertTrue(node0.constraints.containsKey("node0_constraint0"))
+        assertEquals("c1", node0.constraints["node0_constraint0"]?.name)
 
-        assertTrue(node0.indexes.containsKey("nodeIndex0"))
-        assertEquals("i1", node0.indexes["nodeIndex0"]?.name)
+        assertTrue(node0.indexes.containsKey("node0_index0"))
+        assertEquals("i1", node0.indexes["node0_index0"]?.name)
     }
 
     @Test
@@ -132,22 +132,22 @@ class InternalTest {
         // Assert Nodes and Properties
         val internalNode = originalModel.nodes["node0"]!!
         assertEquals("Person", internalNode.name)
-        assertTrue(internalNode.properties.containsKey("nodeProperty0"))
+        assertTrue(internalNode.properties.containsKey("node0_property0"))
 
         val internalRel = originalModel.relationships["relationship0"]!!
         assertEquals("FRIENDS_WITH", internalRel.name)
-        assertTrue(internalRel.properties.containsKey("relationshipProperty0"))
+        assertTrue(internalRel.properties.containsKey("relationship0_property0"))
 
         // Assert Mappings Deep Translation
         val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("relationship0", relMapping.relationship)
         assertEquals("node0", relMapping.startNode.node)
         assertTrue(
-            relMapping.startNode.properties.containsKey("nodeProperty0"),
+            relMapping.startNode.properties.containsKey("node0_property0"),
             "From Target property should be renamed"
         )
         assertTrue(
-            relMapping.properties.containsKey("relationshipProperty0"),
+            relMapping.properties.containsKey("relationship0_property0"),
             "Relationship property should be renamed"
         )
         assertEquals("node0", relMapping.endNode.node)
@@ -185,14 +185,14 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.key, "Key flag should be cleared from the property")
 
-        val constraint = node.constraints["key_User_id"]
+        val constraint = node.constraints["node0_constraint0"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
         assertEquals("User", constraint.label, "Constraint should reference the node's label")
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
     }
 
     @Test
@@ -210,13 +210,13 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.unique, "Unique flag should be cleared from the property")
 
-        val constraint = node.constraints["unique_User_email"]
+        val constraint = node.constraints["node0_constraint0"]
         assertNotNull(constraint, "A unique constraint should be generated for the property")
         assertEquals(ConstraintType.UNIQUE, constraint.type)
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
     }
 
     @Test
@@ -234,13 +234,37 @@ class InternalTest {
         model.internalise()
 
         val node = model.nodes["node0"]!!
-        val property = node.properties["nodeProperty0"]!!
+        val property = node.properties["node0_property0"]!!
         assertNull(property.mustExist, "MustExist flag should be cleared from the property")
 
-        val constraint = node.constraints["exists_User_email"]
+        val constraint = node.constraints["node0_constraint0"]
         assertNotNull(constraint, "An exists constraint should be generated for the property")
         assertEquals(ConstraintType.EXISTS, constraint.type)
-        assertEquals(mutableSetOf("nodeProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("node0_property0"), constraint.properties)
+    }
+
+    @Test
+    fun `test keeps an explicit node constraint alongside a shorthand one`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "User" to Node(
+                    constraints = mutableMapOf(
+                        "c1" to NodeConstraint(ConstraintType.UNIQUE, properties = mutableSetOf())
+                    ),
+                    properties = mutableMapOf("id" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val constraints = model.nodes["node0"]!!.constraints
+        assertEquals(2, constraints.size, "Both constraints should survive internalise")
+        assertEquals("c1", constraints["node0_constraint0"]?.name)
+        assertEquals(ConstraintType.UNIQUE, constraints["node0_constraint0"]?.type)
+        assertEquals(ConstraintType.KEY, constraints["node0_constraint1"]?.type)
     }
 
     @Test
@@ -261,13 +285,40 @@ class InternalTest {
         model.internalise()
 
         val relationship = model.relationships["relationship0"]!!
-        val property = relationship.properties["relationshipProperty0"]!!
+        val property = relationship.properties["relationship0_property0"]!!
         assertNull(property.key, "Key flag should be cleared from the property")
 
-        val constraint: RelationshipConstraint? = relationship.constraints["key_KNOWS_since"]
+        val constraint: RelationshipConstraint? = relationship.constraints["relationship0_constraint0"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
-        assertEquals(mutableSetOf("relationshipProperty0"), constraint.properties)
+        assertEquals(mutableSetOf("relationship0_property0"), constraint.properties)
+    }
+
+    @Test
+    fun `test keeps an explicit relationship constraint alongside a shorthand one`() {
+        val model = GraphModel(
+            version = "1.0",
+            relationships = mutableMapOf(
+                "KNOWS" to Relationship(
+                    type = "KNOWS",
+                    start = RelationshipTarget(),
+                    end = RelationshipTarget(),
+                    constraints = mutableMapOf(
+                        "c1" to RelationshipConstraint(ConstraintType.UNIQUE, mutableSetOf())
+                    ),
+                    properties = mutableMapOf("since" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val constraints = model.relationships["relationship0"]!!.constraints
+        assertEquals(2, constraints.size, "Both constraints should survive internalise")
+        assertEquals("c1", constraints["relationship0_constraint0"]?.name)
+        assertEquals(ConstraintType.UNIQUE, constraints["relationship0_constraint0"]?.type)
+        assertEquals(ConstraintType.KEY, constraints["relationship0_constraint1"]?.type)
     }
 
     @Test

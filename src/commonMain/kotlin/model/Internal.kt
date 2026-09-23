@@ -16,7 +16,7 @@
  */
 package model
 
-import model.Rename.identify
+import model.Rename.assignIds
 import model.Rename.rename
 import model.node.Constraint
 import model.node.NodeConstraint
@@ -54,11 +54,10 @@ object Internal {
     }
 
     private fun GraphModel.internaliseNodes() {
-        val renames = nodes.identify("node")
+        val renames = nodes.assignIds("node")
         Pretty.renameNodeMappings(this, renames)
-        nodes.values.forEach { node ->
-            node.constraints.identify("nodeConstraint")
-            node.indexes.identify("nodeIndex")
+        nodes.forEach { (key, node) ->
+            node.indexes.assignIds("index", key)
         }
         relationships.values.forEach { relationship ->
             relationship.start.node = renames[relationship.start.node] ?: relationship.start.node
@@ -73,7 +72,8 @@ object Internal {
             internaliseProperties(node.constraints, node.properties, node.name ?: key) { type, props ->
                 NodeConstraint(type, node.labels.identifier, props)
             }
-            val propertyRenames = node.properties.identify("nodeProperty", key)
+            node.constraints.assignIds("constraint", key)
+            val propertyRenames = node.properties.assignIds("property", key)
             renames.putAll(propertyRenames)
             node.constraints.values.forEach { it.properties.rename(renames, key) }
             node.indexes.values.forEach { it.properties.rename(renames, key) }
@@ -83,9 +83,7 @@ object Internal {
 
     /**
      * Converts shorthand constraints into long-hand
-     * 1. Doesn't check or transform (e.g. for overlapping)
-     * 2. Should be called before other internal calls to avoid using
-     *  internal names in predictableId
+     * Doesn't check or transform (e.g. for overlapping)
      */
     private fun <C : Constraint> internaliseProperties(
         constraints: MutableMap<String, C>,
@@ -128,11 +126,10 @@ object Internal {
      */
 
     private fun GraphModel.internaliseRelationships() {
-        val renames = relationships.identify("relationship")
+        val renames = relationships.assignIds("relationship")
         Pretty.renameRelationshipMappings(this, renames)
-        relationships.values.forEach { node ->
-            node.constraints.identify("relationshipConstraint")
-            node.indexes.identify("relationshipIndex")
+        relationships.forEach { (key, relationship) ->
+            relationship.indexes.assignIds("index", key)
         }
     }
 
@@ -145,7 +142,8 @@ object Internal {
                 ->
                 RelationshipConstraint(type, props)
             }
-            val propertyRenames = relationship.properties.identify("relationshipProperty", key)
+            relationship.constraints.assignIds("constraint", key)
+            val propertyRenames = relationship.properties.assignIds("property", key)
             renames.putAll(propertyRenames)
             relationship.constraints.values.forEach { it.properties.rename(renames, key) }
             relationship.indexes.values.forEach { it.properties.rename(renames, key) }

@@ -72,15 +72,18 @@ internal object Rename {
      * Pushing existing keys into [Named.name]
      *
      * @param type The type of field in use to prefix the stable id e.g: node0, node1, node2 etc...
-     * @param parent The parent field type to avoid stable id conflicts in a global map node0:property1, node0:property1
+     * @param parent The parent field type to avoid stable id conflicts in a global map node0_property1, node0_property1
      * @return Map of original keys to their replacements
      */
-    internal fun <T : Named> MutableMap<String, T>.identify(type: String, parent: String? = null): Map<String, String> {
+    internal fun <T : Named> MutableMap<String, T>.assignIds(
+        type: String,
+        parent: String? = null
+    ): Map<String, String> {
         var i = 0
         return transformKeys(
             parent = parent,
             skip = { it.name != null },
-            newKey = { _, _ -> "$type${i++}" },
+            newKey = { _, _ -> if (parent != null) "${parent}_$type${i++}" else "$type${i++}" },
             updateName = { og, node -> node.name = og }
         )
     }

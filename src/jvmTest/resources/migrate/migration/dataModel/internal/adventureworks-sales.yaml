@@ -4,276 +4,276 @@ nodes:
     labels:
       identifier: "creditcard"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "creditcardid" }
-      nodeProperty1: { type: "STRING", name: "cardtype" }
-      nodeProperty2: { type: "STRING", name: "cardnumber" }
-      nodeProperty3: { type: "INTEGER", name: "expmonth" }
-      nodeProperty4: { type: "INTEGER", name: "expyear" }
-      nodeProperty5: { type: "ZONED DATETIME", name: "modifieddate" }
+      node0_property0: { type: "INTEGER", name: "creditcardid" }
+      node0_property1: { type: "STRING", name: "cardtype" }
+      node0_property2: { type: "STRING", name: "cardnumber" }
+      node0_property3: { type: "INTEGER", name: "expmonth" }
+      node0_property4: { type: "INTEGER", name: "expyear" }
+      node0_property5: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node0_constraint0:
         type: "UNIQUE"
         label: "creditcard"
-        properties: ["nodeProperty0"]
+        properties: ["node0_property0"]
         name: "unique_creditcard_creditcardid"
     indexes:
-      nodeIndex0:
+      node0_index0:
         type: "TEXT"
         labels: ["creditcard"]
-        properties: ["nodeProperty0"]
+        properties: ["node0_property0"]
         name: "creditcard"
     name: "creditcard"
   node1:
     labels:
       identifier: "currency"
     properties:
-      nodeProperty0: { type: "STRING", name: "currencycode" }
-      nodeProperty1: { type: "ZONED DATETIME", name: "modifieddate" }
+      node1_property0: { type: "STRING", name: "currencycode" }
+      node1_property1: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node1_constraint0:
         type: "UNIQUE"
         label: "currency"
-        properties: ["nodeProperty0"]
+        properties: ["node1_property0"]
         name: "unique_currency_currencycode"
     indexes:
-      nodeIndex0:
+      node1_index0:
         type: "TEXT"
         labels: ["currency"]
-        properties: ["nodeProperty0"]
+        properties: ["node1_property0"]
         name: "currency-text"
     name: "currency"
   node2:
     labels:
       identifier: "currencyrate"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "currencyrateid" }
-      nodeProperty1: { type: "ZONED DATETIME", name: "currencyratedate" }
-      nodeProperty2: { type: "FLOAT", name: "averagerate" }
-      nodeProperty3: { type: "FLOAT", name: "endofdayrate" }
-      nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
+      node2_property0: { type: "INTEGER", name: "currencyrateid" }
+      node2_property1: { type: "ZONED DATETIME", name: "currencyratedate" }
+      node2_property2: { type: "FLOAT", name: "averagerate" }
+      node2_property3: { type: "FLOAT", name: "endofdayrate" }
+      node2_property4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node2_constraint0:
         type: "UNIQUE"
         label: "currencyrate"
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "unique_currencyrate_currencyrateid"
     indexes:
-      nodeIndex0:
+      node2_index0:
         type: "TEXT"
         labels: ["currencyrate"]
-        properties: ["nodeProperty0"]
+        properties: ["node2_property0"]
         name: "currencyrate"
     name: "currencyrate"
   node3:
     labels:
       identifier: "customer"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "customerid" }
-      nodeProperty1: { type: "STRING", name: "rowguid" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "modifieddate" }
+      node3_property0: { type: "INTEGER", name: "customerid" }
+      node3_property1: { type: "STRING", name: "rowguid" }
+      node3_property2: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node3_constraint0:
         type: "UNIQUE"
         label: "customer"
-        properties: ["nodeProperty0"]
+        properties: ["node3_property0"]
         name: "unique_customer_customerid"
     indexes:
-      nodeIndex0:
+      node3_index0:
         type: "TEXT"
         labels: ["customer"]
-        properties: ["nodeProperty0"]
+        properties: ["node3_property0"]
         name: "customer"
     name: "customer"
   node4:
     labels:
       identifier: "salesorderheader"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "salesorderid" }
-      nodeProperty1: { type: "INTEGER", name: "revisionnumber" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "orderdate" }
-      nodeProperty3: { type: "ZONED DATETIME", name: "duedate" }
-      nodeProperty4: { type: "ZONED DATETIME", name: "shipdate" }
-      nodeProperty5: { type: "INTEGER", name: "status" }
-      nodeProperty6: { type: "STRING", name: "creditcardapprovalcode" }
-      nodeProperty7: { type: "FLOAT", name: "subtotal" }
-      nodeProperty8: { type: "FLOAT", name: "taxamt" }
-      nodeProperty9: { type: "FLOAT", name: "freight" }
-      nodeProperty10: { type: "FLOAT", name: "totaldue" }
-      nodeProperty11: { type: "STRING", name: "comment" }
-      nodeProperty12: { type: "STRING", name: "rowguid" }
-      nodeProperty13: { type: "ZONED DATETIME", name: "modifieddate" }
+      node4_property0: { type: "INTEGER", name: "salesorderid" }
+      node4_property1: { type: "INTEGER", name: "revisionnumber" }
+      node4_property2: { type: "ZONED DATETIME", name: "orderdate" }
+      node4_property3: { type: "ZONED DATETIME", name: "duedate" }
+      node4_property4: { type: "ZONED DATETIME", name: "shipdate" }
+      node4_property5: { type: "INTEGER", name: "status" }
+      node4_property6: { type: "STRING", name: "creditcardapprovalcode" }
+      node4_property7: { type: "FLOAT", name: "subtotal" }
+      node4_property8: { type: "FLOAT", name: "taxamt" }
+      node4_property9: { type: "FLOAT", name: "freight" }
+      node4_property10: { type: "FLOAT", name: "totaldue" }
+      node4_property11: { type: "STRING", name: "comment" }
+      node4_property12: { type: "STRING", name: "rowguid" }
+      node4_property13: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node4_constraint0:
         type: "UNIQUE"
         label: "salesorderheader"
-        properties: ["nodeProperty0"]
+        properties: ["node4_property0"]
         name: "unique_salesorderheader_salesorderid"
     indexes:
-      nodeIndex0:
+      node4_index0:
         type: "TEXT"
         labels: ["salesorderheader"]
-        properties: ["nodeProperty0"]
+        properties: ["node4_property0"]
         name: "salesorderheader"
     name: "salesorderheader"
   node5:
     labels:
       identifier: "salesperson"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "businessentityid" }
-      nodeProperty1: { type: "FLOAT", name: "salesquota" }
-      nodeProperty2: { type: "FLOAT", name: "bonus" }
-      nodeProperty3: { type: "FLOAT", name: "commissionpct" }
-      nodeProperty4: { type: "FLOAT", name: "salesytd" }
-      nodeProperty5: { type: "FLOAT", name: "saleslastyear" }
-      nodeProperty6: { type: "STRING", name: "rowguid" }
-      nodeProperty7: { type: "ZONED DATETIME", name: "modifieddate" }
+      node5_property0: { type: "INTEGER", name: "businessentityid" }
+      node5_property1: { type: "FLOAT", name: "salesquota" }
+      node5_property2: { type: "FLOAT", name: "bonus" }
+      node5_property3: { type: "FLOAT", name: "commissionpct" }
+      node5_property4: { type: "FLOAT", name: "salesytd" }
+      node5_property5: { type: "FLOAT", name: "saleslastyear" }
+      node5_property6: { type: "STRING", name: "rowguid" }
+      node5_property7: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node5_constraint0:
         type: "UNIQUE"
         label: "salesperson"
-        properties: ["nodeProperty0"]
+        properties: ["node5_property0"]
         name: "unique_salesperson_businessentityid"
     indexes:
-      nodeIndex0:
+      node5_index0:
         type: "TEXT"
         labels: ["salesperson"]
-        properties: ["nodeProperty0"]
+        properties: ["node5_property0"]
         name: "salesperson"
     name: "salesperson"
   node6:
     labels:
       identifier: "salesreason"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "salesreasonid" }
-      nodeProperty1: { type: "ZONED DATETIME", name: "modifieddate" }
+      node6_property0: { type: "INTEGER", name: "salesreasonid" }
+      node6_property1: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node6_constraint0:
         type: "UNIQUE"
         label: "salesreason"
-        properties: ["nodeProperty0"]
+        properties: ["node6_property0"]
         name: "unique_salesreason_salesreasonid"
     indexes:
-      nodeIndex0:
+      node6_index0:
         type: "TEXT"
         labels: ["salesreason"]
-        properties: ["nodeProperty0"]
+        properties: ["node6_property0"]
         name: "salesreason"
     name: "salesreason"
   node7:
     labels:
       identifier: "salestaxrate"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "salestaxrateid" }
-      nodeProperty1: { type: "INTEGER", name: "taxtype" }
-      nodeProperty2: { type: "FLOAT", name: "taxrate" }
-      nodeProperty3: { type: "STRING", name: "rowguid" }
-      nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
+      node7_property0: { type: "INTEGER", name: "salestaxrateid" }
+      node7_property1: { type: "INTEGER", name: "taxtype" }
+      node7_property2: { type: "FLOAT", name: "taxrate" }
+      node7_property3: { type: "STRING", name: "rowguid" }
+      node7_property4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node7_constraint0:
         type: "UNIQUE"
         label: "salestaxrate"
-        properties: ["nodeProperty0"]
+        properties: ["node7_property0"]
         name: "unique_salestaxrate_salestaxrateid"
     indexes:
-      nodeIndex0:
+      node7_index0:
         type: "TEXT"
         labels: ["salestaxrate"]
-        properties: ["nodeProperty0"]
+        properties: ["node7_property0"]
         name: "salestaxrate"
     name: "salestaxrate"
   node8:
     labels:
       identifier: "salesterritory"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "territoryid" }
-      nodeProperty1: { type: "STRING", name: "group" }
-      nodeProperty2: { type: "FLOAT", name: "salesytd" }
-      nodeProperty3: { type: "FLOAT", name: "saleslastyear" }
-      nodeProperty4: { type: "FLOAT", name: "costytd" }
-      nodeProperty5: { type: "FLOAT", name: "costlastyear" }
-      nodeProperty6: { type: "STRING", name: "rowguid" }
-      nodeProperty7: { type: "ZONED DATETIME", name: "modifieddate" }
+      node8_property0: { type: "INTEGER", name: "territoryid" }
+      node8_property1: { type: "STRING", name: "group" }
+      node8_property2: { type: "FLOAT", name: "salesytd" }
+      node8_property3: { type: "FLOAT", name: "saleslastyear" }
+      node8_property4: { type: "FLOAT", name: "costytd" }
+      node8_property5: { type: "FLOAT", name: "costlastyear" }
+      node8_property6: { type: "STRING", name: "rowguid" }
+      node8_property7: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node8_constraint0:
         type: "UNIQUE"
         label: "salesterritory"
-        properties: ["nodeProperty0"]
+        properties: ["node8_property0"]
         name: "unique_salesterritory_territoryid"
     indexes:
-      nodeIndex0:
+      node8_index0:
         type: "TEXT"
         labels: ["salesterritory"]
-        properties: ["nodeProperty0"]
+        properties: ["node8_property0"]
         name: "salesterritory"
     name: "salesterritory"
   node9:
     labels:
       identifier: "shoppingcartitem"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "shoppingcartitemid" }
-      nodeProperty1: { type: "STRING", name: "shoppingcartid" }
-      nodeProperty2: { type: "INTEGER", name: "quantity" }
-      nodeProperty3: { type: "ZONED DATETIME", name: "datecreated" }
-      nodeProperty4: { type: "ZONED DATETIME", name: "modifieddate" }
+      node9_property0: { type: "INTEGER", name: "shoppingcartitemid" }
+      node9_property1: { type: "STRING", name: "shoppingcartid" }
+      node9_property2: { type: "INTEGER", name: "quantity" }
+      node9_property3: { type: "ZONED DATETIME", name: "datecreated" }
+      node9_property4: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node9_constraint0:
         type: "UNIQUE"
         label: "shoppingcartitem"
-        properties: ["nodeProperty0"]
+        properties: ["node9_property0"]
         name: "unique_shoppingcartitem_shoppingcartitemid"
     indexes:
-      nodeIndex0:
+      node9_index0:
         type: "TEXT"
         labels: ["shoppingcartitem"]
-        properties: ["nodeProperty0"]
+        properties: ["node9_property0"]
         name: "shoppingcartitem"
     name: "shoppingcartitem"
   node10:
     labels:
       identifier: "specialoffer"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "specialofferid" }
-      nodeProperty1: { type: "STRING", name: "description" }
-      nodeProperty2: { type: "FLOAT", name: "discountpct" }
-      nodeProperty3: { type: "STRING", name: "type" }
-      nodeProperty4: { type: "STRING", name: "category" }
-      nodeProperty5: { type: "ZONED DATETIME", name: "startdate" }
-      nodeProperty6: { type: "ZONED DATETIME", name: "enddate" }
-      nodeProperty7: { type: "INTEGER", name: "minqty" }
-      nodeProperty8: { type: "INTEGER", name: "maxqty" }
-      nodeProperty9: { type: "STRING", name: "rowguid" }
-      nodeProperty10: { type: "ZONED DATETIME", name: "modifieddate" }
+      node10_property0: { type: "INTEGER", name: "specialofferid" }
+      node10_property1: { type: "STRING", name: "description" }
+      node10_property2: { type: "FLOAT", name: "discountpct" }
+      node10_property3: { type: "STRING", name: "type" }
+      node10_property4: { type: "STRING", name: "category" }
+      node10_property5: { type: "ZONED DATETIME", name: "startdate" }
+      node10_property6: { type: "ZONED DATETIME", name: "enddate" }
+      node10_property7: { type: "INTEGER", name: "minqty" }
+      node10_property8: { type: "INTEGER", name: "maxqty" }
+      node10_property9: { type: "STRING", name: "rowguid" }
+      node10_property10: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node10_constraint0:
         type: "UNIQUE"
         label: "specialoffer"
-        properties: ["nodeProperty0"]
+        properties: ["node10_property0"]
         name: "unique_specialoffer_specialofferid"
     indexes:
-      nodeIndex0:
+      node10_index0:
         type: "TEXT"
         labels: ["specialoffer"]
-        properties: ["nodeProperty0"]
+        properties: ["node10_property0"]
         name: "specialoffer"
     name: "specialoffer"
   node11:
     labels:
       identifier: "store"
     properties:
-      nodeProperty0: { type: "INTEGER", name: "businessentityid" }
-      nodeProperty1: { type: "STRING", name: "rowguid" }
-      nodeProperty2: { type: "ZONED DATETIME", name: "modifieddate" }
+      node11_property0: { type: "INTEGER", name: "businessentityid" }
+      node11_property1: { type: "STRING", name: "rowguid" }
+      node11_property2: { type: "ZONED DATETIME", name: "modifieddate" }
     constraints:
-      nodeConstraint0:
+      node11_constraint0:
         type: "UNIQUE"
         label: "store"
-        properties: ["nodeProperty0"]
+        properties: ["node11_property0"]
         name: "unique_store_businessentityid"
     indexes:
-      nodeIndex0:
+      node11_index0:
         type: "TEXT"
         labels: ["store"]
-        properties: ["nodeProperty0"]
+        properties: ["node11_property0"]
         name: "store"
     name: "store"
 relationships:
@@ -317,7 +317,7 @@ relationships:
     start: { node: "node4" }
     end: { node: "node6" }
     properties:
-      relationshipProperty0: { type: "ZONED DATETIME", name: "modifieddate" }
+      relationship7_property0: { type: "ZONED DATETIME", name: "modifieddate" }
     name: "SALESREASON"
   relationship8:
     type: "SALESTERRITORY"
@@ -1457,243 +1457,243 @@ mappings:
     node: "node0"
     table: "creditcard"
     properties:
-      nodeProperty0: { column: "creditcardid" }
-      nodeProperty1: { column: "cardtype" }
-      nodeProperty2: { column: "cardnumber" }
-      nodeProperty3: { column: "expmonth" }
-      nodeProperty4: { column: "expyear" }
-      nodeProperty5: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node0_property0: { column: "creditcardid" }
+      node0_property1: { column: "cardtype" }
+      node0_property2: { column: "cardnumber" }
+      node0_property3: { column: "expmonth" }
+      node0_property4: { column: "expyear" }
+      node0_property5: { column: "modifieddate" }
+    key: ["node0_property0"]
   - type: "NODE"
     node: "node1"
     table: "currency"
     properties:
-      nodeProperty0: { column: "currencycode" }
-      nodeProperty1: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node1_property0: { column: "currencycode" }
+      node1_property1: { column: "modifieddate" }
+    key: ["node1_property0"]
   - type: "NODE"
     node: "node2"
     table: "currencyrate"
     properties:
-      nodeProperty0: { column: "currencyrateid" }
-      nodeProperty1: { column: "currencyratedate" }
-      nodeProperty2: { column: "averagerate" }
-      nodeProperty3: { column: "endofdayrate" }
-      nodeProperty4: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node2_property0: { column: "currencyrateid" }
+      node2_property1: { column: "currencyratedate" }
+      node2_property2: { column: "averagerate" }
+      node2_property3: { column: "endofdayrate" }
+      node2_property4: { column: "modifieddate" }
+    key: ["node2_property0"]
   - type: "NODE"
     node: "node3"
     table: "customer"
     properties:
-      nodeProperty0: { column: "customerid" }
-      nodeProperty1: { column: "rowguid" }
-      nodeProperty2: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node3_property0: { column: "customerid" }
+      node3_property1: { column: "rowguid" }
+      node3_property2: { column: "modifieddate" }
+    key: ["node3_property0"]
   - type: "NODE"
     node: "node4"
     table: "salesorderheader"
     properties:
-      nodeProperty0: { column: "salesorderid" }
-      nodeProperty1: { column: "revisionnumber" }
-      nodeProperty2: { column: "orderdate" }
-      nodeProperty3: { column: "duedate" }
-      nodeProperty4: { column: "shipdate" }
-      nodeProperty5: { column: "status" }
-      nodeProperty6: { column: "creditcardapprovalcode" }
-      nodeProperty7: { column: "subtotal" }
-      nodeProperty8: { column: "taxamt" }
-      nodeProperty9: { column: "freight" }
-      nodeProperty10: { column: "totaldue" }
-      nodeProperty11: { column: "comment" }
-      nodeProperty12: { column: "rowguid" }
-      nodeProperty13: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node4_property0: { column: "salesorderid" }
+      node4_property1: { column: "revisionnumber" }
+      node4_property2: { column: "orderdate" }
+      node4_property3: { column: "duedate" }
+      node4_property4: { column: "shipdate" }
+      node4_property5: { column: "status" }
+      node4_property6: { column: "creditcardapprovalcode" }
+      node4_property7: { column: "subtotal" }
+      node4_property8: { column: "taxamt" }
+      node4_property9: { column: "freight" }
+      node4_property10: { column: "totaldue" }
+      node4_property11: { column: "comment" }
+      node4_property12: { column: "rowguid" }
+      node4_property13: { column: "modifieddate" }
+    key: ["node4_property0"]
   - type: "NODE"
     node: "node5"
     table: "salesperson"
     properties:
-      nodeProperty0: { column: "businessentityid" }
-      nodeProperty1: { column: "salesquota" }
-      nodeProperty2: { column: "bonus" }
-      nodeProperty3: { column: "commissionpct" }
-      nodeProperty4: { column: "salesytd" }
-      nodeProperty5: { column: "saleslastyear" }
-      nodeProperty6: { column: "rowguid" }
-      nodeProperty7: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node5_property0: { column: "businessentityid" }
+      node5_property1: { column: "salesquota" }
+      node5_property2: { column: "bonus" }
+      node5_property3: { column: "commissionpct" }
+      node5_property4: { column: "salesytd" }
+      node5_property5: { column: "saleslastyear" }
+      node5_property6: { column: "rowguid" }
+      node5_property7: { column: "modifieddate" }
+    key: ["node5_property0"]
   - type: "NODE"
     node: "node6"
     table: "salesreason"
     properties:
-      nodeProperty0: { column: "salesreasonid" }
-      nodeProperty1: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node6_property0: { column: "salesreasonid" }
+      node6_property1: { column: "modifieddate" }
+    key: ["node6_property0"]
   - type: "NODE"
     node: "node7"
     table: "salestaxrate"
     properties:
-      nodeProperty0: { column: "salestaxrateid" }
-      nodeProperty1: { column: "taxtype" }
-      nodeProperty2: { column: "taxrate" }
-      nodeProperty3: { column: "rowguid" }
-      nodeProperty4: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node7_property0: { column: "salestaxrateid" }
+      node7_property1: { column: "taxtype" }
+      node7_property2: { column: "taxrate" }
+      node7_property3: { column: "rowguid" }
+      node7_property4: { column: "modifieddate" }
+    key: ["node7_property0"]
   - type: "NODE"
     node: "node8"
     table: "salesterritory"
     properties:
-      nodeProperty0: { column: "territoryid" }
-      nodeProperty1: { column: "group" }
-      nodeProperty2: { column: "salesytd" }
-      nodeProperty3: { column: "saleslastyear" }
-      nodeProperty4: { column: "costytd" }
-      nodeProperty5: { column: "costlastyear" }
-      nodeProperty6: { column: "rowguid" }
-      nodeProperty7: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node8_property0: { column: "territoryid" }
+      node8_property1: { column: "group" }
+      node8_property2: { column: "salesytd" }
+      node8_property3: { column: "saleslastyear" }
+      node8_property4: { column: "costytd" }
+      node8_property5: { column: "costlastyear" }
+      node8_property6: { column: "rowguid" }
+      node8_property7: { column: "modifieddate" }
+    key: ["node8_property0"]
   - type: "NODE"
     node: "node9"
     table: "shoppingcartitem"
     properties:
-      nodeProperty0: { column: "shoppingcartitemid" }
-      nodeProperty1: { column: "shoppingcartid" }
-      nodeProperty2: { column: "quantity" }
-      nodeProperty3: { column: "datecreated" }
-      nodeProperty4: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node9_property0: { column: "shoppingcartitemid" }
+      node9_property1: { column: "shoppingcartid" }
+      node9_property2: { column: "quantity" }
+      node9_property3: { column: "datecreated" }
+      node9_property4: { column: "modifieddate" }
+    key: ["node9_property0"]
   - type: "NODE"
     node: "node10"
     table: "specialoffer"
     properties:
-      nodeProperty0: { column: "specialofferid" }
-      nodeProperty1: { column: "description" }
-      nodeProperty2: { column: "discountpct" }
-      nodeProperty3: { column: "type" }
-      nodeProperty4: { column: "category" }
-      nodeProperty5: { column: "startdate" }
-      nodeProperty6: { column: "enddate" }
-      nodeProperty7: { column: "minqty" }
-      nodeProperty8: { column: "maxqty" }
-      nodeProperty9: { column: "rowguid" }
-      nodeProperty10: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node10_property0: { column: "specialofferid" }
+      node10_property1: { column: "description" }
+      node10_property2: { column: "discountpct" }
+      node10_property3: { column: "type" }
+      node10_property4: { column: "category" }
+      node10_property5: { column: "startdate" }
+      node10_property6: { column: "enddate" }
+      node10_property7: { column: "minqty" }
+      node10_property8: { column: "maxqty" }
+      node10_property9: { column: "rowguid" }
+      node10_property10: { column: "modifieddate" }
+    key: ["node10_property0"]
   - type: "NODE"
     node: "node11"
     table: "store"
     properties:
-      nodeProperty0: { column: "businessentityid" }
-      nodeProperty1: { column: "rowguid" }
-      nodeProperty2: { column: "modifieddate" }
-    key: ["nodeProperty0"]
+      node11_property0: { column: "businessentityid" }
+      node11_property1: { column: "rowguid" }
+      node11_property2: { column: "modifieddate" }
+    key: ["node11_property0"]
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "customer"
     start_node:
       node: "node3"
       properties:
-        nodeProperty0: { column: "customerid" }
+        node3_property0: { column: "customerid" }
     end_node:
       node: "node8"
       properties:
-        nodeProperty0: { column: "territoryid" }
+        node8_property0: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "customer"
     start_node:
       node: "node3"
       properties:
-        nodeProperty0: { column: "customerid" }
+        node3_property0: { column: "customerid" }
     end_node:
       node: "node11"
       properties:
-        nodeProperty0: { column: "storeid" }
+        node11_property0: { column: "storeid" }
   - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "salesorderheader"
     start_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "salesorderid" }
+        node4_property0: { column: "salesorderid" }
     end_node:
       node: "node0"
       properties:
-        nodeProperty0: { column: "creditcardid" }
+        node0_property0: { column: "creditcardid" }
   - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "salesorderheader"
     start_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "salesorderid" }
+        node4_property0: { column: "salesorderid" }
     end_node:
       node: "node2"
       properties:
-        nodeProperty0: { column: "currencyrateid" }
+        node2_property0: { column: "currencyrateid" }
   - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "salesorderheader"
     start_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "salesorderid" }
+        node4_property0: { column: "salesorderid" }
     end_node:
       node: "node3"
       properties:
-        nodeProperty0: { column: "customerid" }
+        node3_property0: { column: "customerid" }
   - type: "RELATIONSHIP"
     relationship: "relationship5"
     table: "salesorderheader"
     start_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "salesorderid" }
+        node4_property0: { column: "salesorderid" }
     end_node:
       node: "node5"
       properties:
-        nodeProperty0: { column: "salespersonid" }
+        node5_property0: { column: "salespersonid" }
   - type: "RELATIONSHIP"
     relationship: "relationship6"
     table: "salesorderheader"
     start_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "salesorderid" }
+        node4_property0: { column: "salesorderid" }
     end_node:
       node: "node8"
       properties:
-        nodeProperty0: { column: "territoryid" }
+        node8_property0: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship7"
     table: "salesorderheadersalesreason"
     start_node:
       node: "node4"
       properties:
-        nodeProperty0: { column: "salesorderid" }
+        node4_property0: { column: "salesorderid" }
     end_node:
       node: "node6"
       properties:
-        nodeProperty0: { column: "salesreasonid" }
+        node6_property0: { column: "salesreasonid" }
     properties:
-      relationshipProperty0: { column: "modifieddate" }
+      relationship7_property0: { column: "modifieddate" }
   - type: "RELATIONSHIP"
     relationship: "relationship8"
     table: "salesperson"
     start_node:
       node: "node5"
       properties:
-        nodeProperty0: { column: "businessentityid" }
+        node5_property0: { column: "businessentityid" }
     end_node:
       node: "node8"
       properties:
-        nodeProperty0: { column: "territoryid" }
+        node8_property0: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "relationship9"
     table: "store"
     start_node:
       node: "node11"
       properties:
-        nodeProperty0: { column: "businessentityid" }
+        node11_property0: { column: "businessentityid" }
     end_node:
       node: "node5"
       properties:
-        nodeProperty0: { column: "salespersonid" }
+        node5_property0: { column: "salespersonid" }
