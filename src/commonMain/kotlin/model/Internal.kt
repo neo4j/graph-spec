@@ -83,9 +83,7 @@ object Internal {
 
     /**
      * Converts shorthand constraints into long-hand
-     * 1. Doesn't check or transform (e.g. for overlapping)
-     * 2. Should be called before other internal calls to avoid using
-     *  internal names in predictableId
+     * Doesn't check or transform (e.g. for overlapping)
      */
     private fun <C : Constraint> internaliseProperties(
         constraints: MutableMap<String, C>,
