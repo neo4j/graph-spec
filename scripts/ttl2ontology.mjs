@@ -84,7 +84,7 @@ for (const c of classes) {
   for (const d of term(c, OWL + "disjointWith")) report.dropped.push(`${key}: disjointWith ${local(d.value)} (excluded)`);
 
   const ann = annotations(c);
-  if (ann) entry.extensions_map = { custom: [ann] };
+  if (ann) entry.extensions = { custom: [ann] };
   nodes[key] = entry;
   report.nodes.push(key);
 }
@@ -131,7 +131,7 @@ for (const p of props) {
       const spec = { type: neo4jType, reference: p };
       if (isIfp) spec.unique = true; // IFP: value identifies the subject -> unique
       if (comment) spec.description = comment;
-      if (exts.length) spec.extensions_map = { custom: exts };
+      if (exts.length) spec.extensions = { custom: exts };
       node.properties[name] = spec;
     }
     report.properties.push(`${name} -> ${targets.map(local).join(", ")} (${neo4jType}${isIfp ? ", unique" : ""})`);
@@ -153,20 +153,22 @@ for (const p of props) {
       continue;
     }
     const relType = upperSnake(name);
-    const card = isFp && isIfp ? "ONE_TO_ONE" : isFp ? "MANY_TO_ONE" : isIfp ? "ONE_TO_MANY" : undefined;
+    // FunctionalProperty: at most one value per subject (to side); InverseFunctionalProperty: value identifies the subject (from side)
     for (const d of doms) {
       for (const r of rangesOk) {
         // one entry per endpoint pair; entries sharing a type sit under their own id keys
         const entry = { type: relType, reference: p, from: { node: local(d) }, to: { node: local(r) } };
-        if (card) entry.cardinality_type = card;
+        if (isFp) entry.to.max_count = 1;
+        if (isIfp) entry.from.max_count = 1;
         if (comment) entry.description = comment;
         const label = first(p, RDFS + "label");
         if (label && label !== relType) entry.aliases = [label];
-        if (exts.length) entry.extensions_map = { custom: exts };
+        if (exts.length) entry.extensions = { custom: exts };
         (relationships[relType] ??= []);
         if (!relationships[relType].some((e) => e.from.node === entry.from.node && e.to.node === entry.to.node)) {
           relationships[relType].push(entry);
-          report.relationships.push(`${relType}: ${local(d)} -> ${local(r)}${card ? ` (${card})` : ""}`);
+          const marks = [isFp && "to.max_count=1", isIfp && "from.max_count=1"].filter(Boolean).join(", ");
+          report.relationships.push(`${relType}: ${local(d)} -> ${local(r)}${marks ? ` (${marks})` : ""}`);
         }
       }
     }
@@ -207,7 +209,7 @@ const doc = {
   description: first(ontSubject, "http://purl.org/dc/elements/1.1/description") ?? "Friend of a Friend vocabulary, converted from RDF",
   nodes,
   relationships: relsByKey,
-  extensions_map: { custom },
+  extensions: { custom },
 };
 
 writeFileSync(output, JSON.stringify(doc, null, 2) + "\n");

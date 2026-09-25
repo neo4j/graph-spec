@@ -8,7 +8,7 @@ nodes:
     reference: http://xmlns.com/foaf/0.1/LabelProperty
     description: A foaf:LabelProperty is any RDF property with texual values that serve as labels.
     label: LabelProperty
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -20,7 +20,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -37,7 +37,7 @@ nodes:
     aliases:
       - schema.org/Person
       - www.w3.org/2000/10/swap/pim/contact#Person
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -49,7 +49,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/geekcode
         description: A textual geekcode for this person, see http://www.geekcode.com/geek.html
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -60,7 +60,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -71,7 +71,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/firstName
         description: The first name of a person.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -82,7 +82,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/lastName
         description: The last name of a person.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -93,7 +93,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/surname
         description: The surname of some person.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -104,7 +104,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/family_name
         description: The family name of some person.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -115,7 +115,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/familyName
         description: The family name of some person.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -126,7 +126,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/plan
         description: A .plan comment, in the tradition of finger and '.plan' files.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -137,7 +137,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/myersBriggs
         description: A Myers Briggs (MBTI) personality classification.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -150,7 +150,7 @@ nodes:
     label: Agent
     aliases:
       - purl.org/dc/terms/Agent
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -162,7 +162,7 @@ nodes:
         reference: http://xmlns.com/foaf/0.1/mbox_sha1sum
         unique: true
         description: The sha1sum of the URI of an Internet mailbox associated with exactly one owner, the  first owner of the mailbox.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -173,7 +173,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/gender
         description: The gender of this Agent (typically but not necessarily 'male' or 'female').
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -185,7 +185,7 @@ nodes:
         reference: http://xmlns.com/foaf/0.1/jabberID
         unique: true
         description: A jabber ID for something.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -197,7 +197,7 @@ nodes:
         reference: http://xmlns.com/foaf/0.1/aimChatID
         unique: true
         description: An AIM chat ID
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -208,7 +208,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/skypeID
         description: A Skype ID
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -220,7 +220,7 @@ nodes:
         reference: http://xmlns.com/foaf/0.1/icqChatID
         unique: true
         description: An ICQ chat ID
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -232,7 +232,7 @@ nodes:
         reference: http://xmlns.com/foaf/0.1/yahooChatID
         unique: true
         description: A Yahoo chat ID
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -244,7 +244,7 @@ nodes:
         reference: http://xmlns.com/foaf/0.1/msnChatID
         unique: true
         description: An MSN chat ID
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -255,7 +255,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -266,7 +266,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/birthday
         description: The birthday of this Agent, represented in mm-dd string form, eg. '12-31'.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -277,7 +277,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/age
         description: The age in years of some agent.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -288,7 +288,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/status
         description: A string expressing what the user is happy for the general public (normally) to know about their current activity.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -301,7 +301,7 @@ nodes:
     label: Document
     aliases:
       - schema.org/CreativeWork
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -313,7 +313,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/sha1
         description: A sha1sum hash, in hex.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -324,7 +324,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -338,7 +338,7 @@ nodes:
       identifier: Organization
       implied:
         - Agent
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -350,7 +350,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -364,7 +364,7 @@ nodes:
       identifier: Group
       implied:
         - Agent
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -375,7 +375,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -386,7 +386,7 @@ nodes:
     reference: http://xmlns.com/foaf/0.1/Project
     description: A project (a collective endeavour of some kind).
     label: Project
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -398,7 +398,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -414,7 +414,7 @@ nodes:
         - Document
     aliases:
       - schema.org/ImageObject
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -426,7 +426,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -440,7 +440,7 @@ nodes:
       identifier: PersonalProfileDocument
       implied:
         - Document
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -451,7 +451,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -462,7 +462,7 @@ nodes:
     reference: http://xmlns.com/foaf/0.1/OnlineAccount
     description: An online account.
     label: OnlineAccount
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -474,7 +474,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -485,7 +485,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/accountName
         description: Indicates the name (identifier) associated with this online account.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -499,7 +499,7 @@ nodes:
       identifier: OnlineGamingAccount
       implied:
         - OnlineAccount
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -511,7 +511,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -525,7 +525,7 @@ nodes:
       identifier: OnlineEcommerceAccount
       implied:
         - OnlineAccount
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -537,7 +537,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -551,7 +551,7 @@ nodes:
       identifier: OnlineChatAccount
       implied:
         - OnlineAccount
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -563,7 +563,7 @@ nodes:
         type: STRING
         reference: http://xmlns.com/foaf/0.1/name
         description: A name for some thing.
-        extensions_map:
+        extensions:
           custom:
             - type: rdfs:annotations
               definition:
@@ -576,13 +576,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: LabelProperty
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -594,13 +594,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: Person
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -612,13 +612,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: Agent
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -630,13 +630,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: Document
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -648,13 +648,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: Organization
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -666,13 +666,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: Group
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -684,13 +684,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: Project
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -702,13 +702,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: Image
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -720,13 +720,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: PersonalProfileDocument
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -738,13 +738,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: OnlineAccount
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -756,13 +756,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: OnlineGamingAccount
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -774,13 +774,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: OnlineEcommerceAccount
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -792,13 +792,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/homepage
     from:
       node: OnlineChatAccount
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A homepage for some thing.
     aliases:
       - homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -810,13 +810,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/weblog
     from:
       node: Agent
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A weblog of some thing (whether person, group, company etc.).
     aliases:
       - weblog
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -828,13 +828,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/openid
     from:
       node: Agent
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: An OpenID for an Agent.
     aliases:
       - openid
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -851,7 +851,7 @@ relationships:
     description: A tipjar document for this agent, describing means for payment and reward.
     aliases:
       - tipjar
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -868,7 +868,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -885,7 +885,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -902,7 +902,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -919,7 +919,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -936,7 +936,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -953,7 +953,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -970,7 +970,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -987,7 +987,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1004,7 +1004,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1021,7 +1021,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1038,7 +1038,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1055,7 +1055,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1072,7 +1072,7 @@ relationships:
     description: An agent that  made this thing.
     aliases:
       - maker
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1089,7 +1089,7 @@ relationships:
     description: An image that can be used to represent some thing (ie. those depictions which are particularly representative of something, eg. one's photo on a homepage).
     aliases:
       - image
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1106,7 +1106,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1123,7 +1123,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1140,7 +1140,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1157,7 +1157,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1174,7 +1174,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1191,7 +1191,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1208,7 +1208,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1225,7 +1225,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1242,7 +1242,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1259,7 +1259,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1276,7 +1276,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1293,7 +1293,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1310,7 +1310,7 @@ relationships:
     description: A depiction of some thing.
     aliases:
       - depiction
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1327,7 +1327,7 @@ relationships:
     description: A derived thumbnail image.
     aliases:
       - thumbnail
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1344,7 +1344,7 @@ relationships:
     description: A workplace homepage of some person; the homepage of an organization they work for.
     aliases:
       - workplace homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1361,7 +1361,7 @@ relationships:
     description: A work info homepage of some person; a page about their work for some organization.
     aliases:
       - work info homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1378,7 +1378,7 @@ relationships:
     description: A homepage of a school attended by the person.
     aliases:
       - schoolHomepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1395,7 +1395,7 @@ relationships:
     description: A person known by this person (indicating some level of reciprocated interaction between the parties).
     aliases:
       - knows
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1412,7 +1412,7 @@ relationships:
     description: A page about a topic of interest to this person.
     aliases:
       - interest
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1429,7 +1429,7 @@ relationships:
     description: A link to the publications of this person.
     aliases:
       - publications
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1441,13 +1441,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: LabelProperty
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1459,13 +1459,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: Person
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1477,13 +1477,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: Agent
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1495,13 +1495,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: Document
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1513,13 +1513,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: Organization
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1531,13 +1531,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: Group
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1549,13 +1549,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: Project
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1567,13 +1567,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: Image
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1585,13 +1585,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: PersonalProfileDocument
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1603,13 +1603,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: OnlineAccount
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1621,13 +1621,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: OnlineGamingAccount
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1639,13 +1639,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: OnlineEcommerceAccount
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1657,13 +1657,13 @@ relationships:
     reference: http://xmlns.com/foaf/0.1/isPrimaryTopicOf
     from:
       node: OnlineChatAccount
+      max_count: 1
     to:
       node: Document
-    cardinality_type: ONE_TO_MANY
     description: A document that this thing is the primary topic of.
     aliases:
       - is primary topic of
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1680,7 +1680,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1697,7 +1697,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1714,7 +1714,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1731,7 +1731,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1748,7 +1748,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1765,7 +1765,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1782,7 +1782,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1799,7 +1799,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1816,7 +1816,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1833,7 +1833,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1850,7 +1850,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1867,7 +1867,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1884,7 +1884,7 @@ relationships:
     description: A page or document about this thing.
     aliases:
       - page
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1901,7 +1901,7 @@ relationships:
     description: Indicates an account held by this agent.
     aliases:
       - account
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1918,7 +1918,7 @@ relationships:
     description: Indicates an account held by this agent.
     aliases:
       - account
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1935,7 +1935,7 @@ relationships:
     description: Indicates a homepage of the service provide for this online account.
     aliases:
       - account service homepage
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
@@ -1952,14 +1952,14 @@ relationships:
     description: Indicates a member of a Group
     aliases:
       - member
-    extensions_map:
+    extensions:
       custom:
         - type: rdfs:annotations
           definition:
             label: member
             term_status: stable
             isDefinedBy: http://xmlns.com/foaf/0.1/
-extensions_map:
+extensions:
   custom:
     - type: rdf:source
       name: foaf

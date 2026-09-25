@@ -9,39 +9,57 @@
       "label": "Person",
       "description": "A human being known to the organisation",
       "properties": {
-        "id": { "type": "STRING", "key": true },
+        "id": {
+          "type": "STRING",
+          "key": true
+        },
         "email": {
           "type": "STRING",
           "unique": true,
           "pattern": "^[^@\\s]+@[^@\\s]+$",
           "description": "Primary work email",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "governance:pii",
-                "definition": { "classification": "restricted", "owner": "people-ops" }
+                "definition": {
+                  "classification": "restricted",
+                  "owner": "people-ops"
+                }
               }
             ]
           }
         },
-        "name": { "type": "STRING", "mustExist": true }
+        "name": {
+          "type": "STRING",
+          "mustExist": true
+        }
       }
     },
     "Employee": {
       "labels": {
         "identifier": "Employee",
-        "implied": ["Person"]
+        "implied": [
+          "Person"
+        ]
       },
       "description": "A person employed by the organisation",
-      "aliases": ["Staff member"],
+      "aliases": [
+        "Staff member"
+      ],
       "properties": {
-        "employee_id": { "type": "STRING", "key": true },
+        "employee_id": {
+          "type": "STRING",
+          "key": true
+        },
         "skills": {
-          "type": { "kind": "list", "items": "STRING" },
-          "aliases": ["competencies"]
+          "type": "LIST<STRING>",
+          "aliases": [
+            "competencies"
+          ]
         },
         "face_embedding": {
-          "type": { "kind": "vector", "items": "FLOAT" },
+          "type": "VECTOR<FLOAT>",
           "description": "Badge-photo embedding; dimension unconstrained at authoring time"
         }
       }
@@ -49,23 +67,46 @@
     "Contractor": {
       "labels": {
         "identifier": "Contractor",
-        "implied": ["Person"]
+        "implied": [
+          "Person"
+        ]
       },
       "properties": {
-        "contract_id": { "type": "STRING", "key": true }
+        "contract_id": {
+          "type": "STRING",
+          "key": true
+        }
       }
     },
     "Department": {
       "label": "Department",
       "properties": {
-        "name": { "type": "STRING", "mustExist": true },
-        "region": { "type": "STRING", "one_of": ["EMEA", "AMER", "APAC"] },
-        "cost_center": { "type": "INTEGER" }
+        "name": {
+          "type": "STRING",
+          "mustExist": true
+        },
+        "region": {
+          "type": "STRING",
+          "one_of": [
+            "EMEA",
+            "AMER",
+            "APAC"
+          ]
+        },
+        "cost_center": {
+          "type": "INTEGER"
+        }
       },
       "constraints": [
-        { "kind": "key", "properties": ["name", "region"] }
+        {
+          "constraint_type": "key",
+          "properties": [
+            "name",
+            "region"
+          ]
+        }
       ],
-      "extensions_map": {
+      "extensions": {
         "neo4j:display": {
           "color": "#4c9aff",
           "icon": "building"
@@ -73,7 +114,10 @@
         "neo4j:index": {
           "name": "department_name_region",
           "kind": "range",
-          "properties": ["name", "region"]
+          "properties": [
+            "name",
+            "region"
+          ]
         }
       }
     }
@@ -81,82 +125,130 @@
   "relationships": {
     "WORKS_IN_EMPLOYEE": {
       "type": "WORKS_IN",
-      "from": { "node": "Employee" },
-      "to": { "node": "Department" },
-      "cardinality_type": "MANY_TO_ONE",
+      "from": {
+        "node": "Employee"
+      },
+      "to": {
+        "node": "Department",
+        "max_count": 1
+      },
       "description": "Current organisational home",
       "properties": {
-        "since": { "type": "DATE" },
-        "fte": { "type": "FLOAT", "description": "Fraction of full-time employment" }
+        "since": {
+          "type": "DATE"
+        },
+        "fte": {
+          "type": "FLOAT",
+          "description": "Fraction of full-time employment"
+        }
       },
-      "extensions_map": {
-        "neo4j:tools": [
-          {
-            "kind": "canonicalQuery",
-            "name": "colleaguesOf",
-            "description": "Colleagues of an employee across their departments",
-            "cypher": "MATCH (e:Employee)-[:WORKS_IN]->(d:Department)<-[:WORKS_IN]-(c:Employee) WHERE e.employee_id = $id RETURN c"
-          }
-        ]
-      }
+      "tools": [
+        {
+          "type": "canonicalQuery",
+          "name": "colleaguesOf",
+          "description": "Colleagues of an employee across their departments",
+          "cypher": "MATCH (e:Employee)-[:WORKS_IN]->(d:Department)<-[:WORKS_IN]-(c:Employee) WHERE e.employee_id = $id RETURN c"
+        }
+      ]
     },
     "WORKS_IN_CONTRACTOR": {
       "type": "WORKS_IN",
-      "from": { "node": "Contractor" },
-      "to": { "node": "Department" },
-      "cardinality_type": "MANY_TO_ONE",
+      "from": {
+        "node": "Contractor"
+      },
+      "to": {
+        "node": "Department",
+        "max_count": 1
+      },
       "description": "Current organisational home",
       "properties": {
-        "po_number": { "type": "STRING", "pattern": "^PO-[0-9]{6}$" }
+        "po_number": {
+          "type": "STRING",
+          "pattern": "^PO-[0-9]{6}$"
+        }
       }
     },
     "MANAGES": {
       "type": "MANAGES",
-      "from": { "node": "Employee" },
-      "to": { "node": "Department" },
-      "cardinality_type": "ONE_TO_ONE",
+      "from": {
+        "node": "Employee",
+        "max_count": 1
+      },
+      "to": {
+        "node": "Department",
+        "max_count": 1
+      },
       "constraints": [
-        { "kind": "unique", "properties": ["since", "note"] }
+        {
+          "constraint_type": "unique",
+          "name": "unique_manager_since_note",
+          "properties": [
+            "since",
+            "note"
+          ]
+        }
       ],
       "properties": {
-        "since": { "type": "DATE", "mustExist": true },
-        "note": { "type": "STRING" }
+        "since": {
+          "type": "DATE",
+          "mustExist": true
+        },
+        "note": {
+          "type": "STRING"
+        }
       }
     },
     "REPORTS_TO": {
       "type": "REPORTS_TO",
-      "from": { "node": "Employee" },
-      "to": { "node": "Employee" },
-      "cardinality_type": "MANY_TO_ONE"
+      "from": {
+        "node": "Employee"
+      },
+      "to": {
+        "node": "Employee",
+        "max_count": 1
+      }
     },
     "SUPPORTS": {
       "type": "SUPPORTS",
-      "from": { "node": "Department" },
-      "to": { "node": "Department" },
-      "cardinality_type": "MANY_TO_MANY",
+      "from": {
+        "node": "Department"
+      },
+      "to": {
+        "node": "Department"
+      },
       "description": "Cross-department service relationships"
     },
     "STAFFS": {
       "type": "STAFFS",
-      "from": { "node": "Department" },
-      "to": { "node": "Contractor" },
-      "cardinality_type": "ONE_TO_MANY"
+      "from": {
+        "node": "Department",
+        "max_count": 1
+      },
+      "to": {
+        "node": "Contractor"
+      }
     }
   },
-  "extensions_map": {
+  "extensions": {
     "neo4j-importer:table": {
       "name": "employees",
       "source": "hr/workday",
       "columns": {
-        "employee_id": { "type": "varchar" },
-        "full_name": { "type": "varchar" }
+        "employee_id": {
+          "type": "varchar"
+        },
+        "full_name": {
+          "type": "varchar"
+        }
       }
     },
     "custom": [
       {
         "type": "governance:retention",
         "$schema": "https://example.com/ontology-extensions/governance-retention/0.1.0/schema.json",
-        "definition": { "review_after_days": 365 }
+        "definition": {
+          "review_after_days": 365
+        }
       }
     ]
   }
