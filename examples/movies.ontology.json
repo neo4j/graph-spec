@@ -6,6 +6,7 @@
   "description": "Movie domain ontology",
   "nodes": {
     "Actor": {
+      "label": "Actor",
       "description": "A person who acts in films",
       "aliases": ["Performer"],
       "properties": {
@@ -17,7 +18,7 @@
         },
         "status": {
           "type": "STRING",
-          "enum": ["active", "retired"]
+          "one_of": ["active", "retired"]
         },
         "imdb_id": {
           "type": "STRING",
@@ -25,25 +26,27 @@
           "unique": true
         }
       },
-      "extensions": [
-        {
-          "type": "neo4j:index",
+      "extensions_map": {
+        "neo4j:index": {
           "name": "actor_names",
-          "definition": { "properties": ["name"] }
+          "properties": ["name"]
         },
-        {
-          "type": "ui:display",
-          "definition": { "color": "#e06209", "caption": "name" }
+        "neo4j:display": {
+          "color": "#e06209",
+          "caption": "name"
         }
-      ]
+      }
     },
-    "Person": {
+    "person-id-field": {
+      "reference": "https://example.com/external/Person",
+      "label": "Person",
       "properties": {
         "id": { "type": "STRING", "key": true }
       }
     },
-    "Employee": {
+    "employee": {
       "labels": {
+        "identifier": "Employee",
         "implied": ["Person"],
         "optional": ["Contractor"]
       },
@@ -52,16 +55,19 @@
       }
     },
     "Movie": {
+      "label": "Movie",
       "properties": {
         "id": { "type": "STRING", "key": true },
-        "title": { "type": { "kind": "scalar", "scalar": "STRING" }, "mustExist": true },
+        "title": { "type": "STRING", "mustExist": true },
         "embedding": {
           "type": { "kind": "vector", "items": "FLOAT", "dimension": 1042 },
-          "description": "Plot embedding"
+          "description": "Plot embedding",
+          "reference": "https://example.com/external/embedding"
         }
       }
     },
     "Studio": {
+      "label": "Studio",
       "properties": {
         "id": { "type": "STRING", "key": true },
         "name": { "type": "STRING", "mustExist": true }
@@ -70,6 +76,7 @@
   },
   "relationships": {
     "ACTED_IN": {
+      "type": "ACTED_IN",
       "from": { "node": "Actor" },
       "to": { "node": "Movie" },
       "cardinality_type": "MANY_TO_ONE",
@@ -77,45 +84,43 @@
       "properties": {
         "roles": { "type": { "kind": "list", "items": "STRING" } }
       },
-      "extensions": [
-        {
-          "type": "tool",
-          "name": "findCoActors",
-          "kind": "canonicalQuery",
-          "definition": {
+      "extensions_map": {
+        "neo4j:tools": [
+          {
+            "kind": "canonicalQuery",
+            "name": "findCoActors",
             "description": "Actors who shared a film with a given actor",
             "cypher": "MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) WHERE a.name = $name RETURN co"
           }
-        }
-      ]
-    },
-    "PRODUCED": [
-      {
-        "from": { "node": "Studio" },
-        "to": { "node": "Movie" },
-        "cardinality_type": "ONE_TO_MANY"
-      },
-      {
-        "from": { "node": "Person" },
-        "to": { "node": "Movie" },
-        "cardinality_type": "MANY_TO_ONE",
-        "description": "Individual producer credit"
+        ]
       }
-    ]
+    },
+    "PRODUCED_STUDIO": {
+      "type": "PRODUCED",
+      "from": { "node": "Studio" },
+      "to": { "node": "Movie" },
+      "cardinality_type": "ONE_TO_MANY"
+    },
+    "PRODUCED_PERSON": {
+      "type": "PRODUCED",
+      "from": { "node": "person-id-field" },
+      "to": { "node": "Movie" },
+      "cardinality_type": "MANY_TO_ONE",
+      "description": "Individual producer credit"
+    }
   },
-  "extensions": [
-    {
-      "type": "neo4j-importer:table",
+  "extensions_map": {
+    "neo4j-importer:table": {
       "$schema": "https://neo4j.com/ontology-spec/extensions/neo4j-importer-table/0.1.0/schema.json",
       "name": "actors",
-      "definition": {
-        "source": "sql/postgres",
-        "columns": { "actor_id": { "type": "varchar" } }
-      }
+      "source": "sql/postgres",
+      "columns": { "actor_id": { "type": "varchar" } }
     },
-    {
-      "type": "neo4j-importer:mapping",
-      "definition": { "kind": "node", "node": "Actor", "table": "actors", "key": ["actor_id"] }
+    "neo4j-importer:mapping": {
+      "kind": "node",
+      "node": "Actor",
+      "table": "actors",
+      "key": ["actor_id"]
     }
-  ]
+  }
 }

@@ -51,7 +51,7 @@ const classes = subjects.filter(isClass);
 const classSet = new Set(classes);
 const props = subjects.filter((s) => isProp(s) && !isClass(s));
 
-// --- annotations carried as an extension (doc: seeAlso/isDefinedBy carried, not core)
+// --- annotations carried as a custom extension (doc: seeAlso/isDefinedBy carried, not core)
 const annotations = (s) => {
   const def = {};
   const label = first(s, RDFS + "label");
@@ -65,17 +65,18 @@ const annotations = (s) => {
   return Object.keys(def).length ? { type: "rdfs:annotations", definition: def } : null;
 };
 
-// --- nodes
+// --- nodes (map key is a local id; the label lives in label / labels.identifier)
 const nodes = {};
 for (const c of classes) {
   const key = local(c);
-  const entry = {};
+  const entry = { reference: c };
   const comment = first(c, RDFS + "comment");
   if (comment) entry.description = comment;
 
   const implied = term(c, RDFS + "subClassOf").map((o) => o.value).filter((s) => classSet.has(s));
   const extSupers = term(c, RDFS + "subClassOf").map((o) => o.value).filter((s) => !classSet.has(s));
-  if (implied.length) entry.labels = { implied: implied.map(local) };
+  if (implied.length) entry.labels = { identifier: key, implied: implied.map(local) };
+  else entry.label = key;
   for (const s of extSupers) report.dropped.push(`${key}: subClassOf external ${s} (hierarchies excluded; only internal supers flatten to implied)`);
 
   const equiv = term(c, OWL + "equivalentClass").map((o) => o.value);
@@ -83,7 +84,7 @@ for (const c of classes) {
   for (const d of term(c, OWL + "disjointWith")) report.dropped.push(`${key}: disjointWith ${local(d.value)} (excluded)`);
 
   const ann = annotations(c);
-  if (ann) entry.extensions = [ann];
+  if (ann) entry.extensions_map = { custom: [ann] };
   nodes[key] = entry;
   report.nodes.push(key);
 }
@@ -127,10 +128,10 @@ for (const p of props) {
     for (const d of targets) {
       const node = nodes[local(d)];
       node.properties ??= {};
-      const spec = { type: neo4jType };
+      const spec = { type: neo4jType, reference: p };
       if (isIfp) spec.unique = true; // IFP: value identifies the subject -> unique
       if (comment) spec.description = comment;
-      if (exts.length) spec.extensions = exts;
+      if (exts.length) spec.extensions_map = { custom: exts };
       node.properties[name] = spec;
     }
     report.properties.push(`${name} -> ${targets.map(local).join(", ")} (${neo4jType}${isIfp ? ", unique" : ""})`);
@@ -155,13 +156,13 @@ for (const p of props) {
     const card = isFp && isIfp ? "ONE_TO_ONE" : isFp ? "MANY_TO_ONE" : isIfp ? "ONE_TO_MANY" : undefined;
     for (const d of doms) {
       for (const r of rangesOk) {
-        const entry = { from: { node: local(d) }, to: { node: local(r) } };
+        // one entry per endpoint pair; entries sharing a type sit under their own id keys
+        const entry = { type: relType, reference: p, from: { node: local(d) }, to: { node: local(r) } };
         if (card) entry.cardinality_type = card;
         if (comment) entry.description = comment;
         const label = first(p, RDFS + "label");
         if (label && label !== relType) entry.aliases = [label];
-        if (exts.length) entry.extensions = exts;
-        // one entry per endpoint pair; a type's identity is the (type, from, to) triple
+        if (exts.length) entry.extensions_map = { custom: exts };
         (relationships[relType] ??= []);
         if (!relationships[relType].some((e) => e.from.node === entry.from.node && e.to.node === entry.to.node)) {
           relationships[relType].push(entry);
@@ -172,23 +173,31 @@ for (const p of props) {
   }
 }
 
-// collapse one-entry lists to the shorthand single-object form
-for (const [k, v] of Object.entries(relationships)) {
-  if (v.length === 1) relationships[k] = v[0];
+// emit id keys: a type with a single entry keeps the bare type as its key;
+// a type spanning several endpoint pairs gets one TYPE_FROM_TO key per pair
+const relsByKey = {};
+for (const [relType, entries] of Object.entries(relationships)) {
+  if (entries.length === 1) {
+    relsByKey[relType] = entries[0];
+  } else {
+    for (const e of entries) {
+      relsByKey[`${relType}_${upperSnake(e.from.node)}_${upperSnake(e.to.node)}`] = e;
+    }
+  }
 }
 
 // --- assemble
-const extensions = [
+const custom = [
   {
     type: "rdf:source",
     name: "foaf",
     definition: {
       namespace: NS,
-      note: "Original element URIs are namespace + map key. Preserved per the URI/namespace discussion; static identity, not lineage.",
+      note: "Original element URIs are carried per element in the reference field; the namespace is recorded here for prefix regeneration. Static identity, not lineage.",
     },
   },
 ];
-if (unmapped.length) extensions.push({ type: "rdf:unmapped", definition: { properties: unmapped } });
+if (unmapped.length) custom.push({ type: "rdf:unmapped", definition: { properties: unmapped } });
 
 const doc = {
   $schema: "https://neo4j.com/ontology-spec/1.0.0/schema.json",
@@ -197,8 +206,8 @@ const doc = {
   name: "foaf",
   description: first(ontSubject, "http://purl.org/dc/elements/1.1/description") ?? "Friend of a Friend vocabulary, converted from RDF",
   nodes,
-  relationships,
-  extensions,
+  relationships: relsByKey,
+  extensions_map: { custom },
 };
 
 writeFileSync(output, JSON.stringify(doc, null, 2) + "\n");
