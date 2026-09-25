@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
   "title": "Neo4j Ontology Specification v1",
-  "description": "Draft JSON Schema for the Ontology spec v1 proposal (2026-09-14 doc state). Envelope-only validation for extensions; definitions are never validated by this schema.",
+  "description": "Draft JSON Schema for the Ontology spec v1 proposal (2026-09-25 doc state). Nodes and relationships are keyed by local ids; the label/type lives inside the entry. First-party extensions ride extensions_map as named keys, custom extensions carry the fixed envelope under custom; extension payloads are never validated by this schema.",
   "type": "object",
   "required": ["$schema", "id", "version"],
   "additionalProperties": false,
@@ -25,23 +25,15 @@
     "description": { "type": "string" },
     "nodes": {
       "type": "object",
-      "description": "Map key is the node label.",
+      "description": "Map key is a local id, not the label. The label lives in label / labels.identifier, so label renames do not break references.",
       "additionalProperties": { "$ref": "#/$defs/node" }
     },
     "relationships": {
       "type": "object",
-      "description": "Map key is the relationship type. Value is a single entry (shorthand) or a list of entries, one per endpoint pair (normalized form). A relationship's identity is the triple (type, from, to).",
-      "additionalProperties": {
-        "oneOf": [
-          { "$ref": "#/$defs/relationshipEntry" },
-          { "type": "array", "items": { "$ref": "#/$defs/relationshipEntry" }, "minItems": 1 }
-        ]
-      }
+      "description": "Map key is a local id; the relationship type lives in the type field. Several keys may share a type across different endpoint pairs, but note graph-type enforcement keys on the type alone and cannot distinguish pairs yet.",
+      "additionalProperties": { "$ref": "#/$defs/relationshipEntry" }
     },
-    "extensions": {
-      "type": "array",
-      "items": { "$ref": "#/$defs/extension" }
-    }
+    "extensions_map": { "$ref": "#/$defs/extensionsMap" }
   },
   "$defs": {
     "scalarToken": {
@@ -49,9 +41,13 @@
       "enum": ["STRING", "INTEGER", "FLOAT", "BOOLEAN", "DATE", "TIME", "LOCALTIME", "DATETIME", "LOCALDATETIME", "DURATION", "POINT", "BYTES"]
     },
     "propertyType": {
-      "description": "A type object; scalars may use the bare-token shorthand. Element types are always scalars: no nesting.",
+      "description": "A type object; scalars may use the bare-token shorthand. Element types are always scalars: no nesting. 'any' opts the property out of type constraints (mixed value types).",
       "oneOf": [
         { "$ref": "#/$defs/scalarToken" },
+        {
+          "const": "any",
+          "description": "Mixed or unknown value types. No graph-type constraint is applied to this property."
+        },
         {
           "type": "object",
           "required": ["kind", "scalar"],
@@ -84,8 +80,10 @@
     },
     "labels": {
       "type": "object",
+      "required": ["identifier"],
       "additionalProperties": false,
       "properties": {
+        "identifier": { "type": "string", "description": "The identifying label." },
         "implied": { "type": "array", "items": { "type": "string" } },
         "optional": { "type": "array", "items": { "type": "string" } }
       }
@@ -112,14 +110,15 @@
         "mustExist": { "type": "boolean" },
         "unique": { "type": "boolean" },
         "key": { "type": "boolean" },
-        "enum": { "type": "array" },
+        "one_of": {
+          "type": "array",
+          "description": "Allowed values. JSON Schema's word. Default value support."
+        },
         "pattern": { "type": "string", "format": "regex" },
         "description": { "type": "string" },
         "aliases": { "type": "array", "items": { "type": "string" } },
-        "extensions": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/extension" }
-        }
+        "reference": { "$ref": "#/$defs/reference" },
+        "extensions_map": { "$ref": "#/$defs/extensionsMap" }
       }
     },
     "endpoint": {
@@ -127,11 +126,16 @@
       "required": ["node"],
       "additionalProperties": false,
       "properties": {
-        "node": { "type": "string", "description": "A node label from the nodes map." }
+        "node": { "type": "string", "description": "A node id from the nodes map." }
       }
     },
+    "reference": {
+      "type": "string",
+      "format": "uri",
+      "description": "A single informational URI pointing at an external definition of this element (e.g. the original RDF resource)."
+    },
     "extension": {
-      "description": "Fixed envelope, four fields: type required; $schema, name, definition optional. definition is free-form and never validated by this spec. Unknown extra fields are carried untouched.",
+      "description": "Custom extension envelope, four fields: type required; $schema, name, definition optional. definition is free-form and never validated by this spec. Unknown extra fields are carried untouched.",
       "type": "object",
       "required": ["type"],
       "properties": {
@@ -141,13 +145,27 @@
         "definition": true
       }
     },
+    "extensionsMap": {
+      "type": "object",
+      "description": "First-party extensions as named keys (neo4j:*), each shape defined by its owner and not validated by this spec; available in the ontology spec SDK. Custom extensions ride the fixed envelope under the reserved custom key.",
+      "properties": {
+        "custom": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/extension" }
+        }
+      },
+      "additionalProperties": true
+    },
     "node": {
       "type": "object",
       "additionalProperties": false,
+      "description": "Every node carries its label in label (simple case) or labels.identifier (when implied/optional labels exist). Not schema-enforced; a node with neither is meaningless.",
       "properties": {
+        "label": { "type": "string", "description": "The node label. Simple case; use labels when implied/optional labels exist." },
         "labels": { "$ref": "#/$defs/labels" },
         "description": { "type": "string" },
         "aliases": { "type": "array", "items": { "type": "string" } },
+        "reference": { "$ref": "#/$defs/reference" },
         "properties": {
           "type": "object",
           "additionalProperties": { "$ref": "#/$defs/property" }
@@ -156,17 +174,15 @@
           "type": "array",
           "items": { "$ref": "#/$defs/constraint" }
         },
-        "extensions": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/extension" }
-        }
+        "extensions_map": { "$ref": "#/$defs/extensionsMap" }
       }
     },
     "relationshipEntry": {
       "type": "object",
-      "required": ["from", "to"],
+      "required": ["type", "from", "to"],
       "additionalProperties": false,
       "properties": {
+        "type": { "type": "string", "description": "The relationship type. One-to-one with the map key in the common case; several keys may share a type across different endpoint pairs." },
         "from": { "$ref": "#/$defs/endpoint" },
         "to": { "$ref": "#/$defs/endpoint" },
         "cardinality_type": {
@@ -175,6 +191,7 @@
         },
         "description": { "type": "string" },
         "aliases": { "type": "array", "items": { "type": "string" } },
+        "reference": { "$ref": "#/$defs/reference" },
         "properties": {
           "type": "object",
           "additionalProperties": { "$ref": "#/$defs/property" }
@@ -183,10 +200,7 @@
           "type": "array",
           "items": { "$ref": "#/$defs/constraint" }
         },
-        "extensions": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/extension" }
-        }
+        "extensions_map": { "$ref": "#/$defs/extensionsMap" }
       }
     }
   }
