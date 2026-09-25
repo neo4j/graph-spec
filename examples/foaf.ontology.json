@@ -9,7 +9,7 @@
       "reference": "http://xmlns.com/foaf/0.1/LabelProperty",
       "description": "A foaf:LabelProperty is any RDF property with texual values that serve as labels.",
       "label": "LabelProperty",
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -26,7 +26,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -54,7 +54,7 @@
         "schema.org/Person",
         "www.w3.org/2000/10/swap/pim/contact#Person"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -71,7 +71,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/geekcode",
           "description": "A textual geekcode for this person, see http://www.geekcode.com/geek.html",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -88,7 +88,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -105,7 +105,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/firstName",
           "description": "The first name of a person.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -122,7 +122,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/lastName",
           "description": "The last name of a person.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -139,7 +139,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/surname",
           "description": "The surname of some person.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -156,7 +156,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/family_name",
           "description": "The family name of some person.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -173,7 +173,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/familyName",
           "description": "The family name of some person.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -190,7 +190,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/plan",
           "description": "A .plan comment, in the tradition of finger and '.plan' files.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -207,7 +207,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/myersBriggs",
           "description": "A Myers Briggs (MBTI) personality classification.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -229,7 +229,7 @@
       "aliases": [
         "purl.org/dc/terms/Agent"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -246,7 +246,7 @@
           "reference": "http://xmlns.com/foaf/0.1/mbox_sha1sum",
           "unique": true,
           "description": "The sha1sum of the URI of an Internet mailbox associated with exactly one owner, the  first owner of the mailbox.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -263,7 +263,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/gender",
           "description": "The gender of this Agent (typically but not necessarily 'male' or 'female').",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -281,7 +281,7 @@
           "reference": "http://xmlns.com/foaf/0.1/jabberID",
           "unique": true,
           "description": "A jabber ID for something.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -299,7 +299,7 @@
           "reference": "http://xmlns.com/foaf/0.1/aimChatID",
           "unique": true,
           "description": "An AIM chat ID",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -316,7 +316,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/skypeID",
           "description": "A Skype ID",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -334,7 +334,7 @@
           "reference": "http://xmlns.com/foaf/0.1/icqChatID",
           "unique": true,
           "description": "An ICQ chat ID",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -352,7 +352,7 @@
           "reference": "http://xmlns.com/foaf/0.1/yahooChatID",
           "unique": true,
           "description": "A Yahoo chat ID",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -370,7 +370,7 @@
           "reference": "http://xmlns.com/foaf/0.1/msnChatID",
           "unique": true,
           "description": "An MSN chat ID",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -387,7 +387,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -404,7 +404,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/birthday",
           "description": "The birthday of this Agent, represented in mm-dd string form, eg. '12-31'.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -421,7 +421,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/age",
           "description": "The age in years of some agent.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -438,7 +438,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/status",
           "description": "A string expressing what the user is happy for the general public (normally) to know about their current activity.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -460,7 +460,7 @@
       "aliases": [
         "schema.org/CreativeWork"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -477,7 +477,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/sha1",
           "description": "A sha1sum hash, in hex.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -494,7 +494,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -518,7 +518,7 @@
           "Agent"
         ]
       },
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -535,7 +535,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -559,7 +559,7 @@
           "Agent"
         ]
       },
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -575,7 +575,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -594,7 +594,7 @@
       "reference": "http://xmlns.com/foaf/0.1/Project",
       "description": "A project (a collective endeavour of some kind).",
       "label": "Project",
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -611,7 +611,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -638,7 +638,7 @@
       "aliases": [
         "schema.org/ImageObject"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -655,7 +655,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -679,7 +679,7 @@
           "Document"
         ]
       },
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -695,7 +695,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -714,7 +714,7 @@
       "reference": "http://xmlns.com/foaf/0.1/OnlineAccount",
       "description": "An online account.",
       "label": "OnlineAccount",
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -731,7 +731,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -748,7 +748,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/accountName",
           "description": "Indicates the name (identifier) associated with this online account.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -772,7 +772,7 @@
           "OnlineAccount"
         ]
       },
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -789,7 +789,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -813,7 +813,7 @@
           "OnlineAccount"
         ]
       },
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -830,7 +830,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -854,7 +854,7 @@
           "OnlineAccount"
         ]
       },
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -871,7 +871,7 @@
           "type": "STRING",
           "reference": "http://xmlns.com/foaf/0.1/name",
           "description": "A name for some thing.",
-          "extensions_map": {
+          "extensions": {
             "custom": [
               {
                 "type": "rdfs:annotations",
@@ -892,17 +892,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "LabelProperty"
+        "node": "LabelProperty",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -919,17 +919,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "Person"
+        "node": "Person",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -946,17 +946,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "Agent"
+        "node": "Agent",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -973,17 +973,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "Document"
+        "node": "Document",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1000,17 +1000,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "Organization"
+        "node": "Organization",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1027,17 +1027,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "Group"
+        "node": "Group",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1054,17 +1054,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "Project"
+        "node": "Project",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1081,17 +1081,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "Image"
+        "node": "Image",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1108,17 +1108,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "PersonalProfileDocument"
+        "node": "PersonalProfileDocument",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1135,17 +1135,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "OnlineAccount"
+        "node": "OnlineAccount",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1162,17 +1162,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "OnlineGamingAccount"
+        "node": "OnlineGamingAccount",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1189,17 +1189,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "OnlineEcommerceAccount"
+        "node": "OnlineEcommerceAccount",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1216,17 +1216,17 @@
       "type": "HOMEPAGE",
       "reference": "http://xmlns.com/foaf/0.1/homepage",
       "from": {
-        "node": "OnlineChatAccount"
+        "node": "OnlineChatAccount",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A homepage for some thing.",
       "aliases": [
         "homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1243,17 +1243,17 @@
       "type": "WEBLOG",
       "reference": "http://xmlns.com/foaf/0.1/weblog",
       "from": {
-        "node": "Agent"
+        "node": "Agent",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A weblog of some thing (whether person, group, company etc.).",
       "aliases": [
         "weblog"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1270,17 +1270,17 @@
       "type": "OPENID",
       "reference": "http://xmlns.com/foaf/0.1/openid",
       "from": {
-        "node": "Agent"
+        "node": "Agent",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "An OpenID for an Agent.",
       "aliases": [
         "openid"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1306,7 +1306,7 @@
       "aliases": [
         "tipjar"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1332,7 +1332,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1358,7 +1358,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1384,7 +1384,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1410,7 +1410,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1436,7 +1436,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1462,7 +1462,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1488,7 +1488,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1514,7 +1514,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1540,7 +1540,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1566,7 +1566,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1592,7 +1592,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1618,7 +1618,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1644,7 +1644,7 @@
       "aliases": [
         "maker"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1670,7 +1670,7 @@
       "aliases": [
         "image"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1696,7 +1696,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1722,7 +1722,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1748,7 +1748,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1774,7 +1774,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1800,7 +1800,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1826,7 +1826,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1852,7 +1852,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1878,7 +1878,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1904,7 +1904,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1930,7 +1930,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1956,7 +1956,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -1982,7 +1982,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2008,7 +2008,7 @@
       "aliases": [
         "depiction"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2034,7 +2034,7 @@
       "aliases": [
         "thumbnail"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2060,7 +2060,7 @@
       "aliases": [
         "workplace homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2086,7 +2086,7 @@
       "aliases": [
         "work info homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2112,7 +2112,7 @@
       "aliases": [
         "schoolHomepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2138,7 +2138,7 @@
       "aliases": [
         "knows"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2164,7 +2164,7 @@
       "aliases": [
         "interest"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2190,7 +2190,7 @@
       "aliases": [
         "publications"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2207,17 +2207,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "LabelProperty"
+        "node": "LabelProperty",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2234,17 +2234,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "Person"
+        "node": "Person",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2261,17 +2261,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "Agent"
+        "node": "Agent",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2288,17 +2288,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "Document"
+        "node": "Document",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2315,17 +2315,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "Organization"
+        "node": "Organization",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2342,17 +2342,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "Group"
+        "node": "Group",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2369,17 +2369,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "Project"
+        "node": "Project",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2396,17 +2396,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "Image"
+        "node": "Image",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2423,17 +2423,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "PersonalProfileDocument"
+        "node": "PersonalProfileDocument",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2450,17 +2450,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "OnlineAccount"
+        "node": "OnlineAccount",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2477,17 +2477,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "OnlineGamingAccount"
+        "node": "OnlineGamingAccount",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2504,17 +2504,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "OnlineEcommerceAccount"
+        "node": "OnlineEcommerceAccount",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2531,17 +2531,17 @@
       "type": "IS_PRIMARY_TOPIC_OF",
       "reference": "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
       "from": {
-        "node": "OnlineChatAccount"
+        "node": "OnlineChatAccount",
+        "max_count": 1
       },
       "to": {
         "node": "Document"
       },
-      "cardinality_type": "ONE_TO_MANY",
       "description": "A document that this thing is the primary topic of.",
       "aliases": [
         "is primary topic of"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2567,7 +2567,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2593,7 +2593,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2619,7 +2619,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2645,7 +2645,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2671,7 +2671,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2697,7 +2697,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2723,7 +2723,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2749,7 +2749,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2775,7 +2775,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2801,7 +2801,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2827,7 +2827,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2853,7 +2853,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2879,7 +2879,7 @@
       "aliases": [
         "page"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2905,7 +2905,7 @@
       "aliases": [
         "account"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2931,7 +2931,7 @@
       "aliases": [
         "account"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2957,7 +2957,7 @@
       "aliases": [
         "account service homepage"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2983,7 +2983,7 @@
       "aliases": [
         "member"
       ],
-      "extensions_map": {
+      "extensions": {
         "custom": [
           {
             "type": "rdfs:annotations",
@@ -2997,7 +2997,7 @@
       }
     }
   },
-  "extensions_map": {
+  "extensions": {
     "custom": [
       {
         "type": "rdf:source",

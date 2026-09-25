@@ -16,7 +16,7 @@ nodes:
         unique: true
         pattern: ^[^@\s]+@[^@\s]+$
         description: Primary work email
-        extensions_map:
+        extensions:
           custom:
             - type: governance:pii
               definition:
@@ -38,15 +38,11 @@ nodes:
         type: STRING
         key: true
       skills:
-        type:
-          kind: list
-          items: STRING
+        type: LIST<STRING>
         aliases:
           - competencies
       face_embedding:
-        type:
-          kind: vector
-          items: FLOAT
+        type: VECTOR<FLOAT>
         description: Badge-photo embedding; dimension unconstrained at authoring time
   Contractor:
     labels:
@@ -72,11 +68,11 @@ nodes:
       cost_center:
         type: INTEGER
     constraints:
-      - kind: key
+      - constraint_type: key
         properties:
           - name
           - region
-    extensions_map:
+    extensions:
       neo4j:display:
         color: "#4c9aff"
         icon: building
@@ -93,7 +89,7 @@ relationships:
       node: Employee
     to:
       node: Department
-    cardinality_type: MANY_TO_ONE
+      max_count: 1
     description: Current organisational home
     properties:
       since:
@@ -101,19 +97,18 @@ relationships:
       fte:
         type: FLOAT
         description: Fraction of full-time employment
-    extensions_map:
-      neo4j:tools:
-        - kind: canonicalQuery
-          name: colleaguesOf
-          description: Colleagues of an employee across their departments
-          cypher: MATCH (e:Employee)-[:WORKS_IN]->(d:Department)<-[:WORKS_IN]-(c:Employee) WHERE e.employee_id = $id RETURN c
+    tools:
+      - type: canonicalQuery
+        name: colleaguesOf
+        description: Colleagues of an employee across their departments
+        cypher: MATCH (e:Employee)-[:WORKS_IN]->(d:Department)<-[:WORKS_IN]-(c:Employee) WHERE e.employee_id = $id RETURN c
   WORKS_IN_CONTRACTOR:
     type: WORKS_IN
     from:
       node: Contractor
     to:
       node: Department
-    cardinality_type: MANY_TO_ONE
+      max_count: 1
     description: Current organisational home
     properties:
       po_number:
@@ -123,11 +118,13 @@ relationships:
     type: MANAGES
     from:
       node: Employee
+      max_count: 1
     to:
       node: Department
-    cardinality_type: ONE_TO_ONE
+      max_count: 1
     constraints:
-      - kind: unique
+      - constraint_type: unique
+        name: unique_manager_since_note
         properties:
           - since
           - note
@@ -143,23 +140,22 @@ relationships:
       node: Employee
     to:
       node: Employee
-    cardinality_type: MANY_TO_ONE
+      max_count: 1
   SUPPORTS:
     type: SUPPORTS
     from:
       node: Department
     to:
       node: Department
-    cardinality_type: MANY_TO_MANY
     description: Cross-department service relationships
   STAFFS:
     type: STAFFS
     from:
       node: Department
+      max_count: 1
     to:
       node: Contractor
-    cardinality_type: ONE_TO_MANY
-extensions_map:
+extensions:
   neo4j-importer:table:
     name: employees
     source: hr/workday
