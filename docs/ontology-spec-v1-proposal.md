@@ -38,9 +38,9 @@ id: asd-asd-asd          # for identifying the spec when deployed (required)
 version: 3               # the ontology's own version (required)
 name: movies
 description: Movie domain ontology
-nodes: { <id>: Node }
-relationships: { <id>: Relationship }
-extensions_map: { ... }  # ontology-scope extensions (neo4j-importer:table, neo4j-importer:mapping)
+nodes: { <local-id>: Node }
+relationships: { <local-id>: Relationship }
+extensions: { <id>: {...}, custom: [ ... ] }   # ontology-scope objects (neo4j-importer:table, neo4j-importer:mapping)
 ```
 
 `$schema` is the spec link including the version, meta-level (JSON-LD's `@context` precedent, JSON Schema's `$schema`). Plain `version` is reserved for the ontology's own version: identity metadata, not lifecycle. Publish, immutability and drift semantics are defined by the management layer (WS3), but a downloaded document should be able to say what it is.
@@ -49,63 +49,68 @@ Node:
 
 | field | notes |
 |---|---|
-| map key | a local id, not the label. Label renames don't break references |
-| `label` | the node label. Simple case; use `labels` when implied/optional labels exist |
-| `labels` | `{ identifier, implied?, optional? }`. Multi-label modelling, not a class hierarchy |
+| map key | the identifier within the document, not the label. Label renames don't break references |
+| `labels` | `{ identifier, implied?, optional? }`. Multi-label modelling, not a class hierarchy. `label` is the shorthand for setting the identifier only |
+| `label` | the node label, shorthand form |
 | `reference` | optional single URI pointing at an external definition of this element |
 | `description` | |
 | `aliases` | string list. Covers "aliases and synonyms" from the brief |
 | `properties` | `{ <name>: Property }` |
-| `constraints` | composite constraint objects only (multi-property keys/uniques) |
-| `extensions_map` | named first-party extensions (`neo4j:index`, `neo4j:display`, `neo4j:tools`, ...), custom under `custom` |
+| `constraints` | constraint objects, optionally named (`{ constraint_type, name?, properties }`); shorthand flags live on Property |
+| `tools` | core tool definitions for agents (`{ type: canonicalQuery \| externalRequest \| ..., name, description, ... }`) |
+| `extensions` | named first-party extensions (`neo4j:index`, `neo4j:display`, ...), custom under `custom` |
 
 Property:
 
 | field | notes |
 |---|---|
-| `type` | type object, see Type objects below. Scalar shorthand: bare token (`STRING`). `any` opts the property out of type constraints (mixed value types) |
+| `type` | type token, see Data types below (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>`). `ANY` opts the property out of type constraints (mixed value types) |
+| `dimension` | `VECTOR` companion: element count. Absent = unconstrained |
 | `mustExist`, `unique`, `key` | single-property constraint flags. The readable surface |
 | `one_of` | allowed values. JSON Schema's word. Default value support |
 | `pattern` | regex. JSON Schema's word |
 | `description`, `aliases` | |
 | `reference` | optional single URI, as on Node |
-| `extensions_map` | |
+| `extensions` | |
 
 Relationship:
 
 | field | notes |
 |---|---|
-| map key | a local id, not the type. One-to-one id-to-type in the common case |
+| map key | the intra-document identifier. One-to-one id-to-type in the common case |
 | `type` | the relationship type (required). Several keys may share a type across different endpoint pairs — allowed, but note graph-type enforcement keys on the type alone and cannot distinguish pairs yet |
-| `from`, `to` | `{ node: <id> }` — references a nodes-map key. One endpoint per field per entry. Each entry carries its own `cardinality_type`, `properties`, `constraints` and `extensions_map` |
-| `cardinality_type` | optional: `ONE_TO_ONE`, `ONE_TO_MANY`, `MANY_TO_ONE`, `MANY_TO_MANY` |
+| `from`, `to` | `{ node: <id>, count?, min_count?, max_count? }` — references a nodes-map key. Endpoint cardinality: `count` is the exact form, `min_count`/`max_count` the ranged form; absent means unconstrained (0..*). Counts on `to` constrain relationships per from-instance; counts on `from` constrain per to-instance |
 | `properties`, `constraints` | as Node |
 | `description`, `aliases` | |
 | `reference` | optional single URI, as on Node |
-| `extensions_map` | |
+| `tools` | as Node |
+| `extensions` | |
 
-Type objects:
+Data types:
 
-A property type is an object, not a token. Parameterized types are decomposed into fields, never encoded into the type string: `VECTOR<FLOAT>(1042)` is not a value this spec uses. `kind` discriminates:
+A property type is a token. Examples:
 
-| kind | fields | example |
-|---|---|---|
-| `scalar` | `scalar` (Neo4j scalar type) | `{ kind: scalar, scalar: STRING }` |
-| `list` | `items` (element scalar, required) | `{ kind: list, items: STRING }` |
-| `vector` | `items` (element scalar, required), `dimension` (optional int) | `{ kind: vector, items: FLOAT, dimension: 1042 }` |
+```yaml
+type: LIST<STRING>
+type: LIST<ANY>
+type: STRING
+type: INTEGER
+type: VECTOR<FLOAT>   # vector can come with a companion dimension field
+dimension: 512
+```
 
-Scalars may be written as the bare token (`type: STRING`); the object form is the normalized form. `dimension` absent means unconstrained. Element types are always scalars: no nested lists, no lists of vectors.
+Element types are always scalars: no nested lists, no lists of vectors. No union types in v1: a property is a single data type or `ANY`.
 
-To play nice with existing dirty data, `type: any` is supported and implicitly opts the property out of any graph-type constraint.
+To play nice with existing dirty data, `type: ANY` is supported and implicitly opts the property out of any graph-type constraint.
 
 ## Extensions
 
-First-party supported extensions (extensions we provide but that are not part of the core ontology) are **named extensions**: keys of an element's (or the top-level) `extensions_map`, `neo4j:`-prefixed, each shape defined by its owner and available in the ontology spec SDK. The naming differentiates them from custom extensions and improves the developer experience with types and autocomplete.
+First-party supported extensions (extensions we provide but that are not part of the core ontology) are **named extensions**: keys of an element's (or the top-level) `extensions`, `neo4j:`-prefixed, each shape defined by its owner and available in the ontology spec SDK. The naming differentiates them from custom extensions and improves the developer experience with types and autocomplete.
 
 Custom extensions ride the fixed envelope under the reserved `custom` key:
 
 ```yaml
-extensions_map:
+extensions:
   neo4j:index:
     name: actor_names
     properties: [name]
@@ -127,7 +132,7 @@ The brief's own words are "extended information as tools available to agents". B
 
 Serialization notes: one wire format, no shorthand forms. Absent means none: empty maps and lists are omitted, never written empty.
 
-Placement rule: an extension lives on the element it describes. If it describes several elements or none (tables, mappings), it lives at the top level. Same `extensions_map` shape at both levels; validation and storage do not care where an extension sits.
+Placement rule: an extension lives on the element it describes. If it describes several elements or none (tables, mappings), it lives at the top level. Same `extensions` shape at both levels; validation and storage do not care where an extension sits.
 
 ## Example
 
@@ -155,7 +160,7 @@ nodes:
       imdb_id:
         type: STRING
         pattern: "^tt[0-9]{7,8}$"
-    extensions_map:
+    extensions:
       neo4j:index:
         name: actor_names
         properties: [name]
@@ -183,7 +188,8 @@ nodes:
       id: { type: STRING, key: true }
       title: { type: STRING, mustExist: true }
       embedding:
-        type: { kind: vector, items: FLOAT, dimension: 1042 }
+        type: VECTOR<FLOAT>
+        dimension: 1042
         description: Plot embedding
         reference: https://example.com/external/embedding
 
@@ -197,31 +203,32 @@ relationships:
   ACTED_IN:
     type: ACTED_IN
     from: { node: Actor }
-    to: { node: Movie }
-    cardinality_type: MANY_TO_ONE
+    to: { node: Movie, max_count: 1 }
     description: Filmography
     properties:
-      roles: { type: { kind: list, items: STRING } }
-    extensions_map:
-      neo4j:tools:
-        - kind: canonicalQuery
-          name: findCoActors
-          description: Actors who shared a film with a given actor
-          cypher: MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) WHERE a.name = $name RETURN co
+      roles: { type: LIST<STRING> }
+      mixed_list: { type: LIST<ANY> }
+    tools:
+      - type: externalRequest
+        name: findRecentActingJobs
+        description: Recent acting jobs for a given actor
+        url: https://imdb.com/
+      - type: canonicalQuery
+        name: findCoActors
+        description: Actors who shared a film with a given actor
+        cypher: MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) WHERE a.name = $name RETURN co
 
   PRODUCED_STUDIO:
     type: PRODUCED       # same relationship type between different node pairs
-    from: { node: Studio }
-    to: { node: Movie }
-    cardinality_type: ONE_TO_MANY
+    from: { node: Studio, count: 2 }
+    to: { node: Movie, min_count: 1, max_count: 5 }   # cardinality 2 -> {1,5}
   PRODUCED_PERSON:
     type: PRODUCED
     from: { node: person-id-field }
-    to: { node: Movie }
-    cardinality_type: MANY_TO_ONE
+    to: { node: Movie, max_count: 1 }                 # was: cardinality MANY_TO_ONE
     description: Individual producer credit
 
-extensions_map:
+extensions:
   neo4j-importer:table:
     $schema: "https://<url-to-table-extension-schema>/0.1.0"   # the table type's own schema and version (owner-managed, optional)
     name: actors
@@ -240,7 +247,6 @@ Per the brief, unchanged:
 
 - RDF-based terminology: class, class hierarchy, axioms, ABox, TBox
 - relationship and property hierarchies
-- lineage and provenance
 - explicit inference machinery, unless used for AI use cases
 
 Plus, decided here:
@@ -256,7 +262,7 @@ The brief: "when specified, enforce as much as we can via graph schema, while le
 
 | enforceable via graph schema | descriptive only |
 |---|---|
-| labels (identifier structure), `type`, `mustExist`, `unique`, `key`, constraint objects | `description`, `aliases`, `cardinality_type`, `one_of`, `pattern`, `reference`, all extensions |
+| labels (identifier structure), `type`, `mustExist`, `unique`, `key`, constraint objects | `description`, `aliases`, `count`/`min_count`/`max_count`, `one_of`, `pattern`, `reference`, `tools`, all extensions |
 
 Comment [j] in the brief (ontology as superset of graph type, graph type inferable from ontology) hangs off this table. The left column is what a database can enforce on day one; the right column is what agents and tooling read.
 
@@ -267,7 +273,7 @@ Comment [j] in the brief (ontology as superset of graph type, graph type inferab
 | RDFS construct | v1 mapping | verdict |
 |---|---|---|
 | `rdfs:Class` | `nodes` entry | covered |
-| `rdf:Property` | relationship type if range is a class, node property if range is a datatype | covered |
+| `rdf:Property` | relationship type if range is a class, node property if range is a datatype | covered, with the known import ambiguity: no declared range means we cannot tell property from relationship (normal — RDFS does not distinguish them) |
 | `rdfs:domain` / `rdfs:range` | `from`/`to` endpoints, property `type` (xsd to Neo4jType table) | covered |
 | `rdfs:label` | `name` / `aliases` | covered |
 | `rdfs:comment` | `description` | covered |
@@ -277,7 +283,7 @@ Comment [j] in the brief (ontology as superset of graph type, graph type inferab
 | containers (Bag/Seq/Alt), reification | not pragmatic | excluded |
 | cardinality, enums, patterns | not RDFS (that is SHACL/OWL territory). v1 has them natively | n/a |
 
-Two transformer-side notes, not spec concerns: RDF allows multiple domains/ranges per property (each endpoint pair is one entry under the type; the transformer expands accordingly), and `rdf:type` is instance-level (out of this spec's scope by definition).
+Two transformer-side notes, not spec concerns: RDF allows multiple domains/ranges per property (each endpoint pair is its own entry under its own id key; the transformer expands accordingly), and `rdf:type` is instance-level (out of this spec's scope by definition).
 
 ### SHACL
 
@@ -287,30 +293,29 @@ Two transformer-side notes, not spec concerns: RDF allows multiple domains/range
 | `sh:in` | `one_of` | partially covered, applies on an element property level only |
 | `sh:pattern` | `pattern` (flags fold inline, `(?i)`) | covered |
 | `sh:minCount` >= 1 on property | `mustExist` | covered |
-| `sh:minCount`/`sh:maxCount` on relationship | `cardinality_type` | covered, lossy (gap 1) |
-| `sh:maxCount` > 1 on property | `type: { kind: list, items: ... }` | covered, lossy (no upper bound) |
+| `sh:minCount`/`sh:maxCount` on relationship | endpoint `min_count`/`max_count`/`count` | covered |
+| `sh:maxCount` > 1 on property | `type: LIST<...>` | covered, lossy (no upper bound) |
 | `sh:class` | relationship `to` endpoint label | covered |
 | `sh:nodeKind` | the relationship-vs-property distinction itself | covered conceptually |
 | `sh:name`, `sh:description` | `name`, `description` | covered |
 | `sh:message`, `sh:severity` | extension (a validation type, owner-defined) | carried |
-| `sh:minInclusive`/`maxExclusive` etc. (value ranges) | extension | carried, gap 2 |
-| `sh:minLength`/`maxLength` | extension | carried, gap 3 |
+| `sh:minInclusive`/`maxExclusive` etc. (value ranges) | extension | carried, gap 1 |
+| `sh:minLength`/`maxLength` | extension | carried, gap 2 |
 | `sh:languageIn`, `sh:uniqueLang` | extension | carried |
-| `sh:equals`, `sh:disjoint`, `sh:lessThan` (property-pair comparisons) | extension | carried, gap 4 |
+| `sh:equals`, `sh:disjoint`, `sh:lessThan` (property-pair comparisons) | extension | carried, gap 3 |
 | `sh:hasValue` | extension | carried |
 | `sh:closed`, `sh:ignoredProperties` | extension. Neo4j is schema-optional; "closed" is enforcement policy, not ontology content | carried, semantics differ |
 | `sh:order`, `sh:group` | extension, styling-adjacent | carried |
-| property paths (inverse/alternative/sequence) | not constraints in v1. Sequence paths are named multi-hop paths: `tool` extensions | different mechanism, no loss |
+| property paths (inverse/alternative/sequence) | not constraints in v1. Sequence paths are named multi-hop paths: `tools` | different mechanism, no loss |
 | `sh:not`/`and`/`or`/`xone`, qualified cardinality | | excluded, not pragmatic |
 | SHACL-SPARQL constraints | raw-text extension at best | excluded from core |
 | SHACL-AF rules/functions | | excluded, inference-adjacent (principle 4) |
 
 Gaps, ranked by how likely a customer notices:
 
-1. **Exact cardinalities** (min 2, max 5) do not fit a 4-value enum. If field evidence demands it, v1.1 adds optional `minOccurrences`/`maxOccurrences` ints. Not v1.
-2. **Value ranges.** Plausible in regulated-industry ontologies (ingredient classes, dosage). Candidate for a validation extension type, defined by its owner rather than this spec.
-3. **String lengths.** Cheap to add later, same extension.
-4. **Property-pair comparisons.** Rare in practice.
+1. **Value ranges.** Plausible in regulated-industry ontologies (ingredient classes, dosage). Candidate for a validation extension type, defined by its owner rather than this spec.
+2. **String lengths.** Cheap to add later, same extension.
+3. **Property-pair comparisons.** Rare in practice.
 
 Two semantic caveats, one line each in the final spec:
 
@@ -324,18 +329,23 @@ Two semantic caveats, one line each in the final spec:
 1. **Names.** Spec title ("Neo4j Ontology Specification" proposed), repo name (`neo4j/ontology-spec` proposed), governance group (brief says OLG; OSG was the 8 Sep lean. The artifact is a spec, not a language, which argues OSG; CLG consistency argues OLG).
 2. **Importer sign-off** on indexes/tables/mappings becoming extension objects. Their bar stands: the spec must be downloadable in the initial ontology release. The 4.0.0 converter is the migration story for their artifacts.
 3. **WS1/WS2 boundary** (comment [k]). The spec must not block on storage decisions and vice versa. The extension mechanism is the decoupler: storage-facing concerns ride extensions until WS2 lands.
-4. **`tool` extension shape.** Owned by the agent-surface teams, not this spec. The kind question (query vs path vs pattern) lives in their definition.
-5. **Extensions need no governance from this group.** The spec defines only the envelope; each extension type is defined, versioned and validated by its owner (importer owns `table`/`mapping`, console owns `display`, agent surface owns `tool`). Unknown types are carried untouched.
+4. **Tool type shapes.** `tools` is a core field (decided 2026-09-25); the per-type shapes (`canonicalQuery`, `externalRequest`, ...) are owned by the agent-surface teams, not this spec.
+5. **Extensions need no governance from this group.** The spec defines only the envelope; each extension type is defined, versioned and validated by its owner (importer owns `table`/`mapping`, console owns `display`). Unknown types are carried untouched.
 
 ## Changelog from initial draft
 
 2026-09-25:
-- Extension shape: `extensions_map` at every level — named keys (`neo4j:`-prefixed) for first-party extensions, the fixed envelope under `custom` for custom ones.
+- Extension shape: `extensions` at every level — named keys (`neo4j:`-prefixed) for first-party extensions, the fixed envelope under `custom` for custom ones.
 - `enum` → `one_of`.
-- Mixed value types: `type: any` opts the property out of type constraints.
+- Mixed value types: `type: ANY` opts the property out of type constraints.
 - Nodes and relationships keyed by local ids rather than the identifier label/type name. New fields: `label` and `labels.identifier` on node types, `type` on relationships. Label renames no longer break references; a relationship type shared across endpoint pairs now sits under one id key per pair.
 - `reference` on node types, properties and relationship types: a single informational URI pointing at an external definition. Supersedes the interop/IRI item.
 - The list-valued relationship form from 2026-09-14 is gone: multi-pair is expressed by several id keys sharing a `type`, one entry per key.
+- Data types are tokens, not objects: `STRING`, `LIST<STRING>`, `LIST<ANY>`, `VECTOR<FLOAT>` with a companion `dimension` field. Reverses the 2026-09-11 type-object change.
+- Tools are core: first-class `tools` field on node and relationship entries (`{ type: canonicalQuery | externalRequest | ..., name, description, ... }`), leaving the extensions section.
+- `cardinality_type` → `count`, `min_count`, `max_count` on each `from`/`to`. No enum shorthand: `count` is the exact form, `min_count`/`max_count` the ranged form, absent = unconstrained (0..*). Closes the exact-cardinality gap and maps SHACL `sh:minCount`/`sh:maxCount` 1:1.
+- Constraint objects can be named: `{ constraint_type, name?, properties }` (field renamed from `kind`); the shorthand flags stay.
+- No union types on properties in v1: a single data type or `ANY`.
 
 2026-09-14:
 - Multi-pair relationships. A relationship's identity is the triple (type, from, to); the map key alone could not hold the same type between different node pairs, and the transformer note's "expands to multiple relationship entries" contradicted unique map keys. Found by implementation: 65 of 80 relationship entries in the FOAF conversion are same-type, different pairs. The map value is now a list of entries, one per endpoint pair; a bare object is shorthand for a one-entry list. Per-pair `cardinality_type`, `properties`, `constraints`, `extensions`. (Superseded 2026-09-25 by id keys; see above.)
@@ -360,17 +370,19 @@ Two semantic caveats, one line each in the final spec:
 
 **Indexes out of core.** Indexes are physical layout, not meaning. The ontology is about meaning; graph schema information is in scope only as constraint information (the brief's list). Physical hints ride extensions, which is also what keeps WS1 independent of storage decisions.
 
-**Extensions: named first-party, enveloped custom.** (Split adopted 2026-09-25.) First-party extensions (`neo4j:index`, `neo4j:display`, `neo4j:tools`, `neo4j-importer:table`/`mapping`, ...) are named keys of `extensions_map`, each shape owned by its team and shipped in the SDK — types and autocomplete for the common cases. Everything else carries the four-field envelope under `custom`, so unknown types validate structurally and round-trip untouched. The envelope's in-value `type` field keeps custom extensions describable by graph type, which is what WS2 needs to store the ontology in the database layer and expose it to Cypher without special-casing. Self-describing was the requirement; this split keeps it true where it matters.
+**Extensions: named first-party, enveloped custom.** (Split adopted 2026-09-25.) First-party extensions (`neo4j:index`, `neo4j:display`, `neo4j-importer:table`/`mapping`, ...) are named keys of `extensions`, each shape owned by its team and shipped in the SDK — types and autocomplete for the common cases. Everything else carries the four-field envelope under `custom`, so unknown types validate structurally and round-trip untouched. The envelope's in-value `type` field keeps custom extensions describable by graph type, which is what WS2 needs to store the ontology in the database layer and expose it to Cypher without special-casing. Self-describing was the requirement; this split keeps it true where it matters.
 
 **The envelope.** Same root schema on every custom extension (`type`, `name`, `definition`), specifics pushed one level down. Buys: envelope-only validation, a fixed meta-model for WS2 storage, and zero governance surface (a new custom extension type is defined by its owner and never touches this spec). Costs one nesting level. Worth it.
 
 **tables/mappings/display as extension types.** The brief calls them adjacent specs composable into single artifacts. With a generic extension mechanism there is no case for three privileged top-level fields. One mechanism, one envelope; the known types are owned outside the spec (importer owns table/mapping, and so on).
 
-**Property flags stay; constraint objects only for composites.** `mustExist`/`unique`/`key` cover the common case in the most readable form (principle 2). Composite keys need the object form. Both are one format with a documented relationship, not two formats.
+**Property flags stay; constraint objects for the rest.** `mustExist`/`unique`/`key` cover the common case in the most readable form (principle 2). Everything else — composites, or anything tooling wants to reference by name — uses the object form: `{ constraint_type, name?, properties }`. Both are one format with a documented relationship, not two formats.
 
-**`one_of`, `pattern`, `cardinality_type`, `aliases`.** `one_of` and `pattern` are JSON Schema's words; the audience already knows them. The 4-value `cardinality_type` enum covers the pragmatic cases people actually model; exact counts are deferred to a later version on evidence, not on speculation.
+**`one_of`, `pattern`, `aliases`.** `one_of` and `pattern` are JSON Schema's words; the audience already knows them.
 
-**`tool` extensions, definitions only.** Decided 8 Sep: actions are definitions at annotation level, promotable to first-class fields in a future version. The brief's term is "tools". Behaviour in a spec rots; definitions compose.
+**Cardinality lives on the endpoints.** (Decided 2026-09-25.) No `ONE_TO_MANY`-class enum: exactness comes from `count`, ranges from `min_count`/`max_count`, absence means unconstrained. One mechanism, no shorthand to drift from the full form, and SHACL `sh:minCount`/`sh:maxCount` map 1:1. The cost — writing `max_count: 1` where the enum said it in a word — is paid where precision actually lives.
+
+**`tools`, definitions only.** Decided 8 Sep: actions are definitions at annotation level, promotable per the group's call. Promoted 2026-09-25: `tools` is a first-class field on node and relationship entries. The per-type shapes (`canonicalQuery`, `externalRequest`, ...) stay owner-defined; behaviour belongs to runtimes, not to a spec. Definitions compose.
 
 **`implied`/`optional` kept, documented as multi-label.** Importer lineage, observable today in one validator rule (constraints attach to identifier union implied). Not subclassing. The hierarchy question belongs to the ontology group, not to the format.
 
