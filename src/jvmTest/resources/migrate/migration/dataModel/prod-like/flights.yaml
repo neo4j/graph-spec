@@ -65,27 +65,27 @@ nodes:
 relationships:
   FLIGHT_USES_AIRCRAFT:
     type: "FLIGHT_USES_AIRCRAFT"
-    start: { node: "Flight" }
-    end: { node: "Aircraft" }
+    from: { node: "Flight" }
+    to: { node: "Aircraft" }
   FLIGHT_DEPARTS_FROM_AIRPORT:
     type: "FLIGHT_DEPARTS_FROM_AIRPORT"
-    start: { node: "Flight" }
-    end: { node: "Airport" }
+    from: { node: "Flight" }
+    to: { node: "Airport" }
   FLIGHT_ARRIVES_AT_AIRPORT:
     type: "FLIGHT_ARRIVES_AT_AIRPORT"
-    start: { node: "Flight" }
-    end: { node: "Airport" }
+    from: { node: "Flight" }
+    to: { node: "Airport" }
   FLIGHT_HAS_TICKET:
     type: "FLIGHT_HAS_TICKET"
-    start: { node: "Flight" }
-    end: { node: "Ticket" }
+    from: { node: "Flight" }
+    to: { node: "Ticket" }
     properties:
       fare_conditions: { type: "STRING" }
       amount: { type: "FLOAT" }
   TICKET_BELONGS_TO_BOOKING:
     type: "TICKET_BELONGS_TO_BOOKING"
-    start: { node: "Ticket" }
-    end: { node: "Booking" }
+    from: { node: "Ticket" }
+    to: { node: "Booking" }
 tables:
   aircrafts_data:
     source: "cloud"

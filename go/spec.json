@@ -587,10 +587,10 @@
                 "type": {
                     "type": "string"
                 },
-                "start": {
+                "from": {
                     "$ref": "#/$defs/RelationshipTarget"
                 },
-                "end": {
+                "to": {
                     "$ref": "#/$defs/RelationshipTarget"
                 },
                 "properties": {
@@ -627,8 +627,8 @@
             },
             "required": [
                 "type",
-                "start",
-                "end"
+                "from",
+                "to"
             ],
             "additionalProperties": false
         },

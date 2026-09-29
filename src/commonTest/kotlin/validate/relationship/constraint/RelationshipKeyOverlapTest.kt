@@ -33,8 +33,8 @@ class RelationshipKeyOverlapTest {
     private val model = GraphModel("4.0.0")
     private val dummyRel = Relationship(
         type = "ACTED_IN",
-        start = RelationshipTarget(),
-        end = RelationshipTarget()
+        from = RelationshipTarget(),
+        to = RelationshipTarget()
     )
 
     @Test

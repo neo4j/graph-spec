@@ -116,132 +116,132 @@ nodes:
 relationships:
   AUTHORED_BY:
     type: "AUTHORED_BY"
-    start: { node: "Comment" }
-    end: { node: "Person" }
+    from: { node: "Comment" }
+    to: { node: "Person" }
   AUTHORED_AT:
     type: "AUTHORED_AT"
-    start: { node: "Comment" }
-    end: { node: "Place" }
+    from: { node: "Comment" }
+    to: { node: "Place" }
   REPLIED_TO:
     type: "REPLIED_TO"
-    start: { node: "Comment" }
-    end: { node: "Post" }
+    from: { node: "Comment" }
+    to: { node: "Post" }
   REPLIED_TO2:
     type: "REPLIED_TO"
-    start: { node: "Comment" }
-    end: { node: "Comment" }
+    from: { node: "Comment" }
+    to: { node: "Comment" }
   HAS_TAG:
     type: "HAS_TAG"
-    start: { node: "Comment" }
-    end: { node: "Tag" }
+    from: { node: "Comment" }
+    to: { node: "Tag" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
   MODERATED_BY:
     type: "MODERATED_BY"
-    start: { node: "Forum" }
-    end: { node: "Person" }
+    from: { node: "Forum" }
+    to: { node: "Person" }
   MEMBER_OF:
     type: "MEMBER_OF"
-    start: { node: "Person" }
-    end: { node: "Forum" }
+    from: { node: "Person" }
+    to: { node: "Forum" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
   HAS_TAG2:
     type: "HAS_TAG"
-    start: { node: "Forum" }
-    end: { node: "Tag" }
+    from: { node: "Forum" }
+    to: { node: "Tag" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
   LOCATED_IN:
     type: "LOCATED_IN"
-    start: { node: "Organisation" }
-    end: { node: "Place" }
+    from: { node: "Organisation" }
+    to: { node: "Place" }
   LIVES_IN:
     type: "LIVES_IN"
-    start: { node: "Person" }
-    end: { node: "Place" }
+    from: { node: "Person" }
+    to: { node: "Place" }
   INTERESTED_IN:
     type: "INTERESTED_IN"
-    start: { node: "Person" }
-    end: { node: "Tag" }
+    from: { node: "Person" }
+    to: { node: "Tag" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
   KNOWS:
     type: "KNOWS"
-    start: { node: "Person" }
-    end: { node: "Person" }
+    from: { node: "Person" }
+    to: { node: "Person" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
   LIKED:
     type: "LIKED"
-    start: { node: "Person" }
-    end: { node: "Comment" }
+    from: { node: "Person" }
+    to: { node: "Comment" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
   LIKED2:
     type: "LIKED"
-    start: { node: "Person" }
-    end: { node: "Post" }
+    from: { node: "Person" }
+    to: { node: "Post" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       explicitlyDeleted: { type: "BOOLEAN" }
   STUDIES_AT:
     type: "STUDIES_AT"
-    start: { node: "Person" }
-    end: { node: "Organisation" }
+    from: { node: "Person" }
+    to: { node: "Organisation" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       classYear: { type: "INTEGER" }
   WORKS_AT:
     type: "WORKS_AT"
-    start: { node: "Person" }
-    end: { node: "Organisation" }
+    from: { node: "Person" }
+    to: { node: "Organisation" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
       workFrom: { type: "INTEGER" }
   IS_SIMILAR_TO:
     type: "IS_SIMILAR_TO"
-    start: { node: "Place" }
-    end: { node: "Place" }
+    from: { node: "Place" }
+    to: { node: "Place" }
   AUTHORED_BY2:
     type: "AUTHORED_BY"
-    start: { node: "Post" }
-    end: { node: "Person" }
+    from: { node: "Post" }
+    to: { node: "Person" }
   POSTED_IN:
     type: "POSTED_IN"
-    start: { node: "Post" }
-    end: { node: "Forum" }
+    from: { node: "Post" }
+    to: { node: "Forum" }
   AUTHORED_AT2:
     type: "AUTHORED_AT"
-    start: { node: "Post" }
-    end: { node: "Place" }
+    from: { node: "Post" }
+    to: { node: "Place" }
   HAS_TAG3:
     type: "HAS_TAG"
-    start: { node: "Post" }
-    end: { node: "Tag" }
+    from: { node: "Post" }
+    to: { node: "Tag" }
     properties:
       creationDate: { type: "INTEGER" }
       deletionDate: { type: "INTEGER" }
   HAS_CLASS:
     type: "HAS_CLASS"
-    start: { node: "Tag" }
-    end: { node: "TagClass" }
+    from: { node: "Tag" }
+    to: { node: "TagClass" }
   IS_SUBCLASS:
     type: "IS_SUBCLASS"
-    start: { node: "TagClass" }
-    end: { node: "TagClass" }
+    from: { node: "TagClass" }
+    to: { node: "TagClass" }
 tables:
   Comment:
     source: "cloud"

@@ -21,6 +21,8 @@ import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
 import model.extension.Extensions
 import model.property.Property
+import model.relationship.RelationshipConstraint
+import model.relationship.RelationshipIndex
 import model.type.Named
 import kotlin.js.JsExport
 
@@ -29,8 +31,8 @@ import kotlin.js.JsExport
 @SerialName("Relationship")
 data class Relationship(
     var type: String,
-    val start: RelationshipTarget,
-    val end: RelationshipTarget,
+    val from: RelationshipTarget,
+    val to: RelationshipTarget,
     val properties: MutableMap<String, Property> = mutableMapOf(),
     val constraints: MutableMap<String, RelationshipConstraint> = mutableMapOf(),
     val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf(),
