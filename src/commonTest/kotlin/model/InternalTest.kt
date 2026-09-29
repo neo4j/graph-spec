@@ -301,8 +301,8 @@ class InternalTest {
             relationships = mutableMapOf(
                 "KNOWS" to Relationship(
                     type = "KNOWS",
-                    start = RelationshipTarget(),
-                    end = RelationshipTarget(),
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
                     constraints = mutableMapOf(
                         "c1" to RelationshipConstraint(ConstraintType.UNIQUE, mutableSetOf())
                     ),
