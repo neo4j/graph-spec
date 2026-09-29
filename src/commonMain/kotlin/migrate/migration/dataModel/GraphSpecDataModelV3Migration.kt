@@ -508,7 +508,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         private fun constraintType(name: String): String = when (name) {
             "UNIQUE" -> "uniqueness"
             "EXISTS" -> "propertyExistence"
-            "TYPE" -> "propertyType"
+            "PROPERTY_TYPE" -> "propertyType"
             "KEY" -> "key"
             else -> name.lowercase()
         }

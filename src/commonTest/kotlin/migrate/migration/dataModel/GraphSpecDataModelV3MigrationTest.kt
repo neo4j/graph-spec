@@ -202,6 +202,38 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
+    fun `migrate maps each constraint type to its data model word`() {
+        val constraintTypes = listOf("UNIQUE", "KEY", "EXISTS", "PROPERTY_TYPE")
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "constraints" to constraintTypes.associate { type ->
+                        "c_$type" to schemaMapOf("type" to type, "properties" to listOf("p1"))
+                    }
+                )
+            )
+        )
+
+        val result = migration.migrate(input)
+        val graphSchema = result.map("graphSchemaRepresentation").map("graphSchema")
+
+        assertEquals(
+            mapOf(
+                "c_UNIQUE" to "uniqueness",
+                "c_KEY" to "key",
+                "c_EXISTS" to "propertyExistence",
+                "c_PROPERTY_TYPE" to "propertyType"
+            ),
+            graphSchema.listOfMaps("constraints").associate { it.string("\$id") to it.string("constraintType") }
+        )
+        assertEquals(
+            "p1_User_propertyType",
+            graphSchema.listOfMaps("constraints").first { it.string("\$id") == "c_PROPERTY_TYPE" }.string("name")
+        )
+    }
+
+    @Test
     fun `convertGraphMapping correctly recovers relationship IDs via findRelationshipId`() {
         val input = schemaMapOf(
             "relationships" to schemaMapOf(
