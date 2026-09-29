@@ -22,7 +22,7 @@ import codec.schema.SchemaMap
 import codec.schema.schemaMapOf
 import codec.schema.toNotEmpty
 import migrate.Migration
-import model.Internal
+import model.NameFormat
 import model.Type
 import model.Version
 import model.mapping.MappingType
@@ -130,6 +130,8 @@ class DataModelV3GraphSpecMigration :
             val tokens = labels.map { it.string("token") }
             val labelRef = labelRefs.firstOrNull() // TODO loop all
             val primaryLabel = tokens.first()
+            val propertyTokens = labels.flatMap { it.listOfMapsOrNull("properties").orEmpty() }
+                .associate { it.id() to it.string("token") }
             val id = nodeObject.id()
             nodes[id] = schemaMapOf(
                 "labels" to schemaMapOf(
@@ -137,7 +139,7 @@ class DataModelV3GraphSpecMigration :
                     "implied" toNotEmpty tokens.drop(1)
                     // TODO optional
                 ),
-                "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel),
+                "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, propertyTokens),
                 "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
                 "properties" toNotEmpty convertProperties(labels),
                 "name" to tokens.firstOrNull(),
@@ -176,7 +178,8 @@ class DataModelV3GraphSpecMigration :
     internal fun convertConstraints(
         constraints: Map<String, List<SchemaMap>>,
         labelRef: String?,
-        label: String
+        label: String,
+        propertyTokens: Map<String, String>
     ): Map<String, SchemaMap>? = constraints[labelRef]?.associate { constraint ->
         val properties = constraint.listOfMapsOrNull("properties")
         val constraintType = constraintType(constraint)
@@ -189,15 +192,26 @@ class DataModelV3GraphSpecMigration :
             "label" to label,
             "properties" toNotEmpty properties?.map { it.ref() },
             "name" to (
-                constraint.stringOrNull("name")
-                    ?: Internal.deterministicId(
-                        label,
-                        constraintType,
-                        *properties?.mapNotNull { it.stringOrNull("token") }?.toTypedArray() ?: emptyArray()
-                    )
+                constraint.stringOrNull("name")?.takeUnless { it.isBlank() }
+                    ?: generatedName(properties, propertyTokens, label, constraintType)
                 )
         )
     }
+
+    private fun generatedName(
+        properties: List<SchemaMap>?,
+        propertyTokens: Map<String, String>,
+        label: String,
+        constraintType: ConstraintType
+    ): String = NameFormat.constraintName(
+        properties.propertyNames(propertyTokens),
+        label,
+        constraintType
+    )
+
+    /** Resolves the property refs to their tokens. */
+    private fun List<SchemaMap>?.propertyNames(propertyTokens: Map<String, String>): List<String> =
+        orEmpty().map { property -> propertyTokens[property.ref()] ?: property.ref() }
 
     private fun constraintType(constraint: SchemaMap): ConstraintType {
         val type = constraint.string("constraintType")
@@ -219,13 +233,15 @@ class DataModelV3GraphSpecMigration :
             val typeRef = objectType.ref("type")
             val relationshipType = relationshipTypes[typeRef] ?: error("RelationshipType $typeRef not found")
             val token = relationshipType.string("token")
+            val propertyTokens = relationshipType.listOfMapsOrNull("properties").orEmpty()
+                .associate { it.id() to it.string("token") }
             val id = objectType.id()
             relationships[id] = schemaMapOf(
                 "type" to token,
                 "start" to mapOf("node" to objectType.ref("from")),
                 "end" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType)),
-                "constraints" toNotEmpty convertConstraints(constraints, typeRef, token),
+                "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, propertyTokens),
                 "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
                 "name" to uniqueRelationshipName(token, uniqueNames),
                 "description" to objectType.literalOrNull("description")
@@ -416,12 +432,6 @@ class DataModelV3GraphSpecMigration :
             else -> null
         }
 
-        private fun constraintType(name: String): ConstraintType? = when (name) {
-            "uniqueness" -> UNIQUE
-            "propertyExistence" -> EXISTS
-            "propertyType" -> PROPERTY_TYPE
-            "key" -> KEY
-            else -> null
-        }
+        private fun constraintType(name: String): ConstraintType? = dataModelConstraintType(name)
     }
 }

@@ -18,6 +18,11 @@ package migrate.migration.dataModel
 
 import codec.schema.SchemaMap
 import codec.schema.schemaMapOf
+import model.type.ConstraintType
+import model.type.ConstraintType.EXISTS
+import model.type.ConstraintType.KEY
+import model.type.ConstraintType.PROPERTY_TYPE
+import model.type.ConstraintType.UNIQUE
 
 internal fun SchemaMap.ref() = string("\$ref").removePrefix("#")
 
@@ -37,3 +42,12 @@ internal fun unwrap(schema: SchemaMap): SchemaMap {
 }
 
 internal fun refOf(id: String) = schemaMapOf("\$ref" to "#${id.removePrefix("#")}")
+
+/** The graph spec type for a data model constraint type word, or null when the word is unknown. */
+internal fun dataModelConstraintType(name: String): ConstraintType? = when (name) {
+    "uniqueness" -> UNIQUE
+    "propertyExistence" -> EXISTS
+    "propertyType" -> PROPERTY_TYPE
+    "key" -> KEY
+    else -> null
+}
