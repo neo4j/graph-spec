@@ -17,6 +17,7 @@
 package migrate.migration.dataModel
 
 import model.type.ConstraintType
+import model.type.IndexType
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -30,5 +31,17 @@ class DataModelUtilsTest {
         assertEquals(ConstraintType.EXISTS, dataModelConstraintType("propertyExistence"))
         assertEquals(ConstraintType.PROPERTY_TYPE, dataModelConstraintType("propertyType"))
         assertNull(dataModelConstraintType("something else"))
+    }
+
+    @Test
+    fun `data model index type words map to the graph spec type`() {
+        assertEquals(IndexType.RANGE, dataModelIndexType("default"))
+        assertEquals(IndexType.RANGE, dataModelIndexType("range"))
+        assertEquals(IndexType.TEXT, dataModelIndexType("text"))
+        assertEquals(IndexType.FULLTEXT, dataModelIndexType("fullText"))
+        assertEquals(IndexType.POINT, dataModelIndexType("point"))
+        assertEquals(IndexType.VECTOR, dataModelIndexType("vector"))
+        assertEquals(IndexType.LOOKUP, dataModelIndexType("lookup"))
+        assertNull(dataModelIndexType("something else"))
     }
 }

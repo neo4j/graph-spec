@@ -363,6 +363,9 @@ class InternalTest {
                             properties = mutableSetOf("email"),
                             name = "my_custom_name"
                         )
+                    ),
+                    indexes = mutableMapOf(
+                        "i1" to NodeIndex(IndexType.TEXT, mutableSetOf("User"), mutableSetOf("email"))
                     )
                 )
             ),
@@ -389,6 +392,7 @@ class InternalTest {
             appendLine("node $nodeId name=${node.name} label=${node.labels.identifier}")
             node.properties.entries.forEach { (id, property) -> appendLine("  property $id name=${property.name}") }
             node.constraints.entries.forEach { (id, c) -> appendLine("  constraint $id name=${c.name} type=${c.type}") }
+            node.indexes.entries.forEach { (id, index) -> appendLine("  index $id name=${index.name}") }
         }
         for ((relationshipId, relationship) in model.relationships) {
             appendLine("relationship $relationshipId name=${relationship.name}")
@@ -398,6 +402,7 @@ class InternalTest {
             relationship.constraints.entries.forEach { (id, c) ->
                 appendLine("  constraint $id name=${c.name} type=${c.type}")
             }
+            relationship.indexes.entries.forEach { (id, index) -> appendLine("  index $id name=${index.name}") }
         }
     }
 

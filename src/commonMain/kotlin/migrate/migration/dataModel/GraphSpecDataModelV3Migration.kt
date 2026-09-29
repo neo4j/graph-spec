@@ -374,11 +374,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             val type = typeTransform(element.string("type"))
             schemaMapOf(
                 "\$id" to name,
-                "name" to if (typeKey == "constraintType") {
-                    element.resolvedName(propertyIds, propertyTokens, entityToken, type)
-                } else {
-                    element.stringOrNull("name") ?: name
-                },
+                "name" to element.resolvedName(propertyIds, propertyTokens, entityToken, typeKey, type),
                 typeKey to type,
                 "entityType" to entityType,
                 "nodeLabel" to if (entityType == "node") refOf(refId) else SchemaNull(),
@@ -391,12 +387,13 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
 
     /**
      * A name from the schema wins, otherwise one is built from the properties, the label and the type.
-     * Mirrors UPX `getIndexOrConstraintName` for constraints.
+     * Mirrors UPX `getIndexOrConstraintName`.
      */
     private fun SchemaMap.resolvedName(
         propertyIds: List<String>,
         propertyTokens: Map<String, String>,
         entityToken: String,
+        typeKey: String,
         type: String
     ): String {
         stringOrNull("name")?.takeUnless { it.isBlank() }?.let { return it }
@@ -404,11 +401,19 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         if (tokens.isEmpty()) {
             return ""
         }
-        return NameFormat.constraintName(
-            tokens,
-            entityToken,
-            dataModelConstraintType(type) ?: error("Unknown constraint type: '$type' at $path.name")
-        )
+        return if (typeKey == "constraintType") {
+            NameFormat.constraintName(
+                tokens,
+                entityToken,
+                dataModelConstraintType(type) ?: error("Unknown constraint type: '$type' at $path.name")
+            )
+        } else {
+            NameFormat.indexName(
+                tokens,
+                entityToken,
+                dataModelIndexType(type) ?: error("Unknown index type: '$type' at $path.name")
+            )
+        }
     }
 
     internal fun convertFields(fields: Map<String, SchemaMap>?): List<SchemaMap> {

@@ -23,6 +23,13 @@ import model.type.ConstraintType.EXISTS
 import model.type.ConstraintType.KEY
 import model.type.ConstraintType.PROPERTY_TYPE
 import model.type.ConstraintType.UNIQUE
+import model.type.IndexType
+import model.type.IndexType.FULLTEXT
+import model.type.IndexType.LOOKUP
+import model.type.IndexType.POINT
+import model.type.IndexType.RANGE
+import model.type.IndexType.TEXT
+import model.type.IndexType.VECTOR
 
 internal fun SchemaMap.ref() = string("\$ref").removePrefix("#")
 
@@ -43,11 +50,24 @@ internal fun unwrap(schema: SchemaMap): SchemaMap {
 
 internal fun refOf(id: String) = schemaMapOf("\$ref" to "#${id.removePrefix("#")}")
 
-/** The graph spec type for a data model constraint type word, or null when the word is unknown. */
+/**
+ * The graph spec type for a data model constraint type word, or null when the word is unknown. The
+ * data model spells the plain index `default`, which gs carries as [RANGE].
+ */
 internal fun dataModelConstraintType(name: String): ConstraintType? = when (name) {
     "uniqueness" -> UNIQUE
     "propertyExistence" -> EXISTS
     "propertyType" -> PROPERTY_TYPE
     "key" -> KEY
+    else -> null
+}
+
+internal fun dataModelIndexType(name: String): IndexType? = when (name.lowercase()) {
+    "lookup" -> LOOKUP
+    "default", "range" -> RANGE
+    "fulltext" -> FULLTEXT
+    "point" -> POINT
+    "text" -> TEXT
+    "vector" -> VECTOR
     else -> null
 }
