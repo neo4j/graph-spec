@@ -169,72 +169,72 @@ nodes:
 relationships:
   RELATED_TO_CITY:
     type: "RELATED_TO_CITY"
-    start: { node: "address" }
-    end: { node: "city" }
+    from: { node: "address" }
+    to: { node: "city" }
   RELATED_TO_COUNTRY:
     type: "RELATED_TO_COUNTRY"
-    start: { node: "city" }
-    end: { node: "country" }
+    from: { node: "city" }
+    to: { node: "country" }
   RELATED_TO_ADDRESS:
     type: "RELATED_TO_ADDRESS"
-    start: { node: "customer" }
-    end: { node: "address" }
+    from: { node: "customer" }
+    to: { node: "address" }
   RELATED_TO_LANGUAGE:
     type: "RELATED_TO_LANGUAGE"
-    start: { node: "film" }
-    end: { node: "language" }
+    from: { node: "film" }
+    to: { node: "language" }
   RELATED_TO_FILM:
     type: "RELATED_TO_FILM"
-    start: { node: "actor" }
-    end: { node: "film" }
+    from: { node: "actor" }
+    to: { node: "film" }
     properties:
       last_update: { type: "ZONED DATETIME" }
   RELATED_TO_FILM2:
     type: "RELATED_TO_FILM"
-    start: { node: "category" }
-    end: { node: "film" }
+    from: { node: "category" }
+    to: { node: "film" }
     properties:
       last_update: { type: "ZONED DATETIME" }
   RELATED_TO_FILM3:
     type: "RELATED_TO_FILM"
-    start: { node: "inventory" }
-    end: { node: "film" }
+    from: { node: "inventory" }
+    to: { node: "film" }
   RELATED_TO_CUSTOMER:
     type: "RELATED_TO_CUSTOMER"
-    start: { node: "payment" }
-    end: { node: "customer" }
+    from: { node: "payment" }
+    to: { node: "customer" }
   RELATED_TO_RENTAL:
     type: "RELATED_TO_RENTAL"
-    start: { node: "payment" }
-    end: { node: "rental" }
+    from: { node: "payment" }
+    to: { node: "rental" }
   RELATED_TO_STAFF:
     type: "RELATED_TO_STAFF"
-    start: { node: "payment" }
-    end: { node: "staff" }
+    from: { node: "payment" }
+    to: { node: "staff" }
   RELATED_TO_CUSTOMER2:
     type: "RELATED_TO_CUSTOMER"
-    start: { node: "rental" }
-    end: { node: "customer" }
+    from: { node: "rental" }
+    to: { node: "customer" }
   RELATED_TO_INVENTORY:
     type: "RELATED_TO_INVENTORY"
-    start: { node: "rental" }
-    end: { node: "inventory" }
+    from: { node: "rental" }
+    to: { node: "inventory" }
   RELATED_TO_STAFF2:
     type: "RELATED_TO_STAFF"
-    start: { node: "rental" }
-    end: { node: "staff" }
+    from: { node: "rental" }
+    to: { node: "staff" }
   RELATED_TO_ADDRESS2:
     type: "RELATED_TO_ADDRESS"
-    start: { node: "staff" }
-    end: { node: "address" }
+    from: { node: "staff" }
+    to: { node: "address" }
   RELATED_TO_ADDRESS3:
     type: "RELATED_TO_ADDRESS"
-    start: { node: "store" }
-    end: { node: "address" }
+    from: { node: "store" }
+    to: { node: "address" }
   RELATED_TO_STAFF3:
     type: "RELATED_TO_STAFF"
-    start: { node: "store" }
-    end: { node: "staff" }
+    from: { node: "store" }
+    to: { node: "staff" }
 tables:
   actor:
     source: "cloud"

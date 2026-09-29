@@ -136,44 +136,44 @@ nodes:
 relationships:
   ARTIST:
     type: "ARTIST"
-    start: { node: "album" }
-    end: { node: "artist" }
+    from: { node: "album" }
+    to: { node: "artist" }
   EMPLOYEE:
     type: "EMPLOYEE"
-    start: { node: "customer" }
-    end: { node: "employee" }
+    from: { node: "customer" }
+    to: { node: "employee" }
   EMPLOYEE2:
     type: "EMPLOYEE"
-    start: { node: "employee" }
-    end: { node: "employee" }
+    from: { node: "employee" }
+    to: { node: "employee" }
   CUSTOMER:
     type: "CUSTOMER"
-    start: { node: "invoice" }
-    end: { node: "customer" }
+    from: { node: "invoice" }
+    to: { node: "customer" }
   INVOICE:
     type: "INVOICE"
-    start: { node: "invoice_line" }
-    end: { node: "invoice" }
+    from: { node: "invoice_line" }
+    to: { node: "invoice" }
   TRACK:
     type: "TRACK"
-    start: { node: "invoice_line" }
-    end: { node: "track" }
+    from: { node: "invoice_line" }
+    to: { node: "track" }
   TRACK2:
     type: "TRACK"
-    start: { node: "playlist" }
-    end: { node: "track" }
+    from: { node: "playlist" }
+    to: { node: "track" }
   ALBUM:
     type: "ALBUM"
-    start: { node: "track" }
-    end: { node: "album" }
+    from: { node: "track" }
+    to: { node: "album" }
   GENRE:
     type: "GENRE"
-    start: { node: "track" }
-    end: { node: "genre" }
+    from: { node: "track" }
+    to: { node: "genre" }
   MEDIA_TYPE:
     type: "MEDIA_TYPE"
-    start: { node: "track" }
-    end: { node: "media_type" }
+    from: { node: "track" }
+    to: { node: "media_type" }
 tables:
   album:
     source: "cloud"

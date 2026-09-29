@@ -51,12 +51,12 @@ nodes:
 relationships:
   CATEGORIES:
     type: "CATEGORIES"
-    start: { node: "products" }
-    end: { node: "categories" }
+    from: { node: "products" }
+    to: { node: "categories" }
   SUPPLIERS:
     type: "SUPPLIERS"
-    start: { node: "products" }
-    end: { node: "suppliers" }
+    from: { node: "products" }
+    to: { node: "suppliers" }
 tables:
   categories:
     source: "cloud"

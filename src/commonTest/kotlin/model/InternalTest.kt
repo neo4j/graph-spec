@@ -103,8 +103,8 @@ class InternalTest {
             relationships = mutableMapOf(
                 "FRIENDS_WITH" to Relationship(
                     type = "KNOWS",
-                    start = RelationshipTarget(),
-                    end = RelationshipTarget(),
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
                     properties = mutableMapOf("since" to Property())
                 )
             ),
@@ -274,8 +274,8 @@ class InternalTest {
             relationships = mutableMapOf(
                 "KNOWS" to Relationship(
                     type = "KNOWS",
-                    start = RelationshipTarget(),
-                    end = RelationshipTarget(),
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
                     properties = mutableMapOf("since" to Property(key = true))
                 )
             ),
@@ -301,8 +301,8 @@ class InternalTest {
             relationships = mutableMapOf(
                 "KNOWS" to Relationship(
                     type = "KNOWS",
-                    start = RelationshipTarget(),
-                    end = RelationshipTarget(),
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
                     constraints = mutableMapOf(
                         "c1" to RelationshipConstraint(ConstraintType.UNIQUE, mutableSetOf())
                     ),

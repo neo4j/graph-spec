@@ -126,8 +126,8 @@ class PrettyTest {
                 "relationship0" to Relationship(
                     name = "FRIENDS_WITH",
                     type = "KNOWS",
-                    start = RelationshipTarget(),
-                    end = RelationshipTarget(),
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
                     properties = mutableMapOf("relationshipProperty0" to Property(name = "since"))
                 )
             ),
@@ -325,8 +325,8 @@ class PrettyTest {
                 "relationship0" to Relationship(
                     name = "FRIENDS_WITH",
                     type = "KNOWS",
-                    start = RelationshipTarget(),
-                    end = RelationshipTarget(),
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
                     properties = mutableMapOf("relationshipProperty0" to Property(name = "since")),
                     constraints = mutableMapOf(
                         "relationshipConstraint0" to RelationshipConstraint(
