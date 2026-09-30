@@ -422,8 +422,8 @@ class DataModelV3GraphSpecMigration :
             else -> lower.uppercase()
         }
 
-        private fun indexType(name: String): IndexType? = dataModelIndexType(name)
+        private fun indexType(name: String): IndexType? = dataModelIndexTypeFrom(name)
 
-        private fun constraintType(name: String): ConstraintType? = dataModelConstraintType(name)
+        private fun constraintType(name: String): ConstraintType? = dataModelConstraintTypeFrom(name)
     }
 }

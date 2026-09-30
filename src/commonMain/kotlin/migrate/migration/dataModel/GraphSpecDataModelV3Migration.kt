@@ -405,13 +405,13 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             NameFormat.constraintName(
                 tokens,
                 entityToken,
-                dataModelConstraintType(type) ?: error("Unknown constraint type: '$type' at $path.name")
+                dataModelConstraintTypeFrom(type) ?: error("Unknown constraint type: '$type' at $path.name")
             )
         } else {
             NameFormat.indexName(
                 tokens,
                 entityToken,
-                dataModelIndexType(type) ?: error("Unknown index type: '$type' at $path.name")
+                dataModelIndexTypeFrom(type) ?: error("Unknown index type: '$type' at $path.name")
             )
         }
     }

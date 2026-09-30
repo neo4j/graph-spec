@@ -26,24 +26,24 @@ class DataModelUtilsTest {
 
     @Test
     fun `data model constraint type words map to the graph spec type`() {
-        assertEquals(ConstraintType.UNIQUE, dataModelConstraintType("uniqueness"))
-        assertEquals(ConstraintType.KEY, dataModelConstraintType("key"))
-        assertEquals(ConstraintType.EXISTS, dataModelConstraintType("propertyExistence"))
-        assertEquals(ConstraintType.PROPERTY_TYPE, dataModelConstraintType("propertyType"))
-        assertNull(dataModelConstraintType("something else"))
+        assertEquals(ConstraintType.UNIQUE, dataModelConstraintTypeFrom("uniqueness"))
+        assertEquals(ConstraintType.KEY, dataModelConstraintTypeFrom("key"))
+        assertEquals(ConstraintType.EXISTS, dataModelConstraintTypeFrom("propertyExistence"))
+        assertEquals(ConstraintType.PROPERTY_TYPE, dataModelConstraintTypeFrom("propertyType"))
+        assertNull(dataModelConstraintTypeFrom("something else"))
     }
 
     @Test
     fun `data model index type words map to the graph spec type`() {
-        assertEquals(IndexType.RANGE, dataModelIndexType("default"))
-        assertEquals(IndexType.RANGE, dataModelIndexType("range"))
-        assertEquals(IndexType.TEXT, dataModelIndexType("text"))
-        assertEquals(IndexType.FULLTEXT, dataModelIndexType("fullText"))
-        assertEquals(IndexType.POINT, dataModelIndexType("point"))
-        assertEquals(IndexType.VECTOR, dataModelIndexType("vector"))
-        assertEquals(IndexType.LOOKUP, dataModelIndexType("lookup"))
-        assertNull(dataModelIndexType("something else"))
-        assertNull(dataModelIndexType("fulltext"))
-        assertNull(dataModelIndexType("FullText"))
+        assertEquals(IndexType.RANGE, dataModelIndexTypeFrom("default"))
+        assertEquals(IndexType.RANGE, dataModelIndexTypeFrom("range"))
+        assertEquals(IndexType.TEXT, dataModelIndexTypeFrom("text"))
+        assertEquals(IndexType.FULLTEXT, dataModelIndexTypeFrom("fullText"))
+        assertEquals(IndexType.POINT, dataModelIndexTypeFrom("point"))
+        assertEquals(IndexType.VECTOR, dataModelIndexTypeFrom("vector"))
+        assertEquals(IndexType.LOOKUP, dataModelIndexTypeFrom("lookup"))
+        assertNull(dataModelIndexTypeFrom("something else"))
+        assertNull(dataModelIndexTypeFrom("fulltext"))
+        assertNull(dataModelIndexTypeFrom("FullText"))
     }
 }
