@@ -31,11 +31,11 @@ class NameFormat {
 
         @JsStatic
         fun constraintName(properties: List<String>, entity: String, type: ConstraintType): String =
-            build(properties, entity, suffix(type))
+            build(properties, entity, suffixFrom(type))
 
         @JsStatic
         fun indexName(properties: List<String>, entity: String, type: IndexType? = null): String =
-            build(properties, entity, indexSuffix(type))
+            build(properties, entity, suffixFrom(type))
 
         private fun build(properties: List<String>, entity: String, suffix: String?): String {
             val propertyPart = properties.joinToString("_") { escape(it) }
@@ -47,14 +47,14 @@ class NameFormat {
             return base.take((MAX_LENGTH - suffixPart.length).coerceAtLeast(0)) + suffixPart
         }
 
-        private fun suffix(type: ConstraintType): String = when (type) {
+        private fun suffixFrom(type: ConstraintType): String = when (type) {
             ConstraintType.UNIQUE -> "uniq"
             ConstraintType.KEY -> "key"
             ConstraintType.EXISTS -> "propertyExistence"
             ConstraintType.PROPERTY_TYPE -> "propertyType"
         }
 
-        private fun indexSuffix(type: IndexType?): String? = type?.let { it.name.lowercase() }
+        private fun suffixFrom(type: IndexType?): String? = type?.let { it.name.lowercase() }
 
         /**
          * An underscore inside a token is doubled, so the parts stay recoverable. Without it `pizza_sten` on
