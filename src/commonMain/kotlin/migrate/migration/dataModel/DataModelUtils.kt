@@ -62,10 +62,10 @@ internal fun dataModelConstraintType(name: String): ConstraintType? = when (name
     else -> null
 }
 
-internal fun dataModelIndexType(name: String): IndexType? = when (name.lowercase()) {
+internal fun dataModelIndexType(name: String): IndexType? = when (name) {
     "lookup" -> LOOKUP
     "default", "range" -> RANGE
-    "fulltext" -> FULLTEXT
+    "fullText" -> FULLTEXT
     "point" -> POINT
     "text" -> TEXT
     "vector" -> VECTOR
