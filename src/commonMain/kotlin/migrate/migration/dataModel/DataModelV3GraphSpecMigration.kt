@@ -165,7 +165,7 @@ class DataModelV3GraphSpecMigration :
             "options" toNotEmpty index.mapOrNull("options")?.also { it["type"] = resolvedType.name },
             "name" to (
                 index.stringOrNull("name")?.takeUnless { it.isBlank() }
-                    ?: NameFormat.indexName(properties.propertyNames(propertyTokens), label, resolvedType)
+                    ?: NameFormat.indexName(properties.tokensFrom(propertyTokens), label, resolvedType)
                 )
         )
     }
@@ -204,13 +204,12 @@ class DataModelV3GraphSpecMigration :
         label: String,
         constraintType: ConstraintType
     ): String = NameFormat.constraintName(
-        properties.propertyNames(propertyTokens),
+        properties.tokensFrom(propertyTokens),
         label,
         constraintType
     )
 
-    /** Resolves the property refs of a constraint or index to their tokens. */
-    private fun List<SchemaMap>?.propertyNames(propertyTokens: Map<String, String>): List<String> =
+    private fun List<SchemaMap>?.tokensFrom(propertyTokens: Map<String, String>): List<String> =
         orEmpty().map { property -> propertyTokens[property.ref()] ?: property.ref() }
 
     private fun constraintType(constraint: SchemaMap): ConstraintType {
