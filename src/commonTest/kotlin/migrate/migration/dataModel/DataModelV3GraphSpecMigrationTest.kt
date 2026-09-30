@@ -212,20 +212,22 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
-    fun `convertConstraints throws error for multi-property TYPE constraints`() {
+    fun `convertConstraints throws error for multi-property propertyType constraints`() {
         val constraints = mapOf(
             "L1" to listOf(
                 schemaMapOf(
-                    "constraintType" to "TYPE",
+                    "constraintType" to "propertyType",
                     "name" to "bad_constraint",
                     "properties" to listOf(mapOf("\$ref" to "#p1"), mapOf("\$ref" to "#p2"))
                 )
             )
         )
 
-        assertFailsWith<IllegalStateException>("Type constraints not supported on multiple properties") {
+        val error = assertFailsWith<IllegalStateException> {
             migration.convertConstraints(constraints, "L1", "Person", emptyMap())
         }
+
+        assertEquals("Type constraints not supported on multiple properties.", error.message)
     }
 
     @Test
