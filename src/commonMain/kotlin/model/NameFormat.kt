@@ -56,7 +56,12 @@ class NameFormat {
         }
 
         /** gs has no default index type, so an unset type contributes no suffix. */
-        private fun indexSuffix(type: IndexType?): String? = type?.let { it.name.lowercase() }
+        private fun indexSuffix(type: IndexType?): String? = when (type) {
+            null -> null
+            // The data model spells this one `fullText`, so the name follows the type word.
+            IndexType.FULLTEXT -> "fullText"
+            else -> type.name.lowercase()
+        }
 
         /**
          * An underscore inside a token is doubled, so the parts stay recoverable. Without it `pizza_sten` on
