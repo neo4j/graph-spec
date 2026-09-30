@@ -111,7 +111,7 @@ class NameFormatTest {
         assertEquals("id_Actor", NameFormat.indexName(listOf("id"), "Actor"))
         assertEquals("id_Actor_range", NameFormat.indexName(listOf("id"), "Actor", IndexType.RANGE))
         assertEquals("id_Actor_text", NameFormat.indexName(listOf("id"), "Actor", IndexType.TEXT))
-        assertEquals("id_Actor_fullText", NameFormat.indexName(listOf("id"), "Actor", IndexType.FULLTEXT))
+        assertEquals("id_Actor_fulltext", NameFormat.indexName(listOf("id"), "Actor", IndexType.FULLTEXT))
         assertEquals("id_Actor_point", NameFormat.indexName(listOf("id"), "Actor", IndexType.POINT))
         assertEquals("id_Actor_vector", NameFormat.indexName(listOf("id"), "Actor", IndexType.VECTOR))
         assertEquals("id_Actor_lookup", NameFormat.indexName(listOf("id"), "Actor", IndexType.LOOKUP))
