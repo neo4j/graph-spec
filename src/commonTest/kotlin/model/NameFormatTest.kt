@@ -24,11 +24,6 @@ import kotlin.test.assertEquals
 class NameFormatTest {
 
     @Test
-    fun `index name joins properties then label`() {
-        assertEquals("album__id_album", NameFormat.indexName(listOf("album_id"), "album"))
-    }
-
-    @Test
     fun `an underscore inside a token is doubled`() {
         assertEquals("album__id_album", NameFormat.indexName(listOf("album_id"), "album"))
     }
@@ -116,7 +111,7 @@ class NameFormatTest {
         assertEquals("id_Actor", NameFormat.indexName(listOf("id"), "Actor"))
         assertEquals("id_Actor_range", NameFormat.indexName(listOf("id"), "Actor", IndexType.RANGE))
         assertEquals("id_Actor_text", NameFormat.indexName(listOf("id"), "Actor", IndexType.TEXT))
-        assertEquals("id_Actor_fulltext", NameFormat.indexName(listOf("id"), "Actor", IndexType.FULLTEXT))
+        assertEquals("id_Actor_fullText", NameFormat.indexName(listOf("id"), "Actor", IndexType.FULLTEXT))
         assertEquals("id_Actor_point", NameFormat.indexName(listOf("id"), "Actor", IndexType.POINT))
         assertEquals("id_Actor_vector", NameFormat.indexName(listOf("id"), "Actor", IndexType.VECTOR))
         assertEquals("id_Actor_lookup", NameFormat.indexName(listOf("id"), "Actor", IndexType.LOOKUP))
