@@ -33,7 +33,6 @@ class NameFormat {
         fun constraintName(properties: List<String>, entity: String, type: ConstraintType): String =
             build(properties, entity, suffix(type))
 
-        /** No suffix when [type] is not set. */
         @JsStatic
         fun indexName(properties: List<String>, entity: String, type: IndexType? = null): String =
             build(properties, entity, indexSuffix(type))
@@ -55,7 +54,6 @@ class NameFormat {
             ConstraintType.PROPERTY_TYPE -> "propertyType"
         }
 
-        /** gs has no default index type, so an unset type contributes no suffix. */
         private fun indexSuffix(type: IndexType?): String? = when (type) {
             null -> null
             // The data model spells this one `fullText`, so the name follows the type word.
