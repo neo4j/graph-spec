@@ -204,13 +204,12 @@ class DataModelV3GraphSpecMigration :
         label: String,
         constraintType: ConstraintType
     ): String = NameFormat.constraintName(
-        properties.propertyNames(propertyTokens),
+        properties.tokensFrom(propertyTokens),
         label,
         constraintType
     )
 
-    /** Resolves the property refs to their tokens. */
-    private fun List<SchemaMap>?.propertyNames(propertyTokens: Map<String, String>): List<String> =
+    private fun List<SchemaMap>?.tokensFrom(propertyTokens: Map<String, String>): List<String> =
         orEmpty().map { property -> propertyTokens[property.ref()] ?: property.ref() }
 
     private fun constraintType(constraint: SchemaMap): ConstraintType {
