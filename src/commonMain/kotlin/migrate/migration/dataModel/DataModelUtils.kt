@@ -43,8 +43,7 @@ internal fun unwrap(schema: SchemaMap): SchemaMap {
 
 internal fun refOf(id: String) = schemaMapOf("\$ref" to "#${id.removePrefix("#")}")
 
-/** The graph spec type for a data model constraint type word, or null when the word is unknown. */
-internal fun dataModelConstraintType(name: String): ConstraintType? = when (name) {
+internal fun dataModelConstraintType(word: String): ConstraintType? = when (word) {
     "uniqueness" -> UNIQUE
     "propertyExistence" -> EXISTS
     "propertyType" -> PROPERTY_TYPE
