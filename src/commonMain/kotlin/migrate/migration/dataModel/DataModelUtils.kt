@@ -50,11 +50,7 @@ internal fun unwrap(schema: SchemaMap): SchemaMap {
 
 internal fun refOf(id: String) = schemaMapOf("\$ref" to "#${id.removePrefix("#")}")
 
-/**
- * The graph spec type for a data model constraint type word, or null when the word is unknown. The
- * data model spells the plain index `default`, which gs carries as [RANGE].
- */
-internal fun dataModelConstraintType(name: String): ConstraintType? = when (name) {
+internal fun dataModelConstraintType(word: String): ConstraintType? = when (word) {
     "uniqueness" -> UNIQUE
     "propertyExistence" -> EXISTS
     "propertyType" -> PROPERTY_TYPE
@@ -62,7 +58,7 @@ internal fun dataModelConstraintType(name: String): ConstraintType? = when (name
     else -> null
 }
 
-internal fun dataModelIndexType(name: String): IndexType? = when (name) {
+internal fun dataModelIndexType(word: String): IndexType? = when (word) {
     "lookup" -> LOOKUP
     "default", "range" -> RANGE
     "fullText" -> FULLTEXT
