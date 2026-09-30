@@ -43,7 +43,7 @@ internal fun unwrap(schema: SchemaMap): SchemaMap {
 
 internal fun refOf(id: String) = schemaMapOf("\$ref" to "#${id.removePrefix("#")}")
 
-internal fun dataModelConstraintType(word: String): ConstraintType? = when (word) {
+internal fun dataModelConstraintTypeFrom(word: String): ConstraintType? = when (word) {
     "uniqueness" -> UNIQUE
     "propertyExistence" -> EXISTS
     "propertyType" -> PROPERTY_TYPE

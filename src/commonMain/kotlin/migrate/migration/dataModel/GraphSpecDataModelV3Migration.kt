@@ -407,7 +407,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         return NameFormat.constraintName(
             tokens,
             entityToken,
-            dataModelConstraintType(type) ?: error("Unknown constraint type: '$type' at $path.name")
+            dataModelConstraintTypeFrom(type) ?: error("Unknown constraint type: '$type' at $path.name")
         )
     }
 
