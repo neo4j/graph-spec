@@ -432,6 +432,6 @@ class DataModelV3GraphSpecMigration :
             else -> null
         }
 
-        private fun constraintType(name: String): ConstraintType? = dataModelConstraintType(name)
+        private fun constraintType(name: String): ConstraintType? = dataModelConstraintTypeFrom(name)
     }
 }

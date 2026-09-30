@@ -25,10 +25,10 @@ class DataModelUtilsTest {
 
     @Test
     fun `data model constraint type words map to the graph spec type`() {
-        assertEquals(ConstraintType.UNIQUE, dataModelConstraintType("uniqueness"))
-        assertEquals(ConstraintType.KEY, dataModelConstraintType("key"))
-        assertEquals(ConstraintType.EXISTS, dataModelConstraintType("propertyExistence"))
-        assertEquals(ConstraintType.PROPERTY_TYPE, dataModelConstraintType("propertyType"))
-        assertNull(dataModelConstraintType("something else"))
+        assertEquals(ConstraintType.UNIQUE, dataModelConstraintTypeFrom("uniqueness"))
+        assertEquals(ConstraintType.KEY, dataModelConstraintTypeFrom("key"))
+        assertEquals(ConstraintType.EXISTS, dataModelConstraintTypeFrom("propertyExistence"))
+        assertEquals(ConstraintType.PROPERTY_TYPE, dataModelConstraintTypeFrom("propertyType"))
+        assertNull(dataModelConstraintTypeFrom("something else"))
     }
 }
