@@ -257,14 +257,14 @@ func (QUERY) isMapping() {}
 func (QUERY) MappingType() string { return "QUERY" }
 
 type RELATIONSHIP struct {
-	EndNode      TargetMapping              `json:"to_node"`
+	FromNode     TargetMapping              `json:"from_node"`
 	Key          []string                   `json:"key,omitempty"`
 	MatchLabel   *string                    `json:"matchLabel,omitempty"`
 	Mode         *MappingMode               `json:"mode,omitempty"`
 	Properties   map[string]PropertyMapping `json:"properties,omitempty"`
 	Relationship string                     `json:"relationship"`
-	StartNode    TargetMapping              `json:"from_node"`
 	Table        string                     `json:"table"`
+	ToNode       TargetMapping              `json:"to_node"`
 	Type         string                     `json:"type"`
 }
 
