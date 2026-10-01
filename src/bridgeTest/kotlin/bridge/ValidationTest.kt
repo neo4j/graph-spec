@@ -33,8 +33,8 @@ class ValidationTest {
 
     @Test
     fun testValidate() {
-        // A valid v1 document; no validators are registered yet (track 2 repopulates
-        // Validations.all), so a clean parse yields an empty issue list.
+        // A valid v1 document: a clean parse through Validations.all yields an empty
+        // issue list.
         val input = """{
             "${'$'}schema": "https://neo4j.com/ontology-spec.schema.json",
             "id": "test",
@@ -83,6 +83,48 @@ class ValidationTest {
             assertEquals(STATUS_ERROR, outputBuffer[0])
             val payload = (outputBuffer + 1)!!.toKString()
             assertTrue(payload.isNotEmpty())
+        }
+    }
+
+    @Test
+    fun testValidateDanglingEndpointReference() {
+        // A v1 document that decodes but is invalid: the relationship's from endpoint
+        // references a node id that is not a key in the nodes map. The bridge decodes
+        // fine and surfaces the validator's issue (STATUS_OK, issue in the payload).
+        val input = """{
+            "${'$'}schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+            "id": "test",
+            "version": 1,
+            "nodes": {
+                "n": { "label": "Movie" }
+            },
+            "relationships": {
+                "ACTED_IN": {
+                    "type": "ACTED_IN",
+                    "from": { "node": "missing-node" },
+                    "to": { "node": "n" }
+                }
+            }
+        }
+        """.trimIndent()
+        val bufferSize = 1024
+
+        memScoped {
+            val inputPtr = input.cstr.getPointer(this)
+            val outputBuffer = allocArray<ByteVar>(bufferSize)
+
+            val resultSize = validate(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize)
+            assertTrue(resultSize > 0)
+            assertEquals(STATUS_OK, outputBuffer[0])
+            val payload = (outputBuffer + 1)!!.toKString()
+            assertTrue(
+                payload.contains("missing_relation_from_node"),
+                "Expected the dangling endpoint issue in the payload, got: $payload",
+            )
+            assertTrue(
+                payload.contains("relationships.ACTED_IN.from.node"),
+                "Expected the issue path in the payload, got: $payload",
+            )
         }
     }
 }
