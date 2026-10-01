@@ -89,8 +89,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                         "relationship" to refOf(relId),
                         "tableName" to mapping.literal("table"),
                         "fromMappings" toNotEmpty
-                            convertEntityMap(mapping.map("start_node").mapOfMapsOrNull("properties")),
-                        "toMappings" toNotEmpty convertEntityMap(mapping.map("end_node").mapOfMapsOrNull("properties")),
+                            convertEntityMap(mapping.map("from_node").mapOfMapsOrNull("properties")),
+                        "toMappings" toNotEmpty convertEntityMap(mapping.map("to_node").mapOfMapsOrNull("properties")),
                         "propertyMappings" to convertPropertyMappings(mapping.mapOfMapsOrNull("properties"))
                     )
                 }
@@ -132,8 +132,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
      */
     private fun findRelationshipId(relationships: Map<String, SchemaMap>, mapping: SchemaMap): String? {
         val id = mapping.string("relationship")
-        val fromNode = mapping.map("start_node").string("node")
-        val toNode = mapping.map("end_node").string("node")
+        val fromNode = mapping.map("from_node").string("node")
+        val toNode = mapping.map("to_node").string("node")
         return relationships.entries.firstOrNull { (key, rel) ->
             key == id &&
                 rel.map("from").string("node") == fromNode &&
