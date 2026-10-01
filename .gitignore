@@ -1,5 +1,8 @@
 node_modules/
 
+# gbuild harness store (local-only state)
+.gbuild/
+
 ### Gradle ###
 .gradle
 **/build/
