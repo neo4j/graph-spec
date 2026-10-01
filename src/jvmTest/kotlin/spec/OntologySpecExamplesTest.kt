@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ontology
+package spec
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.networknt.schema.JsonSchema
@@ -51,9 +51,13 @@ class OntologySpecExamplesTest {
                 .schemaLoaders { it.add(ClasspathSchemaLoader()) }
         }
 
-    // The jvmTest working directory is the project directory.
+    // The schema lives at the repo root, not on the classpath; the jvmTest
+    // working directory is the project directory.
     private val schemaFile = File("ontology-spec.schema.json")
-    private val examplesDir = File("src/jvmTest/resources/ontology")
+
+    // Examples are classpath resources (same pattern as DataModelMigrationIT),
+    // so the test also survives IDE runs with a non-project working directory.
+    private val examplesDir = File(javaClass.getResource("/ontology")!!.path)
 
     private fun schema(): JsonSchema = factory.getSchema(mapper.readTree(schemaFile), config)
 

@@ -106,7 +106,7 @@ docs/
   adr/                          decision log, NNNN-short-kebab-slug.md
 src/jvmTest/
   resources/ontology/           the examples: hand-maintained source of truth, as test resources
-  kotlin/ontology/
+  kotlin/spec/
     OntologySpecExamplesTest.kt the spec gate: schema compiles, examples validate (ADR-0007)
 ```
 
