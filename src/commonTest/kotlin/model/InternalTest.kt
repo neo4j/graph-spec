@@ -193,6 +193,7 @@ class InternalTest {
         assertEquals(ConstraintType.KEY, constraint.type)
         assertEquals("User", constraint.label, "Constraint should reference the node's label")
         assertEquals(mutableSetOf("node0_property0"), constraint.properties)
+        assertEquals("id_User_key", constraint.name)
     }
 
     @Test
@@ -217,6 +218,7 @@ class InternalTest {
         assertNotNull(constraint, "A unique constraint should be generated for the property")
         assertEquals(ConstraintType.UNIQUE, constraint.type)
         assertEquals(mutableSetOf("node0_property0"), constraint.properties)
+        assertEquals("email_uniq", constraint.name)
     }
 
     @Test
@@ -241,6 +243,7 @@ class InternalTest {
         assertNotNull(constraint, "An exists constraint should be generated for the property")
         assertEquals(ConstraintType.EXISTS, constraint.type)
         assertEquals(mutableSetOf("node0_property0"), constraint.properties)
+        assertEquals("email_propertyExistence", constraint.name)
     }
 
     @Test
@@ -265,6 +268,7 @@ class InternalTest {
         assertEquals("c1", constraints["node0_constraint0"]?.name)
         assertEquals(ConstraintType.UNIQUE, constraints["node0_constraint0"]?.type)
         assertEquals(ConstraintType.KEY, constraints["node0_constraint1"]?.type)
+        assertEquals("id_key", constraints["node0_constraint1"]?.name)
     }
 
     @Test
@@ -292,6 +296,7 @@ class InternalTest {
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
         assertEquals(mutableSetOf("relationship0_property0"), constraint.properties)
+        assertEquals("since_KNOWS_key", constraint.name)
     }
 
     @Test
@@ -319,6 +324,7 @@ class InternalTest {
         assertEquals("c1", constraints["relationship0_constraint0"]?.name)
         assertEquals(ConstraintType.UNIQUE, constraints["relationship0_constraint0"]?.type)
         assertEquals(ConstraintType.KEY, constraints["relationship0_constraint1"]?.type)
+        assertEquals("since_KNOWS_key", constraints["relationship0_constraint1"]?.name)
     }
 
     @Test
@@ -337,5 +343,93 @@ class InternalTest {
 
         val node = model.nodes["node0"]!!
         assertTrue(node.constraints.isEmpty(), "No constraint should be generated for an unflagged property")
+    }
+
+    @Test
+    fun `test internalise twice leaves ids and names alone`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "User" to Node(
+                    label = "User",
+                    properties = mutableMapOf(
+                        "id" to Property(key = true),
+                        "email" to Property(unique = true)
+                    ),
+                    constraints = mutableMapOf(
+                        "c1" to NodeConstraint(
+                            ConstraintType.UNIQUE,
+                            label = "User",
+                            properties = mutableSetOf("email"),
+                            name = "my_custom_name"
+                        )
+                    )
+                )
+            ),
+            relationships = mutableMapOf(
+                "KNOWS" to Relationship(
+                    type = "KNOWS",
+                    start = RelationshipTarget(),
+                    end = RelationshipTarget(),
+                    properties = mutableMapOf("since" to Property(key = true))
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+        val once = idsAndNames(model)
+        model.internalise()
+
+        assertEquals(once, idsAndNames(model), "A second internalise must not renumber or rename anything")
+    }
+
+    private fun idsAndNames(model: GraphModel): String = buildString {
+        for ((nodeId, node) in model.nodes) {
+            appendLine("node $nodeId name=${node.name} label=${node.labels.identifier}")
+            node.properties.entries.forEach { (id, property) -> appendLine("  property $id name=${property.name}") }
+            node.constraints.entries.forEach { (id, c) -> appendLine("  constraint $id name=${c.name} type=${c.type}") }
+        }
+        for ((relationshipId, relationship) in model.relationships) {
+            appendLine("relationship $relationshipId name=${relationship.name}")
+            relationship.properties.entries.forEach { (id, property) ->
+                appendLine("  property $id name=${property.name}")
+            }
+            relationship.constraints.entries.forEach { (id, c) ->
+                appendLine("  constraint $id name=${c.name} type=${c.type}")
+            }
+        }
+    }
+
+    @Test
+    fun `test keeps shorthand constraints whose property tokens differ only by a space`() {
+        val model = GraphModel(
+            version = "1.0",
+            nodes = mutableMapOf(
+                "User" to Node(
+                    label = "User",
+                    properties = mutableMapOf(
+                        "a b" to Property(key = true),
+                        "a_b" to Property(key = true)
+                    )
+                )
+            ),
+            pretty = true
+        )
+
+        model.internalise()
+
+        val node = model.nodes["node0"]!!
+        assertEquals(2, node.constraints.size, "Both constraints must survive internalise")
+        assertEquals(
+            setOf("node0_constraint0", "node0_constraint1"),
+            node.constraints.keys,
+            "Both constraints are numbered, since neither is named when ids are assigned"
+        )
+        assertEquals(
+            setOf("a b_User_key", "a__b_User_key"),
+            node.constraints.values.mapNotNull { it.name }.toSet(),
+            "A space is kept and an underscore is doubled, so the two names stay distinct"
+        )
     }
 }
