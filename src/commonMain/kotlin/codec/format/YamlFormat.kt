@@ -28,7 +28,6 @@ import net.mamoe.yamlkt.YamlList
 import net.mamoe.yamlkt.YamlLiteral
 import net.mamoe.yamlkt.YamlMap
 import net.mamoe.yamlkt.YamlNull
-import net.mamoe.yamlkt.YamlPrimitive
 import kotlin.collections.component1
 import kotlin.collections.component2
 
@@ -76,12 +75,23 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
             parent,
         )
 
-        is YamlPrimitive -> yaml.content?.let { SchemaLiteral(it, parent, isString = true) } ?: SchemaNull(parent)
-
-        is YamlLiteral -> SchemaLiteral(yaml.content, parent, isString = false)
+        /*
+         * yamlkt's AST has no quoted/unquoted distinction: every scalar (string, number,
+         * boolean) parses to [YamlLiteral]. The writer quotes every string it emits
+         * ([YamlPrintOptions.alwaysQuoteStrings]), so a scalar that reads as a JSON boolean
+         * or number token is a non-string literal; anything else is a string. The
+         * classification mirrors ExtensionValueSerializer's primitive order so payload
+         * numbers/booleans (e.g. `review_after_days: 365`) keep their kind through the
+         * round trip. Known limit (yamlkt is unmaintained): a payload string whose whole
+         * content reads as a JSON number/boolean ("365", "true") comes back as that kind.
+         */
+        is YamlLiteral -> SchemaLiteral(yaml.content, parent, isString = isStringScalar(yaml.content))
 
         YamlNull -> SchemaNull(parent)
     }
+
+    private fun isStringScalar(content: String): Boolean = content != "true" && content != "false" &&
+        content.toLongOrNull() == null && content.toDoubleOrNull() == null
 
     companion object {
         val default = YamlFormat(
