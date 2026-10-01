@@ -50,8 +50,8 @@ class NameFormat {
         private fun suffixFrom(type: ConstraintType): String = when (type) {
             ConstraintType.UNIQUE -> "uniq"
             ConstraintType.KEY -> "key"
-            ConstraintType.EXISTS -> "propertyExistence"
-            ConstraintType.PROPERTY_TYPE -> "propertyType"
+            ConstraintType.EXISTS -> "exists"
+            ConstraintType.PROPERTY_TYPE -> "type"
         }
 
         private fun suffixFrom(type: IndexType?): String? = type?.name?.lowercase()

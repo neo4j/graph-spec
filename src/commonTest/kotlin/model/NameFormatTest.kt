@@ -97,11 +97,11 @@ class NameFormatTest {
         assertEquals("id_Actor_uniq", NameFormat.constraintName(listOf("id"), "Actor", ConstraintType.UNIQUE))
         assertEquals("id_Actor_key", NameFormat.constraintName(listOf("id"), "Actor", ConstraintType.KEY))
         assertEquals(
-            "id_Actor_propertyExistence",
+            "id_Actor_exists",
             NameFormat.constraintName(listOf("id"), "Actor", ConstraintType.EXISTS)
         )
         assertEquals(
-            "id_Actor_propertyType",
+            "id_Actor_type",
             NameFormat.constraintName(listOf("id"), "Actor", ConstraintType.PROPERTY_TYPE)
         )
     }
