@@ -89,23 +89,11 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                 alwaysQuoteStrings = true,
                 inlinePaths = setOf(
                     "nodes.*.properties.*",
-                    "nodes.*.constraints.*.properties",
-                    "nodes.*.indexes.*.labels",
-                    "nodes.*.indexes.*.properties",
+                    "nodes.*.constraints[*].properties",
                     "relationships.*.properties.*",
                     "relationships.*.from",
                     "relationships.*.to",
-                    "relationships.*.constraints.*.properties",
-                    "relationships.*.indexes.*.properties",
-                    "relationships.*.indexes.*.options.*",
-                    "tables.*.columns.*.supported",
-                    "tables.*.primaryKeys",
-                    "tables.*.foreignKeys.*.columns",
-                    "tables.*.foreignKeys.*.references.columns",
-                    "mappings[*].properties.*",
-                    "mappings[*].key",
-                    "mappings[*].start_node.properties.*",
-                    "mappings[*].end_node.properties.*"
+                    "relationships.*.constraints[*].properties"
                 )
             )
         )
