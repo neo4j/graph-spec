@@ -86,6 +86,11 @@ kotlin {
             implementation(libs.kotlin.wrappers.ts)
         }
         commonTest.dependencies { implementation(libs.kotlin.test) }
+        jvmTest.dependencies {
+            // ADR-0007: the spec-validation gate (schema + examples) runs as a JVM test
+            implementation(libs.json.schema.validator)
+            implementation(libs.slf4jnop)
+        }
     }
 
     compilerOptions {
