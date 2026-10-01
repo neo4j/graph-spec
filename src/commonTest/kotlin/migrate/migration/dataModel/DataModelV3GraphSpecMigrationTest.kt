@@ -182,7 +182,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertIndexes(indexes, "label1", "Person", "node")
+        val result = migration.convertIndexes(indexes, "label1", "Person", mapOf("p1" to "prop1", "p2" to "prop2"))
         assertNotNull(result)
 
         // First index uses custom name
@@ -190,12 +190,14 @@ class DataModelV3GraphSpecMigrationTest {
         assertNotNull(idx1)
         assertEquals("RANGE", idx1.string("type"))
         assertEquals(listOf("Person").toSchemaElement(), idx1.list("labels"))
+        assertEquals("custom_idx", idx1.string("name"))
 
-        // Second index gets generated name "index2"
+        // Second index gets a name built from its property and label
         val idx2 = result["i:1"]
         assertNotNull(idx2)
         assertEquals("TEXT", idx2.string("type"))
         assertEquals(listOf("p2").toSchemaElement(), idx2.list("properties"))
+        assertEquals("prop2_Person_text", idx2.string("name"))
     }
 
     @Test
@@ -207,7 +209,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException> {
-            migration.convertIndexes(mapOf("L1" to listOf(index)), "L1", "Label", "node")
+            migration.convertIndexes(mapOf("L1" to listOf(index)), "L1", "Label", emptyMap())
         }
     }
 

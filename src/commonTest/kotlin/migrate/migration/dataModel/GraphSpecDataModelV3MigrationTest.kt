@@ -202,14 +202,18 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `migrate maps each constraint type to its data model word`() {
+    fun `migrate maps each constraint and index type to its data model word`() {
         val constraintTypes = listOf("UNIQUE", "KEY", "EXISTS", "PROPERTY_TYPE")
+        val indexTypes = listOf("RANGE", "TEXT", "FULLTEXT", "POINT", "VECTOR", "LOOKUP")
         val input = schemaMapOf(
             "nodes" to schemaMapOf(
                 "n1" to schemaMapOf(
                     "labels" to schemaMapOf("identifier" to "User"),
                     "constraints" to constraintTypes.associate { type ->
                         "c_$type" to schemaMapOf("type" to type, "properties" to listOf("p1"))
+                    },
+                    "indexes" to indexTypes.associate { type ->
+                        "i_$type" to schemaMapOf("type" to type, "properties" to listOf("p1"))
                     }
                 )
             )
@@ -226,6 +230,17 @@ class GraphSpecDataModelV3MigrationTest {
                 "c_PROPERTY_TYPE" to "propertyType"
             ),
             graphSchema.listOfMaps("constraints").associate { it.string("\$id") to it.string("constraintType") }
+        )
+        assertEquals(
+            mapOf(
+                "i_RANGE" to "range",
+                "i_TEXT" to "text",
+                "i_FULLTEXT" to "fullText",
+                "i_POINT" to "point",
+                "i_VECTOR" to "vector",
+                "i_LOOKUP" to "lookup"
+            ),
+            graphSchema.listOfMaps("indexes").associate { it.string("\$id") to it.string("indexType") }
         )
         assertEquals(
             "p1_User_propertyType",
@@ -660,6 +675,38 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
+    fun `migrate builds index names from property and label when the graph spec has none`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "Person"),
+                    "properties" to schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to "STRING")),
+                    "indexes" to schemaMapOf(
+                        "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"))
+                    )
+                )
+            ),
+            "relationships" to schemaMapOf(
+                "r1" to schemaMapOf(
+                    "type" to "KNOWS",
+                    "start" to schemaMapOf("node" to "n1"),
+                    "end" to schemaMapOf("node" to "n1"),
+                    "properties" to schemaMapOf("rp1" to schemaMapOf("name" to "since", "type" to "INTEGER")),
+                    "indexes" to schemaMapOf(
+                        "rel_idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("rp1"))
+                    )
+                )
+            )
+        )
+
+        val graphSchema = migration.migrate(input).map("graphSchemaRepresentation").map("graphSchema")
+
+        val indexes = graphSchema.listOfMaps("indexes")
+        assertEquals("name_Person_text", indexes.first { it.string("entityType") == "node" }.string("name"))
+        assertEquals("since_KNOWS_text", indexes.first { it.string("entityType") == "relationship" }.string("name"))
+    }
+
+    @Test
     fun `migrate keeps a name the graph spec provides`() {
         val input = schemaMapOf(
             "nodes" to schemaMapOf(
@@ -668,6 +715,9 @@ class GraphSpecDataModelV3MigrationTest {
                     "properties" to schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to "STRING")),
                     "constraints" to schemaMapOf(
                         "uniq" to schemaMapOf("type" to "UNIQUE", "properties" to listOf("p1"), "name" to "my_name")
+                    ),
+                    "indexes" to schemaMapOf(
+                        "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"), "name" to "my_index")
                     )
                 )
             )
@@ -676,6 +726,7 @@ class GraphSpecDataModelV3MigrationTest {
         val graphSchema = migration.migrate(input).map("graphSchemaRepresentation").map("graphSchema")
 
         assertEquals("my_name", graphSchema.listOfMaps("constraints")[0].string("name"))
+        assertEquals("my_index", graphSchema.listOfMaps("indexes")[0].string("name"))
     }
 
     @Test
@@ -687,6 +738,9 @@ class GraphSpecDataModelV3MigrationTest {
                     "properties" to schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to "STRING")),
                     "constraints" to schemaMapOf(
                         "uniq" to schemaMapOf("type" to "KEY", "properties" to listOf("p1"), "name" to "   ")
+                    ),
+                    "indexes" to schemaMapOf(
+                        "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"), "name" to "")
                     )
                 )
             )
@@ -695,5 +749,6 @@ class GraphSpecDataModelV3MigrationTest {
         val graphSchema = migration.migrate(input).map("graphSchemaRepresentation").map("graphSchema")
 
         assertEquals("name_Person_key", graphSchema.listOfMaps("constraints")[0].string("name"))
+        assertEquals("name_Person_text", graphSchema.listOfMaps("indexes")[0].string("name"))
     }
 }

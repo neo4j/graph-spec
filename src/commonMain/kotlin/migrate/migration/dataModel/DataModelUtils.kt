@@ -23,6 +23,13 @@ import model.type.ConstraintType.EXISTS
 import model.type.ConstraintType.KEY
 import model.type.ConstraintType.PROPERTY_TYPE
 import model.type.ConstraintType.UNIQUE
+import model.type.IndexType
+import model.type.IndexType.FULLTEXT
+import model.type.IndexType.LOOKUP
+import model.type.IndexType.POINT
+import model.type.IndexType.RANGE
+import model.type.IndexType.TEXT
+import model.type.IndexType.VECTOR
 
 internal fun SchemaMap.ref() = string("\$ref").removePrefix("#")
 
@@ -48,5 +55,15 @@ internal fun dataModelConstraintTypeFrom(word: String): ConstraintType? = when (
     "propertyExistence" -> EXISTS
     "propertyType" -> PROPERTY_TYPE
     "key" -> KEY
+    else -> null
+}
+
+internal fun dataModelIndexTypeFrom(word: String): IndexType? = when (word) {
+    "lookup" -> LOOKUP
+    "default", "range" -> RANGE
+    "fullText" -> FULLTEXT
+    "point" -> POINT
+    "text" -> TEXT
+    "vector" -> VECTOR
     else -> null
 }
