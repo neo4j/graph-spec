@@ -31,12 +31,12 @@ class NameFormatTest {
     @Test
     fun `a token holding an underscore does not collide with a property boundary`() {
         assertEquals(
-            "pizza__sten_ugn_uniq",
-            NameFormat.constraintName(listOf("pizza_sten"), "ugn", ConstraintType.UNIQUE)
+            "a__b_c_uniq",
+            NameFormat.constraintName(listOf("a_b"), "c", ConstraintType.UNIQUE)
         )
         assertEquals(
-            "pizza_sten__ugn_uniq",
-            NameFormat.constraintName(listOf("pizza"), "sten_ugn", ConstraintType.UNIQUE)
+            "a_b__c_uniq",
+            NameFormat.constraintName(listOf("a"), "b_c", ConstraintType.UNIQUE)
         )
     }
 

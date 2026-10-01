@@ -57,9 +57,9 @@ class NameFormat {
         private fun suffixFrom(type: IndexType?): String? = type?.name?.lowercase()
 
         /**
-         * An underscore inside a token is doubled, so the parts stay recoverable. Without it `pizza_sten` on
-         * label `ugn` collides with `pizza` on `sten_ugn`. A token that starts or ends with an underscore is
-         * still ambiguous.
+         * An underscore inside a token is doubled, so the parts stay recoverable. Without it `a_b` on label
+         * `c` collides with `a` on label `b_c`. A token that starts or ends with an underscore is still
+         * ambiguous.
          */
         private fun escape(token: String): String = token.replace("_", "__")
     }
