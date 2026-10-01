@@ -103,34 +103,20 @@ object Internal {
     ): List<Pair<C, String>> {
         val shorthand = mutableListOf<Pair<C, String>>()
         for ((key, property) in properties) {
+            fun add(type: ConstraintType): Pair<C, String> =
+                addConstraint(constraints, property.name ?: key, key, constraint, type, entity, label)
+
             if (property.key == true) {
                 property.key = null
-                shorthand +=
-                    addConstraint(constraints, property.name ?: key, key, constraint, ConstraintType.KEY, entity, label)
+                shorthand += add(ConstraintType.KEY)
             }
             if (property.unique == true) {
                 property.unique = null
-                shorthand += addConstraint(
-                    constraints,
-                    property.name ?: key,
-                    key,
-                    constraint,
-                    ConstraintType.UNIQUE,
-                    entity,
-                    label
-                )
+                shorthand += add(ConstraintType.UNIQUE)
             }
             if (property.mustExist == true) {
                 property.mustExist = null
-                shorthand += addConstraint(
-                    constraints,
-                    property.name ?: key,
-                    key,
-                    constraint,
-                    ConstraintType.EXISTS,
-                    entity,
-                    label
-                )
+                shorthand += add(ConstraintType.EXISTS)
             }
         }
         return shorthand
