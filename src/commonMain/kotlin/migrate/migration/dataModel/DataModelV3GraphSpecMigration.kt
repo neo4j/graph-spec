@@ -39,9 +39,6 @@ import model.type.IndexType.RANGE
 import model.type.IndexType.TEXT
 import model.type.IndexType.VECTOR
 
-/** One entry of a constraint's or index's `properties`: `{ "$ref": "#id" }`. */
-private typealias PropertyRef = SchemaMap
-
 /**
  * 3.0 -> Graph Spec 4.0
  */
@@ -212,8 +209,8 @@ class DataModelV3GraphSpecMigration :
         constraintType
     )
 
-    private fun List<PropertyRef>?.tokensFrom(propertyTokens: Map<String, String>): List<String> =
-        orEmpty().map { propertyRef -> propertyTokens[propertyRef.ref()] ?: propertyRef.ref() }
+    private fun List<SchemaMap>?.tokensFrom(propertyTokens: Map<String, String>): List<String> =
+        orEmpty().map { propertyTokens[it.ref()] ?: it.ref() }
 
     private fun constraintType(constraint: SchemaMap): ConstraintType {
         val type = constraint.string("constraintType")
