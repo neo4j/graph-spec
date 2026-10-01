@@ -963,10 +963,10 @@
                 "table": {
                     "type": "string"
                 },
-                "start_node": {
+                "from_node": {
                     "$ref": "#/$defs/TargetMapping"
                 },
-                "end_node": {
+                "to_node": {
                     "$ref": "#/$defs/TargetMapping"
                 },
                 "matchLabel": {
@@ -993,8 +993,8 @@
                 "type",
                 "relationship",
                 "table",
-                "start_node",
-                "end_node"
+                "from_node",
+                "to_node"
             ],
             "additionalProperties": false
         },

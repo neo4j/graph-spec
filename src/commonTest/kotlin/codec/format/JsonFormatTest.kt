@@ -163,8 +163,8 @@ class JsonFormatTest {
                 RelationshipMapping(
                     relationship = "r0",
                     table = "t1",
-                    startNode = TargetMapping(node = "n0"),
-                    endNode = TargetMapping(node = "n1")
+                    fromNode = TargetMapping(node = "n0"),
+                    toNode = TargetMapping(node = "n1")
                 ),
                 QueryMapping(table = "t2", query = "MATCH (n) RETURN n")
             )

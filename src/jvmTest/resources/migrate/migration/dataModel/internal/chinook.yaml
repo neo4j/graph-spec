@@ -744,110 +744,110 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "album"
-    start_node:
+    from_node:
       node: "node0"
       properties:
         node0_property0: { column: "album_id" }
-    end_node:
+    to_node:
       node: "node1"
       properties:
         node1_property0: { column: "artist_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "customer"
-    start_node:
+    from_node:
       node: "node2"
       properties:
         node2_property0: { column: "customer_id" }
-    end_node:
+    to_node:
       node: "node3"
       properties:
         node3_property0: { column: "support_rep_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "employee"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property0: { column: "employee_id" }
-    end_node:
+    to_node:
       node: "node3"
       properties:
         node3_property0: { column: "reports_to" }
   - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "invoice"
-    start_node:
+    from_node:
       node: "node5"
       properties:
         node5_property0: { column: "invoice_id" }
-    end_node:
+    to_node:
       node: "node2"
       properties:
         node2_property0: { column: "customer_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "invoice_line"
-    start_node:
+    from_node:
       node: "node6"
       properties:
         node6_property0: { column: "invoice_line_id" }
-    end_node:
+    to_node:
       node: "node5"
       properties:
         node5_property0: { column: "invoice_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship5"
     table: "invoice_line"
-    start_node:
+    from_node:
       node: "node6"
       properties:
         node6_property0: { column: "invoice_line_id" }
-    end_node:
+    to_node:
       node: "node9"
       properties:
         node9_property0: { column: "track_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship6"
     table: "playlist_track"
-    start_node:
+    from_node:
       node: "node8"
       properties:
         node8_property0: { column: "playlist_id" }
-    end_node:
+    to_node:
       node: "node9"
       properties:
         node9_property0: { column: "track_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship7"
     table: "track"
-    start_node:
+    from_node:
       node: "node9"
       properties:
         node9_property0: { column: "track_id" }
-    end_node:
+    to_node:
       node: "node0"
       properties:
         node0_property0: { column: "album_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship8"
     table: "track"
-    start_node:
+    from_node:
       node: "node9"
       properties:
         node9_property0: { column: "track_id" }
-    end_node:
+    to_node:
       node: "node4"
       properties:
         node4_property0: { column: "genre_id" }
   - type: "RELATIONSHIP"
     relationship: "relationship9"
     table: "track"
-    start_node:
+    from_node:
       node: "node9"
       properties:
         node9_property0: { column: "track_id" }
-    end_node:
+    to_node:
       node: "node7"
       properties:
         node7_property0: { column: "media_type_id" }

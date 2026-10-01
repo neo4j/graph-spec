@@ -917,55 +917,55 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "Comment"
-    start_node:
+    from_node:
       node: "node0"
       properties:
         node0_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node3"
       properties:
         node3_property3: { column: "CreatorPersonId" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "Comment"
-    start_node:
+    from_node:
       node: "node0"
       properties:
         node0_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node4"
       properties:
         node4_property0: { column: "LocationCountryId" }
   - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "Comment"
-    start_node:
+    from_node:
       node: "node0"
       properties:
         node0_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node5"
       properties:
         node5_property3: { column: "ParentPostId" }
   - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "Comment"
-    start_node:
+    from_node:
       node: "node0"
       properties:
         node0_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node0"
       properties:
         node0_property3: { column: "ParentCommentId" }
   - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "CommentHasTag"
-    start_node:
+    from_node:
       node: "node0"
       properties:
         node0_property3: { column: "CommentId" }
-    end_node:
+    to_node:
       node: "node6"
       properties:
         node6_property0: { column: "TagId" }
@@ -976,22 +976,22 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship5"
     table: "Forum"
-    start_node:
+    from_node:
       node: "node1"
       properties:
         node1_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node3"
       properties:
         node3_property3: { column: "ModeratorPersonId" }
   - type: "RELATIONSHIP"
     relationship: "relationship6"
     table: "ForumHasMember"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property3: { column: "PersonId" }
-    end_node:
+    to_node:
       node: "node1"
       properties:
         node1_property3: { column: "ForumId" }
@@ -1002,11 +1002,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship7"
     table: "ForumHasTag"
-    start_node:
+    from_node:
       node: "node1"
       properties:
         node1_property3: { column: "ForumId" }
-    end_node:
+    to_node:
       node: "node6"
       properties:
         node6_property0: { column: "TagId" }
@@ -1016,33 +1016,33 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship8"
     table: "Organisation"
-    start_node:
+    from_node:
       node: "node2"
       properties:
         node2_property0: { column: "id" }
-    end_node:
+    to_node:
       node: "node4"
       properties:
         node4_property0: { column: "LocationPlaceId" }
   - type: "RELATIONSHIP"
     relationship: "relationship9"
     table: "Person"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node4"
       properties:
         node4_property0: { column: "LocationCityId" }
   - type: "RELATIONSHIP"
     relationship: "relationship10"
     table: "PersonHasInterest"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property3: { column: "PersonId" }
-    end_node:
+    to_node:
       node: "node6"
       properties:
         node6_property0: { column: "TagId" }
@@ -1052,11 +1052,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship11"
     table: "PersonKnowsPerson"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property3: { column: "Person1Id" }
-    end_node:
+    to_node:
       node: "node3"
       properties:
         node3_property3: { column: "Person2Id" }
@@ -1067,11 +1067,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship12"
     table: "PersonLikesComment"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property3: { column: "PersonId" }
-    end_node:
+    to_node:
       node: "node0"
       properties:
         node0_property3: { column: "CommentId" }
@@ -1082,11 +1082,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship13"
     table: "PersonLikesPost"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property3: { column: "PersonId" }
-    end_node:
+    to_node:
       node: "node5"
       properties:
         node5_property3: { column: "PostId" }
@@ -1097,11 +1097,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship14"
     table: "PersonStudiesAt"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property3: { column: "PersonId" }
-    end_node:
+    to_node:
       node: "node2"
       properties:
         node2_property0: { column: "UniversityId" }
@@ -1112,11 +1112,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship15"
     table: "PersonWorksAt"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property3: { column: "PersonId" }
-    end_node:
+    to_node:
       node: "node2"
       properties:
         node2_property0: { column: "CompanyId" }
@@ -1127,55 +1127,55 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship16"
     table: "Place"
-    start_node:
+    from_node:
       node: "node4"
       properties:
         node4_property0: { column: "id" }
-    end_node:
+    to_node:
       node: "node4"
       properties:
         node4_property0: { column: "PartOfPlaceId" }
   - type: "RELATIONSHIP"
     relationship: "relationship17"
     table: "Post"
-    start_node:
+    from_node:
       node: "node5"
       properties:
         node5_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node3"
       properties:
         node3_property3: { column: "CreatorPersonId" }
   - type: "RELATIONSHIP"
     relationship: "relationship18"
     table: "Post"
-    start_node:
+    from_node:
       node: "node5"
       properties:
         node5_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node1"
       properties:
         node1_property3: { column: "ContainerForumId" }
   - type: "RELATIONSHIP"
     relationship: "relationship19"
     table: "Post"
-    start_node:
+    from_node:
       node: "node5"
       properties:
         node5_property3: { column: "id" }
-    end_node:
+    to_node:
       node: "node4"
       properties:
         node4_property0: { column: "LocationCountryId" }
   - type: "RELATIONSHIP"
     relationship: "relationship20"
     table: "PostHasTag"
-    start_node:
+    from_node:
       node: "node5"
       properties:
         node5_property3: { column: "PostId" }
-    end_node:
+    to_node:
       node: "node6"
       properties:
         node6_property0: { column: "TagId" }
@@ -1185,22 +1185,22 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship21"
     table: "Tag"
-    start_node:
+    from_node:
       node: "node6"
       properties:
         node6_property0: { column: "id" }
-    end_node:
+    to_node:
       node: "node7"
       properties:
         node7_property0: { column: "TypeTagClassId" }
   - type: "RELATIONSHIP"
     relationship: "relationship22"
     table: "TagClass"
-    start_node:
+    from_node:
       node: "node7"
       properties:
         node7_property0: { column: "id" }
-    end_node:
+    to_node:
       node: "node7"
       properties:
         node7_property0: { column: "SubclassOfTagClassId" }
