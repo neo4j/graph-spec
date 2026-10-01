@@ -69,3 +69,9 @@ ontology branch into `main` impossible.
 - The converter, the written spec document, the release/publish
   machinery, the SDK, and the repo rename each land in their own
   workstream with their own ADR before implementation.
+
+## Later references
+
+- ADR-0002 supersedes (i) the `-s ours` unification merge mechanic
+  recorded here and (ii) the deferral of the SDK/converter port to later
+  workstreams.
