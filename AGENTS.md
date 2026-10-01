@@ -6,6 +6,13 @@ and the tooling that keeps them in sync. v1 is a clean break from graph
 spec 4.0.0 — no backwards compatibility in the format; a one-way
 4.0.0 → 1.0.0 converter is the migration story, not the spec's concern.
 
+Since the rebase onto `main` (ADR-0002), this repo also holds the 4.0.0
+implementation — the Kotlin Multiplatform model (`src/`), the Go module
+(`go/`), and the Gradle build (`build-logic/`, `gradle/`) — which the
+port re-targets at the v1 format in place, keeping main's machinery and
+public APIs (ADR-0006). The transition is governed by
+[`docs/adr/`](docs/adr/) (0001–0006).
+
 These rules apply to every change. History never weakens them.
 
 ## Non-negotiables
@@ -18,7 +25,8 @@ changed semantics, changed cardinalities, type-system changes, extension
 mechanism changes, interop mapping changes, governance decisions — if it
 alters what a document may say or what it means, it gets an ADR first.
 
-- Location: [`docs/adr/`](docs/adr/) (created with the first ADR)
+- Location: [`docs/adr/`](docs/adr/) — 0001–0006 govern the repo
+  transition and the port; list the directory before numbering
 - Filename: `NNNN-short-kebab-slug.md` (four-digit sequence, never reused)
 - One decision per file
 - Template sections, in order: **Context**, **Decision**, **Alternatives
@@ -28,7 +36,7 @@ alters what a document may say or what it means, it gets an ADR first.
   agreed. Accepted ADRs are immutable: later change = new ADR + a
   **Later references** note on the old one
 - Next number = highest existing prefix + 1. Do not guess; list the
-  directory. First ADR is `0001`
+  directory
 - Refer to other ADRs as `ADR-NNNN`
 
 Decisions up to 2026-09-25 are recorded in the proposal doc and its
@@ -83,8 +91,14 @@ No format feature without a validating example.
   result must validate and diff cleanly.
 - Never record a wrong answer: if an example only passes because the
   schema is wrong, fix the schema, not the example.
+- When a change touches `src/`, `go/`, `gradle/` or `build-logic/`, the
+  implementation gates join the spec gate: `./gradlew check` and
+  `cd go && go test ./...` (see "How to run checks"). Spec-only changes
+  leave the implementation tree untouched.
 
 ## Repository layout
+
+The v1 ontology spec overlay:
 
 ```
 ontology-spec.schema.json       the format, machine-checkable form (JSON Schema draft 2020-12)
@@ -96,17 +110,62 @@ examples/
   *.ontology.yaml               generated from the JSON; never edited
   foaf.ttl                      RDFS/OWL converter input
 scripts/
-  validate.mjs                  the gate: schema compiles, examples validate
+  validate.mjs                  the spec gate: schema compiles, examples validate
   generate-yaml.mjs             JSON → YAML (runs as the prevalidate hook)
   ttl2ontology.mjs              RDFS/OWL Turtle → ontology format, [input.ttl] [output.json]
+.github/workflows/validate.yaml the spec gate in CI (Node 24)
+```
+
+The 4.0.0 implementation (coexists until the port re-targets it in
+place — ADR-0002, ADR-0004):
+
+```
+src/
+  commonMain/ commonTest/       Kotlin model, codecs, validators, migrations
+  jsMain/ jsTest/               @JsExport JS/TS surface
+  jvmMain/ jvmTest/             JVM, incl. the schema generator
+  bridge/ bridgeTest/           Kotlin/Native bridge used by Go
+go/                             Go module: generated model + validation/migration via the bridge
+build-logic/                    Gradle plugins, incl. the TypeScript union post-processor
+gradle/, gradlew                wrapper + version catalog
+.github/workflows/
+  pr-guard-*.yaml, validate-*.yaml, release.yaml
+                                the 4.0.0 implementation CI (dormant until its port tracks land)
 ```
 
 ## Toolchain
 
-- Node >= 24 (enforced by the validator)
+- Node >= 24 (enforced by the validator; if the shell default is older,
+  a Node 24 install lives at
+  `~/.local/share/fnm/node-versions/v24.21.0/installation/bin`)
 - JSON Schema draft 2020-12 (Ajv + ajv-formats), YAML via `yaml`,
-  Turtle via `n3`
-- npm with a committed `package-lock.json`; a new dependency needs an ADR
+  Turtle via `n3`; npm with a committed `package-lock.json` — a new
+  dependency needs an ADR
+- JDK 17 (temurin) + the Gradle wrapper for the Kotlin Multiplatform
+  build (targets: JVM, JS/TS, Native macosArm64/linuxX64/linuxArm64)
+- Go per `go/go.mod` (1.24.x); the native bridge embeds
+  darwin-arm64/linux libraries, so `go test` works on this machine
+
+## How to run checks
+
+| Surface | Gate | Command |
+| --- | --- | --- |
+| Spec: schema + examples | validate | `npm run validate` |
+| Converter determinism | convert + diff | `npm run convert && git diff --exit-code` |
+| Kotlin: JVM + JS + Native | check | `./gradlew check --no-daemon` |
+| Kotlin lint (ktlint via spotless, license header) | spotless | `./gradlew spotlessCheck` (fix: `./gradlew spotlessApply`) |
+| Go | test | `cd go && go test ./...` |
+| Go model drift | regen + diff | `./go/scripts/generate-go-models.sh && git diff --exit-code` |
+
+- Kotlin tests run inside `./gradlew check`: JVM via JUnit platform, JS
+  via mocha.
+- Go tests exercise the Kotlin/Native bridge through the embedded
+  darwin-arm64/linux libraries. `GRAPHDATAMODEL_LIB_PATH` overrides the
+  library path; `graphspec_noembed` builds without the embedded lib.
+- `generate-go-models.sh` runs the Gradle schema task plus schemancer,
+  so it needs the JDK too.
+- CI mirrors this table: `validate.yaml` (spec), `validate-kotlin.yaml`
+  (`./gradlew check`), `validate-go.yaml` (go test + drift check).
 
 ## Branching and pull requests
 
@@ -116,7 +175,12 @@ scripts/
   more than one PR, order the branches `main → b1 → b2 → …` and open each
   PR against its predecessor.
 - Before any push: `npm run validate`, and `npm run convert` when the
-  converter or the RDFS mapping changed.
+  converter or the RDFS mapping changed. Changes touching the
+  implementation tree also run its gates (see "How to run checks").
+- Linearity applies to automation too: gbuild worktree landings use
+  merge commits, so a branch that went through a gbuild run needs a
+  final `git rebase main` (rebase drops the landing merges) before it
+  is done.
 
 ## How to add an ADR
 
