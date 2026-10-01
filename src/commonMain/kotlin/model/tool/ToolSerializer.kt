@@ -24,19 +24,22 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonDecoder
-import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
-import model.extension.ExtensionValueSerializer
+import model.extension.extractExtras
+import model.extension.putExtras
+import model.extension.requireJsonDecoder
+import model.extension.requireJsonEncoder
 
 /**
  * Untagged catch-all codec for [Tool]: `type`/`name`/`description` are the known fields;
  * every other key is collected into [Tool.extra] on decode and inlined back on encode,
- * so owner-defined tool shapes survive the round trip untouched.
+ * so owner-defined tool shapes survive the round trip untouched. The catch-all
+ * mechanics ([putExtras], [extractExtras]) are shared; this codec only owns its
+ * known-field set and typed field handling.
  */
 object ToolSerializer : KSerializer<Tool> {
     private val knownKeys = setOf("type", "name", "description")
@@ -49,35 +52,25 @@ object ToolSerializer : KSerializer<Tool> {
     }
 
     override fun serialize(encoder: Encoder, value: Tool) {
-        val jsonEncoder = encoder as? JsonEncoder
-            ?: throw SerializationException("Tool can only be serialized as JSON")
-        jsonEncoder.encodeJsonElement(
+        encoder.requireJsonEncoder("Tool").encodeJsonElement(
             buildJsonObject {
                 put("type", value.type)
                 value.name?.let { put("name", it) }
                 value.description?.let { put("description", it) }
-                for ((key, extra) in value.extra) {
-                    if (key !in knownKeys) {
-                        put(key, ExtensionValueSerializer.toJson(extra))
-                    }
-                }
+                putExtras(value.extra, knownKeys)
             }
         )
     }
 
     override fun deserialize(decoder: Decoder): Tool {
-        val jsonDecoder = decoder as? JsonDecoder
-            ?: throw SerializationException("Tool can only be deserialized from JSON")
-        val obj = jsonDecoder.decodeJsonElement().jsonObject
+        val obj = decoder.requireJsonDecoder("Tool").decodeJsonElement().jsonObject
         val type = obj["type"]?.jsonPrimitive?.contentOrNull
             ?: throw SerializationException("Tool requires a 'type' field")
         return Tool(
             type = type,
             name = obj["name"]?.jsonPrimitive?.contentOrNull,
             description = obj["description"]?.jsonPrimitive?.contentOrNull,
-            extra = obj
-                .filterKeys { it !in knownKeys }
-                .mapValuesTo(mutableMapOf()) { ExtensionValueSerializer.fromJson(it.value) }
+            extra = obj.extractExtras(knownKeys)
         )
     }
 }

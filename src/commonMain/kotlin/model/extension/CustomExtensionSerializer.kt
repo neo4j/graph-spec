@@ -24,8 +24,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonDecoder
-import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
@@ -36,6 +34,8 @@ import kotlinx.serialization.json.put
  * Untagged catch-all codec for the [CustomExtension] envelope: `type`/`$schema`/`name`/
  * `definition` are the known fields; every other key is collected into
  * [CustomExtension.extra] on decode and inlined back on encode, carried untouched.
+ * The catch-all mechanics ([putExtras], [extractExtras]) are shared; this codec
+ * only owns its known-field set and typed field handling.
  */
 object CustomExtensionSerializer : KSerializer<CustomExtension> {
     private val knownKeys = setOf("type", "\$schema", "name", "definition")
@@ -49,27 +49,19 @@ object CustomExtensionSerializer : KSerializer<CustomExtension> {
     }
 
     override fun serialize(encoder: Encoder, value: CustomExtension) {
-        val jsonEncoder = encoder as? JsonEncoder
-            ?: throw SerializationException("CustomExtension can only be serialized as JSON")
-        jsonEncoder.encodeJsonElement(
+        encoder.requireJsonEncoder("CustomExtension").encodeJsonElement(
             buildJsonObject {
                 put("type", value.type)
                 value.schema?.let { put("\$schema", it) }
                 value.name?.let { put("name", it) }
                 value.definition?.let { put("definition", ExtensionValueSerializer.toJson(it)) }
-                for ((key, extra) in value.extra) {
-                    if (key !in knownKeys) {
-                        put(key, ExtensionValueSerializer.toJson(extra))
-                    }
-                }
+                putExtras(value.extra, knownKeys)
             }
         )
     }
 
     override fun deserialize(decoder: Decoder): CustomExtension {
-        val jsonDecoder = decoder as? JsonDecoder
-            ?: throw SerializationException("CustomExtension can only be deserialized from JSON")
-        val obj = jsonDecoder.decodeJsonElement().jsonObject
+        val obj = decoder.requireJsonDecoder("CustomExtension").decodeJsonElement().jsonObject
         val type = obj["type"]?.jsonPrimitive?.contentOrNull
             ?: throw SerializationException("CustomExtension requires a 'type' field")
         return CustomExtension(
@@ -77,9 +69,7 @@ object CustomExtensionSerializer : KSerializer<CustomExtension> {
             schema = obj["\$schema"]?.jsonPrimitive?.contentOrNull,
             name = obj["name"]?.jsonPrimitive?.contentOrNull,
             definition = obj["definition"]?.let { ExtensionValueSerializer.fromJson(it) },
-            extra = obj
-                .filterKeys { it !in knownKeys }
-                .mapValuesTo(mutableMapOf()) { ExtensionValueSerializer.fromJson(it.value) }
+            extra = obj.extractExtras(knownKeys)
         )
     }
 }
