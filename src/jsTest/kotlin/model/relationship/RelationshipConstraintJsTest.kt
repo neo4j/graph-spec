@@ -2,6 +2,8 @@ package model.relationship
 
 import model.JsMappingTest
 import model.node.Constraint
+import model.node.toClass
+import model.node.toJs
 import model.type.ConstraintType
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

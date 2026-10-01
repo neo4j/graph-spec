@@ -38,8 +38,7 @@ abstract class TypeScriptModifierTask : DefaultTask() {
 
         // ConstraintType
         unions.create("ConstraintType", "ConstraintTypeJs")
-        types.replace("NodeConstraintJs", "type", "string", "ConstraintTypeJs")
-        types.replace("RelationshipConstraintJs", "type", "string", "ConstraintTypeJs")
+        types.replace("ConstraintJs", "type", "string", "ConstraintTypeJs")
 
         // IndexType
         unions.create("IndexType", "IndexTypeJs")

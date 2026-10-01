@@ -59,7 +59,7 @@ fun nodeJs(
     reference: String? = null,
     description: String? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
-    id: String
+    id: String,
 ): NodeJs = jso {
     this.label = label
     this.labels = labels
@@ -83,10 +83,10 @@ fun Node.toJs(key: String) = nodeJs(
     reference = reference,
     description = description,
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
-    id = key
+    id = key,
 )
 
-fun NodeJs.toClass(id: String): Node = Node(
+fun NodeJs.toClass(): Node = Node(
     label = label,
     labels = labels?.toClass(),
     properties = properties.associateBy { key, value -> value.toClass() },
@@ -95,5 +95,5 @@ fun NodeJs.toClass(id: String): Node = Node(
     aliases = aliases.toMutableList(),
     reference = reference,
     description = description,
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
 )

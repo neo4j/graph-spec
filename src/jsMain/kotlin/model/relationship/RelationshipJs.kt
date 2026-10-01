@@ -25,6 +25,8 @@ import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
 import model.jso
+import model.node.toClass
+import model.node.toJs
 import model.property.PropertyJs
 import model.property.toClass
 import model.property.toJs
@@ -61,7 +63,7 @@ fun relationshipJs(
     reference: String? = null,
     description: String? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
-    id: String
+    id: String,
 ): RelationshipJs = jso {
     this.type = type
     this.from = from
@@ -87,10 +89,10 @@ fun Relationship.toJs(id: String) = relationshipJs(
     reference = reference,
     description = description,
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
-    id = id
+    id = id,
 )
 
-fun RelationshipJs.toClass(id: String) = Relationship(
+fun RelationshipJs.toClass() = Relationship(
     type = type,
     from = from.toClass(),
     to = to.toClass(),
@@ -100,5 +102,5 @@ fun RelationshipJs.toClass(id: String) = Relationship(
     aliases = aliases.toMutableList(),
     reference = reference,
     description = description,
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
 )

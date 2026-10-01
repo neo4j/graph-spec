@@ -22,7 +22,7 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
 
     override fun toJs(k: Node): NodeJs = k.toJs("nodeId")
 
-    override fun toClass(js: NodeJs): Node = js.toClass("nodeId")
+    override fun toClass(js: NodeJs): Node = js.toClass()
 
     override fun verifyJsObject(jsObject: NodeJs) {
         assertEquals("label", jsObject.label)

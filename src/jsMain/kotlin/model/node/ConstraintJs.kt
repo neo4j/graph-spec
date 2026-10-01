@@ -16,12 +16,31 @@
  */
 package model.node
 
-/**
- * The v1 model unified node and relationship constraints into the shared
- * [Constraint] class, so both domains use the one [ConstraintJs] shape.
- * This alias keeps the pre-unification exported name source-compatible.
- */
-typealias NodeConstraintJs = ConstraintJs
+import kotlinx.js.JsPlainObject
+import model.jso
 
-fun nodeConstraintJs(type: String, name: String? = null, properties: Array<String> = emptyArray()): NodeConstraintJs =
-    constraintJs(type, name, properties)
+@JsExport
+@JsPlainObject
+external interface ConstraintJs {
+    var type: String
+    var name: String?
+    var properties: Array<String>
+}
+
+fun constraintJs(type: String, name: String? = null, properties: Array<String> = emptyArray()): ConstraintJs = jso {
+    this.type = type
+    this.name = name
+    this.properties = properties
+}
+
+fun Constraint.toJs() = constraintJs(
+    type = type,
+    name = name,
+    properties = properties.toTypedArray(),
+)
+
+fun ConstraintJs.toClass() = Constraint(
+    type = type,
+    properties = properties.toMutableList(),
+    name = name,
+)

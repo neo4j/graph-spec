@@ -16,36 +16,19 @@
  */
 package model.relationship
 
-import kotlinx.js.JsPlainObject
-import model.jso
-import model.node.Constraint
+import model.node.ConstraintJs
+import model.node.constraintJs
 
-@JsExport
-@JsPlainObject
-external interface RelationshipConstraintJs {
-    var type: String
-    var name: String?
-    var properties: Array<String>
-}
+/**
+ * The v1 model unified node and relationship constraints into the shared
+ * [model.node.Constraint] class, so both domains use the one [ConstraintJs]
+ * shape. This alias keeps the pre-unification exported name
+ * source-compatible.
+ */
+typealias RelationshipConstraintJs = ConstraintJs
 
 fun relationshipConstraintJs(
     type: String,
     name: String? = null,
-    properties: Array<String> = emptyArray()
-): RelationshipConstraintJs = jso {
-    this.type = type
-    this.name = name
-    this.properties = properties
-}
-
-fun Constraint.toJs() = relationshipConstraintJs(
-    type = type,
-    name = name,
-    properties = properties.toTypedArray()
-)
-
-fun RelationshipConstraintJs.toClass() = Constraint(
-    type = type,
-    properties = properties.toMutableList(),
-    name = name
-)
+    properties: Array<String> = emptyArray(),
+): RelationshipConstraintJs = constraintJs(type, name, properties)

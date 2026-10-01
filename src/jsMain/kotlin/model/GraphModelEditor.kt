@@ -43,7 +43,7 @@ class GraphModelEditor {
             nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
             relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
                 .toRecord(),
-            extensions = model.extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+            extensions = model.extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
         )
 
         @JsStatic
@@ -53,16 +53,15 @@ class GraphModelEditor {
             version = model.version,
             name = model.name,
             description = model.description,
-            nodes = model.nodes.associateBy { id, js -> js.toClass(id) },
-            relationships = model.relationships.associateBy { id, js -> js.toClass(id) },
-            extensions = model.extensions.associateBy { _, js -> js.toClass() }.toMutableMap()
+            nodes = model.nodes.associateBy { _, js -> js.toClass() },
+            relationships = model.relationships.associateBy { _, js -> js.toClass() },
+            extensions = model.extensions.associateBy { _, js -> js.toClass() }.toMutableMap(),
         )
 
         @JsStatic
-        fun addNode(model: GraphModelJs, label: String? = null): String =
-            model.nodes.addUnique("node") { nodeId ->
-                nodeJs(id = nodeId, label = label)
-            }
+        fun addNode(model: GraphModelJs, label: String? = null): String = model.nodes.addUnique("node") { nodeId ->
+            nodeJs(id = nodeId, label = label)
+        }
 
         @JsStatic
         fun removeNode(model: GraphModelJs, nodeId: String) {

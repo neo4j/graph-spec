@@ -22,7 +22,7 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
 
     override fun toJs(k: Relationship): RelationshipJs = k.toJs("relationshipId")
 
-    override fun toClass(js: RelationshipJs): Relationship = js.toClass("relationshipId")
+    override fun toClass(js: RelationshipJs): Relationship = js.toClass()
 
     override fun verifyJsObject(jsObject: RelationshipJs) {
         assertEquals("RELATIONSHIP_TYPE", jsObject.type)

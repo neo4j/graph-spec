@@ -16,35 +16,10 @@
  */
 package model.relationship
 
-import model.dropAt
-import kotlin.collections.plus
+import model.node.ConstraintEditor
 
-@JsExport
-class RelationshipConstraintEditor {
-    companion object {
-        @JsStatic
-        fun setType(constraint: RelationshipConstraintJs, type: String) {
-            constraint.type = type
-        }
-
-        @JsStatic
-        fun setName(constraint: RelationshipConstraintJs, name: String?) {
-            constraint.name = name
-        }
-
-        @JsStatic
-        fun addProperty(constraint: RelationshipConstraintJs, property: String) {
-            if (!constraint.properties.contains(property)) {
-                constraint.properties += property
-            }
-        }
-
-        @JsStatic
-        fun removeProperty(constraint: RelationshipConstraintJs, property: String) {
-            val index = constraint.properties.indexOf(property)
-            if (index != -1) {
-                constraint.properties = constraint.properties.dropAt(index)
-            }
-        }
-    }
-}
+/**
+ * Source-compatible alias for the pre-unification name; the implementation
+ * lives in the shared [ConstraintEditor].
+ */
+typealias RelationshipConstraintEditor = ConstraintEditor
