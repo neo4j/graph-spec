@@ -1,6 +1,9 @@
 # gbuild harness store (local-only state)
 .gbuild/
 
+# npm-era debris in old checkouts (nothing npm remains in the repo)
+node_modules/
+
 ### Gradle ###
 .gradle
 **/build/
