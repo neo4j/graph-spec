@@ -25,6 +25,7 @@ import migrate.Migration
 import model.NameFormat
 import model.Type
 import model.Version
+import model.type.ConstraintType
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
@@ -375,7 +376,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             schemaMapOf(
                 "\$id" to name,
                 "name" to if (typeKey == "constraintType") {
-                    element.resolvedName(propertyIds, propertyTokens, entityToken, type)
+                    element.resolvedName(propertyIds, propertyTokens, entityToken)
                 } else {
                     element.stringOrNull("name") ?: name
                 },
@@ -396,19 +397,17 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     private fun SchemaMap.resolvedName(
         propertyIds: List<String>,
         propertyTokens: Map<String, String>,
-        entityToken: String,
-        type: String
+        entityToken: String
     ): String {
         stringOrNull("name")?.takeUnless { it.isBlank() }?.let { return it }
         val tokens = propertyIds.map { propertyTokens[it] ?: it }
         if (tokens.isEmpty()) {
             return ""
         }
-        return NameFormat.constraintName(
-            tokens,
-            entityToken,
-            dataModelConstraintTypeFrom(type) ?: error("Unknown constraint type: '$type' at $path.name")
-        )
+        val typeName = string("type")
+        val type = ConstraintType.entries.find { it.name == typeName }
+            ?: error("Unknown constraint type: '$typeName' at $path.type")
+        return NameFormat.constraintName(tokens, entityToken, type)
     }
 
     internal fun convertFields(fields: Map<String, SchemaMap>?): List<SchemaMap> {
