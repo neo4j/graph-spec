@@ -16,119 +16,43 @@
  */
 package validate
 
-import validate.node.NodeConstraintCoverage
-import validate.node.NodeConstraints
-import validate.node.NodeIndexConstraintNameConflict
-import validate.node.NodeIndexOptions
-import validate.node.NodeIndexProperties
-import validate.node.NodeIndexesExists
-import validate.node.NodeLabel
-import validate.node.NodeLabelToken
-import validate.node.NodeMappingKey
-import validate.node.NodeMappingKeyType
-import validate.node.NodeProperties
-import validate.node.NodePropertyDuplicateName
-import validate.node.NodePropertyEmptyName
-import validate.node.constraint.NodeCompositeConstraintPropertyType
-import validate.node.constraint.NodeConstraintDuplicatePropertySet
-import validate.node.constraint.NodeConstraintProperties
-import validate.node.constraint.NodeExistenceCompositeConflict
-import validate.node.constraint.NodeExistenceConstraint
-import validate.node.constraint.NodeKeyOverlap
-import validate.node.constraint.NodeTypeConstraint
-import validate.relationship.RelationshipConstraints
-import validate.relationship.RelationshipIndexOptions
-import validate.relationship.RelationshipIndexProperties
-import validate.relationship.RelationshipIndexes
-import validate.relationship.RelationshipNodes
-import validate.relationship.RelationshipPropertyDuplicateName
-import validate.relationship.RelationshipPropertyEmptyName
-import validate.relationship.RelationshipType
-import validate.relationship.RelationshipTypeToken
-import validate.relationship.constraint.RelationshipExistenceConstraint
-import validate.relationship.constraint.RelationshipKeyOverlap
-import validate.relationship.constraint.RelationshipTypeConstraint
-import validate.table.TableColumnDuplicateName
-import validate.table.TableColumnEmptyName
-import validate.table.TableColumnType
 import kotlin.js.JsExport
 import kotlin.js.JsStatic
 
 @JsExport
 class Validations {
     companion object {
+        /*
+            The 4.0.0 validators were deleted with their model subjects in the v1 model
+            rewrite (track 1, ADR-0004); the groups stay as empty shells and track 2
+            repopulates them with v1-semantics validators.
+         */
+
         // Graph-spec validators added independent of any UPX call site.
         @JsStatic
-        val core: List<Validation> = listOf(
-            NodeTypeConstraint,
-            RelationshipTypeConstraint,
-            NodeConstraints,
-            RelationshipConstraints,
-            NodeIndexesExists,
-            NodeIndexOptions,
-            RelationshipIndexes,
-            RelationshipIndexOptions,
-            NodeExistenceConstraint,
-            RelationshipExistenceConstraint,
-            RelationshipNodes
-        )
+        val core: List<Validation> = emptyList()
 
         // UPX kg-builder `validateStructuredSchema` (schemas-validators/) - gates accepting
         // an AI-generated schema before it's applied to the model.
         @JsStatic
-        val kgbuilderComplete: List<Validation> = listOf(
-            NodeLabel,
-            NodeProperties,
-            NodeConstraintCoverage,
-            NodeKeyOverlap,
-            NodeExistenceConstraint,
-            RelationshipType,
-            RelationshipKeyOverlap,
-            RelationshipExistenceConstraint,
-            RelationshipNodes
-        )
+        val kgbuilderReady: List<Validation> = emptyList()
 
         // UPX `getDataModelErrors` (errors.ts) - shared call site, gates "Run Import"
         // in both kg-builder's data-model-slice.ts and import's data-model.ts.
         @JsStatic
-        val importComplete: List<Validation> = listOf(
-            NodeLabel,
-            RelationshipType,
-            NodeMappingKey,
-            NodeIndexProperties,
-            RelationshipIndexProperties,
-            NodeConstraintProperties,
-            NodeConstraintDuplicatePropertySet,
-            NodeExistenceCompositeConflict,
-            NodeIndexConstraintNameConflict,
-            TableColumnEmptyName,
-            TableColumnDuplicateName,
-            TableColumnType,
-            NodePropertyEmptyName,
-            NodePropertyDuplicateName,
-            RelationshipPropertyEmptyName,
-            RelationshipPropertyDuplicateName
-        )
+        val importReady: List<Validation> = emptyList()
 
         // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
-        // model, called by both import and ontologies whenever a saved model is loaded/uploaded.
+        // model, called by both apps whenever a saved model is loaded/uploaded.
         @JsStatic
-        val draft: List<Validation> = listOf(
-            NodeLabel,
-            RelationshipType
-        )
+        val importParseIntegrity: List<Validation> = emptyList()
 
         // UPX `apps/import/.../data-model.utils.ts` - import-app-only bulk pass.
         @JsStatic
-        val bulkImportComplete: List<Validation> = listOf(
-            NodeLabelToken,
-            RelationshipTypeToken,
-            NodeMappingKeyType,
-            NodeCompositeConstraintPropertyType
-        )
+        val bulkImportReady: List<Validation> = emptyList()
 
         @JsStatic
         val all: List<Validation> =
-            (core + kgbuilderComplete + importComplete + draft + bulkImportComplete).distinct()
+            (core + kgbuilderReady + importReady + importParseIntegrity + bulkImportReady).distinct()
     }
 }

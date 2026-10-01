@@ -18,19 +18,19 @@ package model
 
 object Version {
     /*
-        Data model versions
+        Data model versions; legacy, they die with the migrate/ chain in track 3
      */
     const val DATA_MODEL_V23 = "2.3.0"
     const val DATA_MODEL_V24 = "2.4.0"
     const val DATA_MODEL_V30 = "3.0.0"
 
     /*
-        Import Spec versions
+        Import Spec versions; legacy, dies with the migrate/ chain in track 3
      */
     const val IMPORT_SPEC_V1 = "1.0.0"
 
     /*
-        Graph spec versions
+        Ontology spec format version
      */
-    const val LATEST = "4.0.0"
+    const val LATEST = "1.0.0"
 }

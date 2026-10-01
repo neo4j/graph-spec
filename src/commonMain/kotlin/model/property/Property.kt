@@ -20,20 +20,28 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
 import model.extension.Extensions
-import model.type.Named
 import kotlin.js.JsExport
 
+/**
+ * v1 property (ontology-spec.schema.json `$defs/property`). [type] is a type token
+ * (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>`, `ANY`, ...; `$defs/propertyType`);
+ * [dimension] is the VECTOR companion. `mustExist`/`unique`/`key` are the shorthand
+ * constraint flags; [oneOf] (`one_of`) and [pattern] constrain allowed values.
+ */
 @JsExport
 @Serializable
 @SerialName("Property")
 data class Property(
-    var type: Neo4jType = Neo4jType.ANY,
+    var type: String? = null,
     var dimension: Int? = null,
     var mustExist: Boolean? = null,
     var unique: Boolean? = null,
     var key: Boolean? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
-    override var name: String? = null,
-    val description: String = ""
-) : Extensions,
-    Named
+    @SerialName("one_of")
+    val oneOf: MutableList<ExtensionValue> = mutableListOf(),
+    var pattern: String? = null,
+    val aliases: MutableList<String> = mutableListOf(),
+    var reference: String? = null,
+    var description: String? = null,
+    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

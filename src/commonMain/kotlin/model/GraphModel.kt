@@ -18,43 +18,35 @@ package model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
-import model.display.Display
-import model.mapping.Mapping
+import model.extension.ExtensionValue
+import model.extension.Extensions
 import model.node.Node
 import model.relationship.Relationship
-import model.source.Table
 import validate.Issue
 import validate.Validation
 import validate.ValidationTree
 import kotlin.js.JsExport
 import kotlin.js.JsStatic
 
+/**
+ * Root of an ontology spec v1 document (ontology-spec.schema.json).
+ * [version] is the ontology's own version (identity metadata), not the format version;
+ * the format version rides in [schema] (`$schema`).
+ */
 @JsExport
 @Serializable
 @SerialName("GraphModel")
 data class GraphModel(
-    val version: String,
-    val name: String = "",
-    val description: String = "",
+    @SerialName("\$schema")
+    val schema: String,
+    val id: String,
+    val version: Int,
+    val name: String? = null,
+    val description: String? = null,
     val nodes: MutableMap<String, Node> = mutableMapOf(),
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
-    val tables: MutableMap<String, Table> = mutableMapOf(),
-    val mappings: MutableList<Mapping> = mutableListOf(),
-    val display: Display = Display(),
-    @Transient
-    var pretty: Boolean = false
-) {
-    @JsExport.Ignore
-    fun prettify() {
-        Pretty.prettify(this)
-    }
-
-    @JsExport.Ignore
-    fun internalise() {
-        Internal.internalise(this)
-    }
-
+    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions {
     @JsExport.Ignore
     fun validate(validators: List<Validation>): List<Issue> {
         val tree = ValidationTree()
@@ -65,11 +57,5 @@ data class GraphModel(
     companion object {
         @JsStatic
         fun validate(model: GraphModel, validators: List<Validation>) = model.validate(validators)
-
-        @JsStatic
-        fun prettify(model: GraphModel) = model.prettify()
-
-        @JsStatic
-        fun internalise(model: GraphModel) = model.internalise()
     }
 }

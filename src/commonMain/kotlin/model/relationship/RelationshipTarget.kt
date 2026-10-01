@@ -20,7 +20,19 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
+/**
+ * v1 relationship endpoint (ontology-spec.schema.json `$defs.endpoint`): [node] is a node id
+ * from the document's nodes map. Cardinality: [count] is the exact form, [minCount]/[maxCount]
+ * the ranged form; all absent = unconstrained (0..*).
+ */
 @JsExport
 @Serializable
 @SerialName("RelationshipTarget")
-data class RelationshipTarget(var node: String = "", var label: String = "")
+data class RelationshipTarget(
+    var node: String,
+    var count: Int? = null,
+    @SerialName("min_count")
+    var minCount: Int? = null,
+    @SerialName("max_count")
+    var maxCount: Int? = null
+)

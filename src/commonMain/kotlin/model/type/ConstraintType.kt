@@ -16,14 +16,11 @@
  */
 package model.type
 
-import kotlinx.serialization.SerialName
-import kotlin.js.JsExport
-
-@JsExport
-@SerialName("ConstraintType")
-enum class ConstraintType {
-    EXISTS,
-    KEY,
-    PROPERTY_TYPE,
-    UNIQUE
+/**
+ * v1 constraint type tokens (ontology-spec.schema.json `$defs.constraint.constraint_type`).
+ */
+object ConstraintType {
+    const val KEY = "key"
+    const val UNIQUE = "unique"
+    const val MUST_EXIST = "mustExist"
 }

@@ -20,10 +20,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
 import model.extension.Extensions
+import model.node.Constraint
 import model.property.Property
-import model.relationship.RelationshipConstraint
-import model.relationship.RelationshipIndex
-import model.type.Named
+import model.tool.Tool
 import kotlin.js.JsExport
 
 @JsExport
@@ -34,10 +33,10 @@ data class Relationship(
     val from: RelationshipTarget,
     val to: RelationshipTarget,
     val properties: MutableMap<String, Property> = mutableMapOf(),
-    val constraints: MutableMap<String, RelationshipConstraint> = mutableMapOf(),
-    val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf(),
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
-    override var name: String? = null,
-    val description: String = ""
-) : Extensions,
-    Named
+    val constraints: MutableList<Constraint> = mutableListOf(),
+    val tools: MutableList<Tool> = mutableListOf(),
+    val aliases: MutableList<String> = mutableListOf(),
+    var reference: String? = null,
+    var description: String? = null,
+    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

@@ -14,22 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.node
+package model.tool
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import model.extension.ExtensionValue
 import kotlin.js.JsExport
 
 /**
- * v1 `labels` object (ontology-spec.schema.json `$defs.labels`, additionalProperties:false):
- * the identifying label plus implied and optional labels. A node with no implied/optional
- * labels uses the `label` shorthand instead.
+ * Core v1 tool definition (ontology-spec.schema.json `$defs/tool`, additionalProperties:true):
+ * [type] discriminates (`canonicalQuery`, `externalRequest`, ...), [name] and [description]
+ * are the readable surface. Remaining per-type fields are owner-defined and carried in
+ * [extra], inlined on the wire (e.g. `cypher`, `url`). Definitions only, no behaviour.
  */
 @JsExport
-@Serializable
-@SerialName("Labels")
-data class Labels(
-    var identifier: String? = null,
-    val implied: MutableSet<String> = mutableSetOf(),
-    val optional: MutableSet<String> = mutableSetOf()
+@Serializable(with = ToolSerializer::class)
+@SerialName("Tool")
+data class Tool(
+    var type: String,
+    var name: String? = null,
+    var description: String? = null,
+    val extra: MutableMap<String, ExtensionValue> = mutableMapOf()
 )

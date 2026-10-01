@@ -16,9 +16,21 @@
  */
 package model.node
 
-import model.type.ConstraintType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
-interface Constraint {
-    val type: ConstraintType
-    val properties: MutableSet<String>
-}
+/**
+ * v1 constraint object (ontology-spec.schema.json `$defs.constraint`): the nameable
+ * alternative to the `mustExist`/`unique`/`key` property shorthand flags. Shared by
+ * node and relationship entries; [type] is a [model.type.ConstraintType] token.
+ */
+@JsExport
+@Serializable
+@SerialName("Constraint")
+data class Constraint(
+    @SerialName("constraint_type")
+    var type: String,
+    val properties: MutableList<String>,
+    var name: String? = null
+)

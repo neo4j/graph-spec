@@ -49,13 +49,13 @@ kotlin {
         generateTypeScriptDefinitions()
     }
     macosArm64 {
-        binaries.sharedLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "ontologymodel" }
     }
     linuxX64 {
-        binaries.sharedLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "ontologymodel" }
     }
     linuxArm64 {
-        binaries.sharedLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "ontologymodel" }
     }
 
     applyDefaultHierarchyTemplate()
@@ -127,7 +127,7 @@ tasks.register("generateTsUnions", TypeScriptModifierTask::class.java) {
         layout.buildDirectory
             .dir("dist/js/productionLibrary/")
             .get()
-            .file("graph-spec.d.mts")
+            .file("ontology-spec.d.mts")
             .asFile
 }
 
@@ -156,11 +156,11 @@ tasks.register<JavaExec>("generateGraphModelJsonSchema") {
 mavenPublishing {
     publishToMavenCentral()
     signAllPublications()
-    coordinates(group.toString(), "graph-spec", version.toString())
+    coordinates(group.toString(), "ontology-spec", version.toString())
     pom {
-        name = "graph-spec"
-        description = "Uniform Graph Specification Library for Neo4j"
-        url = "https://github.com/neo4j/import-spec"
+        name = "ontology-spec"
+        description = "Neo4j Ontology Specification Library"
+        url = "https://github.com/neo4j/graph-spec"
         inceptionYear = "2024"
         organization {
             name = "Neo4j, Neo4j Sweden AB"
