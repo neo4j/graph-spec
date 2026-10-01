@@ -22,9 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
-import java.io.File
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 /**
  * The YAML half of ADR-0007(d): with the v1 model landed, the YAML example forms return
@@ -41,20 +39,9 @@ class OntologyYamlRoundTripTest {
     private val json = JsonFormat.default
     private val yaml = YamlFormat.default
 
-    // Same classpath-resource pattern as OntologyModelRoundTripTest.
-    private val examplesDir = File(javaClass.getResource("/ontology")!!.path)
-
-    private fun examples(): List<File> =
-        examplesDir
-            .listFiles { file -> file.isFile && file.extension == "json" }
-            ?.sortedBy { it.name }
-            .orEmpty()
-
     @TestFactory
     fun `ontology examples round-trip through the YAML codec`(): List<DynamicTest> {
-        val examples = examples()
-        assertTrue(examples.isNotEmpty(), "no ontology examples found in ${examplesDir.path}")
-        return examples.map { example ->
+        return ontologyExamples().map { example ->
             dynamicTest(example.name) {
                 val input = example.readText()
 

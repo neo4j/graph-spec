@@ -55,10 +55,6 @@ class OntologySpecExamplesTest {
     // working directory is the project directory.
     private val schemaFile = File("ontology-spec.schema.json")
 
-    // Examples are classpath resources, so the test also survives IDE runs
-    // with a non-project working directory.
-    private val examplesDir = File(javaClass.getResource("/ontology")!!.path)
-
     private fun schema(): JsonSchema = factory.getSchema(mapper.readTree(schemaFile), config)
 
     @Test
@@ -75,12 +71,7 @@ class OntologySpecExamplesTest {
 
     @TestFactory
     fun `ontology examples validate against the schema`(): List<DynamicTest> {
-        val examples =
-            examplesDir
-                .listFiles { file -> file.isFile && file.extension == "json" }
-                ?.sortedBy { it.name }
-                .orEmpty()
-        assertTrue(examples.isNotEmpty(), "no ontology examples found in ${examplesDir.path}")
+        val examples = ontologyExamples()
         val schema = schema()
         return examples.map { example ->
             dynamicTest(example.name) {

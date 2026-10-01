@@ -21,7 +21,6 @@ import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import validate.Validations
-import java.io.File
 import kotlin.test.assertTrue
 
 /**
@@ -36,18 +35,9 @@ class OntologySpecValidationTest {
 
     private val format = JsonFormat.default
 
-    // Same classpath-resource pattern as OntologySpecExamplesTest.
-    private val examplesDir = File(javaClass.getResource("/ontology")!!.path)
-
     @TestFactory
     fun `ontology examples validate with zero issues through Validations all`(): List<DynamicTest> {
-        val examples =
-            examplesDir
-                .listFiles { file -> file.isFile && file.extension == "json" }
-                ?.sortedBy { it.name }
-                .orEmpty()
-        assertTrue(examples.isNotEmpty(), "no ontology examples found in ${examplesDir.path}")
-        return examples.map { example ->
+        return ontologyExamples().map { example ->
             dynamicTest(example.name) {
                 val model = format.decodeModelFromString(example.readText())
                 val issues = model.validate(Validations.all)

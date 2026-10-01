@@ -41,14 +41,7 @@ class OntologyModelRoundTripTest {
     private val mapper = ObjectMapper()
     private val format = JsonFormat.default
 
-    // Same classpath-resource pattern as OntologySpecExamplesTest.
-    private val examplesDir = File(javaClass.getResource("/ontology")!!.path)
-
-    private fun examples(): List<File> =
-        examplesDir
-            .listFiles { file -> file.isFile && file.extension == "json" }
-            ?.sortedBy { it.name }
-            .orEmpty()
+    private val examplesDir = ontologyExamplesDir()
 
     private fun roundTrip(input: String): String {
         val model = format.decodeModelFromString(input)
@@ -57,9 +50,7 @@ class OntologyModelRoundTripTest {
 
     @TestFactory
     fun `ontology examples round-trip through the v1 model`(): List<DynamicTest> {
-        val examples = examples()
-        assertTrue(examples.isNotEmpty(), "no ontology examples found in ${examplesDir.path}")
-        return examples.map { example ->
+        return ontologyExamples().map { example ->
             dynamicTest(example.name) {
                 val input = example.readText()
                 val output = roundTrip(input)
