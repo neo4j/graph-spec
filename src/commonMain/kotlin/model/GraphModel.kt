@@ -45,7 +45,7 @@ data class GraphModel(
     val description: String? = null,
     val nodes: MutableMap<String, Node> = mutableMapOf(),
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
+    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
 ) : Extensions {
     @JsExport.Ignore
     fun validate(validators: List<Validation>): List<Issue> {

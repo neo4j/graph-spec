@@ -37,7 +37,7 @@ data class CustomExtension(
     var schema: String? = null,
     var name: String? = null,
     var definition: ExtensionValue? = null,
-    val extra: MutableMap<String, ExtensionValue> = mutableMapOf()
+    val extra: MutableMap<String, ExtensionValue> = mutableMapOf(),
 )
 
 /**
@@ -46,5 +46,7 @@ data class CustomExtension(
  */
 fun Extensions.getCustom(json: Json = Json { ignoreUnknownKeys = true }): List<CustomExtension> {
     val value = extensions["custom"] as? ListValue ?: return emptyList()
-    return value.value.map { json.decodeFromJsonElement(CustomExtensionSerializer, ExtensionValueSerializer.toJson(it)) }
+    return value.value.map {
+        json.decodeFromJsonElement(CustomExtensionSerializer, ExtensionValueSerializer.toJson(it))
+    }
 }

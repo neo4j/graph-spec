@@ -38,7 +38,7 @@ sealed class OntologySpec(val configuration: OntologySpecConfig) {
     fun encodeToString(
         model: GraphModel,
         targetType: String = Type.ONTOLOGY_SPEC,
-        targetVersion: String = Version.LATEST
+        targetVersion: String = Version.LATEST,
     ): String {
         if (!path.requiresMigration(Version.LATEST, Type.ONTOLOGY_SPEC, targetVersion, targetType)) {
             return configuration.format.encodeModelToString(model)
@@ -75,7 +75,10 @@ fun defaultConfig(format: Format): OntologySpecConfig {
 
 private class OntologySpecImpl(configuration: OntologySpecConfig) : OntologySpec(configuration)
 
-fun OntologySpec(from: OntologySpec = OntologySpec.Json, builderAction: OntologySpecConfig.Builder.() -> Unit): OntologySpec {
+fun OntologySpec(
+    from: OntologySpec = OntologySpec.Json,
+    builderAction: OntologySpecConfig.Builder.() -> Unit,
+): OntologySpec {
     val builder = OntologySpecConfig.Builder(from.configuration)
     builder.builderAction()
     val conf = builder.build()

@@ -30,7 +30,7 @@ external interface LabelsJs {
 fun labelsJs(
     identifier: String? = null,
     implied: Array<String> = emptyArray(),
-    optional: Array<String> = emptyArray()
+    optional: Array<String> = emptyArray(),
 ): LabelsJs = jso {
     this.identifier = identifier
     this.implied = implied
@@ -40,11 +40,11 @@ fun labelsJs(
 fun Labels.toJs() = labelsJs(
     identifier = identifier,
     implied = implied.toTypedArray(),
-    optional = optional.toTypedArray()
+    optional = optional.toTypedArray(),
 )
 
 fun LabelsJs.toClass(): Labels = Labels(
     identifier = identifier,
     implied = implied.toMutableSet(),
-    optional = optional.toMutableSet()
+    optional = optional.toMutableSet(),
 )

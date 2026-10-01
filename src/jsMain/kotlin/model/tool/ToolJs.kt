@@ -38,7 +38,7 @@ fun toolJs(
     type: String,
     name: String? = null,
     description: String? = null,
-    extra: Record<String, ExtensionValueJs> = emptyRecord()
+    extra: Record<String, ExtensionValueJs> = emptyRecord(),
 ): ToolJs = jso {
     this.type = type
     this.name = name
@@ -50,12 +50,12 @@ fun Tool.toJs() = toolJs(
     type = type,
     name = name,
     description = description,
-    extra = extra.associateBy { _, value -> value.toJs() }
+    extra = extra.associateBy { _, value -> value.toJs() },
 )
 
 fun ToolJs.toClass() = Tool(
     type = type,
     name = name,
     description = description,
-    extra = extra.associateBy { _, value -> value.toClass() }.toMutableMap()
+    extra = extra.associateBy { _, value -> value.toClass() }.toMutableMap(),
 )

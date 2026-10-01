@@ -28,11 +28,11 @@ import kotlin.js.JsName
 class OntologySpecConfig(
     val validators: List<Validation>,
     val migrations: Map<String, List<Migration>>,
-    val format: Format
+    val format: Format,
 ) {
     class Builder(
         @JsName("builderFormat")
-        var format: Format
+        var format: Format,
     ) {
         val validators = mutableListOf<Validation>()
         val migrations = mutableMapOf<String, MutableList<Migration>>()
@@ -70,7 +70,7 @@ class OntologySpecConfig(
         fun build(): OntologySpecConfig = OntologySpecConfig(
             validators = validators,
             migrations = migrations,
-            format = format
+            format = format,
         )
     }
 }

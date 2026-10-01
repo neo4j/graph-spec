@@ -27,7 +27,7 @@ class ValidationTreeTest {
     private val emptyModel = GraphModel(
         schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
         id = "validation-tree-test",
-        version = 1
+        version = 1,
     )
 
     @Test
@@ -158,7 +158,7 @@ class ValidationTreeTest {
     private class MockValidation(
         val name: String,
         private val dependencies: List<Validation> = emptyList(),
-        private val shouldFail: Boolean = false
+        private val shouldFail: Boolean = false,
     ) : Validation {
         var callCount = 0
 

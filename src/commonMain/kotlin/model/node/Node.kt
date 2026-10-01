@@ -36,5 +36,5 @@ data class Node(
     val aliases: MutableList<String> = mutableListOf(),
     var reference: String? = null,
     var description: String? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
+    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
 ) : Extensions

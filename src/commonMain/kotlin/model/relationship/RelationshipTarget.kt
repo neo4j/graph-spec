@@ -34,5 +34,5 @@ data class RelationshipTarget(
     @SerialName("min_count")
     var minCount: Int? = null,
     @SerialName("max_count")
-    var maxCount: Int? = null
+    var maxCount: Int? = null,
 )

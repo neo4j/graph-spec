@@ -70,8 +70,8 @@ class YamlWriterTest {
             mutableMapOf(
                 "name" to SchemaLiteral("John Doe", isString = true),
                 "age" to SchemaLiteral("30", isString = false),
-                "active" to SchemaLiteral("true", isString = false)
-            )
+                "active" to SchemaLiteral("true", isString = false),
+            ),
         )
 
         val expected = """
@@ -90,8 +90,8 @@ class YamlWriterTest {
             mutableListOf(
                 SchemaLiteral("apple", isString = true),
                 SchemaLiteral("banana", isString = true),
-                SchemaLiteral("cherry", isString = true)
-            )
+                SchemaLiteral("cherry", isString = true),
+            ),
         )
 
         val expected = """
@@ -122,12 +122,12 @@ class YamlWriterTest {
                         "tags" to SchemaList(
                             mutableListOf(
                                 SchemaLiteral("kotlin", isString = true),
-                                SchemaLiteral("yaml", isString = true)
-                            )
-                        )
-                    )
-                )
-            )
+                                SchemaLiteral("yaml", isString = true),
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         )
 
         val expected = """
@@ -144,7 +144,7 @@ class YamlWriterTest {
     @Test
     fun `test explicit inlining`() {
         val options = YamlPrintOptions(
-            inlinePaths = setOf("metadata.tags")
+            inlinePaths = setOf("metadata.tags"),
         )
         val writer = YamlWriter(options)
 
@@ -156,14 +156,14 @@ class YamlWriterTest {
                         "tags" to SchemaList(
                             mutableListOf(
                                 SchemaLiteral("kotlin", isString = true),
-                                SchemaLiteral("yaml", isString = true)
+                                SchemaLiteral("yaml", isString = true),
                             ),
-                            path = "metadata.tags"
-                        )
+                            path = "metadata.tags",
+                        ),
                     ),
-                    path = "metadata"
-                )
-            )
+                    path = "metadata",
+                ),
+            ),
         )
 
         val expected = """
@@ -178,7 +178,7 @@ class YamlWriterTest {
     @Test
     fun `test wildcard inlining`() {
         val options = YamlPrintOptions(
-            inlinePaths = setOf("nodes.*.constraints[*].properties")
+            inlinePaths = setOf("nodes.*.constraints[*].properties"),
         )
         val writer = YamlWriter(options)
 
@@ -187,24 +187,24 @@ class YamlWriterTest {
                 "constraint_type" to SchemaLiteral("unique", isString = true),
                 "properties" to SchemaList(
                     mutableListOf(SchemaLiteral("name", isString = true)),
-                    path = "nodes.n1.constraints[0].properties"
-                )
+                    path = "nodes.n1.constraints[0].properties",
+                ),
             ),
-            path = "nodes.n1.constraints[0]"
+            path = "nodes.n1.constraints[0]",
         )
 
         val node = SchemaMap(
             mutableMapOf(
                 "label" to SchemaLiteral("Person", isString = true),
-                "constraints" to SchemaList(mutableListOf(constraint), path = "nodes.n1.constraints")
+                "constraints" to SchemaList(mutableListOf(constraint), path = "nodes.n1.constraints"),
             ),
-            path = "nodes.n1"
+            path = "nodes.n1",
         )
 
         val root = SchemaMap(
             mutableMapOf(
-                "nodes" to SchemaMap(mutableMapOf("n1" to node), path = "nodes")
-            )
+                "nodes" to SchemaMap(mutableMapOf("n1" to node), path = "nodes"),
+            ),
         )
 
         val expected = """

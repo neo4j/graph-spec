@@ -58,7 +58,7 @@ object ToolSerializer : KSerializer<Tool> {
                 value.name?.let { put("name", it) }
                 value.description?.let { put("description", it) }
                 putExtras(value.extra, knownKeys)
-            }
+            },
         )
     }
 
@@ -70,7 +70,7 @@ object ToolSerializer : KSerializer<Tool> {
             type = type,
             name = obj["name"]?.jsonPrimitive?.contentOrNull,
             description = obj["description"]?.jsonPrimitive?.contentOrNull,
-            extra = obj.extractExtras(knownKeys)
+            extra = obj.extractExtras(knownKeys),
         )
     }
 }

@@ -56,7 +56,7 @@ object CustomExtensionSerializer : KSerializer<CustomExtension> {
                 value.name?.let { put("name", it) }
                 value.definition?.let { put("definition", ExtensionValueSerializer.toJson(it)) }
                 putExtras(value.extra, knownKeys)
-            }
+            },
         )
     }
 
@@ -69,7 +69,7 @@ object CustomExtensionSerializer : KSerializer<CustomExtension> {
             schema = obj["\$schema"]?.jsonPrimitive?.contentOrNull,
             name = obj["name"]?.jsonPrimitive?.contentOrNull,
             definition = obj["definition"]?.let { ExtensionValueSerializer.fromJson(it) },
-            extra = obj.extractExtras(knownKeys)
+            extra = obj.extractExtras(knownKeys),
         )
     }
 }

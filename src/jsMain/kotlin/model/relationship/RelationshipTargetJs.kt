@@ -32,7 +32,7 @@ fun relationshipTargetJs(
     node: String = "",
     count: Int? = null,
     minCount: Int? = null,
-    maxCount: Int? = null
+    maxCount: Int? = null,
 ): RelationshipTargetJs = jso {
     this.node = node
     this.count = count
@@ -44,12 +44,12 @@ fun RelationshipTarget.toJs() = relationshipTargetJs(
     node = node,
     count = count,
     minCount = minCount,
-    maxCount = maxCount
+    maxCount = maxCount,
 )
 
 fun RelationshipTargetJs.toClass() = RelationshipTarget(
     node = node,
     count = count,
     minCount = minCount,
-    maxCount = maxCount
+    maxCount = maxCount,
 )

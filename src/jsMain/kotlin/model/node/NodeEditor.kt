@@ -143,7 +143,7 @@ class NodeEditor {
             nodeId: String,
             type: String,
             name: String? = null,
-            properties: Array<String> = emptyArray()
+            properties: Array<String> = emptyArray(),
         ): Int {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             node.constraints += nodeConstraintJs(type, name, properties)

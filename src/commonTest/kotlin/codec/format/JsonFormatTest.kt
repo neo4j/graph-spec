@@ -55,7 +55,7 @@ class JsonFormatTest {
         // Verify Map Pathing
         assertEquals(
             "nodes.user.properties.age",
-            schema.map("nodes").map("user").map("properties").literal("age").path
+            schema.map("nodes").map("user").map("properties").literal("age").path,
         )
 
         // Verify List Pathing
@@ -105,7 +105,7 @@ class JsonFormatTest {
             schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
             id = "empty",
             version = 1,
-            nodes = mutableMapOf()
+            nodes = mutableMapOf(),
         )
 
         val schema = jsonFormat.encodeToSchema(model)
@@ -121,14 +121,14 @@ class JsonFormatTest {
         val node = Node(
             extensions = mutableMapOf(
                 "ext_str" to StringValue("hello"),
-                "ext_bool" to BooleanValue(true)
-            )
+                "ext_bool" to BooleanValue(true),
+            ),
         )
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
             id = "extensions",
             version = 1,
-            nodes = mutableMapOf("n1" to node)
+            nodes = mutableMapOf("n1" to node),
         )
 
         val schema = jsonFormat.encodeToSchema(model) as SchemaMap

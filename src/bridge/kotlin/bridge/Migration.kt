@@ -31,7 +31,7 @@ private val format = JsonFormat(
         ignoreUnknownKeys = true
         isLenient = true
         prettyPrint = false
-    }
+    },
 )
 
 @OptIn(ExperimentalForeignApi::class, ExperimentalNativeApi::class)
@@ -42,14 +42,14 @@ fun migrate(
     targetType: CPointer<ByteVar>?,
     targetVersion: CPointer<ByteVar>?,
     outputBuffer: CPointer<ByteVar>?,
-    bufferSize: Int
+    bufferSize: Int,
 ) = invokeBridge(
     inputJson,
     inputType,
     targetType,
     targetVersion,
     outputBuffer = outputBuffer,
-    bufferSize = bufferSize
+    bufferSize = bufferSize,
 ) { input ->
     val path = MigrationPath(OntologySpec.Json.configuration.migrations)
     val schema = format.decodeFromString(input[0])

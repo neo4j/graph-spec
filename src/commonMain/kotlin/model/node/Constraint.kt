@@ -32,5 +32,5 @@ data class Constraint(
     @SerialName("constraint_type")
     var type: String,
     val properties: MutableList<String>,
-    var name: String? = null
+    var name: String? = null,
 )

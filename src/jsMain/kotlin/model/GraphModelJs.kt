@@ -43,7 +43,7 @@ fun graphModelJs(
     description: String? = null,
     nodes: Record<String, NodeJs> = emptyRecord(),
     relationships: Record<String, RelationshipJs> = emptyRecord(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
+    extensions: Record<String, ExtensionValueJs> = emptyRecord(),
 ): GraphModelJs = jso {
     this.schema = schema
     this.id = id

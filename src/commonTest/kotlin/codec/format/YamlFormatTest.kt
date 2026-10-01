@@ -90,7 +90,7 @@ class YamlFormatTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
             id = "yaml-delegation",
-            version = 2
+            version = 2,
         )
 
         val schema = yamlFormat.encodeToSchema(model) as SchemaMap

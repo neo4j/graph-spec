@@ -34,5 +34,5 @@ data class Tool(
     var type: String,
     var name: String? = null,
     var description: String? = null,
-    val extra: MutableMap<String, ExtensionValue> = mutableMapOf()
+    val extra: MutableMap<String, ExtensionValue> = mutableMapOf(),
 )

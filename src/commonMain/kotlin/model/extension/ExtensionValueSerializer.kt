@@ -68,21 +68,27 @@ object ExtensionValueSerializer : KSerializer<ExtensionValue> {
 
     fun fromJson(element: JsonElement): ExtensionValue = when (element) {
         is JsonObject -> MapValue(
-            element.mapValuesTo(mutableMapOf()) { fromJson(it.value) }
+            element.mapValuesTo(mutableMapOf()) { fromJson(it.value) },
         )
+
         is JsonArray -> ListValue(
-            element.mapTo(mutableListOf()) { fromJson(it) }
+            element.mapTo(mutableListOf()) { fromJson(it) },
         )
+
         is JsonPrimitive -> fromPrimitive(element)
     }
 
     private fun fromPrimitive(element: JsonPrimitive): ExtensionValue = when {
         element.isString -> StringValue(element.content)
+
         element.booleanOrNull != null -> BooleanValue(element.content.toBoolean())
+
         element.longOrNull != null -> LongValue(element.content.toLong())
+
         element.doubleOrNull != null -> DoubleValue(element.content.toDouble())
+
         else -> throw SerializationException(
-            "Unsupported extension value (null is not representable in ExtensionValue): $element"
+            "Unsupported extension value (null is not representable in ExtensionValue): $element",
         )
     }
 }

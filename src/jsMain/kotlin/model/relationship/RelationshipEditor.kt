@@ -112,7 +112,7 @@ class RelationshipEditor {
             relationshipId: String,
             type: String,
             name: String? = null,
-            properties: Array<String> = emptyArray()
+            properties: Array<String> = emptyArray(),
         ): Int {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             relationship.constraints += relationshipConstraintJs(type, name, properties)
@@ -136,7 +136,7 @@ class RelationshipEditor {
             model: GraphModelJs,
             relationshipId: String,
             constraintIndex: Int,
-            propertyId: String
+            propertyId: String,
         ) {
             val constraint = getConstraint(model, relationshipId, constraintIndex)
             RelationshipConstraintEditor.addProperty(constraint, propertyId)
@@ -147,7 +147,7 @@ class RelationshipEditor {
             model: GraphModelJs,
             relationshipId: String,
             constraintIndex: Int,
-            propertyId: String
+            propertyId: String,
         ) {
             val constraint = getConstraint(model, relationshipId, constraintIndex)
             RelationshipConstraintEditor.removeProperty(constraint, propertyId)
@@ -156,7 +156,7 @@ class RelationshipEditor {
         private fun getConstraint(
             model: GraphModelJs,
             relationshipId: String,
-            constraintIndex: Int
+            constraintIndex: Int,
         ): RelationshipConstraintJs {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             return relationship.constraints.getOrNull(constraintIndex)

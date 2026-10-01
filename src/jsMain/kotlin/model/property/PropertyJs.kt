@@ -55,7 +55,7 @@ fun propertyJs(
     reference: String? = null,
     description: String? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
-    id: String
+    id: String,
 ): PropertyJs = jso {
     this.type = type
     this.dimension = dimension
@@ -83,7 +83,7 @@ fun Property.toJs(key: String) = propertyJs(
     reference = reference,
     description = description,
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
-    id = key
+    id = key,
 )
 
 fun PropertyJs.toClass(): Property = Property(
@@ -97,5 +97,5 @@ fun PropertyJs.toClass(): Property = Property(
     aliases = aliases.toMutableList(),
     reference = reference,
     description = description,
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
 )

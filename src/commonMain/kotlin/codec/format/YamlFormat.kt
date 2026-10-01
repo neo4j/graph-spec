@@ -65,6 +65,7 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
 
     fun schemaElement(yaml: YamlElement, parent: String = ""): SchemaElement = when (yaml) {
         is YamlList -> SchemaList(yaml.mapTo(mutableListOf()) { schemaElement(it) }, parent)
+
         is YamlMap -> SchemaMap(
             yaml.content.entries.associateTo(mutableMapOf()) { (key, value) ->
                 if (key !is YamlLiteral) {
@@ -72,10 +73,13 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                 }
                 key.content to schemaElement(value)
             },
-            parent
+            parent,
         )
+
         is YamlPrimitive -> yaml.content?.let { SchemaLiteral(it, parent, isString = true) } ?: SchemaNull(parent)
+
         is YamlLiteral -> SchemaLiteral(yaml.content, parent, isString = false)
+
         YamlNull -> SchemaNull(parent)
     }
 
@@ -93,9 +97,9 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                     "relationships.*.properties.*",
                     "relationships.*.from",
                     "relationships.*.to",
-                    "relationships.*.constraints[*].properties"
-                )
-            )
+                    "relationships.*.constraints[*].properties",
+                ),
+            ),
         )
     }
 }

@@ -25,7 +25,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.put
 
-/**
+/*
  * Shared mechanics for the untagged catch-all codecs ([model.tool.ToolSerializer],
  * [CustomExtensionSerializer], and the per-owner extension codecs of ADR-0005):
  * keys outside a codec's known-field set are collected into the model's `extra`
@@ -38,16 +38,14 @@ import kotlinx.serialization.json.put
 /**
  * JSON-only guard, encode side: [typeName] names the codec's model in the error.
  */
-internal fun Encoder.requireJsonEncoder(typeName: String): JsonEncoder =
-    this as? JsonEncoder
-        ?: throw SerializationException("$typeName can only be serialized as JSON")
+internal fun Encoder.requireJsonEncoder(typeName: String): JsonEncoder = this as? JsonEncoder
+    ?: throw SerializationException("$typeName can only be serialized as JSON")
 
 /**
  * JSON-only guard, decode side: [typeName] names the codec's model in the error.
  */
-internal fun Decoder.requireJsonDecoder(typeName: String): JsonDecoder =
-    this as? JsonDecoder
-        ?: throw SerializationException("$typeName can only be deserialized from JSON")
+internal fun Decoder.requireJsonDecoder(typeName: String): JsonDecoder = this as? JsonDecoder
+    ?: throw SerializationException("$typeName can only be deserialized from JSON")
 
 /**
  * Inlines [extras] into the object being built, skipping keys in [knownKeys].

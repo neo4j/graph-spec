@@ -49,10 +49,13 @@ class JsonFormat(private val json: Json) : Format {
 
     private fun schemaElement(json: JsonElement, parent: String = ""): SchemaElement = when (json) {
         is JsonArray -> SchemaList(json.mapTo(mutableListOf()) { schemaElement(it) }, parent)
+
         is JsonObject -> SchemaMap(json.mapValuesTo(mutableMapOf()) { (_, v) -> schemaElement(v) }, parent)
+
         is JsonPrimitive -> json.contentOrNull?.let {
             SchemaLiteral(it, parent, json.isString)
         } ?: SchemaNull(parent)
+
         JsonNull -> SchemaNull(parent)
     }
 
@@ -73,7 +76,7 @@ class JsonFormat(private val json: Json) : Format {
                 prettyPrint = true
                 encodeDefaults = false
                 explicitNulls = false
-            }
+            },
         )
     }
 }

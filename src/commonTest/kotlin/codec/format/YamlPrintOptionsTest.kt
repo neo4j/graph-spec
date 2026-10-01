@@ -27,7 +27,7 @@ class YamlPrintOptionsTest {
     @Test
     fun `test exact path match`() {
         val options = YamlPrintOptions(
-            inlinePaths = setOf("metadata.tags", "settings.connections")
+            inlinePaths = setOf("metadata.tags", "settings.connections"),
         )
 
         // Exact matches
@@ -43,7 +43,7 @@ class YamlPrintOptionsTest {
     @Test
     fun `test single wildcard match`() {
         val options = YamlPrintOptions(
-            inlinePaths = setOf("nodes.*.properties")
+            inlinePaths = setOf("nodes.*.properties"),
         )
 
         // Single wildcards matching dynamic keys
@@ -60,7 +60,7 @@ class YamlPrintOptionsTest {
     @Test
     fun `test recursive wildcard matching`() {
         val options = YamlPrintOptions(
-            inlinePaths = setOf("configs.**")
+            inlinePaths = setOf("configs.**"),
         )
 
         // Recursive wildcards should match anything nested under the prefix
@@ -76,7 +76,7 @@ class YamlPrintOptionsTest {
     @Test
     fun `test explicit list index match`() {
         val options = YamlPrintOptions(
-            inlinePaths = setOf("nodes.*.constraints[*].properties")
+            inlinePaths = setOf("nodes.*.constraints[*].properties"),
         )
 
         // Matches valid indexed list paths
