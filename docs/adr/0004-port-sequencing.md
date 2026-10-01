@@ -32,7 +32,7 @@ What remains open, and what this ADR decides:
 
 1. **Track order.** Six port tracks: (1) the Kotlin v1 model, (2)
    codecs and validators, (3) the 4.0.0 → 1.0.0 converter replacing
-   the legacy `migrate/` chain, (4) Go bindings, (5) TypeScript types,
+   the legacy `migrate/` chain, (4) TypeScript types, (5) Go bindings,
    (6) the Kotlin/Go CI workflows (`pr-guard-*.yaml`,
    `validate-*.yaml`, `release.yaml`). What blocks what?
 2. **Naming mechanics and timing.** "graph-spec becomes ontology-spec"
