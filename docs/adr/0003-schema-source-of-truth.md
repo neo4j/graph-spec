@@ -29,7 +29,7 @@ The rebased tree (ADR-0002) holds two artefacts that both claim to be
   schema carries **zero `description` fields**, no prose document
   exists, and the pretty/internal format duality lives only in library
   code. kotlinx-serialization descriptors carry no KDoc, so
-  schema-from-Kotlin structurally cannot produce an documented schema
+  schema-from-Kotlin structurally cannot produce a documented schema
   without a parallel annotation channel that would itself become a
   second, drift-prone source of prose.
 
@@ -48,12 +48,29 @@ provenance. The question: what is the source of truth for
 `ontology-spec.schema.json` — hand-maintained with implementations
 conforming to it, or generated from a Kotlin v1 model as in 4.0.0?
 
+ADR-0006 (Accepted) has since sharpened ADR-0002's API-stability
+constraint into an architecture principle: the port keeps main's
+machinery — the Kotlin Multiplatform model, the kotlinx-serialization
+codecs, the `@JsExport` JS/TS surface, the Go schemancer codegen
+pipeline, and the validator framework — re-targeted at the v1 schema,
+with consumer-visible changes limited to the name and the extensions
+area. That principle governs *how* the port is built, not where the
+schema's authority lives, so the question above stands as posed.
+
 ## Decision
 
 **The schema stays hand-maintained, co-equal with the written spec
 document, and the Kotlin/Go/TypeScript implementations conform to it.**
 (Option A, with schema→types generation as the sanctioned derivation.)
 
+- **This recommendation is unchanged under ADR-0006's architecture
+  principle.** Hand-maintained schema plus conforming implementations
+  is compatible with keeping main's machinery: the machinery is
+  re-targeted at the v1 schema, not discarded, and every re-targeted
+  implementation conforms to the hand-maintained schema rather than
+  generating it. ADR-0006 records this reading itself, citing
+  "ADR-0003's rule that the schema is hand-maintained and the
+  implementations conform to it" as the basis for the re-targeting.
 - `ontology-spec.schema.json` is edited by hand, in the same change as
   its prose and at least one validating example (AGENTS.md
   non-negotiables 2 and 4). It is never emitted by a generator from an
@@ -69,16 +86,28 @@ document, and the Kotlin/Go/TypeScript implementations conform to it.**
   TypeScript interfaces (and optionally Go structs / Kotlin
   serialisable classes) from `ontology-spec.schema.json` is permitted
   as a convenience; the generated files are checked in and diff-checked
-  in CI, and the schema remains the input.
-- **build-logic's TypeScript codegen is retired for the v1 surface.**
+  in CI, and the schema remains the input. This is also the arrow the
+  kept machinery runs under ADR-0006: the Go schemancer codegen
+  pipeline is re-targeted at `ontology-spec.schema.json`, so
+  schema → types is the port's native direction, not an added step.
+- **build-logic's TypeScript codegen is retired for the v1 surface
+  only; the machinery itself is kept per ADR-0006.**
   `TypeScriptModifierTask` / `TypeScriptTypes` / `TypeScriptUnions`
   exist to repair Kotlin/JS declaration output (enum → string-union
-  rewriting, `LIST_` → `LIST<...>` token renaming). Under a
-  hand-maintained schema those types are authored or schema-generated
-  directly in their correct form, so the post-processing hack has no
-  input to repair. The task and its plugin may remain in the tree
-  unused during the coexistence period (ADR-0002) and are removed when
-  the 4.0.0 build goes; no v1 code path may depend on them.
+  rewriting, `LIST_` → `LIST<...>` token renaming). The v1 surface
+  gives the rewriter nothing to repair: v1 type tokens
+  (`LIST<STRING>`, `VECTOR<FLOAT>`) are schema `pattern`-validated
+  strings, not enums, so the Kotlin/JS declarations for the v1 model
+  already carry the correct types and the enum → string-union rewrite
+  has no input there. The Kotlin/JS → TypeScript declaration pipeline
+  itself is kept machinery under ADR-0006 — v1 TypeScript declarations
+  flow from the re-targeted `@JsExport` surface exactly as 4.0.0's do,
+  minus the repair step — so retiring the rewrite changes no
+  consumer-visible surface: consumers see the published `.d.mts`
+  types, not the build logic that produced them. The task and its
+  plugin remain in the tree serving the 4.0.0 build during the
+  coexistence period (ADR-0002) and are removed only when the 4.0.0
+  build goes; no v1 code path may depend on them.
 - `src/jvmMain/kotlin/schema/GenerateGraphModelJsonSchema.kt` and the
   `kotlinx-schema-generator` dependency are not ported to v1. The
   4.0.0 generator keeps working for the frozen 4.0.0 artefacts only.
@@ -126,6 +155,9 @@ document, and the Kotlin/Go/TypeScript implementations conform to it.**
    strings, not enums, so there is nothing for the union-rewriter to
    fix. Carrying a textual patch step into v1 would re-couple the
    published types to Kotlin/JS declaration quirks for no benefit.
+   This rejects the rewrite step only; the Kotlin/JS → TypeScript
+   declaration pipeline it post-processes is kept machinery per
+   ADR-0006.
 
 ## Consequences
 
@@ -140,8 +172,12 @@ document, and the Kotlin/Go/TypeScript implementations conform to it.**
   by the schema.
 - build-logic's `TypeScriptModifierTask`, `TypeScriptModifierPlugin`,
   and `script/TypeScript{Types,Unions}.kt` have no v1 consumer. They
-  stay only as long as the 4.0.0 build does and are deleted with it;
-  any v1 TypeScript types are authored or generated from the schema.
+  stay only as long as the 4.0.0 build does and are deleted with it —
+  an internal build-logic change with no consumer-visible effect. The
+  v1 TypeScript declarations come from the Kotlin/JS `@JsExport`
+  surface kept per ADR-0006, with schema → types generation remaining
+  a permitted convenience (per the Decision); neither path passes
+  through the retired rewrite.
 - `GenerateGraphModelJsonSchema.kt` is 4.0.0-only; nothing in v1 may
   regenerate `ontology-spec.schema.json`.
 - The risk accepted: the hand-maintained schema can drift from the
@@ -151,4 +187,6 @@ document, and the Kotlin/Go/TypeScript implementations conform to it.**
 - ADR-0004 (port sequencing) and ADR-0005 (extension packaging) assume
   this decision: port tracks implement *against* the schema, and
   extension type owners ship their own schemas under the same
-  hand-maintained rule.
+  hand-maintained rule. ADR-0006 (port architecture principle) builds
+  on it directly: the kept machinery is re-targeted at, and conforms
+  to, the hand-maintained schema.
