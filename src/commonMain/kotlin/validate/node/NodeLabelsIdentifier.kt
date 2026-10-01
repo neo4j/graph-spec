@@ -19,6 +19,7 @@ package validate.node
 import model.GraphModel
 import validate.Issue
 import validate.Validation
+import validate.forEachNode
 
 /**
  * v1 rule: when the `labels` object is used, `labels.identifier` is present and
@@ -29,14 +30,14 @@ import validate.Validation
  */
 object NodeLabelsIdentifier : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        for ((nodeId, node) in model.nodes) {
-            val labels = node.labels ?: continue
+        model.forEachNode { path, nodeId, node ->
+            val labels = node.labels ?: return@forEachNode
             if (labels.identifier.isNullOrBlank()) {
                 issues.add(
                     Issue(
                         code = "missing_node_identifier_label",
                         message = "Missing identifier label for node '$nodeId'",
-                        path = "nodes.$nodeId.labels.identifier",
+                        path = "$path.labels.identifier",
                     ),
                 )
             }

@@ -20,6 +20,7 @@ import model.GraphModel
 import model.type.ConstraintType
 import validate.Issue
 import validate.Validation
+import validate.forEachConstraint
 
 private val KNOWN_CONSTRAINT_TYPES = setOf(ConstraintType.KEY, ConstraintType.UNIQUE, ConstraintType.MUST_EXIST)
 
@@ -34,19 +35,8 @@ private val KNOWN_CONSTRAINT_TYPES = setOf(ConstraintType.KEY, ConstraintType.UN
  */
 object KnownConstraintType : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        for ((nodeId, node) in model.nodes) {
-            node.constraints.forEachIndexed { index, constraint ->
-                validateConstraintType("nodes.$nodeId.constraints[$index].constraint_type", constraint.type, issues)
-            }
-        }
-        for ((relationshipId, relationship) in model.relationships) {
-            relationship.constraints.forEachIndexed { index, constraint ->
-                validateConstraintType(
-                    "relationships.$relationshipId.constraints[$index].constraint_type",
-                    constraint.type,
-                    issues,
-                )
-            }
+        model.forEachConstraint { path, constraint ->
+            validateConstraintType("$path.constraint_type", constraint.type, issues)
         }
     }
 

@@ -20,6 +20,7 @@ import model.GraphModel
 import model.property.Property
 import validate.Issue
 import validate.Validation
+import validate.forEachProperty
 
 private const val SCALAR_TOKENS =
     "STRING|INTEGER|FLOAT|BOOLEAN|DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES"
@@ -41,15 +42,8 @@ private val TYPE_TOKEN = Regex("^(ANY|LIST<ANY>|($SCALAR_TOKENS)|(LIST|VECTOR)<(
  */
 object PropertyTypeToken : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        for ((nodeId, node) in model.nodes) {
-            for ((propertyId, property) in node.properties) {
-                validateProperty("nodes.$nodeId.properties.$propertyId", property, issues)
-            }
-        }
-        for ((relationshipId, relationship) in model.relationships) {
-            for ((propertyId, property) in relationship.properties) {
-                validateProperty("relationships.$relationshipId.properties.$propertyId", property, issues)
-            }
+        model.forEachProperty { path, property ->
+            validateProperty(path, property, issues)
         }
     }
 

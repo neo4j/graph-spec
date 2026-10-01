@@ -1,0 +1,71 @@
+/*
+ * Copyright (c) "Neo4j"
+ * Neo4j Sweden AB [https://neo4j.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package validate
+
+import model.GraphModel
+import model.node.Constraint
+import model.node.Node
+import model.property.Property
+import model.relationship.Relationship
+import model.relationship.RelationshipTarget
+
+/**
+ * The one owner of the model traversal and the issue-path grammar: `nodes.<id>`,
+ * `relationships.<id>`, and the `properties.<pid>` / `constraints[<index>]` /
+ * `from` / `to` segments beneath them. Validators delegate here and keep only their
+ * rule; the grammar is pinned byte-for-byte by the validator and bridge tests, so a
+ * path change belongs in this file alone — never re-derived per validator.
+ */
+internal fun GraphModel.forEachNode(action: (path: String, id: String, node: Node) -> Unit) {
+    for ((id, node) in nodes) action("nodes.$id", id, node)
+}
+
+internal fun GraphModel.forEachRelationship(action: (path: String, id: String, relationship: Relationship) -> Unit) {
+    for ((id, relationship) in relationships) action("relationships.$id", id, relationship)
+}
+
+internal fun GraphModel.forEachProperty(action: (path: String, property: Property) -> Unit) {
+    forEachNode { nodePath, _, node ->
+        for ((propertyId, property) in node.properties) action("$nodePath.properties.$propertyId", property)
+    }
+    forEachRelationship { relationshipPath, _, relationship ->
+        for ((propertyId, property) in relationship.properties) {
+            action(
+                "$relationshipPath.properties.$propertyId",
+                property,
+            )
+        }
+    }
+}
+
+internal fun GraphModel.forEachConstraint(action: (path: String, constraint: Constraint) -> Unit) {
+    forEachNode { nodePath, _, node ->
+        node.constraints.forEachIndexed { index, constraint -> action("$nodePath.constraints[$index]", constraint) }
+    }
+    forEachRelationship { relationshipPath, _, relationship ->
+        relationship.constraints.forEachIndexed { index, constraint ->
+            action("$relationshipPath.constraints[$index]", constraint)
+        }
+    }
+}
+
+internal fun GraphModel.forEachEndpoint(action: (path: String, endpoint: RelationshipTarget) -> Unit) {
+    forEachRelationship { relationshipPath, _, relationship ->
+        action("$relationshipPath.from", relationship.from)
+        action("$relationshipPath.to", relationship.to)
+    }
+}

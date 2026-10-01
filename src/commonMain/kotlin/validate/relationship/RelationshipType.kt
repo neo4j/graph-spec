@@ -19,6 +19,7 @@ package validate.relationship
 import model.GraphModel
 import validate.Issue
 import validate.Validation
+import validate.forEachRelationship
 
 /**
  * v1 rule: a relationship's `type` is present and non-blank
@@ -29,13 +30,13 @@ import validate.Validation
  */
 object RelationshipType : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        for ((relationshipId, relationship) in model.relationships) {
+        model.forEachRelationship { path, relationshipId, relationship ->
             if (relationship.type.isBlank()) {
                 issues.add(
                     Issue(
                         code = "missing_relation_type",
                         message = "Missing type for relationship '$relationshipId'",
-                        path = "relationships.$relationshipId.type",
+                        path = "$path.type",
                     ),
                 )
             }

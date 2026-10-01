@@ -20,6 +20,7 @@ import model.GraphModel
 import model.relationship.RelationshipTarget
 import validate.Issue
 import validate.Validation
+import validate.forEachEndpoint
 
 /**
  * v1 rule: endpoint cardinality sanity (ontology-spec.schema.json `$defs.endpoint`:
@@ -35,9 +36,8 @@ import validate.Validation
  */
 object EndpointCardinality : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        for ((relationshipId, relationship) in model.relationships) {
-            validateEndpoint("relationships.$relationshipId.from", relationship.from, issues)
-            validateEndpoint("relationships.$relationshipId.to", relationship.to, issues)
+        model.forEachEndpoint { path, endpoint ->
+            validateEndpoint(path, endpoint, issues)
         }
     }
 

@@ -19,6 +19,7 @@ package validate.node
 import model.GraphModel
 import validate.Issue
 import validate.Validation
+import validate.forEachNode
 
 /**
  * v1 rule: a node carries its label in `label` (the shorthand for an identifier-only
@@ -31,7 +32,7 @@ import validate.Validation
  */
 object NodeLabelExclusivity : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        for ((nodeId, node) in model.nodes) {
+        model.forEachNode { path, nodeId, node ->
             val hasLabel = !node.label.isNullOrBlank()
             val hasLabels = node.labels != null
             if (hasLabel && hasLabels) {
@@ -39,7 +40,7 @@ object NodeLabelExclusivity : Validation {
                     Issue(
                         code = "node_label_and_labels",
                         message = "Node '$nodeId' has both 'label' and 'labels'; use exactly one",
-                        path = "nodes.$nodeId",
+                        path = path,
                     ),
                 )
             } else if (!hasLabel && !hasLabels) {
@@ -47,7 +48,7 @@ object NodeLabelExclusivity : Validation {
                     Issue(
                         code = "missing_node_label",
                         message = "Node '$nodeId' has neither 'label' nor 'labels'; a node with neither is meaningless",
-                        path = "nodes.$nodeId",
+                        path = path,
                     ),
                 )
             }
