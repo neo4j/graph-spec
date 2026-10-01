@@ -54,7 +54,7 @@ class NameFormat {
             ConstraintType.PROPERTY_TYPE -> "propertyType"
         }
 
-        private fun suffixFrom(type: IndexType?): String? = type?.let { it.name.lowercase() }
+        private fun suffixFrom(type: IndexType?): String? = type?.name?.lowercase()
 
         /**
          * An underscore inside a token is doubled, so the parts stay recoverable. Without it `pizza_sten` on
