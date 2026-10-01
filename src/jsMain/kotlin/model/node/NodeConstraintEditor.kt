@@ -28,8 +28,8 @@ class NodeConstraintEditor {
         }
 
         @JsStatic
-        fun setLabel(constraint: NodeConstraintJs, label: String?) {
-            constraint.label = label
+        fun setName(constraint: NodeConstraintJs, name: String?) {
+            constraint.name = name
         }
 
         @JsStatic

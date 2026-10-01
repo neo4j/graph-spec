@@ -1,4 +1,4 @@
-package model.mapping
+package model
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

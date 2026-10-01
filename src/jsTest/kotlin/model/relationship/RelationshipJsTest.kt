@@ -1,13 +1,12 @@
 package model.relationship
 
-import model.mapping.JsMappingTest
+import model.JsMappingTest
 import model.extension.StringValue
 import model.extension.stringValueJs
-import model.property.Neo4jType
+import model.node.Constraint
 import model.property.Property
 import model.property.propertyJs
 import model.type.ConstraintType
-import model.type.IndexType
 import kotlin.test.assertEquals
 
 class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
@@ -15,12 +14,10 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
     override fun createClass() = Relationship(
         type = "RELATIONSHIP_TYPE",
         from = RelationshipTarget("from_node"),
-        to = RelationshipTarget("to_node"),
-        properties = mutableMapOf("prop" to Property(Neo4jType.STRING, name = "property_name")),
-        constraints = mutableMapOf("constraint" to RelationshipConstraint(ConstraintType.KEY, mutableSetOf("prop"))),
-        indexes = mutableMapOf("index" to RelationshipIndex(IndexType.POINT, mutableSetOf("prop"))),
+        to = RelationshipTarget("to_node", count = 1),
+        properties = mutableMapOf("prop" to Property(type = "STRING")),
+        constraints = mutableListOf(Constraint(ConstraintType.KEY, mutableListOf("prop"))),
         extensions = mutableMapOf("key1" to StringValue("val1")),
-        name = "relationshipName"
     )
 
     override fun toJs(k: Relationship): RelationshipJs = k.toJs("relationshipId")
@@ -31,12 +28,11 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         assertEquals("RELATIONSHIP_TYPE", jsObject.type)
         assertEquals("from_node", jsObject.from.node)
         assertEquals("to_node", jsObject.to.node)
-        assertJsEquals(propertyJs("STRING", id = "prop", name = "property_name"), jsObject.properties["prop"])
-        assertJsEquals(relationshipConstraintJs("KEY", arrayOf("prop")), jsObject.constraints["constraint"])
-        assertJsEquals(relationshipIndexJs("POINT", arrayOf("prop")), jsObject.indexes["index"])
+        assertEquals(1, jsObject.to.count)
+        assertJsEquals(propertyJs("STRING", id = "prop"), jsObject.properties["prop"])
+        assertJsEquals(relationshipConstraintJs("key", properties = arrayOf("prop")), jsObject.constraints[0])
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
         assertEquals("relationshipId", jsObject.id)
-        assertEquals("relationshipName", jsObject.name)
     }
 
 }

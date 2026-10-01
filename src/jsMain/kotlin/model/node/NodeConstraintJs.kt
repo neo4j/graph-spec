@@ -16,47 +16,35 @@
  */
 package model.node
 
-import js.objects.Record
 import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.jso
-import model.type.ConstraintType
 
 @JsExport
 @JsPlainObject
 external interface NodeConstraintJs {
     var type: String
-    var label: String?
+    var name: String?
     var properties: Array<String>
-    val extensions: Record<String, ExtensionValueJs>
 }
 
 fun nodeConstraintJs(
     type: String,
-    label: String? = null,
-    properties: Array<String> = emptyArray(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
+    name: String? = null,
+    properties: Array<String> = emptyArray()
 ): NodeConstraintJs = jso {
     this.type = type
-    this.label = label
+    this.name = name
     this.properties = properties
-    this.extensions = extensions
 }
 
-fun NodeConstraint.toJs() = nodeConstraintJs(
-    type = type.name,
-    label = label,
-    properties = properties.toTypedArray(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
+fun Constraint.toJs() = nodeConstraintJs(
+    type = type,
+    name = name,
+    properties = properties.toTypedArray()
 )
 
-fun NodeConstraintJs.toClass() = NodeConstraint(
-    type = ConstraintType.valueOf(type),
-    label = label,
-    properties = properties.toMutableSet(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+fun NodeConstraintJs.toClass() = Constraint(
+    type = type,
+    properties = properties.toMutableList(),
+    name = name
 )

@@ -22,13 +22,21 @@ class RelationshipTargetEditor {
         @JsStatic
         fun setNode(target: RelationshipTargetJs, node: String) {
             target.node = node
-            target.label = ""
         }
 
         @JsStatic
-        fun setLabel(target: RelationshipTargetJs, label: String) {
-            target.label = label
-            target.node = ""
+        fun setCount(target: RelationshipTargetJs, count: Int?) {
+            target.count = count
+        }
+
+        @JsStatic
+        fun setMinCount(target: RelationshipTargetJs, minCount: Int?) {
+            target.minCount = minCount
+        }
+
+        @JsStatic
+        fun setMaxCount(target: RelationshipTargetJs, maxCount: Int?) {
+            target.maxCount = maxCount
         }
     }
 }

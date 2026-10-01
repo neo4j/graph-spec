@@ -16,25 +16,28 @@
  */
 package model.node
 
-import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
-import model.emptyRecord
-import model.extension.ExtensionValueJs
 import model.getOrThrow
-import model.index.IndexOptionJs
 import model.property.PropertyEditor
 import model.property.PropertyJs
 import model.property.propertyJs
 import model.remove
+import kotlin.collections.plus
 
 @JsExport
 class NodeEditor {
     companion object {
         @JsStatic
-        fun setName(model: GraphModelJs, nodeId: String, newName: String) {
+        fun setLabel(model: GraphModelJs, nodeId: String, label: String?) {
             val node = model.nodes.getOrThrow(nodeId, "Node")
-            node.name = newName
+            node.label = label
+        }
+
+        @JsStatic
+        fun setDescription(model: GraphModelJs, nodeId: String, description: String?) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            node.description = description
         }
 
         /*
@@ -43,32 +46,37 @@ class NodeEditor {
 
         @JsStatic
         fun setIdentifyingLabel(model: GraphModelJs, nodeId: String, label: String) {
-            val node = model.nodes.getOrThrow(nodeId, "Node")
-            LabelsEditor.setIdentifier(node.labels, label)
+            val labels = getOrCreateLabels(model, nodeId)
+            LabelsEditor.setIdentifier(labels, label)
         }
 
         @JsStatic
         fun addImpliedLabel(model: GraphModelJs, nodeId: String, label: String) {
-            val node = model.nodes.getOrThrow(nodeId, "Node")
-            LabelsEditor.addImplied(node.labels, label)
+            val labels = getOrCreateLabels(model, nodeId)
+            LabelsEditor.addImplied(labels, label)
         }
 
         @JsStatic
         fun removeImpliedLabel(model: GraphModelJs, nodeId: String, label: String) {
-            val node = model.nodes.getOrThrow(nodeId, "Node")
-            LabelsEditor.removeImplied(node.labels, label)
+            val labels = getOrCreateLabels(model, nodeId)
+            LabelsEditor.removeImplied(labels, label)
         }
 
         @JsStatic
         fun addOptionalLabel(model: GraphModelJs, nodeId: String, label: String) {
-            val node = model.nodes.getOrThrow(nodeId, "Node")
-            LabelsEditor.addOptional(node.labels, label)
+            val labels = getOrCreateLabels(model, nodeId)
+            LabelsEditor.addOptional(labels, label)
         }
 
         @JsStatic
         fun removeOptionalLabel(model: GraphModelJs, nodeId: String, label: String) {
+            val labels = getOrCreateLabels(model, nodeId)
+            LabelsEditor.removeOptional(labels, label)
+        }
+
+        private fun getOrCreateLabels(model: GraphModelJs, nodeId: String): LabelsJs {
             val node = model.nodes.getOrThrow(nodeId, "Node")
-            LabelsEditor.removeOptional(node.labels, label)
+            return node.labels ?: labelsJs().also { node.labels = it }
         }
 
         /*
@@ -79,7 +87,7 @@ class NodeEditor {
         fun addProperty(model: GraphModelJs, nodeId: String): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.properties.addUnique("property") { id ->
-                propertyJs(id = id, name = id)
+                propertyJs(id = id)
             }
         }
 
@@ -90,13 +98,7 @@ class NodeEditor {
         }
 
         @JsStatic
-        fun setPropertyName(model: GraphModelJs, nodeId: String, propertyId: String, name: String) {
-            val property = getProperty(model, nodeId, propertyId)
-            PropertyEditor.setName(property, name)
-        }
-
-        @JsStatic
-        fun setPropertyType(model: GraphModelJs, nodeId: String, propertyId: String, type: String) { // TODO neo4j type
+        fun setPropertyType(model: GraphModelJs, nodeId: String, propertyId: String, type: String) {
             val property = getProperty(model, nodeId, propertyId)
             PropertyEditor.setType(property, type)
         }
@@ -140,112 +142,42 @@ class NodeEditor {
             model: GraphModelJs,
             nodeId: String,
             type: String,
-            label: String? = null,
-            properties: Array<String> = emptyArray(),
-            extensions: Record<String, ExtensionValueJs> = emptyRecord()
-        ): String {
+            name: String? = null,
+            properties: Array<String> = emptyArray()
+        ): Int {
             val node = model.nodes.getOrThrow(nodeId, "Node")
-            return node.constraints.addUnique("constraint") {
-                nodeConstraintJs(type, label, properties, extensions)
-            }
+            node.constraints += nodeConstraintJs(type, name, properties)
+            return node.constraints.size - 1
         }
 
         @JsStatic
-        fun setConstraintType(model: GraphModelJs, nodeId: String, constraintId: String, type: String) {
-            val constraint = getConstraint(model, nodeId, constraintId)
+        fun setConstraintType(model: GraphModelJs, nodeId: String, constraintIndex: Int, type: String) {
+            val constraint = getConstraint(model, nodeId, constraintIndex)
             NodeConstraintEditor.setType(constraint, type)
         }
 
         @JsStatic
-        fun setConstraintLabel(model: GraphModelJs, nodeId: String, constraintId: String, label: String) {
-            val constraint = getConstraint(model, nodeId, constraintId)
-            NodeConstraintEditor.setLabel(constraint, label)
+        fun setConstraintName(model: GraphModelJs, nodeId: String, constraintIndex: Int, name: String?) {
+            val constraint = getConstraint(model, nodeId, constraintIndex)
+            NodeConstraintEditor.setName(constraint, name)
         }
 
         @JsStatic
-        fun addConstraintProperty(model: GraphModelJs, nodeId: String, constraintId: String, propertyId: String) {
-            val constraint = getConstraint(model, nodeId, constraintId)
+        fun addConstraintProperty(model: GraphModelJs, nodeId: String, constraintIndex: Int, propertyId: String) {
+            val constraint = getConstraint(model, nodeId, constraintIndex)
             NodeConstraintEditor.addProperty(constraint, propertyId)
         }
 
         @JsStatic
-        fun removeConstraintProperty(model: GraphModelJs, nodeId: String, constraintId: String, propertyId: String) {
-            val constraint = getConstraint(model, nodeId, constraintId)
+        fun removeConstraintProperty(model: GraphModelJs, nodeId: String, constraintIndex: Int, propertyId: String) {
+            val constraint = getConstraint(model, nodeId, constraintIndex)
             NodeConstraintEditor.removeProperty(constraint, propertyId)
         }
 
-        private fun getConstraint(model: GraphModelJs, nodeId: String, constraintId: String): NodeConstraintJs {
+        private fun getConstraint(model: GraphModelJs, nodeId: String, constraintIndex: Int): NodeConstraintJs {
             val node = model.nodes.getOrThrow(nodeId, "Node")
-            val constraint = node.constraints.getOrThrow(constraintId, "Constraint")
-            return constraint
-        }
-
-        /*
-            Indexes
-         */
-
-        @JsStatic
-        fun addIndex(
-            model: GraphModelJs,
-            nodeId: String,
-            type: String,
-            labels: Array<String> = emptyArray(),
-            properties: Array<String> = emptyArray(),
-            options: IndexOptionJs? = null,
-            extensions: Record<String, ExtensionValueJs> = emptyRecord()
-        ): String {
-            val node = model.nodes.getOrThrow(nodeId, "Node")
-            return node.indexes.addUnique("index") {
-                nodeIndexJs(type, labels, properties, options, extensions)
-            }
-        }
-
-        @JsStatic
-        fun setIndexType(model: GraphModelJs, nodeId: String, indexId: String, type: String) {
-            val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.setType(index, type)
-        }
-
-        @JsStatic
-        fun addIndexLabel(model: GraphModelJs, nodeId: String, indexId: String, label: String) {
-            val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.addLabel(index, label)
-        }
-
-        @JsStatic
-        fun removeIndexLabel(model: GraphModelJs, nodeId: String, indexId: String, label: String) {
-            val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.removeLabel(index, label)
-        }
-
-        @JsStatic
-        fun addIndexProperty(model: GraphModelJs, nodeId: String, indexId: String, propertyId: String) {
-            val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.addProperty(index, propertyId)
-        }
-
-        @JsStatic
-        fun removeIndexProperty(model: GraphModelJs, nodeId: String, indexId: String, propertyId: String) {
-            val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.removeProperty(index, propertyId)
-        }
-
-        @JsStatic
-        fun setIndexOption(model: GraphModelJs, nodeId: String, indexId: String, options: IndexOptionJs) {
-            val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.setOption(index, options)
-        }
-
-        @JsStatic
-        fun removeIndexOption(model: GraphModelJs, nodeId: String, indexId: String) {
-            val index = getIndex(model, nodeId, indexId)
-            NodeIndexEditor.removeOption(index)
-        }
-
-        private fun getIndex(model: GraphModelJs, nodeId: String, indexId: String): NodeIndexJs {
-            val node = model.nodes.getOrThrow(nodeId, "Node")
-            val index = node.indexes.getOrThrow(indexId, "Index")
-            return index
+            return node.constraints.getOrNull(constraintIndex)
+                ?: error("Constraint with index '$constraintIndex' not found.")
         }
     }
 }

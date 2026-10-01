@@ -16,44 +16,36 @@
  */
 package model.relationship
 
-import js.objects.Record
 import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
-import model.index.IndexOptionJs
-import model.index.toClass
 import model.jso
-import model.type.ConstraintType
+import model.node.Constraint
 
 @JsExport
 @JsPlainObject
 external interface RelationshipConstraintJs {
     var type: String
+    var name: String?
     var properties: Array<String>
-    val extensions: Record<String, ExtensionValueJs>
 }
 
 fun relationshipConstraintJs(
     type: String,
-    properties: Array<String> = emptyArray(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
+    name: String? = null,
+    properties: Array<String> = emptyArray()
 ): RelationshipConstraintJs = jso {
     this.type = type
+    this.name = name
     this.properties = properties
-    this.extensions = extensions
 }
 
-fun RelationshipConstraint.toJs() = relationshipConstraintJs(
-    type = type.name,
-    properties = properties.toTypedArray(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
+fun Constraint.toJs() = relationshipConstraintJs(
+    type = type,
+    name = name,
+    properties = properties.toTypedArray()
 )
 
-fun RelationshipConstraintJs.toClass() = RelationshipConstraint(
-    type = ConstraintType.valueOf(type),
-    properties = properties.toMutableSet(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+fun RelationshipConstraintJs.toClass() = Constraint(
+    type = type,
+    properties = properties.toMutableList(),
+    name = name
 )

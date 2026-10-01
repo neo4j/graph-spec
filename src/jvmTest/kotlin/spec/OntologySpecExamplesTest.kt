@@ -55,8 +55,8 @@ class OntologySpecExamplesTest {
     // working directory is the project directory.
     private val schemaFile = File("ontology-spec.schema.json")
 
-    // Examples are classpath resources (same pattern as DataModelMigrationIT),
-    // so the test also survives IDE runs with a non-project working directory.
+    // Examples are classpath resources, so the test also survives IDE runs
+    // with a non-project working directory.
     private val examplesDir = File(javaClass.getResource("/ontology")!!.path)
 
     private fun schema(): JsonSchema = factory.getSchema(mapper.readTree(schemaFile), config)

@@ -28,59 +28,72 @@ import model.jso
 import model.property.PropertyJs
 import model.property.toClass
 import model.property.toJs
+import model.tool.ToolJs
+import model.tool.toClass
+import model.tool.toJs
 import kotlin.collections.component1
 import kotlin.collections.component2
 
 @JsExport
 @JsPlainObject
 external interface NodeJs {
-    val labels: LabelsJs
+    var label: String?
+    var labels: LabelsJs?
     val properties: Record<String, PropertyJs>
-    val constraints: Record<String, NodeConstraintJs>
-    val indexes: Record<String, NodeIndexJs>
+    var constraints: Array<NodeConstraintJs>
+    val tools: Array<ToolJs>
+    val aliases: Array<String>
+    var reference: String?
+    var description: String?
     val extensions: Record<String, ExtensionValueJs>
-    var name: String
     val id: String
-    val description: String
 }
 
 fun nodeJs(
-    labels: LabelsJs = labelsJs(),
+    label: String? = null,
+    labels: LabelsJs? = null,
     properties: Record<String, PropertyJs> = emptyRecord(),
-    constraints: Record<String, NodeConstraintJs> = emptyRecord(),
-    indexes: Record<String, NodeIndexJs> = emptyRecord(),
+    constraints: Array<NodeConstraintJs> = emptyArray(),
+    tools: Array<ToolJs> = emptyArray(),
+    aliases: Array<String> = emptyArray(),
+    reference: String? = null,
+    description: String? = null,
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
-    name: String,
-    id: String,
-    description: String = ""
+    id: String
 ): NodeJs = jso {
+    this.label = label
     this.labels = labels
     this.properties = properties
     this.constraints = constraints
-    this.indexes = indexes
-    this.extensions = extensions
-    this.name = name
-    this.id = id
+    this.tools = tools
+    this.aliases = aliases
+    this.reference = reference
     this.description = description
+    this.extensions = extensions
+    this.id = id
 }
 
 fun Node.toJs(key: String) = nodeJs(
-    labels = labels.toJs(),
+    label = label,
+    labels = labels?.toJs(),
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
-    constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
-    indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
+    constraints = constraints.map { it.toJs() }.toTypedArray(),
+    tools = tools.map { it.toJs() }.toTypedArray(),
+    aliases = aliases.toTypedArray(),
+    reference = reference,
+    description = description,
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
-    name = name ?: key,
-    id = key,
-    description = description
+    id = key
 )
 
 fun NodeJs.toClass(id: String): Node = Node(
-    labels = labels.toClass(),
-    properties = properties.associateBy { key, value -> value.toClass("nodes.$id", key) },
-    constraints = constraints.associateBy { _, value -> value.toClass() },
-    indexes = indexes.associateBy { _, value -> value.toClass() },
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
-    name = name,
-    description = description
+    label = label,
+    labels = labels?.toClass(),
+    properties = properties.associateBy { key, value -> value.toClass() },
+    constraints = constraints.map { it.toClass() }.toMutableList(),
+    tools = tools.map { it.toClass() }.toMutableList(),
+    aliases = aliases.toMutableList(),
+    reference = reference,
+    description = description,
+    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

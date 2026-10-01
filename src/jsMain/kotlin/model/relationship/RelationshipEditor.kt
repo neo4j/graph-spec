@@ -16,17 +16,14 @@
  */
 package model.relationship
 
-import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
-import model.emptyRecord
-import model.extension.ExtensionValueJs
 import model.getOrThrow
-import model.index.IndexOptionJs
 import model.property.PropertyEditor
 import model.property.PropertyJs
 import model.property.propertyJs
 import model.remove
+import kotlin.collections.plus
 
 @JsExport
 class RelationshipEditor {
@@ -37,8 +34,8 @@ class RelationshipEditor {
         }
 
         @JsStatic
-        fun setName(relationship: RelationshipJs, name: String) {
-            relationship.name = name
+        fun setDescription(relationship: RelationshipJs, description: String?) {
+            relationship.description = description
         }
 
         @JsStatic
@@ -47,18 +44,8 @@ class RelationshipEditor {
         }
 
         @JsStatic
-        fun setSourceLabel(relationship: RelationshipJs, label: String) {
-            RelationshipTargetEditor.setLabel(relationship.from, label)
-        }
-
-        @JsStatic
         fun setTargetNode(relationship: RelationshipJs, node: String) {
             RelationshipTargetEditor.setNode(relationship.to, node)
-        }
-
-        @JsStatic
-        fun setTargetLabel(relationship: RelationshipJs, label: String) {
-            RelationshipTargetEditor.setLabel(relationship.to, label)
         }
 
         /*
@@ -67,25 +54,18 @@ class RelationshipEditor {
 
         @JsStatic
         fun addProperty(model: GraphModelJs, relationshipId: String): String {
-            val relationship = model.relationships.getOrThrow(relationshipId, "Node")
+            val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             return relationship.properties.addUnique("property") { id ->
-                propertyJs(id = id, name = id)
+                propertyJs(id = id)
             }
         }
 
         @JsStatic
         fun removeProperty(model: GraphModelJs, relationshipId: String, propertyId: String) {
-            val relationship = model.relationships.getOrThrow(relationshipId, "Node")
+            val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             relationship.properties.remove(propertyId)
         }
 
-        @JsStatic
-        fun setPropertyName(model: GraphModelJs, relationshipId: String, propertyId: String, name: String) {
-            val property = getProperty(model, relationshipId, propertyId)
-            PropertyEditor.setName(property, name)
-        }
-
-        // TODO neo4j type
         @JsStatic
         fun setPropertyType(model: GraphModelJs, relationshipId: String, propertyId: String, type: String) {
             val property = getProperty(model, relationshipId, propertyId)
@@ -131,29 +111,34 @@ class RelationshipEditor {
             model: GraphModelJs,
             relationshipId: String,
             type: String,
-            properties: Array<String> = emptyArray(),
-            extensions: Record<String, ExtensionValueJs> = emptyRecord()
-        ): String {
+            name: String? = null,
+            properties: Array<String> = emptyArray()
+        ): Int {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
-            return relationship.constraints.addUnique("constraint") {
-                relationshipConstraintJs(type, properties, extensions)
-            }
+            relationship.constraints += relationshipConstraintJs(type, name, properties)
+            return relationship.constraints.size - 1
         }
 
         @JsStatic
-        fun setConstraintType(model: GraphModelJs, relationshipId: String, constraintId: String, type: String) {
-            val constraint = getConstraint(model, relationshipId, constraintId)
+        fun setConstraintType(model: GraphModelJs, relationshipId: String, constraintIndex: Int, type: String) {
+            val constraint = getConstraint(model, relationshipId, constraintIndex)
             RelationshipConstraintEditor.setType(constraint, type)
+        }
+
+        @JsStatic
+        fun setConstraintName(model: GraphModelJs, relationshipId: String, constraintIndex: Int, name: String?) {
+            val constraint = getConstraint(model, relationshipId, constraintIndex)
+            RelationshipConstraintEditor.setName(constraint, name)
         }
 
         @JsStatic
         fun addConstraintProperty(
             model: GraphModelJs,
             relationshipId: String,
-            constraintId: String,
+            constraintIndex: Int,
             propertyId: String
         ) {
-            val constraint = getConstraint(model, relationshipId, constraintId)
+            val constraint = getConstraint(model, relationshipId, constraintIndex)
             RelationshipConstraintEditor.addProperty(constraint, propertyId)
         }
 
@@ -161,76 +146,21 @@ class RelationshipEditor {
         fun removeConstraintProperty(
             model: GraphModelJs,
             relationshipId: String,
-            constraintId: String,
+            constraintIndex: Int,
             propertyId: String
         ) {
-            val constraint = getConstraint(model, relationshipId, constraintId)
+            val constraint = getConstraint(model, relationshipId, constraintIndex)
             RelationshipConstraintEditor.removeProperty(constraint, propertyId)
         }
 
         private fun getConstraint(
             model: GraphModelJs,
             relationshipId: String,
-            constraintId: String
+            constraintIndex: Int
         ): RelationshipConstraintJs {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
-            val constraint = relationship.constraints.getOrThrow(constraintId, "Constraint")
-            return constraint
-        }
-
-        /*
-            Indexes
-         */
-
-        @JsStatic
-        fun addIndex(
-            model: GraphModelJs,
-            relationshipId: String,
-            type: String,
-            properties: Array<String> = emptyArray(),
-            options: IndexOptionJs? = null,
-            extensions: Record<String, ExtensionValueJs> = emptyRecord()
-        ): String {
-            val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
-            return relationship.indexes.addUnique("index") {
-                relationshipIndexJs(type, properties, options, extensions)
-            }
-        }
-
-        @JsStatic
-        fun setIndexType(model: GraphModelJs, relationshipId: String, indexId: String, type: String) {
-            val constraint = getIndex(model, relationshipId, indexId)
-            RelationshipIndexEditor.setType(constraint, type)
-        }
-
-        @JsStatic
-        fun addIndexProperty(model: GraphModelJs, relationshipId: String, indexId: String, propertyId: String) {
-            val constraint = getIndex(model, relationshipId, indexId)
-            RelationshipIndexEditor.addProperty(constraint, propertyId)
-        }
-
-        @JsStatic
-        fun removeIndexProperty(model: GraphModelJs, relationshipId: String, indexId: String, propertyId: String) {
-            val constraint = getIndex(model, relationshipId, indexId)
-            RelationshipIndexEditor.removeProperty(constraint, propertyId)
-        }
-
-        @JsStatic
-        fun setIndexOption(model: GraphModelJs, relationshipId: String, indexId: String, options: IndexOptionJs) {
-            val constraint = getIndex(model, relationshipId, indexId)
-            RelationshipIndexEditor.setOption(constraint, options)
-        }
-
-        @JsStatic
-        fun removeIndexOption(model: GraphModelJs, relationshipId: String, indexId: String) {
-            val constraint = getIndex(model, relationshipId, indexId)
-            RelationshipIndexEditor.removeOption(constraint)
-        }
-
-        private fun getIndex(model: GraphModelJs, relationshipId: String, indexId: String): RelationshipIndexJs {
-            val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
-            val index = relationship.indexes.getOrThrow(indexId, "Index")
-            return index
+            return relationship.constraints.getOrNull(constraintIndex)
+                ?: error("Constraint with index '$constraintIndex' not found.")
         }
     }
 }

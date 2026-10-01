@@ -33,18 +33,22 @@ class ValidationTest {
 
     @Test
     fun testValidate() {
+        // A valid v1 document; no validators are registered yet (track 2 repopulates
+        // Validations.all), so a clean parse yields an empty issue list.
         val input = """{
-            "version": "4.0.0",
+            "${'$'}schema": "https://neo4j.com/ontology-spec.schema.json",
+            "id": "test",
+            "version": 1,
             "nodes": {
                 "n": {
-                    "constraints": {
-                        "c1": {
-                            "type": "EXISTS",
-                            "label": "L",
-                            "properties": [],
+                    "label": "Movie",
+                    "constraints": [
+                        {
+                            "constraint_type": "unique",
+                            "properties": ["title"],
                             "name": "constraint1"
                         }
-                    }
+                    ]
                 }
             }
         }
@@ -59,7 +63,26 @@ class ValidationTest {
             assertTrue(resultSize > 0)
             assertEquals(STATUS_OK, outputBuffer[0])
             val payload = (outputBuffer + 1)!!.toKString()
-            assertTrue(payload.contains("Missing label with id 'L' for node constraint 'c1'"))
+            assertEquals("[]", payload)
+        }
+    }
+
+    @Test
+    fun testValidateInvalidDocument() {
+        // Not a v1 document: required root fields are missing, so decoding fails and the
+        // bridge reports STATUS_ERROR with the failure message as payload.
+        val input = """{"version": "4.0.0"}"""
+        val bufferSize = 1024
+
+        memScoped {
+            val inputPtr = input.cstr.getPointer(this)
+            val outputBuffer = allocArray<ByteVar>(bufferSize)
+
+            val resultSize = validate(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize)
+            assertTrue(resultSize > 0)
+            assertEquals(STATUS_ERROR, outputBuffer[0])
+            val payload = (outputBuffer + 1)!!.toKString()
+            assertTrue(payload.isNotEmpty())
         }
     }
 }

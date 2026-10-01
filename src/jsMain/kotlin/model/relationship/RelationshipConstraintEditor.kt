@@ -17,8 +17,6 @@
 package model.relationship
 
 import model.dropAt
-import model.extension.ExtensionValueJs
-import model.remove
 import kotlin.collections.plus
 
 @JsExport
@@ -27,6 +25,11 @@ class RelationshipConstraintEditor {
         @JsStatic
         fun setType(constraint: RelationshipConstraintJs, type: String) {
             constraint.type = type
+        }
+
+        @JsStatic
+        fun setName(constraint: RelationshipConstraintJs, name: String?) {
+            constraint.name = name
         }
 
         @JsStatic

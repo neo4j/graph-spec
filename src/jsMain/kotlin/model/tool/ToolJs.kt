@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.source
+package model.tool
 
 import js.objects.Record
 import kotlinx.js.JsPlainObject
@@ -24,34 +24,38 @@ import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
 import model.jso
-import kotlin.String
 
 @JsExport
 @JsPlainObject
-external interface ForeignKeyJs {
-    var columns: Array<String>
-    val references: ForeignKeyReferenceJs
-    val extensions: Record<String, ExtensionValueJs>
+external interface ToolJs {
+    var type: String
+    var name: String?
+    var description: String?
+    val extra: Record<String, ExtensionValueJs>
 }
 
-fun foreignKeyJs(
-    columns: Array<String>,
-    references: ForeignKeyReferenceJs,
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
-): ForeignKeyJs = jso {
-    this.columns = columns
-    this.references = references
-    this.extensions = extensions
+fun toolJs(
+    type: String,
+    name: String? = null,
+    description: String? = null,
+    extra: Record<String, ExtensionValueJs> = emptyRecord()
+): ToolJs = jso {
+    this.type = type
+    this.name = name
+    this.description = description
+    this.extra = extra
 }
 
-fun ForeignKey.toJs() = foreignKeyJs(
-    columns = columns.toTypedArray(),
-    references = references.toJs(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
+fun Tool.toJs() = toolJs(
+    type = type,
+    name = name,
+    description = description,
+    extra = extra.associateBy { _, value -> value.toJs() }
 )
 
-fun ForeignKeyJs.toClass() = ForeignKey(
-    columns = columns.toMutableSet(),
-    references = references.toClass(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+fun ToolJs.toClass() = Tool(
+    type = type,
+    name = name,
+    description = description,
+    extra = extra.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

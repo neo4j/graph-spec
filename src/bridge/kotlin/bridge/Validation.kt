@@ -16,6 +16,7 @@
  */
 package bridge
 
+import OntologySpec
 import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ExperimentalForeignApi
