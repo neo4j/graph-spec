@@ -82,3 +82,10 @@ repo now.
 - ADR-0003 (schema source of truth), ADR-0004 (port sequencing), and
   ADR-0005 (extension packaging) follow as Proposed ADRs; the port
   tracks are charted after those land.
+
+## Later references
+
+- ADR-0006 sharpens this ADR's API-stability constraint: "stay the same
+  to the largest extent possible through the port" becomes the concrete
+  rule that consumer-visible changes are limited to the name and the
+  extensions area.
