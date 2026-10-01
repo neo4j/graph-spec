@@ -8,8 +8,8 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
     override fun createClass() = RelationshipMapping(
         relationship = "relationshipId",
         table = "table_name",
-        startNode = TargetMapping("from_node"),
-        endNode = TargetMapping(label = "to_label"),
+        fromNode = TargetMapping("from_node"),
+        toNode = TargetMapping(label = "to_label"),
         properties = mutableMapOf("prop" to PropertyMapping("field")),
         mode = MappingMode.MERGE,
         matchLabel = "matchLabel",

@@ -408,44 +408,44 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship0"
     table: "flights"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property0: { column: "flight_id" }
-    end_node:
+    to_node:
       node: "node0"
       properties:
         node0_property0: { column: "aircraft_code" }
   - type: "RELATIONSHIP"
     relationship: "relationship1"
     table: "flights"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property0: { column: "flight_id" }
-    end_node:
+    to_node:
       node: "node1"
       properties:
         node1_property0: { column: "departure_airport" }
   - type: "RELATIONSHIP"
     relationship: "relationship2"
     table: "flights"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property0: { column: "flight_id" }
-    end_node:
+    to_node:
       node: "node1"
       properties:
         node1_property0: { column: "arrival_airport" }
   - type: "RELATIONSHIP"
     relationship: "relationship3"
     table: "ticket_flights"
-    start_node:
+    from_node:
       node: "node3"
       properties:
         node3_property0: { column: "flight_id" }
-    end_node:
+    to_node:
       node: "node4"
       properties:
         node4_property0: { column: "ticket_no" }
@@ -455,11 +455,11 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "relationship4"
     table: "tickets"
-    start_node:
+    from_node:
       node: "node4"
       properties:
         node4_property0: { column: "ticket_no" }
-    end_node:
+    to_node:
       node: "node2"
       properties:
         node2_property0: { column: "book_ref" }

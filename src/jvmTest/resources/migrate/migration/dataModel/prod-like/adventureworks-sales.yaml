@@ -1470,88 +1470,88 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "SALESTERRITORY"
     table: "customer"
-    start_node:
+    from_node:
       node: "customer"
       properties:
         customerid: { column: "customerid" }
-    end_node:
+    to_node:
       node: "salesterritory"
       properties:
         territoryid: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "STORE"
     table: "customer"
-    start_node:
+    from_node:
       node: "customer"
       properties:
         customerid: { column: "customerid" }
-    end_node:
+    to_node:
       node: "store"
       properties:
         businessentityid: { column: "storeid" }
   - type: "RELATIONSHIP"
     relationship: "CREDITCARD"
     table: "salesorderheader"
-    start_node:
+    from_node:
       node: "salesorderheader"
       properties:
         salesorderid: { column: "salesorderid" }
-    end_node:
+    to_node:
       node: "creditcard"
       properties:
         creditcardid: { column: "creditcardid" }
   - type: "RELATIONSHIP"
     relationship: "CURRENCYRATE"
     table: "salesorderheader"
-    start_node:
+    from_node:
       node: "salesorderheader"
       properties:
         salesorderid: { column: "salesorderid" }
-    end_node:
+    to_node:
       node: "currencyrate"
       properties:
         currencyrateid: { column: "currencyrateid" }
   - type: "RELATIONSHIP"
     relationship: "CUSTOMER"
     table: "salesorderheader"
-    start_node:
+    from_node:
       node: "salesorderheader"
       properties:
         salesorderid: { column: "salesorderid" }
-    end_node:
+    to_node:
       node: "customer"
       properties:
         customerid: { column: "customerid" }
   - type: "RELATIONSHIP"
     relationship: "SALESPERSON"
     table: "salesorderheader"
-    start_node:
+    from_node:
       node: "salesorderheader"
       properties:
         salesorderid: { column: "salesorderid" }
-    end_node:
+    to_node:
       node: "salesperson"
       properties:
         businessentityid: { column: "salespersonid" }
   - type: "RELATIONSHIP"
     relationship: "SALESTERRITORY2"
     table: "salesorderheader"
-    start_node:
+    from_node:
       node: "salesorderheader"
       properties:
         salesorderid: { column: "salesorderid" }
-    end_node:
+    to_node:
       node: "salesterritory"
       properties:
         territoryid: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "SALESREASON"
     table: "salesorderheadersalesreason"
-    start_node:
+    from_node:
       node: "salesorderheader"
       properties:
         salesorderid: { column: "salesorderid" }
-    end_node:
+    to_node:
       node: "salesreason"
       properties:
         salesreasonid: { column: "salesreasonid" }
@@ -1560,22 +1560,22 @@ mappings:
   - type: "RELATIONSHIP"
     relationship: "SALESTERRITORY3"
     table: "salesperson"
-    start_node:
+    from_node:
       node: "salesperson"
       properties:
         businessentityid: { column: "businessentityid" }
-    end_node:
+    to_node:
       node: "salesterritory"
       properties:
         territoryid: { column: "territoryid" }
   - type: "RELATIONSHIP"
     relationship: "SALESPERSON2"
     table: "store"
-    start_node:
+    from_node:
       node: "store"
       properties:
         businessentityid: { column: "businessentityid" }
-    end_node:
+    to_node:
       node: "salesperson"
       properties:
         businessentityid: { column: "salespersonid" }

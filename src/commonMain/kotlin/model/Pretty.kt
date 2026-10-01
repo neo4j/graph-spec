@@ -98,8 +98,8 @@ object Pretty {
             mapping.node = renames[mapping.node] ?: mapping.node
         }
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
-            mapping.startNode.node = renames[mapping.startNode.node] ?: mapping.startNode.node
-            mapping.endNode.node = renames[mapping.endNode.node] ?: mapping.endNode.node
+            mapping.fromNode.node = renames[mapping.fromNode.node] ?: mapping.fromNode.node
+            mapping.toNode.node = renames[mapping.toNode.node] ?: mapping.toNode.node
         }
     }
 
@@ -157,10 +157,10 @@ object Pretty {
             mapping.key.rename(renames, mapping.node)
         }
         model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
-            mapping.startNode.properties.rename(renames, mapping.startNode.node)
-            mapping.endNode.properties.rename(renames, mapping.endNode.node)
-            mapping.key.rename(renames, mapping.startNode.node)
-            mapping.key.rename(renames, mapping.endNode.node)
+            mapping.fromNode.properties.rename(renames, mapping.fromNode.node)
+            mapping.toNode.properties.rename(renames, mapping.toNode.node)
+            mapping.key.rename(renames, mapping.fromNode.node)
+            mapping.key.rename(renames, mapping.toNode.node)
         }
     }
 
