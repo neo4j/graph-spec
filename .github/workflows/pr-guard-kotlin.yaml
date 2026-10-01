@@ -3,9 +3,10 @@ name: Kotlin PR Quality Guard
 on:
   pull_request:
     branches: [main]
-    # Trigger on changes to the Kotlin files
+    # Trigger on changes to the Kotlin files and the spec schema
     paths:
       - 'src/**'
+      - 'ontology-spec.schema.json'
       - 'build.gradle.kts'
       - 'settings.gradle.kts'
       - 'gradle.properties'

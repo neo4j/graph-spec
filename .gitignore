@@ -1,5 +1,3 @@
-node_modules/
-
 # gbuild harness store (local-only state)
 .gbuild/
 

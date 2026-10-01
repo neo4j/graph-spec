@@ -2,32 +2,29 @@
 
 Two worlds coexist in this repo (ADR-0002):
 
-- The **Neo4j Ontology Specification v1 overlay** - the schema, examples, and Node tooling listed below. Draft; mirrors the shared proposal doc's 2026-09-25 state.
+- The **Neo4j Ontology Specification v1 overlay** - the schema and the validating examples listed below. Draft; mirrors the shared proposal doc's 2026-09-25 state.
 - The **graph-spec 4.0.0 implementation** - the Kotlin Multiplatform model (`src/`), the Go module (`go/`), and the Gradle build (`build-logic/`, `gradle/`) - kept in place while the port re-targets it at the v1 format in place (ADR-0004).
 
 Spec overlay contents:
 
 - `ontology-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format.
-- `examples/` - example ontologies exercising the full surface, plus `foaf.ttl` and its converted output.
-- `scripts/validate.mjs` - validates the schema, then every example (JSON + YAML) against it.
-- `scripts/ttl2ontology.mjs` - converts an RDFS/OWL Turtle vocabulary to the ontology format, applying the proposal's RDFS coverage table. Prints what mapped, what expanded, what was dropped and why.
+- `src/jvmTest/resources/ontology/` - the example ontologies exercising the full surface, as test resources.
+- `src/jvmTest/kotlin/ontology/OntologySpecExamplesTest.kt` - the spec-validation gate (ADR-0007): compiles the schema against the 2020-12 meta-schema, then validates every example resource against it.
 
 ## Run
 
-Requires Node >= 24.
+The spec gate is a Gradle test (JDK 17; the system JDK may be older - point `JAVA_HOME` at a 17 install):
 
 ```sh
-npm install
-npm run validate    # schema + all examples (regenerates YAML first)
-npm run convert     # examples/foaf.ttl -> examples/foaf.ontology.json
+JAVA_HOME=$HOME/.local/share/jdks/temurin-17.jdk/Contents/Home ./gradlew jvmTest   # spec schema + all examples
 ```
 
 ## Checks
 
-The npm gates above cover the spec overlay. The 4.0.0 implementation has its own gates:
+The Gradle gate above covers the spec overlay. The 4.0.0 implementation has its own gates:
 
 ```sh
-./gradlew check --no-daemon   # Kotlin: JVM + JS + Native
+./gradlew check --no-daemon   # Kotlin: JVM + JS + Native (includes jvmTest)
 cd go && go test ./...        # Go module (via the Kotlin/Native bridge)
 ```
 
