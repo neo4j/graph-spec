@@ -1,6 +1,11 @@
-# Ontology spec v1 - JSON Schema + examples
+# Ontology spec
 
-Draft. Mirrors the shared proposal doc's 2026-09-25 state.
+Two worlds coexist in this repo (ADR-0002):
+
+- The **Neo4j Ontology Specification v1 overlay** - the schema, examples, and Node tooling listed below. Draft; mirrors the shared proposal doc's 2026-09-25 state.
+- The **graph-spec 4.0.0 implementation** - the Kotlin Multiplatform model (`src/`), the Go module (`go/`), and the Gradle build (`build-logic/`, `gradle/`) - kept in place while the port re-targets it at the v1 format in place (ADR-0004).
+
+Spec overlay contents:
 
 - `ontology-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format.
 - `examples/` - example ontologies exercising the full surface, plus `foaf.ttl` and its converted output.
@@ -16,6 +21,17 @@ npm install
 npm run validate    # schema + all examples (regenerates YAML first)
 npm run convert     # examples/foaf.ttl -> examples/foaf.ontology.json
 ```
+
+## Checks
+
+The npm gates above cover the spec overlay. The 4.0.0 implementation has its own gates:
+
+```sh
+./gradlew check --no-daemon   # Kotlin: JVM + JS + Native
+cd go && go test ./...        # Go module (via the Kotlin/Native bridge)
+```
+
+The full per-language gate table (spotless, Go model drift, CI mapping) lives in [AGENTS.md](AGENTS.md) under "How to run checks".
 
 ## Notes
 
