@@ -1,34 +1,34 @@
 # Ontology spec
 
-Two worlds coexist in this repo (ADR-0002):
+The Neo4j Ontology Specification v1 and its SDK — a Kotlin Multiplatform
+library (`src/`) with a JS/TS surface and a Go module (`go/`).
 
-- The **Neo4j Ontology Specification v1 overlay** - the schema and the validating examples listed below. Draft; mirrors the shared proposal doc's 2026-09-25 state.
-- The **graph-spec 4.0.0 implementation** - the Kotlin Multiplatform model (`src/`), the Go module (`go/`), and the Gradle build (`gradle/`) - kept in place while the port re-targets it at the v1 format in place (ADR-0004).
+Draft; mirrors the shared proposal doc's 2026-09-25 state.
 
-Spec overlay contents:
-
-- `ontology-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format.
-- `src/jvmTest/resources/ontology/` - the example ontologies exercising the full surface, as test resources.
+- `ontology-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format; the hand-maintained source of truth (ADR-0003).
+- `src/jvmTest/resources/ontology/` - example ontologies exercising the full surface, as test resources.
 - `src/jvmTest/kotlin/spec/OntologySpecExamplesTest.kt` - the spec-validation gate (ADR-0007): compiles the schema against the 2020-12 meta-schema, then validates every example resource against it.
+- `src/commonMain/kotlin/` - the SDK: model, codecs (JSON + YAML), validators, and the converter (`migrate/migration/graphSpec/`, ADR-0008).
+- `go/` - the Go module: generated model (`go/model/model.go` - do not hand-edit), validation + migration via the Kotlin/Native bridge.
 
 ## Run
 
-The spec gate is a Gradle test (JDK 17; the system JDK may be older - point `JAVA_HOME` at a 17 install):
+JDK 17+ for Gradle (the system JDK may be older - point `JAVA_HOME` at a 17 install):
 
 ```sh
-JAVA_HOME=$HOME/.local/share/jdks/temurin-17.jdk/Contents/Home ./gradlew jvmTest   # spec schema + all examples
+JAVA_HOME=$HOME/.local/share/jdks/temurin-17.jdk/Contents/Home ./gradlew jvmTest   # spec gate: schema + all examples
 ```
 
 ## Checks
 
-The Gradle gate above covers the spec overlay. The 4.0.0 implementation has its own gates:
-
 ```sh
-./gradlew check --no-daemon   # Kotlin: JVM + JS + Native (includes jvmTest)
-cd go && go test ./...        # Go module (via the Kotlin/Native bridge)
+./gradlew check --no-daemon    # Kotlin: JVM + JS + Native (includes the spec gate)
+./gradlew spotlessCheck        # lint (ktlint + license header)
+cd go && go test ./...         # Go module (via the Kotlin/Native bridge)
+./go/scripts/generate-go-models.sh && git diff --exit-code   # Go model drift
 ```
 
-The full per-language gate table (spotless, Go model drift, CI mapping) lives in [AGENTS.md](AGENTS.md) under "How to run checks".
+The full per-language gate table and CI mapping live in [AGENTS.md](AGENTS.md) under "Commands".
 
 ## Notes
 
@@ -39,34 +39,13 @@ The full per-language gate table (spotless, Go model drift, CI mapping) lives in
 - `extensions` at every level: first-party extensions as `neo4j:`-prefixed named keys with owner-defined shapes (not validated here), custom extensions as the fixed envelope under `custom` (`type` required; `$schema`, `name`, `definition` optional; `definition` free-form, never validated). Unknown extra fields are carried untouched.
 - Constraint objects (`{ constraint_type: key|unique|mustExist, name?, properties: [...] }`) are the nameable alternative to the property shorthand flags.
 
-```xml
-<dependency>
-    <groupId>org.neo4j.importer</groupId>
-    <artifactId>graph-spec</artifactId>
-    <version>x.y.z</version>
-</dependency>
-```
+## Migrating from graph spec 4.0.0
 
-### Node Package Manager
-
-`npm install -D @neo4j-importer/graph-spec`
-
-```typescript
-import { GraphSpec } from "@neo4j-importer/graph-spec";
-
-const model: GraphModel = GraphSpec.Json.decodeFromString(value);
-```
-
-### Go
-
-```bash
-go get github.com/neo4j/graph-spec/go/vX@vX.Y.Z
-```
-
-> [!NOTE]
-> The Go library comes bundled with the Kotlin/Native library which is embedded and loaded automatically. 
-> The runtime needs `glibc` and `libstdc++`. The Go library can also be run without automatic embedding if needed 
-> (e.g. due to runtime restrictions) - see the [Go README](go/README.md).
+This repo was the graph spec (4.0.0); v1 is a clean break with no backwards
+compatibility in the format. A one-way 4.0.0 → 1.0.0 converter ships in the
+library (`migrate/migration/graphSpec/`, mapping table in ADR-0008); the
+frozen 4.0.0 state is tagged `graph-spec-4.0.0`. The transition's decisions
+are recorded in [`docs/adr/`](docs/adr/) (0001–0008).
 
 ## Releasing
 
