@@ -154,8 +154,8 @@ gradle/, gradlew                wrapper + version catalog
 - Kotlin tests run inside `./gradlew check`: JVM via JUnit platform, JS
   via mocha.
 - Go tests exercise the Kotlin/Native bridge through the embedded
-  darwin-arm64/linux libraries. `GRAPHDATAMODEL_LIB_PATH` overrides the
-  library path; `graphspec_noembed` builds without the embedded lib.
+  darwin-arm64/linux libraries. `ONTOLOGYMODEL_LIB_PATH` overrides the
+  library path; `ontologyspec_noembed` builds without the embedded lib.
 - `generate-go-models.sh` runs schemancer (plus jq and perl for the
   sanitised copy and the extras injection) against the repo-root schema —
   no Gradle schema task remains. It needs Go, jq, perl, and schemancer;
