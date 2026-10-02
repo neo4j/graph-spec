@@ -225,8 +225,7 @@ jobs:
   # DISABLED: Maven Central publishing awaits a release-policy decision.
   # The 4.0.0-era coordinates are already renamed (org.neo4j.importer:ontology-graph-spec,
   # see the mavenPublishing block in build.gradle.kts), but whether/how the v1
-  # line publishes to Maven Central is undecided. The always-false `if:`
-  # condition below keeps it disabled until then.
+  # line publishes to Maven Central is undecided. Keep `if: false` until then.
   publish-maven:
     if: false
     needs: [determine-version, validate-kotlin]
@@ -295,15 +294,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          if git diff --quiet -- go/internal/bridge/lib/; then
-            echo "Native libs unchanged; nothing to commit."
-            echo "sha=${{ needs.determine-version.outputs.sha }}" >> "$GITHUB_OUTPUT"
-          else
+          if ! git diff --quiet -- go/internal/bridge/lib/; then
             git add go/internal/bridge/lib/
             git commit -m "chore: rebuild Kotlin/Native bridge libs for release v${{ needs.determine-version.outputs.version }}"
             git push origin HEAD:main
-            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
   publish-tags:
     needs: [determine-version, validate-go, publish-npm, native-libs]
