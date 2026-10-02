@@ -31,7 +31,7 @@ echo "✓ JSON spec sanitised"
 
 if ! command -v schemancer &> /dev/null; then
     echo "schemancer not found, installing..."
-    go install github.com/Southclaws/schemancer@latest
+    go install github.com/Southclaws/schemancer@v1.2.0
 fi
 # Generate Go types
 SCHEMANCER_BIN=$(go env GOPATH)/bin/schemancer
