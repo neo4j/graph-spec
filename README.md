@@ -11,6 +11,26 @@ Draft; mirrors the shared proposal doc's 2026-09-25 state.
 - `src/commonMain/kotlin/` - the SDK: model, codecs (JSON + YAML), validators, and the converter (`migrate/migration/graphSpec/`, ADR-0008).
 - `go/` - the Go module: generated model (`go/model/model.go` - do not hand-edit), validation + migration via the Kotlin/Native bridge.
 
+## SDKs
+
+**JS/TS** (npm, types included):
+
+```sh
+npm install @neo4j-importer/ontology-graph-spec
+```
+
+The package ships the `@JsExport` model twins and editors (e.g. `graphModelJs(...)`, `GraphModelEditor`) plus the generated `.d.mts` definitions.
+
+**Go**:
+
+```sh
+go get github.com/neo4j/graph-spec/go@latest   # releases tagged go/vX.Y.Z
+```
+
+The module carries the generated `model` types plus `validation.Validate(model)` and `migration.ToOntologyGraphSpec(json, modelType)`, which call into the Kotlin source of truth via a Kotlin/Native bridge (runtime needs `glibc` + `libstdc++`; details in [go/README.md](go/README.md)).
+
+**Kotlin/JVM**: coordinates are `org.neo4j.importer:ontology-graph-spec`, but Maven publishing is not enabled yet (pending a release-policy decision) - consume from source for now.
+
 ## Run
 
 JDK 17+ for Gradle (the system JDK may be older - point `JAVA_HOME` at a 17 install):
