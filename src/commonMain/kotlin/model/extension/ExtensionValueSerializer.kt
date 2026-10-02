@@ -26,9 +26,7 @@ import kotlinx.serialization.descriptors.buildSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.booleanOrNull
@@ -46,14 +44,12 @@ object ExtensionValueSerializer : KSerializer<ExtensionValue> {
     override val descriptor: SerialDescriptor = buildSerialDescriptor("ExtensionValue", PolymorphicKind.SEALED)
 
     override fun serialize(encoder: Encoder, value: ExtensionValue) {
-        val jsonEncoder = encoder as? JsonEncoder
-            ?: throw SerializationException("ExtensionValue can only be serialized as JSON")
+        val jsonEncoder = encoder.requireJsonEncoder("ExtensionValue")
         jsonEncoder.encodeJsonElement(toJson(value))
     }
 
     override fun deserialize(decoder: Decoder): ExtensionValue {
-        val jsonDecoder = decoder as? JsonDecoder
-            ?: throw SerializationException("ExtensionValue can only be deserialized from JSON")
+        val jsonDecoder = decoder.requireJsonDecoder("ExtensionValue")
         return fromJson(jsonDecoder.decodeJsonElement())
     }
 
