@@ -39,6 +39,15 @@ type bridge struct {
 
 var loadBridge = sync.OnceValues(bindBridge)
 
+// Available reports whether the native bridge library can be loaded on this host:
+// nil when usable, the load error otherwise. Bridge-loading tests use it to skip
+// cleanly when no library is available (ontologyspec_noembed builds, or a platform
+// whose bundled library is not checked in — see lib/macos-arm64/README.md).
+func Available() error {
+	_, err := loadBridge()
+	return err
+}
+
 func Call(op Op, model []byte, args ...string) ([]byte, error) {
 	b, err := loadBridge()
 	if err != nil {

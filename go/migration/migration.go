@@ -11,23 +11,24 @@ import (
 type ModelType string
 type ModelVersion string
 
+// The token contract mirrors the Kotlin side (src/commonMain/kotlin/model/Type.kt and
+// model/Version.kt): the rebuilt bridge library supports exactly one migration, the
+// one-way graph spec 4.0.0 -> ontology spec 1.0.0 converter (ADR-0008). The SpecV4
+// tokens are the converter's INPUT contract only — this SDK never writes them.
 const (
-	ModelTypeDataModel        ModelType = "data_model"
-	ModelTypeDataModelWrapped ModelType = "data_model_wrapped"
-	ModelTypeImportSpec       ModelType = "import_spec"
-	ModelTypeOntologySpec     ModelType = "graph_spec"
+	ModelTypeSpecV4       ModelType = "graph_spec"
+	ModelTypeOntologySpec ModelType = "ontology_spec"
 
-	ModelVersionOntologySpecLatest ModelVersion = "4.0.0"
-	ModelVersionDataModelV23       ModelVersion = "2.3.0"
-	ModelVersionDataModelV24       ModelVersion = "2.4.0"
-	ModelVersionDataModelV30       ModelVersion = "3.0.0"
-	ModelVersionImportSpecV1       ModelVersion = "1.0.0"
+	ModelVersionSpecV4             ModelVersion = "4.0.0"
+	ModelVersionOntologySpecLatest ModelVersion = "1.0.0"
 )
 
 // ToOntologySpec returns the provided [jsonModel] migrated to the latest ontology model representation.
-// The input model should be a JSON string matching the provided [modelType]. If the migration path
-// from [modelType] to ontology model is not supported or the input model is malformed an error will
-// be returned.
+// The input model should be a JSON string matching the provided [modelType] — in v1 the only
+// supported input is a graph spec 4.0.0 document ([ModelTypeSpecV4]); pre-4.0.0 inputs
+// (data model 2.x/3.0, import_spec) are rejected by the library (ADR-0008 §10). If the
+// migration path from [modelType] to ontology model is not supported or the input model is
+// malformed an error will be returned.
 func ToOntologySpec(jsonModel string, modelType ModelType) (model.GraphModel, error) {
 	res, err := bridge.Call(bridge.Migrate, []byte(jsonModel), string(modelType), string(ModelTypeOntologySpec), string(ModelVersionOntologySpecLatest))
 	if err != nil {
@@ -42,8 +43,9 @@ func ToOntologySpec(jsonModel string, modelType ModelType) (model.GraphModel, er
 }
 
 // FromOntologySpec returns the provided ontology-spec [model] migrated to the target model. The returned
-// model is a JSON string. If the migration path from ontology-spec to [targetType]:[targetVersion] is
-// not supported or the input model is invalid an error will be returned.
+// model is a JSON string. The v1 converter is one-way (ADR-0008): no migration path out of
+// ontology-spec exists, so every target is rejected by the library with an
+// unsupported-migration error.
 func FromOntologySpec(model model.GraphModel, targetType ModelType, targetVersion ModelVersion) (string, error) {
 	bytes, err := json.Marshal(model)
 	if err != nil {
