@@ -1,248 +1,148 @@
-# Ontology spec agent contract
+# AGENTS.md
 
-The Neo4j Ontology Specification v1: a written spec, a JSON Schema
-(draft 2020-12) that is its machine-checkable form, validating examples,
-and the tooling that keeps them in sync. v1 is a clean break from graph
-spec 4.0.0 — no backwards compatibility in the format; a one-way
-4.0.0 → 1.0.0 converter is the migration story, not the spec's concern.
-
-Since the rebase onto `main` (ADR-0002), this repo also holds the 4.0.0
-implementation — the Kotlin Multiplatform model (`src/`), the Go module
-(`go/`), and the Gradle build (`gradle/`) — which the
-port re-targets at the v1 format in place, keeping main's machinery and
-public APIs (ADR-0006). The transition is governed by
-[`docs/adr/`](docs/adr/) (0001–0008).
-
-These rules apply to every change. History never weakens them.
+The Neo4j Ontology Specification v1 + its SDK (Kotlin Multiplatform model,
+JS/TS surface, Go module). `ontology-spec.schema.json` (draft 2020-12) is the
+hand-maintained source of truth; implementations conform to it (ADR-0003).
+The port from graph spec 4.0.0 and its decisions are recorded in
+[`docs/adr/`](docs/adr/) (0001–0008); the design record up to 2026-09-25 is
+[`docs/ontology-spec-v1-proposal.md`](docs/ontology-spec-v1-proposal.md).
 
 ## Non-negotiables
 
-### 1. Decision log
+1. **ADR first.** Every change to what a document may say or mean (fields,
+   semantics, cardinalities, type system, extension mechanism, interop,
+   governance) gets an ADR before implementation: `docs/adr/NNNN-slug.md`,
+   sections in order Context / Decision / Alternatives considered (each ends
+   in why it was rejected) / Consequences. Status `Proposed`; `Accepted` only
+   when agreed. Accepted ADRs are immutable — a later change is a new ADR +
+   a **Later references** note on the old one. Next number = highest existing
+   + 1; list the directory, don't guess. Typos and meaning-preserving wording
+   fixes are the only exemption. When in doubt, write the ADR.
+2. **Prose + schema + example in the same change.** No schema field without
+   prose, no prose without schema, `description` on every schema field, and
+   every format feature exercised by at least one example under
+   `src/jvmTest/resources/ontology/`. Never record a wrong answer: if an
+   example only passes because the schema is wrong, fix the schema.
+3. **Tooling changes update the docs in the same change.** Every CI workflow
+   and public Gradle task ships documented usage (README.md + this file):
+   what it does, inputs/outputs, flags with defaults, env vars, one
+   copy-paste invocation.
+4. **The gates stay green.** See the table below; a change lands only with
+   its gates passing.
 
-**Every change to the ontology spec is recorded as an Architecture
-Decision Record before it is implemented.** New fields, renamed fields,
-changed semantics, changed cardinalities, type-system changes, extension
-mechanism changes, interop mapping changes, governance decisions — if it
-alters what a document may say or what it means, it gets an ADR first.
+## Commands (the feedback loop)
 
-- Location: [`docs/adr/`](docs/adr/) — 0001–0008 govern the repo
-  transition and the port; list the directory before numbering
-- Filename: `NNNN-short-kebab-slug.md` (four-digit sequence, never reused)
-- One decision per file
-- Template sections, in order: **Context**, **Decision**, **Alternatives
-  considered** (each alternative ends with why it was rejected),
-  **Consequences**
-- Status starts as `Proposed`. Set `Accepted` only when the decision is
-  agreed. Accepted ADRs are immutable: later change = new ADR + a
-  **Later references** note on the old one
-- Next number = highest existing prefix + 1. Do not guess; list the
-  directory
-- Refer to other ADRs as `ADR-NNNN`
+Gradle needs JDK 17+; the system JDK here is 11, so prefix every `./gradlew`
+with `JAVA_HOME=$HOME/.local/share/jdks/temurin-17.jdk/Contents/Home`
+(CI has 17; any 17+ works).
 
-Decisions up to 2026-09-25 are recorded in the proposal doc and its
-changelog ([`docs/ontology-spec-v1-proposal.md`](docs/ontology-spec-v1-proposal.md)).
-That is the historical record, not a template to extend: everything after
-goes through ADRs. The spec document and the schema must never drift
-ahead of the decision log — if it isn't recorded, it isn't decided.
+| What | Command |
+| --- | --- |
+| Spec gate: schema compiles, every example validates | `./gradlew jvmTest` (class `spec.OntologySpecExamplesTest`) |
+| Model conformance: examples round-trip JSON + YAML through the model | same run (`spec.OntologyModelRoundTripTest`, `spec.OntologyYamlRoundTripTest`) |
+| Kotlin: JVM + JS/TS + Native compile, all tests | `./gradlew check` |
+| Lint (ktlint via spotless + license header) | `./gradlew spotlessCheck` (fix: `./gradlew spotlessApply`) |
+| Go | `cd go && go test ./...` (bridge tests skip if no native lib; force-exclude: `-tags ontologyspec_noembed`) |
+| Go model drift | `./go/scripts/generate-go-models.sh && git diff --exit-code` |
+| JS distribution (npm package + `.d.mts`) | `./gradlew jsNodeProductionLibraryDistribution` |
 
-Not ADR-worthy: typo fixes and wording edits that change no meaning.
-When in doubt, write the ADR.
+Notes:
 
-### 2. The spec document
+- The spec gate also runs inside `./gradlew check` (jvmTest is part of it).
+- CI mirrors this table: `pr-guard-kotlin.yaml` (`src/**` or the schema →
+  `check spotlessCheck`), `pr-guard-go.yaml` (`go/**` or the schema → go test
+  + drift check), `release.yaml` (merged PRs with `release:*` labels →
+  validate → npm publish + native-libs + tags; `publish-maven` stays disabled
+  pending a release-policy decision).
+- Go bridge tests load the committed Kotlin/Native libs
+  (`go/internal/bridge/lib/`). The macOS dylib needs full Xcode to build
+  (`./go/scripts/generate-kotlin-native-libs.sh`; this host is CLT-only) —
+  linux libs build anywhere; `ONTOLOGYMODEL_LIB_PATH` overrides the lib path;
+  `ontologyspec_noembed` builds without the embedded lib.
+- `generate-go-models.sh` runs schemancer (+ jq/perl for the sanitised copy
+  and the extras injection) against the repo-root schema — no Gradle, no JDK.
+  Needs Go, jq, perl, schemancer.
 
-The deliverable is the written spec. The schema and the examples are its
-machine-checkable expression — never the other way around.
+## Repo patterns (where things go)
 
-- Every format feature ships with prose + schema + at least one example
-  **in the same change**. No schema field without prose, no prose without
-  schema.
-- Every schema field carries a `description`. The 4.0.0 schema had zero
-  (proposal Appendix B); that failure is why this rewrite exists.
-- The spec document's changelog records every shape change with its date
-  and the ADR that decided it.
-- One wire format. No shorthand forms beyond those the spec explicitly
-  defines (`label` for `labels.identifier`, the property constraint
-  flags). Absent means none: empty maps and lists are omitted, never
-  written empty.
+- `src/commonMain/kotlin/model/` — the v1 model, field-for-field with the
+  schema (`@SerialName` for `one_of`/`min_count`/`max_count`/`constraint_type`/
+  `$schema`). Open surfaces (`Tool`, `CustomExtension`) keep unknown fields
+  via the catch-all helpers in `model/extension/InlineExtras.kt`; the six-kind
+  `ExtensionValue` tree is the payload carrier (raw-JSON
+  `ExtensionValueSerializer`). Named extensions live in owner-prefixed
+  subpackages of `model/extension/` (`neo4j/index/`, `neo4j_importer/table/`…)
+  per ADR-0005 — land with their owners.
+- `src/commonMain/kotlin/codec/` — `format/` (JSON + YAML, one wire format;
+  YAML inline paths live in `YamlFormat.kt`), `schema/` (the `SchemaMap` tree,
+  the converter's transform substrate).
+- `src/commonMain/kotlin/validate/` — one `object` per rule implementing
+  `Validation`, each with its own `commonTest` class, KDoc citing the
+  schema/proposal line it enforces. Traversal and issue-path grammar are owned
+  once by `validate/ModelWalk.kt` — never re-derive a path in a validator.
+  Groups live in `Validations.kt` (`core`, `all`, `namedExtensions`; the
+  4.0.0 UPX group names alias `core` for API stability).
+- `src/commonMain/kotlin/migrate/` — the `Migration`/`MigrationPath`
+  machinery; the one-way 4.0.0 → 1.0.0 converter is
+  `migrate/migration/graphSpec/` (ADR-0008).
+- `src/jsMain/` + `src/jsTest/` — `@JsExport` twins + editors mirroring
+  commonMain (Kotlin/JS's `generateTypeScriptDefinitions` ships the `.d.mts`;
+  no post-processor). Renamed-away API survives as `typealias` + delegating
+  factory (ADR-0006), e.g. `NodeConstraintJs = ConstraintJs`.
+- `src/bridge/` + `src/bridgeTest/` — the Kotlin/Native exports Go calls
+  (`@CName("validate")`, `@CName("migrate")`).
+- `src/jvmTest/kotlin/spec/` — the spec gate and conformance suites.
+  `SpecExamples.kt` owns the `/ontology` classpath glob
+  (`ontologyExamples()`); test classes never re-implement it.
+- `src/jvmTest/resources/ontology/` — the examples, hand-maintained JSON.
+- `go/` — `model/model.go` is GENERATED by `go/scripts/generate-go-models.sh`
+  (never hand-edit; the drift check enforces it); `model/extras.go` is the
+  hand-written open-surface half; `internal/bridge/` loads the native lib;
+  `validation/` + `migration/` bridge into Kotlin.
+- Every Kotlin file carries the header from `license-header.txt`
+  (spotless enforces it).
+- Work is tracked in Linear under ONT-5 (team Ontology Spec Group).
 
-### 3. Tooling usage and flags
+## Changing the format
 
-Every CI workflow and every public Gradle task ships with documented
-usage: what it does, inputs, outputs, flags/positionals with defaults,
-env vars, and at least one copy-paste invocation.
+1. ADR first — no exceptions.
+2. Prose: the spec document (today: the proposal doc), dated changelog entry
+   naming the ADR.
+3. Schema: `ontology-spec.schema.json`, `description` on every new field.
+4. Examples: add or extend one under `src/jvmTest/resources/ontology/`.
+5. `./gradlew jvmTest` green; if the model/codecs/validators are affected,
+   they and their tests change in the same change (conformance suites must
+   stay green).
 
-- Where: [`README.md`](README.md) and this file for the user-facing
-  commands; a header comment in the workflow or task for mechanics.
-- No new or changed tooling behavior ships without updating both in the
-  same change.
+## Branching
 
-### 4. Validation coverage
+- Rebase, never merge. Update branches with `git rebase main`.
+- Stack multi-PR work: `main → b1 → b2`, each PR against its predecessor.
+- gbuild worktree landings use merge commits — a branch that went through a
+  gbuild run needs a final `git rebase main` before it is done.
+- Before push: the gates from the table above that your change touches.
 
-No format feature without a validating example.
+## Design rules (the format's constitution — a change violating one is a format break; ADR it)
 
-- JSON examples are the source of truth; they live as test resources
-  under `src/jvmTest/resources/ontology/` (ADR-0007).
-- `./gradlew jvmTest` is the spec gate: the schema must compile against
-  the 2020-12 meta-schema and every example resource under
-  `src/jvmTest/resources/ontology/` must validate against
-  `ontology-spec.schema.json`.
-- Every format feature is exercised by at least one example. New surface
-  without example coverage does not land.
-- Never record a wrong answer: if an example only passes because the
-  schema is wrong, fix the schema, not the example.
-- When a change touches `src/`, `go/` or `gradle/`, the
-  implementation gates join the spec gate: `./gradlew check` and
-  `cd go && go test ./...` (see "How to run checks"). Spec-only changes
-  leave the implementation tree untouched.
-
-## Repository layout
-
-The v1 ontology spec overlay:
-
-```
-ontology-spec.schema.json       the format, machine-checkable form (JSON Schema draft 2020-12)
-docs/
-  ontology-spec-v1-proposal.md  design record and decisions up to 2026-09-25
-  adr/                          decision log, NNNN-short-kebab-slug.md
-src/jvmTest/
-  resources/ontology/           the examples: hand-maintained source of truth, as test resources
-  kotlin/spec/
-    OntologySpecExamplesTest.kt the spec gate: schema compiles, examples validate (ADR-0007)
-```
-
-The 4.0.0 implementation (coexists until the port re-targets it in
-place — ADR-0002, ADR-0004):
-
-```
-src/
-  commonMain/ commonTest/       Kotlin model, codecs, validators, migrations
-  jsMain/ jsTest/               @JsExport JS/TS surface
-  jvmTest/                      JVM tests, incl. the spec gate
-  bridge/ bridgeTest/           Kotlin/Native bridge used by Go
-go/                             Go module: generated model + validation/migration via the bridge
-gradle/, gradlew                wrapper + version catalog
-.github/workflows/
-  pr-guard-*.yaml, validate-*.yaml, release.yaml
-                                the 4.0.0 implementation CI (dormant until its port tracks land)
-```
-
-## Toolchain
-
-- JDK 17 (temurin) + the Gradle wrapper for the Kotlin Multiplatform
-  build (targets: JVM, JS/TS, Native macosArm64/linuxX64/linuxArm64).
-  JSON Schema draft 2020-12 validation runs on the JVM via
-  `com.networknt:json-schema-validator` (jvmTest scope, ADR-0007) — a
-  new dependency needs an ADR
-- Node remains only as the Kotlin/JS build's internal toolchain,
-  managed by Gradle; no contributor-facing command requires npm
-- Go per `go/go.mod` (1.24.x); the native bridge embeds
-  darwin-arm64/linux libraries, so `go test` works on this machine
-
-## How to run checks
-
-| Surface | Gate | Command |
-| --- | --- | --- |
-| Spec: schema + examples | jvmTest | `JAVA_HOME=$HOME/.local/share/jdks/temurin-17.jdk/Contents/Home ./gradlew jvmTest` |
-| Kotlin: JVM + JS + Native | check | `./gradlew check --no-daemon` |
-| Kotlin lint (ktlint via spotless, license header) | spotless | `./gradlew spotlessCheck` (fix: `./gradlew spotlessApply`) |
-| Go | test | `cd go && go test ./...` |
-| Go model drift | regen + diff | `./go/scripts/generate-go-models.sh && git diff --exit-code` |
-
-- Gradle 9 requires JDK 17+; the system JDK on this machine is 11, so
-  `JAVA_HOME` must point at a 17 install (as in the spec row) for every
-  `./gradlew` invocation.
-- Kotlin tests run inside `./gradlew check`: JVM via JUnit platform, JS
-  via mocha.
-- Go tests exercise the Kotlin/Native bridge through the embedded
-  darwin-arm64/linux libraries. `ONTOLOGYMODEL_LIB_PATH` overrides the
-  library path; `ontologyspec_noembed` builds without the embedded lib.
-- `generate-go-models.sh` runs schemancer (plus jq and perl for the
-  sanitised copy and the extras injection) against the repo-root schema —
-  no Gradle schema task remains. It needs Go, jq, perl, and schemancer;
-  no JDK.
-- CI mirrors this table: `pr-guard-kotlin.yaml` (PRs touching `src/**` or
-  `ontology-spec.schema.json` → `validate-kotlin.yaml` → `./gradlew check
-  spotlessCheck` — spec gate + Kotlin implementation + lint),
-  `pr-guard-go.yaml` (PRs touching `go/**` or `ontology-spec.schema.json` →
-  `validate-go.yaml` → go test + drift check). `release.yaml` runs on merged
-  PRs carrying a `release:*` label: `validate-go` + `validate-kotlin` gate
-  `publish-npm` + `native-libs` (rebuilds and commits the Go bridge's
-  Kotlin/Native libs) + `publish-tags`; `publish-maven` stays disabled
-  pending a release-policy decision.
-
-## Branching and pull requests
-
-- **Rebase, never merge.** Keep every branch linear: update it with
-  `git rebase <base>`, not `git merge <base>`.
-- **Stack large work streams from the first branch.** If a change spans
-  more than one PR, order the branches `main → b1 → b2 → …` and open each
-  PR against its predecessor.
-- Before any push: `./gradlew jvmTest` (the spec gate). Changes touching
-  the implementation tree also run its gates (see "How to run checks").
-- Linearity applies to automation too: gbuild worktree landings use
-  merge commits, so a branch that went through a gbuild run needs a
-  final `git rebase main` (rebase drops the landing merges) before it
-  is done.
-
-## How to add an ADR
-
-1. Confirm it is a spec change and a single decision (when in doubt, it is)
-2. `ls docs/adr/*.md | sort | tail -1` for the next number
-3. Copy the structure of an existing ADR
-4. Status `Proposed` unless the decision is already accepted in conversation
-5. Link related ADRs in Context / Decision / Consequences
-
-## How to change the format
-
-1. ADR first — no exceptions
-2. Prose: update the spec document (today: the proposal doc), with a dated
-   changelog entry naming the ADR
-3. Schema: update `ontology-spec.schema.json`, `description` on every new
-   field
-4. Examples: add or extend at least one example under
-   `src/jvmTest/resources/ontology/` that exercises the change
-5. `./gradlew jvmTest` green
-
-## Design rules
-
-The format's constitution (proposal, "Design rules"). A change that
-violates one of these is a format break and needs an ADR that says so.
-
-1. Minimal and pragmatic. Partial RDFS + SHACL, not RDF, not OWL.
-2. Least surprise. Feels like object orientation to an enterprise
-   developer, not like RDF.
-3. Schema optional. Descriptive first, enforcing over time.
-4. No RDF inference.
-5. Interop with RDF tooling, industry standards, Databricks-class
-   platforms.
+1. Minimal and pragmatic: partial RDFS + SHACL, not RDF, not OWL.
+2. Least surprise: object orientation to an enterprise developer, not RDF.
+3. Schema optional: descriptive first, enforcing over time.
+4. No RDF inference. 5. Interop with RDF tooling and industry standards.
 6. Bottom-up and top-down creation both supported.
-7. Clean break. v1 ignores backwards compatibility with graph spec 4.0.0.
-8. One wire format. Normalisation is a library detail, not spec surface.
-9. Extensions are typed objects. First-party as `neo4j:`-prefixed named
-   keys of `extensions`; everything else under the `custom` envelope
-   (`type` required; `$schema`, `name`, `definition` optional;
-   `definition` free-form, never validated).
+7. Clean break from 4.0.0 — the converter is the migration story.
+8. One wire format; normalisation is a library detail.
+9. Extensions are typed objects: first-party as `neo4j:`-prefixed named keys;
+   custom under the `custom` envelope (`type` required; `$schema`/`name`/
+   `definition` optional; `definition` free-form, never validated). The
+   envelope always validates; unknown content is carried untouched.
 
-## Format invariants
-
-Decided shape, not open for redesign without an ADR:
-
-- Nodes and relationships are keyed by local ids. The label lives in
-  `label` / `labels.identifier`, the relationship type in `type`.
-  Endpoint `node` references point at node ids.
-- Property types are tokens (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>` +
-  companion `dimension`). Element types are scalars only. No union types:
-  a property is a single type or `ANY` (which opts out of type
-  constraints).
-- Relationship cardinality lives on the endpoints: `count` (exact) /
-  `min_count` / `max_count`; absent = unconstrained (0..*).
-- Constraints: shorthand flags (`mustExist`, `unique`, `key`) on
-  properties; everything else as constraint objects
-  (`{ constraint_type, name?, properties }`).
-- `tools` is a core field on node and relationship entries; per-type
-  shapes (`canonicalQuery`, `externalRequest`, …) are owner-defined.
-- The custom-extension envelope always validates. Unknown extension
-  content is carried untouched, never rejected.
-- Out of the format: lifecycle/publish semantics (the management layer),
-  extension type definitions (their owners), indexes as core fields,
-  class/property hierarchies, inference machinery.
+Format invariants (not open for redesign without an ADR): nodes/relationships
+keyed by local ids (`label`/`labels.identifier`, `type`); property types are
+tokens (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>` + `dimension`), no unions
+(single type or `ANY`); cardinality on endpoints (`count`/`min_count`/
+`max_count`, absent = 0..*); constraint flags on properties, constraint
+objects `{constraint_type, name?, properties}` for the rest; `tools` core on
+node + relationship entries (per-type shapes owner-defined); absent means
+none (empty maps/lists omitted). Out of the format: lifecycle/publish
+semantics, extension type definitions, indexes as core fields, class/property
+hierarchies, inference.
