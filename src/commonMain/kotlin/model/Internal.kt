@@ -90,9 +90,6 @@ object Internal {
     /**
      * Converts shorthand constraints into long-hand
      * Doesn't check or transform (e.g. for overlapping)
-     *
-     * Returns each new constraint with the name it should carry once ids are assigned. Naming it here
-     * would make [Rename.assignIds] skip it, leaving it unnumbered.
      */
     private fun <C : Constraint> internaliseProperties(
         constraints: MutableMap<String, C>,
@@ -122,11 +119,6 @@ object Internal {
         return shorthand
     }
 
-    /**
-     * The key stays the deterministic id, so it is unique even when two property tokens collapse to the
-     * same name. The name is returned rather than set, so the constraint is still unnamed when
-     * [Rename.assignIds] numbers it and keeps [Named.name] as the marker of an already internal entry.
-     */
     private fun <C : Constraint> addConstraint(
         constraints: MutableMap<String, C>,
         propertyToken: String,

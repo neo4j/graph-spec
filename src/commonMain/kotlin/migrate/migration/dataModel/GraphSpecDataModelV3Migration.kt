@@ -390,10 +390,6 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         }
     }
 
-    /**
-     * A name from the schema wins, otherwise one is built from the properties, the label and the type.
-     * Mirrors UPX `getIndexOrConstraintName` for constraints.
-     */
     private fun SchemaMap.resolvedName(
         propertyIds: List<String>,
         propertyTokens: Map<String, String>,
