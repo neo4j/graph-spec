@@ -15,6 +15,10 @@ import (
 var testdata embed.FS
 
 func TestValidate(t *testing.T) {
+	// NOTE: the asserted issue codes are 4.0.0-era and pending the v1
+	// validator (native lib rebuild is a separate workstream). Under
+	// ontologyspec_noembed this test fails at the bridge call — the
+	// sanctioned mid-port state.
 	raw, err := testdata.ReadFile("testdata/invalid-graph-model.json")
 	require.NoError(t, err)
 

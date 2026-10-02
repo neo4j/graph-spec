@@ -20,7 +20,7 @@ func TestV3ToOntologySpecMigration(t *testing.T) {
 
 	result, err := migration.ToOntologySpec(string(raw), migration.ModelTypeDataModel)
 	require.NoError(t, err)
-	require.NotEmpty(t, result.Mappings)
+	require.NotEmpty(t, result.Nodes)
 
 	resultBytes, err := json.Marshal(result)
 	require.NoError(t, err)
@@ -33,6 +33,10 @@ func TestV3ToOntologySpecMigration(t *testing.T) {
 }
 
 func TestOntologySpecToV3Migration(t *testing.T) {
+	// NOTE: migration runs through the Kotlin/Native bridge; under
+	// ontologyspec_noembed this test fails at the bridge call — the
+	// sanctioned mid-port state (native lib rebuild is a separate
+	// workstream).
 	raw, err := testdata.ReadFile("testdata/graph-spec-example.json")
 	require.NoError(t, err)
 

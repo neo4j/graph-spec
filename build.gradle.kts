@@ -1,4 +1,3 @@
-import org.gradle.api.tasks.JavaExec
 import org.jetbrains.kotlin.gradle.dsl.JsModuleKind
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
@@ -74,7 +73,6 @@ kotlin {
         }
 
         commonMain.dependencies {
-            implementation(libs.kotlinx.schema)
             implementation(libs.kotlinx.serializer.json)
             implementation(libs.kotlinx.yamlkt)
             implementation(libs.kaseChange)
@@ -115,20 +113,6 @@ val copyReadmeToJs by tasks.registering(Copy::class) {
 
 tasks.named("jsProductionLibraryCompileSync") {
     finalizedBy(copyReadmeToJs)
-}
-
-tasks.register<JavaExec>("generateGraphModelJsonSchema") {
-    description = "Writes JSON Schema for GraphModel Go type generation"
-    val compilation = kotlin.jvm().compilations.getByName("main")
-    dependsOn(compilation.compileTaskProvider)
-    classpath = compilation.output.classesDirs + compilation.compileDependencyFiles
-    mainClass.set("schema.GenerateGraphModelJsonSchemaKt")
-    workingDir = layout.projectDirectory.asFile
-    doFirst {
-        val outputFile = layout.projectDirectory.file("go/spec.json").asFile
-        outputFile.parentFile.mkdirs()
-        args(outputFile.absolutePath)
-    }
 }
 
 mavenPublishing {

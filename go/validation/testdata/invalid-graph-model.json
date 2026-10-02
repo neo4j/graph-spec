@@ -1,31 +1,17 @@
 {
-  "version": "4.0.0",
+  "$schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+  "id": "invalid-graph-model",
+  "version": 1,
   "nodes": {
-    "Person": {
-      "labels": {
-        "identifier": "Person",
-        "implied": [],
-        "optional": []
-      },
-      "properties": {},
-      "constraints": {
-        "typeConstraint": {
-          "type": "PROPERTY_TYPE",
-          "label": "Person",
-          "properties": []
-        },
-        "existenceConstraint": {
-          "type": "EXISTS",
-          "label": "Person",
-          "properties": []
-        }
-      },
-      "indexes": {},
-      "extensions": {}
+    "person": {
+      "label": "Person"
     }
   },
-  "relationships": {},
-  "tables": {},
-  "mappings": [],
-  "display": {}
+  "relationships": {
+    "ACTED_IN": {
+      "type": "ACTED_IN",
+      "from": { "node": "person" },
+      "to": { "node": "movie" }
+    }
+  }
 }
