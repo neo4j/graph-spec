@@ -225,10 +225,11 @@ jobs:
   # DISABLED: Maven Central publishing awaits a release-policy decision.
   # The 4.0.0-era coordinates are already renamed (org.neo4j.importer:ontology-graph-spec,
   # see the mavenPublishing block in build.gradle.kts), but whether/how the v1
-  # line publishes to Maven Central is undecided. Keep `if: false` until then.
+  # line publishes to Maven Central is undecided. The always-false `if:`
+  # condition below keeps it disabled until then.
   publish-maven:
     if: false
-    needs: [determine-version, validate-kotlin, validate-go]
+    needs: [determine-version, validate-kotlin]
     runs-on: macos-latest  # mac-os host is needed to build and compile macosArm64 targets
     steps:
       - name: Checkout Repository
@@ -260,6 +261,8 @@ jobs:
   native-libs:
     needs: [determine-version, validate-kotlin]
     runs-on: macos-latest  # full Xcode is required for linkReleaseSharedMacosArm64
+    outputs:
+      sha: ${{ steps.result.outputs.sha }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -278,7 +281,12 @@ jobs:
       - name: Generate Kotlin/Native shared libs
         run: ./go/scripts/generate-kotlin-native-libs.sh
 
+      - name: Test Go bridge against rebuilt libs
+        working-directory: go
+        run: go test ./...
+
       - name: Commit and push rebuilt libs if changed
+        id: result
         shell: bash
         run: |
           set -euo pipefail
@@ -289,10 +297,12 @@ jobs:
 
           if git diff --quiet -- go/internal/bridge/lib/; then
             echo "Native libs unchanged; nothing to commit."
+            echo "sha=${{ needs.determine-version.outputs.sha }}" >> "$GITHUB_OUTPUT"
           else
             git add go/internal/bridge/lib/
             git commit -m "chore: rebuild Kotlin/Native bridge libs for release v${{ needs.determine-version.outputs.version }}"
             git push origin HEAD:main
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           fi
 
   publish-tags:
@@ -301,10 +311,10 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout Repository at specific SHA
+      - name: Checkout Repository at post-native-libs SHA
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          ref: ${{ needs.determine-version.outputs.sha }}
+          ref: ${{ needs.native-libs.outputs.sha }}
           fetch-depth: 0
 
       - name: Create and Push Unified Tags
