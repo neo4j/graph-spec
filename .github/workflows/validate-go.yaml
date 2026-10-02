@@ -40,7 +40,7 @@ jobs:
           
           # 2. Check for drift
           if ! git diff --exit-code; then
-            echo "❌ Go models are out of sync with latest changes Kotlin. Run ./scripts/generate-go-models.sh locally and commit."
+            echo "❌ Go models are out of sync with ontology-graph-spec.schema.json. Run ./go/scripts/generate-go-models.sh locally and commit."
             git diff
             exit 1
           fi

@@ -1,583 +1,149 @@
 package model
 
-import (
-	"bytes"
-	"encoding/json"
-	"fmt"
-)
+import "encoding/json"
 
-type ConstraintType string
-
-const (
-	ConstraintTypeExists       ConstraintType = "EXISTS"
-	ConstraintTypeKey          ConstraintType = "KEY"
-	ConstraintTypePropertyType ConstraintType = "PROPERTY_TYPE"
-	ConstraintTypeUnique       ConstraintType = "UNIQUE"
-)
-
-var ConstraintTypeValues = []ConstraintType{
-	ConstraintTypeExists,
-	ConstraintTypeKey,
-	ConstraintTypePropertyType,
-	ConstraintTypeUnique,
+// Constraint object form (the alternative to the mustExist/unique/key shorthand flags). Nameable, so tooling can reference individual constraints.
+type Constraint struct {
+	// The constraint kind: key (unique + mustExist), unique, or mustExist.
+	ConstraintType string `json:"constraint_type"`
+	// Optional name, so tooling can reference the constraint.
+	Name *string `json:"name,omitempty"`
+	// Names of properties on the same element this constraint covers.
+	Properties []string `json:"properties"`
 }
 
-type ExtensionValueUnion interface {
-	ExtensionValueType() string
-	isExtensionValue()
+// Endpoint cardinality: count is the exact form, min_count/max_count the ranged form; absent means unconstrained (0..*). Counts on to constrain relationships per from-instance; counts on from constrain per to-instance.
+type Endpoint struct {
+	// Exact relationship count per endpoint instance.
+	Count *int `json:"count,omitempty"`
+	// Maximum relationship count per endpoint instance.
+	MaxCount *int `json:"max_count,omitempty"`
+	// Minimum relationship count per endpoint instance.
+	MinCount *int `json:"min_count,omitempty"`
+	// A node id from the nodes map.
+	Node string `json:"node"`
 }
 
-type ExtensionValue struct {
-	ExtensionValueUnion
-}
-
-func (w ExtensionValue) MarshalJSON() ([]byte, error) {
-	if w.ExtensionValueUnion == nil {
-		return []byte("null"), nil
-	}
-	return json.Marshal(w.ExtensionValueUnion)
-}
-
-func (w *ExtensionValue) UnmarshalJSON(data []byte) error {
-	data = bytes.TrimSpace(data)
-	if bytes.Equal(data, []byte("null")) {
-		w.ExtensionValueUnion = nil
-		return nil
-	}
-
-	var peek struct {
-		Type string `json:"type"`
-	}
-	if err := json.Unmarshal(data, &peek); err != nil {
-		return fmt.Errorf("ExtensionValue: invalid JSON: %w", err)
-	}
-	if peek.Type == "" {
-		return fmt.Errorf("ExtensionValue: missing discriminator field %q", "type")
-	}
-
-	var v ExtensionValueUnion
-	switch peek.Type {
-	case "BOOLEAN":
-		v = &BOOLEAN{}
-	case "DOUBLE":
-		v = &DOUBLE{}
-	case "LIST":
-		v = &LIST{}
-	case "LONG":
-		v = &LONG{}
-	case "MAP":
-		v = &MAP{}
-	case "STRING":
-		v = &STRING{}
-	default:
-		return fmt.Errorf("ExtensionValue: unknown type %q", peek.Type)
-	}
-
-	if err := json.Unmarshal(data, v); err != nil {
-		return fmt.Errorf("ExtensionValue: invalid %q payload: %w", peek.Type, err)
-	}
-
-	w.ExtensionValueUnion = v
-	return nil
-}
-
-type BOOLEAN struct {
-	Type  string `json:"type"`
-	Value bool   `json:"value"`
-}
-
-func (BOOLEAN) isExtensionValue() {}
-
-func (BOOLEAN) ExtensionValueType() string { return "BOOLEAN" }
-
-type DOUBLE struct {
-	Type  string  `json:"type"`
-	Value float64 `json:"value"`
-}
-
-func (DOUBLE) isExtensionValue() {}
-
-func (DOUBLE) ExtensionValueType() string { return "DOUBLE" }
-
-type LIST struct {
-	Type  string           `json:"type"`
-	Value []ExtensionValue `json:"value"`
-}
-
-func (LIST) isExtensionValue() {}
-
-func (LIST) ExtensionValueType() string { return "LIST" }
-
-type LONG struct {
-	Type  string `json:"type"`
-	Value int    `json:"value"`
-}
-
-func (LONG) isExtensionValue() {}
-
-func (LONG) ExtensionValueType() string { return "LONG" }
-
-type MAP struct {
-	Type  string                    `json:"type"`
-	Value map[string]ExtensionValue `json:"value"`
-}
-
-func (MAP) isExtensionValue() {}
-
-func (MAP) ExtensionValueType() string { return "MAP" }
-
-type STRING struct {
-	Type  string `json:"type"`
-	Value string `json:"value"`
-}
-
-func (STRING) isExtensionValue() {}
-
-func (STRING) ExtensionValueType() string { return "STRING" }
-
-type NodeDisplay struct {
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	X          float64                   `json:"x"`
-	Y          float64                   `json:"y"`
-}
-
-type Display struct {
-	Nodes map[string]NodeDisplay `json:"nodes,omitempty"`
-}
-
-type ForeignKeyReference struct {
-	Columns    []string                  `json:"columns,omitempty"`
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Table      string                    `json:"table"`
-}
-
-type ForeignKey struct {
-	Columns    []string                  `json:"columns"`
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	References ForeignKeyReference       `json:"references"`
-}
-
-type MappingMode string
-
-const (
-	MappingModeMerge  MappingMode = "MERGE"
-	MappingModeCreate MappingMode = "CREATE"
-)
-
-var MappingModeValues = []MappingMode{
-	MappingModeMerge,
-	MappingModeCreate,
-}
-
-type PropertyMapping struct {
-	Column string `json:"column"`
-}
-
-type TargetMapping struct {
-	Label      *string                    `json:"label,omitempty"`
-	Node       *string                    `json:"node,omitempty"`
-	Properties map[string]PropertyMapping `json:"properties,omitempty"`
-}
-
-type MappingUnion interface {
-	MappingType() string
-	isMapping()
-}
-
-type Mapping struct {
-	MappingUnion
-}
-
-func (w Mapping) MarshalJSON() ([]byte, error) {
-	if w.MappingUnion == nil {
-		return []byte("null"), nil
-	}
-	return json.Marshal(w.MappingUnion)
-}
-
-func (w *Mapping) UnmarshalJSON(data []byte) error {
-	data = bytes.TrimSpace(data)
-	if bytes.Equal(data, []byte("null")) {
-		w.MappingUnion = nil
-		return nil
-	}
-
-	var peek struct {
-		Type string `json:"type"`
-	}
-	if err := json.Unmarshal(data, &peek); err != nil {
-		return fmt.Errorf("Mapping: invalid JSON: %w", err)
-	}
-	if peek.Type == "" {
-		return fmt.Errorf("Mapping: missing discriminator field %q", "type")
-	}
-
-	var v MappingUnion
-	switch peek.Type {
-	case "NODE":
-		v = &NODE{}
-	case "QUERY":
-		v = &QUERY{}
-	case "RELATIONSHIP":
-		v = &RELATIONSHIP{}
-	default:
-		return fmt.Errorf("Mapping: unknown type %q", peek.Type)
-	}
-
-	if err := json.Unmarshal(data, v); err != nil {
-		return fmt.Errorf("Mapping: invalid %q payload: %w", peek.Type, err)
-	}
-
-	w.MappingUnion = v
-	return nil
-}
-
-type NODE struct {
-	Key        []string                   `json:"key,omitempty"`
-	MatchLabel *string                    `json:"matchLabel,omitempty"`
-	Mode       *MappingMode               `json:"mode,omitempty"`
-	Node       string                     `json:"node"`
-	Properties map[string]PropertyMapping `json:"properties"`
-	Table      string                     `json:"table"`
+// Custom extension envelope, four fields: type required; $schema, name, definition optional. definition is free-form and never validated by this spec. Unknown extra fields are carried untouched.
+type Extension struct {
+	extra      map[string]json.RawMessage `json:"-"`
+	Schema     *string                    `json:"$schema,omitempty"`
+	Definition interface{}                `json:"definition,omitempty"`
+	Name       *string                    `json:"name,omitempty"`
 	Type       string                     `json:"type"`
 }
 
-func (NODE) isMapping() {}
-
-func (NODE) MappingType() string { return "NODE" }
-
-type QUERY struct {
-	Query string `json:"query"`
-	Table string `json:"table"`
-	Type  string `json:"type"`
+// Named extensions: first-party extensions as keys (neo4j:*), each shape defined by its owner, available in the ontology graph spec SDK, not validated by this spec. Custom extensions ride the fixed envelope under the reserved custom key.
+type ExtensionsMap struct {
+	extra map[string]json.RawMessage `json:"-"`
+	// Custom extensions, each in the fixed envelope.
+	Custom []Extension `json:"custom,omitempty"`
 }
 
-func (QUERY) isMapping() {}
-
-func (QUERY) MappingType() string { return "QUERY" }
-
-type RELATIONSHIP struct {
-	EndNode      TargetMapping              `json:"end_node"`
-	Key          []string                   `json:"key,omitempty"`
-	MatchLabel   *string                    `json:"matchLabel,omitempty"`
-	Mode         *MappingMode               `json:"mode,omitempty"`
-	Properties   map[string]PropertyMapping `json:"properties,omitempty"`
-	Relationship string                     `json:"relationship"`
-	StartNode    TargetMapping              `json:"start_node"`
-	Table        string                     `json:"table"`
-	Type         string                     `json:"type"`
-}
-
-func (RELATIONSHIP) isMapping() {}
-
-func (RELATIONSHIP) MappingType() string { return "RELATIONSHIP" }
-
+// The full labels object: identifier (the main label) plus implied and optional labels. A node with no implied/optional labels uses the label shorthand instead.
 type Labels struct {
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Identifier *string                   `json:"identifier,omitempty"`
-	Implied    []string                  `json:"implied,omitempty"`
-	Optional   []string                  `json:"optional,omitempty"`
+	// The identifying (main) label.
+	Identifier string `json:"identifier"`
+	// Labels entailed by the identifying label (documented, never inferred).
+	Implied []string `json:"implied,omitempty"`
+	// Labels that may be present on instances but are not guaranteed.
+	Optional []string `json:"optional,omitempty"`
 }
 
-type NodeConstraint struct {
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Label      *string                   `json:"label,omitempty"`
-	Name       *string                   `json:"name,omitempty"`
-	Properties []string                  `json:"properties"`
-	Type       ConstraintType            `json:"type"`
-}
+// Type token: a Neo4j scalar, ANY, LIST<...> or VECTOR<...> (a VECTOR may carry a companion dimension field on the property). Element types are always scalars: no nested lists, no lists of vectors. No union types in v1: a property is a single type or ANY.
+type PropertyType = string
 
-type IndexType string
+// A single informational URI pointing at an external definition of this element (e.g. the original RDF resource).
+type Reference = string
 
-const (
-	IndexTypeFulltext IndexType = "FULLTEXT"
-	IndexTypePoint    IndexType = "POINT"
-	IndexTypeRange    IndexType = "RANGE"
-	IndexTypeText     IndexType = "TEXT"
-	IndexTypeVector   IndexType = "VECTOR"
-	IndexTypeLookup   IndexType = "LOOKUP"
-)
-
-var IndexTypeValues = []IndexType{
-	IndexTypeFulltext,
-	IndexTypePoint,
-	IndexTypeRange,
-	IndexTypeText,
-	IndexTypeVector,
-	IndexTypeLookup,
-}
-
-type NodeIndex struct {
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Labels     []string                  `json:"labels"`
-	Name       *string                   `json:"name,omitempty"`
-	Options    interface{}               `json:"options,omitempty"`
-	Properties []string                  `json:"properties"`
-	Type       IndexType                 `json:"type"`
-}
-
-type Neo4jType string
-
-const (
-	Neo4jTypeAny               Neo4jType = "ANY"
-	Neo4jTypeBoolean           Neo4jType = "BOOLEAN"
-	Neo4jTypeListBoolean       Neo4jType = "LIST<BOOLEAN>"
-	Neo4jTypeDate              Neo4jType = "DATE"
-	Neo4jTypeListDate          Neo4jType = "LIST<DATE>"
-	Neo4jTypeDuration          Neo4jType = "DURATION"
-	Neo4jTypeListDuration      Neo4jType = "LIST<DURATION>"
-	Neo4jTypeFloat32           Neo4jType = "FLOAT32"
-	Neo4jTypeListFloat32       Neo4jType = "LIST<FLOAT32>"
-	Neo4jTypeFloat             Neo4jType = "FLOAT"
-	Neo4jTypeListFloat         Neo4jType = "LIST<FLOAT>"
-	Neo4jTypeInteger8          Neo4jType = "INTEGER8"
-	Neo4jTypeListInteger8      Neo4jType = "LIST<INTEGER8>"
-	Neo4jTypeInteger16         Neo4jType = "INTEGER16"
-	Neo4jTypeListInteger16     Neo4jType = "LIST<INTEGER16>"
-	Neo4jTypeInteger32         Neo4jType = "INTEGER32"
-	Neo4jTypeListInteger32     Neo4jType = "LIST<INTEGER32>"
-	Neo4jTypeInteger           Neo4jType = "INTEGER"
-	Neo4jTypeListInteger       Neo4jType = "LIST<INTEGER>"
-	Neo4jTypeLocalDatetime     Neo4jType = "LOCAL DATETIME"
-	Neo4jTypeListLocalDatetime Neo4jType = "LIST<LOCAL DATETIME>"
-	Neo4jTypeLocalTime         Neo4jType = "LOCAL TIME"
-	Neo4jTypeListLocalTime     Neo4jType = "LIST<LOCAL TIME>"
-	Neo4jTypePoint             Neo4jType = "POINT"
-	Neo4jTypeListPoint         Neo4jType = "LIST<POINT>"
-	Neo4jTypeString            Neo4jType = "STRING"
-	Neo4jTypeListString        Neo4jType = "LIST<STRING>"
-	Neo4jTypeVectorFloat       Neo4jType = "VECTOR<FLOAT>"
-	Neo4jTypeVectorFloat32     Neo4jType = "VECTOR<FLOAT32>"
-	Neo4jTypeVectorInteger     Neo4jType = "VECTOR<INTEGER>"
-	Neo4jTypeVectorInteger32   Neo4jType = "VECTOR<INTEGER32>"
-	Neo4jTypeVectorInteger16   Neo4jType = "VECTOR<INTEGER16>"
-	Neo4jTypeVectorInteger8    Neo4jType = "VECTOR<INTEGER8>"
-	Neo4jTypeZonedDatetime     Neo4jType = "ZONED DATETIME"
-	Neo4jTypeListZonedDatetime Neo4jType = "LIST<ZONED DATETIME>"
-	Neo4jTypeZonedTime         Neo4jType = "ZONED TIME"
-	Neo4jTypeListZonedTime     Neo4jType = "LIST<ZONED TIME>"
-	Neo4jTypeUUID              Neo4jType = "UUID"
-)
-
-var Neo4jTypeValues = []Neo4jType{
-	Neo4jTypeAny,
-	Neo4jTypeBoolean,
-	Neo4jTypeListBoolean,
-	Neo4jTypeDate,
-	Neo4jTypeListDate,
-	Neo4jTypeDuration,
-	Neo4jTypeListDuration,
-	Neo4jTypeFloat32,
-	Neo4jTypeListFloat32,
-	Neo4jTypeFloat,
-	Neo4jTypeListFloat,
-	Neo4jTypeInteger8,
-	Neo4jTypeListInteger8,
-	Neo4jTypeInteger16,
-	Neo4jTypeListInteger16,
-	Neo4jTypeInteger32,
-	Neo4jTypeListInteger32,
-	Neo4jTypeInteger,
-	Neo4jTypeListInteger,
-	Neo4jTypeLocalDatetime,
-	Neo4jTypeListLocalDatetime,
-	Neo4jTypeLocalTime,
-	Neo4jTypeListLocalTime,
-	Neo4jTypePoint,
-	Neo4jTypeListPoint,
-	Neo4jTypeString,
-	Neo4jTypeListString,
-	Neo4jTypeVectorFloat,
-	Neo4jTypeVectorFloat32,
-	Neo4jTypeVectorInteger,
-	Neo4jTypeVectorInteger32,
-	Neo4jTypeVectorInteger16,
-	Neo4jTypeVectorInteger8,
-	Neo4jTypeZonedDatetime,
-	Neo4jTypeListZonedDatetime,
-	Neo4jTypeZonedTime,
-	Neo4jTypeListZonedTime,
-	Neo4jTypeUUID,
-}
-
+// A property of a node or relationship type: a type token, optional value constraints (one_of, pattern), the shorthand constraint flags, and metadata.
 type Property struct {
-	Description *string                   `json:"description,omitempty"`
-	Dimension   *int                      `json:"dimension,omitempty"`
-	Extensions  map[string]ExtensionValue `json:"extensions,omitempty"`
-	Key         *bool                     `json:"key,omitempty"`
-	MustExist   *bool                     `json:"mustExist,omitempty"`
-	Name        *string                   `json:"name,omitempty"`
-	Type        *Neo4jType                `json:"type,omitempty"`
-	Unique      *bool                     `json:"unique,omitempty"`
+	// Alternative names for this property.
+	Aliases []string `json:"aliases,omitempty"`
+	// Human-readable description of this property.
+	Description *string `json:"description,omitempty"`
+	// VECTOR companion: element count. Absent = unconstrained.
+	Dimension  *int           `json:"dimension,omitempty"`
+	Extensions *ExtensionsMap `json:"extensions,omitempty"`
+	// Shorthand for a single-property key constraint (unique + mustExist).
+	Key *bool `json:"key,omitempty"`
+	// Shorthand for a single-property mustExist constraint.
+	MustExist *bool `json:"mustExist,omitempty"`
+	// Allowed values. JSON Schema's word. Default value support.
+	OneOf []interface{} `json:"one_of,omitempty"`
+	// Regular expression the property value must match.
+	Pattern   *string       `json:"pattern,omitempty"`
+	Reference *Reference    `json:"reference,omitempty"`
+	Type      *PropertyType `json:"type,omitempty"`
+	// Shorthand for a single-property unique constraint.
+	Unique *bool `json:"unique,omitempty"`
 }
 
+// Core tool definition for agents: type discriminates (canonicalQuery, externalRequest, ...), name and description are the readable surface; remaining fields are defined per tool type by its owner (cypher, url, ...). Definitions only, no behaviour.
+type Tool struct {
+	extra       map[string]json.RawMessage `json:"-"`
+	Description *string                    `json:"description,omitempty"`
+	Name        *string                    `json:"name,omitempty"`
+	Type        string                     `json:"type"`
+}
+
+// Every node carries its label in label (shorthand for an identifier-only labels) or labels.identifier (when implied/optional labels exist). Not schema-enforced; a node with neither is meaningless.
 type Node struct {
-	Constraints map[string]NodeConstraint `json:"constraints,omitempty"`
-	Description *string                   `json:"description,omitempty"`
-	Extensions  map[string]ExtensionValue `json:"extensions,omitempty"`
-	Indexes     map[string]NodeIndex      `json:"indexes,omitempty"`
-	Label       *string                   `json:"label,omitempty"`
-	Labels      *Labels                   `json:"labels,omitempty"`
-	Name        *string                   `json:"name,omitempty"`
-	Properties  map[string]Property       `json:"properties,omitempty"`
-}
-
-type RelationshipConstraint struct {
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Name       *string                   `json:"name,omitempty"`
-	Properties []string                  `json:"properties"`
-	Type       ConstraintType            `json:"type"`
-}
-
-type RelationshipIndex struct {
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Name       *string                   `json:"name,omitempty"`
-	Options    interface{}               `json:"options,omitempty"`
-	Properties []string                  `json:"properties"`
-	Type       IndexType                 `json:"type"`
-}
-
-type RelationshipTarget struct {
+	// Alternative names for this node type.
+	Aliases []string `json:"aliases,omitempty"`
+	// Constraint objects on this node type (the nameable alternative to the property flags).
+	Constraints []Constraint `json:"constraints,omitempty"`
+	// Human-readable description of this node type.
+	Description *string        `json:"description,omitempty"`
+	Extensions  *ExtensionsMap `json:"extensions,omitempty"`
+	// Shorthand for labels.identifier when no implied/optional labels exist.
 	Label *string `json:"label,omitempty"`
-	Node  *string `json:"node,omitempty"`
+	// Full labels object: identifier plus implied/optional labels.
+	Labels *Labels `json:"labels,omitempty"`
+	// Properties of this node type; the map key is the property name.
+	Properties map[string]Property `json:"properties,omitempty"`
+	Reference  *Reference          `json:"reference,omitempty"`
+	// Tools available on this node type.
+	Tools []Tool `json:"tools,omitempty"`
 }
 
-type Relationship struct {
-	Constraints map[string]RelationshipConstraint `json:"constraints,omitempty"`
-	Description *string                           `json:"description,omitempty"`
-	Extensions  map[string]ExtensionValue         `json:"extensions,omitempty"`
-	From        RelationshipTarget                `json:"from"`
-	Indexes     map[string]RelationshipIndex      `json:"indexes,omitempty"`
-	Name        *string                           `json:"name,omitempty"`
-	Properties  map[string]Property               `json:"properties,omitempty"`
-	To          RelationshipTarget                `json:"to"`
-	Type        string                            `json:"type"`
+// A relationship type entry: the type, its from/to endpoints with cardinality, properties, constraints, tools, and metadata.
+type RelationshipEntry struct {
+	// Alternative names for this relationship type.
+	Aliases []string `json:"aliases,omitempty"`
+	// Constraint objects on this relationship type (the nameable alternative to the property flags).
+	Constraints []Constraint `json:"constraints,omitempty"`
+	// Human-readable description of this relationship type.
+	Description *string        `json:"description,omitempty"`
+	Extensions  *ExtensionsMap `json:"extensions,omitempty"`
+	// The start endpoint.
+	From Endpoint `json:"from"`
+	// Properties of this relationship type; the map key is the property name.
+	Properties map[string]Property `json:"properties,omitempty"`
+	Reference  *Reference          `json:"reference,omitempty"`
+	// The end endpoint.
+	To Endpoint `json:"to"`
+	// Tools available on this relationship type.
+	Tools []Tool `json:"tools,omitempty"`
+	// The relationship type. One-to-one with the map key in the common case; several keys may share a type across different endpoint pairs.
+	Type string `json:"type"`
 }
 
-type TableColumn struct {
-	Dimension  *int                      `json:"dimension,omitempty"`
-	Extensions map[string]ExtensionValue `json:"extensions,omitempty"`
-	Name       *string                   `json:"name,omitempty"`
-	Size       *int                      `json:"size,omitempty"`
-	Suggested  *Neo4jType                `json:"suggested,omitempty"`
-	Supported  []Neo4jType               `json:"supported,omitempty"`
-	Type       *string                   `json:"type,omitempty"`
-}
-
-type Table struct {
-	Columns     map[string]TableColumn    `json:"columns,omitempty"`
-	Extensions  map[string]ExtensionValue `json:"extensions,omitempty"`
-	ForeignKeys map[string]ForeignKey     `json:"foreignKeys,omitempty"`
-	PrimaryKeys []string                  `json:"primaryKeys,omitempty"`
-	Source      string                    `json:"source"`
-}
-
+// Draft JSON Schema for the Ontology Graph spec v1 proposal (2026-09-25 doc state, working-session revision). Nodes and relationships are keyed by local ids; the label/type lives inside the entry. Types are tokens. Tools are core. Extensions ride the named extensions map: first-party keys, custom envelope under custom; extension payloads are never validated by this schema.
 type GraphModel struct {
-	Description   *string                 `json:"description,omitempty"`
-	Display       *Display                `json:"display,omitempty"`
-	Mappings      []Mapping               `json:"mappings,omitempty"`
-	Name          *string                 `json:"name,omitempty"`
-	Nodes         map[string]Node         `json:"nodes,omitempty"`
-	Relationships map[string]Relationship `json:"relationships,omitempty"`
-	Tables        map[string]Table        `json:"tables,omitempty"`
-	Version       string                  `json:"version"`
+	// Spec link including the version. Meta-level; doubles as document-type marker.
+	Schema string `json:"$schema"`
+	// Human-readable description of the ontology.
+	Description *string        `json:"description,omitempty"`
+	Extensions  *ExtensionsMap `json:"extensions,omitempty"`
+	// Unique identifier of the ontology.
+	ID string `json:"id"`
+	// Human-readable name of the ontology.
+	Name *string `json:"name,omitempty"`
+	// Map key is the identifier within the document, not the label. The label lives in label / labels.identifier, so label renames do not break references.
+	Nodes map[string]Node `json:"nodes,omitempty"`
+	// Map key is the intra-document identifier; the relationship type lives in the type field. Several keys may share a type across different endpoint pairs, but note graph-type enforcement keys on the type alone and cannot distinguish pairs yet.
+	Relationships map[string]RelationshipEntry `json:"relationships,omitempty"`
+	// The ontology's own version. Identity metadata, not lifecycle.
+	Version int `json:"version"`
 }
-
-type IndexOptionUnion interface {
-	IndexOptionType() string
-	isIndexOption()
-}
-
-type IndexOption struct {
-	IndexOptionUnion
-}
-
-func (w IndexOption) MarshalJSON() ([]byte, error) {
-	if w.IndexOptionUnion == nil {
-		return []byte("null"), nil
-	}
-	return json.Marshal(w.IndexOptionUnion)
-}
-
-func (w *IndexOption) UnmarshalJSON(data []byte) error {
-	data = bytes.TrimSpace(data)
-	if bytes.Equal(data, []byte("null")) {
-		w.IndexOptionUnion = nil
-		return nil
-	}
-
-	var peek struct {
-		Type string `json:"type"`
-	}
-	if err := json.Unmarshal(data, &peek); err != nil {
-		return fmt.Errorf("IndexOption: invalid JSON: %w", err)
-	}
-	if peek.Type == "" {
-		return fmt.Errorf("IndexOption: missing discriminator field %q", "type")
-	}
-
-	var v IndexOptionUnion
-	switch peek.Type {
-	case "FULLTEXT":
-		v = &FULLTEXT{}
-	case "POINT":
-		v = &POINT{}
-	case "VECTOR":
-		v = &VECTOR{}
-	default:
-		return fmt.Errorf("IndexOption: unknown type %q", peek.Type)
-	}
-
-	if err := json.Unmarshal(data, v); err != nil {
-		return fmt.Errorf("IndexOption: invalid %q payload: %w", peek.Type, err)
-	}
-
-	w.IndexOptionUnion = v
-	return nil
-}
-
-type FULLTEXT struct {
-	FulltextAnalyzer                                      *string `json:"fulltext.analyzer,omitempty"`
-	FulltextDefaultAnalyzer                               *string `json:"fulltext.default_analyzer,omitempty"`
-	FulltextEventuallyConsistent                          *bool   `json:"fulltext.eventually_consistent,omitempty"`
-	FulltextEventuallyConsistentApplyParallelism          *int    `json:"fulltext.eventually_consistent_apply_parallelism,omitempty"`
-	FulltextEventuallyConsistentIndexUpdateQueueMaxLength *int    `json:"fulltext.eventually_consistent_index_update_queue_max_length,omitempty"`
-	FulltextEventuallyConsistentRefreshInterval           *string `json:"fulltext.eventually_consistent_refresh_interval,omitempty"`
-	FulltextEventuallyConsistentRefreshParallelism        *int    `json:"fulltext.eventually_consistent_refresh_parallelism,omitempty"`
-	Type                                                  string  `json:"type"`
-}
-
-func (FULLTEXT) isIndexOption() {}
-
-func (FULLTEXT) IndexOptionType() string { return "FULLTEXT" }
-
-type POINT struct {
-	SpatialCartesian3dMax []float64 `json:"spatial.cartesian-3d.max,omitempty"`
-	SpatialCartesian3dMin []float64 `json:"spatial.cartesian-3d.min,omitempty"`
-	SpatialCartesianMax   []float64 `json:"spatial.cartesian.max,omitempty"`
-	SpatialCartesianMin   []float64 `json:"spatial.cartesian.min,omitempty"`
-	SpatialWgs843dMax     []float64 `json:"spatial.wgs-84-3d.max,omitempty"`
-	SpatialWgs843dMin     []float64 `json:"spatial.wgs-84-3d.min,omitempty"`
-	SpatialWgs84Max       []float64 `json:"spatial.wgs-84.max,omitempty"`
-	SpatialWgs84Min       []float64 `json:"spatial.wgs-84.min,omitempty"`
-	Type                  string    `json:"type"`
-}
-
-func (POINT) isIndexOption() {}
-
-func (POINT) IndexOptionType() string { return "POINT" }
-
-type VECTOR struct {
-	Type                               string   `json:"type"`
-	VectorDefaultSearchExpansionFactor *float64 `json:"vector.default_search_expansion_factor,omitempty"`
-	VectorDimensions                   *int     `json:"vector.dimensions,omitempty"`
-	VectorHnswEfConstruction           *int     `json:"vector.hnsw.ef_construction,omitempty"`
-	VectorHnswM                        *int     `json:"vector.hnsw.m,omitempty"`
-	VectorQuantizationEnabled          *bool    `json:"vector.quantization.enabled,omitempty"`
-	VectorQuantizationType             *string  `json:"vector.quantization.type,omitempty"`
-	VectorSimilarityFunction           *string  `json:"vector.similarity_function,omitempty"`
-}
-
-func (VECTOR) isIndexOption() {}
-
-func (VECTOR) IndexOptionType() string { return "VECTOR" }

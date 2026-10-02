@@ -1,10 +1,10 @@
-# Go GraphSpec
+# Go OntologyGraphSpec
 
-This package contains the Go GraphSpec Library. It consists of:
+This package contains the Go OntologyGraphSpec Library. It consists of:
 
-* **Go-native GraphSpec types** - These are automatically generated from the Kotlin source of truth models
-* **Methods for migration and validation** - Enables migration between older model types and latest GraphSpec model, as 
-    well as validation of a given GraphSpec model. These methods call into the Kotlin source of truth methods via a
+* **Go-native OntologyGraphSpec types** - These are automatically generated from the repo-root `ontology-graph-spec.schema.json`
+* **Methods for migration and validation** - Enables migration between older model types and latest OntologyGraphSpec model, as 
+    well as validation of a given OntologyGraphSpec model. These methods call into the Kotlin source of truth methods via a
     Kotlin/Native library.
 
 ## Usage
@@ -16,7 +16,7 @@ This library can be imported into your Go project via the standard `go get`:
 git config --global url."git@github.com:".insteadOf "https://github.com/" 
 
 # Fetch Go library
-go get github.com/neo4j/graph-spec/go/vX@vX.Y.Z
+go get github.com/neo4j/graph-spec/go@vX.Y.Z
 ```
 
 > [!NOTE]
@@ -25,7 +25,7 @@ go get github.com/neo4j/graph-spec/go/vX@vX.Y.Z
 ## How the Kotlin/Native library is loaded
 
 The migration and validation methods call into a Kotlin/Native shared library
-(`libgraphdatamodel.so` on Linux, `libgraphdatamodel.dylib` on macOS) at runtime via
+(`libontologygraphmodel.so` on Linux, `libontologygraphmodel.dylib` on macOS) at runtime via
 [purego](https://github.com/ebitengine/purego). 
 
 By default, the library is automatically embedded in the binary for supported platforms (`linux/amd64`, `linux/arm64`, 
@@ -35,20 +35,20 @@ By default, the library is automatically embedded in the binary for supported pl
 
 Automatic embedding can be disabled if needed (e.g. if the runtime is locked down and extracting and loading the 
 embedded native library is not possible). Instead of automatic embedding, the relevant shared library can be hosted
-in a desired location available to the Go binary at runtime, and pointed to via the `GRAPHDATAMODEL_LIB_PATH` env var.
+in a desired location available to the Go binary at runtime, and pointed to via the `ONTOLOGYGRAPHMODEL_LIB_PATH` env var.
 If this env var is set, the shared library will be loaded from there. The shared libraries are stored in this repo 
 under the `go/internal/bridge/lib/` directory.
 
 Optionally, if not using automatic embedding, a Go binary without the bundled library can be built from source with the 
-`graphspec_noembed` tag:
+`ontologygraphspec_noembed` tag:
 
 ```
-go build -tags graphspec_noembed ./...
+go build -tags ontologygraphspec_noembed ./...
 ```
 
 > [!NOTE]
-> The shared native lib must be provided either via automatic embedding or the `GRAPHDATAMODEL_LIB_PATH` var. If not 
-> available, e.g. for an unsupported platform and no `GRAPHDATAMODEL_LIB_PATH`, an error will be returned when run.
+> The shared native lib must be provided either via automatic embedding or the `ONTOLOGYGRAPHMODEL_LIB_PATH` var. If not 
+> available, e.g. for an unsupported platform and no `ONTOLOGYGRAPHMODEL_LIB_PATH`, an error will be returned when run.
 
 ### Configuring Memory
 
@@ -98,7 +98,7 @@ go test ./...
 ```
 
 Tests load the shared library exactly as consumers do. With embedding on (the default) nothing
-extra is needed. If building or testing with `graphspec_noembed`, set `GRAPHDATAMODEL_LIB_PATH`
+extra is needed. If building or testing with `ontologygraphspec_noembed`, set `ONTOLOGYGRAPHMODEL_LIB_PATH`
 first (see [Using Without Embedding](#using-without-embedding)).
 
 ### Generating Kotlin/Native libraries
@@ -119,27 +119,24 @@ published tag whose module omits them will fail to build for consumers.
 ./go/scripts/generate-go-models.sh
 ```
 
-The GraphModel Go struct and associated structs are automatically generated from the Kotlin source of truth. They live
-in the `go/models` package. The pipeline for generating these types is:
+The GraphModel Go struct and associated structs are automatically generated from the repo-root
+`ontology-graph-spec.schema.json`. They live in the `go/model` package. The pipeline for generating these types is:
 
-_Kotlin_ → _JSON Schema_ → _Go_
+_JSON Schema_ → _Go_
 
-Some temporary sanitising is needed to ensure there are no issues relating to Go enum variable names when generating
-Neo4jTypes. The script handles this.
+schemancer consumes the repo-root `ontology-graph-spec.schema.json` directly; the Gradle
+`generateGraphModelJsonSchema` task that used to derive the schema from the Kotlin model is gone.
+
+Some temporary sanitising is needed before schemancer runs, so the script works on a sanitised temp copy of the
+schema (the schema itself is never touched). The copy pins `title` to `"GraphModel"`, keeping the top-level Go type
+consumer-stable (ADR-0006), and demotes `format: "uri"` markers to plain strings, since `encoding/json` cannot
+round-trip `net/url.URL` (URI-format validation stays Kotlin-side). The generated `model.go` is then post-processed
+by a guarded injection that adds an unexported extras field to the open-surface types (`ExtensionsMap`, `Tool`,
+`Extension`); `go/model/extras.go` is the hand-written half of that contract — do not hand-edit `model.go`.
 
 > [!NOTE]
 > The deployment pipeline automatically checks the Go types are up-to-date. If you receive a pipeline failure relating
 > to out-of-date types then rerun the above script.
-
-#### Generating JSON schema
-
-If you want to update the JSON schema separately you can run the individual Gradle command from the repo root:
-
-```shell
-./gradlew :generateGraphModelJsonSchema
-```
-
-JSON Schema is generated automatically from the Kotlin source of truth via the `kotlinx-schema` library.
 
 #### Go type generation
 

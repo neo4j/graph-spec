@@ -17,20 +17,14 @@
 package model
 
 import js.objects.toRecord
-import model.display.toClass
-import model.display.toJs
-import model.mapping.toClass
-import model.mapping.toJs
-import model.node.NodeEditor
+import model.extension.toClass
+import model.extension.toJs
 import model.node.nodeJs
 import model.node.toClass
 import model.node.toJs
 import model.relationship.relationshipJs
 import model.relationship.toClass
 import model.relationship.toJs
-import model.source.tableJs
-import model.source.toClass
-import model.source.toJs
 
 /**
  * We have duplicate model built on external interfaces with conversion to and from classes in order
@@ -40,44 +34,34 @@ import model.source.toJs
 class GraphModelEditor {
     companion object {
         @JsStatic
-        fun plain(model: GraphModel): GraphModelJs {
-            if (model.pretty) {
-                error("Pretty models can't be converted to plain models, call model.internalise() first.")
-            }
-            return graphModelJs(
-                version = model.version,
-                name = model.name,
-                description = model.description,
-                nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
-                relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
-                    .toRecord(),
-                tables = model.tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
-                mappings = model.mappings.map { mapping -> mapping.toJs() }.toTypedArray(),
-                display = model.display.toJs()
-            )
-        }
-
-        @JsStatic
-        fun model(model: GraphModelJs): GraphModel = GraphModel(
+        fun plain(model: GraphModel): GraphModelJs = graphModelJs(
+            schema = model.schema,
+            id = model.id,
             version = model.version,
             name = model.name,
             description = model.description,
-            nodes = model.nodes.associateBy { id, js -> js.toClass(id) },
-            relationships = model.relationships.associateBy { id, js -> js.toClass(id) },
-            tables = model.tables.associateBy { _, js -> js.toClass() },
-            mappings = model.mappings.map { it.toClass() }.toMutableList(),
-            display = model.display.toClass()
+            nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
+            relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
+                .toRecord(),
+            extensions = model.extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord()
         )
 
         @JsStatic
-        fun addNode(model: GraphModelJs, name: String? = null, label: String? = null): String =
-            model.nodes.addUnique("node") { nodeId ->
-                val node = nodeJs(id = nodeId, name = name ?: nodeId)
-                if (label != null) {
-                    NodeEditor.setIdentifyingLabel(model, nodeId, label)
-                }
-                node
-            }
+        fun model(model: GraphModelJs): GraphModel = GraphModel(
+            schema = model.schema,
+            id = model.id,
+            version = model.version,
+            name = model.name,
+            description = model.description,
+            nodes = model.nodes.associateBy { _, js -> js.toClass() },
+            relationships = model.relationships.associateBy { _, js -> js.toClass() },
+            extensions = model.extensions.associateBy { _, js -> js.toClass() }.toMutableMap()
+        )
+
+        @JsStatic
+        fun addNode(model: GraphModelJs, label: String? = null): String = model.nodes.addUnique("node") { nodeId ->
+            nodeJs(id = nodeId, label = label)
+        }
 
         @JsStatic
         fun removeNode(model: GraphModelJs, nodeId: String) {
@@ -85,24 +69,14 @@ class GraphModelEditor {
         }
 
         @JsStatic
-        fun addRelationship(model: GraphModelJs, type: String, name: String?): String =
+        fun addRelationship(model: GraphModelJs, type: String): String =
             model.relationships.addUnique("relationship") { relId ->
-                relationshipJs(type = type, id = relId, name = name ?: relId)
+                relationshipJs(type = type, id = relId)
             }
 
         @JsStatic
         fun removeRelationship(model: GraphModelJs, relationshipId: String) {
             model.relationships.remove(relationshipId)
-        }
-
-        @JsStatic
-        fun addTable(model: GraphModelJs, source: String): String = model.tables.addUnique("table") {
-            tableJs(source)
-        }
-
-        @JsStatic
-        fun removeTable(model: GraphModelJs, tableId: String) {
-            model.tables.remove(tableId)
         }
     }
 }

@@ -1,49 +1,72 @@
-# Neo4j Graph Specification Format
+# Ontology Graph spec
 
-Graph Spec is a format and library for representing graph models in YAML or JSON.
-It provides library support for JVM, JavaScript, TypeScript & Go for migration and validation.
+The Neo4j Ontology Graph Specification v1 and its SDK — a Kotlin Multiplatform
+library (`src/`) with a JS/TS surface and a Go module (`go/`).
 
-> [!WARNING]
-> This repository is currently under construction and highly experimental.
+Draft; mirrors the shared proposal doc's 2026-09-25 state.
 
-## Installing
+- `ontology-graph-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format; generated from the annotated Kotlin model and drift-checked in CI (ADR-0003) - do not hand-edit.
+- `src/jvmTest/resources/ontology/` - example ontologies exercising the full surface, as test resources.
+- `src/jvmTest/kotlin/spec/OntologyGraphSpecExamplesTest.kt` - the spec-validation gate (ADR-0007): compiles the schema against the 2020-12 meta-schema, then validates every example resource against it.
+- `src/commonMain/kotlin/` - the SDK: model, codecs (JSON + YAML), validators, and the converter (`migrate/migration/graphSpec/`, ADR-0008).
+- `go/` - the Go module: generated model (`go/model/model.go` - do not hand-edit), validation + migration via the Kotlin/Native bridge.
 
-### Gradle
+## SDKs
 
-```gradle
-implementation("org.neo4j.importer:graph-spec:x.y.z")
+**JS/TS** (npm, types included):
+
+```sh
+npm install @neo4j-importer/ontology-graph-spec
 ```
 
-### Maven
+The package ships the `@JsExport` model twins and editors (e.g. `graphModelJs(...)`, `GraphModelEditor`) plus the generated `.d.mts` definitions.
 
-```xml
-<dependency>
-    <groupId>org.neo4j.importer</groupId>
-    <artifactId>graph-spec</artifactId>
-    <version>x.y.z</version>
-</dependency>
+**Go**:
+
+```sh
+go get github.com/neo4j/graph-spec/go@latest   # releases tagged go/vX.Y.Z
 ```
 
-### Node Package Manager
+The module carries the generated `model` types plus `validation.Validate(model)` and `migration.ToOntologyGraphSpec(json, modelType)`, which call into the Kotlin source of truth via a Kotlin/Native bridge (runtime needs `glibc` + `libstdc++`; details in [go/README.md](go/README.md)).
 
-`npm install -D @neo4j-importer/graph-spec`
+**Kotlin/JVM**: coordinates are `org.neo4j.importer:ontology-graph-spec`, but Maven publishing is not enabled yet (pending a release-policy decision) - consume from source for now.
 
-```typescript
-import { GraphSpec } from "@neo4j-importer/graph-spec";
+## Run
 
-const model: GraphModel = GraphSpec.Json.decodeFromString(value);
+JDK 17+ for Gradle (the system JDK may be older - point `JAVA_HOME` at a 17 install):
+
+```sh
+JAVA_HOME=$HOME/.local/share/jdks/temurin-17.jdk/Contents/Home ./gradlew jvmTest   # spec gate: schema + all examples
 ```
 
-### Go
+## Checks
 
-```bash
-go get github.com/neo4j/graph-spec/go/vX@vX.Y.Z
+```sh
+./gradlew check --no-daemon    # Kotlin: JVM + JS + Native (includes the spec gate)
+./gradlew spotlessCheck        # lint (ktlint + license header)
+cd go && go test ./...         # Go module (via the Kotlin/Native bridge)
+./go/scripts/generate-go-models.sh && git diff --exit-code   # Go model drift
+./gradlew generateOntologyGraphSpecJsonSchema && git diff --exit-code   # schema drift (ADR-0003)
 ```
 
-> [!NOTE]
-> The Go library comes bundled with the Kotlin/Native library which is embedded and loaded automatically. 
-> The runtime needs `glibc` and `libstdc++`. The Go library can also be run without automatic embedding if needed 
-> (e.g. due to runtime restrictions) - see the [Go README](go/README.md).
+The full per-language gate table and CI mapping live in [AGENTS.md](AGENTS.md) under "Commands".
+
+## Notes
+
+- Nodes and relationships are keyed by local ids; the label lives in `label` / `labels.identifier`, the relationship type in `type`. Endpoint `node` references point at node ids. A relationship type shared across endpoint pairs sits under one id key per pair (allowed, but graph-type enforcement keys on the type alone and cannot distinguish pairs yet).
+- Property types are tokens (`STRING`, `LIST<STRING>`, `LIST<ANY>`, `VECTOR<FLOAT>` + companion `dimension` field). No union types: a property is a single type or `ANY`.
+- Relationship cardinality lives on the endpoints: `count` (exact) / `min_count` / `max_count`; absent = unconstrained.
+- `tools` is a core field on node and relationship entries: `{ type: canonicalQuery | externalRequest | ..., name, description, ... }`, per-type shapes owner-defined.
+- `extensions` at every level: first-party extensions as `neo4j:`-prefixed named keys with owner-defined shapes (not validated here), custom extensions as the fixed envelope under `custom` (`type` required; `$schema`, `name`, `definition` optional; `definition` free-form, never validated). Unknown extra fields are carried untouched.
+- Constraint objects (`{ constraint_type: key|unique|mustExist, name?, properties: [...] }`) are the nameable alternative to the property shorthand flags.
+
+## Migrating from graph spec 4.0.0
+
+This repo was the graph spec (4.0.0); v1 is a clean break with no backwards
+compatibility in the format. A one-way 4.0.0 → 1.0.0 converter ships in the
+library (`migrate/migration/graphSpec/`, mapping table in ADR-0008); the
+frozen 4.0.0 state is tagged `graph-spec-4.0.0`. The transition's decisions
+are recorded in [`docs/adr/`](docs/adr/) (0001–0009).
 
 ## Releasing
 

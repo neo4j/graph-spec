@@ -76,16 +76,16 @@ class YamlPrintOptionsTest {
     @Test
     fun `test explicit list index match`() {
         val options = YamlPrintOptions(
-            inlinePaths = setOf("mappings[*].properties.*")
+            inlinePaths = setOf("nodes.*.constraints[*].properties")
         )
 
         // Matches valid indexed list paths
-        assertTrue(options.shouldInline(elementWithPath("mappings[0].properties.field")))
-        assertTrue(options.shouldInline(elementWithPath("mappings[125].properties.anotherField")))
+        assertTrue(options.shouldInline(elementWithPath("nodes.n1.constraints[0].properties")))
+        assertTrue(options.shouldInline(elementWithPath("nodes.n1.constraints[125].properties")))
 
         // Fails when brackets are missing or mismatched
-        assertFalse(options.shouldInline(elementWithPath("mappings.0.properties.field")))
-        assertFalse(options.shouldInline(elementWithPath("mappings[0].other.field")))
+        assertFalse(options.shouldInline(elementWithPath("nodes.n1.constraints.0.properties")))
+        assertFalse(options.shouldInline(elementWithPath("nodes.n1.constraints[0].other")))
     }
 
     @Test

@@ -18,16 +18,28 @@ package model.node
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
+import model.spec.SpecDoc
+import model.spec.SpecRequired
 import kotlin.js.JsExport
 
+/**
+ * v1 `labels` object (ontology-graph-spec.schema.json `$defs.labels`, additionalProperties:false):
+ * the identifying label plus implied and optional labels. A node with no implied/optional
+ * labels uses the `label` shorthand instead.
+ */
 @JsExport
 @Serializable
 @SerialName("Labels")
+@SpecDoc(
+    "The full labels object: identifier (the main label) plus implied and optional " +
+        "labels. A node with no implied/optional labels uses the label shorthand instead."
+)
 data class Labels(
+    @SpecRequired
+    @SpecDoc("The identifying (main) label.")
     var identifier: String? = null,
+    @SpecDoc("Labels entailed by the identifying label (documented, never inferred).")
     val implied: MutableSet<String> = mutableSetOf(),
-    val optional: MutableSet<String> = mutableSetOf(),
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
-) : Extensions
+    @SpecDoc("Labels that may be present on instances but are not guaranteed.")
+    val optional: MutableSet<String> = mutableSetOf()
+)

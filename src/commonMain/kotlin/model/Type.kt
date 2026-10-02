@@ -17,15 +17,9 @@
 package model
 
 object Type {
-    // The Aura Data Importer graph data model (flat)
-    const val DATA_MODEL = "data_model"
-
-    // The Aura Data Importer graph data model (wrapped)
-    const val DATA_MODEL_WRAPPED = "data_model_wrapped"
-
-    // The Connectors ImportSpec
-    const val IMPORT_SPEC = "import_spec"
-
-    // GraphSpec
+    // Graph spec 4.0.0; the converter's input contract only (ADR-0008) — this SDK never writes it
     const val GRAPH_SPEC = "graph_spec"
+
+    // OntologyGraphSpec
+    const val ONTOLOGY_GRAPH_SPEC = "ontology_graph_spec"
 }

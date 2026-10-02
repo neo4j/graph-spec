@@ -21,20 +21,48 @@ import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
 import model.extension.Extensions
 import model.property.Property
-import model.type.Named
+import model.spec.SpecDef
+import model.spec.SpecDoc
+import model.spec.SpecFormat
+import model.spec.SpecPropertyNames
+import model.tool.Tool
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("Node")
+@SpecDoc(
+    "Every node carries its label in label (shorthand for an identifier-only labels) or " +
+        "labels.identifier (when implied/optional labels exist). Not schema-enforced; a " +
+        "node with neither is meaningless."
+)
 data class Node(
+    @SpecDoc("Shorthand for labels.identifier when no implied/optional labels exist.")
     var label: String? = null,
-    val labels: Labels = Labels(),
+    @SpecDoc("Full labels object: identifier plus implied/optional labels.")
+    val labels: Labels? = null,
+    @SpecDoc("Properties of this node type; the map key is the property name.")
+    @SpecPropertyNames(
+        1,
+        "Property names are non-empty (ADR-0010): the map key is the property's " +
+            "addressable name, the string constraint objects and extensions reference."
+    )
     val properties: MutableMap<String, Property> = mutableMapOf(),
-    val constraints: MutableMap<String, NodeConstraint> = mutableMapOf(),
-    val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
-    override var name: String? = null,
-    val description: String = ""
-) : Extensions,
-    Named
+    @SpecDoc("Constraint objects on this node type (the nameable alternative to the property flags).")
+    val constraints: MutableList<Constraint> = mutableListOf(),
+    @SpecDoc("Tools available on this node type.")
+    val tools: MutableList<Tool> = mutableListOf(),
+    @SpecDoc("Alternative names for this node type.")
+    val aliases: MutableList<String> = mutableListOf(),
+    @SpecDef("reference")
+    @SpecFormat("uri")
+    @SpecDoc(
+        "A single informational URI pointing at an external definition of this element " +
+            "(e.g. the original RDF resource)."
+    )
+    var reference: String? = null,
+    @SpecDoc("Human-readable description of this node type.")
+    var description: String? = null,
+    @SpecDoc("Named extensions map: first-party neo4j:* keys; custom envelopes under the reserved custom key.")
+    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

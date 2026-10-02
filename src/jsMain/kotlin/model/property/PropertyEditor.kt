@@ -21,7 +21,7 @@ class PropertyEditor {
     companion object {
 
         @JsStatic
-        fun setType(property: PropertyJs, type: String) { // TODO neo4jtype
+        fun setType(property: PropertyJs, type: String?) {
             property.type = type
         }
 
@@ -47,11 +47,6 @@ class PropertyEditor {
             property.key = key
             property.unique = null
             property.mustExist = null
-        }
-
-        @JsStatic
-        fun setName(property: PropertyJs, name: String) {
-            property.name = name
         }
     }
 }
