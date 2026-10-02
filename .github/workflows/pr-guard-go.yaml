@@ -4,11 +4,11 @@ on:
   pull_request:
     branches: [main]
     # Trigger on changes to the Go files and the spec schema (the Go model
-    # is generated from ontology-spec.schema.json, so a schema-only PR must
+    # is generated from ontology-graph-spec.schema.json, so a schema-only PR must
     # run the Go drift check)
     paths:
       - 'go/**'
-      - 'ontology-spec.schema.json'
+      - 'ontology-graph-spec.schema.json'
 
 jobs:
   validate:

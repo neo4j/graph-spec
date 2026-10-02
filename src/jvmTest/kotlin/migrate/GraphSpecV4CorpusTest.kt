@@ -62,7 +62,7 @@ class GraphSpecV4CorpusTest {
         }
 
     // The schema lives at the repo root; the jvmTest working directory is the project dir.
-    private val schema: JsonSchema = factory.getSchema(mapper.readTree(File("ontology-spec.schema.json")), config)
+    private val schema: JsonSchema = factory.getSchema(mapper.readTree(File("ontology-graph-spec.schema.json")), config)
 
     private val corpusDir = File(CorpusAnchor.javaClass.getResource("/migrate/migration/dataModel")!!.path)
 
@@ -85,7 +85,7 @@ class GraphSpecV4CorpusTest {
                 val errors = schema.validate(mapper.readTree(output))
                 assertTrue(
                     errors.isEmpty(),
-                    "converted ${fixture.name} must validate against ontology-spec.schema.json:\n" +
+                    "converted ${fixture.name} must validate against ontology-graph-spec.schema.json:\n" +
                         errors.joinToString("\n") { it.message } + "\noutput:\n" + output,
                 )
             }

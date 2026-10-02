@@ -1,5 +1,5 @@
 {
-  "$schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+  "$schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
   "id": "c7d21f58-3a6b-4c9e-b2d8-5e1f7a03c946",
   "version": 1,
   "name": "org",

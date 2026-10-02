@@ -1,5 +1,5 @@
 {
-  "$schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+  "$schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
   "id": "96e2e09f-b080-dcd8-d0fe-38860acecac6",
   "version": 1,
   "name": "foaf",

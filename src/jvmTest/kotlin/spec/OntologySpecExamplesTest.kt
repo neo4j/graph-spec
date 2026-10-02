@@ -53,7 +53,7 @@ class OntologySpecExamplesTest {
 
     // The schema lives at the repo root, not on the classpath; the jvmTest
     // working directory is the project directory.
-    private val schemaFile = File("ontology-spec.schema.json")
+    private val schemaFile = File("ontology-graph-spec.schema.json")
 
     private fun schema(): JsonSchema = factory.getSchema(mapper.readTree(schemaFile), config)
 
@@ -64,7 +64,7 @@ class OntologySpecExamplesTest {
         val errors = metaSchema.validate(mapper.readTree(schemaFile))
         assertTrue(
             errors.isEmpty(),
-            "ontology-spec.schema.json must be a valid draft 2020-12 schema:\n" +
+            "ontology-graph-spec.schema.json must be a valid draft 2020-12 schema:\n" +
                 errors.joinToString("\n") { it.message }
         )
     }
@@ -78,7 +78,7 @@ class OntologySpecExamplesTest {
                 val errors = schema.validate(mapper.readTree(example))
                 assertTrue(
                     errors.isEmpty(),
-                    "${example.name} must validate against ontology-spec.schema.json:\n" +
+                    "${example.name} must validate against ontology-graph-spec.schema.json:\n" +
                         errors.joinToString("\n") { it.message }
                 )
             }

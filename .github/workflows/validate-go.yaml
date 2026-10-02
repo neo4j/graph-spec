@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository Code
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref }}
 
       - name: Set up Go Environment
-        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7
+        uses: actions/setup-go@v5
         with:
           go-version-file: go/go.mod
 
@@ -40,7 +40,7 @@ jobs:
           
           # 2. Check for drift
           if ! git diff --exit-code; then
-            echo "❌ Go models are out of sync with latest changes Kotlin. Run ./scripts/generate-go-models.sh locally and commit."
+            echo "❌ Go models are out of sync with ontology-graph-spec.schema.json. Run ./go/scripts/generate-go-models.sh locally and commit."
             git diff
             exit 1
           fi
