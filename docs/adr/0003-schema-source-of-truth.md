@@ -190,3 +190,7 @@ document, and the Kotlin/Go/TypeScript implementations conform to it.**
   hand-maintained rule. ADR-0006 (port architecture principle) builds
   on it directly: the kept machinery is re-targeted at, and conforms
   to, the hand-maintained schema.
+
+## Later references
+
+- ADR-0009 (docs/adr/0009-ontology-graph-spec-rename.md): renamed the spec "Ontology Spec" → "Ontology Graph Spec"; this ADR's body keeps the historical name.

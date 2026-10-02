@@ -1,11 +1,11 @@
-# Ontology spec v1: proposal
+# Ontology Graph spec v1: proposal
 
 Draft, 2026-09-09. Oskar Hane (WS1 spec lead).
 Input: Anurag's onsite brief, Malmö workshop 1-3 Sep, this repo @ c61fbae (graph spec 4.0.0).
 
 ## Summary
 
-Evolve the graph spec into the Ontology spec, version 1.0.0. Published for interop, governed by the ontology group, wrapped by end of October. Something usable at Graph Summit if console tooling opens.
+Evolve the graph spec into the Ontology Graph spec, version 1.0.0. Published for interop, governed by the ontology group, wrapped by end of October. Something usable at Graph Summit if console tooling opens.
 
 **v1 is a clean break from 4.0.0.** No backwards compatibility in the format. A one-way 4.0.0 to 1.0.0 converter ships in the library so existing importer artifacts survive; the format itself does not carry the old shape. The converter maps 4.0.0's top-level `version` to `$schema`.
 
@@ -33,7 +33,7 @@ Added for v1:
 Top level:
 
 ```yaml
-$schema: "https://<url-to-schema>/1.0.0"   # ontology spec schema and version (required)
+$schema: "https://<url-to-schema>/1.0.0"   # ontology graph spec schema and version (required)
 id: asd-asd-asd          # for identifying the spec when deployed (required)
 version: 3               # the ontology's own version (required)
 name: movies
@@ -105,7 +105,7 @@ To play nice with existing dirty data, `type: ANY` is supported and implicitly o
 
 ## Extensions
 
-First-party supported extensions (extensions we provide but that are not part of the core ontology) are **named extensions**: keys of an element's (or the top-level) `extensions`, `neo4j:`-prefixed, each shape defined by its owner and available in the ontology spec SDK. The naming differentiates them from custom extensions and improves the developer experience with types and autocomplete.
+First-party supported extensions (extensions we provide but that are not part of the core ontology) are **named extensions**: keys of an element's (or the top-level) `extensions`, `neo4j:`-prefixed, each shape defined by its owner and available in the ontology graph spec SDK. The naming differentiates them from custom extensions and improves the developer experience with types and autocomplete.
 
 Custom extensions ride the fixed envelope under the reserved `custom` key:
 
@@ -122,11 +122,11 @@ extensions:
       definition: { properties: [name] }
 ```
 
-The custom envelope has four fields. `type` required. `$schema` optional: the extension type's own schema and version, set and managed by its owner; never the ontology spec schema. `name` optional (a per-node display has no natural name). `definition` optional: free-form payload, never validated by this spec. The payload key is `definition`, not `properties`; that word is already overloaded in this spec.
+The custom envelope has four fields. `type` required. `$schema` optional: the extension type's own schema and version, set and managed by its owner; never the ontology graph spec schema. `name` optional (a per-node display has no natural name). `definition` optional: free-form payload, never validated by this spec. The payload key is `definition`, not `properties`; that word is already overloaded in this spec.
 
 The envelope always validates. Envelope-validated extensions are carried untouched, never rejected.
 
-What extensions will exist, and their shapes, is addressed outside this main ontology spec.
+What extensions will exist, and their shapes, is addressed outside this main ontology graph spec.
 
 The brief's own words are "extended information as tools available to agents". Behaviour belongs to runtimes, not to a spec.
 
@@ -137,7 +137,7 @@ Placement rule: an extension lives on the element it describes. If it describes 
 ## Example
 
 ```yaml
-$schema: "https://<url-to-schema>/1.0.0"   # ontology spec schema and version
+$schema: "https://<url-to-schema>/1.0.0"   # ontology graph spec schema and version
 version: 3                # ontology version
 id: asd-asd-asd
 name: movies
@@ -326,13 +326,16 @@ Two semantic caveats, one line each in the final spec:
 
 ## Decisions needed from the core group
 
-1. **Names.** Spec title ("Neo4j Ontology Specification" proposed), repo name (`neo4j/ontology-spec` proposed), governance group (brief says OLG; OSG was the 8 Sep lean. The artifact is a spec, not a language, which argues OSG; CLG consistency argues OLG).
+1. **Names.** Spec title ("Neo4j Ontology Graph Specification" proposed), repo name (`neo4j/ontology-graph-spec` proposed), governance group (brief says OLG; OSG was the 8 Sep lean. The artifact is a spec, not a language, which argues OSG; CLG consistency argues OLG).
 2. **Importer sign-off** on indexes/tables/mappings becoming extension objects. Their bar stands: the spec must be downloadable in the initial ontology release. The 4.0.0 converter is the migration story for their artifacts.
 3. **WS1/WS2 boundary** (comment [k]). The spec must not block on storage decisions and vice versa. The extension mechanism is the decoupler: storage-facing concerns ride extensions until WS2 lands.
 4. **Tool type shapes.** `tools` is a core field (decided 2026-09-25); the per-type shapes (`canonicalQuery`, `externalRequest`, ...) are owned by the agent-surface teams, not this spec.
 5. **Extensions need no governance from this group.** The spec defines only the envelope; each extension type is defined, versioned and validated by its owner (importer owns `table`/`mapping`, console owns `display`). Unknown types are carried untouched.
 
 ## Changelog from initial draft
+
+2026-10-02:
+- Renamed the product "Ontology Spec" → "Ontology Graph Spec" (ADR-0009); this doc moved from `docs/ontology-spec-v1-proposal.md` to `docs/ontology-graph-spec-v1-proposal.md`. No format change.
 
 2026-09-25:
 - Extension shape: `extensions` at every level — named keys (`neo4j:`-prefixed) for first-party extensions, the fixed envelope under `custom` for custom ones.
@@ -386,7 +389,7 @@ Two semantic caveats, one line each in the final spec:
 
 **`implied`/`optional` kept, documented as multi-label.** Importer lineage, observable today in one validator rule (constraints attach to identifier union implied). Not subclassing. The hierarchy question belongs to the ontology group, not to the format.
 
-**Versioning out of the format, identity in.** Publish, immutability, and drift are management-layer semantics (WS3). A format that bakes them in forces every consumer to implement a lifecycle they may not have. But the artifact's own identity is different: `name` and `description` were already there, and `version` is the same class. So `$schema` links the governing spec including its version (JSON Schema's `$schema` convention; `$`-prefixed fields are meta), and plain `version` is reserved for the ontology's own version, optional. Doing this at v1 costs nothing; reclaiming `version` later would cost a format break. The same sigil inside an extension links the extension type's own schema, owner-managed and never the spec's: one rule, `$schema` points at whatever governs the object. Extension evolution never forces an ontology spec release. `$schema` over a bare `$version`: the link identifies which schema AND its version, and it doubles as the document-type marker (no sniffing structure to guess what kind of document it is).
+**Versioning out of the format, identity in.** Publish, immutability, and drift are management-layer semantics (WS3). A format that bakes them in forces every consumer to implement a lifecycle they may not have. But the artifact's own identity is different: `name` and `description` were already there, and `version` is the same class. So `$schema` links the governing spec including its version (JSON Schema's `$schema` convention; `$`-prefixed fields are meta), and plain `version` is reserved for the ontology's own version, optional. Doing this at v1 costs nothing; reclaiming `version` later would cost a format break. The same sigil inside an extension links the extension type's own schema, owner-managed and never the spec's: one rule, `$schema` points at whatever governs the object. Extension evolution never forces an ontology graph spec release. `$schema` over a bare `$version`: the link identifies which schema AND its version, and it doubles as the document-type marker (no sniffing structure to guess what kind of document it is).
 
 **Written document first.** Appendix B is the evidence that patching is not an option.
 

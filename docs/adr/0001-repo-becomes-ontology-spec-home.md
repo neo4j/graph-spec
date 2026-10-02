@@ -75,3 +75,4 @@ ontology branch into `main` impossible.
 - ADR-0002 supersedes (i) the `-s ours` unification merge mechanic
   recorded here and (ii) the deferral of the SDK/converter port to later
   workstreams.
+- ADR-0009 (docs/adr/0009-ontology-graph-spec-rename.md): renamed the spec "Ontology Spec" → "Ontology Graph Spec"; this ADR's body keeps the historical name.

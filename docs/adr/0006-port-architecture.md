@@ -98,3 +98,7 @@ not a behaviour change to an existing contract.
 - ADR-0002's "largest extent possible" phrasing is sharpened, not
   replaced: this ADR is the concrete reading of that constraint, and
   ADR-0002 otherwise stands.
+
+## Later references
+
+- ADR-0009 (docs/adr/0009-ontology-graph-spec-rename.md): renamed the spec "Ontology Spec" → "Ontology Graph Spec"; this ADR's body keeps the historical name.

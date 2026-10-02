@@ -1,13 +1,13 @@
-# Ontology spec
+# Ontology Graph spec
 
-The Neo4j Ontology Specification v1 and its SDK — a Kotlin Multiplatform
+The Neo4j Ontology Graph Specification v1 and its SDK — a Kotlin Multiplatform
 library (`src/`) with a JS/TS surface and a Go module (`go/`).
 
 Draft; mirrors the shared proposal doc's 2026-09-25 state.
 
-- `ontology-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format; the hand-maintained source of truth (ADR-0003).
+- `ontology-graph-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format; the hand-maintained source of truth (ADR-0003).
 - `src/jvmTest/resources/ontology/` - example ontologies exercising the full surface, as test resources.
-- `src/jvmTest/kotlin/spec/OntologySpecExamplesTest.kt` - the spec-validation gate (ADR-0007): compiles the schema against the 2020-12 meta-schema, then validates every example resource against it.
+- `src/jvmTest/kotlin/spec/OntologyGraphSpecExamplesTest.kt` - the spec-validation gate (ADR-0007): compiles the schema against the 2020-12 meta-schema, then validates every example resource against it.
 - `src/commonMain/kotlin/` - the SDK: model, codecs (JSON + YAML), validators, and the converter (`migrate/migration/graphSpec/`, ADR-0008).
 - `go/` - the Go module: generated model (`go/model/model.go` - do not hand-edit), validation + migration via the Kotlin/Native bridge.
 
@@ -45,7 +45,7 @@ This repo was the graph spec (4.0.0); v1 is a clean break with no backwards
 compatibility in the format. A one-way 4.0.0 → 1.0.0 converter ships in the
 library (`migrate/migration/graphSpec/`, mapping table in ADR-0008); the
 frozen 4.0.0 state is tagged `graph-spec-4.0.0`. The transition's decisions
-are recorded in [`docs/adr/`](docs/adr/) (0001–0008).
+are recorded in [`docs/adr/`](docs/adr/) (0001–0009).
 
 ## Releasing
 

@@ -447,3 +447,7 @@ validates against `ontology-spec.schema.json` (the ADR-0007 gate).
   v1", legacy chain deleted, no 4.0.0 model class survives) is
   implemented as written; this ADR fills in the mapping table it
   deferred.
+
+## Later references
+
+- ADR-0009 (docs/adr/0009-ontology-graph-spec-rename.md): renamed the spec "Ontology Spec" → "Ontology Graph Spec"; this ADR's body keeps the historical name.

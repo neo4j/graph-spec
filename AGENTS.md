@@ -1,11 +1,12 @@
 # AGENTS.md
 
-The Neo4j Ontology Specification v1 + its SDK (Kotlin Multiplatform model,
-JS/TS surface, Go module). `ontology-spec.schema.json` (draft 2020-12) is the
-hand-maintained source of truth; implementations conform to it (ADR-0003).
+The Neo4j Ontology Graph Specification v1 + its SDK (Kotlin Multiplatform
+model, JS/TS surface, Go module). `ontology-graph-spec.schema.json` (draft
+2020-12) is the hand-maintained source of truth; implementations conform to
+it (ADR-0003).
 The port from graph spec 4.0.0 and its decisions are recorded in
-[`docs/adr/`](docs/adr/) (0001–0008); the design record up to 2026-09-25 is
-[`docs/ontology-spec-v1-proposal.md`](docs/ontology-spec-v1-proposal.md).
+[`docs/adr/`](docs/adr/) (0001–0009); the design record up to 2026-09-25 is
+[`docs/ontology-graph-spec-v1-proposal.md`](docs/ontology-graph-spec-v1-proposal.md).
 
 ## Non-negotiables
 
@@ -38,11 +39,11 @@ with `JAVA_HOME=<compatible-java-path>`
 
 | What | Command |
 | --- | --- |
-| Spec gate: schema compiles, every example validates | `./gradlew jvmTest` (class `spec.OntologySpecExamplesTest`) |
-| Model conformance: examples round-trip JSON + YAML through the model | same run (`spec.OntologyModelRoundTripTest`, `spec.OntologyYamlRoundTripTest`) |
+| Spec gate: schema compiles, every example validates | `./gradlew jvmTest` (class `spec.OntologyGraphSpecExamplesTest`) |
+| Model conformance: examples round-trip JSON + YAML through the model | same run (`spec.OntologyGraphModelRoundTripTest`, `spec.OntologyGraphYamlRoundTripTest`) |
 | Kotlin: JVM + JS/TS + Native compile, all tests | `./gradlew check` |
 | Lint (ktlint via spotless + license header) | `./gradlew spotlessCheck` (fix: `./gradlew spotlessApply`) |
-| Go | `cd go && go test ./...` (bridge tests skip if no native lib; force-exclude: `-tags ontologyspec_noembed`) |
+| Go | `cd go && go test ./...` (bridge tests skip if no native lib; force-exclude: `-tags ontologygraphspec_noembed`) |
 | Go model drift | `./go/scripts/generate-go-models.sh && git diff --exit-code` |
 | JS distribution (npm package + `.d.mts`) | `./gradlew jsNodeProductionLibraryDistribution` |
 
@@ -57,8 +58,8 @@ Notes:
 - Go bridge tests load the committed Kotlin/Native libs
   (`go/internal/bridge/lib/`). The macOS dylib needs full Xcode to build
   (`./go/scripts/generate-kotlin-native-libs.sh`; this host is CLT-only) —
-  linux libs build anywhere; `ONTOLOGYMODEL_LIB_PATH` overrides the lib path;
-  `ontologyspec_noembed` builds without the embedded lib.
+  linux libs build anywhere; `ONTOLOGYGRAPHMODEL_LIB_PATH` overrides the lib path;
+  `ontologygraphspec_noembed` builds without the embedded lib.
 - `generate-go-models.sh` runs schemancer (+ jq/perl for the sanitised copy
   and the extras injection) against the repo-root schema — no Gradle, no JDK.
   Needs Go, jq, perl, schemancer.
@@ -108,7 +109,7 @@ Notes:
 1. ADR first — no exceptions.
 2. Prose: the spec document (today: the proposal doc), dated changelog entry
    naming the ADR.
-3. Schema: `ontology-spec.schema.json`, `description` on every new field.
+3. Schema: `ontology-graph-spec.schema.json`, `description` on every new field.
 4. Examples: add or extend one under `src/jvmTest/resources/ontology/`.
 5. `./gradlew jvmTest` green; if the model/codecs/validators are affected,
    they and their tests change in the same change (conformance suites must

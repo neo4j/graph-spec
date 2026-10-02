@@ -305,3 +305,7 @@ documents as test fixtures. The frozen tag `graph-spec-4.0.0`
   compiling with minimal adaptation.
 - The Node `validate.yaml` workflow is untouched and guards the
   schema/examples throughout the port.
+
+## Later references
+
+- ADR-0009 (docs/adr/0009-ontology-graph-spec-rename.md): renamed the spec "Ontology Spec" → "Ontology Graph Spec"; this ADR's body keeps the historical name.
