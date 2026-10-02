@@ -41,7 +41,7 @@ var loadBridge = sync.OnceValues(bindBridge)
 
 // Available reports whether the native bridge library can be loaded on this host:
 // nil when usable, the load error otherwise. Bridge-loading tests use it to skip
-// cleanly when no library is available (ontologyspec_noembed builds, or a platform
+// cleanly when no library is available (ontologygraphspec_noembed builds, or a platform
 // whose bundled library is not checked in — see lib/macos-arm64/README.md).
 func Available() error {
 	_, err := loadBridge()
@@ -133,7 +133,7 @@ func bindBridge() (b *bridge, err error) {
 	defer func() {
 		// purego.RegisterLibFunc panics if a symbol cannot be bound which gets converted to an error.
 		if r := recover(); r != nil {
-			b, err = nil, fmt.Errorf("failed to bind ontologymodel symbols: %v", r)
+			b, err = nil, fmt.Errorf("failed to bind ontologygraphmodel symbols: %v", r)
 		}
 	}()
 

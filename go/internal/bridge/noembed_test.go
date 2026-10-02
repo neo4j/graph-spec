@@ -1,4 +1,4 @@
-//go:build ontologyspec_noembed
+//go:build ontologygraphspec_noembed
 
 package bridge
 
@@ -13,5 +13,5 @@ func TestResolveLibraryPathNoEmbeddedLib(t *testing.T) {
 
 	_, err := resolveLibraryPath()
 	require.Error(t, err)
-	require.ErrorContains(t, err, "no ontologymodel shared library is available")
+	require.ErrorContains(t, err, "no ontologygraphmodel shared library is available")
 }

@@ -13,7 +13,7 @@ import (
 var testdata embed.FS
 
 // requireBridge skips the test when the native library cannot be loaded on this
-// host (ontologyspec_noembed builds, or a platform whose bundled library is not
+// host (ontologygraphspec_noembed builds, or a platform whose bundled library is not
 // checked in — see go/internal/bridge/lib/macos-arm64/README.md).
 func requireBridge(t *testing.T) {
 	t.Helper()
@@ -22,20 +22,20 @@ func requireBridge(t *testing.T) {
 	}
 }
 
-// TestSpecV4ToOntologySpecMigration drives the one supported bridge path (ADR-0008):
-// a graph spec 4.0.0 document converts to the v1 ontology spec shape.
-func TestSpecV4ToOntologySpecMigration(t *testing.T) {
+// TestSpecV4ToOntologyGraphSpecMigration drives the one supported bridge path (ADR-0008):
+// a graph spec 4.0.0 document converts to the v1 ontology graph spec shape.
+func TestSpecV4ToOntologyGraphSpecMigration(t *testing.T) {
 	requireBridge(t)
 
 	raw, err := testdata.ReadFile("testdata/graph-spec-example.json")
 	require.NoError(t, err)
 
-	result, err := migration.ToOntologySpec(string(raw), migration.ModelTypeSpecV4)
+	result, err := migration.ToOntologyGraphSpec(string(raw), migration.ModelTypeSpecV4)
 	require.NoError(t, err)
 
 	// The v1 root shape: the spec link, a fresh ontology identity, version 1 as a
 	// number (a string "version" would fail the model.GraphModel unmarshal above).
-	require.Equal(t, "https://neo4j.com/ontology-spec/1.0.0/schema.json", result.Schema)
+	require.Equal(t, "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json", result.Schema)
 	require.Equal(t, 1, result.Version)
 	require.NotEmpty(t, result.ID, "the converter mints a fresh ontology id")
 	require.NotNil(t, result.Name)
@@ -87,7 +87,7 @@ func TestUnsupportedPreV4InputRejected(t *testing.T) {
 	raw, err := testdata.ReadFile("testdata/northwind.json") // a data_model 3.0.0 document
 	require.NoError(t, err)
 
-	_, err = migration.ToOntologySpec(string(raw), migration.ModelTypeSpecV4)
+	_, err = migration.ToOntologyGraphSpec(string(raw), migration.ModelTypeSpecV4)
 	require.Error(t, err)
 	require.ErrorContains(t, err, "Unsupported migration")
 }

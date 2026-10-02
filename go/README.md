@@ -1,10 +1,10 @@
-# Go OntologySpec
+# Go OntologyGraphSpec
 
-This package contains the Go OntologySpec Library. It consists of:
+This package contains the Go OntologyGraphSpec Library. It consists of:
 
-* **Go-native OntologySpec types** - These are automatically generated from the repo-root `ontology-spec.schema.json`
-* **Methods for migration and validation** - Enables migration between older model types and latest OntologySpec model, as 
-    well as validation of a given OntologySpec model. These methods call into the Kotlin source of truth methods via a
+* **Go-native OntologyGraphSpec types** - These are automatically generated from the repo-root `ontology-graph-spec.schema.json`
+* **Methods for migration and validation** - Enables migration between older model types and latest OntologyGraphSpec model, as 
+    well as validation of a given OntologyGraphSpec model. These methods call into the Kotlin source of truth methods via a
     Kotlin/Native library.
 
 ## Usage
@@ -25,7 +25,7 @@ go get github.com/neo4j/graph-spec/go@vX.Y.Z
 ## How the Kotlin/Native library is loaded
 
 The migration and validation methods call into a Kotlin/Native shared library
-(`libontologymodel.so` on Linux, `libontologymodel.dylib` on macOS) at runtime via
+(`libontologygraphmodel.so` on Linux, `libontologygraphmodel.dylib` on macOS) at runtime via
 [purego](https://github.com/ebitengine/purego). 
 
 By default, the library is automatically embedded in the binary for supported platforms (`linux/amd64`, `linux/arm64`, 
@@ -35,20 +35,20 @@ By default, the library is automatically embedded in the binary for supported pl
 
 Automatic embedding can be disabled if needed (e.g. if the runtime is locked down and extracting and loading the 
 embedded native library is not possible). Instead of automatic embedding, the relevant shared library can be hosted
-in a desired location available to the Go binary at runtime, and pointed to via the `ONTOLOGYMODEL_LIB_PATH` env var.
+in a desired location available to the Go binary at runtime, and pointed to via the `ONTOLOGYGRAPHMODEL_LIB_PATH` env var.
 If this env var is set, the shared library will be loaded from there. The shared libraries are stored in this repo 
 under the `go/internal/bridge/lib/` directory.
 
 Optionally, if not using automatic embedding, a Go binary without the bundled library can be built from source with the 
-`ontologyspec_noembed` tag:
+`ontologygraphspec_noembed` tag:
 
 ```
-go build -tags ontologyspec_noembed ./...
+go build -tags ontologygraphspec_noembed ./...
 ```
 
 > [!NOTE]
-> The shared native lib must be provided either via automatic embedding or the `ONTOLOGYMODEL_LIB_PATH` var. If not 
-> available, e.g. for an unsupported platform and no `ONTOLOGYMODEL_LIB_PATH`, an error will be returned when run.
+> The shared native lib must be provided either via automatic embedding or the `ONTOLOGYGRAPHMODEL_LIB_PATH` var. If not 
+> available, e.g. for an unsupported platform and no `ONTOLOGYGRAPHMODEL_LIB_PATH`, an error will be returned when run.
 
 ### Configuring Memory
 
@@ -98,7 +98,7 @@ go test ./...
 ```
 
 Tests load the shared library exactly as consumers do. With embedding on (the default) nothing
-extra is needed. If building or testing with `ontologyspec_noembed`, set `ONTOLOGYMODEL_LIB_PATH`
+extra is needed. If building or testing with `ontologygraphspec_noembed`, set `ONTOLOGYGRAPHMODEL_LIB_PATH`
 first (see [Using Without Embedding](#using-without-embedding)).
 
 ### Generating Kotlin/Native libraries
@@ -120,11 +120,11 @@ published tag whose module omits them will fail to build for consumers.
 ```
 
 The GraphModel Go struct and associated structs are automatically generated from the repo-root
-`ontology-spec.schema.json`. They live in the `go/model` package. The pipeline for generating these types is:
+`ontology-graph-spec.schema.json`. They live in the `go/model` package. The pipeline for generating these types is:
 
 _JSON Schema_ → _Go_
 
-schemancer consumes the repo-root `ontology-spec.schema.json` directly; the Gradle
+schemancer consumes the repo-root `ontology-graph-spec.schema.json` directly; the Gradle
 `generateGraphModelJsonSchema` task that used to derive the schema from the Kotlin model is gone.
 
 Some temporary sanitising is needed before schemancer runs, so the script works on a sanitised temp copy of the

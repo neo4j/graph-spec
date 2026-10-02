@@ -10,11 +10,11 @@ import (
 	"github.com/ebitengine/purego"
 )
 
-// LibPathEnv can be set to an absolute path to the ontologymodel shared library.
+// LibPathEnv can be set to an absolute path to the ontologygraphmodel shared library.
 // When set it takes precedence over the embedded copy, letting callers supply their
 // own library (e.g. one baked into an image at a fixed path for hardened runtimes
 // where extracting to a temp dir is not possible). It is dormant when unset.
-const LibPathEnv = "ONTOLOGYMODEL_LIB_PATH"
+const LibPathEnv = "ONTOLOGYGRAPHMODEL_LIB_PATH"
 
 var library = sync.OnceValues(openLibrary)
 
@@ -32,18 +32,18 @@ func resolveLibraryPath() (string, error) {
 	if len(embeddedLib) > 0 {
 		return extractEmbeddedLib()
 	}
-	return "", fmt.Errorf("no ontologymodel shared library is available: this build has no embedded library, "+
-		"meaning it was built with ontologyspec_noembed or an unsupported platform is being used. Set %s to the shared "+
+	return "", fmt.Errorf("no ontologygraphmodel shared library is available: this build has no embedded library, "+
+		"meaning it was built with ontologygraphspec_noembed or an unsupported platform is being used. Set %s to the shared "+
 		"library's path", LibPathEnv)
 }
 
 // extractEmbeddedLib writes the embedded library into a private, per-process temp dir and returns its path.
 func extractEmbeddedLib() (string, error) {
-	dir, err := os.MkdirTemp("", "ontologymodel-")
+	dir, err := os.MkdirTemp("", "ontologygraphmodel-")
 	if err != nil {
 		return "", fmt.Errorf("could not create temp dir for embedded library: %w", err)
 	}
-	path := filepath.Join(dir, "libontologymodel"+libraryExt())
+	path := filepath.Join(dir, "libontologygraphmodel"+libraryExt())
 	// File written with owner-only perms
 	if err := os.WriteFile(path, embeddedLib, 0o700); err != nil {
 		_ = os.RemoveAll(dir)
@@ -61,7 +61,7 @@ func openLibrary() (uintptr, error) {
 	lib, err := purego.Dlopen(path, purego.RTLD_NOW|purego.RTLD_GLOBAL)
 	if err != nil {
 		return 0, fmt.Errorf(
-			"could not load the ontologymodel shared library %q: %w; ensure the runtime provides "+
+			"could not load the ontologygraphmodel shared library %q: %w; ensure the runtime provides "+
 				"glibc and libstdc++ and that the shared library exists, or set %s to its path",
 			path, err, LibPathEnv)
 	}

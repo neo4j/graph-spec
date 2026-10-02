@@ -17,7 +17,7 @@ import (
 // struct fields in declaration order, then extras sorted by key) so the
 // byte-equal assertion is exact: any dropped or re-ordered content fails.
 const openSurfacesDoc = `{
-  "$schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+  "$schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
   "extensions": {
     "custom": [
       {

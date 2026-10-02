@@ -16,8 +16,8 @@ var testdata embed.FS
 // values must be identical, including carried-untouched extension payloads
 // and owner-defined tool fields (see extras_test.go for the byte-equal
 // assertions on those open surfaces).
-func TestOntologySpecV1RoundTripJSON(t *testing.T) {
-	raw, err := testdata.ReadFile("testdata/ontology-spec-example.json")
+func TestOntologyGraphSpecV1RoundTripJSON(t *testing.T) {
+	raw, err := testdata.ReadFile("testdata/ontology-graph-spec-example.json")
 	require.NoError(t, err)
 
 	var graph GraphModel

@@ -26,7 +26,7 @@ import (
 )
 
 // knownKeys lists each open surface's schema-defined fields; every other key
-// is extras. Keep in sync with ontology-spec.schema.json ($defs/tool,
+// is extras. Keep in sync with ontology-graph-spec.schema.json ($defs/tool,
 // $defs/extension, $defs/extensionsMap).
 var (
 	toolKnownKeys          = []string{"type", "name", "description"}
