@@ -53,8 +53,11 @@ Notes:
 - CI mirrors this table: `pr-guard-kotlin.yaml` (`src/**` or the schema →
   `check spotlessCheck`), `pr-guard-go.yaml` (`go/**` or the schema → go test
   + drift check), `release.yaml` (merged PRs with `release:*` labels →
-  validate → npm publish + native-libs + tags; `publish-maven` stays disabled
-  pending a release-policy decision).
+  validate → npm publish + native-libs + tags; native-libs gates the rebuilt
+  bridge libs on `go test ./...` before committing them, and the
+  `release/vX.Y.Z`/`go/vX.Y.Z` tags are created at the post-native-libs
+  commit — the merge commit when the lib rebuild changed nothing;
+  `publish-maven` stays disabled pending a release-policy decision).
 - Go bridge tests load the committed Kotlin/Native libs
   (`go/internal/bridge/lib/`). The macOS dylib needs full Xcode to build
   (`./go/scripts/generate-kotlin-native-libs.sh`; this host is CLT-only) —
