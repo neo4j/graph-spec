@@ -131,7 +131,7 @@
     },
     "extensionsMap": {
       "type": "object",
-      "description": "Named extensions: first-party extensions as keys (neo4j:*), each shape defined by its owner, available in the ontology spec SDK, not validated by this spec. Custom extensions ride the fixed envelope under the reserved custom key.",
+      "description": "Named extensions: first-party extensions as keys (neo4j:*), each shape defined by its owner, available in the ontology graph spec SDK, not validated by this spec. Custom extensions ride the fixed envelope under the reserved custom key.",
       "properties": {
         "custom": {
           "type": "array",

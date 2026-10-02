@@ -27,7 +27,7 @@ type Extension struct {
 	Type       string                     `json:"type"`
 }
 
-// Named extensions: first-party extensions as keys (neo4j:*), each shape defined by its owner, available in the ontology spec SDK, not validated by this spec. Custom extensions ride the fixed envelope under the reserved custom key.
+// Named extensions: first-party extensions as keys (neo4j:*), each shape defined by its owner, available in the ontology graph spec SDK, not validated by this spec. Custom extensions ride the fixed envelope under the reserved custom key.
 type ExtensionsMap struct {
 	extra  map[string]json.RawMessage `json:"-"`
 	Custom []Extension                `json:"custom,omitempty"`
