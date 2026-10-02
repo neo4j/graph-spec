@@ -69,7 +69,12 @@ object Internal {
     private fun GraphModel.internaliseNodeProperties() {
         val renames = mutableMapOf<String, String>()
         nodes.forEach { (key, node) ->
-            internaliseProperties(node.constraints, node.properties, node.name ?: key) { type, props ->
+            val shorthand = internaliseProperties(
+                node.constraints,
+                node.properties,
+                node.name ?: key,
+                node.labels.identifier ?: ""
+            ) { type, props ->
                 NodeConstraint(type, node.labels.identifier, props)
             }
             node.constraints.assignIds("constraint", key)
@@ -77,6 +82,7 @@ object Internal {
             renames.putAll(propertyRenames)
             node.constraints.values.forEach { it.properties.rename(renames, key) }
             node.indexes.values.forEach { it.properties.rename(renames, key) }
+            shorthand.forEach { (constraint, name) -> if (name.isNotBlank()) constraint.name = name }
         }
         Pretty.renameNodeMappingProperties(this, renames)
     }
@@ -89,33 +95,42 @@ object Internal {
         constraints: MutableMap<String, C>,
         properties: MutableMap<String, Property>,
         entity: String,
+        label: String,
         constraint: (type: ConstraintType, properties: MutableSet<String>) -> C
-    ) {
+    ): List<Pair<C, String>> {
+        val shorthand = mutableListOf<Pair<C, String>>()
         for ((key, property) in properties) {
+            fun add(type: ConstraintType): Pair<C, String> =
+                addConstraint(constraints, property.name ?: key, key, constraint, type, entity, label)
+
             if (property.key == true) {
                 property.key = null
-                addConstraint(constraints, property.name ?: key, key, constraint, ConstraintType.KEY, entity)
+                shorthand += add(ConstraintType.KEY)
             }
             if (property.unique == true) {
                 property.unique = null
-                addConstraint(constraints, property.name ?: key, key, constraint, ConstraintType.UNIQUE, entity)
+                shorthand += add(ConstraintType.UNIQUE)
             }
             if (property.mustExist == true) {
                 property.mustExist = null
-                addConstraint(constraints, property.name ?: key, key, constraint, ConstraintType.EXISTS, entity)
+                shorthand += add(ConstraintType.EXISTS)
             }
         }
+        return shorthand
     }
 
     private fun <C : Constraint> addConstraint(
         constraints: MutableMap<String, C>,
-        name: String,
+        propertyToken: String,
         key: String,
         constraint: (ConstraintType, MutableSet<String>) -> C,
         type: ConstraintType,
-        entity: String
-    ) {
-        constraints[deterministicId(entity, type, name)] = constraint(type, mutableSetOf(key))
+        entity: String,
+        label: String
+    ): Pair<C, String> {
+        val created = constraint(type, mutableSetOf(key))
+        constraints[deterministicId(entity, type, propertyToken)] = created
+        return created to NameFormat.constraintName(listOf(propertyToken), label, type)
     }
 
     internal fun deterministicId(entity: String, type: ConstraintType, vararg properties: String): String =
@@ -136,10 +151,12 @@ object Internal {
     private fun GraphModel.internaliseRelationshipProperties() {
         val renames = mutableMapOf<String, String>()
         relationships.forEach { (key, relationship) ->
-            internaliseProperties(relationship.constraints, relationship.properties, relationship.name ?: key) {
-                    type,
-                    props
-                ->
+            val shorthand = internaliseProperties(
+                relationship.constraints,
+                relationship.properties,
+                relationship.name ?: key,
+                relationship.type
+            ) { type, props ->
                 RelationshipConstraint(type, props)
             }
             relationship.constraints.assignIds("constraint", key)
@@ -147,6 +164,7 @@ object Internal {
             renames.putAll(propertyRenames)
             relationship.constraints.values.forEach { it.properties.rename(renames, key) }
             relationship.indexes.values.forEach { it.properties.rename(renames, key) }
+            shorthand.forEach { (constraint, name) -> if (name.isNotBlank()) constraint.name = name }
         }
         Pretty.renameRelationshipMappingProperties(this, renames)
     }
