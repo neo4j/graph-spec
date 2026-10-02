@@ -160,9 +160,15 @@ gradle/, gradlew                wrapper + version catalog
   sanitised copy and the extras injection) against the repo-root schema —
   no Gradle schema task remains. It needs Go, jq, perl, and schemancer;
   no JDK.
-- CI mirrors this table: `validate-kotlin.yaml` (`./gradlew check` —
-  spec gate + Kotlin implementation), `validate-go.yaml` (go test +
-  drift check).
+- CI mirrors this table: `pr-guard-kotlin.yaml` (PRs touching `src/**` or
+  `ontology-spec.schema.json` → `validate-kotlin.yaml` → `./gradlew check
+  spotlessCheck` — spec gate + Kotlin implementation + lint),
+  `pr-guard-go.yaml` (PRs touching `go/**` or `ontology-spec.schema.json` →
+  `validate-go.yaml` → go test + drift check). `release.yaml` runs on merged
+  PRs carrying a `release:*` label: `validate-go` + `validate-kotlin` gate
+  `publish-npm` + `native-libs` (rebuilds and commits the Go bridge's
+  Kotlin/Native libs) + `publish-tags`; `publish-maven` stays disabled
+  pending a release-policy decision.
 
 ## Branching and pull requests
 

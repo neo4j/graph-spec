@@ -222,6 +222,10 @@ jobs:
             exit 1
           fi
 
+  # DISABLED: Maven Central publishing awaits a release-policy decision.
+  # The 4.0.0-era coordinates are already renamed (org.neo4j.importer:ontology-spec,
+  # see the mavenPublishing block in build.gradle.kts), but whether/how the v1
+  # line publishes to Maven Central is undecided. Keep `if: false` until then.
   publish-maven:
     if: false
     needs: [determine-version, validate-kotlin, validate-go]
@@ -249,8 +253,50 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
 
+  # Rebuilds the Kotlin/Native shared libraries embedded by the Go bridge and
+  # commits them back if they changed. The repo ships committed binaries under
+  # go/internal/bridge/lib/; this job keeps them (notably macos-arm64, which
+  # needs full Xcode — hence macos-latest) current on every release.
+  native-libs:
+    needs: [determine-version, validate-kotlin]
+    runs-on: macos-latest  # full Xcode is required for linkReleaseSharedMacosArm64
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.determine-version.outputs.sha }}
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Generate Kotlin/Native shared libs
+        run: ./go/scripts/generate-kotlin-native-libs.sh
+
+      - name: Commit and push rebuilt libs if changed
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Configure Git Identity for the runner
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet -- go/internal/bridge/lib/; then
+            echo "Native libs unchanged; nothing to commit."
+          else
+            git add go/internal/bridge/lib/
+            git commit -m "chore: rebuild Kotlin/Native bridge libs for release v${{ needs.determine-version.outputs.version }}"
+            git push origin HEAD:main
+          fi
+
   publish-tags:
-    needs: [determine-version, validate-go, publish-npm]
+    needs: [determine-version, validate-go, publish-npm, native-libs]
     runs-on: ubuntu-latest
     permissions:
       contents: write
