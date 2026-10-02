@@ -23,13 +23,29 @@ import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipTarget
 
-/**
+/*
  * The one owner of the model traversal and the issue-path grammar: `nodes.<id>`,
  * `relationships.<id>`, and the `properties.<pid>` / `constraints[<index>]` /
+ * `constraints[<index>].properties` / `constraints[<index>].properties[<entry>]` /
  * `from` / `to` segments beneath them. Validators delegate here and keep only their
  * rule; the grammar is pinned byte-for-byte by the validator and bridge tests, so a
  * path change belongs in this file alone — never re-derived per validator.
  */
+
+/** `properties.<pid>` beneath an element path. */
+internal fun propertyPath(elementPath: String, propertyId: String) = "$elementPath.properties.$propertyId"
+
+/** `constraints[<index>]` beneath an element path. */
+internal fun constraintPath(elementPath: String, index: Int) = "$elementPath.constraints[$index]"
+
+/** `constraints[<index>].properties` beneath an element path. */
+internal fun constraintPropertiesPath(elementPath: String, index: Int) =
+    "${constraintPath(elementPath, index)}.properties"
+
+/** `constraints[<index>].properties[<entryIndex>]` beneath an element path. */
+internal fun constraintPropertyEntryPath(elementPath: String, index: Int, entryIndex: Int) =
+    "${constraintPropertiesPath(elementPath, index)}[$entryIndex]"
+
 internal fun GraphModel.forEachNode(action: (path: String, id: String, node: Node) -> Unit) {
     for ((id, node) in nodes) action("nodes.$id", id, node)
 }
@@ -40,25 +56,22 @@ internal fun GraphModel.forEachRelationship(action: (path: String, id: String, r
 
 internal fun GraphModel.forEachProperty(action: (path: String, property: Property) -> Unit) {
     forEachNode { nodePath, _, node ->
-        for ((propertyId, property) in node.properties) action("$nodePath.properties.$propertyId", property)
+        for ((propertyId, property) in node.properties) action(propertyPath(nodePath, propertyId), property)
     }
     forEachRelationship { relationshipPath, _, relationship ->
         for ((propertyId, property) in relationship.properties) {
-            action(
-                "$relationshipPath.properties.$propertyId",
-                property,
-            )
+            action(propertyPath(relationshipPath, propertyId), property)
         }
     }
 }
 
 internal fun GraphModel.forEachConstraint(action: (path: String, constraint: Constraint) -> Unit) {
     forEachNode { nodePath, _, node ->
-        node.constraints.forEachIndexed { index, constraint -> action("$nodePath.constraints[$index]", constraint) }
+        node.constraints.forEachIndexed { index, constraint -> action(constraintPath(nodePath, index), constraint) }
     }
     forEachRelationship { relationshipPath, _, relationship ->
         relationship.constraints.forEachIndexed { index, constraint ->
-            action("$relationshipPath.constraints[$index]", constraint)
+            action(constraintPath(relationshipPath, index), constraint)
         }
     }
 }

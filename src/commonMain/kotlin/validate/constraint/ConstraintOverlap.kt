@@ -22,7 +22,10 @@ import model.property.Property
 import model.type.ConstraintType
 import validate.Issue
 import validate.Validation
+import validate.constraintPath
+import validate.constraintPropertiesPath
 import validate.forEachElementConstraints
+import validate.propertyPath
 
 /**
  * v1 rule: redundant and conflicting constraints on one element (node or relationship).
@@ -70,7 +73,7 @@ object ConstraintOverlap : Validation {
                         message =
                         "Constraint ${constraintRef(constraint, index)} (${constraint.type}) is redundant - " +
                             "a key constraint already covers the same properties",
-                        path = "$path.constraints[$index]",
+                        path = constraintPath(path, index),
                     ),
                 )
             }
@@ -106,7 +109,7 @@ object ConstraintOverlap : Validation {
                     code = "duplicate_shorthand_constraint_flag",
                     message = "Flag '$type: true' on property '$propertyId' duplicates " +
                         "a $type constraint object on the same property",
-                    path = "$path.properties.$propertyId.$type",
+                    path = "${propertyPath(path, propertyId)}.$type",
                 ),
             )
         }
@@ -126,7 +129,7 @@ object ConstraintOverlap : Validation {
                         message =
                         "mustExist constraint ${constraintRef(constraint, index)} on property '$propertyId' " +
                             "conflicts with a composite constraint covering the same property",
-                        path = "$path.constraints[$index]",
+                        path = constraintPath(path, index),
                     ),
                 )
             }
@@ -152,7 +155,7 @@ object ConstraintOverlap : Validation {
                         code = "duplicate_constraint_property_set",
                         message = "Constraint ${constraintRef(constraint, index)} property set duplicates " +
                             "another composite constraint",
-                        path = "$path.constraints[$index].properties",
+                        path = constraintPropertiesPath(path, index),
                     ),
                 )
             }

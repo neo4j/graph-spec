@@ -21,6 +21,8 @@ import model.node.Constraint
 import model.property.Property
 import validate.Issue
 import validate.Validation
+import validate.constraintPropertiesPath
+import validate.constraintPropertyEntryPath
 import validate.forEachElementConstraints
 
 /**
@@ -38,13 +40,14 @@ object ConstraintPropertyReferences : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
         model.forEachElementConstraints { path, properties, constraints ->
             constraints.forEachIndexed { index, constraint ->
-                validateConstraintProperties("$path.constraints[$index].properties", properties, constraint, issues)
+                validateConstraintProperties(path, index, properties, constraint, issues)
             }
         }
     }
 
     private fun validateConstraintProperties(
-        path: String,
+        elementPath: String,
+        constraintIndex: Int,
         properties: Map<String, Property>,
         constraint: Constraint,
         issues: MutableList<Issue>,
@@ -54,18 +57,18 @@ object ConstraintPropertyReferences : Validation {
                 Issue(
                     code = "empty_constraint_properties",
                     message = "Constraint properties list is empty; expected at least one property reference",
-                    path = path,
+                    path = constraintPropertiesPath(elementPath, constraintIndex),
                 ),
             )
             return
         }
-        constraint.properties.forEachIndexed { index, propertyId ->
+        constraint.properties.forEachIndexed { entryIndex, propertyId ->
             if (propertyId !in properties) {
                 issues.add(
                     Issue(
                         code = "unknown_constraint_property",
                         message = "Constraint references undeclared property '$propertyId'",
-                        path = "$path[$index]",
+                        path = constraintPropertyEntryPath(elementPath, constraintIndex, entryIndex),
                     ),
                 )
             }
