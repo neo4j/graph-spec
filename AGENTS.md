@@ -117,7 +117,7 @@ place — ADR-0002, ADR-0004):
 src/
   commonMain/ commonTest/       Kotlin model, codecs, validators, migrations
   jsMain/ jsTest/               @JsExport JS/TS surface
-  jvmMain/ jvmTest/             JVM, incl. the schema generator
+  jvmTest/                      JVM tests, incl. the spec gate
   bridge/ bridgeTest/           Kotlin/Native bridge used by Go
 go/                             Go module: generated model + validation/migration via the bridge
 gradle/, gradlew                wrapper + version catalog
@@ -156,8 +156,10 @@ gradle/, gradlew                wrapper + version catalog
 - Go tests exercise the Kotlin/Native bridge through the embedded
   darwin-arm64/linux libraries. `GRAPHDATAMODEL_LIB_PATH` overrides the
   library path; `graphspec_noembed` builds without the embedded lib.
-- `generate-go-models.sh` runs the Gradle schema task plus schemancer,
-  so it needs the JDK too.
+- `generate-go-models.sh` runs schemancer (plus jq and perl for the
+  sanitised copy and the extras injection) against the repo-root schema —
+  no Gradle schema task remains. It needs Go, jq, perl, and schemancer;
+  no JDK.
 - CI mirrors this table: `validate-kotlin.yaml` (`./gradlew check` —
   spec gate + Kotlin implementation), `validate-go.yaml` (go test +
   drift check).

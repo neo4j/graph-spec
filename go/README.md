@@ -120,15 +120,19 @@ published tag whose module omits them will fail to build for consumers.
 ```
 
 The GraphModel Go struct and associated structs are automatically generated from the repo-root
-`ontology-spec.schema.json`. They live in the `go/models` package. The pipeline for generating these types is:
+`ontology-spec.schema.json`. They live in the `go/model` package. The pipeline for generating these types is:
 
 _JSON Schema_ → _Go_
 
 schemancer consumes the repo-root `ontology-spec.schema.json` directly; the Gradle
 `generateGraphModelJsonSchema` task that used to derive the schema from the Kotlin model is gone.
 
-Some temporary sanitising is needed to ensure there are no issues relating to Go enum variable names when generating
-Neo4jTypes. The script handles this.
+Some temporary sanitising is needed before schemancer runs, so the script works on a sanitised temp copy of the
+schema (the schema itself is never touched). The copy pins `title` to `"GraphModel"`, keeping the top-level Go type
+consumer-stable (ADR-0006), and demotes `format: "uri"` markers to plain strings, since `encoding/json` cannot
+round-trip `net/url.URL` (URI-format validation stays Kotlin-side). The generated `model.go` is then post-processed
+by a guarded injection that adds an unexported extras field to the open-surface types (`ExtensionsMap`, `Tool`,
+`Extension`); `go/model/extras.go` is the hand-written half of that contract — do not hand-edit `model.go`.
 
 > [!NOTE]
 > The deployment pipeline automatically checks the Go types are up-to-date. If you receive a pipeline failure relating
