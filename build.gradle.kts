@@ -23,7 +23,7 @@ kotlin {
         binaries.library()
         compilations.named("main") {
             packageJson {
-                name = "@neo4j-importer/ontology-spec"
+                name = "@neo4j-importer/ontology-graph-spec"
                 customField(
                     "repository",
                     mapOf(
@@ -47,13 +47,13 @@ kotlin {
         generateTypeScriptDefinitions()
     }
     macosArm64 {
-        binaries.sharedLib { baseName = "ontologymodel" }
+        binaries.sharedLib { baseName = "ontologygraphmodel" }
     }
     linuxX64 {
-        binaries.sharedLib { baseName = "ontologymodel" }
+        binaries.sharedLib { baseName = "ontologygraphmodel" }
     }
     linuxArm64 {
-        binaries.sharedLib { baseName = "ontologymodel" }
+        binaries.sharedLib { baseName = "ontologygraphmodel" }
     }
 
     applyDefaultHierarchyTemplate()
@@ -118,10 +118,10 @@ tasks.named("jsProductionLibraryCompileSync") {
 mavenPublishing {
     publishToMavenCentral()
     signAllPublications()
-    coordinates(group.toString(), "ontology-spec", version.toString())
+    coordinates(group.toString(), "ontology-graph-spec", version.toString())
     pom {
-        name = "ontology-spec"
-        description = "Neo4j Ontology Specification Library"
+        name = "ontology-graph-spec"
+        description = "Neo4j Ontology Graph Specification Library"
         url = "https://github.com/neo4j/graph-spec"
         inceptionYear = "2024"
         organization {

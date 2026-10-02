@@ -223,7 +223,7 @@ jobs:
           fi
 
   # DISABLED: Maven Central publishing awaits a release-policy decision.
-  # The 4.0.0-era coordinates are already renamed (org.neo4j.importer:ontology-spec,
+  # The 4.0.0-era coordinates are already renamed (org.neo4j.importer:ontology-graph-spec,
   # see the mavenPublishing block in build.gradle.kts), but whether/how the v1
   # line publishes to Maven Central is undecided. Keep `if: false` until then.
   publish-maven:
