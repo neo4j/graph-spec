@@ -30,11 +30,11 @@ func TestExtractEmbeddedLib(t *testing.T) {
 }
 
 func TestResolveLibraryPathEnvOverride(t *testing.T) {
-	t.Setenv(LibPathEnv, "/explicit/path/libgraphdatamodel.so")
+	t.Setenv(LibPathEnv, "/explicit/path/libontologymodel.so")
 
 	path, err := resolveLibraryPath()
 	require.NoError(t, err)
-	require.Equal(t, "/explicit/path/libgraphdatamodel.so", path)
+	require.Equal(t, "/explicit/path/libontologymodel.so", path)
 }
 
 func TestOpenLibraryMissingLibIsActionable(t *testing.T) {

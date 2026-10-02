@@ -1,8 +1,8 @@
-//go:build darwin && arm64 && !graphspec_noembed
+//go:build darwin && arm64 && !ontologyspec_noembed
 
 package bridge
 
 import _ "embed"
 
-//go:embed lib/macos-arm64/libgraphdatamodel.dylib
+//go:embed lib/macos-arm64/libontologymodel.dylib
 var embeddedLib []byte

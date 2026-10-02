@@ -6,19 +6,19 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/neo4j/graph-spec/go/v4/migration"
-	"github.com/neo4j/graph-spec/go/v4/model"
+	"github.com/neo4j/graph-spec/go/migration"
+	"github.com/neo4j/graph-spec/go/model"
 	"github.com/stretchr/testify/require"
 )
 
 //go:embed testdata/*.json
 var testdata embed.FS
 
-func TestV3ToGraphSpecMigration(t *testing.T) {
+func TestV3ToOntologySpecMigration(t *testing.T) {
 	raw, err := testdata.ReadFile("testdata/northwind.json")
 	require.NoError(t, err)
 
-	result, err := migration.ToGraphSpec(string(raw), migration.ModelTypeDataModel)
+	result, err := migration.ToOntologySpec(string(raw), migration.ModelTypeDataModel)
 	require.NoError(t, err)
 	require.NotEmpty(t, result.Mappings)
 
@@ -27,12 +27,12 @@ func TestV3ToGraphSpecMigration(t *testing.T) {
 	t.Log(fmt.Sprintf("Transformed graph: %v", string(resultBytes)))
 
 	// Check round trip back to V3 data model.
-	back, err := migration.FromGraphSpec(result, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
+	back, err := migration.FromOntologySpec(result, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
 	require.NoError(t, err)
 	require.NotEmpty(t, back)
 }
 
-func TestGraphSpecToV3Migration(t *testing.T) {
+func TestOntologySpecToV3Migration(t *testing.T) {
 	raw, err := testdata.ReadFile("testdata/graph-spec-example.json")
 	require.NoError(t, err)
 
@@ -40,7 +40,7 @@ func TestGraphSpecToV3Migration(t *testing.T) {
 	err = json.Unmarshal(raw, &graph)
 	require.NoError(t, err)
 
-	res, err := migration.FromGraphSpec(graph, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
+	res, err := migration.FromOntologySpec(graph, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
 	require.NoError(t, err)
 	require.NotNil(t, res)
 	t.Log(fmt.Sprintf("Transformed graph: %v", res))

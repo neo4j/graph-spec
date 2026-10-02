@@ -1,8 +1,8 @@
-//go:build linux && arm64 && !graphspec_noembed
+//go:build linux && arm64 && !ontologyspec_noembed
 
 package bridge
 
 import _ "embed"
 
-//go:embed lib/linux-arm64/libgraphdatamodel.so
+//go:embed lib/linux-arm64/libontologymodel.so
 var embeddedLib []byte

@@ -124,7 +124,7 @@ func bindBridge() (b *bridge, err error) {
 	defer func() {
 		// purego.RegisterLibFunc panics if a symbol cannot be bound which gets converted to an error.
 		if r := recover(); r != nil {
-			b, err = nil, fmt.Errorf("failed to bind graphdatamodel symbols: %v", r)
+			b, err = nil, fmt.Errorf("failed to bind ontologymodel symbols: %v", r)
 		}
 	}()
 
