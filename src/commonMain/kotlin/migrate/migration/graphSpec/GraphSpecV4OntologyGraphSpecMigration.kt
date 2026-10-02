@@ -393,8 +393,8 @@ class GraphSpecV4OntologyGraphSpecMigration :
             // to.node) while `properties` internalised through the relationship's own —
             // so `key` resolves relationship-first, then from-node, then to-node, and
             // both serialisations converge (e.g. the ldbc corpus pair).
-            val fromKey = mapping.map("from").stringOrNull("node")
-            val toKey = mapping.map("to").stringOrNull("node")
+            val fromKey = (mapping.mapOrNull("start_node") ?: mapping.mapOrNull("from"))?.stringOrNull("node")
+            val toKey = (mapping.mapOrNull("end_node") ?: mapping.mapOrNull("to"))?.stringOrNull("node")
             val resolveKey: (String) -> String = { ref ->
                 propertyIds[ref]
                     ?: fromKey?.let { ids.nodePropertyIds[it]?.get(ref) }
@@ -405,8 +405,10 @@ class GraphSpecV4OntologyGraphSpecMigration :
                 "kind" to "relationship",
                 "relationship" to ids.relationshipId(relationshipKey),
                 "table" to mapping.stringOrNull("table"),
-                "from" to convertTargetMapping(mapping.map("from"), ids),
-                "to" to convertTargetMapping(mapping.map("to"), ids),
+                // 4.0.0's final wire shape renamed the mapping target fields
+                // from/to → start_node/end_node (graph-spec #103); accept both.
+                "from" to convertTargetMapping(mapping.mapOrNull("start_node") ?: mapping.map("from"), ids),
+                "to" to convertTargetMapping(mapping.mapOrNull("end_node") ?: mapping.map("to"), ids),
                 "properties" to convertPropertyMappings(mapping.mapOfMapsOrNull("properties"), propertyIds),
                 "mode" to mapping.stringOrNull("mode"),
                 "matchLabel" to mapping.stringOrNull("matchLabel"),
