@@ -32,8 +32,8 @@ The port from graph spec 4.0.0 and its decisions are recorded in
 
 ## Commands (the feedback loop)
 
-Gradle needs JDK 17+; the system JDK here is 11, so prefix every `./gradlew`
-with `JAVA_HOME=$HOME/.local/share/jdks/temurin-17.jdk/Contents/Home`
+Gradle needs JDK 17+; if system JDK here is different, prefix every `./gradlew`
+with `JAVA_HOME=<compatible-java-path>`
 (CI has 17; any 17+ works).
 
 | What | Command |
@@ -101,7 +101,7 @@ Notes:
   `validation/` + `migration/` bridge into Kotlin.
 - Every Kotlin file carries the header from `license-header.txt`
   (spotless enforces it).
-- Work is tracked in Linear under ONT-5 (team Ontology Spec Group).
+- Work is tracked in Linear under ONT (team Ontology Spec Group).
 
 ## Changing the format
 
@@ -118,8 +118,6 @@ Notes:
 
 - Rebase, never merge. Update branches with `git rebase main`.
 - Stack multi-PR work: `main → b1 → b2`, each PR against its predecessor.
-- gbuild worktree landings use merge commits — a branch that went through a
-  gbuild run needs a final `git rebase main` before it is done.
 - Before push: the gates from the table above that your change touches.
 
 ## Design rules (the format's constitution — a change violating one is a format break; ADR it)
@@ -127,7 +125,8 @@ Notes:
 1. Minimal and pragmatic: partial RDFS + SHACL, not RDF, not OWL.
 2. Least surprise: object orientation to an enterprise developer, not RDF.
 3. Schema optional: descriptive first, enforcing over time.
-4. No RDF inference. 5. Interop with RDF tooling and industry standards.
+4. No RDF inference. 
+5. Interop with RDF tooling and industry standards.
 6. Bottom-up and top-down creation both supported.
 7. Clean break from 4.0.0 — the converter is the migration story.
 8. One wire format; normalisation is a library detail.
@@ -135,14 +134,3 @@ Notes:
    custom under the `custom` envelope (`type` required; `$schema`/`name`/
    `definition` optional; `definition` free-form, never validated). The
    envelope always validates; unknown content is carried untouched.
-
-Format invariants (not open for redesign without an ADR): nodes/relationships
-keyed by local ids (`label`/`labels.identifier`, `type`); property types are
-tokens (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>` + `dimension`), no unions
-(single type or `ANY`); cardinality on endpoints (`count`/`min_count`/
-`max_count`, absent = 0..*); constraint flags on properties, constraint
-objects `{constraint_type, name?, properties}` for the rest; `tools` core on
-node + relationship entries (per-type shapes owner-defined); absent means
-none (empty maps/lists omitted). Out of the format: lifecycle/publish
-semantics, extension type definitions, indexes as core fields, class/property
-hierarchies, inference.
