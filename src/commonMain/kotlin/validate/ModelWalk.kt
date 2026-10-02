@@ -63,6 +63,21 @@ internal fun GraphModel.forEachConstraint(action: (path: String, constraint: Con
     }
 }
 
+/**
+ * Hands each element's path, its properties map, and its constraints list together,
+ * for nodes and relationships alike. For validators that cross-check a constraint's
+ * `properties` entries against the owning element's property keys and the [Property]
+ * objects' shorthand flags — the element path is derived here, never by the caller.
+ */
+internal fun GraphModel.forEachElementConstraints(
+    action: (path: String, properties: Map<String, Property>, constraints: List<Constraint>) -> Unit,
+) {
+    forEachNode { nodePath, _, node -> action(nodePath, node.properties, node.constraints) }
+    forEachRelationship { relationshipPath, _, relationship ->
+        action(relationshipPath, relationship.properties, relationship.constraints)
+    }
+}
+
 internal fun GraphModel.forEachEndpoint(
     action: (path: String, side: String, relationshipId: String, endpoint: RelationshipTarget) -> Unit,
 ) {
