@@ -16,6 +16,8 @@
  */
 package validate
 
+import validate.constraint.ConstraintOverlap
+import validate.constraint.ConstraintPropertyReferences
 import validate.constraint.KnownConstraintType
 import validate.node.NodeLabelExclusivity
 import validate.node.NodeLabelsIdentifier
@@ -32,8 +34,13 @@ class Validations {
         /*
             The v1 suite (track 2, ADR-0004): the rules ontology-graph-spec.schema.json cannot
             express. Each validator's KDoc cites the schema section or proposal line it
-            enforces. The 4.0.0 validators were deleted with their model subjects in the
-            v1 model rewrite (track 1).
+            enforces. The constraint-package rules are KnownConstraintType
+            (constraint_type enum), ConstraintPropertyReferences (a constraint's
+            properties resolve to properties declared on the same element, and the list
+            is non-empty) and ConstraintOverlap (redundant and conflicting constraints
+            on one element: key overlap, duplicated shorthand flags, existence/composite
+            conflict, duplicate composite property sets). The 4.0.0 validators were
+            deleted with their model subjects in the v1 model rewrite (track 1).
          */
 
         // Graph-spec validators added independent of any UPX call site.
@@ -46,6 +53,8 @@ class Validations {
             KnownConstraintType,
             EndpointCardinality,
             RelationshipType,
+            ConstraintPropertyReferences,
+            ConstraintOverlap,
         )
 
         // Named-extension validators (ADR-0005): each owner subpackage under
