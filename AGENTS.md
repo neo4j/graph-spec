@@ -11,7 +11,7 @@ implementation — the Kotlin Multiplatform model (`src/`), the Go module
 (`go/`), and the Gradle build (`gradle/`) — which the
 port re-targets at the v1 format in place, keeping main's machinery and
 public APIs (ADR-0006). The transition is governed by
-[`docs/adr/`](docs/adr/) (0001–0007).
+[`docs/adr/`](docs/adr/) (0001–0008).
 
 These rules apply to every change. History never weakens them.
 
@@ -25,7 +25,7 @@ changed semantics, changed cardinalities, type-system changes, extension
 mechanism changes, interop mapping changes, governance decisions — if it
 alters what a document may say or what it means, it gets an ADR first.
 
-- Location: [`docs/adr/`](docs/adr/) — 0001–0007 govern the repo
+- Location: [`docs/adr/`](docs/adr/) — 0001–0008 govern the repo
   transition and the port; list the directory before numbering
 - Filename: `NNNN-short-kebab-slug.md` (four-digit sequence, never reused)
 - One decision per file

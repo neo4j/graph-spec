@@ -9,7 +9,7 @@ Spec overlay contents:
 
 - `ontology-spec.schema.json` - JSON Schema (draft 2020-12) for the ontology format.
 - `src/jvmTest/resources/ontology/` - the example ontologies exercising the full surface, as test resources.
-- `src/jvmTest/kotlin/ontology/OntologySpecExamplesTest.kt` - the spec-validation gate (ADR-0007): compiles the schema against the 2020-12 meta-schema, then validates every example resource against it.
+- `src/jvmTest/kotlin/spec/OntologySpecExamplesTest.kt` - the spec-validation gate (ADR-0007): compiles the schema against the 2020-12 meta-schema, then validates every example resource against it.
 
 ## Run
 
