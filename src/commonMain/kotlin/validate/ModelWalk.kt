@@ -63,9 +63,11 @@ internal fun GraphModel.forEachConstraint(action: (path: String, constraint: Con
     }
 }
 
-internal fun GraphModel.forEachEndpoint(action: (path: String, endpoint: RelationshipTarget) -> Unit) {
-    forEachRelationship { relationshipPath, _, relationship ->
-        action("$relationshipPath.from", relationship.from)
-        action("$relationshipPath.to", relationship.to)
+internal fun GraphModel.forEachEndpoint(
+    action: (path: String, side: String, relationshipId: String, endpoint: RelationshipTarget) -> Unit,
+) {
+    forEachRelationship { relationshipPath, relationshipId, relationship ->
+        action("$relationshipPath.from", "from", relationshipId, relationship.from)
+        action("$relationshipPath.to", "to", relationshipId, relationship.to)
     }
 }

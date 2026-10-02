@@ -19,7 +19,7 @@ package validate.relationship
 import model.GraphModel
 import validate.Issue
 import validate.Validation
-import validate.forEachRelationship
+import validate.forEachEndpoint
 
 /**
  * v1 rule: every relationship endpoint's `node` value resolves to a key in the
@@ -30,22 +30,13 @@ import validate.forEachRelationship
  */
 object EndpointNodeReferences : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        model.forEachRelationship { path, relationshipId, relationship ->
-            if (!model.nodes.containsKey(relationship.from.node)) {
+        model.forEachEndpoint { path, side, relationshipId, endpoint ->
+            if (!model.nodes.containsKey(endpoint.node)) {
                 issues.add(
                     Issue(
-                        code = "missing_relation_from_node",
-                        message = "Missing node with id '${relationship.from.node}' for relationship '$relationshipId'",
-                        path = "$path.from.node",
-                    ),
-                )
-            }
-            if (!model.nodes.containsKey(relationship.to.node)) {
-                issues.add(
-                    Issue(
-                        code = "missing_relation_to_node",
-                        message = "Missing node with id '${relationship.to.node}' for relationship '$relationshipId'",
-                        path = "$path.to.node",
+                        code = "missing_relation_${side}_node",
+                        message = "Missing node with id '${endpoint.node}' for relationship '$relationshipId'",
+                        path = "$path.node",
                     ),
                 )
             }

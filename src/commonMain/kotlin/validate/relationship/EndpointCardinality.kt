@@ -36,7 +36,7 @@ import validate.forEachEndpoint
  */
 object EndpointCardinality : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        model.forEachEndpoint { path, endpoint ->
+        model.forEachEndpoint { path, _, _, endpoint ->
             validateEndpoint(path, endpoint, issues)
         }
     }
