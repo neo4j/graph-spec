@@ -19,6 +19,7 @@ import codec.format.JsonFormat
 import codec.format.YamlFormat
 import codec.schema.SchemaMap
 import migrate.MigrationPath
+import migrate.migration.graphSpec.GraphSpecV4OntologySpecMigration
 import model.GraphModel
 import model.Type
 import model.Version
@@ -32,8 +33,8 @@ sealed class OntologySpec(val configuration: OntologySpecConfig) {
         In v1, GraphModel.version is the ontology's own version (identity metadata), not the
         format version; the format version of every document this SDK reads and writes is
         Version.LATEST, so the MigrationPath is consulted with the format version, not the
-        document's. The path is empty until the 4.0.0 -> 1.0.0 converter lands in track 3
-        (ADR-0004).
+        document's. The path holds exactly one migration: the one-way 4.0.0 -> 1.0.0
+        converter (ADR-0004 track 3, ADR-0008).
      */
     fun encodeToString(
         model: GraphModel,
@@ -68,9 +69,11 @@ sealed class OntologySpec(val configuration: OntologySpecConfig) {
 }
 
 fun defaultConfig(format: Format): OntologySpecConfig {
-    // No migrations are wired by default: the legacy dataModel chain was deleted with the
-    // v1 model rewrite; the 4.0.0 -> 1.0.0 converter lands in track 3 (ADR-0004).
-    return OntologySpecConfig.Builder(format).build()
+    // ADR-0008: the one-way 4.0.0 -> 1.0.0 converter is the single default migration, so
+    // OntologySpec.Json.decodeFromString(doc, Type.GRAPH_SPEC) works with no API change.
+    return OntologySpecConfig.Builder(format)
+        .apply { migrate(GraphSpecV4OntologySpecMigration()) }
+        .build()
 }
 
 private class OntologySpecImpl(configuration: OntologySpecConfig) : OntologySpec(configuration)

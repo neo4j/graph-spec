@@ -88,16 +88,25 @@ class MigrationPathTest {
         schema["version"] = "1.2.3-alpha+build"
 
         // 1.2.3-alpha -> 1.2.0
-        val m1 = TestMigration("1.2.0", "2.0.0")
+        val m1 = TestMigration("1.2.0", "2.0.0") { it["migrated"] = true }
         val engineWithMigrator = createPath(m1)
 
         val result = engineWithMigrator.migrate(schema, "type", "2.0.0", "type")
-        assertEquals("2.0.0", result.stringOrNull("version"))
+        assertEquals(
+            "true",
+            result.stringOrNull("migrated"),
+            "1.2.3-alpha+build must route through the 1.2.0 migration",
+        )
     }
 
     @Test
-    fun `migrate - executes transformations and updates version key`() {
-        val m1 = TestMigration("1.0.0", "1.1.0") { it["data"] = "processed" }
+    fun `migrate - executes transformations and the migration owns the output document`() {
+        // No post-stamping: in the v1 world the migration sets the target's identity
+        // fields itself (`$schema` + Int `version`, ADR-0008 §1).
+        val m1 = TestMigration("1.0.0", "1.1.0") {
+            it["data"] = "processed"
+            it["version"] = "1.1.0"
+        }
         val engine = createPath(m1)
         val schema = SchemaMap()
         schema["version"] = "1.0.0"
@@ -142,7 +151,7 @@ class MigrationPathTest {
         toV: String,
         fromT: String = "type",
         toT: String = "type",
-        val transformation: (SchemaMap) -> Unit = {}
+        val transformation: (SchemaMap) -> Unit = {},
     ) : Migration(fromT, fromV, toT, toV) {
         override fun migrate(schema: SchemaMap): SchemaMap {
             transformation(schema)
