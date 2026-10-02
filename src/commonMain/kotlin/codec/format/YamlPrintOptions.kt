@@ -21,7 +21,7 @@ import codec.schema.SchemaElement
 class YamlPrintOptions(
     val indent: Int = 2,
     val alwaysQuoteStrings: Boolean = false,
-    val inlinePaths: Set<String> = emptySet()
+    val inlinePaths: Set<String> = emptySet(),
 ) {
     private val matchers = inlinePaths.map { pattern -> pattern to Regex(patternToRegex(pattern)) }
 

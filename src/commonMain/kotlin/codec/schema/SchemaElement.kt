@@ -64,12 +64,17 @@ internal fun <T : SchemaElement> SchemaElement.adopt(child: T, identifier: Strin
 
 fun Any?.toSchemaElement(path: String = ""): SchemaElement = when (this) {
     null -> SchemaNull(path)
+
     is SchemaElement -> this.repath(path)
+
     is Map<*, *> -> SchemaMap(
         entries.associateTo(mutableMapOf()) { (k, v) -> k.toString() to v.toSchemaElement() },
-        path
+        path,
     )
+
     is Iterable<*> -> SchemaList(mapTo(mutableListOf()) { it.toSchemaElement() }, path)
+
     is String -> SchemaLiteral(toString(), path, isString = true)
+
     else -> SchemaLiteral(toString(), path, isString = false)
 }

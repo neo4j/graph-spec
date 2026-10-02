@@ -31,10 +31,10 @@ class SchemaElementTest {
             mutableMapOf(
                 "users" to SchemaList(
                     mutableListOf(
-                        SchemaMap(mutableMapOf("name" to SchemaLiteral("Alice")))
-                    )
-                )
-            )
+                        SchemaMap(mutableMapOf("name" to SchemaLiteral("Alice"))),
+                    ),
+                ),
+            ),
         )
 
         val updated = root.repath("root")
@@ -160,7 +160,7 @@ class SchemaElementTest {
     fun `putAll repaths all elements`() {
         val root = SchemaMap(path = "root")
         val externalData = mapOf(
-            "ext" to SchemaLiteral("value", "wrong.path")
+            "ext" to SchemaLiteral("value", "wrong.path"),
         )
 
         root.putAll(externalData)

@@ -49,7 +49,7 @@ class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMapOf(),
                 append(':')
                 append(v)
             }
-        }
+        },
     )
 
     operator fun set(key: String, value: Any?) {
@@ -151,19 +151,19 @@ class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMapOf(),
 fun schemaMapOf(vararg pairs: Pair<String, Any?>) = SchemaMap(
     pairs
         .filter { it.second != null }
-        .associateTo(mutableMapOf()) { it.first to it.second!!.toSchemaElement() }
+        .associateTo(mutableMapOf()) { it.first to it.second!!.toSchemaElement() },
 )
 
 infix fun <A> A.toNotEmpty(that: Map<String, Any>?): Pair<A, Map<String, Any>?> = Pair(
     this,
     that?.takeIf {
         it.isNotEmpty()
-    }
+    },
 )
 
 infix fun <A> A.toNotEmpty(that: Collection<Any>?): Pair<A, Collection<Any>?> = Pair(
     this,
     that?.takeIf {
         it.isNotEmpty()
-    }
+    },
 )

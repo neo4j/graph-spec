@@ -67,7 +67,7 @@ fun invokeBridge(
     vararg input: CPointer<ByteVar>?,
     outputBuffer: CPointer<ByteVar>?,
     bufferSize: Int,
-    action: (BridgeInput) -> String
+    action: (BridgeInput) -> String,
 ): Int {
     if (input.any { it == null } || outputBuffer == null || bufferSize < 1) return INVALID_INPUTS
 

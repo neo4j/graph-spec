@@ -39,11 +39,13 @@ class YamlWriter(private val options: YamlPrintOptions = YamlPrintOptions()) {
         val inline = forceInline || options.shouldInline(element)
         when (element) {
             is SchemaNull -> builder.append("null")
+
             is SchemaLiteral -> if (element.isString) {
                 builder.append(escapeAndQuoteString(element.string, options.alwaysQuoteStrings))
             } else {
                 builder.append(element.string)
             }
+
             is SchemaList -> {
                 if (element.isEmpty()) {
                     builder.append("[]")
@@ -64,16 +66,19 @@ class YamlWriter(private val options: YamlPrintOptions = YamlPrintOptions()) {
                         when (child) {
                             is SchemaMap if !options.shouldInline(child) ->
                                 writeBlockMapInsideList(child, indent + 2, builder)
+
                             is SchemaList if !options.shouldInline(child) -> {
                                 builder.append("\n")
                                 builder.append(" ".repeat(indent + 2))
                                 writeElement(child, indent + 2, forceInline = false, builder)
                             }
+
                             else -> writeElement(child, indent + 2, forceInline = false, builder)
                         }
                     }
                 }
             }
+
             is SchemaMap -> {
                 if (element.isEmpty()) {
                     builder.append("{}")
@@ -110,11 +115,13 @@ class YamlWriter(private val options: YamlPrintOptions = YamlPrintOptions()) {
                     builder.append(" ".repeat(indent + options.indent))
                     writeElement(value, indent + options.indent, forceInline = false, builder)
                 }
+
                 is SchemaList if !valueInline -> {
                     builder.append("\n")
                     builder.append(" ".repeat(indent + options.indent))
                     writeElement(value, indent + options.indent, forceInline = false, builder)
                 }
+
                 else -> {
                     builder.append(" ")
                     writeElement(value, indent, forceInline = false, builder)
