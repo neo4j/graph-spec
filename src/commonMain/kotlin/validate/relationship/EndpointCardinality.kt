@@ -23,10 +23,10 @@ import validate.Validation
 import validate.forEachEndpoint
 
 /**
- * v1 rule: endpoint cardinality sanity (ontology-spec.schema.json `$defs.endpoint`:
+ * v1 rule: endpoint cardinality sanity (ontology-graph-spec.schema.json `$defs.endpoint`:
  * `count`/`min_count` minimum 0, `max_count` minimum 1, "count is the exact form,
  * min_count/max_count the ranged form; absent means unconstrained (0..*)";
- * docs/ontology-spec-v1-proposal.md changelog 2026-09-25 and Appendix A "Cardinality
+ * docs/ontology-graph-spec-v1-proposal.md changelog 2026-09-25 and Appendix A "Cardinality
  * lives on the endpoints"). The minimums are schema-enforced for parsed documents but
  * not for programmatically built models; the cross-field rules the schema cannot
  * express at all: `min_count` must not exceed `max_count` (a range with min above max

@@ -19,14 +19,14 @@ import codec.format.JsonFormat
 import codec.format.YamlFormat
 import codec.schema.SchemaMap
 import migrate.MigrationPath
-import migrate.migration.graphSpec.GraphSpecV4OntologySpecMigration
+import migrate.migration.graphSpec.GraphSpecV4OntologyGraphSpecMigration
 import model.GraphModel
 import model.Type
 import model.Version
 import kotlin.js.JsExport
 
 @JsExport
-sealed class OntologySpec(val configuration: OntologySpecConfig) {
+sealed class OntologyGraphSpec(val configuration: OntologyGraphSpecConfig) {
     private val path = MigrationPath(configuration.migrations)
 
     /*
@@ -38,52 +38,52 @@ sealed class OntologySpec(val configuration: OntologySpecConfig) {
      */
     fun encodeToString(
         model: GraphModel,
-        targetType: String = Type.ONTOLOGY_SPEC,
+        targetType: String = Type.ONTOLOGY_GRAPH_SPEC,
         targetVersion: String = Version.LATEST,
     ): String {
-        if (!path.requiresMigration(Version.LATEST, Type.ONTOLOGY_SPEC, targetVersion, targetType)) {
+        if (!path.requiresMigration(Version.LATEST, Type.ONTOLOGY_GRAPH_SPEC, targetVersion, targetType)) {
             return configuration.format.encodeModelToString(model)
         }
         val schema = configuration.format.encodeToSchema(model)
         var map = schema as? SchemaMap ?: error("Schema format expected")
-        map = path.migrate(map, Type.ONTOLOGY_SPEC, targetVersion, targetType)
+        map = path.migrate(map, Type.ONTOLOGY_GRAPH_SPEC, targetVersion, targetType)
         return configuration.format.encodeToString(map)
     }
 
-    fun decodeFromString(content: String, type: String = Type.ONTOLOGY_SPEC): GraphModel {
-        if (type == Type.ONTOLOGY_SPEC) {
+    fun decodeFromString(content: String, type: String = Type.ONTOLOGY_GRAPH_SPEC): GraphModel {
+        if (type == Type.ONTOLOGY_GRAPH_SPEC) {
             val model = configuration.format.decodeModelFromString(content)
-            if (!path.requiresMigration(Version.LATEST, type, Version.LATEST, Type.ONTOLOGY_SPEC)) {
+            if (!path.requiresMigration(Version.LATEST, type, Version.LATEST, Type.ONTOLOGY_GRAPH_SPEC)) {
                 return model
             }
         }
         val schema = configuration.format.decodeFromString(content)
         var map = schema as? SchemaMap ?: error("Schema format expected")
-        map = path.migrate(map, type, Version.LATEST, Type.ONTOLOGY_SPEC)
+        map = path.migrate(map, type, Version.LATEST, Type.ONTOLOGY_GRAPH_SPEC)
         return configuration.format.decodeFromSchema(map)
     }
 
-    object Json : OntologySpec(defaultConfig(JsonFormat.default))
+    object Json : OntologyGraphSpec(defaultConfig(JsonFormat.default))
 
-    object Yaml : OntologySpec(defaultConfig(YamlFormat.default))
+    object Yaml : OntologyGraphSpec(defaultConfig(YamlFormat.default))
 }
 
-fun defaultConfig(format: Format): OntologySpecConfig {
+fun defaultConfig(format: Format): OntologyGraphSpecConfig {
     // ADR-0008: the one-way 4.0.0 -> 1.0.0 converter is the single default migration, so
-    // OntologySpec.Json.decodeFromString(doc, Type.GRAPH_SPEC) works with no API change.
-    return OntologySpecConfig.Builder(format)
-        .apply { migrate(GraphSpecV4OntologySpecMigration()) }
+    // OntologyGraphSpec.Json.decodeFromString(doc, Type.GRAPH_SPEC) works with no API change.
+    return OntologyGraphSpecConfig.Builder(format)
+        .apply { migrate(GraphSpecV4OntologyGraphSpecMigration()) }
         .build()
 }
 
-private class OntologySpecImpl(configuration: OntologySpecConfig) : OntologySpec(configuration)
+private class OntologyGraphSpecImpl(configuration: OntologyGraphSpecConfig) : OntologyGraphSpec(configuration)
 
-fun OntologySpec(
-    from: OntologySpec = OntologySpec.Json,
-    builderAction: OntologySpecConfig.Builder.() -> Unit,
-): OntologySpec {
-    val builder = OntologySpecConfig.Builder(from.configuration)
+fun OntologyGraphSpec(
+    from: OntologyGraphSpec = OntologyGraphSpec.Json,
+    builderAction: OntologyGraphSpecConfig.Builder.() -> Unit,
+): OntologyGraphSpec {
+    val builder = OntologyGraphSpecConfig.Builder(from.configuration)
     builder.builderAction()
     val conf = builder.build()
-    return OntologySpecImpl(conf)
+    return OntologyGraphSpecImpl(conf)
 }

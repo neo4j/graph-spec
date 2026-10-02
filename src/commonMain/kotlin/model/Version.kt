@@ -23,7 +23,7 @@ object Version {
     const val GRAPH_SPEC_V4 = "4.0.0"
 
     /*
-        Ontology spec format version
+        Ontology Graph spec format version
      */
     const val LATEST = "1.0.0"
 }

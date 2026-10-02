@@ -23,7 +23,7 @@ import validate.forEachNode
 
 /**
  * v1 rule: when the `labels` object is used, `labels.identifier` is present and
- * non-blank (ontology-spec.schema.json `$defs.labels` lists `identifier` in `required`
+ * non-blank (ontology-graph-spec.schema.json `$defs.labels` lists `identifier` in `required`
  * and describes it as "The identifying (main) label."). The schema enforces this on
  * parsed documents; the Kotlin model's [model.node.Labels.identifier] is nullable, so a
  * programmatically built model can violate it — this is the model-level check.

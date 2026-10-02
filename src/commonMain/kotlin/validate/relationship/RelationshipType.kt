@@ -23,9 +23,9 @@ import validate.forEachRelationship
 
 /**
  * v1 rule: a relationship's `type` is present and non-blank
- * (ontology-spec.schema.json `$defs.relationshipEntry` requires `type` but types it as
+ * (ontology-graph-spec.schema.json `$defs.relationshipEntry` requires `type` but types it as
  * a plain string, so a blank value passes schema validation;
- * docs/ontology-spec-v1-proposal.md §Relationship: "`type` | the relationship type
+ * docs/ontology-graph-spec-v1-proposal.md §Relationship: "`type` | the relationship type
  * (required)"). A blank type is the required field's empty form, rejected here.
  */
 object RelationshipType : Validation {

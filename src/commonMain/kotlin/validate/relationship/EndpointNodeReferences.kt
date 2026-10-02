@@ -23,8 +23,8 @@ import validate.forEachEndpoint
 
 /**
  * v1 rule: every relationship endpoint's `node` value resolves to a key in the
- * document's `nodes` map (ontology-spec.schema.json `$defs.endpoint.node`: "A node id
- * from the nodes map"; docs/ontology-spec-v1-proposal.md §Relationship: "`from`, `to` |
+ * document's `nodes` map (ontology-graph-spec.schema.json `$defs.endpoint.node`: "A node id
+ * from the nodes map"; docs/ontology-graph-spec-v1-proposal.md §Relationship: "`from`, `to` |
  * `{ node: <id>, ... }` — references a nodes-map key"). A cross-reference the schema
  * cannot express, so it is enforced here.
  */

@@ -31,7 +31,7 @@ class PropertyTypeTokenTest {
     private val validator = PropertyTypeToken
 
     private fun modelWithNodeProperty(property: Property) = GraphModel(
-        schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+        schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
         id = "test",
         version = 1,
         nodes = mutableMapOf("n" to Node(label = "N", properties = mutableMapOf("p" to property))),
@@ -134,7 +134,7 @@ class PropertyTypeTokenTest {
     @Test
     fun `relationship properties are checked too`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+            schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
             id = "test",
             version = 1,
             nodes = mutableMapOf("a" to Node(label = "A"), "b" to Node(label = "B")),

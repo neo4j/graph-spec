@@ -29,7 +29,7 @@ class NodeLabelsIdentifierTest {
     private val validator = NodeLabelsIdentifier
 
     private fun model(node: Node) = GraphModel(
-        schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+        schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
         id = "test",
         version = 1,
         nodes = mutableMapOf("n" to node),

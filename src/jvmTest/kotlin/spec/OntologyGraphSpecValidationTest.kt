@@ -24,14 +24,14 @@ import validate.Validations
 import kotlin.test.assertTrue
 
 /**
- * The validator-conformance half of ADR-0003/ADR-0007: [OntologySpecExamplesTest] proves
- * the examples validate against the hand-maintained schema; [OntologyModelRoundTripTest]
+ * The validator-conformance half of ADR-0003/ADR-0007: [OntologyGraphSpecExamplesTest] proves
+ * the examples validate against the hand-maintained schema; [OntologyGraphModelRoundTripTest]
  * proves they round-trip the v1 model; this test proves they pass the v1 validator
  * suite ([Validations.all] — the rules the schema cannot express) with zero issues.
  * A schema-valid example that trips the model-level validators means schema/validator
  * disagreement, and per ADR-0003 the schema wins.
  */
-class OntologySpecValidationTest {
+class OntologyGraphSpecValidationTest {
 
     private val format = JsonFormat.default
 

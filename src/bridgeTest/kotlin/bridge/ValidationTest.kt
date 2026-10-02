@@ -36,7 +36,7 @@ class ValidationTest {
         // A valid v1 document: a clean parse through Validations.all yields an empty
         // issue list.
         val input = """{
-            "${'$'}schema": "https://neo4j.com/ontology-spec.schema.json",
+            "${'$'}schema": "https://neo4j.com/ontology-graph-spec.schema.json",
             "id": "test",
             "version": 1,
             "nodes": {
@@ -92,7 +92,7 @@ class ValidationTest {
         // references a node id that is not a key in the nodes map. The bridge decodes
         // fine and surfaces the validator's issue (STATUS_OK, issue in the payload).
         val input = """{
-            "${'$'}schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+            "${'$'}schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
             "id": "test",
             "version": 1,
             "nodes": {

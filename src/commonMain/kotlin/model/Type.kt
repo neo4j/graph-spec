@@ -20,6 +20,6 @@ object Type {
     // Graph spec 4.0.0; the converter's input contract only (ADR-0008) — this SDK never writes it
     const val GRAPH_SPEC = "graph_spec"
 
-    // OntologySpec
-    const val ONTOLOGY_SPEC = "ontology_spec"
+    // OntologyGraphSpec
+    const val ONTOLOGY_GRAPH_SPEC = "ontology_graph_spec"
 }

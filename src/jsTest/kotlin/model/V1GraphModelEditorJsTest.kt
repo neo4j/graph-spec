@@ -46,7 +46,7 @@ class V1GraphModelEditorJsTest {
 
     private fun buildV1ModelJs(): GraphModelJs {
         val model = graphModelJs(
-            schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+            schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
             id = "editor-built",
             version = 1,
             name = "editor-built-model",
@@ -210,7 +210,7 @@ class V1GraphModelEditorJsTest {
         val model = GraphModelEditor.model(jsModel)
 
         // Spot-check the class side of the v1 shape before the round trip
-        assertEquals("https://neo4j.com/ontology-spec/1.0.0/schema.json", model.schema)
+        assertEquals("https://neo4j.com/ontology-graph-spec/1.0.0/schema.json", model.schema)
         assertEquals("editor-built", model.id)
         assertEquals(setOf("node0", "node1"), model.nodes.keys)
         assertEquals(setOf("relationship0"), model.relationships.keys)

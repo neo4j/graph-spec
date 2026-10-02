@@ -30,13 +30,13 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 /**
- * The model-conformance half of ADR-0003/ADR-0007: [OntologySpecExamplesTest] proves
+ * The model-conformance half of ADR-0003/ADR-0007: [OntologyGraphSpecExamplesTest] proves
  * the examples validate against the hand-maintained schema; this test proves the v1
  * Kotlin model ([model.GraphModel] via [JsonFormat]) round-trips those same examples
  * losslessly — deserialize, re-serialize, JSON tree equality — including the open
  * surfaces (tool extras, extension payloads) and the "absent means none" rule.
  */
-class OntologyModelRoundTripTest {
+class OntologyGraphModelRoundTripTest {
 
     private val mapper = ObjectMapper()
     private val format = JsonFormat.default
@@ -70,7 +70,7 @@ class OntologyModelRoundTripTest {
     fun `absent means none - omitted optional fields are not invented`() {
         val minimal = """
             {
-              "${'$'}schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+              "${'$'}schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
               "id": "minimal",
               "version": 1,
               "nodes": {

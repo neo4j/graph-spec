@@ -24,10 +24,10 @@ import validate.forEachNode
 /**
  * v1 rule: a node carries its label in `label` (the shorthand for an identifier-only
  * `labels`) or in `labels`, never both and never neither
- * (ontology-spec.schema.json `$defs.node`: "Every node carries its label in label
+ * (ontology-graph-spec.schema.json `$defs.node`: "Every node carries its label in label
  * (shorthand for an identifier-only labels) or labels.identifier (when implied/optional
  * labels exist). Not schema-enforced; a node with neither is meaningless.";
- * docs/ontology-spec-v1-proposal.md §Node: "`label` is the shorthand for setting the
+ * docs/ontology-graph-spec-v1-proposal.md §Node: "`label` is the shorthand for setting the
  * identifier only"). A blank `label` counts as absent.
  */
 object NodeLabelExclusivity : Validation {

@@ -30,7 +30,7 @@ import kotlin.js.JsStatic
 class Validations {
     companion object {
         /*
-            The v1 suite (track 2, ADR-0004): the rules ontology-spec.schema.json cannot
+            The v1 suite (track 2, ADR-0004): the rules ontology-graph-spec.schema.json cannot
             express. Each validator's KDoc cites the schema section or proposal line it
             enforces. The 4.0.0 validators were deleted with their model subjects in the
             v1 model rewrite (track 1).

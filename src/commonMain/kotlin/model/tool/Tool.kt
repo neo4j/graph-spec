@@ -22,7 +22,7 @@ import model.extension.ExtensionValue
 import kotlin.js.JsExport
 
 /**
- * Core v1 tool definition (ontology-spec.schema.json `$defs/tool`, additionalProperties:true):
+ * Core v1 tool definition (ontology-graph-spec.schema.json `$defs/tool`, additionalProperties:true):
  * [type] discriminates (`canonicalQuery`, `externalRequest`, ...), [name] and [description]
  * are the readable surface. Remaining per-type fields are owner-defined and carried in
  * [extra], inlined on the wire (e.g. `cypher`, `url`). Definitions only, no behaviour.

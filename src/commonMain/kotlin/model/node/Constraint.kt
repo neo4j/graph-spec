@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 /**
- * v1 constraint object (ontology-spec.schema.json `$defs.constraint`): the nameable
+ * v1 constraint object (ontology-graph-spec.schema.json `$defs.constraint`): the nameable
  * alternative to the `mustExist`/`unique`/`key` property shorthand flags. Shared by
  * node and relationship entries; [type] is a [model.type.ConstraintType] token.
  */

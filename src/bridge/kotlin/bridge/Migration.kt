@@ -16,7 +16,7 @@
  */
 package bridge
 
-import OntologySpec
+import OntologyGraphSpec
 import codec.format.JsonFormat
 import codec.schema.SchemaMap
 import kotlinx.cinterop.ByteVar
@@ -51,7 +51,7 @@ fun migrate(
     outputBuffer = outputBuffer,
     bufferSize = bufferSize,
 ) { input ->
-    val path = MigrationPath(OntologySpec.Json.configuration.migrations)
+    val path = MigrationPath(OntologyGraphSpec.Json.configuration.migrations)
     val schema = format.decodeFromString(input[0])
     var map = schema as? SchemaMap ?: error("Schema format expected")
     map = path.migrate(map, type = input[1], targetType = input[2], targetVersion = input[3])

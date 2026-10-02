@@ -23,7 +23,7 @@ import kotlinx.serialization.json.decodeFromJsonElement
 import kotlin.js.JsExport
 
 /**
- * The fixed custom-extension envelope (ADR-0005; ontology-spec.schema.json `$defs.extension`):
+ * The fixed custom-extension envelope (ADR-0005; ontology-graph-spec.schema.json `$defs.extension`):
  * [type] required; [schema] (`$schema`), [name], [definition] optional; [definition] is
  * free-form and never validated. Unknown extra fields are carried untouched in [extra].
  * On the wire the reserved `custom` key of an extensions map holds a list of envelopes.

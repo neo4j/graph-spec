@@ -16,7 +16,7 @@
  */
 package migrate
 
-import OntologySpec
+import OntologyGraphSpec
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ObjectNode
 import com.networknt.schema.JsonSchema
@@ -43,7 +43,7 @@ private object CorpusAnchor
  * The ADR-0008 corpus gate: every 4.0.0 fixture under
  * `src/jvmTest/resources/migrate/migration/dataModel/` (the prod-like YAML files in
  * pretty form, the internal YAML files in internal form) converts through
- * [OntologySpec] and the output validates against `ontology-spec.schema.json` (the
+ * [OntologyGraphSpec] and the output validates against `ontology-graph-spec.schema.json` (the
  * ADR-0007 gate machinery). Each pretty/internal pair of the same model must converge
  * to the same v1 document modulo the generated `id`. The 3.0.0 fixtures (the prod-like
  * JSON files, `graph-data-model-3.0.0.json`) are legacy-chain inputs, not converter
@@ -55,7 +55,7 @@ class GraphSpecV4CorpusTest {
     private val config = SchemaValidatorsConfig.builder().formatAssertionsEnabled(true).build()
     private val factory =
         JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V202012) { builder ->
-            // Same offline setup as the spec gate (spec/OntologySpecExamplesTest.kt).
+            // Same offline setup as the spec gate (spec/OntologyGraphSpecExamplesTest.kt).
             builder
                 .schemaMappers { it.add(MetaSchemaMapper()) }
                 .schemaLoaders { it.add(ClasspathSchemaLoader()) }
@@ -73,7 +73,7 @@ class GraphSpecV4CorpusTest {
             .orEmpty()
 
     private fun convert(yaml: String): String =
-        OntologySpec.Json.encodeToString(OntologySpec.Yaml.decodeFromString(yaml, Type.GRAPH_SPEC))
+        OntologyGraphSpec.Json.encodeToString(OntologyGraphSpec.Yaml.decodeFromString(yaml, Type.GRAPH_SPEC))
 
     @TestFactory
     fun `every 4-0-0 fixture converts and validates against the v1 schema`(): List<DynamicTest> {
@@ -123,7 +123,7 @@ class GraphSpecV4CorpusTest {
         return legacy.map { fixture ->
             dynamicTest(fixture.name) {
                 val exception = assertFailsWith<IllegalStateException> {
-                    OntologySpec.Json.decodeFromString(fixture.readText(), Type.GRAPH_SPEC)
+                    OntologyGraphSpec.Json.decodeFromString(fixture.readText(), Type.GRAPH_SPEC)
                 }
                 assertTrue(
                     exception.message!!.contains("Unsupported migration from graph_spec:3.0"),

@@ -23,7 +23,7 @@ import model.extension.Extensions
 import kotlin.js.JsExport
 
 /**
- * v1 property (ontology-spec.schema.json `$defs/property`). [type] is a type token
+ * v1 property (ontology-graph-spec.schema.json `$defs/property`). [type] is a type token
  * (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>`, `ANY`, ...; `$defs/propertyType`);
  * [dimension] is the VECTOR companion. `mustExist`/`unique`/`key` are the shorthand
  * constraint flags; [oneOf] (`one_of`) and [pattern] constrain allowed values.

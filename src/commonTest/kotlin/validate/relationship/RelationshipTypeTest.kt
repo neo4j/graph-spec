@@ -30,7 +30,7 @@ class RelationshipTypeTest {
     private val validator = RelationshipType
 
     private fun model(type: String) = GraphModel(
-        schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+        schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
         id = "test",
         version = 1,
         nodes = mutableMapOf("a" to Node(label = "A"), "b" to Node(label = "B")),

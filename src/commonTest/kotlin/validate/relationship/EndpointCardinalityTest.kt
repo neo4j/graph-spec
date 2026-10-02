@@ -30,7 +30,7 @@ class EndpointCardinalityTest {
     private val validator = EndpointCardinality
 
     private fun model(to: RelationshipTarget) = GraphModel(
-        schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+        schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
         id = "test",
         version = 1,
         nodes = mutableMapOf("a" to Node(label = "A"), "b" to Node(label = "B")),
@@ -113,7 +113,7 @@ class EndpointCardinalityTest {
     @Test
     fun `from endpoints are checked too`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+            schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
             id = "test",
             version = 1,
             nodes = mutableMapOf("a" to Node(label = "A"), "b" to Node(label = "B")),

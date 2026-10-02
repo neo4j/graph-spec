@@ -33,7 +33,7 @@ import kotlin.test.assertEquals
  * Jackson tree-equal to the original. If [YamlFormat] drops or invents a field, the tree
  * equality fails.
  */
-class OntologyYamlRoundTripTest {
+class OntologyGraphYamlRoundTripTest {
 
     private val mapper = ObjectMapper()
     private val json = JsonFormat.default

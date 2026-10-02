@@ -29,7 +29,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsStatic
 
 /**
- * Root of an ontology spec v1 document (ontology-spec.schema.json).
+ * Root of an ontology graph spec v1 document (ontology-graph-spec.schema.json).
  * [version] is the ontology's own version (identity metadata), not the format version;
  * the format version rides in [schema] (`$schema`).
  */

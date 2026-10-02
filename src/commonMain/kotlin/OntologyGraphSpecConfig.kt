@@ -25,7 +25,7 @@ import kotlin.js.JsExport
 import kotlin.js.JsName
 
 @JsExport
-class OntologySpecConfig(
+class OntologyGraphSpecConfig(
     val validators: List<Validation>,
     val migrations: Map<String, List<Migration>>,
     val format: Format,
@@ -38,7 +38,7 @@ class OntologySpecConfig(
         val migrations = mutableMapOf<String, MutableList<Migration>>()
 
         @JsName("default")
-        constructor(config: OntologySpecConfig) : this(config.format) {
+        constructor(config: OntologyGraphSpecConfig) : this(config.format) {
             validators.addAll(config.validators)
             migrations.putAll(config.migrations.mapValues { it.value.toMutableList() })
         }
@@ -67,7 +67,7 @@ class OntologySpecConfig(
             migrations.getOrPut(migration.fromKey) { mutableListOf() }.add(migration)
         }
 
-        fun build(): OntologySpecConfig = OntologySpecConfig(
+        fun build(): OntologyGraphSpecConfig = OntologyGraphSpecConfig(
             validators = validators,
             migrations = migrations,
             format = format,

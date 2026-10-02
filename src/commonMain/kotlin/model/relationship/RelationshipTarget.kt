@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 /**
- * v1 relationship endpoint (ontology-spec.schema.json `$defs.endpoint`): [node] is a node id
+ * v1 relationship endpoint (ontology-graph-spec.schema.json `$defs.endpoint`): [node] is a node id
  * from the document's nodes map. Cardinality: [count] is the exact form, [minCount]/[maxCount]
  * the ranged form; all absent = unconstrained (0..*).
  */

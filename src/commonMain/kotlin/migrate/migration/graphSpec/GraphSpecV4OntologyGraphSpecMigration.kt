@@ -29,7 +29,7 @@ import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 /**
- * The one-way graph spec 4.0.0 -> ontology spec 1.0.0 converter (ADR-0008), the single
+ * The one-way graph spec 4.0.0 -> ontology graph spec 1.0.0 converter (ADR-0008), the single
  * `Migration` on the kept `MigrationPath` machinery (ADR-0004 track 3, ADR-0006). Every
  * rule is a map -> map transform over the codec `SchemaMap` tree; no 4.0.0 model class
  * is referenced. Decode (JSON or YAML, pretty or internal form) happens in the codec
@@ -38,11 +38,11 @@ import kotlin.uuid.Uuid
  * Pre-4.0.0 inputs (data model 2.3/2.4/3.0, import_spec 1.0.0) are out of scope and
  * rejected (ADR-0008 §10): holders run the graph-spec 4.x tooling first.
  */
-class GraphSpecV4OntologySpecMigration :
+class GraphSpecV4OntologyGraphSpecMigration :
     Migration(
         fromType = Type.GRAPH_SPEC,
         from = Version.GRAPH_SPEC_V4,
-        toType = Type.ONTOLOGY_SPEC,
+        toType = Type.ONTOLOGY_GRAPH_SPEC,
         to = Version.LATEST,
     ) {
 
@@ -447,7 +447,7 @@ class GraphSpecV4OntologySpecMigration :
 
     companion object {
         /** The v1 spec link (the schema's `$id`), as used by every v1 example. */
-        const val SCHEMA_ID = "https://neo4j.com/ontology-spec/1.0.0/schema.json"
+        const val SCHEMA_ID = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json"
 
         /** First-party extension owner prefixes (ADR-0005/ADR-0008 §9). */
         private val NAMED_PREFIXES = listOf("neo4j:", "neo4j-importer:")

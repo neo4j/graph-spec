@@ -17,7 +17,7 @@
 package model.type
 
 /**
- * v1 constraint type tokens (ontology-spec.schema.json `$defs.constraint.constraint_type`).
+ * v1 constraint type tokens (ontology-graph-spec.schema.json `$defs.constraint.constraint_type`).
  */
 object ConstraintType {
     const val KEY = "key"

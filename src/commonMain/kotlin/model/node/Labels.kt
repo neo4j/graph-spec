@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 /**
- * v1 `labels` object (ontology-spec.schema.json `$defs.labels`, additionalProperties:false):
+ * v1 `labels` object (ontology-graph-spec.schema.json `$defs.labels`, additionalProperties:false):
  * the identifying label plus implied and optional labels. A node with no implied/optional
  * labels uses the `label` shorthand instead.
  */

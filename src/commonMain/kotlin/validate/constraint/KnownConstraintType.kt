@@ -26,8 +26,8 @@ private val KNOWN_CONSTRAINT_TYPES = setOf(ConstraintType.KEY, ConstraintType.UN
 
 /**
  * v1 rule: a constraint object's `constraint_type` is one of `key`, `unique`,
- * `mustExist` (ontology-spec.schema.json `$defs.constraint.constraint_type` enum;
- * docs/ontology-spec-v1-proposal.md §Node: "constraint objects, optionally named
+ * `mustExist` (ontology-graph-spec.schema.json `$defs.constraint.constraint_type` enum;
+ * docs/ontology-graph-spec-v1-proposal.md §Node: "constraint objects, optionally named
  * (`{ constraint_type, name?, properties }`)"). The schema enforces the enum on parsed
  * documents; the Kotlin model's [model.node.Constraint.type] is a plain string, so a
  * programmatically built model can violate it — this is the model-level check, run on

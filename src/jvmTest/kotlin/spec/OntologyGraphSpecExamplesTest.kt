@@ -33,12 +33,12 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 /**
- * The spec-validation gate of ADR-0007: `ontology-spec.schema.json` (JSON
+ * The spec-validation gate of ADR-0007: `ontology-graph-spec.schema.json` (JSON
  * Schema draft 2020-12) must validate against its meta-schema, and every
  * example resource under `src/jvmTest/resources/ontology/` must validate
  * against the schema.
  */
-class OntologySpecExamplesTest {
+class OntologyGraphSpecExamplesTest {
 
     private val mapper = ObjectMapper()
     private val config = SchemaValidatorsConfig.builder().formatAssertionsEnabled(true).build()

@@ -38,7 +38,7 @@ class V1JsonDocumentJsTest {
 
     private val document = """
         {
-          "${'$'}schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+          "${'$'}schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
           "id": "js-read-test",
           "version": 2,
           "name": "js-read",
@@ -115,7 +115,7 @@ class V1JsonDocumentJsTest {
     fun testIdKeyedRecords() {
         val js = parseToJs()
 
-        assertEquals("https://neo4j.com/ontology-spec/1.0.0/schema.json", js.schema)
+        assertEquals("https://neo4j.com/ontology-graph-spec/1.0.0/schema.json", js.schema)
         assertEquals("js-read-test", js.id)
         assertEquals(2, js.version)
         assertEquals("js-read", js.name)

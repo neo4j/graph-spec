@@ -16,12 +16,12 @@
  */
 package migrate
 
-import OntologySpec
+import OntologyGraphSpec
 import codec.format.JsonFormat
 import codec.schema.SchemaMap
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ObjectNode
-import migrate.migration.graphSpec.GraphSpecV4OntologySpecMigration
+import migrate.migration.graphSpec.GraphSpecV4OntologyGraphSpecMigration
 import model.Type
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -38,9 +38,9 @@ import kotlin.test.assertTrue
  * the §10 rejection of pre-4.0.0 inputs. Corpus-level conversion, schema validation and
  * pretty/internal convergence live in [GraphSpecV4CorpusTest].
  */
-class GraphSpecV4OntologySpecMigrationTest {
+class GraphSpecV4OntologyGraphSpecMigrationTest {
 
-    private val migration = GraphSpecV4OntologySpecMigration()
+    private val migration = GraphSpecV4OntologyGraphSpecMigration()
     private val format = JsonFormat.default
 
     private fun convert(json: String): SchemaMap = migration.migrate(format.decodeFromString(json) as SchemaMap)
@@ -112,7 +112,7 @@ class GraphSpecV4OntologySpecMigrationTest {
             """{ "version": "4.0.0", "name": "shop", "description": "", "nodes": { "n": { "label": "n" } } }""",
         )
 
-        assertEquals(GraphSpecV4OntologySpecMigration.SCHEMA_ID, out.string("\$schema"))
+        assertEquals(GraphSpecV4OntologyGraphSpecMigration.SCHEMA_ID, out.string("\$schema"))
         assertEquals("1", out.literal("version").string)
         assertFalse(out.literal("version").isString, "v1 version is the ontology's own Int, not the 4.0.0 format string")
         val id = out.string("id")
@@ -383,14 +383,14 @@ class GraphSpecV4OntologySpecMigrationTest {
     }
 
     @Test
-    fun `end to end - OntologySpec decodes graph spec 4-0-0 JSON into the v1 model`() {
-        val model = OntologySpec.Json.decodeFromString(
+    fun `end to end - OntologyGraphSpec decodes graph spec 4-0-0 JSON into the v1 model`() {
+        val model = OntologyGraphSpec.Json.decodeFromString(
             """{ "version": "4.0.0", "name": "shop",
                  "nodes": { "n": { "label": "n", "properties": { "id": { "type": "UUID", "key": true } } } },
                  "relationships": { "R": { "type": "R", "from": { "node": "n" }, "to": { "node": "n" } } } }""",
             Type.GRAPH_SPEC,
         )
-        assertEquals(GraphSpecV4OntologySpecMigration.SCHEMA_ID, model.schema)
+        assertEquals(GraphSpecV4OntologyGraphSpecMigration.SCHEMA_ID, model.schema)
         assertEquals(1, model.version)
         assertEquals("shop", model.name)
         val node = model.nodes.getValue("n")
@@ -408,10 +408,10 @@ class GraphSpecV4OntologySpecMigrationTest {
             "    properties:\n      id: { type: \"INTEGER\", unique: true }\n"
         val mapper = ObjectMapper()
         val fromJson = mapper.readTree(
-            OntologySpec.Json.encodeToString(OntologySpec.Json.decodeFromString(json, Type.GRAPH_SPEC)),
+            OntologyGraphSpec.Json.encodeToString(OntologyGraphSpec.Json.decodeFromString(json, Type.GRAPH_SPEC)),
         ) as ObjectNode
         val fromYaml = mapper.readTree(
-            OntologySpec.Json.encodeToString(OntologySpec.Yaml.decodeFromString(yaml, Type.GRAPH_SPEC)),
+            OntologyGraphSpec.Json.encodeToString(OntologyGraphSpec.Yaml.decodeFromString(yaml, Type.GRAPH_SPEC)),
         ) as ObjectNode
         fromJson.remove("id")
         fromYaml.remove("id")
@@ -431,7 +431,7 @@ class GraphSpecV4OntologySpecMigrationTest {
         assertTrue(missing.message!!.contains("migrate to graph spec 4.0.0 first"), missing.message)
 
         val endToEnd = assertFailsWith<IllegalStateException> {
-            OntologySpec.Json.decodeFromString("""{ "version": "3.0.0" }""", Type.GRAPH_SPEC)
+            OntologyGraphSpec.Json.decodeFromString("""{ "version": "3.0.0" }""", Type.GRAPH_SPEC)
         }
         assertTrue(endToEnd.message!!.contains("Unsupported migration from graph_spec:3.0"), endToEnd.message)
     }
@@ -447,6 +447,6 @@ class GraphSpecV4OntologySpecMigrationTest {
     @Test
     fun `graph spec 4-0-x patch versions are accepted`() {
         val out = convert("""{ "version": "4.0.3", "nodes": { "n": { "label": "n" } } }""")
-        assertEquals(GraphSpecV4OntologySpecMigration.SCHEMA_ID, out.string("\$schema"))
+        assertEquals(GraphSpecV4OntologyGraphSpecMigration.SCHEMA_ID, out.string("\$schema"))
     }
 }

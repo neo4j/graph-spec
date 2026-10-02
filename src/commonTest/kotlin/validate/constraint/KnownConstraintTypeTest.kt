@@ -31,7 +31,7 @@ class KnownConstraintTypeTest {
     private val validator = KnownConstraintType
 
     private fun modelWithNodeConstraint(constraint: Constraint) = GraphModel(
-        schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+        schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
         id = "test",
         version = 1,
         nodes = mutableMapOf("n" to Node(label = "N", constraints = mutableListOf(constraint))),
@@ -68,7 +68,7 @@ class KnownConstraintTypeTest {
     @Test
     fun `fail for an unknown constraint_type on a relationship`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+            schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
             id = "test",
             version = 1,
             nodes = mutableMapOf("a" to Node(label = "A"), "b" to Node(label = "B")),
