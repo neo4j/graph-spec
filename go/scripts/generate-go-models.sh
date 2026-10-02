@@ -40,7 +40,10 @@ echo "✓ JSON spec sanitised"
 SCHEMANCER_BIN=$(go env GOPATH)/bin/schemancer
 if ! command -v "$SCHEMANCER_BIN" &> /dev/null; then
     echo "schemancer not found, installing..."
-    go install github.com/Southclaws/schemancer@v1.2.0
+    # schemancer v1.2.0 requires go >= 1.25.6; the module itself targets an older
+    # Go, and CI runs with GOTOOLCHAIN=local — so let the tool install (and only
+    # the tool install) fetch the toolchain it needs.
+    GOTOOLCHAIN=auto go install github.com/Southclaws/schemancer@v1.2.0
 fi
 # Generate Go types
 "$SCHEMANCER_BIN" "$TEMP_SPEC" golang "$OUTPUT_FILE" --package $OUTPUT_PACKAGE
