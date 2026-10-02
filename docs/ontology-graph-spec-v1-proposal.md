@@ -55,8 +55,8 @@ Node:
 | `reference` | optional single URI pointing at an external definition of this element |
 | `description` | |
 | `aliases` | string list. Covers "aliases and synonyms" from the brief |
-| `properties` | `{ <name>: Property }` |
-| `constraints` | constraint objects, optionally named (`{ constraint_type, name?, properties }`); shorthand flags live on Property |
+| `properties` | `{ <name>: Property }`. Property names are non-empty (ADR-0010) |
+| `constraints` | constraint objects, optionally named (`{ constraint_type, name?, properties }`); a constraint's `properties` list references properties declared on the same element; shorthand flags live on Property |
 | `tools` | core tool definitions for agents (`{ type: canonicalQuery \| externalRequest \| ..., name, description, ... }`) |
 | `extensions` | named first-party extensions (`neo4j:index`, `neo4j:display`, ...), custom under `custom` |
 
@@ -66,7 +66,7 @@ Property:
 |---|---|
 | `type` | type token, see Data types below (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>`). `ANY` opts the property out of type constraints (mixed value types) |
 | `dimension` | `VECTOR` companion: element count. Absent = unconstrained |
-| `mustExist`, `unique`, `key` | single-property constraint flags. The readable surface |
+| `mustExist`, `unique`, `key` | single-property constraint flags; the shorthand of the object form. `key` implies `unique` + `mustExist`. The readable surface |
 | `one_of` | allowed values. JSON Schema's word. Default value support |
 | `pattern` | regex. JSON Schema's word |
 | `description`, `aliases` | |
@@ -85,6 +85,12 @@ Relationship:
 | `reference` | optional single URI, as on Node |
 | `tools` | as Node |
 | `extensions` | |
+
+Constraints:
+
+A constraint object is `{ constraint_type, name?, properties }`, `constraint_type` one of `key`, `unique`, `mustExist`. Its `properties` list references properties declared on the same element: a node's constraints name that node's properties, a relationship's constraints that relationship's properties. Property names are non-empty (ADR-0010, schema-enforced), so every referenced name is addressable.
+
+The `mustExist`/`unique`/`key` flags on Property are the single-property shorthand of the object form: `mustExist: true` on property `p` means `{ constraint_type: mustExist, properties: [p] }`, and likewise for `unique`. `key` implies `unique` + `mustExist`: `key: true` on `p` means `{ constraint_type: key, properties: [p] }`, which entails both. The object form carries what the shorthand cannot: composites (a `properties` list with more than one entry) and names tooling can reference.
 
 Data types:
 
@@ -336,6 +342,8 @@ Two semantic caveats, one line each in the final spec:
 
 2026-10-02:
 - Renamed the product "Ontology Spec" → "Ontology Graph Spec" (ADR-0009); this doc moved from `docs/ontology-spec-v1-proposal.md` to `docs/ontology-graph-spec-v1-proposal.md`. No format change.
+- Property names are non-empty, enforced in the schema (`propertyNames` with `minLength: 1` on the node and relationship `properties` maps) — ADR-0010.
+- Constraint semantics written down (prose only — documents already-implied meaning, no format change): a constraint object's `properties` list references properties declared on the same element (node or relationship); `key` implies `unique` + `mustExist`; the `mustExist`/`unique`/`key` flags are the single-property shorthand of the object form `{ constraint_type, name?, properties }`.
 
 2026-09-25:
 - Extension shape: `extensions` at every level — named keys (`neo4j:`-prefixed) for first-party extensions, the fixed envelope under `custom` for custom ones.
@@ -379,7 +387,7 @@ Two semantic caveats, one line each in the final spec:
 
 **tables/mappings/display as extension types.** The brief calls them adjacent specs composable into single artifacts. With a generic extension mechanism there is no case for three privileged top-level fields. One mechanism, one envelope; the known types are owned outside the spec (importer owns table/mapping, and so on).
 
-**Property flags stay; constraint objects for the rest.** `mustExist`/`unique`/`key` cover the common case in the most readable form (principle 2). Everything else — composites, or anything tooling wants to reference by name — uses the object form: `{ constraint_type, name?, properties }`. Both are one format with a documented relationship, not two formats.
+**Property flags stay; constraint objects for the rest.** `mustExist`/`unique`/`key` cover the common case in the most readable form (principle 2). Everything else — composites, or anything tooling wants to reference by name — uses the object form: `{ constraint_type, name?, properties }`. Both are one format with a documented relationship, not two formats. That relationship, written down 2026-10-02: the flags are the single-property shorthand of the object form (`mustExist: true` on `p` is `{ constraint_type: mustExist, properties: [p] }`), `key` implies `unique` + `mustExist`, and a constraint object's `properties` list references properties declared on the same element. Property names are non-empty (ADR-0010), so every such reference is addressable.
 
 **`one_of`, `pattern`, `aliases`.** `one_of` and `pattern` are JSON Schema's words; the audience already knows them.
 

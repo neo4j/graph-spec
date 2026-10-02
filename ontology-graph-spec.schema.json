@@ -152,6 +152,10 @@
         "reference": { "$ref": "#/$defs/reference" },
         "properties": {
           "type": "object",
+          "propertyNames": {
+            "minLength": 1,
+            "description": "Property names are non-empty (ADR-0010): the map key is the property's addressable name, the string constraint objects and extensions reference."
+          },
           "additionalProperties": { "$ref": "#/$defs/property" }
         },
         "constraints": {
@@ -178,6 +182,10 @@
         "reference": { "$ref": "#/$defs/reference" },
         "properties": {
           "type": "object",
+          "propertyNames": {
+            "minLength": 1,
+            "description": "Property names are non-empty (ADR-0010): the map key is the property's addressable name, the string constraint objects and extensions reference."
+          },
           "additionalProperties": { "$ref": "#/$defs/property" }
         },
         "constraints": {

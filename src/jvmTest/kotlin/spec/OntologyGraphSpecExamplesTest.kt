@@ -98,4 +98,31 @@ class OntologyGraphSpecExamplesTest {
         assertTrue(messages.contains("id"), "missing id must be reported:\n$messages")
         assertTrue(messages.contains("version"), "missing version must be reported:\n$messages")
     }
+
+    @Test
+    fun `document with an empty property name fails validation`() {
+        // ADR-0010: property names are non-empty, enforced by
+        // `propertyNames: { minLength: 1 }` on the properties maps.
+        val invalid =
+            mapper.readTree(
+                """
+                {
+                  "${'$'}schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+                  "id": "empty-property-name",
+                  "version": 1,
+                  "nodes": {
+                    "Actor": {
+                      "label": "Actor",
+                      "properties": { "": { "type": "STRING" } }
+                    }
+                  }
+                }
+                """.trimIndent()
+            )
+        val errors = schema().validate(invalid)
+        assertFalse(
+            errors.isEmpty(),
+            "a document with an empty-string property name must not validate"
+        )
+    }
 }
