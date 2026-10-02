@@ -3,7 +3,7 @@
 Two worlds coexist in this repo (ADR-0002):
 
 - The **Neo4j Ontology Specification v1 overlay** - the schema and the validating examples listed below. Draft; mirrors the shared proposal doc's 2026-09-25 state.
-- The **graph-spec 4.0.0 implementation** - the Kotlin Multiplatform model (`src/`), the Go module (`go/`), and the Gradle build (`build-logic/`, `gradle/`) - kept in place while the port re-targets it at the v1 format in place (ADR-0004).
+- The **graph-spec 4.0.0 implementation** - the Kotlin Multiplatform model (`src/`), the Go module (`go/`), and the Gradle build (`gradle/`) - kept in place while the port re-targets it at the v1 format in place (ADR-0004).
 
 Spec overlay contents:
 

@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 
 plugins {
-    id("tasks.ts.modifier")
     alias(libs.plugins.spotless)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
@@ -25,13 +24,13 @@ kotlin {
         binaries.library()
         compilations.named("main") {
             packageJson {
-                name = "@neo4j-importer/graph-spec"
+                name = "@neo4j-importer/ontology-spec"
                 customField(
                     "repository",
                     mapOf(
                         "type" to "git",
-                        "url" to "https://github.com/neo4j/graph-spec"
-                    )
+                        "url" to "https://github.com/neo4j/graph-spec",
+                    ),
                 )
             }
         }
@@ -114,29 +113,8 @@ val copyReadmeToJs by tasks.registering(Copy::class) {
     into(layout.buildDirectory.dir("dist/js/productionLibrary"))
 }
 
-/*
-    Kotlin/JS doesn't support TypeScript unions
-    https://youtrack.jetbrains.com/issue/KT-55101/
-    This script modifies the generated types and generates a string union given a basic enum.
-    It's a somewhat brittle hack but the type safety is much preferred on the frontend.
-    There's the potential to use a different library for TS generation in the future which does support this natively.
- */
-tasks.register("generateTsUnions", TypeScriptModifierTask::class.java) {
-    dependsOn(copyReadmeToJs)
-    typescriptFile =
-        layout.buildDirectory
-            .dir("dist/js/productionLibrary/")
-            .get()
-            .file("ontology-spec.d.mts")
-            .asFile
-}
-
 tasks.named("jsProductionLibraryCompileSync") {
     finalizedBy(copyReadmeToJs)
-}
-
-tasks.named("jsNodeProductionLibraryDistribution") {
-    finalizedBy("generateTsUnions")
 }
 
 tasks.register<JavaExec>("generateGraphModelJsonSchema") {
@@ -198,7 +176,7 @@ mavenPublishing {
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
         ktlint().editorConfigOverride(
-            mapOf("code_style" to "intellij_idea")
+            mapOf("code_style" to "intellij_idea"),
         )
         endWithNewline()
         licenseHeaderFile(rootProject.file("license-header.txt"))
@@ -214,7 +192,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
             project.fileTree("src/commonTest/kotlin"),
             project.fileTree("src/jsMain/kotlin"),
             project.fileTree("src/bridge/kotlin"),
-            project.fileTree("src/bridgeTest/kotlin")
+            project.fileTree("src/bridgeTest/kotlin"),
         )
     }
 }

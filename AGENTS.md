@@ -8,7 +8,7 @@ spec 4.0.0 — no backwards compatibility in the format; a one-way
 
 Since the rebase onto `main` (ADR-0002), this repo also holds the 4.0.0
 implementation — the Kotlin Multiplatform model (`src/`), the Go module
-(`go/`), and the Gradle build (`build-logic/`, `gradle/`) — which the
+(`go/`), and the Gradle build (`gradle/`) — which the
 port re-targets at the v1 format in place, keeping main's machinery and
 public APIs (ADR-0006). The transition is governed by
 [`docs/adr/`](docs/adr/) (0001–0007).
@@ -90,7 +90,7 @@ No format feature without a validating example.
   without example coverage does not land.
 - Never record a wrong answer: if an example only passes because the
   schema is wrong, fix the schema, not the example.
-- When a change touches `src/`, `go/`, `gradle/` or `build-logic/`, the
+- When a change touches `src/`, `go/` or `gradle/`, the
   implementation gates join the spec gate: `./gradlew check` and
   `cd go && go test ./...` (see "How to run checks"). Spec-only changes
   leave the implementation tree untouched.
@@ -120,7 +120,6 @@ src/
   jvmMain/ jvmTest/             JVM, incl. the schema generator
   bridge/ bridgeTest/           Kotlin/Native bridge used by Go
 go/                             Go module: generated model + validation/migration via the bridge
-build-logic/                    Gradle plugins, incl. the TypeScript union post-processor
 gradle/, gradlew                wrapper + version catalog
 .github/workflows/
   pr-guard-*.yaml, validate-*.yaml, release.yaml
