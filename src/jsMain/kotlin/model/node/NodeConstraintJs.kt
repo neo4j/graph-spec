@@ -16,47 +16,12 @@
  */
 package model.node
 
-import js.objects.Record
-import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
-import model.jso
-import model.type.ConstraintType
+/**
+ * The v1 model unified node and relationship constraints into the shared
+ * [Constraint] class, so both domains use the one [ConstraintJs] shape.
+ * This alias keeps the pre-unification exported name source-compatible.
+ */
+typealias NodeConstraintJs = ConstraintJs
 
-@JsExport
-@JsPlainObject
-external interface NodeConstraintJs {
-    var type: String
-    var label: String?
-    var properties: Array<String>
-    val extensions: Record<String, ExtensionValueJs>
-}
-
-fun nodeConstraintJs(
-    type: String,
-    label: String? = null,
-    properties: Array<String> = emptyArray(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
-): NodeConstraintJs = jso {
-    this.type = type
-    this.label = label
-    this.properties = properties
-    this.extensions = extensions
-}
-
-fun NodeConstraint.toJs() = nodeConstraintJs(
-    type = type.name,
-    label = label,
-    properties = properties.toTypedArray(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
-)
-
-fun NodeConstraintJs.toClass() = NodeConstraint(
-    type = ConstraintType.valueOf(type),
-    label = label,
-    properties = properties.toMutableSet(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
-)
+fun nodeConstraintJs(type: String, name: String? = null, properties: Array<String> = emptyArray()): NodeConstraintJs =
+    constraintJs(type, name, properties)

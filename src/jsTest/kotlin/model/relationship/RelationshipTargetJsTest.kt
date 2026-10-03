@@ -1,13 +1,15 @@
 package model.relationship
 
-import model.mapping.JsMappingTest
+import model.JsMappingTest
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class RelationshipTargetJsTest : JsMappingTest<RelationshipTarget, RelationshipTargetJs>() {
 
     override fun createClass() = RelationshipTarget(
         node = "nodeId",
-        label = "label",
+        minCount = 0,
+        maxCount = 5,
     )
 
     override fun toJs(k: RelationshipTarget): RelationshipTargetJs = k.toJs()
@@ -16,7 +18,9 @@ class RelationshipTargetJsTest : JsMappingTest<RelationshipTarget, RelationshipT
 
     override fun verifyJsObject(jsObject: RelationshipTargetJs) {
         assertEquals("nodeId", jsObject.node)
-        assertEquals("label", jsObject.label)
+        assertNull(jsObject.count)
+        assertEquals(0, jsObject.minCount)
+        assertEquals(5, jsObject.maxCount)
     }
 
 }

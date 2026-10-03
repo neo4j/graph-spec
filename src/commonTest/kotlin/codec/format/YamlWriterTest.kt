@@ -178,43 +178,42 @@ class YamlWriterTest {
     @Test
     fun `test wildcard inlining`() {
         val options = YamlPrintOptions(
-            inlinePaths = setOf("mappings[*].properties.*")
+            inlinePaths = setOf("nodes.*.constraints[*].properties")
         )
         val writer = YamlWriter(options)
 
-        val p00 = SchemaMap(
+        val constraint = SchemaMap(
             mutableMapOf(
-                "column" to SchemaLiteral("categoryid", isString = true)
+                "constraint_type" to SchemaLiteral("unique", isString = true),
+                "properties" to SchemaList(
+                    mutableListOf(SchemaLiteral("name", isString = true)),
+                    path = "nodes.n1.constraints[0].properties"
+                )
             ),
-            path = "mappings[0].properties.p:0_0"
+            path = "nodes.n1.constraints[0]"
         )
 
-        val properties = SchemaMap(
+        val node = SchemaMap(
             mutableMapOf(
-                "p:0_0" to p00
+                "label" to SchemaLiteral("Person", isString = true),
+                "constraints" to SchemaList(mutableListOf(constraint), path = "nodes.n1.constraints")
             ),
-            path = "mappings[0].properties"
-        )
-
-        val mappingItem = SchemaMap(
-            mutableMapOf(
-                "node" to SchemaLiteral("n:0", isString = true),
-                "properties" to properties
-            ),
-            path = "mappings[0]"
+            path = "nodes.n1"
         )
 
         val root = SchemaMap(
             mutableMapOf(
-                "mappings" to SchemaList(mutableListOf(mappingItem), path = "mappings")
+                "nodes" to SchemaMap(mutableMapOf("n1" to node), path = "nodes")
             )
         )
 
         val expected = """
-            mappings:
-              - node: "n:0"
-                properties:
-                  "p:0_0": { column: categoryid }
+            nodes:
+              n1:
+                label: Person
+                constraints:
+                  - constraint_type: unique
+                    properties: [name]
         """.trimIndent() + "\n"
 
         assertEquals(expected, writer.write(root))

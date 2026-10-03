@@ -1,6 +1,6 @@
 package model.extension
 
-import model.mapping.JsMappingTest
+import model.JsMappingTest
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 

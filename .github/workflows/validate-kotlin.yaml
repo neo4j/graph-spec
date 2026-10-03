@@ -27,5 +27,17 @@ jobs:
         uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       # Runs checks and tests for all targets (JVM, JS/TS, Native metadata)
+      # plus the spotless lint gate (ktlint + license headers); the tree is
+      # spotless-green and this keeps it that way.
       - name: Run Gradle Checks
-        run: ./gradlew check --no-daemon
+        run: ./gradlew check spotlessCheck --no-daemon
+
+      # ADR-0003: the schema is generated from the annotated Kotlin model and
+      # committed; a model/annotation edit without a regenerate is drift.
+      - name: Check schema drift
+        run: |
+          ./gradlew generateOntologyGraphSpecJsonSchema --no-daemon
+          if ! git diff --exit-code -- ontology-graph-spec.schema.json; then
+            echo "❌ ontology-graph-spec.schema.json is out of sync with the Kotlin model. Run ./gradlew generateOntologyGraphSpecJsonSchema locally and commit."
+            exit 1
+          fi
