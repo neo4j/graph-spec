@@ -16,44 +16,19 @@
  */
 package model.relationship
 
-import js.objects.Record
-import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
-import model.index.IndexOptionJs
-import model.index.toClass
-import model.jso
-import model.type.ConstraintType
+import model.node.ConstraintJs
+import model.node.constraintJs
 
-@JsExport
-@JsPlainObject
-external interface RelationshipConstraintJs {
-    var type: String
-    var properties: Array<String>
-    val extensions: Record<String, ExtensionValueJs>
-}
+/**
+ * The v1 model unified node and relationship constraints into the shared
+ * [model.node.Constraint] class, so both domains use the one [ConstraintJs]
+ * shape. This alias keeps the pre-unification exported name
+ * source-compatible.
+ */
+typealias RelationshipConstraintJs = ConstraintJs
 
 fun relationshipConstraintJs(
     type: String,
-    properties: Array<String> = emptyArray(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
-): RelationshipConstraintJs = jso {
-    this.type = type
-    this.properties = properties
-    this.extensions = extensions
-}
-
-fun RelationshipConstraint.toJs() = relationshipConstraintJs(
-    type = type.name,
-    properties = properties.toTypedArray(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
-)
-
-fun RelationshipConstraintJs.toClass() = RelationshipConstraint(
-    type = ConstraintType.valueOf(type),
-    properties = properties.toMutableSet(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
-)
+    name: String? = null,
+    properties: Array<String> = emptyArray()
+): RelationshipConstraintJs = constraintJs(type, name, properties)

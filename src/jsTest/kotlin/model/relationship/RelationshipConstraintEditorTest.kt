@@ -1,15 +1,12 @@
 package model.relationship
 
-import js.objects.Object.Companion.keys
 import kotlin.test.*
-import model.extension.StringValue
-import model.extension.toJs
 
 class RelationshipConstraintEditorTest {
 
     @Test
     fun testFactoryFunctionInitialization() {
-        val type = "RELATIONSHIP_TYPE"
+        val type = "unique"
         val properties = arrayOf("prop1", "prop2")
 
         val constraint = relationshipConstraintJs(
@@ -20,15 +17,25 @@ class RelationshipConstraintEditorTest {
         assertEquals(type, constraint.type)
         assertEquals(2, constraint.properties.size)
         assertTrue(constraint.properties.contains("prop1"))
-        assertEquals(0, keys(constraint.extensions).size)
+        assertNull(constraint.name)
     }
 
     @Test
     fun testSetType() {
-        val constraint = relationshipConstraintJs(type = "OLD_TYPE")
-        RelationshipConstraintEditor.setType(constraint, "NEW_TYPE")
+        val constraint = relationshipConstraintJs(type = "unique")
+        RelationshipConstraintEditor.setType(constraint, "mustExist")
 
-        assertEquals("NEW_TYPE", constraint.type)
+        assertEquals("mustExist", constraint.type)
+    }
+
+    @Test
+    fun testSetName() {
+        val constraint = relationshipConstraintJs(type = "unique")
+        RelationshipConstraintEditor.setName(constraint, "named")
+        assertEquals("named", constraint.name)
+
+        RelationshipConstraintEditor.setName(constraint, null)
+        assertNull(constraint.name)
     }
 
     @Test
@@ -74,7 +81,6 @@ class RelationshipConstraintEditorTest {
         val constraint = relationshipConstraintJs(type = "minimal")
 
         assertNotNull(constraint.properties)
-        assertNotNull(constraint.extensions)
         assertEquals(0, constraint.properties.size)
     }
 }

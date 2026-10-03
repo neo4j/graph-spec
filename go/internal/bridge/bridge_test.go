@@ -30,11 +30,11 @@ func TestExtractEmbeddedLib(t *testing.T) {
 }
 
 func TestResolveLibraryPathEnvOverride(t *testing.T) {
-	t.Setenv(LibPathEnv, "/explicit/path/libgraphdatamodel.so")
+	t.Setenv(LibPathEnv, "/explicit/path/libontologygraphmodel.so")
 
 	path, err := resolveLibraryPath()
 	require.NoError(t, err)
-	require.Equal(t, "/explicit/path/libgraphdatamodel.so", path)
+	require.Equal(t, "/explicit/path/libontologygraphmodel.so", path)
 }
 
 func TestOpenLibraryMissingLibIsActionable(t *testing.T) {
@@ -110,10 +110,15 @@ func TestCallInputValidation(t *testing.T) {
 }
 
 func TestCallRetriedIfOutputBufferNotLargeEnough(t *testing.T) {
-	// An empty graph-spec model will get transformed to a fully initialised data model which
-	// will be far larger than the input model. This test checks that the client will successfully
-	// retry with the required buffer size in cases like these.
-	res, err := Call(Migrate, []byte(`{"version":"4.0.0"}`), "graph_spec", "data_model", "3.0.0")
+	if _, err := loadBridge(); err != nil {
+		t.Skipf("native library unavailable: %v", err)
+	}
+
+	// A minimal graph spec 4.0.0 document converts to a fully initialised v1 ontology
+	// document (schema link, fresh id, version) far larger than the input. This test
+	// checks that the client will successfully retry with the required buffer size in
+	// cases like these.
+	res, err := Call(Migrate, []byte(`{"version":"4.0.0"}`), "graph_spec", "ontology_graph_spec", "1.0.0")
 	require.NotEmpty(t, res)
 	require.NoError(t, err)
 }

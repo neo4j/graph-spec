@@ -17,6 +17,7 @@
 package validate.relationship
 
 import model.GraphModel
+import model.node.Node
 import model.relationship.Relationship
 import model.relationship.RelationshipTarget
 import validate.Issue
@@ -27,32 +28,43 @@ import kotlin.test.assertTrue
 class RelationshipTypeTest {
 
     private val validator = RelationshipType
-    private val model = GraphModel("4.0.0")
+
+    private fun model(type: String) = GraphModel(
+        schema = "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
+        id = "test",
+        version = 1,
+        nodes = mutableMapOf("a" to Node(label = "A"), "b" to Node(label = "B")),
+        relationships = mutableMapOf(
+            "REL" to
+                Relationship(type = type, from = RelationshipTarget(node = "a"), to = RelationshipTarget(node = "b"))
+        )
+    )
 
     @Test
-    fun `pass when relationship has a valid type`() {
-        val relationship = Relationship(
-            type = "ACTED_IN",
-            from = RelationshipTarget(),
-            to = RelationshipTarget()
-        )
+    fun `pass when the relationship has a type`() {
         val issues = mutableListOf<Issue>()
 
-        validator.validateRelationship(model, "actedIn", relationship, issues)
+        validator.validate(model("ACTED_IN"), issues)
 
-        assertTrue(issues.isEmpty(), "Expected no issues when type is set")
+        assertTrue(issues.isEmpty(), "Expected no issues when the relationship type is set")
     }
 
     @Test
-    fun `fail when relationship has blank type`() {
-        val relationship = Relationship(
-            type = "  ",
-            from = RelationshipTarget(),
-            to = RelationshipTarget()
-        )
+    fun `fail when the relationship type is blank`() {
         val issues = mutableListOf<Issue>()
 
-        validator.validateRelationship(model, "blankRel", relationship, issues)
+        validator.validate(model("  "), issues)
+
+        assertEquals(1, issues.size)
+        assertEquals("missing_relation_type", issues.first().code)
+        assertEquals("relationships.REL.type", issues.first().path)
+    }
+
+    @Test
+    fun `fail when the relationship type is empty`() {
+        val issues = mutableListOf<Issue>()
+
+        validator.validate(model(""), issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_relation_type", issues.first().code)

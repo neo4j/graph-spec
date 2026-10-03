@@ -21,7 +21,7 @@ import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
 
 @JsExport
-@Serializable
+@Serializable(with = ExtensionValueSerializer::class)
 @SerialName("ExtensionValue")
 sealed class ExtensionValue {
     val asString: String?

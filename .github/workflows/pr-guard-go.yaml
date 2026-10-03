@@ -3,9 +3,12 @@ name: Go PR Quality Guard
 on:
   pull_request:
     branches: [main]
-    # Trigger on changes to the Go files (including the JSON schema)
+    # Trigger on changes to the Go files and the spec schema (the Go model
+    # is generated from ontology-graph-spec.schema.json, so a schema-only PR must
+    # run the Go drift check)
     paths:
       - 'go/**'
+      - 'ontology-graph-spec.schema.json'
 
 jobs:
   validate:

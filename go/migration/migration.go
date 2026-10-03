@@ -4,32 +4,33 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/neo4j/graph-spec/go/v4/internal/bridge"
-	"github.com/neo4j/graph-spec/go/v4/model"
+	"github.com/neo4j/graph-spec/go/internal/bridge"
+	"github.com/neo4j/graph-spec/go/model"
 )
 
 type ModelType string
 type ModelVersion string
 
+// The token contract mirrors the Kotlin side (src/commonMain/kotlin/model/Type.kt and
+// model/Version.kt): the rebuilt bridge library supports exactly one migration, the
+// one-way graph spec 4.0.0 -> ontology graph spec 1.0.0 converter (ADR-0008). The SpecV4
+// tokens are the converter's INPUT contract only — this SDK never writes them.
 const (
-	ModelTypeDataModel        ModelType = "data_model"
-	ModelTypeDataModelWrapped ModelType = "data_model_wrapped"
-	ModelTypeImportSpec       ModelType = "import_spec"
-	ModelTypeGraphSpec        ModelType = "graph_spec"
+	ModelTypeSpecV4            ModelType = "graph_spec"
+	ModelTypeOntologyGraphSpec ModelType = "ontology_graph_spec"
 
-	ModelVersionGraphSpecLatest ModelVersion = "4.0.0"
-	ModelVersionDataModelV23    ModelVersion = "2.3.0"
-	ModelVersionDataModelV24    ModelVersion = "2.4.0"
-	ModelVersionDataModelV30    ModelVersion = "3.0.0"
-	ModelVersionImportSpecV1    ModelVersion = "1.0.0"
+	ModelVersionSpecV4                  ModelVersion = "4.0.0"
+	ModelVersionOntologyGraphSpecLatest ModelVersion = "1.0.0"
 )
 
-// ToGraphSpec returns the provided [jsonModel] migrated to the latest graph model representation.
-// The input model should be a JSON string matching the provided [modelType]. If the migration path
-// from [modelType] to graph model is not supported or the input model is malformed an error will
-// be returned.
-func ToGraphSpec(jsonModel string, modelType ModelType) (model.GraphModel, error) {
-	res, err := bridge.Call(bridge.Migrate, []byte(jsonModel), string(modelType), string(ModelTypeGraphSpec), string(ModelVersionGraphSpecLatest))
+// ToOntologyGraphSpec returns the provided [jsonModel] migrated to the latest ontology graph model representation.
+// The input model should be a JSON string matching the provided [modelType] — in v1 the only
+// supported input is a graph spec 4.0.0 document ([ModelTypeSpecV4]); pre-4.0.0 inputs
+// (data model 2.x/3.0, import_spec) are rejected by the library (ADR-0008 §10). If the
+// migration path from [modelType] to ontology graph model is not supported or the input model is
+// malformed an error will be returned.
+func ToOntologyGraphSpec(jsonModel string, modelType ModelType) (model.GraphModel, error) {
+	res, err := bridge.Call(bridge.Migrate, []byte(jsonModel), string(modelType), string(ModelTypeOntologyGraphSpec), string(ModelVersionOntologyGraphSpecLatest))
 	if err != nil {
 		return model.GraphModel{}, err
 	}
@@ -41,15 +42,16 @@ func ToGraphSpec(jsonModel string, modelType ModelType) (model.GraphModel, error
 	return graph, nil
 }
 
-// FromGraphSpec returns the provided graph-spec [model] migrated to the target model. The returned
-// model is a JSON string. If the migration path from graph-spec to [targetType]:[targetVersion] is
-// not supported or the input model is invalid an error will be returned.
-func FromGraphSpec(model model.GraphModel, targetType ModelType, targetVersion ModelVersion) (string, error) {
+// FromOntologyGraphSpec returns the provided ontology-graph-spec [model] migrated to the target model. The returned
+// model is a JSON string. The v1 converter is one-way (ADR-0008): no migration path out of
+// ontology-graph-spec exists, so every target is rejected by the library with an
+// unsupported-migration error.
+func FromOntologyGraphSpec(model model.GraphModel, targetType ModelType, targetVersion ModelVersion) (string, error) {
 	bytes, err := json.Marshal(model)
 	if err != nil {
 		return "", err
 	}
-	res, err := bridge.Call(bridge.Migrate, bytes, string(ModelTypeGraphSpec), string(targetType), string(targetVersion))
+	res, err := bridge.Call(bridge.Migrate, bytes, string(ModelTypeOntologyGraphSpec), string(targetType), string(targetVersion))
 	if err != nil {
 		return "", err
 	}
