@@ -27,8 +27,11 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
         val path = findPath(from, to) ?: error("Unsupported migration from $from to $to")
         var map = schema
         for (migration in path) {
+            // The migration owns its output document's identity fields; there is no
+            // post-stamping. In the v1 world the format version rides in `$schema` and
+            // `version` is the ontology's own Int (ADR-0008 §1), so the 4.0.0-era
+            // `map["version"] = migration.to` stamp would corrupt the output.
             map = migration.migrate(map)
-            map["version"] = migration.to
         }
         return map
     }

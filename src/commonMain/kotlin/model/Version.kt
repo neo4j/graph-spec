@@ -18,19 +18,12 @@ package model
 
 object Version {
     /*
-        Data model versions
+        Graph spec 4.0.0; the converter's input contract only (ADR-0008) — this SDK never writes it
      */
-    const val DATA_MODEL_V23 = "2.3.0"
-    const val DATA_MODEL_V24 = "2.4.0"
-    const val DATA_MODEL_V30 = "3.0.0"
+    const val GRAPH_SPEC_V4 = "4.0.0"
 
     /*
-        Import Spec versions
+        Ontology Graph spec format version
      */
-    const val IMPORT_SPEC_V1 = "1.0.0"
-
-    /*
-        Graph spec versions
-     */
-    const val LATEST = "4.0.0"
+    const val LATEST = "1.0.0"
 }

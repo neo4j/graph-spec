@@ -1,0 +1,100 @@
+# ADR-0010: Property names are non-empty
+
+Status: Proposed
+
+## Context
+
+A property's name is the key of its entry in a node's or relationship's
+`properties` map. It is the property's addressable name: constraint
+objects reference properties by name
+(`{ constraint_type, name?, properties }`), and so do first-party
+extensions such as `neo4j:index`. JSON Schema draft 2020-12 constrains
+nothing about object keys by default, so today a document may declare a
+property under the empty string:
+
+```json
+"properties": { "": { "type": "STRING" } }
+```
+
+An empty name is not addressable. A constraint's `properties` list cannot
+meaningfully reference it, no extension can point at it, and Neo4j itself
+rejects empty property keys at write time — so the name could never
+survive the enforcement path the spec builds toward (design rule 3:
+descriptive first, enforcing over time). The schema is the
+hand-maintained source of truth (ADR-0003), and the proposal's prose said
+nothing about name emptiness either way: the gap was unrecorded, not
+decided.
+
+## Decision
+
+Property names must be non-empty, and the schema enforces it:
+`$defs.node.properties` and `$defs.relationshipEntry.properties` each
+carry `propertyNames: { minLength: 1 }` (draft 2020-12's `propertyNames`
+applies a subschema to every key of the object). A document declaring a
+property under `""` fails schema validation.
+
+Enforcement lives in the schema only; no model-level empty-name
+validator is added. A property name's entire job is to be an addressable
+name, and addressable names are already unique within their map by JSON
+object semantics — once the schema guarantees non-emptiness there is no
+second fact left for a model rule to check. The Kotlin model keeps
+`properties` a string-keyed map and round-trips what it is given;
+rejecting empty names is a schema-validation outcome, consistent with
+design rule 3 (schema optional; enforcement is the validation layer's
+job, and the schema is that layer's source of truth).
+
+## Alternatives considered
+
+1. **Allow empty property names (status quo).** Rejected: the empty
+   string is not an addressable name — constraints and extensions
+   reference properties by name, and `""` is meaningless as a reference
+   target. Neo4j rejects empty property keys at write time, so a
+   document carrying one describes something the enforcement target
+   cannot express; recording it as legal would record a wrong answer.
+2. **A model-level empty-name validator instead of (or in addition to)
+   the schema rule.** Rejected: the schema is the source of truth
+   (ADR-0003), and a model rule would duplicate it without adding a
+   fact. The name's only function is addressability, and map keys are
+   already unique by JSON object semantics — uniqueness of addressable
+   names is free, so non-emptiness is the single missing guarantee, and
+   the schema provides it. Schema-optional (design rule 3) also means
+   the model must keep parsing descriptive documents; a hard model
+   rejection would cut against that.
+3. **Constrain names beyond non-emptiness** (e.g. a Cypher-identifier
+   `pattern` on `propertyNames`). Rejected: v1 governs no charset for
+   names — least surprise (design rule 2) lets modelling teams use the
+   names their domain already has, and backtick-escaping makes any
+   non-empty token writable in Cypher. Emptiness is the only exclusion
+   with a semantic justification (addressability); everything else would
+   be taste enforced as format.
+4. **Also `minLength: 1` on the items of a constraint object's
+   `properties` list.** Rejected: redundant once declared names are
+   non-empty — a reference can only resolve to a declared property, and
+   declared properties now all have non-empty names. The
+   reference-resolution rule itself is documented semantics (proposal
+   prose), not new schema surface, so there is nothing for the extra
+   keyword to buy.
+
+## Consequences
+
+- Schema: `propertyNames: { minLength: 1 }` with a `description` on
+  `$defs.node.properties` and `$defs.relationshipEntry.properties`; the
+  schema still validates against the draft 2020-12 meta-schema (the spec
+  gate's first test).
+- Examples: every example under `src/jvmTest/resources/ontology/`
+  already uses non-empty property names (verified by grep), so no
+  example changes; the constraint is exercised by a new negative test in
+  `OntologySpecExamplesTest` proving a document with an empty-string
+  property key fails validation.
+- Proposal: the constraint semantics are written down as prose (property
+  names non-empty; a constraint object's `properties` list references
+  properties declared on the same element; `key` implies `unique` +
+  `mustExist`; the flags are the single-property shorthand of the object
+  form) with a dated changelog entry naming this ADR. The flag↔object
+  semantics document already-implied meaning, so they ride this ADR's
+  changelog entry rather than getting one of their own.
+- Go model: `go/model/model.go` is regenerated by the drift check if the
+  schema change moves the generated output.
+- No Kotlin model, codec, or validator changes: the model carries
+  property maps as string-keyed maps today, and rejection of empty names
+  is a schema-validation outcome, not a parse-time one.

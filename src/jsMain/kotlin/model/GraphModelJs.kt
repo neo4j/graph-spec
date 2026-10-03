@@ -18,42 +18,39 @@ package model
 
 import js.objects.Record
 import kotlinx.js.JsPlainObject
-import model.display.DisplayJs
-import model.display.displayJs
-import model.mapping.MappingJs
+import model.extension.ExtensionValueJs
 import model.node.NodeJs
 import model.relationship.RelationshipJs
-import model.source.TableJs
 
 @JsExport
 @JsPlainObject
 external interface GraphModelJs {
-    val version: String
-    val name: String
-    val description: String
+    val schema: String
+    val id: String
+    val version: Int
+    var name: String?
+    var description: String?
     val nodes: Record<String, NodeJs>
     val relationships: Record<String, RelationshipJs>
-    val tables: Record<String, TableJs>
-    var mappings: Array<MappingJs>
-    val display: DisplayJs
+    val extensions: Record<String, ExtensionValueJs>
 }
 
 fun graphModelJs(
-    version: String,
-    name: String = "",
-    description: String = "",
+    schema: String = "",
+    id: String = "",
+    version: Int = 1,
+    name: String? = null,
+    description: String? = null,
     nodes: Record<String, NodeJs> = emptyRecord(),
     relationships: Record<String, RelationshipJs> = emptyRecord(),
-    tables: Record<String, TableJs> = emptyRecord(),
-    mappings: Array<MappingJs> = emptyArray(),
-    display: DisplayJs = displayJs()
+    extensions: Record<String, ExtensionValueJs> = emptyRecord()
 ): GraphModelJs = jso {
+    this.schema = schema
+    this.id = id
     this.version = version
     this.name = name
     this.description = description
     this.nodes = nodes
     this.relationships = relationships
-    this.tables = tables
-    this.mappings = mappings
-    this.display = display
+    this.extensions = extensions
 }

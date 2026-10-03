@@ -17,20 +17,20 @@
 package model
 
 import js.objects.toRecord
-import model.display.toClass
-import model.display.toJs
-import model.mapping.toClass
-import model.mapping.toJs
-import model.node.NodeEditor
+import kotlinx.serialization.json.Json
+import model.extension.ExtensionValueSerializer
+import model.extension.importer.mapping.MappingExtensionJs
+import model.extension.importer.mapping.MappingExtensionModule
+import model.extension.importer.table.TableExtensionJs
+import model.extension.importer.table.TableExtensionModule
+import model.extension.toClass
+import model.extension.toJs
 import model.node.nodeJs
 import model.node.toClass
 import model.node.toJs
 import model.relationship.relationshipJs
 import model.relationship.toClass
 import model.relationship.toJs
-import model.source.tableJs
-import model.source.toClass
-import model.source.toJs
 
 /**
  * We have duplicate model built on external interfaces with conversion to and from classes in order
@@ -40,44 +40,34 @@ import model.source.toJs
 class GraphModelEditor {
     companion object {
         @JsStatic
-        fun plain(model: GraphModel): GraphModelJs {
-            if (model.pretty) {
-                error("Pretty models can't be converted to plain models, call model.internalise() first.")
-            }
-            return graphModelJs(
-                version = model.version,
-                name = model.name,
-                description = model.description,
-                nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
-                relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
-                    .toRecord(),
-                tables = model.tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
-                mappings = model.mappings.map { mapping -> mapping.toJs() }.toTypedArray(),
-                display = model.display.toJs()
-            )
-        }
-
-        @JsStatic
-        fun model(model: GraphModelJs): GraphModel = GraphModel(
+        fun plain(model: GraphModel): GraphModelJs = graphModelJs(
+            schema = model.schema,
+            id = model.id,
             version = model.version,
             name = model.name,
             description = model.description,
-            nodes = model.nodes.associateBy { id, js -> js.toClass(id) },
-            relationships = model.relationships.associateBy { id, js -> js.toClass(id) },
-            tables = model.tables.associateBy { _, js -> js.toClass() },
-            mappings = model.mappings.map { it.toClass() }.toMutableList(),
-            display = model.display.toClass()
+            nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
+            relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
+                .toRecord(),
+            extensions = model.extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord()
         )
 
         @JsStatic
-        fun addNode(model: GraphModelJs, name: String? = null, label: String? = null): String =
-            model.nodes.addUnique("node") { nodeId ->
-                val node = nodeJs(id = nodeId, name = name ?: nodeId)
-                if (label != null) {
-                    NodeEditor.setIdentifyingLabel(model, nodeId, label)
-                }
-                node
-            }
+        fun model(model: GraphModelJs): GraphModel = GraphModel(
+            schema = model.schema,
+            id = model.id,
+            version = model.version,
+            name = model.name,
+            description = model.description,
+            nodes = model.nodes.associateBy { _, js -> js.toClass() },
+            relationships = model.relationships.associateBy { _, js -> js.toClass() },
+            extensions = model.extensions.associateBy { _, js -> js.toClass() }.toMutableMap()
+        )
+
+        @JsStatic
+        fun addNode(model: GraphModelJs, label: String? = null): String = model.nodes.addUnique("node") { nodeId ->
+            nodeJs(id = nodeId, label = label)
+        }
 
         @JsStatic
         fun removeNode(model: GraphModelJs, nodeId: String) {
@@ -85,9 +75,9 @@ class GraphModelEditor {
         }
 
         @JsStatic
-        fun addRelationship(model: GraphModelJs, type: String, name: String?): String =
+        fun addRelationship(model: GraphModelJs, type: String): String =
             model.relationships.addUnique("relationship") { relId ->
-                relationshipJs(type = type, id = relId, name = name ?: relId)
+                relationshipJs(type = type, id = relId)
             }
 
         @JsStatic
@@ -95,14 +85,47 @@ class GraphModelEditor {
             model.relationships.remove(relationshipId)
         }
 
+        /*
+            Table/mapping are named extensions at the document root (ADR-0005); these
+            helpers keep the 4.0.0 addTable/removeTable editor flow working against the
+            extensions map.
+         */
+
         @JsStatic
-        fun addTable(model: GraphModelJs, source: String): String = model.tables.addUnique("table") {
-            tableJs(source)
+        fun setTableExtension(model: GraphModelJs, table: TableExtensionJs) {
+            model.extensions[TableExtensionModule.key] =
+                ExtensionValueSerializer.fromJson(Json.parseToJsonElement(JSON.stringify(table)).dropNulls()).toJs()
         }
 
         @JsStatic
-        fun removeTable(model: GraphModelJs, tableId: String) {
-            model.tables.remove(tableId)
+        fun removeTableExtension(model: GraphModelJs) {
+            model.extensions.remove(TableExtensionModule.key)
+        }
+
+        @JsStatic
+        fun setMappingExtension(model: GraphModelJs, mapping: MappingExtensionJs) {
+            model.extensions[MappingExtensionModule.key] =
+                ExtensionValueSerializer.fromJson(Json.parseToJsonElement(JSON.stringify(mapping)).dropNulls()).toJs()
+        }
+
+        @JsStatic
+        fun removeMappingExtension(model: GraphModelJs) {
+            model.extensions.remove(MappingExtensionModule.key)
         }
     }
+}
+
+/*
+    JSON.stringify on a *Js twin emits explicit nulls for unset optional fields; the
+    ExtensionValue tree has no null kind (absent means none), so strip them before
+    the payload enters the extensions map.
+ */
+private fun kotlinx.serialization.json.JsonElement.dropNulls(): kotlinx.serialization.json.JsonElement = when (this) {
+    is kotlinx.serialization.json.JsonObject ->
+        kotlinx.serialization.json.JsonObject(
+            entries.filter { it.value !is kotlinx.serialization.json.JsonNull }
+                .associate { it.key to it.value.dropNulls() }
+        )
+    is kotlinx.serialization.json.JsonArray -> kotlinx.serialization.json.JsonArray(map { it.dropNulls() })
+    else -> this
 }

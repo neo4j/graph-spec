@@ -21,6 +21,7 @@ import codec.schema.SchemaList
 import codec.schema.SchemaLiteral
 import codec.schema.SchemaMap
 import codec.schema.SchemaNull
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -63,11 +64,15 @@ class JsonFormat(private val json: Json) : Format {
     }
 
     companion object {
+        // v1 wire config: "absent means none" — defaults and nulls are never written.
+        @OptIn(ExperimentalSerializationApi::class)
         val default = JsonFormat(
             Json {
                 ignoreUnknownKeys = true
                 isLenient = true
                 prettyPrint = true
+                encodeDefaults = false
+                explicitNulls = false
             }
         )
     }

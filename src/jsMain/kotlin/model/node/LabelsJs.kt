@@ -16,13 +16,7 @@
  */
 package model.node
 
-import js.objects.Record
 import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.jso
 
 @JsExport
@@ -31,31 +25,26 @@ external interface LabelsJs {
     var identifier: String?
     var implied: Array<String>
     var optional: Array<String>
-    val extensions: Record<String, ExtensionValueJs>
 }
 
 fun labelsJs(
     identifier: String? = null,
     implied: Array<String> = emptyArray(),
-    optional: Array<String> = emptyArray(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
+    optional: Array<String> = emptyArray()
 ): LabelsJs = jso {
     this.identifier = identifier
     this.implied = implied
     this.optional = optional
-    this.extensions = extensions
 }
 
 fun Labels.toJs() = labelsJs(
     identifier = identifier,
     implied = implied.toTypedArray(),
-    optional = optional.toTypedArray(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
+    optional = optional.toTypedArray()
 )
 
 fun LabelsJs.toClass(): Labels = Labels(
     identifier = identifier,
     implied = implied.toMutableSet(),
-    optional = optional.toMutableSet(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    optional = optional.toMutableSet()
 )

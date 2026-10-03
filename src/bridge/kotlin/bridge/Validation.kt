@@ -16,6 +16,7 @@
  */
 package bridge
 
+import OntologyGraphSpec
 import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -34,7 +35,7 @@ private val json = Json {
 @CName("validate")
 fun validate(inputJson: CPointer<ByteVar>?, outputBuffer: CPointer<ByteVar>?, bufferSize: Int) =
     invokeBridge(inputJson, outputBuffer = outputBuffer, bufferSize = bufferSize) { input ->
-        val graphModel = GraphSpec.Json.decodeFromString(content = input[0])
+        val graphModel = OntologyGraphSpec.Json.decodeFromString(content = input[0])
         val validation = ValidationTree()
         validation.build(Validations.all)
         val issues = validation.validate(graphModel)
