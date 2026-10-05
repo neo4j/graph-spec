@@ -50,7 +50,7 @@ type Labels struct {
 	Optional []string `json:"optional,omitempty"`
 }
 
-// Type token: a Neo4j scalar, ANY, LIST<...> or VECTOR<...> (a VECTOR may carry a companion dimension field on the property). Element types are always scalars: no nested lists, no lists of vectors. No union types in v1: a property is a single type or ANY.
+// Type token: a Neo4j scalar, ANY, LIST<...> or VECTOR<...> (a VECTOR may carry a companion dimension field on the property). Element types are always scalars: no nested lists, no lists of vectors. VECTOR element types are numeric only: INTEGER or FLOAT (ADR-0012); LIST takes any scalar. No union types in v1: a property is a single type or ANY.
 type PropertyType = string
 
 // A single informational URI pointing at an external definition of this element (e.g. the original RDF resource).

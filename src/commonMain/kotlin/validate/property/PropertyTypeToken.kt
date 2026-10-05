@@ -25,12 +25,17 @@ import validate.forEachProperty
 private const val SCALAR_TOKENS =
     "STRING|INTEGER|FLOAT|BOOLEAN|DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES"
 
+// VECTOR element types are numeric only (ADR-0012).
+private const val VECTOR_ELEMENT_TOKENS = "INTEGER|FLOAT"
+
 // Keep identical to ontology-graph-spec.schema.json $defs.propertyType.pattern.
-private val TYPE_TOKEN = Regex("^(ANY|LIST<ANY>|($SCALAR_TOKENS)|(LIST|VECTOR)<($SCALAR_TOKENS)>)$")
+private val TYPE_TOKEN =
+    Regex("^(ANY|LIST<ANY>|($SCALAR_TOKENS)|LIST<($SCALAR_TOKENS)>|VECTOR<($VECTOR_ELEMENT_TOKENS)>)$")
 
 /**
  * v1 rule: a property's `type` is a schema type token — a scalar, `ANY`, `LIST<ANY>`,
- * `LIST<scalar>` or `VECTOR<scalar>`; element types are scalars only, no union types
+ * `LIST<scalar>` or `VECTOR<INTEGER|FLOAT>` (vector element types are numeric only,
+ * ADR-0012); element types are scalars only, no union types
  * (ontology-graph-spec.schema.json `$defs.propertyType.pattern`, mirrored verbatim in
  * [TYPE_TOKEN]; docs/ontology-graph-spec-v1-proposal.md §Data types) — and `dimension` rides
  * only on `VECTOR<...>` as its companion, minimum 1

@@ -189,9 +189,9 @@
             }
         },
         "propertyType": {
-            "description": "Type token: a Neo4j scalar, ANY, LIST<...> or VECTOR<...> (a VECTOR may carry a companion dimension field on the property). Element types are always scalars: no nested lists, no lists of vectors. No union types in v1: a property is a single type or ANY.",
+            "description": "Type token: a Neo4j scalar, ANY, LIST<...> or VECTOR<...> (a VECTOR may carry a companion dimension field on the property). Element types are always scalars: no nested lists, no lists of vectors. VECTOR element types are numeric only: INTEGER or FLOAT (ADR-0012); LIST takes any scalar. No union types in v1: a property is a single type or ANY.",
             "type": "string",
-            "pattern": "^(ANY|LIST<ANY>|(STRING|INTEGER|FLOAT|BOOLEAN|DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES)|(LIST|VECTOR)<(STRING|INTEGER|FLOAT|BOOLEAN|DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES)>)$"
+            "pattern": "^(ANY|LIST<ANY>|(STRING|INTEGER|FLOAT|BOOLEAN|DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES)|LIST<(STRING|INTEGER|FLOAT|BOOLEAN|DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES)>|VECTOR<(INTEGER|FLOAT)>)$"
         },
         "property": {
             "description": "A property of a node or relationship type: a type token, optional value constraints (one_of, pattern), the shorthand constraint flags, and metadata.",

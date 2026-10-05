@@ -105,7 +105,7 @@ type: VECTOR<FLOAT>   # vector can come with a companion dimension field
 dimension: 512
 ```
 
-Element types are always scalars: no nested lists, no lists of vectors. No union types in v1: a property is a single data type or `ANY`.
+Element types are always scalars: no nested lists, no lists of vectors. VECTOR takes numeric element types only — `VECTOR<INTEGER>` or `VECTOR<FLOAT>` (Neo4j vectors are arrays of numbers; ADR-0012) — while `LIST<...>` takes any scalar. No union types in v1: a property is a single data type or `ANY`.
 
 To play nice with existing dirty data, `type: ANY` is supported and implicitly opts the property out of any graph-type constraint.
 
@@ -340,6 +340,8 @@ Two semantic caveats, one line each in the final spec:
 
 ## Changelog from initial draft
 
+2026-10-05:
+- VECTOR element types restricted to numeric (ADR-0012): the `propertyType` pattern's VECTOR arm is now `VECTOR<(INTEGER|FLOAT)>` — `VECTOR<TIME>`-class tokens were never satisfiable by a Neo4j value (PR #118 review comment r4182676002). `ANY`, `LIST<ANY>`, the bare scalars, and `LIST<scalar>` are unchanged. The 4.0.0 → 1.0.0 converter is unaffected (all 4.0.0 vector tokens were already numeric; ADR-0008 §3 prose amended in place).
 2026-10-04:
 - Published coordinates dropped the importer ownership (ADR-0009, revised in place pre-merge): npm `@neo4j-importer/ontology-graph-spec` → `@neo4j/ontology-graph-spec`, Maven `org.neo4j.importer:ontology-graph-spec` → `org.neo4j:ontology-graph-spec`. The spec is a company-wide Neo4j artefact, not a spec for or from the importer team; nothing had shipped under the importer-owned coordinates (npm 404, no v1 tags, publish-maven disabled), so no consumer migrates. This supersedes the 2026-10-03 note that kept the npm coordinate under the importer scope. The pom `scm` URLs were also corrected to `github.com/neo4j/graph-spec` (stale `import-spec` since the repo rename). No format change.
 2026-10-03:

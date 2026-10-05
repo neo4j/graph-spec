@@ -92,6 +92,8 @@ class PropertyTypeTokenTest {
             "LIST<VECTOR<FLOAT>>",
             "VECTOR<LIST<FLOAT>>",
             "VECTOR<ANY>",
+            "VECTOR<TIME>",
+            "VECTOR<STRING>",
             "STRING|INTEGER",
             "MAP",
             ""

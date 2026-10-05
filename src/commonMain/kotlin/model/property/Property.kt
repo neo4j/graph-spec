@@ -44,14 +44,16 @@ data class Property(
     @SpecDef("propertyType")
     @SpecPattern(
         "^(ANY|LIST<ANY>|(STRING|INTEGER|FLOAT|BOOLEAN|DATE|TIME|LOCALTIME|DATETIME|" +
-            "LOCALDATETIME|DURATION|POINT|BYTES)|(LIST|VECTOR)<(STRING|INTEGER|FLOAT|BOOLEAN|" +
-            "DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES)>)$"
+            "LOCALDATETIME|DURATION|POINT|BYTES)|LIST<(STRING|INTEGER|FLOAT|BOOLEAN|" +
+            "DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES)>|" +
+            "VECTOR<(INTEGER|FLOAT)>)$"
     )
     @SpecDoc(
         "Type token: a Neo4j scalar, ANY, LIST<...> or VECTOR<...> (a VECTOR may carry a " +
             "companion dimension field on the property). Element types are always scalars: " +
-            "no nested lists, no lists of vectors. No union types in v1: a property is a " +
-            "single type or ANY."
+            "no nested lists, no lists of vectors. VECTOR element types are numeric only: " +
+            "INTEGER or FLOAT (ADR-0012); LIST takes any scalar. No union types in v1: a " +
+            "property is a single type or ANY."
     )
     var type: String? = null,
     @SpecMinimum(1)

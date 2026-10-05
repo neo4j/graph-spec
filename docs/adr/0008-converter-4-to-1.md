@@ -121,7 +121,8 @@ against the v1 `propertyType` pattern
 (`ontology-spec.schema.json` `$defs.propertyType`: scalars `STRING
 INTEGER FLOAT BOOLEAN DATE TIME LOCALTIME DATETIME LOCALDATETIME
 DURATION POINT BYTES`, plus `ANY`, `LIST<ANY>`, `LIST<scalar>`,
-`VECTOR<scalar>`). **Lossy** rows widen the type; the dropped
+`VECTOR<INTEGER|FLOAT>` — vector element types are numeric only,
+ADR-0012). **Lossy** rows widen the type; the dropped
 information is stated. `dimension` on a VECTOR property carries
 unchanged.
 
@@ -169,8 +170,8 @@ unchanged.
 The same table applies everywhere a 4.0.0 Neo4jType token appears,
 including inside table payloads (`columns.*.suggested` / `.supported`,
 §8): a v1 document must not carry 4.0.0-era type tokens. v1 tokens with
-no 4.0.0 source (`BYTES`, `LIST<BYTES>`, `LIST<ANY>`, `VECTOR<scalar>`
-for non-numeric scalars) are never emitted by the converter.
+no 4.0.0 source (`BYTES`, `LIST<BYTES>`, `LIST<ANY>`) are never
+emitted by the converter.
 
 ### 4. Nodes
 
