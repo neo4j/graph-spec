@@ -7,6 +7,4 @@ pluginManagement {
 
 plugins { id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0" }
 
-rootProject.name = "graph-spec"
-
-includeBuild("build-logic")
+rootProject.name = "ontology-graph-spec"

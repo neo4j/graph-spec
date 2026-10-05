@@ -16,9 +16,33 @@
  */
 package model.node
 
-import model.type.ConstraintType
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import model.spec.SpecDoc
+import model.spec.SpecEnum
+import model.spec.SpecMinItems
+import kotlin.js.JsExport
 
-interface Constraint {
-    val type: ConstraintType
-    val properties: MutableSet<String>
-}
+/**
+ * v1 constraint object (ontology-graph-spec.schema.json `$defs.constraint`): the nameable
+ * alternative to the `mustExist`/`unique`/`key` property shorthand flags. Shared by
+ * node and relationship entries; [type] is a [model.type.ConstraintType] token.
+ */
+@JsExport
+@Serializable
+@SerialName("Constraint")
+@SpecDoc(
+    "Constraint object form (the alternative to the mustExist/unique/key shorthand flags). " +
+        "Nameable, so tooling can reference individual constraints."
+)
+data class Constraint(
+    @SerialName("constraint_type")
+    @SpecEnum(["key", "unique", "mustExist"])
+    @SpecDoc("The constraint kind: key (unique + mustExist), unique, or mustExist.")
+    var type: String,
+    @SpecMinItems(1)
+    @SpecDoc("Names of properties on the same element this constraint covers.")
+    val properties: MutableList<String>,
+    @SpecDoc("Optional name, so tooling can reference the constraint.")
+    var name: String? = null
+)

@@ -5,29 +5,29 @@ import kotlin.test.*
 class NodeConstraintEditorTest {
 
     private fun createConstraint(): NodeConstraintJs = nodeConstraintJs(
-        type = "UNIQUENESS",
-        label = "User",
+        type = "unique",
+        name = "User",
         properties = arrayOf("email")
     )
 
     @Test
     fun testSetType() {
         val constraint = createConstraint()
-        NodeConstraintEditor.setType(constraint, "NODE_PROPERTY_EXISTENCE")
-        assertEquals("NODE_PROPERTY_EXISTENCE", constraint.type)
+        NodeConstraintEditor.setType(constraint, "mustExist")
+        assertEquals("mustExist", constraint.type)
     }
 
     @Test
-    fun testSetLabel() {
+    fun testSetName() {
         val constraint = createConstraint()
 
-        // Change label
-        NodeConstraintEditor.setLabel(constraint, "Admin")
-        assertEquals("Admin", constraint.label)
+        // Change name
+        NodeConstraintEditor.setName(constraint, "Admin")
+        assertEquals("Admin", constraint.name)
 
         // Set to null
-        NodeConstraintEditor.setLabel(constraint, null)
-        assertNull(constraint.label)
+        NodeConstraintEditor.setName(constraint, null)
+        assertNull(constraint.name)
     }
 
     @Test

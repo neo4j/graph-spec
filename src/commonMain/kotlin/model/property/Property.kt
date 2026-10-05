@@ -20,20 +20,68 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
 import model.extension.Extensions
-import model.type.Named
+import model.spec.SpecDef
+import model.spec.SpecDoc
+import model.spec.SpecFormat
+import model.spec.SpecMinimum
+import model.spec.SpecPattern
 import kotlin.js.JsExport
 
+/**
+ * v1 property (ontology-graph-spec.schema.json `$defs/property`). [type] is a type token
+ * (`STRING`, `LIST<STRING>`, `VECTOR<FLOAT>`, `ANY`, ...; `$defs/propertyType`);
+ * [dimension] is the VECTOR companion. `mustExist`/`unique`/`key` are the shorthand
+ * constraint flags; [oneOf] (`one_of`) and [pattern] constrain allowed values.
+ */
 @JsExport
 @Serializable
 @SerialName("Property")
+@SpecDoc(
+    "A property of a node or relationship type: a type token, optional value " +
+        "constraints (one_of, pattern), the shorthand constraint flags, and metadata."
+)
 data class Property(
-    var type: Neo4jType = Neo4jType.ANY,
+    @SpecDef("propertyType")
+    @SpecPattern(
+        "^(ANY|LIST<ANY>|(STRING|INTEGER|FLOAT|BOOLEAN|DATE|TIME|LOCALTIME|DATETIME|" +
+            "LOCALDATETIME|DURATION|POINT|BYTES)|LIST<(STRING|INTEGER|FLOAT|BOOLEAN|" +
+            "DATE|TIME|LOCALTIME|DATETIME|LOCALDATETIME|DURATION|POINT|BYTES)>|" +
+            "VECTOR<(INTEGER|FLOAT)>)$"
+    )
+    @SpecDoc(
+        "Type token: a Neo4j scalar, ANY, LIST<...> or VECTOR<...> (a VECTOR may carry a " +
+            "companion dimension field on the property). Element types are always scalars: " +
+            "no nested lists, no lists of vectors. VECTOR element types are numeric only: " +
+            "INTEGER or FLOAT (ADR-0012); LIST takes any scalar. No union types in v1: a " +
+            "property is a single type or ANY."
+    )
+    var type: String? = null,
+    @SpecMinimum(1)
+    @SpecDoc("VECTOR companion: element count. Absent = unconstrained.")
     var dimension: Int? = null,
+    @SpecDoc("Shorthand for a single-property mustExist constraint.")
     var mustExist: Boolean? = null,
+    @SpecDoc("Shorthand for a single-property unique constraint.")
     var unique: Boolean? = null,
+    @SpecDoc("Shorthand for a single-property key constraint (unique + mustExist).")
     var key: Boolean? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
-    override var name: String? = null,
-    val description: String = ""
-) : Extensions,
-    Named
+    @SerialName("one_of")
+    @SpecDoc("Allowed values. JSON Schema's word. Default value support.")
+    val oneOf: MutableList<ExtensionValue> = mutableListOf(),
+    @SpecFormat("regex")
+    @SpecDoc("Regular expression the property value must match.")
+    var pattern: String? = null,
+    @SpecDoc("Alternative names for this property.")
+    val aliases: MutableList<String> = mutableListOf(),
+    @SpecDef("reference")
+    @SpecFormat("uri")
+    @SpecDoc(
+        "A single informational URI pointing at an external definition of this element " +
+            "(e.g. the original RDF resource)."
+    )
+    var reference: String? = null,
+    @SpecDoc("Human-readable description of this property.")
+    var description: String? = null,
+    @SpecDoc("Named extensions map: first-party neo4j:* keys; custom envelopes under the reserved custom key.")
+    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

@@ -17,24 +17,29 @@
 package validate.relationship
 
 import model.GraphModel
-import model.relationship.Relationship
 import validate.Issue
+import validate.Validation
+import validate.forEachRelationship
 
-object RelationshipType : RelationshipValidation {
-    override fun validateRelationship(
-        model: GraphModel,
-        relationshipId: String,
-        relationship: Relationship,
-        issues: MutableList<Issue>
-    ) {
-        if (relationship.type.isBlank()) {
-            issues.add(
-                Issue(
-                    code = "missing_relation_type",
-                    message = "Missing type for relationship '$relationshipId'",
-                    path = "relationships.$relationshipId.type"
+/**
+ * v1 rule: a relationship's `type` is present and non-blank
+ * (ontology-graph-spec.schema.json `$defs.relationshipEntry` requires `type` but types it as
+ * a plain string, so a blank value passes schema validation;
+ * docs/ontology-graph-spec-v1-proposal.md §Relationship: "`type` | the relationship type
+ * (required)"). A blank type is the required field's empty form, rejected here.
+ */
+object RelationshipType : Validation {
+    override fun validate(model: GraphModel, issues: MutableList<Issue>) {
+        model.forEachRelationship { path, relationshipId, relationship ->
+            if (relationship.type.isBlank()) {
+                issues.add(
+                    Issue(
+                        code = "missing_relation_type",
+                        message = "Missing type for relationship '$relationshipId'",
+                        path = "$path.type"
+                    )
                 )
-            )
+            }
         }
     }
 }

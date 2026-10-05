@@ -1,281 +1,35 @@
 {
   "version": "4.0.0",
+  "name": "movies",
+  "description": "Movie domain ontology",
   "nodes": {
-    "Actor": {
-      "labels": {
-        "identifier": "Actor",
-        "implied": [],
-        "optional": [],
-        "extensions": {}
-      },
+    "movie": {
+      "label": "Movie",
       "properties": {
-        "id": {
-          "type": "STRING",
-          "mustExist": false,
-          "unique": true,
-          "extensions": {}
-        },
-        "name": {
-          "type": "STRING",
-          "mustExist": false,
-          "unique": false,
-          "extensions": {}
-        }
+        "id": { "type": "UUID", "unique": true },
+        "title": { "type": "STRING" },
+        "released": { "type": "ZONED DATETIME" },
+        "embedding": { "type": "VECTOR<FLOAT32>", "dimension": 1536 }
       },
-      "constraints": {},
-      "indexes": {},
-      "extensions": {
-        "note": {
-          "type": "STRING",
-          "value": "lead role"
-        },
-        "verified": {
-          "type": "BOOLEAN",
-          "value": true
-        }
+      "constraints": {
+        "c0": { "type": "EXISTS", "properties": ["title"], "name": "exists_movie_title" }
       }
     },
-    "Movie": {
-      "labels": {
-        "identifier": "Movie",
-        "implied": [],
-        "optional": [],
-        "extensions": {}
-      },
+    "person": {
+      "labels": { "identifier": "Person", "implied": ["Actor"], "optional": ["Director"] },
       "properties": {
-        "id": {
-          "type": "STRING",
-          "mustExist": false,
-          "unique": true,
-          "extensions": {}
-        }
-      },
-      "constraints": {},
-      "indexes": {},
-      "extensions": {}
+        "name": { "type": "STRING" }
+      }
     }
   },
   "relationships": {
     "ACTED_IN": {
       "type": "ACTED_IN",
-      "from": {
-        "node": "Actor",
-        "label": "Actor",
-        "property": "id"
-      },
-      "to": {
-        "node": "Movie",
-        "label": "Movie",
-        "property": "id"
-      },
+      "from": { "node": "person", "label": "Person" },
+      "to": { "node": "movie", "label": "Movie" },
       "properties": {
-        "roles": {
-          "type": "STRING",
-          "mustExist": false,
-          "unique": false,
-          "extensions": {}
-        }
-      },
-      "constraints": {},
-      "indexes": {},
-      "extensions": {}
+        "roles": { "type": "LIST<STRING>" }
+      }
     }
-  },
-  "tables": {
-    "actors": {
-      "source": "sql/postgres",
-      "columns": {
-        "actor_id": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "extensions": {}
-        },
-        "actor_name": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "extensions": {}
-        }
-      },
-      "primaryKeys": [
-        "actor_id"
-      ],
-      "foreignKeys": {
-        "fk_actor_id": {
-          "columns": [
-            "actor_id"
-          ],
-          "references": {
-            "table": "actors",
-            "columns": [
-              "actorid"
-            ],
-            "extensions": {}
-          },
-          "extensions": {}
-        },
-        "fk_actor_name": {
-          "columns": [
-            "actor_name"
-          ],
-          "references": {
-            "table": "actors",
-            "columns": [
-              "actorname"
-            ],
-            "extensions": {}
-          },
-          "extensions": {}
-        }
-      },
-      "extensions": {}
-    },
-    "movies": {
-      "source": "sql/postgres",
-      "columns": {
-        "id": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "extensions": {}
-        },
-        "field_1": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "extensions": {}
-        }
-      },
-      "primaryKeys": [
-        "id"
-      ],
-      "foreignKeys": {
-        "fk_movie_actor_id": {
-          "columns": [
-            "actor_id"
-          ],
-          "references": {
-            "table": "actors",
-            "columns": [
-              "actorid"
-            ],
-            "extensions": {}
-          },
-          "extensions": {}
-        }
-      },
-      "extensions": {}
-    },
-    "actors-movies": {
-      "source": "sql/postgres",
-      "columns": {
-        "actor_id": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "extensions": {}
-        },
-        "movie_id": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "extensions": {}
-        },
-        "field_1": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "extensions": {}
-        }
-      },
-      "primaryKeys": [],
-      "foreignKeys": {},
-      "extensions": {}
-    }
-  },
-  "mappings": [
-    {
-      "type": "NODE",
-      "node": "Actor",
-      "table": "actors",
-      "properties": {
-        "id": {
-          "column": "actor_id"
-        },
-        "name": {
-          "column": "actor_name"
-        }
-      },
-      "mode": "MERGE",
-      "key": [
-        "id"
-      ]
-    },
-    {
-      "type": "NODE",
-      "node": "Movie",
-      "table": "movies",
-      "properties": {
-        "id": {
-          "column": "id"
-        }
-      },
-      "mode": "MERGE",
-      "key": [
-        "id"
-      ]
-    },
-    {
-      "type": "RELATIONSHIP",
-      "relationship": "ACTED_IN",
-      "table": "actors-movies",
-      "start_node": {
-        "node": "Actor",
-        "label": "Actor",
-        "properties": {
-          "id": {
-            "column": "actor_id"
-          }
-        }
-      },
-      "end_node": {
-        "node": "Movie",
-        "label": "Movie",
-        "properties": {
-          "id": {
-            "column": "movie_id"
-          }
-        }
-      },
-      "properties": {
-        "roles": {
-          "column": "field_1"
-        }
-      },
-      "mode": "MERGE",
-      "key": []
-    }
-  ]
+  }
 }

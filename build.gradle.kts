@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
 
 plugins {
-    id("tasks.ts.modifier")
     alias(libs.plugins.spotless)
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.serialization)
@@ -12,7 +11,7 @@ plugins {
     alias(libs.plugins.maven.publish)
 }
 
-group = "org.neo4j.importer"
+group = "org.neo4j"
 
 repositories { mavenCentral() }
 
@@ -25,7 +24,7 @@ kotlin {
         binaries.library()
         compilations.named("main") {
             packageJson {
-                name = "@neo4j-importer/graph-spec"
+                name = "@neo4j/ontology-graph-spec"
                 customField(
                     "repository",
                     mapOf(
@@ -49,13 +48,13 @@ kotlin {
         generateTypeScriptDefinitions()
     }
     macosArm64 {
-        binaries.sharedLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "ontologygraphmodel" }
     }
     linuxX64 {
-        binaries.sharedLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "ontologygraphmodel" }
     }
     linuxArm64 {
-        binaries.sharedLib { baseName = "graphdatamodel" }
+        binaries.sharedLib { baseName = "ontologygraphmodel" }
     }
 
     applyDefaultHierarchyTemplate()
@@ -75,7 +74,6 @@ kotlin {
         }
 
         commonMain.dependencies {
-            implementation(libs.kotlinx.schema)
             implementation(libs.kotlinx.serializer.json)
             implementation(libs.kotlinx.yamlkt)
             implementation(libs.kaseChange)
@@ -86,6 +84,11 @@ kotlin {
             implementation(libs.kotlin.wrappers.ts)
         }
         commonTest.dependencies { implementation(libs.kotlin.test) }
+        jvmTest.dependencies {
+            // ADR-0007: the spec-validation gate (schema + examples) runs as a JVM test
+            implementation(libs.json.schema.validator)
+            implementation(libs.slf4jnop)
+        }
     }
 
     compilerOptions {
@@ -109,41 +112,24 @@ val copyReadmeToJs by tasks.registering(Copy::class) {
     into(layout.buildDirectory.dir("dist/js/productionLibrary"))
 }
 
-/*
-    Kotlin/JS doesn't support TypeScript unions
-    https://youtrack.jetbrains.com/issue/KT-55101/
-    This script modifies the generated types and generates a string union given a basic enum.
-    It's a somewhat brittle hack but the type safety is much preferred on the frontend.
-    There's the potential to use a different library for TS generation in the future which does support this natively.
- */
-tasks.register("generateTsUnions", TypeScriptModifierTask::class.java) {
-    dependsOn(copyReadmeToJs)
-    typescriptFile =
-        layout.buildDirectory
-            .dir("dist/js/productionLibrary/")
-            .get()
-            .file("graph-spec.d.mts")
-            .asFile
-}
-
 tasks.named("jsProductionLibraryCompileSync") {
     finalizedBy(copyReadmeToJs)
 }
 
-tasks.named("jsNodeProductionLibraryDistribution") {
-    finalizedBy("generateTsUnions")
-}
-
-tasks.register<JavaExec>("generateGraphModelJsonSchema") {
-    description = "Writes JSON Schema for GraphModel Go type generation"
+/*
+    ADR-0003: the annotated Kotlin model is the schema's source of truth.
+    Regenerates the committed ontology-graph-spec.schema.json from the model's
+    spec annotations; CI drift-checks the result (validate-kotlin.yaml).
+ */
+tasks.register<JavaExec>("generateOntologyGraphSpecJsonSchema") {
+    description = "Writes ontology-graph-spec.schema.json from the annotated Kotlin model"
     val compilation = kotlin.jvm().compilations.getByName("main")
     dependsOn(compilation.compileTaskProvider)
     classpath = compilation.output.classesDirs + compilation.compileDependencyFiles
-    mainClass.set("schema.GenerateGraphModelJsonSchemaKt")
+    mainClass.set("schema.GenerateOntologyGraphSpecJsonSchemaKt")
     workingDir = layout.projectDirectory.asFile
     doFirst {
-        val outputFile = layout.projectDirectory.file("go/spec.json").asFile
-        outputFile.parentFile.mkdirs()
+        val outputFile = layout.projectDirectory.file("ontology-graph-spec.schema.json").asFile
         args(outputFile.absolutePath)
     }
 }
@@ -151,11 +137,11 @@ tasks.register<JavaExec>("generateGraphModelJsonSchema") {
 mavenPublishing {
     publishToMavenCentral()
     signAllPublications()
-    coordinates(group.toString(), "graph-spec", version.toString())
+    coordinates(group.toString(), "ontology-graph-spec", version.toString())
     pom {
-        name = "graph-spec"
-        description = "Uniform Graph Specification Library for Neo4j"
-        url = "https://github.com/neo4j/import-spec"
+        name = "ontology-graph-spec"
+        description = "Neo4j Ontology Graph Specification Library"
+        url = "https://github.com/neo4j/graph-spec"
         inceptionYear = "2024"
         organization {
             name = "Neo4j, Neo4j Sweden AB"
@@ -183,9 +169,9 @@ mavenPublishing {
             }
         }
         scm {
-            connection = "scm:git:git://github.com/neo4j/import-spec.git"
-            developerConnection = "scm:git:git@github.com:neo4j/import-spec.git"
-            url = "https://github.com/neo4j/import-spec"
+            connection = "scm:git:git://github.com/neo4j/graph-spec.git"
+            developerConnection = "scm:git:git@github.com:neo4j/graph-spec.git"
+            url = "https://github.com/neo4j/graph-spec"
         }
     }
 }
