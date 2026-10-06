@@ -447,8 +447,8 @@ type RelationshipIndex struct {
 type RelationshipTarget struct {
 	Count    *int    `json:"count,omitempty"`
 	Label    *string `json:"label,omitempty"`
-	MaxCount *int    `json:"maxCount,omitempty"`
-	MinCount *int    `json:"minCount,omitempty"`
+	MaxCount *int    `json:"max_count,omitempty"`
+	MinCount *int    `json:"min_count,omitempty"`
 	Node     *string `json:"node,omitempty"`
 }
 

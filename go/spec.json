@@ -675,10 +675,10 @@
                 "count": {
                     "type": "integer"
                 },
-                "minCount": {
+                "min_count": {
                     "type": "integer"
                 },
-                "maxCount": {
+                "max_count": {
                     "type": "integer"
                 }
             },

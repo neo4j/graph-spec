@@ -27,6 +27,8 @@ data class RelationshipTarget(
     var node: String = "",
     var label: String = "",
     var count: Int = -1,
+    @SerialName("min_count")
     var minCount: Int = 0,
+    @SerialName("max_count")
     var maxCount: Int = Int.MAX_VALUE
 )
