@@ -24,18 +24,6 @@
                 "$ref": "#/$defs/Relationship"
             }
         },
-        "tables": {
-            "type": "object",
-            "additionalProperties": {
-                "$ref": "#/$defs/Table"
-            }
-        },
-        "mappings": {
-            "type": "array",
-            "items": {
-                "$ref": "#/$defs/Mapping"
-            }
-        },
         "extensions": {
             "$ref": "#/$defs/GraphModelExtensions"
         }
@@ -845,6 +833,31 @@
             ],
             "additionalProperties": false
         },
+        "GraphModelExtensions": {
+            "type": "object",
+            "properties": {
+                "custom": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ExtensionValue"
+                    }
+                },
+                "tables": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/Table"
+                    }
+                },
+                "mappings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Mapping"
+                    }
+                }
+            },
+            "required": [],
+            "additionalProperties": false
+        },
         "Table": {
             "type": "object",
             "properties": {
@@ -1128,19 +1141,6 @@
                 "from_node",
                 "to_node"
             ],
-            "additionalProperties": false
-        },
-        "GraphModelExtensions": {
-            "type": "object",
-            "properties": {
-                "custom": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
-                }
-            },
-            "required": [],
             "additionalProperties": false
         }
     }

@@ -20,7 +20,7 @@ func TestV3ToGraphSpecMigration(t *testing.T) {
 
 	result, err := migration.ToGraphSpec(string(raw), migration.ModelTypeDataModel)
 	require.NoError(t, err)
-	require.NotEmpty(t, result.Mappings)
+	require.NotEmpty(t, result.Extensions.Mappings)
 
 	resultBytes, err := json.Marshal(result)
 	require.NoError(t, err)

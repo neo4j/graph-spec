@@ -19,30 +19,31 @@ nodes:
             vector.similarity_function: "euclidean"
           name: "document_embedding"
     name: "document"
-tables:
-  document:
-    source: "cloud"
-    columns:
-      documentid:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER"]
-      embedding:
-        type: "VECTOR"
-        suggested: "VECTOR<FLOAT>"
-        supported: ["VECTOR<FLOAT>", "VECTOR<FLOAT32>"]
-        dimension: 123
-      legacyembedding:
-        type: "VECTOR"
-        suggested: "VECTOR<FLOAT>"
-        supported: ["VECTOR<FLOAT>"]
-    primaryKeys: ["documentid"]
-mappings:
-  - type: "NODE"
-    node: "node0"
-    table: "document"
-    properties:
-      node0_property0: { column: "documentid" }
-      node0_property1: { column: "embedding" }
-      node0_property2: { column: "legacyembedding" }
-    key: ["node0_property0"]
+extensions:
+  tables:
+    document:
+      source: "cloud"
+      columns:
+        documentid:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER"]
+        embedding:
+          type: "VECTOR"
+          suggested: "VECTOR<FLOAT>"
+          supported: ["VECTOR<FLOAT>", "VECTOR<FLOAT32>"]
+          dimension: 123
+        legacyembedding:
+          type: "VECTOR"
+          suggested: "VECTOR<FLOAT>"
+          supported: ["VECTOR<FLOAT>"]
+      primaryKeys: ["documentid"]
+  mappings:
+    - type: "NODE"
+      node: "node0"
+      table: "document"
+      properties:
+        node0_property0: { column: "documentid" }
+        node0_property1: { column: "embedding" }
+        node0_property2: { column: "legacyembedding" }
+      key: ["node0_property0"]

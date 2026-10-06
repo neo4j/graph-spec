@@ -27,6 +27,9 @@
     }
   },
   "relationships": {},
-  "tables": {},
-  "mappings": []
+  "extensions": {
+    "custom": {},
+    "tables": {},
+    "mappings": []
+  }
 }

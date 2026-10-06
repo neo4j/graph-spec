@@ -25,21 +25,39 @@ import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
 import model.jso
+import model.mapping.MappingJs
+import model.mapping.toClass
+import model.mapping.toJs
+import model.source.TableJs
+import model.source.toClass
+import model.source.toJs
 
 @JsExport
 @JsPlainObject
 external interface GraphModelExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
+    val tables: Record<String, TableJs>
+    var mappings: Array<MappingJs>
 }
 
-fun graphModelExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): GraphModelExtensionsJs = jso {
+fun graphModelExtensionsJs(
+    custom: Record<String, ExtensionValueJs> = emptyRecord(),
+    tables: Record<String, TableJs> = emptyRecord(),
+    mappings: Array<MappingJs> = emptyArray()
+): GraphModelExtensionsJs = jso {
     this.custom = custom
+    this.tables = tables
+    this.mappings = mappings
 }
 
 fun GraphModelExtensions.toJs() = graphModelExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    tables = tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
+    mappings = mappings.map { mapping -> mapping.toJs() }.toTypedArray()
 )
 
 fun GraphModelExtensionsJs.toClass(): GraphModelExtensions = GraphModelExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    tables = tables.associateBy { _, js -> js.toClass() },
+    mappings = mappings.map { it.toClass() }.toMutableList()
 )

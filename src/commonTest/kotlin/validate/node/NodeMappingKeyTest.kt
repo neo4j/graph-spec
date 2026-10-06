@@ -52,7 +52,7 @@ class NodeMappingKeyTest {
             properties = mutableMapOf("name" to Property())
         )
         model.nodes["person"] = node
-        model.mappings.add(
+        model.extensions.mappings.add(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -74,7 +74,7 @@ class NodeMappingKeyTest {
             properties = mutableMapOf("name" to Property())
         )
         model.nodes["person"] = node
-        model.mappings.add(
+        model.extensions.mappings.add(
             NodeMapping(
                 node = "person",
                 table = "people.csv",

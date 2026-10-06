@@ -78,7 +78,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
 
     private fun convertGraphMapping(schema: SchemaMap): SchemaMap {
         val relationships = schema.mapOfMapsOrNull("relationships").orEmpty()
-        val mappings = schema.listOfMapsOrNull("mappings").orEmpty()
+        val mappings = schema.mapOrNull("extensions")?.listOfMapsOrNull("mappings").orEmpty()
         val (nodeMappings, relationshipMappings) = mappings.mapNotNull { mapping ->
             when {
                 mapping.containsKey("node") -> "node" to schemaMapOf(
@@ -101,7 +101,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             }
         }.partition { it.first == "node" }
         return schemaMapOf(
-            "dataSourceSchema" to convertSourceSchema(schema.mapOfMapsOrNull("tables")),
+            "dataSourceSchema" to convertSourceSchema(schema.mapOrNull("extensions")?.mapOfMapsOrNull("tables")),
             "nodeMappings" to nodeMappings.map { it.second },
             "relationshipMappings" to relationshipMappings.map { it.second }
         )
@@ -114,7 +114,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
 
     internal fun convertMappingKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
         val keyProperties = mutableMapOf<String, MutableSet<String>>()
-        for (mapping in schema.listOfMapsOrNull("mappings").orEmpty()) {
+        for (mapping in schema.mapOrNull("extensions")?.listOfMapsOrNull("mappings").orEmpty()) {
             val entity = mapping.stringOrNull(singular) ?: continue
             val keys = mapping.listOrNull("key") ?: continue
             if (keys.isNotEmpty()) {

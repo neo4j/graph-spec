@@ -698,10 +698,10 @@ class DataModelV3GraphSpecMigrationTest {
 
         val result = migration.migrate(input)
 
-        assertNotNull(result.mapOfMaps("tables")["users"])
+        assertNotNull(result.map("extensions").mapOfMaps("tables")["users"])
         assertTrue(result.mapOfMaps("nodes").isEmpty(), "nodes should be present but empty")
         assertTrue(result.mapOfMaps("relationships").isEmpty(), "relationships should be present but empty")
-        assertFalse(result.containsKey("mappings"), "mappings should be omitted when empty")
+        assertFalse(result.map("extensions").containsKey("mappings"), "mappings should be omitted when empty")
         assertTrue(result.containsKey("description"), "description should be present but empty")
     }
 }

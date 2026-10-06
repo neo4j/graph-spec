@@ -63,7 +63,7 @@ class DataModelV3GraphSpecMigration :
                 "description" to schema.literalOrNull("description"),
                 "nodes" to emptyMap<String, SchemaMap>(),
                 "relationships" to emptyMap<String, SchemaMap>(),
-                "tables" toNotEmpty migrateTables(schema)
+                "extensions" toNotEmpty extensions(migrateTables(schema), emptyList())
             )
         val (nodeConstraints, relationshipConstraints) = gatherWithNames(graphSchema, "constraints")
         val (nodeIndexes, relationshipIndexes) = gatherWithNames(graphSchema, "indexes")
@@ -74,9 +74,25 @@ class DataModelV3GraphSpecMigration :
             "description" to schema.literalOrNull("description"),
             "nodes" to nodes,
             "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),
-            "tables" toNotEmpty migrateTables(schema),
-            "mappings" toNotEmpty nodeMappings(schema, nodeKeys) + relationshipMappings(schema, relKeys)
+            "extensions" toNotEmpty extensions(
+                migrateTables(schema),
+                nodeMappings(schema, nodeKeys) + relationshipMappings(schema, relKeys)
+            )
         )
+    }
+
+    /**
+     * Graph model level extensions, omitting any which are empty.
+     */
+    private fun extensions(tables: Map<String, SchemaMap>, mappings: List<SchemaMap>): Map<String, Any> {
+        val extensions = mutableMapOf<String, Any>()
+        if (tables.isNotEmpty()) {
+            extensions["tables"] = tables
+        }
+        if (mappings.isNotEmpty()) {
+            extensions["mappings"] = mappings
+        }
+        return extensions
     }
 
     private fun keyProperties(extensions: SchemaMap?, entity: String): Map<String, Set<String>> =

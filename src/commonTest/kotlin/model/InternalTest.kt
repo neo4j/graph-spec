@@ -111,19 +111,21 @@ class InternalTest {
                     properties = mutableMapOf("since" to Property())
                 )
             ),
-            mappings = mutableListOf(
-                RelationshipMapping(
-                    relationship = "FRIENDS_WITH",
-                    table = "friends_table",
-                    fromNode = TargetMapping(
-                        node = "Person",
-                        properties = mutableMapOf("age" to PropertyMapping("from_age"))
-                    ),
-                    toNode = TargetMapping(
-                        node = "Person"
-                    ),
-                    properties = mutableMapOf(
-                        "since" to PropertyMapping("friends_since")
+            extensions = GraphModelExtensions(
+                mappings = mutableListOf(
+                    RelationshipMapping(
+                        relationship = "FRIENDS_WITH",
+                        table = "friends_table",
+                        fromNode = TargetMapping(
+                            node = "Person",
+                            properties = mutableMapOf("age" to PropertyMapping("from_age"))
+                        ),
+                        toNode = TargetMapping(
+                            node = "Person"
+                        ),
+                        properties = mutableMapOf(
+                            "since" to PropertyMapping("friends_since")
+                        )
                     )
                 )
             ),
@@ -142,7 +144,7 @@ class InternalTest {
         assertTrue(internalRel.properties.containsKey("relationship0_property0"))
 
         // Assert Mappings Deep Translation
-        val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
+        val relMapping = originalModel.extensions.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("relationship0", relMapping.relationship)
         assertEquals("node0", relMapping.fromNode.node)
         assertTrue(
@@ -161,14 +163,16 @@ class InternalTest {
         val model = GraphModel(
             version = "1.0",
             nodes = mutableMapOf(),
-            mappings = mutableListOf(
-                NodeMapping(node = "GhostNode", table = "ghosts", properties = mutableMapOf())
+            extensions = GraphModelExtensions(
+                mappings = mutableListOf(
+                    NodeMapping(node = "GhostNode", table = "ghosts", properties = mutableMapOf())
+                )
             )
         )
 
         model.internalise()
 
-        val mapping = model.mappings.first() as NodeMapping
+        val mapping = model.extensions.mappings.first() as NodeMapping
         assertEquals("GhostNode", mapping.node)
     }
 

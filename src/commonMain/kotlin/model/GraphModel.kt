@@ -19,10 +19,8 @@ package model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import model.mapping.Mapping
 import model.node.Node
 import model.relationship.Relationship
-import model.source.Table
 import validate.Issue
 import validate.Validation
 import validate.ValidationTree
@@ -38,8 +36,6 @@ data class GraphModel(
     val description: String = "",
     val nodes: MutableMap<String, Node> = mutableMapOf(),
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
-    val tables: MutableMap<String, Table> = mutableMapOf(),
-    val mappings: MutableList<Mapping> = mutableListOf(),
     val extensions: GraphModelExtensions = GraphModelExtensions(),
     @Transient
     var pretty: Boolean = false

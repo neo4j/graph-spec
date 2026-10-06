@@ -20,6 +20,7 @@ import codec.schema.SchemaMap
 import codec.schema.SchemaNull
 import kotlinx.serialization.SerializationException
 import model.GraphModel
+import model.GraphModelExtensions
 import model.extension.BooleanValue
 import model.extension.StringValue
 import model.index.FullTextIndexOption
@@ -113,7 +114,7 @@ class JsonFormatTest {
         val model = GraphModel(
             version = "1.0",
             nodes = mutableMapOf(),
-            mappings = mutableListOf()
+            extensions = GraphModelExtensions(mappings = mutableListOf())
         )
 
         val schema = jsonFormat.encodeToSchema(model)
@@ -121,7 +122,7 @@ class JsonFormatTest {
 
         assertEquals(model.version, decoded.version)
         assertTrue(decoded.nodes.isEmpty())
-        assertTrue(decoded.mappings.isEmpty())
+        assertTrue(decoded.extensions.mappings.isEmpty())
     }
 
     @Test
@@ -157,19 +158,21 @@ class JsonFormatTest {
     fun `test polymorphic Mapping serialization round-trips through explicit type discriminator`() {
         val model = GraphModel(
             version = "1",
-            mappings = mutableListOf(
-                NodeMapping(
-                    node = "n0",
-                    table = "t0",
-                    properties = mutableMapOf("p0" to PropertyMapping(column = "f0"))
-                ),
-                RelationshipMapping(
-                    relationship = "r0",
-                    table = "t1",
-                    fromNode = TargetMapping(node = "n0"),
-                    toNode = TargetMapping(node = "n1")
-                ),
-                QueryMapping(table = "t2", query = "MATCH (n) RETURN n")
+            extensions = GraphModelExtensions(
+                mappings = mutableListOf(
+                    NodeMapping(
+                        node = "n0",
+                        table = "t0",
+                        properties = mutableMapOf("p0" to PropertyMapping(column = "f0"))
+                    ),
+                    RelationshipMapping(
+                        relationship = "r0",
+                        table = "t1",
+                        fromNode = TargetMapping(node = "n0"),
+                        toNode = TargetMapping(node = "n1")
+                    ),
+                    QueryMapping(table = "t2", query = "MATCH (n) RETURN n")
+                )
             )
         )
 
@@ -179,7 +182,7 @@ class JsonFormatTest {
         assertTrue(encoded.contains(""""type": "QUERY""""))
 
         val decoded = jsonFormat.decodeModelFromString(encoded)
-        assertEquals(model.mappings, decoded.mappings)
+        assertEquals(model.extensions.mappings, decoded.extensions.mappings)
     }
 
     @Test
@@ -213,7 +216,7 @@ class JsonFormatTest {
         val json = """{ "node": "n0", "table": "t0", "properties": {} }"""
 
         val failure = assertFailsWith<SerializationException> {
-            jsonFormat.decodeModelFromString("""{"version":"1","mappings":[$json]}""")
+            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"mappings":[$json]}}""")
         }
 
         assertTrue(
@@ -227,7 +230,7 @@ class JsonFormatTest {
         val json = """{ "type": "NotARealMapping", "node": "n0", "table": "t0", "properties": {} }"""
 
         assertFailsWith<SerializationException> {
-            jsonFormat.decodeModelFromString("""{"version":"1","mappings":[$json]}""")
+            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"mappings":[$json]}}""")
         }
     }
 
