@@ -320,6 +320,7 @@ type Neo4jType string
 
 const (
 	Neo4jTypeAny               Neo4jType = "ANY"
+	Neo4jTypeListAny           Neo4jType = "LIST<ANY>"
 	Neo4jTypeBoolean           Neo4jType = "BOOLEAN"
 	Neo4jTypeListBoolean       Neo4jType = "LIST<BOOLEAN>"
 	Neo4jTypeDate              Neo4jType = "DATE"
@@ -361,6 +362,7 @@ const (
 
 var Neo4jTypeValues = []Neo4jType{
 	Neo4jTypeAny,
+	Neo4jTypeListAny,
 	Neo4jTypeBoolean,
 	Neo4jTypeListBoolean,
 	Neo4jTypeDate,
@@ -407,11 +409,15 @@ type Property struct {
 	Key         *bool                     `json:"key,omitempty"`
 	MustExist   *bool                     `json:"mustExist,omitempty"`
 	Name        *string                   `json:"name,omitempty"`
+	OneOf       []ExtensionValue          `json:"one_of,omitempty"`
+	Pattern     *string                   `json:"pattern,omitempty"`
+	Reference   *string                   `json:"reference,omitempty"`
 	Type        *Neo4jType                `json:"type,omitempty"`
 	Unique      *bool                     `json:"unique,omitempty"`
 }
 
 type Node struct {
+	Aliases     []string                  `json:"aliases,omitempty"`
 	Constraints map[string]NodeConstraint `json:"constraints,omitempty"`
 	Description *string                   `json:"description,omitempty"`
 	Extensions  map[string]ExtensionValue `json:"extensions,omitempty"`
@@ -420,6 +426,7 @@ type Node struct {
 	Labels      *Labels                   `json:"labels,omitempty"`
 	Name        *string                   `json:"name,omitempty"`
 	Properties  map[string]Property       `json:"properties,omitempty"`
+	Reference   *string                   `json:"reference,omitempty"`
 }
 
 type RelationshipConstraint struct {
@@ -438,11 +445,15 @@ type RelationshipIndex struct {
 }
 
 type RelationshipTarget struct {
-	Label *string `json:"label,omitempty"`
-	Node  *string `json:"node,omitempty"`
+	Count    *int    `json:"count,omitempty"`
+	Label    *string `json:"label,omitempty"`
+	MaxCount *int    `json:"maxCount,omitempty"`
+	MinCount *int    `json:"minCount,omitempty"`
+	Node     *string `json:"node,omitempty"`
 }
 
 type Relationship struct {
+	Aliases     []string                          `json:"aliases,omitempty"`
 	Constraints map[string]RelationshipConstraint `json:"constraints,omitempty"`
 	Description *string                           `json:"description,omitempty"`
 	Extensions  map[string]ExtensionValue         `json:"extensions,omitempty"`
@@ -450,6 +461,7 @@ type Relationship struct {
 	Indexes     map[string]RelationshipIndex      `json:"indexes,omitempty"`
 	Name        *string                           `json:"name,omitempty"`
 	Properties  map[string]Property               `json:"properties,omitempty"`
+	Reference   *string                           `json:"reference,omitempty"`
 	To          RelationshipTarget                `json:"to"`
 	Type        string                            `json:"type"`
 }

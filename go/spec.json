@@ -85,6 +85,15 @@
                 },
                 "description": {
                     "type": "string"
+                },
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reference": {
+                    "type": "string"
                 }
             },
             "required": [],
@@ -286,6 +295,18 @@
                 },
                 "description": {
                     "type": "string"
+                },
+                "reference": {
+                    "type": "string"
+                },
+                "pattern": {
+                    "type": "string"
+                },
+                "one_of": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ExtensionValue"
+                    }
                 }
             },
             "required": [],
@@ -295,6 +316,7 @@
             "type": "string",
             "enum": [
                 "ANY",
+                "LIST<ANY>",
                 "BOOLEAN",
                 "LIST<BOOLEAN>",
                 "DATE",
@@ -623,6 +645,15 @@
                 },
                 "description": {
                     "type": "string"
+                },
+                "aliases": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "reference": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -640,6 +671,15 @@
                 },
                 "label": {
                     "type": "string"
+                },
+                "count": {
+                    "type": "integer"
+                },
+                "minCount": {
+                    "type": "integer"
+                },
+                "maxCount": {
+                    "type": "integer"
                 }
             },
             "required": [],
