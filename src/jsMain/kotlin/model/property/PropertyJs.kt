@@ -38,6 +38,9 @@ external interface PropertyJs {
     var name: String
     val id: String
     val description: String
+    var reference: String
+    var pattern: String
+    var oneOf: Array<ExtensionValueJs>
 }
 
 fun propertyJs(
@@ -49,7 +52,10 @@ fun propertyJs(
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String,
     id: String,
-    description: String = ""
+    description: String = "",
+    reference: String = "",
+    pattern: String = "",
+    oneOf: Array<ExtensionValueJs> = emptyArray()
 ): PropertyJs = jso {
     this.type = type
     this.dimension = dimension
@@ -60,6 +66,9 @@ fun propertyJs(
     this.name = name
     this.id = id
     this.description = description
+    this.reference = reference
+    this.pattern = pattern
+    this.oneOf = oneOf
 }
 
 fun Property.toJs(key: String) = propertyJs(
@@ -71,7 +80,10 @@ fun Property.toJs(key: String) = propertyJs(
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: key,
     id = key,
-    description = description
+    description = description,
+    reference = reference,
+    pattern = pattern,
+    oneOf = oneOf.map { it.toJs() }.toTypedArray()
 )
 
 fun PropertyJs.toClass(parent: String, property: String): Property {
@@ -86,6 +98,9 @@ fun PropertyJs.toClass(parent: String, property: String): Property {
         key = key,
         extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
         name = name,
-        description = description
+        description = description,
+        reference = reference,
+        pattern = pattern,
+        oneOf = oneOf.map { it.toClass() }.toMutableList()
     )
 }

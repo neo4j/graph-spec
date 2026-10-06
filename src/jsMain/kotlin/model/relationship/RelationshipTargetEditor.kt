@@ -30,5 +30,33 @@ class RelationshipTargetEditor {
             target.label = label
             target.node = ""
         }
+
+        /**
+         * Sets an exact count, resetting the min/max range as only one or the other may be used.
+         */
+        @JsStatic
+        fun setCount(target: RelationshipTargetJs, count: Int) {
+            target.count = count
+            target.minCount = 0
+            target.maxCount = Int.MAX_VALUE
+        }
+
+        /**
+         * Sets the minimum count, clearing any exact count.
+         */
+        @JsStatic
+        fun setMinCount(target: RelationshipTargetJs, minCount: Int) {
+            target.minCount = minCount
+            target.count = -1
+        }
+
+        /**
+         * Sets the maximum count, clearing any exact count.
+         */
+        @JsStatic
+        fun setMaxCount(target: RelationshipTargetJs, maxCount: Int) {
+            target.maxCount = maxCount
+            target.count = -1
+        }
     }
 }

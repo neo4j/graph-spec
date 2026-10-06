@@ -68,4 +68,37 @@ class RelationshipTargetEditorTest {
         assertEquals("C", target.node)
         assertEquals("", target.label)
     }
+
+    @Test
+    fun testCountDefaults() {
+        val target = relationshipTargetJs()
+        assertEquals(-1, target.count)
+        assertEquals(0, target.minCount)
+        assertEquals(Int.MAX_VALUE, target.maxCount)
+    }
+
+    @Test
+    fun testSetCountResetsRange() {
+        val target = relationshipTargetJs(minCount = 2, maxCount = 5)
+
+        RelationshipTargetEditor.setCount(target, 3)
+
+        assertEquals(3, target.count)
+        assertEquals(0, target.minCount)
+        assertEquals(Int.MAX_VALUE, target.maxCount)
+    }
+
+    @Test
+    fun testSetMinAndMaxClearCount() {
+        val target = relationshipTargetJs(count = 3)
+
+        RelationshipTargetEditor.setMinCount(target, 1)
+        assertEquals(-1, target.count)
+        assertEquals(1, target.minCount)
+
+        RelationshipTargetEditor.setCount(target, 4)
+        RelationshipTargetEditor.setMaxCount(target, 9)
+        assertEquals(-1, target.count)
+        assertEquals(9, target.maxCount)
+    }
 }

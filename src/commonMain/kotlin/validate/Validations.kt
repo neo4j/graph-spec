@@ -43,6 +43,7 @@ import validate.relationship.RelationshipIndexes
 import validate.relationship.RelationshipNodes
 import validate.relationship.RelationshipPropertyDuplicateName
 import validate.relationship.RelationshipPropertyEmptyName
+import validate.relationship.RelationshipTargetCount
 import validate.relationship.RelationshipType
 import validate.relationship.RelationshipTypeToken
 import validate.relationship.constraint.RelationshipExistenceConstraint
@@ -70,7 +71,8 @@ class Validations {
             RelationshipIndexOptions,
             NodeExistenceConstraint,
             RelationshipExistenceConstraint,
-            RelationshipNodes
+            RelationshipNodes,
+            RelationshipTargetCount
         )
 
         // UPX kg-builder `validateStructuredSchema` (schemas-validators/) - gates accepting

@@ -1,7 +1,9 @@
 package model.property
 
 import model.mapping.JsMappingTest
+import model.extension.BooleanValue
 import model.extension.StringValue
+import model.extension.booleanValueJs
 import model.extension.stringValueJs
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -15,7 +17,10 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         unique = true,
         key = true,
         extensions = mutableMapOf("key1" to StringValue("val1")),
-        name = "propertyName"
+        name = "propertyName",
+        reference = "ref",
+        pattern = "^a.*",
+        oneOf = mutableListOf(StringValue("a"), BooleanValue(true))
     )
 
     override fun toJs(k: Property): PropertyJs = k.toJs("propertyId")
@@ -31,6 +36,11 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
         assertEquals("propertyId", jsObject.id)
         assertEquals("propertyName", jsObject.name)
+        assertEquals("ref", jsObject.reference)
+        assertEquals("^a.*", jsObject.pattern)
+        assertEquals(2, jsObject.oneOf.size)
+        assertJsEquals(stringValueJs("a"), jsObject.oneOf[0])
+        assertJsEquals(booleanValueJs(true), jsObject.oneOf[1])
     }
 
 }

@@ -20,7 +20,9 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         constraints = mutableMapOf("constraint" to RelationshipConstraint(ConstraintType.KEY, mutableSetOf("prop"))),
         indexes = mutableMapOf("index" to RelationshipIndex(IndexType.POINT, mutableSetOf("prop"))),
         extensions = mutableMapOf("key1" to StringValue("val1")),
-        name = "relationshipName"
+        name = "relationshipName",
+        aliases = mutableSetOf("alias1", "alias2"),
+        reference = "rel-ref"
     )
 
     override fun toJs(k: Relationship): RelationshipJs = k.toJs("relationshipId")
@@ -37,6 +39,8 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
         assertEquals("relationshipId", jsObject.id)
         assertEquals("relationshipName", jsObject.name)
+        assertEquals(listOf("alias1", "alias2"), jsObject.aliases.toList())
+        assertEquals("rel-ref", jsObject.reference)
     }
 
 }

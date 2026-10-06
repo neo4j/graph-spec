@@ -61,6 +61,53 @@ class RelationshipEditor {
             RelationshipTargetEditor.setLabel(relationship.to, label)
         }
 
+        @JsStatic
+        fun setReference(relationship: RelationshipJs, reference: String) {
+            relationship.reference = reference
+        }
+
+        @JsStatic
+        fun addAlias(relationship: RelationshipJs, alias: String) {
+            if (!relationship.aliases.contains(alias)) {
+                relationship.aliases += alias
+            }
+        }
+
+        @JsStatic
+        fun removeAlias(relationship: RelationshipJs, alias: String) {
+            relationship.aliases = relationship.aliases.filter { it != alias }.toTypedArray()
+        }
+
+        @JsStatic
+        fun setSourceCount(relationship: RelationshipJs, count: Int) {
+            RelationshipTargetEditor.setCount(relationship.from, count)
+        }
+
+        @JsStatic
+        fun setSourceMinCount(relationship: RelationshipJs, minCount: Int) {
+            RelationshipTargetEditor.setMinCount(relationship.from, minCount)
+        }
+
+        @JsStatic
+        fun setSourceMaxCount(relationship: RelationshipJs, maxCount: Int) {
+            RelationshipTargetEditor.setMaxCount(relationship.from, maxCount)
+        }
+
+        @JsStatic
+        fun setTargetCount(relationship: RelationshipJs, count: Int) {
+            RelationshipTargetEditor.setCount(relationship.to, count)
+        }
+
+        @JsStatic
+        fun setTargetMinCount(relationship: RelationshipJs, minCount: Int) {
+            RelationshipTargetEditor.setMinCount(relationship.to, minCount)
+        }
+
+        @JsStatic
+        fun setTargetMaxCount(relationship: RelationshipJs, maxCount: Int) {
+            RelationshipTargetEditor.setMaxCount(relationship.to, maxCount)
+        }
+
         /*
             Properties
          */
@@ -114,6 +161,30 @@ class RelationshipEditor {
         fun setPropertyKey(model: GraphModelJs, relationshipId: String, propertyId: String, key: Boolean) {
             val property = getProperty(model, relationshipId, propertyId)
             PropertyEditor.setKey(property, key)
+        }
+
+        @JsStatic
+        fun setPropertyReference(model: GraphModelJs, relationshipId: String, propertyId: String, reference: String) {
+            val property = getProperty(model, relationshipId, propertyId)
+            PropertyEditor.setReference(property, reference)
+        }
+
+        @JsStatic
+        fun setPropertyPattern(model: GraphModelJs, relationshipId: String, propertyId: String, pattern: String) {
+            val property = getProperty(model, relationshipId, propertyId)
+            PropertyEditor.setPattern(property, pattern)
+        }
+
+        @JsStatic
+        fun addPropertyOneOf(model: GraphModelJs, relationshipId: String, propertyId: String, value: ExtensionValueJs) {
+            val property = getProperty(model, relationshipId, propertyId)
+            PropertyEditor.addOneOf(property, value)
+        }
+
+        @JsStatic
+        fun removePropertyOneOf(model: GraphModelJs, relationshipId: String, propertyId: String, index: Int) {
+            val property = getProperty(model, relationshipId, propertyId)
+            PropertyEditor.removeOneOf(property, index)
         }
 
         private fun getProperty(model: GraphModelJs, relationshipId: String, propertyId: String): PropertyJs {
