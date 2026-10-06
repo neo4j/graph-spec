@@ -175,6 +175,18 @@ class RelationshipEditor {
             PropertyEditor.setPattern(property, pattern)
         }
 
+        @JsStatic
+        fun addPropertyOneOf(model: GraphModelJs, relationshipId: String, propertyId: String, value: ExtensionValueJs) {
+            val property = getProperty(model, relationshipId, propertyId)
+            PropertyEditor.addOneOf(property, value)
+        }
+
+        @JsStatic
+        fun removePropertyOneOf(model: GraphModelJs, relationshipId: String, propertyId: String, index: Int) {
+            val property = getProperty(model, relationshipId, propertyId)
+            PropertyEditor.removeOneOf(property, index)
+        }
+
         private fun getProperty(model: GraphModelJs, relationshipId: String, propertyId: String): PropertyJs {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             val property = relationship.properties.getOrThrow(propertyId, "Property")

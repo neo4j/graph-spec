@@ -16,6 +16,8 @@
  */
 package model.property
 
+import model.extension.ExtensionValueJs
+
 @JsExport
 class PropertyEditor {
     companion object {
@@ -57,6 +59,18 @@ class PropertyEditor {
         @JsStatic
         fun setPattern(property: PropertyJs, pattern: String) {
             property.pattern = pattern
+        }
+
+        @JsStatic
+        fun addOneOf(property: PropertyJs, value: ExtensionValueJs) {
+            property.oneOf += value
+        }
+
+        @JsStatic
+        fun removeOneOf(property: PropertyJs, index: Int) {
+            if (index in property.oneOf.indices) {
+                property.oneOf = property.oneOf.filterIndexed { i, _ -> i != index }.toTypedArray()
+            }
         }
 
         @JsStatic

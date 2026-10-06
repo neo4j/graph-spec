@@ -36,6 +36,8 @@ data class Property(
     override var name: String? = null,
     val description: String = "",
     val reference: String = "",
-    val pattern: String = ""
+    val pattern: String = "",
+    @SerialName("one_of")
+    val oneOf: MutableList<ExtensionValue> = mutableListOf()
 ) : Extensions,
     Named

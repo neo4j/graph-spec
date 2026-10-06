@@ -157,6 +157,18 @@ class NodeEditor {
             PropertyEditor.setPattern(property, pattern)
         }
 
+        @JsStatic
+        fun addPropertyOneOf(model: GraphModelJs, nodeId: String, propertyId: String, value: ExtensionValueJs) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.addOneOf(property, value)
+        }
+
+        @JsStatic
+        fun removePropertyOneOf(model: GraphModelJs, nodeId: String, propertyId: String, index: Int) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.removeOneOf(property, index)
+        }
+
         private fun getProperty(model: GraphModelJs, nodeId: String, propertyId: String): PropertyJs {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             val property = node.properties.getOrThrow(propertyId, "Property")
