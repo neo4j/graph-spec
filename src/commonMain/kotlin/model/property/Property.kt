@@ -34,6 +34,8 @@ data class Property(
     var key: Boolean? = null,
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null,
-    val description: String = ""
+    val description: String = "",
+    val reference: String = "",
+    val pattern: String = ""
 ) : Extensions,
     Named

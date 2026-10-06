@@ -37,6 +37,26 @@ class NodeEditor {
             node.name = newName
         }
 
+        @JsStatic
+        fun setReference(model: GraphModelJs, nodeId: String, reference: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            node.reference = reference
+        }
+
+        @JsStatic
+        fun addAlias(model: GraphModelJs, nodeId: String, alias: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            if (!node.aliases.contains(alias)) {
+                node.aliases += alias
+            }
+        }
+
+        @JsStatic
+        fun removeAlias(model: GraphModelJs, nodeId: String, alias: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            node.aliases = node.aliases.filter { it != alias }.toTypedArray()
+        }
+
         /*
             Labels
          */
@@ -123,6 +143,18 @@ class NodeEditor {
         fun setPropertyKey(model: GraphModelJs, nodeId: String, propertyId: String, key: Boolean) {
             val property = getProperty(model, nodeId, propertyId)
             PropertyEditor.setKey(property, key)
+        }
+
+        @JsStatic
+        fun setPropertyReference(model: GraphModelJs, nodeId: String, propertyId: String, reference: String) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setReference(property, reference)
+        }
+
+        @JsStatic
+        fun setPropertyPattern(model: GraphModelJs, nodeId: String, propertyId: String, pattern: String) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setPattern(property, pattern)
         }
 
         private fun getProperty(model: GraphModelJs, nodeId: String, propertyId: String): PropertyJs {

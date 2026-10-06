@@ -43,6 +43,8 @@ external interface RelationshipJs {
     var name: String
     val id: String
     val description: String
+    var aliases: Array<String>
+    var reference: String
 }
 
 fun relationshipJs(
@@ -55,7 +57,9 @@ fun relationshipJs(
     extensions: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String,
     id: String,
-    description: String = ""
+    description: String = "",
+    aliases: Array<String> = emptyArray(),
+    reference: String = ""
 ): RelationshipJs = jso {
     this.type = type
     this.from = from
@@ -67,6 +71,8 @@ fun relationshipJs(
     this.name = name
     this.id = id
     this.description = description
+    this.aliases = aliases
+    this.reference = reference
 }
 
 fun Relationship.toJs(id: String) = relationshipJs(
@@ -79,7 +85,9 @@ fun Relationship.toJs(id: String) = relationshipJs(
     extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
     name = name ?: id,
     id = id,
-    description = description
+    description = description,
+    aliases = aliases.toTypedArray(),
+    reference = reference
 )
 
 fun RelationshipJs.toClass(id: String) = Relationship(
@@ -91,5 +99,7 @@ fun RelationshipJs.toClass(id: String) = Relationship(
     indexes = indexes.associateBy { _, index -> index.toClass() },
     extensions = extensions.associateBy { _, value -> value.toClass() },
     name = name,
-    description = description
+    description = description,
+    aliases = aliases.toMutableSet(),
+    reference = reference
 )

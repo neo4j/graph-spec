@@ -35,6 +35,8 @@ data class Node(
     val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
     override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null,
-    val description: String = ""
+    val description: String = "",
+    val aliases: MutableSet<String> = mutableSetOf(),
+    val reference: String = ""
 ) : Extensions,
     Named

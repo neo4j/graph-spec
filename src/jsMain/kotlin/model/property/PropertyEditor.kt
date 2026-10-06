@@ -50,6 +50,16 @@ class PropertyEditor {
         }
 
         @JsStatic
+        fun setReference(property: PropertyJs, reference: String) {
+            property.reference = reference
+        }
+
+        @JsStatic
+        fun setPattern(property: PropertyJs, pattern: String) {
+            property.pattern = pattern
+        }
+
+        @JsStatic
         fun setName(property: PropertyJs, name: String) {
             property.name = name
         }
