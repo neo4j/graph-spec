@@ -25,6 +25,10 @@ import kotlin.js.JsExport
 @SerialName("Neo4jType")
 enum class Neo4jType {
     ANY,
+
+    @SerialName("LIST<ANY>")
+    LIST_ANY,
+
     BOOLEAN,
 
     @SerialName("LIST<BOOLEAN>")
@@ -121,6 +125,7 @@ enum class Neo4jType {
         // this would break the js union conversion
         fun fromString(string: String): Neo4jType? = when (string) {
             "ANY" -> ANY
+            "LIST<ANY>" -> Neo4jType.LIST_ANY
             "BOOLEAN" -> BOOLEAN
             "LIST<BOOLEAN>" -> LIST_BOOLEAN
             "DATE" -> DATE
@@ -163,6 +168,7 @@ enum class Neo4jType {
 
         fun toString(type: Neo4jType): String = when (type) {
             ANY -> "ANY"
+            Neo4jType.LIST_ANY -> "LIST<ANY>"
             BOOLEAN -> "BOOLEAN"
             LIST_BOOLEAN -> "LIST<BOOLEAN>"
             DATE -> "DATE"
