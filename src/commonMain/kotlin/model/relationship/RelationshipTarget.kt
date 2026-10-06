@@ -23,4 +23,10 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("RelationshipTarget")
-data class RelationshipTarget(var node: String = "", var label: String = "")
+data class RelationshipTarget(
+    var node: String = "",
+    var label: String = "",
+    var count: Int = -1,
+    var minCount: Int = 0,
+    var maxCount: Int = Int.MAX_VALUE
+)

@@ -24,19 +24,37 @@ import model.jso
 external interface RelationshipTargetJs {
     var node: String
     var label: String
+    var count: Int
+    var minCount: Int
+    var maxCount: Int
 }
 
-fun relationshipTargetJs(node: String = "", label: String = ""): RelationshipTargetJs = jso {
+fun relationshipTargetJs(
+    node: String = "",
+    label: String = "",
+    count: Int = -1,
+    minCount: Int = 0,
+    maxCount: Int = Int.MAX_VALUE
+): RelationshipTargetJs = jso {
     this.node = node
     this.label = label
+    this.count = count
+    this.minCount = minCount
+    this.maxCount = maxCount
 }
 
 fun RelationshipTarget.toJs() = relationshipTargetJs(
     node = node,
-    label = label
+    label = label,
+    count = count,
+    minCount = minCount,
+    maxCount = maxCount
 )
 
 fun RelationshipTargetJs.toClass() = RelationshipTarget(
     node = node,
-    label = label
+    label = label,
+    count = count,
+    minCount = minCount,
+    maxCount = maxCount
 )
