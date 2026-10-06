@@ -515,7 +515,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         private fun indexType(name: String): String = when (name) {
             "LOOKUP" -> "lookup"
             "RANGE" -> "range"
-            "FULLTEXT" -> "fulltext"
+            "FULLTEXT" -> "fullText"
             "POINT" -> "point"
             "TEXT" -> "text"
             "VECTOR" -> "vector"

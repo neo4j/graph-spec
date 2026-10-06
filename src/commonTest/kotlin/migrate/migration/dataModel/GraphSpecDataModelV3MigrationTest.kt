@@ -235,7 +235,7 @@ class GraphSpecDataModelV3MigrationTest {
             mapOf(
                 "i_RANGE" to "range",
                 "i_TEXT" to "text",
-                "i_FULLTEXT" to "fulltext",
+                "i_FULLTEXT" to "fullText",
                 "i_POINT" to "point",
                 "i_VECTOR" to "vector",
                 "i_LOOKUP" to "lookup"

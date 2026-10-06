@@ -43,5 +43,7 @@ class DataModelUtilsTest {
         assertEquals(IndexType.VECTOR, dataModelIndexTypeFrom("vector"))
         assertEquals(IndexType.LOOKUP, dataModelIndexTypeFrom("lookup"))
         assertNull(dataModelIndexTypeFrom("something else"))
+        assertNull(dataModelIndexTypeFrom("fulltext"))
+        assertNull(dataModelIndexTypeFrom("FullText"))
     }
 }
