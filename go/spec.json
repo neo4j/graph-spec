@@ -40,7 +40,7 @@
             "$ref": "#/$defs/Display"
         },
         "extensions": {
-            "$ref": "#/$defs/GraphModelExtension"
+            "$ref": "#/$defs/GraphModelExtensions"
         }
     },
     "additionalProperties": false,
@@ -77,7 +77,7 @@
                     }
                 },
                 "extensions": {
-                    "$ref": "#/$defs/NodeExtension"
+                    "$ref": "#/$defs/NodeExtensions"
                 },
                 "name": {
                     "type": "string",
@@ -119,13 +119,13 @@
                     }
                 },
                 "extensions": {
-                    "$ref": "#/$defs/LabelsExtension"
+                    "$ref": "#/$defs/LabelsExtensions"
                 }
             },
             "required": [],
             "additionalProperties": false
         },
-        "LabelsExtension": {
+        "LabelsExtensions": {
             "type": "object",
             "properties": {
                 "custom": {
@@ -294,7 +294,7 @@
                     "nullable": true
                 },
                 "extensions": {
-                    "$ref": "#/$defs/PropertyExtension"
+                    "$ref": "#/$defs/PropertyExtensions"
                 },
                 "name": {
                     "type": "string",
@@ -363,7 +363,7 @@
                 "UUID"
             ]
         },
-        "PropertyExtension": {
+        "PropertyExtensions": {
             "type": "object",
             "properties": {
                 "custom": {
@@ -623,7 +623,7 @@
             ],
             "additionalProperties": false
         },
-        "NodeExtension": {
+        "NodeExtensions": {
             "type": "object",
             "properties": {
                 "custom": {
@@ -667,7 +667,7 @@
                     }
                 },
                 "extensions": {
-                    "$ref": "#/$defs/RelationshipExtension"
+                    "$ref": "#/$defs/RelationshipExtensions"
                 },
                 "name": {
                     "type": "string",
@@ -783,7 +783,7 @@
             ],
             "additionalProperties": false
         },
-        "RelationshipExtension": {
+        "RelationshipExtensions": {
             "type": "object",
             "properties": {
                 "custom": {
@@ -1116,7 +1116,7 @@
             ],
             "additionalProperties": false
         },
-        "GraphModelExtension": {
+        "GraphModelExtensions": {
             "type": "object",
             "properties": {
                 "custom": {

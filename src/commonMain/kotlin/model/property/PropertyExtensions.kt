@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.relationship
+package model.property
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,14 +23,14 @@ import model.extension.Extensions
 import kotlin.js.JsExport
 
 /**
- * Extensions for a [Relationship].
+ * Extensions for a [model.property.Property].
  *
  * @property custom user-defined arbitrary data.
  */
 @JsExport
 @Serializable
-@SerialName("RelationshipExtension")
-data class RelationshipExtension(val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions {
+@SerialName("PropertyExtensions")
+data class PropertyExtensions(val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions {
     override val extensions: MutableMap<String, ExtensionValue>
         get() = custom
 }

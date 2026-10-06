@@ -28,18 +28,18 @@ import model.jso
 
 @JsExport
 @JsPlainObject
-external interface NodeExtensionJs {
+external interface LabelsExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
 }
 
-fun nodeExtensionJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): NodeExtensionJs = jso {
+fun labelsExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): LabelsExtensionsJs = jso {
     this.custom = custom
 }
 
-fun NodeExtension.toJs() = nodeExtensionJs(
+fun LabelsExtensions.toJs() = labelsExtensionsJs(
     custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
 )
 
-fun NodeExtensionJs.toClass(): NodeExtension = NodeExtension(
+fun LabelsExtensionsJs.toClass(): LabelsExtensions = LabelsExtensions(
     custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

@@ -11,7 +11,7 @@ class LabelsJsTest : JsMappingTest<Labels, LabelsJs>() {
         identifier = "test-id",
         implied = mutableSetOf("a", "b"),
         optional = mutableSetOf("c"),
-        extensions = LabelsExtension(mutableMapOf("key1" to StringValue("val1")))
+        extensions = LabelsExtensions(mutableMapOf("key1" to StringValue("val1")))
     )
 
     override fun toJs(k: Labels): LabelsJs = k.toJs()

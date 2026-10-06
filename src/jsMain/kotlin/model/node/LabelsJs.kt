@@ -31,14 +31,14 @@ external interface LabelsJs {
     var identifier: String?
     var implied: Array<String>
     var optional: Array<String>
-    val extensions: LabelsExtensionJs
+    val extensions: LabelsExtensionsJs
 }
 
 fun labelsJs(
     identifier: String? = null,
     implied: Array<String> = emptyArray(),
     optional: Array<String> = emptyArray(),
-    extensions: LabelsExtensionJs = labelsExtensionJs()
+    extensions: LabelsExtensionsJs = labelsExtensionsJs()
 ): LabelsJs = jso {
     this.identifier = identifier
     this.implied = implied

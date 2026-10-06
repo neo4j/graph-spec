@@ -29,7 +29,7 @@ import model.mapping.QueryMapping
 import model.mapping.RelationshipMapping
 import model.mapping.TargetMapping
 import model.node.Node
-import model.node.NodeExtension
+import model.node.NodeExtensions
 import model.node.NodeIndex
 import model.type.IndexType
 import kotlin.test.Test
@@ -128,7 +128,7 @@ class JsonFormatTest {
     fun `test polymorphic ExtensionValue serialization`() {
         val node = Node(
             name = "TestNode",
-            extensions = NodeExtension(
+            extensions = NodeExtensions(
                 mutableMapOf(
                     "ext_str" to StringValue("hello"),
                     "ext_bool" to BooleanValue(true)

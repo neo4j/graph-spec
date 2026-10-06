@@ -17,7 +17,7 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
         properties = mutableMapOf("prop" to Property(Neo4jType.STRING, name = "propertyName")),
         constraints = mutableMapOf("constraint" to NodeConstraint(ConstraintType.EXISTS, "label", mutableSetOf("prop"))),
         indexes = mutableMapOf("index" to NodeIndex(IndexType.RANGE, mutableSetOf("label"), mutableSetOf("prop"))),
-        extensions = NodeExtension(mutableMapOf("key1" to StringValue("val1"))),
+        extensions = NodeExtensions(mutableMapOf("key1" to StringValue("val1"))),
         name = "Node Name",
         aliases = mutableSetOf("alias1", "alias2"),
         reference = "node-ref"

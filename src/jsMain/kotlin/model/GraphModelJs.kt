@@ -36,7 +36,7 @@ external interface GraphModelJs {
     val tables: Record<String, TableJs>
     var mappings: Array<MappingJs>
     val display: DisplayJs
-    val extensions: GraphModelExtensionJs
+    val extensions: GraphModelExtensionsJs
 }
 
 fun graphModelJs(
@@ -48,7 +48,7 @@ fun graphModelJs(
     tables: Record<String, TableJs> = emptyRecord(),
     mappings: Array<MappingJs> = emptyArray(),
     display: DisplayJs = displayJs(),
-    extensions: GraphModelExtensionJs = graphModelExtensionJs()
+    extensions: GraphModelExtensionsJs = graphModelExtensionsJs()
 ): GraphModelJs = jso {
     this.version = version
     this.name = name

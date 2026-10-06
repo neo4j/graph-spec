@@ -38,7 +38,7 @@ external interface NodeJs {
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, NodeConstraintJs>
     val indexes: Record<String, NodeIndexJs>
-    val extensions: NodeExtensionJs
+    val extensions: NodeExtensionsJs
     var name: String
     val id: String
     val description: String
@@ -51,7 +51,7 @@ fun nodeJs(
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, NodeConstraintJs> = emptyRecord(),
     indexes: Record<String, NodeIndexJs> = emptyRecord(),
-    extensions: NodeExtensionJs = nodeExtensionJs(),
+    extensions: NodeExtensionsJs = nodeExtensionsJs(),
     name: String,
     id: String,
     description: String = "",

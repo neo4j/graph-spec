@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model
+package model.relationship
 
 import js.objects.Record
 import js.objects.toRecord
@@ -28,18 +28,18 @@ import model.jso
 
 @JsExport
 @JsPlainObject
-external interface GraphModelExtensionJs {
+external interface RelationshipExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
 }
 
-fun graphModelExtensionJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): GraphModelExtensionJs = jso {
+fun relationshipExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): RelationshipExtensionsJs = jso {
     this.custom = custom
 }
 
-fun GraphModelExtension.toJs() = graphModelExtensionJs(
+fun RelationshipExtensions.toJs() = relationshipExtensionsJs(
     custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
 )
 
-fun GraphModelExtensionJs.toClass(): GraphModelExtension = GraphModelExtension(
+fun RelationshipExtensionsJs.toClass(): RelationshipExtensions = RelationshipExtensions(
     custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

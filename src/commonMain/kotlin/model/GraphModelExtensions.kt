@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.property
+package model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,14 +23,14 @@ import model.extension.Extensions
 import kotlin.js.JsExport
 
 /**
- * Extensions for a [model.property.Property].
+ * Extensions for a [GraphModel].
  *
  * @property custom user-defined arbitrary data.
  */
 @JsExport
 @Serializable
-@SerialName("PropertyExtension")
-data class PropertyExtension(val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions {
+@SerialName("GraphModelExtensions")
+data class GraphModelExtensions(val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions {
     override val extensions: MutableMap<String, ExtensionValue>
         get() = custom
 }

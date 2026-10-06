@@ -31,7 +31,7 @@ data class Property(
     var mustExist: Boolean? = null,
     var unique: Boolean? = null,
     var key: Boolean? = null,
-    val extensions: PropertyExtension = PropertyExtension(),
+    val extensions: PropertyExtensions = PropertyExtensions(),
     override var name: String? = null,
     val description: String = "",
     val reference: String = "",

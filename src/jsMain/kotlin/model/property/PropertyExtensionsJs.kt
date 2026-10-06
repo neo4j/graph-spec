@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.relationship
+package model.property
 
 import js.objects.Record
 import js.objects.toRecord
@@ -28,18 +28,18 @@ import model.jso
 
 @JsExport
 @JsPlainObject
-external interface RelationshipExtensionJs {
+external interface PropertyExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
 }
 
-fun relationshipExtensionJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): RelationshipExtensionJs = jso {
+fun propertyExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): PropertyExtensionsJs = jso {
     this.custom = custom
 }
 
-fun RelationshipExtension.toJs() = relationshipExtensionJs(
+fun PropertyExtensions.toJs() = propertyExtensionsJs(
     custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
 )
 
-fun RelationshipExtensionJs.toClass(): RelationshipExtension = RelationshipExtension(
+fun PropertyExtensionsJs.toClass(): PropertyExtensions = PropertyExtensions(
     custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

@@ -3,7 +3,7 @@ package model.property
 import model.mapping.JsMappingTest
 import model.extension.BooleanValue
 import model.extension.StringValue
-import model.property.PropertyExtension
+import model.property.PropertyExtensions
 import model.extension.booleanValueJs
 import model.extension.stringValueJs
 import kotlin.test.assertEquals
@@ -17,7 +17,7 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         mustExist = true,
         unique = true,
         key = true,
-        extensions = PropertyExtension(mutableMapOf("key1" to StringValue("val1"))),
+        extensions = PropertyExtensions(mutableMapOf("key1" to StringValue("val1"))),
         name = "propertyName",
         reference = "ref",
         pattern = "^a.*",

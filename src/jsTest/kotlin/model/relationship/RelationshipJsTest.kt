@@ -2,7 +2,7 @@ package model.relationship
 
 import model.mapping.JsMappingTest
 import model.extension.StringValue
-import model.relationship.RelationshipExtension
+import model.relationship.RelationshipExtensions
 import model.extension.stringValueJs
 import model.property.Neo4jType
 import model.property.Property
@@ -20,7 +20,7 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         properties = mutableMapOf("prop" to Property(Neo4jType.STRING, name = "property_name")),
         constraints = mutableMapOf("constraint" to RelationshipConstraint(ConstraintType.KEY, mutableSetOf("prop"))),
         indexes = mutableMapOf("index" to RelationshipIndex(IndexType.POINT, mutableSetOf("prop"))),
-        extensions = RelationshipExtension(mutableMapOf("key1" to StringValue("val1"))),
+        extensions = RelationshipExtensions(mutableMapOf("key1" to StringValue("val1"))),
         name = "relationshipName",
         aliases = mutableSetOf("alias1", "alias2"),
         reference = "rel-ref"

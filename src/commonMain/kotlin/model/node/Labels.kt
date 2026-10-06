@@ -27,5 +27,5 @@ data class Labels(
     var identifier: String? = null,
     val implied: MutableSet<String> = mutableSetOf(),
     val optional: MutableSet<String> = mutableSetOf(),
-    val extensions: LabelsExtension = LabelsExtension()
+    val extensions: LabelsExtensions = LabelsExtensions()
 )

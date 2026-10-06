@@ -39,7 +39,7 @@ external interface RelationshipJs {
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, RelationshipConstraintJs>
     val indexes: Record<String, RelationshipIndexJs>
-    val extensions: RelationshipExtensionJs
+    val extensions: RelationshipExtensionsJs
     var name: String
     val id: String
     val description: String
@@ -54,7 +54,7 @@ fun relationshipJs(
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, RelationshipConstraintJs> = emptyRecord(),
     indexes: Record<String, RelationshipIndexJs> = emptyRecord(),
-    extensions: RelationshipExtensionJs = relationshipExtensionJs(),
+    extensions: RelationshipExtensionsJs = relationshipExtensionsJs(),
     name: String,
     id: String,
     description: String = "",
