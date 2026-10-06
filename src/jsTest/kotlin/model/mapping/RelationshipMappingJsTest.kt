@@ -23,8 +23,8 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
     override fun verifyJsObject(jsObject: RelationshipMappingJs) {
         assertEquals("RELATIONSHIP", jsObject.type)
         assertEquals("table_name", jsObject.table)
-        assertEquals("from_node", jsObject.startNode.node)
-        assertEquals("to_label", jsObject.endNode.label)
+        assertEquals("from_node", jsObject.fromNode.node)
+        assertEquals("to_label", jsObject.toNode.label)
         assertJsEquals(propertyMappingJs("field"), jsObject.properties["prop"])
         assertEquals("MERGE", jsObject.mode)
         assertEquals("matchLabel", jsObject.matchLabel)

@@ -28,8 +28,8 @@ external interface RelationshipMappingJs : MappingJs {
     override val type: String
     var relationship: String
     var table: String
-    val startNode: TargetMappingJs
-    val endNode: TargetMappingJs
+    val fromNode: TargetMappingJs
+    val toNode: TargetMappingJs
     val properties: Record<String, PropertyMappingJs>
     var mode: String
     var matchLabel: String?
@@ -39,8 +39,8 @@ external interface RelationshipMappingJs : MappingJs {
 fun relationshipMappingJs(
     relationship: String,
     table: String,
-    startNode: TargetMappingJs,
-    endNode: TargetMappingJs,
+    fromNode: TargetMappingJs,
+    toNode: TargetMappingJs,
     properties: Record<String, PropertyMappingJs>,
     mode: String,
     matchLabel: String?,
@@ -49,8 +49,8 @@ fun relationshipMappingJs(
     this.type = MappingType.RELATIONSHIP
     this.relationship = relationship
     this.table = table
-    this.startNode = startNode
-    this.endNode = endNode
+    this.fromNode = fromNode
+    this.toNode = toNode
     this.properties = properties
     this.mode = mode
     this.matchLabel = matchLabel
@@ -60,8 +60,8 @@ fun relationshipMappingJs(
 fun RelationshipMapping.toJs() = relationshipMappingJs(
     relationship = relationship,
     table = table,
-    startNode = fromNode.toJs(),
-    endNode = toNode.toJs(),
+    fromNode = fromNode.toJs(),
+    toNode = toNode.toJs(),
     properties = properties.map { it.key to it.value.toJs() }.toMap().toRecord(),
     mode = mode.name,
     matchLabel = matchLabel,
@@ -71,8 +71,8 @@ fun RelationshipMapping.toJs() = relationshipMappingJs(
 fun RelationshipMappingJs.toClass() = RelationshipMapping(
     relationship = relationship,
     table = table,
-    fromNode = startNode.toClass(),
-    toNode = endNode.toClass(),
+    fromNode = fromNode.toClass(),
+    toNode = toNode.toClass(),
     properties = properties.associateBy { _, value -> value.toClass() },
     mode = MappingMode.valueOf(mode),
     matchLabel = matchLabel,
