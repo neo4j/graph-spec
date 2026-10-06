@@ -26,6 +26,7 @@ import model.NameFormat
 import model.Type
 import model.Version
 import model.type.ConstraintType
+import model.type.IndexType
 import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
@@ -375,11 +376,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             val type = typeTransform(element.string("type"))
             schemaMapOf(
                 "\$id" to name,
-                "name" to if (typeKey == "constraintType") {
-                    element.resolvedName(propertyIds, propertyTokens, entityToken)
-                } else {
-                    element.stringOrNull("name") ?: name
-                },
+                "name" to element.resolvedName(propertyIds, propertyTokens, entityToken, typeKey),
                 typeKey to type,
                 "entityType" to entityType,
                 "nodeLabel" to if (entityType == "node") refOf(refId) else SchemaNull(),
@@ -393,7 +390,8 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     private fun SchemaMap.resolvedName(
         propertyIds: List<String>,
         propertyTokens: Map<String, String>,
-        entityToken: String
+        entityToken: String,
+        typeKey: String
     ): String {
         stringOrNull("name")?.takeUnless { it.isBlank() }?.let { return it }
         val tokens = propertyIds.map { propertyTokens[it] ?: it }
@@ -401,9 +399,15 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             return ""
         }
         val typeName = string("type")
-        val type = ConstraintType.entries.find { it.name == typeName }
-            ?: error("Unknown constraint type: '$typeName' at $path.type")
-        return NameFormat.constraintName(tokens, entityToken, type)
+        return if (typeKey == "constraintType") {
+            val type = ConstraintType.entries.find { it.name == typeName }
+                ?: error("Unknown constraint type: '$typeName' at $path.type")
+            NameFormat.constraintName(tokens, entityToken, type)
+        } else {
+            val type = IndexType.entries.find { it.name == typeName }
+                ?: error("Unknown index type: '$typeName' at $path.type")
+            NameFormat.indexName(tokens, entityToken, type)
+        }
     }
 
     internal fun convertFields(fields: Map<String, SchemaMap>?): List<SchemaMap> {
