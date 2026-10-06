@@ -67,7 +67,7 @@ object RelationshipTargetCount : RelationshipValidation {
                 Issue(
                     code = "relationship_min_count_negative",
                     message = "Relationship '$relationshipId' $side min count must not be negative",
-                    path = "$path.minCount"
+                    path = "$path.min_count"
                 )
             )
         }
