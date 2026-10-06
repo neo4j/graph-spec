@@ -113,6 +113,8 @@ This rebuilds the shared libraries for all supported platforms from the Kotlin s
 The regenerated `.so`/`.dylib` files are checked in to git history. They are what `//go:embed` bundles, so a
 published tag whose module omits them will fail to build for consumers.
 
+This can also be done via GitHub actions: `gh workflow run update-native-libs.yaml --ref <branch>`
+
 ### Generating Go types
 
 ```shell
