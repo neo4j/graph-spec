@@ -53,7 +53,8 @@ class GraphModelEditor {
                     .toRecord(),
                 tables = model.tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
                 mappings = model.mappings.map { mapping -> mapping.toJs() }.toTypedArray(),
-                display = model.display.toJs()
+                display = model.display.toJs(),
+                extensions = model.extensions.toJs()
             )
         }
 
@@ -66,7 +67,8 @@ class GraphModelEditor {
             relationships = model.relationships.associateBy { id, js -> js.toClass(id) },
             tables = model.tables.associateBy { _, js -> js.toClass() },
             mappings = model.mappings.map { it.toClass() }.toMutableList(),
-            display = model.display.toClass()
+            display = model.display.toClass(),
+            extensions = model.extensions.toClass()
         )
 
         @JsStatic

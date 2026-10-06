@@ -42,6 +42,7 @@ data class GraphModel(
     val tables: MutableMap<String, Table> = mutableMapOf(),
     val mappings: MutableList<Mapping> = mutableListOf(),
     val display: Display = Display(),
+    val extensions: GraphModelExtension = GraphModelExtension(),
     @Transient
     var pretty: Boolean = false
 ) {

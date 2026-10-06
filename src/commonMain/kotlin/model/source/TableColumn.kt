@@ -33,7 +33,10 @@ data class TableColumn(
     val suggested: Neo4jType = Neo4jType.ANY,
     val supported: Set<Neo4jType> = emptySet(),
     val dimension: Int? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val extras: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
 ) : Extensions,
-    Named
+    Named {
+    override val extensions: MutableMap<String, ExtensionValue>
+        get() = extras
+}

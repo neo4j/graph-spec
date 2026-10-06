@@ -31,8 +31,11 @@ import kotlin.js.JsExport
 data class RelationshipConstraint(
     override var type: ConstraintType,
     override val properties: MutableSet<String>,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val extras: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
 ) : Extensions,
     Constraint,
-    Named
+    Named {
+    override val extensions: MutableMap<String, ExtensionValue>
+        get() = extras
+}

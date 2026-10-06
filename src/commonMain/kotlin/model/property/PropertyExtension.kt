@@ -19,23 +19,18 @@ package model.property
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
-import model.type.Named
+import model.extension.Extensions
 import kotlin.js.JsExport
 
+/**
+ * Extensions for a [model.property.Property].
+ *
+ * @property custom user-defined arbitrary data.
+ */
 @JsExport
 @Serializable
-@SerialName("Property")
-data class Property(
-    var type: Neo4jType = Neo4jType.ANY,
-    var dimension: Int? = null,
-    var mustExist: Boolean? = null,
-    var unique: Boolean? = null,
-    var key: Boolean? = null,
-    val extensions: PropertyExtension = PropertyExtension(),
-    override var name: String? = null,
-    val description: String = "",
-    val reference: String = "",
-    val pattern: String = "",
-    @SerialName("one_of")
-    val oneOf: MutableList<ExtensionValue> = mutableListOf()
-) : Named
+@SerialName("PropertyExtension")
+data class PropertyExtension(val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions {
+    override val extensions: MutableMap<String, ExtensionValue>
+        get() = custom
+}

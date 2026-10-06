@@ -18,8 +18,6 @@ package model.node
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
 import model.property.Property
 import model.type.Named
 import kotlin.js.JsExport
@@ -33,10 +31,9 @@ data class Node(
     val properties: MutableMap<String, Property> = mutableMapOf(),
     val constraints: MutableMap<String, NodeConstraint> = mutableMapOf(),
     val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val extensions: NodeExtension = NodeExtension(),
     override var name: String? = null,
     val description: String = "",
     val aliases: MutableSet<String> = mutableSetOf(),
     val reference: String = ""
-) : Extensions,
-    Named
+) : Named

@@ -31,8 +31,11 @@ data class NodeConstraint(
     override var type: ConstraintType,
     var label: String? = null, // TODO: Optional to avoid id issues with frontend redux?
     override val properties: MutableSet<String>,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val extras: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
 ) : Extensions,
     Constraint,
-    Named
+    Named {
+    override val extensions: MutableMap<String, ExtensionValue>
+        get() = extras
+}

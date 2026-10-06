@@ -20,7 +20,7 @@ class RelationshipConstraintEditorTest {
         assertEquals(type, constraint.type)
         assertEquals(2, constraint.properties.size)
         assertTrue(constraint.properties.contains("prop1"))
-        assertEquals(0, keys(constraint.extensions).size)
+        assertEquals(0, keys(constraint.extras).size)
     }
 
     @Test
@@ -74,7 +74,7 @@ class RelationshipConstraintEditorTest {
         val constraint = relationshipConstraintJs(type = "minimal")
 
         assertNotNull(constraint.properties)
-        assertNotNull(constraint.extensions)
+        assertNotNull(constraint.extras)
         assertEquals(0, constraint.properties.size)
     }
 }

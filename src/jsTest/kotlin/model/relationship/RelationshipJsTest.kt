@@ -2,6 +2,7 @@ package model.relationship
 
 import model.mapping.JsMappingTest
 import model.extension.StringValue
+import model.relationship.RelationshipExtension
 import model.extension.stringValueJs
 import model.property.Neo4jType
 import model.property.Property
@@ -19,7 +20,7 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         properties = mutableMapOf("prop" to Property(Neo4jType.STRING, name = "property_name")),
         constraints = mutableMapOf("constraint" to RelationshipConstraint(ConstraintType.KEY, mutableSetOf("prop"))),
         indexes = mutableMapOf("index" to RelationshipIndex(IndexType.POINT, mutableSetOf("prop"))),
-        extensions = mutableMapOf("key1" to StringValue("val1")),
+        extensions = RelationshipExtension(mutableMapOf("key1" to StringValue("val1"))),
         name = "relationshipName",
         aliases = mutableSetOf("alias1", "alias2"),
         reference = "rel-ref"
@@ -36,7 +37,7 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         assertJsEquals(propertyJs("STRING", id = "prop", name = "property_name"), jsObject.properties["prop"])
         assertJsEquals(relationshipConstraintJs("KEY", arrayOf("prop")), jsObject.constraints["constraint"])
         assertJsEquals(relationshipIndexJs("POINT", arrayOf("prop")), jsObject.indexes["index"])
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
+        assertJsEquals(stringValueJs("val1"), jsObject.extensions.custom["key1"])
         assertEquals("relationshipId", jsObject.id)
         assertEquals("relationshipName", jsObject.name)
         assertEquals(listOf("alias1", "alias2"), jsObject.aliases.toList())

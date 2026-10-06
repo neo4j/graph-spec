@@ -13,7 +13,7 @@ class NodeConstraintJsTest : JsMappingTest<NodeConstraint, NodeConstraintJs>() {
         type = ConstraintType.KEY,
         label = "node_label",
         properties = mutableSetOf("property_1", "property_2"),
-        extensions = mutableMapOf(
+        extras = mutableMapOf(
             "key1" to StringValue("val1")
         )
     )
@@ -28,7 +28,7 @@ class NodeConstraintJsTest : JsMappingTest<NodeConstraint, NodeConstraintJs>() {
         assertEquals(2, jsObject.properties.size)
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
+        assertJsEquals(stringValueJs("val1"), jsObject.extras["key1"])
     }
 
 }

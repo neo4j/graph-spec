@@ -33,27 +33,27 @@ import model.type.ConstraintType
 external interface RelationshipConstraintJs {
     var type: String
     var properties: Array<String>
-    val extensions: Record<String, ExtensionValueJs>
+    val extras: Record<String, ExtensionValueJs>
 }
 
 fun relationshipConstraintJs(
     type: String,
     properties: Array<String> = emptyArray(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
+    extras: Record<String, ExtensionValueJs> = emptyRecord()
 ): RelationshipConstraintJs = jso {
     this.type = type
     this.properties = properties
-    this.extensions = extensions
+    this.extras = extras
 }
 
 fun RelationshipConstraint.toJs() = relationshipConstraintJs(
     type = type.name,
     properties = properties.toTypedArray(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
+    extras = extras.associateBy { _, value -> value.toJs() }
 )
 
 fun RelationshipConstraintJs.toClass() = RelationshipConstraint(
     type = ConstraintType.valueOf(type),
     properties = properties.toMutableSet(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    extras = extras.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

@@ -25,8 +25,8 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("NodeDisplay")
-data class NodeDisplay(
-    var x: Double,
-    var y: Double,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
-) : Extensions
+data class NodeDisplay(var x: Double, var y: Double, val extras: MutableMap<String, ExtensionValue> = mutableMapOf()) :
+    Extensions {
+    override val extensions: MutableMap<String, ExtensionValue>
+        get() = extras
+}

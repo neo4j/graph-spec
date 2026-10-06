@@ -33,7 +33,7 @@ external interface TableJs {
     val columns: Record<String, TableColumnJs>
     var primaryKeys: Array<String>
     val foreignKeys: Record<String, ForeignKeyJs>
-    val extensions: Record<String, ExtensionValueJs>
+    val extras: Record<String, ExtensionValueJs>
 }
 
 fun tableJs(
@@ -41,13 +41,13 @@ fun tableJs(
     columns: Record<String, TableColumnJs> = emptyRecord(),
     primaryKeys: Array<String> = emptyArray(),
     foreignKeys: Record<String, ForeignKeyJs> = emptyRecord(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
+    extras: Record<String, ExtensionValueJs> = emptyRecord()
 ): TableJs = jso {
     this.source = source
     this.columns = columns
     this.primaryKeys = primaryKeys
     this.foreignKeys = foreignKeys
-    this.extensions = extensions
+    this.extras = extras
 }
 
 fun Table.toJs() = tableJs(
@@ -55,7 +55,7 @@ fun Table.toJs() = tableJs(
     columns = columns.associateBy { key, column -> column.toJs(key) },
     primaryKeys = primaryKeys.toTypedArray(),
     foreignKeys = foreignKeys.associateBy { _, key -> key.toJs() },
-    extensions = extensions.associateBy { _, value -> value.toJs() }
+    extras = extras.associateBy { _, value -> value.toJs() }
 )
 
 fun TableJs.toClass() = Table(
@@ -63,5 +63,5 @@ fun TableJs.toClass() = Table(
     columns = columns.associateBy { _, column -> column.toClass() },
     primaryKeys = primaryKeys.toMutableSet(),
     foreignKeys = foreignKeys.associateBy { _, fk -> fk.toClass() },
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    extras = extras.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

@@ -19,7 +19,7 @@ class RelationshipIndexJsTest : JsMappingTest<RelationshipIndex, RelationshipInd
         options = FullTextIndexOption(
             analyzer = "test"
         ),
-        extensions = mutableMapOf(
+        extras = mutableMapOf(
             "key1" to StringValue("val1")
         )
     )
@@ -34,7 +34,7 @@ class RelationshipIndexJsTest : JsMappingTest<RelationshipIndex, RelationshipInd
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))
         assertJsEquals("test", (jsObject.options as? FullTextIndexOptionJs)?.analyzer)
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
+        assertJsEquals(stringValueJs("val1"), jsObject.extras["key1"])
     }
 
 }

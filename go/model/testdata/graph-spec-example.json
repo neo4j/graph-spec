@@ -6,32 +6,40 @@
         "identifier": "Actor",
         "implied": [],
         "optional": [],
-        "extensions": {}
+        "extensions": {
+          "custom": {}
+        }
       },
       "properties": {
         "id": {
           "type": "STRING",
           "mustExist": false,
           "unique": true,
-          "extensions": {}
+          "extensions": {
+            "custom": {}
+          }
         },
         "name": {
           "type": "STRING",
           "mustExist": false,
           "unique": false,
-          "extensions": {}
+          "extensions": {
+            "custom": {}
+          }
         }
       },
       "constraints": {},
       "indexes": {},
       "extensions": {
-        "note": {
-          "type": "STRING",
-          "value": "lead role"
-        },
-        "verified": {
-          "type": "BOOLEAN",
-          "value": true
+        "custom": {
+          "note": {
+            "type": "STRING",
+            "value": "lead role"
+          },
+          "verified": {
+            "type": "BOOLEAN",
+            "value": true
+          }
         }
       }
     },
@@ -40,19 +48,25 @@
         "identifier": "Movie",
         "implied": [],
         "optional": [],
-        "extensions": {}
+        "extensions": {
+          "custom": {}
+        }
       },
       "properties": {
         "id": {
           "type": "STRING",
           "mustExist": false,
           "unique": true,
-          "extensions": {}
+          "extensions": {
+            "custom": {}
+          }
         }
       },
       "constraints": {},
       "indexes": {},
-      "extensions": {}
+      "extensions": {
+        "custom": {}
+      }
     }
   },
   "relationships": {
@@ -73,12 +87,16 @@
           "type": "STRING",
           "mustExist": false,
           "unique": false,
-          "extensions": {}
+          "extensions": {
+            "custom": {}
+          }
         }
       },
       "constraints": {},
       "indexes": {},
-      "extensions": {}
+      "extensions": {
+        "custom": {}
+      }
     }
   },
   "tables": {
@@ -92,7 +110,7 @@
           "supported": [
             "STRING"
           ],
-          "extensions": {}
+          "extras": {}
         },
         "actor_name": {
           "type": "varchar",
@@ -101,7 +119,7 @@
           "supported": [
             "STRING"
           ],
-          "extensions": {}
+          "extras": {}
         }
       },
       "primaryKeys": [
@@ -117,9 +135,9 @@
             "columns": [
               "actorid"
             ],
-            "extensions": {}
+            "extras": {}
           },
-          "extensions": {}
+          "extras": {}
         },
         "fk_actor_name": {
           "columns": [
@@ -130,12 +148,12 @@
             "columns": [
               "actorname"
             ],
-            "extensions": {}
+            "extras": {}
           },
-          "extensions": {}
+          "extras": {}
         }
       },
-      "extensions": {}
+      "extras": {}
     },
     "movies": {
       "source": "sql/postgres",
@@ -147,7 +165,7 @@
           "supported": [
             "STRING"
           ],
-          "extensions": {}
+          "extras": {}
         },
         "field_1": {
           "type": "varchar",
@@ -156,7 +174,7 @@
           "supported": [
             "STRING"
           ],
-          "extensions": {}
+          "extras": {}
         }
       },
       "primaryKeys": [
@@ -172,12 +190,12 @@
             "columns": [
               "actorid"
             ],
-            "extensions": {}
+            "extras": {}
           },
-          "extensions": {}
+          "extras": {}
         }
       },
-      "extensions": {}
+      "extras": {}
     },
     "actors-movies": {
       "source": "sql/postgres",
@@ -189,7 +207,7 @@
           "supported": [
             "STRING"
           ],
-          "extensions": {}
+          "extras": {}
         },
         "movie_id": {
           "type": "varchar",
@@ -198,7 +216,7 @@
           "supported": [
             "STRING"
           ],
-          "extensions": {}
+          "extras": {}
         },
         "field_1": {
           "type": "varchar",
@@ -207,12 +225,12 @@
           "supported": [
             "STRING"
           ],
-          "extensions": {}
+          "extras": {}
         }
       },
       "primaryKeys": [],
       "foreignKeys": {},
-      "extensions": {}
+      "extras": {}
     }
   },
   "mappings": [

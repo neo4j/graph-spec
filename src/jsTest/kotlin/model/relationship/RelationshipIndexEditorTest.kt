@@ -21,7 +21,7 @@ class RelationshipIndexEditorTest {
         assertEquals(1, index.properties.size)
         assertEquals("prop1", index.properties[0])
         assertNull(index.options)
-        assertNotNull(index.extensions)
+        assertNotNull(index.extras)
     }
 
     @Test

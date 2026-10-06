@@ -29,6 +29,7 @@ import model.mapping.QueryMapping
 import model.mapping.RelationshipMapping
 import model.mapping.TargetMapping
 import model.node.Node
+import model.node.NodeExtension
 import model.node.NodeIndex
 import model.type.IndexType
 import kotlin.test.Test
@@ -127,9 +128,11 @@ class JsonFormatTest {
     fun `test polymorphic ExtensionValue serialization`() {
         val node = Node(
             name = "TestNode",
-            extensions = mutableMapOf(
-                "ext_str" to StringValue("hello"),
-                "ext_bool" to BooleanValue(true)
+            extensions = NodeExtension(
+                mutableMapOf(
+                    "ext_str" to StringValue("hello"),
+                    "ext_bool" to BooleanValue(true)
+                )
             )
         )
         val model = GraphModel(version = "1", nodes = mutableMapOf("n1" to node))
@@ -137,7 +140,7 @@ class JsonFormatTest {
         val encoded = jsonFormat.encodeModelToString(model)
         val schema = jsonFormat.decodeFromString(encoded) as SchemaMap
         val n1 = schema.map("nodes").map("n1")
-        val extensions = n1.map("extensions")
+        val extensions = n1.map("extensions").map("custom")
 
         assertIs<SchemaMap>(extensions.content["ext_str"])
         val extStrMap = extensions.map("ext_str")
@@ -146,8 +149,8 @@ class JsonFormatTest {
 
         val decoded = jsonFormat.decodeModelFromString(encoded)
         val decodedNode = decoded.nodes["n1"]!!
-        assertEquals(StringValue("hello"), decodedNode.extensions["ext_str"])
-        assertEquals(BooleanValue(true), decodedNode.extensions["ext_bool"])
+        assertEquals(StringValue("hello"), decodedNode.extensions.custom["ext_str"])
+        assertEquals(BooleanValue(true), decodedNode.extensions.custom["ext_bool"])
     }
 
     @Test

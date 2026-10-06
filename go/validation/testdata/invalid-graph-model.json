@@ -21,7 +21,9 @@
         }
       },
       "indexes": {},
-      "extensions": {}
+      "extensions": {
+        "custom": {}
+      }
     }
   },
   "relationships": {},
