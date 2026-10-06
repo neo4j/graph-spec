@@ -19,6 +19,8 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
         indexes = mutableMapOf("index" to NodeIndex(IndexType.RANGE, mutableSetOf("label"), mutableSetOf("prop"))),
         extensions = mutableMapOf("key1" to StringValue("val1")),
         name = "Node Name",
+        aliases = mutableSetOf("alias1", "alias2"),
+        reference = "node-ref"
     )
 
     override fun toJs(k: Node): NodeJs = k.toJs("nodeId")
@@ -32,6 +34,8 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
         assertJsEquals(nodeIndexJs("RANGE", arrayOf("label"), arrayOf("prop")), jsObject.indexes["index"])
         assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
         assertEquals("nodeId", jsObject.id)
+        assertEquals(listOf("alias1", "alias2"), jsObject.aliases.toList())
+        assertEquals("node-ref", jsObject.reference)
     }
 
 }
