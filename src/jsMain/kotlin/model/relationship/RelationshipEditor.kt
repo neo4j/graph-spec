@@ -263,7 +263,7 @@ class RelationshipEditor {
             custom: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
-            return relationship.indexes.addUnique("index") {
+            return relationship.extensions.indexes.addUnique("index") {
                 relationshipIndexJs(type, properties, options, custom)
             }
         }
@@ -300,7 +300,7 @@ class RelationshipEditor {
 
         private fun getIndex(model: GraphModelJs, relationshipId: String, indexId: String): RelationshipIndexJs {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
-            val index = relationship.indexes.getOrThrow(indexId, "Index")
+            val index = relationship.extensions.indexes.getOrThrow(indexId, "Index")
             return index
         }
     }

@@ -5,21 +5,23 @@ nodes:
     properties:
       album_id: { type: "INTEGER", unique: true }
       title: { type: "STRING" }
-    indexes:
-      album:
-        type: "TEXT"
-        labels: ["album"]
-        properties: ["album_id"]
+    extensions:
+      indexes:
+        album:
+          type: "TEXT"
+          labels: ["album"]
+          properties: ["album_id"]
   artist:
     label: "artist"
     properties:
       artist_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-    indexes:
-      artist:
-        type: "TEXT"
-        labels: ["artist"]
-        properties: ["artist_id"]
+    extensions:
+      indexes:
+        artist:
+          type: "TEXT"
+          labels: ["artist"]
+          properties: ["artist_id"]
   customer:
     label: "customer"
     properties:
@@ -35,11 +37,12 @@ nodes:
       phone: { type: "STRING" }
       fax: { type: "STRING" }
       email: { type: "STRING" }
-    indexes:
-      customer:
-        type: "TEXT"
-        labels: ["customer"]
-        properties: ["customer_id"]
+    extensions:
+      indexes:
+        customer:
+          type: "TEXT"
+          labels: ["customer"]
+          properties: ["customer_id"]
   employee:
     label: "employee"
     properties:
@@ -57,21 +60,23 @@ nodes:
       phone: { type: "STRING" }
       fax: { type: "STRING" }
       email: { type: "STRING" }
-    indexes:
-      employee:
-        type: "TEXT"
-        labels: ["employee"]
-        properties: ["employee_id"]
+    extensions:
+      indexes:
+        employee:
+          type: "TEXT"
+          labels: ["employee"]
+          properties: ["employee_id"]
   genre:
     label: "genre"
     properties:
       genre_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-    indexes:
-      genre:
-        type: "TEXT"
-        labels: ["genre"]
-        properties: ["genre_id"]
+    extensions:
+      indexes:
+        genre:
+          type: "TEXT"
+          labels: ["genre"]
+          properties: ["genre_id"]
   invoice:
     label: "invoice"
     properties:
@@ -83,42 +88,46 @@ nodes:
       billing_country: { type: "STRING" }
       billing_postal_code: { type: "STRING" }
       total: { type: "FLOAT" }
-    indexes:
-      invoice:
-        type: "TEXT"
-        labels: ["invoice"]
-        properties: ["invoice_id"]
+    extensions:
+      indexes:
+        invoice:
+          type: "TEXT"
+          labels: ["invoice"]
+          properties: ["invoice_id"]
   invoice_line:
     label: "invoice_line"
     properties:
       invoice_line_id: { type: "INTEGER", unique: true }
       unit_price: { type: "FLOAT" }
       quantity: { type: "INTEGER" }
-    indexes:
-      invoice_line:
-        type: "TEXT"
-        labels: ["invoice_line"]
-        properties: ["invoice_line_id"]
+    extensions:
+      indexes:
+        invoice_line:
+          type: "TEXT"
+          labels: ["invoice_line"]
+          properties: ["invoice_line_id"]
   media_type:
     label: "media_type"
     properties:
       media_type_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-    indexes:
-      media_type:
-        type: "TEXT"
-        labels: ["media_type"]
-        properties: ["media_type_id"]
+    extensions:
+      indexes:
+        media_type:
+          type: "TEXT"
+          labels: ["media_type"]
+          properties: ["media_type_id"]
   playlist:
     label: "playlist"
     properties:
       playlist_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
-    indexes:
-      playlist:
-        type: "TEXT"
-        labels: ["playlist"]
-        properties: ["playlist_id"]
+    extensions:
+      indexes:
+        playlist:
+          type: "TEXT"
+          labels: ["playlist"]
+          properties: ["playlist_id"]
   track:
     label: "track"
     properties:
@@ -128,11 +137,12 @@ nodes:
       milliseconds: { type: "INTEGER" }
       bytes: { type: "INTEGER" }
       unit_price: { type: "FLOAT" }
-    indexes:
-      track:
-        type: "TEXT"
-        labels: ["track"]
-        properties: ["track_id"]
+    extensions:
+      indexes:
+        track:
+          type: "TEXT"
+          labels: ["track"]
+          properties: ["track_id"]
 relationships:
   ARTIST:
     type: "ARTIST"

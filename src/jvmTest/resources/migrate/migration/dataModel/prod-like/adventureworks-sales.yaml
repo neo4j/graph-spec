@@ -9,21 +9,23 @@ nodes:
       expmonth: { type: "INTEGER" }
       expyear: { type: "INTEGER" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      creditcard:
-        type: "TEXT"
-        labels: ["creditcard"]
-        properties: ["creditcardid"]
+    extensions:
+      indexes:
+        creditcard:
+          type: "TEXT"
+          labels: ["creditcard"]
+          properties: ["creditcardid"]
   currency:
     label: "currency"
     properties:
       currencycode: { type: "STRING", unique: true }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      "currency-text":
-        type: "TEXT"
-        labels: ["currency"]
-        properties: ["currencycode"]
+    extensions:
+      indexes:
+        "currency-text":
+          type: "TEXT"
+          labels: ["currency"]
+          properties: ["currencycode"]
   currencyrate:
     label: "currencyrate"
     properties:
@@ -32,22 +34,24 @@ nodes:
       averagerate: { type: "FLOAT" }
       endofdayrate: { type: "FLOAT" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      currencyrate:
-        type: "TEXT"
-        labels: ["currencyrate"]
-        properties: ["currencyrateid"]
+    extensions:
+      indexes:
+        currencyrate:
+          type: "TEXT"
+          labels: ["currencyrate"]
+          properties: ["currencyrateid"]
   customer:
     label: "customer"
     properties:
       customerid: { type: "INTEGER", unique: true }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      customer:
-        type: "TEXT"
-        labels: ["customer"]
-        properties: ["customerid"]
+    extensions:
+      indexes:
+        customer:
+          type: "TEXT"
+          labels: ["customer"]
+          properties: ["customerid"]
   salesorderheader:
     label: "salesorderheader"
     properties:
@@ -65,11 +69,12 @@ nodes:
       comment: { type: "STRING" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      salesorderheader:
-        type: "TEXT"
-        labels: ["salesorderheader"]
-        properties: ["salesorderid"]
+    extensions:
+      indexes:
+        salesorderheader:
+          type: "TEXT"
+          labels: ["salesorderheader"]
+          properties: ["salesorderid"]
   salesperson:
     label: "salesperson"
     properties:
@@ -81,21 +86,23 @@ nodes:
       saleslastyear: { type: "FLOAT" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      salesperson:
-        type: "TEXT"
-        labels: ["salesperson"]
-        properties: ["businessentityid"]
+    extensions:
+      indexes:
+        salesperson:
+          type: "TEXT"
+          labels: ["salesperson"]
+          properties: ["businessentityid"]
   salesreason:
     label: "salesreason"
     properties:
       salesreasonid: { type: "INTEGER", unique: true }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      salesreason:
-        type: "TEXT"
-        labels: ["salesreason"]
-        properties: ["salesreasonid"]
+    extensions:
+      indexes:
+        salesreason:
+          type: "TEXT"
+          labels: ["salesreason"]
+          properties: ["salesreasonid"]
   salestaxrate:
     label: "salestaxrate"
     properties:
@@ -104,11 +111,12 @@ nodes:
       taxrate: { type: "FLOAT" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      salestaxrate:
-        type: "TEXT"
-        labels: ["salestaxrate"]
-        properties: ["salestaxrateid"]
+    extensions:
+      indexes:
+        salestaxrate:
+          type: "TEXT"
+          labels: ["salestaxrate"]
+          properties: ["salestaxrateid"]
   salesterritory:
     label: "salesterritory"
     properties:
@@ -120,11 +128,12 @@ nodes:
       costlastyear: { type: "FLOAT" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      salesterritory:
-        type: "TEXT"
-        labels: ["salesterritory"]
-        properties: ["territoryid"]
+    extensions:
+      indexes:
+        salesterritory:
+          type: "TEXT"
+          labels: ["salesterritory"]
+          properties: ["territoryid"]
   shoppingcartitem:
     label: "shoppingcartitem"
     properties:
@@ -133,11 +142,12 @@ nodes:
       quantity: { type: "INTEGER" }
       datecreated: { type: "ZONED DATETIME" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      shoppingcartitem:
-        type: "TEXT"
-        labels: ["shoppingcartitem"]
-        properties: ["shoppingcartitemid"]
+    extensions:
+      indexes:
+        shoppingcartitem:
+          type: "TEXT"
+          labels: ["shoppingcartitem"]
+          properties: ["shoppingcartitemid"]
   specialoffer:
     label: "specialoffer"
     properties:
@@ -152,22 +162,24 @@ nodes:
       maxqty: { type: "INTEGER" }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      specialoffer:
-        type: "TEXT"
-        labels: ["specialoffer"]
-        properties: ["specialofferid"]
+    extensions:
+      indexes:
+        specialoffer:
+          type: "TEXT"
+          labels: ["specialoffer"]
+          properties: ["specialofferid"]
   store:
     label: "store"
     properties:
       businessentityid: { type: "INTEGER", unique: true }
       rowguid: { type: "STRING" }
       modifieddate: { type: "ZONED DATETIME" }
-    indexes:
-      store:
-        type: "TEXT"
-        labels: ["store"]
-        properties: ["businessentityid"]
+    extensions:
+      indexes:
+        store:
+          type: "TEXT"
+          labels: ["store"]
+          properties: ["businessentityid"]
 relationships:
   SALESTERRITORY:
     type: "SALESTERRITORY"

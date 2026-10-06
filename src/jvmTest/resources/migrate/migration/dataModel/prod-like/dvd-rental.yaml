@@ -7,11 +7,12 @@ nodes:
       first_name: { type: "STRING" }
       last_name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      actor:
-        type: "TEXT"
-        labels: ["actor"]
-        properties: ["actor_id"]
+    extensions:
+      indexes:
+        actor:
+          type: "TEXT"
+          labels: ["actor"]
+          properties: ["actor_id"]
   address:
     label: "address"
     properties:
@@ -22,44 +23,48 @@ nodes:
       postal_code: { type: "STRING" }
       phone: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      address:
-        type: "TEXT"
-        labels: ["address"]
-        properties: ["address_id"]
+    extensions:
+      indexes:
+        address:
+          type: "TEXT"
+          labels: ["address"]
+          properties: ["address_id"]
   category:
     label: "category"
     properties:
       category_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      category:
-        type: "TEXT"
-        labels: ["category"]
-        properties: ["category_id"]
+    extensions:
+      indexes:
+        category:
+          type: "TEXT"
+          labels: ["category"]
+          properties: ["category_id"]
   city:
     label: "city"
     properties:
       city_id: { type: "INTEGER", unique: true }
       city: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      city:
-        type: "TEXT"
-        labels: ["city"]
-        properties: ["city_id"]
+    extensions:
+      indexes:
+        city:
+          type: "TEXT"
+          labels: ["city"]
+          properties: ["city_id"]
   country:
     label: "country"
     properties:
       country_id: { type: "INTEGER", unique: true }
       country: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      country:
-        type: "TEXT"
-        labels: ["country"]
-        properties: ["country_id"]
+    extensions:
+      indexes:
+        country:
+          type: "TEXT"
+          labels: ["country"]
+          properties: ["country_id"]
   customer:
     label: "customer"
     properties:
@@ -72,11 +77,12 @@ nodes:
       create_date: { type: "DATE" }
       last_update: { type: "ZONED DATETIME" }
       active: { type: "INTEGER" }
-    indexes:
-      customer:
-        type: "TEXT"
-        labels: ["customer"]
-        properties: ["customer_id"]
+    extensions:
+      indexes:
+        customer:
+          type: "TEXT"
+          labels: ["customer"]
+          properties: ["customer_id"]
   film:
     label: "film"
     properties:
@@ -89,44 +95,48 @@ nodes:
       replacement_cost: { type: "FLOAT" }
       rating: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      film:
-        type: "TEXT"
-        labels: ["film"]
-        properties: ["film_id"]
+    extensions:
+      indexes:
+        film:
+          type: "TEXT"
+          labels: ["film"]
+          properties: ["film_id"]
   inventory:
     label: "inventory"
     properties:
       inventory_id: { type: "INTEGER", unique: true }
       store_id: { type: "INTEGER" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      inventory:
-        type: "TEXT"
-        labels: ["inventory"]
-        properties: ["inventory_id"]
+    extensions:
+      indexes:
+        inventory:
+          type: "TEXT"
+          labels: ["inventory"]
+          properties: ["inventory_id"]
   language:
     label: "language"
     properties:
       language_id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      language:
-        type: "TEXT"
-        labels: ["language"]
-        properties: ["language_id"]
+    extensions:
+      indexes:
+        language:
+          type: "TEXT"
+          labels: ["language"]
+          properties: ["language_id"]
   payment:
     label: "payment"
     properties:
       payment_id: { type: "INTEGER", unique: true }
       amount: { type: "FLOAT" }
       payment_date: { type: "ZONED DATETIME" }
-    indexes:
-      payment:
-        type: "TEXT"
-        labels: ["payment"]
-        properties: ["payment_id"]
+    extensions:
+      indexes:
+        payment:
+          type: "TEXT"
+          labels: ["payment"]
+          properties: ["payment_id"]
   rental:
     label: "rental"
     properties:
@@ -134,11 +144,12 @@ nodes:
       rental_date: { type: "ZONED DATETIME" }
       return_date: { type: "ZONED DATETIME" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      rental:
-        type: "TEXT"
-        labels: ["rental"]
-        properties: ["rental_id"]
+    extensions:
+      indexes:
+        rental:
+          type: "TEXT"
+          labels: ["rental"]
+          properties: ["rental_id"]
   staff:
     label: "staff"
     properties:
@@ -151,21 +162,23 @@ nodes:
       username: { type: "STRING" }
       password: { type: "STRING" }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      staff:
-        type: "TEXT"
-        labels: ["staff"]
-        properties: ["staff_id"]
+    extensions:
+      indexes:
+        staff:
+          type: "TEXT"
+          labels: ["staff"]
+          properties: ["staff_id"]
   store:
     label: "store"
     properties:
       store_id: { type: "INTEGER", unique: true }
       last_update: { type: "ZONED DATETIME" }
-    indexes:
-      store:
-        type: "TEXT"
-        labels: ["store"]
-        properties: ["store_id"]
+    extensions:
+      indexes:
+        store:
+          type: "TEXT"
+          labels: ["store"]
+          properties: ["store_id"]
 relationships:
   RELATED_TO_CITY:
     type: "RELATED_TO_CITY"

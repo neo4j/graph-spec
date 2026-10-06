@@ -14,12 +14,13 @@ nodes:
         label: "actor"
         properties: ["node0_property0"]
         name: "actor__id_actor_uniq"
-    indexes:
-      node0_index0:
-        type: "TEXT"
-        labels: ["actor"]
-        properties: ["node0_property0"]
-        name: "actor"
+    extensions:
+      indexes:
+        node0_index0:
+          type: "TEXT"
+          labels: ["actor"]
+          properties: ["node0_property0"]
+          name: "actor"
     name: "actor"
   node1:
     labels:
@@ -38,12 +39,13 @@ nodes:
         label: "address"
         properties: ["node1_property0"]
         name: "address__id_address_uniq"
-    indexes:
-      node1_index0:
-        type: "TEXT"
-        labels: ["address"]
-        properties: ["node1_property0"]
-        name: "address"
+    extensions:
+      indexes:
+        node1_index0:
+          type: "TEXT"
+          labels: ["address"]
+          properties: ["node1_property0"]
+          name: "address"
     name: "address"
   node2:
     labels:
@@ -58,12 +60,13 @@ nodes:
         label: "category"
         properties: ["node2_property0"]
         name: "category__id_category_uniq"
-    indexes:
-      node2_index0:
-        type: "TEXT"
-        labels: ["category"]
-        properties: ["node2_property0"]
-        name: "category"
+    extensions:
+      indexes:
+        node2_index0:
+          type: "TEXT"
+          labels: ["category"]
+          properties: ["node2_property0"]
+          name: "category"
     name: "category"
   node3:
     labels:
@@ -78,12 +81,13 @@ nodes:
         label: "city"
         properties: ["node3_property0"]
         name: "city__id_city_uniq"
-    indexes:
-      node3_index0:
-        type: "TEXT"
-        labels: ["city"]
-        properties: ["node3_property0"]
-        name: "city"
+    extensions:
+      indexes:
+        node3_index0:
+          type: "TEXT"
+          labels: ["city"]
+          properties: ["node3_property0"]
+          name: "city"
     name: "city"
   node4:
     labels:
@@ -98,12 +102,13 @@ nodes:
         label: "country"
         properties: ["node4_property0"]
         name: "country__id_country_uniq"
-    indexes:
-      node4_index0:
-        type: "TEXT"
-        labels: ["country"]
-        properties: ["node4_property0"]
-        name: "country"
+    extensions:
+      indexes:
+        node4_index0:
+          type: "TEXT"
+          labels: ["country"]
+          properties: ["node4_property0"]
+          name: "country"
     name: "country"
   node5:
     labels:
@@ -124,12 +129,13 @@ nodes:
         label: "customer"
         properties: ["node5_property0"]
         name: "customer__id_customer_uniq"
-    indexes:
-      node5_index0:
-        type: "TEXT"
-        labels: ["customer"]
-        properties: ["node5_property0"]
-        name: "customer"
+    extensions:
+      indexes:
+        node5_index0:
+          type: "TEXT"
+          labels: ["customer"]
+          properties: ["node5_property0"]
+          name: "customer"
     name: "customer"
   node6:
     labels:
@@ -150,12 +156,13 @@ nodes:
         label: "film"
         properties: ["node6_property0"]
         name: "film__id_film_uniq"
-    indexes:
-      node6_index0:
-        type: "TEXT"
-        labels: ["film"]
-        properties: ["node6_property0"]
-        name: "film"
+    extensions:
+      indexes:
+        node6_index0:
+          type: "TEXT"
+          labels: ["film"]
+          properties: ["node6_property0"]
+          name: "film"
     name: "film"
   node7:
     labels:
@@ -170,12 +177,13 @@ nodes:
         label: "inventory"
         properties: ["node7_property0"]
         name: "inventory__id_inventory_uniq"
-    indexes:
-      node7_index0:
-        type: "TEXT"
-        labels: ["inventory"]
-        properties: ["node7_property0"]
-        name: "inventory"
+    extensions:
+      indexes:
+        node7_index0:
+          type: "TEXT"
+          labels: ["inventory"]
+          properties: ["node7_property0"]
+          name: "inventory"
     name: "inventory"
   node8:
     labels:
@@ -190,12 +198,13 @@ nodes:
         label: "language"
         properties: ["node8_property0"]
         name: "language__id_language_uniq"
-    indexes:
-      node8_index0:
-        type: "TEXT"
-        labels: ["language"]
-        properties: ["node8_property0"]
-        name: "language"
+    extensions:
+      indexes:
+        node8_index0:
+          type: "TEXT"
+          labels: ["language"]
+          properties: ["node8_property0"]
+          name: "language"
     name: "language"
   node9:
     labels:
@@ -210,12 +219,13 @@ nodes:
         label: "payment"
         properties: ["node9_property0"]
         name: "payment__id_payment_uniq"
-    indexes:
-      node9_index0:
-        type: "TEXT"
-        labels: ["payment"]
-        properties: ["node9_property0"]
-        name: "payment"
+    extensions:
+      indexes:
+        node9_index0:
+          type: "TEXT"
+          labels: ["payment"]
+          properties: ["node9_property0"]
+          name: "payment"
     name: "payment"
   node10:
     labels:
@@ -231,12 +241,13 @@ nodes:
         label: "rental"
         properties: ["node10_property0"]
         name: "rental__id_rental_uniq"
-    indexes:
-      node10_index0:
-        type: "TEXT"
-        labels: ["rental"]
-        properties: ["node10_property0"]
-        name: "rental"
+    extensions:
+      indexes:
+        node10_index0:
+          type: "TEXT"
+          labels: ["rental"]
+          properties: ["node10_property0"]
+          name: "rental"
     name: "rental"
   node11:
     labels:
@@ -257,12 +268,13 @@ nodes:
         label: "staff"
         properties: ["node11_property0"]
         name: "staff__id_staff_uniq"
-    indexes:
-      node11_index0:
-        type: "TEXT"
-        labels: ["staff"]
-        properties: ["node11_property0"]
-        name: "staff"
+    extensions:
+      indexes:
+        node11_index0:
+          type: "TEXT"
+          labels: ["staff"]
+          properties: ["node11_property0"]
+          name: "staff"
     name: "staff"
   node12:
     labels:
@@ -276,12 +288,13 @@ nodes:
         label: "store"
         properties: ["node12_property0"]
         name: "store__id_store_uniq"
-    indexes:
-      node12_index0:
-        type: "TEXT"
-        labels: ["store"]
-        properties: ["node12_property0"]
-        name: "store"
+    extensions:
+      indexes:
+        node12_index0:
+          type: "TEXT"
+          labels: ["store"]
+          properties: ["node12_property0"]
+          name: "store"
     name: "store"
 relationships:
   relationship0:

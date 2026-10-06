@@ -30,7 +30,6 @@ data class Node(
     val labels: Labels = Labels(),
     val properties: MutableMap<String, Property> = mutableMapOf(),
     val constraints: MutableMap<String, NodeConstraint> = mutableMapOf(),
-    val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
     val extensions: NodeExtensions = NodeExtensions(),
     override var name: String? = null,
     val description: String = "",

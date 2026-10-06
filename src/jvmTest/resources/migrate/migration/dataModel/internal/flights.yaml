@@ -13,12 +13,13 @@ nodes:
         label: "Aircraft"
         properties: ["node0_property0"]
         name: "aircraftCode_Aircraft_uniq"
-    indexes:
-      node0_index0:
-        type: "TEXT"
-        labels: ["Aircraft"]
-        properties: ["node0_property0"]
-        name: "aircrafts_data-text"
+    extensions:
+      indexes:
+        node0_index0:
+          type: "TEXT"
+          labels: ["Aircraft"]
+          properties: ["node0_property0"]
+          name: "aircrafts_data-text"
     name: "Aircraft"
   node1:
     labels:
@@ -35,12 +36,13 @@ nodes:
         label: "Airport"
         properties: ["node1_property0"]
         name: "airportCode_Airport_uniq"
-    indexes:
-      node1_index0:
-        type: "TEXT"
-        labels: ["Airport"]
-        properties: ["node1_property0"]
-        name: "airports_data-text"
+    extensions:
+      indexes:
+        node1_index0:
+          type: "TEXT"
+          labels: ["Airport"]
+          properties: ["node1_property0"]
+          name: "airports_data-text"
     name: "Airport"
   node2:
     labels:
@@ -55,12 +57,13 @@ nodes:
         label: "Booking"
         properties: ["node2_property0"]
         name: "bookRef_Booking_uniq"
-    indexes:
-      node2_index0:
-        type: "TEXT"
-        labels: ["Booking"]
-        properties: ["node2_property0"]
-        name: "bookings-text"
+    extensions:
+      indexes:
+        node2_index0:
+          type: "TEXT"
+          labels: ["Booking"]
+          properties: ["node2_property0"]
+          name: "bookings-text"
     name: "Booking"
   node3:
     labels:
@@ -79,12 +82,13 @@ nodes:
         label: "Flight"
         properties: ["node3_property0"]
         name: "flightId_Flight_uniq"
-    indexes:
-      node3_index0:
-        type: "TEXT"
-        labels: ["Flight"]
-        properties: ["node3_property0"]
-        name: "flights"
+    extensions:
+      indexes:
+        node3_index0:
+          type: "TEXT"
+          labels: ["Flight"]
+          properties: ["node3_property0"]
+          name: "flights"
     name: "Flight"
   node4:
     labels:
@@ -100,12 +104,13 @@ nodes:
         label: "Ticket"
         properties: ["node4_property0"]
         name: "ticketNo_Ticket_uniq"
-    indexes:
-      node4_index0:
-        type: "TEXT"
-        labels: ["Ticket"]
-        properties: ["node4_property0"]
-        name: "tickets-text"
+    extensions:
+      indexes:
+        node4_index0:
+          type: "TEXT"
+          labels: ["Ticket"]
+          properties: ["node4_property0"]
+          name: "tickets-text"
     name: "Ticket"
 relationships:
   relationship0:

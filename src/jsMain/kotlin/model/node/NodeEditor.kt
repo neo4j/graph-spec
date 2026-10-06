@@ -239,7 +239,7 @@ class NodeEditor {
             custom: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
-            return node.indexes.addUnique("index") {
+            return node.extensions.indexes.addUnique("index") {
                 nodeIndexJs(type, labels, properties, options, custom)
             }
         }
@@ -288,7 +288,7 @@ class NodeEditor {
 
         private fun getIndex(model: GraphModelJs, nodeId: String, indexId: String): NodeIndexJs {
             val node = model.nodes.getOrThrow(nodeId, "Node")
-            val index = node.indexes.getOrThrow(indexId, "Index")
+            val index = node.extensions.indexes.getOrThrow(indexId, "Index")
             return index
         }
     }

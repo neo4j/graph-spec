@@ -7,16 +7,17 @@ nodes:
       node0_property0: { type: "INTEGER", name: "documentid" }
       node0_property1: { type: "VECTOR<FLOAT>", dimension: 123, name: "embedding" }
       node0_property2: { type: "VECTOR<FLOAT>", name: "legacyembedding" }
-    indexes:
-      node0_index0:
-        type: "VECTOR"
-        labels: ["document"]
-        properties: ["node0_property1"]
-        options:
+    extensions:
+      indexes:
+        node0_index0:
           type: "VECTOR"
-          vector.dimensions: 123
-          vector.similarity_function: "euclidean"
-        name: "document_embedding"
+          labels: ["document"]
+          properties: ["node0_property1"]
+          options:
+            type: "VECTOR"
+            vector.dimensions: 123
+            vector.similarity_function: "euclidean"
+          name: "document_embedding"
     name: "document"
 tables:
   document:

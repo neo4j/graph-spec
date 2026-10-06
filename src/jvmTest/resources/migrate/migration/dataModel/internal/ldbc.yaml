@@ -18,12 +18,13 @@ nodes:
         label: "Comment"
         properties: ["node0_property3"]
         name: "id_Comment_uniq"
-    indexes:
-      node0_index0:
-        type: "TEXT"
-        labels: ["Comment"]
-        properties: ["node0_property3"]
-        name: "Comment"
+    extensions:
+      indexes:
+        node0_index0:
+          type: "TEXT"
+          labels: ["Comment"]
+          properties: ["node0_property3"]
+          name: "Comment"
     name: "Comment"
   node1:
     labels:
@@ -40,12 +41,13 @@ nodes:
         label: "Forum"
         properties: ["node1_property3"]
         name: "id_Forum_uniq"
-    indexes:
-      node1_index0:
-        type: "TEXT"
-        labels: ["Forum"]
-        properties: ["node1_property3"]
-        name: "Forum"
+    extensions:
+      indexes:
+        node1_index0:
+          type: "TEXT"
+          labels: ["Forum"]
+          properties: ["node1_property3"]
+          name: "Forum"
     name: "Forum"
   node2:
     labels:
@@ -61,12 +63,13 @@ nodes:
         label: "Organisation"
         properties: ["node2_property0"]
         name: "id_Organisation_uniq"
-    indexes:
-      node2_index0:
-        type: "TEXT"
-        labels: ["Organisation"]
-        properties: ["node2_property0"]
-        name: "Organisation"
+    extensions:
+      indexes:
+        node2_index0:
+          type: "TEXT"
+          labels: ["Organisation"]
+          properties: ["node2_property0"]
+          name: "Organisation"
     name: "Organisation"
   node3:
     labels:
@@ -90,12 +93,13 @@ nodes:
         label: "Person"
         properties: ["node3_property3"]
         name: "id_Person_uniq"
-    indexes:
-      node3_index0:
-        type: "TEXT"
-        labels: ["Person"]
-        properties: ["node3_property3"]
-        name: "Person"
+    extensions:
+      indexes:
+        node3_index0:
+          type: "TEXT"
+          labels: ["Person"]
+          properties: ["node3_property3"]
+          name: "Person"
     name: "Person"
   node4:
     labels:
@@ -111,12 +115,13 @@ nodes:
         label: "Place"
         properties: ["node4_property0"]
         name: "id_Place_uniq"
-    indexes:
-      node4_index0:
-        type: "TEXT"
-        labels: ["Place"]
-        properties: ["node4_property0"]
-        name: "Place"
+    extensions:
+      indexes:
+        node4_index0:
+          type: "TEXT"
+          labels: ["Place"]
+          properties: ["node4_property0"]
+          name: "Place"
     name: "Place"
   node5:
     labels:
@@ -138,12 +143,13 @@ nodes:
         label: "Post"
         properties: ["node5_property3"]
         name: "id_Post_uniq"
-    indexes:
-      node5_index0:
-        type: "TEXT"
-        labels: ["Post"]
-        properties: ["node5_property3"]
-        name: "Post"
+    extensions:
+      indexes:
+        node5_index0:
+          type: "TEXT"
+          labels: ["Post"]
+          properties: ["node5_property3"]
+          name: "Post"
     name: "Post"
   node6:
     labels:
@@ -158,12 +164,13 @@ nodes:
         label: "Tag"
         properties: ["node6_property0"]
         name: "id_Tag_uniq"
-    indexes:
-      node6_index0:
-        type: "TEXT"
-        labels: ["Tag"]
-        properties: ["node6_property0"]
-        name: "Tag"
+    extensions:
+      indexes:
+        node6_index0:
+          type: "TEXT"
+          labels: ["Tag"]
+          properties: ["node6_property0"]
+          name: "Tag"
     name: "Tag"
   node7:
     labels:
@@ -178,12 +185,13 @@ nodes:
         label: "TagClass"
         properties: ["node7_property0"]
         name: "id_TagClass_uniq"
-    indexes:
-      node7_index0:
-        type: "TEXT"
-        labels: ["TagClass"]
-        properties: ["node7_property0"]
-        name: "TagClass"
+    extensions:
+      indexes:
+        node7_index0:
+          type: "TEXT"
+          labels: ["TagClass"]
+          properties: ["node7_property0"]
+          name: "TagClass"
     name: "TagClass"
 relationships:
   relationship0:

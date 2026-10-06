@@ -16,12 +16,13 @@ nodes:
         label: "creditcard"
         properties: ["node0_property0"]
         name: "creditcardid_creditcard_uniq"
-    indexes:
-      node0_index0:
-        type: "TEXT"
-        labels: ["creditcard"]
-        properties: ["node0_property0"]
-        name: "creditcard"
+    extensions:
+      indexes:
+        node0_index0:
+          type: "TEXT"
+          labels: ["creditcard"]
+          properties: ["node0_property0"]
+          name: "creditcard"
     name: "creditcard"
   node1:
     labels:
@@ -35,12 +36,13 @@ nodes:
         label: "currency"
         properties: ["node1_property0"]
         name: "currencycode_currency_uniq"
-    indexes:
-      node1_index0:
-        type: "TEXT"
-        labels: ["currency"]
-        properties: ["node1_property0"]
-        name: "currency-text"
+    extensions:
+      indexes:
+        node1_index0:
+          type: "TEXT"
+          labels: ["currency"]
+          properties: ["node1_property0"]
+          name: "currency-text"
     name: "currency"
   node2:
     labels:
@@ -57,12 +59,13 @@ nodes:
         label: "currencyrate"
         properties: ["node2_property0"]
         name: "currencyrateid_currencyrate_uniq"
-    indexes:
-      node2_index0:
-        type: "TEXT"
-        labels: ["currencyrate"]
-        properties: ["node2_property0"]
-        name: "currencyrate"
+    extensions:
+      indexes:
+        node2_index0:
+          type: "TEXT"
+          labels: ["currencyrate"]
+          properties: ["node2_property0"]
+          name: "currencyrate"
     name: "currencyrate"
   node3:
     labels:
@@ -77,12 +80,13 @@ nodes:
         label: "customer"
         properties: ["node3_property0"]
         name: "customerid_customer_uniq"
-    indexes:
-      node3_index0:
-        type: "TEXT"
-        labels: ["customer"]
-        properties: ["node3_property0"]
-        name: "customer"
+    extensions:
+      indexes:
+        node3_index0:
+          type: "TEXT"
+          labels: ["customer"]
+          properties: ["node3_property0"]
+          name: "customer"
     name: "customer"
   node4:
     labels:
@@ -108,12 +112,13 @@ nodes:
         label: "salesorderheader"
         properties: ["node4_property0"]
         name: "salesorderid_salesorderheader_uniq"
-    indexes:
-      node4_index0:
-        type: "TEXT"
-        labels: ["salesorderheader"]
-        properties: ["node4_property0"]
-        name: "salesorderheader"
+    extensions:
+      indexes:
+        node4_index0:
+          type: "TEXT"
+          labels: ["salesorderheader"]
+          properties: ["node4_property0"]
+          name: "salesorderheader"
     name: "salesorderheader"
   node5:
     labels:
@@ -133,12 +138,13 @@ nodes:
         label: "salesperson"
         properties: ["node5_property0"]
         name: "businessentityid_salesperson_uniq"
-    indexes:
-      node5_index0:
-        type: "TEXT"
-        labels: ["salesperson"]
-        properties: ["node5_property0"]
-        name: "salesperson"
+    extensions:
+      indexes:
+        node5_index0:
+          type: "TEXT"
+          labels: ["salesperson"]
+          properties: ["node5_property0"]
+          name: "salesperson"
     name: "salesperson"
   node6:
     labels:
@@ -152,12 +158,13 @@ nodes:
         label: "salesreason"
         properties: ["node6_property0"]
         name: "salesreasonid_salesreason_uniq"
-    indexes:
-      node6_index0:
-        type: "TEXT"
-        labels: ["salesreason"]
-        properties: ["node6_property0"]
-        name: "salesreason"
+    extensions:
+      indexes:
+        node6_index0:
+          type: "TEXT"
+          labels: ["salesreason"]
+          properties: ["node6_property0"]
+          name: "salesreason"
     name: "salesreason"
   node7:
     labels:
@@ -174,12 +181,13 @@ nodes:
         label: "salestaxrate"
         properties: ["node7_property0"]
         name: "salestaxrateid_salestaxrate_uniq"
-    indexes:
-      node7_index0:
-        type: "TEXT"
-        labels: ["salestaxrate"]
-        properties: ["node7_property0"]
-        name: "salestaxrate"
+    extensions:
+      indexes:
+        node7_index0:
+          type: "TEXT"
+          labels: ["salestaxrate"]
+          properties: ["node7_property0"]
+          name: "salestaxrate"
     name: "salestaxrate"
   node8:
     labels:
@@ -199,12 +207,13 @@ nodes:
         label: "salesterritory"
         properties: ["node8_property0"]
         name: "territoryid_salesterritory_uniq"
-    indexes:
-      node8_index0:
-        type: "TEXT"
-        labels: ["salesterritory"]
-        properties: ["node8_property0"]
-        name: "salesterritory"
+    extensions:
+      indexes:
+        node8_index0:
+          type: "TEXT"
+          labels: ["salesterritory"]
+          properties: ["node8_property0"]
+          name: "salesterritory"
     name: "salesterritory"
   node9:
     labels:
@@ -221,12 +230,13 @@ nodes:
         label: "shoppingcartitem"
         properties: ["node9_property0"]
         name: "shoppingcartitemid_shoppingcartitem_uniq"
-    indexes:
-      node9_index0:
-        type: "TEXT"
-        labels: ["shoppingcartitem"]
-        properties: ["node9_property0"]
-        name: "shoppingcartitem"
+    extensions:
+      indexes:
+        node9_index0:
+          type: "TEXT"
+          labels: ["shoppingcartitem"]
+          properties: ["node9_property0"]
+          name: "shoppingcartitem"
     name: "shoppingcartitem"
   node10:
     labels:
@@ -249,12 +259,13 @@ nodes:
         label: "specialoffer"
         properties: ["node10_property0"]
         name: "specialofferid_specialoffer_uniq"
-    indexes:
-      node10_index0:
-        type: "TEXT"
-        labels: ["specialoffer"]
-        properties: ["node10_property0"]
-        name: "specialoffer"
+    extensions:
+      indexes:
+        node10_index0:
+          type: "TEXT"
+          labels: ["specialoffer"]
+          properties: ["node10_property0"]
+          name: "specialoffer"
     name: "specialoffer"
   node11:
     labels:
@@ -269,12 +280,13 @@ nodes:
         label: "store"
         properties: ["node11_property0"]
         name: "businessentityid_store_uniq"
-    indexes:
-      node11_index0:
-        type: "TEXT"
-        labels: ["store"]
-        properties: ["node11_property0"]
-        name: "store"
+    extensions:
+      indexes:
+        node11_index0:
+          type: "TEXT"
+          labels: ["store"]
+          properties: ["node11_property0"]
+          name: "store"
     name: "store"
 relationships:
   relationship0:

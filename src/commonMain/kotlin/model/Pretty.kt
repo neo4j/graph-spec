@@ -46,13 +46,13 @@ object Pretty {
         model.nodes.values.forEach { node ->
             node.properties.values.forEach { it.name = null }
             node.constraints.values.forEach { it.name = null }
-            node.indexes.values.forEach { it.name = null }
+            node.extensions.indexes.values.forEach { it.name = null }
             node.name = null
         }
         model.relationships.values.forEach { relationship ->
             relationship.properties.values.forEach { it.name = null }
             relationship.constraints.values.forEach { it.name = null }
-            relationship.indexes.values.forEach { it.name = null }
+            relationship.extensions.indexes.values.forEach { it.name = null }
             relationship.name = null
         }
         model.tables.values.forEach { table ->
@@ -80,7 +80,7 @@ object Pretty {
         renameNodeMappings(this, renames)
         nodes.values.forEach { node ->
             node.constraints.prettify()
-            node.indexes.prettify()
+            node.extensions.indexes.prettify()
         }
         relationships.values.forEach { relationship ->
             if (relationship.from.node != "") {
@@ -90,7 +90,6 @@ object Pretty {
                 relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
             }
         }
-        display.nodes.rename(renames)
     }
 
     internal fun renameNodeMappings(model: GraphModel, renames: Map<String, String>) {
@@ -110,7 +109,7 @@ object Pretty {
             node.constraints.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
-            node.indexes.values.forEach { property ->
+            node.extensions.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
             prettifyProperties(node.constraints, node.properties) { constraint ->
@@ -173,7 +172,7 @@ object Pretty {
         renameRelationshipMappings(this, renames)
         relationships.values.forEach { node ->
             node.constraints.prettify()
-            node.indexes.prettify()
+            node.extensions.indexes.prettify()
         }
     }
 
@@ -190,7 +189,7 @@ object Pretty {
             relationship.constraints.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
-            relationship.indexes.values.forEach { property ->
+            relationship.extensions.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
             prettifyProperties(relationship.constraints, relationship.properties)

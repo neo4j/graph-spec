@@ -188,12 +188,14 @@ class JsonFormatTest {
             version = "1",
             nodes = mutableMapOf(
                 "n0" to Node(
-                    indexes = mutableMapOf(
-                        "idx0" to NodeIndex(
-                            type = IndexType.FULLTEXT,
-                            labels = mutableSetOf("Document"),
-                            properties = mutableSetOf("body"),
-                            options = FullTextIndexOption()
+                    extensions = NodeExtensions(
+                        indexes = mutableMapOf(
+                            "idx0" to NodeIndex(
+                                type = IndexType.FULLTEXT,
+                                labels = mutableSetOf("Document"),
+                                properties = mutableSetOf("body"),
+                                options = FullTextIndexOption()
+                            )
                         )
                     )
                 )
@@ -203,7 +205,7 @@ class JsonFormatTest {
         val encoded = jsonFormat.encodeModelToString(model)
         val decoded = jsonFormat.decodeModelFromString(encoded)
 
-        assertEquals(FullTextIndexOption(), decoded.nodes["n0"]!!.indexes["idx0"]!!.options)
+        assertEquals(FullTextIndexOption(), decoded.nodes["n0"]!!.extensions.indexes["idx0"]!!.options)
     }
 
     @Test

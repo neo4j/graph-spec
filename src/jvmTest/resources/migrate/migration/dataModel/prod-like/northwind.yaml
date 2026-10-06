@@ -7,11 +7,15 @@ nodes:
       categoryname: { type: "STRING" }
       description: { type: "STRING" }
       picture: { type: "STRING" }
-    indexes:
-      categories:
-        type: "TEXT"
-        labels: ["categories"]
-        properties: ["categoryid"]
+    extensions:
+      indexes:
+        categories:
+          type: "TEXT"
+          labels: ["categories"]
+          properties: ["categoryid"]
+      display:
+        x: -100.123
+        y: 200.0
   products:
     label: "products"
     properties:
@@ -23,11 +27,12 @@ nodes:
       unitsonorder: { type: "INTEGER" }
       reorderlevel: { type: "INTEGER" }
       discontinued: { type: "INTEGER" }
-    indexes:
-      products:
-        type: "TEXT"
-        labels: ["products"]
-        properties: ["productid"]
+    extensions:
+      indexes:
+        products:
+          type: "TEXT"
+          labels: ["products"]
+          properties: ["productid"]
   suppliers:
     label: "suppliers"
     properties:
@@ -43,11 +48,12 @@ nodes:
       phone: { type: "STRING" }
       fax: { type: "STRING" }
       homepage: { type: "STRING" }
-    indexes:
-      suppliers:
-        type: "TEXT"
-        labels: ["suppliers"]
-        properties: ["supplierid"]
+    extensions:
+      indexes:
+        suppliers:
+          type: "TEXT"
+          labels: ["suppliers"]
+          properties: ["supplierid"]
 relationships:
   CATEGORIES:
     type: "CATEGORIES"
@@ -277,8 +283,3 @@ mappings:
       node: "suppliers"
       properties:
         supplierid: { column: "supplierid" }
-display:
-  nodes:
-    categories:
-      x: -100.123
-      y: 200.0

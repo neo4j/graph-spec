@@ -6,15 +6,16 @@ nodes:
       documentid: { type: "INTEGER" }
       embedding: { type: "VECTOR<FLOAT>", dimension: 123 }
       legacyembedding: { type: "VECTOR<FLOAT>" }
-    indexes:
-      document_embedding:
-        type: "VECTOR"
-        labels: ["document"]
-        properties: ["embedding"]
-        options:
+    extensions:
+      indexes:
+        document_embedding:
           type: "VECTOR"
-          vector.dimensions: 123
-          vector.similarity_function: "euclidean"
+          labels: ["document"]
+          properties: ["embedding"]
+          options:
+            type: "VECTOR"
+            vector.dimensions: 123
+            vector.similarity_function: "euclidean"
 tables:
   document:
     source: "cloud"

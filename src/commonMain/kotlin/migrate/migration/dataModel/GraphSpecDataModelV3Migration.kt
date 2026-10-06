@@ -196,7 +196,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             )
             indexes.addAll(
                 convertElements(
-                    elements = rel.mapOfMapsOrNull("indexes"),
+                    elements = rel.mapOrNull("extensions")?.mapOfMapsOrNull("indexes"),
                     entityType = "relationship",
                     refId = typeId,
                     entityToken = typeToken,
@@ -281,7 +281,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             )
             indexes.addAll(
                 convertElements(
-                    elements = node.mapOfMapsOrNull("indexes"),
+                    elements = node.mapOrNull("extensions")?.mapOfMapsOrNull("indexes"),
                     entityType = "node",
                     refId = primaryLabelId,
                     entityToken = primaryLabel,
@@ -324,9 +324,10 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
     }
 
     internal fun convertVisualisation(schema: SchemaMap): SchemaMap {
-        val display = schema.mapOrNull("display")?.mapOfMaps("nodes")
+        val nodes = schema.mapOfMapsOrNull("nodes").orEmpty()
         return schemaMapOf(
-            "nodes" to display?.map { (id, pos) ->
+            "nodes" toNotEmpty nodes.mapNotNull { (id, node) ->
+                val pos = node.mapOrNull("extensions")?.mapOrNull("display") ?: return@mapNotNull null
                 schemaMapOf(
                     "id" to id,
                     "position" to schemaMapOf(

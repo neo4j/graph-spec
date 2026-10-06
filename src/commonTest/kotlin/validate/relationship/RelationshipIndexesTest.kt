@@ -83,7 +83,7 @@ class RelationshipIndexesTest {
         val issue = issues.first()
         assertEquals("missing_relation_index_property", issue.code)
         assertEquals("Missing property with id 'roles' for relationship index 'idx_roles'", issue.message)
-        assertEquals("relationships.actedIn.indexes.idx_roles.properties.roles", issue.path)
+        assertEquals("relationships.actedIn.extensions.indexes.idx_roles.properties.roles", issue.path)
     }
 
     @Test

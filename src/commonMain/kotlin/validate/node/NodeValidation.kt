@@ -37,7 +37,7 @@ interface NodeValidation : Validation {
             for ((constraintId, constraint) in node.constraints) {
                 validateConstraint(model, nodeId, node, constraintId, constraint, issues)
             }
-            for ((indexId, index) in node.indexes) {
+            for ((indexId, index) in node.extensions.indexes) {
                 validateIndex(model, nodeId, node, indexId, index, issues)
             }
         }

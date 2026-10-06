@@ -49,7 +49,7 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
-    fun `visualisation transforms to display`() {
+    fun `visualisation moves positions into node extensions`() {
         val nodes = mutableMapOf("nodeA" to schemaMapOf("id" to "nodeA"))
         val schema = schemaMapOf(
             "visualisation" to schemaMapOf(
@@ -62,12 +62,10 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.visualisation(schema, nodes)
-        assertNotNull(result)
-        val node = result.mapOfMaps("nodes")["nodeA"]
-        assertNotNull(node)
-        assertEquals("10.1234", node.string("x"))
-        assertEquals("20.54321", node.string("y"))
+        migration.visualisation(schema, nodes)
+        val display = nodes["nodeA"]!!.map("extensions").map("display")
+        assertEquals("10.1234", display.string("x"))
+        assertEquals("20.54321", display.string("y"))
     }
 
     @Test

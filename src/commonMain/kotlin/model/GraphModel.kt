@@ -19,7 +19,6 @@ package model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import model.display.Display
 import model.mapping.Mapping
 import model.node.Node
 import model.relationship.Relationship
@@ -41,7 +40,6 @@ data class GraphModel(
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
     val tables: MutableMap<String, Table> = mutableMapOf(),
     val mappings: MutableList<Mapping> = mutableListOf(),
-    val display: Display = Display(),
     val extensions: GraphModelExtensions = GraphModelExtensions(),
     @Transient
     var pretty: Boolean = false

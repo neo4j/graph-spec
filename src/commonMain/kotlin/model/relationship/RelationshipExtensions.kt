@@ -26,8 +26,12 @@ import kotlin.js.JsExport
  * Extensions for a [Relationship].
  *
  * @property custom user-defined arbitrary data.
+ * @property indexes indexes on this relationship.
  */
 @JsExport
 @Serializable
 @SerialName("RelationshipExtensions")
-data class RelationshipExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions
+data class RelationshipExtensions(
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf()
+) : Extensions

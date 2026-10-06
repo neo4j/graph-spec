@@ -12,12 +12,13 @@ nodes:
         label: "album"
         properties: ["node0_property0"]
         name: "album__id_album_uniq"
-    indexes:
-      node0_index0:
-        type: "TEXT"
-        labels: ["album"]
-        properties: ["node0_property0"]
-        name: "album"
+    extensions:
+      indexes:
+        node0_index0:
+          type: "TEXT"
+          labels: ["album"]
+          properties: ["node0_property0"]
+          name: "album"
     name: "album"
   node1:
     labels:
@@ -31,12 +32,13 @@ nodes:
         label: "artist"
         properties: ["node1_property0"]
         name: "artist__id_artist_uniq"
-    indexes:
-      node1_index0:
-        type: "TEXT"
-        labels: ["artist"]
-        properties: ["node1_property0"]
-        name: "artist"
+    extensions:
+      indexes:
+        node1_index0:
+          type: "TEXT"
+          labels: ["artist"]
+          properties: ["node1_property0"]
+          name: "artist"
     name: "artist"
   node2:
     labels:
@@ -60,12 +62,13 @@ nodes:
         label: "customer"
         properties: ["node2_property0"]
         name: "customer__id_customer_uniq"
-    indexes:
-      node2_index0:
-        type: "TEXT"
-        labels: ["customer"]
-        properties: ["node2_property0"]
-        name: "customer"
+    extensions:
+      indexes:
+        node2_index0:
+          type: "TEXT"
+          labels: ["customer"]
+          properties: ["node2_property0"]
+          name: "customer"
     name: "customer"
   node3:
     labels:
@@ -91,12 +94,13 @@ nodes:
         label: "employee"
         properties: ["node3_property0"]
         name: "employee__id_employee_uniq"
-    indexes:
-      node3_index0:
-        type: "TEXT"
-        labels: ["employee"]
-        properties: ["node3_property0"]
-        name: "employee"
+    extensions:
+      indexes:
+        node3_index0:
+          type: "TEXT"
+          labels: ["employee"]
+          properties: ["node3_property0"]
+          name: "employee"
     name: "employee"
   node4:
     labels:
@@ -110,12 +114,13 @@ nodes:
         label: "genre"
         properties: ["node4_property0"]
         name: "genre__id_genre_uniq"
-    indexes:
-      node4_index0:
-        type: "TEXT"
-        labels: ["genre"]
-        properties: ["node4_property0"]
-        name: "genre"
+    extensions:
+      indexes:
+        node4_index0:
+          type: "TEXT"
+          labels: ["genre"]
+          properties: ["node4_property0"]
+          name: "genre"
     name: "genre"
   node5:
     labels:
@@ -135,12 +140,13 @@ nodes:
         label: "invoice"
         properties: ["node5_property0"]
         name: "invoice__id_invoice_uniq"
-    indexes:
-      node5_index0:
-        type: "TEXT"
-        labels: ["invoice"]
-        properties: ["node5_property0"]
-        name: "invoice"
+    extensions:
+      indexes:
+        node5_index0:
+          type: "TEXT"
+          labels: ["invoice"]
+          properties: ["node5_property0"]
+          name: "invoice"
     name: "invoice"
   node6:
     labels:
@@ -155,12 +161,13 @@ nodes:
         label: "invoice_line"
         properties: ["node6_property0"]
         name: "invoice__line__id_invoice__line_uniq"
-    indexes:
-      node6_index0:
-        type: "TEXT"
-        labels: ["invoice_line"]
-        properties: ["node6_property0"]
-        name: "invoice_line"
+    extensions:
+      indexes:
+        node6_index0:
+          type: "TEXT"
+          labels: ["invoice_line"]
+          properties: ["node6_property0"]
+          name: "invoice_line"
     name: "invoice_line"
   node7:
     labels:
@@ -174,12 +181,13 @@ nodes:
         label: "media_type"
         properties: ["node7_property0"]
         name: "media__type__id_media__type_uniq"
-    indexes:
-      node7_index0:
-        type: "TEXT"
-        labels: ["media_type"]
-        properties: ["node7_property0"]
-        name: "media_type"
+    extensions:
+      indexes:
+        node7_index0:
+          type: "TEXT"
+          labels: ["media_type"]
+          properties: ["node7_property0"]
+          name: "media_type"
     name: "media_type"
   node8:
     labels:
@@ -193,12 +201,13 @@ nodes:
         label: "playlist"
         properties: ["node8_property0"]
         name: "playlist__id_playlist_uniq"
-    indexes:
-      node8_index0:
-        type: "TEXT"
-        labels: ["playlist"]
-        properties: ["node8_property0"]
-        name: "playlist"
+    extensions:
+      indexes:
+        node8_index0:
+          type: "TEXT"
+          labels: ["playlist"]
+          properties: ["node8_property0"]
+          name: "playlist"
     name: "playlist"
   node9:
     labels:
@@ -216,12 +225,13 @@ nodes:
         label: "track"
         properties: ["node9_property0"]
         name: "track__id_track_uniq"
-    indexes:
-      node9_index0:
-        type: "TEXT"
-        labels: ["track"]
-        properties: ["node9_property0"]
-        name: "track"
+    extensions:
+      indexes:
+        node9_index0:
+          type: "TEXT"
+          labels: ["track"]
+          properties: ["node9_property0"]
+          name: "track"
     name: "track"
 relationships:
   relationship0:

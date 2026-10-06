@@ -23,6 +23,7 @@ import model.mapping.TargetMapping
 import model.node.Labels
 import model.node.Node
 import model.node.NodeConstraint
+import model.node.NodeExtensions
 import model.node.NodeIndex
 import model.property.Property
 import model.relationship.Relationship
@@ -92,8 +93,10 @@ class PrettyTest {
                         "nodeConstraint0" to
                             NodeConstraint(ConstraintType.UNIQUE, properties = mutableSetOf(), name = "c1")
                     ),
-                    indexes = mutableMapOf(
-                        "nodeIndex0" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf(), name = "i1")
+                    extensions = NodeExtensions(
+                        indexes = mutableMapOf(
+                            "nodeIndex0" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf(), name = "i1")
+                        )
                     )
                 )
             )
@@ -108,8 +111,8 @@ class PrettyTest {
         assertTrue(node.constraints.containsKey("c1"), "Constraint ID should be restored")
         assertNull(node.constraints["c1"]?.name, "Constraint name should be cleared")
 
-        assertTrue(node.indexes.containsKey("i1"), "Index ID should be restored")
-        assertNull(node.indexes["i1"]?.name, "Index name should be cleared")
+        assertTrue(node.extensions.indexes.containsKey("i1"), "Index ID should be restored")
+        assertNull(node.extensions.indexes["i1"]?.name, "Index name should be cleared")
     }
 
     @Test

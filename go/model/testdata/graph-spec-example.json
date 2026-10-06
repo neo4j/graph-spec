@@ -29,7 +29,6 @@
         }
       },
       "constraints": {},
-      "indexes": {},
       "extensions": {
         "custom": {
           "note": {
@@ -40,7 +39,8 @@
             "type": "BOOLEAN",
             "value": true
           }
-        }
+        },
+        "indexes": {}
       }
     },
     "Movie": {
@@ -63,9 +63,9 @@
         }
       },
       "constraints": {},
-      "indexes": {},
       "extensions": {
-        "custom": {}
+        "custom": {},
+        "indexes": {}
       }
     }
   },
@@ -93,9 +93,9 @@
         }
       },
       "constraints": {},
-      "indexes": {},
       "extensions": {
-        "custom": {}
+        "custom": {},
+        "indexes": {}
       }
     }
   },

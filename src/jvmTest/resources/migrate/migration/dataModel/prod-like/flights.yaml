@@ -6,11 +6,12 @@ nodes:
       aircraftCode: { type: "STRING", unique: true }
       model: { type: "STRING" }
       aircraftRange: { type: "INTEGER" }
-    indexes:
-      "aircrafts_data-text":
-        type: "TEXT"
-        labels: ["Aircraft"]
-        properties: ["aircraftCode"]
+    extensions:
+      indexes:
+        "aircrafts_data-text":
+          type: "TEXT"
+          labels: ["Aircraft"]
+          properties: ["aircraftCode"]
   Airport:
     label: "Airport"
     properties:
@@ -19,22 +20,24 @@ nodes:
       city: { type: "STRING" }
       coordinates: { type: "POINT" }
       timezone: { type: "STRING" }
-    indexes:
-      "airports_data-text":
-        type: "TEXT"
-        labels: ["Airport"]
-        properties: ["airportCode"]
+    extensions:
+      indexes:
+        "airports_data-text":
+          type: "TEXT"
+          labels: ["Airport"]
+          properties: ["airportCode"]
   Booking:
     label: "Booking"
     properties:
       bookRef: { type: "STRING", unique: true }
       bookDate: { type: "ZONED DATETIME" }
       totalAmount: { type: "FLOAT" }
-    indexes:
-      "bookings-text":
-        type: "TEXT"
-        labels: ["Booking"]
-        properties: ["bookRef"]
+    extensions:
+      indexes:
+        "bookings-text":
+          type: "TEXT"
+          labels: ["Booking"]
+          properties: ["bookRef"]
   Flight:
     label: "Flight"
     properties:
@@ -45,11 +48,12 @@ nodes:
       status: { type: "STRING" }
       actualDeparture: { type: "ZONED DATETIME" }
       actualArrival: { type: "ZONED DATETIME" }
-    indexes:
-      flights:
-        type: "TEXT"
-        labels: ["Flight"]
-        properties: ["flightId"]
+    extensions:
+      indexes:
+        flights:
+          type: "TEXT"
+          labels: ["Flight"]
+          properties: ["flightId"]
   Ticket:
     label: "Ticket"
     properties:
@@ -57,11 +61,12 @@ nodes:
       passengerId: { type: "STRING" }
       passengerName: { type: "STRING" }
       contactData: { type: "STRING" }
-    indexes:
-      "tickets-text":
-        type: "TEXT"
-        labels: ["Ticket"]
-        properties: ["ticketNo"]
+    extensions:
+      indexes:
+        "tickets-text":
+          type: "TEXT"
+          labels: ["Ticket"]
+          properties: ["ticketNo"]
 relationships:
   FLIGHT_USES_AIRCRAFT:
     type: "FLIGHT_USES_AIRCRAFT"

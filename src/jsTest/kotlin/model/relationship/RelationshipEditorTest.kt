@@ -103,7 +103,7 @@ class RelationshipEditorTest {
     fun testIndexManagement() {
         // Add Index
         val indexId = RelationshipEditor.addIndex(model, relId, "RANGE", arrayOf("a"))
-        val index = model.relationships[relId]!!.indexes[indexId]!!
+        val index = model.relationships[relId]!!.extensions.indexes[indexId]!!
 
         // Update Type
         RelationshipEditor.setIndexType(model, relId, indexId, "POINT")

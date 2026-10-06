@@ -38,7 +38,7 @@ interface RelationshipValidation : Validation {
             for ((constraintId, constraint) in relationship.constraints) {
                 validateConstraint(model, relationshipId, relationship, constraintId, constraint, issues)
             }
-            for ((indexId, index) in relationship.indexes) {
+            for ((indexId, index) in relationship.extensions.indexes) {
                 validateIndex(model, relationshipId, relationship, indexId, index, issues)
             }
         }

@@ -20,6 +20,9 @@ cd "$REPO_ROOT/go"
 cp "$INPUT_SPEC" "$TEMP_SPEC"
 # Ensure "title" is present in the spec which is needed for Go generation of top-level model
 jq '.title //= .["$id"]' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
+# Collapse the nullable NodeDisplay reference ("oneOf": [{"type": "null"}, {"$ref": ".../NodeDisplay"}]) into a plain
+# reference, as optional properties are already generated as pointers. Other nullable unions are left untouched.
+jq 'walk(if type == "object" and (.oneOf | type) == "array" and (.oneOf | map(.["$ref"]? == "#/$defs/NodeDisplay") | any) then {"$ref": "#/$defs/NodeDisplay"} else . end)' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
 # Replace characters that cannot appear in Go structs with placeholders to enable Go generation
 # 1. Angled brackets in keys and values
 perl -pi -e 's/"([^"]+)<([^>]+)>"/"$1_LEFTBRACK_$2_RIGHTBRACK_"/g' "$TEMP_SPEC"

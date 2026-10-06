@@ -3,8 +3,8 @@ import model.GraphModel
 import model.GraphModelEditor
 import model.Type
 import model.Version
-import model.display.displayJs
-import model.display.nodeDisplayJs
+import model.node.nodeDisplayJs
+import model.node.nodeExtensionsJs
 import model.graphModelJs
 import model.node.Labels
 import model.node.Node
@@ -33,9 +33,9 @@ class JsEdgeCaseTests {
                         "p:n1:1" to propertyJs("LIST<STRING>", name = "genres", id = "p:n1:1"),
                     ),
                     id = "n:1",
+                    extensions = nodeExtensionsJs(display = nodeDisplayJs(0.0, 0.0))
                 )
-            ),
-            display = displayJs(recordOf("n:1" to nodeDisplayJs(0.0, 0.0)))
+            )
         )
         val model = GraphModelEditor.model(plainSpec)
 

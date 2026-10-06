@@ -13,12 +13,13 @@ nodes:
         label: "ACCOUNT"
         properties: ["node0_property0"]
         name: "ACCOUNT__IDENTIFIER_ACCOUNT_uniq"
-    indexes:
-      node0_index0:
-        type: "TEXT"
-        labels: ["ACCOUNT"]
-        properties: ["node0_property0"]
-        name: "ACCOUNT"
+    extensions:
+      indexes:
+        node0_index0:
+          type: "TEXT"
+          labels: ["ACCOUNT"]
+          properties: ["node0_property0"]
+          name: "ACCOUNT"
     name: "ACCOUNT"
   node1:
     labels:
@@ -31,12 +32,13 @@ nodes:
         label: "ADMINISTRATIVE_ORGANIZATION_UNIT"
         properties: ["node1_property0"]
         name: "ORGANIZATION__IDENTIFIER_ADMINISTRATIVE__ORGANIZATION__UNIT_uniq"
-    indexes:
-      node1_index0:
-        type: "TEXT"
-        labels: ["ADMINISTRATIVE_ORGANIZATION_UNIT"]
-        properties: ["node1_property0"]
-        name: "ADMINISTRATIVE_ORGANIZATION_UNIT"
+    extensions:
+      indexes:
+        node1_index0:
+          type: "TEXT"
+          labels: ["ADMINISTRATIVE_ORGANIZATION_UNIT"]
+          properties: ["node1_property0"]
+          name: "ADMINISTRATIVE_ORGANIZATION_UNIT"
     name: "ADMINISTRATIVE_ORGANIZATION_UNIT"
   node2:
     labels:
@@ -49,12 +51,13 @@ nodes:
         label: "AGENCY_CONTRACT"
         properties: ["node2_property0"]
         name: "AGREEMENT__IDENTIFIER_AGENCY__CONTRACT_uniq"
-    indexes:
-      node2_index0:
-        type: "TEXT"
-        labels: ["AGENCY_CONTRACT"]
-        properties: ["node2_property0"]
-        name: "AGENCY_CONTRACT"
+    extensions:
+      indexes:
+        node2_index0:
+          type: "TEXT"
+          labels: ["AGENCY_CONTRACT"]
+          properties: ["node2_property0"]
+          name: "AGENCY_CONTRACT"
     name: "AGENCY_CONTRACT"
   node3:
     labels:
@@ -70,12 +73,13 @@ nodes:
         label: "AGREEMENT"
         properties: ["node3_property0"]
         name: "AGREEMENT__IDENTIFIER_AGREEMENT_uniq"
-    indexes:
-      node3_index0:
-        type: "TEXT"
-        labels: ["AGREEMENT"]
-        properties: ["node3_property0"]
-        name: "AGREEMENT"
+    extensions:
+      indexes:
+        node3_index0:
+          type: "TEXT"
+          labels: ["AGREEMENT"]
+          properties: ["node3_property0"]
+          name: "AGREEMENT"
     name: "AGREEMENT"
   node4:
     labels:
@@ -88,12 +92,13 @@ nodes:
         label: "ANIMAL"
         properties: ["node4_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_ANIMAL_uniq"
-    indexes:
-      node4_index0:
-        type: "TEXT"
-        labels: ["ANIMAL"]
-        properties: ["node4_property0"]
-        name: "ANIMAL"
+    extensions:
+      indexes:
+        node4_index0:
+          type: "TEXT"
+          labels: ["ANIMAL"]
+          properties: ["node4_property0"]
+          name: "ANIMAL"
     name: "ANIMAL"
   node5:
     labels:
@@ -106,12 +111,13 @@ nodes:
         label: "APPROVAL"
         properties: ["node5_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_APPROVAL_uniq"
-    indexes:
-      node5_index0:
-        type: "TEXT"
-        labels: ["APPROVAL"]
-        properties: ["node5_property0"]
-        name: "APPROVAL"
+    extensions:
+      indexes:
+        node5_index0:
+          type: "TEXT"
+          labels: ["APPROVAL"]
+          properties: ["node5_property0"]
+          name: "APPROVAL"
     name: "APPROVAL"
   node6:
     labels:
@@ -125,12 +131,13 @@ nodes:
         label: "ARBITRATION"
         properties: ["node6_property0"]
         name: "ARBITRATION__IDENTIFIER_ARBITRATION_uniq"
-    indexes:
-      node6_index0:
-        type: "TEXT"
-        labels: ["ARBITRATION"]
-        properties: ["node6_property0"]
-        name: "ARBITRATION"
+    extensions:
+      indexes:
+        node6_index0:
+          type: "TEXT"
+          labels: ["ARBITRATION"]
+          properties: ["node6_property0"]
+          name: "ARBITRATION"
     name: "ARBITRATION"
   node7:
     labels:
@@ -147,12 +154,13 @@ nodes:
         label: "ASSESSMENT"
         properties: ["node7_property0"]
         name: "ASSESSMENT__IDENTIFIER_ASSESSMENT_uniq"
-    indexes:
-      node7_index0:
-        type: "TEXT"
-        labels: ["ASSESSMENT"]
-        properties: ["node7_property0"]
-        name: "ASSESSMENT"
+    extensions:
+      indexes:
+        node7_index0:
+          type: "TEXT"
+          labels: ["ASSESSMENT"]
+          properties: ["node7_property0"]
+          name: "ASSESSMENT"
     name: "ASSESSMENT"
   node8:
     labels:
@@ -166,12 +174,13 @@ nodes:
         label: "ASSESSMENT_RESULT"
         properties: ["node8_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_ASSESSMENT__RESULT_uniq"
-    indexes:
-      node8_index0:
-        type: "TEXT"
-        labels: ["ASSESSMENT_RESULT"]
-        properties: ["node8_property0"]
-        name: "ASSESSMENT_RESULT"
+    extensions:
+      indexes:
+        node8_index0:
+          type: "TEXT"
+          labels: ["ASSESSMENT_RESULT"]
+          properties: ["node8_property0"]
+          name: "ASSESSMENT_RESULT"
     name: "ASSESSMENT_RESULT"
   node9:
     labels:
@@ -184,12 +193,13 @@ nodes:
         label: "ASSUMED_CLAIM_AMOUNT"
         properties: ["node9_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_ASSUMED__CLAIM__AMOUNT_uniq"
-    indexes:
-      node9_index0:
-        type: "TEXT"
-        labels: ["ASSUMED_CLAIM_AMOUNT"]
-        properties: ["node9_property0"]
-        name: "ASSUMED_CLAIM_AMOUNT"
+    extensions:
+      indexes:
+        node9_index0:
+          type: "TEXT"
+          labels: ["ASSUMED_CLAIM_AMOUNT"]
+          properties: ["node9_property0"]
+          name: "ASSUMED_CLAIM_AMOUNT"
     name: "ASSUMED_CLAIM_AMOUNT"
   node10:
     labels:
@@ -202,12 +212,13 @@ nodes:
         label: "ASSUMED_POLICY_AMOUNT"
         properties: ["node10_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_ASSUMED__POLICY__AMOUNT_uniq"
-    indexes:
-      node10_index0:
-        type: "TEXT"
-        labels: ["ASSUMED_POLICY_AMOUNT"]
-        properties: ["node10_property0"]
-        name: "ASSUMED_POLICY_AMOUNT"
+    extensions:
+      indexes:
+        node10_index0:
+          type: "TEXT"
+          labels: ["ASSUMED_POLICY_AMOUNT"]
+          properties: ["node10_property0"]
+          name: "ASSUMED_POLICY_AMOUNT"
     name: "ASSUMED_POLICY_AMOUNT"
   node11:
     labels:
@@ -220,12 +231,13 @@ nodes:
         label: "AUTOMOBILE"
         properties: ["node11_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_AUTOMOBILE_uniq"
-    indexes:
-      node11_index0:
-        type: "TEXT"
-        labels: ["AUTOMOBILE"]
-        properties: ["node11_property0"]
-        name: "AUTOMOBILE"
+    extensions:
+      indexes:
+        node11_index0:
+          type: "TEXT"
+          labels: ["AUTOMOBILE"]
+          properties: ["node11_property0"]
+          name: "AUTOMOBILE"
     name: "AUTOMOBILE"
   node12:
     labels:
@@ -238,12 +250,13 @@ nodes:
         label: "AUTO_REPAIR_SHOP_CONTRACT"
         properties: ["node12_property0"]
         name: "AGREEMENT__IDENTIFIER_AUTO__REPAIR__SHOP__CONTRACT_uniq"
-    indexes:
-      node12_index0:
-        type: "TEXT"
-        labels: ["AUTO_REPAIR_SHOP_CONTRACT"]
-        properties: ["node12_property0"]
-        name: "AUTO_REPAIR_SHOP_CONTRACT"
+    extensions:
+      indexes:
+        node12_index0:
+          type: "TEXT"
+          labels: ["AUTO_REPAIR_SHOP_CONTRACT"]
+          properties: ["node12_property0"]
+          name: "AUTO_REPAIR_SHOP_CONTRACT"
     name: "AUTO_REPAIR_SHOP_CONTRACT"
   node13:
     labels:
@@ -256,12 +269,13 @@ nodes:
         label: "BINDING"
         properties: ["node13_property0"]
         name: "EVENT__IDENTIFIER_BINDING_uniq"
-    indexes:
-      node13_index0:
-        type: "TEXT"
-        labels: ["BINDING"]
-        properties: ["node13_property0"]
-        name: "BINDING"
+    extensions:
+      indexes:
+        node13_index0:
+          type: "TEXT"
+          labels: ["BINDING"]
+          properties: ["node13_property0"]
+          name: "BINDING"
     name: "BINDING"
   node14:
     labels:
@@ -274,12 +288,13 @@ nodes:
         label: "BOAT"
         properties: ["node14_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_BOAT_uniq"
-    indexes:
-      node14_index0:
-        type: "TEXT"
-        labels: ["BOAT"]
-        properties: ["node14_property0"]
-        name: "BOAT"
+    extensions:
+      indexes:
+        node14_index0:
+          type: "TEXT"
+          labels: ["BOAT"]
+          properties: ["node14_property0"]
+          name: "BOAT"
     name: "BOAT"
   node15:
     labels:
@@ -292,12 +307,13 @@ nodes:
         label: "BODY_OBJECT"
         properties: ["node15_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_BODY__OBJECT_uniq"
-    indexes:
-      node15_index0:
-        type: "TEXT"
-        labels: ["BODY_OBJECT"]
-        properties: ["node15_property0"]
-        name: "BODY_OBJECT"
+    extensions:
+      indexes:
+        node15_index0:
+          type: "TEXT"
+          labels: ["BODY_OBJECT"]
+          properties: ["node15_property0"]
+          name: "BODY_OBJECT"
     name: "BODY_OBJECT"
   node16:
     labels:
@@ -310,12 +326,13 @@ nodes:
         label: "BROKERAGE_CONTRACT"
         properties: ["node16_property0"]
         name: "AGREEMENT__IDENTIFIER_BROKERAGE__CONTRACT_uniq"
-    indexes:
-      node16_index0:
-        type: "TEXT"
-        labels: ["BROKERAGE_CONTRACT"]
-        properties: ["node16_property0"]
-        name: "BROKERAGE_CONTRACT"
+    extensions:
+      indexes:
+        node16_index0:
+          type: "TEXT"
+          labels: ["BROKERAGE_CONTRACT"]
+          properties: ["node16_property0"]
+          name: "BROKERAGE_CONTRACT"
     name: "BROKERAGE_CONTRACT"
   node17:
     labels:
@@ -328,12 +345,13 @@ nodes:
         label: "BUS"
         properties: ["node17_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_BUS_uniq"
-    indexes:
-      node17_index0:
-        type: "TEXT"
-        labels: ["BUS"]
-        properties: ["node17_property0"]
-        name: "BUS"
+    extensions:
+      indexes:
+        node17_index0:
+          type: "TEXT"
+          labels: ["BUS"]
+          properties: ["node17_property0"]
+          name: "BUS"
     name: "BUS"
   node18:
     labels:
@@ -346,12 +364,13 @@ nodes:
         label: "BUSINESS_EVENT"
         properties: ["node18_property0"]
         name: "EVENT__IDENTIFIER_BUSINESS__EVENT_uniq"
-    indexes:
-      node18_index0:
-        type: "TEXT"
-        labels: ["BUSINESS_EVENT"]
-        properties: ["node18_property0"]
-        name: "BUSINESS_EVENT"
+    extensions:
+      indexes:
+        node18_index0:
+          type: "TEXT"
+          labels: ["BUSINESS_EVENT"]
+          properties: ["node18_property0"]
+          name: "BUSINESS_EVENT"
     name: "BUSINESS_EVENT"
   node19:
     labels:
@@ -364,12 +383,13 @@ nodes:
         label: "CANCEL"
         properties: ["node19_property0"]
         name: "EVENT__IDENTIFIER_CANCEL_uniq"
-    indexes:
-      node19_index0:
-        type: "TEXT"
-        labels: ["CANCEL"]
-        properties: ["node19_property0"]
-        name: "CANCEL"
+    extensions:
+      indexes:
+        node19_index0:
+          type: "TEXT"
+          labels: ["CANCEL"]
+          properties: ["node19_property0"]
+          name: "CANCEL"
     name: "CANCEL"
   node20:
     labels:
@@ -386,12 +406,13 @@ nodes:
         label: "CATASTROPHE"
         properties: ["node20_property0"]
         name: "CATASTROPHE__IDENTIFIER_CATASTROPHE_uniq"
-    indexes:
-      node20_index0:
-        type: "TEXT"
-        labels: ["CATASTROPHE"]
-        properties: ["node20_property0"]
-        name: "CATASTROPHE"
+    extensions:
+      indexes:
+        node20_index0:
+          type: "TEXT"
+          labels: ["CATASTROPHE"]
+          properties: ["node20_property0"]
+          name: "CATASTROPHE"
     name: "CATASTROPHE"
   node21:
     labels:
@@ -404,12 +425,13 @@ nodes:
         label: "CEDED_CLAIM_AMOUNT"
         properties: ["node21_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_CEDED__CLAIM__AMOUNT_uniq"
-    indexes:
-      node21_index0:
-        type: "TEXT"
-        labels: ["CEDED_CLAIM_AMOUNT"]
-        properties: ["node21_property0"]
-        name: "CEDED_CLAIM_AMOUNT"
+    extensions:
+      indexes:
+        node21_index0:
+          type: "TEXT"
+          labels: ["CEDED_CLAIM_AMOUNT"]
+          properties: ["node21_property0"]
+          name: "CEDED_CLAIM_AMOUNT"
     name: "CEDED_CLAIM_AMOUNT"
   node22:
     labels:
@@ -422,12 +444,13 @@ nodes:
         label: "CEDED_POLICY_AMOUNT"
         properties: ["node22_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_CEDED__POLICY__AMOUNT_uniq"
-    indexes:
-      node22_index0:
-        type: "TEXT"
-        labels: ["CEDED_POLICY_AMOUNT"]
-        properties: ["node22_property0"]
-        name: "CEDED_POLICY_AMOUNT"
+    extensions:
+      indexes:
+        node22_index0:
+          type: "TEXT"
+          labels: ["CEDED_POLICY_AMOUNT"]
+          properties: ["node22_property0"]
+          name: "CEDED_POLICY_AMOUNT"
     name: "CEDED_POLICY_AMOUNT"
   node23:
     labels:
@@ -440,12 +463,13 @@ nodes:
         label: "CHANNEL_SCORE"
         properties: ["node23_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_CHANNEL__SCORE_uniq"
-    indexes:
-      node23_index0:
-        type: "TEXT"
-        labels: ["CHANNEL_SCORE"]
-        properties: ["node23_property0"]
-        name: "CHANNEL_SCORE"
+    extensions:
+      indexes:
+        node23_index0:
+          type: "TEXT"
+          labels: ["CHANNEL_SCORE"]
+          properties: ["node23_property0"]
+          name: "CHANNEL_SCORE"
     name: "CHANNEL_SCORE"
   node24:
     labels:
@@ -468,12 +492,13 @@ nodes:
         label: "CLAIM"
         properties: ["node24_property0"]
         name: "CLAIM__IDENTIFIER_CLAIM_uniq"
-    indexes:
-      node24_index0:
-        type: "TEXT"
-        labels: ["CLAIM"]
-        properties: ["node24_property0"]
-        name: "CLAIM"
+    extensions:
+      indexes:
+        node24_index0:
+          type: "TEXT"
+          labels: ["CLAIM"]
+          properties: ["node24_property0"]
+          name: "CLAIM"
     name: "CLAIM"
   node25:
     labels:
@@ -490,12 +515,13 @@ nodes:
         label: "CLAIM_AMOUNT"
         properties: ["node25_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_CLAIM__AMOUNT_uniq"
-    indexes:
-      node25_index0:
-        type: "TEXT"
-        labels: ["CLAIM_AMOUNT"]
-        properties: ["node25_property0"]
-        name: "CLAIM_AMOUNT"
+    extensions:
+      indexes:
+        node25_index0:
+          type: "TEXT"
+          labels: ["CLAIM_AMOUNT"]
+          properties: ["node25_property0"]
+          name: "CLAIM_AMOUNT"
     name: "CLAIM_AMOUNT"
   node26:
     labels:
@@ -508,12 +534,13 @@ nodes:
         label: "CLAIM_EVALUATION_RESULT"
         properties: ["node26_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_CLAIM__EVALUATION__RESULT_uniq"
-    indexes:
-      node26_index0:
-        type: "TEXT"
-        labels: ["CLAIM_EVALUATION_RESULT"]
-        properties: ["node26_property0"]
-        name: "CLAIM_EVALUATION_RESULT"
+    extensions:
+      indexes:
+        node26_index0:
+          type: "TEXT"
+          labels: ["CLAIM_EVALUATION_RESULT"]
+          properties: ["node26_property0"]
+          name: "CLAIM_EVALUATION_RESULT"
     name: "CLAIM_EVALUATION_RESULT"
   node27:
     labels:
@@ -526,12 +553,13 @@ nodes:
         label: "CLAIM_EVENT"
         properties: ["node27_property0"]
         name: "EVENT__IDENTIFIER_CLAIM__EVENT_uniq"
-    indexes:
-      node27_index0:
-        type: "TEXT"
-        labels: ["CLAIM_EVENT"]
-        properties: ["node27_property0"]
-        name: "CLAIM_EVENT"
+    extensions:
+      indexes:
+        node27_index0:
+          type: "TEXT"
+          labels: ["CLAIM_EVENT"]
+          properties: ["node27_property0"]
+          name: "CLAIM_EVENT"
     name: "CLAIM_EVENT"
   node28:
     labels:
@@ -545,12 +573,13 @@ nodes:
         label: "CLAIM_FOLDER"
         properties: ["node28_property0"]
         name: "CLAIM__IDENTIFIER_CLAIM__FOLDER_uniq"
-    indexes:
-      node28_index0:
-        type: "TEXT"
-        labels: ["CLAIM_FOLDER"]
-        properties: ["node28_property0"]
-        name: "CLAIM_FOLDER"
+    extensions:
+      indexes:
+        node28_index0:
+          type: "TEXT"
+          labels: ["CLAIM_FOLDER"]
+          properties: ["node28_property0"]
+          name: "CLAIM_FOLDER"
     name: "CLAIM_FOLDER"
   node29:
     labels:
@@ -565,12 +594,13 @@ nodes:
         label: "CLAIM_OFFER"
         properties: ["node29_property0"]
         name: "CLAIM__OFFER__IDENTIFIER_CLAIM__OFFER_uniq"
-    indexes:
-      node29_index0:
-        type: "TEXT"
-        labels: ["CLAIM_OFFER"]
-        properties: ["node29_property0"]
-        name: "CLAIM_OFFER"
+    extensions:
+      indexes:
+        node29_index0:
+          type: "TEXT"
+          labels: ["CLAIM_OFFER"]
+          properties: ["node29_property0"]
+          name: "CLAIM_OFFER"
     name: "CLAIM_OFFER"
   node30:
     labels:
@@ -583,12 +613,13 @@ nodes:
         label: "CLAIM_PAYMENT"
         properties: ["node30_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_CLAIM__PAYMENT_uniq"
-    indexes:
-      node30_index0:
-        type: "TEXT"
-        labels: ["CLAIM_PAYMENT"]
-        properties: ["node30_property0"]
-        name: "CLAIM_PAYMENT"
+    extensions:
+      indexes:
+        node30_index0:
+          type: "TEXT"
+          labels: ["CLAIM_PAYMENT"]
+          properties: ["node30_property0"]
+          name: "CLAIM_PAYMENT"
     name: "CLAIM_PAYMENT"
   node31:
     labels:
@@ -601,12 +632,13 @@ nodes:
         label: "CLAIM_RESERVE"
         properties: ["node31_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_CLAIM__RESERVE_uniq"
-    indexes:
-      node31_index0:
-        type: "TEXT"
-        labels: ["CLAIM_RESERVE"]
-        properties: ["node31_property0"]
-        name: "CLAIM_RESERVE"
+    extensions:
+      indexes:
+        node31_index0:
+          type: "TEXT"
+          labels: ["CLAIM_RESERVE"]
+          properties: ["node31_property0"]
+          name: "CLAIM_RESERVE"
     name: "CLAIM_RESERVE"
   node32:
     labels:
@@ -619,12 +651,13 @@ nodes:
         label: "COMBINATION_STRUCTURE"
         properties: ["node32_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_COMBINATION__STRUCTURE_uniq"
-    indexes:
-      node32_index0:
-        type: "TEXT"
-        labels: ["COMBINATION_STRUCTURE"]
-        properties: ["node32_property0"]
-        name: "COMBINATION_STRUCTURE"
+    extensions:
+      indexes:
+        node32_index0:
+          type: "TEXT"
+          labels: ["COMBINATION_STRUCTURE"]
+          properties: ["node32_property0"]
+          name: "COMBINATION_STRUCTURE"
     name: "COMBINATION_STRUCTURE"
   node33:
     labels:
@@ -637,12 +670,13 @@ nodes:
         label: "COMBINE"
         properties: ["node33_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_COMBINE_uniq"
-    indexes:
-      node33_index0:
-        type: "TEXT"
-        labels: ["COMBINE"]
-        properties: ["node33_property0"]
-        name: "COMBINE"
+    extensions:
+      indexes:
+        node33_index0:
+          type: "TEXT"
+          labels: ["COMBINE"]
+          properties: ["node33_property0"]
+          name: "COMBINE"
     name: "COMBINE"
   node34:
     labels:
@@ -655,12 +689,13 @@ nodes:
         label: "COMMERCIAL_AGREEMENT"
         properties: ["node34_property0"]
         name: "AGREEMENT__IDENTIFIER_COMMERCIAL__AGREEMENT_uniq"
-    indexes:
-      node34_index0:
-        type: "TEXT"
-        labels: ["COMMERCIAL_AGREEMENT"]
-        properties: ["node34_property0"]
-        name: "COMMERCIAL_AGREEMENT"
+    extensions:
+      indexes:
+        node34_index0:
+          type: "TEXT"
+          labels: ["COMMERCIAL_AGREEMENT"]
+          properties: ["node34_property0"]
+          name: "COMMERCIAL_AGREEMENT"
     name: "COMMERCIAL_AGREEMENT"
   node35:
     labels:
@@ -673,12 +708,13 @@ nodes:
         label: "COMMERCIAL_STRUCTURE"
         properties: ["node35_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_COMMERCIAL__STRUCTURE_uniq"
-    indexes:
-      node35_index0:
-        type: "TEXT"
-        labels: ["COMMERCIAL_STRUCTURE"]
-        properties: ["node35_property0"]
-        name: "COMMERCIAL_STRUCTURE"
+    extensions:
+      indexes:
+        node35_index0:
+          type: "TEXT"
+          labels: ["COMMERCIAL_STRUCTURE"]
+          properties: ["node35_property0"]
+          name: "COMMERCIAL_STRUCTURE"
     name: "COMMERCIAL_STRUCTURE"
   node36:
     labels:
@@ -694,12 +730,13 @@ nodes:
         label: "COMMUNICATION_IDENTITY"
         properties: ["node36_property0"]
         name: "COMMUNICATION__IDENTIFIER_COMMUNICATION__IDENTITY_uniq"
-    indexes:
-      node36_index0:
-        type: "TEXT"
-        labels: ["COMMUNICATION_IDENTITY"]
-        properties: ["node36_property0"]
-        name: "COMMUNICATION_IDENTITY"
+    extensions:
+      indexes:
+        node36_index0:
+          type: "TEXT"
+          labels: ["COMMUNICATION_IDENTITY"]
+          properties: ["node36_property0"]
+          name: "COMMUNICATION_IDENTITY"
     name: "COMMUNICATION_IDENTITY"
   node37:
     labels:
@@ -712,12 +749,13 @@ nodes:
         label: "COMMUTATION_AGREEMENT"
         properties: ["node37_property0"]
         name: "AGREEMENT__IDENTIFIER_COMMUTATION__AGREEMENT_uniq"
-    indexes:
-      node37_index0:
-        type: "TEXT"
-        labels: ["COMMUTATION_AGREEMENT"]
-        properties: ["node37_property0"]
-        name: "COMMUTATION_AGREEMENT"
+    extensions:
+      indexes:
+        node37_index0:
+          type: "TEXT"
+          labels: ["COMMUTATION_AGREEMENT"]
+          properties: ["node37_property0"]
+          name: "COMMUTATION_AGREEMENT"
     name: "COMMUTATION_AGREEMENT"
   node38:
     labels:
@@ -733,12 +771,13 @@ nodes:
         label: "COMPANY"
         properties: ["node38_property0"]
         name: "COMPANY__IDENTIFIER_COMPANY_uniq"
-    indexes:
-      node38_index0:
-        type: "TEXT"
-        labels: ["COMPANY"]
-        properties: ["node38_property0"]
-        name: "COMPANY"
+    extensions:
+      indexes:
+        node38_index0:
+          type: "TEXT"
+          labels: ["COMPANY"]
+          properties: ["node38_property0"]
+          name: "COMPANY"
     name: "COMPANY"
   node39:
     labels:
@@ -751,12 +790,13 @@ nodes:
         label: "CONSTRUCTION_VEHICLE"
         properties: ["node39_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_CONSTRUCTION__VEHICLE_uniq"
-    indexes:
-      node39_index0:
-        type: "TEXT"
-        labels: ["CONSTRUCTION_VEHICLE"]
-        properties: ["node39_property0"]
-        name: "CONSTRUCTION_VEHICLE"
+    extensions:
+      indexes:
+        node39_index0:
+          type: "TEXT"
+          labels: ["CONSTRUCTION_VEHICLE"]
+          properties: ["node39_property0"]
+          name: "CONSTRUCTION_VEHICLE"
     name: "CONSTRUCTION_VEHICLE"
   node40:
     labels:
@@ -769,12 +809,13 @@ nodes:
         label: "CONSULTANT_CONTRACT"
         properties: ["node40_property0"]
         name: "AGREEMENT__IDENTIFIER_CONSULTANT__CONTRACT_uniq"
-    indexes:
-      node40_index0:
-        type: "TEXT"
-        labels: ["CONSULTANT_CONTRACT"]
-        properties: ["node40_property0"]
-        name: "CONSULTANT_CONTRACT"
+    extensions:
+      indexes:
+        node40_index0:
+          type: "TEXT"
+          labels: ["CONSULTANT_CONTRACT"]
+          properties: ["node40_property0"]
+          name: "CONSULTANT_CONTRACT"
     name: "CONSULTANT_CONTRACT"
   node41:
     labels:
@@ -789,12 +830,13 @@ nodes:
         label: "COVERAGE"
         properties: ["node41_property0"]
         name: "COVERAGE__IDENTIFIER_COVERAGE_uniq"
-    indexes:
-      node41_index0:
-        type: "TEXT"
-        labels: ["COVERAGE"]
-        properties: ["node41_property0"]
-        name: "COVERAGE"
+    extensions:
+      indexes:
+        node41_index0:
+          type: "TEXT"
+          labels: ["COVERAGE"]
+          properties: ["node41_property0"]
+          name: "COVERAGE"
     name: "COVERAGE"
   node42:
     labels:
@@ -809,12 +851,13 @@ nodes:
         label: "COVERAGE_GROUP"
         properties: ["node42_property0"]
         name: "COVERAGE__GROUP__IDENTIFIER_COVERAGE__GROUP_uniq"
-    indexes:
-      node42_index0:
-        type: "TEXT"
-        labels: ["COVERAGE_GROUP"]
-        properties: ["node42_property0"]
-        name: "COVERAGE_GROUP"
+    extensions:
+      indexes:
+        node42_index0:
+          type: "TEXT"
+          labels: ["COVERAGE_GROUP"]
+          properties: ["node42_property0"]
+          name: "COVERAGE_GROUP"
     name: "COVERAGE_GROUP"
   node43:
     labels:
@@ -829,12 +872,13 @@ nodes:
         label: "COVERAGE_LIMIT_TYPE"
         properties: ["node43_property0"]
         name: "COVERAGE__LIMIT__TYPE__IDENTIFIER_COVERAGE__LIMIT__TYPE_uniq"
-    indexes:
-      node43_index0:
-        type: "TEXT"
-        labels: ["COVERAGE_LIMIT_TYPE"]
-        properties: ["node43_property0"]
-        name: "COVERAGE_LIMIT_TYPE"
+    extensions:
+      indexes:
+        node43_index0:
+          type: "TEXT"
+          labels: ["COVERAGE_LIMIT_TYPE"]
+          properties: ["node43_property0"]
+          name: "COVERAGE_LIMIT_TYPE"
     name: "COVERAGE_LIMIT_TYPE"
   node44:
     labels:
@@ -848,12 +892,13 @@ nodes:
         label: "COVERAGE_PART"
         properties: ["node44_property0"]
         name: "COVERAGE__PART__CODE_COVERAGE__PART_uniq"
-    indexes:
-      node44_index0:
-        type: "TEXT"
-        labels: ["COVERAGE_PART"]
-        properties: ["node44_property0"]
-        name: "COVERAGE_PART-text"
+    extensions:
+      indexes:
+        node44_index0:
+          type: "TEXT"
+          labels: ["COVERAGE_PART"]
+          properties: ["node44_property0"]
+          name: "COVERAGE_PART-text"
     name: "COVERAGE_PART"
   node45:
     labels:
@@ -868,12 +913,13 @@ nodes:
         label: "COVERAGE_TYPE"
         properties: ["node45_property0"]
         name: "COVERAGE__TYPE__IDENTIFIER_COVERAGE__TYPE_uniq"
-    indexes:
-      node45_index0:
-        type: "TEXT"
-        labels: ["COVERAGE_TYPE"]
-        properties: ["node45_property0"]
-        name: "COVERAGE_TYPE"
+    extensions:
+      indexes:
+        node45_index0:
+          type: "TEXT"
+          labels: ["COVERAGE_TYPE"]
+          properties: ["node45_property0"]
+          name: "COVERAGE_TYPE"
     name: "COVERAGE_TYPE"
   node46:
     labels:
@@ -886,12 +932,13 @@ nodes:
         label: "CREDIT_CLAIM_AMOUNT"
         properties: ["node46_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_CREDIT__CLAIM__AMOUNT_uniq"
-    indexes:
-      node46_index0:
-        type: "TEXT"
-        labels: ["CREDIT_CLAIM_AMOUNT"]
-        properties: ["node46_property0"]
-        name: "CREDIT_CLAIM_AMOUNT"
+    extensions:
+      indexes:
+        node46_index0:
+          type: "TEXT"
+          labels: ["CREDIT_CLAIM_AMOUNT"]
+          properties: ["node46_property0"]
+          name: "CREDIT_CLAIM_AMOUNT"
     name: "CREDIT_CLAIM_AMOUNT"
   node47:
     labels:
@@ -904,12 +951,13 @@ nodes:
         label: "CREDIT_POLICY_AMOUNT"
         properties: ["node47_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_CREDIT__POLICY__AMOUNT_uniq"
-    indexes:
-      node47_index0:
-        type: "TEXT"
-        labels: ["CREDIT_POLICY_AMOUNT"]
-        properties: ["node47_property0"]
-        name: "CREDIT_POLICY_AMOUNT"
+    extensions:
+      indexes:
+        node47_index0:
+          type: "TEXT"
+          labels: ["CREDIT_POLICY_AMOUNT"]
+          properties: ["node47_property0"]
+          name: "CREDIT_POLICY_AMOUNT"
     name: "CREDIT_POLICY_AMOUNT"
   node48:
     labels:
@@ -922,12 +970,13 @@ nodes:
         label: "CREDIT_RATING"
         properties: ["node48_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_CREDIT__RATING_uniq"
-    indexes:
-      node48_index0:
-        type: "TEXT"
-        labels: ["CREDIT_RATING"]
-        properties: ["node48_property0"]
-        name: "CREDIT_RATING"
+    extensions:
+      indexes:
+        node48_index0:
+          type: "TEXT"
+          labels: ["CREDIT_RATING"]
+          properties: ["node48_property0"]
+          name: "CREDIT_RATING"
     name: "CREDIT_RATING"
   node49:
     labels:
@@ -940,12 +989,13 @@ nodes:
         label: "CUSTOMER_SCORE"
         properties: ["node49_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_CUSTOMER__SCORE_uniq"
-    indexes:
-      node49_index0:
-        type: "TEXT"
-        labels: ["CUSTOMER_SCORE"]
-        properties: ["node49_property0"]
-        name: "CUSTOMER_SCORE"
+    extensions:
+      indexes:
+        node49_index0:
+          type: "TEXT"
+          labels: ["CUSTOMER_SCORE"]
+          properties: ["node49_property0"]
+          name: "CUSTOMER_SCORE"
     name: "CUSTOMER_SCORE"
   node50:
     labels:
@@ -958,12 +1008,13 @@ nodes:
         label: "DEBIT_CLAIM_AMOUNT"
         properties: ["node50_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_DEBIT__CLAIM__AMOUNT_uniq"
-    indexes:
-      node50_index0:
-        type: "TEXT"
-        labels: ["DEBIT_CLAIM_AMOUNT"]
-        properties: ["node50_property0"]
-        name: "DEBIT_CLAIM_AMOUNT"
+    extensions:
+      indexes:
+        node50_index0:
+          type: "TEXT"
+          labels: ["DEBIT_CLAIM_AMOUNT"]
+          properties: ["node50_property0"]
+          name: "DEBIT_CLAIM_AMOUNT"
     name: "DEBIT_CLAIM_AMOUNT"
   node51:
     labels:
@@ -976,12 +1027,13 @@ nodes:
         label: "DEBIT_POLICY_AMOUNT"
         properties: ["node51_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_DEBIT__POLICY__AMOUNT_uniq"
-    indexes:
-      node51_index0:
-        type: "TEXT"
-        labels: ["DEBIT_POLICY_AMOUNT"]
-        properties: ["node51_property0"]
-        name: "DEBIT_POLICY_AMOUNT"
+    extensions:
+      indexes:
+        node51_index0:
+          type: "TEXT"
+          labels: ["DEBIT_POLICY_AMOUNT"]
+          properties: ["node51_property0"]
+          name: "DEBIT_POLICY_AMOUNT"
     name: "DEBIT_POLICY_AMOUNT"
   node52:
     labels:
@@ -994,12 +1046,13 @@ nodes:
         label: "DEDUCTIBLE_RECOVERY"
         properties: ["node52_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_DEDUCTIBLE__RECOVERY_uniq"
-    indexes:
-      node52_index0:
-        type: "TEXT"
-        labels: ["DEDUCTIBLE_RECOVERY"]
-        properties: ["node52_property0"]
-        name: "DEDUCTIBLE_RECOVERY"
+    extensions:
+      indexes:
+        node52_index0:
+          type: "TEXT"
+          labels: ["DEDUCTIBLE_RECOVERY"]
+          properties: ["node52_property0"]
+          name: "DEDUCTIBLE_RECOVERY"
     name: "DEDUCTIBLE_RECOVERY"
   node53:
     labels:
@@ -1012,12 +1065,13 @@ nodes:
         label: "DEMOGRAPHIC_SCORE"
         properties: ["node53_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_DEMOGRAPHIC__SCORE_uniq"
-    indexes:
-      node53_index0:
-        type: "TEXT"
-        labels: ["DEMOGRAPHIC_SCORE"]
-        properties: ["node53_property0"]
-        name: "DEMOGRAPHIC_SCORE"
+    extensions:
+      indexes:
+        node53_index0:
+          type: "TEXT"
+          labels: ["DEMOGRAPHIC_SCORE"]
+          properties: ["node53_property0"]
+          name: "DEMOGRAPHIC_SCORE"
     name: "DEMOGRAPHIC_SCORE"
   node54:
     labels:
@@ -1030,12 +1084,13 @@ nodes:
         label: "DERIVATIVE_CONTRACT"
         properties: ["node54_property0"]
         name: "AGREEMENT__IDENTIFIER_DERIVATIVE__CONTRACT_uniq"
-    indexes:
-      node54_index0:
-        type: "TEXT"
-        labels: ["DERIVATIVE_CONTRACT"]
-        properties: ["node54_property0"]
-        name: "DERIVATIVE_CONTRACT"
+    extensions:
+      indexes:
+        node54_index0:
+          type: "TEXT"
+          labels: ["DERIVATIVE_CONTRACT"]
+          properties: ["node54_property0"]
+          name: "DERIVATIVE_CONTRACT"
     name: "DERIVATIVE_CONTRACT"
   node55:
     labels:
@@ -1048,12 +1103,13 @@ nodes:
         label: "DIRECT_CLAIM_AMOUNT"
         properties: ["node55_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_DIRECT__CLAIM__AMOUNT_uniq"
-    indexes:
-      node55_index0:
-        type: "TEXT"
-        labels: ["DIRECT_CLAIM_AMOUNT"]
-        properties: ["node55_property0"]
-        name: "DIRECT_CLAIM_AMOUNT"
+    extensions:
+      indexes:
+        node55_index0:
+          type: "TEXT"
+          labels: ["DIRECT_CLAIM_AMOUNT"]
+          properties: ["node55_property0"]
+          name: "DIRECT_CLAIM_AMOUNT"
     name: "DIRECT_CLAIM_AMOUNT"
   node56:
     labels:
@@ -1066,12 +1122,13 @@ nodes:
         label: "DIRECT_POLICY_AMOUNT"
         properties: ["node56_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_DIRECT__POLICY__AMOUNT_uniq"
-    indexes:
-      node56_index0:
-        type: "TEXT"
-        labels: ["DIRECT_POLICY_AMOUNT"]
-        properties: ["node56_property0"]
-        name: "DIRECT_POLICY_AMOUNT"
+    extensions:
+      indexes:
+        node56_index0:
+          type: "TEXT"
+          labels: ["DIRECT_POLICY_AMOUNT"]
+          properties: ["node56_property0"]
+          name: "DIRECT_POLICY_AMOUNT"
     name: "DIRECT_POLICY_AMOUNT"
   node57:
     labels:
@@ -1084,12 +1141,13 @@ nodes:
         label: "DWELLING"
         properties: ["node57_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_DWELLING_uniq"
-    indexes:
-      node57_index0:
-        type: "TEXT"
-        labels: ["DWELLING"]
-        properties: ["node57_property0"]
-        name: "DWELLING"
+    extensions:
+      indexes:
+        node57_index0:
+          type: "TEXT"
+          labels: ["DWELLING"]
+          properties: ["node57_property0"]
+          name: "DWELLING"
     name: "DWELLING"
   node58:
     labels:
@@ -1102,12 +1160,13 @@ nodes:
         label: "EMPLOYMENT_AGREEMENT"
         properties: ["node58_property0"]
         name: "AGREEMENT__IDENTIFIER_EMPLOYMENT__AGREEMENT_uniq"
-    indexes:
-      node58_index0:
-        type: "TEXT"
-        labels: ["EMPLOYMENT_AGREEMENT"]
-        properties: ["node58_property0"]
-        name: "EMPLOYMENT_AGREEMENT"
+    extensions:
+      indexes:
+        node58_index0:
+          type: "TEXT"
+          labels: ["EMPLOYMENT_AGREEMENT"]
+          properties: ["node58_property0"]
+          name: "EMPLOYMENT_AGREEMENT"
     name: "EMPLOYMENT_AGREEMENT"
   node59:
     labels:
@@ -1120,12 +1179,13 @@ nodes:
         label: "ENDORSEMENT"
         properties: ["node59_property0"]
         name: "EVENT__IDENTIFIER_ENDORSEMENT_uniq"
-    indexes:
-      node59_index0:
-        type: "TEXT"
-        labels: ["ENDORSEMENT"]
-        properties: ["node59_property0"]
-        name: "ENDORSEMENT"
+    extensions:
+      indexes:
+        node59_index0:
+          type: "TEXT"
+          labels: ["ENDORSEMENT"]
+          properties: ["node59_property0"]
+          name: "ENDORSEMENT"
     name: "ENDORSEMENT"
   node60:
     labels:
@@ -1138,12 +1198,13 @@ nodes:
         label: "EVENT"
         properties: ["node60_property0"]
         name: "EVENT__IDENTIFIER_EVENT_uniq"
-    indexes:
-      node60_index0:
-        type: "TEXT"
-        labels: ["EVENT"]
-        properties: ["node60_property0"]
-        name: "EVENT"
+    extensions:
+      indexes:
+        node60_index0:
+          type: "TEXT"
+          labels: ["EVENT"]
+          properties: ["node60_property0"]
+          name: "EVENT"
     name: "EVENT"
   node61:
     labels:
@@ -1156,12 +1217,13 @@ nodes:
         label: "EXPENSE_PAYMENT"
         properties: ["node61_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_EXPENSE__PAYMENT_uniq"
-    indexes:
-      node61_index0:
-        type: "TEXT"
-        labels: ["EXPENSE_PAYMENT"]
-        properties: ["node61_property0"]
-        name: "EXPENSE_PAYMENT"
+    extensions:
+      indexes:
+        node61_index0:
+          type: "TEXT"
+          labels: ["EXPENSE_PAYMENT"]
+          properties: ["node61_property0"]
+          name: "EXPENSE_PAYMENT"
     name: "EXPENSE_PAYMENT"
   node62:
     labels:
@@ -1174,12 +1236,13 @@ nodes:
         label: "EXPENSE_RECOVERY"
         properties: ["node62_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_EXPENSE__RECOVERY_uniq"
-    indexes:
-      node62_index0:
-        type: "TEXT"
-        labels: ["EXPENSE_RECOVERY"]
-        properties: ["node62_property0"]
-        name: "EXPENSE_RECOVERY"
+    extensions:
+      indexes:
+        node62_index0:
+          type: "TEXT"
+          labels: ["EXPENSE_RECOVERY"]
+          properties: ["node62_property0"]
+          name: "EXPENSE_RECOVERY"
     name: "EXPENSE_RECOVERY"
   node63:
     labels:
@@ -1192,12 +1255,13 @@ nodes:
         label: "EXPENSE_RESERVE"
         properties: ["node63_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_EXPENSE__RESERVE_uniq"
-    indexes:
-      node63_index0:
-        type: "TEXT"
-        labels: ["EXPENSE_RESERVE"]
-        properties: ["node63_property0"]
-        name: "EXPENSE_RESERVE"
+    extensions:
+      indexes:
+        node63_index0:
+          type: "TEXT"
+          labels: ["EXPENSE_RESERVE"]
+          properties: ["node63_property0"]
+          name: "EXPENSE_RESERVE"
     name: "EXPENSE_RESERVE"
   node64:
     labels:
@@ -1210,12 +1274,13 @@ nodes:
         label: "FARM_EQUIPMENT"
         properties: ["node64_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_FARM__EQUIPMENT_uniq"
-    indexes:
-      node64_index0:
-        type: "TEXT"
-        labels: ["FARM_EQUIPMENT"]
-        properties: ["node64_property0"]
-        name: "FARM_EQUIPMENT"
+    extensions:
+      indexes:
+        node64_index0:
+          type: "TEXT"
+          labels: ["FARM_EQUIPMENT"]
+          properties: ["node64_property0"]
+          name: "FARM_EQUIPMENT"
     name: "FARM_EQUIPMENT"
   node65:
     labels:
@@ -1228,12 +1293,13 @@ nodes:
         label: "FEE"
         properties: ["node65_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_FEE_uniq"
-    indexes:
-      node65_index0:
-        type: "TEXT"
-        labels: ["FEE"]
-        properties: ["node65_property0"]
-        name: "FEE"
+    extensions:
+      indexes:
+        node65_index0:
+          type: "TEXT"
+          labels: ["FEE"]
+          properties: ["node65_property0"]
+          name: "FEE"
     name: "FEE"
   node66:
     labels:
@@ -1246,12 +1312,13 @@ nodes:
         label: "FIELD_ORGANIZATION_UNIT"
         properties: ["node66_property0"]
         name: "ORGANIZATION__IDENTIFIER_FIELD__ORGANIZATION__UNIT_uniq"
-    indexes:
-      node66_index0:
-        type: "TEXT"
-        labels: ["FIELD_ORGANIZATION_UNIT"]
-        properties: ["node66_property0"]
-        name: "FIELD_ORGANIZATION_UNIT"
+    extensions:
+      indexes:
+        node66_index0:
+          type: "TEXT"
+          labels: ["FIELD_ORGANIZATION_UNIT"]
+          properties: ["node66_property0"]
+          name: "FIELD_ORGANIZATION_UNIT"
     name: "FIELD_ORGANIZATION_UNIT"
   node67:
     labels:
@@ -1264,12 +1331,13 @@ nodes:
         label: "FINANCIAL_ACCOUNT_AGREEMENT"
         properties: ["node67_property0"]
         name: "AGREEMENT__IDENTIFIER_FINANCIAL__ACCOUNT__AGREEMENT_uniq"
-    indexes:
-      node67_index0:
-        type: "TEXT"
-        labels: ["FINANCIAL_ACCOUNT_AGREEMENT"]
-        properties: ["node67_property0"]
-        name: "FINANCIAL_ACCOUNT_AGREEMENT"
+    extensions:
+      indexes:
+        node67_index0:
+          type: "TEXT"
+          labels: ["FINANCIAL_ACCOUNT_AGREEMENT"]
+          properties: ["node67_property0"]
+          name: "FINANCIAL_ACCOUNT_AGREEMENT"
     name: "FINANCIAL_ACCOUNT_AGREEMENT"
   node68:
     labels:
@@ -1282,12 +1350,13 @@ nodes:
         label: "FINANCIAL_SERVICES_ASSESSMENT"
         properties: ["node68_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_FINANCIAL__SERVICES__ASSESSMENT_uniq"
-    indexes:
-      node68_index0:
-        type: "TEXT"
-        labels: ["FINANCIAL_SERVICES_ASSESSMENT"]
-        properties: ["node68_property0"]
-        name: "FINANCIAL_SERVICES_ASSESSMENT"
+    extensions:
+      indexes:
+        node68_index0:
+          type: "TEXT"
+          labels: ["FINANCIAL_SERVICES_ASSESSMENT"]
+          properties: ["node68_property0"]
+          name: "FINANCIAL_SERVICES_ASSESSMENT"
     name: "FINANCIAL_SERVICES_ASSESSMENT"
   node69:
     labels:
@@ -1300,12 +1369,13 @@ nodes:
         label: "FINANCIAL_VALUATION"
         properties: ["node69_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_FINANCIAL__VALUATION_uniq"
-    indexes:
-      node69_index0:
-        type: "TEXT"
-        labels: ["FINANCIAL_VALUATION"]
-        properties: ["node69_property0"]
-        name: "FINANCIAL_VALUATION"
+    extensions:
+      indexes:
+        node69_index0:
+          type: "TEXT"
+          labels: ["FINANCIAL_VALUATION"]
+          properties: ["node69_property0"]
+          name: "FINANCIAL_VALUATION"
     name: "FINANCIAL_VALUATION"
   node70:
     labels:
@@ -1318,12 +1388,13 @@ nodes:
         label: "FLAT"
         properties: ["node70_property0"]
         name: "EVENT__IDENTIFIER_FLAT_uniq"
-    indexes:
-      node70_index0:
-        type: "TEXT"
-        labels: ["FLAT"]
-        properties: ["node70_property0"]
-        name: "FLAT"
+    extensions:
+      indexes:
+        node70_index0:
+          type: "TEXT"
+          labels: ["FLAT"]
+          properties: ["node70_property0"]
+          name: "FLAT"
     name: "FLAT"
   node71:
     labels:
@@ -1336,12 +1407,13 @@ nodes:
         label: "FOR_PROFIT_ORGANIZATION"
         properties: ["node71_property0"]
         name: "ORGANIZATION__IDENTIFIER_FOR__PROFIT__ORGANIZATION_uniq"
-    indexes:
-      node71_index0:
-        type: "TEXT"
-        labels: ["FOR_PROFIT_ORGANIZATION"]
-        properties: ["node71_property0"]
-        name: "FOR_PROFIT_ORGANIZATION"
+    extensions:
+      indexes:
+        node71_index0:
+          type: "TEXT"
+          labels: ["FOR_PROFIT_ORGANIZATION"]
+          properties: ["node71_property0"]
+          name: "FOR_PROFIT_ORGANIZATION"
     name: "FOR_PROFIT_ORGANIZATION"
   node72:
     labels:
@@ -1354,12 +1426,13 @@ nodes:
         label: "FRAUD_ASSESSMENT"
         properties: ["node72_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_FRAUD__ASSESSMENT_uniq"
-    indexes:
-      node72_index0:
-        type: "TEXT"
-        labels: ["FRAUD_ASSESSMENT"]
-        properties: ["node72_property0"]
-        name: "FRAUD_ASSESSMENT"
+    extensions:
+      indexes:
+        node72_index0:
+          type: "TEXT"
+          labels: ["FRAUD_ASSESSMENT"]
+          properties: ["node72_property0"]
+          name: "FRAUD_ASSESSMENT"
     name: "FRAUD_ASSESSMENT"
   node73:
     labels:
@@ -1372,12 +1445,13 @@ nodes:
         label: "FREIGHT_GROUP"
         properties: ["node73_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_FREIGHT__GROUP_uniq"
-    indexes:
-      node73_index0:
-        type: "TEXT"
-        labels: ["FREIGHT_GROUP"]
-        properties: ["node73_property0"]
-        name: "FREIGHT_GROUP"
+    extensions:
+      indexes:
+        node73_index0:
+          type: "TEXT"
+          labels: ["FREIGHT_GROUP"]
+          properties: ["node73_property0"]
+          name: "FREIGHT_GROUP"
     name: "FREIGHT_GROUP"
   node74:
     labels:
@@ -1390,12 +1464,13 @@ nodes:
         label: "FULL_TERM"
         properties: ["node74_property0"]
         name: "EVENT__IDENTIFIER_FULL__TERM_uniq"
-    indexes:
-      node74_index0:
-        type: "TEXT"
-        labels: ["FULL_TERM"]
-        properties: ["node74_property0"]
-        name: "FULL_TERM"
+    extensions:
+      indexes:
+        node74_index0:
+          type: "TEXT"
+          labels: ["FULL_TERM"]
+          properties: ["node74_property0"]
+          name: "FULL_TERM"
     name: "FULL_TERM"
   node75:
     labels:
@@ -1412,12 +1487,13 @@ nodes:
         label: "GEOGRAPHIC_LOCATION"
         properties: ["node75_property0"]
         name: "GEOGRAPHIC__LOCATION__IDENTIFIER_GEOGRAPHIC__LOCATION_uniq"
-    indexes:
-      node75_index0:
-        type: "TEXT"
-        labels: ["GEOGRAPHIC_LOCATION"]
-        properties: ["node75_property0"]
-        name: "GEOGRAPHIC_LOCATION"
+    extensions:
+      indexes:
+        node75_index0:
+          type: "TEXT"
+          labels: ["GEOGRAPHIC_LOCATION"]
+          properties: ["node75_property0"]
+          name: "GEOGRAPHIC_LOCATION"
     name: "GEOGRAPHIC_LOCATION"
   node76:
     labels:
@@ -1430,12 +1506,13 @@ nodes:
         label: "GOVERNMENT_ORGANIZATION"
         properties: ["node76_property0"]
         name: "ORGANIZATION__IDENTIFIER_GOVERNMENT__ORGANIZATION_uniq"
-    indexes:
-      node76_index0:
-        type: "TEXT"
-        labels: ["GOVERNMENT_ORGANIZATION"]
-        properties: ["node76_property0"]
-        name: "GOVERNMENT_ORGANIZATION"
+    extensions:
+      indexes:
+        node76_index0:
+          type: "TEXT"
+          labels: ["GOVERNMENT_ORGANIZATION"]
+          properties: ["node76_property0"]
+          name: "GOVERNMENT_ORGANIZATION"
     name: "GOVERNMENT_ORGANIZATION"
   node77:
     labels:
@@ -1449,12 +1526,13 @@ nodes:
         label: "GROUPING"
         properties: ["node77_property0"]
         name: "GROUPING__IDENTIFIER_GROUPING_uniq"
-    indexes:
-      node77_index0:
-        type: "TEXT"
-        labels: ["GROUPING"]
-        properties: ["node77_property0"]
-        name: "GROUPING"
+    extensions:
+      indexes:
+        node77_index0:
+          type: "TEXT"
+          labels: ["GROUPING"]
+          properties: ["node77_property0"]
+          name: "GROUPING"
     name: "GROUPING"
   node78:
     labels:
@@ -1467,12 +1545,13 @@ nodes:
         label: "GROUP_AGREEMENT"
         properties: ["node78_property0"]
         name: "AGREEMENT__IDENTIFIER_GROUP__AGREEMENT_uniq"
-    indexes:
-      node78_index0:
-        type: "TEXT"
-        labels: ["GROUP_AGREEMENT"]
-        properties: ["node78_property0"]
-        name: "GROUP_AGREEMENT"
+    extensions:
+      indexes:
+        node78_index0:
+          type: "TEXT"
+          labels: ["GROUP_AGREEMENT"]
+          properties: ["node78_property0"]
+          name: "GROUP_AGREEMENT"
     name: "GROUP_AGREEMENT"
   node79:
     labels:
@@ -1485,12 +1564,13 @@ nodes:
         label: "HOUSEHOLD"
         properties: ["node79_property0"]
         name: "HOUSEHOLD__IDENTIFIER_HOUSEHOLD_uniq"
-    indexes:
-      node79_index0:
-        type: "TEXT"
-        labels: ["HOUSEHOLD"]
-        properties: ["node79_property0"]
-        name: "HOUSEHOLD"
+    extensions:
+      indexes:
+        node79_index0:
+          type: "TEXT"
+          labels: ["HOUSEHOLD"]
+          properties: ["node79_property0"]
+          name: "HOUSEHOLD"
     name: "HOUSEHOLD"
   node80:
     labels:
@@ -1503,12 +1583,13 @@ nodes:
         label: "HOUSEHOLD_CONTENT"
         properties: ["node80_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_HOUSEHOLD__CONTENT_uniq"
-    indexes:
-      node80_index0:
-        type: "TEXT"
-        labels: ["HOUSEHOLD_CONTENT"]
-        properties: ["node80_property0"]
-        name: "HOUSEHOLD_CONTENT"
+    extensions:
+      indexes:
+        node80_index0:
+          type: "TEXT"
+          labels: ["HOUSEHOLD_CONTENT"]
+          properties: ["node80_property0"]
+          name: "HOUSEHOLD_CONTENT"
     name: "HOUSEHOLD_CONTENT"
   node81:
     labels:
@@ -1521,12 +1602,13 @@ nodes:
         label: "INDIVIDUAL_AGREEMENT"
         properties: ["node81_property0"]
         name: "AGREEMENT__IDENTIFIER_INDIVIDUAL__AGREEMENT_uniq"
-    indexes:
-      node81_index0:
-        type: "TEXT"
-        labels: ["INDIVIDUAL_AGREEMENT"]
-        properties: ["node81_property0"]
-        name: "INDIVIDUAL_AGREEMENT"
+    extensions:
+      indexes:
+        node81_index0:
+          type: "TEXT"
+          labels: ["INDIVIDUAL_AGREEMENT"]
+          properties: ["node81_property0"]
+          name: "INDIVIDUAL_AGREEMENT"
     name: "INDIVIDUAL_AGREEMENT"
   node82:
     labels:
@@ -1540,12 +1622,13 @@ nodes:
         label: "INSURABLE_OBJECT"
         properties: ["node82_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_INSURABLE__OBJECT_uniq"
-    indexes:
-      node82_index0:
-        type: "TEXT"
-        labels: ["INSURABLE_OBJECT"]
-        properties: ["node82_property0"]
-        name: "INSURABLE_OBJECT"
+    extensions:
+      indexes:
+        node82_index0:
+          type: "TEXT"
+          labels: ["INSURABLE_OBJECT"]
+          properties: ["node82_property0"]
+          name: "INSURABLE_OBJECT"
     name: "INSURABLE_OBJECT"
   node83:
     labels:
@@ -1560,12 +1643,13 @@ nodes:
         label: "INSURANCE_CLASS"
         properties: ["node83_property0"]
         name: "INSURANCE__CLASS__IDENTIFIER_INSURANCE__CLASS_uniq"
-    indexes:
-      node83_index0:
-        type: "TEXT"
-        labels: ["INSURANCE_CLASS"]
-        properties: ["node83_property0"]
-        name: "INSURANCE_CLASS"
+    extensions:
+      indexes:
+        node83_index0:
+          type: "TEXT"
+          labels: ["INSURANCE_CLASS"]
+          properties: ["node83_property0"]
+          name: "INSURANCE_CLASS"
     name: "INSURANCE_CLASS"
   node84:
     labels:
@@ -1578,12 +1662,13 @@ nodes:
         label: "INSURED_ACCOUNT"
         properties: ["node84_property0"]
         name: "ACCOUNT__IDENTIFIER_INSURED__ACCOUNT_uniq"
-    indexes:
-      node84_index0:
-        type: "TEXT"
-        labels: ["INSURED_ACCOUNT"]
-        properties: ["node84_property0"]
-        name: "INSURED_ACCOUNT"
+    extensions:
+      indexes:
+        node84_index0:
+          type: "TEXT"
+          labels: ["INSURED_ACCOUNT"]
+          properties: ["node84_property0"]
+          name: "INSURED_ACCOUNT"
     name: "INSURED_ACCOUNT"
   node85:
     labels:
@@ -1596,12 +1681,13 @@ nodes:
         label: "INTERMEDIARY_AGREEMENT"
         properties: ["node85_property0"]
         name: "AGREEMENT__IDENTIFIER_INTERMEDIARY__AGREEMENT_uniq"
-    indexes:
-      node85_index0:
-        type: "TEXT"
-        labels: ["INTERMEDIARY_AGREEMENT"]
-        properties: ["node85_property0"]
-        name: "INTERMEDIARY_AGREEMENT"
+    extensions:
+      indexes:
+        node85_index0:
+          type: "TEXT"
+          labels: ["INTERMEDIARY_AGREEMENT"]
+          properties: ["node85_property0"]
+          name: "INTERMEDIARY_AGREEMENT"
     name: "INTERMEDIARY_AGREEMENT"
   node86:
     labels:
@@ -1617,12 +1703,13 @@ nodes:
         label: "LEGAL_JURISDICTION"
         properties: ["node86_property0"]
         name: "LEGAL__JURISDICTION__IDENTIFIER_LEGAL__JURISDICTION_uniq"
-    indexes:
-      node86_index0:
-        type: "TEXT"
-        labels: ["LEGAL_JURISDICTION"]
-        properties: ["node86_property0"]
-        name: "LEGAL_JURISDICTION"
+    extensions:
+      indexes:
+        node86_index0:
+          type: "TEXT"
+          labels: ["LEGAL_JURISDICTION"]
+          properties: ["node86_property0"]
+          name: "LEGAL_JURISDICTION"
     name: "LEGAL_JURISDICTION"
   node87:
     labels:
@@ -1635,12 +1722,13 @@ nodes:
         label: "LIFE_EVENT"
         properties: ["node87_property0"]
         name: "EVENT__IDENTIFIER_LIFE__EVENT_uniq"
-    indexes:
-      node87_index0:
-        type: "TEXT"
-        labels: ["LIFE_EVENT"]
-        properties: ["node87_property0"]
-        name: "LIFE_EVENT"
+    extensions:
+      indexes:
+        node87_index0:
+          type: "TEXT"
+          labels: ["LIFE_EVENT"]
+          properties: ["node87_property0"]
+          name: "LIFE_EVENT"
     name: "LIFE_EVENT"
   node88:
     labels:
@@ -1656,12 +1744,13 @@ nodes:
         label: "LINE_OF_BUSINESS"
         properties: ["node88_property0"]
         name: "LINE__OF__BUSINESS__IDENTIFIER_LINE__OF__BUSINESS_uniq"
-    indexes:
-      node88_index0:
-        type: "TEXT"
-        labels: ["LINE_OF_BUSINESS"]
-        properties: ["node88_property0"]
-        name: "LINE_OF_BUSINESS"
+    extensions:
+      indexes:
+        node88_index0:
+          type: "TEXT"
+          labels: ["LINE_OF_BUSINESS"]
+          properties: ["node88_property0"]
+          name: "LINE_OF_BUSINESS"
     name: "LINE_OF_BUSINESS"
   node89:
     labels:
@@ -1676,12 +1765,13 @@ nodes:
         label: "LINE_OF_BUSINESS_GROUP"
         properties: ["node89_property0"]
         name: "LINE__OF__BUSINESS__GROUP__IDENTIFIER_LINE__OF__BUSINESS__GROUP_uniq"
-    indexes:
-      node89_index0:
-        type: "TEXT"
-        labels: ["LINE_OF_BUSINESS_GROUP"]
-        properties: ["node89_property0"]
-        name: "LINE_OF_BUSINESS_GROUP"
+    extensions:
+      indexes:
+        node89_index0:
+          type: "TEXT"
+          labels: ["LINE_OF_BUSINESS_GROUP"]
+          properties: ["node89_property0"]
+          name: "LINE_OF_BUSINESS_GROUP"
     name: "LINE_OF_BUSINESS_GROUP"
   node90:
     labels:
@@ -1695,12 +1785,13 @@ nodes:
         label: "LITIGATION"
         properties: ["node90_property0"]
         name: "LITIGATION__IDENTIFIER_LITIGATION_uniq"
-    indexes:
-      node90_index0:
-        type: "TEXT"
-        labels: ["LITIGATION"]
-        properties: ["node90_property0"]
-        name: "LITIGATION"
+    extensions:
+      indexes:
+        node90_index0:
+          type: "TEXT"
+          labels: ["LITIGATION"]
+          properties: ["node90_property0"]
+          name: "LITIGATION"
     name: "LITIGATION"
   node91:
     labels:
@@ -1720,12 +1811,13 @@ nodes:
         label: "LOCATION_ADDRESS"
         properties: ["node91_property0"]
         name: "LOCATION__ADDRESS__IDENTIFIER_LOCATION__ADDRESS_uniq"
-    indexes:
-      node91_index0:
-        type: "TEXT"
-        labels: ["LOCATION_ADDRESS"]
-        properties: ["node91_property0"]
-        name: "LOCATION_ADDRESS"
+    extensions:
+      indexes:
+        node91_index0:
+          type: "TEXT"
+          labels: ["LOCATION_ADDRESS"]
+          properties: ["node91_property0"]
+          name: "LOCATION_ADDRESS"
     name: "LOCATION_ADDRESS"
   node92:
     labels:
@@ -1738,12 +1830,13 @@ nodes:
         label: "LOSS_PAYMENT"
         properties: ["node92_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_LOSS__PAYMENT_uniq"
-    indexes:
-      node92_index0:
-        type: "TEXT"
-        labels: ["LOSS_PAYMENT"]
-        properties: ["node92_property0"]
-        name: "LOSS_PAYMENT"
+    extensions:
+      indexes:
+        node92_index0:
+          type: "TEXT"
+          labels: ["LOSS_PAYMENT"]
+          properties: ["node92_property0"]
+          name: "LOSS_PAYMENT"
     name: "LOSS_PAYMENT"
   node93:
     labels:
@@ -1756,12 +1849,13 @@ nodes:
         label: "LOSS_RECOVERY"
         properties: ["node93_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_LOSS__RECOVERY_uniq"
-    indexes:
-      node93_index0:
-        type: "TEXT"
-        labels: ["LOSS_RECOVERY"]
-        properties: ["node93_property0"]
-        name: "LOSS_RECOVERY"
+    extensions:
+      indexes:
+        node93_index0:
+          type: "TEXT"
+          labels: ["LOSS_RECOVERY"]
+          properties: ["node93_property0"]
+          name: "LOSS_RECOVERY"
     name: "LOSS_RECOVERY"
   node94:
     labels:
@@ -1774,12 +1868,13 @@ nodes:
         label: "LOSS_RESERVE"
         properties: ["node94_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_LOSS__RESERVE_uniq"
-    indexes:
-      node94_index0:
-        type: "TEXT"
-        labels: ["LOSS_RESERVE"]
-        properties: ["node94_property0"]
-        name: "LOSS_RESERVE"
+    extensions:
+      indexes:
+        node94_index0:
+          type: "TEXT"
+          labels: ["LOSS_RESERVE"]
+          properties: ["node94_property0"]
+          name: "LOSS_RESERVE"
     name: "LOSS_RESERVE"
   node95:
     labels:
@@ -1792,12 +1887,13 @@ nodes:
         label: "MANUFACTURED_OBJECT"
         properties: ["node95_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_MANUFACTURED__OBJECT_uniq"
-    indexes:
-      node95_index0:
-        type: "TEXT"
-        labels: ["MANUFACTURED_OBJECT"]
-        properties: ["node95_property0"]
-        name: "MANUFACTURED_OBJECT"
+    extensions:
+      indexes:
+        node95_index0:
+          type: "TEXT"
+          labels: ["MANUFACTURED_OBJECT"]
+          properties: ["node95_property0"]
+          name: "MANUFACTURED_OBJECT"
     name: "MANUFACTURED_OBJECT"
   node96:
     labels:
@@ -1810,12 +1906,13 @@ nodes:
         label: "MEDICAL_CONDITION"
         properties: ["node96_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_MEDICAL__CONDITION_uniq"
-    indexes:
-      node96_index0:
-        type: "TEXT"
-        labels: ["MEDICAL_CONDITION"]
-        properties: ["node96_property0"]
-        name: "MEDICAL_CONDITION"
+    extensions:
+      indexes:
+        node96_index0:
+          type: "TEXT"
+          labels: ["MEDICAL_CONDITION"]
+          properties: ["node96_property0"]
+          name: "MEDICAL_CONDITION"
     name: "MEDICAL_CONDITION"
   node97:
     labels:
@@ -1828,12 +1925,13 @@ nodes:
         label: "MID_TERM"
         properties: ["node97_property0"]
         name: "EVENT__IDENTIFIER_MID__TERM_uniq"
-    indexes:
-      node97_index0:
-        type: "TEXT"
-        labels: ["MID_TERM"]
-        properties: ["node97_property0"]
-        name: "MID_TERM"
+    extensions:
+      indexes:
+        node97_index0:
+          type: "TEXT"
+          labels: ["MID_TERM"]
+          properties: ["node97_property0"]
+          name: "MID_TERM"
     name: "MID_TERM"
   node98:
     labels:
@@ -1846,12 +1944,13 @@ nodes:
         label: "MILKING_MACHINE"
         properties: ["node98_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_MILKING__MACHINE_uniq"
-    indexes:
-      node98_index0:
-        type: "TEXT"
-        labels: ["MILKING_MACHINE"]
-        properties: ["node98_property0"]
-        name: "MILKING_MACHINE"
+    extensions:
+      indexes:
+        node98_index0:
+          type: "TEXT"
+          labels: ["MILKING_MACHINE"]
+          properties: ["node98_property0"]
+          name: "MILKING_MACHINE"
     name: "MILKING_MACHINE"
   node99:
     labels:
@@ -1864,12 +1963,13 @@ nodes:
         label: "MOBILE_HOME"
         properties: ["node99_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_MOBILE__HOME_uniq"
-    indexes:
-      node99_index0:
-        type: "TEXT"
-        labels: ["MOBILE_HOME"]
-        properties: ["node99_property0"]
-        name: "MOBILE_HOME"
+    extensions:
+      indexes:
+        node99_index0:
+          type: "TEXT"
+          labels: ["MOBILE_HOME"]
+          properties: ["node99_property0"]
+          name: "MOBILE_HOME"
     name: "MOBILE_HOME"
   node100:
     labels:
@@ -1882,12 +1982,13 @@ nodes:
         label: "MOTORCYCLE"
         properties: ["node100_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_MOTORCYCLE_uniq"
-    indexes:
-      node100_index0:
-        type: "TEXT"
-        labels: ["MOTORCYCLE"]
-        properties: ["node100_property0"]
-        name: "MOTORCYCLE"
+    extensions:
+      indexes:
+        node100_index0:
+          type: "TEXT"
+          labels: ["MOTORCYCLE"]
+          properties: ["node100_property0"]
+          name: "MOTORCYCLE"
     name: "MOTORCYCLE"
   node101:
     labels:
@@ -1900,12 +2001,13 @@ nodes:
         label: "NEW_BUSINESS"
         properties: ["node101_property0"]
         name: "EVENT__IDENTIFIER_NEW__BUSINESS_uniq"
-    indexes:
-      node101_index0:
-        type: "TEXT"
-        labels: ["NEW_BUSINESS"]
-        properties: ["node101_property0"]
-        name: "NEW_BUSINESS"
+    extensions:
+      indexes:
+        node101_index0:
+          type: "TEXT"
+          labels: ["NEW_BUSINESS"]
+          properties: ["node101_property0"]
+          name: "NEW_BUSINESS"
     name: "NEW_BUSINESS"
   node102:
     labels:
@@ -1918,12 +2020,13 @@ nodes:
         label: "NOT_FOR_PROFIT_ORGANIZATION"
         properties: ["node102_property0"]
         name: "ORGANIZATION__IDENTIFIER_NOT__FOR__PROFIT__ORGANIZATION_uniq"
-    indexes:
-      node102_index0:
-        type: "TEXT"
-        labels: ["NOT_FOR_PROFIT_ORGANIZATION"]
-        properties: ["node102_property0"]
-        name: "NOT_FOR_PROFIT_ORGANIZATION"
+    extensions:
+      indexes:
+        node102_index0:
+          type: "TEXT"
+          labels: ["NOT_FOR_PROFIT_ORGANIZATION"]
+          properties: ["node102_property0"]
+          name: "NOT_FOR_PROFIT_ORGANIZATION"
     name: "NOT_FOR_PROFIT_ORGANIZATION"
   node103:
     labels:
@@ -1942,12 +2045,13 @@ nodes:
         label: "OCCURRENCE"
         properties: ["node103_property0"]
         name: "OCCURRENCE__IDENTIFIER_OCCURRENCE_uniq"
-    indexes:
-      node103_index0:
-        type: "TEXT"
-        labels: ["OCCURRENCE"]
-        properties: ["node103_property0"]
-        name: "OCCURRENCE"
+    extensions:
+      indexes:
+        node103_index0:
+          type: "TEXT"
+          labels: ["OCCURRENCE"]
+          properties: ["node103_property0"]
+          name: "OCCURRENCE"
     name: "OCCURRENCE"
   node104:
     labels:
@@ -1968,12 +2072,13 @@ nodes:
         label: "ORGANIZATION"
         properties: ["node104_property0"]
         name: "ORGANIZATION__IDENTIFIER_ORGANIZATION_uniq"
-    indexes:
-      node104_index0:
-        type: "TEXT"
-        labels: ["ORGANIZATION"]
-        properties: ["node104_property0"]
-        name: "ORGANIZATION"
+    extensions:
+      indexes:
+        node104_index0:
+          type: "TEXT"
+          labels: ["ORGANIZATION"]
+          properties: ["node104_property0"]
+          name: "ORGANIZATION"
     name: "ORGANIZATION"
   node105:
     labels:
@@ -1991,12 +2096,13 @@ nodes:
         label: "ORGANIZATION_UNIT"
         properties: ["node105_property0"]
         name: "ORGANIZATION__IDENTIFIER_ORGANIZATION__UNIT_uniq"
-    indexes:
-      node105_index0:
-        type: "TEXT"
-        labels: ["ORGANIZATION_UNIT"]
-        properties: ["node105_property0"]
-        name: "ORGANIZATION_UNIT"
+    extensions:
+      indexes:
+        node105_index0:
+          type: "TEXT"
+          labels: ["ORGANIZATION_UNIT"]
+          properties: ["node105_property0"]
+          name: "ORGANIZATION_UNIT"
     name: "ORGANIZATION_UNIT"
   node106:
     labels:
@@ -2009,12 +2115,13 @@ nodes:
         label: "OTHER_ASSESSMENT_RESULT"
         properties: ["node106_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_OTHER__ASSESSMENT__RESULT_uniq"
-    indexes:
-      node106_index0:
-        type: "TEXT"
-        labels: ["OTHER_ASSESSMENT_RESULT"]
-        properties: ["node106_property0"]
-        name: "OTHER_ASSESSMENT_RESULT"
+    extensions:
+      indexes:
+        node106_index0:
+          type: "TEXT"
+          labels: ["OTHER_ASSESSMENT_RESULT"]
+          properties: ["node106_property0"]
+          name: "OTHER_ASSESSMENT_RESULT"
     name: "OTHER_ASSESSMENT_RESULT"
   node107:
     labels:
@@ -2031,12 +2138,13 @@ nodes:
         label: "PARTY"
         properties: ["node107_property0"]
         name: "PARTY__IDENTIFIER_PARTY_uniq"
-    indexes:
-      node107_index0:
-        type: "TEXT"
-        labels: ["PARTY"]
-        properties: ["node107_property0"]
-        name: "PARTY"
+    extensions:
+      indexes:
+        node107_index0:
+          type: "TEXT"
+          labels: ["PARTY"]
+          properties: ["node107_property0"]
+          name: "PARTY"
     name: "PARTY"
   node108:
     labels:
@@ -2050,12 +2158,13 @@ nodes:
         label: "PARTY_PREFERENCE"
         properties: ["node108_property0"]
         name: "PARTY__IDENTIFIER_PARTY__PREFERENCE_uniq"
-    indexes:
-      node108_index0:
-        type: "TEXT"
-        labels: ["PARTY_PREFERENCE"]
-        properties: ["node108_property0"]
-        name: "PARTY_PREFERENCE"
+    extensions:
+      indexes:
+        node108_index0:
+          type: "TEXT"
+          labels: ["PARTY_PREFERENCE"]
+          properties: ["node108_property0"]
+          name: "PARTY_PREFERENCE"
     name: "PARTY_PREFERENCE"
   node109:
     labels:
@@ -2070,12 +2179,13 @@ nodes:
         label: "PARTY_ROLE"
         properties: ["node109_property0"]
         name: "PARTY__ROLE__CODE_PARTY__ROLE_uniq"
-    indexes:
-      node109_index0:
-        type: "TEXT"
-        labels: ["PARTY_ROLE"]
-        properties: ["node109_property0"]
-        name: "PARTY_ROLE-text"
+    extensions:
+      indexes:
+        node109_index0:
+          type: "TEXT"
+          labels: ["PARTY_ROLE"]
+          properties: ["node109_property0"]
+          name: "PARTY_ROLE-text"
     name: "PARTY_ROLE"
   node110:
     labels:
@@ -2098,12 +2208,13 @@ nodes:
         label: "PERSON"
         properties: ["node110_property0"]
         name: "PERSON__IDENTIFIER_PERSON_uniq"
-    indexes:
-      node110_index0:
-        type: "TEXT"
-        labels: ["PERSON"]
-        properties: ["node110_property0"]
-        name: "PERSON"
+    extensions:
+      indexes:
+        node110_index0:
+          type: "TEXT"
+          labels: ["PERSON"]
+          properties: ["node110_property0"]
+          name: "PERSON"
     name: "PERSON"
   node111:
     labels:
@@ -2117,12 +2228,13 @@ nodes:
         label: "PERSON_PROFESSION"
         properties: ["node111_property0"]
         name: "PERSON__IDENTIFIER_PERSON__PROFESSION_uniq"
-    indexes:
-      node111_index0:
-        type: "TEXT"
-        labels: ["PERSON_PROFESSION"]
-        properties: ["node111_property0"]
-        name: "PERSON_PROFESSION"
+    extensions:
+      indexes:
+        node111_index0:
+          type: "TEXT"
+          labels: ["PERSON_PROFESSION"]
+          properties: ["node111_property0"]
+          name: "PERSON_PROFESSION"
     name: "PERSON_PROFESSION"
   node112:
     labels:
@@ -2143,12 +2255,13 @@ nodes:
         label: "PHYSICAL_LOCATION"
         properties: ["node112_property0"]
         name: "PHYSICAL__LOCATION__IDENTIFIER_PHYSICAL__LOCATION_uniq"
-    indexes:
-      node112_index0:
-        type: "TEXT"
-        labels: ["PHYSICAL_LOCATION"]
-        properties: ["node112_property0"]
-        name: "PHYSICAL_LOCATION"
+    extensions:
+      indexes:
+        node112_index0:
+          type: "TEXT"
+          labels: ["PHYSICAL_LOCATION"]
+          properties: ["node112_property0"]
+          name: "PHYSICAL_LOCATION"
     name: "PHYSICAL_LOCATION"
   node113:
     labels:
@@ -2161,12 +2274,13 @@ nodes:
         label: "PHYSICAL_OBJECT_ASSESSMENT"
         properties: ["node113_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_PHYSICAL__OBJECT__ASSESSMENT_uniq"
-    indexes:
-      node113_index0:
-        type: "TEXT"
-        labels: ["PHYSICAL_OBJECT_ASSESSMENT"]
-        properties: ["node113_property0"]
-        name: "PHYSICAL_OBJECT_ASSESSMENT"
+    extensions:
+      indexes:
+        node113_index0:
+          type: "TEXT"
+          labels: ["PHYSICAL_OBJECT_ASSESSMENT"]
+          properties: ["node113_property0"]
+          name: "PHYSICAL_OBJECT_ASSESSMENT"
     name: "PHYSICAL_OBJECT_ASSESSMENT"
   node114:
     labels:
@@ -2179,12 +2293,13 @@ nodes:
         label: "PLACE_ASSESSMENT"
         properties: ["node114_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_PLACE__ASSESSMENT_uniq"
-    indexes:
-      node114_index0:
-        type: "TEXT"
-        labels: ["PLACE_ASSESSMENT"]
-        properties: ["node114_property0"]
-        name: "PLACE_ASSESSMENT"
+    extensions:
+      indexes:
+        node114_index0:
+          type: "TEXT"
+          labels: ["PLACE_ASSESSMENT"]
+          properties: ["node114_property0"]
+          name: "PLACE_ASSESSMENT"
     name: "PLACE_ASSESSMENT"
   node115:
     labels:
@@ -2201,12 +2316,13 @@ nodes:
         label: "POLICY"
         properties: ["node115_property0"]
         name: "POLICY__IDENTIFIER_POLICY_uniq"
-    indexes:
-      node115_index0:
-        type: "TEXT"
-        labels: ["POLICY"]
-        properties: ["node115_property0"]
-        name: "POLICY"
+    extensions:
+      indexes:
+        node115_index0:
+          type: "TEXT"
+          labels: ["POLICY"]
+          properties: ["node115_property0"]
+          name: "POLICY"
     name: "POLICY"
   node116:
     labels:
@@ -2224,12 +2340,13 @@ nodes:
         label: "POLICY_AMOUNT"
         properties: ["node116_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_POLICY__AMOUNT_uniq"
-    indexes:
-      node116_index0:
-        type: "TEXT"
-        labels: ["POLICY_AMOUNT"]
-        properties: ["node116_property0"]
-        name: "POLICY_AMOUNT"
+    extensions:
+      indexes:
+        node116_index0:
+          type: "TEXT"
+          labels: ["POLICY_AMOUNT"]
+          properties: ["node116_property0"]
+          name: "POLICY_AMOUNT"
     name: "POLICY_AMOUNT"
   node117:
     labels:
@@ -2245,12 +2362,13 @@ nodes:
         label: "POLICY_DEDUCTIBLE"
         properties: ["node117_property0"]
         name: "POLICY__DEDUCTIBLE__IDENTIFIER_POLICY__DEDUCTIBLE_uniq"
-    indexes:
-      node117_index0:
-        type: "TEXT"
-        labels: ["POLICY_DEDUCTIBLE"]
-        properties: ["node117_property0"]
-        name: "POLICY_DEDUCTIBLE"
+    extensions:
+      indexes:
+        node117_index0:
+          type: "TEXT"
+          labels: ["POLICY_DEDUCTIBLE"]
+          properties: ["node117_property0"]
+          name: "POLICY_DEDUCTIBLE"
     name: "POLICY_DEDUCTIBLE"
   node118:
     labels:
@@ -2267,12 +2385,13 @@ nodes:
         label: "POLICY_EVENT"
         properties: ["node118_property0"]
         name: "EVENT__IDENTIFIER_POLICY__EVENT_uniq"
-    indexes:
-      node118_index0:
-        type: "TEXT"
-        labels: ["POLICY_EVENT"]
-        properties: ["node118_property0"]
-        name: "POLICY_EVENT"
+    extensions:
+      indexes:
+        node118_index0:
+          type: "TEXT"
+          labels: ["POLICY_EVENT"]
+          properties: ["node118_property0"]
+          name: "POLICY_EVENT"
     name: "POLICY_EVENT"
   node119:
     labels:
@@ -2288,12 +2407,13 @@ nodes:
         label: "POLICY_LIMIT"
         properties: ["node119_property0"]
         name: "POLICY__LIMIT__IDENTIFIER_POLICY__LIMIT_uniq"
-    indexes:
-      node119_index0:
-        type: "TEXT"
-        labels: ["POLICY_LIMIT"]
-        properties: ["node119_property0"]
-        name: "POLICY_LIMIT"
+    extensions:
+      indexes:
+        node119_index0:
+          type: "TEXT"
+          labels: ["POLICY_LIMIT"]
+          properties: ["node119_property0"]
+          name: "POLICY_LIMIT"
     name: "POLICY_LIMIT"
   node120:
     labels:
@@ -2306,12 +2426,13 @@ nodes:
         label: "PREMIUM"
         properties: ["node120_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_PREMIUM_uniq"
-    indexes:
-      node120_index0:
-        type: "TEXT"
-        labels: ["PREMIUM"]
-        properties: ["node120_property0"]
-        name: "PREMIUM"
+    extensions:
+      indexes:
+        node120_index0:
+          type: "TEXT"
+          labels: ["PREMIUM"]
+          properties: ["node120_property0"]
+          name: "PREMIUM"
     name: "PREMIUM"
   node121:
     labels:
@@ -2324,12 +2445,13 @@ nodes:
         label: "PRE_QUALIFICATION"
         properties: ["node121_property0"]
         name: "EVENT__IDENTIFIER_PRE__QUALIFICATION_uniq"
-    indexes:
-      node121_index0:
-        type: "TEXT"
-        labels: ["PRE_QUALIFICATION"]
-        properties: ["node121_property0"]
-        name: "PRE_QUALIFICATION"
+    extensions:
+      indexes:
+        node121_index0:
+          type: "TEXT"
+          labels: ["PRE_QUALIFICATION"]
+          properties: ["node121_property0"]
+          name: "PRE_QUALIFICATION"
     name: "PRE_QUALIFICATION"
   node122:
     labels:
@@ -2344,12 +2466,13 @@ nodes:
         label: "PRODUCT"
         properties: ["node122_property0"]
         name: "PRODUCT__IDENTIFIER_PRODUCT_uniq"
-    indexes:
-      node122_index0:
-        type: "TEXT"
-        labels: ["PRODUCT"]
-        properties: ["node122_property0"]
-        name: "PRODUCT"
+    extensions:
+      indexes:
+        node122_index0:
+          type: "TEXT"
+          labels: ["PRODUCT"]
+          properties: ["node122_property0"]
+          name: "PRODUCT"
     name: "PRODUCT"
   node123:
     labels:
@@ -2362,12 +2485,13 @@ nodes:
         label: "PROFESSIONAL_GROUP"
         properties: ["node123_property0"]
         name: "GROUPING__IDENTIFIER_PROFESSIONAL__GROUP_uniq"
-    indexes:
-      node123_index0:
-        type: "TEXT"
-        labels: ["PROFESSIONAL_GROUP"]
-        properties: ["node123_property0"]
-        name: "PROFESSIONAL_GROUP"
+    extensions:
+      indexes:
+        node123_index0:
+          type: "TEXT"
+          labels: ["PROFESSIONAL_GROUP"]
+          properties: ["node123_property0"]
+          name: "PROFESSIONAL_GROUP"
     name: "PROFESSIONAL_GROUP"
   node124:
     labels:
@@ -2380,12 +2504,13 @@ nodes:
         label: "PROJECT"
         properties: ["node124_property0"]
         name: "GROUPING__IDENTIFIER_PROJECT_uniq"
-    indexes:
-      node124_index0:
-        type: "TEXT"
-        labels: ["PROJECT"]
-        properties: ["node124_property0"]
-        name: "PROJECT"
+    extensions:
+      indexes:
+        node124_index0:
+          type: "TEXT"
+          labels: ["PROJECT"]
+          properties: ["node124_property0"]
+          name: "PROJECT"
     name: "PROJECT"
   node125:
     labels:
@@ -2398,12 +2523,13 @@ nodes:
         label: "PROPERTY_IN_TRANSIT"
         properties: ["node125_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_PROPERTY__IN__TRANSIT_uniq"
-    indexes:
-      node125_index0:
-        type: "TEXT"
-        labels: ["PROPERTY_IN_TRANSIT"]
-        properties: ["node125_property0"]
-        name: "PROPERTY_IN_TRANSIT"
+    extensions:
+      indexes:
+        node125_index0:
+          type: "TEXT"
+          labels: ["PROPERTY_IN_TRANSIT"]
+          properties: ["node125_property0"]
+          name: "PROPERTY_IN_TRANSIT"
     name: "PROPERTY_IN_TRANSIT"
   node126:
     labels:
@@ -2416,12 +2542,13 @@ nodes:
         label: "PROVIDER_AGREEMENT"
         properties: ["node126_property0"]
         name: "AGREEMENT__IDENTIFIER_PROVIDER__AGREEMENT_uniq"
-    indexes:
-      node126_index0:
-        type: "TEXT"
-        labels: ["PROVIDER_AGREEMENT"]
-        properties: ["node126_property0"]
-        name: "PROVIDER_AGREEMENT"
+    extensions:
+      indexes:
+        node126_index0:
+          type: "TEXT"
+          labels: ["PROVIDER_AGREEMENT"]
+          properties: ["node126_property0"]
+          name: "PROVIDER_AGREEMENT"
     name: "PROVIDER_AGREEMENT"
   node127:
     labels:
@@ -2434,12 +2561,13 @@ nodes:
         label: "PRO_RATA"
         properties: ["node127_property0"]
         name: "EVENT__IDENTIFIER_PRO__RATA_uniq"
-    indexes:
-      node127_index0:
-        type: "TEXT"
-        labels: ["PRO_RATA"]
-        properties: ["node127_property0"]
-        name: "PRO_RATA"
+    extensions:
+      indexes:
+        node127_index0:
+          type: "TEXT"
+          labels: ["PRO_RATA"]
+          properties: ["node127_property0"]
+          name: "PRO_RATA"
     name: "PRO_RATA"
   node128:
     labels:
@@ -2452,12 +2580,13 @@ nodes:
         label: "QUOTE"
         properties: ["node128_property0"]
         name: "EVENT__IDENTIFIER_QUOTE_uniq"
-    indexes:
-      node128_index0:
-        type: "TEXT"
-        labels: ["QUOTE"]
-        properties: ["node128_property0"]
-        name: "QUOTE"
+    extensions:
+      indexes:
+        node128_index0:
+          type: "TEXT"
+          labels: ["QUOTE"]
+          properties: ["node128_property0"]
+          name: "QUOTE"
     name: "QUOTE"
   node129:
     labels:
@@ -2473,12 +2602,13 @@ nodes:
         label: "RATING_TERRITORY"
         properties: ["node129_property0"]
         name: "RATING__TERRITORY__IDENTIFIER_RATING__TERRITORY_uniq"
-    indexes:
-      node129_index0:
-        type: "TEXT"
-        labels: ["RATING_TERRITORY"]
-        properties: ["node129_property0"]
-        name: "RATING_TERRITORY"
+    extensions:
+      indexes:
+        node129_index0:
+          type: "TEXT"
+          labels: ["RATING_TERRITORY"]
+          properties: ["node129_property0"]
+          name: "RATING_TERRITORY"
     name: "RATING_TERRITORY"
   node130:
     labels:
@@ -2491,12 +2621,13 @@ nodes:
         label: "RECOVERY"
         properties: ["node130_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_RECOVERY_uniq"
-    indexes:
-      node130_index0:
-        type: "TEXT"
-        labels: ["RECOVERY"]
-        properties: ["node130_property0"]
-        name: "RECOVERY"
+    extensions:
+      indexes:
+        node130_index0:
+          type: "TEXT"
+          labels: ["RECOVERY"]
+          properties: ["node130_property0"]
+          name: "RECOVERY"
     name: "RECOVERY"
   node131:
     labels:
@@ -2509,12 +2640,13 @@ nodes:
         label: "RECREATIONAL_VEHICLE"
         properties: ["node131_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_RECREATIONAL__VEHICLE_uniq"
-    indexes:
-      node131_index0:
-        type: "TEXT"
-        labels: ["RECREATIONAL_VEHICLE"]
-        properties: ["node131_property0"]
-        name: "RECREATIONAL_VEHICLE"
+    extensions:
+      indexes:
+        node131_index0:
+          type: "TEXT"
+          labels: ["RECREATIONAL_VEHICLE"]
+          properties: ["node131_property0"]
+          name: "RECREATIONAL_VEHICLE"
     name: "RECREATIONAL_VEHICLE"
   node132:
     labels:
@@ -2527,12 +2659,13 @@ nodes:
         label: "REINSTATEMENT"
         properties: ["node132_property0"]
         name: "EVENT__IDENTIFIER_REINSTATEMENT_uniq"
-    indexes:
-      node132_index0:
-        type: "TEXT"
-        labels: ["REINSTATEMENT"]
-        properties: ["node132_property0"]
-        name: "REINSTATEMENT"
+    extensions:
+      indexes:
+        node132_index0:
+          type: "TEXT"
+          labels: ["REINSTATEMENT"]
+          properties: ["node132_property0"]
+          name: "REINSTATEMENT"
     name: "REINSTATEMENT"
   node133:
     labels:
@@ -2545,12 +2678,13 @@ nodes:
         label: "REINSURANCE_AGREEMENT"
         properties: ["node133_property0"]
         name: "AGREEMENT__IDENTIFIER_REINSURANCE__AGREEMENT_uniq"
-    indexes:
-      node133_index0:
-        type: "TEXT"
-        labels: ["REINSURANCE_AGREEMENT"]
-        properties: ["node133_property0"]
-        name: "REINSURANCE_AGREEMENT"
+    extensions:
+      indexes:
+        node133_index0:
+          type: "TEXT"
+          labels: ["REINSURANCE_AGREEMENT"]
+          properties: ["node133_property0"]
+          name: "REINSURANCE_AGREEMENT"
     name: "REINSURANCE_AGREEMENT"
   node134:
     labels:
@@ -2563,12 +2697,13 @@ nodes:
         label: "REINSURANCE_RECOVERY"
         properties: ["node134_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_REINSURANCE__RECOVERY_uniq"
-    indexes:
-      node134_index0:
-        type: "TEXT"
-        labels: ["REINSURANCE_RECOVERY"]
-        properties: ["node134_property0"]
-        name: "REINSURANCE_RECOVERY"
+    extensions:
+      indexes:
+        node134_index0:
+          type: "TEXT"
+          labels: ["REINSURANCE_RECOVERY"]
+          properties: ["node134_property0"]
+          name: "REINSURANCE_RECOVERY"
     name: "REINSURANCE_RECOVERY"
   node135:
     labels:
@@ -2581,12 +2716,13 @@ nodes:
         label: "RENEWAL"
         properties: ["node135_property0"]
         name: "EVENT__IDENTIFIER_RENEWAL_uniq"
-    indexes:
-      node135_index0:
-        type: "TEXT"
-        labels: ["RENEWAL"]
-        properties: ["node135_property0"]
-        name: "RENEWAL"
+    extensions:
+      indexes:
+        node135_index0:
+          type: "TEXT"
+          labels: ["RENEWAL"]
+          properties: ["node135_property0"]
+          name: "RENEWAL"
     name: "RENEWAL"
   node136:
     labels:
@@ -2599,12 +2735,13 @@ nodes:
         label: "RESIDENTIAL_STRUCTURE"
         properties: ["node136_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_RESIDENTIAL__STRUCTURE_uniq"
-    indexes:
-      node136_index0:
-        type: "TEXT"
-        labels: ["RESIDENTIAL_STRUCTURE"]
-        properties: ["node136_property0"]
-        name: "RESIDENTIAL_STRUCTURE"
+    extensions:
+      indexes:
+        node136_index0:
+          type: "TEXT"
+          labels: ["RESIDENTIAL_STRUCTURE"]
+          properties: ["node136_property0"]
+          name: "RESIDENTIAL_STRUCTURE"
     name: "RESIDENTIAL_STRUCTURE"
   node137:
     labels:
@@ -2617,12 +2754,13 @@ nodes:
         label: "RISK_FACTOR_SCORE"
         properties: ["node137_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_RISK__FACTOR__SCORE_uniq"
-    indexes:
-      node137_index0:
-        type: "TEXT"
-        labels: ["RISK_FACTOR_SCORE"]
-        properties: ["node137_property0"]
-        name: "RISK_FACTOR_SCORE"
+    extensions:
+      indexes:
+        node137_index0:
+          type: "TEXT"
+          labels: ["RISK_FACTOR_SCORE"]
+          properties: ["node137_property0"]
+          name: "RISK_FACTOR_SCORE"
     name: "RISK_FACTOR_SCORE"
   node138:
     labels:
@@ -2635,12 +2773,13 @@ nodes:
         label: "SALVAGE"
         properties: ["node138_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_SALVAGE_uniq"
-    indexes:
-      node138_index0:
-        type: "TEXT"
-        labels: ["SALVAGE"]
-        properties: ["node138_property0"]
-        name: "SALVAGE"
+    extensions:
+      indexes:
+        node138_index0:
+          type: "TEXT"
+          labels: ["SALVAGE"]
+          properties: ["node138_property0"]
+          name: "SALVAGE"
     name: "SALVAGE"
   node139:
     labels:
@@ -2653,12 +2792,13 @@ nodes:
         label: "SCHEDULED_ITEM"
         properties: ["node139_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_SCHEDULED__ITEM_uniq"
-    indexes:
-      node139_index0:
-        type: "TEXT"
-        labels: ["SCHEDULED_ITEM"]
-        properties: ["node139_property0"]
-        name: "SCHEDULED_ITEM"
+    extensions:
+      indexes:
+        node139_index0:
+          type: "TEXT"
+          labels: ["SCHEDULED_ITEM"]
+          properties: ["node139_property0"]
+          name: "SCHEDULED_ITEM"
     name: "SCHEDULED_ITEM"
   node140:
     labels:
@@ -2671,12 +2811,13 @@ nodes:
         label: "SHORT_RATE"
         properties: ["node140_property0"]
         name: "EVENT__IDENTIFIER_SHORT__RATE_uniq"
-    indexes:
-      node140_index0:
-        type: "TEXT"
-        labels: ["SHORT_RATE"]
-        properties: ["node140_property0"]
-        name: "SHORT_RATE"
+    extensions:
+      indexes:
+        node140_index0:
+          type: "TEXT"
+          labels: ["SHORT_RATE"]
+          properties: ["node140_property0"]
+          name: "SHORT_RATE"
     name: "SHORT_RATE"
   node141:
     labels:
@@ -2689,12 +2830,13 @@ nodes:
         label: "STAFFING_AGREEMENT"
         properties: ["node141_property0"]
         name: "AGREEMENT__IDENTIFIER_STAFFING__AGREEMENT_uniq"
-    indexes:
-      node141_index0:
-        type: "TEXT"
-        labels: ["STAFFING_AGREEMENT"]
-        properties: ["node141_property0"]
-        name: "STAFFING_AGREEMENT"
+    extensions:
+      indexes:
+        node141_index0:
+          type: "TEXT"
+          labels: ["STAFFING_AGREEMENT"]
+          properties: ["node141_property0"]
+          name: "STAFFING_AGREEMENT"
     name: "STAFFING_AGREEMENT"
   node142:
     labels:
@@ -2709,12 +2851,13 @@ nodes:
         label: "STAFF_CLASSIFICATION"
         properties: ["node142_property0"]
         name: "STAFF__CLASSIFICATION__CODE_STAFF__CLASSIFICATION_uniq"
-    indexes:
-      node142_index0:
-        type: "TEXT"
-        labels: ["STAFF_CLASSIFICATION"]
-        properties: ["node142_property0"]
-        name: "STAFF_CLASSIFICATION-text"
+    extensions:
+      indexes:
+        node142_index0:
+          type: "TEXT"
+          labels: ["STAFF_CLASSIFICATION"]
+          properties: ["node142_property0"]
+          name: "STAFF_CLASSIFICATION-text"
     name: "STAFF_CLASSIFICATION"
   node143:
     labels:
@@ -2729,12 +2872,13 @@ nodes:
         label: "STAFF_POSITION"
         properties: ["node143_property0"]
         name: "STAFF__POSITION__IDENTIFIER_STAFF__POSITION_uniq"
-    indexes:
-      node143_index0:
-        type: "TEXT"
-        labels: ["STAFF_POSITION"]
-        properties: ["node143_property0"]
-        name: "STAFF_POSITION"
+    extensions:
+      indexes:
+        node143_index0:
+          type: "TEXT"
+          labels: ["STAFF_POSITION"]
+          properties: ["node143_property0"]
+          name: "STAFF_POSITION"
     name: "STAFF_POSITION"
   node144:
     labels:
@@ -2748,12 +2892,13 @@ nodes:
         label: "STATE"
         properties: ["node144_property0"]
         name: "STATE__CODE_STATE_uniq"
-    indexes:
-      node144_index0:
-        type: "TEXT"
-        labels: ["STATE"]
-        properties: ["node144_property0"]
-        name: "STATE-text"
+    extensions:
+      indexes:
+        node144_index0:
+          type: "TEXT"
+          labels: ["STATE"]
+          properties: ["node144_property0"]
+          name: "STATE-text"
     name: "STATE"
   node145:
     labels:
@@ -2766,12 +2911,13 @@ nodes:
         label: "STRUCTURE"
         properties: ["node145_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_STRUCTURE_uniq"
-    indexes:
-      node145_index0:
-        type: "TEXT"
-        labels: ["STRUCTURE"]
-        properties: ["node145_property0"]
-        name: "STRUCTURE"
+    extensions:
+      indexes:
+        node145_index0:
+          type: "TEXT"
+          labels: ["STRUCTURE"]
+          properties: ["node145_property0"]
+          name: "STRUCTURE"
     name: "STRUCTURE"
   node146:
     labels:
@@ -2784,12 +2930,13 @@ nodes:
         label: "SUBROGATION"
         properties: ["node146_property0"]
         name: "CLAIM__AMOUNT__IDENTIFIER_SUBROGATION_uniq"
-    indexes:
-      node146_index0:
-        type: "TEXT"
-        labels: ["SUBROGATION"]
-        properties: ["node146_property0"]
-        name: "SUBROGATION"
+    extensions:
+      indexes:
+        node146_index0:
+          type: "TEXT"
+          labels: ["SUBROGATION"]
+          properties: ["node146_property0"]
+          name: "SUBROGATION"
     name: "SUBROGATION"
   node147:
     labels:
@@ -2802,12 +2949,13 @@ nodes:
         label: "SURCHARGE"
         properties: ["node147_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_SURCHARGE_uniq"
-    indexes:
-      node147_index0:
-        type: "TEXT"
-        labels: ["SURCHARGE"]
-        properties: ["node147_property0"]
-        name: "SURCHARGE"
+    extensions:
+      indexes:
+        node147_index0:
+          type: "TEXT"
+          labels: ["SURCHARGE"]
+          properties: ["node147_property0"]
+          name: "SURCHARGE"
     name: "SURCHARGE"
   node148:
     labels:
@@ -2820,12 +2968,13 @@ nodes:
         label: "TAX"
         properties: ["node148_property0"]
         name: "POLICY__AMOUNT__IDENTIFIER_TAX_uniq"
-    indexes:
-      node148_index0:
-        type: "TEXT"
-        labels: ["TAX"]
-        properties: ["node148_property0"]
-        name: "TAX"
+    extensions:
+      indexes:
+        node148_index0:
+          type: "TEXT"
+          labels: ["TAX"]
+          properties: ["node148_property0"]
+          name: "TAX"
     name: "TAX"
   node149:
     labels:
@@ -2838,12 +2987,13 @@ nodes:
         label: "TEAM"
         properties: ["node149_property0"]
         name: "GROUPING__IDENTIFIER_TEAM_uniq"
-    indexes:
-      node149_index0:
-        type: "TEXT"
-        labels: ["TEAM"]
-        properties: ["node149_property0"]
-        name: "TEAM"
+    extensions:
+      indexes:
+        node149_index0:
+          type: "TEXT"
+          labels: ["TEAM"]
+          properties: ["node149_property0"]
+          name: "TEAM"
     name: "TEAM"
   node150:
     labels:
@@ -2856,12 +3006,13 @@ nodes:
         label: "THIRD_PARTY_STAFFING_AGREEMENT"
         properties: ["node150_property0"]
         name: "AGREEMENT__IDENTIFIER_THIRD__PARTY__STAFFING__AGREEMENT_uniq"
-    indexes:
-      node150_index0:
-        type: "TEXT"
-        labels: ["THIRD_PARTY_STAFFING_AGREEMENT"]
-        properties: ["node150_property0"]
-        name: "THIRD_PARTY_STAFFING_AGREEMENT"
+    extensions:
+      indexes:
+        node150_index0:
+          type: "TEXT"
+          labels: ["THIRD_PARTY_STAFFING_AGREEMENT"]
+          properties: ["node150_property0"]
+          name: "THIRD_PARTY_STAFFING_AGREEMENT"
     name: "THIRD_PARTY_STAFFING_AGREEMENT"
   node151:
     labels:
@@ -2874,12 +3025,13 @@ nodes:
         label: "TRACTOR"
         properties: ["node151_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_TRACTOR_uniq"
-    indexes:
-      node151_index0:
-        type: "TEXT"
-        labels: ["TRACTOR"]
-        properties: ["node151_property0"]
-        name: "TRACTOR"
+    extensions:
+      indexes:
+        node151_index0:
+          type: "TEXT"
+          labels: ["TRACTOR"]
+          properties: ["node151_property0"]
+          name: "TRACTOR"
     name: "TRACTOR"
   node152:
     labels:
@@ -2892,12 +3044,13 @@ nodes:
         label: "TRAILER"
         properties: ["node152_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_TRAILER_uniq"
-    indexes:
-      node152_index0:
-        type: "TEXT"
-        labels: ["TRAILER"]
-        properties: ["node152_property0"]
-        name: "TRAILER"
+    extensions:
+      indexes:
+        node152_index0:
+          type: "TEXT"
+          labels: ["TRAILER"]
+          properties: ["node152_property0"]
+          name: "TRAILER"
     name: "TRAILER"
   node153:
     labels:
@@ -2910,12 +3063,13 @@ nodes:
         label: "TRANSPORTATION_CLASS"
         properties: ["node153_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_TRANSPORTATION__CLASS_uniq"
-    indexes:
-      node153_index0:
-        type: "TEXT"
-        labels: ["TRANSPORTATION_CLASS"]
-        properties: ["node153_property0"]
-        name: "TRANSPORTATION_CLASS"
+    extensions:
+      indexes:
+        node153_index0:
+          type: "TEXT"
+          labels: ["TRANSPORTATION_CLASS"]
+          properties: ["node153_property0"]
+          name: "TRANSPORTATION_CLASS"
     name: "TRANSPORTATION_CLASS"
   node154:
     labels:
@@ -2928,12 +3082,13 @@ nodes:
         label: "TRUCK"
         properties: ["node154_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_TRUCK_uniq"
-    indexes:
-      node154_index0:
-        type: "TEXT"
-        labels: ["TRUCK"]
-        properties: ["node154_property0"]
-        name: "TRUCK"
+    extensions:
+      indexes:
+        node154_index0:
+          type: "TEXT"
+          labels: ["TRUCK"]
+          properties: ["node154_property0"]
+          name: "TRUCK"
     name: "TRUCK"
   node155:
     labels:
@@ -2946,12 +3101,13 @@ nodes:
         label: "UNDERWRITING_ASSESSMENT"
         properties: ["node155_property0"]
         name: "ASSESSMENT__RESULT__IDENTIFIER_UNDERWRITING__ASSESSMENT_uniq"
-    indexes:
-      node155_index0:
-        type: "TEXT"
-        labels: ["UNDERWRITING_ASSESSMENT"]
-        properties: ["node155_property0"]
-        name: "UNDERWRITING_ASSESSMENT"
+    extensions:
+      indexes:
+        node155_index0:
+          type: "TEXT"
+          labels: ["UNDERWRITING_ASSESSMENT"]
+          properties: ["node155_property0"]
+          name: "UNDERWRITING_ASSESSMENT"
     name: "UNDERWRITING_ASSESSMENT"
   node156:
     labels:
@@ -2964,12 +3120,13 @@ nodes:
         label: "VAN"
         properties: ["node156_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_VAN_uniq"
-    indexes:
-      node156_index0:
-        type: "TEXT"
-        labels: ["VAN"]
-        properties: ["node156_property0"]
-        name: "VAN"
+    extensions:
+      indexes:
+        node156_index0:
+          type: "TEXT"
+          labels: ["VAN"]
+          properties: ["node156_property0"]
+          name: "VAN"
     name: "VAN"
   node157:
     labels:
@@ -2987,12 +3144,13 @@ nodes:
         label: "VEHICLE"
         properties: ["node157_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_VEHICLE_uniq"
-    indexes:
-      node157_index0:
-        type: "TEXT"
-        labels: ["VEHICLE"]
-        properties: ["node157_property0"]
-        name: "VEHICLE"
+    extensions:
+      indexes:
+        node157_index0:
+          type: "TEXT"
+          labels: ["VEHICLE"]
+          properties: ["node157_property0"]
+          name: "VEHICLE"
     name: "VEHICLE"
   node158:
     labels:
@@ -3005,12 +3163,13 @@ nodes:
         label: "WATERCRAFT"
         properties: ["node158_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_WATERCRAFT_uniq"
-    indexes:
-      node158_index0:
-        type: "TEXT"
-        labels: ["WATERCRAFT"]
-        properties: ["node158_property0"]
-        name: "WATERCRAFT"
+    extensions:
+      indexes:
+        node158_index0:
+          type: "TEXT"
+          labels: ["WATERCRAFT"]
+          properties: ["node158_property0"]
+          name: "WATERCRAFT"
     name: "WATERCRAFT"
   node159:
     labels:
@@ -3023,12 +3182,13 @@ nodes:
         label: "WORKERS_COMP_CLASS"
         properties: ["node159_property0"]
         name: "INSURABLE__OBJECT__IDENTIFIER_WORKERS__COMP__CLASS_uniq"
-    indexes:
-      node159_index0:
-        type: "TEXT"
-        labels: ["WORKERS_COMP_CLASS"]
-        properties: ["node159_property0"]
-        name: "WORKERS_COMP_CLASS"
+    extensions:
+      indexes:
+        node159_index0:
+          type: "TEXT"
+          labels: ["WORKERS_COMP_CLASS"]
+          properties: ["node159_property0"]
+          name: "WORKERS_COMP_CLASS"
     name: "WORKERS_COMP_CLASS"
   node160:
     labels:
@@ -3041,12 +3201,13 @@ nodes:
         label: "audit"
         properties: ["node160_property0"]
         name: "EVENT__IDENTIFIER_audit_uniq"
-    indexes:
-      node160_index0:
-        type: "TEXT"
-        labels: ["audit"]
-        properties: ["node160_property0"]
-        name: "audit"
+    extensions:
+      indexes:
+        node160_index0:
+          type: "TEXT"
+          labels: ["audit"]
+          properties: ["node160_property0"]
+          name: "audit"
     name: "audit"
 relationships:
   relationship0:

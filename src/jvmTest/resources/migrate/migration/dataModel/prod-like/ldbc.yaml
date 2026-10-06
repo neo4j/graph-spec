@@ -11,11 +11,12 @@ nodes:
       browserUsed: { type: "STRING" }
       content: { type: "STRING" }
       length: { type: "INTEGER" }
-    indexes:
-      Comment:
-        type: "TEXT"
-        labels: ["Comment"]
-        properties: ["id"]
+    extensions:
+      indexes:
+        Comment:
+          type: "TEXT"
+          labels: ["Comment"]
+          properties: ["id"]
   Forum:
     label: "Forum"
     properties:
@@ -24,11 +25,12 @@ nodes:
       explicitlyDeleted: { type: "BOOLEAN" }
       id: { type: "INTEGER", unique: true }
       title: { type: "STRING" }
-    indexes:
-      Forum:
-        type: "TEXT"
-        labels: ["Forum"]
-        properties: ["id"]
+    extensions:
+      indexes:
+        Forum:
+          type: "TEXT"
+          labels: ["Forum"]
+          properties: ["id"]
   Organisation:
     label: "Organisation"
     properties:
@@ -36,11 +38,12 @@ nodes:
       type: { type: "STRING" }
       name: { type: "STRING" }
       url: { type: "STRING" }
-    indexes:
-      Organisation:
-        type: "TEXT"
-        labels: ["Organisation"]
-        properties: ["id"]
+    extensions:
+      indexes:
+        Organisation:
+          type: "TEXT"
+          labels: ["Organisation"]
+          properties: ["id"]
   Person:
     label: "Person"
     properties:
@@ -56,11 +59,12 @@ nodes:
       browserUsed: { type: "STRING" }
       language: { type: "STRING" }
       email: { type: "STRING" }
-    indexes:
-      Person:
-        type: "TEXT"
-        labels: ["Person"]
-        properties: ["id"]
+    extensions:
+      indexes:
+        Person:
+          type: "TEXT"
+          labels: ["Person"]
+          properties: ["id"]
   Place:
     label: "Place"
     properties:
@@ -68,11 +72,12 @@ nodes:
       name: { type: "STRING" }
       url: { type: "STRING" }
       type: { type: "STRING" }
-    indexes:
-      Place:
-        type: "TEXT"
-        labels: ["Place"]
-        properties: ["id"]
+    extensions:
+      indexes:
+        Place:
+          type: "TEXT"
+          labels: ["Place"]
+          properties: ["id"]
   Post:
     label: "Post"
     properties:
@@ -86,33 +91,36 @@ nodes:
       language: { type: "STRING" }
       content: { type: "STRING" }
       length: { type: "INTEGER" }
-    indexes:
-      Post:
-        type: "TEXT"
-        labels: ["Post"]
-        properties: ["id"]
+    extensions:
+      indexes:
+        Post:
+          type: "TEXT"
+          labels: ["Post"]
+          properties: ["id"]
   Tag:
     label: "Tag"
     properties:
       id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       url: { type: "STRING" }
-    indexes:
-      Tag:
-        type: "TEXT"
-        labels: ["Tag"]
-        properties: ["id"]
+    extensions:
+      indexes:
+        Tag:
+          type: "TEXT"
+          labels: ["Tag"]
+          properties: ["id"]
   TagClass:
     label: "TagClass"
     properties:
       id: { type: "INTEGER", unique: true }
       name: { type: "STRING" }
       url: { type: "STRING" }
-    indexes:
-      TagClass:
-        type: "TEXT"
-        labels: ["TagClass"]
-        properties: ["id"]
+    extensions:
+      indexes:
+        TagClass:
+          type: "TEXT"
+          labels: ["TagClass"]
+          properties: ["id"]
 relationships:
   AUTHORED_BY:
     type: "AUTHORED_BY"

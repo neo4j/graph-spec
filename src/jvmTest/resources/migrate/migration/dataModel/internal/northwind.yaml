@@ -14,12 +14,16 @@ nodes:
         label: "categories"
         properties: ["node0_property0"]
         name: "categoryid_categories_uniq"
-    indexes:
-      node0_index0:
-        type: "TEXT"
-        labels: ["categories"]
-        properties: ["node0_property0"]
-        name: "categories"
+    extensions:
+      indexes:
+        node0_index0:
+          type: "TEXT"
+          labels: ["categories"]
+          properties: ["node0_property0"]
+          name: "categories"
+      display:
+        x: -100.123
+        y: 200.0
     name: "categories"
   node1:
     labels:
@@ -39,12 +43,13 @@ nodes:
         label: "products"
         properties: ["node1_property0"]
         name: "productid_products_uniq"
-    indexes:
-      node1_index0:
-        type: "TEXT"
-        labels: ["products"]
-        properties: ["node1_property0"]
-        name: "products"
+    extensions:
+      indexes:
+        node1_index0:
+          type: "TEXT"
+          labels: ["products"]
+          properties: ["node1_property0"]
+          name: "products"
     name: "products"
   node2:
     labels:
@@ -68,12 +73,13 @@ nodes:
         label: "suppliers"
         properties: ["node2_property0"]
         name: "supplierid_suppliers_uniq"
-    indexes:
-      node2_index0:
-        type: "TEXT"
-        labels: ["suppliers"]
-        properties: ["node2_property0"]
-        name: "suppliers"
+    extensions:
+      indexes:
+        node2_index0:
+          type: "TEXT"
+          labels: ["suppliers"]
+          properties: ["node2_property0"]
+          name: "suppliers"
     name: "suppliers"
 relationships:
   relationship0:
@@ -306,8 +312,3 @@ mappings:
       node: "node2"
       properties:
         node2_property0: { column: "supplierid" }
-display:
-  nodes:
-    node0:
-      x: -100.123
-      y: 200.0

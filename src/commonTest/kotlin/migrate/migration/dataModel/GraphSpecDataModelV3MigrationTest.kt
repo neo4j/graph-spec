@@ -183,8 +183,10 @@ class GraphSpecDataModelV3MigrationTest {
                     "constraints" to schemaMapOf(
                         "uniq_id" to schemaMapOf("type" to "UNIQUE", "properties" to listOf("p1"))
                     ),
-                    "indexes" to schemaMapOf(
-                        "idx_name" to schemaMapOf("type" to "RANGE", "properties" to listOf("p2"))
+                    "extensions" to schemaMapOf(
+                        "indexes" to schemaMapOf(
+                            "idx_name" to schemaMapOf("type" to "RANGE", "properties" to listOf("p2"))
+                        )
                     )
                 )
             )
@@ -212,9 +214,11 @@ class GraphSpecDataModelV3MigrationTest {
                     "constraints" to constraintTypes.associate { type ->
                         "c_$type" to schemaMapOf("type" to type, "properties" to listOf("p1"))
                     },
-                    "indexes" to indexTypes.associate { type ->
-                        "i_$type" to schemaMapOf("type" to type, "properties" to listOf("p1"))
-                    }
+                    "extensions" to schemaMapOf(
+                        "indexes" to indexTypes.associate { type ->
+                            "i_$type" to schemaMapOf("type" to type, "properties" to listOf("p1"))
+                        }
+                    )
                 )
             )
         )
@@ -461,15 +465,16 @@ class GraphSpecDataModelV3MigrationTest {
 
     @Test
     fun `convertVisualisation transforms coordinates correctly`() {
-        val display = schemaMapOf(
-            "display" to schemaMapOf(
-                "nodes" to schemaMapOf(
-                    "node1" to schemaMapOf("x" to 100.23, "y" to 200.12)
-                )
+        val schema = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "node1" to schemaMapOf(
+                    "extensions" to schemaMapOf("display" to schemaMapOf("x" to 100.23, "y" to 200.12))
+                ),
+                "node2" to schemaMapOf("labels" to schemaMapOf("identifier" to "NoDisplay"))
             )
         )
 
-        val result = migration.convertVisualisation(display)
+        val result = migration.convertVisualisation(schema)
 
         assertNotNull(result)
         val nodes = result.listOfMaps("nodes")
@@ -614,11 +619,9 @@ class GraphSpecDataModelV3MigrationTest {
     fun `migrate emits the flat data model by default and the wrapped model file when wrapped`() {
         val input = schemaMapOf(
             "nodes" to schemaMapOf(
-                "n1" to schemaMapOf("labels" to schemaMapOf("identifier" to "Person"))
-            ),
-            "display" to schemaMapOf(
-                "nodes" to schemaMapOf(
-                    "node1" to schemaMapOf("x" to 100.23, "y" to 200.12)
+                "n1" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "Person"),
+                    "extensions" to schemaMapOf("display" to schemaMapOf("x" to 100.23, "y" to 200.12))
                 )
             ),
             "description" to "a description"
@@ -681,8 +684,10 @@ class GraphSpecDataModelV3MigrationTest {
                 "n1" to schemaMapOf(
                     "labels" to schemaMapOf("identifier" to "Person"),
                     "properties" to schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to "STRING")),
-                    "indexes" to schemaMapOf(
-                        "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"))
+                    "extensions" to schemaMapOf(
+                        "indexes" to schemaMapOf(
+                            "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"))
+                        )
                     )
                 )
             ),
@@ -692,8 +697,10 @@ class GraphSpecDataModelV3MigrationTest {
                     "from" to schemaMapOf("node" to "n1"),
                     "to" to schemaMapOf("node" to "n1"),
                     "properties" to schemaMapOf("rp1" to schemaMapOf("name" to "since", "type" to "INTEGER")),
-                    "indexes" to schemaMapOf(
-                        "rel_idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("rp1"))
+                    "extensions" to schemaMapOf(
+                        "indexes" to schemaMapOf(
+                            "rel_idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("rp1"))
+                        )
                     )
                 )
             )
@@ -716,8 +723,10 @@ class GraphSpecDataModelV3MigrationTest {
                     "constraints" to schemaMapOf(
                         "uniq" to schemaMapOf("type" to "UNIQUE", "properties" to listOf("p1"), "name" to "my_name")
                     ),
-                    "indexes" to schemaMapOf(
-                        "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"), "name" to "my_index")
+                    "extensions" to schemaMapOf(
+                        "indexes" to schemaMapOf(
+                            "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"), "name" to "my_index")
+                        )
                     )
                 )
             )
@@ -739,8 +748,10 @@ class GraphSpecDataModelV3MigrationTest {
                     "constraints" to schemaMapOf(
                         "uniq" to schemaMapOf("type" to "KEY", "properties" to listOf("p1"), "name" to "   ")
                     ),
-                    "indexes" to schemaMapOf(
-                        "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"), "name" to "")
+                    "extensions" to schemaMapOf(
+                        "indexes" to schemaMapOf(
+                            "idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("p1"), "name" to "")
+                        )
                     )
                 )
             )
