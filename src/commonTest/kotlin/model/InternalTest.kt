@@ -112,11 +112,11 @@ class InternalTest {
                 RelationshipMapping(
                     relationship = "FRIENDS_WITH",
                     table = "friends_table",
-                    startNode = TargetMapping(
+                    fromNode = TargetMapping(
                         node = "Person",
                         properties = mutableMapOf("age" to PropertyMapping("from_age"))
                     ),
-                    endNode = TargetMapping(
+                    toNode = TargetMapping(
                         node = "Person"
                     ),
                     properties = mutableMapOf(
@@ -141,16 +141,16 @@ class InternalTest {
         // Assert Mappings Deep Translation
         val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("relationship0", relMapping.relationship)
-        assertEquals("node0", relMapping.startNode.node)
+        assertEquals("node0", relMapping.fromNode.node)
         assertTrue(
-            relMapping.startNode.properties.containsKey("node0_property0"),
+            relMapping.fromNode.properties.containsKey("node0_property0"),
             "From Target property should be renamed"
         )
         assertTrue(
             relMapping.properties.containsKey("relationship0_property0"),
             "Relationship property should be renamed"
         )
-        assertEquals("node0", relMapping.endNode.node)
+        assertEquals("node0", relMapping.toNode.node)
     }
 
     @Test
