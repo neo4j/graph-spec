@@ -228,7 +228,7 @@ class GraphSpecDataModelV3MigrationTest {
             graphSchema.listOfMaps("constraints").associate { it.string("\$id") to it.string("constraintType") }
         )
         assertEquals(
-            "p1_User_propertyType",
+            "p1_User_type",
             graphSchema.listOfMaps("constraints").first { it.string("\$id") == "c_PROPERTY_TYPE" }.string("name")
         )
     }

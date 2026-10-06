@@ -243,7 +243,7 @@ class InternalTest {
         assertNotNull(constraint, "An exists constraint should be generated for the property")
         assertEquals(ConstraintType.EXISTS, constraint.type)
         assertEquals(mutableSetOf("node0_property0"), constraint.properties)
-        assertEquals("email_propertyExistence", constraint.name)
+        assertEquals("email_exists", constraint.name)
     }
 
     @Test
