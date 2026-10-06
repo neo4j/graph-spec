@@ -125,7 +125,7 @@ enum class Neo4jType {
         // this would break the js union conversion
         fun fromString(string: String): Neo4jType? = when (string) {
             "ANY" -> ANY
-            "LIST<ANY>" -> Neo4jType.LIST_ANY
+            "LIST<ANY>" -> LIST_ANY
             "BOOLEAN" -> BOOLEAN
             "LIST<BOOLEAN>" -> LIST_BOOLEAN
             "DATE" -> DATE
