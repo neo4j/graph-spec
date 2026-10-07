@@ -140,7 +140,7 @@ class DataModelV3GraphSpecMigration :
                     // TODO optional
                 ),
                 "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, propertyTokens),
-                "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, "node"),
+                "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, propertyTokens),
                 "properties" toNotEmpty convertProperties(labels),
                 "name" to tokens.firstOrNull(),
                 "description" to nodeObject.literalOrNull("description")
@@ -153,26 +153,27 @@ class DataModelV3GraphSpecMigration :
         indexes: Map<String, List<SchemaMap>>,
         labelRef: String?,
         label: String,
-        type: String
-    ): Map<String, SchemaMap>? {
-        var count = 0
-        return indexes[labelRef]?.associate { index ->
-            count++
-            val id = index.id()
-            val resolvedType = indexType(index)
-            id to schemaMapOf(
-                "type" to resolvedType.name,
-                "labels" to listOf(label),
-                "properties" to index.listOfMapsOrNull("properties")?.map { it.ref() },
-                "options" toNotEmpty index.mapOrNull("options")?.also { it["type"] = resolvedType.name },
-                "name" to (index.stringOrNull("name") ?: "${type}Index${count - 1}")
-            )
-        }
+        propertyTokens: Map<String, String>
+    ): Map<String, SchemaMap>? = indexes[labelRef]?.associate { index ->
+        val id = index.id()
+        val resolvedType = indexType(index)
+        val properties = index.listOfMapsOrNull("properties")
+        id to schemaMapOf(
+            "type" to resolvedType.name,
+            "labels" to listOf(label),
+            "properties" to properties?.map { it.ref() },
+            "options" toNotEmpty index.mapOrNull("options")?.also { it["type"] = resolvedType.name },
+            "name" to (
+                index.stringOrNull("name")?.takeUnless { it.isBlank() }
+                    ?: NameFormat.indexName(properties.tokensFrom(propertyTokens), label, resolvedType)
+                )
+        )
     }
 
     private fun indexType(index: SchemaMap): IndexType {
         val type = index.string("indexType")
-        return indexType(type) ?: error("Unknown index type: '$type' at ${index.path}.${index.string("name")}")
+        return dataModelIndexTypeFrom(type)
+            ?: error("Unknown index type: '$type' at ${index.path}.${index.string("name")}")
     }
 
     internal fun convertConstraints(
@@ -241,7 +242,7 @@ class DataModelV3GraphSpecMigration :
                 "to" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType)),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, propertyTokens),
-                "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, "relationship"),
+                "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, propertyTokens),
                 "name" to uniqueRelationshipName(token, uniqueNames),
                 "description" to objectType.literalOrNull("description")
             )
@@ -419,16 +420,6 @@ class DataModelV3GraphSpecMigration :
             // everything else (string, integer, float, boolean, point, date, duration
             // and the vector coordinate variants like float32) is just its uppercase name
             else -> lower.uppercase()
-        }
-
-        private fun indexType(name: String): IndexType? = when (name) {
-            "lookup" -> LOOKUP
-            "default", "range" -> RANGE // TODO is default always range or is it dynamic based on type?
-            "fulltext" -> FULLTEXT
-            "point" -> POINT
-            "text" -> TEXT
-            "vector" -> VECTOR
-            else -> null
         }
     }
 }
