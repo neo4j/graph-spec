@@ -657,8 +657,8 @@ class GraphSpecDataModelV3MigrationTest {
             "relationships" to schemaMapOf(
                 "r1" to schemaMapOf(
                     "type" to "KNOWS",
-                    "start" to schemaMapOf("node" to "n1"),
-                    "end" to schemaMapOf("node" to "n1"),
+                    "from" to schemaMapOf("node" to "n1"),
+                    "to" to schemaMapOf("node" to "n1"),
                     "properties" to schemaMapOf("rp1" to schemaMapOf("name" to "since", "type" to "INTEGER")),
                     "constraints" to schemaMapOf(
                         "rel_uniq" to schemaMapOf("type" to "UNIQUE", "properties" to listOf("rp1"))
@@ -689,8 +689,8 @@ class GraphSpecDataModelV3MigrationTest {
             "relationships" to schemaMapOf(
                 "r1" to schemaMapOf(
                     "type" to "KNOWS",
-                    "start" to schemaMapOf("node" to "n1"),
-                    "end" to schemaMapOf("node" to "n1"),
+                    "from" to schemaMapOf("node" to "n1"),
+                    "to" to schemaMapOf("node" to "n1"),
                     "properties" to schemaMapOf("rp1" to schemaMapOf("name" to "since", "type" to "INTEGER")),
                     "indexes" to schemaMapOf(
                         "rel_idx" to schemaMapOf("type" to "TEXT", "properties" to listOf("rp1"))
