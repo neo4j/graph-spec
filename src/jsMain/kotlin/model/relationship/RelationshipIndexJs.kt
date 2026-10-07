@@ -31,15 +31,12 @@ external interface RelationshipIndexJs {
     var options: IndexOptionJs?
 }
 
-fun relationshipIndexJs(
-    type: String,
-    properties: Array<String>,
-    options: IndexOptionJs? = null
-): RelationshipIndexJs = jso {
-    this.type = type
-    this.properties = properties
-    this.options = options
-}
+fun relationshipIndexJs(type: String, properties: Array<String>, options: IndexOptionJs? = null): RelationshipIndexJs =
+    jso {
+        this.type = type
+        this.properties = properties
+        this.options = options
+    }
 
 fun RelationshipIndex.toJs() = relationshipIndexJs(
     type = type.name,

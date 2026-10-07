@@ -32,7 +32,9 @@ external interface RelationshipConstraintExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
 }
 
-fun relationshipConstraintExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): RelationshipConstraintExtensionsJs = jso {
+fun relationshipConstraintExtensionsJs(
+    custom: Record<String, ExtensionValueJs> = emptyRecord()
+): RelationshipConstraintExtensionsJs = jso {
     this.custom = custom
 }
 

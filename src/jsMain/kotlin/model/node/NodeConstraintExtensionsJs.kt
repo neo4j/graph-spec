@@ -32,9 +32,10 @@ external interface NodeConstraintExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
 }
 
-fun nodeConstraintExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): NodeConstraintExtensionsJs = jso {
-    this.custom = custom
-}
+fun nodeConstraintExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): NodeConstraintExtensionsJs =
+    jso {
+        this.custom = custom
+    }
 
 fun NodeConstraintExtensions.toJs() = nodeConstraintExtensionsJs(
     custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()

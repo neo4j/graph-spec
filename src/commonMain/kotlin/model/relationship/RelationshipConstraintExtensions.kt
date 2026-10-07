@@ -30,4 +30,5 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("RelationshipConstraintExtensions")
-data class RelationshipConstraintExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions
+data class RelationshipConstraintExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) :
+    Extensions
