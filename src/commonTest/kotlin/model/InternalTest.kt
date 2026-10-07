@@ -372,8 +372,8 @@ class InternalTest {
             relationships = mutableMapOf(
                 "KNOWS" to Relationship(
                     type = "KNOWS",
-                    start = RelationshipTarget(),
-                    end = RelationshipTarget(),
+                    from = RelationshipTarget(),
+                    to = RelationshipTarget(),
                     properties = mutableMapOf("since" to Property(key = true))
                 )
             ),
