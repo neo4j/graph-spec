@@ -214,7 +214,7 @@ class DataModelV3GraphSpecMigration :
 
     private fun constraintType(constraint: SchemaMap): ConstraintType {
         val type = constraint.string("constraintType")
-        return constraintType(type)
+        return dataModelConstraintTypeFrom(type)
             ?: error("Unknown constraint type: $type at ${constraint.path}.${constraint.string("name")}")
     }
 
@@ -430,7 +430,5 @@ class DataModelV3GraphSpecMigration :
             "vector" -> VECTOR
             else -> null
         }
-
-        private fun constraintType(name: String): ConstraintType? = dataModelConstraintTypeFrom(name)
     }
 }
