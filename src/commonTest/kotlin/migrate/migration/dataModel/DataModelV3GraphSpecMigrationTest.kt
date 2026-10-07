@@ -212,20 +212,22 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
-    fun `convertConstraints throws error for multi-property TYPE constraints`() {
+    fun `convertConstraints throws error for multi-property propertyType constraints`() {
         val constraints = mapOf(
             "L1" to listOf(
                 schemaMapOf(
-                    "constraintType" to "TYPE",
+                    "constraintType" to "propertyType",
                     "name" to "bad_constraint",
                     "properties" to listOf(mapOf("\$ref" to "#p1"), mapOf("\$ref" to "#p2"))
                 )
             )
         )
 
-        assertFailsWith<IllegalStateException>("Type constraints not supported on multiple properties") {
-            migration.convertConstraints(constraints, "L1", "Person")
+        val error = assertFailsWith<IllegalStateException> {
+            migration.convertConstraints(constraints, "L1", "Person", emptyMap())
         }
+
+        assertEquals("Type constraints not supported on multiple properties.", error.message)
     }
 
     @Test
@@ -241,7 +243,15 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.convertConstraints(constraints, "label1", "Person")
+        val result = migration.convertConstraints(
+            constraints,
+            "label1",
+            "Person",
+            mapOf(
+                "p1" to "prop1",
+                "p2" to "prop2"
+            )
+        )
 
         assertNotNull(result)
         val constraint = result["c:1"]
@@ -249,6 +259,34 @@ class DataModelV3GraphSpecMigrationTest {
         assertEquals("UNIQUE", constraint.string("type"))
         assertEquals("Person", constraint.string("label"))
         assertEquals(listOf("p1", "p2").toSchemaElement(), constraint.list("properties"))
+        assertEquals("constraint1", constraint.string("name"))
+    }
+
+    @Test
+    fun `convertConstraints builds a name when the data model has none`() {
+        val constraints = mapOf(
+            "label1" to listOf(
+                schemaMapOf(
+                    "\$id" to "c:1",
+                    "name" to "",
+                    "constraintType" to "uniqueness",
+                    "properties" to listOf(mapOf("\$ref" to "#p1"), mapOf("\$ref" to "#p2"))
+                )
+            )
+        )
+
+        val result = migration.convertConstraints(
+            constraints,
+            "label1",
+            "Person",
+            mapOf(
+                "p1" to "prop1",
+                "p2" to "prop2"
+            )
+        )
+
+        assertNotNull(result)
+        assertEquals("prop1_prop2_Person_uniq", result["c:1"]?.string("name"))
     }
 
     @Test

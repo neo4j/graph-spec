@@ -202,6 +202,38 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
+    fun `migrate maps each constraint type to its data model word`() {
+        val constraintTypes = listOf("UNIQUE", "KEY", "EXISTS", "PROPERTY_TYPE")
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "User"),
+                    "constraints" to constraintTypes.associate { type ->
+                        "c_$type" to schemaMapOf("type" to type, "properties" to listOf("p1"))
+                    }
+                )
+            )
+        )
+
+        val result = migration.migrate(input)
+        val graphSchema = result.map("graphSchemaRepresentation").map("graphSchema")
+
+        assertEquals(
+            mapOf(
+                "c_UNIQUE" to "uniqueness",
+                "c_KEY" to "key",
+                "c_EXISTS" to "propertyExistence",
+                "c_PROPERTY_TYPE" to "propertyType"
+            ),
+            graphSchema.listOfMaps("constraints").associate { it.string("\$id") to it.string("constraintType") }
+        )
+        assertEquals(
+            "p1_User_type",
+            graphSchema.listOfMaps("constraints").first { it.string("\$id") == "c_PROPERTY_TYPE" }.string("name")
+        )
+    }
+
+    @Test
     fun `convertGraphMapping correctly recovers relationship IDs via findRelationshipId`() {
         val input = schemaMapOf(
             "relationships" to schemaMapOf(
@@ -593,5 +625,75 @@ class GraphSpecDataModelV3MigrationTest {
         assertTrue(dataModel.containsKey("graphMappingRepresentation"))
         assertTrue(dataModel.containsKey("configurations"))
         assertTrue(wrapped.containsKey("description"))
+    }
+
+    @Test
+    fun `migrate builds constraint names from property and label when the graph spec has none`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "Person"),
+                    "properties" to schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to "STRING")),
+                    "constraints" to schemaMapOf(
+                        "uniq" to schemaMapOf("type" to "UNIQUE", "properties" to listOf("p1"))
+                    )
+                )
+            ),
+            "relationships" to schemaMapOf(
+                "r1" to schemaMapOf(
+                    "type" to "KNOWS",
+                    "start" to schemaMapOf("node" to "n1"),
+                    "end" to schemaMapOf("node" to "n1"),
+                    "properties" to schemaMapOf("rp1" to schemaMapOf("name" to "since", "type" to "INTEGER")),
+                    "constraints" to schemaMapOf(
+                        "rel_uniq" to schemaMapOf("type" to "UNIQUE", "properties" to listOf("rp1"))
+                    )
+                )
+            )
+        )
+
+        val graphSchema = migration.migrate(input).map("graphSchemaRepresentation").map("graphSchema")
+
+        val constraints = graphSchema.listOfMaps("constraints")
+        assertEquals("name_Person_uniq", constraints.first { it.string("entityType") == "node" }.string("name"))
+        assertEquals("since_KNOWS_uniq", constraints.first { it.string("entityType") == "relationship" }.string("name"))
+    }
+
+    @Test
+    fun `migrate keeps a name the graph spec provides`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "Person"),
+                    "properties" to schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to "STRING")),
+                    "constraints" to schemaMapOf(
+                        "uniq" to schemaMapOf("type" to "UNIQUE", "properties" to listOf("p1"), "name" to "my_name")
+                    )
+                )
+            )
+        )
+
+        val graphSchema = migration.migrate(input).map("graphSchemaRepresentation").map("graphSchema")
+
+        assertEquals("my_name", graphSchema.listOfMaps("constraints")[0].string("name"))
+    }
+
+    @Test
+    fun `migrate treats a blank name as absent`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "Person"),
+                    "properties" to schemaMapOf("p1" to schemaMapOf("name" to "name", "type" to "STRING")),
+                    "constraints" to schemaMapOf(
+                        "uniq" to schemaMapOf("type" to "KEY", "properties" to listOf("p1"), "name" to "   ")
+                    )
+                )
+            )
+        )
+
+        val graphSchema = migration.migrate(input).map("graphSchemaRepresentation").map("graphSchema")
+
+        assertEquals("name_Person_key", graphSchema.listOfMaps("constraints")[0].string("name"))
     }
 }

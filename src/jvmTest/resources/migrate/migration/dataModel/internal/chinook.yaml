@@ -11,7 +11,7 @@ nodes:
         type: "UNIQUE"
         label: "album"
         properties: ["node0_property0"]
-        name: "unique_album_album_id"
+        name: "album__id_album_uniq"
     indexes:
       node0_index0:
         type: "TEXT"
@@ -30,7 +30,7 @@ nodes:
         type: "UNIQUE"
         label: "artist"
         properties: ["node1_property0"]
-        name: "unique_artist_artist_id"
+        name: "artist__id_artist_uniq"
     indexes:
       node1_index0:
         type: "TEXT"
@@ -59,7 +59,7 @@ nodes:
         type: "UNIQUE"
         label: "customer"
         properties: ["node2_property0"]
-        name: "unique_customer_customer_id"
+        name: "customer__id_customer_uniq"
     indexes:
       node2_index0:
         type: "TEXT"
@@ -90,7 +90,7 @@ nodes:
         type: "UNIQUE"
         label: "employee"
         properties: ["node3_property0"]
-        name: "unique_employee_employee_id"
+        name: "employee__id_employee_uniq"
     indexes:
       node3_index0:
         type: "TEXT"
@@ -109,7 +109,7 @@ nodes:
         type: "UNIQUE"
         label: "genre"
         properties: ["node4_property0"]
-        name: "unique_genre_genre_id"
+        name: "genre__id_genre_uniq"
     indexes:
       node4_index0:
         type: "TEXT"
@@ -134,7 +134,7 @@ nodes:
         type: "UNIQUE"
         label: "invoice"
         properties: ["node5_property0"]
-        name: "unique_invoice_invoice_id"
+        name: "invoice__id_invoice_uniq"
     indexes:
       node5_index0:
         type: "TEXT"
@@ -154,7 +154,7 @@ nodes:
         type: "UNIQUE"
         label: "invoice_line"
         properties: ["node6_property0"]
-        name: "unique_invoice_line_invoice_line_id"
+        name: "invoice__line__id_invoice__line_uniq"
     indexes:
       node6_index0:
         type: "TEXT"
@@ -173,7 +173,7 @@ nodes:
         type: "UNIQUE"
         label: "media_type"
         properties: ["node7_property0"]
-        name: "unique_media_type_media_type_id"
+        name: "media__type__id_media__type_uniq"
     indexes:
       node7_index0:
         type: "TEXT"
@@ -192,7 +192,7 @@ nodes:
         type: "UNIQUE"
         label: "playlist"
         properties: ["node8_property0"]
-        name: "unique_playlist_playlist_id"
+        name: "playlist__id_playlist_uniq"
     indexes:
       node8_index0:
         type: "TEXT"
@@ -215,7 +215,7 @@ nodes:
         type: "UNIQUE"
         label: "track"
         properties: ["node9_property0"]
-        name: "unique_track_track_id"
+        name: "track__id_track_uniq"
     indexes:
       node9_index0:
         type: "TEXT"

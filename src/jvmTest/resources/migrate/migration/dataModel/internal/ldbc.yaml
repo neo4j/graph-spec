@@ -17,7 +17,7 @@ nodes:
         type: "UNIQUE"
         label: "Comment"
         properties: ["node0_property3"]
-        name: "unique_Comment_id"
+        name: "id_Comment_uniq"
     indexes:
       node0_index0:
         type: "TEXT"
@@ -39,7 +39,7 @@ nodes:
         type: "UNIQUE"
         label: "Forum"
         properties: ["node1_property3"]
-        name: "unique_Forum_id"
+        name: "id_Forum_uniq"
     indexes:
       node1_index0:
         type: "TEXT"
@@ -60,7 +60,7 @@ nodes:
         type: "UNIQUE"
         label: "Organisation"
         properties: ["node2_property0"]
-        name: "unique_Organisation_id"
+        name: "id_Organisation_uniq"
     indexes:
       node2_index0:
         type: "TEXT"
@@ -89,7 +89,7 @@ nodes:
         type: "UNIQUE"
         label: "Person"
         properties: ["node3_property3"]
-        name: "unique_Person_id"
+        name: "id_Person_uniq"
     indexes:
       node3_index0:
         type: "TEXT"
@@ -110,7 +110,7 @@ nodes:
         type: "UNIQUE"
         label: "Place"
         properties: ["node4_property0"]
-        name: "unique_Place_id"
+        name: "id_Place_uniq"
     indexes:
       node4_index0:
         type: "TEXT"
@@ -137,7 +137,7 @@ nodes:
         type: "UNIQUE"
         label: "Post"
         properties: ["node5_property3"]
-        name: "unique_Post_id"
+        name: "id_Post_uniq"
     indexes:
       node5_index0:
         type: "TEXT"
@@ -157,7 +157,7 @@ nodes:
         type: "UNIQUE"
         label: "Tag"
         properties: ["node6_property0"]
-        name: "unique_Tag_id"
+        name: "id_Tag_uniq"
     indexes:
       node6_index0:
         type: "TEXT"
@@ -177,7 +177,7 @@ nodes:
         type: "UNIQUE"
         label: "TagClass"
         properties: ["node7_property0"]
-        name: "unique_TagClass_id"
+        name: "id_TagClass_uniq"
     indexes:
       node7_index0:
         type: "TEXT"
