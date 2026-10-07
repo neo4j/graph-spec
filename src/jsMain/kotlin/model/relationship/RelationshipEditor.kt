@@ -16,8 +16,10 @@
  */
 package model.relationship
 
+import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
+import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.getOrThrow
 import model.index.IndexOptionJs
@@ -257,11 +259,12 @@ class RelationshipEditor {
             relationshipId: String,
             type: String,
             properties: Array<String> = emptyArray(),
-            options: IndexOptionJs? = null
+            options: IndexOptionJs? = null,
+            custom: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             return relationship.indexes.addUnique("index") {
-                relationshipIndexJs(type, properties, options)
+                relationshipIndexJs(type, properties, options, custom)
             }
         }
 

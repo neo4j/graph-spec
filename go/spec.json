@@ -456,6 +456,12 @@
                         }
                     ]
                 },
+                "custom": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ExtensionValue"
+                    }
+                },
                 "name": {
                     "type": "string",
                     "nullable": true
@@ -779,6 +785,12 @@
                             "$ref": "#/$defs/IndexOption"
                         }
                     ]
+                },
+                "custom": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ExtensionValue"
+                    }
                 },
                 "name": {
                     "type": "string",

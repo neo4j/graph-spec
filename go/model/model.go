@@ -324,11 +324,12 @@ var IndexTypeValues = []IndexType{
 }
 
 type NodeIndex struct {
-	Labels     []string    `json:"labels"`
-	Name       *string     `json:"name,omitempty"`
-	Options    interface{} `json:"options,omitempty"`
-	Properties []string    `json:"properties"`
-	Type       IndexType   `json:"type"`
+	Custom     map[string]ExtensionValue `json:"custom,omitempty"`
+	Labels     []string                  `json:"labels"`
+	Name       *string                   `json:"name,omitempty"`
+	Options    interface{}               `json:"options,omitempty"`
+	Properties []string                  `json:"properties"`
+	Type       IndexType                 `json:"type"`
 }
 
 type Neo4jType string
@@ -464,10 +465,11 @@ type RelationshipExtensions struct {
 }
 
 type RelationshipIndex struct {
-	Name       *string     `json:"name,omitempty"`
-	Options    interface{} `json:"options,omitempty"`
-	Properties []string    `json:"properties"`
-	Type       IndexType   `json:"type"`
+	Custom     map[string]ExtensionValue `json:"custom,omitempty"`
+	Name       *string                   `json:"name,omitempty"`
+	Options    interface{}               `json:"options,omitempty"`
+	Properties []string                  `json:"properties"`
+	Type       IndexType                 `json:"type"`
 }
 
 type RelationshipTarget struct {

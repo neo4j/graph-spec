@@ -16,7 +16,13 @@
  */
 package model.node
 
+import js.objects.Record
 import kotlinx.js.JsPlainObject
+import model.associateBy
+import model.emptyRecord
+import model.extension.ExtensionValueJs
+import model.extension.toClass
+import model.extension.toJs
 import model.index.IndexOptionJs
 import model.index.toClass
 import model.index.toJs
@@ -30,30 +36,35 @@ external interface NodeIndexJs {
     var labels: Array<String>
     var properties: Array<String>
     var options: IndexOptionJs?
+    val custom: Record<String, ExtensionValueJs>
 }
 
 fun nodeIndexJs(
     type: String,
     labels: Array<String> = emptyArray(),
     properties: Array<String> = emptyArray(),
-    options: IndexOptionJs? = null
+    options: IndexOptionJs? = null,
+    custom: Record<String, ExtensionValueJs> = emptyRecord()
 ): NodeIndexJs = jso {
     this.type = type
     this.labels = labels
     this.properties = properties
     this.options = options
+    this.custom = custom
 }
 
 fun NodeIndex.toJs() = nodeIndexJs(
     type = type.name,
     labels = labels.toTypedArray(),
     properties = properties.toTypedArray(),
-    options = options?.toJs()
+    options = options?.toJs(),
+    custom = custom.associateBy { _, value -> value.toJs() }
 )
 
 fun NodeIndexJs.toClass() = NodeIndex(
     type = IndexType.valueOf(type),
     labels = labels.toMutableSet(),
     properties = properties.toMutableSet(),
-    options = options?.toClass()
+    options = options?.toClass(),
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

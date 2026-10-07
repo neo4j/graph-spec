@@ -16,8 +16,10 @@
  */
 package model.node
 
+import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
+import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.getOrThrow
 import model.index.IndexOptionJs
@@ -233,11 +235,12 @@ class NodeEditor {
             type: String,
             labels: Array<String> = emptyArray(),
             properties: Array<String> = emptyArray(),
-            options: IndexOptionJs? = null
+            options: IndexOptionJs? = null,
+            custom: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.indexes.addUnique("index") {
-                nodeIndexJs(type, labels, properties, options)
+                nodeIndexJs(type, labels, properties, options, custom)
             }
         }
 
