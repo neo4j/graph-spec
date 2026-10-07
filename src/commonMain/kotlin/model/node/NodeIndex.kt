@@ -18,8 +18,6 @@ package model.node
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
 import model.index.IndexOption
 import model.type.IndexType
 import model.type.Named
@@ -33,7 +31,5 @@ data class NodeIndex(
     val labels: MutableSet<String>,
     val properties: MutableSet<String>,
     val options: IndexOption? = null,
-    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
-) : Extensions,
-    Named
+) : Named

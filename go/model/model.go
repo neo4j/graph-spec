@@ -287,8 +287,12 @@ type Labels struct {
 	Optional   []string          `json:"optional,omitempty"`
 }
 
+type NodeConstraintExtensions struct {
+	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+}
+
 type NodeConstraint struct {
-	Custom     map[string]ExtensionValue `json:"custom,omitempty"`
+	Extensions *NodeConstraintExtensions `json:"extensions,omitempty"`
 	Label      *string                   `json:"label,omitempty"`
 	Name       *string                   `json:"name,omitempty"`
 	Properties []string                  `json:"properties"`
@@ -320,12 +324,11 @@ var IndexTypeValues = []IndexType{
 }
 
 type NodeIndex struct {
-	Custom     map[string]ExtensionValue `json:"custom,omitempty"`
-	Labels     []string                  `json:"labels"`
-	Name       *string                   `json:"name,omitempty"`
-	Options    interface{}               `json:"options,omitempty"`
-	Properties []string                  `json:"properties"`
-	Type       IndexType                 `json:"type"`
+	Labels     []string    `json:"labels"`
+	Name       *string     `json:"name,omitempty"`
+	Options    interface{} `json:"options,omitempty"`
+	Properties []string    `json:"properties"`
+	Type       IndexType   `json:"type"`
 }
 
 type Neo4jType string
@@ -445,11 +448,15 @@ type Node struct {
 	Reference   *string                   `json:"reference,omitempty"`
 }
 
+type RelationshipConstraintExtensions struct {
+	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+}
+
 type RelationshipConstraint struct {
-	Custom     map[string]ExtensionValue `json:"custom,omitempty"`
-	Name       *string                   `json:"name,omitempty"`
-	Properties []string                  `json:"properties"`
-	Type       ConstraintType            `json:"type"`
+	Extensions *RelationshipConstraintExtensions `json:"extensions,omitempty"`
+	Name       *string                           `json:"name,omitempty"`
+	Properties []string                          `json:"properties"`
+	Type       ConstraintType                    `json:"type"`
 }
 
 type RelationshipExtensions struct {
@@ -457,11 +464,10 @@ type RelationshipExtensions struct {
 }
 
 type RelationshipIndex struct {
-	Custom     map[string]ExtensionValue `json:"custom,omitempty"`
-	Name       *string                   `json:"name,omitempty"`
-	Options    interface{}               `json:"options,omitempty"`
-	Properties []string                  `json:"properties"`
-	Type       IndexType                 `json:"type"`
+	Name       *string     `json:"name,omitempty"`
+	Options    interface{} `json:"options,omitempty"`
+	Properties []string    `json:"properties"`
+	Type       IndexType   `json:"type"`
 }
 
 type RelationshipTarget struct {
@@ -487,8 +493,8 @@ type Relationship struct {
 }
 
 type TableColumn struct {
-	Dimension *int                      `json:"dimension,omitempty"`
 	Custom    map[string]ExtensionValue `json:"custom,omitempty"`
+	Dimension *int                      `json:"dimension,omitempty"`
 	Name      *string                   `json:"name,omitempty"`
 	Size      *int                      `json:"size,omitempty"`
 	Suggested *Neo4jType                `json:"suggested,omitempty"`

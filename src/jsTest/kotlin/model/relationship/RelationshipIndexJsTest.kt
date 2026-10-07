@@ -1,8 +1,6 @@
 package model.relationship
 
 import model.mapping.JsMappingTest
-import model.extension.StringValue
-import model.extension.stringValueJs
 import model.index.FullTextIndexOption
 import model.index.FullTextIndexOptionJs
 import model.index.fullTextIndexOptionJs
@@ -18,9 +16,6 @@ class RelationshipIndexJsTest : JsMappingTest<RelationshipIndex, RelationshipInd
         properties = mutableSetOf("property_1", "property_2"),
         options = FullTextIndexOption(
             analyzer = "test"
-        ),
-        custom = mutableMapOf(
-            "key1" to StringValue("val1")
         )
     )
 
@@ -34,7 +29,6 @@ class RelationshipIndexJsTest : JsMappingTest<RelationshipIndex, RelationshipInd
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))
         assertJsEquals("test", (jsObject.options as? FullTextIndexOptionJs)?.analyzer)
-        assertJsEquals(stringValueJs("val1"), jsObject.custom["key1"])
     }
 
 }

@@ -16,10 +16,8 @@
  */
 package model.node
 
-import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
-import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.getOrThrow
 import model.index.IndexOptionJs
@@ -186,11 +184,11 @@ class NodeEditor {
             type: String,
             label: String? = null,
             properties: Array<String> = emptyArray(),
-            custom: Record<String, ExtensionValueJs> = emptyRecord()
+            extensions: NodeConstraintExtensionsJs = nodeConstraintExtensionsJs()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.constraints.addUnique("constraint") {
-                nodeConstraintJs(type, label, properties, custom)
+                nodeConstraintJs(type, label, properties, extensions)
             }
         }
 
@@ -235,12 +233,11 @@ class NodeEditor {
             type: String,
             labels: Array<String> = emptyArray(),
             properties: Array<String> = emptyArray(),
-            options: IndexOptionJs? = null,
-            custom: Record<String, ExtensionValueJs> = emptyRecord()
+            options: IndexOptionJs? = null
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.indexes.addUnique("index") {
-                nodeIndexJs(type, labels, properties, options, custom)
+                nodeIndexJs(type, labels, properties, options)
             }
         }
 

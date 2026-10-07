@@ -18,8 +18,6 @@ package model.node
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
 import model.type.ConstraintType
 import model.type.Named
 import kotlin.js.JsExport
@@ -31,8 +29,7 @@ data class NodeConstraint(
     override var type: ConstraintType,
     var label: String? = null, // TODO: Optional to avoid id issues with frontend redux?
     override val properties: MutableSet<String>,
-    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val extensions: NodeConstraintExtensions = NodeConstraintExtensions(),
     override var name: String? = null
-) : Extensions,
-    Constraint,
+) : Constraint,
     Named

@@ -392,11 +392,8 @@
                         "type": "string"
                     }
                 },
-                "custom": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                "extensions": {
+                    "$ref": "#/$defs/NodeConstraintExtensions"
                 },
                 "name": {
                     "type": "string",
@@ -417,6 +414,19 @@
                 "PROPERTY_TYPE",
                 "UNIQUE"
             ]
+        },
+        "NodeConstraintExtensions": {
+            "type": "object",
+            "properties": {
+                "custom": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ExtensionValue"
+                    }
+                }
+            },
+            "required": [],
+            "additionalProperties": false
         },
         "NodeIndex": {
             "type": "object",
@@ -445,12 +455,6 @@
                             "$ref": "#/$defs/IndexOption"
                         }
                     ]
-                },
-                "custom": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
                 },
                 "name": {
                     "type": "string",
@@ -727,11 +731,8 @@
                         "type": "string"
                     }
                 },
-                "custom": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                "extensions": {
+                    "$ref": "#/$defs/RelationshipConstraintExtensions"
                 },
                 "name": {
                     "type": "string",
@@ -742,6 +743,19 @@
                 "type",
                 "properties"
             ],
+            "additionalProperties": false
+        },
+        "RelationshipConstraintExtensions": {
+            "type": "object",
+            "properties": {
+                "custom": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ExtensionValue"
+                    }
+                }
+            },
+            "required": [],
             "additionalProperties": false
         },
         "RelationshipIndex": {
@@ -765,12 +779,6 @@
                             "$ref": "#/$defs/IndexOption"
                         }
                     ]
-                },
-                "custom": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
                 },
                 "name": {
                     "type": "string",

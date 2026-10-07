@@ -16,13 +16,7 @@
  */
 package model.relationship
 
-import js.objects.Record
 import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.index.IndexOptionJs
 import model.index.toClass
 import model.jso
@@ -33,27 +27,27 @@ import model.type.ConstraintType
 external interface RelationshipConstraintJs {
     var type: String
     var properties: Array<String>
-    val custom: Record<String, ExtensionValueJs>
+    val extensions: RelationshipConstraintExtensionsJs
 }
 
 fun relationshipConstraintJs(
     type: String,
     properties: Array<String> = emptyArray(),
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
+    extensions: RelationshipConstraintExtensionsJs = relationshipConstraintExtensionsJs()
 ): RelationshipConstraintJs = jso {
     this.type = type
     this.properties = properties
-    this.custom = custom
+    this.extensions = extensions
 }
 
 fun RelationshipConstraint.toJs() = relationshipConstraintJs(
     type = type.name,
     properties = properties.toTypedArray(),
-    custom = custom.associateBy { _, value -> value.toJs() }
+    extensions = extensions.toJs()
 )
 
 fun RelationshipConstraintJs.toClass() = RelationshipConstraint(
     type = ConstraintType.valueOf(type),
     properties = properties.toMutableSet(),
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    extensions = extensions.toClass()
 )

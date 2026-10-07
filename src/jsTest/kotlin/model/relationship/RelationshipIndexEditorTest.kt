@@ -2,7 +2,6 @@ package model.relationship
 import js.objects.Object.Companion.keys
 import kotlin.test.*
 import js.objects.get
-import model.extension.StringValue
 import model.extension.toJs
 
 class RelationshipIndexEditorTest {
@@ -21,7 +20,6 @@ class RelationshipIndexEditorTest {
         assertEquals(1, index.properties.size)
         assertEquals("prop1", index.properties[0])
         assertNull(index.options)
-        assertNotNull(index.custom)
     }
 
     @Test
