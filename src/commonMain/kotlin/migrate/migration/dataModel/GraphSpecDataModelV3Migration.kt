@@ -188,10 +188,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     elements = rel.mapOfMapsOrNull("constraints"),
                     entityType = "relationship",
                     refId = typeId,
-                    entityToken = typeToken,
-                    propertyTokens = propertyTokens,
                     typeKey = "constraintType",
-                    typeTransform = ::constraintType
+                    typeTransform = ::constraintType,
+                    generatedName = { element, ids -> element.constraintName(ids, propertyTokens, typeToken) }
                 )
             )
             indexes.addAll(
@@ -199,10 +198,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     elements = rel.mapOfMapsOrNull("indexes"),
                     entityType = "relationship",
                     refId = typeId,
-                    entityToken = typeToken,
-                    propertyTokens = propertyTokens,
                     typeKey = "indexType",
-                    typeTransform = ::indexType
+                    typeTransform = ::indexType,
+                    generatedName = { element, ids -> element.indexName(ids, propertyTokens, typeToken) }
                 )
             )
         }
@@ -273,10 +271,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     elements = node.mapOfMapsOrNull("constraints"),
                     entityType = "node",
                     refId = primaryLabelId,
-                    entityToken = primaryLabel,
-                    propertyTokens = propertyTokens,
                     typeKey = "constraintType",
-                    typeTransform = ::constraintType
+                    typeTransform = ::constraintType,
+                    generatedName = { element, ids -> element.constraintName(ids, propertyTokens, primaryLabel) }
                 )
             )
             indexes.addAll(
@@ -284,10 +281,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
                     elements = node.mapOfMapsOrNull("indexes"),
                     entityType = "node",
                     refId = primaryLabelId,
-                    entityToken = primaryLabel,
-                    propertyTokens = propertyTokens,
                     typeKey = "indexType",
-                    typeTransform = ::indexType
+                    typeTransform = ::indexType,
+                    generatedName = { element, ids -> element.indexName(ids, propertyTokens, primaryLabel) }
                 )
             )
         }
@@ -361,10 +357,9 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         elements: Map<String, SchemaMap>?,
         entityType: String,
         refId: String,
-        entityToken: String,
-        propertyTokens: Map<String, String>,
         typeKey: String,
-        typeTransform: (String) -> String
+        typeTransform: (String) -> String,
+        generatedName: (element: SchemaMap, propertyIds: List<String>) -> String
     ): List<SchemaMap> {
         if (elements.isNullOrEmpty()) {
             return emptyList()
@@ -376,7 +371,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             val type = typeTransform(element.string("type"))
             schemaMapOf(
                 "\$id" to name,
-                "name" to element.resolvedName(propertyIds, propertyTokens, entityToken, typeKey),
+                "name" to element.resolvedName(propertyIds) { generatedName(element, propertyIds) },
                 typeKey to type,
                 "entityType" to entityType,
                 "nodeLabel" to if (entityType == "node") refOf(refId) else SchemaNull(),
@@ -387,28 +382,38 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         }
     }
 
-    private fun SchemaMap.resolvedName(
-        propertyIds: List<String>,
-        propertyTokens: Map<String, String>,
-        entityToken: String,
-        typeKey: String
-    ): String {
+    private fun SchemaMap.resolvedName(propertyIds: List<String>, generate: () -> String): String {
         stringOrNull("name")?.takeUnless { it.isBlank() }?.let { return it }
-        val tokens = propertyIds.map { propertyTokens[it] ?: it }
-        if (tokens.isEmpty()) {
+        if (propertyIds.isEmpty()) {
             return ""
         }
-        val typeName = string("type")
-        return if (typeKey == "constraintType") {
-            val type = ConstraintType.entries.find { it.name == typeName }
-                ?: error("Unknown constraint type: '$typeName' at $path.type")
-            NameFormat.constraintName(tokens, entityToken, type)
-        } else {
-            val type = IndexType.entries.find { it.name == typeName }
-                ?: error("Unknown index type: '$typeName' at $path.type")
-            NameFormat.indexName(tokens, entityToken, type)
-        }
+        return generate()
     }
+
+    private fun SchemaMap.constraintName(
+        propertyIds: List<String>,
+        propertyTokens: Map<String, String>,
+        entityToken: String
+    ): String {
+        val typeName = string("type")
+        val type = ConstraintType.entries.find { it.name == typeName }
+            ?: error("Unknown constraint type: '$typeName' at $path.type")
+        return NameFormat.constraintName(propertyIds.tokens(propertyTokens), entityToken, type)
+    }
+
+    private fun SchemaMap.indexName(
+        propertyIds: List<String>,
+        propertyTokens: Map<String, String>,
+        entityToken: String
+    ): String {
+        val typeName = string("type")
+        val type = IndexType.entries.find { it.name == typeName }
+            ?: error("Unknown index type: '$typeName' at $path.type")
+        return NameFormat.indexName(propertyIds.tokens(propertyTokens), entityToken, type)
+    }
+
+    private fun List<String>.tokens(propertyTokens: Map<String, String>): List<String> =
+        map { propertyTokens[it] ?: it }
 
     internal fun convertFields(fields: Map<String, SchemaMap>?): List<SchemaMap> {
         if (fields.isNullOrEmpty()) {
