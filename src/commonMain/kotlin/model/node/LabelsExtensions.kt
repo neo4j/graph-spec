@@ -30,7 +30,4 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("LabelsExtensions")
-data class LabelsExtensions(val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions {
-    override val extensions: MutableMap<String, ExtensionValue>
-        get() = custom
-}
+data class LabelsExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions

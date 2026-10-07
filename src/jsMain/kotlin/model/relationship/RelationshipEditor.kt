@@ -203,11 +203,11 @@ class RelationshipEditor {
             relationshipId: String,
             type: String,
             properties: Array<String> = emptyArray(),
-            extras: Record<String, ExtensionValueJs> = emptyRecord()
+            custom: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             return relationship.constraints.addUnique("constraint") {
-                relationshipConstraintJs(type, properties, extras)
+                relationshipConstraintJs(type, properties, custom)
             }
         }
 
@@ -260,11 +260,11 @@ class RelationshipEditor {
             type: String,
             properties: Array<String> = emptyArray(),
             options: IndexOptionJs? = null,
-            extras: Record<String, ExtensionValueJs> = emptyRecord()
+            custom: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             return relationship.indexes.addUnique("index") {
-                relationshipIndexJs(type, properties, options, extras)
+                relationshipIndexJs(type, properties, options, custom)
             }
         }
 

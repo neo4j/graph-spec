@@ -392,7 +392,7 @@
                         "type": "string"
                     }
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
@@ -446,7 +446,7 @@
                         }
                     ]
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
@@ -727,7 +727,7 @@
                         "type": "string"
                     }
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
@@ -766,7 +766,7 @@
                         }
                     ]
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
@@ -820,7 +820,7 @@
                         "$ref": "#/$defs/ForeignKey"
                     }
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
@@ -854,7 +854,7 @@
                     "type": "integer",
                     "nullable": true
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
@@ -880,7 +880,7 @@
                 "references": {
                     "$ref": "#/$defs/ForeignKeyReference"
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
@@ -905,7 +905,7 @@
                         "type": "string"
                     }
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
@@ -1103,7 +1103,7 @@
                 "y": {
                     "type": "number"
                 },
-                "extras": {
+                "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"

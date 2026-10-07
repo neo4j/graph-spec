@@ -32,31 +32,31 @@ external interface NodeConstraintJs {
     var type: String
     var label: String?
     var properties: Array<String>
-    val extras: Record<String, ExtensionValueJs>
+    val custom: Record<String, ExtensionValueJs>
 }
 
 fun nodeConstraintJs(
     type: String,
     label: String? = null,
     properties: Array<String> = emptyArray(),
-    extras: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, ExtensionValueJs> = emptyRecord()
 ): NodeConstraintJs = jso {
     this.type = type
     this.label = label
     this.properties = properties
-    this.extras = extras
+    this.custom = custom
 }
 
 fun NodeConstraint.toJs() = nodeConstraintJs(
     type = type.name,
     label = label,
     properties = properties.toTypedArray(),
-    extras = extras.associateBy { _, value -> value.toJs() }
+    custom = custom.associateBy { _, value -> value.toJs() }
 )
 
 fun NodeConstraintJs.toClass() = NodeConstraint(
     type = ConstraintType.valueOf(type),
     label = label,
     properties = properties.toMutableSet(),
-    extras = extras.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

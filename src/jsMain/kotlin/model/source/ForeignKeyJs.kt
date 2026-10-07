@@ -31,27 +31,27 @@ import kotlin.String
 external interface ForeignKeyJs {
     var columns: Array<String>
     val references: ForeignKeyReferenceJs
-    val extras: Record<String, ExtensionValueJs>
+    val custom: Record<String, ExtensionValueJs>
 }
 
 fun foreignKeyJs(
     columns: Array<String>,
     references: ForeignKeyReferenceJs,
-    extras: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, ExtensionValueJs> = emptyRecord()
 ): ForeignKeyJs = jso {
     this.columns = columns
     this.references = references
-    this.extras = extras
+    this.custom = custom
 }
 
 fun ForeignKey.toJs() = foreignKeyJs(
     columns = columns.toTypedArray(),
     references = references.toJs(),
-    extras = extras.associateBy { _, value -> value.toJs() }
+    custom = custom.associateBy { _, value -> value.toJs() }
 )
 
 fun ForeignKeyJs.toClass() = ForeignKey(
     columns = columns.toMutableSet(),
     references = references.toClass(),
-    extras = extras.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

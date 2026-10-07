@@ -32,10 +32,7 @@ data class RelationshipIndex(
     var type: IndexType,
     val properties: MutableSet<String>,
     val options: IndexOption? = null,
-    val extras: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
 ) : Extensions,
-    Named {
-    override val extensions: MutableMap<String, ExtensionValue>
-        get() = extras
-}
+    Named

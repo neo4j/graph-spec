@@ -24,9 +24,9 @@ package model.extension
  * Complex data should be stored as an optional module within [model.GraphModel].
  */
 interface Extensions {
-    val extensions: MutableMap<String, ExtensionValue>
+    val custom: MutableMap<String, ExtensionValue>
 
-    fun contains(key: String): Boolean = extensions.containsKey(key)
+    fun contains(key: String): Boolean = custom.containsKey(key)
 
     /*
         Name-spaced setters
@@ -57,10 +57,10 @@ interface Extensions {
     }
 
     private fun getOrPut(section: String): MutableMap<String, ExtensionValue> {
-        val value = extensions[section] as? MapValue
+        val value = custom[section] as? MapValue
         if (value == null) {
             val map = mutableMapOf<String, ExtensionValue>()
-            extensions[section] = MapValue(map)
+            custom[section] = MapValue(map)
             return map
         }
         return value.value
@@ -156,18 +156,18 @@ interface Extensions {
         return output
     }
 
-    private fun get(section: String): MutableMap<String, ExtensionValue>? = (extensions[section] as? MapValue)?.value
+    private fun get(section: String): MutableMap<String, ExtensionValue>? = (custom[section] as? MapValue)?.value
 
     /*
         Basic top-level setters
      */
 
     fun set(key: String, value: String) {
-        extensions[key] = StringValue(value)
+        custom[key] = StringValue(value)
     }
 
     fun set(key: String, value: Boolean) {
-        extensions[key] = BooleanValue(value)
+        custom[key] = BooleanValue(value)
     }
 
     fun set(key: String, value: Int) {
@@ -175,7 +175,7 @@ interface Extensions {
     }
 
     fun set(key: String, value: Long) {
-        extensions[key] = LongValue(value)
+        custom[key] = LongValue(value)
     }
 
     fun set(key: String, value: Float) {
@@ -183,20 +183,20 @@ interface Extensions {
     }
 
     fun set(key: String, value: Double) {
-        extensions[key] = DoubleValue(value)
+        custom[key] = DoubleValue(value)
     }
 
     fun setList(key: String, value: List<String>) {
-        extensions[key] = ListValue(value.map { StringValue(it) }.toMutableList())
+        custom[key] = ListValue(value.map { StringValue(it) }.toMutableList())
     }
 
     fun setStringMap(key: String, value: Map<String, String>) {
-        extensions[key] =
+        custom[key] =
             MapValue(value.mapValues { StringValue(it.value) }.toMutableMap())
     }
 
     fun setIntMap(key: String, value: Map<String, Int>) {
-        extensions[key] =
+        custom[key] =
             MapValue(value.mapValues { LongValue(it.value.toLong()) }.toMutableMap())
     }
 
@@ -204,15 +204,15 @@ interface Extensions {
         Basic top-level getters
      */
 
-    fun getString(key: String): String? = extensions[key]?.asString
+    fun getString(key: String): String? = custom[key]?.asString
 
-    fun getBoolean(key: String): Boolean? = extensions[key]?.asBoolean
+    fun getBoolean(key: String): Boolean? = custom[key]?.asBoolean
 
-    fun getLong(key: String): Long? = extensions[key]?.asLong
+    fun getLong(key: String): Long? = custom[key]?.asLong
 
     fun getInt(key: String): Int? = getLong(key)?.toInt()
 
-    fun getDouble(key: String): Double? = extensions[key]?.asDouble
+    fun getDouble(key: String): Double? = custom[key]?.asDouble
 
     fun getFloat(key: String): Float? = getDouble(key)?.toFloat()
 }

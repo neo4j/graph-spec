@@ -110,7 +110,7 @@
           "supported": [
             "STRING"
           ],
-          "extras": {}
+          "custom": {}
         },
         "actor_name": {
           "type": "varchar",
@@ -119,7 +119,7 @@
           "supported": [
             "STRING"
           ],
-          "extras": {}
+          "custom": {}
         }
       },
       "primaryKeys": [
@@ -135,9 +135,9 @@
             "columns": [
               "actorid"
             ],
-            "extras": {}
+            "custom": {}
           },
-          "extras": {}
+          "custom": {}
         },
         "fk_actor_name": {
           "columns": [
@@ -148,12 +148,12 @@
             "columns": [
               "actorname"
             ],
-            "extras": {}
+            "custom": {}
           },
-          "extras": {}
+          "custom": {}
         }
       },
-      "extras": {}
+      "custom": {}
     },
     "movies": {
       "source": "sql/postgres",
@@ -165,7 +165,7 @@
           "supported": [
             "STRING"
           ],
-          "extras": {}
+          "custom": {}
         },
         "field_1": {
           "type": "varchar",
@@ -174,7 +174,7 @@
           "supported": [
             "STRING"
           ],
-          "extras": {}
+          "custom": {}
         }
       },
       "primaryKeys": [
@@ -190,12 +190,12 @@
             "columns": [
               "actorid"
             ],
-            "extras": {}
+            "custom": {}
           },
-          "extras": {}
+          "custom": {}
         }
       },
-      "extras": {}
+      "custom": {}
     },
     "actors-movies": {
       "source": "sql/postgres",
@@ -207,7 +207,7 @@
           "supported": [
             "STRING"
           ],
-          "extras": {}
+          "custom": {}
         },
         "movie_id": {
           "type": "varchar",
@@ -216,7 +216,7 @@
           "supported": [
             "STRING"
           ],
-          "extras": {}
+          "custom": {}
         },
         "field_1": {
           "type": "varchar",
@@ -225,12 +225,12 @@
           "supported": [
             "STRING"
           ],
-          "extras": {}
+          "custom": {}
         }
       },
       "primaryKeys": [],
       "foreignKeys": {},
-      "extras": {}
+      "custom": {}
     }
   },
   "mappings": [

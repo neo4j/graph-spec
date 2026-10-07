@@ -30,8 +30,5 @@ data class Table(
     val columns: MutableMap<String, TableColumn> = mutableMapOf(),
     val primaryKeys: MutableSet<String> = mutableSetOf(),
     val foreignKeys: MutableMap<String, ForeignKey> = mutableMapOf(),
-    val extras: MutableMap<String, ExtensionValue> = mutableMapOf()
-) : Extensions {
-    override val extensions: MutableMap<String, ExtensionValue>
-        get() = extras
-}
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

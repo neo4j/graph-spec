@@ -28,8 +28,5 @@ import kotlin.js.JsExport
 data class ForeignKeyReference(
     var table: String,
     val columns: MutableSet<String> = mutableSetOf(),
-    val extras: MutableMap<String, ExtensionValue> = mutableMapOf()
-) : Extensions {
-    override val extensions: MutableMap<String, ExtensionValue>
-        get() = extras
-}
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

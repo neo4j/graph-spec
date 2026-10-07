@@ -30,7 +30,4 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("GraphModelExtensions")
-data class GraphModelExtensions(val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions {
-    override val extensions: MutableMap<String, ExtensionValue>
-        get() = custom
-}
+data class GraphModelExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions

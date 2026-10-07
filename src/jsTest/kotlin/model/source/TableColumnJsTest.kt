@@ -15,7 +15,7 @@ class TableColumnJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
         suggested = Neo4jType.VECTOR_FLOAT,
         supported = setOf(Neo4jType.VECTOR_FLOAT, Neo4jType.VECTOR_FLOAT32),
         dimension = 8,
-        extras = mutableMapOf("key1" to StringValue("val1")),
+        custom = mutableMapOf("key1" to StringValue("val1")),
         name = "Field name"
     )
 
@@ -29,7 +29,7 @@ class TableColumnJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
         assertEquals("VECTOR<FLOAT>", jsObject.suggested)
         assertContentEquals(arrayOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"), jsObject.supported)
         assertEquals(8, jsObject.dimension)
-        assertJsEquals(stringValueJs("val1"), jsObject.extras["key1"])
+        assertJsEquals(stringValueJs("val1"), jsObject.custom["key1"])
         assertEquals("Field name", jsObject.name)
     }
 
