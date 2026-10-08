@@ -20,8 +20,11 @@ import kotlinx.js.JsPlainObject
 import model.index.IndexOptionJs
 import model.index.toClass
 import model.jso
+import model.relationship.extension.RelationshipConstraintExtensionsJs
+import model.relationship.extension.relationshipConstraintExtensionsJs
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
 import model.type.ConstraintType
-
 @JsExport
 @JsPlainObject
 external interface RelationshipConstraintJs {

@@ -25,11 +25,10 @@ import migrate.Migration
 import model.NameFormat
 import model.Type
 import model.Version
-import model.mapping.MappingType
+import model.extension.mapping.MappingType
 import model.type.ConstraintType
 import model.type.ConstraintType.PROPERTY_TYPE
 import model.type.IndexType
-
 /**
  * 3.0 -> Graph Spec 4.0
  */

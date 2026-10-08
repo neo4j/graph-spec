@@ -18,8 +18,11 @@ package model.node
 
 import kotlinx.js.JsPlainObject
 import model.jso
+import model.node.extension.NodeConstraintExtensionsJs
+import model.node.extension.nodeConstraintExtensionsJs
+import model.node.extension.toClass
+import model.node.extension.toJs
 import model.type.ConstraintType
-
 @JsExport
 @JsPlainObject
 external interface NodeConstraintJs {

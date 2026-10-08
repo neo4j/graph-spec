@@ -19,7 +19,7 @@ package validate.node
 import model.GraphModel
 import model.node.Node
 import model.node.NodeConstraint
-import model.node.NodeIndex
+import model.node.extension.NodeIndex
 import model.property.Property
 import validate.Issue
 import validate.Validation

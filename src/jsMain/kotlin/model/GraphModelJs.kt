@@ -18,9 +18,10 @@ package model
 
 import js.objects.Record
 import kotlinx.js.JsPlainObject
+import model.extension.GraphModelExtensionsJs
+import model.extension.graphModelExtensionsJs
 import model.node.NodeJs
 import model.relationship.RelationshipJs
-
 @JsExport
 @JsPlainObject
 external interface GraphModelJs {

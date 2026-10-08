@@ -22,8 +22,8 @@ import model.index.PointIndexOption
 import model.index.VectorIndexOption
 import model.property.Property
 import model.relationship.Relationship
-import model.relationship.RelationshipIndex
 import model.relationship.RelationshipTarget
+import model.relationship.extension.RelationshipIndex
 import model.type.IndexType
 import validate.Issue
 import kotlin.test.Test

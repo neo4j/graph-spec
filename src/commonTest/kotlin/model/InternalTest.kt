@@ -16,14 +16,15 @@
  */
 package model
 
-import model.mapping.NodeMapping
-import model.mapping.PropertyMapping
-import model.mapping.RelationshipMapping
-import model.mapping.TargetMapping
+import model.extension.GraphModelExtensions
+import model.extension.mapping.NodeMapping
+import model.extension.mapping.PropertyMapping
+import model.extension.mapping.RelationshipMapping
+import model.extension.mapping.TargetMapping
 import model.node.Node
 import model.node.NodeConstraint
-import model.node.NodeExtensions
-import model.node.NodeIndex
+import model.node.extension.NodeExtensions
+import model.node.extension.NodeIndex
 import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipConstraint

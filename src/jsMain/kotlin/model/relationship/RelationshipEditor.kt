@@ -20,14 +20,18 @@ import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
 import model.emptyRecord
-import model.extension.ExtensionValueJs
 import model.getOrThrow
 import model.index.IndexOptionJs
 import model.property.PropertyEditor
 import model.property.PropertyJs
 import model.property.propertyJs
+import model.relationship.extension.RelationshipConstraintExtensionsJs
+import model.relationship.extension.RelationshipIndexEditor
+import model.relationship.extension.RelationshipIndexJs
+import model.relationship.extension.relationshipConstraintExtensionsJs
+import model.relationship.extension.relationshipIndexJs
 import model.remove
-
+import model.value.ExtensionValueJs
 @JsExport
 class RelationshipEditor {
     companion object {

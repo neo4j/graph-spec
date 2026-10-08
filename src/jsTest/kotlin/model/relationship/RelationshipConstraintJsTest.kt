@@ -1,8 +1,11 @@
 package model.relationship
 
-import model.mapping.JsMappingTest
-import model.extension.StringValue
-import model.extension.stringValueJs
+import model.relationship.extension.RelationshipConstraintExtensions
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
+import model.extension.mapping.JsMappingTest
+import model.value.StringValue
+import model.value.stringValueJs
 import model.type.ConstraintType
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

@@ -19,6 +19,7 @@ package model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import model.extension.GraphModelExtensions
 import model.node.Node
 import model.relationship.Relationship
 import validate.Issue

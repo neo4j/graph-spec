@@ -1,8 +1,11 @@
 package model.node
 
-import model.mapping.JsMappingTest
-import model.extension.StringValue
-import model.extension.stringValueJs
+import model.node.extension.LabelsExtensions
+import model.node.extension.toClass
+import model.node.extension.toJs
+import model.extension.mapping.JsMappingTest
+import model.value.StringValue
+import model.value.stringValueJs
 import kotlin.test.assertEquals
 
 class LabelsJsTest : JsMappingTest<Labels, LabelsJs>() {

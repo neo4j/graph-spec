@@ -21,11 +21,14 @@ import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import model.associateBy
 import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.jso
-
+import model.property.extension.PropertyExtensionsJs
+import model.property.extension.propertyExtensionsJs
+import model.property.extension.toClass
+import model.property.extension.toJs
+import model.value.ExtensionValueJs
+import model.value.toClass
+import model.value.toJs
 @JsExport
 @JsPlainObject
 external interface PropertyJs {

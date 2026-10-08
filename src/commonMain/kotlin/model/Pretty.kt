@@ -18,8 +18,8 @@ package model
 
 import model.Rename.prettify
 import model.Rename.rename
-import model.mapping.NodeMapping
-import model.mapping.RelationshipMapping
+import model.extension.mapping.NodeMapping
+import model.extension.mapping.RelationshipMapping
 import model.node.Constraint
 import model.property.Property
 import model.type.ConstraintType

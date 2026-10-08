@@ -17,10 +17,9 @@
 package validate.table
 
 import model.GraphModel
-import model.source.Table
-import model.source.TableColumn
+import model.extension.source.Table
+import model.extension.source.TableColumn
 import validate.Issue
-
 object TableColumnEmptyName : TableValidation {
     override fun validateTableColumn(
         model: GraphModel,

@@ -17,19 +17,24 @@
 package model
 
 import js.objects.toRecord
-import model.mapping.toClass
-import model.mapping.toJs
+import model.extension.mapping.toClass
+import model.extension.mapping.toJs
+import model.extension.source.tableJs
+import model.extension.source.toClass
+import model.extension.source.toJs
+import model.extension.toClass
+import model.extension.toJs
 import model.node.NodeEditor
+import model.node.extension.toClass
+import model.node.extension.toJs
 import model.node.nodeJs
 import model.node.toClass
 import model.node.toJs
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
 import model.relationship.relationshipJs
 import model.relationship.toClass
 import model.relationship.toJs
-import model.source.tableJs
-import model.source.toClass
-import model.source.toJs
-
 /**
  * We have duplicate model built on external interfaces with conversion to and from classes in order
  * to support plain JavaScript objects which are used in React's Redux state storage.

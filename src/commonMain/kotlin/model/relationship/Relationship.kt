@@ -20,7 +20,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.property.Property
 import model.relationship.RelationshipConstraint
-import model.relationship.RelationshipIndex
+import model.relationship.extension.RelationshipExtensions
+import model.relationship.extension.RelationshipIndex
 import model.type.Named
 import kotlin.js.JsExport
 

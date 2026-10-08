@@ -17,7 +17,7 @@
 package validate.node
 
 import model.GraphModel
-import model.mapping.NodeMapping
+import model.extension.mapping.NodeMapping
 import model.node.Labels
 import model.node.Node
 import model.property.Neo4jType

@@ -18,6 +18,7 @@ package model.node
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import model.node.extension.LabelsExtensions
 import kotlin.js.JsExport
 
 @JsExport
