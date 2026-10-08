@@ -262,6 +262,9 @@ class DataModelV3GraphSpecMigration :
                 "to" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType)),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, propertyTokens),
+                "extensions" toNotEmpty mapOf(
+                    "indexes" to convertIndexes(indexes, typeRef, token, propertyTokens)
+                ).filterValues { !it.isNullOrEmpty() }.mapValues { it.value!! },
                 "name" to uniqueRelationshipName(token, uniqueNames),
                 "description" to objectType.literalOrNull("description")
             )

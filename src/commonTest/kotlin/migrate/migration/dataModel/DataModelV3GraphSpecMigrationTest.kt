@@ -348,6 +348,47 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
+    fun `migrateRelationships moves indexes into relationship extensions`() {
+        val graphSchema = schemaMapOf(
+            "relationshipTypes" to listOf(
+                schemaMapOf(
+                    "\$id" to "relType1",
+                    "token" to "FOLLOWS",
+                    "properties" to listOf(
+                        schemaMapOf("\$id" to "p1", "token" to "since", "type" to mapOf("type" to "datetime"))
+                    )
+                )
+            ),
+            "relationshipObjectTypes" to listOf(
+                schemaMapOf(
+                    "\$id" to "relObj1",
+                    "type" to mapOf("\$ref" to "#relType1"),
+                    "from" to mapOf("\$ref" to "#nodeA"),
+                    "to" to mapOf("\$ref" to "#nodeB")
+                )
+            )
+        )
+        val indexes = mapOf(
+            "relType1" to listOf(
+                schemaMapOf(
+                    "\$id" to "i:0",
+                    "name" to "since_idx",
+                    "indexType" to "range",
+                    "properties" to listOf(mapOf("\$ref" to "#p1"))
+                )
+            )
+        )
+
+        val rel = migration.migrateRelationships(graphSchema, emptyMap(), indexes)["relObj1"]
+        assertNotNull(rel)
+        assertFalse(rel.containsKey("indexes"))
+        val index = rel.map("extensions").map("indexes").map("i:0")
+        assertEquals("RANGE", index.string("type"))
+        assertEquals("since_idx", index.string("name"))
+        assertEquals(listOf("p1").toSchemaElement(), index.list("properties"))
+    }
+
+    @Test
     fun `convertProperties normalizes types to uppercase`() {
         val labels = listOf(
             schemaMapOf(
