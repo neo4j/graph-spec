@@ -23,7 +23,7 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         name = "propertyName",
         reference = "ref",
         pattern = "^a.*",
-        oneOf = mutableListOf(StringValue("a"), BooleanValue(true))
+        oneOf = mutableListOf("a", "b")
     )
 
     override fun toJs(k: Property): PropertyJs = k.toJs("propertyId")
@@ -42,8 +42,8 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         assertEquals("ref", jsObject.reference)
         assertEquals("^a.*", jsObject.pattern)
         assertEquals(2, jsObject.oneOf.size)
-        assertJsEquals(stringValueJs("a"), jsObject.oneOf[0])
-        assertJsEquals(booleanValueJs(true), jsObject.oneOf[1])
+        assertEquals("a", jsObject.oneOf[0])
+        assertEquals("b", jsObject.oneOf[1])
     }
 
 }

@@ -180,7 +180,7 @@ class RelationshipEditor {
         }
 
         @JsStatic
-        fun addPropertyOneOf(model: GraphModelJs, relationshipId: String, propertyId: String, value: ExtensionValueJs) {
+        fun addPropertyOneOf(model: GraphModelJs, relationshipId: String, propertyId: String, value: String) {
             val property = getProperty(model, relationshipId, propertyId)
             PropertyEditor.addOneOf(property, value)
         }

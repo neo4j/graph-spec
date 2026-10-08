@@ -162,7 +162,7 @@ class NodeEditor {
         }
 
         @JsStatic
-        fun addPropertyOneOf(model: GraphModelJs, nodeId: String, propertyId: String, value: ExtensionValueJs) {
+        fun addPropertyOneOf(model: GraphModelJs, nodeId: String, propertyId: String, value: String) {
             val property = getProperty(model, nodeId, propertyId)
             PropertyEditor.addOneOf(property, value)
         }

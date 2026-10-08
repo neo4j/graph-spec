@@ -19,28 +19,28 @@ class PropertyEditorTest {
     fun testAddOneOf() {
         val property = property()
 
-        PropertyEditor.addOneOf(property, stringValueJs("a"))
-        PropertyEditor.addOneOf(property, stringValueJs("b"))
+        PropertyEditor.addOneOf(property, "a")
+        PropertyEditor.addOneOf(property, "b")
 
-        assertEquals(listOf("a", "b"), property.oneOf.map { (it as StringValueJs).value })
+        assertEquals(listOf("a", "b"), property.oneOf.toList())
     }
 
     @Test
     fun testRemoveOneOfByIndex() {
         val property = property()
-        PropertyEditor.addOneOf(property, stringValueJs("a"))
-        PropertyEditor.addOneOf(property, stringValueJs("b"))
-        PropertyEditor.addOneOf(property, stringValueJs("c"))
+        PropertyEditor.addOneOf(property, "a")
+        PropertyEditor.addOneOf(property, "b")
+        PropertyEditor.addOneOf(property, "c")
 
         PropertyEditor.removeOneOf(property, 1)
 
-        assertEquals(listOf("a", "c"), property.oneOf.map { (it as StringValueJs).value })
+        assertEquals(listOf("a", "c"), property.oneOf.toList())
     }
 
     @Test
     fun testRemoveOneOfOutOfRangeIsIgnored() {
         val property = property()
-        PropertyEditor.addOneOf(property, stringValueJs("a"))
+        PropertyEditor.addOneOf(property, "a")
 
         PropertyEditor.removeOneOf(property, 5)
         PropertyEditor.removeOneOf(property, -1)
