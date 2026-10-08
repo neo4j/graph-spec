@@ -411,7 +411,9 @@ class InternalTest {
             relationship.constraints.entries.forEach { (id, c) ->
                 appendLine("  constraint $id name=${c.name} type=${c.type}")
             }
-            relationship.extensions.indexes.entries.forEach { (id, index) -> appendLine("  index $id name=${index.name}") }
+            relationship.extensions.indexes.entries.forEach { (id, index) ->
+                appendLine("  index $id name=${index.name}")
+            }
         }
     }
 
