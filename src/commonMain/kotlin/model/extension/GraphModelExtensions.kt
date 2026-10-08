@@ -19,7 +19,6 @@ package model.extension
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.GraphModel
-import model.Version
 import model.extension.Extensions
 import model.extension.mapping.Mapping
 import model.extension.source.Table

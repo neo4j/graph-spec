@@ -16,16 +16,12 @@
  */
 package model.node
 
-import js.objects.Record
 import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
 import model.jso
 import model.node.extension.LabelsExtensionsJs
 import model.node.extension.labelsExtensionsJs
 import model.node.extension.toClass
 import model.node.extension.toJs
-import model.value.ExtensionValueJs
 import model.value.toClass
 import model.value.toJs
 @JsExport
