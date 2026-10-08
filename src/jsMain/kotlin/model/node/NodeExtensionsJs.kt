@@ -14,9 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.source
+package model.node
 
 import js.objects.Record
+import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import model.associateBy
 import model.emptyRecord
@@ -24,34 +25,21 @@ import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
 import model.jso
-import kotlin.String
 
 @JsExport
 @JsPlainObject
-external interface ForeignKeyReferenceJs {
-    var table: String
-    var columns: Array<String>
+external interface NodeExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
 }
 
-fun foreignKeyReferenceJs(
-    table: String,
-    columns: Array<String> = emptyArray(),
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
-): ForeignKeyReferenceJs = jso {
-    this.table = table
-    this.columns = columns
+fun nodeExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): NodeExtensionsJs = jso {
     this.custom = custom
 }
 
-fun ForeignKeyReference.toJs() = foreignKeyReferenceJs(
-    table = table,
-    columns = columns.toTypedArray(),
-    custom = custom.associateBy { _, value -> value.toJs() }
+fun NodeExtensions.toJs() = nodeExtensionsJs(
+    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
 )
 
-fun ForeignKeyReferenceJs.toClass() = ForeignKeyReference(
-    table = table,
-    columns = columns.toMutableSet(),
+fun NodeExtensionsJs.toClass(): NodeExtensions = NodeExtensions(
     custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

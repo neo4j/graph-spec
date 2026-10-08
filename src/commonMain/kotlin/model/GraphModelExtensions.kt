@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.source
+package model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -22,11 +22,12 @@ import model.extension.ExtensionValue
 import model.extension.Extensions
 import kotlin.js.JsExport
 
+/**
+ * Extensions for a [GraphModel].
+ *
+ * @property custom user-defined arbitrary data.
+ */
 @JsExport
 @Serializable
-@SerialName("ForeignKeyReference")
-data class ForeignKeyReference(
-    var table: String,
-    val columns: MutableSet<String> = mutableSetOf(),
-    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
-) : Extensions
+@SerialName("GraphModelExtensions")
+data class GraphModelExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions

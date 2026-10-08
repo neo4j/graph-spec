@@ -34,7 +34,7 @@ external interface PropertyJs {
     var mustExist: Boolean?
     var unique: Boolean?
     var key: Boolean?
-    val extensions: Record<String, ExtensionValueJs>
+    val extensions: PropertyExtensionsJs
     var name: String
     val id: String
     val description: String
@@ -49,7 +49,7 @@ fun propertyJs(
     mustExist: Boolean? = null,
     unique: Boolean? = null,
     key: Boolean? = null,
-    extensions: Record<String, ExtensionValueJs> = emptyRecord(),
+    extensions: PropertyExtensionsJs = propertyExtensionsJs(),
     name: String,
     id: String,
     description: String = "",
@@ -77,7 +77,7 @@ fun Property.toJs(key: String) = propertyJs(
     mustExist = mustExist,
     unique = unique,
     key = this.key,
-    extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    extensions = extensions.toJs(),
     name = name ?: key,
     id = key,
     description = description,
@@ -96,7 +96,7 @@ fun PropertyJs.toClass(parent: String, property: String): Property {
         mustExist = mustExist,
         unique = unique,
         key = key,
-        extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
+        extensions = extensions.toClass(),
         name = name,
         description = description,
         reference = reference,

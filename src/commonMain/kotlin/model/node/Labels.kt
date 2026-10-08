@@ -18,8 +18,6 @@ package model.node
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
 import kotlin.js.JsExport
 
 @JsExport
@@ -29,5 +27,5 @@ data class Labels(
     var identifier: String? = null,
     val implied: MutableSet<String> = mutableSetOf(),
     val optional: MutableSet<String> = mutableSetOf(),
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
-) : Extensions
+    val extensions: LabelsExtensions = LabelsExtensions()
+)

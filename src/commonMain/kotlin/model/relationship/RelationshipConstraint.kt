@@ -18,8 +18,6 @@ package model.relationship
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
 import model.node.Constraint
 import model.type.ConstraintType
 import model.type.Named
@@ -31,8 +29,7 @@ import kotlin.js.JsExport
 data class RelationshipConstraint(
     override var type: ConstraintType,
     override val properties: MutableSet<String>,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val extensions: RelationshipConstraintExtensions = RelationshipConstraintExtensions(),
     override var name: String? = null
-) : Extensions,
-    Constraint,
+) : Constraint,
     Named

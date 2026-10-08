@@ -33,7 +33,7 @@ data class NodeIndex(
     val labels: MutableSet<String>,
     val properties: MutableSet<String>,
     val options: IndexOption? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
     override var name: String? = null
 ) : Extensions,
     Named

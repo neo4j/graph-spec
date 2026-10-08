@@ -186,7 +186,7 @@ class NodeEditor {
             type: String,
             label: String? = null,
             properties: Array<String> = emptyArray(),
-            extensions: Record<String, ExtensionValueJs> = emptyRecord()
+            extensions: NodeConstraintExtensionsJs = nodeConstraintExtensionsJs()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.constraints.addUnique("constraint") {
@@ -236,11 +236,11 @@ class NodeEditor {
             labels: Array<String> = emptyArray(),
             properties: Array<String> = emptyArray(),
             options: IndexOptionJs? = null,
-            extensions: Record<String, ExtensionValueJs> = emptyRecord()
+            custom: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.indexes.addUnique("index") {
-                nodeIndexJs(type, labels, properties, options, extensions)
+                nodeIndexJs(type, labels, properties, options, custom)
             }
         }
 

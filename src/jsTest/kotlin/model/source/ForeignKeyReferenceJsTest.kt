@@ -11,7 +11,7 @@ class ForeignKeyReferenceJsTest : JsMappingTest<ForeignKeyReference, ForeignKeyR
     override fun createClass() = ForeignKeyReference(
         table = "table_name",
         columns = mutableSetOf("field1", "field2"),
-        extensions = mutableMapOf("key1" to StringValue("val1")),
+        custom = mutableMapOf("key1" to StringValue("val1")),
     )
 
     override fun toJs(k: ForeignKeyReference): ForeignKeyReferenceJs = k.toJs()
@@ -21,7 +21,7 @@ class ForeignKeyReferenceJsTest : JsMappingTest<ForeignKeyReference, ForeignKeyR
     override fun verifyJsObject(jsObject: ForeignKeyReferenceJs) {
         assertEquals("table_name", jsObject.table)
         assertContentEquals(arrayOf("field1", "field2"), jsObject.columns)
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
+        assertJsEquals(stringValueJs("val1"), jsObject.custom["key1"])
     }
 
 }

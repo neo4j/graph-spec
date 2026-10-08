@@ -35,7 +35,7 @@ external interface TableColumnJs {
     val suggested: String
     val supported: Array<String>
     val dimension: Int?
-    val extensions: Record<String, ExtensionValueJs>
+    val custom: Record<String, ExtensionValueJs>
     val name: String
 }
 
@@ -45,7 +45,7 @@ fun tableColumnJs(
     suggested: String = "ANY",
     supported: Array<String> = emptyArray(),
     dimension: Int? = null,
-    extensions: Record<String, ExtensionValueJs> = emptyRecord(),
+    custom: Record<String, ExtensionValueJs> = emptyRecord(),
     name: String = ""
 ): TableColumnJs = jso {
     this.type = type
@@ -53,7 +53,7 @@ fun tableColumnJs(
     this.suggested = suggested
     this.supported = supported
     this.dimension = dimension
-    this.extensions = extensions
+    this.custom = custom
     this.name = name
 }
 
@@ -63,7 +63,7 @@ fun TableColumn.toJs(key: String) = tableColumnJs(
     suggested = Neo4jType.toString(suggested),
     supported = supported.map { Neo4jType.toString(it) }.toTypedArray(),
     dimension = dimension,
-    extensions = extensions.associateBy { _, value -> value.toJs() },
+    custom = custom.associateBy { _, value -> value.toJs() },
     name = name ?: key
 )
 
@@ -73,7 +73,7 @@ fun TableColumnJs.toClass() = TableColumn(
     suggested = neo4jType(suggested),
     supported = supported.map { neo4jType(it) }.toSet(),
     dimension = dimension,
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap(),
     name = name
 )
 

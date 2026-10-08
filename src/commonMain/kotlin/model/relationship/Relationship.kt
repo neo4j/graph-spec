@@ -18,8 +18,6 @@ package model.relationship
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
 import model.property.Property
 import model.relationship.RelationshipConstraint
 import model.relationship.RelationshipIndex
@@ -36,10 +34,9 @@ data class Relationship(
     val properties: MutableMap<String, Property> = mutableMapOf(),
     val constraints: MutableMap<String, RelationshipConstraint> = mutableMapOf(),
     val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf(),
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val extensions: RelationshipExtensions = RelationshipExtensions(),
     override var name: String? = null,
     val description: String = "",
     val aliases: MutableSet<String> = mutableSetOf(),
     val reference: String = ""
-) : Extensions,
-    Named
+) : Named

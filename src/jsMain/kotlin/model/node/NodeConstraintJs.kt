@@ -16,13 +16,7 @@
  */
 package model.node
 
-import js.objects.Record
 import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.jso
 import model.type.ConstraintType
 
@@ -32,14 +26,14 @@ external interface NodeConstraintJs {
     var type: String
     var label: String?
     var properties: Array<String>
-    val extensions: Record<String, ExtensionValueJs>
+    val extensions: NodeConstraintExtensionsJs
 }
 
 fun nodeConstraintJs(
     type: String,
     label: String? = null,
     properties: Array<String> = emptyArray(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
+    extensions: NodeConstraintExtensionsJs = nodeConstraintExtensionsJs()
 ): NodeConstraintJs = jso {
     this.type = type
     this.label = label
@@ -51,12 +45,12 @@ fun NodeConstraint.toJs() = nodeConstraintJs(
     type = type.name,
     label = label,
     properties = properties.toTypedArray(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
+    extensions = extensions.toJs()
 )
 
 fun NodeConstraintJs.toClass() = NodeConstraint(
     type = ConstraintType.valueOf(type),
     label = label,
     properties = properties.toMutableSet(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    extensions = extensions.toClass()
 )

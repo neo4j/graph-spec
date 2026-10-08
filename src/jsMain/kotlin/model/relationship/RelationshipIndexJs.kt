@@ -35,31 +35,31 @@ external interface RelationshipIndexJs {
     var type: String
     var properties: Array<String>
     var options: IndexOptionJs?
-    val extensions: Record<String, ExtensionValueJs>
+    val custom: Record<String, ExtensionValueJs>
 }
 
 fun relationshipIndexJs(
     type: String,
     properties: Array<String>,
     options: IndexOptionJs? = null,
-    extensions: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, ExtensionValueJs> = emptyRecord()
 ): RelationshipIndexJs = jso {
     this.type = type
     this.properties = properties
     this.options = options
-    this.extensions = extensions
+    this.custom = custom
 }
 
 fun RelationshipIndex.toJs() = relationshipIndexJs(
     type = type.name,
     properties = properties.toTypedArray(),
     options = options?.toJs(),
-    extensions = extensions.associateBy { _, value -> value.toJs() }
+    custom = custom.associateBy { _, value -> value.toJs() }
 )
 
 fun RelationshipIndexJs.toClass() = RelationshipIndex(
     type = IndexType.valueOf(type),
     properties = properties.toMutableSet(),
     options = options?.toClass(),
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

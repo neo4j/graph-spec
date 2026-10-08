@@ -39,7 +39,7 @@ external interface RelationshipJs {
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, RelationshipConstraintJs>
     val indexes: Record<String, RelationshipIndexJs>
-    val extensions: Record<String, ExtensionValueJs>
+    val extensions: RelationshipExtensionsJs
     var name: String
     val id: String
     val description: String
@@ -54,7 +54,7 @@ fun relationshipJs(
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, RelationshipConstraintJs> = emptyRecord(),
     indexes: Record<String, RelationshipIndexJs> = emptyRecord(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord(),
+    extensions: RelationshipExtensionsJs = relationshipExtensionsJs(),
     name: String,
     id: String,
     description: String = "",
@@ -82,7 +82,7 @@ fun Relationship.toJs(id: String) = relationshipJs(
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
     indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
-    extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    extensions = extensions.toJs(),
     name = name ?: id,
     id = id,
     description = description,
@@ -97,7 +97,7 @@ fun RelationshipJs.toClass(id: String) = Relationship(
     properties = properties.associateBy { _, property -> property.toClass("relationships.$id", name) },
     constraints = constraints.associateBy { _, constraint -> constraint.toClass() },
     indexes = indexes.associateBy { _, index -> index.toClass() },
-    extensions = extensions.associateBy { _, value -> value.toClass() },
+    extensions = extensions.toClass(),
     name = name,
     description = description,
     aliases = aliases.toMutableSet(),

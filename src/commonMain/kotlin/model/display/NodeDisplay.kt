@@ -28,5 +28,5 @@ import kotlin.js.JsExport
 data class NodeDisplay(
     var x: Double,
     var y: Double,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf()
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
 ) : Extensions

@@ -33,24 +33,23 @@ import kotlin.collections.component2
 external interface NodeDisplayJs {
     var x: Double
     var y: Double
-    val extensions: Record<String, ExtensionValueJs>
+    val custom: Record<String, ExtensionValueJs>
 }
 
-fun nodeDisplayJs(x: Double, y: Double, extensions: Record<String, ExtensionValueJs> = emptyRecord()): NodeDisplayJs =
-    jso {
-        this.x = x
-        this.y = y
-        this.extensions = extensions
-    }
+fun nodeDisplayJs(x: Double, y: Double, custom: Record<String, ExtensionValueJs> = emptyRecord()): NodeDisplayJs = jso {
+    this.x = x
+    this.y = y
+    this.custom = custom
+}
 
 fun NodeDisplay.toJs() = nodeDisplayJs(
     x = x,
     y = y,
-    extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
 )
 
 fun NodeDisplayJs.toClass(): NodeDisplay = NodeDisplay(
     x = x,
     y = y,
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
 )

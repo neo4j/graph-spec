@@ -38,7 +38,7 @@ external interface NodeJs {
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, NodeConstraintJs>
     val indexes: Record<String, NodeIndexJs>
-    val extensions: Record<String, ExtensionValueJs>
+    val extensions: NodeExtensionsJs
     var name: String
     val id: String
     val description: String
@@ -51,7 +51,7 @@ fun nodeJs(
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, NodeConstraintJs> = emptyRecord(),
     indexes: Record<String, NodeIndexJs> = emptyRecord(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord(),
+    extensions: NodeExtensionsJs = nodeExtensionsJs(),
     name: String,
     id: String,
     description: String = "",
@@ -75,7 +75,7 @@ fun Node.toJs(key: String) = nodeJs(
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
     indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
-    extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    extensions = extensions.toJs(),
     name = name ?: key,
     id = key,
     description = description,
@@ -88,7 +88,7 @@ fun NodeJs.toClass(id: String): Node = Node(
     properties = properties.associateBy { key, value -> value.toClass("nodes.$id", key) },
     constraints = constraints.associateBy { _, value -> value.toClass() },
     indexes = indexes.associateBy { _, value -> value.toClass() },
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    extensions = extensions.toClass(),
     name = name,
     description = description,
     aliases = aliases.toMutableSet(),
