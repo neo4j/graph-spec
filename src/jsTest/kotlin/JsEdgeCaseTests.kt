@@ -3,8 +3,8 @@ import model.GraphModel
 import model.GraphModelEditor
 import model.Type
 import model.Version
-import model.node.nodeDisplayJs
-import model.node.nodeExtensionsJs
+import model.node.extension.nodeDisplayJs
+import model.node.extension.nodeExtensionsJs
 import model.graphModelJs
 import model.node.Labels
 import model.node.Node

@@ -3,10 +3,9 @@ package model.relationship
 import kotlin.test.*
 import js.objects.recordOf
 import model.GraphModelJs
-import model.extension.StringValue
-import model.extension.toJs
+import model.value.StringValue
+import model.value.toJs
 import model.graphModelJs
-
 class RelationshipEditorTest {
 
     private lateinit var model: GraphModelJs

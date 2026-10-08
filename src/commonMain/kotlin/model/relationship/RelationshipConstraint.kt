@@ -19,6 +19,7 @@ package model.relationship
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.node.Constraint
+import model.relationship.extension.RelationshipConstraintExtensions
 import model.type.ConstraintType
 import model.type.Named
 import kotlin.js.JsExport

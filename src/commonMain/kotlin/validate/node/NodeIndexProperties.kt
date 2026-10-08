@@ -18,9 +18,8 @@ package validate.node
 
 import model.GraphModel
 import model.node.Node
-import model.node.NodeIndex
+import model.node.extension.NodeIndex
 import validate.Issue
-
 object NodeIndexProperties : NodeValidation {
     override fun validateIndex(
         model: GraphModel,

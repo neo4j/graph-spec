@@ -2,9 +2,8 @@ package model.relationship
 
 import js.objects.Object.Companion.keys
 import kotlin.test.*
-import model.extension.StringValue
-import model.extension.toJs
-
+import model.value.StringValue
+import model.value.toJs
 class RelationshipConstraintEditorTest {
 
     @Test

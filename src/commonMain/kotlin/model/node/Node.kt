@@ -18,6 +18,7 @@ package model.node
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import model.node.extension.NodeExtensions
 import model.property.Property
 import model.type.Named
 import kotlin.js.JsExport

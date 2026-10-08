@@ -18,9 +18,8 @@ package validate.relationship
 
 import model.GraphModel
 import model.relationship.Relationship
-import model.relationship.RelationshipIndex
+import model.relationship.extension.RelationshipIndex
 import validate.Issue
-
 object RelationshipIndexProperties : RelationshipValidation {
     override fun validateIndex(
         model: GraphModel,

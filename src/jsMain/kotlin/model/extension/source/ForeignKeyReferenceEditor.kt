@@ -1,0 +1,45 @@
+/*
+ * Copyright (c) "Neo4j"
+ * Neo4j Sweden AB [https://neo4j.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package model.extension.source
+
+import model.dropAt
+import kotlin.collections.plus
+
+@JsExport
+class ForeignKeyReferenceEditor {
+    companion object {
+        @JsStatic
+        fun setTable(reference: ForeignKeyReferenceJs, table: String) {
+            reference.table = table
+        }
+
+        @JsStatic
+        fun addColumn(reference: ForeignKeyReferenceJs, column: String) {
+            if (!reference.columns.contains(column)) {
+                reference.columns += column
+            }
+        }
+
+        @JsStatic
+        fun removeColumn(reference: ForeignKeyReferenceJs, column: String) {
+            val index = reference.columns.indexOf(column)
+            if (index != -1) {
+                reference.columns = reference.columns.dropAt(index)
+            }
+        }
+    }
+}

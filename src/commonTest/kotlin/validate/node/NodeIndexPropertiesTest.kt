@@ -18,7 +18,7 @@ package validate.node
 
 import model.GraphModel
 import model.node.Node
-import model.node.NodeIndex
+import model.node.extension.NodeIndex
 import model.property.Property
 import model.type.IndexType
 import validate.Issue

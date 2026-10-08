@@ -17,11 +17,10 @@
 package validate.node
 
 import model.GraphModel
-import model.mapping.NodeMapping
+import model.extension.mapping.NodeMapping
 import model.node.Node
 import model.property.Neo4jType
 import validate.Issue
-
 object NodeMappingKeyType : NodeValidation {
     override fun validateNode(model: GraphModel, nodeId: String, node: Node, issues: MutableList<Issue>) {
         val nodeMapping = model.extensions.mappings.filterIsInstance<NodeMapping>().find { it.node == nodeId } ?: return

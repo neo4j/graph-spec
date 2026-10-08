@@ -17,9 +17,9 @@
 package validate.table
 
 import model.GraphModel
+import model.extension.source.Table
+import model.extension.source.TableColumn
 import model.property.Neo4jType
-import model.source.Table
-import model.source.TableColumn
 import validate.Issue
 import kotlin.test.Test
 import kotlin.test.assertEquals

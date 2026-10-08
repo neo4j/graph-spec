@@ -2,8 +2,8 @@ package model.node
 
 import js.objects.recordOf
 import model.GraphModelJs
-import model.extension.StringValue
-import model.extension.toJs
+import model.value.StringValue
+import model.value.toJs
 import model.graphModelJs
 import model.index.FullTextIndexOptionJs
 import model.index.fullTextIndexOptionJs

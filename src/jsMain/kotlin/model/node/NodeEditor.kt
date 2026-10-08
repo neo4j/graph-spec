@@ -20,14 +20,18 @@ import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
 import model.emptyRecord
-import model.extension.ExtensionValueJs
 import model.getOrThrow
 import model.index.IndexOptionJs
+import model.node.extension.NodeConstraintExtensionsJs
+import model.node.extension.NodeIndexEditor
+import model.node.extension.NodeIndexJs
+import model.node.extension.nodeConstraintExtensionsJs
+import model.node.extension.nodeIndexJs
 import model.property.PropertyEditor
 import model.property.PropertyJs
 import model.property.propertyJs
 import model.remove
-
+import model.value.ExtensionValueJs
 @JsExport
 class NodeEditor {
     companion object {

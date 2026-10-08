@@ -1,9 +1,13 @@
 package model.relationship
 
-import model.mapping.JsMappingTest
-import model.extension.StringValue
-import model.relationship.RelationshipExtensions
-import model.extension.stringValueJs
+import model.relationship.extension.RelationshipIndex
+import model.relationship.extension.relationshipIndexJs
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
+import model.extension.mapping.JsMappingTest
+import model.value.StringValue
+import model.relationship.extension.RelationshipExtensions
+import model.value.stringValueJs
 import model.property.Neo4jType
 import model.property.Property
 import model.property.propertyJs

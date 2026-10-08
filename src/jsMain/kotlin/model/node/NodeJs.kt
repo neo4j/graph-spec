@@ -21,13 +21,19 @@ import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import model.associateBy
 import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.jso
+import model.node.extension.NodeExtensionsJs
+import model.node.extension.nodeExtensionsJs
+import model.node.extension.toClass
+import model.node.extension.toJs
 import model.property.PropertyJs
+import model.property.extension.toClass
+import model.property.extension.toJs
 import model.property.toClass
 import model.property.toJs
+import model.value.ExtensionValueJs
+import model.value.toClass
+import model.value.toJs
 import kotlin.collections.component1
 import kotlin.collections.component2
 

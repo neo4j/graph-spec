@@ -1,8 +1,14 @@
 package model.node
 
-import model.mapping.JsMappingTest
-import model.extension.StringValue
-import model.extension.stringValueJs
+import model.node.extension.NodeDisplay
+import model.node.extension.NodeExtensions
+import model.node.extension.NodeIndex
+import model.node.extension.nodeIndexJs
+import model.node.extension.toClass
+import model.node.extension.toJs
+import model.extension.mapping.JsMappingTest
+import model.value.StringValue
+import model.value.stringValueJs
 import model.property.Neo4jType
 import model.property.Property
 import model.property.propertyJs

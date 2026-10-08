@@ -20,8 +20,8 @@ import model.GraphModel
 import model.node.Labels
 import model.node.Node
 import model.node.NodeConstraint
-import model.node.NodeExtensions
-import model.node.NodeIndex
+import model.node.extension.NodeExtensions
+import model.node.extension.NodeIndex
 import model.property.Property
 import model.type.ConstraintType
 import model.type.IndexType

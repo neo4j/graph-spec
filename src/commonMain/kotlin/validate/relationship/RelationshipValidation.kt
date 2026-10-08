@@ -20,7 +20,7 @@ import model.GraphModel
 import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipConstraint
-import model.relationship.RelationshipIndex
+import model.relationship.extension.RelationshipIndex
 import validate.Issue
 import validate.Validation
 import kotlin.collections.iterator

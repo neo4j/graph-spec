@@ -16,6 +16,14 @@
  */
 package model.extension
 
+import model.value.BooleanValue
+import model.value.DoubleValue
+import model.value.ExtensionValue
+import model.value.ListValue
+import model.value.LongValue
+import model.value.MapValue
+import model.value.StringValue
+
 /**
  * Extensions for storing basic arbitrary data.
  * It's encouraged to use name-spaced setters when working with extensions programmatically.

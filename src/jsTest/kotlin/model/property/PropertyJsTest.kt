@@ -1,11 +1,13 @@
 package model.property
 
-import model.mapping.JsMappingTest
-import model.extension.BooleanValue
-import model.extension.StringValue
-import model.property.PropertyExtensions
-import model.extension.booleanValueJs
-import model.extension.stringValueJs
+import model.property.extension.toClass
+import model.property.extension.toJs
+import model.extension.mapping.JsMappingTest
+import model.value.BooleanValue
+import model.value.StringValue
+import model.property.extension.PropertyExtensions
+import model.value.booleanValueJs
+import model.value.stringValueJs
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

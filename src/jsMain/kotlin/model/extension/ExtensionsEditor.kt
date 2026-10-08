@@ -18,7 +18,8 @@ package model.extension
 
 import js.objects.Record
 import model.remove
-
+import model.value.ExtensionValueJs
+import model.value.stringValueJs
 class ExtensionsEditor {
     companion object {
         @JsStatic

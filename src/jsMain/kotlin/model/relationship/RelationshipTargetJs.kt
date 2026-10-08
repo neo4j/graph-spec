@@ -18,7 +18,8 @@ package model.relationship
 
 import kotlinx.js.JsPlainObject
 import model.jso
-
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
 @JsExport
 @JsPlainObject
 external interface RelationshipTargetJs {

@@ -17,8 +17,8 @@
 package validate.table
 
 import model.GraphModel
-import model.source.Table
-import model.source.TableColumn
+import model.extension.source.Table
+import model.extension.source.TableColumn
 import validate.Issue
 import validate.Validation
 import kotlin.collections.iterator
