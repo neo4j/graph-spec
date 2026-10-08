@@ -25,6 +25,7 @@ import model.relationship.RelationshipJs
 @JsExport
 @JsPlainObject
 external interface GraphModelJs {
+    val schema: String
     val version: String
     val name: String
     val description: String
@@ -34,6 +35,7 @@ external interface GraphModelJs {
 }
 
 fun graphModelJs(
+    schema: String,
     version: String,
     name: String = "",
     description: String = "",
@@ -41,6 +43,7 @@ fun graphModelJs(
     relationships: Record<String, RelationshipJs> = emptyRecord(),
     extensions: GraphModelExtensionsJs = graphModelExtensionsJs()
 ): GraphModelJs = jso {
+    this.schema = schema
     this.version = version
     this.name = name
     this.description = description

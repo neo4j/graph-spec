@@ -28,7 +28,7 @@ import kotlin.test.assertTrue
 class NodeTypeConstraintTest {
 
     private val validator = NodeTypeConstraint
-    private val model = GraphModel("4.0.0")
+    private val model = GraphModel(schema = "https://neo4j.io/ontology-graph-spec/4.0.0/", version = "1.0.0")
     private val nodeDummy = Node()
 
     @Test

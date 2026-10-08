@@ -48,6 +48,7 @@ class GraphModelEditor {
                 error("Pretty models can't be converted to plain models, call model.internalise() first.")
             }
             return graphModelJs(
+                schema = model.schema,
                 version = model.version,
                 name = model.name,
                 description = model.description,
@@ -60,6 +61,7 @@ class GraphModelEditor {
 
         @JsStatic
         fun model(model: GraphModelJs): GraphModel = GraphModel(
+            schema = model.schema,
             version = model.version,
             name = model.name,
             description = model.description,

@@ -49,7 +49,8 @@ class DataModelV3GraphSpecMigration :
         // are emitted as empty maps to match the full migration path of them always being present
         val graphSchema = schema.mapOrNull("graphSchemaRepresentation")?.mapOrNull("graphSchema")
             ?: return schemaMapOf(
-                "version" to schema.literal("version"),
+                "schema" to Version.schemaUrl(Version.LATEST),
+                "version" to Version.DEFAULT_DOCUMENT_VERSION,
                 "description" to schema.literalOrNull("description"),
                 "nodes" to emptyMap<String, SchemaMap>(),
                 "relationships" to emptyMap<String, SchemaMap>(),
@@ -60,7 +61,8 @@ class DataModelV3GraphSpecMigration :
         val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes)
         convertVisualisations(schema, nodes)
         return schemaMapOf(
-            "version" to schema.literal("version"),
+            "schema" to Version.schemaUrl(Version.LATEST),
+            "version" to Version.DEFAULT_DOCUMENT_VERSION,
             "description" to schema.literalOrNull("description"),
             "nodes" to nodes,
             "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),

@@ -32,6 +32,7 @@ import kotlin.js.JsStatic
 @Serializable
 @SerialName("GraphModel")
 data class GraphModel(
+    val schema: String,
     val version: String,
     val name: String = "",
     val description: String = "",

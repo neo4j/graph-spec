@@ -17,6 +17,7 @@
 package migrate
 
 import codec.schema.SchemaMap
+import model.Type
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -107,6 +108,56 @@ class MigrationPathTest {
 
         assertEquals("processed", result.stringOrNull("data"))
         assertEquals("1.1.0", result.stringOrNull("version"))
+    }
+
+    @Test
+    fun `migrate - graph spec reads the schema url and leaves the user version alone`() {
+        val m1 = TestMigration("4.0.0", "4.1.0", Type.GRAPH_SPEC, Type.GRAPH_SPEC)
+        val engine = createPath(m1)
+        val schema = SchemaMap()
+        schema["schema"] = "https://example.com/some/other/path/4.0.0"
+        schema["version"] = "my-doc-7"
+
+        val result = engine.migrate(schema, Type.GRAPH_SPEC, "4.1.0", Type.GRAPH_SPEC)
+
+        assertEquals("https://neo4j.io/ontology-graph-spec/4.1.0/", result.stringOrNull("schema"))
+        assertEquals("my-doc-7", result.stringOrNull("version"))
+    }
+
+    @Test
+    fun `migrate - graph spec without a schema throws`() {
+        val engine = createPath(TestMigration("4.0.0", "4.1.0", Type.GRAPH_SPEC, Type.GRAPH_SPEC))
+        val schema = SchemaMap()
+        schema["version"] = "4.0.0"
+
+        val error = assertFailsWith<IllegalStateException> {
+            engine.migrate(schema, Type.GRAPH_SPEC, "4.1.0", Type.GRAPH_SPEC)
+        }
+
+        assertEquals("Schema must be specified", error.message)
+    }
+
+    @Test
+    fun `migrate - legacy type to graph spec sets schema and keeps version key untouched`() {
+        val engine = createPath(TestMigration("3.0.0", "4.0.0", Type.DATA_MODEL, Type.GRAPH_SPEC))
+        val schema = SchemaMap()
+        schema["version"] = "3.0.0"
+
+        val result = engine.migrate(schema, Type.DATA_MODEL, "4.0.0", Type.GRAPH_SPEC)
+
+        assertEquals("https://neo4j.io/ontology-graph-spec/4.0.0/", result.stringOrNull("schema"))
+        assertEquals("3.0.0", result.stringOrNull("version")) // Real migrations replace this themselves
+    }
+
+    @Test
+    fun `migrate - graph spec to legacy type sets version`() {
+        val engine = createPath(TestMigration("4.0.0", "3.0.0", Type.GRAPH_SPEC, Type.DATA_MODEL))
+        val schema = SchemaMap()
+        schema["schema"] = "https://neo4j.io/ontology-graph-spec/4.0.0/"
+
+        val result = engine.migrate(schema, Type.GRAPH_SPEC, "3.0.0", Type.DATA_MODEL)
+
+        assertEquals("3.0.0", result.stringOrNull("version"))
     }
 
     @Test
