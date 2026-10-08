@@ -31,7 +31,6 @@ import model.property.extension.toClass
 import model.property.extension.toJs
 import model.property.toClass
 import model.property.toJs
-import model.value.ExtensionValueJs
 import model.value.toClass
 import model.value.toJs
 import kotlin.collections.component1

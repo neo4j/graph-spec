@@ -16,11 +16,7 @@
  */
 package model.property
 
-import js.objects.Record
-import js.objects.toRecord
 import kotlinx.js.JsPlainObject
-import model.associateBy
-import model.emptyRecord
 import model.jso
 import model.property.extension.PropertyExtensionsJs
 import model.property.extension.propertyExtensionsJs

@@ -193,7 +193,7 @@ mavenPublishing {
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
         ktlint().editorConfigOverride(
-            mapOf("code_style" to "intellij_idea")
+            mapOf("code_style" to "intellij_idea", "ktlint_standard_no-unused-imports" to "enabled")
         )
         endWithNewline()
         licenseHeaderFile(rootProject.file("license-header.txt"))

@@ -31,8 +31,6 @@ import model.relationship.extension.RelationshipExtensionsJs
 import model.relationship.extension.relationshipExtensionsJs
 import model.relationship.extension.toClass
 import model.relationship.extension.toJs
-import model.toMap
-import model.value.ExtensionValueJs
 import model.value.toClass
 import model.value.toJs
 @JsExport

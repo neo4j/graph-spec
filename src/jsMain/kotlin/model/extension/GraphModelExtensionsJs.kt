@@ -19,7 +19,6 @@ package model.extension
 import js.objects.Record
 import js.objects.toRecord
 import kotlinx.js.JsPlainObject
-import model.Version
 import model.associateBy
 import model.emptyRecord
 import model.extension.mapping.MappingJs

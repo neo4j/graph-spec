@@ -17,7 +17,6 @@
 package model.relationship
 
 import kotlinx.js.JsPlainObject
-import model.index.IndexOptionJs
 import model.index.toClass
 import model.jso
 import model.relationship.extension.RelationshipConstraintExtensionsJs
