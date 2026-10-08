@@ -18,9 +18,9 @@ package model.property
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import model.extension.ExtensionValue
-import model.extension.Extensions
+import model.property.extension.PropertyExtensions
 import model.type.Named
+import model.value.ExtensionValue
 import kotlin.js.JsExport
 
 @JsExport
@@ -32,12 +32,11 @@ data class Property(
     var mustExist: Boolean? = null,
     var unique: Boolean? = null,
     var key: Boolean? = null,
-    override val extensions: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val extensions: PropertyExtensions = PropertyExtensions(),
     override var name: String? = null,
     val description: String = "",
     val reference: String = "",
     val pattern: String = "",
     @SerialName("one_of")
     val oneOf: MutableList<ExtensionValue> = mutableListOf()
-) : Extensions,
-    Named
+) : Named

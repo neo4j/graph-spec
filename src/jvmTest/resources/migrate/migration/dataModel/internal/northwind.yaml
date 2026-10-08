@@ -14,12 +14,16 @@ nodes:
         label: "categories"
         properties: ["node0_property0"]
         name: "categoryid_categories_uniq"
-    indexes:
-      node0_index0:
-        type: "TEXT"
-        labels: ["categories"]
-        properties: ["node0_property0"]
-        name: "categories"
+    extensions:
+      indexes:
+        node0_index0:
+          type: "TEXT"
+          labels: ["categories"]
+          properties: ["node0_property0"]
+          name: "categories"
+      display:
+        x: -100.123
+        y: 200.0
     name: "categories"
   node1:
     labels:
@@ -39,12 +43,13 @@ nodes:
         label: "products"
         properties: ["node1_property0"]
         name: "productid_products_uniq"
-    indexes:
-      node1_index0:
-        type: "TEXT"
-        labels: ["products"]
-        properties: ["node1_property0"]
-        name: "products"
+    extensions:
+      indexes:
+        node1_index0:
+          type: "TEXT"
+          labels: ["products"]
+          properties: ["node1_property0"]
+          name: "products"
     name: "products"
   node2:
     labels:
@@ -68,12 +73,13 @@ nodes:
         label: "suppliers"
         properties: ["node2_property0"]
         name: "supplierid_suppliers_uniq"
-    indexes:
-      node2_index0:
-        type: "TEXT"
-        labels: ["suppliers"]
-        properties: ["node2_property0"]
-        name: "suppliers"
+    extensions:
+      indexes:
+        node2_index0:
+          type: "TEXT"
+          labels: ["suppliers"]
+          properties: ["node2_property0"]
+          name: "suppliers"
     name: "suppliers"
 relationships:
   relationship0:
@@ -86,228 +92,224 @@ relationships:
     from: { node: "node1" }
     to: { node: "node2" }
     name: "SUPPLIERS"
-tables:
-  categories:
-    source: "cloud"
-    columns:
-      categoryid:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      categoryname:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      description:
-        type: "TEXT"
-        suggested: "STRING"
-        supported: ["STRING"]
-      picture:
-        type: "TEXT"
-        suggested: "STRING"
-        supported: ["STRING"]
-    primaryKeys: ["categoryid"]
-  orders:
-    source: "cloud"
-    columns:
-      orderid:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      productid:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      unitprice:
-        type: "DOUBLE"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      quantity:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      discount:
-        type: "DOUBLE"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-    primaryKeys: ["orderid", "productid"]
-    foreignKeys:
-      foreignKey1:
-        columns: ["productid"]
-        references:
-          table: "products"
+extensions:
+  tables:
+    categories:
+      source: "cloud"
+      columns:
+        categoryid:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        categoryname:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        description:
+          type: "TEXT"
+          suggested: "STRING"
+          supported: ["STRING"]
+        picture:
+          type: "TEXT"
+          suggested: "STRING"
+          supported: ["STRING"]
+      primaryKeys: ["categoryid"]
+    orders:
+      source: "cloud"
+      columns:
+        orderid:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        productid:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        unitprice:
+          type: "DOUBLE"
+          suggested: "FLOAT"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        quantity:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        discount:
+          type: "DOUBLE"
+          suggested: "FLOAT"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+      primaryKeys: ["orderid", "productid"]
+      foreignKeys:
+        foreignKey1:
           columns: ["productid"]
-  products:
-    source: "cloud"
-    columns:
-      productid:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      productname:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      supplierid:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      categoryid:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      quantityperunit:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      unitprice:
-        type: "DOUBLE"
-        suggested: "FLOAT"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      unitsinstock:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      unitsonorder:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      reorderlevel:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      discontinued:
-        type: "BIT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT", "BOOLEAN"]
-    primaryKeys: ["productid"]
-    foreignKeys:
-      foreignKey1:
-        columns: ["categoryid"]
-        references:
-          table: "categories"
+          references:
+            table: "products"
+            columns: ["productid"]
+    products:
+      source: "cloud"
+      columns:
+        productid:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        productname:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        supplierid:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        categoryid:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        quantityperunit:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        unitprice:
+          type: "DOUBLE"
+          suggested: "FLOAT"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        unitsinstock:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        unitsonorder:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        reorderlevel:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        discontinued:
+          type: "BIT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT", "BOOLEAN"]
+      primaryKeys: ["productid"]
+      foreignKeys:
+        foreignKey1:
           columns: ["categoryid"]
-      foreignKey2:
-        columns: ["supplierid"]
-        references:
-          table: "suppliers"
+          references:
+            table: "categories"
+            columns: ["categoryid"]
+        foreignKey2:
           columns: ["supplierid"]
-  suppliers:
-    source: "cloud"
-    columns:
-      supplierid:
-        type: "INT"
-        suggested: "INTEGER"
-        supported: ["INTEGER", "STRING", "FLOAT"]
-      companyname:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      contactname:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      contacttitle:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      address:
-        type: "TEXT"
-        suggested: "STRING"
-        supported: ["STRING"]
-      city:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      region:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      postalcode:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      country:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      phone:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      fax:
-        type: "VARCHAR"
-        suggested: "STRING"
-        supported: ["STRING"]
-      homepage:
-        type: "TEXT"
-        suggested: "STRING"
-        supported: ["STRING"]
-    primaryKeys: ["supplierid"]
-mappings:
-  - type: "NODE"
-    node: "node0"
-    table: "categories"
-    properties:
-      node0_property0: { column: "categoryid" }
-      node0_property1: { column: "categoryname" }
-      node0_property2: { column: "description" }
-      node0_property3: { column: "picture" }
-    key: ["node0_property0"]
-  - type: "NODE"
-    node: "node1"
-    table: "products"
-    properties:
-      node1_property0: { column: "productid" }
-      node1_property1: { column: "productname" }
-      node1_property2: { column: "quantityperunit" }
-      node1_property3: { column: "unitprice" }
-      node1_property4: { column: "unitsinstock" }
-      node1_property5: { column: "unitsonorder" }
-      node1_property6: { column: "reorderlevel" }
-      node1_property7: { column: "discontinued" }
-    key: ["node1_property0"]
-  - type: "NODE"
-    node: "node2"
-    table: "suppliers"
-    properties:
-      node2_property0: { column: "supplierid" }
-      node2_property1: { column: "companyname" }
-      node2_property2: { column: "contactname" }
-      node2_property3: { column: "contacttitle" }
-      node2_property4: { column: "address" }
-      node2_property5: { column: "city" }
-      node2_property6: { column: "region" }
-      node2_property7: { column: "postalcode" }
-      node2_property8: { column: "country" }
-      node2_property9: { column: "phone" }
-      node2_property10: { column: "fax" }
-      node2_property11: { column: "homepage" }
-    key: ["node2_property0"]
-  - type: "RELATIONSHIP"
-    relationship: "relationship0"
-    table: "products"
-    from_node:
-      node: "node1"
-      properties:
-        node1_property0: { column: "productid" }
-    to_node:
+          references:
+            table: "suppliers"
+            columns: ["supplierid"]
+    suppliers:
+      source: "cloud"
+      columns:
+        supplierid:
+          type: "INT"
+          suggested: "INTEGER"
+          supported: ["INTEGER", "STRING", "FLOAT"]
+        companyname:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        contactname:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        contacttitle:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        address:
+          type: "TEXT"
+          suggested: "STRING"
+          supported: ["STRING"]
+        city:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        region:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        postalcode:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        country:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        phone:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        fax:
+          type: "VARCHAR"
+          suggested: "STRING"
+          supported: ["STRING"]
+        homepage:
+          type: "TEXT"
+          suggested: "STRING"
+          supported: ["STRING"]
+      primaryKeys: ["supplierid"]
+  mappings:
+    - type: "NODE"
       node: "node0"
+      table: "categories"
       properties:
         node0_property0: { column: "categoryid" }
-  - type: "RELATIONSHIP"
-    relationship: "relationship1"
-    table: "products"
-    from_node:
+        node0_property1: { column: "categoryname" }
+        node0_property2: { column: "description" }
+        node0_property3: { column: "picture" }
+      key: ["node0_property0"]
+    - type: "NODE"
       node: "node1"
+      table: "products"
       properties:
         node1_property0: { column: "productid" }
-    to_node:
+        node1_property1: { column: "productname" }
+        node1_property2: { column: "quantityperunit" }
+        node1_property3: { column: "unitprice" }
+        node1_property4: { column: "unitsinstock" }
+        node1_property5: { column: "unitsonorder" }
+        node1_property6: { column: "reorderlevel" }
+        node1_property7: { column: "discontinued" }
+      key: ["node1_property0"]
+    - type: "NODE"
       node: "node2"
+      table: "suppliers"
       properties:
         node2_property0: { column: "supplierid" }
-display:
-  nodes:
-    node0:
-      x: -100.123
-      y: 200.0
+        node2_property1: { column: "companyname" }
+        node2_property2: { column: "contactname" }
+        node2_property3: { column: "contacttitle" }
+        node2_property4: { column: "address" }
+        node2_property5: { column: "city" }
+        node2_property6: { column: "region" }
+        node2_property7: { column: "postalcode" }
+        node2_property8: { column: "country" }
+        node2_property9: { column: "phone" }
+        node2_property10: { column: "fax" }
+        node2_property11: { column: "homepage" }
+      key: ["node2_property0"]
+    - type: "RELATIONSHIP"
+      relationship: "relationship0"
+      table: "products"
+      from_node:
+        node: "node1"
+        properties:
+          node1_property0: { column: "productid" }
+      to_node:
+        node: "node0"
+        properties:
+          node0_property0: { column: "categoryid" }
+    - type: "RELATIONSHIP"
+      relationship: "relationship1"
+      table: "products"
+      from_node:
+        node: "node1"
+        properties:
+          node1_property0: { column: "productid" }
+      to_node:
+        node: "node2"
+        properties:
+          node2_property0: { column: "supplierid" }

@@ -17,21 +17,24 @@
 package model
 
 import js.objects.toRecord
-import model.display.toClass
-import model.display.toJs
-import model.mapping.toClass
-import model.mapping.toJs
+import model.extension.mapping.toClass
+import model.extension.mapping.toJs
+import model.extension.source.tableJs
+import model.extension.source.toClass
+import model.extension.source.toJs
+import model.extension.toClass
+import model.extension.toJs
 import model.node.NodeEditor
+import model.node.extension.toClass
+import model.node.extension.toJs
 import model.node.nodeJs
 import model.node.toClass
 import model.node.toJs
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
 import model.relationship.relationshipJs
 import model.relationship.toClass
 import model.relationship.toJs
-import model.source.tableJs
-import model.source.toClass
-import model.source.toJs
-
 /**
  * We have duplicate model built on external interfaces with conversion to and from classes in order
  * to support plain JavaScript objects which are used in React's Redux state storage.
@@ -51,9 +54,7 @@ class GraphModelEditor {
                 nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
                 relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
                     .toRecord(),
-                tables = model.tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
-                mappings = model.mappings.map { mapping -> mapping.toJs() }.toTypedArray(),
-                display = model.display.toJs()
+                extensions = model.extensions.toJs()
             )
         }
 
@@ -64,9 +65,7 @@ class GraphModelEditor {
             description = model.description,
             nodes = model.nodes.associateBy { id, js -> js.toClass(id) },
             relationships = model.relationships.associateBy { id, js -> js.toClass(id) },
-            tables = model.tables.associateBy { _, js -> js.toClass() },
-            mappings = model.mappings.map { it.toClass() }.toMutableList(),
-            display = model.display.toClass()
+            extensions = model.extensions.toClass()
         )
 
         @JsStatic
@@ -96,13 +95,13 @@ class GraphModelEditor {
         }
 
         @JsStatic
-        fun addTable(model: GraphModelJs, source: String): String = model.tables.addUnique("table") {
+        fun addTable(model: GraphModelJs, source: String): String = model.extensions.tables.addUnique("table") {
             tableJs(source)
         }
 
         @JsStatic
         fun removeTable(model: GraphModelJs, tableId: String) {
-            model.tables.remove(tableId)
+            model.extensions.tables.remove(tableId)
         }
     }
 }

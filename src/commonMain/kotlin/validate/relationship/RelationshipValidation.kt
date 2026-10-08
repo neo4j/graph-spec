@@ -20,7 +20,7 @@ import model.GraphModel
 import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipConstraint
-import model.relationship.RelationshipIndex
+import model.relationship.extension.RelationshipIndex
 import validate.Issue
 import validate.Validation
 import kotlin.collections.iterator
@@ -38,7 +38,7 @@ interface RelationshipValidation : Validation {
             for ((constraintId, constraint) in relationship.constraints) {
                 validateConstraint(model, relationshipId, relationship, constraintId, constraint, issues)
             }
-            for ((indexId, index) in relationship.indexes) {
+            for ((indexId, index) in relationship.extensions.indexes) {
                 validateIndex(model, relationshipId, relationship, indexId, index, issues)
             }
         }

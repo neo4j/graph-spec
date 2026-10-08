@@ -21,13 +21,19 @@ import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import model.associateBy
 import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.jso
+import model.node.extension.NodeExtensionsJs
+import model.node.extension.nodeExtensionsJs
+import model.node.extension.toClass
+import model.node.extension.toJs
 import model.property.PropertyJs
+import model.property.extension.toClass
+import model.property.extension.toJs
 import model.property.toClass
 import model.property.toJs
+import model.value.ExtensionValueJs
+import model.value.toClass
+import model.value.toJs
 import kotlin.collections.component1
 import kotlin.collections.component2
 
@@ -37,8 +43,7 @@ external interface NodeJs {
     val labels: LabelsJs
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, NodeConstraintJs>
-    val indexes: Record<String, NodeIndexJs>
-    val extensions: Record<String, ExtensionValueJs>
+    val extensions: NodeExtensionsJs
     var name: String
     val id: String
     val description: String
@@ -50,8 +55,7 @@ fun nodeJs(
     labels: LabelsJs = labelsJs(),
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, NodeConstraintJs> = emptyRecord(),
-    indexes: Record<String, NodeIndexJs> = emptyRecord(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord(),
+    extensions: NodeExtensionsJs = nodeExtensionsJs(),
     name: String,
     id: String,
     description: String = "",
@@ -61,7 +65,6 @@ fun nodeJs(
     this.labels = labels
     this.properties = properties
     this.constraints = constraints
-    this.indexes = indexes
     this.extensions = extensions
     this.name = name
     this.id = id
@@ -74,8 +77,7 @@ fun Node.toJs(key: String) = nodeJs(
     labels = labels.toJs(),
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
-    indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
-    extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    extensions = extensions.toJs(),
     name = name ?: key,
     id = key,
     description = description,
@@ -87,8 +89,7 @@ fun NodeJs.toClass(id: String): Node = Node(
     labels = labels.toClass(),
     properties = properties.associateBy { key, value -> value.toClass("nodes.$id", key) },
     constraints = constraints.associateBy { _, value -> value.toClass() },
-    indexes = indexes.associateBy { _, value -> value.toClass() },
-    extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    extensions = extensions.toClass(),
     name = name,
     description = description,
     aliases = aliases.toMutableSet(),

@@ -20,7 +20,8 @@ import model.GraphModel
 import model.node.Labels
 import model.node.Node
 import model.node.NodeConstraint
-import model.node.NodeIndex
+import model.node.extension.NodeExtensions
+import model.node.extension.NodeIndex
 import model.property.Property
 import model.type.ConstraintType
 import model.type.IndexType
@@ -64,7 +65,7 @@ class NodeIndexConstraintNameConflictTest {
     ) = Node(
         labels = Labels(identifier = label),
         properties = mutableMapOf("id" to Property(), "name" to Property()),
-        indexes = indexes.toMutableMap(),
+        extensions = NodeExtensions(indexes = indexes.toMutableMap()),
         constraints = constraints.toMutableMap()
     )
 
@@ -94,7 +95,7 @@ class NodeIndexConstraintNameConflictTest {
         assertEquals(2, issues.size)
         assertTrue(issues.all { it.code == "duplicate_index_constraint_name" })
         assertEquals(
-            setOf("nodes.personNode.indexes.i1.name", "nodes.personNode.indexes.i2.name"),
+            setOf("nodes.personNode.extensions.indexes.i1.name", "nodes.personNode.extensions.indexes.i2.name"),
             issues.mapNotNull { it.path }.toSet()
         )
     }
@@ -134,7 +135,7 @@ class NodeIndexConstraintNameConflictTest {
         assertEquals(2, issues.size, "Every index sharing the bad name is flagged")
         assertTrue(issues.all { it.code == "duplicate_index_constraint_name" })
         assertEquals(
-            setOf("nodes.personNode.indexes.i1.name", "nodes.personNode.indexes.i2.name"),
+            setOf("nodes.personNode.extensions.indexes.i1.name", "nodes.personNode.extensions.indexes.i2.name"),
             issues.mapNotNull { it.path }.toSet()
         )
     }
@@ -173,7 +174,7 @@ class NodeIndexConstraintNameConflictTest {
         // ASSERT
         assertEquals(2, issues.size)
         assertEquals(
-            setOf("nodes.personNode.indexes.i1.name", "nodes.movieNode.indexes.i2.name"),
+            setOf("nodes.personNode.extensions.indexes.i1.name", "nodes.movieNode.extensions.indexes.i2.name"),
             issues.mapNotNull { it.path }.toSet()
         )
     }
@@ -236,7 +237,7 @@ class NodeIndexConstraintNameConflictTest {
         // ASSERT
         assertEquals(2, issues.size)
         assertEquals(
-            setOf("nodes.personNode.indexes.i1.name", "nodes.personNode.constraints.c1.name"),
+            setOf("nodes.personNode.extensions.indexes.i1.name", "nodes.personNode.constraints.c1.name"),
             issues.mapNotNull { it.path }.toSet()
         )
     }

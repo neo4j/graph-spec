@@ -2,9 +2,8 @@ package model.relationship
 
 import js.objects.Object.Companion.keys
 import kotlin.test.*
-import model.extension.StringValue
-import model.extension.toJs
-
+import model.value.StringValue
+import model.value.toJs
 class RelationshipConstraintEditorTest {
 
     @Test
@@ -20,7 +19,7 @@ class RelationshipConstraintEditorTest {
         assertEquals(type, constraint.type)
         assertEquals(2, constraint.properties.size)
         assertTrue(constraint.properties.contains("prop1"))
-        assertEquals(0, keys(constraint.extensions).size)
+        assertEquals(0, keys(constraint.extensions.custom).size)
     }
 
     @Test
@@ -74,7 +73,7 @@ class RelationshipConstraintEditorTest {
         val constraint = relationshipConstraintJs(type = "minimal")
 
         assertNotNull(constraint.properties)
-        assertNotNull(constraint.extensions)
+        assertNotNull(constraint.extensions.custom)
         assertEquals(0, constraint.properties.size)
     }
 }

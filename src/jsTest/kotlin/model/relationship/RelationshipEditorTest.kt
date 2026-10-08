@@ -3,10 +3,9 @@ package model.relationship
 import kotlin.test.*
 import js.objects.recordOf
 import model.GraphModelJs
-import model.extension.StringValue
-import model.extension.toJs
+import model.value.StringValue
+import model.value.toJs
 import model.graphModelJs
-
 class RelationshipEditorTest {
 
     private lateinit var model: GraphModelJs
@@ -103,7 +102,7 @@ class RelationshipEditorTest {
     fun testIndexManagement() {
         // Add Index
         val indexId = RelationshipEditor.addIndex(model, relId, "RANGE", arrayOf("a"))
-        val index = model.relationships[relId]!!.indexes[indexId]!!
+        val index = model.relationships[relId]!!.extensions.indexes[indexId]!!
 
         // Update Type
         RelationshipEditor.setIndexType(model, relId, indexId, "POINT")

@@ -2,8 +2,8 @@ package model.node
 
 import js.objects.recordOf
 import model.GraphModelJs
-import model.extension.StringValue
-import model.extension.toJs
+import model.value.StringValue
+import model.value.toJs
 import model.graphModelJs
 import model.index.FullTextIndexOptionJs
 import model.index.fullTextIndexOptionJs
@@ -124,32 +124,32 @@ class NodeEditorTest {
         )
 
         val node = model.nodes[nodeId]!!
-        assertNotNull(node.indexes[indexId])
+        assertNotNull(node.extensions.indexes[indexId])
 
         // Test Type
         NodeEditor.setIndexType(model, nodeId, indexId, "TEXT")
-        assertEquals("TEXT", node.indexes[indexId]?.type)
+        assertEquals("TEXT", node.extensions.indexes[indexId]?.type)
 
         // Test Labels
         NodeEditor.addIndexLabel(model, nodeId, indexId, "Account")
-        assertEquals(true, node.indexes[indexId]?.labels?.contains("Account"))
+        assertEquals(true, node.extensions.indexes[indexId]?.labels?.contains("Account"))
 
         NodeEditor.removeIndexLabel(model, nodeId, indexId, "User")
-        assertNotEquals(true, node.indexes[indexId]?.labels?.contains("User"))
+        assertNotEquals(true, node.extensions.indexes[indexId]?.labels?.contains("User"))
 
         // Test Properties
         NodeEditor.addIndexProperty(model, nodeId, indexId, "username")
-        assertEquals(true, node.indexes[indexId]?.properties?.contains("username"))
+        assertEquals(true, node.extensions.indexes[indexId]?.properties?.contains("username"))
 
         NodeEditor.removeIndexProperty(model, nodeId, indexId, "username")
-        assertNotEquals(true, node.indexes[indexId]?.properties?.contains("username"))
+        assertNotEquals(true, node.extensions.indexes[indexId]?.properties?.contains("username"))
 
         // Test Options (ExtensionValueJs)
         NodeEditor.setIndexOption(model, nodeId, indexId, fullTextIndexOptionJs(analyzer = "analyzer"))
-        assertEquals("analyzer", (node.indexes[indexId]?.options as? FullTextIndexOptionJs)?.analyzer)
+        assertEquals("analyzer", (node.extensions.indexes[indexId]?.options as? FullTextIndexOptionJs)?.analyzer)
 
         NodeEditor.removeIndexOption(model, nodeId, indexId)
-        assertNull(node.indexes[indexId]?.options)
+        assertNull(node.extensions.indexes[indexId]?.options)
     }
 
     @Test

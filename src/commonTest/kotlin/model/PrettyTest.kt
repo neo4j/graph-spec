@@ -16,14 +16,16 @@
  */
 package model
 
-import model.mapping.NodeMapping
-import model.mapping.PropertyMapping
-import model.mapping.RelationshipMapping
-import model.mapping.TargetMapping
+import model.extension.GraphModelExtensions
+import model.extension.mapping.NodeMapping
+import model.extension.mapping.PropertyMapping
+import model.extension.mapping.RelationshipMapping
+import model.extension.mapping.TargetMapping
 import model.node.Labels
 import model.node.Node
 import model.node.NodeConstraint
-import model.node.NodeIndex
+import model.node.extension.NodeExtensions
+import model.node.extension.NodeIndex
 import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipConstraint
@@ -92,8 +94,10 @@ class PrettyTest {
                         "nodeConstraint0" to
                             NodeConstraint(ConstraintType.UNIQUE, properties = mutableSetOf(), name = "c1")
                     ),
-                    indexes = mutableMapOf(
-                        "nodeIndex0" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf(), name = "i1")
+                    extensions = NodeExtensions(
+                        indexes = mutableMapOf(
+                            "nodeIndex0" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf(), name = "i1")
+                        )
                     )
                 )
             )
@@ -108,8 +112,8 @@ class PrettyTest {
         assertTrue(node.constraints.containsKey("c1"), "Constraint ID should be restored")
         assertNull(node.constraints["c1"]?.name, "Constraint name should be cleared")
 
-        assertTrue(node.indexes.containsKey("i1"), "Index ID should be restored")
-        assertNull(node.indexes["i1"]?.name, "Index name should be cleared")
+        assertTrue(node.extensions.indexes.containsKey("i1"), "Index ID should be restored")
+        assertNull(node.extensions.indexes["i1"]?.name, "Index name should be cleared")
     }
 
     @Test
@@ -131,19 +135,21 @@ class PrettyTest {
                     properties = mutableMapOf("relationshipProperty0" to Property(name = "since"))
                 )
             ),
-            mappings = mutableListOf(
-                RelationshipMapping(
-                    relationship = "relationship0",
-                    table = "friends_table",
-                    fromNode = TargetMapping(
-                        node = "node0",
-                        properties = mutableMapOf("nodeProperty0" to PropertyMapping("from_age"))
-                    ),
-                    toNode = TargetMapping(
-                        node = "node0"
-                    ),
-                    properties = mutableMapOf(
-                        "relationshipProperty0" to PropertyMapping("friends_since")
+            extensions = GraphModelExtensions(
+                mappings = mutableListOf(
+                    RelationshipMapping(
+                        relationship = "relationship0",
+                        table = "friends_table",
+                        fromNode = TargetMapping(
+                            node = "node0",
+                            properties = mutableMapOf("nodeProperty0" to PropertyMapping("from_age"))
+                        ),
+                        toNode = TargetMapping(
+                            node = "node0"
+                        ),
+                        properties = mutableMapOf(
+                            "relationshipProperty0" to PropertyMapping("friends_since")
+                        )
                     )
                 )
             )
@@ -161,7 +167,7 @@ class PrettyTest {
         assertTrue(prettyRel.properties.containsKey("since"))
 
         // Assert Mappings Deep Translation
-        val relMapping = internalModel.mappings.filterIsInstance<RelationshipMapping>().first()
+        val relMapping = internalModel.extensions.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("FRIENDS_WITH", relMapping.relationship)
         assertEquals("Person", relMapping.fromNode.node)
         assertTrue(
@@ -177,14 +183,16 @@ class PrettyTest {
         val model = GraphModel(
             version = "1.0",
             nodes = mutableMapOf(),
-            mappings = mutableListOf(
-                NodeMapping(node = "node0", table = "users", properties = mutableMapOf())
+            extensions = GraphModelExtensions(
+                mappings = mutableListOf(
+                    NodeMapping(node = "node0", table = "users", properties = mutableMapOf())
+                )
             )
         )
 
         model.prettify()
 
-        val mapping = model.mappings.first() as NodeMapping
+        val mapping = model.extensions.mappings.first() as NodeMapping
         // Because "node0" isn't matched to a real node to extract its Name, it stays as is.
         assertEquals("node0", mapping.node)
     }

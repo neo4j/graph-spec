@@ -18,9 +18,8 @@ package validate.relationship
 
 import model.GraphModel
 import model.relationship.Relationship
-import model.relationship.RelationshipIndex
+import model.relationship.extension.RelationshipIndex
 import validate.Issue
-
 object RelationshipIndexOptions : RelationshipValidation {
     override fun validateIndex(
         model: GraphModel,
@@ -36,7 +35,7 @@ object RelationshipIndexOptions : RelationshipValidation {
                     code = "relationship_index_type_options_mismatch",
                     message = "Cannot use options type '${index.options.type}' with relationship index '$indexId' " +
                         "type '${index.type}'",
-                    path = "relationships.$relationshipId.indexes.$indexId.options"
+                    path = "relationships.$relationshipId.extensions.indexes.$indexId.options"
                 )
             )
         }

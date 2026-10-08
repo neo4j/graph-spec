@@ -17,10 +17,9 @@
 package validate.table
 
 import model.GraphModel
-import model.source.Table
-import model.source.TableColumn
+import model.extension.source.Table
+import model.extension.source.TableColumn
 import validate.Issue
-
 object TableColumnDuplicateName : TableValidation {
     override fun validateTableColumn(
         model: GraphModel,
@@ -41,7 +40,7 @@ object TableColumnDuplicateName : TableValidation {
                 Issue(
                     code = "duplicate_table_column_name",
                     message = "Duplicate column name '$name' in table '$tableId'",
-                    path = "tables.$tableId.columns.$columnId.name"
+                    path = "extensions.tables.$tableId.columns.$columnId.name"
                 )
             )
         }

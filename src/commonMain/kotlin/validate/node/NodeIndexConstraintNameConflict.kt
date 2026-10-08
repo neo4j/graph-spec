@@ -33,7 +33,7 @@ object NodeIndexConstraintNameConflict : NodeValidation {
     override fun validateNode(model: GraphModel, nodeId: String, node: Node, issues: MutableList<Issue>) {
         val duplicateNames = duplicateNames(model)
 
-        for ((indexId, index) in node.indexes) {
+        for ((indexId, index) in node.extensions.indexes) {
             val name = index.name
             if (!name.isNullOrEmpty() && name in duplicateNames) {
                 issues.add(
@@ -41,7 +41,7 @@ object NodeIndexConstraintNameConflict : NodeValidation {
                         code = "duplicate_index_constraint_name",
                         message = "Index '$indexId' on node '$nodeId' reuses name '$name' " +
                             "already used by another index or constraint",
-                        path = "nodes.$nodeId.indexes.$indexId.name"
+                        path = "nodes.$nodeId.extensions.indexes.$indexId.name"
                     )
                 )
             }
@@ -65,7 +65,7 @@ object NodeIndexConstraintNameConflict : NodeValidation {
     private fun duplicateNames(model: GraphModel): Set<String> {
         val seen = mutableMapOf<String, Int>()
         for (node in model.nodes.values) {
-            for (index in node.indexes.values) {
+            for (index in node.extensions.indexes.values) {
                 val name = index.name
                 if (!name.isNullOrEmpty()) {
                     seen[name] = (seen[name] ?: 0) + 1

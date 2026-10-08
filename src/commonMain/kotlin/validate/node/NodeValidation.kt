@@ -19,7 +19,7 @@ package validate.node
 import model.GraphModel
 import model.node.Node
 import model.node.NodeConstraint
-import model.node.NodeIndex
+import model.node.extension.NodeIndex
 import model.property.Property
 import validate.Issue
 import validate.Validation
@@ -37,7 +37,7 @@ interface NodeValidation : Validation {
             for ((constraintId, constraint) in node.constraints) {
                 validateConstraint(model, nodeId, node, constraintId, constraint, issues)
             }
-            for ((indexId, index) in node.indexes) {
+            for ((indexId, index) in node.extensions.indexes) {
                 validateIndex(model, nodeId, node, indexId, index, issues)
             }
         }

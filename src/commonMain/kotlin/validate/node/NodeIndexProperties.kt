@@ -18,9 +18,8 @@ package validate.node
 
 import model.GraphModel
 import model.node.Node
-import model.node.NodeIndex
+import model.node.extension.NodeIndex
 import validate.Issue
-
 object NodeIndexProperties : NodeValidation {
     override fun validateIndex(
         model: GraphModel,
@@ -35,7 +34,7 @@ object NodeIndexProperties : NodeValidation {
                 Issue(
                     code = "missing_index_properties",
                     message = "Index '$indexId' on node '$nodeId' must have at least one property",
-                    path = "nodes.$nodeId.indexes.$indexId.properties"
+                    path = "nodes.$nodeId.extensions.indexes.$indexId.properties"
                 )
             )
         }

@@ -18,7 +18,7 @@ package validate.node
 
 import model.GraphModel
 import model.node.Node
-import model.node.NodeIndex
+import model.node.extension.NodeIndex
 import model.property.Property
 import model.type.IndexType
 import validate.Issue
@@ -75,7 +75,7 @@ class NodeIndexesExistsTest {
         val issue = issues.first()
         assertEquals("missing_node_index_property", issue.code)
         assertEquals("Missing property with id 'email' for node index 'idx_user_email'", issue.message)
-        assertEquals("nodes.userNode.indexes.idx_user_email.properties.email", issue.path)
+        assertEquals("nodes.userNode.extensions.indexes.idx_user_email.properties.email", issue.path)
     }
 
     @Test

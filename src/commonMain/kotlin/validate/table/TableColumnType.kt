@@ -17,10 +17,9 @@
 package validate.table
 
 import model.GraphModel
-import model.source.Table
-import model.source.TableColumn
+import model.extension.source.Table
+import model.extension.source.TableColumn
 import validate.Issue
-
 object TableColumnType : TableValidation {
     override fun validateTableColumn(
         model: GraphModel,
@@ -40,7 +39,7 @@ object TableColumnType : TableValidation {
                 Issue(
                     code = "missing_table_column_type",
                     message = "Missing suggested type for table column '$columnId'",
-                    path = "tables.$tableId.columns.$columnId.type"
+                    path = "extensions.tables.$tableId.columns.$columnId.type"
                 )
             )
         }

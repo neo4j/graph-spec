@@ -19,8 +19,8 @@ package validate.relationship
 import model.GraphModel
 import model.property.Property
 import model.relationship.Relationship
-import model.relationship.RelationshipIndex
 import model.relationship.RelationshipTarget
+import model.relationship.extension.RelationshipIndex
 import model.type.IndexType
 import validate.Issue
 import kotlin.test.Test
@@ -81,6 +81,6 @@ class RelationshipIndexPropertiesTest {
         assertEquals(1, issues.size)
         val issue = issues.first()
         assertEquals("missing_index_properties", issue.code)
-        assertEquals("relationships.actedIn.indexes.idx_empty.properties", issue.path)
+        assertEquals("relationships.actedIn.extensions.indexes.idx_empty.properties", issue.path)
     }
 }

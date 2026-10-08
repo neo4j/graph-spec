@@ -16,13 +16,15 @@
  */
 package model
 
-import model.mapping.NodeMapping
-import model.mapping.PropertyMapping
-import model.mapping.RelationshipMapping
-import model.mapping.TargetMapping
+import model.extension.GraphModelExtensions
+import model.extension.mapping.NodeMapping
+import model.extension.mapping.PropertyMapping
+import model.extension.mapping.RelationshipMapping
+import model.extension.mapping.TargetMapping
 import model.node.Node
 import model.node.NodeConstraint
-import model.node.NodeIndex
+import model.node.extension.NodeExtensions
+import model.node.extension.NodeIndex
 import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipConstraint
@@ -68,7 +70,9 @@ class InternalTest {
                             properties = mutableSetOf()
                         )
                     ),
-                    indexes = mutableMapOf("i1" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf()))
+                    extensions = NodeExtensions(
+                        indexes = mutableMapOf("i1" to NodeIndex(IndexType.TEXT, mutableSetOf(), mutableSetOf()))
+                    )
                 ),
                 "User2" to Node()
             ),
@@ -86,8 +90,8 @@ class InternalTest {
         assertTrue(node0.constraints.containsKey("node0_constraint0"))
         assertEquals("c1", node0.constraints["node0_constraint0"]?.name)
 
-        assertTrue(node0.indexes.containsKey("node0_index0"))
-        assertEquals("i1", node0.indexes["node0_index0"]?.name)
+        assertTrue(node0.extensions.indexes.containsKey("node0_index0"))
+        assertEquals("i1", node0.extensions.indexes["node0_index0"]?.name)
     }
 
     @Test
@@ -108,19 +112,21 @@ class InternalTest {
                     properties = mutableMapOf("since" to Property())
                 )
             ),
-            mappings = mutableListOf(
-                RelationshipMapping(
-                    relationship = "FRIENDS_WITH",
-                    table = "friends_table",
-                    fromNode = TargetMapping(
-                        node = "Person",
-                        properties = mutableMapOf("age" to PropertyMapping("from_age"))
-                    ),
-                    toNode = TargetMapping(
-                        node = "Person"
-                    ),
-                    properties = mutableMapOf(
-                        "since" to PropertyMapping("friends_since")
+            extensions = GraphModelExtensions(
+                mappings = mutableListOf(
+                    RelationshipMapping(
+                        relationship = "FRIENDS_WITH",
+                        table = "friends_table",
+                        fromNode = TargetMapping(
+                            node = "Person",
+                            properties = mutableMapOf("age" to PropertyMapping("from_age"))
+                        ),
+                        toNode = TargetMapping(
+                            node = "Person"
+                        ),
+                        properties = mutableMapOf(
+                            "since" to PropertyMapping("friends_since")
+                        )
                     )
                 )
             ),
@@ -139,7 +145,7 @@ class InternalTest {
         assertTrue(internalRel.properties.containsKey("relationship0_property0"))
 
         // Assert Mappings Deep Translation
-        val relMapping = originalModel.mappings.filterIsInstance<RelationshipMapping>().first()
+        val relMapping = originalModel.extensions.mappings.filterIsInstance<RelationshipMapping>().first()
         assertEquals("relationship0", relMapping.relationship)
         assertEquals("node0", relMapping.fromNode.node)
         assertTrue(
@@ -158,14 +164,16 @@ class InternalTest {
         val model = GraphModel(
             version = "1.0",
             nodes = mutableMapOf(),
-            mappings = mutableListOf(
-                NodeMapping(node = "GhostNode", table = "ghosts", properties = mutableMapOf())
+            extensions = GraphModelExtensions(
+                mappings = mutableListOf(
+                    NodeMapping(node = "GhostNode", table = "ghosts", properties = mutableMapOf())
+                )
             )
         )
 
         model.internalise()
 
-        val mapping = model.mappings.first() as NodeMapping
+        val mapping = model.extensions.mappings.first() as NodeMapping
         assertEquals("GhostNode", mapping.node)
     }
 
@@ -364,8 +372,10 @@ class InternalTest {
                             name = "my_custom_name"
                         )
                     ),
-                    indexes = mutableMapOf(
-                        "i1" to NodeIndex(IndexType.TEXT, mutableSetOf("User"), mutableSetOf("email"))
+                    extensions = NodeExtensions(
+                        indexes = mutableMapOf(
+                            "i1" to NodeIndex(IndexType.TEXT, mutableSetOf("User"), mutableSetOf("email"))
+                        )
                     )
                 )
             ),
@@ -392,7 +402,7 @@ class InternalTest {
             appendLine("node $nodeId name=${node.name} label=${node.labels.identifier}")
             node.properties.entries.forEach { (id, property) -> appendLine("  property $id name=${property.name}") }
             node.constraints.entries.forEach { (id, c) -> appendLine("  constraint $id name=${c.name} type=${c.type}") }
-            node.indexes.entries.forEach { (id, index) -> appendLine("  index $id name=${index.name}") }
+            node.extensions.indexes.entries.forEach { (id, index) -> appendLine("  index $id name=${index.name}") }
         }
         for ((relationshipId, relationship) in model.relationships) {
             appendLine("relationship $relationshipId name=${relationship.name}")
@@ -402,7 +412,9 @@ class InternalTest {
             relationship.constraints.entries.forEach { (id, c) ->
                 appendLine("  constraint $id name=${c.name} type=${c.type}")
             }
-            relationship.indexes.entries.forEach { (id, index) -> appendLine("  index $id name=${index.name}") }
+            relationship.extensions.indexes.entries.forEach { (id, index) ->
+                appendLine("  index $id name=${index.name}")
+            }
         }
     }
 

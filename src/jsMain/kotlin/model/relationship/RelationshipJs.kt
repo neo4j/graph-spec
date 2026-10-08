@@ -21,15 +21,20 @@ import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import model.associateBy
 import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.jso
 import model.property.PropertyJs
+import model.property.extension.toClass
+import model.property.extension.toJs
 import model.property.toClass
 import model.property.toJs
+import model.relationship.extension.RelationshipExtensionsJs
+import model.relationship.extension.relationshipExtensionsJs
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
 import model.toMap
-
+import model.value.ExtensionValueJs
+import model.value.toClass
+import model.value.toJs
 @JsExport
 @JsPlainObject
 external interface RelationshipJs {
@@ -38,8 +43,7 @@ external interface RelationshipJs {
     val to: RelationshipTargetJs
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, RelationshipConstraintJs>
-    val indexes: Record<String, RelationshipIndexJs>
-    val extensions: Record<String, ExtensionValueJs>
+    val extensions: RelationshipExtensionsJs
     var name: String
     val id: String
     val description: String
@@ -53,8 +57,7 @@ fun relationshipJs(
     to: RelationshipTargetJs = relationshipTargetJs(),
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, RelationshipConstraintJs> = emptyRecord(),
-    indexes: Record<String, RelationshipIndexJs> = emptyRecord(),
-    extensions: Record<String, ExtensionValueJs> = emptyRecord(),
+    extensions: RelationshipExtensionsJs = relationshipExtensionsJs(),
     name: String,
     id: String,
     description: String = "",
@@ -66,7 +69,6 @@ fun relationshipJs(
     this.to = to
     this.properties = properties
     this.constraints = constraints
-    this.indexes = indexes
     this.extensions = extensions
     this.name = name
     this.id = id
@@ -81,8 +83,7 @@ fun Relationship.toJs(id: String) = relationshipJs(
     to = to.toJs(),
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
-    indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
-    extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    extensions = extensions.toJs(),
     name = name ?: id,
     id = id,
     description = description,
@@ -96,8 +97,7 @@ fun RelationshipJs.toClass(id: String) = Relationship(
     to = to.toClass(),
     properties = properties.associateBy { _, property -> property.toClass("relationships.$id", name) },
     constraints = constraints.associateBy { _, constraint -> constraint.toClass() },
-    indexes = indexes.associateBy { _, index -> index.toClass() },
-    extensions = extensions.associateBy { _, value -> value.toClass() },
+    extensions = extensions.toClass(),
     name = name,
     description = description,
     aliases = aliases.toMutableSet(),

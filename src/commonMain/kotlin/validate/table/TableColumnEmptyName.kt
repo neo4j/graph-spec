@@ -17,10 +17,9 @@
 package validate.table
 
 import model.GraphModel
-import model.source.Table
-import model.source.TableColumn
+import model.extension.source.Table
+import model.extension.source.TableColumn
 import validate.Issue
-
 object TableColumnEmptyName : TableValidation {
     override fun validateTableColumn(
         model: GraphModel,
@@ -35,7 +34,7 @@ object TableColumnEmptyName : TableValidation {
                 Issue(
                     code = "missing_table_column_name",
                     message = "Missing name for table column '$columnId'",
-                    path = "tables.$tableId.columns.$columnId.name"
+                    path = "extensions.tables.$tableId.columns.$columnId.name"
                 )
             )
         }

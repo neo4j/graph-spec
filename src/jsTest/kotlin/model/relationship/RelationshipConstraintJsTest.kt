@@ -1,8 +1,11 @@
 package model.relationship
 
-import model.mapping.JsMappingTest
-import model.extension.StringValue
-import model.extension.stringValueJs
+import model.relationship.extension.RelationshipConstraintExtensions
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
+import model.extension.mapping.JsMappingTest
+import model.value.StringValue
+import model.value.stringValueJs
 import model.type.ConstraintType
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -12,8 +15,8 @@ class RelationshipConstraintJsTest : JsMappingTest<RelationshipConstraint, Relat
     override fun createClass() = RelationshipConstraint(
         type = ConstraintType.UNIQUE,
         properties = mutableSetOf("property_1", "property_2"),
-        extensions = mutableMapOf(
-            "key1" to StringValue("val1")
+        extensions = RelationshipConstraintExtensions(
+            mutableMapOf("key1" to StringValue("val1"))
         )
     )
 
@@ -26,7 +29,7 @@ class RelationshipConstraintJsTest : JsMappingTest<RelationshipConstraint, Relat
         assertEquals(2, jsObject.properties.size)
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
+        assertJsEquals(stringValueJs("val1"), jsObject.extensions.custom["key1"])
     }
 
 }

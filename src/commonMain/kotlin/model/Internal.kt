@@ -57,13 +57,12 @@ object Internal {
         val renames = nodes.assignIds("node")
         Pretty.renameNodeMappings(this, renames)
         nodes.forEach { (key, node) ->
-            node.indexes.assignIds("index", key)
+            node.extensions.indexes.assignIds("index", key)
         }
         relationships.values.forEach { relationship ->
             relationship.from.node = renames[relationship.from.node] ?: relationship.from.node
             relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
         }
-        display.nodes.rename(renames)
     }
 
     private fun GraphModel.internaliseNodeProperties() {
@@ -81,7 +80,7 @@ object Internal {
             val propertyRenames = node.properties.assignIds("property", key)
             renames.putAll(propertyRenames)
             node.constraints.values.forEach { it.properties.rename(renames, key) }
-            node.indexes.values.forEach { it.properties.rename(renames, key) }
+            node.extensions.indexes.values.forEach { it.properties.rename(renames, key) }
             shorthand.forEach { (constraint, name) -> if (name.isNotBlank()) constraint.name = name }
         }
         Pretty.renameNodeMappingProperties(this, renames)
@@ -144,7 +143,7 @@ object Internal {
         val renames = relationships.assignIds("relationship")
         Pretty.renameRelationshipMappings(this, renames)
         relationships.forEach { (key, relationship) ->
-            relationship.indexes.assignIds("index", key)
+            relationship.extensions.indexes.assignIds("index", key)
         }
     }
 
@@ -163,7 +162,7 @@ object Internal {
             val propertyRenames = relationship.properties.assignIds("property", key)
             renames.putAll(propertyRenames)
             relationship.constraints.values.forEach { it.properties.rename(renames, key) }
-            relationship.indexes.values.forEach { it.properties.rename(renames, key) }
+            relationship.extensions.indexes.values.forEach { it.properties.rename(renames, key) }
             shorthand.forEach { (constraint, name) -> if (name.isNotBlank()) constraint.name = name }
         }
         Pretty.renameRelationshipMappingProperties(this, renames)

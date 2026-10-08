@@ -21,11 +21,14 @@ import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import model.associateBy
 import model.emptyRecord
-import model.extension.ExtensionValueJs
-import model.extension.toClass
-import model.extension.toJs
 import model.jso
-
+import model.property.extension.PropertyExtensionsJs
+import model.property.extension.propertyExtensionsJs
+import model.property.extension.toClass
+import model.property.extension.toJs
+import model.value.ExtensionValueJs
+import model.value.toClass
+import model.value.toJs
 @JsExport
 @JsPlainObject
 external interface PropertyJs {
@@ -34,7 +37,7 @@ external interface PropertyJs {
     var mustExist: Boolean?
     var unique: Boolean?
     var key: Boolean?
-    val extensions: Record<String, ExtensionValueJs>
+    val extensions: PropertyExtensionsJs
     var name: String
     val id: String
     val description: String
@@ -49,7 +52,7 @@ fun propertyJs(
     mustExist: Boolean? = null,
     unique: Boolean? = null,
     key: Boolean? = null,
-    extensions: Record<String, ExtensionValueJs> = emptyRecord(),
+    extensions: PropertyExtensionsJs = propertyExtensionsJs(),
     name: String,
     id: String,
     description: String = "",
@@ -77,7 +80,7 @@ fun Property.toJs(key: String) = propertyJs(
     mustExist = mustExist,
     unique = unique,
     key = this.key,
-    extensions = extensions.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    extensions = extensions.toJs(),
     name = name ?: key,
     id = key,
     description = description,
@@ -96,7 +99,7 @@ fun PropertyJs.toClass(parent: String, property: String): Property {
         mustExist = mustExist,
         unique = unique,
         key = key,
-        extensions = extensions.associateBy { _, value -> value.toClass() }.toMutableMap(),
+        extensions = extensions.toClass(),
         name = name,
         description = description,
         reference = reference,

@@ -18,9 +18,8 @@ package validate.node
 
 import model.GraphModel
 import model.node.Node
-import model.node.NodeIndex
+import model.node.extension.NodeIndex
 import validate.Issue
-
 object NodeIndexOptions : NodeValidation {
     override fun validateIndex(
         model: GraphModel,
@@ -36,7 +35,7 @@ object NodeIndexOptions : NodeValidation {
                     code = "node_index_type_options_mismatch",
                     message = "Cannot use options type '${index.options.type}' with node index '$indexId' " +
                         "type '${index.type}'",
-                    path = "nodes.$nodeId.indexes.$indexId.options"
+                    path = "nodes.$nodeId.extensions.indexes.$indexId.options"
                 )
             )
         }

@@ -17,7 +17,7 @@
 package validate.node
 
 import model.GraphModel
-import model.mapping.NodeMapping
+import model.extension.mapping.NodeMapping
 import model.node.Labels
 import model.node.Node
 import model.property.Property
@@ -52,7 +52,7 @@ class NodeMappingKeyTest {
             properties = mutableMapOf("name" to Property())
         )
         model.nodes["person"] = node
-        model.mappings.add(
+        model.extensions.mappings.add(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -74,7 +74,7 @@ class NodeMappingKeyTest {
             properties = mutableMapOf("name" to Property())
         )
         model.nodes["person"] = node
-        model.mappings.add(
+        model.extensions.mappings.add(
             NodeMapping(
                 node = "person",
                 table = "people.csv",

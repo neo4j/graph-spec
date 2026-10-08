@@ -18,9 +18,8 @@ package validate.relationship
 
 import model.GraphModel
 import model.relationship.Relationship
-import model.relationship.RelationshipIndex
+import model.relationship.extension.RelationshipIndex
 import validate.Issue
-
 object RelationshipIndexProperties : RelationshipValidation {
     override fun validateIndex(
         model: GraphModel,
@@ -35,7 +34,7 @@ object RelationshipIndexProperties : RelationshipValidation {
                 Issue(
                     code = "missing_index_properties",
                     message = "Index '$indexId' on relationship '$relationshipId' must have at least one property",
-                    path = "relationships.$relationshipId.indexes.$indexId.properties"
+                    path = "relationships.$relationshipId.extensions.indexes.$indexId.properties"
                 )
             )
         }

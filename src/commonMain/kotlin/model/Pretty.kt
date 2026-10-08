@@ -18,8 +18,8 @@ package model
 
 import model.Rename.prettify
 import model.Rename.rename
-import model.mapping.NodeMapping
-import model.mapping.RelationshipMapping
+import model.extension.mapping.NodeMapping
+import model.extension.mapping.RelationshipMapping
 import model.node.Constraint
 import model.property.Property
 import model.type.ConstraintType
@@ -46,16 +46,16 @@ object Pretty {
         model.nodes.values.forEach { node ->
             node.properties.values.forEach { it.name = null }
             node.constraints.values.forEach { it.name = null }
-            node.indexes.values.forEach { it.name = null }
+            node.extensions.indexes.values.forEach { it.name = null }
             node.name = null
         }
         model.relationships.values.forEach { relationship ->
             relationship.properties.values.forEach { it.name = null }
             relationship.constraints.values.forEach { it.name = null }
-            relationship.indexes.values.forEach { it.name = null }
+            relationship.extensions.indexes.values.forEach { it.name = null }
             relationship.name = null
         }
-        model.tables.values.forEach { table ->
+        model.extensions.tables.values.forEach { table ->
             table.columns.values.forEach { it.name = null }
         }
     }
@@ -80,7 +80,7 @@ object Pretty {
         renameNodeMappings(this, renames)
         nodes.values.forEach { node ->
             node.constraints.prettify()
-            node.indexes.prettify()
+            node.extensions.indexes.prettify()
         }
         relationships.values.forEach { relationship ->
             if (relationship.from.node != "") {
@@ -90,14 +90,13 @@ object Pretty {
                 relationship.to.node = renames[relationship.to.node] ?: relationship.to.node
             }
         }
-        display.nodes.rename(renames)
     }
 
     internal fun renameNodeMappings(model: GraphModel, renames: Map<String, String>) {
-        model.mappings.filterIsInstance<NodeMapping>().forEach { mapping ->
+        model.extensions.mappings.filterIsInstance<NodeMapping>().forEach { mapping ->
             mapping.node = renames[mapping.node] ?: mapping.node
         }
-        model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
+        model.extensions.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
             mapping.fromNode.node = renames[mapping.fromNode.node] ?: mapping.fromNode.node
             mapping.toNode.node = renames[mapping.toNode.node] ?: mapping.toNode.node
         }
@@ -110,7 +109,7 @@ object Pretty {
             node.constraints.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
-            node.indexes.values.forEach { property ->
+            node.extensions.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
             prettifyProperties(node.constraints, node.properties) { constraint ->
@@ -152,11 +151,11 @@ object Pretty {
     }
 
     internal fun renameNodeMappingProperties(model: GraphModel, renames: Map<String, String>) {
-        model.mappings.filterIsInstance<NodeMapping>().forEach { mapping ->
+        model.extensions.mappings.filterIsInstance<NodeMapping>().forEach { mapping ->
             mapping.properties.rename(renames, mapping.node)
             mapping.key.rename(renames, mapping.node)
         }
-        model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
+        model.extensions.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
             mapping.fromNode.properties.rename(renames, mapping.fromNode.node)
             mapping.toNode.properties.rename(renames, mapping.toNode.node)
             mapping.key.rename(renames, mapping.fromNode.node)
@@ -173,12 +172,12 @@ object Pretty {
         renameRelationshipMappings(this, renames)
         relationships.values.forEach { node ->
             node.constraints.prettify()
-            node.indexes.prettify()
+            node.extensions.indexes.prettify()
         }
     }
 
     internal fun renameRelationshipMappings(model: GraphModel, renames: Map<String, String>) {
-        model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
+        model.extensions.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
             mapping.relationship = renames[mapping.relationship] ?: mapping.relationship
         }
     }
@@ -190,7 +189,7 @@ object Pretty {
             relationship.constraints.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
-            relationship.indexes.values.forEach { property ->
+            relationship.extensions.indexes.values.forEach { property ->
                 property.properties.rename(renames, key)
             }
             prettifyProperties(relationship.constraints, relationship.properties)
@@ -199,7 +198,7 @@ object Pretty {
     }
 
     internal fun renameRelationshipMappingProperties(model: GraphModel, renames: Map<String, String>) {
-        model.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
+        model.extensions.mappings.filterIsInstance<RelationshipMapping>().forEach { mapping ->
             mapping.properties.rename(renames, mapping.relationship)
             mapping.key.rename(renames, mapping.relationship)
         }

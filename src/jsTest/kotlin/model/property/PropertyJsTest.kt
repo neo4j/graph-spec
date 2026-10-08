@@ -1,10 +1,13 @@
 package model.property
 
-import model.mapping.JsMappingTest
-import model.extension.BooleanValue
-import model.extension.StringValue
-import model.extension.booleanValueJs
-import model.extension.stringValueJs
+import model.property.extension.toClass
+import model.property.extension.toJs
+import model.extension.mapping.JsMappingTest
+import model.value.BooleanValue
+import model.value.StringValue
+import model.property.extension.PropertyExtensions
+import model.value.booleanValueJs
+import model.value.stringValueJs
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -16,7 +19,7 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         mustExist = true,
         unique = true,
         key = true,
-        extensions = mutableMapOf("key1" to StringValue("val1")),
+        extensions = PropertyExtensions(mutableMapOf("key1" to StringValue("val1"))),
         name = "propertyName",
         reference = "ref",
         pattern = "^a.*",
@@ -33,7 +36,7 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         assertTrue(jsObject.mustExist!!)
         assertTrue(jsObject.unique!!)
         assertTrue(jsObject.key!!)
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions["key1"])
+        assertJsEquals(stringValueJs("val1"), jsObject.extensions.custom["key1"])
         assertEquals("propertyId", jsObject.id)
         assertEquals("propertyName", jsObject.name)
         assertEquals("ref", jsObject.reference)

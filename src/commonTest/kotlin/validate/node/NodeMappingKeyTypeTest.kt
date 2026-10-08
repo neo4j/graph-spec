@@ -17,7 +17,7 @@
 package validate.node
 
 import model.GraphModel
-import model.mapping.NodeMapping
+import model.extension.mapping.NodeMapping
 import model.node.Labels
 import model.node.Node
 import model.property.Neo4jType
@@ -39,7 +39,7 @@ class NodeMappingKeyTypeTest {
             properties = mutableMapOf("id" to Property(type = Neo4jType.STRING))
         )
         model.nodes["person"] = node
-        model.mappings.add(
+        model.extensions.mappings.add(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -61,7 +61,7 @@ class NodeMappingKeyTypeTest {
             properties = mutableMapOf("id" to Property(type = Neo4jType.INTEGER))
         )
         model.nodes["person"] = node
-        model.mappings.add(
+        model.extensions.mappings.add(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -83,7 +83,7 @@ class NodeMappingKeyTypeTest {
             properties = mutableMapOf("id" to Property(type = Neo4jType.FLOAT))
         )
         model.nodes["person"] = node
-        model.mappings.add(
+        model.extensions.mappings.add(
             NodeMapping(
                 node = "person",
                 table = "people.csv",

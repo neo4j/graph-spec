@@ -20,14 +20,18 @@ import js.objects.Record
 import model.GraphModelJs
 import model.addUnique
 import model.emptyRecord
-import model.extension.ExtensionValueJs
 import model.getOrThrow
 import model.index.IndexOptionJs
+import model.node.extension.NodeConstraintExtensionsJs
+import model.node.extension.NodeIndexEditor
+import model.node.extension.NodeIndexJs
+import model.node.extension.nodeConstraintExtensionsJs
+import model.node.extension.nodeIndexJs
 import model.property.PropertyEditor
 import model.property.PropertyJs
 import model.property.propertyJs
 import model.remove
-
+import model.value.ExtensionValueJs
 @JsExport
 class NodeEditor {
     companion object {
@@ -186,7 +190,7 @@ class NodeEditor {
             type: String,
             label: String? = null,
             properties: Array<String> = emptyArray(),
-            extensions: Record<String, ExtensionValueJs> = emptyRecord()
+            extensions: NodeConstraintExtensionsJs = nodeConstraintExtensionsJs()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.constraints.addUnique("constraint") {
@@ -236,11 +240,11 @@ class NodeEditor {
             labels: Array<String> = emptyArray(),
             properties: Array<String> = emptyArray(),
             options: IndexOptionJs? = null,
-            extensions: Record<String, ExtensionValueJs> = emptyRecord()
+            custom: Record<String, ExtensionValueJs> = emptyRecord()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
-            return node.indexes.addUnique("index") {
-                nodeIndexJs(type, labels, properties, options, extensions)
+            return node.extensions.indexes.addUnique("index") {
+                nodeIndexJs(type, labels, properties, options, custom)
             }
         }
 
@@ -288,7 +292,7 @@ class NodeEditor {
 
         private fun getIndex(model: GraphModelJs, nodeId: String, indexId: String): NodeIndexJs {
             val node = model.nodes.getOrThrow(nodeId, "Node")
-            val index = node.indexes.getOrThrow(indexId, "Index")
+            val index = node.extensions.indexes.getOrThrow(indexId, "Index")
             return index
         }
     }

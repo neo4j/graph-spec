@@ -17,20 +17,19 @@
 package validate.node
 
 import model.GraphModel
-import model.mapping.NodeMapping
+import model.extension.mapping.NodeMapping
 import model.node.Node
 import validate.Issue
-
 object NodeMappingKey : NodeValidation {
     override fun validateNode(model: GraphModel, nodeId: String, node: Node, issues: MutableList<Issue>) {
-        val nodeMapping = model.mappings.filterIsInstance<NodeMapping>().find { it.node == nodeId }
+        val nodeMapping = model.extensions.mappings.filterIsInstance<NodeMapping>().find { it.node == nodeId }
         if (nodeMapping != null && nodeMapping.key.isEmpty()) {
             issues.add(
                 Issue(
                     // Replaced legacy code: missing_node_key_property
                     code = "missing_node_mapping_key",
                     message = "Node '$nodeId' has no mapping key defined",
-                    path = "mappings.$nodeId.key"
+                    path = "extensions.mappings.$nodeId.key"
                 )
             )
         }

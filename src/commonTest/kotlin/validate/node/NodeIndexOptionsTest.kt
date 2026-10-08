@@ -21,7 +21,7 @@ import model.index.FullTextIndexOption
 import model.index.PointIndexOption
 import model.index.VectorIndexOption
 import model.node.Node
-import model.node.NodeIndex
+import model.node.extension.NodeIndex
 import model.property.Property
 import model.type.IndexType
 import validate.Issue
@@ -111,7 +111,7 @@ class NodeIndexOptionsTest {
             "Cannot use options type 'POINT' with node index 'idx_user_email_status' type 'TEXT'",
             issue.message
         )
-        assertEquals("nodes.userNode.indexes.idx_user_email_status.options", issue.path)
+        assertEquals("nodes.userNode.extensions.indexes.idx_user_email_status.options", issue.path)
     }
 
     @Test

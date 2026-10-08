@@ -1,7 +1,7 @@
 package model.property
 
-import model.extension.StringValueJs
-import model.extension.stringValueJs
+import model.value.StringValueJs
+import model.value.stringValueJs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

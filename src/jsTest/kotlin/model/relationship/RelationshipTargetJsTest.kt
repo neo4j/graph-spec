@@ -1,6 +1,8 @@
 package model.relationship
 
-import model.mapping.JsMappingTest
+import model.relationship.extension.toClass
+import model.relationship.extension.toJs
+import model.extension.mapping.JsMappingTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
