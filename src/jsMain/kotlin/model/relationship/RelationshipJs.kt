@@ -28,6 +28,7 @@ import model.jso
 import model.property.PropertyJs
 import model.property.toClass
 import model.property.toJs
+import model.toMap
 
 @JsExport
 @JsPlainObject

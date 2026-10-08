@@ -27,8 +27,17 @@ import model.Type
 import model.Version
 import model.mapping.MappingType
 import model.type.ConstraintType
+import model.type.ConstraintType.EXISTS
+import model.type.ConstraintType.KEY
 import model.type.ConstraintType.PROPERTY_TYPE
+import model.type.ConstraintType.UNIQUE
 import model.type.IndexType
+import model.type.IndexType.FULLTEXT
+import model.type.IndexType.LOOKUP
+import model.type.IndexType.POINT
+import model.type.IndexType.RANGE
+import model.type.IndexType.TEXT
+import model.type.IndexType.VECTOR
 
 /**
  * 3.0 -> Graph Spec 4.0

@@ -23,6 +23,7 @@ import model.emptyRecord
 import model.extension.ExtensionValueJs
 import model.extension.toClass
 import model.extension.toJs
+import model.index.IndexOptionJs
 import model.index.toClass
 import model.jso
 import model.type.ConstraintType

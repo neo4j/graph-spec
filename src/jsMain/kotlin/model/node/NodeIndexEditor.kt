@@ -17,7 +17,9 @@
 package model.node
 
 import model.dropAt
+import model.extension.ExtensionValueJs
 import model.index.IndexOptionJs
+import model.remove
 import kotlin.collections.indexOf
 import kotlin.collections.plus
 

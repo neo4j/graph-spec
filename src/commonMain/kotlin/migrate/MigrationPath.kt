@@ -17,6 +17,7 @@
 package migrate
 
 import codec.schema.SchemaMap
+import model.Type
 
 class MigrationPath(val migrations: Map<String, List<Migration>>) {
 
