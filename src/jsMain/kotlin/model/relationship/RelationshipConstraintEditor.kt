@@ -17,8 +17,6 @@
 package model.relationship
 
 import model.dropAt
-import model.extension.ExtensionValueJs
-import model.remove
 import kotlin.collections.plus
 
 @JsExport
