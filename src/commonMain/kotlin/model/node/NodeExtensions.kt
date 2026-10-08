@@ -26,8 +26,14 @@ import kotlin.js.JsExport
  * Extensions for a [Node].
  *
  * @property custom user-defined arbitrary data.
+ * @property indexes indexes on this node.
+ * @property display optional visual position of this node.
  */
 @JsExport
 @Serializable
 @SerialName("NodeExtensions")
-data class NodeExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions
+data class NodeExtensions(
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
+    val display: NodeDisplay? = null
+) : Extensions

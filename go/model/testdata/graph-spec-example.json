@@ -29,7 +29,6 @@
         }
       },
       "constraints": {},
-      "indexes": {},
       "extensions": {
         "custom": {
           "note": {
@@ -40,7 +39,8 @@
             "type": "BOOLEAN",
             "value": true
           }
-        }
+        },
+        "indexes": {}
       }
     },
     "Movie": {
@@ -63,9 +63,9 @@
         }
       },
       "constraints": {},
-      "indexes": {},
       "extensions": {
-        "custom": {}
+        "custom": {},
+        "indexes": {}
       }
     }
   },
@@ -93,207 +93,210 @@
         }
       },
       "constraints": {},
-      "indexes": {},
       "extensions": {
-        "custom": {}
+        "custom": {},
+        "indexes": {}
       }
     }
   },
-  "tables": {
-    "actors": {
-      "source": "sql/postgres",
-      "columns": {
-        "actor_id": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "custom": {}
-        },
-        "actor_name": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "custom": {}
-        }
-      },
-      "primaryKeys": [
-        "actor_id"
-      ],
-      "foreignKeys": {
-        "fk_actor_id": {
-          "columns": [
-            "actor_id"
-          ],
-          "references": {
-            "table": "actors",
-            "columns": [
-              "actorid"
+  "extensions": {
+    "custom": {},
+    "tables": {
+      "actors": {
+        "source": "sql/postgres",
+        "columns": {
+          "actor_id": {
+            "type": "varchar",
+            "size": 255,
+            "suggested": "STRING",
+            "supported": [
+              "STRING"
             ],
             "custom": {}
           },
-          "custom": {}
+          "actor_name": {
+            "type": "varchar",
+            "size": 255,
+            "suggested": "STRING",
+            "supported": [
+              "STRING"
+            ],
+            "custom": {}
+          }
         },
-        "fk_actor_name": {
-          "columns": [
-            "actor_name"
-          ],
-          "references": {
-            "table": "actors",
+        "primaryKeys": [
+          "actor_id"
+        ],
+        "foreignKeys": {
+          "fk_actor_id": {
             "columns": [
-              "actorname"
+              "actor_id"
+            ],
+            "references": {
+              "table": "actors",
+              "columns": [
+                "actorid"
+              ],
+              "custom": {}
+            },
+            "custom": {}
+          },
+          "fk_actor_name": {
+            "columns": [
+              "actor_name"
+            ],
+            "references": {
+              "table": "actors",
+              "columns": [
+                "actorname"
+              ],
+              "custom": {}
+            },
+            "custom": {}
+          }
+        },
+        "custom": {}
+      },
+      "movies": {
+        "source": "sql/postgres",
+        "columns": {
+          "id": {
+            "type": "varchar",
+            "size": 255,
+            "suggested": "STRING",
+            "supported": [
+              "STRING"
             ],
             "custom": {}
           },
-          "custom": {}
-        }
-      },
-      "custom": {}
-    },
-    "movies": {
-      "source": "sql/postgres",
-      "columns": {
-        "id": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "custom": {}
+          "field_1": {
+            "type": "varchar",
+            "size": 255,
+            "suggested": "STRING",
+            "supported": [
+              "STRING"
+            ],
+            "custom": {}
+          }
         },
-        "field_1": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "custom": {}
-        }
-      },
-      "primaryKeys": [
-        "id"
-      ],
-      "foreignKeys": {
-        "fk_movie_actor_id": {
-          "columns": [
-            "actor_id"
-          ],
-          "references": {
-            "table": "actors",
+        "primaryKeys": [
+          "id"
+        ],
+        "foreignKeys": {
+          "fk_movie_actor_id": {
             "columns": [
-              "actorid"
+              "actor_id"
+            ],
+            "references": {
+              "table": "actors",
+              "columns": [
+                "actorid"
+              ],
+              "custom": {}
+            },
+            "custom": {}
+          }
+        },
+        "custom": {}
+      },
+      "actors-movies": {
+        "source": "sql/postgres",
+        "columns": {
+          "actor_id": {
+            "type": "varchar",
+            "size": 255,
+            "suggested": "STRING",
+            "supported": [
+              "STRING"
             ],
             "custom": {}
           },
-          "custom": {}
-        }
-      },
-      "custom": {}
-    },
-    "actors-movies": {
-      "source": "sql/postgres",
-      "columns": {
-        "actor_id": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "custom": {}
+          "movie_id": {
+            "type": "varchar",
+            "size": 255,
+            "suggested": "STRING",
+            "supported": [
+              "STRING"
+            ],
+            "custom": {}
+          },
+          "field_1": {
+            "type": "varchar",
+            "size": 255,
+            "suggested": "STRING",
+            "supported": [
+              "STRING"
+            ],
+            "custom": {}
+          }
         },
-        "movie_id": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "custom": {}
-        },
-        "field_1": {
-          "type": "varchar",
-          "size": 255,
-          "suggested": "STRING",
-          "supported": [
-            "STRING"
-          ],
-          "custom": {}
-        }
-      },
-      "primaryKeys": [],
-      "foreignKeys": {},
-      "custom": {}
-    }
-  },
-  "mappings": [
-    {
-      "type": "NODE",
-      "node": "Actor",
-      "table": "actors",
-      "properties": {
-        "id": {
-          "column": "actor_id"
-        },
-        "name": {
-          "column": "actor_name"
-        }
-      },
-      "mode": "MERGE",
-      "key": [
-        "id"
-      ]
+        "primaryKeys": [],
+        "foreignKeys": {},
+        "custom": {}
+      }
     },
-    {
-      "type": "NODE",
-      "node": "Movie",
-      "table": "movies",
-      "properties": {
-        "id": {
-          "column": "id"
-        }
-      },
-      "mode": "MERGE",
-      "key": [
-        "id"
-      ]
-    },
-    {
-      "type": "RELATIONSHIP",
-      "relationship": "ACTED_IN",
-      "table": "actors-movies",
-      "from_node": {
+    "mappings": [
+      {
+        "type": "NODE",
         "node": "Actor",
-        "label": "Actor",
+        "table": "actors",
         "properties": {
           "id": {
             "column": "actor_id"
+          },
+          "name": {
+            "column": "actor_name"
           }
-        }
+        },
+        "mode": "MERGE",
+        "key": [
+          "id"
+        ]
       },
-      "to_node": {
+      {
+        "type": "NODE",
         "node": "Movie",
-        "label": "Movie",
+        "table": "movies",
         "properties": {
           "id": {
-            "column": "movie_id"
+            "column": "id"
           }
-        }
+        },
+        "mode": "MERGE",
+        "key": [
+          "id"
+        ]
       },
-      "properties": {
-        "roles": {
-          "column": "field_1"
-        }
-      },
-      "mode": "MERGE",
-      "key": []
-    }
-  ]
+      {
+        "type": "RELATIONSHIP",
+        "relationship": "ACTED_IN",
+        "table": "actors-movies",
+        "from_node": {
+          "node": "Actor",
+          "label": "Actor",
+          "properties": {
+            "id": {
+              "column": "actor_id"
+            }
+          }
+        },
+        "to_node": {
+          "node": "Movie",
+          "label": "Movie",
+          "properties": {
+            "id": {
+              "column": "movie_id"
+            }
+          }
+        },
+        "properties": {
+          "roles": {
+            "column": "field_1"
+          }
+        },
+        "mode": "MERGE",
+        "key": []
+      }
+    ]
+  }
 }

@@ -17,8 +17,6 @@
 package model
 
 import js.objects.toRecord
-import model.display.toClass
-import model.display.toJs
 import model.mapping.toClass
 import model.mapping.toJs
 import model.node.NodeEditor
@@ -51,9 +49,6 @@ class GraphModelEditor {
                 nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
                 relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
                     .toRecord(),
-                tables = model.tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
-                mappings = model.mappings.map { mapping -> mapping.toJs() }.toTypedArray(),
-                display = model.display.toJs(),
                 extensions = model.extensions.toJs()
             )
         }
@@ -65,9 +60,6 @@ class GraphModelEditor {
             description = model.description,
             nodes = model.nodes.associateBy { id, js -> js.toClass(id) },
             relationships = model.relationships.associateBy { id, js -> js.toClass(id) },
-            tables = model.tables.associateBy { _, js -> js.toClass() },
-            mappings = model.mappings.map { it.toClass() }.toMutableList(),
-            display = model.display.toClass(),
             extensions = model.extensions.toClass()
         )
 
@@ -98,13 +90,13 @@ class GraphModelEditor {
         }
 
         @JsStatic
-        fun addTable(model: GraphModelJs, source: String): String = model.tables.addUnique("table") {
+        fun addTable(model: GraphModelJs, source: String): String = model.extensions.tables.addUnique("table") {
             tableJs(source)
         }
 
         @JsStatic
         fun removeTable(model: GraphModelJs, tableId: String) {
-            model.tables.remove(tableId)
+            model.extensions.tables.remove(tableId)
         }
     }
 }

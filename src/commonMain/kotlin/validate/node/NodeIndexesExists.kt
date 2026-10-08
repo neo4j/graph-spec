@@ -36,7 +36,7 @@ object NodeIndexesExists : NodeValidation {
                     Issue(
                         code = "missing_node_index_property",
                         message = "Missing property with id '$property' for node index '$indexId'",
-                        path = "nodes.$nodeId.indexes.$indexId.properties.$property"
+                        path = "nodes.$nodeId.extensions.indexes.$indexId.properties.$property"
                     )
                 )
             }

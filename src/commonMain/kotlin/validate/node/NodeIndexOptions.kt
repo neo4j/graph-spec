@@ -36,7 +36,7 @@ object NodeIndexOptions : NodeValidation {
                     code = "node_index_type_options_mismatch",
                     message = "Cannot use options type '${index.options.type}' with node index '$indexId' " +
                         "type '${index.type}'",
-                    path = "nodes.$nodeId.indexes.$indexId.options"
+                    path = "nodes.$nodeId.extensions.indexes.$indexId.options"
                 )
             )
         }

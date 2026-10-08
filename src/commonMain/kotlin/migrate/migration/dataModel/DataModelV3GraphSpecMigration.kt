@@ -27,17 +27,8 @@ import model.Type
 import model.Version
 import model.mapping.MappingType
 import model.type.ConstraintType
-import model.type.ConstraintType.EXISTS
-import model.type.ConstraintType.KEY
 import model.type.ConstraintType.PROPERTY_TYPE
-import model.type.ConstraintType.UNIQUE
 import model.type.IndexType
-import model.type.IndexType.FULLTEXT
-import model.type.IndexType.LOOKUP
-import model.type.IndexType.POINT
-import model.type.IndexType.RANGE
-import model.type.IndexType.TEXT
-import model.type.IndexType.VECTOR
 
 /**
  * 3.0 -> Graph Spec 4.0
@@ -63,20 +54,36 @@ class DataModelV3GraphSpecMigration :
                 "description" to schema.literalOrNull("description"),
                 "nodes" to emptyMap<String, SchemaMap>(),
                 "relationships" to emptyMap<String, SchemaMap>(),
-                "tables" toNotEmpty migrateTables(schema)
+                "extensions" toNotEmpty extensions(migrateTables(schema), emptyList())
             )
         val (nodeConstraints, relationshipConstraints) = gatherWithNames(graphSchema, "constraints")
         val (nodeIndexes, relationshipIndexes) = gatherWithNames(graphSchema, "indexes")
         val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes)
+        convertVisualisations(schema, nodes)
         return schemaMapOf(
             "version" to schema.literal("version"),
             "description" to schema.literalOrNull("description"),
             "nodes" to nodes,
             "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),
-            "tables" toNotEmpty migrateTables(schema),
-            "mappings" toNotEmpty nodeMappings(schema, nodeKeys) + relationshipMappings(schema, relKeys),
-            "display" toNotEmpty visualisation(schema, nodes)
+            "extensions" toNotEmpty extensions(
+                migrateTables(schema),
+                nodeMappings(schema, nodeKeys) + relationshipMappings(schema, relKeys)
+            )
         )
+    }
+
+    /**
+     * Graph model level extensions, omitting any which are empty.
+     */
+    private fun extensions(tables: Map<String, SchemaMap>, mappings: List<SchemaMap>): Map<String, Any> {
+        val extensions = mutableMapOf<String, Any>()
+        if (tables.isNotEmpty()) {
+            extensions["tables"] = tables
+        }
+        if (mappings.isNotEmpty()) {
+            extensions["mappings"] = mappings
+        }
+        return extensions
     }
 
     private fun keyProperties(extensions: SchemaMap?, entity: String): Map<String, Set<String>> =
@@ -84,19 +91,21 @@ class DataModelV3GraphSpecMigration :
             kp.ref(entity) to kp.listOfMaps("keyProperties").map { it.ref() }.toSet()
         } ?: emptyMap()
 
-    internal fun visualisation(schema: SchemaMap, nodes: MutableMap<String, SchemaMap>): SchemaMap? {
-        val visualisation = schema.remove("visualisation") as? SchemaMap ?: return null
-        val display = mutableMapOf<String, SchemaMap>()
+    /**
+     * Moves node positions into each node's extensions.
+     */
+    internal fun convertVisualisations(schema: SchemaMap, nodes: MutableMap<String, SchemaMap>) {
+        val visualisation = schema.remove("visualisation") as? SchemaMap ?: return
         for (vis in visualisation.listOfMaps("nodes")) {
             val ref = vis.string("id").removePrefix("#")
-            nodes[ref] ?: error("Unknown node $ref")
+            val node = nodes[ref] ?: error("Unknown node $ref")
             val position = vis.map("position")
-            display[ref] = schemaMapOf(
+            val extensions = node.mapOrNull("extensions") ?: schemaMapOf().also { node["extensions"] = it }
+            extensions["display"] = schemaMapOf(
                 "x" to position.literal("x"),
                 "y" to position.literal("y")
             )
         }
-        return schemaMapOf("nodes" to display)
     }
 
     internal fun gatherWithNames(
@@ -140,8 +149,10 @@ class DataModelV3GraphSpecMigration :
                     // TODO optional
                 ),
                 "constraints" toNotEmpty convertConstraints(constraints, labelRef, primaryLabel, propertyTokens),
-                "indexes" toNotEmpty convertIndexes(indexes, labelRef, primaryLabel, propertyTokens),
                 "properties" toNotEmpty convertProperties(labels),
+                "extensions" toNotEmpty mapOf(
+                    "indexes" to convertIndexes(indexes, labelRef, primaryLabel, propertyTokens)
+                ).filterValues { !it.isNullOrEmpty() }.mapValues { it.value!! },
                 "name" to tokens.firstOrNull(),
                 "description" to nodeObject.literalOrNull("description")
             )
@@ -242,7 +253,9 @@ class DataModelV3GraphSpecMigration :
                 "to" to mapOf("node" to objectType.ref("to")),
                 "properties" to convertProperties(listOf(relationshipType)),
                 "constraints" toNotEmpty convertConstraints(constraints, typeRef, token, propertyTokens),
-                "indexes" toNotEmpty convertIndexes(indexes, typeRef, token, propertyTokens),
+                "extensions" toNotEmpty mapOf(
+                    "indexes" to convertIndexes(indexes, typeRef, token, propertyTokens)
+                ).filterValues { !it.isNullOrEmpty() }.mapValues { it.value!! },
                 "name" to uniqueRelationshipName(token, uniqueNames),
                 "description" to objectType.literalOrNull("description")
             )

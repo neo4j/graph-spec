@@ -35,7 +35,7 @@ object RelationshipIndexProperties : RelationshipValidation {
                 Issue(
                     code = "missing_index_properties",
                     message = "Index '$indexId' on relationship '$relationshipId' must have at least one property",
-                    path = "relationships.$relationshipId.indexes.$indexId.properties"
+                    path = "relationships.$relationshipId.extensions.indexes.$indexId.properties"
                 )
             )
         }

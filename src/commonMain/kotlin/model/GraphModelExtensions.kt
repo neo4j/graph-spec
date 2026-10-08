@@ -20,14 +20,22 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.ExtensionValue
 import model.extension.Extensions
+import model.mapping.Mapping
+import model.source.Table
 import kotlin.js.JsExport
 
 /**
  * Extensions for a [GraphModel].
  *
  * @property custom user-defined arbitrary data.
+ * @property tables data source table schemas.
+ * @property mappings mappings from tables to nodes and relationships.
  */
 @JsExport
 @Serializable
 @SerialName("GraphModelExtensions")
-data class GraphModelExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions
+data class GraphModelExtensions(
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    val tables: MutableMap<String, Table> = mutableMapOf(),
+    val mappings: MutableList<Mapping> = mutableListOf()
+) : Extensions

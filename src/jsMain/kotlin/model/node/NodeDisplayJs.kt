@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package model.display
+package model.node
 
 import js.objects.Record
 import js.objects.toRecord

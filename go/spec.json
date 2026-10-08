@@ -24,21 +24,6 @@
                 "$ref": "#/$defs/Relationship"
             }
         },
-        "tables": {
-            "type": "object",
-            "additionalProperties": {
-                "$ref": "#/$defs/Table"
-            }
-        },
-        "mappings": {
-            "type": "array",
-            "items": {
-                "$ref": "#/$defs/Mapping"
-            }
-        },
-        "display": {
-            "$ref": "#/$defs/Display"
-        },
         "extensions": {
             "$ref": "#/$defs/GraphModelExtensions"
         }
@@ -68,12 +53,6 @@
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/NodeConstraint"
-                    }
-                },
-                "indexes": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/NodeIndex"
                     }
                 },
                 "extensions": {
@@ -428,6 +407,35 @@
             "required": [],
             "additionalProperties": false
         },
+        "NodeExtensions": {
+            "type": "object",
+            "properties": {
+                "custom": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ExtensionValue"
+                    }
+                },
+                "indexes": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/NodeIndex"
+                    }
+                },
+                "display": {
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/$defs/NodeDisplay"
+                        }
+                    ]
+                }
+            },
+            "required": [],
+            "additionalProperties": false
+        },
         "NodeIndex": {
             "type": "object",
             "properties": {
@@ -633,9 +641,15 @@
             ],
             "additionalProperties": false
         },
-        "NodeExtensions": {
+        "NodeDisplay": {
             "type": "object",
             "properties": {
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                },
                 "custom": {
                     "type": "object",
                     "additionalProperties": {
@@ -643,7 +657,10 @@
                     }
                 }
             },
-            "required": [],
+            "required": [
+                "x",
+                "y"
+            ],
             "additionalProperties": false
         },
         "Relationship": {
@@ -668,12 +685,6 @@
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/RelationshipConstraint"
-                    }
-                },
-                "indexes": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/RelationshipIndex"
                     }
                 },
                 "extensions": {
@@ -764,6 +775,25 @@
             "required": [],
             "additionalProperties": false
         },
+        "RelationshipExtensions": {
+            "type": "object",
+            "properties": {
+                "custom": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ExtensionValue"
+                    }
+                },
+                "indexes": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/RelationshipIndex"
+                    }
+                }
+            },
+            "required": [],
+            "additionalProperties": false
+        },
         "RelationshipIndex": {
             "type": "object",
             "properties": {
@@ -803,13 +833,25 @@
             ],
             "additionalProperties": false
         },
-        "RelationshipExtensions": {
+        "GraphModelExtensions": {
             "type": "object",
             "properties": {
                 "custom": {
                     "type": "object",
                     "additionalProperties": {
                         "$ref": "#/$defs/ExtensionValue"
+                    }
+                },
+                "tables": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/Table"
+                    }
+                },
+                "mappings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Mapping"
                     }
                 }
             },
@@ -1099,54 +1141,6 @@
                 "from_node",
                 "to_node"
             ],
-            "additionalProperties": false
-        },
-        "Display": {
-            "type": "object",
-            "properties": {
-                "nodes": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/NodeDisplay"
-                    }
-                }
-            },
-            "required": [],
-            "additionalProperties": false
-        },
-        "NodeDisplay": {
-            "type": "object",
-            "properties": {
-                "x": {
-                    "type": "number"
-                },
-                "y": {
-                    "type": "number"
-                },
-                "custom": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
-                }
-            },
-            "required": [
-                "x",
-                "y"
-            ],
-            "additionalProperties": false
-        },
-        "GraphModelExtensions": {
-            "type": "object",
-            "properties": {
-                "custom": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
-                }
-            },
-            "required": [],
             "additionalProperties": false
         }
     }

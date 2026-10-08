@@ -37,7 +37,6 @@ external interface NodeJs {
     val labels: LabelsJs
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, NodeConstraintJs>
-    val indexes: Record<String, NodeIndexJs>
     val extensions: NodeExtensionsJs
     var name: String
     val id: String
@@ -50,7 +49,6 @@ fun nodeJs(
     labels: LabelsJs = labelsJs(),
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, NodeConstraintJs> = emptyRecord(),
-    indexes: Record<String, NodeIndexJs> = emptyRecord(),
     extensions: NodeExtensionsJs = nodeExtensionsJs(),
     name: String,
     id: String,
@@ -61,7 +59,6 @@ fun nodeJs(
     this.labels = labels
     this.properties = properties
     this.constraints = constraints
-    this.indexes = indexes
     this.extensions = extensions
     this.name = name
     this.id = id
@@ -74,7 +71,6 @@ fun Node.toJs(key: String) = nodeJs(
     labels = labels.toJs(),
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
-    indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
     extensions = extensions.toJs(),
     name = name ?: key,
     id = key,
@@ -87,7 +83,6 @@ fun NodeJs.toClass(id: String): Node = Node(
     labels = labels.toClass(),
     properties = properties.associateBy { key, value -> value.toClass("nodes.$id", key) },
     constraints = constraints.associateBy { _, value -> value.toClass() },
-    indexes = indexes.associateBy { _, value -> value.toClass() },
     extensions = extensions.toClass(),
     name = name,
     description = description,

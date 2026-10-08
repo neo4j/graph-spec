@@ -36,7 +36,7 @@ object RelationshipIndexOptions : RelationshipValidation {
                     code = "relationship_index_type_options_mismatch",
                     message = "Cannot use options type '${index.options.type}' with relationship index '$indexId' " +
                         "type '${index.type}'",
-                    path = "relationships.$relationshipId.indexes.$indexId.options"
+                    path = "relationships.$relationshipId.extensions.indexes.$indexId.options"
                 )
             )
         }

@@ -30,16 +30,28 @@ import model.jso
 @JsPlainObject
 external interface NodeExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
+    val indexes: Record<String, NodeIndexJs>
+    var display: NodeDisplayJs?
 }
 
-fun nodeExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): NodeExtensionsJs = jso {
+fun nodeExtensionsJs(
+    custom: Record<String, ExtensionValueJs> = emptyRecord(),
+    indexes: Record<String, NodeIndexJs> = emptyRecord(),
+    display: NodeDisplayJs? = null
+): NodeExtensionsJs = jso {
     this.custom = custom
+    this.indexes = indexes
+    this.display = display
 }
 
 fun NodeExtensions.toJs() = nodeExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
+    display = display?.toJs()
 )
 
 fun NodeExtensionsJs.toClass(): NodeExtensions = NodeExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    indexes = indexes.associateBy { _, value -> value.toClass() },
+    display = display?.toClass()
 )

@@ -119,7 +119,7 @@ class RelationshipIndexOptionsTest {
             "Cannot use options type 'POINT' with relationship index 'idx_roles' type 'TEXT'",
             issue.message
         )
-        assertEquals("relationships.actedIn.indexes.idx_roles.options", issue.path)
+        assertEquals("relationships.actedIn.extensions.indexes.idx_roles.options", issue.path)
     }
 
     @Test

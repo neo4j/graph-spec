@@ -24,7 +24,7 @@ import validate.Issue
 
 object NodeMappingKeyType : NodeValidation {
     override fun validateNode(model: GraphModel, nodeId: String, node: Node, issues: MutableList<Issue>) {
-        val nodeMapping = model.mappings.filterIsInstance<NodeMapping>().find { it.node == nodeId } ?: return
+        val nodeMapping = model.extensions.mappings.filterIsInstance<NodeMapping>().find { it.node == nodeId } ?: return
         for (propertyId in nodeMapping.key) {
             val property = node.properties[propertyId] ?: continue
             if (property.type != Neo4jType.STRING && property.type != Neo4jType.INTEGER) {
@@ -33,7 +33,7 @@ object NodeMappingKeyType : NodeValidation {
                         // Replaced legacy code: invalid_node_key_property_type
                         code = "invalid_node_mapping_key_type",
                         message = "Mapping key '$propertyId' on node '$nodeId' must be STRING or INTEGER",
-                        path = "mappings.$nodeId.key.$propertyId"
+                        path = "extensions.mappings.$nodeId.key.$propertyId"
                     )
                 )
             }

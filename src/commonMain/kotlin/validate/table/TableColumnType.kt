@@ -40,7 +40,7 @@ object TableColumnType : TableValidation {
                 Issue(
                     code = "missing_table_column_type",
                     message = "Missing suggested type for table column '$columnId'",
-                    path = "tables.$tableId.columns.$columnId.type"
+                    path = "extensions.tables.$tableId.columns.$columnId.type"
                 )
             )
         }

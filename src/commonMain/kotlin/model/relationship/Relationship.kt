@@ -33,7 +33,6 @@ data class Relationship(
     val to: RelationshipTarget,
     val properties: MutableMap<String, Property> = mutableMapOf(),
     val constraints: MutableMap<String, RelationshipConstraint> = mutableMapOf(),
-    val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf(),
     val extensions: RelationshipExtensions = RelationshipExtensions(),
     override var name: String? = null,
     val description: String = "",

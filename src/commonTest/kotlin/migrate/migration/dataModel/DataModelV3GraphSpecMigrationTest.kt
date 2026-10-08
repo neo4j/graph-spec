@@ -44,12 +44,12 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Unknown node nonExistentNode") {
-            migration.visualisation(schema, nodes)
+            migration.convertVisualisations(schema, nodes)
         }
     }
 
     @Test
-    fun `visualisation transforms to display`() {
+    fun `visualisation moves positions into node extensions`() {
         val nodes = mutableMapOf("nodeA" to schemaMapOf("id" to "nodeA"))
         val schema = schemaMapOf(
             "visualisation" to schemaMapOf(
@@ -62,12 +62,10 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.visualisation(schema, nodes)
-        assertNotNull(result)
-        val node = result.mapOfMaps("nodes")["nodeA"]
-        assertNotNull(node)
-        assertEquals("10.1234", node.string("x"))
-        assertEquals("20.54321", node.string("y"))
+        migration.convertVisualisations(schema, nodes)
+        val display = nodes["nodeA"]!!.map("extensions").map("display")
+        assertEquals("10.1234", display.string("x"))
+        assertEquals("20.54321", display.string("y"))
     }
 
     @Test
@@ -347,6 +345,47 @@ class DataModelV3GraphSpecMigrationTest {
         assertEquals("ZONED DATETIME", prop.string("type"))
         assertEquals("prop description", prop.string("description"))
         assertNotNull(rel.map("constraints")["c1"])
+    }
+
+    @Test
+    fun `migrateRelationships moves indexes into relationship extensions`() {
+        val graphSchema = schemaMapOf(
+            "relationshipTypes" to listOf(
+                schemaMapOf(
+                    "\$id" to "relType1",
+                    "token" to "FOLLOWS",
+                    "properties" to listOf(
+                        schemaMapOf("\$id" to "p1", "token" to "since", "type" to mapOf("type" to "datetime"))
+                    )
+                )
+            ),
+            "relationshipObjectTypes" to listOf(
+                schemaMapOf(
+                    "\$id" to "relObj1",
+                    "type" to mapOf("\$ref" to "#relType1"),
+                    "from" to mapOf("\$ref" to "#nodeA"),
+                    "to" to mapOf("\$ref" to "#nodeB")
+                )
+            )
+        )
+        val indexes = mapOf(
+            "relType1" to listOf(
+                schemaMapOf(
+                    "\$id" to "i:0",
+                    "name" to "since_idx",
+                    "indexType" to "range",
+                    "properties" to listOf(mapOf("\$ref" to "#p1"))
+                )
+            )
+        )
+
+        val rel = migration.migrateRelationships(graphSchema, emptyMap(), indexes)["relObj1"]
+        assertNotNull(rel)
+        assertFalse(rel.containsKey("indexes"))
+        val index = rel.map("extensions").map("indexes").map("i:0")
+        assertEquals("RANGE", index.string("type"))
+        assertEquals("since_idx", index.string("name"))
+        assertEquals(listOf("p1").toSchemaElement(), index.list("properties"))
     }
 
     @Test
@@ -700,10 +739,10 @@ class DataModelV3GraphSpecMigrationTest {
 
         val result = migration.migrate(input)
 
-        assertNotNull(result.mapOfMaps("tables")["users"])
+        assertNotNull(result.map("extensions").mapOfMaps("tables")["users"])
         assertTrue(result.mapOfMaps("nodes").isEmpty(), "nodes should be present but empty")
         assertTrue(result.mapOfMaps("relationships").isEmpty(), "relationships should be present but empty")
-        assertFalse(result.containsKey("mappings"), "mappings should be omitted when empty")
+        assertFalse(result.map("extensions").containsKey("mappings"), "mappings should be omitted when empty")
         assertTrue(result.containsKey("description"), "description should be present but empty")
     }
 }

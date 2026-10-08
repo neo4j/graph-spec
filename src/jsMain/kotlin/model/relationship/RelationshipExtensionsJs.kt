@@ -30,16 +30,23 @@ import model.jso
 @JsPlainObject
 external interface RelationshipExtensionsJs {
     val custom: Record<String, ExtensionValueJs>
+    val indexes: Record<String, RelationshipIndexJs>
 }
 
-fun relationshipExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): RelationshipExtensionsJs = jso {
+fun relationshipExtensionsJs(
+    custom: Record<String, ExtensionValueJs> = emptyRecord(),
+    indexes: Record<String, RelationshipIndexJs> = emptyRecord()
+): RelationshipExtensionsJs = jso {
     this.custom = custom
+    this.indexes = indexes
 }
 
 fun RelationshipExtensions.toJs() = relationshipExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord()
 )
 
 fun RelationshipExtensionsJs.toClass(): RelationshipExtensions = RelationshipExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    indexes = indexes.associateBy { _, value -> value.toClass() }
 )

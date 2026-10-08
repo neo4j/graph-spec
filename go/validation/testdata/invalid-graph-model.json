@@ -20,14 +20,16 @@
           "properties": []
         }
       },
-      "indexes": {},
       "extensions": {
-        "custom": {}
+        "custom": {},
+        "indexes": {}
       }
     }
   },
   "relationships": {},
-  "tables": {},
-  "mappings": [],
-  "display": {}
+  "extensions": {
+    "custom": {},
+    "tables": {},
+    "mappings": []
+  }
 }

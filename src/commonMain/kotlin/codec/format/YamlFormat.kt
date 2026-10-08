@@ -90,22 +90,22 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                 inlinePaths = setOf(
                     "nodes.*.properties.*",
                     "nodes.*.constraints.*.properties",
-                    "nodes.*.indexes.*.labels",
-                    "nodes.*.indexes.*.properties",
+                    "nodes.*.extensions.indexes.*.labels",
+                    "nodes.*.extensions.indexes.*.properties",
                     "relationships.*.properties.*",
                     "relationships.*.from",
                     "relationships.*.to",
                     "relationships.*.constraints.*.properties",
-                    "relationships.*.indexes.*.properties",
-                    "relationships.*.indexes.*.options.*",
-                    "tables.*.columns.*.supported",
-                    "tables.*.primaryKeys",
-                    "tables.*.foreignKeys.*.columns",
-                    "tables.*.foreignKeys.*.references.columns",
-                    "mappings[*].properties.*",
-                    "mappings[*].key",
-                    "mappings[*].from_node.properties.*",
-                    "mappings[*].to_node.properties.*"
+                    "relationships.*.extensions.indexes.*.properties",
+                    "relationships.*.extensions.indexes.*.options.*",
+                    "extensions.tables.*.columns.*.supported",
+                    "extensions.tables.*.primaryKeys",
+                    "extensions.tables.*.foreignKeys.*.columns",
+                    "extensions.tables.*.foreignKeys.*.references.columns",
+                    "extensions.mappings[*].properties.*",
+                    "extensions.mappings[*].key",
+                    "extensions.mappings[*].from_node.properties.*",
+                    "extensions.mappings[*].to_node.properties.*"
                 )
             )
         )
