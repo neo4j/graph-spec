@@ -27,17 +27,8 @@ import model.Type
 import model.Version
 import model.mapping.MappingType
 import model.type.ConstraintType
-import model.type.ConstraintType.EXISTS
-import model.type.ConstraintType.KEY
 import model.type.ConstraintType.PROPERTY_TYPE
-import model.type.ConstraintType.UNIQUE
 import model.type.IndexType
-import model.type.IndexType.FULLTEXT
-import model.type.IndexType.LOOKUP
-import model.type.IndexType.POINT
-import model.type.IndexType.RANGE
-import model.type.IndexType.TEXT
-import model.type.IndexType.VECTOR
 
 /**
  * 3.0 -> Graph Spec 4.0
@@ -68,7 +59,7 @@ class DataModelV3GraphSpecMigration :
         val (nodeConstraints, relationshipConstraints) = gatherWithNames(graphSchema, "constraints")
         val (nodeIndexes, relationshipIndexes) = gatherWithNames(graphSchema, "indexes")
         val nodes = migrateNodes(graphSchema, nodeConstraints, nodeIndexes)
-        visualisation(schema, nodes)
+        convertVisualisations(schema, nodes)
         return schemaMapOf(
             "version" to schema.literal("version"),
             "description" to schema.literalOrNull("description"),
@@ -103,7 +94,7 @@ class DataModelV3GraphSpecMigration :
     /**
      * Moves node positions into each node's extensions.
      */
-    internal fun visualisation(schema: SchemaMap, nodes: MutableMap<String, SchemaMap>) {
+    internal fun convertVisualisations(schema: SchemaMap, nodes: MutableMap<String, SchemaMap>) {
         val visualisation = schema.remove("visualisation") as? SchemaMap ?: return
         for (vis in visualisation.listOfMaps("nodes")) {
             val ref = vis.string("id").removePrefix("#")

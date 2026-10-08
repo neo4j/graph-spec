@@ -44,7 +44,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Unknown node nonExistentNode") {
-            migration.visualisation(schema, nodes)
+            migration.convertVisualisations(schema, nodes)
         }
     }
 
@@ -62,7 +62,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        migration.visualisation(schema, nodes)
+        migration.convertVisualisations(schema, nodes)
         val display = nodes["nodeA"]!!.map("extensions").map("display")
         assertEquals("10.1234", display.string("x"))
         assertEquals("20.54321", display.string("y"))
