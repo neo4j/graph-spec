@@ -37,8 +37,6 @@ object Version {
     /*
         Schema urls, the spec version is always the last path segment.
      */
-    const val DEFAULT_DOCUMENT_VERSION = "1.0.0"
-
     const val SCHEMA_BASE = "https://neo4j.io/ontology-graph-spec/"
 
     fun schemaUrl(version: String): String = "$SCHEMA_BASE$version/"

@@ -50,7 +50,7 @@ class DataModelV3GraphSpecMigration :
         val graphSchema = schema.mapOrNull("graphSchemaRepresentation")?.mapOrNull("graphSchema")
             ?: return schemaMapOf(
                 "schema" to Version.schemaUrl(Version.LATEST),
-                "version" to Version.DEFAULT_DOCUMENT_VERSION,
+                "version" to "1.0.0",
                 "description" to schema.literalOrNull("description"),
                 "nodes" to emptyMap<String, SchemaMap>(),
                 "relationships" to emptyMap<String, SchemaMap>(),
@@ -62,7 +62,7 @@ class DataModelV3GraphSpecMigration :
         convertVisualisations(schema, nodes)
         return schemaMapOf(
             "schema" to Version.schemaUrl(Version.LATEST),
-            "version" to Version.DEFAULT_DOCUMENT_VERSION,
+            "version" to "1.0.0",
             "description" to schema.literalOrNull("description"),
             "nodes" to nodes,
             "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),
