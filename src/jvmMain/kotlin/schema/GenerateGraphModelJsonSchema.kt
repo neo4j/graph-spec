@@ -21,13 +21,43 @@ import kotlinx.schema.generator.json.JsonSchemaConfig
 import kotlinx.schema.generator.json.serialization.SerializationClassJsonSchemaGenerator
 import kotlinx.schema.json.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonObject
 import model.GraphModel
+import model.Version
 
+/**
+ * The structure of the schema comes from the serialization descriptor, as that is what the (de)serialisation of
+ * the model actually follows (defaults, transient fields, naming, nullability).
+ * Descriptions come from `@property:SerialDescription` annotations, as KDoc is not available at runtime.
+ *
+ * Output is plain JSON Schema draft 2020-12: nullability is expressed with `"type": [..., "null"]` rather than
+ * OpenAPI's `nullable`, and polymorphic subtypes are told apart by their `type` const rather than `discriminator`.
+ * Definitions keep their short serial names and are namespaced by the absolute schema url in `$id`.
+ */
 fun main(args: Array<String>) {
     val out =
         File(args.firstOrNull()?.takeIf { it.isNotEmpty() } ?: "go/spec.json").absoluteFile
     out.parentFile?.mkdirs()
-    val generator = SerializationClassJsonSchemaGenerator(jsonSchemaConfig = JsonSchemaConfig.OpenAPI)
-    val schema = generator.generateSchema(GraphModel.serializer().descriptor)
-    out.writeText(schema.encodeToString(Json { prettyPrint = true }))
+    val json = Json { prettyPrint = true }
+    val generator = SerializationClassJsonSchemaGenerator(jsonSchemaConfig = JsonSchemaConfig.Default)
+    val schema = json.parseToJsonElement(generator.generateSchema(GraphModel.serializer().descriptor).encodeToString(json)).jsonObject
+    out.writeText(json.encodeToString(JsonElement.serializer(), withId(schema, Version.schemaUrl(Version.LATEST))))
+}
+
+/**
+ * Replaces the generated `$id` (the serial name) with the absolute schema url, keeping the name as the `title`.
+ */
+private fun withId(schema: JsonObject, id: String): JsonObject = buildJsonObject {
+    schema.forEach { (key, value) ->
+        if (key == "\$id") {
+            put(key, JsonPrimitive(id))
+            put("title", value)
+        } else {
+            put(key, value)
+        }
+    }
 }

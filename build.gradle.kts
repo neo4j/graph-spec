@@ -75,7 +75,7 @@ kotlin {
         }
 
         commonMain.dependencies {
-            implementation(libs.kotlinx.schema)
+            implementation(libs.kotlinx.schema.generator.json)
             implementation(libs.kotlinx.serializer.json)
             implementation(libs.kotlinx.yamlkt)
             implementation(libs.kaseChange)
@@ -94,6 +94,7 @@ kotlin {
     }
 
     compilerOptions {
+        freeCompilerArgs.add("-Xannotation-default-target=param-property")
         freeCompilerArgs.add("-opt-in=kotlin.native.ExperimentalNativeApi")
     }
 }
