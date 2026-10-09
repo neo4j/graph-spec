@@ -20,7 +20,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.property.extension.PropertyExtensions
 import model.type.Named
-import model.value.ExtensionValue
 import kotlin.js.JsExport
 
 @JsExport

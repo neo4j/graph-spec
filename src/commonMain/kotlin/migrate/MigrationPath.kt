@@ -17,6 +17,8 @@
 package migrate
 
 import codec.schema.SchemaMap
+import model.Type
+import model.Version
 
 class MigrationPath(val migrations: Map<String, List<Migration>>) {
 
@@ -27,7 +29,7 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
         var map = schema
         for (migration in path) {
             map = migration.migrate(map)
-            map["version"] = migration.to
+            stampVersion(map, migration)
         }
         return map
     }
@@ -43,9 +45,24 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
         return "$type:$semver"
     }
 
+    /**
+     * Graph specs identify their spec version via the `schema` url, whereas the legacy types use `version`.
+     */
     private fun version(schema: SchemaMap, type: String): String {
+        if (type == Type.GRAPH_SPEC) {
+            val url = schema.stringOrNull("schema") ?: error("Schema must be specified")
+            return version(Version.parseSchemaVersion(url), type)
+        }
         val version = schema.stringOrNull("version") ?: error("Version must be specified")
         return version(version, type)
+    }
+
+    private fun stampVersion(map: SchemaMap, migration: Migration) {
+        if (migration.toType == Type.GRAPH_SPEC) {
+            map["schema"] = Version.schemaUrl(migration.to) // `version` belongs to the user
+        } else {
+            map["version"] = migration.to
+        }
     }
 
     /**

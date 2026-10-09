@@ -16,7 +16,6 @@
  */
 package model.property
 
-import model.value.ExtensionValueJs
 @JsExport
 class PropertyEditor {
     companion object {

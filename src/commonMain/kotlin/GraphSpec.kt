@@ -39,7 +39,7 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
         if (targetType != Type.GRAPH_SPEC) { // Migrations expect internalised graph spec models.
             model.internalise()
         }
-        if (!path.requiresMigration(model.version, Type.GRAPH_SPEC, targetVersion, targetType)) {
+        if (!path.requiresMigration(model.specVersion(), Type.GRAPH_SPEC, targetVersion, targetType)) {
             return configuration.format.encodeModelToString(model)
         }
         val schema = configuration.format.encodeToSchema(model)
@@ -57,7 +57,7 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
     private fun decodeModel(content: String, type: String): GraphModel {
         if (type == Type.GRAPH_SPEC) {
             val model = configuration.format.decodeModelFromString(content)
-            if (!path.requiresMigration(model.version, type, Version.LATEST, Type.GRAPH_SPEC)) {
+            if (!path.requiresMigration(model.specVersion(), type, Version.LATEST, Type.GRAPH_SPEC)) {
                 return model
             }
         }
@@ -81,6 +81,8 @@ fun defaultConfig(format: Format): GraphSpecConfig {
     builder.migrate(GraphSpecDataModelV3Migration(wrapped = true))
     return builder.build()
 }
+
+private fun GraphModel.specVersion() = Version.parseSchemaVersion(schema)
 
 private class GraphSpecImpl(configuration: GraphSpecConfig) : GraphSpec(configuration)
 

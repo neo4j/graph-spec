@@ -616,5 +616,6 @@ type GraphModel struct {
 	Name          *string                 `json:"name,omitempty"`
 	Nodes         map[string]Node         `json:"nodes,omitempty"`
 	Relationships map[string]Relationship `json:"relationships,omitempty"`
+	Schema        string                  `json:"schema"`
 	Version       string                  `json:"version"`
 }

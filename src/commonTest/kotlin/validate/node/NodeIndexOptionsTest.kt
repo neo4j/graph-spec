@@ -32,7 +32,7 @@ import kotlin.test.assertTrue
 class NodeIndexOptionsTest {
 
     private val validator = NodeIndexOptions
-    private val model = GraphModel("4.0.0")
+    private val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0")
 
     @Test
     fun `no options set - no issues`() {

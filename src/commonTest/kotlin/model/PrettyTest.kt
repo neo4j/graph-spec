@@ -43,6 +43,7 @@ class PrettyTest {
     @Test
     fun `test restores node label from identifier`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "node0" to Node(
@@ -64,6 +65,7 @@ class PrettyTest {
     @Test
     fun `test does not restore label if implied or optional labels exist`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "node0" to Node(
@@ -86,6 +88,7 @@ class PrettyTest {
     @Test
     fun `test restores multiple IDs from constraints and indexes`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "node0" to Node(
@@ -119,6 +122,7 @@ class PrettyTest {
     @Test
     fun `test translates mappings and deep properties correctly`() {
         val internalModel = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "node0" to Node(
@@ -181,6 +185,7 @@ class PrettyTest {
     @Test
     fun `test ignores missing mapping references gracefully`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(),
             extensions = GraphModelExtensions(
@@ -200,6 +205,7 @@ class PrettyTest {
     @Test
     fun `test folds single-property node key constraint into property flag`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "node0" to Node(
@@ -227,6 +233,7 @@ class PrettyTest {
     @Test
     fun `test folds single-property node unique and exists constraints into property flags`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "node0" to Node(
@@ -266,6 +273,7 @@ class PrettyTest {
     @Test
     fun `test does not fold node constraint whose label differs from the node's identifier`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "node0" to Node(
@@ -298,6 +306,7 @@ class PrettyTest {
     @Test
     fun `test does not fold node constraint covering multiple properties`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "node0" to Node(
@@ -328,6 +337,7 @@ class PrettyTest {
     @Test
     fun `test folds single-property relationship constraint into property flag`() {
         val model = GraphModel(
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             relationships = mutableMapOf(
                 "relationship0" to Relationship(

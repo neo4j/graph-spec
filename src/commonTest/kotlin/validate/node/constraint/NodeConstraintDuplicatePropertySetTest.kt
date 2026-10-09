@@ -30,7 +30,7 @@ import kotlin.test.assertTrue
 class NodeConstraintDuplicatePropertySetTest {
 
     private val validator = NodeConstraintDuplicatePropertySet
-    private val model = GraphModel("4.0.0")
+    private val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0")
 
     @Test
     fun `pass when no duplicate composite property sets`() {

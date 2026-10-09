@@ -87,7 +87,7 @@ class YamlFormatTest {
 
     @Test
     fun `test delegation to json for schema encoding`() {
-        val model = GraphModel(version = "v2")
+        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "v2")
 
         val schema = yamlFormat.encodeToSchema(model) as SchemaMap
         assertEquals("v2", schema.string("version"))

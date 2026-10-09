@@ -22,9 +22,7 @@ import model.property.extension.PropertyExtensionsJs
 import model.property.extension.propertyExtensionsJs
 import model.property.extension.toClass
 import model.property.extension.toJs
-import model.value.ExtensionValueJs
-import model.value.toClass
-import model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface PropertyJs {
