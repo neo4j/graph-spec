@@ -61,7 +61,7 @@ class PropertyEditor {
         }
 
         @JsStatic
-        fun addOneOf(property: PropertyJs, value: ExtensionValueJs) {
+        fun addOneOf(property: PropertyJs, value: String) {
             property.oneOf += value
         }
 

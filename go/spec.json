@@ -291,7 +291,7 @@
                 "one_of": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/$defs/ExtensionValue"
+                        "type": "string"
                     }
                 }
             },

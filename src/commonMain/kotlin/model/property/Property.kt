@@ -38,5 +38,5 @@ data class Property(
     val reference: String = "",
     val pattern: String = "",
     @SerialName("one_of")
-    val oneOf: MutableList<ExtensionValue> = mutableListOf()
+    val oneOf: MutableList<String> = mutableListOf()
 ) : Named

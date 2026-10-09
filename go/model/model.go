@@ -546,7 +546,7 @@ type Property struct {
 	Key         *bool               `json:"key,omitempty"`
 	MustExist   *bool               `json:"mustExist,omitempty"`
 	Name        *string             `json:"name,omitempty"`
-	OneOf       []ExtensionValue    `json:"one_of,omitempty"`
+	OneOf       []string            `json:"one_of,omitempty"`
 	Pattern     *string             `json:"pattern,omitempty"`
 	Reference   *string             `json:"reference,omitempty"`
 	Type        *Neo4jType          `json:"type,omitempty"`
