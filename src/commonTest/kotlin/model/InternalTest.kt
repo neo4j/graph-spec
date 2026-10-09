@@ -42,7 +42,7 @@ class InternalTest {
     @Test
     fun `test moves node label to identifier`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(label = "UserLabel")
@@ -62,7 +62,7 @@ class InternalTest {
     @Test
     fun `test increments IDs correctly for multiple nodes and children`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User1" to Node(
@@ -99,7 +99,7 @@ class InternalTest {
     @Test
     fun `test translates mappings and deep properties correctly`() {
         val originalModel = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "Person" to Node(
@@ -165,7 +165,7 @@ class InternalTest {
     @Test
     fun `test ignores missing mapping references gracefully`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(),
             extensions = GraphModelExtensions(
@@ -184,7 +184,7 @@ class InternalTest {
     @Test
     fun `test converts key property flag into a node key constraint`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(
@@ -212,7 +212,7 @@ class InternalTest {
     @Test
     fun `test converts unique property flag into a node unique constraint`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(
@@ -238,7 +238,7 @@ class InternalTest {
     @Test
     fun `test converts mustExist property flag into a node exists constraint`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(
@@ -264,7 +264,7 @@ class InternalTest {
     @Test
     fun `test keeps an explicit node constraint alongside a shorthand one`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(
@@ -290,7 +290,7 @@ class InternalTest {
     @Test
     fun `test converts key property flag into a relationship key constraint`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             relationships = mutableMapOf(
                 "KNOWS" to Relationship(
@@ -319,7 +319,7 @@ class InternalTest {
     @Test
     fun `test keeps an explicit relationship constraint alongside a shorthand one`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             relationships = mutableMapOf(
                 "KNOWS" to Relationship(
@@ -348,7 +348,7 @@ class InternalTest {
     @Test
     fun `test leaves properties without flags unconstrained`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(
@@ -367,7 +367,7 @@ class InternalTest {
     @Test
     fun `test internalise twice leaves ids and names alone`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(
@@ -433,7 +433,7 @@ class InternalTest {
     @Test
     fun `test keeps shorthand constraints whose property tokens differ only by a space`() {
         val model = GraphModel(
-            schema = "https://neo4j.io/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
             nodes = mutableMapOf(
                 "User" to Node(

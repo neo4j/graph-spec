@@ -26,7 +26,7 @@ class TableValidationTest {
     @Test
     fun `validate on empty model produces no issues`() {
         val validator = object : TableValidation {}
-        val model = GraphModel(schema = "https://neo4j.io/ontology-graph-spec/4.0.0/", version = "1.0.0")
+        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0")
 
         val issues = mutableListOf<Issue>()
         validator.validate(model, issues)

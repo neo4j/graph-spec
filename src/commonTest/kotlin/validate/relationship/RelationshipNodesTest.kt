@@ -31,7 +31,7 @@ class RelationshipNodesTest {
 
     @Test
     fun `both source and target nodes exist`() {
-        val model = GraphModel(schema = "https://neo4j.io/ontology-graph-spec/4.0.0/", version = "1.0.0").apply {
+        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0").apply {
             nodes["Person"] = Node()
             nodes["Movie"] = Node()
         }
@@ -49,7 +49,7 @@ class RelationshipNodesTest {
 
     @Test
     fun `source and target node identifiers are blank`() {
-        val model = GraphModel(schema = "https://neo4j.io/ontology-graph-spec/4.0.0/", version = "1.0.0")
+        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0")
         val relationship = Relationship(
             type = "ACTED_IN",
             from = RelationshipTarget(""),
@@ -64,7 +64,7 @@ class RelationshipNodesTest {
 
     @Test
     fun `from node does not exist`() {
-        val model = GraphModel(schema = "https://neo4j.io/ontology-graph-spec/4.0.0/", version = "1.0.0").apply {
+        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0").apply {
             nodes["Movie"] = Node() // Only 'to' node exists
         }
         val relationship = Relationship(
@@ -85,7 +85,7 @@ class RelationshipNodesTest {
 
     @Test
     fun `to node does not exist`() {
-        val model = GraphModel(schema = "https://neo4j.io/ontology-graph-spec/4.0.0/", version = "1.0.0").apply {
+        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0").apply {
             nodes["Person"] = Node() // Only 'from' node exists
         }
         val relationship = Relationship(
@@ -107,7 +107,7 @@ class RelationshipNodesTest {
 
     @Test
     fun `neither node exists`() {
-        val model = GraphModel(schema = "https://neo4j.io/ontology-graph-spec/4.0.0/", version = "1.0.0") // Empty model
+        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0") // Empty model
         val relationship = Relationship(
             type = "ACTED_IN",
             from = RelationshipTarget("Person"),

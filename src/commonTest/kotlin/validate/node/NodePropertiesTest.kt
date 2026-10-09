@@ -28,7 +28,7 @@ import kotlin.test.assertTrue
 class NodePropertiesTest {
 
     private val validator = NodeProperties
-    private val model = GraphModel(schema = "https://neo4j.io/ontology-graph-spec/4.0.0/", version = "1.0.0")
+    private val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0")
 
     @Test
     fun `pass when node has properties`() {

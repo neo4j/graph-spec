@@ -53,9 +53,9 @@ class End2EndMigrationTest {
 
     @TestFactory
     fun `decoding a graph-spec model with an unsupported version fails`() = mapOf(
-        GraphSpec.Json to """{"schema":"https://neo4j.io/ontology-graph-spec/3.0.0/","version":"1.0.0"}""",
+        GraphSpec.Json to """{"schema":"https://neo4j.com/ontology-graph-spec/3.0.0/","version":"1.0.0"}""",
         GraphSpec.Yaml to """
-            schema: "https://neo4j.io/ontology-graph-spec/3.0.0/"
+            schema: "https://neo4j.com/ontology-graph-spec/3.0.0/"
             version: "1.0.0"
         """.trimIndent(),
     ).map { (graphSpec, input) ->
