@@ -252,10 +252,10 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 
 // Maps rows of a table to nodes.
 type NODE struct {
-    // Id of the mapping which must be imported before this one. Empty when there is no dependency.
-    DependsOn *string `json:"depends_on,omitempty"`
-    // Optional id of this mapping, so other mappings can reference it in depends_on.
-    ID *string `json:"id,omitempty"`
+	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	DependsOn *string `json:"depends_on,omitempty"`
+	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	ID *string `json:"id,omitempty"`
 	// Ids of the properties which identify a node.
 	Key []string `json:"key,omitempty"`
 	// Label used to match existing nodes.
@@ -277,10 +277,10 @@ func (NODE) MappingType() string { return "NODE" }
 
 // Maps the results of a query run against a table.
 type QUERY struct {
-    // Id of the mapping which must be imported before this one. Empty when there is no dependency.
-    DependsOn *string `json:"depends_on,omitempty"`
-    // Optional id of this mapping, so other mappings can reference it in depends_on.
-    ID *string `json:"id,omitempty"`
+	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	DependsOn *string `json:"depends_on,omitempty"`
+	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	ID *string `json:"id,omitempty"`
 	// The query to run.
 	Query string `json:"query"`
 	// Id of the source table.
@@ -294,14 +294,12 @@ func (QUERY) MappingType() string { return "QUERY" }
 
 // Maps rows of a table to relationships.
 type RELATIONSHIP struct {
-    // Id of the mapping which must be imported before this one. Empty when there is no dependency.
-    DependsOn *string `json:"depends_on,omitempty"`
-    // How the start node of the relationship is matched.
-    FromNode TargetMapping `json:"from_node"`
-    // Optional id of this mapping, so other mappings can reference it in depends_on.
-    ID *string `json:"id,omitempty"`
+	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	DependsOn *string `json:"depends_on,omitempty"`
 	// How the start node of the relationship is matched.
 	FromNode TargetMapping `json:"from_node"`
+	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	ID *string `json:"id,omitempty"`
 	// Ids of the properties which identify a relationship.
 	Key []string `json:"key,omitempty"`
 	// Label used to match existing relationships.
@@ -492,8 +490,8 @@ type NodeConstraint struct {
 
 // Visual information for a node.
 type NodeDisplay struct {
-    // Display colour of the node as a hex string, e.g. #FF8800.
-    Colour *string `json:"colour,omitempty"`
+	// Display colour of the node as a hex string, e.g. #FF8800.
+	Colour *string `json:"colour,omitempty"`
 	// User-defined arbitrary data.
 	Custom map[string]ExtensionValue `json:"custom,omitempty"`
 	// Horizontal position.
@@ -810,7 +808,6 @@ type GraphModel struct {
 	Description *string `json:"description,omitempty"`
 	// Extensions to the model: data source tables, mappings and external custom data.
 	Extensions *GraphModelExtensions `json:"extensions,omitempty"`
-	// Human readable name for the model.
 	// Unique identifier of the model, typically a kebab-case version of the name, used for referencing.
 	ID string `json:"id"`
 	// Human readable name for the model.
