@@ -689,6 +689,7 @@ type Property struct {
 	Unique *bool `json:"unique,omitempty"`
 }
 
+// A node of the graph.
 type Node struct {
 	// Alternative names for the node.
 	Aliases []string `json:"aliases,omitempty"`
