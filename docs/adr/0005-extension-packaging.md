@@ -363,3 +363,7 @@ artifact.**
 - ADR-0002's deferral ("details are deferred to ADR-0005") and
   ADR-0006's pointer ("whose packaging and shape ADR-0005 decides") are
   resolved by this ADR.
+
+## Later references
+
+- ADR-0014 (docs/adr/0014-schema-field-named-schema.md): renamed the spec-link field `$schema` to `schema`, including on the custom extension envelope; this ADR's body keeps the historical spelling.

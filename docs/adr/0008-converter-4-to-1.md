@@ -454,3 +454,4 @@ validates against `ontology-spec.schema.json` (the ADR-0007 gate).
 ## Later references
 
 - ADR-0009 (docs/adr/0009-ontology-graph-spec-rename.md): renamed the spec "Ontology Spec" → "Ontology Graph Spec"; this ADR's body keeps the historical name.
+- ADR-0014 (docs/adr/0014-schema-field-named-schema.md): renamed the spec-link field `$schema` to `schema`; the converter's emission becomes `schema`; this ADR's body keeps the historical spelling.
