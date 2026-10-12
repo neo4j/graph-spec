@@ -66,7 +66,12 @@ Notes:
   (`go/internal/bridge/lib/`). The macOS dylib needs full Xcode to build
   (`./go/scripts/generate-kotlin-native-libs.sh`; this host is CLT-only) —
   linux libs build anywhere; `ONTOLOGYGRAPHMODEL_LIB_PATH` overrides the lib path;
-  `ontologygraphspec_noembed` builds without the embedded lib.
+  `ontologygraphspec_noembed` builds without the embedded lib. A wire-format
+  change MUST rebuild the committed linux libs in the same change —
+  `pr-guard-go.yaml` gates PRs on `go test ./...` against the embedded lib,
+  so a format change without the rebuild cannot be green on CI; the macOS
+  dylib (needs full Xcode) and the release-time full rebuild stay with
+  release.yaml.
 - `generate-go-models.sh` runs schemancer (+ jq/perl for the sanitised copy
   and the extras injection) against the repo-root schema — no Gradle, no JDK.
   Needs Go, jq, perl, schemancer.
