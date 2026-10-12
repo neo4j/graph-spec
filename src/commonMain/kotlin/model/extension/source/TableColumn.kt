@@ -32,11 +32,11 @@ import kotlin.js.JsExport
 data class TableColumn(
     @SerialDescription("Data type of the column in the source.")
     var type: String = "",
-    @SerialDescription("Size of the column. -1 when unspecified.")
+    @SerialDescription("Size of the column.")
     var size: Int = -1,
     @SerialDescription("Neo4j type suggested for values of this column.")
     val suggested: Neo4jType = Neo4jType.ANY,
-    @SerialDescription("Neo4j types values of this column can be converted to.")
+    @SerialDescription("Neo4j types values of this column can be converted to when using the import tool.")
     val supported: Set<Neo4jType> = emptySet(),
     @SerialDescription("Dimension of the column when it holds vectors.")
     val dimension: Int? = null,

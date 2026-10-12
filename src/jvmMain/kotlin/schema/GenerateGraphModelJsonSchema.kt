@@ -30,10 +30,6 @@ import model.GraphModel
 import model.Version
 
 /**
- * The structure of the schema comes from the serialization descriptor, as that is what the (de)serialisation of
- * the model actually follows (defaults, transient fields, naming, nullability).
- * Descriptions come from `@property:SerialDescription` annotations, as KDoc is not available at runtime.
- *
  * Output is plain JSON Schema draft 2020-12: nullability is expressed with `"type": [..., "null"]` rather than
  * OpenAPI's `nullable`, and polymorphic subtypes are told apart by their `type` const rather than `discriminator`.
  * Definitions keep their short serial names and are namespaced by the absolute schema url in `$id`.

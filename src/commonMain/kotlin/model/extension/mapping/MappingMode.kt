@@ -24,7 +24,7 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("MappingMode")
-@SerialDescription("Whether mapped data is merged into existing data or always created.")
+@SerialDescription("Write approach used when importing data (merged into existing data or always created).")
 enum class MappingMode {
     MERGE,
     CREATE

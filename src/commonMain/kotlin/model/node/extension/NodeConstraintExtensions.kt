@@ -24,9 +24,6 @@ import model.node.NodeConstraint
 import model.value.ExtensionValue
 import kotlin.js.JsExport
 
-/**
- * Extensions for a [NodeConstraint].
- */
 @JsExport
 @Serializable
 @SerialName("NodeConstraintExtensions")

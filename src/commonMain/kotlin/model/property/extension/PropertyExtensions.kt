@@ -24,9 +24,6 @@ import model.property.Property
 import model.value.ExtensionValue
 import kotlin.js.JsExport
 
-/**
- * Extensions for a [model.property.Property].
- */
 @JsExport
 @Serializable
 @SerialName("PropertyExtensions")

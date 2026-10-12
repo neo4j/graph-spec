@@ -24,9 +24,6 @@ import model.relationship.RelationshipConstraint
 import model.value.ExtensionValue
 import kotlin.js.JsExport
 
-/**
- * Extensions for a [RelationshipConstraint].
- */
 @JsExport
 @Serializable
 @SerialName("RelationshipConstraintExtensions")

@@ -26,7 +26,7 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("NodeDisplay")
-@SerialDescription("Visual position of a node.")
+@SerialDescription("Visual information for a node.")
 data class NodeDisplay(
     @SerialDescription("Horizontal position.")
     var x: Double,

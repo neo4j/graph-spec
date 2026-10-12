@@ -24,10 +24,6 @@ import model.relationship.Relationship
 import model.value.ExtensionValue
 import kotlin.js.JsExport
 
-/**
- * Extensions for a [Relationship].
- * @property indexes database indexes on this relationship.
- */
 @JsExport
 @Serializable
 @SerialName("RelationshipExtensions")

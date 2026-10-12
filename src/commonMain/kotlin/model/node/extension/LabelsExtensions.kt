@@ -24,9 +24,6 @@ import model.node.Labels
 import model.value.ExtensionValue
 import kotlin.js.JsExport
 
-/**
- * Extensions for [Labels].
- */
 @JsExport
 @Serializable
 @SerialName("LabelsExtensions")

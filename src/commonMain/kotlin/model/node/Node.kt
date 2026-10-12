@@ -28,7 +28,7 @@ import kotlin.js.JsExport
 @Serializable
 @SerialName("Node")
 data class Node(
-    @SerialDescription("Shorthand for the identifying label. Moved to labels when the model is parsed.")
+    @SerialDescription("Shorthand for the identifying label. Moved to labels when the model is internalised.")
     var label: String? = null,
     @SerialDescription("Labels of the node.")
     val labels: Labels = Labels(),
