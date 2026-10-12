@@ -32,6 +32,8 @@ data class NodeDisplay(
     var x: Double,
     @SerialDescription("Vertical position.")
     var y: Double,
+    @SerialDescription("Display colour of the node as a hex string, e.g. #FF8800.")
+    var colour: String? = null,
     @SerialDescription("User-defined arbitrary data.")
     override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
 ) : Extensions

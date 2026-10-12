@@ -25,7 +25,7 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
         extensions = NodeExtensions(
             custom = mutableMapOf("key1" to StringValue("val1")),
             indexes = mutableMapOf("index" to NodeIndex(IndexType.RANGE, mutableSetOf("label"), mutableSetOf("prop"))),
-            display = NodeDisplay(1.0, 2.0)
+            display = NodeDisplay(1.0, 2.0, "#FF8800")
         ),
         name = "Node Name",
         aliases = mutableSetOf("alias1", "alias2"),
@@ -44,6 +44,7 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
         assertJsEquals(stringValueJs("val1"), jsObject.extensions.custom["key1"])
         assertEquals(1.0, jsObject.extensions.display?.x)
         assertEquals(2.0, jsObject.extensions.display?.y)
+        assertEquals("#FF8800", jsObject.extensions.display?.colour)
         assertEquals("nodeId", jsObject.id)
         assertEquals(listOf("alias1", "alias2"), jsObject.aliases.toList())
         assertEquals("node-ref", jsObject.reference)
