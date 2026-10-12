@@ -2,7 +2,6 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://neo4j.com/ontology-graph-spec/4.0.0/",
     "title": "GraphModel",
-    "description": "A complete graph model.",
     "type": "object",
     "properties": {
         "schema": {
@@ -11,15 +10,15 @@
         },
         "version": {
             "type": "string",
-            "description": "Version of the spec."
+            "description": "Version of the document."
         },
         "name": {
             "type": "string",
-            "description": "Name of the graph model."
+            "description": "Human readable name for the model."
         },
         "description": {
             "type": "string",
-            "description": "Description of the graph model."
+            "description": "Description of the model."
         },
         "nodes": {
             "type": "object",
@@ -37,7 +36,7 @@
         },
         "extensions": {
             "$ref": "#/$defs/GraphModelExtensions",
-            "description": "Extensions to the model: data source tables, mappings and custom data."
+            "description": "Extensions to the model: data source tables, mappings and external custom data."
         }
     },
     "additionalProperties": false,
@@ -48,14 +47,13 @@
     "$defs": {
         "Node": {
             "type": "object",
-            "description": "A node of the graph.",
             "properties": {
                 "label": {
                     "type": [
                         "string",
                         "null"
                     ],
-                    "description": "Shorthand for the identifying label. Moved to labels when the model is internalised."
+                    "description": "Shorthand for the identifying label. Moved to labels when the model is parsed."
                 },
                 "labels": {
                     "$ref": "#/$defs/Labels",
@@ -504,7 +502,7 @@
                 },
                 "indexes": {
                     "type": "object",
-                    "description": "Indexes on this node keyed by id.",
+                    "description": "Database indexes on this node keyed by id.",
                     "additionalProperties": {
                         "$ref": "#/$defs/NodeIndex"
                     }
@@ -1023,7 +1021,7 @@
                 },
                 "mappings": {
                     "type": "array",
-                    "description": "Mappings from tables to nodes and relationships.",
+                    "description": "Import mappings from tables to nodes and relationships.",
                     "items": {
                         "$ref": "#/$defs/Mapping"
                     }
