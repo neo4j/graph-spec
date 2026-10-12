@@ -70,7 +70,7 @@ class OntologyGraphModelRoundTripTest {
     fun `absent means none - omitted optional fields are not invented`() {
         val minimal = """
             {
-              "${'$'}schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
+              "schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
               "id": "minimal",
               "version": 1,
               "nodes": {

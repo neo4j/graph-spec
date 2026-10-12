@@ -62,10 +62,10 @@ class GraphSpecV4OntologyGraphSpecMigration :
 
         val ids = GraphSpecV4Normalizer(schema)
 
-        // ADR-0008 §1: the 4.0.0 format version becomes the $schema link; the ontology
-        // gets a fresh identity (random UUID, own version 1).
+        // ADR-0008 §1 + ADR-0014: the 4.0.0 format version becomes the schema link; the
+        // ontology gets a fresh identity (random UUID, own version 1).
         val out = schemaMapOf(
-            "\$schema" to SCHEMA_ID,
+            "schema" to SCHEMA_ID,
             "id" to Uuid.random().toString(),
             "version" to 1,
             "name" to schema.stringOrNull("name"),

@@ -102,7 +102,7 @@ class MigrationPathTest {
     @Test
     fun `migrate - executes transformations and the migration owns the output document`() {
         // No post-stamping: in the v1 world the migration sets the target's identity
-        // fields itself (`$schema` + Int `version`, ADR-0008 §1).
+        // fields itself (`schema` + Int `version`, ADR-0008 §1, ADR-0014).
         val m1 = TestMigration("1.0.0", "1.1.0") {
             it["data"] = "processed"
             it["version"] = "1.1.0"

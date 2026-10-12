@@ -31,19 +31,19 @@ import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 
 /**
- * Untagged catch-all codec for the [CustomExtension] envelope: `type`/`$schema`/`name`/
+ * Untagged catch-all codec for the [CustomExtension] envelope: `type`/`schema`/`name`/
  * `definition` are the known fields; every other key is collected into
  * [CustomExtension.extra] on decode and inlined back on encode, carried untouched.
  * The catch-all mechanics ([putExtras], [extractExtras]) are shared; this codec
  * only owns its known-field set and typed field handling.
  */
 object CustomExtensionSerializer : KSerializer<CustomExtension> {
-    private val knownKeys = setOf("type", "\$schema", "name", "definition")
+    private val knownKeys = setOf("type", "schema", "name", "definition")
 
     @OptIn(InternalSerializationApi::class)
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("CustomExtension") {
         element("type", String.serializer().descriptor)
-        element("\$schema", String.serializer().descriptor, isOptional = true)
+        element("schema", String.serializer().descriptor, isOptional = true)
         element("name", String.serializer().descriptor, isOptional = true)
         element("definition", ExtensionValueSerializer.descriptor, isOptional = true)
     }
@@ -52,7 +52,7 @@ object CustomExtensionSerializer : KSerializer<CustomExtension> {
         encoder.requireJsonEncoder("CustomExtension").encodeJsonElement(
             buildJsonObject {
                 put("type", value.type)
-                value.schema?.let { put("\$schema", it) }
+                value.schema?.let { put("schema", it) }
                 value.name?.let { put("name", it) }
                 value.definition?.let { put("definition", ExtensionValueSerializer.toJson(it)) }
                 putExtras(value.extra, knownKeys)
@@ -66,7 +66,7 @@ object CustomExtensionSerializer : KSerializer<CustomExtension> {
             ?: throw SerializationException("CustomExtension requires a 'type' field")
         return CustomExtension(
             type = type,
-            schema = obj["\$schema"]?.jsonPrimitive?.contentOrNull,
+            schema = obj["schema"]?.jsonPrimitive?.contentOrNull,
             name = obj["name"]?.jsonPrimitive?.contentOrNull,
             definition = obj["definition"]?.let { ExtensionValueSerializer.fromJson(it) },
             extra = obj.extractExtras(knownKeys)

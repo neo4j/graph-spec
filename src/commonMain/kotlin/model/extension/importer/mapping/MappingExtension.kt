@@ -48,7 +48,6 @@ object MappingMode {
 @JsExport
 @Serializable
 data class MappingExtension(
-    @SerialName("\$schema")
     val schema: String? = null,
     val kind: String,
     val node: String? = null,

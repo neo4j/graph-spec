@@ -31,13 +31,13 @@ import kotlin.js.JsExport
  * exactly once, next to the class.
  */
 const val CUSTOM_EXTENSION_SPEC_DOC =
-    "Custom extension envelope, four fields: type required; \$schema, name, definition " +
+    "Custom extension envelope, four fields: type required; schema, name, definition " +
         "optional. definition is free-form and never validated by this spec. Unknown extra " +
         "fields are carried untouched."
 
 /**
  * The fixed custom-extension envelope (ADR-0005; ontology-graph-spec.schema.json `$defs.extension`):
- * [type] required; [schema] (`$schema`), [name], [definition] optional; [definition] is
+ * [type] required; [schema], [name], [definition] optional; [definition] is
  * free-form and never validated. Unknown extra fields are carried untouched in [extra].
  * On the wire the reserved `custom` key of an extensions map holds a list of envelopes.
  */
@@ -48,7 +48,6 @@ const val CUSTOM_EXTENSION_SPEC_DOC =
 data class CustomExtension(
     @SpecDoc("The extension type, owner-namespaced (e.g. governance:pii).")
     var type: String,
-    @SerialName("\$schema")
     @SpecFormat("uri")
     @SpecDoc("Optional link to the extension owner's schema for the definition payload.")
     var schema: String? = null,

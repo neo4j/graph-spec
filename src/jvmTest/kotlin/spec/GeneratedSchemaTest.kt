@@ -57,13 +57,13 @@ class GeneratedSchemaTest {
     @Test
     fun `root shape`() {
         assertEquals(
-            listOf("\$schema", "id", "version"),
+            listOf("schema", "id", "version"),
             (schema["required"] as JsonArray).map { (it as JsonPrimitive).content },
         )
         assertEquals(JsonPrimitive(false), schema["additionalProperties"])
         assertEquals(
             "uri",
-            ((schema["properties"] as JsonObject).jsonObject("\$schema")["format"] as JsonPrimitive).content,
+            ((schema["properties"] as JsonObject).jsonObject("schema")["format"] as JsonPrimitive).content,
         )
     }
 
@@ -158,8 +158,8 @@ class GeneratedSchemaTest {
         // serializer descriptors don't carry annotations (enumerated override, ADR-0003)
         assertEquals(
             listOf(
-                "\$defs/extension/properties/\$schema",
                 "\$defs/extension/properties/name",
+                "\$defs/extension/properties/schema",
                 "\$defs/extension/properties/type",
             ),
             undocumented.sorted(),

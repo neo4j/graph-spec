@@ -29,7 +29,7 @@ import (
 // is extras. Keep in sync with ontology-graph-spec.schema.json
 // ($defs/extension, $defs/extensionsMap).
 var (
-	extensionKnownKeys     = []string{"type", "$schema", "name", "definition"}
+	extensionKnownKeys     = []string{"type", "schema", "name", "definition"}
 	extensionsMapKnownKeys = []string{"custom"}
 )
 
