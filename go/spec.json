@@ -12,6 +12,10 @@
             "type": "string",
             "description": "Version of the document."
         },
+        "id": {
+            "type": "string",
+            "description": "Unique identifier of the model, typically a kebab-case version of the name, used for referencing."
+        },
         "name": {
             "type": "string",
             "description": "Human readable name for the model."
@@ -42,7 +46,8 @@
     "additionalProperties": false,
     "required": [
         "schema",
-        "version"
+        "version",
+        "id"
     ],
     "$defs": {
         "Node": {
@@ -779,6 +784,13 @@
                     "type": "number",
                     "description": "Vertical position."
                 },
+                "colour": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Display colour of the node as a hex string, e.g. #FF8800."
+                },
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
@@ -870,15 +882,24 @@
                     "description": "Label of the node at this end."
                 },
                 "count": {
-                    "type": "integer",
-                    "description": "Exact number of relationships per node at this end. -1 when unconstrained."
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
+                    "description": "Exact number of relationships per node at this end. Null when unconstrained."
                 },
                 "min_count": {
-                    "type": "integer",
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
                     "description": "Minimum number of relationships per node at this end."
                 },
                 "max_count": {
-                    "type": "integer",
+                    "type": [
+                        "integer",
+                        "null"
+                    ],
                     "description": "Maximum number of relationships per node at this end."
                 }
             },
@@ -1232,6 +1253,14 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "depends_on": {
+                    "type": "string",
+                    "description": "Id of the mapping which must be imported before this one. Empty when there is no dependency."
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Optional id of this mapping, so other mappings can reference it in depends_on."
                 }
             },
             "required": [
@@ -1279,6 +1308,14 @@
                 "query": {
                     "type": "string",
                     "description": "The query to run."
+                },
+                "depends_on": {
+                    "type": "string",
+                    "description": "Id of the mapping which must be imported before this one. Empty when there is no dependency."
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Optional id of this mapping, so other mappings can reference it in depends_on."
                 }
             },
             "required": [
@@ -1336,6 +1373,14 @@
                     "items": {
                         "type": "string"
                     }
+                },
+                "depends_on": {
+                    "type": "string",
+                    "description": "Id of the mapping which must be imported before this one. Empty when there is no dependency."
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Optional id of this mapping, so other mappings can reference it in depends_on."
                 }
             },
             "required": [
