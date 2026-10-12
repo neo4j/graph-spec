@@ -43,5 +43,10 @@ data class RelationshipMapping(
     @SerialDescription("Whether relationships are merged with existing relationships or always created.")
     var mode: MappingMode = MappingMode.MERGE,
     @SerialDescription("Ids of the properties which identify a relationship.")
-    val key: MutableSet<String> = mutableSetOf()
+    val key: MutableSet<String> = mutableSetOf(),
+    @SerialName("depends_on")
+    @SerialDescription("Id of the mapping which must be imported before this one. Empty when there is no dependency.")
+    var dependsOn: String = "",
+    @SerialDescription("Optional id of this mapping, so other mappings can reference it in depends_on.")
+    var id: String = ""
 ) : Mapping
