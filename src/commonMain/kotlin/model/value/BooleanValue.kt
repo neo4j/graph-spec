@@ -16,6 +16,7 @@
  */
 package model.value
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,4 +24,8 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName(ExtensionType.BOOLEAN)
-data class BooleanValue(val value: Boolean) : ExtensionValue()
+@SerialDescription("A boolean extension value.")
+data class BooleanValue(
+    @SerialDescription("The value.")
+    val value: Boolean
+) : ExtensionValue()

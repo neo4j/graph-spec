@@ -16,6 +16,7 @@
  */
 package model.extension.mapping
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,4 +24,8 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("PropertyMapping")
-data class PropertyMapping(var column: String)
+@SerialDescription("Maps a property to a source column.")
+data class PropertyMapping(
+    @SerialDescription("Name of the source column.")
+    var column: String
+)

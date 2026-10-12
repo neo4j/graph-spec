@@ -16,6 +16,7 @@
  */
 package model.node.extension
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
@@ -25,11 +26,12 @@ import kotlin.js.JsExport
 
 /**
  * Extensions for a [NodeConstraint].
- *
- * @property custom user-defined arbitrary data.
  */
 @JsExport
 @Serializable
 @SerialName("NodeConstraintExtensions")
-data class NodeConstraintExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) :
-    Extensions
+@SerialDescription("Extensions for a node constraint.")
+data class NodeConstraintExtensions(
+    @SerialDescription("User-defined arbitrary data.")
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

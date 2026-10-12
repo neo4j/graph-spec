@@ -16,6 +16,7 @@
  */
 package model.property.extension
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
@@ -25,10 +26,12 @@ import kotlin.js.JsExport
 
 /**
  * Extensions for a [model.property.Property].
- *
- * @property custom user-defined arbitrary data.
  */
 @JsExport
 @Serializable
 @SerialName("PropertyExtensions")
-data class PropertyExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) : Extensions
+@SerialDescription("Extensions for a property.")
+data class PropertyExtensions(
+    @SerialDescription("User-defined arbitrary data.")
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

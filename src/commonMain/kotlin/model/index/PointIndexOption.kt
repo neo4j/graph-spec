@@ -16,6 +16,7 @@
  */
 package model.index
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.type.IndexType
@@ -27,22 +28,31 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("POINT")
+@SerialDescription("Configuration of a point index.")
 data class PointIndexOption(
     @SerialName("spatial.cartesian.min")
+    @SerialDescription("Lower bounds of the 2D cartesian space.")
     val cartesianMin: List<Double> = listOf(-1000000.0, -1000000.0),
     @SerialName("spatial.cartesian.max")
+    @SerialDescription("Upper bounds of the 2D cartesian space.")
     val cartesianMax: List<Double> = listOf(1000000.0, 1000000.0),
     @SerialName("spatial.cartesian-3d.min")
+    @SerialDescription("Lower bounds of the 3D cartesian space.")
     val cartesian3DMin: List<Double> = listOf(-1000000.0, -1000000.0, -1000000.0),
     @SerialName("spatial.cartesian-3d.max")
+    @SerialDescription("Upper bounds of the 3D cartesian space.")
     val cartesian3DMax: List<Double> = listOf(1000000.0, 1000000.0, 1000000.0),
     @SerialName("spatial.wgs-84.min")
+    @SerialDescription("Lower bounds of the 2D WGS-84 space.")
     val wgs84Min: List<Double> = listOf(-180.0, -90.0),
     @SerialName("spatial.wgs-84.max")
+    @SerialDescription("Upper bounds of the 2D WGS-84 space.")
     val wgs84Max: List<Double> = listOf(180.0, 90.0),
     @SerialName("spatial.wgs-84-3d.min")
+    @SerialDescription("Lower bounds of the 3D WGS-84 space.")
     val wgs843DMin: List<Double> = listOf(-180.0, -90.0, -1000000.0),
     @SerialName("spatial.wgs-84-3d.max")
+    @SerialDescription("Upper bounds of the 3D WGS-84 space.")
     val wgs843DMax: List<Double> = listOf(180.0, 90.0, 1000000.0)
 ) : IndexOption {
     override val type: IndexType get() = IndexType.POINT

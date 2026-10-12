@@ -16,6 +16,7 @@
  */
 package model.node
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.node.extension.NodeExtensions
@@ -27,13 +28,22 @@ import kotlin.js.JsExport
 @Serializable
 @SerialName("Node")
 data class Node(
+    @SerialDescription("Shorthand for the identifying label. Moved to labels when the model is parsed.")
     var label: String? = null,
+    @SerialDescription("Labels of the node.")
     val labels: Labels = Labels(),
+    @SerialDescription("Properties of the node keyed by id.")
     val properties: MutableMap<String, Property> = mutableMapOf(),
+    @SerialDescription("Constraints on the node keyed by id.")
     val constraints: MutableMap<String, NodeConstraint> = mutableMapOf(),
+    @SerialDescription("Extensions for the node.")
     val extensions: NodeExtensions = NodeExtensions(),
+    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
     override var name: String? = null,
+    @SerialDescription("Description of the node.")
     val description: String = "",
+    @SerialDescription("Alternative names for the node.")
     val aliases: MutableSet<String> = mutableSetOf(),
+    @SerialDescription("Reference to an external resource describing the node.")
     val reference: String = ""
 ) : Named

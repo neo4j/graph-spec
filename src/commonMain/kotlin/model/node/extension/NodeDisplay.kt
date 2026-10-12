@@ -16,6 +16,7 @@
  */
 package model.node.extension
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
@@ -25,8 +26,12 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("NodeDisplay")
+@SerialDescription("Visual position of a node.")
 data class NodeDisplay(
+    @SerialDescription("Horizontal position.")
     var x: Double,
+    @SerialDescription("Vertical position.")
     var y: Double,
+    @SerialDescription("User-defined arbitrary data.")
     override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
 ) : Extensions

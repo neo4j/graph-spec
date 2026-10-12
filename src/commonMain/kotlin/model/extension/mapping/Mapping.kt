@@ -16,6 +16,7 @@
  */
 package model.extension.mapping
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,4 +24,5 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("Mapping")
+@SerialDescription("A mapping from a data source table to the graph. Either a node, relationship or query mapping.")
 sealed interface Mapping

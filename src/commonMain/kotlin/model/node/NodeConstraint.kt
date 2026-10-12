@@ -16,6 +16,7 @@
  */
 package model.node
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.node.extension.NodeConstraintExtensions
@@ -26,11 +27,17 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("NodeConstraint")
+@SerialDescription("A constraint on a node.")
 data class NodeConstraint(
+    @SerialDescription("Type of the constraint.")
     override var type: ConstraintType,
+    @SerialDescription("Label the constraint applies to.")
     var label: String? = null, // TODO: Optional to avoid id issues with frontend redux?
+    @SerialDescription("Ids of the properties the constraint covers.")
     override val properties: MutableSet<String>,
+    @SerialDescription("Extensions for the constraint.")
     val extensions: NodeConstraintExtensions = NodeConstraintExtensions(),
+    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
     override var name: String? = null
 ) : Constraint,
     Named

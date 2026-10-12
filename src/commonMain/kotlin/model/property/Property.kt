@@ -16,6 +16,7 @@
  */
 package model.property
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.property.extension.PropertyExtensions
@@ -25,17 +26,33 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("Property")
+@SerialDescription("A property of a node or relationship.")
 data class Property(
+    @SerialDescription("Neo4j type of the property.")
     var type: Neo4jType = Neo4jType.ANY,
+    @SerialDescription("Dimension of the property when it holds a vector.")
     var dimension: Int? = null,
+    @SerialDescription(
+        "Shorthand for an existence constraint. Expanded into constraints when the model is internalised."
+    )
     var mustExist: Boolean? = null,
+    @SerialDescription(
+        "Shorthand for a uniqueness constraint. Expanded into constraints when the model is internalised."
+    )
     var unique: Boolean? = null,
+    @SerialDescription("Shorthand for a key constraint. Expanded into constraints when the model is internalised.")
     var key: Boolean? = null,
+    @SerialDescription("Extensions for the property.")
     val extensions: PropertyExtensions = PropertyExtensions(),
+    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
     override var name: String? = null,
+    @SerialDescription("Description of the property.")
     val description: String = "",
+    @SerialDescription("Reference to an external resource describing the property.")
     val reference: String = "",
+    @SerialDescription("Pattern values of the property are expected to match.")
     val pattern: String = "",
     @SerialName("one_of")
+    @SerialDescription("Values the property is restricted to.")
     val oneOf: MutableList<String> = mutableListOf()
 ) : Named

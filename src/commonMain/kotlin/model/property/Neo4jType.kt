@@ -16,6 +16,7 @@
  */
 package model.property
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,6 +24,7 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("Neo4jType")
+@SerialDescription("A Neo4j property type.")
 enum class Neo4jType {
     ANY,
 

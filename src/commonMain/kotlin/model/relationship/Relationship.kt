@@ -16,6 +16,7 @@
  */
 package model.relationship
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.property.Property
@@ -27,15 +28,26 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("Relationship")
+@SerialDescription("A relationship of the graph.")
 data class Relationship(
+    @SerialDescription("Type of the relationship.")
     var type: String,
+    @SerialDescription("The node the relationship starts at.")
     val from: RelationshipTarget,
+    @SerialDescription("The node the relationship ends at.")
     val to: RelationshipTarget,
+    @SerialDescription("Properties of the relationship keyed by id.")
     val properties: MutableMap<String, Property> = mutableMapOf(),
+    @SerialDescription("Constraints on the relationship keyed by id.")
     val constraints: MutableMap<String, RelationshipConstraint> = mutableMapOf(),
+    @SerialDescription("Extensions for the relationship.")
     val extensions: RelationshipExtensions = RelationshipExtensions(),
+    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
     override var name: String? = null,
+    @SerialDescription("Description of the relationship.")
     val description: String = "",
+    @SerialDescription("Alternative names for the relationship.")
     val aliases: MutableSet<String> = mutableSetOf(),
+    @SerialDescription("Reference to an external resource describing the relationship.")
     val reference: String = ""
 ) : Named

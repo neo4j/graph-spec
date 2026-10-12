@@ -16,6 +16,7 @@
  */
 package model.extension.mapping
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,15 +24,24 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName(MappingType.RELATIONSHIP)
+@SerialDescription("Maps rows of a table to relationships.")
 data class RelationshipMapping(
+    @SerialDescription("Id of the relationship being mapped.")
     var relationship: String,
+    @SerialDescription("Id of the source table.")
     var table: String,
     @SerialName("from_node")
+    @SerialDescription("How the start node of the relationship is matched.")
     val fromNode: TargetMapping,
     @SerialName("to_node")
+    @SerialDescription("How the end node of the relationship is matched.")
     val toNode: TargetMapping,
+    @SerialDescription("Label used to match existing relationships.")
     var matchLabel: String? = null,
+    @SerialDescription("Mappings from property ids to source columns.")
     val properties: MutableMap<String, PropertyMapping> = mutableMapOf(),
+    @SerialDescription("Whether relationships are merged with existing relationships or always created.")
     var mode: MappingMode = MappingMode.MERGE,
+    @SerialDescription("Ids of the properties which identify a relationship.")
     val key: MutableSet<String> = mutableSetOf()
 ) : Mapping

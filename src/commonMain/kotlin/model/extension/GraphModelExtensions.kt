@@ -16,6 +16,7 @@
  */
 package model.extension
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.GraphModel
@@ -27,16 +28,16 @@ import kotlin.js.JsExport
 
 /**
  * Extensions for a [GraphModel].
- *
- * @property custom user-defined arbitrary data.
- * @property tables data source table schemas.
- * @property mappings mappings from tables to nodes and relationships.
  */
 @JsExport
 @Serializable
 @SerialName("GraphModelExtensions")
+@SerialDescription("Extensions for a graph model.")
 data class GraphModelExtensions(
+    @SerialDescription("User-defined arbitrary data.")
     override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    @SerialDescription("Data source table schemas keyed by table id.")
     val tables: MutableMap<String, Table> = mutableMapOf(),
+    @SerialDescription("Import mappings from tables to nodes and relationships.")
     val mappings: MutableList<Mapping> = mutableListOf()
 ) : Extensions

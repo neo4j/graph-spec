@@ -16,6 +16,7 @@
  */
 package model.value
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,4 +24,8 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName(ExtensionType.DOUBLE)
-data class DoubleValue(val value: Double) : ExtensionValue()
+@SerialDescription("A double extension value.")
+data class DoubleValue(
+    @SerialDescription("The value.")
+    val value: Double
+) : ExtensionValue()

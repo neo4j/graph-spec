@@ -16,6 +16,7 @@
  */
 package model.value
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,6 +24,7 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("ExtensionValue")
+@SerialDescription("A value stored in an extension. Either a string, boolean, long, double, list or map.")
 sealed class ExtensionValue {
     val asString: String?
         get() = (this as? StringValue)?.value

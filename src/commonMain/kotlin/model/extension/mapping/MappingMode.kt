@@ -16,6 +16,7 @@
  */
 package model.extension.mapping
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,6 +24,7 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("MappingMode")
+@SerialDescription("Whether mapped data is merged into existing data or always created.")
 enum class MappingMode {
     MERGE,
     CREATE

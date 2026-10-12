@@ -16,6 +16,7 @@
  */
 package model.relationship
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.node.Constraint
@@ -27,10 +28,15 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("RelationshipConstraint")
+@SerialDescription("A constraint on a relationship.")
 data class RelationshipConstraint(
+    @SerialDescription("Type of the constraint.")
     override var type: ConstraintType,
+    @SerialDescription("Ids of the properties the constraint covers.")
     override val properties: MutableSet<String>,
+    @SerialDescription("Extensions for the constraint.")
     val extensions: RelationshipConstraintExtensions = RelationshipConstraintExtensions(),
+    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
     override var name: String? = null
 ) : Constraint,
     Named

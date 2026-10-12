@@ -16,6 +16,7 @@
  */
 package model.node.extension
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
@@ -27,14 +28,18 @@ import kotlin.js.JsExport
  * Extensions for a [Node].
  *
  * @property custom user-defined arbitrary data.
- * @property indexes indexes on this node.
+ * @property indexes database indexes on this node.
  * @property display optional visual position of this node.
  */
 @JsExport
 @Serializable
 @SerialName("NodeExtensions")
+@SerialDescription("Extensions for a node.")
 data class NodeExtensions(
+    @SerialDescription("User-defined arbitrary data.")
     override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    @SerialDescription("Database indexes on this node keyed by id.")
     val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
+    @SerialDescription("Optional visual position of this node.")
     val display: NodeDisplay? = null
 ) : Extensions

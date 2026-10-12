@@ -22,6 +22,7 @@ var ConstraintTypeValues = []ConstraintType{
 	ConstraintTypeUnique,
 }
 
+// A complete graph model.
 type ExtensionValueUnion interface {
 	ExtensionValueType() string
 	isExtensionValue()
@@ -169,6 +170,7 @@ type TargetMapping struct {
 	Properties map[string]PropertyMapping `json:"properties,omitempty"`
 }
 
+// A complete graph model.
 type MappingUnion interface {
 	MappingType() string
 	isMapping()
@@ -366,13 +368,19 @@ type Table struct {
 	Source      string                    `json:"source"`
 }
 
+// Extensions for a [GraphModel].
 type GraphModelExtensions struct {
-	Custom   map[string]ExtensionValue `json:"custom,omitempty"`
-	Mappings []Mapping                 `json:"mappings,omitempty"`
-	Tables   map[string]Table          `json:"tables,omitempty"`
+	// user-defined arbitrary data.
+	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	// mappings from tables to nodes and relationships.
+	Mappings []Mapping `json:"mappings,omitempty"`
+	// data source table schemas.
+	Tables map[string]Table `json:"tables,omitempty"`
 }
 
+// Extensions for [Labels].
 type LabelsExtensions struct {
+	// user-defined arbitrary data.
 	Custom map[string]ExtensionValue `json:"custom,omitempty"`
 }
 
@@ -383,7 +391,9 @@ type Labels struct {
 	Optional   []string          `json:"optional,omitempty"`
 }
 
+// Extensions for a [NodeConstraint].
 type NodeConstraintExtensions struct {
+	// user-defined arbitrary data.
 	Custom map[string]ExtensionValue `json:"custom,omitempty"`
 }
 
@@ -401,6 +411,7 @@ type NodeDisplay struct {
 	Y      float64                   `json:"y"`
 }
 
+// A complete graph model.
 type IndexOptionUnion interface {
 	IndexOptionType() string
 	isIndexOption()
@@ -529,13 +540,19 @@ type NodeIndex struct {
 	Type       IndexType                 `json:"type"`
 }
 
+// Extensions for a [Node].
 type NodeExtensions struct {
-	Custom  map[string]ExtensionValue `json:"custom,omitempty"`
-	Display *NodeDisplay              `json:"display,omitempty"`
-	Indexes map[string]NodeIndex      `json:"indexes,omitempty"`
+	// user-defined arbitrary data.
+	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	// optional visual position of this node.
+	Display *NodeDisplay `json:"display,omitempty"`
+	// indexes on this node.
+	Indexes map[string]NodeIndex `json:"indexes,omitempty"`
 }
 
+// Extensions for a [model.property.Property].
 type PropertyExtensions struct {
+	// user-defined arbitrary data.
 	Custom map[string]ExtensionValue `json:"custom,omitempty"`
 }
 
@@ -565,7 +582,9 @@ type Node struct {
 	Reference   *string                   `json:"reference,omitempty"`
 }
 
+// Extensions for a [RelationshipConstraint].
 type RelationshipConstraintExtensions struct {
+	// user-defined arbitrary data.
 	Custom map[string]ExtensionValue `json:"custom,omitempty"`
 }
 
@@ -584,8 +603,11 @@ type RelationshipIndex struct {
 	Type       IndexType                 `json:"type"`
 }
 
+// Extensions for a [Relationship].
 type RelationshipExtensions struct {
-	Custom  map[string]ExtensionValue    `json:"custom,omitempty"`
+	// user-defined arbitrary data.
+	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	// indexes on this relationship.
 	Indexes map[string]RelationshipIndex `json:"indexes,omitempty"`
 }
 
@@ -610,12 +632,14 @@ type Relationship struct {
 	Type        string                            `json:"type"`
 }
 
+// A complete graph model.
 type GraphModel struct {
 	Description   *string                 `json:"description,omitempty"`
 	Extensions    *GraphModelExtensions   `json:"extensions,omitempty"`
 	Name          *string                 `json:"name,omitempty"`
 	Nodes         map[string]Node         `json:"nodes,omitempty"`
 	Relationships map[string]Relationship `json:"relationships,omitempty"`
-	Schema        string                  `json:"schema"`
-	Version       string                  `json:"version"`
+	// Identifier of the schema.
+	Schema  string `json:"schema"`
+	Version string `json:"version"`
 }
