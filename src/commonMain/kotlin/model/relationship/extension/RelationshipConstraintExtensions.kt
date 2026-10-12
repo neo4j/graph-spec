@@ -16,20 +16,18 @@
  */
 package model.relationship.extension
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
-import model.relationship.RelationshipConstraint
 import model.value.ExtensionValue
 import kotlin.js.JsExport
 
-/**
- * Extensions for a [RelationshipConstraint].
- *
- * @property custom user-defined arbitrary data.
- */
 @JsExport
 @Serializable
 @SerialName("RelationshipConstraintExtensions")
-data class RelationshipConstraintExtensions(override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()) :
-    Extensions
+@SerialDescription("Extensions for a relationship constraint.")
+data class RelationshipConstraintExtensions(
+    @SerialDescription("User-defined arbitrary data.")
+    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
+) : Extensions

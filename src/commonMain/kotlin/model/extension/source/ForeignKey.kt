@@ -16,6 +16,7 @@
  */
 package model.extension.source
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
@@ -25,8 +26,12 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("ForeignKey")
+@SerialDescription("A foreign key of a table.")
 data class ForeignKey(
+    @SerialDescription("Names of the columns in this table which make up the key.")
     val columns: MutableSet<String>,
+    @SerialDescription("The table and columns the key refers to.")
     val references: ForeignKeyReference,
+    @SerialDescription("User-defined arbitrary data.")
     override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
 ) : Extensions

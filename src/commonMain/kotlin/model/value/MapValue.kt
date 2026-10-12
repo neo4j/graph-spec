@@ -16,6 +16,7 @@
  */
 package model.value
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,4 +24,8 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName(ExtensionType.MAP)
-data class MapValue(val value: MutableMap<String, ExtensionValue>) : ExtensionValue()
+@SerialDescription("A map extension value.")
+data class MapValue(
+    @SerialDescription("The values in the map keyed by name.")
+    val value: MutableMap<String, ExtensionValue>
+) : ExtensionValue()

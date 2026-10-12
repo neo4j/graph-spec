@@ -16,6 +16,7 @@
  */
 package model.extension.source
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
@@ -27,13 +28,21 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("TableColumn")
+@SerialDescription("A column of a data source table.")
 data class TableColumn(
+    @SerialDescription("Data type of the column in the source.")
     var type: String = "",
+    @SerialDescription("Size of the column.")
     var size: Int = -1,
+    @SerialDescription("Neo4j type suggested for values of this column.")
     val suggested: Neo4jType = Neo4jType.ANY,
+    @SerialDescription("Neo4j types values of this column can be converted to when using the import tool.")
     val supported: Set<Neo4jType> = emptySet(),
+    @SerialDescription("Dimension of the column when it holds vectors.")
     val dimension: Int? = null,
+    @SerialDescription("User-defined arbitrary data.")
     override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
     override var name: String? = null
 ) : Extensions,
     Named

@@ -16,6 +16,7 @@
  */
 package model.relationship
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,12 +24,18 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("RelationshipTarget")
+@SerialDescription("One end of a relationship.")
 data class RelationshipTarget(
+    @SerialDescription("Id of the node at this end.")
     var node: String = "",
+    @SerialDescription("Label of the node at this end.")
     var label: String = "",
+    @SerialDescription("Exact number of relationships per node at this end. -1 when unconstrained.")
     var count: Int = -1,
     @SerialName("min_count")
+    @SerialDescription("Minimum number of relationships per node at this end.")
     var minCount: Int = 0,
     @SerialName("max_count")
+    @SerialDescription("Maximum number of relationships per node at this end.")
     var maxCount: Int = Int.MAX_VALUE
 )

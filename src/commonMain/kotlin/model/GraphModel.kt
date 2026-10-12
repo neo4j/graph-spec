@@ -16,6 +16,7 @@
  */
 package model
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -32,12 +33,19 @@ import kotlin.js.JsStatic
 @Serializable
 @SerialName("GraphModel")
 data class GraphModel(
+    @SerialDescription("Schema specification uri used.")
     val schema: String,
+    @SerialDescription("Version of the document.")
     val version: String,
+    @SerialDescription("Human readable name for the model.")
     val name: String = "",
+    @SerialDescription("Description of the model.")
     val description: String = "",
+    @SerialDescription("Node definitions keyed by node id.")
     val nodes: MutableMap<String, Node> = mutableMapOf(),
+    @SerialDescription("Relationship definitions keyed by relationship id.")
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
+    @SerialDescription("Extensions to the model: data source tables, mappings and external custom data.")
     val extensions: GraphModelExtensions = GraphModelExtensions(),
     @Transient
     var pretty: Boolean = false

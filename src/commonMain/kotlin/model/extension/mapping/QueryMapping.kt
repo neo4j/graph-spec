@@ -16,6 +16,7 @@
  */
 package model.extension.mapping
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,4 +24,10 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName(MappingType.QUERY)
-data class QueryMapping(var table: String, var query: String) : Mapping
+@SerialDescription("Maps the results of a query run against a table.")
+data class QueryMapping(
+    @SerialDescription("Id of the source table.")
+    var table: String,
+    @SerialDescription("The query to run.")
+    var query: String
+) : Mapping

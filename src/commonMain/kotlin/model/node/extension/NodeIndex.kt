@@ -16,6 +16,7 @@
  */
 package model.node.extension
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
@@ -28,12 +29,19 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("NodeIndex")
+@SerialDescription("An index on a node.")
 data class NodeIndex(
+    @SerialDescription("Type of the index.")
     var type: IndexType,
+    @SerialDescription("Labels the index covers.")
     val labels: MutableSet<String>,
+    @SerialDescription("Ids of the properties the index covers.")
     val properties: MutableSet<String>,
+    @SerialDescription("Configuration specific to the type of index.")
     val options: IndexOption? = null,
+    @SerialDescription("User-defined arbitrary data.")
     override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
     override var name: String? = null
 ) : Extensions,
     Named

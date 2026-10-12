@@ -16,23 +16,20 @@
  */
 package model.relationship.extension
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
-import model.relationship.Relationship
 import model.value.ExtensionValue
 import kotlin.js.JsExport
 
-/**
- * Extensions for a [Relationship].
- *
- * @property custom user-defined arbitrary data.
- * @property indexes indexes on this relationship.
- */
 @JsExport
 @Serializable
 @SerialName("RelationshipExtensions")
+@SerialDescription("Extensions for a relationship.")
 data class RelationshipExtensions(
+    @SerialDescription("User-defined arbitrary data.")
     override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    @SerialDescription("Indexes on this relationship keyed by id.")
     val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf()
 ) : Extensions

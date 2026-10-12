@@ -16,6 +16,7 @@
  */
 package model.index
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.type.IndexType
@@ -24,6 +25,7 @@ import kotlin.js.JsExport
 @Serializable
 @JsExport
 @SerialName("IndexOption")
+@SerialDescription("Configuration specific to the type of an index.")
 sealed interface IndexOption {
     val type: IndexType
 }

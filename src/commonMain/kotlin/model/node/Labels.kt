@@ -16,6 +16,7 @@
  */
 package model.node
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.node.extension.LabelsExtensions
@@ -24,9 +25,14 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("Labels")
+@SerialDescription("The labels of a node.")
 data class Labels(
+    @SerialDescription("The label which identifies the node.")
     var identifier: String? = null,
+    @SerialDescription("Labels implied by the node in addition to the identifier.")
     val implied: MutableSet<String> = mutableSetOf(),
+    @SerialDescription("Labels which may be present on the node but aren't required.")
     val optional: MutableSet<String> = mutableSetOf(),
+    @SerialDescription("Extensions for the labels.")
     val extensions: LabelsExtensions = LabelsExtensions()
 )

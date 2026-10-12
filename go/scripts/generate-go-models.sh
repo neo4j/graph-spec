@@ -18,12 +18,12 @@ echo "✓ Generated JSON spec"
 # Create temporary json spec file that we can sanitise
 cd "$REPO_ROOT/go"
 cp "$INPUT_SPEC" "$TEMP_SPEC"
-# Ensure "title" is present in the spec which is needed for Go generation of top-level model
-jq '.title //= .["$id"]' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
-# Drop the null branch from nullable unions ("oneOf": [{"type": "null"}, X] becomes X). Optional properties are already
+# Drop the null branch from nullable unions ("oneOf": [{"type": "null"}, X] becomes X and "type": [X, "null"] becomes
+# "type": X). Optional properties are already
 # omitted from "required" and generated as pointers, whereas the generator would otherwise emit an untyped interface{}.
 # Only the temporary copy is changed, the published spec keeps the null branch.
 # This is a temp work-around for schemancer, can be removed once https://github.com/Southclaws/schemancer/issues/14 is resolved
+jq 'walk(if type == "object" and (.type | type) == "array" and (.type | index("null")) then (.type | map(select(. != "null"))) as $rest | .type = (if ($rest | length) == 1 then $rest[0] else $rest end) else . end)' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
 jq 'walk(if type == "object" and (.oneOf | type) == "array" and (.oneOf | any(. == {"type": "null"})) then (.oneOf | map(select(. != {"type": "null"}))) as $rest | if ($rest | length) == 1 then del(.oneOf) + $rest[0] else .oneOf = $rest end else . end)' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
 # Replace characters that cannot appear in Go structs with placeholders to enable Go generation
 # 1. Angled brackets in keys and values

@@ -16,6 +16,7 @@
  */
 package model.value
 
+import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.js.JsExport
@@ -23,4 +24,8 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName(ExtensionType.LIST)
-data class ListValue(val value: MutableList<ExtensionValue>) : ExtensionValue()
+@SerialDescription("A list extension value.")
+data class ListValue(
+    @SerialDescription("The values in the list.")
+    val value: MutableList<ExtensionValue>
+) : ExtensionValue()
