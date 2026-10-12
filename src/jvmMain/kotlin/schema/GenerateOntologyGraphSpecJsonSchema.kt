@@ -46,7 +46,7 @@ import java.io.File
     Deliberate, enumerated overrides (schema shape a serializer descriptor cannot express):
     - the `extensionsMap` $def is a constant: the extensions map is Map<String, ExtensionValue>
       in the model, but the spec pins its `custom` envelope and additionalProperties:true
-    - `Tool` and the extensions map are open surfaces: additionalProperties:true (InlineExtras)
+    - the extensions map is an open surface: additionalProperties:true (InlineExtras)
     - `CustomExtension.definition` is free-form: the boolean schema `true`
     - `one_of` lists ExtensionValue payloads: an array with no items constraint
     - `ExtensionValue` itself is untagged raw JSON: emitted as `true` where referenced directly
@@ -61,22 +61,18 @@ object OntologyGraphSpecJsonSchemaGenerator {
             "Property" to "property",
             "RelationshipTarget" to "endpoint",
             "Relationship" to "relationshipEntry",
-            "Tool" to "tool",
             "CustomExtension" to "extension",
         )
-
-    /** $defs entries that stay open (InlineExtras catch-alls); everything else is closed. */
-    private val OPEN_DEFS = setOf("tool")
 
     /** $defs entries with no additionalProperties key at all (JSON Schema default: open). */
     private val UNGUARDED_DEFS = setOf("extension")
 
     /**
-     * Custom-serialized classes (ToolSerializer, CustomExtensionSerializer) hand-build
+     * Custom-serialized classes (CustomExtensionSerializer) hand-build
      * their descriptors, so property-level annotations are invisible to the generator;
      * their fields are documented on the model but not required in the schema output.
      */
-    private val CUSTOM_SERIALIZED_DEFS = setOf("tool", "extension")
+    private val CUSTOM_SERIALIZED_DEFS = setOf("extension")
 
     /** Field-level schema facts the hand-built serializer descriptors can't carry. */
     private val FIELD_OVERRIDES =
@@ -89,11 +85,10 @@ object OntologyGraphSpecJsonSchemaGenerator {
     /**
      * Class-level docs for the custom-serialized classes: their hand-built serializer
      * descriptors don't carry the class annotations, so the generator reads the consts
-     * declared next to the classes (single source, see Tool.kt / CustomExtension.kt).
+     * declared next to the classes (single source, see CustomExtension.kt).
      */
     private val CLASS_DOC_OVERRIDES =
         mapOf(
-            "tool" to model.tool.TOOL_SPEC_DOC,
             "extension" to model.extension.CUSTOM_EXTENSION_SPEC_DOC,
         )
 
@@ -163,7 +158,6 @@ object OntologyGraphSpecJsonSchemaGenerator {
         val required = requiredArray(descriptor, defName)
         if (required.size > 0) entries["required"] = required
         when (defName) {
-            in OPEN_DEFS -> entries["additionalProperties"] = JsonPrimitive(true)
             in UNGUARDED_DEFS -> Unit
             else -> entries["additionalProperties"] = JsonPrimitive(false)
         }

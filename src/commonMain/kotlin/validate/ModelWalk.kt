@@ -23,13 +23,12 @@ import model.node.Node
 import model.property.Property
 import model.relationship.Relationship
 import model.relationship.RelationshipTarget
-import model.tool.Tool
 
 /*
  * The one owner of the model traversal and the issue-path grammar: `nodes.<id>`,
  * `relationships.<id>`, and the `properties.<pid>` / `constraints[<index>]` /
  * `constraints[<index>].properties` / `constraints[<index>].properties[<entry>]` /
- * `tools[<index>]` / `from` / `to` segments beneath them. Validators delegate here and
+ * `from` / `to` segments beneath them. Validators delegate here and
  * keep only their rule; the grammar is pinned byte-for-byte by the validator and bridge
  * tests, so a path change belongs in this file alone — never re-derived per validator.
  */
@@ -47,9 +46,6 @@ internal fun constraintPropertiesPath(elementPath: String, index: Int) =
 /** `constraints[<index>].properties[<entryIndex>]` beneath an element path. */
 internal fun constraintPropertyEntryPath(elementPath: String, index: Int, entryIndex: Int) =
     "${constraintPropertiesPath(elementPath, index)}[$entryIndex]"
-
-/** `tools[<index>]` beneath an element path. */
-internal fun toolPath(elementPath: String, index: Int) = "$elementPath.tools[$index]"
 
 /**
  * `extensions[<key>]` beneath an element path (or at the root when [elementPath] is
@@ -87,15 +83,6 @@ internal fun GraphModel.forEachConstraint(action: (path: String, constraint: Con
         relationship.constraints.forEachIndexed { index, constraint ->
             action(constraintPath(relationshipPath, index), constraint)
         }
-    }
-}
-
-internal fun GraphModel.forEachTool(action: (path: String, tool: Tool) -> Unit) {
-    forEachNode { nodePath, _, node ->
-        node.tools.forEachIndexed { index, tool -> action(toolPath(nodePath, index), tool) }
-    }
-    forEachRelationship { relationshipPath, _, relationship ->
-        relationship.tools.forEachIndexed { index, tool -> action(toolPath(relationshipPath, index), tool) }
     }
 }
 

@@ -26,7 +26,6 @@ import model.spec.SpecDef
 import model.spec.SpecDoc
 import model.spec.SpecFormat
 import model.spec.SpecPropertyNames
-import model.tool.Tool
 import kotlin.js.JsExport
 
 @JsExport
@@ -34,7 +33,7 @@ import kotlin.js.JsExport
 @SerialName("Relationship")
 @SpecDoc(
     "A relationship type entry: the type, its from/to endpoints with cardinality, " +
-        "properties, constraints, tools, and metadata."
+        "properties, constraints, and metadata."
 )
 data class Relationship(
     @SpecDoc(
@@ -55,8 +54,6 @@ data class Relationship(
     val properties: MutableMap<String, Property> = mutableMapOf(),
     @SpecDoc("Constraint objects on this relationship type (the nameable alternative to the property flags).")
     val constraints: MutableList<Constraint> = mutableListOf(),
-    @SpecDoc("Tools available on this relationship type.")
-    val tools: MutableList<Tool> = mutableListOf(),
     @SpecDoc("Alternative names for this relationship type.")
     val aliases: MutableList<String> = mutableListOf(),
     @SpecDef("reference")

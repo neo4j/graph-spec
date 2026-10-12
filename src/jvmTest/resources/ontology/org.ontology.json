@@ -169,15 +169,7 @@
           "type": "FLOAT",
           "description": "Fraction of full-time employment"
         }
-      },
-      "tools": [
-        {
-          "type": "canonicalQuery",
-          "name": "colleaguesOf",
-          "description": "Colleagues of an employee across their departments",
-          "cypher": "MATCH (e:Employee)-[:WORKS_IN]->(d:Department)<-[:WORKS_IN]-(c:Employee) WHERE e.employee_id = $id RETURN c"
-        }
-      ]
+      }
     },
     "WORKS_IN_CONTRACTOR": {
       "type": "WORKS_IN",

@@ -84,21 +84,7 @@
       "properties": {
         "roles": { "type": "LIST<STRING>" },
         "mixed_list": { "type": "LIST<ANY>" }
-      },
-      "tools": [
-        {
-          "type": "externalRequest",
-          "name": "findRecentActingJobs",
-          "description": "Recent acting jobs for a given actor",
-          "url": "https://imdb.com/"
-        },
-        {
-          "type": "canonicalQuery",
-          "name": "findCoActors",
-          "description": "Actors who shared a film with a given actor",
-          "cypher": "MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) WHERE a.name = $name RETURN co"
-        }
-      ]
+      }
     },
     "PRODUCED_STUDIO": {
       "type": "PRODUCED",

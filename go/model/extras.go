@@ -4,10 +4,10 @@ package model
 // this file survives regeneration of model.go (go/scripts/generate-go-models.sh).
 //
 // schemancer (pinned v1.2.0) drops `additionalProperties: true` from the
-// generated structs: ExtensionsMap would lose named neo4j:* keys, Tool its
-// owner-defined fields (cypher, url, ...), and Extension the custom
-// envelope's unknown fields. The format's invariant is that unknown content
-// is carried untouched, never rejected (design rule 9; ADR-0005, ADR-0006).
+// generated structs: ExtensionsMap would lose named neo4j:* keys and
+// Extension the custom envelope's unknown fields. The format's invariant is
+// that unknown content is carried untouched, never rejected (design rule 9;
+// ADR-0005, ADR-0006).
 //
 // The generate script injects the unexported `extra` field these methods
 // use; keys outside each type's known-field set are collected into it on
@@ -26,10 +26,9 @@ import (
 )
 
 // knownKeys lists each open surface's schema-defined fields; every other key
-// is extras. Keep in sync with ontology-graph-spec.schema.json ($defs/tool,
-// $defs/extension, $defs/extensionsMap).
+// is extras. Keep in sync with ontology-graph-spec.schema.json
+// ($defs/extension, $defs/extensionsMap).
 var (
-	toolKnownKeys          = []string{"type", "name", "description"}
 	extensionKnownKeys     = []string{"type", "$schema", "name", "definition"}
 	extensionsMapKnownKeys = []string{"custom"}
 )
@@ -55,7 +54,7 @@ func extractExtras(data []byte, known []string) (map[string]json.RawMessage, err
 // known keys first (struct declaration order), then extras sorted by key for
 // deterministic output. Extra values are inlined byte-faithfully. A key
 // colliding with a known field is dropped — the known field always wins
-// (the InlineExtras rule, owned here once for all three open surfaces).
+// (the InlineExtras rule, owned here once for both open surfaces).
 func inlineExtras(known []byte, extra map[string]json.RawMessage, knownKeys []string) ([]byte, error) {
 	if len(extra) == 0 {
 		return known, nil
@@ -96,30 +95,6 @@ func inlineExtras(known []byte, extra map[string]json.RawMessage, knownKeys []st
 	}
 	buf.WriteByte('}')
 	return buf.Bytes(), nil
-}
-
-func (t Tool) MarshalJSON() ([]byte, error) {
-	type alias Tool
-	known, err := json.Marshal(alias(t))
-	if err != nil {
-		return nil, err
-	}
-	return inlineExtras(known, t.extra, toolKnownKeys)
-}
-
-func (t *Tool) UnmarshalJSON(data []byte) error {
-	type alias Tool
-	var a alias
-	if err := json.Unmarshal(data, &a); err != nil {
-		return err
-	}
-	extra, err := extractExtras(data, toolKnownKeys)
-	if err != nil {
-		return err
-	}
-	a.extra = extra
-	*t = Tool(a)
-	return nil
 }
 
 func (e Extension) MarshalJSON() ([]byte, error) {

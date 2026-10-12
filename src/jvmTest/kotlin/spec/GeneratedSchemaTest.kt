@@ -48,7 +48,7 @@ class GeneratedSchemaTest {
         assertEquals(
             setOf(
                 "propertyType", "labels", "constraint", "property", "endpoint",
-                "reference", "tool", "extension", "extensionsMap", "node", "relationshipEntry",
+                "reference", "extension", "extensionsMap", "node", "relationshipEntry",
             ),
             (schema["\$defs"] as JsonObject).keys,
         )
@@ -73,7 +73,6 @@ class GeneratedSchemaTest {
         assertEquals(listOf("constraint_type", "properties"), required("constraint"))
         assertEquals(listOf("node"), required("endpoint"))
         assertEquals(listOf("type", "from", "to"), required("relationshipEntry"))
-        assertEquals(listOf("type"), required("tool"))
         assertEquals(listOf("type"), required("extension"))
         assertFalse(def("node").containsKey("required"))
         assertFalse(def("property").containsKey("required"))
@@ -84,7 +83,6 @@ class GeneratedSchemaTest {
         for (closed in listOf("labels", "constraint", "property", "endpoint", "node", "relationshipEntry")) {
             assertEquals(JsonPrimitive(false), def(closed)["additionalProperties"], closed)
         }
-        assertEquals(JsonPrimitive(true), def("tool")["additionalProperties"])
         assertEquals(JsonPrimitive(true), def("extensionsMap")["additionalProperties"])
         assertFalse(def("extension").containsKey("additionalProperties")) // JSON Schema default
     }
@@ -156,16 +154,13 @@ class GeneratedSchemaTest {
         }
         check(schema["properties"] as JsonObject, "properties")
 
-        // tool/extension fields are documented on the model but their hand-built
+        // extension fields are documented on the model but their hand-built
         // serializer descriptors don't carry annotations (enumerated override, ADR-0003)
         assertEquals(
             listOf(
                 "\$defs/extension/properties/\$schema",
                 "\$defs/extension/properties/name",
                 "\$defs/extension/properties/type",
-                "\$defs/tool/properties/description",
-                "\$defs/tool/properties/name",
-                "\$defs/tool/properties/type",
             ),
             undocumented.sorted(),
         )

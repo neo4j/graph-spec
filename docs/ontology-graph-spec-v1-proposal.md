@@ -57,7 +57,6 @@ Node:
 | `aliases` | string list. Covers "aliases and synonyms" from the brief |
 | `properties` | `{ <name>: Property }`. Property names are non-empty (ADR-0010) |
 | `constraints` | constraint objects, optionally named (`{ constraint_type, name?, properties }`); a constraint's `properties` list references properties declared on the same element; shorthand flags live on Property |
-| `tools` | core tool definitions for agents (`{ type: canonicalQuery \| externalRequest \| ..., name, description, ... }`) |
 | `extensions` | named first-party extensions (`neo4j:index`, `ui:display`, ...), custom under `custom` |
 
 Property:
@@ -83,7 +82,6 @@ Relationship:
 | `properties`, `constraints` | as Node |
 | `description`, `aliases` | |
 | `reference` | optional single URI, as on Node |
-| `tools` | as Node |
 | `extensions` | |
 
 Constraints:
@@ -214,15 +212,6 @@ relationships:
     properties:
       roles: { type: LIST<STRING> }
       mixed_list: { type: LIST<ANY> }
-    tools:
-      - type: externalRequest
-        name: findRecentActingJobs
-        description: Recent acting jobs for a given actor
-        url: https://imdb.com/
-      - type: canonicalQuery
-        name: findCoActors
-        description: Actors who shared a film with a given actor
-        cypher: MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) WHERE a.name = $name RETURN co
 
   PRODUCED_STUDIO:
     type: PRODUCED       # same relationship type between different node pairs
@@ -268,7 +257,7 @@ The brief: "when specified, enforce as much as we can via graph schema, while le
 
 | enforceable via graph schema | descriptive only |
 |---|---|
-| labels (identifier structure), `type`, `mustExist`, `unique`, `key`, constraint objects | `description`, `aliases`, `count`/`min_count`/`max_count`, `one_of`, `pattern`, `reference`, `tools`, all extensions |
+| labels (identifier structure), `type`, `mustExist`, `unique`, `key`, constraint objects | `description`, `aliases`, `count`/`min_count`/`max_count`, `one_of`, `pattern`, `reference`, all extensions |
 
 Comment [j] in the brief (ontology as superset of graph type, graph type inferable from ontology) hangs off this table. The left column is what a database can enforce on day one; the right column is what agents and tooling read.
 
@@ -312,7 +301,7 @@ Two transformer-side notes, not spec concerns: RDF allows multiple domains/range
 | `sh:hasValue` | extension | carried |
 | `sh:closed`, `sh:ignoredProperties` | extension. Neo4j is schema-optional; "closed" is enforcement policy, not ontology content | carried, semantics differ |
 | `sh:order`, `sh:group` | extension, styling-adjacent | carried |
-| property paths (inverse/alternative/sequence) | not constraints in v1. Sequence paths are named multi-hop paths: `tools` | different mechanism, no loss |
+| property paths (inverse/alternative/sequence) | not constraints in v1; the `tools` carrier for named multi-hop paths left the initial version (ADR-0013) | excluded |
 | `sh:not`/`and`/`or`/`xone`, qualified cardinality | | excluded, not pragmatic |
 | SHACL-SPARQL constraints | raw-text extension at best | excluded from core |
 | SHACL-AF rules/functions | | excluded, inference-adjacent (principle 4) |
@@ -335,11 +324,13 @@ Two semantic caveats, one line each in the final spec:
 1. **Names.** Spec title ("Neo4j Ontology Graph Specification" proposed), repo name (`neo4j/ontology-graph-spec` proposed), governance group (brief says OLG; OSG was the 8 Sep lean. The artifact is a spec, not a language, which argues OSG; CLG consistency argues OLG).
 2. **Importer sign-off** on indexes/tables/mappings becoming extension objects. Their bar stands: the spec must be downloadable in the initial ontology release. The 4.0.0 converter is the migration story for their artifacts.
 3. **WS1/WS2 boundary** (comment [k]). The spec must not block on storage decisions and vice versa. The extension mechanism is the decoupler: storage-facing concerns ride extensions until WS2 lands.
-4. **Tool type shapes.** `tools` is a core field (decided 2026-09-25); the per-type shapes (`canonicalQuery`, `externalRequest`, ...) are owned by the agent-surface teams, not this spec.
+4. **Tool type shapes.** Removed 2026-10-12 (ADR-0013): tools are not in the initial v1 — the `tools` field and its SDK surface are gone, and re-introduction (in any form) goes through the OSP process. The per-type shape question (`canonicalQuery`, `externalRequest`, ...) moves with it.
 5. **Extensions need no governance from this group.** The spec defines only the envelope; each extension type is defined, versioned and validated by its owner (importer owns `table`/`mapping`, console owns `display`). Unknown types are carried untouched.
 
 ## Changelog from initial draft
 
+2026-10-12:
+- Tools are not in the initial v1 (ADR-0013): the `tools` field on node and relationship entries, the schema's `$defs/tool`, and the SDK tool surface (`model/tool/`, the Js twins, the `ToolType` module machinery including `canonicalQuery` per ADR-0011, the `ModelWalk` tool traversal, and the examples' `tools` sections) are all removed, reversing the 2026-09-25 promotion; the OSG call of 2026-10-07 is the governing decision and re-introduction goes through the OSP process. ADR-0011 is superseded. The 4.0.0 → 1.0.0 converter is unaffected (it never emitted tools).
 2026-10-05:
 - VECTOR element types restricted to numeric (ADR-0012): the `propertyType` pattern's VECTOR arm is now `VECTOR<(INTEGER|FLOAT)>` — `VECTOR<TIME>`-class tokens were never satisfiable by a Neo4j value (PR #118 review comment r4182676002). `ANY`, `LIST<ANY>`, the bare scalars, and `LIST<scalar>` are unchanged. The 4.0.0 → 1.0.0 converter is unaffected (all 4.0.0 vector tokens were already numeric; ADR-0008 §3 prose amended in place).
 2026-10-04:
@@ -405,7 +396,7 @@ Two semantic caveats, one line each in the final spec:
 
 **Cardinality lives on the endpoints.** (Decided 2026-09-25.) No `ONE_TO_MANY`-class enum: exactness comes from `count`, ranges from `min_count`/`max_count`, absence means unconstrained. One mechanism, no shorthand to drift from the full form, and SHACL `sh:minCount`/`sh:maxCount` map 1:1. The cost — writing `max_count: 1` where the enum said it in a word — is paid where precision actually lives.
 
-**`tools`, definitions only.** Decided 8 Sep: actions are definitions at annotation level, promotable per the group's call. Promoted 2026-09-25: `tools` is a first-class field on node and relationship entries. The per-type shapes (`canonicalQuery`, `externalRequest`, ...) stay owner-defined; behaviour belongs to runtimes, not to a spec. Definitions compose.
+**`tools`, definitions only.** Decided 8 Sep: actions are definitions at annotation level, promotable per the group's call. Promoted 2026-09-25: `tools` is a first-class field on node and relationship entries. Removed 2026-10-12 (ADR-0013): the OSG call of 2026-10-07 decided tools are not in the initial v1 — the field and its SDK surface are gone; re-introduction goes through the OSP process. The per-type shapes (`canonicalQuery`, `externalRequest`, ...) stayed owner-defined while the field lived; behaviour belongs to runtimes, not to a spec.
 
 **`implied`/`optional` kept, documented as multi-label.** Importer lineage, observable today in one validator rule (constraints attach to identifier union implied). Not subclassing. The hierarchy question belongs to the ontology group, not to the format.
 

@@ -16,7 +16,6 @@
  */
 package validate
 
-import model.tool.toolTypeModules
 import validate.constraint.ConstraintOverlap
 import validate.constraint.ConstraintPropertyReferences
 import validate.constraint.KnownConstraintType
@@ -44,10 +43,7 @@ class Validations {
             deleted with their model subjects in the v1 model rewrite (track 1).
          */
 
-        // Graph-spec validators added independent of any UPX call site. Tool type shapes
-        // stay owner-defined (proposal open item 4), but tools are a core field, so the
-        // predefined types' rules (ADR-0011, starting with canonicalQuery) live in core,
-        // aggregated from the single module list in model.tool.toolTypeModules.
+        // Graph-spec validators added independent of any UPX call site.
         @JsStatic
         val core: List<Validation> =
             listOf(
@@ -60,7 +56,7 @@ class Validations {
                 RelationshipType,
                 ConstraintPropertyReferences,
                 ConstraintOverlap
-            ) + toolTypeModules.flatMap { it.validations }
+            )
 
         // Named-extension validators (ADR-0005): each owner subpackage under
         // model/extension/ exposes its module's validations here, aggregated from the

@@ -25,7 +25,6 @@ import model.spec.SpecDef
 import model.spec.SpecDoc
 import model.spec.SpecFormat
 import model.spec.SpecPropertyNames
-import model.tool.Tool
 import kotlin.js.JsExport
 
 @JsExport
@@ -50,8 +49,6 @@ data class Node(
     val properties: MutableMap<String, Property> = mutableMapOf(),
     @SpecDoc("Constraint objects on this node type (the nameable alternative to the property flags).")
     val constraints: MutableList<Constraint> = mutableListOf(),
-    @SpecDoc("Tools available on this node type.")
-    val tools: MutableList<Tool> = mutableListOf(),
     @SpecDoc("Alternative names for this node type.")
     val aliases: MutableList<String> = mutableListOf(),
     @SpecDef("reference")

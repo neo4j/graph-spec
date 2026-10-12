@@ -16,12 +16,9 @@
  */
 package model
 
-import js.objects.recordOf
 import model.extension.ExtensionType
-import model.extension.ExtensionValueJs
 import model.extension.ExtensionsEditor
 import model.extension.StringValueJs
-import model.extension.stringValueJs
 import model.node.NodeConstraintEditor
 import model.node.NodeConstraintJs
 import model.node.NodeEditor
@@ -29,7 +26,6 @@ import model.relationship.RelationshipConstraintEditor
 import model.relationship.RelationshipConstraintJs
 import model.relationship.RelationshipEditor
 import model.relationship.RelationshipTargetEditor
-import model.tool.toolJs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -39,7 +35,7 @@ import kotlin.test.assertTrue
 /**
  * Real coverage of the v1 JS surface (ADR-0004 track 4): a v1 model built through the
  * editors (id-keyed nodes/relationships, String type tokens, endpoint cardinality,
- * the unified constraint aliases, tools, extensions), read back through the *Js twins
+ * the unified constraint aliases, extensions), read back through the *Js twins
  * and round-tripped toJs/toClass with data-class equality.
  */
 class V1GraphModelEditorJsTest {
@@ -81,20 +77,6 @@ class V1GraphModelEditorJsTest {
         NodeEditor.removeConstraintProperty(model, personId, nodeConstraintIndex, tagsProp)
         val nodeConstraint: NodeConstraintJs = model.nodes[personId]!!.constraints[nodeConstraintIndex]
         NodeConstraintEditor.setName(nodeConstraint, "person_name_unique_v2")
-
-        // A canonicalQuery tool with a cypher extra, via the ToolJs shape. `tools` is a
-        // read-only array on the twins and there is no ToolEditor, so attach in place.
-        val person = model.nodes[personId]!!
-        person.tools.asDynamic().push(
-            toolJs(
-                type = "canonicalQuery",
-                name = "findPeople",
-                description = "All people",
-                extra = recordOf<String, ExtensionValueJs>(
-                    "cypher" to stringValueJs("MATCH (p:Person) RETURN p"),
-                ),
-            ),
-        )
 
         // Id-keyed relationship record with endpoint cardinality
         val relId = GraphModelEditor.addRelationship(model, "ACTED_IN")
@@ -165,16 +147,6 @@ class V1GraphModelEditorJsTest {
         assertEquals("person_name_unique_v2", nodeConstraint.name)
         assertEquals(listOf("property0"), nodeConstraint.properties.toList())
 
-        // The canonicalQuery tool with its cypher extra
-        assertEquals(1, person.tools.size)
-        val tool = person.tools[0]
-        assertEquals("canonicalQuery", tool.type)
-        assertEquals("findPeople", tool.name)
-        assertEquals("All people", tool.description)
-        val cypher = tool.extra["cypher"]
-        assertEquals(ExtensionType.STRING, cypher?.type)
-        assertEquals("MATCH (p:Person) RETURN p", (cypher as StringValueJs).value)
-
         // Relationship: id-keyed, type, endpoints with count/min_count/max_count
         val relId = "relationship0"
         val rel = model.relationships[relId]
@@ -220,8 +192,6 @@ class V1GraphModelEditorJsTest {
         assertEquals(1536, person.properties.getValue("property2").dimension)
         assertEquals("unique", person.constraints[0].type)
         assertEquals("person_name_unique_v2", person.constraints[0].name)
-        assertEquals("canonicalQuery", person.tools[0].type)
-        assertEquals("MATCH (p:Person) RETURN p", person.tools[0].extra.getValue("cypher").asString)
         val rel = model.relationships.getValue("relationship0")
         assertEquals("ACTED_IN", rel.type)
         assertEquals("node0", rel.from.node)
