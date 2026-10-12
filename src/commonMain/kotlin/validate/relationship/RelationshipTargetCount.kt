@@ -42,8 +42,11 @@ object RelationshipTargetCount : RelationshipValidation {
         issues: MutableList<Issue>
     ) {
         val path = "relationships.$relationshipId.$side"
-        val hasCount = target.count != -1
-        val hasRange = target.minCount != 0 || target.maxCount != Int.MAX_VALUE
+        val count = target.count
+        val minCount = target.minCount
+        val maxCount = target.maxCount
+        val hasCount = count != null
+        val hasRange = minCount != null || maxCount != null
         if (hasCount && hasRange) {
             issues.add(
                 Issue(
@@ -53,7 +56,7 @@ object RelationshipTargetCount : RelationshipValidation {
                 )
             )
         }
-        if (hasCount && target.count < 0) {
+        if (count != null && count < 0) {
             issues.add(
                 Issue(
                     code = "relationship_count_negative",
@@ -62,7 +65,7 @@ object RelationshipTargetCount : RelationshipValidation {
                 )
             )
         }
-        if (target.minCount < 0) {
+        if (minCount != null && minCount < 0) {
             issues.add(
                 Issue(
                     code = "relationship_min_count_negative",
@@ -71,7 +74,7 @@ object RelationshipTargetCount : RelationshipValidation {
                 )
             )
         }
-        if (target.minCount > target.maxCount) {
+        if (minCount != null && maxCount != null && minCount > maxCount) {
             issues.add(
                 Issue(
                     code = "relationship_min_count_exceeds_max",
