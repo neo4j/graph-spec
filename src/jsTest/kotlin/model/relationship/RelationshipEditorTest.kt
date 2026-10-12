@@ -21,6 +21,7 @@ class RelationshipEditorTest {
         model = graphModelJs(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0.0",
+            id = "test",
             relationships = recordOf(relId to relationship)
         )
     }

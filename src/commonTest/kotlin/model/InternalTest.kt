@@ -44,6 +44,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User" to Node(label = "UserLabel")
             ),
@@ -64,6 +65,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User1" to Node(
                     constraints = mutableMapOf(
@@ -101,6 +103,7 @@ class InternalTest {
         val originalModel = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "Person" to Node(
                     label = "Person",
@@ -167,6 +170,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(),
             extensions = GraphModelExtensions(
                 mappings = mutableListOf(
@@ -186,6 +190,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User" to Node(
                     label = "User",
@@ -214,6 +219,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User" to Node(
                     properties = mutableMapOf("email" to Property(unique = true))
@@ -240,6 +246,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User" to Node(
                     properties = mutableMapOf("email" to Property(mustExist = true))
@@ -266,6 +273,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User" to Node(
                     constraints = mutableMapOf(
@@ -292,6 +300,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             relationships = mutableMapOf(
                 "KNOWS" to Relationship(
                     type = "KNOWS",
@@ -321,6 +330,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             relationships = mutableMapOf(
                 "KNOWS" to Relationship(
                     type = "KNOWS",
@@ -350,6 +360,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User" to Node(
                     properties = mutableMapOf("name" to Property())
@@ -369,6 +380,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User" to Node(
                     label = "User",
@@ -435,6 +447,7 @@ class InternalTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "User" to Node(
                     label = "User",
