@@ -27,6 +27,7 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("Node")
+@SerialDescription("A node of the graph.")
 data class Node(
     @SerialDescription("Shorthand for the identifying label. Moved to labels when the model is internalised.")
     var label: String? = null,
