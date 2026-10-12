@@ -30,7 +30,8 @@ import kotlin.test.assertTrue
 class NodeMappingKeyTypeTest {
 
     private val validator = NodeMappingKeyType
-    private val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test")
+    private val model =
+        GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test")
 
     @Test
     fun `pass when mapping key is STRING`() {

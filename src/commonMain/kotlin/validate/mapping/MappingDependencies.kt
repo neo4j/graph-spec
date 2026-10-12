@@ -98,7 +98,9 @@ object MappingDependencies : Validation {
                 issues.add(
                     Issue(
                         code = "mapping_dependency_cycle",
-                        message = "Mappings ${cycle.sorted().joinToString(", ") { "[$it]" }} depend on each other in a cycle",
+                        message = "Mappings ${cycle.sorted().joinToString(", ") {
+                            "[$it]"
+                        }} depend on each other in a cycle",
                         path = "extensions.mappings[$first].depends_on"
                     )
                 )
