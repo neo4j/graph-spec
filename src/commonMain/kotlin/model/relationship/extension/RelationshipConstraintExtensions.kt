@@ -20,7 +20,6 @@ import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.Extensions
-import model.relationship.RelationshipConstraint
 import model.value.ExtensionValue
 import kotlin.js.JsExport
 
