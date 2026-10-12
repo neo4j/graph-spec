@@ -37,17 +37,6 @@ internal fun SchemaMap.ref(key: String) = map(key).ref()
 
 internal fun SchemaMap.id() = string("\$id")
 
-internal fun unwrap(schema: SchemaMap): SchemaMap {
-    if (schema.containsKey("dataModel")) {
-        val model = schema.map("dataModel")
-        schema.remove("dataModel")
-        schema.remove("version")
-        model.putAll(schema)
-        return model
-    }
-    return schema
-}
-
 internal fun refOf(id: String) = schemaMapOf("\$ref" to "#${id.removePrefix("#")}")
 
 internal fun dataModelConstraintTypeFrom(word: String): ConstraintType? = when (word) {

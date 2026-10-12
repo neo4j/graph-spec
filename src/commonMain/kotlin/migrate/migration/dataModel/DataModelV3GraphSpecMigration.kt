@@ -41,7 +41,6 @@ class DataModelV3GraphSpecMigration :
     ) {
 
     override fun migrate(schema: SchemaMap): SchemaMap {
-        val schema = unwrap(schema)
         val extensions = schema.mapOrNull("graphSchemaExtensionsRepresentation")
         val nodeKeys = keyProperties(extensions, "node")
         val relKeys = keyProperties(extensions, "relationship")

@@ -20,6 +20,7 @@ import codec.schema.SchemaLiteral
 import codec.schema.SchemaNull
 import codec.schema.schemaListOf
 import codec.schema.schemaMapOf
+import model.Version
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -626,7 +627,7 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
-    fun `migrate emits the flat data model by default and the wrapped model file when wrapped`() {
+    fun `migrate emits a flat data model without the wrapper fields`() {
         val input = schemaMapOf(
             "nodes" to schemaMapOf(
                 "n1" to schemaMapOf(
@@ -637,22 +638,37 @@ class GraphSpecDataModelV3MigrationTest {
             "description" to "a description"
         )
 
-        // Default DATA_MODEL is flat with no visualisation
         val flat = migration.migrate(input)
+
         assertFalse(flat.containsKey("dataModel"), "flat output must not be wrapped")
         assertTrue(flat.containsKey("graphSchemaRepresentation"))
         assertTrue(flat.containsKey("graphMappingRepresentation"))
         assertFalse(flat.containsKey("visualisation"))
+        assertFalse(flat.containsKey("description"))
+    }
 
-        // DATA_MODEL_WRAPPED wraps the same data model under a top-level dataModel key and includes visualisation
-        val wrapped = GraphSpecDataModelV3Migration(wrapped = true).migrate(input)
-        assertFalse(wrapped.containsKey("graphSchemaRepresentation"))
-        assertTrue(wrapped.containsKey("visualisation"))
+    @Test
+    fun `wrapped migration envelopes the data model with visualisation and description`() {
+        val input = schemaMapOf(
+            "nodes" to schemaMapOf(
+                "n1" to schemaMapOf(
+                    "labels" to schemaMapOf("identifier" to "Person"),
+                    "extensions" to schemaMapOf("display" to schemaMapOf("x" to 100.23, "y" to 200.12))
+                )
+            ),
+            "description" to "a description"
+        )
+
+        val wrapped = GraphSpecDataModelWrappedMigration().migrate(input)
+
+        assertEquals(Version.DATA_MODEL_WRAPPED_V30, wrapped.string("version"))
+        assertEquals("a description", wrapped.string("description"))
+        assertEquals("n1", wrapped.map("visualisation").listOfMaps("nodes").single().string("id"))
         val dataModel = wrapped.map("dataModel")
         assertTrue(dataModel.containsKey("graphSchemaRepresentation"))
         assertTrue(dataModel.containsKey("graphMappingRepresentation"))
         assertTrue(dataModel.containsKey("configurations"))
-        assertTrue(wrapped.containsKey("description"))
+        assertFalse(dataModel.containsKey("visualisation"))
     }
 
     @Test
