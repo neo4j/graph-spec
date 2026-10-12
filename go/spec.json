@@ -6,7 +6,7 @@
     "properties": {
         "schema": {
             "type": "string",
-            "description": "Identifier of the schema."
+            "description": "Schema specification uri used."
         },
         "version": {
             "type": "string",
@@ -53,7 +53,7 @@
                         "string",
                         "null"
                     ],
-                    "description": "Shorthand for the identifying label. Moved to labels when the model is parsed."
+                    "description": "Shorthand for the identifying label. Moved to labels when the model is internalised."
                 },
                 "labels": {
                     "$ref": "#/$defs/Labels",
@@ -516,7 +516,7 @@
                             "$ref": "#/$defs/NodeDisplay"
                         }
                     ],
-                    "description": "Optional visual position of this node."
+                    "description": "Optional visual information of this node."
                 }
             },
             "required": [],
@@ -768,7 +768,7 @@
         },
         "NodeDisplay": {
             "type": "object",
-            "description": "Visual position of a node.",
+            "description": "Visual information for a node.",
             "properties": {
                 "x": {
                     "type": "number",
@@ -1082,7 +1082,7 @@
                 },
                 "size": {
                     "type": "integer",
-                    "description": "Size of the column. -1 when unspecified."
+                    "description": "Size of the column."
                 },
                 "suggested": {
                     "$ref": "#/$defs/Neo4jType",
@@ -1090,7 +1090,7 @@
                 },
                 "supported": {
                     "type": "array",
-                    "description": "Neo4j types values of this column can be converted to.",
+                    "description": "Neo4j types values of this column can be converted to when using the import tool.",
                     "items": {
                         "$ref": "#/$defs/Neo4jType"
                     }
@@ -1257,7 +1257,7 @@
         },
         "MappingMode": {
             "type": "string",
-            "description": "Whether mapped data is merged into existing data or always created.",
+            "description": "Write approach used when importing data (merged into existing data or always created).",
             "enum": [
                 "MERGE",
                 "CREATE"

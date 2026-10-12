@@ -168,7 +168,7 @@ type ForeignKey struct {
 	References ForeignKeyReference `json:"references"`
 }
 
-// Whether mapped data is merged into existing data or always created.
+// Write approach used when importing data (merged into existing data or always created).
 type MappingMode string
 
 const (
@@ -404,11 +404,11 @@ type TableColumn struct {
 	Dimension *int `json:"dimension,omitempty"`
 	// Human-readable name. Used in place of the stable id in the pretty form of the model.
 	Name *string `json:"name,omitempty"`
-	// Size of the column. -1 when unspecified.
+	// Size of the column.
 	Size *int `json:"size,omitempty"`
 	// Neo4j type suggested for values of this column.
 	Suggested *Neo4jType `json:"suggested,omitempty"`
-	// Neo4j types values of this column can be converted to.
+	// Neo4j types values of this column can be converted to when using the import tool.
 	Supported []Neo4jType `json:"supported,omitempty"`
 	// Data type of the column in the source.
 	Type *string `json:"type,omitempty"`
@@ -476,7 +476,7 @@ type NodeConstraint struct {
 	Type ConstraintType `json:"type"`
 }
 
-// Visual position of a node.
+// Visual information for a node.
 type NodeDisplay struct {
 	// User-defined arbitrary data.
 	Custom map[string]ExtensionValue `json:"custom,omitempty"`
@@ -651,7 +651,7 @@ type NodeIndex struct {
 type NodeExtensions struct {
 	// User-defined arbitrary data.
 	Custom map[string]ExtensionValue `json:"custom,omitempty"`
-	// Optional visual position of this node.
+	// Optional visual information of this node.
 	Display *NodeDisplay `json:"display,omitempty"`
 	// Database indexes on this node keyed by id.
 	Indexes map[string]NodeIndex `json:"indexes,omitempty"`
@@ -698,7 +698,7 @@ type Node struct {
 	Description *string `json:"description,omitempty"`
 	// Extensions for the node.
 	Extensions *NodeExtensions `json:"extensions,omitempty"`
-	// Shorthand for the identifying label. Moved to labels when the model is parsed.
+	// Shorthand for the identifying label. Moved to labels when the model is internalised.
 	Label *string `json:"label,omitempty"`
 	// Labels of the node.
 	Labels *Labels `json:"labels,omitempty"`
@@ -799,7 +799,7 @@ type GraphModel struct {
 	Nodes map[string]Node `json:"nodes,omitempty"`
 	// Relationship definitions keyed by relationship id.
 	Relationships map[string]Relationship `json:"relationships,omitempty"`
-	// Identifier of the schema.
+	// Schema specification uri used.
 	Schema string `json:"schema"`
 	// Version of the document.
 	Version string `json:"version"`
