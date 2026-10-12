@@ -63,7 +63,7 @@ Model-only rules (fire even on schema-valid documents):
 
 - Cross-references: endpoint `node` to a `nodes` key; constraint `properties` to the same element's properties; `neo4j:index` properties to the element's properties; `importer:mapping` node/relationship/table refs.
 - Cross-field semantics: `dimension` only on `VECTOR<...>`; exactly one of `label` / `labels`; endpoint `count` not combined with `min_count` / `max_count`; `min_count` <= `max_count`; constraint overlap (key redundancy, duplicated shorthand flags, existence/composite conflict, duplicate property sets); index options matching the index type.
-- Blank strings the schema's presence checks miss: relationship `type`, `labels.identifier`, table column names, `canonicalQuery` tools' `cypher` (ADR-0011).
+- Blank strings the schema's presence checks miss: relationship `type`, `labels.identifier`, table column names.
 - Model-wide uniqueness: index and constraint names share one namespace.
 
 A few rules live in both layers (the type-token pattern, numeric minimums, the `constraint_type` enum, `minItems`) as a safety net for programmatically built models - a schema-valid parsed document can never trip them. Set expectations accordingly: **schema-valid is not sound** (most issue codes are model-level only), and **zero model issues is not schema-valid** (header checks, closed-object typos, property-name emptiness are schema-only). For JS/TS and Go consumers the schema is not part of the shipped library - the model validators are the validation story there.
@@ -73,7 +73,6 @@ A few rules live in both layers (the type-token pattern, numeric minimums, the `
 - Nodes and relationships are keyed by local ids; the label lives in `label` / `labels.identifier`, the relationship type in `type`. Endpoint `node` references point at node ids. A relationship type shared across endpoint pairs sits under one id key per pair (allowed, but graph-type enforcement keys on the type alone and cannot distinguish pairs yet).
 - Property types are tokens (`STRING`, `LIST<STRING>`, `LIST<ANY>`, `VECTOR<FLOAT>` + companion `dimension` field). VECTOR element types are numeric only (`INTEGER` or `FLOAT`, ADR-0012); `LIST<...>` takes any scalar. No union types: a property is a single type or `ANY`.
 - Relationship cardinality lives on the endpoints: `count` (exact) / `min_count` / `max_count`; absent = unconstrained.
-- `tools` is a core field on node and relationship entries: `{ type: canonicalQuery | externalRequest | ..., name, description, ... }`, per-type shapes owner-defined.
 - `extensions` at every level: first-party extensions as `neo4j:`-prefixed named keys with owner-defined shapes (not validated here), custom extensions as the fixed envelope under `custom` (`type` required; `$schema`, `name`, `definition` optional; `definition` free-form, never validated). Unknown extra fields are carried untouched.
 - Constraint objects (`{ constraint_type: key|unique|mustExist, name?, properties: [...] }`) are the nameable alternative to the property shorthand flags.
 

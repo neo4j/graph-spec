@@ -79,14 +79,6 @@ type Property struct {
 	Unique *bool `json:"unique,omitempty"`
 }
 
-// Core tool definition for agents: type discriminates (canonicalQuery, externalRequest, ...), name and description are the readable surface; remaining fields are defined per tool type by its owner (cypher, url, ...). Definitions only, no behaviour.
-type Tool struct {
-	extra       map[string]json.RawMessage `json:"-"`
-	Description *string                    `json:"description,omitempty"`
-	Name        *string                    `json:"name,omitempty"`
-	Type        string                     `json:"type"`
-}
-
 // Every node carries its label in label (shorthand for an identifier-only labels) or labels.identifier (when implied/optional labels exist). Not schema-enforced; a node with neither is meaningless.
 type Node struct {
 	// Alternative names for this node type.
@@ -103,11 +95,9 @@ type Node struct {
 	// Properties of this node type; the map key is the property name.
 	Properties map[string]Property `json:"properties,omitempty"`
 	Reference  *Reference          `json:"reference,omitempty"`
-	// Tools available on this node type.
-	Tools []Tool `json:"tools,omitempty"`
 }
 
-// A relationship type entry: the type, its from/to endpoints with cardinality, properties, constraints, tools, and metadata.
+// A relationship type entry: the type, its from/to endpoints with cardinality, properties, constraints, and metadata.
 type RelationshipEntry struct {
 	// Alternative names for this relationship type.
 	Aliases []string `json:"aliases,omitempty"`
@@ -123,13 +113,11 @@ type RelationshipEntry struct {
 	Reference  *Reference          `json:"reference,omitempty"`
 	// The end endpoint.
 	To Endpoint `json:"to"`
-	// Tools available on this relationship type.
-	Tools []Tool `json:"tools,omitempty"`
 	// The relationship type. One-to-one with the map key in the common case; several keys may share a type across different endpoint pairs.
 	Type string `json:"type"`
 }
 
-// Draft JSON Schema for the Ontology Graph spec v1 proposal (2026-09-25 doc state, working-session revision). Nodes and relationships are keyed by local ids; the label/type lives inside the entry. Types are tokens. Tools are core. Extensions ride the named extensions map: first-party keys, custom envelope under custom; extension payloads are never validated by this schema.
+// Draft JSON Schema for the Ontology Graph spec v1 proposal (2026-09-25 doc state, working-session revision). Nodes and relationships are keyed by local ids; the label/type lives inside the entry. Types are tokens. Extensions ride the named extensions map: first-party keys, custom envelope under custom; extension payloads are never validated by this schema.
 type GraphModel struct {
 	// Spec link including the version. Meta-level; doubles as document-type marker.
 	Schema string `json:"$schema"`

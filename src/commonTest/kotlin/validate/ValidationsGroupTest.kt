@@ -48,17 +48,6 @@ class ValidationsGroupTest {
     }
 
     @Test
-    fun `core aggregates the tool-type modules' rules exactly once`() {
-        // ADR-0011: the predefined tool types' rules reach core through
-        // model.tool.toolTypeModules, never as direct entries.
-        val moduleRules = model.tool.toolTypeModules.flatMap { it.validations }
-        assertTrue(Validations.core.containsAll(moduleRules))
-        moduleRules.forEach { rule ->
-            assertEquals(1, Validations.core.count { it == rule })
-        }
-    }
-
-    @Test
     fun `all is the distinct union of the groups`() {
         val union =
             (

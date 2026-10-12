@@ -34,7 +34,7 @@ import kotlin.test.assertTrue
  * the examples validate against the hand-maintained schema; this test proves the v1
  * Kotlin model ([model.GraphModel] via [JsonFormat]) round-trips those same examples
  * losslessly — deserialize, re-serialize, JSON tree equality — including the open
- * surfaces (tool extras, extension payloads) and the "absent means none" rule.
+ * surfaces (extension payloads) and the "absent means none" rule.
  */
 class OntologyGraphModelRoundTripTest {
 
@@ -88,38 +88,9 @@ class OntologyGraphModelRoundTripTest {
         assertFalse(outputTree.has("relationships"), "no empty relationships map: $outputTree")
         assertFalse(outputTree.has("extensions"), "no empty extensions map: $outputTree")
 
-        // The node must not grow empty properties/constraints/tools/aliases/extensions.
+        // The node must not grow empty properties/constraints/aliases/extensions.
         val solo = outputTree.at("/nodes/Solo")
         assertEquals(setOf("label"), solo.fieldNames().asSequence().toSet())
-    }
-
-    @Test
-    fun `movies tools keep their owner-defined extras`() {
-        val input = File(examplesDir, "movies.ontology.json").readText()
-        val model = format.decodeModelFromString(input)
-
-        val actedIn = model.relationships.getValue("ACTED_IN")
-        assertEquals(2, actedIn.tools.size)
-        val externalRequest = actedIn.tools[0]
-        assertEquals("externalRequest", externalRequest.type)
-        assertEquals("https://imdb.com/", externalRequest.extra["url"]?.asString)
-        val canonicalQuery = actedIn.tools[1]
-        assertEquals("canonicalQuery", canonicalQuery.type)
-        assertTrue(
-            canonicalQuery.extra["cypher"]?.asString?.startsWith("MATCH (a:Actor)") == true,
-            "canonicalQuery tool must keep its cypher extra"
-        )
-
-        // The extras are inlined on the wire again after re-serialization.
-        val outputTree = mapper.readTree(format.encodeModelToString(model))
-        assertEquals(
-            "https://imdb.com/",
-            outputTree.at("/relationships/ACTED_IN/tools/0/url").asText()
-        )
-        assertTrue(
-            outputTree.at("/relationships/ACTED_IN/tools/1/cypher").asText()
-                .startsWith("MATCH (a:Actor)")
-        )
     }
 
     @Test

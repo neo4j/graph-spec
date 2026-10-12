@@ -28,9 +28,6 @@ import model.jso
 import model.property.PropertyJs
 import model.property.toClass
 import model.property.toJs
-import model.tool.ToolJs
-import model.tool.toClass
-import model.tool.toJs
 import kotlin.collections.component1
 import kotlin.collections.component2
 
@@ -41,7 +38,6 @@ external interface NodeJs {
     var labels: LabelsJs?
     val properties: Record<String, PropertyJs>
     var constraints: Array<NodeConstraintJs>
-    val tools: Array<ToolJs>
     val aliases: Array<String>
     var reference: String?
     var description: String?
@@ -54,7 +50,6 @@ fun nodeJs(
     labels: LabelsJs? = null,
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Array<NodeConstraintJs> = emptyArray(),
-    tools: Array<ToolJs> = emptyArray(),
     aliases: Array<String> = emptyArray(),
     reference: String? = null,
     description: String? = null,
@@ -65,7 +60,6 @@ fun nodeJs(
     this.labels = labels
     this.properties = properties
     this.constraints = constraints
-    this.tools = tools
     this.aliases = aliases
     this.reference = reference
     this.description = description
@@ -78,7 +72,6 @@ fun Node.toJs(key: String) = nodeJs(
     labels = labels?.toJs(),
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.map { it.toJs() }.toTypedArray(),
-    tools = tools.map { it.toJs() }.toTypedArray(),
     aliases = aliases.toTypedArray(),
     reference = reference,
     description = description,
@@ -91,7 +84,6 @@ fun NodeJs.toClass(): Node = Node(
     labels = labels?.toClass(),
     properties = properties.associateBy { key, value -> value.toClass() },
     constraints = constraints.map { it.toClass() }.toMutableList(),
-    tools = tools.map { it.toClass() }.toMutableList(),
     aliases = aliases.toMutableList(),
     reference = reference,
     description = description,

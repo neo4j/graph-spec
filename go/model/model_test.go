@@ -14,8 +14,8 @@ var testdata embed.FS
 // A real v1 document (the spec gate's movies example) round-trips through
 // the generated model: unmarshal, marshal, unmarshal again — the two model
 // values must be identical, including carried-untouched extension payloads
-// and owner-defined tool fields (see extras_test.go for the byte-equal
-// assertions on those open surfaces).
+// (see extras_test.go for the byte-equal assertions on those open
+// surfaces).
 func TestOntologyGraphSpecV1RoundTripJSON(t *testing.T) {
 	raw, err := testdata.ReadFile("testdata/ontology-graph-spec-example.json")
 	require.NoError(t, err)
@@ -24,7 +24,7 @@ func TestOntologyGraphSpecV1RoundTripJSON(t *testing.T) {
 	require.NoError(t, json.Unmarshal(raw, &graph))
 
 	// v1 shape spot checks: id-keyed nodes, type tokens, endpoint
-	// cardinality, core tools.
+	// cardinality.
 	require.Equal(t, "3f8a4c2e-9b1d-4e7a-a5c3-2d8f1b6e9a04", graph.ID)
 	require.Equal(t, 3, graph.Version)
 	require.Len(t, graph.Nodes, 5)
@@ -38,8 +38,6 @@ func TestOntologyGraphSpecV1RoundTripJSON(t *testing.T) {
 	require.Equal(t, "ACTED_IN", actedIn.Type)
 	require.Equal(t, "Actor", actedIn.From.Node)
 	require.Equal(t, 1, *actedIn.To.MaxCount)
-	require.Len(t, actedIn.Tools, 2)
-	require.Equal(t, "canonicalQuery", actedIn.Tools[1].Type)
 
 	out, err := json.Marshal(graph)
 	require.NoError(t, err)

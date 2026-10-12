@@ -26,8 +26,8 @@ import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.put
 
 /*
- * Shared mechanics for the untagged catch-all codecs ([model.tool.ToolSerializer],
- * [CustomExtensionSerializer], and the per-owner extension codecs of ADR-0005):
+ * Shared mechanics for the untagged catch-all codecs ([CustomExtensionSerializer]
+ * and the per-owner extension codecs of ADR-0005):
  * keys outside a codec's known-field set are collected into the model's `extra`
  * map on decode ([extractExtras]) and inlined back on encode ([putExtras]), so
  * owner-defined fields survive the round trip untouched. JSON-only: every

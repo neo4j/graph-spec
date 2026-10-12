@@ -31,7 +31,7 @@ import kotlin.test.assertTrue
 /**
  * A JS-side read of a hand-written v1 document: parsed with the repo's JsonFormat and
  * read through the JS twins, asserting the v1 shapes — id-keyed records, String type
- * tokens, endpoint fields, tools, the custom extension envelope and a named
+ * tokens, endpoint fields, the custom extension envelope and a named
  * ui:display extension.
  */
 class V1JsonDocumentJsTest {
@@ -53,14 +53,6 @@ class V1JsonDocumentJsTest {
               },
               "constraints": [
                 { "constraint_type": "unique", "name": "person_name_unique", "properties": ["name"] }
-              ],
-              "tools": [
-                {
-                  "type": "canonicalQuery",
-                  "name": "findCoActors",
-                  "description": "Actors who shared a film with a given actor",
-                  "cypher": "MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) RETURN co"
-                }
               ],
               "extensions": {
                 "ui:display": { "color": "#e06209", "caption": "name" },
@@ -177,18 +169,8 @@ class V1JsonDocumentJsTest {
     }
 
     @Test
-    fun testTools() {
+    fun testNodeConstraints() {
         val person = parseToJs().nodes["person"]!!
-
-        assertEquals(1, person.tools.size)
-        val tool = person.tools[0]
-        assertEquals("canonicalQuery", tool.type)
-        assertEquals("findCoActors", tool.name)
-        assertEquals("Actors who shared a film with a given actor", tool.description)
-        assertEquals(
-            "MATCH (a:Actor)-[:ACTED_IN]->(m:Movie)<-[:ACTED_IN]-(co:Actor) RETURN co",
-            assertString(tool.extra["cypher"], "tools[0].cypher"),
-        )
 
         // The wire `constraint_type` reads back through the node twin as well
         assertEquals(1, person.constraints.size)

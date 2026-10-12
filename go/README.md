@@ -131,7 +131,7 @@ Some temporary sanitising is needed before schemancer runs, so the script works 
 schema (the schema itself is never touched). The copy pins `title` to `"GraphModel"`, keeping the top-level Go type
 consumer-stable (ADR-0006), and demotes `format: "uri"` markers to plain strings, since `encoding/json` cannot
 round-trip `net/url.URL` (URI-format validation stays Kotlin-side). The generated `model.go` is then post-processed
-by a guarded injection that adds an unexported extras field to the open-surface types (`ExtensionsMap`, `Tool`,
+by a guarded injection that adds an unexported extras field to the open-surface types (`ExtensionsMap`,
 `Extension`); `go/model/extras.go` is the hand-written half of that contract — do not hand-edit `model.go`.
 
 > [!NOTE]

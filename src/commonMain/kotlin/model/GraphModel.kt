@@ -42,7 +42,7 @@ import kotlin.js.JsStatic
 @SpecDoc(
     "Draft JSON Schema for the Ontology Graph spec v1 proposal (2026-09-25 doc state, " +
         "working-session revision). Nodes and relationships are keyed by local ids; the " +
-        "label/type lives inside the entry. Types are tokens. Tools are core. Extensions " +
+        "label/type lives inside the entry. Types are tokens. Extensions " +
         "ride the named extensions map: first-party keys, custom envelope under custom; " +
         "extension payloads are never validated by this schema."
 )

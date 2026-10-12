@@ -2,7 +2,7 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
     "title": "Neo4j Ontology Graph Specification v1",
-    "description": "Draft JSON Schema for the Ontology Graph spec v1 proposal (2026-09-25 doc state, working-session revision). Nodes and relationships are keyed by local ids; the label/type lives inside the entry. Types are tokens. Tools are core. Extensions ride the named extensions map: first-party keys, custom envelope under custom; extension payloads are never validated by this schema.",
+    "description": "Draft JSON Schema for the Ontology Graph spec v1 proposal (2026-09-25 doc state, working-session revision). Nodes and relationships are keyed by local ids; the label/type lives inside the entry. Types are tokens. Extensions ride the named extensions map: first-party keys, custom envelope under custom; extension payloads are never validated by this schema.",
     "type": "object",
     "required": [
         "$schema",
@@ -100,13 +100,6 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/$defs/constraint"
-                    }
-                },
-                "tools": {
-                    "description": "Tools available on this node type.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/$defs/tool"
                     }
                 },
                 "aliases": {
@@ -276,7 +269,7 @@
             }
         },
         "relationshipEntry": {
-            "description": "A relationship type entry: the type, its from/to endpoints with cardinality, properties, constraints, tools, and metadata.",
+            "description": "A relationship type entry: the type, its from/to endpoints with cardinality, properties, constraints, and metadata.",
             "type": "object",
             "required": [
                 "type",
@@ -315,13 +308,6 @@
                         "$ref": "#/$defs/constraint"
                     }
                 },
-                "tools": {
-                    "description": "Tools available on this relationship type.",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/$defs/tool"
-                    }
-                },
                 "aliases": {
                     "description": "Alternative names for this relationship type.",
                     "type": "array",
@@ -338,25 +324,6 @@
                 },
                 "extensions": {
                     "$ref": "#/$defs/extensionsMap"
-                }
-            }
-        },
-        "tool": {
-            "description": "Core tool definition for agents: type discriminates (canonicalQuery, externalRequest, ...), name and description are the readable surface; remaining fields are defined per tool type by its owner (cypher, url, ...). Definitions only, no behaviour.",
-            "type": "object",
-            "required": [
-                "type"
-            ],
-            "additionalProperties": true,
-            "properties": {
-                "type": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
                 }
             }
         },

@@ -30,9 +30,6 @@ import model.node.toJs
 import model.property.PropertyJs
 import model.property.toClass
 import model.property.toJs
-import model.tool.ToolJs
-import model.tool.toClass
-import model.tool.toJs
 import kotlin.collections.component1
 import kotlin.collections.component2
 
@@ -44,7 +41,6 @@ external interface RelationshipJs {
     val to: RelationshipTargetJs
     val properties: Record<String, PropertyJs>
     var constraints: Array<RelationshipConstraintJs>
-    val tools: Array<ToolJs>
     val aliases: Array<String>
     var reference: String?
     var description: String?
@@ -58,7 +54,6 @@ fun relationshipJs(
     to: RelationshipTargetJs = relationshipTargetJs(),
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Array<RelationshipConstraintJs> = emptyArray(),
-    tools: Array<ToolJs> = emptyArray(),
     aliases: Array<String> = emptyArray(),
     reference: String? = null,
     description: String? = null,
@@ -70,7 +65,6 @@ fun relationshipJs(
     this.to = to
     this.properties = properties
     this.constraints = constraints
-    this.tools = tools
     this.aliases = aliases
     this.reference = reference
     this.description = description
@@ -84,7 +78,6 @@ fun Relationship.toJs(id: String) = relationshipJs(
     to = to.toJs(),
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.map { it.toJs() }.toTypedArray(),
-    tools = tools.map { it.toJs() }.toTypedArray(),
     aliases = aliases.toTypedArray(),
     reference = reference,
     description = description,
@@ -98,7 +91,6 @@ fun RelationshipJs.toClass() = Relationship(
     to = to.toClass(),
     properties = properties.associateBy { _, property -> property.toClass() },
     constraints = constraints.map { it.toClass() }.toMutableList(),
-    tools = tools.map { it.toClass() }.toMutableList(),
     aliases = aliases.toMutableList(),
     reference = reference,
     description = description,

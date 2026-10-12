@@ -8,9 +8,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// openSurfacesDoc exercises all three open surfaces in one document: a named
+// openSurfacesDoc exercises both open surfaces in one document: a named
 // ui:display extension on the document and on a node (ExtensionsMap
-// extras), a canonicalQuery tool with an owner-defined cypher field (Tool
 // extras), and a custom extension with extra keys (Extension extras).
 //
 // Object keys are ordered to match this package's marshal order (generated
@@ -34,14 +33,7 @@ const openSurfacesDoc = `{
       "extensions": {
         "ui:display": { "color": "red" }
       },
-      "label": "Person",
-      "tools": [
-        {
-          "name": "personByName",
-          "type": "canonicalQuery",
-          "cypher": "MATCH (p:Person {name: $name}) RETURN p"
-        }
-      ]
+      "label": "Person"
     }
   },
   "version": 1
@@ -54,7 +46,7 @@ func compacted(t *testing.T, raw string) []byte {
 	return buf.Bytes()
 }
 
-// The format's carried-untouched invariant: a document using all three open
+// The format's carried-untouched invariant: a document using both open
 // surfaces round-trips through the model byte-equal.
 func TestOpenSurfacesRoundTripByteEqual(t *testing.T) {
 	want := compacted(t, openSurfacesDoc)
@@ -72,21 +64,6 @@ func TestOpenSurfacesRoundTripByteEqual(t *testing.T) {
 	out2, err := json.Marshal(again)
 	require.NoError(t, err)
 	require.Equal(t, string(want), string(out2))
-}
-
-func TestToolCarriesOwnerDefinedFields(t *testing.T) {
-	var tool Tool
-	require.NoError(t, json.Unmarshal(
-		[]byte(`{"type":"externalRequest","name":"findRecentActingJobs","url":"https://imdb.com/"}`), &tool))
-
-	require.Equal(t, "externalRequest", tool.Type)
-	require.JSONEq(t, `"https://imdb.com/"`, string(tool.extra["url"]))
-
-	out, err := json.Marshal(tool)
-	require.NoError(t, err)
-	require.JSONEq(t,
-		`{"type":"externalRequest","name":"findRecentActingJobs","url":"https://imdb.com/"}`,
-		string(out))
 }
 
 func TestExtensionCarriesUnknownFields(t *testing.T) {
@@ -126,23 +103,23 @@ func TestExtensionsMapCarriesNamedExtensions(t *testing.T) {
 // programmatically built value may carry an extra whose key collides with a
 // known field — the known field wins, the extras entry is dropped.
 func TestKnownKeyCollisionKnownFieldWins(t *testing.T) {
-	tool := Tool{Type: "canonicalQuery", extra: map[string]json.RawMessage{
-		"type":   json.RawMessage(`"evil"`),
-		"cypher": json.RawMessage(`"RETURN 1"`),
+	ext := Extension{Type: "acme:lineage", extra: map[string]json.RawMessage{
+		"type":  json.RawMessage(`"evil"`),
+		"owner": json.RawMessage(`"data-platform"`),
 	}}
 
-	out, err := json.Marshal(tool)
+	out, err := json.Marshal(ext)
 	require.NoError(t, err)
-	require.Equal(t, `{"type":"canonicalQuery","cypher":"RETURN 1"}`, string(out))
+	require.Equal(t, `{"type":"acme:lineage","owner":"data-platform"}`, string(out))
 }
 
 // Absent means none: no extras, no trace of the catch-all on the wire.
 func TestAbsentExtrasStayAbsent(t *testing.T) {
-	out, err := json.Marshal(Tool{Type: "canonicalQuery"})
+	out, err := json.Marshal(Extension{Type: "acme:lineage"})
 	require.NoError(t, err)
-	require.Equal(t, `{"type":"canonicalQuery"}`, string(out))
+	require.Equal(t, `{"type":"acme:lineage"}`, string(out))
 
-	var tool Tool
-	require.NoError(t, json.Unmarshal([]byte(`{"type":"canonicalQuery"}`), &tool))
-	require.Nil(t, tool.extra)
+	var ext Extension
+	require.NoError(t, json.Unmarshal([]byte(`{"type":"acme:lineage"}`), &ext))
+	require.Nil(t, ext.extra)
 }

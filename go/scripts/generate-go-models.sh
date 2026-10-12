@@ -47,21 +47,20 @@ fi
 echo "✓ Go models generated"
 
 # schemancer drops `additionalProperties: true`: ExtensionsMap would lose
-# named neo4j:* keys, Tool its owner-defined fields (cypher, url, ...), and
-# Extension the custom envelope's unknown fields — breaking the format's
-# "carried untouched, never rejected" invariant. Inject an unexported extras
-# field into the three open-surface structs; the hand-written companions in
-# go/model/extras.go (not generated, survives regen) implement the JSON
-# round-trip on top of it. The guard fails the run if schemancer's output
-# ever stops matching the injection anchors.
+# named neo4j:* keys and Extension the custom envelope's unknown fields —
+# breaking the format's "carried untouched, never rejected" invariant. Inject
+# an unexported extras field into the two open-surface structs; the
+# hand-written companions in go/model/extras.go (not generated, survives
+# regen) implement the JSON round-trip on top of it. The guard fails the run
+# if schemancer's output ever stops matching the injection anchors.
 perl -pi -e '
   if (!$imported && /^package model$/) { $_ .= "\nimport \"encoding/json\"\n"; $imported = 1 }
-  if (/^type (?:ExtensionsMap|Tool|Extension) struct \{$/) {
+  if (/^type (?:ExtensionsMap|Extension) struct \{$/) {
     $bt = chr(96);
     $_ .= "\textra map[string]json.RawMessage ${bt}json:\"-\"${bt}\n";
     $injected++;
   }
-  END { die "extra-field injection missed its anchors (got " . ($injected // 0) . ", want 3)\n" unless ($injected // 0) == 3 }
+  END { die "extra-field injection missed its anchors (got " . ($injected // 0) . ", want 2)\n" unless ($injected // 0) == 2 }
 ' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
 echo "✓ Open-surface extras fields injected"
 
