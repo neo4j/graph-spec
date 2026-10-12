@@ -135,3 +135,7 @@ pattern on the tool surface.**
   (`externalRequest`, ...) get their own module objects under
   `model/tool/`, moving to owner folders per alternative 3 when a second
   owner arrives.
+
+## Later references
+
+- ADR-0013 (docs/adr/0013-tools-not-in-initial-version.md) supersedes this ADR — tools are not in the initial v1; the canonicalQuery tool type and the tool-type module machinery are removed with the tools field.
