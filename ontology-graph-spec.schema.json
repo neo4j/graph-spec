@@ -5,13 +5,13 @@
     "description": "Draft JSON Schema for the Ontology Graph spec v1 proposal (2026-09-25 doc state, working-session revision). Nodes and relationships are keyed by local ids; the label/type lives inside the entry. Types are tokens. Extensions ride the named extensions map: first-party keys, custom envelope under custom; extension payloads are never validated by this schema.",
     "type": "object",
     "required": [
-        "$schema",
+        "schema",
         "id",
         "version"
     ],
     "additionalProperties": false,
     "properties": {
-        "$schema": {
+        "schema": {
             "description": "Spec link including the version. Meta-level; doubles as document-type marker.",
             "type": "string",
             "format": "uri"
@@ -328,7 +328,7 @@
             }
         },
         "extension": {
-            "description": "Custom extension envelope, four fields: type required; $schema, name, definition optional. definition is free-form and never validated by this spec. Unknown extra fields are carried untouched.",
+            "description": "Custom extension envelope, four fields: type required; schema, name, definition optional. definition is free-form and never validated by this spec. Unknown extra fields are carried untouched.",
             "type": "object",
             "required": [
                 "type"
@@ -337,7 +337,7 @@
                 "type": {
                     "type": "string"
                 },
-                "$schema": {
+                "schema": {
                     "type": "string",
                     "format": "uri"
                 },

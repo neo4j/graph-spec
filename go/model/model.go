@@ -24,12 +24,12 @@ type Endpoint struct {
 	Node string `json:"node"`
 }
 
-// Custom extension envelope, four fields: type required; $schema, name, definition optional. definition is free-form and never validated by this spec. Unknown extra fields are carried untouched.
+// Custom extension envelope, four fields: type required; schema, name, definition optional. definition is free-form and never validated by this spec. Unknown extra fields are carried untouched.
 type Extension struct {
 	extra      map[string]json.RawMessage `json:"-"`
-	Schema     *string                    `json:"$schema,omitempty"`
 	Definition interface{}                `json:"definition,omitempty"`
 	Name       *string                    `json:"name,omitempty"`
+	Schema     *string                    `json:"schema,omitempty"`
 	Type       string                     `json:"type"`
 }
 
@@ -119,8 +119,6 @@ type RelationshipEntry struct {
 
 // Draft JSON Schema for the Ontology Graph spec v1 proposal (2026-09-25 doc state, working-session revision). Nodes and relationships are keyed by local ids; the label/type lives inside the entry. Types are tokens. Extensions ride the named extensions map: first-party keys, custom envelope under custom; extension payloads are never validated by this schema.
 type GraphModel struct {
-	// Spec link including the version. Meta-level; doubles as document-type marker.
-	Schema string `json:"$schema"`
 	// Human-readable description of the ontology.
 	Description *string        `json:"description,omitempty"`
 	Extensions  *ExtensionsMap `json:"extensions,omitempty"`
@@ -132,6 +130,8 @@ type GraphModel struct {
 	Nodes map[string]Node `json:"nodes,omitempty"`
 	// Map key is the intra-document identifier; the relationship type lives in the type field. Several keys may share a type across different endpoint pairs, but note graph-type enforcement keys on the type alone and cannot distinguish pairs yet.
 	Relationships map[string]RelationshipEntry `json:"relationships,omitempty"`
+	// Spec link including the version. Meta-level; doubles as document-type marker.
+	Schema string `json:"schema"`
 	// The ontology's own version. Identity metadata, not lifecycle.
 	Version int `json:"version"`
 }

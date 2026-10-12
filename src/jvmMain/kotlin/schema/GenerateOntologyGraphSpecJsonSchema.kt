@@ -77,9 +77,9 @@ object OntologyGraphSpecJsonSchemaGenerator {
     /** Field-level schema facts the hand-built serializer descriptors can't carry. */
     private val FIELD_OVERRIDES =
         mapOf(
-            // CustomExtension.`$schema`: format: uri (the @SpecFormat sits on the class
+            // CustomExtension.`schema`: format: uri (the @SpecFormat sits on the class
             // field, invisible through CustomExtensionSerializer's descriptor)
-            "extension" to mapOf("\$schema" to mapOf("format" to JsonPrimitive("uri"))),
+            "extension" to mapOf("schema" to mapOf("format" to JsonPrimitive("uri"))),
         )
 
     /**

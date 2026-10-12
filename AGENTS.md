@@ -74,8 +74,7 @@ Notes:
 ## Repo patterns (where things go)
 
 - `src/commonMain/kotlin/model/` — the v1 model, field-for-field with the
-  schema (`@SerialName` for `one_of`/`min_count`/`max_count`/`constraint_type`/
-  `$schema`). Open surfaces (`CustomExtension`) keep unknown fields
+  schema (`@SerialName` for `one_of`/`min_count`/`max_count`/`constraint_type`). Open surfaces (`CustomExtension`) keep unknown fields
   via the catch-all helpers in `model/extension/InlineExtras.kt`; the six-kind
   `ExtensionValue` tree is the payload carrier (raw-JSON
   `ExtensionValueSerializer`). Named extensions live in owner-prefixed
@@ -146,6 +145,6 @@ Notes:
 7. Clean break from 4.0.0 — the converter is the migration story.
 8. One wire format; normalisation is a library detail.
 9. Extensions are typed objects: first-party as `neo4j:`-prefixed named keys;
-   custom under the `custom` envelope (`type` required; `$schema`/`name`/
+   custom under the `custom` envelope (`type` required; `schema`/`name`/
    `definition` optional; `definition` free-form, never validated). The
    envelope always validates; unknown content is carried untouched.

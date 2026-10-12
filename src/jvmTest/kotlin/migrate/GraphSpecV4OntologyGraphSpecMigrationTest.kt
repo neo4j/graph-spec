@@ -112,7 +112,7 @@ class GraphSpecV4OntologyGraphSpecMigrationTest {
             """{ "version": "4.0.0", "name": "shop", "description": "", "nodes": { "n": { "label": "n" } } }""",
         )
 
-        assertEquals(GraphSpecV4OntologyGraphSpecMigration.SCHEMA_ID, out.string("\$schema"))
+        assertEquals(GraphSpecV4OntologyGraphSpecMigration.SCHEMA_ID, out.string("schema"))
         assertEquals("1", out.literal("version").string)
         assertFalse(out.literal("version").isString, "v1 version is the ontology's own Int, not the 4.0.0 format string")
         val id = out.string("id")
@@ -502,6 +502,6 @@ class GraphSpecV4OntologyGraphSpecMigrationTest {
     @Test
     fun `graph spec 4-0-x patch versions are accepted`() {
         val out = convert("""{ "version": "4.0.3", "nodes": { "n": { "label": "n" } } }""")
-        assertEquals(GraphSpecV4OntologyGraphSpecMigration.SCHEMA_ID, out.string("\$schema"))
+        assertEquals(GraphSpecV4OntologyGraphSpecMigration.SCHEMA_ID, out.string("schema"))
     }
 }

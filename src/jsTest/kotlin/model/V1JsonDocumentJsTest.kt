@@ -38,7 +38,7 @@ class V1JsonDocumentJsTest {
 
     private val document = """
         {
-          "${'$'}schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
+          "schema": "https://neo4j.com/ontology-graph-spec/1.0.0/schema.json",
           "id": "js-read-test",
           "version": 2,
           "name": "js-read",

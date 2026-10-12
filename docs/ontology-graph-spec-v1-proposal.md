@@ -7,7 +7,7 @@ Input: Anurag's onsite brief, Malmö workshop 1-3 Sep, this repo @ c61fbae (grap
 
 Evolve the graph spec into the Ontology Graph spec, version 1.0.0. Published for interop, governed by the ontology group, wrapped by end of October. Something usable at Graph Summit if console tooling opens.
 
-**v1 is a clean break from 4.0.0.** No backwards compatibility in the format. A one-way 4.0.0 to 1.0.0 converter ships in the library so existing importer artifacts survive; the format itself does not carry the old shape. The converter maps 4.0.0's top-level `version` to `$schema`.
+**v1 is a clean break from 4.0.0.** No backwards compatibility in the format. A one-way 4.0.0 to 1.0.0 converter ships in the library so existing importer artifacts survive; the format itself does not carry the old shape. The converter maps 4.0.0's top-level `version` to `schema`.
 
 The deliverable is a written spec document plus a JSON Schema generated from it. Today the "spec" is a schema serialised from Kotlin classes with zero descriptions (Appendix B). There is no prose to patch; the document is the work. This might be reconsidered though, the work for that isn't significantly large.
 
@@ -33,7 +33,7 @@ Added for v1:
 Top level:
 
 ```yaml
-$schema: "https://<url-to-schema>/1.0.0"   # ontology graph spec schema and version (required)
+schema: "https://<url-to-schema>/1.0.0"   # ontology graph spec schema and version (required)
 id: asd-asd-asd          # for identifying the spec when deployed (required)
 version: 3               # the ontology's own version (required)
 name: movies
@@ -43,7 +43,7 @@ relationships: { <local-id>: Relationship }
 extensions: { <id>: {...}, custom: [ ... ] }   # ontology-scope objects (importer:table, importer:mapping)
 ```
 
-`$schema` is the spec link including the version, meta-level (JSON-LD's `@context` precedent, JSON Schema's `$schema`). Plain `version` is reserved for the ontology's own version: identity metadata, not lifecycle. Publish, immutability and drift semantics are defined by the management layer (WS3), but a downloaded document should be able to say what it is.
+`schema` is the spec link including the version, meta-level (ADR-0014; the field was `$schema` until the OSG call of 2026-10-07 chose the plain spelling). Plain `version` is reserved for the ontology's own version: identity metadata, not lifecycle. Publish, immutability and drift semantics are defined by the management layer (WS3), but a downloaded document should be able to say what it is.
 
 Node:
 
@@ -119,14 +119,14 @@ extensions:
     name: actor_names
     properties: [name]
   custom:
-    - $schema: "https://<url-to-index-extension-schema>/0.1.0"
+    - schema: "https://<url-to-index-extension-schema>/0.1.0"
       type: "index"
       name: actor_names
       description: ""
       definition: { properties: [name] }
 ```
 
-The custom envelope has four fields. `type` required. `$schema` optional: the extension type's own schema and version, set and managed by its owner; never the ontology graph spec schema. `name` optional (a per-node display has no natural name). `definition` optional: free-form payload, never validated by this spec. The payload key is `definition`, not `properties`; that word is already overloaded in this spec.
+The custom envelope has four fields. `type` required. `schema` optional: the extension type's own schema and version, set and managed by its owner; never the ontology graph spec schema. `name` optional (a per-node display has no natural name). `definition` optional: free-form payload, never validated by this spec. The payload key is `definition`, not `properties`; that word is already overloaded in this spec.
 
 The envelope always validates. Envelope-validated extensions are carried untouched, never rejected.
 
@@ -141,7 +141,7 @@ Placement rule: an extension lives on the element it describes. If it describes 
 ## Example
 
 ```yaml
-$schema: "https://<url-to-schema>/1.0.0"   # ontology graph spec schema and version
+schema: "https://<url-to-schema>/1.0.0"   # ontology graph spec schema and version
 version: 3                # ontology version
 id: asd-asd-asd
 name: movies
@@ -225,7 +225,7 @@ relationships:
 
 extensions:
   importer:table:
-    $schema: "https://<url-to-table-extension-schema>/0.1.0"   # the table type's own schema and version (owner-managed, optional)
+    schema: "https://<url-to-table-extension-schema>/0.1.0"   # the table type's own schema and version (owner-managed, optional)
     name: actors
     source: sql/postgres
     columns: { actor_id: { type: varchar } }
@@ -248,7 +248,7 @@ Plus, decided here:
 
 - indexes as core fields (they are extension objects instead)
 - SHACL as a validation model (its constraint vocabulary maps, see below; its open-world validation semantics do not)
-- ontology version lifecycle and publish semantics as format concerns. That is the management layer's job (WS3). The format carries only identity: `$schema` (required, the spec schema link + version) and optional `version` (the ontology's own version)
+- ontology version lifecycle and publish semantics as format concerns. That is the management layer's job (WS3). The format carries only identity: `schema` (required, the spec schema link + version) and optional `version` (the ontology's own version)
 - extension type definitions and validation. Owned, defined and validated by each extension type's owner; this spec defines only the envelope
 
 ## Enforcement mapping
@@ -331,6 +331,7 @@ Two semantic caveats, one line each in the final spec:
 
 2026-10-12:
 - Tools are not in the initial v1 (ADR-0013): the `tools` field on node and relationship entries, the schema's `$defs/tool`, and the SDK tool surface (`model/tool/`, the Js twins, the `ToolType` module machinery including `canonicalQuery` per ADR-0011, the `ModelWalk` tool traversal, and the examples' `tools` sections) are all removed, reversing the 2026-09-25 promotion; the OSG call of 2026-10-07 is the governing decision and re-introduction goes through the OSP process. ADR-0011 is superseded. The 4.0.0 → 1.0.0 converter is unaffected (it never emitted tools).
+- The spec-link field is renamed `$schema` → `schema` (ADR-0014): the document root, the custom extension envelope, and the `importer:table`/`importer:mapping` shapes all spell the field `schema`, and the 4.0.0 → 1.0.0 converter emits `schema` where ADR-0008 §1 emitted `$schema`. The field's semantics are unchanged — the spec link including the version, doubling as the document-type marker; inside an extension it points at the extension type's own owner-managed schema. The `"$schema"` and `"$id"` keywords at the top of `ontology-graph-spec.schema.json` are JSON Schema's own draft-2020-12 meta-keys and stay. Wire-incompatible for existing v1 draft documents; acceptable pre-publication (v1 is unpublished).
 2026-10-05:
 - VECTOR element types restricted to numeric (ADR-0012): the `propertyType` pattern's VECTOR arm is now `VECTOR<(INTEGER|FLOAT)>` — `VECTOR<TIME>`-class tokens were never satisfiable by a Neo4j value (PR #118 review comment r4182676002). `ANY`, `LIST<ANY>`, the bare scalars, and `LIST<scalar>` are unchanged. The 4.0.0 → 1.0.0 converter is unaffected (all 4.0.0 vector tokens were already numeric; ADR-0008 §3 prose amended in place).
 2026-10-04:
@@ -400,7 +401,7 @@ Two semantic caveats, one line each in the final spec:
 
 **`implied`/`optional` kept, documented as multi-label.** Importer lineage, observable today in one validator rule (constraints attach to identifier union implied). Not subclassing. The hierarchy question belongs to the ontology group, not to the format.
 
-**Versioning out of the format, identity in.** Publish, immutability, and drift are management-layer semantics (WS3). A format that bakes them in forces every consumer to implement a lifecycle they may not have. But the artifact's own identity is different: `name` and `description` were already there, and `version` is the same class. So `$schema` links the governing spec including its version (JSON Schema's `$schema` convention; `$`-prefixed fields are meta), and plain `version` is reserved for the ontology's own version, optional. Doing this at v1 costs nothing; reclaiming `version` later would cost a format break. The same sigil inside an extension links the extension type's own schema, owner-managed and never the spec's: one rule, `$schema` points at whatever governs the object. Extension evolution never forces an ontology graph spec release. `$schema` over a bare `$version`: the link identifies which schema AND its version, and it doubles as the document-type marker (no sniffing structure to guess what kind of document it is).
+**Versioning out of the format, identity in.** Publish, immutability, and drift are management-layer semantics (WS3). A format that bakes them in forces every consumer to implement a lifecycle they may not have. But the artifact's own identity is different: `name` and `description` were already there, and `version` is the same class. So `schema` links the governing spec including its version, and plain `version` is reserved for the ontology's own version, optional. Doing this at v1 costs nothing; reclaiming `version` later would cost a format break. The same field inside an extension links the extension type's own schema, owner-managed and never the spec's: one rule, `schema` points at whatever governs the object. Extension evolution never forces an ontology graph spec release. A spec link over a bare version token: the link identifies which schema AND its version, and it doubles as the document-type marker (no sniffing structure to guess what kind of document it is). The field was `$schema` — the JSON Schema/JSON-LD sigil convention, `$`-prefixed fields are meta — until the OSG call of 2026-10-07 renamed it to plain `schema` (ADR-0014): the sigil's meta-vs-data distinction is not load-bearing (the field's position already says what it is), v1 has no other `$`-prefixed field, and plain `schema` is the least-surprise spelling for the enterprise developer the format is written for.
 
 **Written document first.** Appendix B is the evidence that patching is not an option.
 

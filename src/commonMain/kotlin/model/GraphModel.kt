@@ -34,7 +34,7 @@ import kotlin.js.JsStatic
 /**
  * Root of an ontology graph spec v1 document (ontology-graph-spec.schema.json).
  * [version] is the ontology's own version (identity metadata), not the format version;
- * the format version rides in [schema] (`$schema`).
+ * the format version rides in [schema] (ADR-0014).
  */
 @JsExport
 @Serializable
@@ -47,7 +47,6 @@ import kotlin.js.JsStatic
         "extension payloads are never validated by this schema."
 )
 data class GraphModel(
-    @SerialName("\$schema")
     @SpecFormat("uri")
     @SpecDoc("Spec link including the version. Meta-level; doubles as document-type marker.")
     val schema: String,

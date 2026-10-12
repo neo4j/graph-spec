@@ -23,7 +23,7 @@ echo "Starting Go model generation..."
 #  2. format:"uri" demotion: schemancer maps format:"uri" to net/url.URL,
 #     which encoding/json cannot round-trip (unmarshalling a JSON string
 #     into url.URL fails; url.URL has no Text(Un)Marshaler). The Kotlin
-#     model types reference/$schema as String and URI-format validation is
+#     model types reference/schema as String and URI-format validation is
 #     Kotlin-side, so the format marker is dropped here and the Go fields
 #     stay plain strings.
 cd "$REPO_ROOT/go"

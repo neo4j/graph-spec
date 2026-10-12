@@ -16,7 +16,6 @@
  */
 package model.extension.importer.table
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import model.extension.NamedExtension
 import validate.Validation
@@ -32,7 +31,6 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 data class TableExtension(
-    @SerialName("\$schema")
     val schema: String? = null,
     val name: String? = null,
     val source: String? = null,

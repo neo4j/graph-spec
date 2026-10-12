@@ -91,10 +91,10 @@ class OntologyGraphSpecExamplesTest {
         val errors = schema().validate(invalid)
         assertFalse(
             errors.isEmpty(),
-            "a document without \$schema, id and version must not validate"
+            "a document without schema, id and version must not validate"
         )
         val messages = errors.joinToString("\n") { it.message }
-        assertTrue(messages.contains("\$schema"), "missing \$schema must be reported:\n$messages")
+        assertTrue(messages.contains("schema"), "missing schema must be reported:\n$messages")
         assertTrue(messages.contains("id"), "missing id must be reported:\n$messages")
         assertTrue(messages.contains("version"), "missing version must be reported:\n$messages")
     }
@@ -107,7 +107,7 @@ class OntologyGraphSpecExamplesTest {
             mapper.readTree(
                 """
                 {
-                  "${'$'}schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
+                  "schema": "https://neo4j.com/ontology-spec/1.0.0/schema.json",
                   "id": "empty-property-name",
                   "version": 1,
                   "nodes": {
