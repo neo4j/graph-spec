@@ -486,7 +486,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.relationshipMappings(unwrap(input), emptyMap())
+        val result = migration.relationshipMappings(input, emptyMap())
 
         val mapping = result.first()
         assertEquals("obj1", mapping.string("relationship"))
@@ -514,7 +514,7 @@ class DataModelV3GraphSpecMigrationTest {
         )
 
         assertFailsWith<IllegalStateException>("Relationship missingRel not found") {
-            migration.relationshipMappings(unwrap(schema), emptyMap())
+            migration.relationshipMappings(schema, emptyMap())
         }
     }
 
@@ -537,7 +537,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val result = migration.nodeMappings(unwrap(input), emptyMap())
+        val result = migration.nodeMappings(input, emptyMap())
 
         assertEquals(1, result.size)
         val mapping = result.first()
@@ -572,7 +572,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val tables = migration.migrateTables(unwrap(inputSchema))
+        val tables = migration.migrateTables(inputSchema)
 
         val userTable = tables["users"]
         assertNotNull(userTable)
@@ -599,7 +599,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val tables = migration.migrateTables(unwrap(inputSchema))
+        val tables = migration.migrateTables(inputSchema)
         val table = tables["empty_table"]!!
 
         assertFalse(table.containsKey("primaryKeys"), "primaryKeys should be omitted if empty")
@@ -640,7 +640,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val columns = migration.migrateTables(unwrap(inputSchema))["film"]!!.mapOfMaps("columns")
+        val columns = migration.migrateTables(inputSchema)["film"]!!.mapOfMaps("columns")
 
         val arrayField = columns["special_features"]!!
         assertEquals("STRING", arrayField.string("suggested"))
@@ -711,7 +711,7 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val fields = migration.migrateTables(unwrap(inputSchema))["document"]!!.mapOfMaps("columns")
+        val fields = migration.migrateTables(inputSchema)["document"]!!.mapOfMaps("columns")
 
         assertEquals(123, fields["embeddingWithDim"]?.intOrNull("dimension"))
         assertEquals(456, fields["supportedOnly"]?.intOrNull("dimension"))

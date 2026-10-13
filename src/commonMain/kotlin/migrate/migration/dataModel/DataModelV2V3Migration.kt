@@ -34,7 +34,6 @@ class DataModelV2V3Migration(version: String) :
     ) {
 
     override fun migrate(schema: SchemaMap): SchemaMap {
-        val schema = unwrap(schema)
         // Replace singular keyProperty with a list keyProperties
         val nodeKeyProperties = schema
             .map("graphSchemaExtensionsRepresentation")
