@@ -36,6 +36,7 @@ class ValidationTest {
         val input = """{
             "schema": "https://neo4j.com/ontology-graph-spec/4.0.0/",
             "version": "1.0.0",
+            "id": "test",
             "nodes": {
                 "n": {
                     "constraints": {
@@ -58,8 +59,8 @@ class ValidationTest {
 
             val resultSize = validate(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize)
             assertTrue(resultSize > 0)
-            assertEquals(STATUS_OK, outputBuffer[0])
             val payload = (outputBuffer + 1)!!.toKString()
+            assertEquals(STATUS_OK, outputBuffer[0], message = "Error: $payload")
             assertTrue(payload.contains("Missing label with id 'L' for node constraint 'c1'"))
         }
     }
