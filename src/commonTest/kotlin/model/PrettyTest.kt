@@ -45,6 +45,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "node0" to Node(
                     name = "User",
@@ -67,6 +68,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "node0" to Node(
                     name = "User",
@@ -90,6 +92,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "node0" to Node(
                     name = "User1",
@@ -124,6 +127,7 @@ class PrettyTest {
         val internalModel = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "node0" to Node(
                     name = "Person",
@@ -187,6 +191,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(),
             extensions = GraphModelExtensions(
                 mappings = mutableListOf(
@@ -207,6 +212,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "node0" to Node(
                     name = "User",
@@ -235,6 +241,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "node0" to Node(
                     name = "User",
@@ -275,6 +282,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "node0" to Node(
                     name = "User",
@@ -308,6 +316,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(
                 "node0" to Node(
                     name = "User",
@@ -339,6 +348,7 @@ class PrettyTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             relationships = mutableMapOf(
                 "relationship0" to Relationship(
                     name = "FRIENDS_WITH",

@@ -29,7 +29,7 @@ class RelationshipTargetCountTest {
     private fun validate(from: RelationshipTarget, to: RelationshipTarget = RelationshipTarget()): List<Issue> {
         val issues = mutableListOf<Issue>()
         RelationshipTargetCount.validateRelationship(
-            GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0"),
+            GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test"),
             "rel",
             Relationship(type = "REL", from = from, to = to),
             issues
@@ -71,6 +71,17 @@ class RelationshipTargetCountTest {
         val issues = validate(RelationshipTarget(count = -2, minCount = -1))
         assertTrue("relationship_count_conflict" in issues.map { it.code })
         assertTrue("relationship_min_count_negative" in issues.map { it.code })
+    }
+
+    @Test
+    fun `negative exact count is invalid`() {
+        val issues = validate(RelationshipTarget(count = -1))
+        assertEquals(listOf("relationship_count_negative"), issues.map { it.code })
+    }
+
+    @Test
+    fun `min without max is valid`() {
+        assertTrue(validate(RelationshipTarget(minCount = 2)).isEmpty())
     }
 
     @Test

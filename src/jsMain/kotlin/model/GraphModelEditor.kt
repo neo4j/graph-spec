@@ -50,6 +50,7 @@ class GraphModelEditor {
             return graphModelJs(
                 schema = model.schema,
                 version = model.version,
+                id = model.id,
                 name = model.name,
                 description = model.description,
                 nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
@@ -63,6 +64,7 @@ class GraphModelEditor {
         fun model(model: GraphModelJs): GraphModel = GraphModel(
             schema = model.schema,
             version = model.version,
+            id = model.id,
             name = model.name,
             description = model.description,
             nodes = model.nodes.associateBy { id, js -> js.toClass(id) },

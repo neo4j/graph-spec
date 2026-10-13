@@ -30,12 +30,12 @@ data class RelationshipTarget(
     var node: String = "",
     @SerialDescription("Label of the node at this end.")
     var label: String = "",
-    @SerialDescription("Exact number of relationships per node at this end. -1 when unconstrained.")
-    var count: Int = -1,
+    @SerialDescription("Exact number of relationships per node at this end. Null when unconstrained.")
+    var count: Int? = null,
     @SerialName("min_count")
     @SerialDescription("Minimum number of relationships per node at this end.")
-    var minCount: Int = 0,
+    var minCount: Int? = null,
     @SerialName("max_count")
     @SerialDescription("Maximum number of relationships per node at this end.")
-    var maxCount: Int = Int.MAX_VALUE
+    var maxCount: Int? = null
 )

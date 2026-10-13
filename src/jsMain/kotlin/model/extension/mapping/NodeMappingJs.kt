@@ -31,6 +31,8 @@ external interface NodeMappingJs : MappingJs {
     var mode: String
     var matchLabel: String?
     var key: Array<String>
+    var dependsOn: String
+    var id: String
 }
 
 fun nodeMappingJs(
@@ -39,7 +41,9 @@ fun nodeMappingJs(
     properties: Record<String, PropertyMappingJs>,
     mode: String,
     matchLabel: String?,
-    key: Array<String>
+    key: Array<String>,
+    dependsOn: String = "",
+    id: String = ""
 ): NodeMappingJs = jso {
     this.type = MappingType.NODE
     this.node = node
@@ -48,6 +52,8 @@ fun nodeMappingJs(
     this.mode = mode
     this.matchLabel = matchLabel
     this.key = key
+    this.dependsOn = dependsOn
+    this.id = id
 }
 
 fun NodeMapping.toJs() = nodeMappingJs(
@@ -56,7 +62,9 @@ fun NodeMapping.toJs() = nodeMappingJs(
     properties = properties.map { it.key to it.value.toJs() }.toMap().toRecord(),
     mode = mode.name,
     matchLabel = matchLabel,
-    key = key.toTypedArray()
+    key = key.toTypedArray(),
+    dependsOn = dependsOn,
+    id = id
 )
 
 fun NodeMappingJs.toClass() = NodeMapping(
@@ -65,5 +73,7 @@ fun NodeMappingJs.toClass() = NodeMapping(
     properties = properties.associateBy { _, value -> value.toClass() },
     mode = MappingMode.valueOf(mode),
     matchLabel = matchLabel,
-    key = key.toMutableSet()
+    key = key.toMutableSet(),
+    dependsOn = dependsOn,
+    id = id
 )
