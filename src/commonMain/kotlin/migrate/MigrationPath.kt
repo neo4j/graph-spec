@@ -17,6 +17,7 @@
 package migrate
 
 import codec.schema.SchemaMap
+import migrate.migration.dataModel.DataModelWrapper
 import model.Type
 import model.Version
 
@@ -49,7 +50,7 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
      * Wrapped data models are also accepted as plain data models.
      */
     private fun sourceType(schema: SchemaMap, type: String): String =
-        if (type == Type.DATA_MODEL && schema.containsKey(WRAPPED_DATA_MODEL)) Type.DATA_MODEL_WRAPPED else type
+        if (type == Type.DATA_MODEL && DataModelWrapper.isWrapped(schema)) Type.DATA_MODEL_WRAPPED else type
 
     /**
      * Graph specs identify their spec version via the `schema` url, wrapped data models by their inner data model,
@@ -60,7 +61,7 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
             val url = schema.stringOrNull("schema") ?: error("Schema must be specified")
             return version(Version.parseSchemaVersion(url), type)
         }
-        val versioned = if (type == Type.DATA_MODEL_WRAPPED) schema.map(WRAPPED_DATA_MODEL) else schema
+        val versioned = if (type == Type.DATA_MODEL_WRAPPED) schema.map(DataModelWrapper.DATA_MODEL) else schema
         val version = versioned.stringOrNull("version") ?: error("Version must be specified")
         return version(version, type)
     }
@@ -69,7 +70,7 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
         when (migration.toType) {
             Type.GRAPH_SPEC -> map["schema"] = Version.schemaUrl(migration.to) // `version` belongs to the user
             // `version` belongs to the envelope
-            Type.DATA_MODEL_WRAPPED -> map.map(WRAPPED_DATA_MODEL)["version"] = migration.to
+            Type.DATA_MODEL_WRAPPED -> map.map(DataModelWrapper.DATA_MODEL)["version"] = migration.to
             else -> map["version"] = migration.to
         }
     }
@@ -115,9 +116,5 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
             cur = m.fromKey
         }
         return reversed
-    }
-
-    companion object {
-        private const val WRAPPED_DATA_MODEL = "dataModel"
     }
 }

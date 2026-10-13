@@ -41,7 +41,7 @@ internal object DataModelWrapper {
         val model = schema.map(DATA_MODEL)
         schema.remove(DATA_MODEL)
         schema.remove("version")
-        model.putAll(schema)
+        moveFields(schema, model)
         return model
     }
 
@@ -49,11 +49,18 @@ internal object DataModelWrapper {
      * Envelopes a flat data model, moving the envelope fields out of it
      */
     fun wrap(schema: SchemaMap): SchemaMap {
+        if (isWrapped(schema)) {
+            return schema
+        }
         val wrapped = schemaMapOf("version" to Version.DATA_MODEL_WRAPPED_V30)
         wrapped[DATA_MODEL] = schema
-        for (field in FIELDS) {
-            wrapped[field] = schema.remove(field) ?: continue
-        }
+        moveFields(schema, wrapped)
         return wrapped
+    }
+
+    private fun moveFields(from: SchemaMap, to: SchemaMap) {
+        for (field in FIELDS) {
+            to[field] = from.remove(field) ?: continue
+        }
     }
 }
