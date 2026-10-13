@@ -37,6 +37,10 @@ data class GraphModel(
     val schema: String,
     @SerialDescription("Version of the document.")
     val version: String,
+    @SerialDescription(
+        "Unique identifier of the model, typically a kebab-case version of the name, used for referencing."
+    )
+    val id: String,
     @SerialDescription("Human readable name for the model.")
     val name: String = "",
     @SerialDescription("Description of the model.")

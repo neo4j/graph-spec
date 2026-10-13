@@ -252,6 +252,10 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 
 // Maps rows of a table to nodes.
 type NODE struct {
+	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	DependsOn *string `json:"depends_on,omitempty"`
+	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	ID *string `json:"id,omitempty"`
 	// Ids of the properties which identify a node.
 	Key []string `json:"key,omitempty"`
 	// Label used to match existing nodes.
@@ -273,6 +277,10 @@ func (NODE) MappingType() string { return "NODE" }
 
 // Maps the results of a query run against a table.
 type QUERY struct {
+	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	DependsOn *string `json:"depends_on,omitempty"`
+	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	ID *string `json:"id,omitempty"`
 	// The query to run.
 	Query string `json:"query"`
 	// Id of the source table.
@@ -286,8 +294,12 @@ func (QUERY) MappingType() string { return "QUERY" }
 
 // Maps rows of a table to relationships.
 type RELATIONSHIP struct {
+	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	DependsOn *string `json:"depends_on,omitempty"`
 	// How the start node of the relationship is matched.
 	FromNode TargetMapping `json:"from_node"`
+	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	ID *string `json:"id,omitempty"`
 	// Ids of the properties which identify a relationship.
 	Key []string `json:"key,omitempty"`
 	// Label used to match existing relationships.
@@ -478,6 +490,8 @@ type NodeConstraint struct {
 
 // Visual information for a node.
 type NodeDisplay struct {
+	// Display colour of the node as a hex string, e.g. #FF8800.
+	Colour *string `json:"colour,omitempty"`
 	// User-defined arbitrary data.
 	Custom map[string]ExtensionValue `json:"custom,omitempty"`
 	// Horizontal position.
@@ -753,7 +767,7 @@ type RelationshipExtensions struct {
 
 // One end of a relationship.
 type RelationshipTarget struct {
-	// Exact number of relationships per node at this end. -1 when unconstrained.
+	// Exact number of relationships per node at this end. Null when unconstrained.
 	Count *int `json:"count,omitempty"`
 	// Label of the node at this end.
 	Label *string `json:"label,omitempty"`
@@ -794,6 +808,8 @@ type GraphModel struct {
 	Description *string `json:"description,omitempty"`
 	// Extensions to the model: data source tables, mappings and external custom data.
 	Extensions *GraphModelExtensions `json:"extensions,omitempty"`
+	// Unique identifier of the model, typically a kebab-case version of the name, used for referencing.
+	ID string `json:"id"`
 	// Human readable name for the model.
 	Name *string `json:"name,omitempty"`
 	// Node definitions keyed by node id.

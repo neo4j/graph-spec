@@ -22,7 +22,7 @@ class RelationshipTargetJsTest : JsMappingTest<RelationshipTarget, RelationshipT
     override fun verifyJsObject(jsObject: RelationshipTargetJs) {
         assertEquals("nodeId", jsObject.node)
         assertEquals("label", jsObject.label)
-        assertEquals(-1, jsObject.count)
+        assertEquals(null, jsObject.count)
         assertEquals(1, jsObject.minCount)
         assertEquals(5, jsObject.maxCount)
     }
@@ -32,8 +32,8 @@ class RelationshipTargetJsTest : JsMappingTest<RelationshipTarget, RelationshipT
         val js = RelationshipTarget(node = "n", count = 3).toJs()
 
         assertEquals(3, js.count)
-        assertEquals(0, js.minCount)
-        assertEquals(Int.MAX_VALUE, js.maxCount)
+        assertEquals(null, js.minCount)
+        assertEquals(null, js.maxCount)
         assertEquals(RelationshipTarget(node = "n", count = 3), js.toClass())
     }
 

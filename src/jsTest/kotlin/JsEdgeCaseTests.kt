@@ -26,6 +26,7 @@ class JsEdgeCaseTests {
         val plainSpec = graphModelJs(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "4.0.0",
+            id = "test",
             nodes = recordOf(
                 "n:1" to nodeJs(
                     name = "Movie",
@@ -58,6 +59,7 @@ class JsEdgeCaseTests {
         val graphSpec = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "4.0.0",
+            id = "test",
             nodes = mutableMapOf(
                 "PersonNode" to Node(
                     labels = Labels("Person"),
@@ -85,6 +87,7 @@ class JsEdgeCaseTests {
         val graphSpec = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "4.0.0",
+            id = "test",
             nodes = mutableMapOf(
                 "Person" to Node(
                     label = "Person",

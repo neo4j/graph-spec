@@ -72,9 +72,9 @@ class RelationshipTargetEditorTest {
     @Test
     fun testCountDefaults() {
         val target = relationshipTargetJs()
-        assertEquals(-1, target.count)
-        assertEquals(0, target.minCount)
-        assertEquals(Int.MAX_VALUE, target.maxCount)
+        assertEquals(null, target.count)
+        assertEquals(null, target.minCount)
+        assertEquals(null, target.maxCount)
     }
 
     @Test
@@ -84,8 +84,8 @@ class RelationshipTargetEditorTest {
         RelationshipTargetEditor.setCount(target, 3)
 
         assertEquals(3, target.count)
-        assertEquals(0, target.minCount)
-        assertEquals(Int.MAX_VALUE, target.maxCount)
+        assertEquals(null, target.minCount)
+        assertEquals(null, target.maxCount)
     }
 
     @Test
@@ -93,12 +93,12 @@ class RelationshipTargetEditorTest {
         val target = relationshipTargetJs(count = 3)
 
         RelationshipTargetEditor.setMinCount(target, 1)
-        assertEquals(-1, target.count)
+        assertEquals(null, target.count)
         assertEquals(1, target.minCount)
 
         RelationshipTargetEditor.setCount(target, 4)
         RelationshipTargetEditor.setMaxCount(target, 9)
-        assertEquals(-1, target.count)
+        assertEquals(null, target.count)
         assertEquals(9, target.maxCount)
     }
 }

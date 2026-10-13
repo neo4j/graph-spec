@@ -114,6 +114,7 @@ class JsonFormatTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1.0",
+            id = "test",
             nodes = mutableMapOf(),
             extensions = GraphModelExtensions(mappings = mutableListOf())
         )
@@ -141,6 +142,7 @@ class JsonFormatTest {
             GraphModel(
                 schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
                 version = "1",
+                id = "test",
                 nodes = mutableMapOf("n1" to node)
             )
 
@@ -165,6 +167,7 @@ class JsonFormatTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1",
+            id = "test",
             extensions = GraphModelExtensions(
                 mappings = mutableListOf(
                     NodeMapping(
@@ -197,6 +200,7 @@ class JsonFormatTest {
         val model = GraphModel(
             schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
             version = "1",
+            id = "test",
             nodes = mutableMapOf(
                 "n0" to Node(
                     extensions = NodeExtensions(

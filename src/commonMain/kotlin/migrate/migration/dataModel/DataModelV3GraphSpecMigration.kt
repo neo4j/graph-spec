@@ -51,6 +51,7 @@ class DataModelV3GraphSpecMigration :
             ?: return schemaMapOf(
                 "schema" to Version.schemaUrl(Version.LATEST),
                 "version" to "1.0.0",
+                "id" to "graph-model",
                 "description" to schema.literalOrNull("description"),
                 "nodes" to emptyMap<String, SchemaMap>(),
                 "relationships" to emptyMap<String, SchemaMap>(),
@@ -63,6 +64,7 @@ class DataModelV3GraphSpecMigration :
         return schemaMapOf(
             "schema" to Version.schemaUrl(Version.LATEST),
             "version" to "1.0.0",
+            "id" to "graph-model",
             "description" to schema.literalOrNull("description"),
             "nodes" to nodes,
             "relationships" to migrateRelationships(graphSchema, relationshipConstraints, relationshipIndexes),

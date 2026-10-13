@@ -16,6 +16,7 @@
  */
 package validate
 
+import validate.mapping.MappingDependencies
 import validate.node.NodeConstraintCoverage
 import validate.node.NodeConstraints
 import validate.node.NodeIndexConstraintNameConflict
@@ -109,7 +110,8 @@ class Validations {
             NodePropertyEmptyName,
             NodePropertyDuplicateName,
             RelationshipPropertyEmptyName,
-            RelationshipPropertyDuplicateName
+            RelationshipPropertyDuplicateName,
+            MappingDependencies
         )
 
         // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a

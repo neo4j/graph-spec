@@ -27,6 +27,7 @@ import model.relationship.RelationshipJs
 external interface GraphModelJs {
     val schema: String
     val version: String
+    val id: String
     val name: String
     val description: String
     val nodes: Record<String, NodeJs>
@@ -37,6 +38,7 @@ external interface GraphModelJs {
 fun graphModelJs(
     schema: String,
     version: String,
+    id: String,
     name: String = "",
     description: String = "",
     nodes: Record<String, NodeJs> = emptyRecord(),
@@ -45,6 +47,7 @@ fun graphModelJs(
 ): GraphModelJs = jso {
     this.schema = schema
     this.version = version
+    this.id = id
     this.name = name
     this.description = description
     this.nodes = nodes
