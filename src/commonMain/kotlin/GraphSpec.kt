@@ -19,9 +19,12 @@ import codec.format.JsonFormat
 import codec.format.YamlFormat
 import codec.schema.SchemaMap
 import migrate.MigrationPath
+import migrate.migration.dataModel.DataModelUnwrapMigration
 import migrate.migration.dataModel.DataModelV2V3Migration
 import migrate.migration.dataModel.DataModelV3GraphSpecMigration
+import migrate.migration.dataModel.DataModelWrapMigration
 import migrate.migration.dataModel.GraphSpecDataModelV3Migration
+import migrate.migration.dataModel.GraphSpecDataModelWrappedMigration
 import model.GraphModel
 import model.Type
 import model.Version
@@ -78,7 +81,11 @@ fun defaultConfig(format: Format): GraphSpecConfig {
     builder.migrate(DataModelV2V3Migration(Version.DATA_MODEL_V24))
     builder.migrate(DataModelV3GraphSpecMigration())
     builder.migrate(GraphSpecDataModelV3Migration())
-    builder.migrate(GraphSpecDataModelV3Migration(wrapped = true))
+    builder.migrate(GraphSpecDataModelWrappedMigration())
+    builder.migrate(DataModelUnwrapMigration(Version.DATA_MODEL_V23))
+    builder.migrate(DataModelUnwrapMigration(Version.DATA_MODEL_V24))
+    builder.migrate(DataModelUnwrapMigration(Version.DATA_MODEL_V30))
+    builder.migrate(DataModelWrapMigration())
     return builder.build()
 }
 

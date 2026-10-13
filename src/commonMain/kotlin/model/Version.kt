@@ -25,6 +25,11 @@ object Version {
     const val DATA_MODEL_V30 = "3.0.0"
 
     /*
+        Wrapped data model versions
+     */
+    const val DATA_MODEL_WRAPPED_V30 = "3.0.0"
+
+    /*
         Import Spec versions
      */
     const val IMPORT_SPEC_V1 = "1.0.0"

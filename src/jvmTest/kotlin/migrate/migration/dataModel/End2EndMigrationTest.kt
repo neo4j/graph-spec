@@ -1,11 +1,15 @@
 package migrate.migration.dataModel
 
 import GraphSpec
+import codec.schema.SchemaMap
 import model.Type
+import model.Version
 import org.junit.jupiter.api.DynamicTest.dynamicTest
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestFactory
 import resourceAsString
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -84,5 +88,23 @@ class End2EndMigrationTest {
 
             assertTrue(failure.message!!.contains("schema"), "unexpected message: ${failure.message}")
         }
+    }
+
+    @Test
+    fun `wrapped round trip keeps visualisation in the envelope`() {
+        val input = End2EndMigrationTest::class.resourceAsString("prod-like/northwind.json")
+        val model = GraphSpec.Json.decodeFromString(input, Type.DATA_MODEL)
+
+        val wrapped = GraphSpec.Json.encodeToString(model, Type.DATA_MODEL_WRAPPED, Version.DATA_MODEL_V30)
+
+        val envelope = GraphSpec.Json.configuration.format.decodeFromString(wrapped) as SchemaMap
+        assertEquals(Version.DATA_MODEL_WRAPPED_V30, envelope.string("version"))
+        assertTrue(envelope.map("visualisation").listOfMaps("nodes").isNotEmpty())
+        val dataModel = envelope.map("dataModel")
+        assertEquals(Version.DATA_MODEL_V30, dataModel.string("version"))
+        assertFalse(dataModel.containsKey("visualisation"))
+
+        val decoded = GraphSpec.Json.decodeFromString(wrapped, Type.DATA_MODEL_WRAPPED)
+        assertEquals(GraphSpec.Json.encodeToString(model), GraphSpec.Json.encodeToString(decoded))
     }
 }

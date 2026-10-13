@@ -17,6 +17,7 @@
 package migrate
 
 import codec.schema.SchemaMap
+import codec.schema.schemaMapOf
 import model.Type
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -181,6 +182,29 @@ class MigrationPathTest {
         assertFailsWith<IllegalStateException> {
             engine.migrate(schema, "type", "2.0.0", "type")
         }
+    }
+
+    @Test
+    fun `migrate - wrapped types are versioned by their inner data model`() {
+        val engine = createPath(
+            TestMigration("2.4.0", "3.0.0", Type.DATA_MODEL_WRAPPED, Type.DATA_MODEL_WRAPPED)
+        )
+        val schema = schemaMapOf("version" to "9.0.0", "dataModel" to schemaMapOf("version" to "2.4.0"))
+
+        val result = engine.migrate(schema, Type.DATA_MODEL_WRAPPED, "3.0.0", Type.DATA_MODEL_WRAPPED)
+
+        assertEquals("9.0.0", result.stringOrNull("version"))
+        assertEquals("3.0.0", result.map("dataModel").stringOrNull("version"))
+    }
+
+    @Test
+    fun `migrate - wrapped data models are accepted as data models`() {
+        val engine = createPath(TestMigration("3.0.0", "3.0.0", Type.DATA_MODEL_WRAPPED, Type.DATA_MODEL))
+        val schema = schemaMapOf("version" to "2.4.0", "dataModel" to schemaMapOf("version" to "3.0.0"))
+
+        val path = engine.migrate(schema, Type.DATA_MODEL, "3.0.0", Type.DATA_MODEL)
+
+        assertEquals("3.0.0", path.stringOrNull("version"))
     }
 
     private fun createPath(vararg migrations: Migration): MigrationPath {

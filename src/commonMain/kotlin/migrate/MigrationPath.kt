@@ -17,13 +17,14 @@
 package migrate
 
 import codec.schema.SchemaMap
+import migrate.migration.dataModel.DataModelWrapper
 import model.Type
 import model.Version
 
 class MigrationPath(val migrations: Map<String, List<Migration>>) {
 
     fun migrate(schema: SchemaMap, type: String, targetVersion: String, targetType: String): SchemaMap {
-        val from = version(schema, type)
+        val from = version(schema, sourceType(schema, type))
         val to = version(targetVersion, targetType)
         val path = findPath(from, to) ?: error("Unsupported migration from $from to $to")
         var map = schema
@@ -46,22 +47,31 @@ class MigrationPath(val migrations: Map<String, List<Migration>>) {
     }
 
     /**
-     * Graph specs identify their spec version via the `schema` url, whereas the legacy types use `version`.
+     * Wrapped data models are also accepted as plain data models.
+     */
+    private fun sourceType(schema: SchemaMap, type: String): String =
+        if (type == Type.DATA_MODEL && DataModelWrapper.isWrapped(schema)) Type.DATA_MODEL_WRAPPED else type
+
+    /**
+     * Graph specs identify their spec version via the `schema` url, wrapped data models by their inner data model,
+     * whereas the legacy types use `version`.
      */
     private fun version(schema: SchemaMap, type: String): String {
         if (type == Type.GRAPH_SPEC) {
             val url = schema.stringOrNull("schema") ?: error("Schema must be specified")
             return version(Version.parseSchemaVersion(url), type)
         }
-        val version = schema.stringOrNull("version") ?: error("Version must be specified")
+        val versioned = if (type == Type.DATA_MODEL_WRAPPED) schema.map(DataModelWrapper.DATA_MODEL) else schema
+        val version = versioned.stringOrNull("version") ?: error("Version must be specified")
         return version(version, type)
     }
 
     private fun stampVersion(map: SchemaMap, migration: Migration) {
-        if (migration.toType == Type.GRAPH_SPEC) {
-            map["schema"] = Version.schemaUrl(migration.to) // `version` belongs to the user
-        } else {
-            map["version"] = migration.to
+        when (migration.toType) {
+            Type.GRAPH_SPEC -> map["schema"] = Version.schemaUrl(migration.to) // `version` belongs to the user
+            // `version` belongs to the envelope
+            Type.DATA_MODEL_WRAPPED -> map.map(DataModelWrapper.DATA_MODEL)["version"] = migration.to
+            else -> map["version"] = migration.to
         }
     }
 

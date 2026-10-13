@@ -31,15 +31,11 @@ import kotlin.collections.component1
 import kotlin.collections.component2
 import kotlin.collections.iterator
 
-class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
+class GraphSpecDataModelV3Migration :
     Migration(
         fromType = Type.GRAPH_SPEC,
         from = Version.LATEST,
-        toType = if (wrapped) {
-            Type.DATA_MODEL_WRAPPED
-        } else {
-            Type.DATA_MODEL
-        },
+        toType = Type.DATA_MODEL,
         to = Version.DATA_MODEL_V30
     ) {
 
@@ -48,7 +44,7 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
         val indexes = mutableListOf<SchemaMap>()
         val nodeData = convertNodes(schema, constraints, indexes)
         val relData = convertRelationships(schema, constraints, indexes)
-        val dataModel = schemaMapOf(
+        return schemaMapOf(
             "version" to "3.0.0",
             "graphSchemaRepresentation" to schemaMapOf(
                 "version" to "1.0.0",
@@ -64,15 +60,6 @@ class GraphSpecDataModelV3Migration(private val wrapped: Boolean = false) :
             "graphSchemaExtensionsRepresentation" to convertExtensions(schema),
             "graphMappingRepresentation" to convertGraphMapping(schema),
             "configurations" to schemaMapOf("idsToIgnore" to emptyList<String>())
-        )
-        if (!wrapped) {
-            return dataModel
-        }
-        return schemaMapOf(
-            "version" to "3.0.0",
-            "dataModel" to dataModel,
-            "visualisation" toNotEmpty convertVisualisation(schema),
-            "description" to schema.literalOrNull("description")
         )
     }
 
