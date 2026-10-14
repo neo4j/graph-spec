@@ -49,7 +49,7 @@ data class Property(
     override var name: String? = null,
     @SerialDescription("Description of the property.")
     val description: String = "",
-    @SerialDescription("Reference to an external resource describing the property.")
+    @SerialDescription("Reference or URI of an external resource describing the property.")
     val reference: String = "",
     @SerialDescription("Pattern values of the property are expected to match.")
     val pattern: String = "",

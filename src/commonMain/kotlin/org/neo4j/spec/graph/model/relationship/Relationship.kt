@@ -48,6 +48,6 @@ data class Relationship(
     val description: String = "",
     @SerialDescription("Alternative names for the relationship.")
     val aliases: MutableSet<String> = mutableSetOf(),
-    @SerialDescription("Reference to an external resource describing the relationship.")
+    @SerialDescription("Reference or URI of an external resource describing the relationship.")
     val reference: String = ""
 ) : Named
