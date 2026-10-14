@@ -25,23 +25,27 @@ external interface QueryMappingJs : MappingJs {
     var table: String
     var query: String
     var dependsOn: String
+    var id: String
 }
 
-fun queryMappingJs(table: String, query: String, dependsOn: String = ""): QueryMappingJs = jso {
+fun queryMappingJs(table: String, query: String, dependsOn: String = "", id: String = ""): QueryMappingJs = jso {
     this.type = MappingType.QUERY
     this.table = table
     this.query = query
     this.dependsOn = dependsOn
+    this.id = id
 }
 
 fun QueryMapping.toJs() = queryMappingJs(
     table = table,
     query = query,
-    dependsOn = dependsOn
+    dependsOn = dependsOn,
+    id = id
 )
 
 fun QueryMappingJs.toClass() = QueryMapping(
     table = table,
     query = query,
-    dependsOn = dependsOn
+    dependsOn = dependsOn,
+    id = id
 )

@@ -8,7 +8,8 @@ class QueryMappingJsTest : JsMappingTest<QueryMapping, QueryMappingJs>() {
     override fun createClass() = QueryMapping(
         table = "table_name",
         query = "cypher query",
-        dependsOn = "other"
+        dependsOn = "other",
+        id = "mapping-id"
     )
 
     override fun toJs(k: QueryMapping): QueryMappingJs = k.toJs()
@@ -20,6 +21,7 @@ class QueryMappingJsTest : JsMappingTest<QueryMapping, QueryMappingJs>() {
         assertEquals("table_name", jsObject.table)
         assertEquals("cypher query", jsObject.query)
         assertEquals("other", jsObject.dependsOn)
+        assertEquals("mapping-id", jsObject.id)
     }
 
 }

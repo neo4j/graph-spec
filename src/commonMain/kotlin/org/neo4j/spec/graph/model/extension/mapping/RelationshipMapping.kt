@@ -47,7 +47,12 @@ data class RelationshipMapping(
     val key: MutableSet<String> = mutableSetOf(),
     @SerialName("depends_on")
     @SerialDescription(
-        "Id of the mapping group which must be imported before this one. Empty when there is no dependency."
+        "Id of another mapping in the same list which must be imported before this one. " +
+            "Empty when there is no dependency."
     )
-    var dependsOn: String = ""
+    var dependsOn: String = "",
+    @SerialDescription(
+        "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
+    )
+    var id: String = ""
 ) : Mapping

@@ -25,79 +25,114 @@ import org.neo4j.spec.graph.validate.Issue
 import org.neo4j.spec.graph.validate.Validation
 
 /**
- * A mapping's `depends_on` must reference the id of another mapping group, and groups must be free of dependency
- * cycles so an import order can be derived.
+ * A mapping's `depends_on` must reference the `id` of another mapping in the same list. Ids must be unique within
+ * their list and the dependencies free of cycles so an import order can be derived.
  */
 object MappingDependencies : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        val groups = model.extensions.mappings
-
-        // Edges between groups, a group depends on every group any of its mappings depend on.
-        val next = mutableMapOf<String, MutableSet<String>>()
-        for ((groupId, mappings) in groups) {
-            for ((index, mapping) in mappings.withIndex()) {
-                val dependsOn = mapping.mappingDependsOn()
-                if (dependsOn.isEmpty()) {
-                    continue
-                }
-                val path = "extensions.mappings.$groupId[$index].depends_on"
-                when {
-                    dependsOn == groupId -> issues.add(
-                        Issue(
-                            code = "mapping_depends_on_self",
-                            message = "Mapping '$dependsOn' can't depend on itself",
-                            path = path
-                        )
-                    )
-                    dependsOn !in groups -> issues.add(
-                        Issue(
-                            code = "mapping_depends_on_unknown",
-                            message = "Mapping depends on '$dependsOn' which isn't the id of any mapping",
-                            path = path
-                        )
-                    )
-                    else -> next.getOrPut(groupId) { mutableSetOf() }.add(dependsOn)
-                }
-            }
+        val lists = model.extensions.mappings
+        for ((listId, mappings) in lists) {
+            validateList(listId, mappings, lists, issues)
         }
-        reportCycles(next, issues)
     }
 
-    private fun reportCycles(next: Map<String, Set<String>>, issues: MutableList<Issue>) {
-        val done = mutableSetOf<String>()
-        val reported = mutableSetOf<Set<String>>()
+    private fun validateList(
+        listId: String,
+        mappings: List<Mapping>,
+        lists: Map<String, List<Mapping>>,
+        issues: MutableList<Issue>
+    ) {
+        val indexById = mutableMapOf<String, Int>()
+        for ((index, mapping) in mappings.withIndex()) {
+            val id = mapping.mappingId()
+            if (id.isEmpty()) {
+                continue
+            }
+            if (id in indexById) {
+                issues.add(
+                    Issue(
+                        code = "mapping_id_duplicate",
+                        message = "Mapping id '$id' is used by more than one mapping in '$listId'",
+                        path = "extensions.mappings.$listId[$index].id"
+                    )
+                )
+            } else {
+                indexById[id] = index
+            }
+        }
 
-        fun visit(node: String, path: MutableList<String>) {
-            if (node in path) {
-                val cycle = path.subList(path.indexOf(node), path.size)
-                if (reported.add(cycle.toSet())) {
-                    val first = cycle.min()
+        // Each mapping depends on at most one other, so follow the chain from every mapping looking for a loop.
+        val next = mutableMapOf<Int, Int>()
+        for ((index, mapping) in mappings.withIndex()) {
+            val dependsOn = mapping.mappingDependsOn()
+            if (dependsOn.isEmpty()) {
+                continue
+            }
+            val target = indexById[dependsOn]
+            val path = "extensions.mappings.$listId[$index].depends_on"
+            when {
+                target == index -> issues.add(
+                    Issue(
+                        code = "mapping_depends_on_self",
+                        message = "Mapping '$dependsOn' can't depend on itself",
+                        path = path
+                    )
+                )
+                target != null -> next[index] = target
+                lists.any { (otherId, other) -> otherId != listId && other.any { it.mappingId() == dependsOn } } ->
                     issues.add(
                         Issue(
-                            code = "mapping_dependency_cycle",
-                            message = "Mappings ${cycle.sorted().joinToString(", ") {
-                                "'$it'"
-                            }} depend on each other in a cycle",
-                            path = "extensions.mappings.$first"
+                            code = "mapping_depends_on_other_list",
+                            message = "Mapping depends on '$dependsOn' which is in a different list of mappings, " +
+                                "mappings can only depend on others in the same list",
+                            path = path
                         )
                     )
-                }
-                return
+                else -> issues.add(
+                    Issue(
+                        code = "mapping_depends_on_unknown",
+                        message = "Mapping depends on '$dependsOn' which isn't the id of any mapping in '$listId'",
+                        path = path
+                    )
+                )
             }
-            if (node in done) {
-                return
-            }
-            path.add(node)
-            for (target in next[node].orEmpty()) {
-                visit(target, path)
-            }
-            path.removeAt(path.size - 1)
-            done.add(node)
         }
+        reportCycles(listId, next, issues)
+    }
 
-        for (start in next.keys) {
-            visit(start, mutableListOf())
+    private fun reportCycles(listId: String, next: Map<Int, Int>, issues: MutableList<Issue>) {
+        val done = mutableSetOf<Int>()
+        for (start in next.keys.sorted()) {
+            if (start in done) {
+                continue
+            }
+            val path = mutableListOf<Int>()
+            var current: Int? = start
+            while (current != null && current !in done && current !in path) {
+                path.add(current)
+                current = next[current]
+            }
+            if (current != null && current in path) {
+                val cycle = path.subList(path.indexOf(current), path.size)
+                val first = cycle.min()
+                issues.add(
+                    Issue(
+                        code = "mapping_dependency_cycle",
+                        message = "Mappings ${cycle.sorted().joinToString(", ") {
+                            "[$it]"
+                        }} in '$listId' depend on each other in a cycle",
+                        path = "extensions.mappings.$listId[$first].depends_on"
+                    )
+                )
+            }
+            done.addAll(path)
         }
+    }
+
+    private fun Mapping.mappingId() = when (this) {
+        is NodeMapping -> id
+        is RelationshipMapping -> id
+        is QueryMapping -> id
     }
 
     private fun Mapping.mappingDependsOn() = when (this) {
