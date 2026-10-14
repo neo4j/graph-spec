@@ -12,8 +12,7 @@ class NodeMappingJsTest : JsMappingTest<NodeMapping, NodeMappingJs>() {
         mode = MappingMode.CREATE,
         matchLabel = "label_name",
         key = mutableSetOf("key1", "key2"),
-        dependsOn = "other",
-        id = "mapping-id"
+        dependsOn = "other"
     )
 
     override fun toJs(k: NodeMapping): NodeMappingJs = k.toJs()
@@ -28,7 +27,6 @@ class NodeMappingJsTest : JsMappingTest<NodeMapping, NodeMappingJs>() {
         assertEquals("label_name", jsObject.matchLabel)
         assertContentEquals(arrayOf("key1", "key2"), jsObject.key)
         assertEquals("other", jsObject.dependsOn)
-        assertEquals("mapping-id", jsObject.id)
     }
 
 }

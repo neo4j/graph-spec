@@ -17,6 +17,7 @@
 package org.neo4j.spec.graph.validate.mapping
 
 import org.neo4j.spec.graph.model.GraphModel
+import org.neo4j.spec.graph.model.extension.mapping.Mapping
 import org.neo4j.spec.graph.model.extension.mapping.NodeMapping
 import org.neo4j.spec.graph.model.extension.mapping.QueryMapping
 import org.neo4j.spec.graph.model.extension.mapping.RelationshipMapping
@@ -28,24 +29,24 @@ import kotlin.test.assertTrue
 
 class MappingDependenciesTest {
 
-    private fun node(id: String = "", dependsOn: String = "") =
-        NodeMapping(node = "n", table = "t", properties = mutableMapOf(), id = id, dependsOn = dependsOn)
+    private fun node(dependsOn: String = "") =
+        NodeMapping(node = "n", table = "t", properties = mutableMapOf(), dependsOn = dependsOn)
 
-    private fun rel(id: String = "", dependsOn: String = "") = RelationshipMapping(
+    private fun rel(dependsOn: String = "") = RelationshipMapping(
         relationship = "r",
         table = "t",
         fromNode = TargetMapping(),
         toNode = TargetMapping(),
-        id = id,
         dependsOn = dependsOn
     )
 
-    private fun query(id: String = "", dependsOn: String = "") =
-        QueryMapping(table = "t", query = "RETURN 1", id = id, dependsOn = dependsOn)
+    private fun query(dependsOn: String = "") = QueryMapping(table = "t", query = "RETURN 1", dependsOn = dependsOn)
 
-    private fun validate(vararg mappings: org.neo4j.spec.graph.model.extension.mapping.Mapping): List<Issue> {
+    private fun validate(vararg mappings: Pair<String, Mapping>): List<Issue> {
         val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test")
-        model.extensions.mappings.addAll(mappings)
+        mappings.groupBy({ it.first }, { it.second }).forEach { (id, group) ->
+            model.extensions.mappings[id] = group.toMutableList()
+        }
         val issues = mutableListOf<Issue>()
         MappingDependencies.validate(model, issues)
         return issues
@@ -57,64 +58,64 @@ class MappingDependenciesTest {
     }
 
     @Test
-    fun `mappings without ids or dependencies are valid`() {
-        assertTrue(validate(node(), rel(), query()).isEmpty())
+    fun `mappings without dependencies are valid`() {
+        assertTrue(validate("a" to node(), "b" to rel(), "c" to query()).isEmpty())
     }
 
     @Test
     fun `dependency on another mapping is valid for every mapping type`() {
-        assertTrue(validate(node("a"), rel("b", "a"), query("c", "b"), node(dependsOn = "c")).isEmpty())
+        assertTrue(validate("a" to node(), "b" to rel("a"), "c" to query("b"), "d" to node("c")).isEmpty())
     }
 
     @Test
     fun `unknown dependency is invalid`() {
-        val issues = validate(node("a"), rel(dependsOn = "missing"))
+        val issues = validate("a" to node(), "b" to rel("missing"))
         assertEquals(listOf("mapping_depends_on_unknown"), issues.map { it.code })
-        assertEquals("extensions.mappings[1].depends_on", issues.single().path)
-    }
-
-    @Test
-    fun `dependency on a mapping without an id is unknown`() {
-        val issues = validate(node(), query(dependsOn = ""), rel(dependsOn = "x"))
-        assertEquals(listOf("mapping_depends_on_unknown"), issues.map { it.code })
+        assertEquals("extensions.mappings.b[0].depends_on", issues.single().path)
     }
 
     @Test
     fun `self dependency is invalid`() {
-        val issues = validate(node("a", "a"))
+        val issues = validate("a" to node("a"))
         assertEquals(listOf("mapping_depends_on_self"), issues.map { it.code })
-        assertEquals("extensions.mappings[0].depends_on", issues.single().path)
-    }
-
-    @Test
-    fun `duplicate ids are invalid`() {
-        val issues = validate(node("a"), query("a"), rel("b"))
-        assertEquals(listOf("mapping_id_duplicate"), issues.map { it.code })
-        assertEquals("extensions.mappings[1].id", issues.single().path)
+        assertEquals("extensions.mappings.a[0].depends_on", issues.single().path)
     }
 
     @Test
     fun `two mapping cycle is reported once`() {
-        val issues = validate(node("a", "b"), node("b", "a"))
+        val issues = validate("a" to node("b"), "b" to node("a"))
         assertEquals(listOf("mapping_dependency_cycle"), issues.map { it.code })
-        assertEquals("extensions.mappings[0].depends_on", issues.single().path)
+        assertEquals("extensions.mappings.a", issues.single().path)
     }
 
     @Test
     fun `longer cycle with a tail is reported once`() {
-        val issues = validate(node("tail", "a"), node("a", "b"), node("b", "c"), node("c", "a"))
+        val issues = validate("tail" to node("a"), "a" to node("b"), "b" to node("c"), "c" to node("a"))
         assertEquals(listOf("mapping_dependency_cycle"), issues.map { it.code })
-        assertEquals("extensions.mappings[1].depends_on", issues.single().path)
+        assertEquals("extensions.mappings.a", issues.single().path)
     }
 
     @Test
     fun `separate cycles are each reported`() {
-        val issues = validate(node("a", "b"), node("b", "a"), node("c", "d"), node("d", "c"))
+        val issues = validate("a" to node("b"), "b" to node("a"), "c" to node("d"), "d" to node("c"))
         assertEquals(2, issues.count { it.code == "mapping_dependency_cycle" })
     }
 
     @Test
+    fun `mappings in the same group can depend on different groups`() {
+        val issues = validate("a" to node(), "b" to node(), "c" to node("a"), "c" to rel("b"))
+        assertTrue(issues.isEmpty())
+    }
+
+    @Test
+    fun `dependency on the group a mapping belongs to is invalid`() {
+        val issues = validate("a" to node(), "b" to node(), "b" to rel("b"))
+        assertEquals(listOf("mapping_depends_on_self"), issues.map { it.code })
+        assertEquals("extensions.mappings.b[1].depends_on", issues.single().path)
+    }
+
+    @Test
     fun `long chain is valid`() {
-        assertTrue(validate(node("a"), node("b", "a"), node("c", "b"), node("d", "c")).isEmpty())
+        assertTrue(validate("a" to node(), "b" to node("a"), "c" to node("b"), "d" to node("c")).isEmpty())
     }
 }

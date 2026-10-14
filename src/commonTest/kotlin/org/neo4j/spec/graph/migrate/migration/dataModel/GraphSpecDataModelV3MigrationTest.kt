@@ -264,20 +264,22 @@ class GraphSpecDataModelV3MigrationTest {
                 )
             ),
             "extensions" to schemaMapOf(
-                "mappings" to listOf(
-                    schemaMapOf(
-                        "relationship" to "actual_rel_id",
-                        "table" to "user_follows",
-                        "from_node" to
-                            schemaMapOf(
-                                "node" to "User",
-                                "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
-                            ),
-                        "to_node" to
-                            schemaMapOf(
-                                "node" to "User",
-                                "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
-                            )
+                "mappings" to schemaMapOf(
+                    "m0" to listOf(
+                        schemaMapOf(
+                            "relationship" to "actual_rel_id",
+                            "table" to "user_follows",
+                            "from_node" to
+                                schemaMapOf(
+                                    "node" to "User",
+                                    "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
+                                ),
+                            "to_node" to
+                                schemaMapOf(
+                                    "node" to "User",
+                                    "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
+                                )
+                        )
                     )
                 )
             )
@@ -299,11 +301,13 @@ class GraphSpecDataModelV3MigrationTest {
         val input = schemaMapOf(
             "relationships" to schemaMapOf(), // Empty
             "extensions" to schemaMapOf(
-                "mappings" to listOf(
-                    schemaMapOf(
-                        "relationship" to "NON_EXISTENT",
-                        "from_node" to schemaMapOf("node" to "A"),
-                        "to_node" to schemaMapOf("node" to "B")
+                "mappings" to schemaMapOf(
+                    "m0" to listOf(
+                        schemaMapOf(
+                            "relationship" to "NON_EXISTENT",
+                            "from_node" to schemaMapOf("node" to "A"),
+                            "to_node" to schemaMapOf("node" to "B")
+                        )
                     )
                 )
             )
@@ -320,26 +324,28 @@ class GraphSpecDataModelV3MigrationTest {
     fun `convertExtensions identifies key properties from mappings`() {
         val input = schemaMapOf(
             "extensions" to schemaMapOf(
-                "mappings" to schemaListOf(
-                    schemaMapOf(
-                        "node" to "node1",
-                        "table" to "table1",
-                        "properties" to schemaMapOf(
-                            "p1" to schemaMapOf("field" to "field1"),
-                            "p2" to schemaMapOf("field" to "field2"),
-                            "p3" to schemaMapOf("field" to "field3")
+                "mappings" to schemaMapOf(
+                    "m0" to listOf(
+                        schemaMapOf(
+                            "node" to "node1",
+                            "table" to "table1",
+                            "properties" to schemaMapOf(
+                                "p1" to schemaMapOf("field" to "field1"),
+                                "p2" to schemaMapOf("field" to "field2"),
+                                "p3" to schemaMapOf("field" to "field3")
+                            ),
+                            "key" to schemaListOf("p1")
                         ),
-                        "key" to schemaListOf("p1")
-                    ),
-                    schemaMapOf(
-                        "relationship" to "relationship1",
-                        "table" to "table2",
-                        "properties" to schemaMapOf(
-                            "p1" to schemaMapOf("field" to "field1"),
-                            "p2" to schemaMapOf("field" to "field2"),
-                            "p3" to schemaMapOf("field" to "field3")
-                        ),
-                        "key" to schemaListOf("p2", "p3")
+                        schemaMapOf(
+                            "relationship" to "relationship1",
+                            "table" to "table2",
+                            "properties" to schemaMapOf(
+                                "p1" to schemaMapOf("field" to "field1"),
+                                "p2" to schemaMapOf("field" to "field2"),
+                                "p3" to schemaMapOf("field" to "field3")
+                            ),
+                            "key" to schemaListOf("p2", "p3")
+                        )
                     )
                 )
             )

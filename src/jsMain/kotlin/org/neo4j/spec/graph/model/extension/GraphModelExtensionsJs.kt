@@ -36,13 +36,13 @@ import org.neo4j.spec.graph.model.jso
 external interface GraphModelExtensionsJs {
     val custom: Record<String, Any>
     val tables: Record<String, TableJs>
-    var mappings: Array<MappingJs>
+    val mappings: Record<String, Array<MappingJs>>
 }
 
 fun graphModelExtensionsJs(
     custom: Record<String, Any> = emptyRecord(),
     tables: Record<String, TableJs> = emptyRecord(),
-    mappings: Array<MappingJs> = emptyArray()
+    mappings: Record<String, Array<MappingJs>> = emptyRecord()
 ): GraphModelExtensionsJs = jso {
     this.custom = custom
     this.tables = tables
@@ -52,11 +52,11 @@ fun graphModelExtensionsJs(
 fun GraphModelExtensions.toJs() = graphModelExtensionsJs(
     custom = custom.toCustomJs(),
     tables = tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
-    mappings = mappings.map { mapping -> mapping.toJs() }.toTypedArray()
+    mappings = mappings.mapValues { (_, group) -> group.map { it.toJs() }.toTypedArray() }.toRecord()
 )
 
 fun GraphModelExtensionsJs.toClass(): GraphModelExtensions = GraphModelExtensions(
     custom = custom.toCustomClass(),
     tables = tables.associateBy { _, js -> js.toClass() },
-    mappings = mappings.map { it.toClass() }.toMutableList()
+    mappings = mappings.associateBy { _, group -> group.map { it.toClass() }.toMutableList() }
 )

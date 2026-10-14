@@ -65,7 +65,7 @@ class GraphSpecDataModelV3Migration :
 
     private fun convertGraphMapping(schema: SchemaMap): SchemaMap {
         val relationships = schema.mapOfMapsOrNull("relationships").orEmpty()
-        val mappings = schema.mapOrNull("extensions")?.listOfMapsOrNull("mappings").orEmpty()
+        val mappings = schema.mapOrNull("extensions")?.mappings().orEmpty()
         val (nodeMappings, relationshipMappings) = mappings.mapNotNull { mapping ->
             when {
                 mapping.containsKey("node") -> "node" to schemaMapOf(
@@ -101,7 +101,7 @@ class GraphSpecDataModelV3Migration :
 
     internal fun convertMappingKeyProperties(schema: SchemaMap, singular: String): List<SchemaMap> {
         val keyProperties = mutableMapOf<String, MutableSet<String>>()
-        for (mapping in schema.mapOrNull("extensions")?.listOfMapsOrNull("mappings").orEmpty()) {
+        for (mapping in schema.mapOrNull("extensions")?.mappings().orEmpty()) {
             val entity = mapping.stringOrNull(singular) ?: continue
             val keys = mapping.listOrNull("key") ?: continue
             if (keys.isNotEmpty()) {
@@ -276,6 +276,11 @@ class GraphSpecDataModelV3Migration :
         }
         return NodeData(nodeLabels, nodeObjectTypes, constraints, indexes)
     }
+
+    /**
+     * Mappings are grouped by id, the data model has no such grouping so they're flattened into a single list.
+     */
+    private fun SchemaMap.mappings(): List<SchemaMap> = mapOfListsOfMapsOrNull("mappings").orEmpty().values.flatten()
 
     private fun convertSourceSchema(tables: Map<String, SchemaMap>?): SchemaMap {
         if (tables == null) {

@@ -34,7 +34,6 @@ external interface RelationshipMappingJs : MappingJs {
     var matchLabel: String?
     var key: Array<String>
     var dependsOn: String
-    var id: String
 }
 
 fun relationshipMappingJs(
@@ -46,8 +45,7 @@ fun relationshipMappingJs(
     mode: String,
     matchLabel: String?,
     key: Array<String>,
-    dependsOn: String = "",
-    id: String = ""
+    dependsOn: String = ""
 ): RelationshipMappingJs = jso {
     this.type = MappingType.RELATIONSHIP
     this.relationship = relationship
@@ -59,7 +57,6 @@ fun relationshipMappingJs(
     this.matchLabel = matchLabel
     this.key = key
     this.dependsOn = dependsOn
-    this.id = id
 }
 
 fun RelationshipMapping.toJs() = relationshipMappingJs(
@@ -71,8 +68,7 @@ fun RelationshipMapping.toJs() = relationshipMappingJs(
     mode = mode.name,
     matchLabel = matchLabel,
     key = key.toTypedArray(),
-    dependsOn = dependsOn,
-    id = id
+    dependsOn = dependsOn
 )
 
 fun RelationshipMappingJs.toClass() = RelationshipMapping(
@@ -84,6 +80,5 @@ fun RelationshipMappingJs.toClass() = RelationshipMapping(
     mode = MappingMode.valueOf(mode),
     matchLabel = matchLabel,
     key = key.toMutableSet(),
-    dependsOn = dependsOn,
-    id = id
+    dependsOn = dependsOn
 )

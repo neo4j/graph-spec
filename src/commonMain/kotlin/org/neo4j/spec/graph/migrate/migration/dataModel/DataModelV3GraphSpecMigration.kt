@@ -83,7 +83,7 @@ class DataModelV3GraphSpecMigration :
             extensions["tables"] = tables
         }
         if (mappings.isNotEmpty()) {
-            extensions["mappings"] = mappings
+            extensions["mappings"] = mapOf(MAPPING_ID to mappings)
         }
         return extensions
     }
@@ -411,6 +411,8 @@ class DataModelV3GraphSpecMigration :
     }
 
     companion object {
+        const val MAPPING_ID = "mapping0"
+
         private fun neo4jType(type: SchemaMap?): String? {
             val base = type?.stringOrNull("type")?.lowercase() ?: return null
             return when (base) {

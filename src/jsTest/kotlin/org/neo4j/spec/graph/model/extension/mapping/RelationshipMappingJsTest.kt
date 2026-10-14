@@ -14,8 +14,7 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
         mode = MappingMode.MERGE,
         matchLabel = "matchLabel",
         key = mutableSetOf("key"),
-        dependsOn = "other",
-        id = "mapping-id",
+        dependsOn = "other"
     )
 
     override fun toJs(k: RelationshipMapping): RelationshipMappingJs = k.toJs()
@@ -32,7 +31,6 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
         assertEquals("matchLabel", jsObject.matchLabel)
         assertContentEquals(arrayOf("key"), jsObject.key)
         assertEquals("other", jsObject.dependsOn)
-        assertEquals("mapping-id", jsObject.id)
     }
 
 }
