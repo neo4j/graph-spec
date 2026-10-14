@@ -1,0 +1,74 @@
+/*
+ * Copyright (c) "Neo4j"
+ * Neo4j Sweden AB [https://neo4j.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.neo4j.spec.graph.codec.format
+
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.JsonUnquotedLiteral
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.decodeFromJsonElement
+import kotlinx.serialization.json.encodeToJsonElement
+import org.neo4j.spec.graph.codec.schema.SchemaElement
+import org.neo4j.spec.graph.codec.schema.SchemaList
+import org.neo4j.spec.graph.codec.schema.SchemaLiteral
+import org.neo4j.spec.graph.codec.schema.SchemaMap
+import org.neo4j.spec.graph.codec.schema.SchemaNull
+import org.neo4j.spec.graph.model.GraphModel
+
+class JsonFormat(private val json: Json) : Format {
+    override fun encodeToString(element: SchemaElement) = json.encodeToString(element.toJson())
+
+    override fun decodeFromString(string: String) = schemaElement(json.parseToJsonElement(string))
+
+    override fun encodeToSchema(model: GraphModel) = schemaElement(json.encodeToJsonElement(model))
+
+    override fun decodeFromSchema(element: SchemaElement) = json.decodeFromJsonElement<GraphModel>(element.toJson())
+
+    override fun decodeModelFromString(content: String) = json.decodeFromString<GraphModel>(content)
+
+    override fun encodeModelToString(model: GraphModel) = json.encodeToString(model)
+
+    private fun schemaElement(json: JsonElement, parent: String = ""): SchemaElement = when (json) {
+        is JsonArray -> SchemaList(json.mapTo(mutableListOf()) { schemaElement(it) }, parent)
+        is JsonObject -> SchemaMap(json.mapValuesTo(mutableMapOf()) { (_, v) -> schemaElement(v) }, parent)
+        is JsonPrimitive -> json.contentOrNull?.let {
+            SchemaLiteral(it, parent, json.isString)
+        } ?: SchemaNull(parent)
+        JsonNull -> SchemaNull(parent)
+    }
+
+    private fun SchemaElement.toJson(): JsonElement = when (this) {
+        is SchemaList -> JsonArray(content.map { it.toJson() })
+        is SchemaMap -> JsonObject(content.mapValues { (_, value) -> value.toJson() })
+        is SchemaLiteral -> if (isString) JsonPrimitive(string) else JsonUnquotedLiteral(string)
+        is SchemaNull -> JsonNull
+    }
+
+    companion object {
+        val default = JsonFormat(
+            Json {
+                ignoreUnknownKeys = true
+                isLenient = true
+                prettyPrint = true
+            }
+        )
+    }
+}
