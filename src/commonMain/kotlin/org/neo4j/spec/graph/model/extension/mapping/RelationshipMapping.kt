@@ -36,6 +36,7 @@ data class RelationshipMapping(
     @SerialName("to_node")
     @SerialDescription("How the end node of the relationship is matched.")
     val toNode: TargetMapping,
+    @SerialName("match_label")
     @SerialDescription("Label used to match existing relationships.")
     var matchLabel: String? = null,
     @SerialDescription("Mappings from property ids to source columns.")

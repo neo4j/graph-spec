@@ -32,6 +32,7 @@ data class Property(
     var type: Neo4jType = Neo4jType.ANY,
     @SerialDescription("Dimension of the property when it holds a vector.")
     var dimension: Int? = null,
+    @SerialName("must_exist")
     @SerialDescription(
         "Shorthand for an existence constraint. Expanded into constraints when the model is internalised."
     )

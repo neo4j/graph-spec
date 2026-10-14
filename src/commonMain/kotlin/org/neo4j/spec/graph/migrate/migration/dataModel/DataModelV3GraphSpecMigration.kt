@@ -365,8 +365,8 @@ class DataModelV3GraphSpecMigration :
             tables[name] = schemaMapOf(
                 "source" to sourceSchema.literalOrNull("type"),
                 "columns" to migrateColumns(table),
-                "primaryKeys" toNotEmpty table.listOrNull("primaryKeys"),
-                "foreignKeys" toNotEmpty migrateForeignKeys(table)
+                "primary_keys" toNotEmpty table.listOrNull("primaryKeys"),
+                "foreign_keys" toNotEmpty migrateForeignKeys(table)
             )
         }
         return tables

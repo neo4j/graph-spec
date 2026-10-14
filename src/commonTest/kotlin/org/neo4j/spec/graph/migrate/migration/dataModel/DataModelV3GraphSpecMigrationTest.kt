@@ -576,14 +576,14 @@ class DataModelV3GraphSpecMigrationTest {
 
         val userTable = tables["users"]
         assertNotNull(userTable)
-        val fks = userTable.mapOfMaps("foreignKeys")
+        val fks = userTable.mapOfMaps("foreign_keys")
         assertEquals(1, fks.size)
         val firstFK = fks.values.first()
         assertEquals("accounts", firstFK.map("references").string("table"))
     }
 
     @Test
-    fun `migrateTables excludes empty foreignKeys and primaryKeys`() {
+    fun `migrateTables excludes empty foreign_keys and primary_keys`() {
         val inputSchema = schemaMapOf(
             "graphMappingRepresentation" to mapOf(
                 "dataSourceSchema" to schemaMapOf(
@@ -602,8 +602,8 @@ class DataModelV3GraphSpecMigrationTest {
         val tables = migration.migrateTables(inputSchema)
         val table = tables["empty_table"]!!
 
-        assertFalse(table.containsKey("primaryKeys"), "primaryKeys should be omitted if empty")
-        assertFalse(table.containsKey("foreignKeys"), "foreignKeys should be omitted if empty")
+        assertFalse(table.containsKey("primary_keys"), "primary_keys should be omitted if empty")
+        assertFalse(table.containsKey("foreign_keys"), "foreign_keys should be omitted if empty")
     }
 
     @Test

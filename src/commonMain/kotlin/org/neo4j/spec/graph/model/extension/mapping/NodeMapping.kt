@@ -34,6 +34,7 @@ data class NodeMapping(
     val properties: MutableMap<String, PropertyMapping>,
     @SerialDescription("Whether nodes are merged with existing nodes or always created.")
     var mode: MappingMode = MappingMode.MERGE,
+    @SerialName("match_label")
     @SerialDescription("Label used to match existing nodes.")
     var matchLabel: String? = null,
     @SerialDescription("Ids of the properties which identify a node.")

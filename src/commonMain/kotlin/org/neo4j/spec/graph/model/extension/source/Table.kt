@@ -32,8 +32,10 @@ data class Table(
     var source: String,
     @SerialDescription("Columns of the table keyed by column name.")
     val columns: MutableMap<String, TableColumn> = mutableMapOf(),
+    @SerialName("primary_keys")
     @SerialDescription("Names of the columns making up the primary key.")
     val primaryKeys: MutableSet<String> = mutableSetOf(),
+    @SerialName("foreign_keys")
     @SerialDescription("Foreign keys of the table keyed by id.")
     val foreignKeys: MutableMap<String, ForeignKey> = mutableMapOf(),
     @SerialDescription("User-defined arbitrary data.")

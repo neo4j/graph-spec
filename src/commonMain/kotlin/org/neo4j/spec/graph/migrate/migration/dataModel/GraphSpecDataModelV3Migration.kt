@@ -295,8 +295,8 @@ class GraphSpecDataModelV3Migration :
                     "name" to tableName,
                     "expanded" to true,
                     "fields" to convertFields(table.mapOfMapsOrNull("columns")),
-                    "primaryKeys" to table.listOrNull("primaryKeys"),
-                    "foreignKeys" to convertForeignKeys(table.mapOfMapsOrNull("foreignKeys"))
+                    "primaryKeys" to table.listOrNull("primary_keys"),
+                    "foreignKeys" to convertForeignKeys(table.mapOfMapsOrNull("foreign_keys"))
                 )
             )
         }

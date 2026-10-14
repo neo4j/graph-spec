@@ -15,7 +15,7 @@
       "properties": {
         "id": {
           "type": "STRING",
-          "mustExist": false,
+          "must_exist": false,
           "unique": true,
           "extensions": {
             "custom": {}
@@ -23,7 +23,7 @@
         },
         "name": {
           "type": "STRING",
-          "mustExist": false,
+          "must_exist": false,
           "unique": false,
           "extensions": {
             "custom": {}
@@ -51,7 +51,7 @@
       "properties": {
         "id": {
           "type": "STRING",
-          "mustExist": false,
+          "must_exist": false,
           "unique": true,
           "extensions": {
             "custom": {}
@@ -81,7 +81,7 @@
       "properties": {
         "roles": {
           "type": "STRING",
-          "mustExist": false,
+          "must_exist": false,
           "unique": false,
           "extensions": {
             "custom": {}
@@ -100,8 +100,9 @@
     "tables": {
       "actors": {
         "source": "sql/postgres",
-        "columns": {
-          "actor_id": {
+        "columns": [
+          {
+            "name": "actor_id",
             "type": "varchar",
             "size": 255,
             "suggested": "STRING",
@@ -110,7 +111,8 @@
             ],
             "custom": {}
           },
-          "actor_name": {
+          {
+            "name": "actor_name",
             "type": "varchar",
             "size": 255,
             "suggested": "STRING",
@@ -119,11 +121,11 @@
             ],
             "custom": {}
           }
-        },
-        "primaryKeys": [
+        ],
+        "primary_keys": [
           "actor_id"
         ],
-        "foreignKeys": {
+        "foreign_keys": {
           "fk_actor_id": {
             "columns": [
               "actor_id"
@@ -155,8 +157,9 @@
       },
       "movies": {
         "source": "sql/postgres",
-        "columns": {
-          "id": {
+        "columns": [
+          {
+            "name": "id",
             "type": "varchar",
             "size": 255,
             "suggested": "STRING",
@@ -165,7 +168,8 @@
             ],
             "custom": {}
           },
-          "field_1": {
+          {
+            "name": "field_1",
             "type": "varchar",
             "size": 255,
             "suggested": "STRING",
@@ -174,11 +178,11 @@
             ],
             "custom": {}
           }
-        },
-        "primaryKeys": [
+        ],
+        "primary_keys": [
           "id"
         ],
-        "foreignKeys": {
+        "foreign_keys": {
           "fk_movie_actor_id": {
             "columns": [
               "actor_id"
@@ -197,8 +201,9 @@
       },
       "actors-movies": {
         "source": "sql/postgres",
-        "columns": {
-          "actor_id": {
+        "columns": [
+          {
+            "name": "actor_id",
             "type": "varchar",
             "size": 255,
             "suggested": "STRING",
@@ -207,7 +212,8 @@
             ],
             "custom": {}
           },
-          "movie_id": {
+          {
+            "name": "movie_id",
             "type": "varchar",
             "size": 255,
             "suggested": "STRING",
@@ -216,7 +222,8 @@
             ],
             "custom": {}
           },
-          "field_1": {
+          {
+            "name": "field_1",
             "type": "varchar",
             "size": 255,
             "suggested": "STRING",
@@ -225,14 +232,14 @@
             ],
             "custom": {}
           }
-        },
-        "primaryKeys": [],
-        "foreignKeys": {},
+        ],
+        "primary_keys": [],
+        "foreign_keys": {},
         "custom": {}
       }
     },
-    "mappings": [
-      {
+    "mappings": {
+      "mapping0": {
         "type": "NODE",
         "node": "Actor",
         "table": "actors",
@@ -249,7 +256,7 @@
           "id"
         ]
       },
-      {
+      "mapping1": {
         "type": "NODE",
         "node": "Movie",
         "table": "movies",
@@ -263,7 +270,7 @@
           "id"
         ]
       },
-      {
+      "mapping2": {
         "type": "RELATIONSHIP",
         "relationship": "ACTED_IN",
         "table": "actors-movies",
@@ -293,6 +300,6 @@
         "mode": "MERGE",
         "key": []
       }
-    ]
+    }
   }
 }
