@@ -18,7 +18,6 @@ package org.neo4j.spec.graph.model.extension.source
 
 import org.neo4j.spec.graph.model.addUnique
 import org.neo4j.spec.graph.model.dropAt
-import org.neo4j.spec.graph.model.getOrThrow
 import org.neo4j.spec.graph.model.remove
 @JsExport
 class TableEditor {
@@ -29,26 +28,30 @@ class TableEditor {
         }
 
         @JsStatic
-        fun setColumnType(table: TableJs, columnId: String, type: String) {
-            val column = table.columns.getOrThrow(columnId, "Column")
-            TableColumnEditor.setType(column, type)
+        fun setColumnType(table: TableJs, columnName: String, type: String) {
+            TableColumnEditor.setType(table.column(columnName), type)
         }
 
         @JsStatic
-        fun setColumnSize(table: TableJs, columnId: String, size: Int) {
-            val column = table.columns.getOrThrow(columnId, "Column")
-            TableColumnEditor.setSize(column, size)
+        fun setColumnSize(table: TableJs, columnName: String, size: Int) {
+            TableColumnEditor.setSize(table.column(columnName), size)
         }
 
         @JsStatic
-        fun addColumn(table: TableJs, type: String): String = table.columns.addUnique("column") {
-            tableColumnJs(type)
+        fun addColumn(table: TableJs, type: String): String {
+            val names = table.columns.map { it.name }.toSet()
+            val name = generateSequence(0) { it + 1 }.map { "column$it" }.first { it !in names }
+            table.columns += tableColumnJs(name, type)
+            return name
         }
 
         @JsStatic
-        fun removeColumn(table: TableJs, columnId: String) {
-            table.columns.remove(columnId)
+        fun removeColumn(table: TableJs, columnName: String) {
+            table.columns = table.columns.filter { it.name != columnName }.toTypedArray()
         }
+
+        private fun TableJs.column(columnName: String): TableColumnJs =
+            columns.firstOrNull { it.name == columnName } ?: error("Column with name '$columnName' not found.")
 
         @JsStatic
         fun addPrimaryKey(table: TableJs, key: String) {

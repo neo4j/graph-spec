@@ -409,8 +409,8 @@ class GraphSpecDataModelV3MigrationTest {
 
     @Test
     fun `convertFields transforms raw types to camelCase recommended types`() {
-        val fieldsInput = mapOf(
-            "f1" to schemaMapOf(
+        val fieldsInput = listOf(
+            schemaMapOf(
                 "name" to "first_name",
                 "suggested" to "STRING",
                 "supported" to listOf(SchemaLiteral("STRING"), SchemaLiteral("INTEGER"))
@@ -428,19 +428,19 @@ class GraphSpecDataModelV3MigrationTest {
 
     @Test
     fun `convertFields writes dimension field for vector types`() {
-        val fieldsInput = mapOf(
-            "f1" to schemaMapOf(
+        val fieldsInput = listOf(
+            schemaMapOf(
                 "name" to "embeddingWithDim",
                 "suggested" to "VECTOR<FLOAT>",
                 "supported" to listOf(SchemaLiteral("VECTOR<FLOAT>"), SchemaLiteral("VECTOR<FLOAT32>")),
                 "dimension" to 123
             ),
-            "f2" to schemaMapOf(
+            schemaMapOf(
                 "name" to "embedding",
                 "suggested" to "VECTOR<FLOAT>",
                 "supported" to listOf(SchemaLiteral("VECTOR<FLOAT>"))
             ),
-            "f3" to schemaMapOf(
+            schemaMapOf(
                 "name" to "stringWithDim",
                 "suggested" to "STRING",
                 "supported" to listOf(SchemaLiteral("STRING")),

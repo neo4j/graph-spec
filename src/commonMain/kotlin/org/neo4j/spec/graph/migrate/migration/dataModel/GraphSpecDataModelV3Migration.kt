@@ -299,7 +299,7 @@ class GraphSpecDataModelV3Migration :
                 schemaMapOf(
                     "name" to tableName,
                     "expanded" to true,
-                    "fields" to convertFields(table.mapOfMapsOrNull("columns")),
+                    "fields" to convertFields(table.listOfMapsOrNull("columns")),
                     "primaryKeys" to table.listOrNull("primary_keys"),
                     "foreignKeys" to convertForeignKeys(table.mapOfMapsOrNull("foreign_keys"))
                 )
@@ -408,11 +408,11 @@ class GraphSpecDataModelV3Migration :
     private fun List<String>.tokens(propertyTokens: Map<String, String>): List<String> =
         map { propertyTokens[it] ?: it }
 
-    internal fun convertFields(fields: Map<String, SchemaMap>?): List<SchemaMap> {
+    internal fun convertFields(fields: List<SchemaMap>?): List<SchemaMap> {
         if (fields.isNullOrEmpty()) {
             return emptyList()
         }
-        return fields.values.map { field ->
+        return fields.map { field ->
             schemaMapOf(
                 "name" to field.literalOrNull("name"),
                 "rawType" to field.literalOrNull("type"),

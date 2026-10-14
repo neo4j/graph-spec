@@ -8,7 +8,7 @@ class TableJsTest : JsMappingTest<Table, TableJs>() {
 
     override fun createClass() = Table(
         source = "sourceId",
-        columns = mutableMapOf("field" to TableColumn("varchar", name = "Field name")),
+        columns = mutableListOf(TableColumn(name = "field", type = "varchar")),
         primaryKeys = mutableSetOf("field"),
         foreignKeys = mutableMapOf("key" to ForeignKey(mutableSetOf("key"), ForeignKeyReference("table"))),
         custom = mutableMapOf("key1" to "val1"),
@@ -20,7 +20,7 @@ class TableJsTest : JsMappingTest<Table, TableJs>() {
 
     override fun verifyJsObject(jsObject: TableJs) {
         assertEquals("sourceId", jsObject.source)
-        assertJsEquals(tableColumnJs("varchar", name = "Field name"), jsObject.columns["field"])
+        assertJsEquals(tableColumnJs("field", "varchar"), jsObject.columns[0])
         assertContentEquals(arrayOf("field"), jsObject.primaryKeys)
         assertJsEquals(foreignKeyJs(arrayOf("key"), foreignKeyReferenceJs("table")), jsObject.foreignKeys["key"])
         assertEquals<Any?>("val1", jsObject.custom["key1"])

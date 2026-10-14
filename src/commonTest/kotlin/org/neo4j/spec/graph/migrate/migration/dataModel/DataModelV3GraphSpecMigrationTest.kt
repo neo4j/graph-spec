@@ -640,7 +640,9 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val columns = migration.migrateTables(inputSchema)["film"]!!.mapOfMaps("columns")
+        val columns = migration.migrateTables(inputSchema)["film"]!!.listOfMaps("columns").associateBy {
+            it.string("name")
+        }
 
         val arrayField = columns["special_features"]!!
         assertEquals("STRING", arrayField.string("suggested"))
@@ -711,7 +713,9 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val fields = migration.migrateTables(inputSchema)["document"]!!.mapOfMaps("columns")
+        val fields = migration.migrateTables(inputSchema)["document"]!!.listOfMaps("columns").associateBy {
+            it.string("name")
+        }
 
         assertEquals(123, fields["embeddingWithDim"]?.intOrNull("dimension"))
         assertEquals(456, fields["supportedOnly"]?.intOrNull("dimension"))

@@ -108,7 +108,7 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                     "relationships.*.constraints.*.properties",
                     "relationships.*.extensions.indexes.*.properties",
                     "relationships.*.extensions.indexes.*.options.*",
-                    "extensions.tables.*.columns.*.supported",
+                    "extensions.tables.*.columns[*].supported",
                     "extensions.tables.*.primary_keys",
                     "extensions.tables.*.foreign_keys.*.columns",
                     "extensions.tables.*.foreign_keys.*.references.columns",

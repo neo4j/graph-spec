@@ -389,25 +389,20 @@ class DataModelV3GraphSpecMigration :
         return foreignKeys
     }
 
-    private fun migrateColumns(table: SchemaMap): MutableMap<String, SchemaElement> {
-        val columns = mutableMapOf<String, SchemaElement>()
-        for (field in table.listOfMaps("fields")) {
-            val name = field.string("name")
-            columns[name] = schemaMapOf(
-                "name" to field.literal("name"),
-                "type" to field.literalOrNull("rawType"),
-                "size" to field.literalOrNull("size"),
-                "suggested" to neo4jType(field.mapOrNull("recommendedType")),
-                "supported" to field.listOfMapsOrNull("supportedTypes")?.map {
-                    neo4jType(it)
-                },
-                "dimension" to (
-                    dimension(field.mapOrNull("recommendedType"))
-                        ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
-                    )
-            )
-        }
-        return columns
+    private fun migrateColumns(table: SchemaMap): List<SchemaMap> = table.listOfMaps("fields").map { field ->
+        schemaMapOf(
+            "name" to field.literal("name"),
+            "type" to field.literalOrNull("rawType"),
+            "size" to field.literalOrNull("size"),
+            "suggested" to neo4jType(field.mapOrNull("recommendedType")),
+            "supported" to field.listOfMapsOrNull("supportedTypes")?.map {
+                neo4jType(it)
+            },
+            "dimension" to (
+                dimension(field.mapOrNull("recommendedType"))
+                    ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
+                )
+        )
     }
 
     companion object {

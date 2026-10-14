@@ -17,7 +17,7 @@ class TableColumnJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
         name = "Field name"
     )
 
-    override fun toJs(k: TableColumn): TableColumnJs = k.toJs("columnId")
+    override fun toJs(k: TableColumn): TableColumnJs = k.toJs()
 
     override fun toClass(js: TableColumnJs): TableColumn = js.toClass()
 
