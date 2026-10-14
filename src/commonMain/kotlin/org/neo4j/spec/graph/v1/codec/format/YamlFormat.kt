@@ -16,12 +16,6 @@
  */
 package org.neo4j.spec.graph.v1.codec.format
 
-import org.neo4j.spec.graph.v1.codec.schema.SchemaElement
-import org.neo4j.spec.graph.v1.codec.schema.SchemaList
-import org.neo4j.spec.graph.v1.codec.schema.SchemaLiteral
-import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
-import org.neo4j.spec.graph.v1.codec.schema.SchemaNull
-import org.neo4j.spec.graph.v1.model.GraphModel
 import net.mamoe.yamlkt.Yaml
 import net.mamoe.yamlkt.YamlElement
 import net.mamoe.yamlkt.YamlList
@@ -29,6 +23,12 @@ import net.mamoe.yamlkt.YamlLiteral
 import net.mamoe.yamlkt.YamlMap
 import net.mamoe.yamlkt.YamlNull
 import net.mamoe.yamlkt.YamlPrimitive
+import org.neo4j.spec.graph.v1.codec.schema.SchemaElement
+import org.neo4j.spec.graph.v1.codec.schema.SchemaList
+import org.neo4j.spec.graph.v1.codec.schema.SchemaLiteral
+import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
+import org.neo4j.spec.graph.v1.codec.schema.SchemaNull
+import org.neo4j.spec.graph.v1.model.GraphModel
 import kotlin.collections.component1
 import kotlin.collections.component2
 

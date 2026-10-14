@@ -16,9 +16,9 @@
  */
 package org.neo4j.spec.graph.v1.codec.format
 
+import kotlinx.serialization.SerializationException
 import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
 import org.neo4j.spec.graph.v1.codec.schema.SchemaNull
-import kotlinx.serialization.SerializationException
 import org.neo4j.spec.graph.v1.model.GraphModel
 import org.neo4j.spec.graph.v1.model.extension.GraphModelExtensions
 import org.neo4j.spec.graph.v1.model.extension.mapping.NodeMapping

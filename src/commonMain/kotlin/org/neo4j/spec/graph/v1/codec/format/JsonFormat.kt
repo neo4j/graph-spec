@@ -16,11 +16,6 @@
  */
 package org.neo4j.spec.graph.v1.codec.format
 
-import org.neo4j.spec.graph.v1.codec.schema.SchemaElement
-import org.neo4j.spec.graph.v1.codec.schema.SchemaList
-import org.neo4j.spec.graph.v1.codec.schema.SchemaLiteral
-import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
-import org.neo4j.spec.graph.v1.codec.schema.SchemaNull
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -31,6 +26,11 @@ import kotlinx.serialization.json.JsonUnquotedLiteral
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.encodeToJsonElement
+import org.neo4j.spec.graph.v1.codec.schema.SchemaElement
+import org.neo4j.spec.graph.v1.codec.schema.SchemaList
+import org.neo4j.spec.graph.v1.codec.schema.SchemaLiteral
+import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
+import org.neo4j.spec.graph.v1.codec.schema.SchemaNull
 import org.neo4j.spec.graph.v1.model.GraphModel
 
 class JsonFormat(private val json: Json) : Format {

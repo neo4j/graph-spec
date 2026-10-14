@@ -16,8 +16,6 @@
  */
 package org.neo4j.spec.graph.v1.bridge
 
-import org.neo4j.spec.graph.v1.codec.format.JsonFormat
-import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
 import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.CArrayPointer
 import kotlinx.cinterop.ExperimentalForeignApi
@@ -25,6 +23,8 @@ import kotlinx.cinterop.allocArray
 import kotlinx.cinterop.cstr
 import kotlinx.cinterop.get
 import kotlinx.cinterop.memScoped
+import org.neo4j.spec.graph.v1.codec.format.JsonFormat
+import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

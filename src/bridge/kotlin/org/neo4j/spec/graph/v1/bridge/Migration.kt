@@ -16,13 +16,13 @@
  */
 package org.neo4j.spec.graph.v1.bridge
 
-import org.neo4j.spec.graph.v1.GraphSpec
-import org.neo4j.spec.graph.v1.codec.format.JsonFormat
-import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
 import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.serialization.json.Json
+import org.neo4j.spec.graph.v1.GraphSpec
+import org.neo4j.spec.graph.v1.codec.format.JsonFormat
+import org.neo4j.spec.graph.v1.codec.schema.SchemaMap
 import org.neo4j.spec.graph.v1.migrate.MigrationPath
 import kotlin.experimental.ExperimentalNativeApi
 
