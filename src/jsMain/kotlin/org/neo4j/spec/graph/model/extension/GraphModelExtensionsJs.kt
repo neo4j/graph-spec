@@ -21,6 +21,8 @@ import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.extension.mapping.MappingJs
 import org.neo4j.spec.graph.model.extension.mapping.toClass
 import org.neo4j.spec.graph.model.extension.mapping.toJs
@@ -28,19 +30,17 @@ import org.neo4j.spec.graph.model.extension.source.TableJs
 import org.neo4j.spec.graph.model.extension.source.toClass
 import org.neo4j.spec.graph.model.extension.source.toJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface GraphModelExtensionsJs {
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
     val tables: Record<String, TableJs>
     var mappings: Array<MappingJs>
 }
 
 fun graphModelExtensionsJs(
-    custom: Record<String, ExtensionValueJs> = emptyRecord(),
+    custom: Record<String, Any> = emptyRecord(),
     tables: Record<String, TableJs> = emptyRecord(),
     mappings: Array<MappingJs> = emptyArray()
 ): GraphModelExtensionsJs = jso {
@@ -50,13 +50,13 @@ fun graphModelExtensionsJs(
 }
 
 fun GraphModelExtensions.toJs() = graphModelExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    custom = custom.toCustomJs(),
     tables = tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
     mappings = mappings.map { mapping -> mapping.toJs() }.toTypedArray()
 )
 
 fun GraphModelExtensionsJs.toClass(): GraphModelExtensions = GraphModelExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    custom = custom.toCustomClass(),
     tables = tables.associateBy { _, js -> js.toClass() },
     mappings = mappings.map { it.toClass() }.toMutableList()
 )

@@ -2,8 +2,6 @@ package org.neo4j.spec.graph.model.node
 
 import js.objects.recordOf
 import org.neo4j.spec.graph.model.GraphModelJs
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.toJs
 import org.neo4j.spec.graph.model.graphModelJs
 import org.neo4j.spec.graph.model.index.FullTextIndexOptionJs
 import org.neo4j.spec.graph.model.index.fullTextIndexOptionJs
@@ -146,7 +144,7 @@ class NodeEditorTest {
         NodeEditor.removeIndexProperty(model, nodeId, indexId, "username")
         assertNotEquals(true, node.extensions.indexes[indexId]?.properties?.contains("username"))
 
-        // Test Options (ExtensionValueJs)
+        // Test Options
         NodeEditor.setIndexOption(model, nodeId, indexId, fullTextIndexOptionJs(analyzer = "analyzer"))
         assertEquals("analyzer", (node.extensions.indexes[indexId]?.options as? FullTextIndexOptionJs)?.analyzer)
 

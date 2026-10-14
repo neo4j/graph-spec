@@ -20,7 +20,7 @@ import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.Extensions
-import org.neo4j.spec.graph.model.value.ExtensionValue
+import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import kotlin.js.JsExport
 
 @JsExport
@@ -29,7 +29,8 @@ import kotlin.js.JsExport
 @SerialDescription("Extensions for a node.")
 data class NodeExtensions(
     @SerialDescription("User-defined arbitrary data.")
-    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    @Serializable(with = CustomMapSerializer::class)
+    override val custom: MutableMap<String, Any> = mutableMapOf(),
     @SerialDescription("Database indexes on this node keyed by id.")
     val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
     @SerialDescription("Optional visual information of this node.")

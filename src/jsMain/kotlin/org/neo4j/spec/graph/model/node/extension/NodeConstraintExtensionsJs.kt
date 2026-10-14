@@ -17,31 +17,26 @@
 package org.neo4j.spec.graph.model.node.extension
 
 import js.objects.Record
-import js.objects.toRecord
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.node.toClass
-import org.neo4j.spec.graph.model.node.toJs
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface NodeConstraintExtensionsJs {
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
-fun nodeConstraintExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): NodeConstraintExtensionsJs =
-    jso {
-        this.custom = custom
-    }
+fun nodeConstraintExtensionsJs(custom: Record<String, Any> = emptyRecord()): NodeConstraintExtensionsJs = jso {
+    this.custom = custom
+}
 
 fun NodeConstraintExtensions.toJs() = nodeConstraintExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.toCustomJs()
 )
 
 fun NodeConstraintExtensionsJs.toClass(): NodeConstraintExtensions = NodeConstraintExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

@@ -17,32 +17,28 @@
 package org.neo4j.spec.graph.model.relationship.extension
 
 import js.objects.Record
-import js.objects.toRecord
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.relationship.toClass
-import org.neo4j.spec.graph.model.relationship.toJs
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface RelationshipConstraintExtensionsJs {
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
 fun relationshipConstraintExtensionsJs(
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord()
 ): RelationshipConstraintExtensionsJs = jso {
     this.custom = custom
 }
 
 fun RelationshipConstraintExtensions.toJs() = relationshipConstraintExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.toCustomJs()
 )
 
 fun RelationshipConstraintExtensionsJs.toClass(): RelationshipConstraintExtensions = RelationshipConstraintExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

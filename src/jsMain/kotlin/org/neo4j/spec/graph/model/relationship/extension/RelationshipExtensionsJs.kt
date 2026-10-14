@@ -21,21 +21,21 @@ import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
 import org.neo4j.spec.graph.model.relationship.toClass
 import org.neo4j.spec.graph.model.relationship.toJs
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface RelationshipExtensionsJs {
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
     val indexes: Record<String, RelationshipIndexJs>
 }
 
 fun relationshipExtensionsJs(
-    custom: Record<String, ExtensionValueJs> = emptyRecord(),
+    custom: Record<String, Any> = emptyRecord(),
     indexes: Record<String, RelationshipIndexJs> = emptyRecord()
 ): RelationshipExtensionsJs = jso {
     this.custom = custom
@@ -43,11 +43,11 @@ fun relationshipExtensionsJs(
 }
 
 fun RelationshipExtensions.toJs() = relationshipExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    custom = custom.toCustomJs(),
     indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord()
 )
 
 fun RelationshipExtensionsJs.toClass(): RelationshipExtensions = RelationshipExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    custom = custom.toCustomClass(),
     indexes = indexes.associateBy { _, value -> value.toClass() }
 )

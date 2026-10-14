@@ -20,10 +20,10 @@ import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.Extensions
+import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import org.neo4j.spec.graph.model.index.IndexOption
 import org.neo4j.spec.graph.model.type.IndexType
 import org.neo4j.spec.graph.model.type.Named
-import org.neo4j.spec.graph.model.value.ExtensionValue
 import kotlin.js.JsExport
 
 @JsExport
@@ -38,7 +38,8 @@ data class RelationshipIndex(
     @SerialDescription("Configuration specific to the type of index.")
     val options: IndexOption? = null,
     @SerialDescription("User-defined arbitrary data.")
-    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    @Serializable(with = CustomMapSerializer::class)
+    override val custom: MutableMap<String, Any> = mutableMapOf(),
     @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
     override var name: String? = null
 ) : Extensions,

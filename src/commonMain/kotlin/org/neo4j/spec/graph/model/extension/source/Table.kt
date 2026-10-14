@@ -20,7 +20,7 @@ import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.Extensions
-import org.neo4j.spec.graph.model.value.ExtensionValue
+import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import kotlin.js.JsExport
 
 @JsExport
@@ -37,5 +37,6 @@ data class Table(
     @SerialDescription("Foreign keys of the table keyed by id.")
     val foreignKeys: MutableMap<String, ForeignKey> = mutableMapOf(),
     @SerialDescription("User-defined arbitrary data.")
-    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
+    @Serializable(with = CustomMapSerializer::class)
+    override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : Extensions

@@ -31,7 +31,7 @@ import org.neo4j.spec.graph.model.relationship.extension.RelationshipIndexJs
 import org.neo4j.spec.graph.model.relationship.extension.relationshipConstraintExtensionsJs
 import org.neo4j.spec.graph.model.relationship.extension.relationshipIndexJs
 import org.neo4j.spec.graph.model.remove
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
+
 @JsExport
 class RelationshipEditor {
     companion object {
@@ -264,7 +264,7 @@ class RelationshipEditor {
             type: String,
             properties: Array<String> = emptyArray(),
             options: IndexOptionJs? = null,
-            custom: Record<String, ExtensionValueJs> = emptyRecord()
+            custom: Record<String, Any> = emptyRecord()
         ): String {
             val relationship = model.relationships.getOrThrow(relationshipId, "Relationship")
             return relationship.extensions.indexes.addUnique("index") {

@@ -20,10 +20,9 @@ import js.objects.Record
 import kotlinx.js.JsPlainObject
 import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
 import kotlin.String
 
 @JsExport
@@ -33,7 +32,7 @@ external interface TableJs {
     val columns: Record<String, TableColumnJs>
     var primaryKeys: Array<String>
     val foreignKeys: Record<String, ForeignKeyJs>
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
 fun tableJs(
@@ -41,7 +40,7 @@ fun tableJs(
     columns: Record<String, TableColumnJs> = emptyRecord(),
     primaryKeys: Array<String> = emptyArray(),
     foreignKeys: Record<String, ForeignKeyJs> = emptyRecord(),
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord()
 ): TableJs = jso {
     this.source = source
     this.columns = columns
@@ -55,7 +54,7 @@ fun Table.toJs() = tableJs(
     columns = columns.associateBy { key, column -> column.toJs(key) },
     primaryKeys = primaryKeys.toTypedArray(),
     foreignKeys = foreignKeys.associateBy { _, key -> key.toJs() },
-    custom = custom.associateBy { _, value -> value.toJs() }
+    custom = custom.toCustomJs()
 )
 
 fun TableJs.toClass() = Table(
@@ -63,5 +62,5 @@ fun TableJs.toClass() = Table(
     columns = columns.associateBy { _, column -> column.toClass() },
     primaryKeys = primaryKeys.toMutableSet(),
     foreignKeys = foreignKeys.associateBy { _, fk -> fk.toClass() },
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

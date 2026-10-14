@@ -170,7 +170,7 @@ enum class Neo4jType {
 
         fun toString(type: Neo4jType): String = when (type) {
             ANY -> "ANY"
-            Neo4jType.LIST_ANY -> "LIST<ANY>"
+            LIST_ANY -> "LIST<ANY>"
             BOOLEAN -> "BOOLEAN"
             LIST_BOOLEAN -> "LIST<BOOLEAN>"
             DATE -> "DATE"

@@ -17,30 +17,25 @@
 package org.neo4j.spec.graph.model.property.extension
 
 import js.objects.Record
-import js.objects.toRecord
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.property.toClass
-import org.neo4j.spec.graph.model.property.toJs
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
 @JsExport
 @JsPlainObject
 external interface PropertyExtensionsJs {
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
-fun propertyExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): PropertyExtensionsJs = jso {
+fun propertyExtensionsJs(custom: Record<String, Any> = emptyRecord()): PropertyExtensionsJs = jso {
     this.custom = custom
 }
 
 fun PropertyExtensions.toJs() = propertyExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.toCustomJs()
 )
 
 fun PropertyExtensionsJs.toClass(): PropertyExtensions = PropertyExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

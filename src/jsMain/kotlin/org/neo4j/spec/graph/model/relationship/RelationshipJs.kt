@@ -31,8 +31,7 @@ import org.neo4j.spec.graph.model.relationship.extension.RelationshipExtensionsJ
 import org.neo4j.spec.graph.model.relationship.extension.relationshipExtensionsJs
 import org.neo4j.spec.graph.model.relationship.extension.toClass
 import org.neo4j.spec.graph.model.relationship.extension.toJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface RelationshipJs {

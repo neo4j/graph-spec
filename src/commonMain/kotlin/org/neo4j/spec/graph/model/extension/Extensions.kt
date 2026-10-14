@@ -16,13 +16,7 @@
  */
 package org.neo4j.spec.graph.model.extension
 
-import org.neo4j.spec.graph.model.value.BooleanValue
-import org.neo4j.spec.graph.model.value.DoubleValue
-import org.neo4j.spec.graph.model.value.ExtensionValue
-import org.neo4j.spec.graph.model.value.ListValue
-import org.neo4j.spec.graph.model.value.LongValue
-import org.neo4j.spec.graph.model.value.MapValue
-import org.neo4j.spec.graph.model.value.StringValue
+import kotlin.math.floor
 
 /**
  * Extensions for storing basic arbitrary data.
@@ -32,7 +26,7 @@ import org.neo4j.spec.graph.model.value.StringValue
  * Complex data should be stored as an optional module within [model.GraphModel].
  */
 interface Extensions {
-    val custom: MutableMap<String, ExtensionValue>
+    val custom: MutableMap<String, Any>
 
     fun contains(key: String): Boolean = custom.containsKey(key)
 
@@ -41,11 +35,11 @@ interface Extensions {
      */
 
     fun set(section: String, key: String, value: String) {
-        getOrPut(section)[key] = StringValue(value)
+        getOrPut(section)[key] = value
     }
 
     fun set(section: String, key: String, value: Boolean) {
-        getOrPut(section)[key] = BooleanValue(value)
+        getOrPut(section)[key] = value
     }
 
     fun set(section: String, key: String, value: Int) {
@@ -53,7 +47,7 @@ interface Extensions {
     }
 
     fun set(section: String, key: String, value: Long) {
-        getOrPut(section)[key] = LongValue(value)
+        getOrPut(section)[key] = value
     }
 
     fun set(section: String, key: String, value: Float) {
@@ -61,17 +55,18 @@ interface Extensions {
     }
 
     fun set(section: String, key: String, value: Double) {
-        getOrPut(section)[key] = DoubleValue(value)
+        getOrPut(section)[key] = value
     }
 
-    private fun getOrPut(section: String): MutableMap<String, ExtensionValue> {
-        val value = custom[section] as? MapValue
+    @Suppress("UNCHECKED_CAST")
+    private fun getOrPut(section: String): MutableMap<String, Any> {
+        val value = custom[section] as? MutableMap<String, Any>
         if (value == null) {
-            val map = mutableMapOf<String, ExtensionValue>()
-            custom[section] = MapValue(map)
+            val map = mutableMapOf<String, Any>()
+            custom[section] = map
             return map
         }
-        return value.value
+        return value
     }
 
     /*
@@ -90,7 +85,7 @@ interface Extensions {
 
     fun getFloat(section: String, key: String): Float? = getDouble(section, key)?.toFloat()
 
-    fun getList(section: String, key: String): List<ExtensionValue>? = get(section)?.get(key)?.asList
+    fun getList(section: String, key: String): List<Any>? = get(section)?.get(key)?.asList
 
     fun getStringList(section: String, key: String): List<String>? = getList(section, key)?.mapNotNull { it.asString }
 
@@ -108,7 +103,7 @@ interface Extensions {
         it.asDouble?.toFloat()
     }
 
-    fun getMap(section: String, key: String): Map<String, ExtensionValue>? = get(section)?.get(key)?.asMap
+    fun getMap(section: String, key: String): Map<String, Any>? = get(section)?.get(key)?.asMap
 
     fun getStringMap(section: String, key: String): Map<String, String>? {
         val map = getMap(section, key) ?: return null
@@ -164,18 +159,19 @@ interface Extensions {
         return output
     }
 
-    private fun get(section: String): MutableMap<String, ExtensionValue>? = (custom[section] as? MapValue)?.value
+    @Suppress("UNCHECKED_CAST")
+    private fun get(section: String): MutableMap<String, Any>? = custom[section] as? MutableMap<String, Any>
 
     /*
         Basic top-level setters
      */
 
     fun set(key: String, value: String) {
-        custom[key] = StringValue(value)
+        custom[key] = value
     }
 
     fun set(key: String, value: Boolean) {
-        custom[key] = BooleanValue(value)
+        custom[key] = value
     }
 
     fun set(key: String, value: Int) {
@@ -183,7 +179,7 @@ interface Extensions {
     }
 
     fun set(key: String, value: Long) {
-        custom[key] = LongValue(value)
+        custom[key] = value
     }
 
     fun set(key: String, value: Float) {
@@ -191,21 +187,19 @@ interface Extensions {
     }
 
     fun set(key: String, value: Double) {
-        custom[key] = DoubleValue(value)
+        custom[key] = value
     }
 
     fun setList(key: String, value: List<String>) {
-        custom[key] = ListValue(value.map { StringValue(it) }.toMutableList())
+        custom[key] = value.toMutableList()
     }
 
     fun setStringMap(key: String, value: Map<String, String>) {
-        custom[key] =
-            MapValue(value.mapValues { StringValue(it.value) }.toMutableMap())
+        custom[key] = value.toMutableMap()
     }
 
     fun setIntMap(key: String, value: Map<String, Int>) {
-        custom[key] =
-            MapValue(value.mapValues { LongValue(it.value.toLong()) }.toMutableMap())
+        custom[key] = value.mapValuesTo(mutableMapOf()) { it.value.toLong() }
     }
 
     /*
@@ -224,3 +218,21 @@ interface Extensions {
 
     fun getFloat(key: String): Float? = getDouble(key)?.toFloat()
 }
+
+private val Any.asString: String? get() = this as? String
+
+private val Any.asBoolean: Boolean? get() = this as? Boolean
+
+private val Any.asLong: Long? get() = when (this) {
+    is Long -> this
+    is Number -> toDouble().takeIf { it == floor(it) }?.toLong()
+    else -> null
+}
+
+private val Any.asDouble: Double? get() = (this as? Number)?.toDouble()
+
+@Suppress("UNCHECKED_CAST")
+private val Any.asList: List<Any>? get() = this as? List<Any>
+
+@Suppress("UNCHECKED_CAST")
+private val Any.asMap: Map<String, Any>? get() = this as? Map<String, Any>

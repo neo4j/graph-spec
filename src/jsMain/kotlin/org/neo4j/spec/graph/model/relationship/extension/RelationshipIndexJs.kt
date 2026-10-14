@@ -18,8 +18,9 @@ package org.neo4j.spec.graph.model.relationship.extension
 
 import js.objects.Record
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.index.IndexOptionJs
 import org.neo4j.spec.graph.model.index.toClass
 import org.neo4j.spec.graph.model.index.toJs
@@ -27,23 +28,21 @@ import org.neo4j.spec.graph.model.jso
 import org.neo4j.spec.graph.model.relationship.toClass
 import org.neo4j.spec.graph.model.relationship.toJs
 import org.neo4j.spec.graph.model.type.IndexType
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface RelationshipIndexJs {
     var type: String
     var properties: Array<String>
     var options: IndexOptionJs?
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
 fun relationshipIndexJs(
     type: String,
     properties: Array<String>,
     options: IndexOptionJs? = null,
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord()
 ): RelationshipIndexJs = jso {
     this.type = type
     this.properties = properties
@@ -55,12 +54,12 @@ fun RelationshipIndex.toJs() = relationshipIndexJs(
     type = type.name,
     properties = properties.toTypedArray(),
     options = options?.toJs(),
-    custom = custom.associateBy { _, value -> value.toJs() }
+    custom = custom.toCustomJs()
 )
 
 fun RelationshipIndexJs.toClass() = RelationshipIndex(
     type = IndexType.valueOf(type),
     properties = properties.toMutableSet(),
     options = options?.toClass(),
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

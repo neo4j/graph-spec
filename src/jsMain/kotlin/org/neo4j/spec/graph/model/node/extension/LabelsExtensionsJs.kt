@@ -17,30 +17,26 @@
 package org.neo4j.spec.graph.model.node.extension
 
 import js.objects.Record
-import js.objects.toRecord
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.node.toClass
-import org.neo4j.spec.graph.model.node.toJs
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface LabelsExtensionsJs {
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
-fun labelsExtensionsJs(custom: Record<String, ExtensionValueJs> = emptyRecord()): LabelsExtensionsJs = jso {
+fun labelsExtensionsJs(custom: Record<String, Any> = emptyRecord()): LabelsExtensionsJs = jso {
     this.custom = custom
 }
 
 fun LabelsExtensions.toJs() = labelsExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.toCustomJs()
 )
 
 fun LabelsExtensionsJs.toClass(): LabelsExtensions = LabelsExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

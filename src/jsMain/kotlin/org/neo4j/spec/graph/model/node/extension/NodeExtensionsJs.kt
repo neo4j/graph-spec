@@ -21,22 +21,22 @@ import js.objects.toRecord
 import kotlinx.js.JsPlainObject
 import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
 import org.neo4j.spec.graph.model.node.toClass
 import org.neo4j.spec.graph.model.node.toJs
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface NodeExtensionsJs {
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
     val indexes: Record<String, NodeIndexJs>
     var display: NodeDisplayJs?
 }
 
 fun nodeExtensionsJs(
-    custom: Record<String, ExtensionValueJs> = emptyRecord(),
+    custom: Record<String, Any> = emptyRecord(),
     indexes: Record<String, NodeIndexJs> = emptyRecord(),
     display: NodeDisplayJs? = null
 ): NodeExtensionsJs = jso {
@@ -46,13 +46,13 @@ fun nodeExtensionsJs(
 }
 
 fun NodeExtensions.toJs() = nodeExtensionsJs(
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord(),
+    custom = custom.toCustomJs(),
     indexes = indexes.mapValues { (_, index) -> index.toJs() }.toRecord(),
     display = display?.toJs()
 )
 
 fun NodeExtensionsJs.toClass(): NodeExtensions = NodeExtensions(
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap(),
+    custom = custom.toCustomClass(),
     indexes = indexes.associateBy { _, value -> value.toClass() },
     display = display?.toClass()
 )

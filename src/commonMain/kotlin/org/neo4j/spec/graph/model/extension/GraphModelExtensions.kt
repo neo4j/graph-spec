@@ -21,9 +21,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.GraphModel
 import org.neo4j.spec.graph.model.extension.Extensions
+import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import org.neo4j.spec.graph.model.extension.mapping.Mapping
 import org.neo4j.spec.graph.model.extension.source.Table
-import org.neo4j.spec.graph.model.value.ExtensionValue
 import kotlin.js.JsExport
 
 /**
@@ -35,7 +35,8 @@ import kotlin.js.JsExport
 @SerialDescription("Extensions for a graph model.")
 data class GraphModelExtensions(
     @SerialDescription("User-defined arbitrary data.")
-    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf(),
+    @Serializable(with = CustomMapSerializer::class)
+    override val custom: MutableMap<String, Any> = mutableMapOf(),
     @SerialDescription("Data source table schemas keyed by table id.")
     val tables: MutableMap<String, Table> = mutableMapOf(),
     @SerialDescription("Import mappings from tables to nodes and relationships.")

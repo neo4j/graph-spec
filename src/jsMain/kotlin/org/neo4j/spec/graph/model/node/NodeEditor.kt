@@ -31,7 +31,7 @@ import org.neo4j.spec.graph.model.property.PropertyEditor
 import org.neo4j.spec.graph.model.property.PropertyJs
 import org.neo4j.spec.graph.model.property.propertyJs
 import org.neo4j.spec.graph.model.remove
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
+
 @JsExport
 class NodeEditor {
     companion object {
@@ -240,7 +240,7 @@ class NodeEditor {
             labels: Array<String> = emptyArray(),
             properties: Array<String> = emptyArray(),
             options: IndexOptionJs? = null,
-            custom: Record<String, ExtensionValueJs> = emptyRecord()
+            custom: Record<String, Any> = emptyRecord()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.extensions.indexes.addUnique("index") {
