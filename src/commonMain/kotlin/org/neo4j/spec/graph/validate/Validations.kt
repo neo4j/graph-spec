@@ -30,6 +30,7 @@ import org.neo4j.spec.graph.validate.node.NodeMappingKeyType
 import org.neo4j.spec.graph.validate.node.NodeProperties
 import org.neo4j.spec.graph.validate.node.NodePropertyDuplicateName
 import org.neo4j.spec.graph.validate.node.NodePropertyEmptyName
+import org.neo4j.spec.graph.validate.node.NodePropertyPatternOneOf
 import org.neo4j.spec.graph.validate.node.constraint.NodeCompositeConstraintPropertyType
 import org.neo4j.spec.graph.validate.node.constraint.NodeConstraintDuplicatePropertySet
 import org.neo4j.spec.graph.validate.node.constraint.NodeConstraintProperties
@@ -44,6 +45,7 @@ import org.neo4j.spec.graph.validate.relationship.RelationshipIndexes
 import org.neo4j.spec.graph.validate.relationship.RelationshipNodes
 import org.neo4j.spec.graph.validate.relationship.RelationshipPropertyDuplicateName
 import org.neo4j.spec.graph.validate.relationship.RelationshipPropertyEmptyName
+import org.neo4j.spec.graph.validate.relationship.RelationshipPropertyPatternOneOf
 import org.neo4j.spec.graph.validate.relationship.RelationshipTargetCount
 import org.neo4j.spec.graph.validate.relationship.RelationshipType
 import org.neo4j.spec.graph.validate.relationship.RelationshipTypeToken
@@ -73,7 +75,9 @@ class Validations {
             NodeExistenceConstraint,
             RelationshipExistenceConstraint,
             RelationshipNodes,
-            RelationshipTargetCount
+            RelationshipTargetCount,
+            NodePropertyPatternOneOf,
+            RelationshipPropertyPatternOneOf
         )
 
         // UPX kg-builder `validateStructuredSchema` (schemas-validators/) - gates accepting
