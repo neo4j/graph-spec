@@ -388,79 +388,79 @@ extensions:
     actor:
       source: "cloud"
       columns:
-        actor_id:
+        - name: "actor_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        first_name:
+        - name: "first_name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_name:
+        - name: "last_name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["actor_id"]
+      primary_keys: ["actor_id"]
     actor_info:
       source: "cloud"
       columns:
-        actor_id:
+        - name: "actor_id"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        first_name:
+        - name: "first_name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_name:
+        - name: "last_name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        film_info:
+        - name: "film_info"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
     address:
       source: "cloud"
       columns:
-        address_id:
+        - name: "address_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        address:
+        - name: "address"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        address2:
+        - name: "address2"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        district:
+        - name: "district"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        city_id:
+        - name: "city_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        postal_code:
+        - name: "postal_code"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        phone:
+        - name: "phone"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["address_id"]
-      foreignKeys:
+      primary_keys: ["address_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["city_id"]
           references:
@@ -469,40 +469,40 @@ extensions:
     category:
       source: "cloud"
       columns:
-        category_id:
+        - name: "category_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["category_id"]
+      primary_keys: ["category_id"]
     city:
       source: "cloud"
       columns:
-        city_id:
+        - name: "city_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        city:
+        - name: "city"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        country_id:
+        - name: "country_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["city_id"]
-      foreignKeys:
+      primary_keys: ["city_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["country_id"]
           references:
@@ -511,64 +511,64 @@ extensions:
     country:
       source: "cloud"
       columns:
-        country_id:
+        - name: "country_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        country:
+        - name: "country"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["country_id"]
+      primary_keys: ["country_id"]
     customer:
       source: "cloud"
       columns:
-        customer_id:
+        - name: "customer_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        store_id:
+        - name: "store_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        first_name:
+        - name: "first_name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_name:
+        - name: "last_name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        email:
+        - name: "email"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        address_id:
+        - name: "address_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        activebool:
+        - name: "activebool"
           type: "bool"
           suggested: "BOOLEAN"
           supported: ["STRING", "BOOLEAN"]
-        create_date:
+        - name: "create_date"
           type: "date"
           suggested: "DATE"
           supported: ["DATE"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        active:
+        - name: "active"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-      primaryKeys: ["customer_id"]
-      foreignKeys:
+      primary_keys: ["customer_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["address_id"]
           references:
@@ -577,93 +577,93 @@ extensions:
     customer_list:
       source: "cloud"
       columns:
-        id:
+        - name: "id"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        address:
+        - name: "address"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        zip code:
+        - name: "zip code"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        phone:
+        - name: "phone"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        city:
+        - name: "city"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        country:
+        - name: "country"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        notes:
+        - name: "notes"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        sid:
+        - name: "sid"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
     film:
       source: "cloud"
       columns:
-        film_id:
+        - name: "film_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        title:
+        - name: "title"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        description:
+        - name: "description"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        release_year:
+        - name: "release_year"
           type: "year"
-        language_id:
+        - name: "language_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rental_duration:
+        - name: "rental_duration"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rental_rate:
+        - name: "rental_rate"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        length:
+        - name: "length"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        replacement_cost:
+        - name: "replacement_cost"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rating:
+        - name: "rating"
           type: "mpaa_rating"
           suggested: "STRING"
           supported: ["STRING"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        special_features:
+        - name: "special_features"
           type: "_text"
-        fulltext:
+        - name: "fulltext"
           type: "tsvector"
-      primaryKeys: ["film_id"]
-      foreignKeys:
+      primary_keys: ["film_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["language_id"]
           references:
@@ -672,20 +672,20 @@ extensions:
     film_actor:
       source: "cloud"
       columns:
-        actor_id:
+        - name: "actor_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        film_id:
+        - name: "film_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["actor_id", "film_id"]
-      foreignKeys:
+      primary_keys: ["actor_id", "film_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["actor_id"]
           references:
@@ -699,20 +699,20 @@ extensions:
     film_category:
       source: "cloud"
       columns:
-        film_id:
+        - name: "film_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        category_id:
+        - name: "category_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["film_id", "category_id"]
-      foreignKeys:
+      primary_keys: ["film_id", "category_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["category_id"]
           references:
@@ -726,59 +726,59 @@ extensions:
     film_list:
       source: "cloud"
       columns:
-        fid:
+        - name: "fid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        title:
+        - name: "title"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        description:
+        - name: "description"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        category:
+        - name: "category"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        price:
+        - name: "price"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        length:
+        - name: "length"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rating:
+        - name: "rating"
           type: "mpaa_rating"
           suggested: "STRING"
           supported: ["STRING"]
-        actors:
+        - name: "actors"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
     inventory:
       source: "cloud"
       columns:
-        inventory_id:
+        - name: "inventory_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        film_id:
+        - name: "film_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        store_id:
+        - name: "store_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["inventory_id"]
-      foreignKeys:
+      primary_keys: ["inventory_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["film_id"]
           references:
@@ -787,83 +787,83 @@ extensions:
     language:
       source: "cloud"
       columns:
-        language_id:
+        - name: "language_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "bpchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["language_id"]
+      primary_keys: ["language_id"]
     nicer_but_slower_film_list:
       source: "cloud"
       columns:
-        fid:
+        - name: "fid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        title:
+        - name: "title"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        description:
+        - name: "description"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        category:
+        - name: "category"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        price:
+        - name: "price"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        length:
+        - name: "length"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rating:
+        - name: "rating"
           type: "mpaa_rating"
           suggested: "STRING"
           supported: ["STRING"]
-        actors:
+        - name: "actors"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
     payment:
       source: "cloud"
       columns:
-        payment_id:
+        - name: "payment_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        customer_id:
+        - name: "customer_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        staff_id:
+        - name: "staff_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rental_id:
+        - name: "rental_id"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        amount:
+        - name: "amount"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        payment_date:
+        - name: "payment_date"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["payment_id"]
-      foreignKeys:
+      primary_keys: ["payment_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["customer_id"]
           references:
@@ -882,36 +882,36 @@ extensions:
     rental:
       source: "cloud"
       columns:
-        rental_id:
+        - name: "rental_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rental_date:
+        - name: "rental_date"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        inventory_id:
+        - name: "inventory_id"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        customer_id:
+        - name: "customer_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        return_date:
+        - name: "return_date"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        staff_id:
+        - name: "staff_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["rental_id"]
-      foreignKeys:
+      primary_keys: ["rental_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["customer_id"]
           references:
@@ -930,76 +930,76 @@ extensions:
     sales_by_film_category:
       source: "cloud"
       columns:
-        category:
+        - name: "category"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        total_sales:
+        - name: "total_sales"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
     sales_by_store:
       source: "cloud"
       columns:
-        store:
+        - name: "store"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        manager:
+        - name: "manager"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        total_sales:
+        - name: "total_sales"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
     staff:
       source: "cloud"
       columns:
-        staff_id:
+        - name: "staff_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        first_name:
+        - name: "first_name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_name:
+        - name: "last_name"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        address_id:
+        - name: "address_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        email:
+        - name: "email"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        store_id:
+        - name: "store_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        active:
+        - name: "active"
           type: "bool"
           suggested: "BOOLEAN"
           supported: ["STRING", "BOOLEAN"]
-        username:
+        - name: "username"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        password:
+        - name: "password"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        picture:
+        - name: "picture"
           type: "bytea"
-      primaryKeys: ["staff_id"]
-      foreignKeys:
+      primary_keys: ["staff_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["address_id"]
           references:
@@ -1008,59 +1008,59 @@ extensions:
     staff_list:
       source: "cloud"
       columns:
-        id:
+        - name: "id"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        address:
+        - name: "address"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        zip code:
+        - name: "zip code"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        phone:
+        - name: "phone"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        city:
+        - name: "city"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        country:
+        - name: "country"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        sid:
+        - name: "sid"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
     store:
       source: "cloud"
       columns:
-        store_id:
+        - name: "store_id"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        manager_staff_id:
+        - name: "manager_staff_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        address_id:
+        - name: "address_id"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        last_update:
+        - name: "last_update"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["store_id"]
-      foreignKeys:
+      primary_keys: ["store_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["address_id"]
           references:
@@ -1072,310 +1072,311 @@ extensions:
             table: "staff"
             columns: ["staff_id"]
   mappings:
-    - type: "NODE"
-      node: "node0"
-      table: "actor"
-      properties:
-        node0_property0: { column: "actor_id" }
-        node0_property1: { column: "first_name" }
-        node0_property2: { column: "last_name" }
-        node0_property3: { column: "last_update" }
-      key: ["node0_property0"]
-    - type: "NODE"
-      node: "node1"
-      table: "address"
-      properties:
-        node1_property0: { column: "address_id" }
-        node1_property1: { column: "address" }
-        node1_property2: { column: "address2" }
-        node1_property3: { column: "district" }
-        node1_property4: { column: "postal_code" }
-        node1_property5: { column: "phone" }
-        node1_property6: { column: "last_update" }
-      key: ["node1_property0"]
-    - type: "NODE"
-      node: "node2"
-      table: "category"
-      properties:
-        node2_property0: { column: "category_id" }
-        node2_property1: { column: "name" }
-        node2_property2: { column: "last_update" }
-      key: ["node2_property0"]
-    - type: "NODE"
-      node: "node3"
-      table: "city"
-      properties:
-        node3_property0: { column: "city_id" }
-        node3_property1: { column: "city" }
-        node3_property2: { column: "last_update" }
-      key: ["node3_property0"]
-    - type: "NODE"
-      node: "node4"
-      table: "country"
-      properties:
-        node4_property0: { column: "country_id" }
-        node4_property1: { column: "country" }
-        node4_property2: { column: "last_update" }
-      key: ["node4_property0"]
-    - type: "NODE"
-      node: "node5"
-      table: "customer"
-      properties:
-        node5_property0: { column: "customer_id" }
-        node5_property1: { column: "store_id" }
-        node5_property2: { column: "first_name" }
-        node5_property3: { column: "last_name" }
-        node5_property4: { column: "email" }
-        node5_property5: { column: "activebool" }
-        node5_property6: { column: "create_date" }
-        node5_property7: { column: "last_update" }
-        node5_property8: { column: "active" }
-      key: ["node5_property0"]
-    - type: "NODE"
-      node: "node6"
-      table: "film"
-      properties:
-        node6_property0: { column: "film_id" }
-        node6_property1: { column: "title" }
-        node6_property2: { column: "description" }
-        node6_property3: { column: "rental_duration" }
-        node6_property4: { column: "rental_rate" }
-        node6_property5: { column: "length" }
-        node6_property6: { column: "replacement_cost" }
-        node6_property7: { column: "rating" }
-        node6_property8: { column: "last_update" }
-      key: ["node6_property0"]
-    - type: "NODE"
-      node: "node7"
-      table: "inventory"
-      properties:
-        node7_property0: { column: "inventory_id" }
-        node7_property1: { column: "store_id" }
-        node7_property2: { column: "last_update" }
-      key: ["node7_property0"]
-    - type: "NODE"
-      node: "node8"
-      table: "language"
-      properties:
-        node8_property0: { column: "language_id" }
-        node8_property1: { column: "name" }
-        node8_property2: { column: "last_update" }
-      key: ["node8_property0"]
-    - type: "NODE"
-      node: "node9"
-      table: "payment"
-      properties:
-        node9_property0: { column: "payment_id" }
-        node9_property1: { column: "amount" }
-        node9_property2: { column: "payment_date" }
-      key: ["node9_property0"]
-    - type: "NODE"
-      node: "node10"
-      table: "rental"
-      properties:
-        node10_property0: { column: "rental_id" }
-        node10_property1: { column: "rental_date" }
-        node10_property2: { column: "return_date" }
-        node10_property3: { column: "last_update" }
-      key: ["node10_property0"]
-    - type: "NODE"
-      node: "node11"
-      table: "staff"
-      properties:
-        node11_property0: { column: "staff_id" }
-        node11_property1: { column: "first_name" }
-        node11_property2: { column: "last_name" }
-        node11_property3: { column: "email" }
-        node11_property4: { column: "store_id" }
-        node11_property5: { column: "active" }
-        node11_property6: { column: "username" }
-        node11_property7: { column: "password" }
-        node11_property8: { column: "last_update" }
-      key: ["node11_property0"]
-    - type: "NODE"
-      node: "node12"
-      table: "store"
-      properties:
-        node12_property0: { column: "store_id" }
-        node12_property1: { column: "last_update" }
-      key: ["node12_property0"]
-    - type: "RELATIONSHIP"
-      relationship: "relationship0"
-      table: "address"
-      from_node:
-        node: "node1"
-        properties:
-          node1_property0: { column: "address_id" }
-      to_node:
-        node: "node3"
-        properties:
-          node3_property0: { column: "city_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship1"
-      table: "city"
-      from_node:
-        node: "node3"
-        properties:
-          node3_property0: { column: "city_id" }
-      to_node:
-        node: "node4"
-        properties:
-          node4_property0: { column: "country_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship2"
-      table: "customer"
-      from_node:
-        node: "node5"
-        properties:
-          node5_property0: { column: "customer_id" }
-      to_node:
-        node: "node1"
-        properties:
-          node1_property0: { column: "address_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship3"
-      table: "film"
-      from_node:
-        node: "node6"
-        properties:
-          node6_property0: { column: "film_id" }
-      to_node:
-        node: "node8"
-        properties:
-          node8_property0: { column: "language_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship4"
-      table: "film_actor"
-      from_node:
+    mapping0:
+      - type: "NODE"
         node: "node0"
+        table: "actor"
         properties:
           node0_property0: { column: "actor_id" }
-      to_node:
-        node: "node6"
+          node0_property1: { column: "first_name" }
+          node0_property2: { column: "last_name" }
+          node0_property3: { column: "last_update" }
+        key: ["node0_property0"]
+      - type: "NODE"
+        node: "node1"
+        table: "address"
         properties:
-          node6_property0: { column: "film_id" }
-      properties:
-        relationship4_property0: { column: "last_update" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship5"
-      table: "film_category"
-      from_node:
+          node1_property0: { column: "address_id" }
+          node1_property1: { column: "address" }
+          node1_property2: { column: "address2" }
+          node1_property3: { column: "district" }
+          node1_property4: { column: "postal_code" }
+          node1_property5: { column: "phone" }
+          node1_property6: { column: "last_update" }
+        key: ["node1_property0"]
+      - type: "NODE"
         node: "node2"
+        table: "category"
         properties:
           node2_property0: { column: "category_id" }
-      to_node:
-        node: "node6"
+          node2_property1: { column: "name" }
+          node2_property2: { column: "last_update" }
+        key: ["node2_property0"]
+      - type: "NODE"
+        node: "node3"
+        table: "city"
         properties:
-          node6_property0: { column: "film_id" }
-      properties:
-        relationship5_property0: { column: "last_update" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship6"
-      table: "inventory"
-      from_node:
-        node: "node7"
+          node3_property0: { column: "city_id" }
+          node3_property1: { column: "city" }
+          node3_property2: { column: "last_update" }
+        key: ["node3_property0"]
+      - type: "NODE"
+        node: "node4"
+        table: "country"
         properties:
-          node7_property0: { column: "inventory_id" }
-      to_node:
-        node: "node6"
-        properties:
-          node6_property0: { column: "film_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship7"
-      table: "payment"
-      from_node:
-        node: "node9"
-        properties:
-          node9_property0: { column: "payment_id" }
-      to_node:
+          node4_property0: { column: "country_id" }
+          node4_property1: { column: "country" }
+          node4_property2: { column: "last_update" }
+        key: ["node4_property0"]
+      - type: "NODE"
         node: "node5"
+        table: "customer"
         properties:
           node5_property0: { column: "customer_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship8"
-      table: "payment"
-      from_node:
-        node: "node9"
+          node5_property1: { column: "store_id" }
+          node5_property2: { column: "first_name" }
+          node5_property3: { column: "last_name" }
+          node5_property4: { column: "email" }
+          node5_property5: { column: "activebool" }
+          node5_property6: { column: "create_date" }
+          node5_property7: { column: "last_update" }
+          node5_property8: { column: "active" }
+        key: ["node5_property0"]
+      - type: "NODE"
+        node: "node6"
+        table: "film"
         properties:
-          node9_property0: { column: "payment_id" }
-      to_node:
-        node: "node10"
-        properties:
-          node10_property0: { column: "rental_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship9"
-      table: "payment"
-      from_node:
-        node: "node9"
-        properties:
-          node9_property0: { column: "payment_id" }
-      to_node:
-        node: "node11"
-        properties:
-          node11_property0: { column: "staff_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship10"
-      table: "rental"
-      from_node:
-        node: "node10"
-        properties:
-          node10_property0: { column: "rental_id" }
-      to_node:
-        node: "node5"
-        properties:
-          node5_property0: { column: "customer_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship11"
-      table: "rental"
-      from_node:
-        node: "node10"
-        properties:
-          node10_property0: { column: "rental_id" }
-      to_node:
+          node6_property0: { column: "film_id" }
+          node6_property1: { column: "title" }
+          node6_property2: { column: "description" }
+          node6_property3: { column: "rental_duration" }
+          node6_property4: { column: "rental_rate" }
+          node6_property5: { column: "length" }
+          node6_property6: { column: "replacement_cost" }
+          node6_property7: { column: "rating" }
+          node6_property8: { column: "last_update" }
+        key: ["node6_property0"]
+      - type: "NODE"
         node: "node7"
+        table: "inventory"
         properties:
           node7_property0: { column: "inventory_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship12"
-      table: "rental"
-      from_node:
+          node7_property1: { column: "store_id" }
+          node7_property2: { column: "last_update" }
+        key: ["node7_property0"]
+      - type: "NODE"
+        node: "node8"
+        table: "language"
+        properties:
+          node8_property0: { column: "language_id" }
+          node8_property1: { column: "name" }
+          node8_property2: { column: "last_update" }
+        key: ["node8_property0"]
+      - type: "NODE"
+        node: "node9"
+        table: "payment"
+        properties:
+          node9_property0: { column: "payment_id" }
+          node9_property1: { column: "amount" }
+          node9_property2: { column: "payment_date" }
+        key: ["node9_property0"]
+      - type: "NODE"
         node: "node10"
+        table: "rental"
         properties:
           node10_property0: { column: "rental_id" }
-      to_node:
+          node10_property1: { column: "rental_date" }
+          node10_property2: { column: "return_date" }
+          node10_property3: { column: "last_update" }
+        key: ["node10_property0"]
+      - type: "NODE"
         node: "node11"
+        table: "staff"
         properties:
           node11_property0: { column: "staff_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship13"
-      table: "staff"
-      from_node:
-        node: "node11"
-        properties:
-          node11_property0: { column: "staff_id" }
-      to_node:
-        node: "node1"
-        properties:
-          node1_property0: { column: "address_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship14"
-      table: "store"
-      from_node:
+          node11_property1: { column: "first_name" }
+          node11_property2: { column: "last_name" }
+          node11_property3: { column: "email" }
+          node11_property4: { column: "store_id" }
+          node11_property5: { column: "active" }
+          node11_property6: { column: "username" }
+          node11_property7: { column: "password" }
+          node11_property8: { column: "last_update" }
+        key: ["node11_property0"]
+      - type: "NODE"
         node: "node12"
+        table: "store"
         properties:
           node12_property0: { column: "store_id" }
-      to_node:
-        node: "node1"
+          node12_property1: { column: "last_update" }
+        key: ["node12_property0"]
+      - type: "RELATIONSHIP"
+        relationship: "relationship0"
+        table: "address"
+        from_node:
+          node: "node1"
+          properties:
+            node1_property0: { column: "address_id" }
+        to_node:
+          node: "node3"
+          properties:
+            node3_property0: { column: "city_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship1"
+        table: "city"
+        from_node:
+          node: "node3"
+          properties:
+            node3_property0: { column: "city_id" }
+        to_node:
+          node: "node4"
+          properties:
+            node4_property0: { column: "country_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship2"
+        table: "customer"
+        from_node:
+          node: "node5"
+          properties:
+            node5_property0: { column: "customer_id" }
+        to_node:
+          node: "node1"
+          properties:
+            node1_property0: { column: "address_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship3"
+        table: "film"
+        from_node:
+          node: "node6"
+          properties:
+            node6_property0: { column: "film_id" }
+        to_node:
+          node: "node8"
+          properties:
+            node8_property0: { column: "language_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship4"
+        table: "film_actor"
+        from_node:
+          node: "node0"
+          properties:
+            node0_property0: { column: "actor_id" }
+        to_node:
+          node: "node6"
+          properties:
+            node6_property0: { column: "film_id" }
         properties:
-          node1_property0: { column: "address_id" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship15"
-      table: "store"
-      from_node:
-        node: "node12"
+          relationship4_property0: { column: "last_update" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship5"
+        table: "film_category"
+        from_node:
+          node: "node2"
+          properties:
+            node2_property0: { column: "category_id" }
+        to_node:
+          node: "node6"
+          properties:
+            node6_property0: { column: "film_id" }
         properties:
-          node12_property0: { column: "store_id" }
-      to_node:
-        node: "node11"
-        properties:
-          node11_property0: { column: "manager_staff_id" }
+          relationship5_property0: { column: "last_update" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship6"
+        table: "inventory"
+        from_node:
+          node: "node7"
+          properties:
+            node7_property0: { column: "inventory_id" }
+        to_node:
+          node: "node6"
+          properties:
+            node6_property0: { column: "film_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship7"
+        table: "payment"
+        from_node:
+          node: "node9"
+          properties:
+            node9_property0: { column: "payment_id" }
+        to_node:
+          node: "node5"
+          properties:
+            node5_property0: { column: "customer_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship8"
+        table: "payment"
+        from_node:
+          node: "node9"
+          properties:
+            node9_property0: { column: "payment_id" }
+        to_node:
+          node: "node10"
+          properties:
+            node10_property0: { column: "rental_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship9"
+        table: "payment"
+        from_node:
+          node: "node9"
+          properties:
+            node9_property0: { column: "payment_id" }
+        to_node:
+          node: "node11"
+          properties:
+            node11_property0: { column: "staff_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship10"
+        table: "rental"
+        from_node:
+          node: "node10"
+          properties:
+            node10_property0: { column: "rental_id" }
+        to_node:
+          node: "node5"
+          properties:
+            node5_property0: { column: "customer_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship11"
+        table: "rental"
+        from_node:
+          node: "node10"
+          properties:
+            node10_property0: { column: "rental_id" }
+        to_node:
+          node: "node7"
+          properties:
+            node7_property0: { column: "inventory_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship12"
+        table: "rental"
+        from_node:
+          node: "node10"
+          properties:
+            node10_property0: { column: "rental_id" }
+        to_node:
+          node: "node11"
+          properties:
+            node11_property0: { column: "staff_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship13"
+        table: "staff"
+        from_node:
+          node: "node11"
+          properties:
+            node11_property0: { column: "staff_id" }
+        to_node:
+          node: "node1"
+          properties:
+            node1_property0: { column: "address_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship14"
+        table: "store"
+        from_node:
+          node: "node12"
+          properties:
+            node12_property0: { column: "store_id" }
+        to_node:
+          node: "node1"
+          properties:
+            node1_property0: { column: "address_id" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship15"
+        table: "store"
+        from_node:
+          node: "node12"
+          properties:
+            node12_property0: { column: "store_id" }
+        to_node:
+          node: "node11"
+          properties:
+            node11_property0: { column: "manager_staff_id" }

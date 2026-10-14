@@ -239,67 +239,69 @@
       }
     },
     "mappings": {
-      "mapping0": {
-        "type": "NODE",
-        "node": "Actor",
-        "table": "actors",
-        "properties": {
-          "id": {
-            "column": "actor_id"
-          },
-          "name": {
-            "column": "actor_name"
-          }
-        },
-        "mode": "MERGE",
-        "key": [
-          "id"
-        ]
-      },
-      "mapping1": {
-        "type": "NODE",
-        "node": "Movie",
-        "table": "movies",
-        "properties": {
-          "id": {
-            "column": "id"
-          }
-        },
-        "mode": "MERGE",
-        "key": [
-          "id"
-        ]
-      },
-      "mapping2": {
-        "type": "RELATIONSHIP",
-        "relationship": "ACTED_IN",
-        "table": "actors-movies",
-        "from_node": {
+      "mapping0": [
+        {
+          "type": "NODE",
           "node": "Actor",
-          "label": "Actor",
+          "table": "actors",
           "properties": {
             "id": {
               "column": "actor_id"
+            },
+            "name": {
+              "column": "actor_name"
             }
-          }
+          },
+          "mode": "MERGE",
+          "key": [
+            "id"
+          ]
         },
-        "to_node": {
+        {
+          "type": "NODE",
           "node": "Movie",
-          "label": "Movie",
+          "table": "movies",
           "properties": {
             "id": {
-              "column": "movie_id"
+              "column": "id"
             }
-          }
+          },
+          "mode": "MERGE",
+          "key": [
+            "id"
+          ]
         },
-        "properties": {
-          "roles": {
-            "column": "field_1"
-          }
-        },
-        "mode": "MERGE",
-        "key": []
-      }
+        {
+          "type": "RELATIONSHIP",
+          "relationship": "ACTED_IN",
+          "table": "actors-movies",
+          "from_node": {
+            "node": "Actor",
+            "label": "Actor",
+            "properties": {
+              "id": {
+                "column": "actor_id"
+              }
+            }
+          },
+          "to_node": {
+            "node": "Movie",
+            "label": "Movie",
+            "properties": {
+              "id": {
+                "column": "movie_id"
+              }
+            }
+          },
+          "properties": {
+            "roles": {
+              "column": "field_1"
+            }
+          },
+          "mode": "MERGE",
+          "key": []
+        }
+      ]
     }
   }
 }
