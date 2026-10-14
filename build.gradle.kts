@@ -140,7 +140,7 @@ tasks.register<JavaExec>("generateGraphModelJsonSchema") {
     val compilation = kotlin.jvm().compilations.getByName("main")
     dependsOn(compilation.compileTaskProvider)
     classpath = compilation.output.classesDirs + compilation.compileDependencyFiles
-    mainClass.set("schema.GenerateGraphModelJsonSchemaKt")
+    mainClass.set("org.neo4j.spec.graph.schema.GenerateGraphModelJsonSchemaKt")
     workingDir = layout.projectDirectory.asFile
     doFirst {
         val outputFile = layout.projectDirectory.file("go/spec.json").asFile
