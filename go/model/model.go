@@ -23,137 +23,12 @@ var ConstraintTypeValues = []ConstraintType{
 	ConstraintTypeUnique,
 }
 
-type ExtensionValueUnion interface {
-	ExtensionValueType() string
-	isExtensionValue()
-}
-
-type ExtensionValue struct {
-	ExtensionValueUnion
-}
-
-func (w ExtensionValue) MarshalJSON() ([]byte, error) {
-	if w.ExtensionValueUnion == nil {
-		return []byte("null"), nil
-	}
-	return json.Marshal(w.ExtensionValueUnion)
-}
-
-func (w *ExtensionValue) UnmarshalJSON(data []byte) error {
-	data = bytes.TrimSpace(data)
-	if bytes.Equal(data, []byte("null")) {
-		w.ExtensionValueUnion = nil
-		return nil
-	}
-
-	var peek struct {
-		Type string `json:"type"`
-	}
-	if err := json.Unmarshal(data, &peek); err != nil {
-		return fmt.Errorf("ExtensionValue: invalid JSON: %w", err)
-	}
-	if peek.Type == "" {
-		return fmt.Errorf("ExtensionValue: missing discriminator field %q", "type")
-	}
-
-	var v ExtensionValueUnion
-	switch peek.Type {
-	case "BOOLEAN":
-		v = &BOOLEAN{}
-	case "DOUBLE":
-		v = &DOUBLE{}
-	case "LIST":
-		v = &LIST{}
-	case "LONG":
-		v = &LONG{}
-	case "MAP":
-		v = &MAP{}
-	case "STRING":
-		v = &STRING{}
-	default:
-		return fmt.Errorf("ExtensionValue: unknown type %q", peek.Type)
-	}
-
-	if err := json.Unmarshal(data, v); err != nil {
-		return fmt.Errorf("ExtensionValue: invalid %q payload: %w", peek.Type, err)
-	}
-
-	w.ExtensionValueUnion = v
-	return nil
-}
-
-// A boolean extension value.
-type BOOLEAN struct {
-	Type string `json:"type"`
-	// The value.
-	Value bool `json:"value"`
-}
-
-func (BOOLEAN) isExtensionValue() {}
-
-func (BOOLEAN) ExtensionValueType() string { return "BOOLEAN" }
-
-// A double extension value.
-type DOUBLE struct {
-	Type string `json:"type"`
-	// The value.
-	Value float64 `json:"value"`
-}
-
-func (DOUBLE) isExtensionValue() {}
-
-func (DOUBLE) ExtensionValueType() string { return "DOUBLE" }
-
-// A list extension value.
-type LIST struct {
-	Type string `json:"type"`
-	// The values in the list.
-	Value []ExtensionValue `json:"value"`
-}
-
-func (LIST) isExtensionValue() {}
-
-func (LIST) ExtensionValueType() string { return "LIST" }
-
-// A long extension value.
-type LONG struct {
-	Type string `json:"type"`
-	// The value.
-	Value int `json:"value"`
-}
-
-func (LONG) isExtensionValue() {}
-
-func (LONG) ExtensionValueType() string { return "LONG" }
-
-// A map extension value.
-type MAP struct {
-	Type string `json:"type"`
-	// The values in the map keyed by name.
-	Value map[string]ExtensionValue `json:"value"`
-}
-
-func (MAP) isExtensionValue() {}
-
-func (MAP) ExtensionValueType() string { return "MAP" }
-
-// A string extension value.
-type STRING struct {
-	Type string `json:"type"`
-	// The value.
-	Value string `json:"value"`
-}
-
-func (STRING) isExtensionValue() {}
-
-func (STRING) ExtensionValueType() string { return "STRING" }
-
 // The target of a foreign key.
 type ForeignKeyReference struct {
 	// Names of the referenced columns.
 	Columns []string `json:"columns,omitempty"`
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Id of the referenced table.
 	Table string `json:"table"`
 }
@@ -163,7 +38,7 @@ type ForeignKey struct {
 	// Names of the columns in this table which make up the key.
 	Columns []string `json:"columns"`
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// The table and columns the key refers to.
 	References ForeignKeyReference `json:"references"`
 }
@@ -411,7 +286,7 @@ var Neo4jTypeValues = []Neo4jType{
 // A column of a data source table.
 type TableColumn struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Dimension of the column when it holds vectors.
 	Dimension *int `json:"dimension,omitempty"`
 	// Human-readable name. Used in place of the stable id in the pretty form of the model.
@@ -431,7 +306,7 @@ type Table struct {
 	// Columns of the table keyed by column name.
 	Columns map[string]TableColumn `json:"columns,omitempty"`
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Foreign keys of the table keyed by id.
 	ForeignKeys map[string]ForeignKey `json:"foreignKeys,omitempty"`
 	// Names of the columns making up the primary key.
@@ -443,7 +318,7 @@ type Table struct {
 // Extensions for a graph model.
 type GraphModelExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Import mappings from tables to nodes and relationships.
 	Mappings []Mapping `json:"mappings,omitempty"`
 	// Data source table schemas keyed by table id.
@@ -453,7 +328,7 @@ type GraphModelExtensions struct {
 // Extensions for the labels of a node.
 type LabelsExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 }
 
 // The labels of a node.
@@ -471,7 +346,7 @@ type Labels struct {
 // Extensions for a node constraint.
 type NodeConstraintExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 }
 
 // A constraint on a node.
@@ -493,7 +368,7 @@ type NodeDisplay struct {
 	// Display colour of the node as a hex string, e.g. #FF8800.
 	Colour *string `json:"colour,omitempty"`
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Horizontal position.
 	X float64 `json:"x"`
 	// Vertical position.
@@ -648,7 +523,7 @@ var IndexTypeValues = []IndexType{
 // An index on a node.
 type NodeIndex struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Labels the index covers.
 	Labels []string `json:"labels"`
 	// Human-readable name. Used in place of the stable id in the pretty form of the model.
@@ -664,7 +539,7 @@ type NodeIndex struct {
 // Extensions for a node.
 type NodeExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Optional visual information of this node.
 	Display *NodeDisplay `json:"display,omitempty"`
 	// Database indexes on this node keyed by id.
@@ -674,7 +549,7 @@ type NodeExtensions struct {
 // Extensions for a property.
 type PropertyExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 }
 
 // A property of a node or relationship.
@@ -728,7 +603,7 @@ type Node struct {
 // Extensions for a relationship constraint.
 type RelationshipConstraintExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 }
 
 // A constraint on a relationship.
@@ -746,7 +621,7 @@ type RelationshipConstraint struct {
 // An index on a relationship.
 type RelationshipIndex struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Human-readable name. Used in place of the stable id in the pretty form of the model.
 	Name *string `json:"name,omitempty"`
 	// Configuration specific to the type of index.
@@ -760,7 +635,7 @@ type RelationshipIndex struct {
 // Extensions for a relationship.
 type RelationshipExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Indexes on this relationship keyed by id.
 	Indexes map[string]RelationshipIndex `json:"indexes,omitempty"`
 }

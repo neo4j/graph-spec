@@ -149,155 +149,10 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 }
             },
             "required": [],
-            "additionalProperties": false
-        },
-        "ExtensionValue": {
-            "oneOf": [
-                {
-                    "$ref": "#/$defs/BOOLEAN"
-                },
-                {
-                    "$ref": "#/$defs/DOUBLE"
-                },
-                {
-                    "$ref": "#/$defs/LIST"
-                },
-                {
-                    "$ref": "#/$defs/LONG"
-                },
-                {
-                    "$ref": "#/$defs/MAP"
-                },
-                {
-                    "$ref": "#/$defs/STRING"
-                }
-            ],
-            "description": "A value stored in an extension. Either a string, boolean, long, double, list or map."
-        },
-        "BOOLEAN": {
-            "type": "object",
-            "description": "A boolean extension value.",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "BOOLEAN"
-                },
-                "value": {
-                    "type": "boolean",
-                    "description": "The value."
-                }
-            },
-            "required": [
-                "type",
-                "value"
-            ],
-            "additionalProperties": false
-        },
-        "DOUBLE": {
-            "type": "object",
-            "description": "A double extension value.",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "DOUBLE"
-                },
-                "value": {
-                    "type": "number",
-                    "description": "The value."
-                }
-            },
-            "required": [
-                "type",
-                "value"
-            ],
-            "additionalProperties": false
-        },
-        "LIST": {
-            "type": "object",
-            "description": "A list extension value.",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "LIST"
-                },
-                "value": {
-                    "type": "array",
-                    "description": "The values in the list.",
-                    "items": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
-                }
-            },
-            "required": [
-                "type",
-                "value"
-            ],
-            "additionalProperties": false
-        },
-        "LONG": {
-            "type": "object",
-            "description": "A long extension value.",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "LONG"
-                },
-                "value": {
-                    "type": "integer",
-                    "description": "The value."
-                }
-            },
-            "required": [
-                "type",
-                "value"
-            ],
-            "additionalProperties": false
-        },
-        "MAP": {
-            "type": "object",
-            "description": "A map extension value.",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "MAP"
-                },
-                "value": {
-                    "type": "object",
-                    "description": "The values in the map keyed by name.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
-                }
-            },
-            "required": [
-                "type",
-                "value"
-            ],
-            "additionalProperties": false
-        },
-        "STRING": {
-            "type": "object",
-            "description": "A string extension value.",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "const": "STRING"
-                },
-                "value": {
-                    "type": "string",
-                    "description": "The value."
-                }
-            },
-            "required": [
-                "type",
-                "value"
-            ],
             "additionalProperties": false
         },
         "Property": {
@@ -422,9 +277,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 }
             },
             "required": [],
@@ -487,9 +340,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 }
             },
             "required": [],
@@ -502,9 +353,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 },
                 "indexes": {
                     "type": "object",
@@ -564,9 +413,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 },
                 "name": {
                     "type": [
@@ -794,9 +641,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 }
             },
             "required": [
@@ -946,9 +791,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 }
             },
             "required": [],
@@ -961,9 +804,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 },
                 "indexes": {
                     "type": "object",
@@ -1005,9 +846,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 },
                 "name": {
                     "type": [
@@ -1030,9 +869,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 },
                 "tables": {
                     "type": "object",
@@ -1084,9 +921,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 }
             },
             "required": [
@@ -1127,9 +962,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 },
                 "name": {
                     "type": [
@@ -1160,9 +993,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 }
             },
             "required": [
@@ -1189,9 +1020,7 @@
                 "custom": {
                     "type": "object",
                     "description": "User-defined arbitrary data.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/ExtensionValue"
-                    }
+                    "additionalProperties": {}
                 }
             },
             "required": [
