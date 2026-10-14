@@ -20,6 +20,7 @@ import kotlinx.cinterop.ByteVar
 import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.serialization.json.Json
+import org.neo4j.spec.graph.v1.GraphSpec
 import org.neo4j.spec.graph.v1.validate.ValidationTree
 import org.neo4j.spec.graph.v1.validate.Validations
 import kotlin.experimental.ExperimentalNativeApi
