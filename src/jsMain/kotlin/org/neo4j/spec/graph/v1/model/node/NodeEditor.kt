@@ -1,0 +1,299 @@
+/*
+ * Copyright (c) "Neo4j"
+ * Neo4j Sweden AB [https://neo4j.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.neo4j.spec.graph.v1.model.node
+
+import js.objects.Record
+import org.neo4j.spec.graph.v1.model.GraphModelJs
+import org.neo4j.spec.graph.v1.model.addUnique
+import org.neo4j.spec.graph.v1.model.emptyRecord
+import org.neo4j.spec.graph.v1.model.getOrThrow
+import org.neo4j.spec.graph.v1.model.index.IndexOptionJs
+import org.neo4j.spec.graph.v1.model.node.extension.NodeConstraintExtensionsJs
+import org.neo4j.spec.graph.v1.model.node.extension.NodeIndexEditor
+import org.neo4j.spec.graph.v1.model.node.extension.NodeIndexJs
+import org.neo4j.spec.graph.v1.model.node.extension.nodeConstraintExtensionsJs
+import org.neo4j.spec.graph.v1.model.node.extension.nodeIndexJs
+import org.neo4j.spec.graph.v1.model.property.PropertyEditor
+import org.neo4j.spec.graph.v1.model.property.PropertyJs
+import org.neo4j.spec.graph.v1.model.property.propertyJs
+import org.neo4j.spec.graph.v1.model.remove
+import org.neo4j.spec.graph.v1.model.value.ExtensionValueJs
+@JsExport
+class NodeEditor {
+    companion object {
+        @JsStatic
+        fun setName(model: GraphModelJs, nodeId: String, newName: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            node.name = newName
+        }
+
+        @JsStatic
+        fun setReference(model: GraphModelJs, nodeId: String, reference: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            node.reference = reference
+        }
+
+        @JsStatic
+        fun addAlias(model: GraphModelJs, nodeId: String, alias: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            if (!node.aliases.contains(alias)) {
+                node.aliases += alias
+            }
+        }
+
+        @JsStatic
+        fun removeAlias(model: GraphModelJs, nodeId: String, alias: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            node.aliases = node.aliases.filter { it != alias }.toTypedArray()
+        }
+
+        /*
+            Labels
+         */
+
+        @JsStatic
+        fun setIdentifyingLabel(model: GraphModelJs, nodeId: String, label: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            LabelsEditor.setIdentifier(node.labels, label)
+        }
+
+        @JsStatic
+        fun addImpliedLabel(model: GraphModelJs, nodeId: String, label: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            LabelsEditor.addImplied(node.labels, label)
+        }
+
+        @JsStatic
+        fun removeImpliedLabel(model: GraphModelJs, nodeId: String, label: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            LabelsEditor.removeImplied(node.labels, label)
+        }
+
+        @JsStatic
+        fun addOptionalLabel(model: GraphModelJs, nodeId: String, label: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            LabelsEditor.addOptional(node.labels, label)
+        }
+
+        @JsStatic
+        fun removeOptionalLabel(model: GraphModelJs, nodeId: String, label: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            LabelsEditor.removeOptional(node.labels, label)
+        }
+
+        /*
+            Properties
+         */
+
+        @JsStatic
+        fun addProperty(model: GraphModelJs, nodeId: String): String {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            return node.properties.addUnique("property") { id ->
+                propertyJs(id = id, name = id)
+            }
+        }
+
+        @JsStatic
+        fun removeProperty(model: GraphModelJs, nodeId: String, propertyId: String) {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            node.properties.remove(propertyId)
+        }
+
+        @JsStatic
+        fun setPropertyName(model: GraphModelJs, nodeId: String, propertyId: String, name: String) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setName(property, name)
+        }
+
+        @JsStatic
+        fun setPropertyType(model: GraphModelJs, nodeId: String, propertyId: String, type: String) { // TODO neo4j type
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setType(property, type)
+        }
+
+        @JsStatic
+        fun setPropertyDimension(model: GraphModelJs, nodeId: String, propertyId: String, dimension: Int?) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setDimension(property, dimension)
+        }
+
+        @JsStatic
+        fun setPropertyMustExist(model: GraphModelJs, nodeId: String, propertyId: String, mustExist: Boolean) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setMustExist(property, mustExist)
+        }
+
+        @JsStatic
+        fun setPropertyUnique(model: GraphModelJs, nodeId: String, propertyId: String, unique: Boolean) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setUnique(property, unique)
+        }
+
+        @JsStatic
+        fun setPropertyKey(model: GraphModelJs, nodeId: String, propertyId: String, key: Boolean) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setKey(property, key)
+        }
+
+        @JsStatic
+        fun setPropertyReference(model: GraphModelJs, nodeId: String, propertyId: String, reference: String) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setReference(property, reference)
+        }
+
+        @JsStatic
+        fun setPropertyPattern(model: GraphModelJs, nodeId: String, propertyId: String, pattern: String) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.setPattern(property, pattern)
+        }
+
+        @JsStatic
+        fun addPropertyOneOf(model: GraphModelJs, nodeId: String, propertyId: String, value: String) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.addOneOf(property, value)
+        }
+
+        @JsStatic
+        fun removePropertyOneOf(model: GraphModelJs, nodeId: String, propertyId: String, index: Int) {
+            val property = getProperty(model, nodeId, propertyId)
+            PropertyEditor.removeOneOf(property, index)
+        }
+
+        private fun getProperty(model: GraphModelJs, nodeId: String, propertyId: String): PropertyJs {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            val property = node.properties.getOrThrow(propertyId, "Property")
+            return property
+        }
+
+        /*
+            Constraints
+         */
+
+        @JsStatic
+        fun addConstraint(
+            model: GraphModelJs,
+            nodeId: String,
+            type: String,
+            label: String? = null,
+            properties: Array<String> = emptyArray(),
+            extensions: NodeConstraintExtensionsJs = nodeConstraintExtensionsJs()
+        ): String {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            return node.constraints.addUnique("constraint") {
+                nodeConstraintJs(type, label, properties, extensions)
+            }
+        }
+
+        @JsStatic
+        fun setConstraintType(model: GraphModelJs, nodeId: String, constraintId: String, type: String) {
+            val constraint = getConstraint(model, nodeId, constraintId)
+            NodeConstraintEditor.setType(constraint, type)
+        }
+
+        @JsStatic
+        fun setConstraintLabel(model: GraphModelJs, nodeId: String, constraintId: String, label: String) {
+            val constraint = getConstraint(model, nodeId, constraintId)
+            NodeConstraintEditor.setLabel(constraint, label)
+        }
+
+        @JsStatic
+        fun addConstraintProperty(model: GraphModelJs, nodeId: String, constraintId: String, propertyId: String) {
+            val constraint = getConstraint(model, nodeId, constraintId)
+            NodeConstraintEditor.addProperty(constraint, propertyId)
+        }
+
+        @JsStatic
+        fun removeConstraintProperty(model: GraphModelJs, nodeId: String, constraintId: String, propertyId: String) {
+            val constraint = getConstraint(model, nodeId, constraintId)
+            NodeConstraintEditor.removeProperty(constraint, propertyId)
+        }
+
+        private fun getConstraint(model: GraphModelJs, nodeId: String, constraintId: String): NodeConstraintJs {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            val constraint = node.constraints.getOrThrow(constraintId, "Constraint")
+            return constraint
+        }
+
+        /*
+            Indexes
+         */
+
+        @JsStatic
+        fun addIndex(
+            model: GraphModelJs,
+            nodeId: String,
+            type: String,
+            labels: Array<String> = emptyArray(),
+            properties: Array<String> = emptyArray(),
+            options: IndexOptionJs? = null,
+            custom: Record<String, ExtensionValueJs> = emptyRecord()
+        ): String {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            return node.extensions.indexes.addUnique("index") {
+                nodeIndexJs(type, labels, properties, options, custom)
+            }
+        }
+
+        @JsStatic
+        fun setIndexType(model: GraphModelJs, nodeId: String, indexId: String, type: String) {
+            val index = getIndex(model, nodeId, indexId)
+            NodeIndexEditor.setType(index, type)
+        }
+
+        @JsStatic
+        fun addIndexLabel(model: GraphModelJs, nodeId: String, indexId: String, label: String) {
+            val index = getIndex(model, nodeId, indexId)
+            NodeIndexEditor.addLabel(index, label)
+        }
+
+        @JsStatic
+        fun removeIndexLabel(model: GraphModelJs, nodeId: String, indexId: String, label: String) {
+            val index = getIndex(model, nodeId, indexId)
+            NodeIndexEditor.removeLabel(index, label)
+        }
+
+        @JsStatic
+        fun addIndexProperty(model: GraphModelJs, nodeId: String, indexId: String, propertyId: String) {
+            val index = getIndex(model, nodeId, indexId)
+            NodeIndexEditor.addProperty(index, propertyId)
+        }
+
+        @JsStatic
+        fun removeIndexProperty(model: GraphModelJs, nodeId: String, indexId: String, propertyId: String) {
+            val index = getIndex(model, nodeId, indexId)
+            NodeIndexEditor.removeProperty(index, propertyId)
+        }
+
+        @JsStatic
+        fun setIndexOption(model: GraphModelJs, nodeId: String, indexId: String, options: IndexOptionJs) {
+            val index = getIndex(model, nodeId, indexId)
+            NodeIndexEditor.setOption(index, options)
+        }
+
+        @JsStatic
+        fun removeIndexOption(model: GraphModelJs, nodeId: String, indexId: String) {
+            val index = getIndex(model, nodeId, indexId)
+            NodeIndexEditor.removeOption(index)
+        }
+
+        private fun getIndex(model: GraphModelJs, nodeId: String, indexId: String): NodeIndexJs {
+            val node = model.nodes.getOrThrow(nodeId, "Node")
+            val index = node.extensions.indexes.getOrThrow(indexId, "Index")
+            return index
+        }
+    }
+}

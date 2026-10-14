@@ -1,0 +1,54 @@
+/*
+ * Copyright (c) "Neo4j"
+ * Neo4j Sweden AB [https://neo4j.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.neo4j.spec.graph.v1.model
+
+object Version {
+    /*
+        Data model versions
+     */
+    const val DATA_MODEL_V23 = "2.3.0"
+    const val DATA_MODEL_V24 = "2.4.0"
+    const val DATA_MODEL_V30 = "3.0.0"
+
+    /*
+        Wrapped data model versions
+     */
+    const val DATA_MODEL_WRAPPED_V30 = "3.0.0"
+
+    /*
+        Import Spec versions
+     */
+    const val IMPORT_SPEC_V1 = "1.0.0"
+
+    /*
+        Graph spec versions
+     */
+    const val LATEST = "4.0.0"
+
+    /*
+        Schema urls, the spec version is always the last path segment.
+     */
+    const val SCHEMA_BASE = "https://neo4j.com/ontology-graph-spec/"
+
+    fun schemaUrl(version: String): String = "$SCHEMA_BASE$version/"
+
+    fun parseSchemaVersion(schema: String): String {
+        val version = schema.trim().trimEnd('/').substringAfterLast('/')
+        require(version.isNotBlank()) { "Unable to determine version from schema '$schema'" }
+        return version
+    }
+}
