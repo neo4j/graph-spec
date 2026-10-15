@@ -46,7 +46,7 @@ fun Record<String, Any>.toCustomClass(): MutableMap<String, Any> = (this as Any)
 fun Any.toJsValue(): Any = when (this) {
     is String, is Boolean -> this
     is Byte, is Short, is Int -> (this as Number).toDouble()
-    is Long -> if (abs(this) <= MAX_SAFE_INTEGER) toDouble() else bigInt(toString())
+    is Long -> if (this in -MAX_SAFE_INTEGER..MAX_SAFE_INTEGER) toDouble() else bigInt(toString())
     is Float, is Double -> (this as Number).toDouble()
     is List<*> -> map { (it ?: error("Custom values cannot be null")).toJsValue() }.toTypedArray()
     is Map<*, *> -> entries.associate { (key, value) ->
