@@ -91,4 +91,33 @@ class NodeMappingKeyTest {
         assertEquals(1, issues.size)
         assertEquals("missing_node_mapping_key", issues.first().code)
     }
+
+    @Test
+    fun `fail when a second mapping of the node has no key`() {
+        val node = Node(
+            labels = Labels(identifier = "Person"),
+            properties = mutableMapOf("name" to Property())
+        )
+        model.nodes["person"] = node
+        model.extensions.mappings["mapping0"] = mutableListOf(
+            NodeMapping(
+                node = "person",
+                table = "people.csv",
+                properties = mutableMapOf(),
+                key = mutableSetOf("name")
+            ),
+            NodeMapping(
+                node = "person",
+                table = "more_people.csv",
+                properties = mutableMapOf(),
+                key = mutableSetOf()
+            )
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateNode(model, "person", node, issues)
+
+        assertEquals(1, issues.size)
+        assertEquals("extensions.mappings.mapping0[1].key", issues[0].path)
+    }
 }

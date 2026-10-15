@@ -21,16 +21,17 @@ import org.neo4j.spec.graph.model.node.Node
 import org.neo4j.spec.graph.validate.Issue
 object NodeMappingKey : NodeValidation {
     override fun validateNode(model: GraphModel, nodeId: String, node: Node, issues: MutableList<Issue>) {
-        val (mappingId, index, nodeMapping) = findNodeMapping(model, nodeId) ?: return
-        if (nodeMapping.key.isEmpty()) {
-            issues.add(
-                Issue(
-                    // Replaced legacy code: missing_node_key_property
-                    code = "missing_node_mapping_key",
-                    message = "Node '$nodeId' has no mapping key defined",
-                    path = "extensions.mappings.$mappingId[$index].key"
+        for ((mappingId, index, nodeMapping) in findNodeMappings(model, nodeId)) {
+            if (nodeMapping.key.isEmpty()) {
+                issues.add(
+                    Issue(
+                        // Replaced legacy code: missing_node_key_property
+                        code = "missing_node_mapping_key",
+                        message = "Node '$nodeId' has no mapping key defined",
+                        path = "extensions.mappings.$mappingId[$index].key"
+                    )
                 )
-            )
+            }
         }
     }
 }

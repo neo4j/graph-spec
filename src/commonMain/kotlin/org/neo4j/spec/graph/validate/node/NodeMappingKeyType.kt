@@ -22,18 +22,19 @@ import org.neo4j.spec.graph.model.property.Neo4jType
 import org.neo4j.spec.graph.validate.Issue
 object NodeMappingKeyType : NodeValidation {
     override fun validateNode(model: GraphModel, nodeId: String, node: Node, issues: MutableList<Issue>) {
-        val (mappingId, index, nodeMapping) = findNodeMapping(model, nodeId) ?: return
-        for (propertyId in nodeMapping.key) {
-            val property = node.properties[propertyId] ?: continue
-            if (property.type != Neo4jType.STRING && property.type != Neo4jType.INTEGER) {
-                issues.add(
-                    Issue(
-                        // Replaced legacy code: invalid_node_key_property_type
-                        code = "invalid_node_mapping_key_type",
-                        message = "Mapping key '$propertyId' on node '$nodeId' must be STRING or INTEGER",
-                        path = "extensions.mappings.$mappingId[$index].key.$propertyId"
+        for ((mappingId, index, nodeMapping) in findNodeMappings(model, nodeId)) {
+            for (propertyId in nodeMapping.key) {
+                val property = node.properties[propertyId] ?: continue
+                if (property.type != Neo4jType.STRING && property.type != Neo4jType.INTEGER) {
+                    issues.add(
+                        Issue(
+                            // Replaced legacy code: invalid_node_key_property_type
+                            code = "invalid_node_mapping_key_type",
+                            message = "Mapping key '$propertyId' on node '$nodeId' must be STRING or INTEGER",
+                            path = "extensions.mappings.$mappingId[$index].key.$propertyId"
+                        )
                     )
-                )
+                }
             }
         }
     }

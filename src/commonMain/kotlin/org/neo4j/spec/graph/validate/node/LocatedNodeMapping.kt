@@ -22,15 +22,16 @@ import org.neo4j.spec.graph.model.extension.mapping.NodeMapping
 internal data class LocatedNodeMapping(val mappingId: String, val index: Int, val mapping: NodeMapping)
 
 /**
- * Finds the first mapping of [nodeId] along with where it lives in the model's mappings.
+ * Finds every mapping of [nodeId] along with where each lives in the model's mappings.
  */
-internal fun findNodeMapping(model: GraphModel, nodeId: String): LocatedNodeMapping? {
+internal fun findNodeMappings(model: GraphModel, nodeId: String): List<LocatedNodeMapping> {
+    val found = mutableListOf<LocatedNodeMapping>()
     for ((mappingId, mappings) in model.extensions.mappings) {
         for ((index, mapping) in mappings.withIndex()) {
             if (mapping is NodeMapping && mapping.node == nodeId) {
-                return LocatedNodeMapping(mappingId, index, mapping)
+                found.add(LocatedNodeMapping(mappingId, index, mapping))
             }
         }
     }
-    return null
+    return found
 }
