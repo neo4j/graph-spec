@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/order",
+  "title": "Order",
+  "description": "An order placed by a customer.\n\nOrders are immutable once placed.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "description": "Unique identifier of the order." },
+    "quantity": { "type": "integer", "minimum": 0 },
+    "price": { "type": "number" },
+    "gift": { "type": "boolean" },
+    "metadata": {},
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "attributes": { "type": "object", "additionalProperties": { "type": "string" } },
+    "matrix": { "type": "array", "items": { "type": "array", "items": { "type": "number" } } },
+    "customer": { "$ref": "#/$defs/Customer", "description": "Who placed the order." },
+    "lines": { "type": "array", "items": { "$ref": "#/$defs/OrderLine" } },
+    "discounts": { "type": "object", "additionalProperties": { "$ref": "#/$defs/Discount" } },
+    "flags": { "$ref": "#/$defs/Flags" }
+  },
+  "required": ["id", "quantity", "metadata", "tags", "customer", "flags"],
+  "additionalProperties": false,
+  "$defs": {
+    "Customer": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "user_id": { "type": "string" },
+        "referrer": { "$ref": "#/$defs/Customer", "description": "Recursive references are pointers when optional." }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "OrderLine": {
+      "type": "object",
+      "properties": { "sku": { "type": "string" }, "count": { "type": "integer" } },
+      "required": ["sku", "count"],
+      "additionalProperties": false
+    },
+    "Discount": {
+      "type": "object",
+      "properties": { "percent": { "type": "number" } },
+      "additionalProperties": false
+    },
+    "Flags": { "type": "object", "properties": {}, "additionalProperties": false }
+  }
+}
