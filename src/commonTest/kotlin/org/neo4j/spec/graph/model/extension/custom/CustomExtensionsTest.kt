@@ -23,7 +23,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
-class ExtensionsTest {
+class CustomExtensionsTest {
 
     private val extensions = GraphModelExtensions()
 

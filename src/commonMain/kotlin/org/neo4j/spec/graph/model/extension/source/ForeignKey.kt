@@ -19,7 +19,7 @@ package org.neo4j.spec.graph.model.extension.source
 import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.neo4j.spec.graph.model.extension.Extensions
+import org.neo4j.spec.graph.model.extension.CustomExtensions
 import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import kotlin.js.JsExport
 
@@ -35,4 +35,4 @@ data class ForeignKey(
     @SerialDescription("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()
-) : Extensions
+) : CustomExtensions

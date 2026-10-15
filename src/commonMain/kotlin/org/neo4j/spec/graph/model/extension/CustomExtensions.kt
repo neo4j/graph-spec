@@ -22,10 +22,8 @@ import kotlin.math.floor
  * Extensions for storing basic arbitrary data.
  * It's encouraged to use name-spaced setters when working with extensions programmatically.
  * Though we cannot prevent users from using top-level setters if they wish to.
- *
- * Complex data should be stored as an optional module within [model.GraphModel].
  */
-interface Extensions {
+interface CustomExtensions {
     val custom: MutableMap<String, Any>
 
     fun contains(key: String): Boolean = custom.containsKey(key)
@@ -58,7 +56,7 @@ interface Extensions {
         put(section, key, value)
     }
 
-       private fun put(section: String, key: String, value: Any) {
+    private fun put(section: String, key: String, value: Any) {
         custom[section] = (get(section) ?: emptyMap()).toMutableMap().apply { this[key] = value }
     }
 
