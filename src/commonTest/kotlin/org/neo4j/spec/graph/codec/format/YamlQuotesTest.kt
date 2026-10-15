@@ -54,4 +54,39 @@ class YamlQuotesTest {
     fun `marks indented scalars at line start`() {
         assertEquals("list:\n  - \"${m}a\"\n  -\n    \"${m}b\"", markQuotedScalars("list:\n  - \"a\"\n  -\n    \"b\""))
     }
+
+    @Test
+    fun `ignores quotes after a comma in plain block scalars`() {
+        val yaml = "note: hello, \"world\""
+        assertEquals(yaml, markQuotedScalars(yaml))
+    }
+
+    @Test
+    fun `ignores indicators inside plain scalars`() {
+        for (yaml in listOf("a: x - \"y\"", "a: what? \"y\"", "a: p, 'q', \"r\"")) {
+            assertEquals(yaml, markQuotedScalars(yaml))
+        }
+    }
+
+    @Test
+    fun `ignores quotes in block scalars`() {
+        val yaml = "note: |\n  \"Test\"\n  one\n\n  'two'\nnext: 1"
+        assertEquals("note: |\n  \"Test\"\n  one\n\n  'two'\nnext: 1", markQuotedScalars(yaml))
+        assertEquals(
+            "a:\n  - >-\n    \"x\"\n  - \"${m}y\"\nb: |2 # c\n   'z'\nc: \"${m}d\"",
+            markQuotedScalars("a:\n  - >-\n    \"x\"\n  - \"y\"\nb: |2 # c\n   'z'\nc: \"d\"")
+        )
+    }
+
+    @Test
+    fun `ignores quotes on plain scalar continuation lines`() {
+        val yaml = "note: hello\n  \"world\"\n  more\nnext: \"x\""
+        assertEquals("note: hello\n  \"world\"\n  more\nnext: \"${m}x\"", markQuotedScalars(yaml))
+        assertEquals("key:\n  \"${m}v\"", markQuotedScalars("key:\n  \"v\""))
+    }
+
+    @Test
+    fun `marks quoted values after anchors and tags`() {
+        assertEquals("a: &x \"${m}b\"\nc: !!str '${m}d'", markQuotedScalars("a: &x \"b\"\nc: !!str 'd'"))
+    }
 }
