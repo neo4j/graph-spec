@@ -18,8 +18,9 @@ package org.neo4j.spec.graph.model.node.extension
 
 import js.objects.Record
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.index.IndexOptionJs
 import org.neo4j.spec.graph.model.index.toClass
 import org.neo4j.spec.graph.model.index.toJs
@@ -27,9 +28,7 @@ import org.neo4j.spec.graph.model.jso
 import org.neo4j.spec.graph.model.node.toClass
 import org.neo4j.spec.graph.model.node.toJs
 import org.neo4j.spec.graph.model.type.IndexType
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface NodeIndexJs {
@@ -37,7 +36,7 @@ external interface NodeIndexJs {
     var labels: Array<String>
     var properties: Array<String>
     var options: IndexOptionJs?
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
 fun nodeIndexJs(
@@ -45,7 +44,7 @@ fun nodeIndexJs(
     labels: Array<String> = emptyArray(),
     properties: Array<String> = emptyArray(),
     options: IndexOptionJs? = null,
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord()
 ): NodeIndexJs = jso {
     this.type = type
     this.labels = labels
@@ -59,7 +58,7 @@ fun NodeIndex.toJs() = nodeIndexJs(
     labels = labels.toTypedArray(),
     properties = properties.toTypedArray(),
     options = options?.toJs(),
-    custom = custom.associateBy { _, value -> value.toJs() }
+    custom = custom.toCustomJs()
 )
 
 fun NodeIndexJs.toClass() = NodeIndex(
@@ -67,5 +66,5 @@ fun NodeIndexJs.toClass() = NodeIndex(
     labels = labels.toMutableSet(),
     properties = properties.toMutableSet(),
     options = options?.toClass(),
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

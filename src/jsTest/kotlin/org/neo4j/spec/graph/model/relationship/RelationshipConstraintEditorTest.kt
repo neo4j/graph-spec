@@ -2,8 +2,6 @@ package org.neo4j.spec.graph.model.relationship
 
 import js.objects.Object.Companion.keys
 import kotlin.test.*
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.toJs
 class RelationshipConstraintEditorTest {
 
     @Test

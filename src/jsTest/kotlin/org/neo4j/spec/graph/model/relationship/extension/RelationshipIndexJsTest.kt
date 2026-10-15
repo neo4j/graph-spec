@@ -3,8 +3,6 @@ package org.neo4j.spec.graph.model.relationship.extension
 import org.neo4j.spec.graph.model.relationship.toClass
 import org.neo4j.spec.graph.model.relationship.toJs
 import org.neo4j.spec.graph.model.extension.mapping.JsMappingTest
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.stringValueJs
 import org.neo4j.spec.graph.model.index.FullTextIndexOption
 import org.neo4j.spec.graph.model.index.FullTextIndexOptionJs
 import org.neo4j.spec.graph.model.index.fullTextIndexOptionJs
@@ -22,7 +20,7 @@ class RelationshipIndexJsTest : JsMappingTest<RelationshipIndex, RelationshipInd
             analyzer = "test"
         ),
         custom = mutableMapOf(
-            "key1" to StringValue("val1")
+            "key1" to "val1"
         )
     )
 
@@ -36,7 +34,7 @@ class RelationshipIndexJsTest : JsMappingTest<RelationshipIndex, RelationshipInd
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))
         assertJsEquals("test", (jsObject.options as? FullTextIndexOptionJs)?.analyzer)
-        assertJsEquals(stringValueJs("val1"), jsObject.custom["key1"])
+        assertEquals<Any?>("val1", jsObject.custom["key1"])
     }
 
 }

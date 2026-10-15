@@ -31,11 +31,10 @@ import org.neo4j.spec.graph.model.node.Node
 import org.neo4j.spec.graph.model.node.extension.NodeExtensions
 import org.neo4j.spec.graph.model.node.extension.NodeIndex
 import org.neo4j.spec.graph.model.type.IndexType
-import org.neo4j.spec.graph.model.value.BooleanValue
-import org.neo4j.spec.graph.model.value.StringValue
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 
@@ -128,13 +127,13 @@ class JsonFormatTest {
     }
 
     @Test
-    fun `test polymorphic ExtensionValue serialization`() {
+    fun `test custom extension values serialize with implicit types`() {
         val node = Node(
             name = "TestNode",
             extensions = NodeExtensions(
-                mutableMapOf(
-                    "ext_str" to StringValue("hello"),
-                    "ext_bool" to BooleanValue(true)
+                custom = mutableMapOf(
+                    "ext_str" to "hello",
+                    "ext_bool" to true
                 )
             )
         )
@@ -151,15 +150,15 @@ class JsonFormatTest {
         val n1 = schema.map("nodes").map("n1")
         val extensions = n1.map("extensions").map("custom")
 
-        assertIs<SchemaMap>(extensions.content["ext_str"])
-        val extStrMap = extensions.map("ext_str")
-        assertEquals("STRING", extStrMap.string("type"))
-        assertTrue(extStrMap.content.containsKey("value"))
+        assertEquals("hello", extensions.string("ext_str"))
+        assertTrue(extensions.literal("ext_str").isString)
+        assertEquals("true", extensions.string("ext_bool"))
+        assertFalse(extensions.literal("ext_bool").isString)
 
         val decoded = jsonFormat.decodeModelFromString(encoded)
         val decodedNode = decoded.nodes["n1"]!!
-        assertEquals(StringValue("hello"), decodedNode.extensions.custom["ext_str"])
-        assertEquals(BooleanValue(true), decodedNode.extensions.custom["ext_bool"])
+        assertEquals("hello", decodedNode.extensions.custom["ext_str"])
+        assertEquals(true, decodedNode.extensions.custom["ext_bool"])
     }
 
     @Test

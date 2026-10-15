@@ -3,11 +3,7 @@ package org.neo4j.spec.graph.model.property
 import org.neo4j.spec.graph.model.property.extension.toClass
 import org.neo4j.spec.graph.model.property.extension.toJs
 import org.neo4j.spec.graph.model.extension.mapping.JsMappingTest
-import org.neo4j.spec.graph.model.value.BooleanValue
-import org.neo4j.spec.graph.model.value.StringValue
 import org.neo4j.spec.graph.model.property.extension.PropertyExtensions
-import org.neo4j.spec.graph.model.value.booleanValueJs
-import org.neo4j.spec.graph.model.value.stringValueJs
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -19,7 +15,7 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         mustExist = true,
         unique = true,
         key = true,
-        extensions = PropertyExtensions(mutableMapOf("key1" to StringValue("val1"))),
+        extensions = PropertyExtensions(mutableMapOf("key1" to "val1")),
         name = "propertyName",
         reference = "ref",
         pattern = "^a.*",
@@ -36,7 +32,7 @@ class PropertyJsTest : JsMappingTest<Property, PropertyJs>() {
         assertTrue(jsObject.mustExist!!)
         assertTrue(jsObject.unique!!)
         assertTrue(jsObject.key!!)
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions.custom["key1"])
+        assertEquals<Any?>("val1", jsObject.extensions.custom["key1"])
         assertEquals("propertyId", jsObject.id)
         assertEquals("propertyName", jsObject.name)
         assertEquals("ref", jsObject.reference)

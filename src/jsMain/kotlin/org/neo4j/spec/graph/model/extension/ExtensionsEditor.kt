@@ -18,17 +18,16 @@ package org.neo4j.spec.graph.model.extension
 
 import js.objects.Record
 import org.neo4j.spec.graph.model.remove
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.stringValueJs
+
 class ExtensionsEditor {
     companion object {
         @JsStatic
-        fun set(extensions: Record<String, ExtensionValueJs>, key: String, value: String) {
-            extensions[key] = stringValueJs(value) // TODO test
+        fun set(extensions: Record<String, Any>, key: String, value: Any) {
+            extensions[key] = value
         }
 
         @JsStatic
-        fun remove(extensions: Record<String, ExtensionValueJs>, key: String) {
+        fun remove(extensions: Record<String, Any>, key: String) {
             extensions.remove(key)
         }
     }

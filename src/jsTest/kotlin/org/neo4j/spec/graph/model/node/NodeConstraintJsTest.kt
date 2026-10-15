@@ -4,8 +4,6 @@ import org.neo4j.spec.graph.model.node.extension.NodeConstraintExtensions
 import org.neo4j.spec.graph.model.node.extension.toClass
 import org.neo4j.spec.graph.model.node.extension.toJs
 import org.neo4j.spec.graph.model.extension.mapping.JsMappingTest
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.stringValueJs
 import org.neo4j.spec.graph.model.type.ConstraintType
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -17,7 +15,7 @@ class NodeConstraintJsTest : JsMappingTest<NodeConstraint, NodeConstraintJs>() {
         label = "node_label",
         properties = mutableSetOf("property_1", "property_2"),
         extensions = NodeConstraintExtensions(
-            mutableMapOf("key1" to StringValue("val1"))
+            mutableMapOf("key1" to "val1")
         )
     )
 
@@ -31,7 +29,7 @@ class NodeConstraintJsTest : JsMappingTest<NodeConstraint, NodeConstraintJs>() {
         assertEquals(2, jsObject.properties.size)
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions.custom["key1"])
+        assertEquals<Any?>("val1", jsObject.extensions.custom["key1"])
     }
 
 }

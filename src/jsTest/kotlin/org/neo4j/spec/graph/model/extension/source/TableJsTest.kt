@@ -1,8 +1,6 @@
 package org.neo4j.spec.graph.model.extension.source
 
 import org.neo4j.spec.graph.model.extension.mapping.JsMappingTest
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.stringValueJs
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
@@ -13,7 +11,7 @@ class TableJsTest : JsMappingTest<Table, TableJs>() {
         columns = mutableMapOf("field" to TableColumn("varchar", name = "Field name")),
         primaryKeys = mutableSetOf("field"),
         foreignKeys = mutableMapOf("key" to ForeignKey(mutableSetOf("key"), ForeignKeyReference("table"))),
-        custom = mutableMapOf("key1" to StringValue("val1")),
+        custom = mutableMapOf("key1" to "val1"),
     )
 
     override fun toJs(k: Table): TableJs = k.toJs()
@@ -25,7 +23,7 @@ class TableJsTest : JsMappingTest<Table, TableJs>() {
         assertJsEquals(tableColumnJs("varchar", name = "Field name"), jsObject.columns["field"])
         assertContentEquals(arrayOf("field"), jsObject.primaryKeys)
         assertJsEquals(foreignKeyJs(arrayOf("key"), foreignKeyReferenceJs("table")), jsObject.foreignKeys["key"])
-        assertJsEquals(stringValueJs("val1"), jsObject.custom["key1"])
+        assertEquals<Any?>("val1", jsObject.custom["key1"])
     }
 
 }

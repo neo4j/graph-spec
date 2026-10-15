@@ -3,8 +3,6 @@ package org.neo4j.spec.graph.model.relationship
 import kotlin.test.*
 import js.objects.recordOf
 import org.neo4j.spec.graph.model.GraphModelJs
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.toJs
 import org.neo4j.spec.graph.model.graphModelJs
 class RelationshipEditorTest {
 
