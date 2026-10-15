@@ -61,6 +61,8 @@ object AnyValueSerializer : KSerializer<Any> {
             // Checked before other numbers as on Kotlin/JS all numbers pass `is Int`
             is Double, is Float -> encoder.encodeDouble((value as Number).toDouble())
             is Number -> encoder.encodeLong(value.toLong())
+            // Checked before lists and maps as JsonArray and JsonObject are also a List and Map
+            is JsonElement -> throw unsupported(value)
             is List<*> -> encoder.encodeSerializableValue(listSerializer, value.map { it.requireValue() })
             is Map<*, *> -> encoder.encodeSerializableValue(
                 mapSerializer,
@@ -69,19 +71,25 @@ object AnyValueSerializer : KSerializer<Any> {
                         value.requireValue()
                 }
             )
-            else -> throw SerializationException("Unsupported custom value type: ${value::class.simpleName}")
+            else -> throw unsupported(value)
         }
     }
 
     override fun deserialize(decoder: Decoder): Any {
         val json = decoder as? JsonDecoder
             ?: throw SerializationException("Custom values can only be decoded by a JSON decoder")
-        return json.decodeJsonElement().toAnyValue(1)
+        return json.decodeJsonElement().toAnyValue()
     }
+
+    private fun unsupported(value: Any) = SerializationException(
+        "Unsupported custom value type: ${value::class.simpleName}. " +
+            "Use setSerializable(key, value) to store @Serializable objects, " +
+            "otherwise only String, Boolean, Long, Double, List and Map values are supported."
+    )
 
     private fun Any?.requireValue(): Any = this ?: throw SerializationException("Custom values cannot be null")
 
-    private fun JsonElement.toAnyValue(depth: Int): Any = when (this) {
+    internal fun JsonElement.toAnyValue(depth: Int = 1): Any = when (this) {
         JsonNull -> throw SerializationException("Custom values cannot be null")
         is JsonPrimitive -> if (isString) {
             content

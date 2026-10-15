@@ -16,182 +16,74 @@
  */
 package org.neo4j.spec.graph.model.extension
 
-import kotlin.math.floor
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.SerializationStrategy
+import kotlinx.serialization.serializer
+import org.neo4j.spec.graph.model.extension.custom.fromCustomValue
+import org.neo4j.spec.graph.model.extension.custom.toCustomValue
 
 /**
- * Extensions for storing basic arbitrary data.
- * It's encouraged to use name-spaced setters when working with extensions programmatically.
- * Though we cannot prevent users from using top-level setters if they wish to.
+ * Extensions for storing arbitrary data in [custom].
+ * Plain values (String, Boolean, Long, Double, List and Map) can be put in [custom] directly,
+ * helpers used to store and read `@Serializable` objects.
  */
 interface CustomExtensions {
     val custom: MutableMap<String, Any>
 
-    fun contains(key: String): Boolean = custom.containsKey(key)
-
-    /*
-        Name-spaced setters
+    /**
+     * Stores a serializable object under [section] as plain maps, lists and primitives.
      */
-
-    fun set(section: String, key: String, value: String) {
-        put(section, key, value)
+    fun <T> setSerializable(section: String, key: String, value: T, serializer: SerializationStrategy<T>) {
+        val existing = custom[section] as? Map<*, *>
+        val updated = mutableMapOf<String, Any>()
+        existing?.forEach { (name, entry) -> if (name is String && entry != null) updated[name] = entry }
+        updated[key] = toCustomValue(serializer, value)
+        custom[section] = updated
     }
 
-    fun set(section: String, key: String, value: Boolean) {
-        put(section, key, value)
-    }
-
-    fun set(section: String, key: String, value: Int) {
-        set(section, key, value.toLong())
-    }
-
-    fun set(section: String, key: String, value: Long) {
-        put(section, key, value)
-    }
-
-    fun set(section: String, key: String, value: Float) {
-        set(section, key, value.toDouble())
-    }
-
-    fun set(section: String, key: String, value: Double) {
-        put(section, key, value)
-    }
-
-    private fun put(section: String, key: String, value: Any) {
-        custom[section] = (get(section) ?: emptyMap()).toMutableMap().apply { this[key] = value }
-    }
-
-    /*
-        Name-spaced getters
+    /**
+     * Stores a serializable object as plain maps, lists and primitives.
+     * See also the reified [setSerializable] extension.
      */
-
-    fun getString(section: String, key: String): String? = get(section)?.get(key)?.asString
-
-    fun getBoolean(section: String, key: String): Boolean? = get(section)?.get(key)?.asBoolean
-
-    fun getLong(section: String, key: String): Long? = get(section)?.get(key)?.asLong
-
-    fun getInt(section: String, key: String): Int? = getLong(section, key)?.toInt()
-
-    fun getDouble(section: String, key: String): Double? = get(section)?.get(key)?.asDouble
-
-    fun getFloat(section: String, key: String): Float? = getDouble(section, key)?.toFloat()
-
-    fun getList(section: String, key: String): List<Any>? = get(section)?.get(key)?.asList
-
-    fun getStringList(section: String, key: String): List<String>? = getList(section, key)?.mapNotNull { it.asString }
-
-    fun getBooleanList(section: String, key: String): List<Boolean>? = getList(section, key)?.mapNotNull {
-        it.asBoolean
+    fun <T> setSerializable(key: String, value: T, serializer: SerializationStrategy<T>) {
+        custom[key] = toCustomValue(serializer, value)
     }
 
-    fun getLongList(section: String, key: String): List<Long>? = getList(section, key)?.mapNotNull { it.asLong }
-
-    fun getIntList(section: String, key: String): List<Int>? = getList(section, key)?.mapNotNull { it.asLong?.toInt() }
-
-    fun getDoubleList(section: String, key: String): List<Double>? = getList(section, key)?.mapNotNull { it.asDouble }
-
-    fun getFloatList(section: String, key: String): List<Float>? = getList(section, key)?.mapNotNull {
-        it.asDouble?.toFloat()
-    }
-
-    fun getMap(section: String, key: String): Map<String, Any>? = get(section)?.get(key)?.asMap
-
-    fun getStringMap(section: String, key: String): Map<String, String>? = getMap(section, key) { it.asString }
-
-    fun getBooleanMap(section: String, key: String): Map<String, Boolean>? = getMap(section, key) { it.asBoolean }
-
-    fun getLongMap(section: String, key: String): Map<String, Long>? = getMap(section, key) { it.asLong }
-
-    fun getIntMap(section: String, key: String): Map<String, Int>? = getMap(section, key) { it.asLong?.toInt() }
-
-    fun getDoubleMap(section: String, key: String): Map<String, Double>? = getMap(section, key) { it.asDouble }
-
-    fun getFloatMap(section: String, key: String): Map<String, Float>? = getMap(section, key) {
-        it.asDouble?.toFloat()
-    }
-
-    private fun <T : Any> getMap(section: String, key: String, convert: (Any) -> T?): Map<String, T>? {
-        val map = getMap(section, key) ?: return null
-        val output = mutableMapOf<String, T>()
-        for ((name, value) in map) {
-            output[name] = convert(value) ?: continue
-        }
-        return output
-    }
-
-    private fun get(section: String): Map<String, Any>? = custom[section]?.asMap
-
-    /*
-        Basic top-level setters
+    /**
+     * Reads the object stored under [section] and [key] back into [T],
+     * or `null` if there isn't one. See also the reified [getSerializable] extension.
+     * @throws kotlinx.serialization.SerializationException if the stored value doesn't match [T].
      */
-
-    fun set(key: String, value: String) {
-        custom[key] = value
+    fun <T> getSerializable(section: String, key: String, deserializer: DeserializationStrategy<T>): T? {
+        val value = (custom[section] as? Map<*, *>)?.get(key) ?: return null
+        return fromCustomValue(deserializer, value)
     }
 
-    fun set(key: String, value: Boolean) {
-        custom[key] = value
-    }
-
-    fun set(key: String, value: Int) {
-        set(key, value.toLong())
-    }
-
-    fun set(key: String, value: Long) {
-        custom[key] = value
-    }
-
-    fun set(key: String, value: Float) {
-        set(key, value.toDouble())
-    }
-
-    fun set(key: String, value: Double) {
-        custom[key] = value
-    }
-
-    fun setList(key: String, value: List<String>) {
-        custom[key] = value.toMutableList()
-    }
-
-    fun setStringMap(key: String, value: Map<String, String>) {
-        custom[key] = value.toMutableMap()
-    }
-
-    fun setIntMap(key: String, value: Map<String, Int>) {
-        custom[key] = value.mapValuesTo(mutableMapOf()) { it.value.toLong() }
-    }
-
-    /*
-        Basic top-level getters
+    /**
+     * Reads the object stored under [key] back into [T], or `null` if there isn't one.
+     * See also the reified [getSerializable] extension.
+     * @throws kotlinx.serialization.SerializationException if the stored value doesn't match [T].
      */
-
-    fun getString(key: String): String? = custom[key]?.asString
-
-    fun getBoolean(key: String): Boolean? = custom[key]?.asBoolean
-
-    fun getLong(key: String): Long? = custom[key]?.asLong
-
-    fun getInt(key: String): Int? = getLong(key)?.toInt()
-
-    fun getDouble(key: String): Double? = custom[key]?.asDouble
-
-    fun getFloat(key: String): Float? = getDouble(key)?.toFloat()
+    fun <T> getSerializable(key: String, deserializer: DeserializationStrategy<T>): T? {
+        val value = custom[key] ?: return null
+        return fromCustomValue(deserializer, value)
+    }
 }
 
-private val Any.asString: String? get() = this as? String
+/**
+ * Stores a `@Serializable` object (or collection of them) as plain maps, lists and primitives.
+ * Unlike the plain setters this works with generic classes as the type arguments are known.
+ */
+inline fun <reified T> CustomExtensions.setSerializable(key: String, value: T) =
+    setSerializable(key, value, serializer<T>())
 
-private val Any.asBoolean: Boolean? get() = this as? Boolean
+/** Name-spaced version of [setSerializable]. */
+inline fun <reified T> CustomExtensions.setSerializable(section: String, key: String, value: T) =
+    setSerializable(section, key, value, serializer<T>())
 
-private val Any.asLong: Long? get() = when (this) {
-    is Long -> this
-    is Number -> toDouble().takeIf { it == floor(it) }?.toLong()
-    else -> null
-}
+/** Reads back a `@Serializable` object stored with [setSerializable], or `null` if there isn't one. */
+inline fun <reified T> CustomExtensions.getSerializable(key: String): T? = getSerializable(key, serializer<T>())
 
-private val Any.asDouble: Double? get() = (this as? Number)?.toDouble()
-
-@Suppress("UNCHECKED_CAST")
-private val Any.asList: List<Any>? get() = this as? List<Any>
-
-@Suppress("UNCHECKED_CAST")
-private val Any.asMap: Map<String, Any>? get() = this as? Map<String, Any>
+/** Name-spaced version of [getSerializable]. */
+inline fun <reified T> CustomExtensions.getSerializable(section: String, key: String): T? =
+    getSerializable(section, key, serializer<T>())

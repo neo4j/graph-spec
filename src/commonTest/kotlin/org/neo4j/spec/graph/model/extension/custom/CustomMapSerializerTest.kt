@@ -17,6 +17,9 @@
 package org.neo4j.spec.graph.model.extension.custom
 
 import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import org.neo4j.spec.graph.codec.format.JsonFormat
 import org.neo4j.spec.graph.codec.format.YamlFormat
 import org.neo4j.spec.graph.model.GraphModel
@@ -114,6 +117,17 @@ class CustomMapSerializerTest {
     fun `unsupported value type fails to encode`() {
         assertFailsWith<SerializationException> {
             JsonFormat.default.encodeModelToString(model(mutableMapOf("bad" to Pair(1, 2))))
+        }
+    }
+
+    @Test
+    fun `unsupported value type error points to setSerializable`() {
+        val values = listOf(Pair(1, 2), JsonObject(mapOf("a" to JsonPrimitive(1))), JsonArray(listOf(JsonPrimitive(1))))
+        for (value in values) {
+            val error = assertFailsWith<SerializationException> {
+                JsonFormat.default.encodeModelToString(model(mutableMapOf("bad" to value)))
+            }
+            assertTrue(error.message!!.contains("setSerializable"), error.message)
         }
     }
 
