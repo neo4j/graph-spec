@@ -103,7 +103,7 @@
                 },
                 "reference": {
                     "type": "string",
-                    "description": "Reference to an external resource describing the node."
+                    "description": "Reference or URI of an external resource describing the node."
                 }
             },
             "required": [],
@@ -170,7 +170,7 @@
                     ],
                     "description": "Dimension of the property when it holds a vector."
                 },
-                "mustExist": {
+                "must_exist": {
                     "type": [
                         "boolean",
                         "null"
@@ -208,7 +208,7 @@
                 },
                 "reference": {
                     "type": "string",
-                    "description": "Reference to an external resource describing the property."
+                    "description": "Reference or URI of an external resource describing the property."
                 },
                 "pattern": {
                     "type": "string",
@@ -704,7 +704,7 @@
                 },
                 "reference": {
                     "type": "string",
-                    "description": "Reference to an external resource describing the relationship."
+                    "description": "Reference or URI of an external resource describing the relationship."
                 }
             },
             "required": [
@@ -874,10 +874,13 @@
                     }
                 },
                 "mappings": {
-                    "type": "array",
-                    "description": "Import mappings from tables to nodes and relationships.",
-                    "items": {
-                        "$ref": "#/$defs/Mapping"
+                    "type": "object",
+                    "description": "Sets of data source mappings from tables to nodes and relationships, often used for importing.",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/$defs/Mapping"
+                        }
                     }
                 },
                 "custom": {
@@ -898,20 +901,20 @@
                     "description": "Where the table's data comes from."
                 },
                 "columns": {
-                    "type": "object",
-                    "description": "Columns of the table keyed by column name.",
-                    "additionalProperties": {
+                    "type": "array",
+                    "description": "Columns of the table in their source order.",
+                    "items": {
                         "$ref": "#/$defs/TableColumn"
                     }
                 },
-                "primaryKeys": {
+                "primary_keys": {
                     "type": "array",
                     "description": "Names of the columns making up the primary key.",
                     "items": {
                         "type": "string"
                     }
                 },
-                "foreignKeys": {
+                "foreign_keys": {
                     "type": "object",
                     "description": "Foreign keys of the table keyed by id.",
                     "additionalProperties": {
@@ -933,6 +936,10 @@
             "type": "object",
             "description": "A column of a data source table.",
             "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the column in the source. Unique within the table."
+                },
                 "type": {
                     "type": "string",
                     "description": "Data type of the column in the source."
@@ -963,13 +970,6 @@
                     "type": "object",
                     "description": "User-defined arbitrary data.",
                     "additionalProperties": {}
-                },
-                "name": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "description": "Human-readable name. Used in place of the stable id in the pretty form of the model."
                 }
             },
             "required": [],
@@ -1069,7 +1069,7 @@
                     "$ref": "#/$defs/MappingMode",
                     "description": "Whether nodes are merged with existing nodes or always created."
                 },
-                "matchLabel": {
+                "match_label": {
                     "type": [
                         "string",
                         "null"
@@ -1085,11 +1085,11 @@
                 },
                 "depends_on": {
                     "type": "string",
-                    "description": "Id of the mapping which must be imported before this one. Empty when there is no dependency."
+                    "description": "Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency."
                 },
                 "id": {
                     "type": "string",
-                    "description": "Optional id of this mapping, so other mappings can reference it in depends_on."
+                    "description": "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
                 }
             },
             "required": [
@@ -1140,11 +1140,11 @@
                 },
                 "depends_on": {
                     "type": "string",
-                    "description": "Id of the mapping which must be imported before this one. Empty when there is no dependency."
+                    "description": "Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency."
                 },
                 "id": {
                     "type": "string",
-                    "description": "Optional id of this mapping, so other mappings can reference it in depends_on."
+                    "description": "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
                 }
             },
             "required": [
@@ -1178,7 +1178,7 @@
                     "$ref": "#/$defs/TargetMapping",
                     "description": "How the end node of the relationship is matched."
                 },
-                "matchLabel": {
+                "match_label": {
                     "type": [
                         "string",
                         "null"
@@ -1205,11 +1205,11 @@
                 },
                 "depends_on": {
                     "type": "string",
-                    "description": "Id of the mapping which must be imported before this one. Empty when there is no dependency."
+                    "description": "Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency."
                 },
                 "id": {
                     "type": "string",
-                    "description": "Optional id of this mapping, so other mappings can reference it in depends_on."
+                    "description": "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
                 }
             },
             "required": [

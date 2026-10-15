@@ -127,14 +127,14 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 
 // Maps rows of a table to nodes.
 type NODE struct {
-	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	// Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency.
 	DependsOn *string `json:"depends_on,omitempty"`
-	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	// Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
 	ID *string `json:"id,omitempty"`
 	// Ids of the properties which identify a node.
 	Key []string `json:"key,omitempty"`
 	// Label used to match existing nodes.
-	MatchLabel *string `json:"matchLabel,omitempty"`
+	MatchLabel *string `json:"match_label,omitempty"`
 	// Whether nodes are merged with existing nodes or always created.
 	Mode *MappingMode `json:"mode,omitempty"`
 	// Id of the node being mapped.
@@ -152,9 +152,9 @@ func (NODE) MappingType() string { return "NODE" }
 
 // Maps the results of a query run against a table.
 type QUERY struct {
-	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	// Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency.
 	DependsOn *string `json:"depends_on,omitempty"`
-	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	// Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
 	ID *string `json:"id,omitempty"`
 	// The query to run.
 	Query string `json:"query"`
@@ -169,16 +169,16 @@ func (QUERY) MappingType() string { return "QUERY" }
 
 // Maps rows of a table to relationships.
 type RELATIONSHIP struct {
-	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	// Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency.
 	DependsOn *string `json:"depends_on,omitempty"`
 	// How the start node of the relationship is matched.
 	FromNode TargetMapping `json:"from_node"`
-	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	// Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
 	ID *string `json:"id,omitempty"`
 	// Ids of the properties which identify a relationship.
 	Key []string `json:"key,omitempty"`
 	// Label used to match existing relationships.
-	MatchLabel *string `json:"matchLabel,omitempty"`
+	MatchLabel *string `json:"match_label,omitempty"`
 	// Whether relationships are merged with existing relationships or always created.
 	Mode *MappingMode `json:"mode,omitempty"`
 	// Mappings from property ids to source columns.
@@ -289,7 +289,7 @@ type TableColumn struct {
 	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Dimension of the column when it holds vectors.
 	Dimension *int `json:"dimension,omitempty"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
+	// Name of the column in the source. Unique within the table.
 	Name *string `json:"name,omitempty"`
 	// Size of the column.
 	Size *int `json:"size,omitempty"`
@@ -303,14 +303,14 @@ type TableColumn struct {
 
 // A data source table schema.
 type Table struct {
-	// Columns of the table keyed by column name.
-	Columns map[string]TableColumn `json:"columns,omitempty"`
+	// Columns of the table in their source order.
+	Columns []TableColumn `json:"columns,omitempty"`
 	// User-defined arbitrary data.
 	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Foreign keys of the table keyed by id.
-	ForeignKeys map[string]ForeignKey `json:"foreignKeys,omitempty"`
+	ForeignKeys map[string]ForeignKey `json:"foreign_keys,omitempty"`
 	// Names of the columns making up the primary key.
-	PrimaryKeys []string `json:"primaryKeys,omitempty"`
+	PrimaryKeys []string `json:"primary_keys,omitempty"`
 	// Where the table's data comes from.
 	Source string `json:"source"`
 }
@@ -319,8 +319,8 @@ type Table struct {
 type GraphModelExtensions struct {
 	// User-defined arbitrary data.
 	Custom map[string]interface{} `json:"custom,omitempty"`
-	// Import mappings from tables to nodes and relationships.
-	Mappings []Mapping `json:"mappings,omitempty"`
+	// Sets of data source mappings from tables to nodes and relationships, often used for importing.
+	Mappings map[string][]Mapping `json:"mappings,omitempty"`
 	// Data source table schemas keyed by table id.
 	Tables map[string]Table `json:"tables,omitempty"`
 }
@@ -563,14 +563,14 @@ type Property struct {
 	// Shorthand for a key constraint. Expanded into constraints when the model is internalised.
 	Key *bool `json:"key,omitempty"`
 	// Shorthand for an existence constraint. Expanded into constraints when the model is internalised.
-	MustExist *bool `json:"mustExist,omitempty"`
+	MustExist *bool `json:"must_exist,omitempty"`
 	// Human-readable name. Used in place of the stable id in the pretty form of the model.
 	Name *string `json:"name,omitempty"`
 	// Values the property is restricted to.
 	OneOf []string `json:"one_of,omitempty"`
 	// Pattern values of the property are expected to match.
 	Pattern *string `json:"pattern,omitempty"`
-	// Reference to an external resource describing the property.
+	// Reference or URI of an external resource describing the property.
 	Reference *string `json:"reference,omitempty"`
 	// Neo4j type of the property.
 	Type *Neo4jType `json:"type,omitempty"`
@@ -596,7 +596,7 @@ type Node struct {
 	Name *string `json:"name,omitempty"`
 	// Properties of the node keyed by id.
 	Properties map[string]Property `json:"properties,omitempty"`
-	// Reference to an external resource describing the node.
+	// Reference or URI of an external resource describing the node.
 	Reference *string `json:"reference,omitempty"`
 }
 
@@ -670,7 +670,7 @@ type Relationship struct {
 	Name *string `json:"name,omitempty"`
 	// Properties of the relationship keyed by id.
 	Properties map[string]Property `json:"properties,omitempty"`
-	// Reference to an external resource describing the relationship.
+	// Reference or URI of an external resource describing the relationship.
 	Reference *string `json:"reference,omitempty"`
 	// The node the relationship ends at.
 	To RelationshipTarget `json:"to"`
