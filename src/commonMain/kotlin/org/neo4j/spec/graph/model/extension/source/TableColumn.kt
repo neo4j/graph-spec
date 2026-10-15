@@ -31,7 +31,7 @@ import kotlin.js.JsExport
 @SerialDescription("A column of a data source table.")
 data class TableColumn(
     @SerialDescription("Name of the column in the source. Unique within the table.")
-    var name: String = "",
+    val name: String = "",
     @SerialDescription("Data type of the column in the source.")
     var type: String = "",
     @SerialDescription("Size of the column.")

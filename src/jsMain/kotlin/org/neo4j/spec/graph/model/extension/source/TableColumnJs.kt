@@ -28,7 +28,7 @@ import kotlin.String
 @JsExport
 @JsPlainObject
 external interface TableColumnJs {
-    var name: String
+    val name: String
     var type: String
     var size: Int
     val suggested: String
