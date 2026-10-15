@@ -20,6 +20,7 @@ import js.objects.Object
 import js.objects.Record
 import js.objects.toRecord
 import js.string.JsStrings.toKotlinString
+import org.neo4j.spec.graph.model.extension.custom.AnyValueSerializer.tooDeep
 import kotlin.math.abs
 import kotlin.math.floor
 
@@ -37,19 +38,25 @@ fun Map<String, Any>.toCustomJs(): Record<String, Any> = mapValues { (_, value) 
  */
 fun Record<String, Any>.toCustomClass(): MutableMap<String, Any> = (this as Any).fromJsMap()
 
-fun Any.toJsValue(): Any = when (this) {
+fun Any.toJsValue(depth: Int = 1): Any = when (this) {
     is String, is Boolean -> this
     is Byte, is Short, is Int -> (this as Number).toDouble()
     is Long -> if (abs(this) <= MAX_SAFE_INTEGER) toDouble() else bigInt(toString())
     is Float, is Double -> (this as Number).toDouble()
-    is List<*> -> map { (it ?: error("Custom values cannot be null")).toJsValue() }.toTypedArray()
-    is Map<*, *> -> entries.associate { (key, value) ->
-        key.toString() to (value ?: error("Custom values cannot be null")).toJsValue()
-    }.toRecord()
+    is List<*> -> {
+        checkJsDepth(depth)
+        map { (it ?: error("Custom values cannot be null")).toJsValue(depth + 1) }.toTypedArray()
+    }
+    is Map<*, *> -> {
+        checkJsDepth(depth)
+        entries.associate { (key, value) ->
+            key.toString() to (value ?: error("Custom values cannot be null")).toJsValue(depth + 1)
+        }.toRecord()
+    }
     else -> error("Unsupported custom value type: ${this::class.simpleName}")
 }
 
-fun Any?.fromJsValue(): Any = when {
+fun Any?.fromJsValue(depth: Int = 1): Any = when {
     this == null -> error("Custom values cannot be null or undefined")
     jsTypeOf(this) == "bigint" -> toString().toLong()
     this is Long -> this
@@ -58,19 +65,35 @@ fun Any?.fromJsValue(): Any = when {
         val number = this as Double
         if (number.isFinite() && number == floor(number) && abs(number) <= MAX_SAFE_INTEGER) number.toLong() else number
     }
-    this is Array<*> -> mapTo(mutableListOf()) { it.fromJsValue() }
-    this is List<*> -> mapTo(mutableListOf()) { it.fromJsValue() }
-    this is Map<*, *> -> entries.associateTo(mutableMapOf()) { (key, value) -> key.toString() to value.fromJsValue() }
-    jsTypeOf(this) == "object" -> fromJsMap()
+    this is Array<*> -> {
+        checkJsDepth(depth)
+        mapTo(mutableListOf()) { it.fromJsValue(depth + 1) }
+    }
+    this is List<*> -> {
+        checkJsDepth(depth)
+        mapTo(mutableListOf()) { it.fromJsValue(depth + 1) }
+    }
+    this is Map<*, *> -> {
+        checkJsDepth(depth)
+        entries.associateTo(mutableMapOf()) { (key, value) -> key.toString() to value.fromJsValue(depth + 1) }
+    }
+    jsTypeOf(this) == "object" -> {
+        checkJsDepth(depth)
+        fromJsMap(depth)
+    }
     else -> error("Unsupported custom value type: ${jsTypeOf(this)}")
 }
 
-private fun Any.fromJsMap(): MutableMap<String, Any> {
+private fun checkJsDepth(depth: Int) {
+    if (depth > MAX_CUSTOM_DEPTH) tooDeep()
+}
+
+private fun Any.fromJsMap(depth: Int = 0): MutableMap<String, Any> {
     val record = unsafeCast<Record<String, Any?>>()
     val map = mutableMapOf<String, Any>()
     for (key in Object.keys(record)) {
         val value = record[key] ?: continue
-        map[key.toKotlinString()] = value.fromJsValue()
+        map[key.toKotlinString()] = value.fromJsValue(depth + 1)
     }
     return map
 }

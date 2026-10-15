@@ -22,6 +22,7 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import org.neo4j.spec.graph.model.extension.custom.AnyValueSerializer.checkDepth
 
 /**
  * Serializes user-defined custom extension data as a plain map of implicitly typed values.
@@ -32,7 +33,10 @@ object CustomMapSerializer : KSerializer<MutableMap<String, Any>> {
 
     override val descriptor: SerialDescriptor = delegate.descriptor
 
-    override fun serialize(encoder: Encoder, value: MutableMap<String, Any>) = delegate.serialize(encoder, value)
+    override fun serialize(encoder: Encoder, value: MutableMap<String, Any>) {
+        value.values.forEach { it.checkDepth() }
+        delegate.serialize(encoder, value)
+    }
 
     override fun deserialize(decoder: Decoder): MutableMap<String, Any> = delegate.deserialize(decoder).toMutableMap()
 }

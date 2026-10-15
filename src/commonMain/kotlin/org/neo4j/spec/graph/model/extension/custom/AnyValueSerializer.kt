@@ -36,6 +36,9 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.booleanOrNull
 
+// Maximum nesting in custom values to guard against stack overflows
+internal const val MAX_CUSTOM_DEPTH = 128
+
 /**
  * Serializes an untyped custom extension value with an implicit type:
  * a [String], [Boolean], [Long], [Double], [List] or [Map] of string keys, nested arbitrarily.
@@ -73,12 +76,12 @@ object AnyValueSerializer : KSerializer<Any> {
     override fun deserialize(decoder: Decoder): Any {
         val json = decoder as? JsonDecoder
             ?: throw SerializationException("Custom values can only be decoded by a JSON decoder")
-        return json.decodeJsonElement().toAnyValue()
+        return json.decodeJsonElement().toAnyValue(1)
     }
 
     private fun Any?.requireValue(): Any = this ?: throw SerializationException("Custom values cannot be null")
 
-    private fun JsonElement.toAnyValue(): Any = when (this) {
+    private fun JsonElement.toAnyValue(depth: Int): Any = when (this) {
         JsonNull -> throw SerializationException("Custom values cannot be null")
         is JsonPrimitive -> if (isString) {
             content
@@ -87,7 +90,37 @@ object AnyValueSerializer : KSerializer<Any> {
             booleanOrNull ?: content.toLongOrNull() ?: content.toDoubleOrNull()
                 ?: throw SerializationException("Unsupported custom value: $content")
         }
-        is JsonArray -> mapTo(mutableListOf()) { it.toAnyValue() }
-        is JsonObject -> mapValuesTo(mutableMapOf()) { (_, value) -> value.toAnyValue() }
+        is JsonArray -> {
+            if (depth > MAX_CUSTOM_DEPTH) {
+                tooDeep()
+            }
+            mapTo(mutableListOf()) { it.toAnyValue(depth + 1) }
+        }
+        is JsonObject -> {
+            if (depth > MAX_CUSTOM_DEPTH) {
+                tooDeep()
+            }
+            mapValuesTo(mutableMapOf()) { (_, value) -> value.toAnyValue(depth + 1) }
+        }
+    }
+
+    internal fun tooDeep(): Nothing =
+        throw SerializationException("Custom values cannot be nested more than $MAX_CUSTOM_DEPTH levels deep")
+
+    internal fun Any?.checkDepth(depth: Int = 1) {
+        when (this) {
+            is List<*> -> {
+                if (depth > MAX_CUSTOM_DEPTH) {
+                    tooDeep()
+                }
+                forEach { it.checkDepth(depth + 1) }
+            }
+            is Map<*, *> -> {
+                if (depth > MAX_CUSTOM_DEPTH) {
+                    tooDeep()
+                }
+                values.forEach { it.checkDepth(depth + 1) }
+            }
+        }
     }
 }

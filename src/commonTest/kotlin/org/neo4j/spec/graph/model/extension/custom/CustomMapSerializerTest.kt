@@ -128,6 +128,45 @@ class CustomMapSerializerTest {
         }
     }
 
+    @Test
+    fun `deeply nested values fail to encode`() {
+        var nested: Any = "leaf"
+        repeat(MAX_CUSTOM_DEPTH + 1) { nested = mutableListOf(nested) }
+        assertFailsWith<SerializationException> {
+            JsonFormat.default.encodeModelToString(model(mutableMapOf("deep" to nested)))
+        }
+    }
+
+    @Test
+    fun `cyclic values fail to encode`() {
+        val cycle = mutableMapOf<String, Any>()
+        cycle["self"] = cycle
+        assertFailsWith<SerializationException> {
+            JsonFormat.default.encodeModelToString(model(mutableMapOf("cycle" to cycle)))
+        }
+    }
+
+    @Test
+    fun `deeply nested values fail to decode`() {
+        val depth = MAX_CUSTOM_DEPTH * 4
+        val json = """
+            {"schema": "https://neo4j.com/ontology-graph-spec/4.0.0/", "version": "1", "id": "test",
+             "extensions": {"custom": {"a": ${"[".repeat(depth)}${"]".repeat(depth)}}}}
+        """.trimIndent()
+        assertFailsWith<SerializationException> {
+            JsonFormat.default.decodeModelFromString(json)
+        }
+    }
+
+    @Test
+    fun `values at the depth limit round trip`() {
+        var nested: Any = "leaf"
+        repeat(MAX_CUSTOM_DEPTH) { nested = mutableListOf(nested) }
+        val format = JsonFormat.default
+        val decoded = format.decodeModelFromString(format.encodeModelToString(model(mutableMapOf("deep" to nested))))
+        assertEquals(nested, decoded.extensions.custom["deep"])
+    }
+
     private fun assertTyped(expected: Map<String, Any>, actual: Map<String, Any>) {
         assertEquals(typed(expected), typed(actual))
         assertEquals(expected, actual)

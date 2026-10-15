@@ -94,4 +94,15 @@ class AnyValueJsTest {
         ExtensionsEditor.set(custom, "key", 5)
         assertEquals(mapOf<String, Any>("key" to 5L), custom.toCustomClass())
     }
+
+    @Test
+    fun testDeeplyNestedValuesFail() {
+        val js: Record<String, Any> = js(
+            "(() => { let v = 'leaf'; for (let i = 0; i < 1000; i++) v = [v]; return { deep: v } })()"
+        )
+        assertFails { js.toCustomClass() }
+        var nested: Any = "leaf"
+        repeat(1000) { nested = listOf(nested) }
+        assertFails { mutableMapOf("deep" to nested).toCustomJs() }
+    }
 }
