@@ -35,17 +35,17 @@ class TableColumnDuplicateNameTest {
         // UPX findArrayDuplicates + includes flags ALL fields with a duplicated name
         val table = Table(
             source = "local",
-            columns = mutableMapOf(
-                "f:1" to TableColumn(name = "name"),
-                "f:2" to TableColumn(name = "email"),
-                "f:3" to TableColumn(name = "name")
+            columns = mutableListOf(
+                TableColumn(name = "name"),
+                TableColumn(name = "email"),
+                TableColumn(name = "name")
             )
         )
         val issuesFirst = mutableListOf<Issue>()
         val issuesThird = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issuesFirst)
-        validator.validateTableColumn(model, "t:1", table, "f:3", table.columns["f:3"]!!, issuesThird)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issuesFirst)
+        validator.validateTableColumn(model, "t:1", table, 2, table.columns[2], issuesThird)
 
         assertEquals(1, issuesFirst.size, "First occurrence should also be flagged as duplicate")
         assertEquals("duplicate_table_column_name", issuesFirst.first().code)
@@ -57,15 +57,15 @@ class TableColumnDuplicateNameTest {
     fun `pass when all column names are unique`() {
         val table = Table(
             source = "local",
-            columns = mutableMapOf(
-                "f:1" to TableColumn(name = "name"),
-                "f:2" to TableColumn(name = "email")
+            columns = mutableListOf(
+                TableColumn(name = "name"),
+                TableColumn(name = "email")
             )
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
-        validator.validateTableColumn(model, "t:1", table, "f:2", table.columns["f:2"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issues)
+        validator.validateTableColumn(model, "t:1", table, 1, table.columns[1], issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -75,11 +75,11 @@ class TableColumnDuplicateNameTest {
         // blank names are the empty-name validator's concern, not this one
         val table = Table(
             source = "local",
-            columns = mutableMapOf("f:1" to TableColumn(name = ""))
+            columns = mutableListOf(TableColumn(name = ""))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issues)
 
         assertTrue(issues.isEmpty())
     }

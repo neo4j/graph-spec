@@ -264,20 +264,22 @@ class GraphSpecDataModelV3MigrationTest {
                 )
             ),
             "extensions" to schemaMapOf(
-                "mappings" to listOf(
-                    schemaMapOf(
-                        "relationship" to "actual_rel_id",
-                        "table" to "user_follows",
-                        "from_node" to
-                            schemaMapOf(
-                                "node" to "User",
-                                "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
-                            ),
-                        "to_node" to
-                            schemaMapOf(
-                                "node" to "User",
-                                "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
-                            )
+                "mappings" to schemaMapOf(
+                    "m0" to listOf(
+                        schemaMapOf(
+                            "relationship" to "actual_rel_id",
+                            "table" to "user_follows",
+                            "from_node" to
+                                schemaMapOf(
+                                    "node" to "User",
+                                    "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
+                                ),
+                            "to_node" to
+                                schemaMapOf(
+                                    "node" to "User",
+                                    "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
+                                )
+                        )
                     )
                 )
             )
@@ -299,11 +301,13 @@ class GraphSpecDataModelV3MigrationTest {
         val input = schemaMapOf(
             "relationships" to schemaMapOf(), // Empty
             "extensions" to schemaMapOf(
-                "mappings" to listOf(
-                    schemaMapOf(
-                        "relationship" to "NON_EXISTENT",
-                        "from_node" to schemaMapOf("node" to "A"),
-                        "to_node" to schemaMapOf("node" to "B")
+                "mappings" to schemaMapOf(
+                    "m0" to listOf(
+                        schemaMapOf(
+                            "relationship" to "NON_EXISTENT",
+                            "from_node" to schemaMapOf("node" to "A"),
+                            "to_node" to schemaMapOf("node" to "B")
+                        )
                     )
                 )
             )
@@ -320,26 +324,28 @@ class GraphSpecDataModelV3MigrationTest {
     fun `convertExtensions identifies key properties from mappings`() {
         val input = schemaMapOf(
             "extensions" to schemaMapOf(
-                "mappings" to schemaListOf(
-                    schemaMapOf(
-                        "node" to "node1",
-                        "table" to "table1",
-                        "properties" to schemaMapOf(
-                            "p1" to schemaMapOf("field" to "field1"),
-                            "p2" to schemaMapOf("field" to "field2"),
-                            "p3" to schemaMapOf("field" to "field3")
+                "mappings" to schemaMapOf(
+                    "m0" to listOf(
+                        schemaMapOf(
+                            "node" to "node1",
+                            "table" to "table1",
+                            "properties" to schemaMapOf(
+                                "p1" to schemaMapOf("field" to "field1"),
+                                "p2" to schemaMapOf("field" to "field2"),
+                                "p3" to schemaMapOf("field" to "field3")
+                            ),
+                            "key" to schemaListOf("p1")
                         ),
-                        "key" to schemaListOf("p1")
-                    ),
-                    schemaMapOf(
-                        "relationship" to "relationship1",
-                        "table" to "table2",
-                        "properties" to schemaMapOf(
-                            "p1" to schemaMapOf("field" to "field1"),
-                            "p2" to schemaMapOf("field" to "field2"),
-                            "p3" to schemaMapOf("field" to "field3")
-                        ),
-                        "key" to schemaListOf("p2", "p3")
+                        schemaMapOf(
+                            "relationship" to "relationship1",
+                            "table" to "table2",
+                            "properties" to schemaMapOf(
+                                "p1" to schemaMapOf("field" to "field1"),
+                                "p2" to schemaMapOf("field" to "field2"),
+                                "p3" to schemaMapOf("field" to "field3")
+                            ),
+                            "key" to schemaListOf("p2", "p3")
+                        )
                     )
                 )
             )
@@ -370,7 +376,7 @@ class GraphSpecDataModelV3MigrationTest {
                 "tables" to schemaMapOf(
                     "Orders" to schemaMapOf(
                         "source" to "SQL",
-                        "foreignKeys" to schemaMapOf(
+                        "foreign_keys" to schemaMapOf(
                             "fk_customer" to schemaMapOf(
                                 "columns" to listOf("cust_id", "region_id"),
                                 "references" to schemaMapOf(
@@ -403,8 +409,8 @@ class GraphSpecDataModelV3MigrationTest {
 
     @Test
     fun `convertFields transforms raw types to camelCase recommended types`() {
-        val fieldsInput = mapOf(
-            "f1" to schemaMapOf(
+        val fieldsInput = listOf(
+            schemaMapOf(
                 "name" to "first_name",
                 "suggested" to "STRING",
                 "supported" to listOf(SchemaLiteral("STRING"), SchemaLiteral("INTEGER"))
@@ -422,19 +428,19 @@ class GraphSpecDataModelV3MigrationTest {
 
     @Test
     fun `convertFields writes dimension field for vector types`() {
-        val fieldsInput = mapOf(
-            "f1" to schemaMapOf(
+        val fieldsInput = listOf(
+            schemaMapOf(
                 "name" to "embeddingWithDim",
                 "suggested" to "VECTOR<FLOAT>",
                 "supported" to listOf(SchemaLiteral("VECTOR<FLOAT>"), SchemaLiteral("VECTOR<FLOAT32>")),
                 "dimension" to 123
             ),
-            "f2" to schemaMapOf(
+            schemaMapOf(
                 "name" to "embedding",
                 "suggested" to "VECTOR<FLOAT>",
                 "supported" to listOf(SchemaLiteral("VECTOR<FLOAT>"))
             ),
-            "f3" to schemaMapOf(
+            schemaMapOf(
                 "name" to "stringWithDim",
                 "suggested" to "STRING",
                 "supported" to listOf(SchemaLiteral("STRING")),

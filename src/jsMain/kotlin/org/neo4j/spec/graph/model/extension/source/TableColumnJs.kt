@@ -28,51 +28,51 @@ import kotlin.String
 @JsExport
 @JsPlainObject
 external interface TableColumnJs {
+    val name: String
     var type: String
     var size: Int
     val suggested: String
     val supported: Array<String>
     val dimension: Int?
     val custom: Record<String, Any>
-    val name: String
 }
 
 fun tableColumnJs(
+    name: String,
     type: String,
     size: Int = -1,
     suggested: String = "ANY",
     supported: Array<String> = emptyArray(),
     dimension: Int? = null,
-    custom: Record<String, Any> = emptyRecord(),
-    name: String = ""
+    custom: Record<String, Any> = emptyRecord()
 ): TableColumnJs = jso {
+    this.name = name
     this.type = type
     this.size = size
     this.suggested = suggested
     this.supported = supported
     this.dimension = dimension
     this.custom = custom
-    this.name = name
 }
 
-fun TableColumn.toJs(key: String) = tableColumnJs(
+fun TableColumn.toJs() = tableColumnJs(
+    name = name,
     type = type,
     size = size,
     suggested = Neo4jType.toString(suggested),
     supported = supported.map { Neo4jType.toString(it) }.toTypedArray(),
     dimension = dimension,
-    custom = custom.toCustomJs(),
-    name = name ?: key
+    custom = custom.toCustomJs()
 )
 
 fun TableColumnJs.toClass() = TableColumn(
+    name = name,
     type = type,
     size = size,
     suggested = neo4jType(suggested),
     supported = supported.map { neo4jType(it) }.toSet(),
     dimension = dimension,
-    custom = custom.toCustomClass(),
-    name = name
+    custom = custom.toCustomClass()
 )
 
 private fun TableColumnJs.neo4jType(type: String) = Neo4jType.fromString(type)

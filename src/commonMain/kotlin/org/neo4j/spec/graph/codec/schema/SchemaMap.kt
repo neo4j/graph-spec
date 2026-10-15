@@ -127,6 +127,18 @@ class SchemaMap(val content: MutableMap<String, SchemaElement> = mutableMapOf(),
         return map
     }
 
+    fun mapOfListsOfMapsOrNull(key: String): Map<String, List<SchemaMap>>? {
+        val map = mutableMapOf<String, List<SchemaMap>>()
+        for ((childKey, element) in mapOrNull(key)?.content ?: return null) {
+            val list = mutableListOf<SchemaMap>()
+            for (item in (element as? SchemaList ?: return null).content) {
+                list.add(item as? SchemaMap ?: return null)
+            }
+            map[childKey] = list
+        }
+        return map
+    }
+
     fun listOfMaps(key: String): List<SchemaMap> {
         val list = content[key] ?: error("Missing required list at ${path(key)}")
         val schemaList =

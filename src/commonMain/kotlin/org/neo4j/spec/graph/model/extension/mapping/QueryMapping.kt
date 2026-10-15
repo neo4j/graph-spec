@@ -31,8 +31,13 @@ data class QueryMapping(
     @SerialDescription("The query to run.")
     var query: String,
     @SerialName("depends_on")
-    @SerialDescription("Id of the mapping which must be imported before this one. Empty when there is no dependency.")
+    @SerialDescription(
+        "Id of another mapping in the same list which must be imported before this one. " +
+            "Empty when there is no dependency."
+    )
     var dependsOn: String = "",
-    @SerialDescription("Optional id of this mapping, so other mappings can reference it in depends_on.")
+    @SerialDescription(
+        "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
+    )
     var id: String = ""
 ) : Mapping

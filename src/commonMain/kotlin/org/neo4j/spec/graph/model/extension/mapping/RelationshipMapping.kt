@@ -36,6 +36,7 @@ data class RelationshipMapping(
     @SerialName("to_node")
     @SerialDescription("How the end node of the relationship is matched.")
     val toNode: TargetMapping,
+    @SerialName("match_label")
     @SerialDescription("Label used to match existing relationships.")
     var matchLabel: String? = null,
     @SerialDescription("Mappings from property ids to source columns.")
@@ -45,8 +46,13 @@ data class RelationshipMapping(
     @SerialDescription("Ids of the properties which identify a relationship.")
     val key: MutableSet<String> = mutableSetOf(),
     @SerialName("depends_on")
-    @SerialDescription("Id of the mapping which must be imported before this one. Empty when there is no dependency.")
+    @SerialDescription(
+        "Id of another mapping in the same list which must be imported before this one. " +
+            "Empty when there is no dependency."
+    )
     var dependsOn: String = "",
-    @SerialDescription("Optional id of this mapping, so other mappings can reference it in depends_on.")
+    @SerialDescription(
+        "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
+    )
     var id: String = ""
 ) : Mapping

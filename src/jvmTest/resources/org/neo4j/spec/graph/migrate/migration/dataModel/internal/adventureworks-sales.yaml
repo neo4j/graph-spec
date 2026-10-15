@@ -348,20 +348,20 @@ extensions:
     countryregioncurrency:
       source: "cloud"
       columns:
-        countryregioncode:
+        - name: "countryregioncode"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        currencycode:
+        - name: "currencycode"
           type: "bpchar"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["countryregioncode", "currencycode"]
-      foreignKeys:
+      primary_keys: ["countryregioncode", "currencycode"]
+      foreign_keys:
         foreignKey1:
           columns: ["countryregioncode"]
           references:
@@ -375,78 +375,78 @@ extensions:
     creditcard:
       source: "cloud"
       columns:
-        creditcardid:
+        - name: "creditcardid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        cardtype:
+        - name: "cardtype"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        cardnumber:
+        - name: "cardnumber"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        expmonth:
+        - name: "expmonth"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        expyear:
+        - name: "expyear"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["creditcardid"]
+      primary_keys: ["creditcardid"]
     currency:
       source: "cloud"
       columns:
-        currencycode:
+        - name: "currencycode"
           type: "bpchar"
           suggested: "STRING"
           supported: ["STRING"]
-        name:
+        - name: "name"
           type: "Name"
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["currencycode"]
+      primary_keys: ["currencycode"]
     currencyrate:
       source: "cloud"
       columns:
-        currencyrateid:
+        - name: "currencyrateid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        currencyratedate:
+        - name: "currencyratedate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        fromcurrencycode:
+        - name: "fromcurrencycode"
           type: "bpchar"
           suggested: "STRING"
           supported: ["STRING"]
-        tocurrencycode:
+        - name: "tocurrencycode"
           type: "bpchar"
           suggested: "STRING"
           supported: ["STRING"]
-        averagerate:
+        - name: "averagerate"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        endofdayrate:
+        - name: "endofdayrate"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["currencyrateid"]
-      foreignKeys:
+      primary_keys: ["currencyrateid"]
+      foreign_keys:
         foreignKey1:
           columns: ["fromcurrencycode", "tocurrencycode"]
           references:
@@ -455,32 +455,32 @@ extensions:
     customer:
       source: "cloud"
       columns:
-        customerid:
+        - name: "customerid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        personid:
+        - name: "personid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        storeid:
+        - name: "storeid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        territoryid:
+        - name: "territoryid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["customerid"]
-      foreignKeys:
+      primary_keys: ["customerid"]
+      foreign_keys:
         foreignKey1:
           columns: ["personid"]
           references:
@@ -499,20 +499,20 @@ extensions:
     personcreditcard:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        creditcardid:
+        - name: "creditcardid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["businessentityid", "creditcardid"]
-      foreignKeys:
+      primary_keys: ["businessentityid", "creditcardid"]
+      foreign_keys:
         foreignKey1:
           columns: ["businessentityid"]
           references:
@@ -526,48 +526,48 @@ extensions:
     salesorderdetail:
       source: "cloud"
       columns:
-        salesorderid:
+        - name: "salesorderid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        salesorderdetailid:
+        - name: "salesorderdetailid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        carriertrackingnumber:
+        - name: "carriertrackingnumber"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        orderqty:
+        - name: "orderqty"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        productid:
+        - name: "productid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        specialofferid:
+        - name: "specialofferid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        unitprice:
+        - name: "unitprice"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        unitpricediscount:
+        - name: "unitpricediscount"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["salesorderid", "salesorderdetailid"]
-      foreignKeys:
+      primary_keys: ["salesorderid", "salesorderdetailid"]
+      foreign_keys:
         foreignKey1:
           columns: ["salesorderid"]
           references:
@@ -581,102 +581,102 @@ extensions:
     salesorderheader:
       source: "cloud"
       columns:
-        salesorderid:
+        - name: "salesorderid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        revisionnumber:
+        - name: "revisionnumber"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        orderdate:
+        - name: "orderdate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        duedate:
+        - name: "duedate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        shipdate:
+        - name: "shipdate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        status:
+        - name: "status"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        onlineorderflag:
+        - name: "onlineorderflag"
           type: "Flag"
-        purchaseordernumber:
+        - name: "purchaseordernumber"
           type: "OrderNumber"
-        accountnumber:
+        - name: "accountnumber"
           type: "AccountNumber"
-        customerid:
+        - name: "customerid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        salespersonid:
+        - name: "salespersonid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        territoryid:
+        - name: "territoryid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        billtoaddressid:
+        - name: "billtoaddressid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        shiptoaddressid:
+        - name: "shiptoaddressid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        shipmethodid:
+        - name: "shipmethodid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        creditcardid:
+        - name: "creditcardid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        creditcardapprovalcode:
+        - name: "creditcardapprovalcode"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        currencyrateid:
+        - name: "currencyrateid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        subtotal:
+        - name: "subtotal"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        taxamt:
+        - name: "taxamt"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        freight:
+        - name: "freight"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        totaldue:
+        - name: "totaldue"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        comment:
+        - name: "comment"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["salesorderid"]
-      foreignKeys:
+      primary_keys: ["salesorderid"]
+      foreign_keys:
         foreignKey1:
           columns: ["billtoaddressid", "shiptoaddressid"]
           references:
@@ -715,20 +715,20 @@ extensions:
     salesorderheadersalesreason:
       source: "cloud"
       columns:
-        salesorderid:
+        - name: "salesorderid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        salesreasonid:
+        - name: "salesreasonid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["salesorderid", "salesreasonid"]
-      foreignKeys:
+      primary_keys: ["salesorderid", "salesreasonid"]
+      foreign_keys:
         foreignKey1:
           columns: ["salesorderid"]
           references:
@@ -742,44 +742,44 @@ extensions:
     salesperson:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        territoryid:
+        - name: "territoryid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        salesquota:
+        - name: "salesquota"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        bonus:
+        - name: "bonus"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        commissionpct:
+        - name: "commissionpct"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        salesytd:
+        - name: "salesytd"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        saleslastyear:
+        - name: "saleslastyear"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["businessentityid"]
-      foreignKeys:
+      primary_keys: ["businessentityid"]
+      foreign_keys:
         foreignKey1:
           columns: ["businessentityid"]
           references:
@@ -793,28 +793,28 @@ extensions:
     salespersonquotahistory:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        quotadate:
+        - name: "quotadate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        salesquota:
+        - name: "salesquota"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["businessentityid", "quotadate"]
-      foreignKeys:
+      primary_keys: ["businessentityid", "quotadate"]
+      foreign_keys:
         foreignKey1:
           columns: ["businessentityid"]
           references:
@@ -823,50 +823,50 @@ extensions:
     salesreason:
       source: "cloud"
       columns:
-        salesreasonid:
+        - name: "salesreasonid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "Name"
-        reasontype:
+        - name: "reasontype"
           type: "Name"
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["salesreasonid"]
+      primary_keys: ["salesreasonid"]
     salestaxrate:
       source: "cloud"
       columns:
-        salestaxrateid:
+        - name: "salestaxrateid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        stateprovinceid:
+        - name: "stateprovinceid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        taxtype:
+        - name: "taxtype"
           type: "int2"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        taxrate:
+        - name: "taxrate"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "Name"
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["salestaxrateid"]
-      foreignKeys:
+      primary_keys: ["salestaxrateid"]
+      foreign_keys:
         foreignKey1:
           columns: ["stateprovinceid"]
           references:
@@ -875,46 +875,46 @@ extensions:
     salesterritory:
       source: "cloud"
       columns:
-        territoryid:
+        - name: "territoryid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "Name"
-        countryregioncode:
+        - name: "countryregioncode"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        group:
+        - name: "group"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        salesytd:
+        - name: "salesytd"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        saleslastyear:
+        - name: "saleslastyear"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        costytd:
+        - name: "costytd"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        costlastyear:
+        - name: "costlastyear"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["territoryid"]
-      foreignKeys:
+      primary_keys: ["territoryid"]
+      foreign_keys:
         foreignKey1:
           columns: ["countryregioncode"]
           references:
@@ -923,32 +923,32 @@ extensions:
     salesterritoryhistory:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        territoryid:
+        - name: "territoryid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        startdate:
+        - name: "startdate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        enddate:
+        - name: "enddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["businessentityid", "startdate", "territoryid"]
-      foreignKeys:
+      primary_keys: ["businessentityid", "startdate", "territoryid"]
+      foreign_keys:
         foreignKey1:
           columns: ["businessentityid"]
           references:
@@ -962,32 +962,32 @@ extensions:
     shoppingcartitem:
       source: "cloud"
       columns:
-        shoppingcartitemid:
+        - name: "shoppingcartitemid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        shoppingcartid:
+        - name: "shoppingcartid"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        quantity:
+        - name: "quantity"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        productid:
+        - name: "productid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        datecreated:
+        - name: "datecreated"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["shoppingcartitemid"]
-      foreignKeys:
+      primary_keys: ["shoppingcartitemid"]
+      foreign_keys:
         foreignKey1:
           columns: ["productid"]
           references:
@@ -996,72 +996,72 @@ extensions:
     specialoffer:
       source: "cloud"
       columns:
-        specialofferid:
+        - name: "specialofferid"
           type: "serial"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        description:
+        - name: "description"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        discountpct:
+        - name: "discountpct"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        type:
+        - name: "type"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        category:
+        - name: "category"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        startdate:
+        - name: "startdate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        enddate:
+        - name: "enddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-        minqty:
+        - name: "minqty"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        maxqty:
+        - name: "maxqty"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["specialofferid"]
+      primary_keys: ["specialofferid"]
     specialofferproduct:
       source: "cloud"
       columns:
-        specialofferid:
+        - name: "specialofferid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        productid:
+        - name: "productid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["specialofferid", "productid"]
-      foreignKeys:
+      primary_keys: ["specialofferid", "productid"]
+      foreign_keys:
         foreignKey1:
           columns: ["productid"]
           references:
@@ -1075,28 +1075,28 @@ extensions:
     store:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "Name"
-        salespersonid:
+        - name: "salespersonid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        demographics:
+        - name: "demographics"
           type: "xml"
-        rowguid:
+        - name: "rowguid"
           type: "uuid"
           suggested: "STRING"
           supported: ["STRING"]
-        modifieddate:
+        - name: "modifieddate"
           type: "timestamp"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "LOCAL DATETIME"]
-      primaryKeys: ["businessentityid"]
-      foreignKeys:
+      primary_keys: ["businessentityid"]
+      foreign_keys:
         foreignKey1:
           columns: ["businessentityid"]
           references:
@@ -1110,605 +1110,606 @@ extensions:
     vindividualcustomer:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        title:
+        - name: "title"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        firstname:
+        - name: "firstname"
           type: "Name"
-        middlename:
+        - name: "middlename"
           type: "Name"
-        lastname:
+        - name: "lastname"
           type: "Name"
-        suffix:
+        - name: "suffix"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        phonenumber:
+        - name: "phonenumber"
           type: "Phone"
-        phonenumbertype:
+        - name: "phonenumbertype"
           type: "Name"
-        emailaddress:
+        - name: "emailaddress"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        emailpromotion:
+        - name: "emailpromotion"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        addresstype:
+        - name: "addresstype"
           type: "Name"
-        addressline1:
+        - name: "addressline1"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        addressline2:
+        - name: "addressline2"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        city:
+        - name: "city"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        stateprovincename:
+        - name: "stateprovincename"
           type: "Name"
-        postalcode:
+        - name: "postalcode"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        countryregionname:
+        - name: "countryregionname"
           type: "Name"
-        demographics:
+        - name: "demographics"
           type: "xml"
     vpersondemographics:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        totalpurchaseytd:
+        - name: "totalpurchaseytd"
           type: "money"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        datefirstpurchase:
+        - name: "datefirstpurchase"
           type: "date"
           suggested: "DATE"
           supported: ["DATE"]
-        birthdate:
+        - name: "birthdate"
           type: "date"
           suggested: "DATE"
           supported: ["DATE"]
-        maritalstatus:
+        - name: "maritalstatus"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        yearlyincome:
+        - name: "yearlyincome"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        gender:
+        - name: "gender"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        totalchildren:
+        - name: "totalchildren"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        numberchildrenathome:
+        - name: "numberchildrenathome"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        education:
+        - name: "education"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        occupation:
+        - name: "occupation"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        homeownerflag:
+        - name: "homeownerflag"
           type: "bool"
           suggested: "BOOLEAN"
           supported: ["STRING", "BOOLEAN"]
-        numbercarsowned:
+        - name: "numbercarsowned"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
     vsalesperson:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        title:
+        - name: "title"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        firstname:
+        - name: "firstname"
           type: "Name"
-        middlename:
+        - name: "middlename"
           type: "Name"
-        lastname:
+        - name: "lastname"
           type: "Name"
-        suffix:
+        - name: "suffix"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        jobtitle:
+        - name: "jobtitle"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        phonenumber:
+        - name: "phonenumber"
           type: "Phone"
-        phonenumbertype:
+        - name: "phonenumbertype"
           type: "Name"
-        emailaddress:
+        - name: "emailaddress"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        emailpromotion:
+        - name: "emailpromotion"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        addressline1:
+        - name: "addressline1"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        addressline2:
+        - name: "addressline2"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        city:
+        - name: "city"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        stateprovincename:
+        - name: "stateprovincename"
           type: "Name"
-        postalcode:
+        - name: "postalcode"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        countryregionname:
+        - name: "countryregionname"
           type: "Name"
-        territoryname:
+        - name: "territoryname"
           type: "Name"
-        territorygroup:
+        - name: "territorygroup"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        salesquota:
+        - name: "salesquota"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        salesytd:
+        - name: "salesytd"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        saleslastyear:
+        - name: "saleslastyear"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
     vsalespersonsalesbyfiscalyears:
       source: "cloud"
       columns:
-        SalesPersonID:
+        - name: "SalesPersonID"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        FullName:
+        - name: "FullName"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        JobTitle:
+        - name: "JobTitle"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        SalesTerritory:
+        - name: "SalesTerritory"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        "2012":
+        - name: "2012"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        "2013":
+        - name: "2013"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        "2014":
+        - name: "2014"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
     vsalespersonsalesbyfiscalyearsdata:
       source: "cloud"
       columns:
-        salespersonid:
+        - name: "salespersonid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        fullname:
+        - name: "fullname"
           type: "text"
           suggested: "STRING"
           supported: ["STRING"]
-        jobtitle:
+        - name: "jobtitle"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        salesterritory:
+        - name: "salesterritory"
           type: "Name"
-        salestotal:
+        - name: "salestotal"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        fiscalyear:
+        - name: "fiscalyear"
           type: "numeric"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
     vstorewithaddresses:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "Name"
-        addresstype:
+        - name: "addresstype"
           type: "Name"
-        addressline1:
+        - name: "addressline1"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        addressline2:
+        - name: "addressline2"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        city:
+        - name: "city"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        stateprovincename:
+        - name: "stateprovincename"
           type: "Name"
-        postalcode:
+        - name: "postalcode"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        countryregionname:
+        - name: "countryregionname"
           type: "Name"
     vstorewithcontacts:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "Name"
-        contacttype:
+        - name: "contacttype"
           type: "Name"
-        title:
+        - name: "title"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        firstname:
+        - name: "firstname"
           type: "Name"
-        middlename:
+        - name: "middlename"
           type: "Name"
-        lastname:
+        - name: "lastname"
           type: "Name"
-        suffix:
+        - name: "suffix"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        phonenumber:
+        - name: "phonenumber"
           type: "Phone"
-        phonenumbertype:
+        - name: "phonenumbertype"
           type: "Name"
-        emailaddress:
+        - name: "emailaddress"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        emailpromotion:
+        - name: "emailpromotion"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
     vstorewithdemographics:
       source: "cloud"
       columns:
-        businessentityid:
+        - name: "businessentityid"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "Name"
-        AnnualSales:
+        - name: "AnnualSales"
           type: "money"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        AnnualRevenue:
+        - name: "AnnualRevenue"
           type: "money"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        BankName:
+        - name: "BankName"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        BusinessType:
+        - name: "BusinessType"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        YearOpened:
+        - name: "YearOpened"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        Specialty:
+        - name: "Specialty"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        SquareFeet:
+        - name: "SquareFeet"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        Brands:
+        - name: "Brands"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        Internet:
+        - name: "Internet"
           type: "varchar"
           suggested: "STRING"
           supported: ["STRING"]
-        NumberEmployees:
+        - name: "NumberEmployees"
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
   mappings:
-    - type: "NODE"
-      node: "node0"
-      table: "creditcard"
-      properties:
-        node0_property0: { column: "creditcardid" }
-        node0_property1: { column: "cardtype" }
-        node0_property2: { column: "cardnumber" }
-        node0_property3: { column: "expmonth" }
-        node0_property4: { column: "expyear" }
-        node0_property5: { column: "modifieddate" }
-      key: ["node0_property0"]
-    - type: "NODE"
-      node: "node1"
-      table: "currency"
-      properties:
-        node1_property0: { column: "currencycode" }
-        node1_property1: { column: "modifieddate" }
-      key: ["node1_property0"]
-    - type: "NODE"
-      node: "node2"
-      table: "currencyrate"
-      properties:
-        node2_property0: { column: "currencyrateid" }
-        node2_property1: { column: "currencyratedate" }
-        node2_property2: { column: "averagerate" }
-        node2_property3: { column: "endofdayrate" }
-        node2_property4: { column: "modifieddate" }
-      key: ["node2_property0"]
-    - type: "NODE"
-      node: "node3"
-      table: "customer"
-      properties:
-        node3_property0: { column: "customerid" }
-        node3_property1: { column: "rowguid" }
-        node3_property2: { column: "modifieddate" }
-      key: ["node3_property0"]
-    - type: "NODE"
-      node: "node4"
-      table: "salesorderheader"
-      properties:
-        node4_property0: { column: "salesorderid" }
-        node4_property1: { column: "revisionnumber" }
-        node4_property2: { column: "orderdate" }
-        node4_property3: { column: "duedate" }
-        node4_property4: { column: "shipdate" }
-        node4_property5: { column: "status" }
-        node4_property6: { column: "creditcardapprovalcode" }
-        node4_property7: { column: "subtotal" }
-        node4_property8: { column: "taxamt" }
-        node4_property9: { column: "freight" }
-        node4_property10: { column: "totaldue" }
-        node4_property11: { column: "comment" }
-        node4_property12: { column: "rowguid" }
-        node4_property13: { column: "modifieddate" }
-      key: ["node4_property0"]
-    - type: "NODE"
-      node: "node5"
-      table: "salesperson"
-      properties:
-        node5_property0: { column: "businessentityid" }
-        node5_property1: { column: "salesquota" }
-        node5_property2: { column: "bonus" }
-        node5_property3: { column: "commissionpct" }
-        node5_property4: { column: "salesytd" }
-        node5_property5: { column: "saleslastyear" }
-        node5_property6: { column: "rowguid" }
-        node5_property7: { column: "modifieddate" }
-      key: ["node5_property0"]
-    - type: "NODE"
-      node: "node6"
-      table: "salesreason"
-      properties:
-        node6_property0: { column: "salesreasonid" }
-        node6_property1: { column: "modifieddate" }
-      key: ["node6_property0"]
-    - type: "NODE"
-      node: "node7"
-      table: "salestaxrate"
-      properties:
-        node7_property0: { column: "salestaxrateid" }
-        node7_property1: { column: "taxtype" }
-        node7_property2: { column: "taxrate" }
-        node7_property3: { column: "rowguid" }
-        node7_property4: { column: "modifieddate" }
-      key: ["node7_property0"]
-    - type: "NODE"
-      node: "node8"
-      table: "salesterritory"
-      properties:
-        node8_property0: { column: "territoryid" }
-        node8_property1: { column: "group" }
-        node8_property2: { column: "salesytd" }
-        node8_property3: { column: "saleslastyear" }
-        node8_property4: { column: "costytd" }
-        node8_property5: { column: "costlastyear" }
-        node8_property6: { column: "rowguid" }
-        node8_property7: { column: "modifieddate" }
-      key: ["node8_property0"]
-    - type: "NODE"
-      node: "node9"
-      table: "shoppingcartitem"
-      properties:
-        node9_property0: { column: "shoppingcartitemid" }
-        node9_property1: { column: "shoppingcartid" }
-        node9_property2: { column: "quantity" }
-        node9_property3: { column: "datecreated" }
-        node9_property4: { column: "modifieddate" }
-      key: ["node9_property0"]
-    - type: "NODE"
-      node: "node10"
-      table: "specialoffer"
-      properties:
-        node10_property0: { column: "specialofferid" }
-        node10_property1: { column: "description" }
-        node10_property2: { column: "discountpct" }
-        node10_property3: { column: "type" }
-        node10_property4: { column: "category" }
-        node10_property5: { column: "startdate" }
-        node10_property6: { column: "enddate" }
-        node10_property7: { column: "minqty" }
-        node10_property8: { column: "maxqty" }
-        node10_property9: { column: "rowguid" }
-        node10_property10: { column: "modifieddate" }
-      key: ["node10_property0"]
-    - type: "NODE"
-      node: "node11"
-      table: "store"
-      properties:
-        node11_property0: { column: "businessentityid" }
-        node11_property1: { column: "rowguid" }
-        node11_property2: { column: "modifieddate" }
-      key: ["node11_property0"]
-    - type: "RELATIONSHIP"
-      relationship: "relationship0"
-      table: "customer"
-      from_node:
-        node: "node3"
-        properties:
-          node3_property0: { column: "customerid" }
-      to_node:
-        node: "node8"
-        properties:
-          node8_property0: { column: "territoryid" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship1"
-      table: "customer"
-      from_node:
-        node: "node3"
-        properties:
-          node3_property0: { column: "customerid" }
-      to_node:
-        node: "node11"
-        properties:
-          node11_property0: { column: "storeid" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship2"
-      table: "salesorderheader"
-      from_node:
-        node: "node4"
-        properties:
-          node4_property0: { column: "salesorderid" }
-      to_node:
+    mapping0:
+      - type: "NODE"
         node: "node0"
+        table: "creditcard"
         properties:
           node0_property0: { column: "creditcardid" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship3"
-      table: "salesorderheader"
-      from_node:
-        node: "node4"
+          node0_property1: { column: "cardtype" }
+          node0_property2: { column: "cardnumber" }
+          node0_property3: { column: "expmonth" }
+          node0_property4: { column: "expyear" }
+          node0_property5: { column: "modifieddate" }
+        key: ["node0_property0"]
+      - type: "NODE"
+        node: "node1"
+        table: "currency"
         properties:
-          node4_property0: { column: "salesorderid" }
-      to_node:
+          node1_property0: { column: "currencycode" }
+          node1_property1: { column: "modifieddate" }
+        key: ["node1_property0"]
+      - type: "NODE"
         node: "node2"
+        table: "currencyrate"
         properties:
           node2_property0: { column: "currencyrateid" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship4"
-      table: "salesorderheader"
-      from_node:
-        node: "node4"
-        properties:
-          node4_property0: { column: "salesorderid" }
-      to_node:
+          node2_property1: { column: "currencyratedate" }
+          node2_property2: { column: "averagerate" }
+          node2_property3: { column: "endofdayrate" }
+          node2_property4: { column: "modifieddate" }
+        key: ["node2_property0"]
+      - type: "NODE"
         node: "node3"
+        table: "customer"
         properties:
           node3_property0: { column: "customerid" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship5"
-      table: "salesorderheader"
-      from_node:
+          node3_property1: { column: "rowguid" }
+          node3_property2: { column: "modifieddate" }
+        key: ["node3_property0"]
+      - type: "NODE"
         node: "node4"
+        table: "salesorderheader"
         properties:
           node4_property0: { column: "salesorderid" }
-      to_node:
+          node4_property1: { column: "revisionnumber" }
+          node4_property2: { column: "orderdate" }
+          node4_property3: { column: "duedate" }
+          node4_property4: { column: "shipdate" }
+          node4_property5: { column: "status" }
+          node4_property6: { column: "creditcardapprovalcode" }
+          node4_property7: { column: "subtotal" }
+          node4_property8: { column: "taxamt" }
+          node4_property9: { column: "freight" }
+          node4_property10: { column: "totaldue" }
+          node4_property11: { column: "comment" }
+          node4_property12: { column: "rowguid" }
+          node4_property13: { column: "modifieddate" }
+        key: ["node4_property0"]
+      - type: "NODE"
         node: "node5"
-        properties:
-          node5_property0: { column: "salespersonid" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship6"
-      table: "salesorderheader"
-      from_node:
-        node: "node4"
-        properties:
-          node4_property0: { column: "salesorderid" }
-      to_node:
-        node: "node8"
-        properties:
-          node8_property0: { column: "territoryid" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship7"
-      table: "salesorderheadersalesreason"
-      from_node:
-        node: "node4"
-        properties:
-          node4_property0: { column: "salesorderid" }
-      to_node:
-        node: "node6"
-        properties:
-          node6_property0: { column: "salesreasonid" }
-      properties:
-        relationship7_property0: { column: "modifieddate" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship8"
-      table: "salesperson"
-      from_node:
-        node: "node5"
+        table: "salesperson"
         properties:
           node5_property0: { column: "businessentityid" }
-      to_node:
+          node5_property1: { column: "salesquota" }
+          node5_property2: { column: "bonus" }
+          node5_property3: { column: "commissionpct" }
+          node5_property4: { column: "salesytd" }
+          node5_property5: { column: "saleslastyear" }
+          node5_property6: { column: "rowguid" }
+          node5_property7: { column: "modifieddate" }
+        key: ["node5_property0"]
+      - type: "NODE"
+        node: "node6"
+        table: "salesreason"
+        properties:
+          node6_property0: { column: "salesreasonid" }
+          node6_property1: { column: "modifieddate" }
+        key: ["node6_property0"]
+      - type: "NODE"
+        node: "node7"
+        table: "salestaxrate"
+        properties:
+          node7_property0: { column: "salestaxrateid" }
+          node7_property1: { column: "taxtype" }
+          node7_property2: { column: "taxrate" }
+          node7_property3: { column: "rowguid" }
+          node7_property4: { column: "modifieddate" }
+        key: ["node7_property0"]
+      - type: "NODE"
         node: "node8"
+        table: "salesterritory"
         properties:
           node8_property0: { column: "territoryid" }
-    - type: "RELATIONSHIP"
-      relationship: "relationship9"
-      table: "store"
-      from_node:
+          node8_property1: { column: "group" }
+          node8_property2: { column: "salesytd" }
+          node8_property3: { column: "saleslastyear" }
+          node8_property4: { column: "costytd" }
+          node8_property5: { column: "costlastyear" }
+          node8_property6: { column: "rowguid" }
+          node8_property7: { column: "modifieddate" }
+        key: ["node8_property0"]
+      - type: "NODE"
+        node: "node9"
+        table: "shoppingcartitem"
+        properties:
+          node9_property0: { column: "shoppingcartitemid" }
+          node9_property1: { column: "shoppingcartid" }
+          node9_property2: { column: "quantity" }
+          node9_property3: { column: "datecreated" }
+          node9_property4: { column: "modifieddate" }
+        key: ["node9_property0"]
+      - type: "NODE"
+        node: "node10"
+        table: "specialoffer"
+        properties:
+          node10_property0: { column: "specialofferid" }
+          node10_property1: { column: "description" }
+          node10_property2: { column: "discountpct" }
+          node10_property3: { column: "type" }
+          node10_property4: { column: "category" }
+          node10_property5: { column: "startdate" }
+          node10_property6: { column: "enddate" }
+          node10_property7: { column: "minqty" }
+          node10_property8: { column: "maxqty" }
+          node10_property9: { column: "rowguid" }
+          node10_property10: { column: "modifieddate" }
+        key: ["node10_property0"]
+      - type: "NODE"
         node: "node11"
+        table: "store"
         properties:
           node11_property0: { column: "businessentityid" }
-      to_node:
-        node: "node5"
+          node11_property1: { column: "rowguid" }
+          node11_property2: { column: "modifieddate" }
+        key: ["node11_property0"]
+      - type: "RELATIONSHIP"
+        relationship: "relationship0"
+        table: "customer"
+        from_node:
+          node: "node3"
+          properties:
+            node3_property0: { column: "customerid" }
+        to_node:
+          node: "node8"
+          properties:
+            node8_property0: { column: "territoryid" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship1"
+        table: "customer"
+        from_node:
+          node: "node3"
+          properties:
+            node3_property0: { column: "customerid" }
+        to_node:
+          node: "node11"
+          properties:
+            node11_property0: { column: "storeid" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship2"
+        table: "salesorderheader"
+        from_node:
+          node: "node4"
+          properties:
+            node4_property0: { column: "salesorderid" }
+        to_node:
+          node: "node0"
+          properties:
+            node0_property0: { column: "creditcardid" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship3"
+        table: "salesorderheader"
+        from_node:
+          node: "node4"
+          properties:
+            node4_property0: { column: "salesorderid" }
+        to_node:
+          node: "node2"
+          properties:
+            node2_property0: { column: "currencyrateid" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship4"
+        table: "salesorderheader"
+        from_node:
+          node: "node4"
+          properties:
+            node4_property0: { column: "salesorderid" }
+        to_node:
+          node: "node3"
+          properties:
+            node3_property0: { column: "customerid" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship5"
+        table: "salesorderheader"
+        from_node:
+          node: "node4"
+          properties:
+            node4_property0: { column: "salesorderid" }
+        to_node:
+          node: "node5"
+          properties:
+            node5_property0: { column: "salespersonid" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship6"
+        table: "salesorderheader"
+        from_node:
+          node: "node4"
+          properties:
+            node4_property0: { column: "salesorderid" }
+        to_node:
+          node: "node8"
+          properties:
+            node8_property0: { column: "territoryid" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship7"
+        table: "salesorderheadersalesreason"
+        from_node:
+          node: "node4"
+          properties:
+            node4_property0: { column: "salesorderid" }
+        to_node:
+          node: "node6"
+          properties:
+            node6_property0: { column: "salesreasonid" }
         properties:
-          node5_property0: { column: "salespersonid" }
+          relationship7_property0: { column: "modifieddate" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship8"
+        table: "salesperson"
+        from_node:
+          node: "node5"
+          properties:
+            node5_property0: { column: "businessentityid" }
+        to_node:
+          node: "node8"
+          properties:
+            node8_property0: { column: "territoryid" }
+      - type: "RELATIONSHIP"
+        relationship: "relationship9"
+        table: "store"
+        from_node:
+          node: "node11"
+          properties:
+            node11_property0: { column: "businessentityid" }
+        to_node:
+          node: "node5"
+          properties:
+            node5_property0: { column: "salespersonid" }

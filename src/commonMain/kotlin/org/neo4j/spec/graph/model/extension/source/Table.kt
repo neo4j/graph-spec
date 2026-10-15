@@ -30,10 +30,12 @@ import kotlin.js.JsExport
 data class Table(
     @SerialDescription("Where the table's data comes from.")
     var source: String,
-    @SerialDescription("Columns of the table keyed by column name.")
-    val columns: MutableMap<String, TableColumn> = mutableMapOf(),
+    @SerialDescription("Columns of the table in their source order.")
+    val columns: MutableList<TableColumn> = mutableListOf(),
+    @SerialName("primary_keys")
     @SerialDescription("Names of the columns making up the primary key.")
     val primaryKeys: MutableSet<String> = mutableSetOf(),
+    @SerialName("foreign_keys")
     @SerialDescription("Foreign keys of the table keyed by id.")
     val foreignKeys: MutableMap<String, ForeignKey> = mutableMapOf(),
     @SerialDescription("User-defined arbitrary data.")

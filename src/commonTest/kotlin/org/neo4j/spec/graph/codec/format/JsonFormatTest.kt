@@ -115,7 +115,7 @@ class JsonFormatTest {
             version = "1.0",
             id = "test",
             nodes = mutableMapOf(),
-            extensions = GraphModelExtensions(mappings = mutableListOf())
+            extensions = GraphModelExtensions(mappings = mutableMapOf())
         )
 
         val schema = jsonFormat.encodeToSchema(model)
@@ -168,19 +168,21 @@ class JsonFormatTest {
             version = "1",
             id = "test",
             extensions = GraphModelExtensions(
-                mappings = mutableListOf(
-                    NodeMapping(
-                        node = "n0",
-                        table = "t0",
-                        properties = mutableMapOf("p0" to PropertyMapping(column = "f0"))
-                    ),
-                    RelationshipMapping(
-                        relationship = "r0",
-                        table = "t1",
-                        fromNode = TargetMapping(node = "n0"),
-                        toNode = TargetMapping(node = "n1")
-                    ),
-                    QueryMapping(table = "t2", query = "MATCH (n) RETURN n")
+                mappings = mutableMapOf(
+                    "m0" to mutableListOf(
+                        NodeMapping(
+                            node = "n0",
+                            table = "t0",
+                            properties = mutableMapOf("p0" to PropertyMapping(column = "f0"))
+                        ),
+                        RelationshipMapping(
+                            relationship = "r0",
+                            table = "t1",
+                            fromNode = TargetMapping(node = "n0"),
+                            toNode = TargetMapping(node = "n1")
+                        ),
+                        QueryMapping(table = "t2", query = "MATCH (n) RETURN n")
+                    )
                 )
             )
         )
@@ -227,7 +229,7 @@ class JsonFormatTest {
         val json = """{ "node": "n0", "table": "t0", "properties": {} }"""
 
         val failure = assertFailsWith<SerializationException> {
-            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"mappings":[$json]}}""")
+            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"mappings":{"m0":[$json]}}}""")
         }
 
         assertTrue(
@@ -241,7 +243,7 @@ class JsonFormatTest {
         val json = """{ "type": "NotARealMapping", "node": "n0", "table": "t0", "properties": {} }"""
 
         assertFailsWith<SerializationException> {
-            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"mappings":[$json]}}""")
+            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"mappings":{"m0":[$json]}}}""")
         }
     }
 

@@ -45,6 +45,6 @@ data class Node(
     val description: String = "",
     @SerialDescription("Alternative names for the node.")
     val aliases: MutableSet<String> = mutableSetOf(),
-    @SerialDescription("Reference to an external resource describing the node.")
+    @SerialDescription("Reference or URI of an external resource describing the node.")
     val reference: String = ""
 ) : Named

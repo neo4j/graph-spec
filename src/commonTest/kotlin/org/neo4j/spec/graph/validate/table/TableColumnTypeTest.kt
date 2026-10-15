@@ -36,13 +36,13 @@ class TableColumnTypeTest {
         // UPX: supportedTypes?.length === 0
         val table = Table(
             source = "sql/postgres",
-            columns = mutableMapOf(
-                "f:1" to TableColumn(name = "email", suggested = Neo4jType.STRING, supported = emptySet())
+            columns = mutableListOf(
+                TableColumn(name = "email", suggested = Neo4jType.STRING, supported = emptySet())
             )
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_column_type", issues.first().code)
@@ -52,8 +52,8 @@ class TableColumnTypeTest {
     fun `pass on cloud column with non-empty supported types`() {
         val table = Table(
             source = "sql/postgres",
-            columns = mutableMapOf(
-                "f:1" to TableColumn(
+            columns = mutableListOf(
+                TableColumn(
                     name = "email",
                     suggested = Neo4jType.STRING,
                     supported = setOf(Neo4jType.STRING)
@@ -62,7 +62,7 @@ class TableColumnTypeTest {
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -72,11 +72,11 @@ class TableColumnTypeTest {
         // rule skipped for local tables - only cloud columns are checked
         val table = Table(
             source = "local",
-            columns = mutableMapOf("f:1" to TableColumn(name = "email", supported = emptySet()))
+            columns = mutableListOf(TableColumn(name = "email", supported = emptySet()))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issues)
 
         assertTrue(issues.isEmpty())
     }
@@ -86,11 +86,11 @@ class TableColumnTypeTest {
         // type check is independent of name check - both can fire
         val table = Table(
             source = "sql/postgres",
-            columns = mutableMapOf("f:1" to TableColumn(name = "", supported = emptySet()))
+            columns = mutableListOf(TableColumn(name = "", supported = emptySet()))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_column_type", issues.first().code)

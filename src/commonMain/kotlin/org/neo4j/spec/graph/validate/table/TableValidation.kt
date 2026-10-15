@@ -21,7 +21,6 @@ import org.neo4j.spec.graph.model.extension.source.Table
 import org.neo4j.spec.graph.model.extension.source.TableColumn
 import org.neo4j.spec.graph.validate.Issue
 import org.neo4j.spec.graph.validate.Validation
-import kotlin.collections.iterator
 import kotlin.js.JsExport
 
 @JsExport
@@ -29,8 +28,8 @@ interface TableValidation : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
         for ((tableId, table) in model.extensions.tables) {
             validateTable(model, tableId, table, issues)
-            for ((columnId, column) in table.columns) {
-                validateTableColumn(model, tableId, table, columnId, column, issues)
+            for ((index, column) in table.columns.withIndex()) {
+                validateTableColumn(model, tableId, table, index, column, issues)
             }
         }
     }
@@ -42,7 +41,7 @@ interface TableValidation : Validation {
         model: GraphModel,
         tableId: String,
         table: Table,
-        columnId: String,
+        columnIndex: Int,
         column: TableColumn,
         issues: MutableList<Issue>
     ) {

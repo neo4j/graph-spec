@@ -16,39 +16,43 @@ class TableEditorTest {
         val table = tableJs(source = "users")
 
         // Test Add
-        val columnId = TableEditor.addColumn(table, "STRING")
-        assertTrue(columnId.isNotEmpty(), "Add column should return an ID.")
+        val columnName = TableEditor.addColumn(table, "STRING")
+        assertTrue(columnName.isNotEmpty(), "Add column should return the new column's name.")
 
-        // Assert column exists using dynamic access for JS plain object
-        val addedColumn = table.columns[columnId]
-        assertNotNull(addedColumn, "Column should exist in Record.")
+        val addedColumn = table.columns.firstOrNull { it.name == columnName }
+        assertNotNull(addedColumn, "Column should exist in the list.")
         assertEquals("STRING", addedColumn.type)
 
+        // Names are unique, so adding another column doesn't reuse the name
+        val otherName = TableEditor.addColumn(table, "STRING")
+        assertNotEquals(columnName, otherName)
+        assertEquals(listOf(columnName, otherName), table.columns.map { it.name })
+
         // Test Remove
-        TableEditor.removeColumn(table, columnId)
-        val removedColumn = table.columns[columnId]
-        assertNull(removedColumn, "Column should be removed from Record.")
+        TableEditor.removeColumn(table, columnName)
+        assertNull(table.columns.firstOrNull { it.name == columnName }, "Column should be removed from the list.")
+        assertEquals(listOf(otherName), table.columns.map { it.name })
     }
 
     @Test
     fun testSetColumnType() {
         val table = tableJs(source = "users")
-        val columnId = TableEditor.addColumn(table, "STRING")
+        val columnName = TableEditor.addColumn(table, "STRING")
 
-        TableEditor.setColumnType(table, columnId, "INTEGER")
+        TableEditor.setColumnType(table, columnName, "INTEGER")
 
-        val column = table.columns[columnId]
+        val column = table.columns.firstOrNull { it.name == columnName }
         assertEquals("INTEGER", column?.type)
     }
 
     @Test
     fun testSetColumnSize() {
         val table = tableJs(source = "users")
-        val columnId = TableEditor.addColumn(table, "STRING")
+        val columnName = TableEditor.addColumn(table, "STRING")
 
-        TableEditor.setColumnSize(table, columnId, 128)
+        TableEditor.setColumnSize(table, columnName, 128)
 
-        val column = table.columns[columnId]
+        val column = table.columns.firstOrNull { it.name == columnName }
         assertEquals(128, column?.size)
     }
 

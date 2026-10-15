@@ -32,6 +32,7 @@ data class Property(
     var type: Neo4jType = Neo4jType.ANY,
     @SerialDescription("Dimension of the property when it holds a vector.")
     var dimension: Int? = null,
+    @SerialName("must_exist")
     @SerialDescription(
         "Shorthand for an existence constraint. Expanded into constraints when the model is internalised."
     )
@@ -48,7 +49,7 @@ data class Property(
     override var name: String? = null,
     @SerialDescription("Description of the property.")
     val description: String = "",
-    @SerialDescription("Reference to an external resource describing the property.")
+    @SerialDescription("Reference or URI of an external resource describing the property.")
     val reference: String = "",
     @SerialDescription("Pattern values of the property are expected to match.")
     val pattern: String = "",

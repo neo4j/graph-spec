@@ -25,12 +25,23 @@ import org.neo4j.spec.graph.validate.Issue
 import org.neo4j.spec.graph.validate.Validation
 
 /**
- * A mapping's `depends_on` must reference the `id` of another mapping, and mapping ids must be unique and
- * free of dependency cycles so an import order can be derived.
+ * A mapping's `depends_on` must reference the `id` of another mapping in the same list. Ids must be unique within
+ * their list and the dependencies free of cycles so an import order can be derived.
  */
 object MappingDependencies : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        val mappings = model.extensions.mappings
+        val lists = model.extensions.mappings
+        for ((listId, mappings) in lists) {
+            validateList(listId, mappings, lists, issues)
+        }
+    }
+
+    private fun validateList(
+        listId: String,
+        mappings: List<Mapping>,
+        lists: Map<String, List<Mapping>>,
+        issues: MutableList<Issue>
+    ) {
         val indexById = mutableMapOf<String, Int>()
         for ((index, mapping) in mappings.withIndex()) {
             val id = mapping.mappingId()
@@ -41,8 +52,8 @@ object MappingDependencies : Validation {
                 issues.add(
                     Issue(
                         code = "mapping_id_duplicate",
-                        message = "Mapping id '$id' is used by more than one mapping",
-                        path = "extensions.mappings[$index].id"
+                        message = "Mapping id '$id' is used by more than one mapping in '$listId'",
+                        path = "extensions.mappings.$listId[$index].id"
                     )
                 )
             } else {
@@ -58,29 +69,38 @@ object MappingDependencies : Validation {
                 continue
             }
             val target = indexById[dependsOn]
-            val path = "extensions.mappings[$index].depends_on"
-            when (target) {
-                null -> issues.add(
-                    Issue(
-                        code = "mapping_depends_on_unknown",
-                        message = "Mapping depends on '$dependsOn' which isn't the id of any mapping",
-                        path = path
-                    )
-                )
-                index -> issues.add(
+            val path = "extensions.mappings.$listId[$index].depends_on"
+            when {
+                target == index -> issues.add(
                     Issue(
                         code = "mapping_depends_on_self",
                         message = "Mapping '$dependsOn' can't depend on itself",
                         path = path
                     )
                 )
-                else -> next[index] = target
+                target != null -> next[index] = target
+                lists.any { (otherId, other) -> otherId != listId && other.any { it.mappingId() == dependsOn } } ->
+                    issues.add(
+                        Issue(
+                            code = "mapping_depends_on_other_list",
+                            message = "Mapping depends on '$dependsOn' which is in a different list of mappings, " +
+                                "mappings can only depend on others in the same list",
+                            path = path
+                        )
+                    )
+                else -> issues.add(
+                    Issue(
+                        code = "mapping_depends_on_unknown",
+                        message = "Mapping depends on '$dependsOn' which isn't the id of any mapping in '$listId'",
+                        path = path
+                    )
+                )
             }
         }
-        reportCycles(next, issues)
+        reportCycles(listId, next, issues)
     }
 
-    private fun reportCycles(next: Map<Int, Int>, issues: MutableList<Issue>) {
+    private fun reportCycles(listId: String, next: Map<Int, Int>, issues: MutableList<Issue>) {
         val done = mutableSetOf<Int>()
         for (start in next.keys.sorted()) {
             if (start in done) {
@@ -100,8 +120,8 @@ object MappingDependencies : Validation {
                         code = "mapping_dependency_cycle",
                         message = "Mappings ${cycle.sorted().joinToString(", ") {
                             "[$it]"
-                        }} depend on each other in a cycle",
-                        path = "extensions.mappings[$first].depends_on"
+                        }} in '$listId' depend on each other in a cycle",
+                        path = "extensions.mappings.$listId[$first].depends_on"
                     )
                 )
             }

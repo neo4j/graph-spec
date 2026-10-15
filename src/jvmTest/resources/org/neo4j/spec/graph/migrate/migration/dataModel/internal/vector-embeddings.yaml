@@ -26,26 +26,27 @@ extensions:
     document:
       source: "cloud"
       columns:
-        documentid:
+        - name: "documentid"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER"]
-        embedding:
+        - name: "embedding"
           type: "VECTOR"
           suggested: "VECTOR<FLOAT>"
           supported: ["VECTOR<FLOAT>", "VECTOR<FLOAT32>"]
           dimension: 123
-        legacyembedding:
+        - name: "legacyembedding"
           type: "VECTOR"
           suggested: "VECTOR<FLOAT>"
           supported: ["VECTOR<FLOAT>"]
-      primaryKeys: ["documentid"]
+      primary_keys: ["documentid"]
   mappings:
-    - type: "NODE"
-      node: "node0"
-      table: "document"
-      properties:
-        node0_property0: { column: "documentid" }
-        node0_property1: { column: "embedding" }
-        node0_property2: { column: "legacyembedding" }
-      key: ["node0_property0"]
+    mapping0:
+      - type: "NODE"
+        node: "node0"
+        table: "document"
+        properties:
+          node0_property0: { column: "documentid" }
+          node0_property1: { column: "embedding" }
+          node0_property2: { column: "legacyembedding" }
+        key: ["node0_property0"]

@@ -29,7 +29,7 @@ import kotlin.String
 @JsPlainObject
 external interface TableJs {
     var source: String
-    val columns: Record<String, TableColumnJs>
+    var columns: Array<TableColumnJs>
     var primaryKeys: Array<String>
     val foreignKeys: Record<String, ForeignKeyJs>
     val custom: Record<String, Any>
@@ -37,7 +37,7 @@ external interface TableJs {
 
 fun tableJs(
     source: String,
-    columns: Record<String, TableColumnJs> = emptyRecord(),
+    columns: Array<TableColumnJs> = emptyArray(),
     primaryKeys: Array<String> = emptyArray(),
     foreignKeys: Record<String, ForeignKeyJs> = emptyRecord(),
     custom: Record<String, Any> = emptyRecord()
@@ -51,7 +51,7 @@ fun tableJs(
 
 fun Table.toJs() = tableJs(
     source = source,
-    columns = columns.associateBy { key, column -> column.toJs(key) },
+    columns = columns.map { it.toJs() }.toTypedArray(),
     primaryKeys = primaryKeys.toTypedArray(),
     foreignKeys = foreignKeys.associateBy { _, key -> key.toJs() },
     custom = custom.toCustomJs()
@@ -59,7 +59,7 @@ fun Table.toJs() = tableJs(
 
 fun TableJs.toClass() = Table(
     source = source,
-    columns = columns.associateBy { _, column -> column.toClass() },
+    columns = columns.map { it.toClass() }.toMutableList(),
     primaryKeys = primaryKeys.toMutableSet(),
     foreignKeys = foreignKeys.associateBy { _, fk -> fk.toClass() },
     custom = custom.toCustomClass()
