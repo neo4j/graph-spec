@@ -131,7 +131,7 @@ class JsonFormatTest {
         val node = Node(
             name = "TestNode",
             extensions = NodeExtensions(
-                mutableMapOf(
+                custom = mutableMapOf(
                     "ext_str" to "hello",
                     "ext_bool" to true
                 )

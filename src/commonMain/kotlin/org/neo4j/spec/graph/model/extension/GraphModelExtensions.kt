@@ -33,11 +33,11 @@ import kotlin.js.JsExport
 @SerialName("GraphModelExtensions")
 @SerialDescription("Extensions for a graph model.")
 data class GraphModelExtensions(
-    @SerialDescription("User-defined arbitrary data.")
-    @Serializable(with = CustomMapSerializer::class)
-    override val custom: MutableMap<String, Any> = mutableMapOf(),
     @SerialDescription("Data source table schemas keyed by table id.")
     val tables: MutableMap<String, Table> = mutableMapOf(),
     @SerialDescription("Import mappings from tables to nodes and relationships.")
-    val mappings: MutableList<Mapping> = mutableListOf()
+    val mappings: MutableList<Mapping> = mutableListOf(),
+    @SerialDescription("User-defined arbitrary data.")
+    @Serializable(with = CustomMapSerializer::class)
+    override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions

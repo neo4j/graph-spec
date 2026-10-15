@@ -28,11 +28,11 @@ import kotlin.js.JsExport
 @SerialName("NodeExtensions")
 @SerialDescription("Extensions for a node.")
 data class NodeExtensions(
-    @SerialDescription("User-defined arbitrary data.")
-    @Serializable(with = CustomMapSerializer::class)
-    override val custom: MutableMap<String, Any> = mutableMapOf(),
     @SerialDescription("Database indexes on this node keyed by id.")
     val indexes: MutableMap<String, NodeIndex> = mutableMapOf(),
     @SerialDescription("Optional visual information of this node.")
-    val display: NodeDisplay? = null
+    val display: NodeDisplay? = null,
+    @SerialDescription("User-defined arbitrary data.")
+    @Serializable(with = CustomMapSerializer::class)
+    override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions

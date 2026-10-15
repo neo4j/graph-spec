@@ -28,9 +28,9 @@ import kotlin.js.JsExport
 @SerialName("RelationshipExtensions")
 @SerialDescription("Extensions for a relationship.")
 data class RelationshipExtensions(
+    @SerialDescription("Indexes on this relationship keyed by id.")
+    val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf(),
     @SerialDescription("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
-    override val custom: MutableMap<String, Any> = mutableMapOf(),
-    @SerialDescription("Indexes on this relationship keyed by id.")
-    val indexes: MutableMap<String, RelationshipIndex> = mutableMapOf()
+    override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions
