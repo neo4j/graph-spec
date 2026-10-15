@@ -82,4 +82,24 @@ class ExtensionsTest {
         assertEquals(mapOf("a" to 1.5, "b" to 2.0), decoded.getDoubleMap("section_map", "weights"))
         assertEquals(mapOf("b" to 2L), decoded.getLongMap("section_map", "weights"))
     }
+
+    @Test
+    fun `immutable section maps can be read and extended`() {
+        extensions.custom["section"] = mapOf("a" to 1L)
+
+        assertEquals(1L, extensions.getLong("section", "a"))
+        extensions.set("section", "b", "x")
+
+        assertEquals(1L, extensions.getLong("section", "a"))
+        assertEquals("x", extensions.getString("section", "b"))
+    }
+
+    @Test
+    fun `typed map getters skip values of other types`() {
+        extensions.custom["section"] = mapOf("m" to mapOf("a" to 1L, "b" to "x", "c" to 2L))
+
+        assertEquals(mapOf("a" to 1L, "c" to 2L), extensions.getLongMap("section", "m"))
+        assertEquals(mapOf("b" to "x"), extensions.getStringMap("section", "m"))
+        assertNull(extensions.getLongMap("section", "missing"))
+    }
 }

@@ -35,11 +35,11 @@ interface Extensions {
      */
 
     fun set(section: String, key: String, value: String) {
-        getOrPut(section)[key] = value
+        put(section, key, value)
     }
 
     fun set(section: String, key: String, value: Boolean) {
-        getOrPut(section)[key] = value
+        put(section, key, value)
     }
 
     fun set(section: String, key: String, value: Int) {
@@ -47,7 +47,7 @@ interface Extensions {
     }
 
     fun set(section: String, key: String, value: Long) {
-        getOrPut(section)[key] = value
+        put(section, key, value)
     }
 
     fun set(section: String, key: String, value: Float) {
@@ -55,18 +55,11 @@ interface Extensions {
     }
 
     fun set(section: String, key: String, value: Double) {
-        getOrPut(section)[key] = value
+        put(section, key, value)
     }
 
-    @Suppress("UNCHECKED_CAST")
-    private fun getOrPut(section: String): MutableMap<String, Any> {
-        val value = custom[section] as? MutableMap<String, Any>
-        if (value == null) {
-            val map = mutableMapOf<String, Any>()
-            custom[section] = map
-            return map
-        }
-        return value
+       private fun put(section: String, key: String, value: Any) {
+        custom[section] = (get(section) ?: emptyMap()).toMutableMap().apply { this[key] = value }
     }
 
     /*
@@ -105,62 +98,30 @@ interface Extensions {
 
     fun getMap(section: String, key: String): Map<String, Any>? = get(section)?.get(key)?.asMap
 
-    fun getStringMap(section: String, key: String): Map<String, String>? {
+    fun getStringMap(section: String, key: String): Map<String, String>? = getMap(section, key) { it.asString }
+
+    fun getBooleanMap(section: String, key: String): Map<String, Boolean>? = getMap(section, key) { it.asBoolean }
+
+    fun getLongMap(section: String, key: String): Map<String, Long>? = getMap(section, key) { it.asLong }
+
+    fun getIntMap(section: String, key: String): Map<String, Int>? = getMap(section, key) { it.asLong?.toInt() }
+
+    fun getDoubleMap(section: String, key: String): Map<String, Double>? = getMap(section, key) { it.asDouble }
+
+    fun getFloatMap(section: String, key: String): Map<String, Float>? = getMap(section, key) {
+        it.asDouble?.toFloat()
+    }
+
+    private fun <T : Any> getMap(section: String, key: String, convert: (Any) -> T?): Map<String, T>? {
         val map = getMap(section, key) ?: return null
-        val output = mutableMapOf<String, String>()
-        for ((key, value) in map) {
-            output[key] = value.asString ?: continue
+        val output = mutableMapOf<String, T>()
+        for ((name, value) in map) {
+            output[name] = convert(value) ?: continue
         }
         return output
     }
 
-    fun getBooleanMap(section: String, key: String): Map<String, Boolean>? {
-        val map = getMap(section, key) ?: return null
-        val output = mutableMapOf<String, Boolean>()
-        for ((key, value) in map) {
-            output[key] = value.asBoolean ?: continue
-        }
-        return output
-    }
-
-    fun getLongMap(section: String, key: String): Map<String, Long>? {
-        val map = getMap(section, key) ?: return null
-        val output = mutableMapOf<String, Long>()
-        for ((key, value) in map) {
-            output[key] = value.asLong ?: continue
-        }
-        return output
-    }
-
-    fun getIntMap(section: String, key: String): Map<String, Int>? {
-        val map = getMap(section, key) ?: return null
-        val output = mutableMapOf<String, Int>()
-        for ((key, value) in map) {
-            output[key] = value.asLong?.toInt() ?: continue
-        }
-        return output
-    }
-
-    fun getDoubleMap(section: String, key: String): Map<String, Double>? {
-        val map = getMap(section, key) ?: return null
-        val output = mutableMapOf<String, Double>()
-        for ((key, value) in map) {
-            output[key] = value.asDouble ?: continue
-        }
-        return output
-    }
-
-    fun getFloatMap(section: String, key: String): Map<String, Float>? {
-        val map = getMap(section, key) ?: return null
-        val output = mutableMapOf<String, Float>()
-        for ((key, value) in map) {
-            output[key] = value.asDouble?.toFloat() ?: continue
-        }
-        return output
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    private fun get(section: String): MutableMap<String, Any>? = custom[section] as? MutableMap<String, Any>
+    private fun get(section: String): Map<String, Any>? = custom[section]?.asMap
 
     /*
         Basic top-level setters
