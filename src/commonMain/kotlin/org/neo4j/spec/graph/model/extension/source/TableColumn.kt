@@ -22,7 +22,6 @@ import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.CustomExtensions
 import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import org.neo4j.spec.graph.model.property.Neo4jType
-import org.neo4j.spec.graph.model.type.Named
 import kotlin.js.JsExport
 
 @JsExport
@@ -45,4 +44,4 @@ data class TableColumn(
     @SerialDescription("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()
-) : Extensions
+) : CustomExtensions
