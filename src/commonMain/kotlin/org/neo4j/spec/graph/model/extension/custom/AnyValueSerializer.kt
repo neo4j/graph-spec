@@ -91,34 +91,30 @@ object AnyValueSerializer : KSerializer<Any> {
                 ?: throw SerializationException("Unsupported custom value: $content")
         }
         is JsonArray -> {
-            if (depth > MAX_CUSTOM_DEPTH) {
-                tooDeep()
-            }
+            requireDepth(depth)
             mapTo(mutableListOf()) { it.toAnyValue(depth + 1) }
         }
         is JsonObject -> {
-            if (depth > MAX_CUSTOM_DEPTH) {
-                tooDeep()
-            }
+            requireDepth(depth)
             mapValuesTo(mutableMapOf()) { (_, value) -> value.toAnyValue(depth + 1) }
         }
     }
 
-    internal fun tooDeep(): Nothing =
-        throw SerializationException("Custom values cannot be nested more than $MAX_CUSTOM_DEPTH levels deep")
+    /** Fails if [depth] levels of nested lists and maps is more than [MAX_CUSTOM_DEPTH]. */
+    internal fun requireDepth(depth: Int) {
+        if (depth > MAX_CUSTOM_DEPTH) {
+            throw SerializationException("Custom values cannot be nested more than $MAX_CUSTOM_DEPTH levels deep")
+        }
+    }
 
     internal fun Any?.checkDepth(depth: Int = 1) {
         when (this) {
             is List<*> -> {
-                if (depth > MAX_CUSTOM_DEPTH) {
-                    tooDeep()
-                }
+                requireDepth(depth)
                 forEach { it.checkDepth(depth + 1) }
             }
             is Map<*, *> -> {
-                if (depth > MAX_CUSTOM_DEPTH) {
-                    tooDeep()
-                }
+                requireDepth(depth)
                 values.forEach { it.checkDepth(depth + 1) }
             }
         }

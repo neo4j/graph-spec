@@ -20,7 +20,8 @@ import js.objects.Object
 import js.objects.Record
 import js.objects.toRecord
 import js.string.JsStrings.toKotlinString
-import org.neo4j.spec.graph.model.extension.custom.AnyValueSerializer.tooDeep
+import org.neo4j.spec.graph.model.extension.custom.AnyValueSerializer.checkDepth
+import org.neo4j.spec.graph.model.extension.custom.AnyValueSerializer.requireDepth
 import kotlin.math.abs
 import kotlin.math.floor
 
@@ -30,65 +31,58 @@ private const val MAX_SAFE_INTEGER = 9007199254740991L
  * Converts custom extension data into plain JS values.
  * Integers are returned as `number`, or as `bigint` when outside the safe integer range.
  */
-fun Map<String, Any>.toCustomJs(): Record<String, Any> = mapValues { (_, value) -> value.toJsValue() }.toRecord()
+fun Map<String, Any>.toCustomJs(): Record<String, Any> {
+    values.forEach { it.checkDepth() }
+    return mapValues { (_, value) -> value.toJsValue() }.toRecord()
+}
 
 /**
  * Converts plain JS custom extension data into Kotlin values.
  * Integral numbers become [Long], other numbers [Double]; `null` and `undefined` map entries are skipped.
  */
-fun Record<String, Any>.toCustomClass(): MutableMap<String, Any> = (this as Any).fromJsMap()
+fun Record<String, Any>.toCustomClass(): MutableMap<String, Any> = (this as Any).fromJsMap(0)
 
-fun Any.toJsValue(depth: Int = 1): Any = when (this) {
+/** Callers must have checked the depth, see [checkDepth]. */
+fun Any.toJsValue(): Any = when (this) {
     is String, is Boolean -> this
     is Byte, is Short, is Int -> (this as Number).toDouble()
     is Long -> if (abs(this) <= MAX_SAFE_INTEGER) toDouble() else bigInt(toString())
     is Float, is Double -> (this as Number).toDouble()
-    is List<*> -> {
-        checkJsDepth(depth)
-        map { (it ?: error("Custom values cannot be null")).toJsValue(depth + 1) }.toTypedArray()
-    }
-    is Map<*, *> -> {
-        checkJsDepth(depth)
-        entries.associate { (key, value) ->
-            key.toString() to (value ?: error("Custom values cannot be null")).toJsValue(depth + 1)
-        }.toRecord()
-    }
+    is List<*> -> map { (it ?: error("Custom values cannot be null")).toJsValue() }.toTypedArray()
+    is Map<*, *> -> entries.associate { (key, value) ->
+        key.toString() to (value ?: error("Custom values cannot be null")).toJsValue()
+    }.toRecord()
     else -> error("Unsupported custom value type: ${this::class.simpleName}")
 }
 
 fun Any?.fromJsValue(depth: Int = 1): Any = when {
     this == null -> error("Custom values cannot be null or undefined")
     jsTypeOf(this) == "bigint" -> toString().toLong()
-    this is Long -> this
-    this is String || this is Boolean -> this
+    this is Long || this is String || this is Boolean -> this
     jsTypeOf(this) == "number" -> {
         val number = this as Double
         if (number.isFinite() && number == floor(number) && abs(number) <= MAX_SAFE_INTEGER) number.toLong() else number
     }
-    this is Array<*> -> {
-        checkJsDepth(depth)
-        mapTo(mutableListOf()) { it.fromJsValue(depth + 1) }
-    }
-    this is List<*> -> {
-        checkJsDepth(depth)
-        mapTo(mutableListOf()) { it.fromJsValue(depth + 1) }
-    }
+    this is Array<*> -> asList().fromJsList(depth)
+    this is List<*> -> fromJsList(depth)
     this is Map<*, *> -> {
-        checkJsDepth(depth)
+        requireDepth(depth)
         entries.associateTo(mutableMapOf()) { (key, value) -> key.toString() to value.fromJsValue(depth + 1) }
     }
     jsTypeOf(this) == "object" -> {
-        checkJsDepth(depth)
+        requireDepth(depth)
         fromJsMap(depth)
     }
     else -> error("Unsupported custom value type: ${jsTypeOf(this)}")
 }
 
-private fun checkJsDepth(depth: Int) {
-    if (depth > MAX_CUSTOM_DEPTH) tooDeep()
+private fun List<*>.fromJsList(depth: Int): MutableList<Any> {
+    requireDepth(depth)
+    return mapTo(mutableListOf()) { it.fromJsValue(depth + 1) }
 }
 
-private fun Any.fromJsMap(depth: Int = 0): MutableMap<String, Any> {
+/** [depth] is the depth of the object itself, so its values are one deeper. */
+private fun Any.fromJsMap(depth: Int): MutableMap<String, Any> {
     val record = unsafeCast<Record<String, Any?>>()
     val map = mutableMapOf<String, Any>()
     for (key in Object.keys(record)) {
