@@ -350,11 +350,6 @@
             "type": "object",
             "description": "Extensions for a node.",
             "properties": {
-                "custom": {
-                    "type": "object",
-                    "description": "User-defined arbitrary data.",
-                    "additionalProperties": {}
-                },
                 "indexes": {
                     "type": "object",
                     "description": "Database indexes on this node keyed by id.",
@@ -372,6 +367,11 @@
                         }
                     ],
                     "description": "Optional visual information of this node."
+                },
+                "custom": {
+                    "type": "object",
+                    "description": "User-defined arbitrary data.",
+                    "additionalProperties": {}
                 }
             },
             "required": [],
@@ -801,17 +801,17 @@
             "type": "object",
             "description": "Extensions for a relationship.",
             "properties": {
-                "custom": {
-                    "type": "object",
-                    "description": "User-defined arbitrary data.",
-                    "additionalProperties": {}
-                },
                 "indexes": {
                     "type": "object",
                     "description": "Indexes on this relationship keyed by id.",
                     "additionalProperties": {
                         "$ref": "#/$defs/RelationshipIndex"
                     }
+                },
+                "custom": {
+                    "type": "object",
+                    "description": "User-defined arbitrary data.",
+                    "additionalProperties": {}
                 }
             },
             "required": [],
@@ -866,11 +866,6 @@
             "type": "object",
             "description": "Extensions for a graph model.",
             "properties": {
-                "custom": {
-                    "type": "object",
-                    "description": "User-defined arbitrary data.",
-                    "additionalProperties": {}
-                },
                 "tables": {
                     "type": "object",
                     "description": "Data source table schemas keyed by table id.",
@@ -884,6 +879,11 @@
                     "items": {
                         "$ref": "#/$defs/Mapping"
                     }
+                },
+                "custom": {
+                    "type": "object",
+                    "description": "User-defined arbitrary data.",
+                    "additionalProperties": {}
                 }
             },
             "required": [],
