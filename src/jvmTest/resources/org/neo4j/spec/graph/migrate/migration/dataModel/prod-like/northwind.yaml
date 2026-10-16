@@ -269,21 +269,17 @@ extensions:
         relationship: "CATEGORIES"
         table: "products"
         from_node:
-          node: "products"
           properties:
             productid: { column: "productid" }
         to_node:
-          node: "categories"
           properties:
             categoryid: { column: "categoryid" }
       - type: "RELATIONSHIP"
         relationship: "SUPPLIERS"
         table: "products"
         from_node:
-          node: "products"
           properties:
             productid: { column: "productid" }
         to_node:
-          node: "suppliers"
           properties:
             supplierid: { column: "supplierid" }

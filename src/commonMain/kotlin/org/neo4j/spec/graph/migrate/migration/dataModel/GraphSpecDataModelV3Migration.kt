@@ -118,17 +118,11 @@ class GraphSpecDataModelV3Migration :
     }
 
     /**
-     * Recovers the lost relationship ObjectType reference matching the unique combo of (relId, from, to)
+     * Finds the relationship ObjectType reference of a mapping, if the relationship exists
      */
     private fun findRelationshipId(relationships: Map<String, SchemaMap>, mapping: SchemaMap): String? {
         val id = mapping.string("relationship")
-        val fromNode = mapping.map("from_node").string("node")
-        val toNode = mapping.map("to_node").string("node")
-        return relationships.entries.firstOrNull { (key, rel) ->
-            key == id &&
-                rel.map("from").string("node") == fromNode &&
-                rel.map("to").string("node") == toNode
-        }?.key
+        return id.takeIf { relationships.containsKey(it) }
     }
 
     private data class RelationshipData(

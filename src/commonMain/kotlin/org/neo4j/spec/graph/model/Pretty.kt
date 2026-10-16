@@ -93,10 +93,6 @@ object Pretty {
         model.extensions.mappings.values.flatten().filterIsInstance<NodeMapping>().forEach { mapping ->
             mapping.node = renames[mapping.node] ?: mapping.node
         }
-        model.extensions.mappings.values.flatten().filterIsInstance<RelationshipMapping>().forEach { mapping ->
-            mapping.fromNode.node = renames[mapping.fromNode.node] ?: mapping.fromNode.node
-            mapping.toNode.node = renames[mapping.toNode.node] ?: mapping.toNode.node
-        }
     }
 
     private fun GraphModel.prettifyNodeProperties() {
@@ -153,10 +149,12 @@ object Pretty {
             mapping.key.rename(renames, mapping.node)
         }
         model.extensions.mappings.values.flatten().filterIsInstance<RelationshipMapping>().forEach { mapping ->
-            mapping.fromNode.properties.rename(renames, mapping.fromNode.node)
-            mapping.toNode.properties.rename(renames, mapping.toNode.node)
-            mapping.key.rename(renames, mapping.fromNode.node)
-            mapping.key.rename(renames, mapping.toNode.node)
+            // The mapped nodes are those at either end of the relationship
+            val relationship = model.relationships[mapping.relationship] ?: return@forEach
+            mapping.fromNode.properties.rename(renames, relationship.from.node)
+            mapping.toNode.properties.rename(renames, relationship.to.node)
+            mapping.key.rename(renames, relationship.from.node)
+            mapping.key.rename(renames, relationship.to.node)
         }
     }
 

@@ -659,109 +659,89 @@ extensions:
         relationship: "ARTIST"
         table: "album"
         from_node:
-          node: "album"
           properties:
             album_id: { column: "album_id" }
         to_node:
-          node: "artist"
           properties:
             artist_id: { column: "artist_id" }
       - type: "RELATIONSHIP"
         relationship: "EMPLOYEE"
         table: "customer"
         from_node:
-          node: "customer"
           properties:
             customer_id: { column: "customer_id" }
         to_node:
-          node: "employee"
           properties:
             employee_id: { column: "support_rep_id" }
       - type: "RELATIONSHIP"
         relationship: "EMPLOYEE2"
         table: "employee"
         from_node:
-          node: "employee"
           properties:
             employee_id: { column: "employee_id" }
         to_node:
-          node: "employee"
           properties:
             employee_id: { column: "reports_to" }
       - type: "RELATIONSHIP"
         relationship: "CUSTOMER"
         table: "invoice"
         from_node:
-          node: "invoice"
           properties:
             invoice_id: { column: "invoice_id" }
         to_node:
-          node: "customer"
           properties:
             customer_id: { column: "customer_id" }
       - type: "RELATIONSHIP"
         relationship: "INVOICE"
         table: "invoice_line"
         from_node:
-          node: "invoice_line"
           properties:
             invoice_line_id: { column: "invoice_line_id" }
         to_node:
-          node: "invoice"
           properties:
             invoice_id: { column: "invoice_id" }
       - type: "RELATIONSHIP"
         relationship: "TRACK"
         table: "invoice_line"
         from_node:
-          node: "invoice_line"
           properties:
             invoice_line_id: { column: "invoice_line_id" }
         to_node:
-          node: "track"
           properties:
             track_id: { column: "track_id" }
       - type: "RELATIONSHIP"
         relationship: "TRACK2"
         table: "playlist_track"
         from_node:
-          node: "playlist"
           properties:
             playlist_id: { column: "playlist_id" }
         to_node:
-          node: "track"
           properties:
             track_id: { column: "track_id" }
       - type: "RELATIONSHIP"
         relationship: "ALBUM"
         table: "track"
         from_node:
-          node: "track"
           properties:
             track_id: { column: "track_id" }
         to_node:
-          node: "album"
           properties:
             album_id: { column: "album_id" }
       - type: "RELATIONSHIP"
         relationship: "GENRE"
         table: "track"
         from_node:
-          node: "track"
           properties:
             track_id: { column: "track_id" }
         to_node:
-          node: "genre"
           properties:
             genre_id: { column: "genre_id" }
       - type: "RELATIONSHIP"
         relationship: "MEDIA_TYPE"
         table: "track"
         from_node:
-          node: "track"
           properties:
             track_id: { column: "track_id" }
         to_node:
-          node: "media_type"
           properties:
             media_type_id: { column: "media_type_id" }

@@ -271,12 +271,10 @@ class GraphSpecDataModelV3MigrationTest {
                             "table" to "user_follows",
                             "from_node" to
                                 schemaMapOf(
-                                    "node" to "User",
                                     "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
                                 ),
                             "to_node" to
                                 schemaMapOf(
-                                    "node" to "User",
                                     "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
                                 )
                         )
@@ -305,8 +303,8 @@ class GraphSpecDataModelV3MigrationTest {
                     "m0" to listOf(
                         schemaMapOf(
                             "relationship" to "NON_EXISTENT",
-                            "from_node" to schemaMapOf("node" to "A"),
-                            "to_node" to schemaMapOf("node" to "B")
+                            "from_node" to schemaMapOf(),
+                            "to_node" to schemaMapOf()
                         )
                     )
                 )

@@ -930,55 +930,45 @@ extensions:
         relationship: "relationship0"
         table: "Comment"
         from_node:
-          node: "node0"
           properties:
             node0_property3: { column: "id" }
         to_node:
-          node: "node3"
           properties:
             node3_property3: { column: "CreatorPersonId" }
       - type: "RELATIONSHIP"
         relationship: "relationship1"
         table: "Comment"
         from_node:
-          node: "node0"
           properties:
             node0_property3: { column: "id" }
         to_node:
-          node: "node4"
           properties:
             node4_property0: { column: "LocationCountryId" }
       - type: "RELATIONSHIP"
         relationship: "relationship2"
         table: "Comment"
         from_node:
-          node: "node0"
           properties:
             node0_property3: { column: "id" }
         to_node:
-          node: "node5"
           properties:
             node5_property3: { column: "ParentPostId" }
       - type: "RELATIONSHIP"
         relationship: "relationship3"
         table: "Comment"
         from_node:
-          node: "node0"
           properties:
             node0_property3: { column: "id" }
         to_node:
-          node: "node0"
           properties:
             node0_property3: { column: "ParentCommentId" }
       - type: "RELATIONSHIP"
         relationship: "relationship4"
         table: "CommentHasTag"
         from_node:
-          node: "node0"
           properties:
             node0_property3: { column: "CommentId" }
         to_node:
-          node: "node6"
           properties:
             node6_property0: { column: "TagId" }
         properties:
@@ -989,22 +979,18 @@ extensions:
         relationship: "relationship5"
         table: "Forum"
         from_node:
-          node: "node1"
           properties:
             node1_property3: { column: "id" }
         to_node:
-          node: "node3"
           properties:
             node3_property3: { column: "ModeratorPersonId" }
       - type: "RELATIONSHIP"
         relationship: "relationship6"
         table: "ForumHasMember"
         from_node:
-          node: "node3"
           properties:
             node3_property3: { column: "PersonId" }
         to_node:
-          node: "node1"
           properties:
             node1_property3: { column: "ForumId" }
         properties:
@@ -1015,11 +1001,9 @@ extensions:
         relationship: "relationship7"
         table: "ForumHasTag"
         from_node:
-          node: "node1"
           properties:
             node1_property3: { column: "ForumId" }
         to_node:
-          node: "node6"
           properties:
             node6_property0: { column: "TagId" }
         properties:
@@ -1029,33 +1013,27 @@ extensions:
         relationship: "relationship8"
         table: "Organisation"
         from_node:
-          node: "node2"
           properties:
             node2_property0: { column: "id" }
         to_node:
-          node: "node4"
           properties:
             node4_property0: { column: "LocationPlaceId" }
       - type: "RELATIONSHIP"
         relationship: "relationship9"
         table: "Person"
         from_node:
-          node: "node3"
           properties:
             node3_property3: { column: "id" }
         to_node:
-          node: "node4"
           properties:
             node4_property0: { column: "LocationCityId" }
       - type: "RELATIONSHIP"
         relationship: "relationship10"
         table: "PersonHasInterest"
         from_node:
-          node: "node3"
           properties:
             node3_property3: { column: "PersonId" }
         to_node:
-          node: "node6"
           properties:
             node6_property0: { column: "TagId" }
         properties:
@@ -1065,11 +1043,9 @@ extensions:
         relationship: "relationship11"
         table: "PersonKnowsPerson"
         from_node:
-          node: "node3"
           properties:
             node3_property3: { column: "Person1Id" }
         to_node:
-          node: "node3"
           properties:
             node3_property3: { column: "Person2Id" }
         properties:
@@ -1080,11 +1056,9 @@ extensions:
         relationship: "relationship12"
         table: "PersonLikesComment"
         from_node:
-          node: "node3"
           properties:
             node3_property3: { column: "PersonId" }
         to_node:
-          node: "node0"
           properties:
             node0_property3: { column: "CommentId" }
         properties:
@@ -1095,11 +1069,9 @@ extensions:
         relationship: "relationship13"
         table: "PersonLikesPost"
         from_node:
-          node: "node3"
           properties:
             node3_property3: { column: "PersonId" }
         to_node:
-          node: "node5"
           properties:
             node5_property3: { column: "PostId" }
         properties:
@@ -1110,11 +1082,9 @@ extensions:
         relationship: "relationship14"
         table: "PersonStudiesAt"
         from_node:
-          node: "node3"
           properties:
             node3_property3: { column: "PersonId" }
         to_node:
-          node: "node2"
           properties:
             node2_property0: { column: "UniversityId" }
         properties:
@@ -1125,11 +1095,9 @@ extensions:
         relationship: "relationship15"
         table: "PersonWorksAt"
         from_node:
-          node: "node3"
           properties:
             node3_property3: { column: "PersonId" }
         to_node:
-          node: "node2"
           properties:
             node2_property0: { column: "CompanyId" }
         properties:
@@ -1140,55 +1108,45 @@ extensions:
         relationship: "relationship16"
         table: "Place"
         from_node:
-          node: "node4"
           properties:
             node4_property0: { column: "id" }
         to_node:
-          node: "node4"
           properties:
             node4_property0: { column: "PartOfPlaceId" }
       - type: "RELATIONSHIP"
         relationship: "relationship17"
         table: "Post"
         from_node:
-          node: "node5"
           properties:
             node5_property3: { column: "id" }
         to_node:
-          node: "node3"
           properties:
             node3_property3: { column: "CreatorPersonId" }
       - type: "RELATIONSHIP"
         relationship: "relationship18"
         table: "Post"
         from_node:
-          node: "node5"
           properties:
             node5_property3: { column: "id" }
         to_node:
-          node: "node1"
           properties:
             node1_property3: { column: "ContainerForumId" }
       - type: "RELATIONSHIP"
         relationship: "relationship19"
         table: "Post"
         from_node:
-          node: "node5"
           properties:
             node5_property3: { column: "id" }
         to_node:
-          node: "node4"
           properties:
             node4_property0: { column: "LocationCountryId" }
       - type: "RELATIONSHIP"
         relationship: "relationship20"
         table: "PostHasTag"
         from_node:
-          node: "node5"
           properties:
             node5_property3: { column: "PostId" }
         to_node:
-          node: "node6"
           properties:
             node6_property0: { column: "TagId" }
         properties:
@@ -1198,21 +1156,17 @@ extensions:
         relationship: "relationship21"
         table: "Tag"
         from_node:
-          node: "node6"
           properties:
             node6_property0: { column: "id" }
         to_node:
-          node: "node7"
           properties:
             node7_property0: { column: "TypeTagClassId" }
       - type: "RELATIONSHIP"
         relationship: "relationship22"
         table: "TagClass"
         from_node:
-          node: "node7"
           properties:
             node7_property0: { column: "id" }
         to_node:
-          node: "node7"
           properties:
             node7_property0: { column: "SubclassOfTagClassId" }

@@ -300,18 +300,12 @@ class DataModelV3GraphSpecMigration :
         val mappings = mutableListOf<SchemaMap>()
         for (mapping in relationshipMappings) {
             val ref = mapping.ref("relationship")
-            val obj = relInfo[ref] ?: error("Relationship $ref not found")
+            if (ref !in relInfo) error("Relationship $ref not found")
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.RELATIONSHIP), // needed for Kotlin/Native migrations
                 "relationship" to ref,
-                "from_node" to mapOf(
-                    "node" to obj.ref("from"),
-                    "properties" to mapping.entityMap("fromMappings")
-                ),
-                "to_node" to mapOf(
-                    "node" to obj.ref("to"),
-                    "properties" to mapping.entityMap("toMappings")
-                ),
+                "from_node" to mapOf("properties" to mapping.entityMap("fromMappings")),
+                "to_node" to mapOf("properties" to mapping.entityMap("toMappings")),
                 "table" to mapping.literal("tableName"),
                 "properties" toNotEmpty migratePropertyMappings(mapping),
                 "key" toNotEmpty migrateKeyProperties(mapping, relKeys[ref] ?: emptySet())
