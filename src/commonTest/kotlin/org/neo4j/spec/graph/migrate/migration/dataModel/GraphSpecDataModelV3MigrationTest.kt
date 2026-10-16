@@ -171,8 +171,8 @@ class GraphSpecDataModelV3MigrationTest {
         assertEquals("rel_uniq", relConstraint.string("\$id"))
         assertEquals("relationship", relConstraint.string("entityType"))
         assertEquals("#rt:0", relConstraint.map("relationshipType").string("\$ref"))
-        // Ensure nodeLabel is specifically SchemaNull
-        assertTrue(relConstraint["nodeLabel"] is SchemaNull)
+        // Ensure nodeLabel is omitted rather than null
+        assertFalse(relConstraint.containsKey("nodeLabel"))
     }
 
     @Test
@@ -199,6 +199,7 @@ class GraphSpecDataModelV3MigrationTest {
         val constraint = graphSchema.listOfMaps("constraints")[0]
         assertEquals("uniqueness", constraint.string("constraintType"))
         assertEquals("#nl:0", constraint.map("nodeLabel").string("\$ref"))
+        assertFalse(constraint.containsKey("relationshipType"))
 
         val index = graphSchema.listOfMaps("indexes")[0]
         assertEquals("range", index.string("indexType"))

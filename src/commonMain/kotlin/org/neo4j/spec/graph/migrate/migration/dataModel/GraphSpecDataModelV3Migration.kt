@@ -361,9 +361,9 @@ class GraphSpecDataModelV3Migration :
                 "name" to element.resolvedName(propertyIds) { generatedName(element, propertyIds) },
                 typeKey to type,
                 "entityType" to entityType,
-                "nodeLabel" to if (entityType == "node") refOf(refId) else SchemaNull(),
+                "nodeLabel" to if (entityType == "node") refOf(refId) else null,
                 "properties" to propertyIds.map { refOf(it) },
-                "relationshipType" to if (entityType == "relationship") refOf(refId) else SchemaNull(),
+                "relationshipType" to if (entityType == "relationship") refOf(refId) else null,
                 "options" toNotEmpty element.mapOrNull("options")
             )
         }

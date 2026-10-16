@@ -4,6 +4,7 @@ import org.neo4j.spec.graph.GraphSpec
 import org.neo4j.spec.graph.codec.schema.SchemaElement
 import org.neo4j.spec.graph.codec.schema.SchemaList
 import org.neo4j.spec.graph.codec.schema.SchemaMap
+import org.neo4j.spec.graph.codec.schema.SchemaNull
 import org.neo4j.spec.graph.model.Type
 import org.neo4j.spec.graph.model.Version
 import org.junit.jupiter.api.Disabled
@@ -55,6 +56,8 @@ class DataModelMigrationIT {
                     .forEach {
                         it.remove("expanded")
                     }
+                // Legacy data models have explicit nulls for the other entity's reference, they're now omitted IMP-1333
+                removeNullEntityReferences(expected)
                 // We need to handle #IMP-994 before comparing visualisations
                 expected.remove("visualisation")
 
@@ -64,6 +67,19 @@ class DataModelMigrationIT {
                 )
             }
         }
+
+    private fun removeNullEntityReferences(expected: SchemaMap) {
+        val graphSchema = expected.map("graphSchemaRepresentation").map("graphSchema")
+        for (key in listOf("constraints", "indexes")) {
+            graphSchema.listOfMapsOrNull(key)?.forEach { element ->
+                for (reference in listOf("nodeLabel", "relationshipType")) {
+                    if (element[reference] is SchemaNull) {
+                        element.remove(reference)
+                    }
+                }
+            }
+        }
+    }
 
     private fun removeDefaultSizes(actual: SchemaMap) {
         // Remove default size: -1
