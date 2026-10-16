@@ -395,7 +395,8 @@ class DataModelV3GraphSpecMigration :
             "dimension" to (
                 dimension(field.mapOrNull("recommendedType"))
                     ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
-                )
+                ),
+            "custom" toNotEmpty field.literalOrNull("sample")?.let { mapOf("sample" to it) }
         )
     }
 

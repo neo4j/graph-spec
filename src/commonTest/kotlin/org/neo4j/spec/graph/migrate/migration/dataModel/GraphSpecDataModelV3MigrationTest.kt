@@ -425,6 +425,19 @@ class GraphSpecDataModelV3MigrationTest {
     }
 
     @Test
+    fun `convertFields restores sample data from custom extensions`() {
+        val fieldsInput = listOf(
+            schemaMapOf("name" to "categoryID", "custom" to schemaMapOf("sample" to "1")),
+            schemaMapOf("name" to "description")
+        )
+
+        val fields = migration.convertFields(fieldsInput)
+
+        assertEquals("1", fields[0].string("sample"))
+        assertFalse(fields[1].containsKey("sample"))
+    }
+
+    @Test
     fun `convertFields writes dimension field for vector types`() {
         val fieldsInput = listOf(
             schemaMapOf(

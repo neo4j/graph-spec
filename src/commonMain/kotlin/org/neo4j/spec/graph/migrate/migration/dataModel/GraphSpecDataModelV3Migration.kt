@@ -416,7 +416,8 @@ class GraphSpecDataModelV3Migration :
                 },
                 "supportedTypes" to field.listOrNull("supported")?.map {
                     propertyType((it as SchemaLiteral).string, field.intOrNull("dimension"))
-                }
+                },
+                "sample" to field.mapOrNull("custom")?.literalOrNull("sample")
             )
         }
     }
