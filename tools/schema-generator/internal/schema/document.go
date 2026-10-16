@@ -12,13 +12,11 @@ type Document struct {
 	byName map[string]*Def
 }
 
-// Def is an entry of the root's "$defs".
 type Def struct {
 	Name    string
 	Element *Element
 }
 
-// Element is a schema or subschema. Path is its JSON pointer within the document.
 type Element struct {
 	Path string
 
@@ -36,13 +34,11 @@ type Element struct {
 	OneOf                []*Element
 }
 
-// Property is an entry of "properties".
 type Property struct {
 	Name    string
 	Element *Element
 }
 
-// Property returns the schema of the named property, or nil if e has none.
 func (e *Element) Property(name string) *Element {
 	for _, p := range e.Properties {
 		if p.Name == name {
@@ -52,7 +48,6 @@ func (e *Element) Property(name string) *Element {
 	return nil
 }
 
-// Errorf is fmt.Sprintf with the JSON pointer path of the offending schema prepended. Package model uses it too.
 func Errorf(path, format string, args ...any) error {
 	return fmt.Errorf("%s: %s", path, fmt.Sprintf(format, args...))
 }

@@ -1,6 +1,6 @@
 module github.com/neo4j/graph-spec/tools/schema-generator
 
-go 1.25
+go 1.25.6
 
 require github.com/stretchr/testify v1.12.1
 

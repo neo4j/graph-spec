@@ -10,7 +10,6 @@ import (
 
 var typeNames = []string{"null", "boolean", "object", "array", "number", "integer", "string"}
 
-// Load parses a JSON Schema document.
 func Load(data []byte) (*Document, error) {
 	var raw json.RawMessage
 	if err := json.Unmarshal(data, &raw); err != nil {
