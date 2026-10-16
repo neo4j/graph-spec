@@ -1,0 +1,82 @@
+{
+  "title": "Drawing",
+  "type": "object",
+  "properties": {
+    "shapes": { "type": "array", "items": { "$ref": "#/$defs/Shape" } },
+    "background": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Shape" }] },
+    "byName": { "type": "object", "additionalProperties": { "$ref": "#/$defs/Shape" } },
+    "origin": { "$ref": "#/$defs/Point" },
+    "marker": { "$ref": "#/$defs/Marker" },
+    "expression": { "$ref": "#/$defs/Expr" }
+  },
+  "required": ["shapes", "background"],
+  "additionalProperties": false,
+  "$defs": {
+    "Shape": {
+      "description": "A shape, selected by its type.",
+      "oneOf": [
+        { "$ref": "#/$defs/CIRCLE" },
+        { "$ref": "#/$defs/Point" },
+        { "$ref": "#/$defs/RectangleShape" }
+      ]
+    },
+    "Marker": {
+      "description": "Shares the Point variant with Shape.",
+      "oneOf": [
+        { "$ref": "#/$defs/Pin" },
+        { "$ref": "#/$defs/Point" }
+      ]
+    },
+    "CIRCLE": {
+      "type": "object",
+      "properties": { "type": { "type": "string", "const": "CIRCLE" }, "radius": { "type": "number" } },
+      "required": ["type", "radius"],
+      "additionalProperties": false
+    },
+    "RectangleShape": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "const": "RECTANGLE" },
+        "width": { "type": "number" },
+        "height": { "type": "number" }
+      },
+      "required": ["type", "width", "height"],
+      "additionalProperties": false
+    },
+    "Point": {
+      "description": "Also used outside the unions, so it keeps its own name.",
+      "type": "object",
+      "properties": { "type": { "type": "string", "const": "POINT" }, "x": { "type": "number" }, "y": { "type": "number" } },
+      "required": ["type", "x", "y"],
+      "additionalProperties": false
+    },
+    "Pin": {
+      "type": "object",
+      "properties": { "type": { "type": "string", "const": "PIN" }, "label": { "type": "string" } },
+      "required": ["type", "label"],
+      "additionalProperties": false
+    },
+    "Expr": {
+      "oneOf": [
+        { "$ref": "#/$defs/Add" },
+        { "$ref": "#/$defs/Literal" }
+      ]
+    },
+    "Literal": {
+      "type": "object",
+      "properties": { "op": { "type": "string", "const": "lit" }, "value": { "type": "number" } },
+      "required": ["op", "value"],
+      "additionalProperties": false
+    },
+    "Add": {
+      "type": "object",
+      "properties": {
+        "op": { "type": "string", "const": "add" },
+        "left": { "$ref": "#/$defs/Expr" },
+        "right": { "$ref": "#/$defs/Expr" }
+      },
+      "required": ["op", "left", "right"],
+      "additionalProperties": false
+    }
+  }
+}
