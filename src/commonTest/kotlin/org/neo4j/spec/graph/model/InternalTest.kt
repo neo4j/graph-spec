@@ -113,8 +113,8 @@ class InternalTest {
             relationships = mutableMapOf(
                 "FRIENDS_WITH" to Relationship(
                     type = "KNOWS",
-                    from = RelationshipTarget(),
-                    to = RelationshipTarget(),
+                    from = RelationshipTarget(node = "Person"),
+                    to = RelationshipTarget(node = "Person"),
                     properties = mutableMapOf("since" to Property())
                 )
             ),
@@ -125,12 +125,9 @@ class InternalTest {
                             relationship = "FRIENDS_WITH",
                             table = "friends_table",
                             fromNode = TargetMapping(
-                                node = "Person",
                                 properties = mutableMapOf("age" to PropertyMapping("from_age"))
                             ),
-                            toNode = TargetMapping(
-                                node = "Person"
-                            ),
+                            toNode = TargetMapping(),
                             properties = mutableMapOf(
                                 "since" to PropertyMapping("friends_since")
                             )
@@ -157,7 +154,6 @@ class InternalTest {
             .filterIsInstance<RelationshipMapping>()
             .first()
         assertEquals("relationship0", relMapping.relationship)
-        assertEquals("node0", relMapping.fromNode.node)
         assertTrue(
             relMapping.fromNode.properties.containsKey("node0_property0"),
             "From Target property should be renamed"
@@ -166,7 +162,8 @@ class InternalTest {
             relMapping.properties.containsKey("relationship0_property0"),
             "Relationship property should be renamed"
         )
-        assertEquals("node0", relMapping.toNode.node)
+        assertEquals("node0", internalRel.from.node)
+        assertEquals("node0", internalRel.to.node)
     }
 
     @Test

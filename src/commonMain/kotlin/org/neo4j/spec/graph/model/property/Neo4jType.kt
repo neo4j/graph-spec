@@ -209,5 +209,15 @@ enum class Neo4jType {
             LIST_ZONED_TIME -> "LIST<ZONED TIME>"
             UUID -> "UUID"
         }
+
+        fun isVector(type: Neo4jType): Boolean = when (type) {
+            VECTOR_FLOAT,
+            VECTOR_FLOAT32,
+            VECTOR_INTEGER,
+            VECTOR_INTEGER32,
+            VECTOR_INTEGER16,
+            VECTOR_INTEGER8 -> true
+            else -> false
+        }
     }
 }

@@ -37,6 +37,7 @@ external interface NodeIndexJs {
     var properties: Array<String>
     var options: IndexOptionJs?
     val custom: Record<String, Any>
+    var name: String?
 }
 
 fun nodeIndexJs(
@@ -44,13 +45,15 @@ fun nodeIndexJs(
     labels: Array<String> = emptyArray(),
     properties: Array<String> = emptyArray(),
     options: IndexOptionJs? = null,
-    custom: Record<String, Any> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord(),
+    name: String? = null
 ): NodeIndexJs = jso {
     this.type = type
     this.labels = labels
     this.properties = properties
     this.options = options
     this.custom = custom
+    this.name = name
 }
 
 fun NodeIndex.toJs() = nodeIndexJs(
@@ -58,7 +61,8 @@ fun NodeIndex.toJs() = nodeIndexJs(
     labels = labels.toTypedArray(),
     properties = properties.toTypedArray(),
     options = options?.toJs(),
-    custom = custom.toCustomJs()
+    custom = custom.toCustomJs(),
+    name = name
 )
 
 fun NodeIndexJs.toClass() = NodeIndex(
@@ -66,5 +70,6 @@ fun NodeIndexJs.toClass() = NodeIndex(
     labels = labels.toMutableSet(),
     properties = properties.toMutableSet(),
     options = options?.toClass(),
-    custom = custom.toCustomClass()
+    custom = custom.toCustomClass(),
+    name = name
 )

@@ -26,8 +26,6 @@ import kotlin.js.JsExport
 @SerialName("TargetMapping")
 @SerialDescription("Identifies a node at one end of a mapped relationship.")
 data class TargetMapping(
-    @SerialDescription("Id of the node.")
-    var node: String = "",
     @SerialDescription("Label of the node.")
     var label: String = "",
     @SerialDescription("Mappings from property ids to source columns used to match the node.")

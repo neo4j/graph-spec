@@ -298,21 +298,17 @@ extensions:
         relationship: "relationship0"
         table: "products"
         from_node:
-          node: "node1"
           properties:
             node1_property0: { column: "productid" }
         to_node:
-          node: "node0"
           properties:
             node0_property0: { column: "categoryid" }
       - type: "RELATIONSHIP"
         relationship: "relationship1"
         table: "products"
         from_node:
-          node: "node1"
           properties:
             node1_property0: { column: "productid" }
         to_node:
-          node: "node2"
           properties:
             node2_property0: { column: "supplierid" }

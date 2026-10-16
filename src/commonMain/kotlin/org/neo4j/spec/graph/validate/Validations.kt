@@ -16,6 +16,7 @@
  */
 package org.neo4j.spec.graph.validate
 
+import org.neo4j.spec.graph.validate.length.StringLength
 import org.neo4j.spec.graph.validate.mapping.MappingDependencies
 import org.neo4j.spec.graph.validate.node.NodeConstraintCoverage
 import org.neo4j.spec.graph.validate.node.NodeConstraints
@@ -42,6 +43,7 @@ import org.neo4j.spec.graph.validate.relationship.RelationshipConstraints
 import org.neo4j.spec.graph.validate.relationship.RelationshipIndexOptions
 import org.neo4j.spec.graph.validate.relationship.RelationshipIndexProperties
 import org.neo4j.spec.graph.validate.relationship.RelationshipIndexes
+import org.neo4j.spec.graph.validate.relationship.RelationshipMappingKey
 import org.neo4j.spec.graph.validate.relationship.RelationshipNodes
 import org.neo4j.spec.graph.validate.relationship.RelationshipPropertyDuplicateName
 import org.neo4j.spec.graph.validate.relationship.RelationshipPropertyEmptyName
@@ -77,7 +79,9 @@ class Validations {
             RelationshipNodes,
             RelationshipTargetCount,
             NodePropertyPatternOneOf,
-            RelationshipPropertyPatternOneOf
+            RelationshipPropertyPatternOneOf,
+            RelationshipMappingKey,
+            StringLength
         )
 
         // UPX kg-builder `validateStructuredSchema` (schemas-validators/) - gates accepting

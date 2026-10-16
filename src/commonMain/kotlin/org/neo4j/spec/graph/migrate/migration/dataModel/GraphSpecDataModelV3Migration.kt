@@ -118,17 +118,11 @@ class GraphSpecDataModelV3Migration :
     }
 
     /**
-     * Recovers the lost relationship ObjectType reference matching the unique combo of (relId, from, to)
+     * Finds the relationship ObjectType reference of a mapping, if the relationship exists
      */
     private fun findRelationshipId(relationships: Map<String, SchemaMap>, mapping: SchemaMap): String? {
         val id = mapping.string("relationship")
-        val fromNode = mapping.map("from_node").string("node")
-        val toNode = mapping.map("to_node").string("node")
-        return relationships.entries.firstOrNull { (key, rel) ->
-            key == id &&
-                rel.map("from").string("node") == fromNode &&
-                rel.map("to").string("node") == toNode
-        }?.key
+        return id.takeIf { relationships.containsKey(it) }
     }
 
     private data class RelationshipData(
@@ -367,9 +361,9 @@ class GraphSpecDataModelV3Migration :
                 "name" to element.resolvedName(propertyIds) { generatedName(element, propertyIds) },
                 typeKey to type,
                 "entityType" to entityType,
-                "nodeLabel" to if (entityType == "node") refOf(refId) else SchemaNull(),
+                "nodeLabel" to if (entityType == "node") refOf(refId) else null,
                 "properties" to propertyIds.map { refOf(it) },
-                "relationshipType" to if (entityType == "relationship") refOf(refId) else SchemaNull(),
+                "relationshipType" to if (entityType == "relationship") refOf(refId) else null,
                 "options" toNotEmpty element.mapOrNull("options")
             )
         }
@@ -422,7 +416,8 @@ class GraphSpecDataModelV3Migration :
                 },
                 "supportedTypes" to field.listOrNull("supported")?.map {
                     propertyType((it as SchemaLiteral).string, field.intOrNull("dimension"))
-                }
+                },
+                "sample" to field.mapOrNull("custom")?.literalOrNull("sample")
             )
         }
     }

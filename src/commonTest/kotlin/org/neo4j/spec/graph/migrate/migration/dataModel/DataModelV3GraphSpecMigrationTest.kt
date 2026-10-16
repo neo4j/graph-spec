@@ -660,6 +660,31 @@ class DataModelV3GraphSpecMigrationTest {
     }
 
     @Test
+    fun `migrateTables copies sample data to custom extensions`() {
+        val inputSchema = schemaMapOf(
+            "graphMappingRepresentation" to mapOf(
+                "dataSourceSchema" to schemaMapOf(
+                    "type" to "local",
+                    "tableSchemas" to listOf(
+                        schemaMapOf(
+                            "name" to "categories.csv",
+                            "fields" to listOf(
+                                schemaMapOf("name" to "categoryID", "sample" to "1"),
+                                schemaMapOf("name" to "description")
+                            )
+                        )
+                    )
+                )
+            )
+        )
+
+        val columns = migration.migrateTables(inputSchema)["categories.csv"]!!.listOfMaps("columns")
+
+        assertEquals("1", columns[0].map("custom").string("sample"))
+        assertFalse(columns[1].containsKey("custom"), "custom should be omitted without sample data")
+    }
+
+    @Test
     fun `migrateTables processes vector dimension`() {
         val inputSchema = schemaMapOf(
             "graphMappingRepresentation" to mapOf(

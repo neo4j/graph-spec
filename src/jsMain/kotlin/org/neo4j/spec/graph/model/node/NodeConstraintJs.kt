@@ -30,30 +30,35 @@ external interface NodeConstraintJs {
     var label: String?
     var properties: Array<String>
     val extensions: NodeConstraintExtensionsJs
+    var name: String?
 }
 
 fun nodeConstraintJs(
     type: String,
     label: String? = null,
     properties: Array<String> = emptyArray(),
-    extensions: NodeConstraintExtensionsJs = nodeConstraintExtensionsJs()
+    extensions: NodeConstraintExtensionsJs = nodeConstraintExtensionsJs(),
+    name: String? = null
 ): NodeConstraintJs = jso {
     this.type = type
     this.label = label
     this.properties = properties
     this.extensions = extensions
+    this.name = name
 }
 
 fun NodeConstraint.toJs() = nodeConstraintJs(
     type = type.name,
     label = label,
     properties = properties.toTypedArray(),
-    extensions = extensions.toJs()
+    extensions = extensions.toJs(),
+    name = name
 )
 
 fun NodeConstraintJs.toClass() = NodeConstraint(
     type = ConstraintType.valueOf(type),
     label = label,
     properties = properties.toMutableSet(),
-    extensions = extensions.toClass()
+    extensions = extensions.toClass(),
+    name = name
 )

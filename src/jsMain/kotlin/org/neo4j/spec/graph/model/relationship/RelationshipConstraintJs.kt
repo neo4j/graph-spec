@@ -30,26 +30,31 @@ external interface RelationshipConstraintJs {
     var type: String
     var properties: Array<String>
     val extensions: RelationshipConstraintExtensionsJs
+    var name: String?
 }
 
 fun relationshipConstraintJs(
     type: String,
     properties: Array<String> = emptyArray(),
-    extensions: RelationshipConstraintExtensionsJs = relationshipConstraintExtensionsJs()
+    extensions: RelationshipConstraintExtensionsJs = relationshipConstraintExtensionsJs(),
+    name: String? = null
 ): RelationshipConstraintJs = jso {
     this.type = type
     this.properties = properties
     this.extensions = extensions
+    this.name = name
 }
 
 fun RelationshipConstraint.toJs() = relationshipConstraintJs(
     type = type.name,
     properties = properties.toTypedArray(),
-    extensions = extensions.toJs()
+    extensions = extensions.toJs(),
+    name = name
 )
 
 fun RelationshipConstraintJs.toClass() = RelationshipConstraint(
     type = ConstraintType.valueOf(type),
     properties = properties.toMutableSet(),
-    extensions = extensions.toClass()
+    extensions = extensions.toClass(),
+    name = name
 )

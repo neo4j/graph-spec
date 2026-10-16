@@ -138,8 +138,8 @@ class PrettyTest {
                 "relationship0" to Relationship(
                     name = "FRIENDS_WITH",
                     type = "KNOWS",
-                    from = RelationshipTarget(),
-                    to = RelationshipTarget(),
+                    from = RelationshipTarget(node = "node0"),
+                    to = RelationshipTarget(node = "node0"),
                     properties = mutableMapOf("relationshipProperty0" to Property(name = "since"))
                 )
             ),
@@ -150,12 +150,9 @@ class PrettyTest {
                             relationship = "relationship0",
                             table = "friends_table",
                             fromNode = TargetMapping(
-                                node = "node0",
                                 properties = mutableMapOf("nodeProperty0" to PropertyMapping("from_age"))
                             ),
-                            toNode = TargetMapping(
-                                node = "node0"
-                            ),
+                            toNode = TargetMapping(),
                             properties = mutableMapOf(
                                 "relationshipProperty0" to PropertyMapping("friends_since")
                             )
@@ -181,13 +178,13 @@ class PrettyTest {
             .filterIsInstance<RelationshipMapping>()
             .first()
         assertEquals("FRIENDS_WITH", relMapping.relationship)
-        assertEquals("Person", relMapping.fromNode.node)
         assertTrue(
             relMapping.fromNode.properties.containsKey("age"),
             "From Target property should revert to human readable"
         )
         assertTrue(relMapping.properties.containsKey("since"), "Relationship property should revert to human readable")
-        assertEquals("Person", relMapping.toNode.node)
+        assertEquals("Person", prettyRel.from.node)
+        assertEquals("Person", prettyRel.to.node)
     }
 
     @Test

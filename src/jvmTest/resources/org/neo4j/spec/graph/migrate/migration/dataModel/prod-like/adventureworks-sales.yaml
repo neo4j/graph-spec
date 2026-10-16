@@ -1487,88 +1487,72 @@ extensions:
         relationship: "SALESTERRITORY"
         table: "customer"
         from_node:
-          node: "customer"
           properties:
             customerid: { column: "customerid" }
         to_node:
-          node: "salesterritory"
           properties:
             territoryid: { column: "territoryid" }
       - type: "RELATIONSHIP"
         relationship: "STORE"
         table: "customer"
         from_node:
-          node: "customer"
           properties:
             customerid: { column: "customerid" }
         to_node:
-          node: "store"
           properties:
             businessentityid: { column: "storeid" }
       - type: "RELATIONSHIP"
         relationship: "CREDITCARD"
         table: "salesorderheader"
         from_node:
-          node: "salesorderheader"
           properties:
             salesorderid: { column: "salesorderid" }
         to_node:
-          node: "creditcard"
           properties:
             creditcardid: { column: "creditcardid" }
       - type: "RELATIONSHIP"
         relationship: "CURRENCYRATE"
         table: "salesorderheader"
         from_node:
-          node: "salesorderheader"
           properties:
             salesorderid: { column: "salesorderid" }
         to_node:
-          node: "currencyrate"
           properties:
             currencyrateid: { column: "currencyrateid" }
       - type: "RELATIONSHIP"
         relationship: "CUSTOMER"
         table: "salesorderheader"
         from_node:
-          node: "salesorderheader"
           properties:
             salesorderid: { column: "salesorderid" }
         to_node:
-          node: "customer"
           properties:
             customerid: { column: "customerid" }
       - type: "RELATIONSHIP"
         relationship: "SALESPERSON"
         table: "salesorderheader"
         from_node:
-          node: "salesorderheader"
           properties:
             salesorderid: { column: "salesorderid" }
         to_node:
-          node: "salesperson"
           properties:
             businessentityid: { column: "salespersonid" }
       - type: "RELATIONSHIP"
         relationship: "SALESTERRITORY2"
         table: "salesorderheader"
         from_node:
-          node: "salesorderheader"
           properties:
             salesorderid: { column: "salesorderid" }
         to_node:
-          node: "salesterritory"
           properties:
             territoryid: { column: "territoryid" }
       - type: "RELATIONSHIP"
         relationship: "SALESREASON"
         table: "salesorderheadersalesreason"
         from_node:
-          node: "salesorderheader"
           properties:
             salesorderid: { column: "salesorderid" }
         to_node:
-          node: "salesreason"
           properties:
             salesreasonid: { column: "salesreasonid" }
         properties:
@@ -1577,21 +1561,17 @@ extensions:
         relationship: "SALESTERRITORY3"
         table: "salesperson"
         from_node:
-          node: "salesperson"
           properties:
             businessentityid: { column: "businessentityid" }
         to_node:
-          node: "salesterritory"
           properties:
             territoryid: { column: "territoryid" }
       - type: "RELATIONSHIP"
         relationship: "SALESPERSON2"
         table: "store"
         from_node:
-          node: "store"
           properties:
             businessentityid: { column: "businessentityid" }
         to_node:
-          node: "salesperson"
           properties:
             businessentityid: { column: "salespersonid" }

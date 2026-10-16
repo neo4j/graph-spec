@@ -171,8 +171,8 @@ class GraphSpecDataModelV3MigrationTest {
         assertEquals("rel_uniq", relConstraint.string("\$id"))
         assertEquals("relationship", relConstraint.string("entityType"))
         assertEquals("#rt:0", relConstraint.map("relationshipType").string("\$ref"))
-        // Ensure nodeLabel is specifically SchemaNull
-        assertTrue(relConstraint["nodeLabel"] is SchemaNull)
+        // Ensure nodeLabel is omitted rather than null
+        assertFalse(relConstraint.containsKey("nodeLabel"))
     }
 
     @Test
@@ -199,6 +199,7 @@ class GraphSpecDataModelV3MigrationTest {
         val constraint = graphSchema.listOfMaps("constraints")[0]
         assertEquals("uniqueness", constraint.string("constraintType"))
         assertEquals("#nl:0", constraint.map("nodeLabel").string("\$ref"))
+        assertFalse(constraint.containsKey("relationshipType"))
 
         val index = graphSchema.listOfMaps("indexes")[0]
         assertEquals("range", index.string("indexType"))
@@ -271,12 +272,10 @@ class GraphSpecDataModelV3MigrationTest {
                             "table" to "user_follows",
                             "from_node" to
                                 schemaMapOf(
-                                    "node" to "User",
                                     "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
                                 ),
                             "to_node" to
                                 schemaMapOf(
-                                    "node" to "User",
                                     "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
                                 )
                         )
@@ -305,8 +304,8 @@ class GraphSpecDataModelV3MigrationTest {
                     "m0" to listOf(
                         schemaMapOf(
                             "relationship" to "NON_EXISTENT",
-                            "from_node" to schemaMapOf("node" to "A"),
-                            "to_node" to schemaMapOf("node" to "B")
+                            "from_node" to schemaMapOf(),
+                            "to_node" to schemaMapOf()
                         )
                     )
                 )
@@ -424,6 +423,19 @@ class GraphSpecDataModelV3MigrationTest {
         val supported = fields[0].listOfMaps("supportedTypes")
         assertEquals("string", supported[0].string("type"))
         assertEquals("integer", supported[1].string("type"))
+    }
+
+    @Test
+    fun `convertFields restores sample data from custom extensions`() {
+        val fieldsInput = listOf(
+            schemaMapOf("name" to "categoryID", "custom" to schemaMapOf("sample" to "1")),
+            schemaMapOf("name" to "description")
+        )
+
+        val fields = migration.convertFields(fieldsInput)
+
+        assertEquals("1", fields[0].string("sample"))
+        assertFalse(fields[1].containsKey("sample"))
     }
 
     @Test

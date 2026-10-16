@@ -36,30 +36,35 @@ external interface RelationshipIndexJs {
     var properties: Array<String>
     var options: IndexOptionJs?
     val custom: Record<String, Any>
+    var name: String?
 }
 
 fun relationshipIndexJs(
     type: String,
     properties: Array<String>,
     options: IndexOptionJs? = null,
-    custom: Record<String, Any> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord(),
+    name: String? = null
 ): RelationshipIndexJs = jso {
     this.type = type
     this.properties = properties
     this.options = options
     this.custom = custom
+    this.name = name
 }
 
 fun RelationshipIndex.toJs() = relationshipIndexJs(
     type = type.name,
     properties = properties.toTypedArray(),
     options = options?.toJs(),
-    custom = custom.toCustomJs()
+    custom = custom.toCustomJs(),
+    name = name
 )
 
 fun RelationshipIndexJs.toClass() = RelationshipIndex(
     type = IndexType.valueOf(type),
     properties = properties.toMutableSet(),
     options = options?.toClass(),
-    custom = custom.toCustomClass()
+    custom = custom.toCustomClass(),
+    name = name
 )

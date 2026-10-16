@@ -35,5 +35,5 @@ fun IndexOptionJs.toClass(): IndexOption = when (this.type) {
     IndexType.FULLTEXT.name -> (this as FullTextIndexOptionJs).toClass()
     IndexType.POINT.name -> (this as PointIndexOptionJs).toClass()
     IndexType.VECTOR.name -> (this as VectorIndexOptionJs).toClass()
-    else -> error("Unexpected mapping type: ${this.type}")
+    else -> error("Unexpected index option type: ${this.type}")
 }

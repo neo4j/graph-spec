@@ -66,8 +66,6 @@ type PropertyMapping struct {
 type TargetMapping struct {
 	// Label of the node.
 	Label *string `json:"label,omitempty"`
-	// Id of the node.
-	Node *string `json:"node,omitempty"`
 	// Mappings from property ids to source columns used to match the node.
 	Properties map[string]PropertyMapping `json:"properties,omitempty"`
 }

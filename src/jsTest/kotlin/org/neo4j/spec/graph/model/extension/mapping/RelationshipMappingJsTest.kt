@@ -8,7 +8,7 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
     override fun createClass() = RelationshipMapping(
         relationship = "relationshipId",
         table = "table_name",
-        fromNode = TargetMapping("from_node"),
+        fromNode = TargetMapping(label = "from_label"),
         toNode = TargetMapping(label = "to_label"),
         properties = mutableMapOf("prop" to PropertyMapping("field")),
         mode = MappingMode.MERGE,
@@ -25,7 +25,7 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
     override fun verifyJsObject(jsObject: RelationshipMappingJs) {
         assertEquals("RELATIONSHIP", jsObject.type)
         assertEquals("table_name", jsObject.table)
-        assertEquals("from_node", jsObject.fromNode.node)
+        assertEquals("from_label", jsObject.fromNode.label)
         assertEquals("to_label", jsObject.toNode.label)
         assertJsEquals(propertyMappingJs("field"), jsObject.properties["prop"])
         assertEquals("MERGE", jsObject.mode)
