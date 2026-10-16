@@ -1225,10 +1225,6 @@
             "type": "object",
             "description": "Identifies a node at one end of a mapped relationship.",
             "properties": {
-                "node": {
-                    "type": "string",
-                    "description": "Id of the node."
-                },
                 "label": {
                     "type": "string",
                     "description": "Label of the node."
