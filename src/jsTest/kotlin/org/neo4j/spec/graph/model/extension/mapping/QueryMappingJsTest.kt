@@ -9,7 +9,7 @@ class QueryMappingJsTest : JsMappingTest<QueryMapping, QueryMappingJs>() {
         table = "table_name",
         query = "cypher query",
         dependsOn = "other",
-        id = "mapping-id",
+        id = "mapping-id"
     )
 
     override fun toJs(k: QueryMapping): QueryMappingJs = k.toJs()

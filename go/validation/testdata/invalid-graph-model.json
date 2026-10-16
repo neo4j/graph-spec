@@ -32,6 +32,8 @@
   "extensions": {
     "custom": {},
     "tables": {},
-    "mappings": []
+    "mappings": {
+      "mapping0": []
+    }
   }
 }

@@ -17,16 +17,11 @@
 package org.neo4j.spec.graph.model.node.extension
 
 import js.objects.Record
-import js.objects.toRecord
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.node.toClass
-import org.neo4j.spec.graph.model.node.toJs
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
 import kotlin.collections.component1
 import kotlin.collections.component2
 
@@ -36,14 +31,14 @@ external interface NodeDisplayJs {
     var x: Double
     var y: Double
     var colour: String?
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
 fun nodeDisplayJs(
     x: Double,
     y: Double,
     colour: String? = null,
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord()
 ): NodeDisplayJs = jso {
     this.x = x
     this.y = y
@@ -55,12 +50,12 @@ fun NodeDisplay.toJs() = nodeDisplayJs(
     x = x,
     y = y,
     colour = colour,
-    custom = custom.mapValues { (_, extension) -> extension.toJs() }.toRecord()
+    custom = custom.toCustomJs()
 )
 
 fun NodeDisplayJs.toClass(): NodeDisplay = NodeDisplay(
     x = x,
     y = y,
     colour = colour,
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

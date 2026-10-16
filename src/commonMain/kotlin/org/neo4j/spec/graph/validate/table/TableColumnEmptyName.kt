@@ -25,16 +25,16 @@ object TableColumnEmptyName : TableValidation {
         model: GraphModel,
         tableId: String,
         table: Table,
-        columnId: String,
+        columnIndex: Int,
         column: TableColumn,
         issues: MutableList<Issue>
     ) {
-        if (column.name.isNullOrBlank()) {
+        if (column.name.isBlank()) {
             issues.add(
                 Issue(
                     code = "missing_table_column_name",
-                    message = "Missing name for table column '$columnId'",
-                    path = "extensions.tables.$tableId.columns.$columnId.name"
+                    message = "Missing name for table column at index $columnIndex in table '$tableId'",
+                    path = "extensions.tables.$tableId.columns[$columnIndex].name"
                 )
             )
         }

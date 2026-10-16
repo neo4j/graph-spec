@@ -58,3 +58,17 @@ fun duplicatePropertyName(
     }
     return null
 }
+
+/**
+ * A property may restrict its values with either a `pattern` or a `one_of` list, but not both.
+ */
+fun patternOneOfConflict(propertyId: String, property: Property, entityPath: String): Issue? {
+    if (property.pattern.isNotEmpty() && property.oneOf.isNotEmpty()) {
+        return Issue(
+            code = "property_pattern_one_of_conflict",
+            message = "Property '$propertyId' can't set both pattern and one_of",
+            path = "$entityPath.properties.$propertyId"
+        )
+    }
+    return null
+}

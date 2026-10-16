@@ -26,7 +26,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
             mapOf("code_style" to "intellij_idea")
         )
         endWithNewline()
-        licenseHeaderFile(rootDir.resolve("../license-header.txt"))
+        licenseHeaderFile(rootDir.resolve("license-header.txt"))
     }
     kotlinGradle {
         target("*.gradle.kts")

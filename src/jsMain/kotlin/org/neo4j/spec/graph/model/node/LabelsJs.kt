@@ -22,8 +22,7 @@ import org.neo4j.spec.graph.model.node.extension.LabelsExtensionsJs
 import org.neo4j.spec.graph.model.node.extension.labelsExtensionsJs
 import org.neo4j.spec.graph.model.node.extension.toClass
 import org.neo4j.spec.graph.model.node.extension.toJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
+
 @JsExport
 @JsPlainObject
 external interface LabelsJs {

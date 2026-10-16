@@ -191,20 +191,20 @@ extensions:
     album:
       source: "cloud"
       columns:
-        album_id:
+        - name: "album_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        title:
+        - name: "title"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        artist_id:
+        - name: "artist_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-      primaryKeys: ["album_id"]
-      foreignKeys:
+      primary_keys: ["album_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["artist_id"]
           references:
@@ -213,72 +213,72 @@ extensions:
     artist:
       source: "cloud"
       columns:
-        artist_id:
+        - name: "artist_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-      primaryKeys: ["artist_id"]
+      primary_keys: ["artist_id"]
     customer:
       source: "cloud"
       columns:
-        customer_id:
+        - name: "customer_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        first_name:
+        - name: "first_name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        last_name:
+        - name: "last_name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        company:
+        - name: "company"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        address:
+        - name: "address"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        city:
+        - name: "city"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        state:
+        - name: "state"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        country:
+        - name: "country"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        postal_code:
+        - name: "postal_code"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        phone:
+        - name: "phone"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        fax:
+        - name: "fax"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        email:
+        - name: "email"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        support_rep_id:
+        - name: "support_rep_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-      primaryKeys: ["customer_id"]
-      foreignKeys:
+      primary_keys: ["customer_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["support_rep_id"]
           references:
@@ -287,68 +287,68 @@ extensions:
     employee:
       source: "cloud"
       columns:
-        employee_id:
+        - name: "employee_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        last_name:
+        - name: "last_name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        first_name:
+        - name: "first_name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        title:
+        - name: "title"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        reports_to:
+        - name: "reports_to"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        birth_date:
+        - name: "birth_date"
           type: "DATETIME"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
-        hire_date:
+        - name: "hire_date"
           type: "DATETIME"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
-        address:
+        - name: "address"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        city:
+        - name: "city"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        state:
+        - name: "state"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        country:
+        - name: "country"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        postal_code:
+        - name: "postal_code"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        phone:
+        - name: "phone"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        fax:
+        - name: "fax"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        email:
+        - name: "email"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-      primaryKeys: ["employee_id"]
-      foreignKeys:
+      primary_keys: ["employee_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["reports_to"]
           references:
@@ -357,56 +357,56 @@ extensions:
     genre:
       source: "cloud"
       columns:
-        genre_id:
+        - name: "genre_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-      primaryKeys: ["genre_id"]
+      primary_keys: ["genre_id"]
     invoice:
       source: "cloud"
       columns:
-        invoice_id:
+        - name: "invoice_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        customer_id:
+        - name: "customer_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        invoice_date:
+        - name: "invoice_date"
           type: "TIMESTAMP"
           suggested: "ZONED DATETIME"
           supported: ["DATE", "ZONED DATETIME", "ZONED TIME", "LOCAL TIME", "LOCAL DATETIME"]
-        billing_address:
+        - name: "billing_address"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        billing_city:
+        - name: "billing_city"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        billing_state:
+        - name: "billing_state"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        billing_country:
+        - name: "billing_country"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        billing_postal_code:
+        - name: "billing_postal_code"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        total:
+        - name: "total"
           type: "DECIMAL"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-      primaryKeys: ["invoice_id"]
-      foreignKeys:
+      primary_keys: ["invoice_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["customer_id"]
           references:
@@ -415,28 +415,28 @@ extensions:
     invoice_line:
       source: "cloud"
       columns:
-        invoice_line_id:
+        - name: "invoice_line_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        invoice_id:
+        - name: "invoice_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        track_id:
+        - name: "track_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        unit_price:
+        - name: "unit_price"
           type: "DECIMAL"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        quantity:
+        - name: "quantity"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-      primaryKeys: ["invoice_line_id"]
-      foreignKeys:
+      primary_keys: ["invoice_line_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["invoice_id"]
           references:
@@ -450,40 +450,40 @@ extensions:
     media_type:
       source: "cloud"
       columns:
-        media_type_id:
+        - name: "media_type_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-      primaryKeys: ["media_type_id"]
+      primary_keys: ["media_type_id"]
     playlist:
       source: "cloud"
       columns:
-        playlist_id:
+        - name: "playlist_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-      primaryKeys: ["playlist_id"]
+      primary_keys: ["playlist_id"]
     playlist_track:
       source: "cloud"
       columns:
-        playlist_id:
+        - name: "playlist_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        track_id:
+        - name: "track_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-      primaryKeys: ["playlist_id", "track_id"]
-      foreignKeys:
+      primary_keys: ["playlist_id", "track_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["playlist_id"]
           references:
@@ -497,44 +497,44 @@ extensions:
     track:
       source: "cloud"
       columns:
-        track_id:
+        - name: "track_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        name:
+        - name: "name"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        album_id:
+        - name: "album_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        media_type_id:
+        - name: "media_type_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        genre_id:
+        - name: "genre_id"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        composer:
+        - name: "composer"
           type: "VARCHAR"
           suggested: "STRING"
           supported: ["STRING"]
-        milliseconds:
+        - name: "milliseconds"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        bytes:
+        - name: "bytes"
           type: "INT"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-        unit_price:
+        - name: "unit_price"
           type: "DECIMAL"
           suggested: "FLOAT"
           supported: ["INTEGER", "STRING", "FLOAT"]
-      primaryKeys: ["track_id"]
-      foreignKeys:
+      primary_keys: ["track_id"]
+      foreign_keys:
         foreignKey1:
           columns: ["album_id"]
           references:
@@ -551,216 +551,217 @@ extensions:
             table: "media_type"
             columns: ["media_type_id"]
   mappings:
-    - type: "NODE"
-      node: "album"
-      table: "album"
-      properties:
-        album_id: { column: "album_id" }
-        title: { column: "title" }
-      key: ["album_id"]
-    - type: "NODE"
-      node: "artist"
-      table: "artist"
-      properties:
-        artist_id: { column: "artist_id" }
-        name: { column: "name" }
-      key: ["artist_id"]
-    - type: "NODE"
-      node: "customer"
-      table: "customer"
-      properties:
-        customer_id: { column: "customer_id" }
-        first_name: { column: "first_name" }
-        last_name: { column: "last_name" }
-        company: { column: "company" }
-        address: { column: "address" }
-        city: { column: "city" }
-        state: { column: "state" }
-        country: { column: "country" }
-        postal_code: { column: "postal_code" }
-        phone: { column: "phone" }
-        fax: { column: "fax" }
-        email: { column: "email" }
-      key: ["customer_id"]
-    - type: "NODE"
-      node: "employee"
-      table: "employee"
-      properties:
-        employee_id: { column: "employee_id" }
-        last_name: { column: "last_name" }
-        first_name: { column: "first_name" }
-        title: { column: "title" }
-        birth_date: { column: "birth_date" }
-        hire_date: { column: "hire_date" }
-        address: { column: "address" }
-        city: { column: "city" }
-        state: { column: "state" }
-        country: { column: "country" }
-        postal_code: { column: "postal_code" }
-        phone: { column: "phone" }
-        fax: { column: "fax" }
-        email: { column: "email" }
-      key: ["employee_id"]
-    - type: "NODE"
-      node: "genre"
-      table: "genre"
-      properties:
-        genre_id: { column: "genre_id" }
-        name: { column: "name" }
-      key: ["genre_id"]
-    - type: "NODE"
-      node: "invoice"
-      table: "invoice"
-      properties:
-        invoice_id: { column: "invoice_id" }
-        invoice_date: { column: "invoice_date" }
-        billing_address: { column: "billing_address" }
-        billing_city: { column: "billing_city" }
-        billing_state: { column: "billing_state" }
-        billing_country: { column: "billing_country" }
-        billing_postal_code: { column: "billing_postal_code" }
-        total: { column: "total" }
-      key: ["invoice_id"]
-    - type: "NODE"
-      node: "invoice_line"
-      table: "invoice_line"
-      properties:
-        invoice_line_id: { column: "invoice_line_id" }
-        unit_price: { column: "unit_price" }
-        quantity: { column: "quantity" }
-      key: ["invoice_line_id"]
-    - type: "NODE"
-      node: "media_type"
-      table: "media_type"
-      properties:
-        media_type_id: { column: "media_type_id" }
-        name: { column: "name" }
-      key: ["media_type_id"]
-    - type: "NODE"
-      node: "playlist"
-      table: "playlist"
-      properties:
-        playlist_id: { column: "playlist_id" }
-        name: { column: "name" }
-      key: ["playlist_id"]
-    - type: "NODE"
-      node: "track"
-      table: "track"
-      properties:
-        track_id: { column: "track_id" }
-        name: { column: "name" }
-        composer: { column: "composer" }
-        milliseconds: { column: "milliseconds" }
-        bytes: { column: "bytes" }
-        unit_price: { column: "unit_price" }
-      key: ["track_id"]
-    - type: "RELATIONSHIP"
-      relationship: "ARTIST"
-      table: "album"
-      from_node:
+    mapping0:
+      - type: "NODE"
         node: "album"
+        table: "album"
         properties:
           album_id: { column: "album_id" }
-      to_node:
+          title: { column: "title" }
+        key: ["album_id"]
+      - type: "NODE"
         node: "artist"
+        table: "artist"
         properties:
           artist_id: { column: "artist_id" }
-    - type: "RELATIONSHIP"
-      relationship: "EMPLOYEE"
-      table: "customer"
-      from_node:
+          name: { column: "name" }
+        key: ["artist_id"]
+      - type: "NODE"
         node: "customer"
+        table: "customer"
         properties:
           customer_id: { column: "customer_id" }
-      to_node:
+          first_name: { column: "first_name" }
+          last_name: { column: "last_name" }
+          company: { column: "company" }
+          address: { column: "address" }
+          city: { column: "city" }
+          state: { column: "state" }
+          country: { column: "country" }
+          postal_code: { column: "postal_code" }
+          phone: { column: "phone" }
+          fax: { column: "fax" }
+          email: { column: "email" }
+        key: ["customer_id"]
+      - type: "NODE"
         node: "employee"
-        properties:
-          employee_id: { column: "support_rep_id" }
-    - type: "RELATIONSHIP"
-      relationship: "EMPLOYEE2"
-      table: "employee"
-      from_node:
-        node: "employee"
+        table: "employee"
         properties:
           employee_id: { column: "employee_id" }
-      to_node:
-        node: "employee"
-        properties:
-          employee_id: { column: "reports_to" }
-    - type: "RELATIONSHIP"
-      relationship: "CUSTOMER"
-      table: "invoice"
-      from_node:
-        node: "invoice"
-        properties:
-          invoice_id: { column: "invoice_id" }
-      to_node:
-        node: "customer"
-        properties:
-          customer_id: { column: "customer_id" }
-    - type: "RELATIONSHIP"
-      relationship: "INVOICE"
-      table: "invoice_line"
-      from_node:
-        node: "invoice_line"
-        properties:
-          invoice_line_id: { column: "invoice_line_id" }
-      to_node:
-        node: "invoice"
-        properties:
-          invoice_id: { column: "invoice_id" }
-    - type: "RELATIONSHIP"
-      relationship: "TRACK"
-      table: "invoice_line"
-      from_node:
-        node: "invoice_line"
-        properties:
-          invoice_line_id: { column: "invoice_line_id" }
-      to_node:
-        node: "track"
-        properties:
-          track_id: { column: "track_id" }
-    - type: "RELATIONSHIP"
-      relationship: "TRACK2"
-      table: "playlist_track"
-      from_node:
-        node: "playlist"
-        properties:
-          playlist_id: { column: "playlist_id" }
-      to_node:
-        node: "track"
-        properties:
-          track_id: { column: "track_id" }
-    - type: "RELATIONSHIP"
-      relationship: "ALBUM"
-      table: "track"
-      from_node:
-        node: "track"
-        properties:
-          track_id: { column: "track_id" }
-      to_node:
-        node: "album"
-        properties:
-          album_id: { column: "album_id" }
-    - type: "RELATIONSHIP"
-      relationship: "GENRE"
-      table: "track"
-      from_node:
-        node: "track"
-        properties:
-          track_id: { column: "track_id" }
-      to_node:
+          last_name: { column: "last_name" }
+          first_name: { column: "first_name" }
+          title: { column: "title" }
+          birth_date: { column: "birth_date" }
+          hire_date: { column: "hire_date" }
+          address: { column: "address" }
+          city: { column: "city" }
+          state: { column: "state" }
+          country: { column: "country" }
+          postal_code: { column: "postal_code" }
+          phone: { column: "phone" }
+          fax: { column: "fax" }
+          email: { column: "email" }
+        key: ["employee_id"]
+      - type: "NODE"
         node: "genre"
+        table: "genre"
         properties:
           genre_id: { column: "genre_id" }
-    - type: "RELATIONSHIP"
-      relationship: "MEDIA_TYPE"
-      table: "track"
-      from_node:
-        node: "track"
+          name: { column: "name" }
+        key: ["genre_id"]
+      - type: "NODE"
+        node: "invoice"
+        table: "invoice"
         properties:
-          track_id: { column: "track_id" }
-      to_node:
+          invoice_id: { column: "invoice_id" }
+          invoice_date: { column: "invoice_date" }
+          billing_address: { column: "billing_address" }
+          billing_city: { column: "billing_city" }
+          billing_state: { column: "billing_state" }
+          billing_country: { column: "billing_country" }
+          billing_postal_code: { column: "billing_postal_code" }
+          total: { column: "total" }
+        key: ["invoice_id"]
+      - type: "NODE"
+        node: "invoice_line"
+        table: "invoice_line"
+        properties:
+          invoice_line_id: { column: "invoice_line_id" }
+          unit_price: { column: "unit_price" }
+          quantity: { column: "quantity" }
+        key: ["invoice_line_id"]
+      - type: "NODE"
         node: "media_type"
+        table: "media_type"
         properties:
           media_type_id: { column: "media_type_id" }
+          name: { column: "name" }
+        key: ["media_type_id"]
+      - type: "NODE"
+        node: "playlist"
+        table: "playlist"
+        properties:
+          playlist_id: { column: "playlist_id" }
+          name: { column: "name" }
+        key: ["playlist_id"]
+      - type: "NODE"
+        node: "track"
+        table: "track"
+        properties:
+          track_id: { column: "track_id" }
+          name: { column: "name" }
+          composer: { column: "composer" }
+          milliseconds: { column: "milliseconds" }
+          bytes: { column: "bytes" }
+          unit_price: { column: "unit_price" }
+        key: ["track_id"]
+      - type: "RELATIONSHIP"
+        relationship: "ARTIST"
+        table: "album"
+        from_node:
+          node: "album"
+          properties:
+            album_id: { column: "album_id" }
+        to_node:
+          node: "artist"
+          properties:
+            artist_id: { column: "artist_id" }
+      - type: "RELATIONSHIP"
+        relationship: "EMPLOYEE"
+        table: "customer"
+        from_node:
+          node: "customer"
+          properties:
+            customer_id: { column: "customer_id" }
+        to_node:
+          node: "employee"
+          properties:
+            employee_id: { column: "support_rep_id" }
+      - type: "RELATIONSHIP"
+        relationship: "EMPLOYEE2"
+        table: "employee"
+        from_node:
+          node: "employee"
+          properties:
+            employee_id: { column: "employee_id" }
+        to_node:
+          node: "employee"
+          properties:
+            employee_id: { column: "reports_to" }
+      - type: "RELATIONSHIP"
+        relationship: "CUSTOMER"
+        table: "invoice"
+        from_node:
+          node: "invoice"
+          properties:
+            invoice_id: { column: "invoice_id" }
+        to_node:
+          node: "customer"
+          properties:
+            customer_id: { column: "customer_id" }
+      - type: "RELATIONSHIP"
+        relationship: "INVOICE"
+        table: "invoice_line"
+        from_node:
+          node: "invoice_line"
+          properties:
+            invoice_line_id: { column: "invoice_line_id" }
+        to_node:
+          node: "invoice"
+          properties:
+            invoice_id: { column: "invoice_id" }
+      - type: "RELATIONSHIP"
+        relationship: "TRACK"
+        table: "invoice_line"
+        from_node:
+          node: "invoice_line"
+          properties:
+            invoice_line_id: { column: "invoice_line_id" }
+        to_node:
+          node: "track"
+          properties:
+            track_id: { column: "track_id" }
+      - type: "RELATIONSHIP"
+        relationship: "TRACK2"
+        table: "playlist_track"
+        from_node:
+          node: "playlist"
+          properties:
+            playlist_id: { column: "playlist_id" }
+        to_node:
+          node: "track"
+          properties:
+            track_id: { column: "track_id" }
+      - type: "RELATIONSHIP"
+        relationship: "ALBUM"
+        table: "track"
+        from_node:
+          node: "track"
+          properties:
+            track_id: { column: "track_id" }
+        to_node:
+          node: "album"
+          properties:
+            album_id: { column: "album_id" }
+      - type: "RELATIONSHIP"
+        relationship: "GENRE"
+        table: "track"
+        from_node:
+          node: "track"
+          properties:
+            track_id: { column: "track_id" }
+        to_node:
+          node: "genre"
+          properties:
+            genre_id: { column: "genre_id" }
+      - type: "RELATIONSHIP"
+        relationship: "MEDIA_TYPE"
+        table: "track"
+        from_node:
+          node: "track"
+          properties:
+            track_id: { column: "track_id" }
+        to_node:
+          node: "media_type"
+          properties:
+            media_type_id: { column: "media_type_id" }

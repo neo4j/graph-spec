@@ -83,7 +83,7 @@ class DataModelV3GraphSpecMigration :
             extensions["tables"] = tables
         }
         if (mappings.isNotEmpty()) {
-            extensions["mappings"] = mappings
+            extensions["mappings"] = mapOf(MAPPING_ID to mappings)
         }
         return extensions
     }
@@ -365,8 +365,8 @@ class DataModelV3GraphSpecMigration :
             tables[name] = schemaMapOf(
                 "source" to sourceSchema.literalOrNull("type"),
                 "columns" to migrateColumns(table),
-                "primaryKeys" toNotEmpty table.listOrNull("primaryKeys"),
-                "foreignKeys" toNotEmpty migrateForeignKeys(table)
+                "primary_keys" toNotEmpty table.listOrNull("primaryKeys"),
+                "foreign_keys" toNotEmpty migrateForeignKeys(table)
             )
         }
         return tables
@@ -389,28 +389,25 @@ class DataModelV3GraphSpecMigration :
         return foreignKeys
     }
 
-    private fun migrateColumns(table: SchemaMap): MutableMap<String, SchemaElement> {
-        val columns = mutableMapOf<String, SchemaElement>()
-        for (field in table.listOfMaps("fields")) {
-            val name = field.string("name")
-            columns[name] = schemaMapOf(
-                "name" to field.literal("name"),
-                "type" to field.literalOrNull("rawType"),
-                "size" to field.literalOrNull("size"),
-                "suggested" to neo4jType(field.mapOrNull("recommendedType")),
-                "supported" to field.listOfMapsOrNull("supportedTypes")?.map {
-                    neo4jType(it)
-                },
-                "dimension" to (
-                    dimension(field.mapOrNull("recommendedType"))
-                        ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
-                    )
-            )
-        }
-        return columns
+    private fun migrateColumns(table: SchemaMap): List<SchemaMap> = table.listOfMaps("fields").map { field ->
+        schemaMapOf(
+            "name" to field.literal("name"),
+            "type" to field.literalOrNull("rawType"),
+            "size" to field.literalOrNull("size"),
+            "suggested" to neo4jType(field.mapOrNull("recommendedType")),
+            "supported" to field.listOfMapsOrNull("supportedTypes")?.map {
+                neo4jType(it)
+            },
+            "dimension" to (
+                dimension(field.mapOrNull("recommendedType"))
+                    ?: field.listOfMapsOrNull("supportedTypes")?.firstNotNullOfOrNull { dimension(it) }
+                )
+        )
     }
 
     companion object {
+        const val MAPPING_ID = "mapping0"
+
         private fun neo4jType(type: SchemaMap?): String? {
             val base = type?.stringOrNull("type")?.lowercase() ?: return null
             return when (base) {

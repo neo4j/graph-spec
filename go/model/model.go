@@ -23,137 +23,12 @@ var ConstraintTypeValues = []ConstraintType{
 	ConstraintTypeUnique,
 }
 
-type ExtensionValueUnion interface {
-	ExtensionValueType() string
-	isExtensionValue()
-}
-
-type ExtensionValue struct {
-	ExtensionValueUnion
-}
-
-func (w ExtensionValue) MarshalJSON() ([]byte, error) {
-	if w.ExtensionValueUnion == nil {
-		return []byte("null"), nil
-	}
-	return json.Marshal(w.ExtensionValueUnion)
-}
-
-func (w *ExtensionValue) UnmarshalJSON(data []byte) error {
-	data = bytes.TrimSpace(data)
-	if bytes.Equal(data, []byte("null")) {
-		w.ExtensionValueUnion = nil
-		return nil
-	}
-
-	var peek struct {
-		Type string `json:"type"`
-	}
-	if err := json.Unmarshal(data, &peek); err != nil {
-		return fmt.Errorf("ExtensionValue: invalid JSON: %w", err)
-	}
-	if peek.Type == "" {
-		return fmt.Errorf("ExtensionValue: missing discriminator field %q", "type")
-	}
-
-	var v ExtensionValueUnion
-	switch peek.Type {
-	case "BOOLEAN":
-		v = &BOOLEAN{}
-	case "DOUBLE":
-		v = &DOUBLE{}
-	case "LIST":
-		v = &LIST{}
-	case "LONG":
-		v = &LONG{}
-	case "MAP":
-		v = &MAP{}
-	case "STRING":
-		v = &STRING{}
-	default:
-		return fmt.Errorf("ExtensionValue: unknown type %q", peek.Type)
-	}
-
-	if err := json.Unmarshal(data, v); err != nil {
-		return fmt.Errorf("ExtensionValue: invalid %q payload: %w", peek.Type, err)
-	}
-
-	w.ExtensionValueUnion = v
-	return nil
-}
-
-// A boolean extension value.
-type BOOLEAN struct {
-	Type string `json:"type"`
-	// The value.
-	Value bool `json:"value"`
-}
-
-func (BOOLEAN) isExtensionValue() {}
-
-func (BOOLEAN) ExtensionValueType() string { return "BOOLEAN" }
-
-// A double extension value.
-type DOUBLE struct {
-	Type string `json:"type"`
-	// The value.
-	Value float64 `json:"value"`
-}
-
-func (DOUBLE) isExtensionValue() {}
-
-func (DOUBLE) ExtensionValueType() string { return "DOUBLE" }
-
-// A list extension value.
-type LIST struct {
-	Type string `json:"type"`
-	// The values in the list.
-	Value []ExtensionValue `json:"value"`
-}
-
-func (LIST) isExtensionValue() {}
-
-func (LIST) ExtensionValueType() string { return "LIST" }
-
-// A long extension value.
-type LONG struct {
-	Type string `json:"type"`
-	// The value.
-	Value int `json:"value"`
-}
-
-func (LONG) isExtensionValue() {}
-
-func (LONG) ExtensionValueType() string { return "LONG" }
-
-// A map extension value.
-type MAP struct {
-	Type string `json:"type"`
-	// The values in the map keyed by name.
-	Value map[string]ExtensionValue `json:"value"`
-}
-
-func (MAP) isExtensionValue() {}
-
-func (MAP) ExtensionValueType() string { return "MAP" }
-
-// A string extension value.
-type STRING struct {
-	Type string `json:"type"`
-	// The value.
-	Value string `json:"value"`
-}
-
-func (STRING) isExtensionValue() {}
-
-func (STRING) ExtensionValueType() string { return "STRING" }
-
 // The target of a foreign key.
 type ForeignKeyReference struct {
 	// Names of the referenced columns.
 	Columns []string `json:"columns,omitempty"`
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Id of the referenced table.
 	Table string `json:"table"`
 }
@@ -163,7 +38,7 @@ type ForeignKey struct {
 	// Names of the columns in this table which make up the key.
 	Columns []string `json:"columns"`
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// The table and columns the key refers to.
 	References ForeignKeyReference `json:"references"`
 }
@@ -252,14 +127,14 @@ func (w *Mapping) UnmarshalJSON(data []byte) error {
 
 // Maps rows of a table to nodes.
 type NODE struct {
-	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	// Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency.
 	DependsOn *string `json:"depends_on,omitempty"`
-	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	// Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
 	ID *string `json:"id,omitempty"`
 	// Ids of the properties which identify a node.
 	Key []string `json:"key,omitempty"`
 	// Label used to match existing nodes.
-	MatchLabel *string `json:"matchLabel,omitempty"`
+	MatchLabel *string `json:"match_label,omitempty"`
 	// Whether nodes are merged with existing nodes or always created.
 	Mode *MappingMode `json:"mode,omitempty"`
 	// Id of the node being mapped.
@@ -277,9 +152,9 @@ func (NODE) MappingType() string { return "NODE" }
 
 // Maps the results of a query run against a table.
 type QUERY struct {
-	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	// Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency.
 	DependsOn *string `json:"depends_on,omitempty"`
-	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	// Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
 	ID *string `json:"id,omitempty"`
 	// The query to run.
 	Query string `json:"query"`
@@ -294,16 +169,16 @@ func (QUERY) MappingType() string { return "QUERY" }
 
 // Maps rows of a table to relationships.
 type RELATIONSHIP struct {
-	// Id of the mapping which must be imported before this one. Empty when there is no dependency.
+	// Id of another mapping in the same list which must be imported before this one. Empty when there is no dependency.
 	DependsOn *string `json:"depends_on,omitempty"`
 	// How the start node of the relationship is matched.
 	FromNode TargetMapping `json:"from_node"`
-	// Optional id of this mapping, so other mappings can reference it in depends_on.
+	// Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
 	ID *string `json:"id,omitempty"`
 	// Ids of the properties which identify a relationship.
 	Key []string `json:"key,omitempty"`
 	// Label used to match existing relationships.
-	MatchLabel *string `json:"matchLabel,omitempty"`
+	MatchLabel *string `json:"match_label,omitempty"`
 	// Whether relationships are merged with existing relationships or always created.
 	Mode *MappingMode `json:"mode,omitempty"`
 	// Mappings from property ids to source columns.
@@ -411,10 +286,10 @@ var Neo4jTypeValues = []Neo4jType{
 // A column of a data source table.
 type TableColumn struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Dimension of the column when it holds vectors.
 	Dimension *int `json:"dimension,omitempty"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
+	// Name of the column in the source. Unique within the table.
 	Name *string `json:"name,omitempty"`
 	// Size of the column.
 	Size *int `json:"size,omitempty"`
@@ -428,14 +303,14 @@ type TableColumn struct {
 
 // A data source table schema.
 type Table struct {
-	// Columns of the table keyed by column name.
-	Columns map[string]TableColumn `json:"columns,omitempty"`
+	// Columns of the table in their source order.
+	Columns []TableColumn `json:"columns,omitempty"`
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Foreign keys of the table keyed by id.
-	ForeignKeys map[string]ForeignKey `json:"foreignKeys,omitempty"`
+	ForeignKeys map[string]ForeignKey `json:"foreign_keys,omitempty"`
 	// Names of the columns making up the primary key.
-	PrimaryKeys []string `json:"primaryKeys,omitempty"`
+	PrimaryKeys []string `json:"primary_keys,omitempty"`
 	// Where the table's data comes from.
 	Source string `json:"source"`
 }
@@ -443,9 +318,9 @@ type Table struct {
 // Extensions for a graph model.
 type GraphModelExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
-	// Import mappings from tables to nodes and relationships.
-	Mappings []Mapping `json:"mappings,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
+	// Sets of data source mappings from tables to nodes and relationships, often used for importing.
+	Mappings map[string][]Mapping `json:"mappings,omitempty"`
 	// Data source table schemas keyed by table id.
 	Tables map[string]Table `json:"tables,omitempty"`
 }
@@ -453,7 +328,7 @@ type GraphModelExtensions struct {
 // Extensions for the labels of a node.
 type LabelsExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 }
 
 // The labels of a node.
@@ -471,7 +346,7 @@ type Labels struct {
 // Extensions for a node constraint.
 type NodeConstraintExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 }
 
 // A constraint on a node.
@@ -493,7 +368,7 @@ type NodeDisplay struct {
 	// Display colour of the node as a hex string, e.g. #FF8800.
 	Colour *string `json:"colour,omitempty"`
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Horizontal position.
 	X float64 `json:"x"`
 	// Vertical position.
@@ -648,7 +523,7 @@ var IndexTypeValues = []IndexType{
 // An index on a node.
 type NodeIndex struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Labels the index covers.
 	Labels []string `json:"labels"`
 	// Human-readable name. Used in place of the stable id in the pretty form of the model.
@@ -664,7 +539,7 @@ type NodeIndex struct {
 // Extensions for a node.
 type NodeExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Optional visual information of this node.
 	Display *NodeDisplay `json:"display,omitempty"`
 	// Database indexes on this node keyed by id.
@@ -674,7 +549,7 @@ type NodeExtensions struct {
 // Extensions for a property.
 type PropertyExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 }
 
 // A property of a node or relationship.
@@ -688,14 +563,14 @@ type Property struct {
 	// Shorthand for a key constraint. Expanded into constraints when the model is internalised.
 	Key *bool `json:"key,omitempty"`
 	// Shorthand for an existence constraint. Expanded into constraints when the model is internalised.
-	MustExist *bool `json:"mustExist,omitempty"`
+	MustExist *bool `json:"must_exist,omitempty"`
 	// Human-readable name. Used in place of the stable id in the pretty form of the model.
 	Name *string `json:"name,omitempty"`
 	// Values the property is restricted to.
 	OneOf []string `json:"one_of,omitempty"`
 	// Pattern values of the property are expected to match.
 	Pattern *string `json:"pattern,omitempty"`
-	// Reference to an external resource describing the property.
+	// Reference or URI of an external resource describing the property.
 	Reference *string `json:"reference,omitempty"`
 	// Neo4j type of the property.
 	Type *Neo4jType `json:"type,omitempty"`
@@ -721,14 +596,14 @@ type Node struct {
 	Name *string `json:"name,omitempty"`
 	// Properties of the node keyed by id.
 	Properties map[string]Property `json:"properties,omitempty"`
-	// Reference to an external resource describing the node.
+	// Reference or URI of an external resource describing the node.
 	Reference *string `json:"reference,omitempty"`
 }
 
 // Extensions for a relationship constraint.
 type RelationshipConstraintExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 }
 
 // A constraint on a relationship.
@@ -746,7 +621,7 @@ type RelationshipConstraint struct {
 // An index on a relationship.
 type RelationshipIndex struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Human-readable name. Used in place of the stable id in the pretty form of the model.
 	Name *string `json:"name,omitempty"`
 	// Configuration specific to the type of index.
@@ -760,7 +635,7 @@ type RelationshipIndex struct {
 // Extensions for a relationship.
 type RelationshipExtensions struct {
 	// User-defined arbitrary data.
-	Custom map[string]ExtensionValue `json:"custom,omitempty"`
+	Custom map[string]interface{} `json:"custom,omitempty"`
 	// Indexes on this relationship keyed by id.
 	Indexes map[string]RelationshipIndex `json:"indexes,omitempty"`
 }
@@ -795,7 +670,7 @@ type Relationship struct {
 	Name *string `json:"name,omitempty"`
 	// Properties of the relationship keyed by id.
 	Properties map[string]Property `json:"properties,omitempty"`
-	// Reference to an external resource describing the relationship.
+	// Reference or URI of an external resource describing the relationship.
 	Reference *string `json:"reference,omitempty"`
 	// The node the relationship ends at.
 	To RelationshipTarget `json:"to"`

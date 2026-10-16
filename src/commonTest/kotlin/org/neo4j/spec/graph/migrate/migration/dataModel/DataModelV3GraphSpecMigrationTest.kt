@@ -576,14 +576,14 @@ class DataModelV3GraphSpecMigrationTest {
 
         val userTable = tables["users"]
         assertNotNull(userTable)
-        val fks = userTable.mapOfMaps("foreignKeys")
+        val fks = userTable.mapOfMaps("foreign_keys")
         assertEquals(1, fks.size)
         val firstFK = fks.values.first()
         assertEquals("accounts", firstFK.map("references").string("table"))
     }
 
     @Test
-    fun `migrateTables excludes empty foreignKeys and primaryKeys`() {
+    fun `migrateTables excludes empty foreign_keys and primary_keys`() {
         val inputSchema = schemaMapOf(
             "graphMappingRepresentation" to mapOf(
                 "dataSourceSchema" to schemaMapOf(
@@ -602,8 +602,8 @@ class DataModelV3GraphSpecMigrationTest {
         val tables = migration.migrateTables(inputSchema)
         val table = tables["empty_table"]!!
 
-        assertFalse(table.containsKey("primaryKeys"), "primaryKeys should be omitted if empty")
-        assertFalse(table.containsKey("foreignKeys"), "foreignKeys should be omitted if empty")
+        assertFalse(table.containsKey("primary_keys"), "primary_keys should be omitted if empty")
+        assertFalse(table.containsKey("foreign_keys"), "foreign_keys should be omitted if empty")
     }
 
     @Test
@@ -640,7 +640,9 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val columns = migration.migrateTables(inputSchema)["film"]!!.mapOfMaps("columns")
+        val columns = migration.migrateTables(inputSchema)["film"]!!.listOfMaps("columns").associateBy {
+            it.string("name")
+        }
 
         val arrayField = columns["special_features"]!!
         assertEquals("STRING", arrayField.string("suggested"))
@@ -711,7 +713,9 @@ class DataModelV3GraphSpecMigrationTest {
             )
         )
 
-        val fields = migration.migrateTables(inputSchema)["document"]!!.mapOfMaps("columns")
+        val fields = migration.migrateTables(inputSchema)["document"]!!.listOfMaps("columns").associateBy {
+            it.string("name")
+        }
 
         assertEquals(123, fields["embeddingWithDim"]?.intOrNull("dimension"))
         assertEquals(456, fields["supportedOnly"]?.intOrNull("dimension"))

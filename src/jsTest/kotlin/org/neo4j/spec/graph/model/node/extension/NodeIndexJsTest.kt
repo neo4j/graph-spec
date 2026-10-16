@@ -3,8 +3,6 @@ package org.neo4j.spec.graph.model.node.extension
 import org.neo4j.spec.graph.model.node.toClass
 import org.neo4j.spec.graph.model.node.toJs
 import org.neo4j.spec.graph.model.extension.mapping.JsMappingTest
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.stringValueJs
 import org.neo4j.spec.graph.model.index.VectorIndexOption
 import org.neo4j.spec.graph.model.index.VectorIndexOptionJs
 import org.neo4j.spec.graph.model.type.IndexType
@@ -21,7 +19,7 @@ class NodeIndexJsTest : JsMappingTest<NodeIndex, NodeIndexJs>() {
             similarityFunction = "test",
         ),
         custom = mutableMapOf(
-            "key1" to StringValue("val1")
+            "key1" to "val1"
         )
     )
 
@@ -38,7 +36,7 @@ class NodeIndexJsTest : JsMappingTest<NodeIndex, NodeIndexJs>() {
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))
         assertJsEquals("test", (jsObject.options as? VectorIndexOptionJs)?.similarityFunction)
-        assertJsEquals(stringValueJs("val1"), jsObject.custom["key1"])
+        assertEquals<Any?>("val1", jsObject.custom["key1"])
     }
 
 }

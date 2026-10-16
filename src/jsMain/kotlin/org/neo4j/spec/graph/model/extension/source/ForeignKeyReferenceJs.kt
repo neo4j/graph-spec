@@ -18,12 +18,10 @@ package org.neo4j.spec.graph.model.extension.source
 
 import js.objects.Record
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
 import kotlin.String
 
 @JsExport
@@ -31,13 +29,13 @@ import kotlin.String
 external interface ForeignKeyReferenceJs {
     var table: String
     var columns: Array<String>
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
 fun foreignKeyReferenceJs(
     table: String,
     columns: Array<String> = emptyArray(),
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord()
 ): ForeignKeyReferenceJs = jso {
     this.table = table
     this.columns = columns
@@ -47,11 +45,11 @@ fun foreignKeyReferenceJs(
 fun ForeignKeyReference.toJs() = foreignKeyReferenceJs(
     table = table,
     columns = columns.toTypedArray(),
-    custom = custom.associateBy { _, value -> value.toJs() }
+    custom = custom.toCustomJs()
 )
 
 fun ForeignKeyReferenceJs.toClass() = ForeignKeyReference(
     table = table,
     columns = columns.toMutableSet(),
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )

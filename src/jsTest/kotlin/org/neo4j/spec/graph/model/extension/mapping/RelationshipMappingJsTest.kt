@@ -15,7 +15,7 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
         matchLabel = "matchLabel",
         key = mutableSetOf("key"),
         dependsOn = "other",
-        id = "mapping-id",
+        id = "mapping-id"
     )
 
     override fun toJs(k: RelationshipMapping): RelationshipMappingJs = k.toJs()

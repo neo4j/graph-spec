@@ -2,8 +2,6 @@ package org.neo4j.spec.graph.model.extension.source
 
 import org.neo4j.spec.graph.model.extension.mapping.JsMappingTest
 import org.neo4j.spec.graph.model.property.Neo4jType
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.stringValueJs
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
@@ -15,11 +13,11 @@ class TableColumnJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
         suggested = Neo4jType.VECTOR_FLOAT,
         supported = setOf(Neo4jType.VECTOR_FLOAT, Neo4jType.VECTOR_FLOAT32),
         dimension = 8,
-        custom = mutableMapOf("key1" to StringValue("val1")),
+        custom = mutableMapOf("key1" to "val1"),
         name = "Field name"
     )
 
-    override fun toJs(k: TableColumn): TableColumnJs = k.toJs("columnId")
+    override fun toJs(k: TableColumn): TableColumnJs = k.toJs()
 
     override fun toClass(js: TableColumnJs): TableColumn = js.toClass()
 
@@ -29,7 +27,7 @@ class TableColumnJsTest : JsMappingTest<TableColumn, TableColumnJs>() {
         assertEquals("VECTOR<FLOAT>", jsObject.suggested)
         assertContentEquals(arrayOf("VECTOR<FLOAT>", "VECTOR<FLOAT32>"), jsObject.supported)
         assertEquals(8, jsObject.dimension)
-        assertJsEquals(stringValueJs("val1"), jsObject.custom["key1"])
+        assertEquals<Any?>("val1", jsObject.custom["key1"])
         assertEquals("Field name", jsObject.name)
     }
 

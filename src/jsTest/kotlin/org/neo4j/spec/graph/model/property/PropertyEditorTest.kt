@@ -1,7 +1,5 @@
 package org.neo4j.spec.graph.model.property
 
-import org.neo4j.spec.graph.model.value.StringValueJs
-import org.neo4j.spec.graph.model.value.stringValueJs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

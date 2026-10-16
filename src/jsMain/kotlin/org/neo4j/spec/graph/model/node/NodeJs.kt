@@ -31,8 +31,6 @@ import org.neo4j.spec.graph.model.property.extension.toClass
 import org.neo4j.spec.graph.model.property.extension.toJs
 import org.neo4j.spec.graph.model.property.toClass
 import org.neo4j.spec.graph.model.property.toJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
 import kotlin.collections.component1
 import kotlin.collections.component2
 

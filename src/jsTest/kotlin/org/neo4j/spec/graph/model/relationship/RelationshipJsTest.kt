@@ -5,9 +5,7 @@ import org.neo4j.spec.graph.model.relationship.extension.relationshipIndexJs
 import org.neo4j.spec.graph.model.relationship.extension.toClass
 import org.neo4j.spec.graph.model.relationship.extension.toJs
 import org.neo4j.spec.graph.model.extension.mapping.JsMappingTest
-import org.neo4j.spec.graph.model.value.StringValue
 import org.neo4j.spec.graph.model.relationship.extension.RelationshipExtensions
-import org.neo4j.spec.graph.model.value.stringValueJs
 import org.neo4j.spec.graph.model.property.Neo4jType
 import org.neo4j.spec.graph.model.property.Property
 import org.neo4j.spec.graph.model.property.propertyJs
@@ -24,7 +22,7 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         properties = mutableMapOf("prop" to Property(Neo4jType.STRING, name = "property_name")),
         constraints = mutableMapOf("constraint" to RelationshipConstraint(ConstraintType.KEY, mutableSetOf("prop"))),
         extensions = RelationshipExtensions(
-            custom = mutableMapOf("key1" to StringValue("val1")),
+            custom = mutableMapOf("key1" to "val1"),
             indexes = mutableMapOf("index" to RelationshipIndex(IndexType.POINT, mutableSetOf("prop")))
         ),
         name = "relationshipName",
@@ -43,7 +41,7 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         assertJsEquals(propertyJs("STRING", id = "prop", name = "property_name"), jsObject.properties["prop"])
         assertJsEquals(relationshipConstraintJs("KEY", arrayOf("prop")), jsObject.constraints["constraint"])
         assertJsEquals(relationshipIndexJs("POINT", arrayOf("prop")), jsObject.extensions.indexes["index"])
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions.custom["key1"])
+        assertEquals<Any?>("val1", jsObject.extensions.custom["key1"])
         assertEquals("relationshipId", jsObject.id)
         assertEquals("relationshipName", jsObject.name)
         assertEquals(listOf("alias1", "alias2"), jsObject.aliases.toList())

@@ -22,7 +22,6 @@ import net.mamoe.yamlkt.YamlList
 import net.mamoe.yamlkt.YamlLiteral
 import net.mamoe.yamlkt.YamlMap
 import net.mamoe.yamlkt.YamlNull
-import net.mamoe.yamlkt.YamlPrimitive
 import org.neo4j.spec.graph.codec.schema.SchemaElement
 import org.neo4j.spec.graph.codec.schema.SchemaList
 import org.neo4j.spec.graph.codec.schema.SchemaLiteral
@@ -53,7 +52,7 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
               2. Write our own multi-platform yaml library
               3. Drop yaml support
          */
-        val amended = string.replace(regex, ": \"$1\"")
+        val amended = markQuotedScalars(string).replace(regex, ": \"$1\"")
         val yaml = yaml.decodeYamlFromString(amended)
         return schemaElement(yaml)
     }
@@ -70,14 +69,25 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                 if (key !is YamlLiteral) {
                     error("Failed to parse yaml: non-string key not supported: $key")
                 }
-                key.content to schemaElement(value)
+                key.content.removePrefix(QUOTED_MARKER) to schemaElement(value)
             },
             parent
         )
-        is YamlPrimitive -> yaml.content?.let { SchemaLiteral(it, parent, isString = true) } ?: SchemaNull(parent)
-        is YamlLiteral -> SchemaLiteral(yaml.content, parent, isString = false)
+        is YamlLiteral -> scalar(yaml.content, parent)
         YamlNull -> SchemaNull(parent)
     }
+
+    /**
+     * Quoted scalars are always strings, unquoted scalars are only literals when they're a boolean or a number.
+     */
+    private fun scalar(content: String, parent: String): SchemaLiteral = when {
+        content.startsWith(QUOTED_MARKER) -> SchemaLiteral(content.removePrefix(QUOTED_MARKER), parent, isString = true)
+        content == "true" || content == "false" || number.matches(content) ->
+            SchemaLiteral(content, parent, isString = false)
+        else -> SchemaLiteral(content, parent, isString = true)
+    }
+
+    private val number = Regex("-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][-+]?[0-9]+)?")
 
     companion object {
         val default = YamlFormat(
@@ -98,14 +108,14 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                     "relationships.*.constraints.*.properties",
                     "relationships.*.extensions.indexes.*.properties",
                     "relationships.*.extensions.indexes.*.options.*",
-                    "extensions.tables.*.columns.*.supported",
-                    "extensions.tables.*.primaryKeys",
-                    "extensions.tables.*.foreignKeys.*.columns",
-                    "extensions.tables.*.foreignKeys.*.references.columns",
-                    "extensions.mappings[*].properties.*",
-                    "extensions.mappings[*].key",
-                    "extensions.mappings[*].from_node.properties.*",
-                    "extensions.mappings[*].to_node.properties.*"
+                    "extensions.tables.*.columns[*].supported",
+                    "extensions.tables.*.primary_keys",
+                    "extensions.tables.*.foreign_keys.*.columns",
+                    "extensions.tables.*.foreign_keys.*.references.columns",
+                    "extensions.mappings.*[*].properties.*",
+                    "extensions.mappings.*[*].key",
+                    "extensions.mappings.*[*].from_node.properties.*",
+                    "extensions.mappings.*[*].to_node.properties.*"
                 )
             )
         )

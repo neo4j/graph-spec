@@ -34,25 +34,11 @@ class TableColumnEmptyNameTest {
     fun `fail when column name is blank`() {
         val table = Table(
             source = "local",
-            columns = mutableMapOf("f:1" to TableColumn(name = ""))
+            columns = mutableListOf(TableColumn(name = ""))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
-
-        assertEquals(1, issues.size)
-        assertEquals("missing_table_column_name", issues.first().code)
-    }
-
-    @Test
-    fun `fail when column name is null`() {
-        val table = Table(
-            source = "local",
-            columns = mutableMapOf("f:1" to TableColumn(name = null))
-        )
-        val issues = mutableListOf<Issue>()
-
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issues)
 
         assertEquals(1, issues.size)
         assertEquals("missing_table_column_name", issues.first().code)
@@ -62,11 +48,11 @@ class TableColumnEmptyNameTest {
     fun `pass when column has a valid name`() {
         val table = Table(
             source = "local",
-            columns = mutableMapOf("f:1" to TableColumn(name = "email"))
+            columns = mutableListOf(TableColumn(name = "email"))
         )
         val issues = mutableListOf<Issue>()
 
-        validator.validateTableColumn(model, "t:1", table, "f:1", table.columns["f:1"]!!, issues)
+        validator.validateTableColumn(model, "t:1", table, 0, table.columns[0], issues)
 
         assertTrue(issues.isEmpty())
     }

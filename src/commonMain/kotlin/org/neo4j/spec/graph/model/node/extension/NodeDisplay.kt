@@ -19,8 +19,8 @@ package org.neo4j.spec.graph.model.node.extension
 import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.neo4j.spec.graph.model.extension.Extensions
-import org.neo4j.spec.graph.model.value.ExtensionValue
+import org.neo4j.spec.graph.model.extension.CustomExtensions
+import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import kotlin.js.JsExport
 
 @JsExport
@@ -35,5 +35,6 @@ data class NodeDisplay(
     @SerialDescription("Display colour of the node as a hex string, e.g. #FF8800.")
     var colour: String? = null,
     @SerialDescription("User-defined arbitrary data.")
-    override val custom: MutableMap<String, ExtensionValue> = mutableMapOf()
-) : Extensions
+    @Serializable(with = CustomMapSerializer::class)
+    override val custom: MutableMap<String, Any> = mutableMapOf()
+) : CustomExtensions

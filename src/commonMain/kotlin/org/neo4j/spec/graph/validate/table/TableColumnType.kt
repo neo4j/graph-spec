@@ -25,7 +25,7 @@ object TableColumnType : TableValidation {
         model: GraphModel,
         tableId: String,
         table: Table,
-        columnId: String,
+        columnIndex: Int,
         column: TableColumn,
         issues: MutableList<Issue>
     ) {
@@ -38,8 +38,8 @@ object TableColumnType : TableValidation {
             issues.add(
                 Issue(
                     code = "missing_table_column_type",
-                    message = "Missing suggested type for table column '$columnId'",
-                    path = "extensions.tables.$tableId.columns.$columnId.type"
+                    message = "Missing suggested type for table column '${column.name}'",
+                    path = "extensions.tables.$tableId.columns[$columnIndex].type"
                 )
             )
         }

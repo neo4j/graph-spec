@@ -4,8 +4,6 @@ import org.neo4j.spec.graph.model.relationship.extension.RelationshipConstraintE
 import org.neo4j.spec.graph.model.relationship.extension.toClass
 import org.neo4j.spec.graph.model.relationship.extension.toJs
 import org.neo4j.spec.graph.model.extension.mapping.JsMappingTest
-import org.neo4j.spec.graph.model.value.StringValue
-import org.neo4j.spec.graph.model.value.stringValueJs
 import org.neo4j.spec.graph.model.type.ConstraintType
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -16,7 +14,7 @@ class RelationshipConstraintJsTest : JsMappingTest<RelationshipConstraint, Relat
         type = ConstraintType.UNIQUE,
         properties = mutableSetOf("property_1", "property_2"),
         extensions = RelationshipConstraintExtensions(
-            mutableMapOf("key1" to StringValue("val1"))
+            mutableMapOf("key1" to "val1")
         )
     )
 
@@ -29,7 +27,7 @@ class RelationshipConstraintJsTest : JsMappingTest<RelationshipConstraint, Relat
         assertEquals(2, jsObject.properties.size)
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))
-        assertJsEquals(stringValueJs("val1"), jsObject.extensions.custom["key1"])
+        assertEquals<Any?>("val1", jsObject.extensions.custom["key1"])
     }
 
 }

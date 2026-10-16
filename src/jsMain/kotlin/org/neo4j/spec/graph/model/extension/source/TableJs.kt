@@ -20,28 +20,27 @@ import js.objects.Record
 import kotlinx.js.JsPlainObject
 import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.emptyRecord
+import org.neo4j.spec.graph.model.extension.custom.toCustomClass
+import org.neo4j.spec.graph.model.extension.custom.toCustomJs
 import org.neo4j.spec.graph.model.jso
-import org.neo4j.spec.graph.model.value.ExtensionValueJs
-import org.neo4j.spec.graph.model.value.toClass
-import org.neo4j.spec.graph.model.value.toJs
 import kotlin.String
 
 @JsExport
 @JsPlainObject
 external interface TableJs {
     var source: String
-    val columns: Record<String, TableColumnJs>
+    var columns: Array<TableColumnJs>
     var primaryKeys: Array<String>
     val foreignKeys: Record<String, ForeignKeyJs>
-    val custom: Record<String, ExtensionValueJs>
+    val custom: Record<String, Any>
 }
 
 fun tableJs(
     source: String,
-    columns: Record<String, TableColumnJs> = emptyRecord(),
+    columns: Array<TableColumnJs> = emptyArray(),
     primaryKeys: Array<String> = emptyArray(),
     foreignKeys: Record<String, ForeignKeyJs> = emptyRecord(),
-    custom: Record<String, ExtensionValueJs> = emptyRecord()
+    custom: Record<String, Any> = emptyRecord()
 ): TableJs = jso {
     this.source = source
     this.columns = columns
@@ -52,16 +51,16 @@ fun tableJs(
 
 fun Table.toJs() = tableJs(
     source = source,
-    columns = columns.associateBy { key, column -> column.toJs(key) },
+    columns = columns.map { it.toJs() }.toTypedArray(),
     primaryKeys = primaryKeys.toTypedArray(),
     foreignKeys = foreignKeys.associateBy { _, key -> key.toJs() },
-    custom = custom.associateBy { _, value -> value.toJs() }
+    custom = custom.toCustomJs()
 )
 
 fun TableJs.toClass() = Table(
     source = source,
-    columns = columns.associateBy { _, column -> column.toClass() },
+    columns = columns.map { it.toClass() }.toMutableList(),
     primaryKeys = primaryKeys.toMutableSet(),
     foreignKeys = foreignKeys.associateBy { _, fk -> fk.toClass() },
-    custom = custom.associateBy { _, value -> value.toClass() }.toMutableMap()
+    custom = custom.toCustomClass()
 )
