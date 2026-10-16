@@ -974,7 +974,7 @@ extensions:
         properties:
           relationship4_property0: { column: "creationDate" }
           relationship4_property1: { column: "deletionDate" }
-        key: ["node0_property0"]
+        key: ["relationship4_property0"]
       - type: "RELATIONSHIP"
         relationship: "relationship5"
         table: "Forum"

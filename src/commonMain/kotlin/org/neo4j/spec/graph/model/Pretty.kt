@@ -153,8 +153,6 @@ object Pretty {
             val relationship = model.relationships[mapping.relationship] ?: return@forEach
             mapping.fromNode.properties.rename(renames, relationship.from.node)
             mapping.toNode.properties.rename(renames, relationship.to.node)
-            mapping.key.rename(renames, relationship.from.node)
-            mapping.key.rename(renames, relationship.to.node)
         }
     }
 
