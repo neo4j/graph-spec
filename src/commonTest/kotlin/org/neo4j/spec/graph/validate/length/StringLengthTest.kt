@@ -44,7 +44,7 @@ class StringLengthTest {
         nodes: Map<String, Node> = emptyMap(),
         relationships: Map<String, Relationship> = emptyMap()
     ) = GraphModel(
-        version = "1.0.0",
+        version = "1",
         id = "test",
         name = name,
         description = description,

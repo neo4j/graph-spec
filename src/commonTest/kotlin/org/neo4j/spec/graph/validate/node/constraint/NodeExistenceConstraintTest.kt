@@ -29,7 +29,7 @@ class NodeExistenceConstraintTest {
 
     private val validator = NodeExistenceConstraint
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
     private val nodeDummy = Node()
 
     @Test

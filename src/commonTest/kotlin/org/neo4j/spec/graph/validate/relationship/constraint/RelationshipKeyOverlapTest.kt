@@ -31,7 +31,7 @@ class RelationshipKeyOverlapTest {
 
     private val validator = RelationshipKeyOverlap
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
     private val dummyRel = Relationship(
         type = "ACTED_IN",
         from = RelationshipTarget(),

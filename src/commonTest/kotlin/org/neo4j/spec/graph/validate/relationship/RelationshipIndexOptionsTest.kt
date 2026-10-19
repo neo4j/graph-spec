@@ -34,7 +34,7 @@ class RelationshipIndexOptionsTest {
 
     private val validator = RelationshipIndexOptions
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
     private val targetDummy = RelationshipTarget()
 
     @Test

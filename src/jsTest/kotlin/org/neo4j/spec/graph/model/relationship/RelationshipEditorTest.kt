@@ -17,7 +17,7 @@ class RelationshipEditorTest {
             id = relId
         )
         model = graphModelJs(
-            version = "1.0.0",
+            version = "1",
             id = "test",
             relationships = recordOf(relId to relationship)
         )

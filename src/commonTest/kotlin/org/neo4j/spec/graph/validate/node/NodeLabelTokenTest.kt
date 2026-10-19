@@ -28,7 +28,7 @@ class NodeLabelTokenTest {
 
     private val validator = NodeLabelToken
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
 
     @Test
     fun `pass when label token has no invalid characters`() {

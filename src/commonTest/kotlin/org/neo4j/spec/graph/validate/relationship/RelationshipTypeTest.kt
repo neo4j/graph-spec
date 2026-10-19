@@ -28,7 +28,7 @@ class RelationshipTypeTest {
 
     private val validator = RelationshipType
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
 
     @Test
     fun `pass when relationship has a valid type`() {

@@ -31,7 +31,7 @@ class NodeMappingKeyTypeTest {
 
     private val validator = NodeMappingKeyType
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
 
     @Test
     fun `pass when mapping key is STRING`() {

@@ -30,7 +30,7 @@ import kotlin.test.assertTrue
 class NodeConstraintsTest {
 
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
     private val validator = NodeConstraints
 
     @Test

@@ -29,7 +29,7 @@ class NodePropertyEmptyNameTest {
 
     private val validator = NodePropertyEmptyName
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
 
     @Test
     fun `fail when property name is blank`() {

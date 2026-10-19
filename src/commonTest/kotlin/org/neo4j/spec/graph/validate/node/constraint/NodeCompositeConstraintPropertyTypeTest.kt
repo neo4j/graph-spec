@@ -32,7 +32,7 @@ class NodeCompositeConstraintPropertyTypeTest {
 
     private val validator = NodeCompositeConstraintPropertyType
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
 
     @Test
     fun `pass when composite properties are STRING and INTEGER`() {

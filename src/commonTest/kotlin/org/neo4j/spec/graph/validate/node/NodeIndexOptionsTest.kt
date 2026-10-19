@@ -33,7 +33,7 @@ class NodeIndexOptionsTest {
 
     private val validator = NodeIndexOptions
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
 
     @Test
     fun `no options set - no issues`() {

@@ -26,7 +26,7 @@ class TableValidationTest {
     @Test
     fun `validate on empty model produces no issues`() {
         val validator = object : TableValidation {}
-        val model = GraphModel(version = "1.0.0", id = "test")
+        val model = GraphModel(version = "1", id = "test")
 
         val issues = mutableListOf<Issue>()
         validator.validate(model, issues)

@@ -28,7 +28,7 @@ import kotlin.test.assertTrue
 class NodePropertyPatternOneOfTest {
 
     private val model =
-        GraphModel(version = "1.0.0", id = "test")
+        GraphModel(version = "1", id = "test")
 
     private fun validate(property: Property): List<Issue> {
         val node = Node(labels = Labels(identifier = "Person"), properties = mutableMapOf("p:1" to property))
