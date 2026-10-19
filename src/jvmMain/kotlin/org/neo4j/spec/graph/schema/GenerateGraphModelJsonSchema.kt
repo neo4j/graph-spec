@@ -36,7 +36,7 @@ import org.neo4j.spec.graph.model.Version
  */
 fun main(args: Array<String>) {
     val out =
-        File(args.firstOrNull()?.takeIf { it.isNotEmpty() } ?: "go/spec.json").absoluteFile
+        File(args.firstOrNull()?.takeIf { it.isNotEmpty() } ?: "ontology-graph-spec.schema.json").absoluteFile
     out.parentFile?.mkdirs()
     val json = Json { prettyPrint = true }
     val generator = SerializationClassJsonSchemaGenerator(jsonSchemaConfig = JsonSchemaConfig.Default)
