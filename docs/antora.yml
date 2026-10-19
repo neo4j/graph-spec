@@ -1,0 +1,8 @@
+name: ontology-graph-spec
+title: Neo4j Ontology Graph Specification
+version: ~ # versionless component — keep this key: Antora aborts if it is omitted
+start_page: ROOT:index.adoc
+nav:
+- modules/ROOT/content-nav.adoc
+asciidoc:
+  attributes:

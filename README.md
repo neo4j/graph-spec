@@ -121,6 +121,19 @@ go get github.com/neo4j/graph-spec/go@vX.Y.Z
 The Go library bundles the Kotlin/Native library, which is embedded and loaded automatically. The runtime needs
 `glibc` and `libstdc++`. See the [Go README](go/README.md) for details, including running without embedding.
 
+## Documentation
+
+The docs live in `docs/` as an Antora site. To build and preview them locally:
+
+```bash
+cd docs
+npm install
+npm start
+```
+
+This builds the site and serves it at http://localhost:8000, rebuilding and restarting the server on changes.
+Use `npm run build:preview` to build without serving, or `npm run serve` to serve an existing build.
+
 ## Repository layout
 
 | Path | Contents |
