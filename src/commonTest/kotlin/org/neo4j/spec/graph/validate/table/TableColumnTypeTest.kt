@@ -29,7 +29,7 @@ class TableColumnTypeTest {
 
     private val validator = TableColumnType
     private val model =
-        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", version = "1.0.0", id = "test")
+        GraphModel(version = "1.0.0", id = "test")
 
     @Test
     fun `fail on cloud column with empty supported types`() {

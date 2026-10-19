@@ -31,7 +31,7 @@ class RelationshipConstraintsTest {
 
     private val validator = RelationshipConstraints
     private val model =
-        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", version = "1.0.0", id = "test")
+        GraphModel(version = "1.0.0", id = "test")
     private val targetDummy = RelationshipTarget()
 
     @Test

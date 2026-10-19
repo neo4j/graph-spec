@@ -46,7 +46,6 @@ class CustomMapSerializerTest {
     )
 
     private fun model(custom: MutableMap<String, Any>) = GraphModel(
-        schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
         version = "1",
         id = "test",
         extensions = GraphModelExtensions(custom = custom)

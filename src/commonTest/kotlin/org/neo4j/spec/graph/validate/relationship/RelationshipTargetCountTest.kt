@@ -29,7 +29,7 @@ class RelationshipTargetCountTest {
     private fun validate(from: RelationshipTarget, to: RelationshipTarget = RelationshipTarget()): List<Issue> {
         val issues = mutableListOf<Issue>()
         RelationshipTargetCount.validateRelationship(
-            GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", version = "1.0.0", id = "test"),
+            GraphModel(version = "1.0.0", id = "test"),
             "rel",
             Relationship(type = "REL", from = from, to = to),
             issues

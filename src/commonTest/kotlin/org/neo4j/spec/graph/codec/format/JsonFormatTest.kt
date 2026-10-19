@@ -111,7 +111,6 @@ class JsonFormatTest {
     @Test
     fun `test empty collections round-trip`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
             version = "1.0",
             id = "test",
             nodes = mutableMapOf(),
@@ -139,7 +138,6 @@ class JsonFormatTest {
         )
         val model =
             GraphModel(
-                schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
                 version = "1",
                 id = "test",
                 nodes = mutableMapOf("n1" to node)
@@ -164,7 +162,6 @@ class JsonFormatTest {
     @Test
     fun `test polymorphic Mapping serialization round-trips through explicit type discriminator`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
             version = "1",
             id = "test",
             extensions = GraphModelExtensions(
@@ -199,7 +196,6 @@ class JsonFormatTest {
     @Test
     fun `test IndexOption with every field left at its default still round-trips`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
             version = "1",
             id = "test",
             nodes = mutableMapOf(

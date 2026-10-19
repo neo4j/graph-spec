@@ -36,7 +36,7 @@ external interface GraphModelJs {
 }
 
 fun graphModelJs(
-    schema: String,
+    schema: String = Version.schemaUrl(Version.LATEST),
     version: String,
     id: String,
     name: String = "",

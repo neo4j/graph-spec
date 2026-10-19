@@ -28,7 +28,7 @@ import kotlin.test.assertTrue
 class RelationshipPropertyPatternOneOfTest {
 
     private val model =
-        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", version = "1.0.0", id = "test")
+        GraphModel(version = "1.0.0", id = "test")
 
     private fun validate(property: Property): List<Issue> {
         val relationship = Relationship(

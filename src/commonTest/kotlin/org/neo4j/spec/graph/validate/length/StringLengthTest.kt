@@ -44,7 +44,6 @@ class StringLengthTest {
         nodes: Map<String, Node> = emptyMap(),
         relationships: Map<String, Relationship> = emptyMap()
     ) = GraphModel(
-        schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
         version = "1.0.0",
         id = "test",
         name = name,
