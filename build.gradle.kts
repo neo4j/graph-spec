@@ -25,12 +25,12 @@ kotlin {
         binaries.library()
         compilations.named("main") {
             packageJson {
-                name = "@neo4j-importer/graph-spec"
+                name = "@neo4j/ontology-graph-spec"
                 customField(
                     "repository",
                     mapOf(
                         "type" to "git",
-                        "url" to "https://github.com/neo4j/graph-spec"
+                        "url" to "https://github.com/neo4j/ontology-graph-spec"
                     )
                 )
             }

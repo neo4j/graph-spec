@@ -103,11 +103,11 @@ implementation("org.neo4j.spec.graph:ontology-graph-spec:x.y.z")
 ### npm
 
 ```bash
-npm install -D @neo4j-importer/graph-spec
+npm install -D @neo4j/ontology-graph-spec
 ```
 
 ```typescript
-import { GraphSpec } from "@neo4j-importer/graph-spec";
+import { GraphSpec } from "@neo4j/ontology-graph-spec";
 
 const model: GraphModel = GraphSpec.Json.decodeFromString(value);
 ```
