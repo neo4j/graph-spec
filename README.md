@@ -37,7 +37,7 @@ const model: GraphModel = GraphSpec.Json.decodeFromString(value);
 ### Go
 
 ```bash
-go get github.com/neo4j/graph-spec/go/vX@vX.Y.Z
+go get github.com/neo4j/graph-spec/go@vX.Y.Z
 ```
 
 > [!NOTE]
