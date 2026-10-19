@@ -13,7 +13,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/neo4j/graph-spec/tools/schema-generator/internal/generator"
+	"github.com/neo4j/ontology-graph-spec/tools/schema-generator/internal/generator"
 )
 
 func main() {
