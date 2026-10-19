@@ -28,7 +28,7 @@ class NodeLabelTest {
 
     private val validator = NodeLabel
     private val model =
-        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", version = "1.0.0", id = "test")
+        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", version = "1.0.0", id = "test")
 
     @Test
     fun `pass when node has a valid identifier label`() {

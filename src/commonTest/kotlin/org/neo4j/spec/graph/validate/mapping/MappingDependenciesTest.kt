@@ -45,7 +45,7 @@ class MappingDependenciesTest {
         QueryMapping(table = "t", query = "RETURN 1", id = id, dependsOn = dependsOn)
 
     private fun validateLists(vararg lists: Pair<String, List<Mapping>>): List<Issue> {
-        val model = GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", version = "1.0.0", id = "test")
+        val model = GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", version = "1.0.0", id = "test")
         lists.forEach { (id, mappings) -> model.extensions.mappings[id] = mappings.toMutableList() }
         val issues = mutableListOf<Issue>()
         MappingDependencies.validate(model, issues)

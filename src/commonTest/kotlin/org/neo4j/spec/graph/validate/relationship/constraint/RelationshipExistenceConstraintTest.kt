@@ -30,7 +30,7 @@ class RelationshipExistenceConstraintTest {
 
     private val validator = RelationshipExistenceConstraint
     private val model =
-        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", version = "1.0.0", id = "test")
+        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", version = "1.0.0", id = "test")
     private val relationshipDummy = Relationship(
         type = "ACTED_IN",
         from = RelationshipTarget(),

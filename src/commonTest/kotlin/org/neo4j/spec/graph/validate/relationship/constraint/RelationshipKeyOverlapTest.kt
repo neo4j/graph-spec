@@ -31,7 +31,7 @@ class RelationshipKeyOverlapTest {
 
     private val validator = RelationshipKeyOverlap
     private val model =
-        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", version = "1.0.0", id = "test")
+        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", version = "1.0.0", id = "test")
     private val dummyRel = Relationship(
         type = "ACTED_IN",
         from = RelationshipTarget(),
