@@ -46,7 +46,7 @@ class CustomMapSerializerTest {
     )
 
     private fun model(custom: MutableMap<String, Any>) = GraphModel(
-        schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
+        schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json",
         version = "1",
         id = "test",
         extensions = GraphModelExtensions(custom = custom)
@@ -76,7 +76,7 @@ class CustomMapSerializerTest {
     @Test
     fun `yaml distinguishes quoted and unquoted scalars`() {
         val yaml = """
-            schema: "https://neo4j.com/ontology-graph-spec/4.0.0/"
+            schema: "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json"
             version: "1"
             id: "test"
             extensions:
@@ -134,7 +134,7 @@ class CustomMapSerializerTest {
     @Test
     fun `null value fails to decode`() {
         val json = """
-            {"schema": "https://neo4j.com/ontology-graph-spec/4.0.0/", "version": "1", "id": "test",
+            {"schema": "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", "version": "1", "id": "test",
              "extensions": {"custom": {"a": null}}}
         """.trimIndent()
         assertFailsWith<SerializationException> {
@@ -164,7 +164,7 @@ class CustomMapSerializerTest {
     fun `deeply nested values fail to decode`() {
         val depth = MAX_CUSTOM_DEPTH * 4
         val json = """
-            {"schema": "https://neo4j.com/ontology-graph-spec/4.0.0/", "version": "1", "id": "test",
+            {"schema": "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", "version": "1", "id": "test",
              "extensions": {"custom": {"a": ${"[".repeat(depth)}${"]".repeat(depth)}}}}
         """.trimIndent()
         assertFailsWith<SerializationException> {

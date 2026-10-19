@@ -61,7 +61,7 @@ class CustomExtensionsTest {
         extensions.setSerializable("section", "point", Point(1, 2.5))
         val format = JsonFormat.default
         val model = GraphModel(
-            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json",
             version = "1",
             id = "test",
             extensions = extensions
@@ -133,7 +133,7 @@ class CustomExtensionsTest {
         extensions.setSerializable("point", Point(1, 2.5))
         val format = JsonFormat.default
         val model = GraphModel(
-            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
+            schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json",
             version = "1",
             id = "test",
             extensions = extensions

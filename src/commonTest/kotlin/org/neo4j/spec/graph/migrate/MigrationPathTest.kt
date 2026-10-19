@@ -121,7 +121,7 @@ class MigrationPathTest {
 
         val result = engine.migrate(schema, Type.GRAPH_SPEC, "4.1.0", Type.GRAPH_SPEC)
 
-        assertEquals("https://neo4j.com/ontology-graph-spec/4.1.0/", result.stringOrNull("schema"))
+        assertEquals("https://neo4j.com/docs/ontology-graph-spec/4.1.0/schema.json", result.stringOrNull("schema"))
         assertEquals("my-doc-7", result.stringOrNull("version"))
     }
 
@@ -146,7 +146,7 @@ class MigrationPathTest {
 
         val result = engine.migrate(schema, Type.DATA_MODEL, "4.0.0", Type.GRAPH_SPEC)
 
-        assertEquals("https://neo4j.com/ontology-graph-spec/4.0.0/", result.stringOrNull("schema"))
+        assertEquals("https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", result.stringOrNull("schema"))
         assertEquals("3.0.0", result.stringOrNull("version")) // Real migrations replace this themselves
     }
 
@@ -154,7 +154,7 @@ class MigrationPathTest {
     fun `migrate - graph spec to legacy type sets version`() {
         val engine = createPath(TestMigration("4.0.0", "3.0.0", Type.GRAPH_SPEC, Type.DATA_MODEL))
         val schema = SchemaMap()
-        schema["schema"] = "https://neo4j.com/ontology-graph-spec/4.0.0/"
+        schema["schema"] = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json"
 
         val result = engine.migrate(schema, Type.GRAPH_SPEC, "3.0.0", Type.DATA_MODEL)
 

@@ -28,7 +28,7 @@ import kotlin.test.assertTrue
 class NodePropertyPatternOneOfTest {
 
     private val model =
-        GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test")
+        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", version = "1.0.0", id = "test")
 
     private fun validate(property: Property): List<Issue> {
         val node = Node(labels = Labels(identifier = "Person"), properties = mutableMapOf("p:1" to property))

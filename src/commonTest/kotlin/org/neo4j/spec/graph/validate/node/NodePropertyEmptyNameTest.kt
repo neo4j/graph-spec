@@ -29,7 +29,7 @@ class NodePropertyEmptyNameTest {
 
     private val validator = NodePropertyEmptyName
     private val model =
-        GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test")
+        GraphModel(schema = "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json", version = "1.0.0", id = "test")
 
     @Test
     fun `fail when property name is blank`() {

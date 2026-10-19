@@ -34,7 +34,7 @@ class ValidationTest {
     @Test
     fun testValidate() {
         val input = """{
-            "schema": "https://neo4j.com/ontology-graph-spec/4.0.0/",
+            "schema": "https://neo4j.com/docs/ontology-graph-spec/4.0.0/schema.json",
             "version": "1.0.0",
             "id": "test",
             "nodes": {
