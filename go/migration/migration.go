@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/neo4j/graph-spec/go/internal/bridge"
-	"github.com/neo4j/graph-spec/go/model"
+	"github.com/neo4j/ontology-graph-spec/go/internal/bridge"
+	"github.com/neo4j/ontology-graph-spec/go/model"
 )
 
 type ModelType string

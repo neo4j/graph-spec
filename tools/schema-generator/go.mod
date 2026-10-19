@@ -1,4 +1,4 @@
-module github.com/neo4j/graph-spec/tools/schema-generator
+module github.com/neo4j/ontology-graph-spec/tools/schema-generator
 
 go 1.25.6
 

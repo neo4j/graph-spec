@@ -16,7 +16,7 @@ This library can be imported into your Go project via the standard `go get`:
 git config --global url."git@github.com:".insteadOf "https://github.com/" 
 
 # Fetch Go library
-go get github.com/neo4j/graph-spec/go@vX.Y.Z
+go get github.com/neo4j/ontology-graph-spec/go@vX.Y.Z
 ```
 
 > [!NOTE]
