@@ -17,7 +17,7 @@ For Neo4j, that is the **graph model** behind a graph, written down explicitly:
 | Attribute | Property, with a type |
 | Rule | Constraints (uniqueness, existence, keys) and indexes |
 
-For example, "an `Actor` has an `id` and a `name`, and can `ACTED_IN` a `Movie`" is a small ontology.
+For example, "an `Actor` has an `id` and a `name`, and can have an `ACTED_IN` relationship to a `Movie`", forms a small ontology.
 
 Neo4j is schema-optional, so a graph's model often lives only in people's heads, import scripts or diagrams. A
 machine-readable ontology gives tools and people one shared source of truth for designing models, importing data into
