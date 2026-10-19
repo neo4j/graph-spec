@@ -77,7 +77,7 @@ class End2EndMigrationTest {
     }
 
     @TestFactory
-    fun `decoding a graph-spec model without a schema defaults to the latest schema`() = mapOf(
+    fun `decoding a graph-spec model without a schema fails`() = mapOf(
         GraphSpec.Json to """{"version":"1","id":"test"}""",
         GraphSpec.Yaml to """
             version: "1"
@@ -85,9 +85,11 @@ class End2EndMigrationTest {
         """.trimIndent(),
     ).map { (graphSpec, input) ->
         dynamicTest(graphSpec.configuration.format.javaClass.toString()) {
-            val model = graphSpec.decodeFromString(input, Type.GRAPH_SPEC)
+            val failure = assertFailsWith<Exception> {
+                graphSpec.decodeFromString(input, Type.GRAPH_SPEC)
+            }
 
-            assertEquals(Version.schemaUrl(Version.LATEST), model.schema)
+            assertTrue(failure.message!!.contains("schema"), "unexpected message: ${failure.message}")
         }
     }
 

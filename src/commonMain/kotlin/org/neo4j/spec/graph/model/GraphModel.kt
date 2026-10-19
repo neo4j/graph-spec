@@ -17,8 +17,7 @@
 package org.neo4j.spec.graph.model
 
 import kotlinx.schema.generator.json.SerialDescription
-import kotlinx.serialization.EncodeDefault
-import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -31,13 +30,12 @@ import org.neo4j.spec.graph.validate.ValidationTree
 import kotlin.js.JsExport
 import kotlin.js.JsStatic
 
-@OptIn(ExperimentalSerializationApi::class)
 @JsExport
 @Serializable
 @SerialName("GraphModel")
 data class GraphModel(
     @SerialDescription("Schema specification uri used.")
-    @EncodeDefault
+    @Required
     val schema: String = Version.schemaUrl(Version.LATEST),
     @SerialDescription(
         "User-defined version of this model document, e.g. a revision number or label."
