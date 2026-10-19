@@ -1,4 +1,4 @@
-module github.com/neo4j/graph-spec/go
+module github.com/neo4j/ontology-graph-spec/go
 
 go 1.25.6
 

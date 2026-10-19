@@ -87,15 +87,15 @@ including extensions.
 ### Gradle
 
 ```gradle
-implementation("org.neo4j.importer:graph-spec:x.y.z")
+implementation("org.neo4j.spec.graph:ontology-graph-spec:x.y.z")
 ```
 
 ### Maven
 
 ```xml
 <dependency>
-    <groupId>org.neo4j.importer</groupId>
-    <artifactId>graph-spec</artifactId>
+    <groupId>org.neo4j.spec.graph</groupId>
+    <artifactId>ontology-graph-spec</artifactId>
     <version>x.y.z</version>
 </dependency>
 ```
@@ -103,11 +103,11 @@ implementation("org.neo4j.importer:graph-spec:x.y.z")
 ### npm
 
 ```bash
-npm install -D @neo4j-importer/graph-spec
+npm install -D @neo4j/ontology-graph-spec
 ```
 
 ```typescript
-import { GraphSpec } from "@neo4j-importer/graph-spec";
+import { GraphSpec } from "@neo4j/ontology-graph-spec";
 
 const model: GraphModel = GraphSpec.Json.decodeFromString(value);
 ```
@@ -115,7 +115,7 @@ const model: GraphModel = GraphSpec.Json.decodeFromString(value);
 ### Go
 
 ```bash
-go get github.com/neo4j/graph-spec/go@vX.Y.Z
+go get github.com/neo4j/ontology-graph-spec/go@vX.Y.Z
 ```
 
 The Go library bundles the Kotlin/Native library, which is embedded and loaded automatically. The runtime needs

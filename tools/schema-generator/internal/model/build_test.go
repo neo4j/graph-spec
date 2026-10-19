@@ -3,11 +3,11 @@ package model_test
 import (
 	"testing"
 
-	"github.com/neo4j/graph-spec/tools/schema-generator/internal/model"
+	"github.com/neo4j/ontology-graph-spec/tools/schema-generator/internal/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/neo4j/graph-spec/tools/schema-generator/internal/schema"
+	"github.com/neo4j/ontology-graph-spec/tools/schema-generator/internal/schema"
 )
 
 func TestBuild(t *testing.T) {

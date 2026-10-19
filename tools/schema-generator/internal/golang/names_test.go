@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/neo4j/graph-spec/tools/schema-generator/internal/model"
+	"github.com/neo4j/ontology-graph-spec/tools/schema-generator/internal/model"
 )
 
 func TestValidTagName(t *testing.T) {
