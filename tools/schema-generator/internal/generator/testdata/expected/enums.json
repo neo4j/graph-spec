@@ -1,0 +1,22 @@
+{
+  "title": "Palette",
+  "type": "object",
+  "properties": {
+    "primary": { "$ref": "#/$defs/Colour" },
+    "secondary": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Colour" }] },
+    "history": { "type": "array", "items": { "$ref": "#/$defs/DataType" } }
+  },
+  "required": ["primary", "secondary"],
+  "additionalProperties": false,
+  "$defs": {
+    "Colour": {
+      "description": "A primary colour.",
+      "type": "string",
+      "enum": ["RED", "GREEN", "BLUE"]
+    },
+    "DataType": {
+      "type": "string",
+      "enum": ["LIST<STRING>", "LOCAL DATETIME", "kebab-case", "snake_case", "camelCase", "user.id", "http-url", "3d"]
+    }
+  }
+}

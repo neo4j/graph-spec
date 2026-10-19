@@ -1,0 +1,29 @@
+{
+  "title": "Profile",
+  "type": "object",
+  "properties": {
+    "typeArray": { "type": ["string", "null"] },
+    "nullableRef": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Address" }] },
+    "optionalNullable": { "type": ["boolean", "null"] },
+    "nullableItems": { "type": "array", "items": { "type": ["string", "null"] } },
+    "nullableValues": {
+      "type": "object",
+      "additionalProperties": { "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/Address" }] }
+    },
+    "nullableList": { "type": ["array", "null"], "items": { "type": "string" } },
+    "nullableMap": { "type": ["object", "null"], "additionalProperties": { "type": "integer" } },
+    "anything": {}
+  },
+  "required": [
+    "typeArray", "nullableRef", "nullableItems", "nullableValues", "nullableList", "nullableMap", "anything"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Address": {
+      "type": "object",
+      "properties": { "street": { "type": "string" } },
+      "required": ["street"],
+      "additionalProperties": false
+    }
+  }
+}
