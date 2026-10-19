@@ -1,5 +1,5 @@
 {
-  "schema": "https://neo4j.com/ontology-graph-spec/1.0.0/",
+  "schema": "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
   "version": "1.0.0",
   "id": "accounts-using-cols-2",
   "description": "This model is valid for graph engine but not for import, because the Account node id is a column which does not have a corresponding property",
@@ -26,41 +26,43 @@
     }
   },
   "extensions": {
-    "mappings": [
-      {
-        "type": "NODE",
-        "node": "Account",
-        "table": "accounts",
-        "properties": {
-          "name": {
-            "column": "name"
-          }
+    "mappings": {
+      "mapping0": [
+        {
+          "type": "NODE",
+          "node": "Account",
+          "table": "accounts",
+          "properties": {
+            "name": {
+              "column": "name"
+            }
+          },
+          "key_columns": [
+            "id"
+          ]
         },
-        "keyColumns": [
-          "id"
-        ]
-      },
-      {
-        "type": "RELATIONSHIP",
-        "relationship": "TRANSACTION",
-        "table": "transactions",
-        "from_node": [
-          {
-            "nodeKeyColumn": "id",
-            "relationshipColumn": "from_id"
-          }
-        ],
-        "to_node": [
-          {
-            "nodeKeyColumn": "id",
-            "relationshipColumn": "to_id"
-          }
-        ],
-        "properties": {},
-        "keyColumns": [
-          "id"
-        ]
-      }
-    ]
+        {
+          "type": "RELATIONSHIP",
+          "relationship": "TRANSACTION",
+          "table": "transactions",
+          "from_node": [
+            {
+              "node_key_column": "id",
+              "relationship_column": "from_id"
+            }
+          ],
+          "to_node": [
+            {
+              "node_key_column": "id",
+              "relationship_column": "to_id"
+            }
+          ],
+          "properties": {},
+          "key_columns": [
+            "id"
+          ]
+        }
+      ]
+    }
   }
 }

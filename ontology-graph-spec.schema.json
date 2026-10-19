@@ -1076,14 +1076,14 @@
                     ],
                     "description": "Label used to match existing nodes."
                 },
-                "keyProperties": {
+                "key_properties": {
                     "type": "array",
                     "description": "Ids of the properties which identify a node.",
                     "items": {
                         "type": "string"
                     }
                 },
-                "keyColumns": {
+                "key_columns": {
                     "type": "array",
                     "description": "Names of the table columns which identify a node.",
                     "items": {
@@ -1209,14 +1209,14 @@
                     "$ref": "#/$defs/MappingMode",
                     "description": "Whether relationships are merged with existing relationships or always created."
                 },
-                "keyProperties": {
+                "key_properties": {
                     "type": "array",
                     "description": "Ids of the properties which identify a relationship.",
                     "items": {
                         "type": "string"
                     }
                 },
-                "keyColumns": {
+                "key_columns": {
                     "type": "array",
                     "description": "Names of the table columns which identify a relationship.",
                     "items": {
@@ -1245,15 +1245,15 @@
             "type": "object",
             "description": "Maps a node key to a relationship column.",
             "properties": {
-                "nodeKeyProperty": {
+                "node_key_property": {
                     "type": "string",
                     "description": "Id of key property of the node."
                 },
-                "nodeKeyColumn": {
+                "node_key_column": {
                     "type": "string",
                     "description": "Name of key column of the node."
                 },
-                "relationshipColumn": {
+                "relationship_column": {
                     "type": "string",
                     "description": "Name of key column of the relationship."
                 }

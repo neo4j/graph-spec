@@ -1,5 +1,5 @@
 {
-  "schema": "https://neo4j.com/ontology-graph-spec/1.0.0/",
+  "schema": "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
   "version": "1.0.0",
   "id": "accounts-using-props",
   "description": "This model corresponds to the graph engine model here: https://github.com/neo-technology/ge-test-data/blob/main/fraud-detection-training/fraud-mono.json. This model is an example that could in the future be used in an API. This model would not be sufficient for use in the UI - it would additionally need a `tables` section to define the SQL/snowflake/etc source tables, columns & types for display in the UI.",
@@ -42,57 +42,59 @@
     }
   },
   "extensions": {
-    "mappings": [
-      {
-        "type": "NODE",
-        "node": "Account",
-        "table": "accounts",
-        "properties": {
-          "email": {
-            "column": "email"
+    "mappings": {
+      "mapping0": [
+        {
+          "type": "NODE",
+          "node": "Account",
+          "table": "accounts",
+          "properties": {
+            "email": {
+              "column": "email"
+            },
+            "name": {
+              "column": "name"
+            },
+            "a_id": {
+              "column": "id"
+            }
           },
-          "name": {
-            "column": "name"
-          },
-          "a_id": {
-            "column": "id"
-          }
+          "key_properties": [
+            "a_id"
+          ]
         },
-        "keyProperties": [
-          "a_id"
-        ]
-      },
-      {
-        "type": "RELATIONSHIP",
-        "relationship": "TRANSACTION",
-        "table": "transactions",
-        "from_node": [
-          {
-            "nodeKeyProperty": "a_id",
-            "relationshipColumn": "to_id"
-          }
-        ],
-        "to_node": [
-          {
-            "nodeKeyProperty": "a_id",
-            "relationshipColumn": "from_id"
-          }
-        ],
-        "properties": {
-          "tx_id": {
-            "column": "id"
+        {
+          "type": "RELATIONSHIP",
+          "relationship": "TRANSACTION",
+          "table": "transactions",
+          "from_node": [
+            {
+              "node_key_property": "a_id",
+              "relationship_column": "to_id"
+            }
+          ],
+          "to_node": [
+            {
+              "node_key_property": "a_id",
+              "relationship_column": "from_id"
+            }
+          ],
+          "properties": {
+            "tx_id": {
+              "column": "id"
+            },
+            "date": {
+              "column": "created_at"
+            },
+            "amount": {
+              "column": "amount"
+            }
           },
-          "date": {
-            "column": "created_at"
-          },
-          "amount": {
-            "column": "amount"
-          }
-        },
-        "keyProperties": [
-          "tx_id"
-        ]
-      }
-    ]
+          "key_properties": [
+            "tx_id"
+          ]
+        }
+      ]
+    }
   }
 }
