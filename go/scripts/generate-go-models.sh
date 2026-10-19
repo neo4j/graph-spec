@@ -5,7 +5,7 @@ set -euo pipefail
 REPO_ROOT=$(git rev-parse --show-toplevel)
 cd "$REPO_ROOT"
 
-INPUT_SPEC="spec.json"
+INPUT_SPEC="$REPO_ROOT/ontology-graph-spec.schema.json"
 TEMP_SPEC="spec-sanitised.json"
 OUTPUT_PACKAGE="model"
 OUTPUT_FILE="model"

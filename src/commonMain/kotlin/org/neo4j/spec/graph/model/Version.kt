@@ -37,17 +37,19 @@ object Version {
     /*
         Graph spec versions
      */
-    const val LATEST = "4.0.0"
+    const val LATEST = "1.0.0"
 
     /*
-        Schema urls, the spec version is always the last path segment.
+        Schema urls, the spec version is always the path segment before schema.json.
      */
-    const val SCHEMA_BASE = "https://neo4j.com/ontology-graph-spec/"
+    const val SCHEMA_BASE = "https://neo4j.com/docs/ontology-graph-spec/"
 
-    fun schemaUrl(version: String): String = "$SCHEMA_BASE$version/"
+    const val SCHEMA_FILE = "schema.json"
+
+    fun schemaUrl(version: String): String = "$SCHEMA_BASE$version/$SCHEMA_FILE"
 
     fun parseSchemaVersion(schema: String): String {
-        val version = schema.trim().trimEnd('/').substringAfterLast('/')
+        val version = schema.trim().trimEnd('/').removeSuffix(SCHEMA_FILE).trimEnd('/').substringAfterLast('/')
         require(version.isNotBlank()) { "Unable to determine version from schema '$schema'" }
         return version
     }

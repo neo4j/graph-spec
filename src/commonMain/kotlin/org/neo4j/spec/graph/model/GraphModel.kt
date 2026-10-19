@@ -17,6 +17,7 @@
 package org.neo4j.spec.graph.model
 
 import kotlinx.schema.generator.json.SerialDescription
+import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -34,8 +35,11 @@ import kotlin.js.JsStatic
 @SerialName("GraphModel")
 data class GraphModel(
     @SerialDescription("Schema specification uri used.")
-    val schema: String,
-    @SerialDescription("Version of the document.")
+    @Required
+    val schema: String = Version.schemaUrl(Version.LATEST),
+    @SerialDescription(
+        "User-defined version of this model document, e.g. a revision number or label."
+    )
     val version: String,
     @SerialDescription(
         "Unique identifier of the model, typically a kebab-case version of the name, used for referencing."

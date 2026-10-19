@@ -32,8 +32,7 @@ class RelationshipNodesTest {
     @Test
     fun `both source and target nodes exist`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
-            version = "1.0.0",
+            version = "1",
             id = "test"
         ).apply {
             nodes["Person"] = Node()
@@ -53,7 +52,7 @@ class RelationshipNodesTest {
 
     @Test
     fun `source and target node identifiers are blank`() {
-        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test")
+        val model = GraphModel(version = "1", id = "test")
         val relationship = Relationship(
             type = "ACTED_IN",
             from = RelationshipTarget(""),
@@ -69,8 +68,7 @@ class RelationshipNodesTest {
     @Test
     fun `from node does not exist`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
-            version = "1.0.0",
+            version = "1",
             id = "test"
         ).apply {
             nodes["Movie"] = Node() // Only 'to' node exists
@@ -94,8 +92,7 @@ class RelationshipNodesTest {
     @Test
     fun `to node does not exist`() {
         val model = GraphModel(
-            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
-            version = "1.0.0",
+            version = "1",
             id = "test"
         ).apply {
             nodes["Person"] = Node() // Only 'from' node exists
@@ -119,7 +116,7 @@ class RelationshipNodesTest {
 
     @Test
     fun `neither node exists`() {
-        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test")
+        val model = GraphModel(version = "1", id = "test")
         val relationship = Relationship(
             type = "ACTED_IN",
             from = RelationshipTarget("Person"),

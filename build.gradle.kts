@@ -143,7 +143,7 @@ tasks.register<JavaExec>("generateGraphModelJsonSchema") {
     mainClass.set("org.neo4j.spec.graph.schema.GenerateGraphModelJsonSchemaKt")
     workingDir = layout.projectDirectory.asFile
     doFirst {
-        val outputFile = layout.projectDirectory.file("go/spec.json").asFile
+        val outputFile = layout.projectDirectory.file("ontology-graph-spec.schema.json").asFile
         outputFile.parentFile.mkdirs()
         args(outputFile.absolutePath)
     }

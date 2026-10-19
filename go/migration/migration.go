@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/neo4j/graph-spec/go/v4/internal/bridge"
-	"github.com/neo4j/graph-spec/go/v4/model"
+	"github.com/neo4j/graph-spec/go/internal/bridge"
+	"github.com/neo4j/graph-spec/go/model"
 )
 
 type ModelType string
@@ -17,7 +17,7 @@ const (
 	ModelTypeImportSpec       ModelType = "import_spec"
 	ModelTypeGraphSpec        ModelType = "graph_spec"
 
-	ModelVersionGraphSpecLatest ModelVersion = "4.0.0"
+	ModelVersionGraphSpecLatest ModelVersion = "1.0.0"
 	ModelVersionDataModelV23    ModelVersion = "2.3.0"
 	ModelVersionDataModelV24    ModelVersion = "2.4.0"
 	ModelVersionDataModelV30    ModelVersion = "3.0.0"

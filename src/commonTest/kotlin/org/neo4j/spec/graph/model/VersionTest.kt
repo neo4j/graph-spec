@@ -24,7 +24,7 @@ class VersionTest {
 
     @Test
     fun `schema url round trips`() {
-        assertEquals("https://neo4j.com/ontology-graph-spec/4.0.0/", Version.schemaUrl("4.0.0"))
+        assertEquals("https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json", Version.schemaUrl("1.0.0"))
         assertEquals("4.0.0", Version.parseSchemaVersion(Version.schemaUrl("4.0.0")))
     }
 

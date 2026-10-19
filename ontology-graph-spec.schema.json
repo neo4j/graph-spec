@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://neo4j.com/ontology-graph-spec/4.0.0/",
+    "$id": "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
     "title": "GraphModel",
     "type": "object",
     "properties": {
@@ -10,7 +10,7 @@
         },
         "version": {
             "type": "string",
-            "description": "Version of the document."
+            "description": "User-defined version of this model document, e.g. a revision number or label."
         },
         "id": {
             "type": "string",

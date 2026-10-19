@@ -57,10 +57,10 @@ class End2EndMigrationTest {
 
     @TestFactory
     fun `decoding a graph-spec model with an unsupported version fails`() = mapOf(
-        GraphSpec.Json to """{"schema":"https://neo4j.com/ontology-graph-spec/3.0.0/","version":"1.0.0","id":"test"}""",
+        GraphSpec.Json to """{"schema":"https://neo4j.com/docs/ontology-graph-spec/3.0.0/schema.json","version":"1","id":"test"}""",
         GraphSpec.Yaml to """
-            schema: "https://neo4j.com/ontology-graph-spec/3.0.0/"
-            version: "1.0.0"
+            schema: "https://neo4j.com/docs/ontology-graph-spec/3.0.0/schema.json"
+            version: "1"
             id: "test"
         """.trimIndent(),
     ).map { (graphSpec, input) ->
@@ -70,7 +70,7 @@ class End2EndMigrationTest {
             }
 
             assertTrue(
-                failure.message!!.contains("Unsupported migration from graph_spec:3.0.0 to graph_spec:4.0.0"),
+                failure.message!!.contains("Unsupported migration from graph_spec:3.0.0 to graph_spec:1.0.0"),
                 "unexpected message: ${failure.message}"
             )
         }
@@ -78,8 +78,11 @@ class End2EndMigrationTest {
 
     @TestFactory
     fun `decoding a graph-spec model without a schema fails`() = mapOf(
-        GraphSpec.Json to """{"version":"4.0.0"}""",
-        GraphSpec.Yaml to """version: "4.0.0"""",
+        GraphSpec.Json to """{"version":"1","id":"test"}""",
+        GraphSpec.Yaml to """
+            version: "1"
+            id: "test"
+        """.trimIndent(),
     ).map { (graphSpec, input) ->
         dynamicTest(graphSpec.configuration.format.javaClass.toString()) {
             val failure = assertFailsWith<Exception> {

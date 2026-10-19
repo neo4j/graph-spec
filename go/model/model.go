@@ -691,6 +691,6 @@ type GraphModel struct {
 	Relationships map[string]Relationship `json:"relationships,omitempty"`
 	// Schema specification uri used.
 	Schema string `json:"schema"`
-	// Version of the document.
+	// User-defined version of this model document, e.g. a revision number or label.
 	Version string `json:"version"`
 }

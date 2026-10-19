@@ -26,8 +26,7 @@ class JsEdgeCaseTests {
     @Test
     fun `encodeToString should handle LIST<STRING>`() {
         val plainSpec = graphModelJs(
-            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
-            version = "4.0.0",
+            version = "1",
             id = "test",
             nodes = recordOf(
                 "n:1" to nodeJs(
@@ -59,8 +58,7 @@ class JsEdgeCaseTests {
     @Test
     fun `encodeToString shouldn't drop fields`() {
         val graphSpec = GraphModel(
-            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
-            version = "4.0.0",
+            version = "1",
             id = "test",
             nodes = mutableMapOf(
                 "PersonNode" to Node(
@@ -87,8 +85,7 @@ class JsEdgeCaseTests {
     @Test
     fun `encodeToString should be able to encode a graph spec that is using shorthand label syntax to data_model`() {
         val graphSpec = GraphModel(
-            schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
-            version = "4.0.0",
+            version = "1",
             id = "test",
             nodes = mutableMapOf(
                 "Person" to Node(

@@ -70,7 +70,7 @@ class NodeIndexConstraintNameConflictTest {
     )
 
     private fun validate(vararg nodes: Pair<String, Node>): List<Issue> {
-        val model = GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0.0", id = "test")
+        val model = GraphModel(version = "1", id = "test")
         model.nodes.putAll(nodes.toMap())
         val issues = mutableListOf<Issue>()
         validator.validate(model, issues)

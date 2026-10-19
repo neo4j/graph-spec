@@ -25,7 +25,7 @@ import kotlin.test.assertTrue
 class ValidationTreeTest {
 
     private val emptyModel =
-        GraphModel(schema = "https://neo4j.com/ontology-graph-spec/4.0.0/", version = "1.0", id = "test")
+        GraphModel(version = "1.0", id = "test")
 
     @Test
     fun `validate throws exception if build was not called`() {

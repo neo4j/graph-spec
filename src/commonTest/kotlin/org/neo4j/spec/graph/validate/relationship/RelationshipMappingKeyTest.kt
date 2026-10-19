@@ -33,8 +33,7 @@ import kotlin.test.assertTrue
 class RelationshipMappingKeyTest {
 
     private fun model(key: Set<String>, relationship: String = "rel0") = GraphModel(
-        schema = "https://neo4j.com/ontology-graph-spec/4.0.0/",
-        version = "1.0.0",
+        version = "1",
         id = "test",
         nodes = mutableMapOf("node0" to Node(properties = mutableMapOf("shared" to Property(), "age" to Property()))),
         relationships = mutableMapOf(
