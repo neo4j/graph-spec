@@ -6,53 +6,14 @@ REPO_ROOT=$(git rev-parse --show-toplevel)
 cd "$REPO_ROOT"
 
 INPUT_SPEC="$REPO_ROOT/ontology-graph-spec.schema.json"
-TEMP_SPEC="spec-sanitised.json"
 OUTPUT_PACKAGE="model"
-OUTPUT_FILE="model"
+OUTPUT_FILE="$REPO_ROOT/go/$OUTPUT_PACKAGE/model.go"
 
 echo "Starting Go model generation..."
 
 ./gradlew :generateGraphModelJsonSchema
 echo "✓ Generated JSON spec"
 
-# Create temporary json spec file that we can sanitise
-cd "$REPO_ROOT/go"
-cp "$INPUT_SPEC" "$TEMP_SPEC"
-# Drop the null branch from nullable unions ("oneOf": [{"type": "null"}, X] becomes X and "type": [X, "null"] becomes
-# "type": X). Optional properties are already
-# omitted from "required" and generated as pointers, whereas the generator would otherwise emit an untyped interface{}.
-# Only the temporary copy is changed, the published spec keeps the null branch.
-# This is a temp work-around for schemancer, can be removed once https://github.com/Southclaws/schemancer/issues/14 is resolved
-jq 'walk(if type == "object" and (.type | type) == "array" and (.type | index("null")) then (.type | map(select(. != "null"))) as $rest | .type = (if ($rest | length) == 1 then $rest[0] else $rest end) else . end)' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
-jq 'walk(if type == "object" and (.oneOf | type) == "array" and (.oneOf | any(. == {"type": "null"})) then (.oneOf | map(select(. != {"type": "null"}))) as $rest | if ($rest | length) == 1 then del(.oneOf) + $rest[0] else .oneOf = $rest end else . end)' "$TEMP_SPEC" > tmp.json && mv tmp.json "$TEMP_SPEC"
-# Replace characters that cannot appear in Go structs with placeholders to enable Go generation
-# 1. Angled brackets in keys and values
-perl -pi -e 's/"([^"]+)<([^>]+)>"/"$1_LEFTBRACK_$2_RIGHTBRACK_"/g' "$TEMP_SPEC"
-# 2. Periods and hyphens in keys
-perl -pi -e 's/\.(?=[^"]*":)/_PERIOD_/g' "$TEMP_SPEC"
-perl -pi -e 's/-(?=[^"]*":)/_HYPHEN_/g' "$TEMP_SPEC"
-echo "✓ JSON spec sanitised"
-
-
-if ! command -v schemancer &> /dev/null; then
-    echo "schemancer not found, installing..."
-    go install github.com/Southclaws/schemancer@v1.2.0
-fi
 # Generate Go types
-SCHEMANCER_BIN=$(go env GOPATH)/bin/schemancer
-"$SCHEMANCER_BIN" "$TEMP_SPEC" golang "$OUTPUT_FILE" --package $OUTPUT_PACKAGE
+go -C tools/schema-generator run . --schema "$INPUT_SPEC" --out "$OUTPUT_FILE" --package "$OUTPUT_PACKAGE"
 echo "✓ Go models generated"
-
-
-# Reinstate values from placeholders within Go enum strings
-perl -pi -e 's/"([^"]+)_LEFTBRACK_([^"]+)_RIGHTBRACK_"/"$1<$2>"/g' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
-# Reinstate values from placeholders within Go json definition strings
-perl -pi -e 's/_PERIOD_/./g' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
-perl -pi -e 's/_HYPHEN_/-/g' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
-# Remove placeholders from Go enum names
-perl -pi -e 's/Leftbrack//gi; s/Rightbrack//gi; s/Period//gi; s/Hyphen//gi' "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
-# Final Go formatting
-go fmt "$OUTPUT_PACKAGE/$OUTPUT_FILE.go"
-# Cleanup temporary sanitised json spec file
-rm spec-sanitised.json
-echo "✓ Post-processing, formatting and cleanup completed"
