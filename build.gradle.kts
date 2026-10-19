@@ -12,7 +12,7 @@ plugins {
     alias(libs.plugins.maven.publish)
 }
 
-group = "org.neo4j.importer"
+group = "org.neo4j.spec.graph"
 
 repositories { mavenCentral() }
 
@@ -152,12 +152,12 @@ tasks.register<JavaExec>("generateGraphModelJsonSchema") {
 mavenPublishing {
     publishToMavenCentral()
     signAllPublications()
-    coordinates(group.toString(), "graph-spec", version.toString())
+    coordinates(group.toString(), "ontology-graph-spec", version.toString())
     pom {
-        name = "graph-spec"
+        name = "ontology-graph-spec"
         description = "Uniform Graph Specification Library for Neo4j"
-        url = "https://github.com/neo4j/import-spec"
-        inceptionYear = "2024"
+        url = "https://github.com/neo4j/ontology-graph-spec"
+        inceptionYear = "2026"
         organization {
             name = "Neo4j, Neo4j Sweden AB"
             url = "https://neo4j.com"
@@ -184,9 +184,9 @@ mavenPublishing {
             }
         }
         scm {
-            connection = "scm:git:git://github.com/neo4j/import-spec.git"
-            developerConnection = "scm:git:git@github.com:neo4j/import-spec.git"
-            url = "https://github.com/neo4j/import-spec"
+            connection = "scm:git:git://github.com/neo4j/ontology-graph-spec.git"
+            developerConnection = "scm:git:git@github.com:neo4j/ontology-graph-spec.git"
+            url = "https://github.com/neo4j/ontology-graph-spec"
         }
     }
 }

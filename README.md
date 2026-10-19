@@ -87,15 +87,15 @@ including extensions.
 ### Gradle
 
 ```gradle
-implementation("org.neo4j.importer:graph-spec:x.y.z")
+implementation("org.neo4j.spec.graph:ontology-graph-spec:x.y.z")
 ```
 
 ### Maven
 
 ```xml
 <dependency>
-    <groupId>org.neo4j.importer</groupId>
-    <artifactId>graph-spec</artifactId>
+    <groupId>org.neo4j.spec.graph</groupId>
+    <artifactId>ontology-graph-spec</artifactId>
     <version>x.y.z</version>
 </dependency>
 ```
