@@ -1,0 +1,66 @@
+{
+  "schema": "https://neo4j.com/ontology-graph-spec/1.0.0/",
+  "version": "1.0.0",
+  "id": "accounts-using-cols-2",
+  "description": "This model is valid for graph engine but not for import, because the Account node id is a column which does not have a corresponding property",
+  "nodes": {
+    "Account": {
+      "label": "Account",
+      "properties": {
+        "name": {
+          "type": "STRING"
+        }
+      }
+    }
+  },
+  "relationships": {
+    "TRANSACTION": {
+      "type": "TRANSACTION",
+      "from": {
+        "node": "Account"
+      },
+      "to": {
+        "node": "Account"
+      },
+      "properties": {}
+    }
+  },
+  "extensions": {
+    "mappings": [
+      {
+        "type": "NODE",
+        "node": "Account",
+        "table": "accounts",
+        "properties": {
+          "name": {
+            "column": "name"
+          }
+        },
+        "keyColumns": [
+          "id"
+        ]
+      },
+      {
+        "type": "RELATIONSHIP",
+        "relationship": "TRANSACTION",
+        "table": "transactions",
+        "from_node": [
+          {
+            "nodeKeyColumn": "id",
+            "relationshipColumn": "from_id"
+          }
+        ],
+        "to_node": [
+          {
+            "nodeKeyColumn": "id",
+            "relationshipColumn": "to_id"
+          }
+        ],
+        "properties": {},
+        "keyColumns": [
+          "id"
+        ]
+      }
+    ]
+  }
+}
