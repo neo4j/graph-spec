@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"go/token"
 
-	"github.com/neo4j/graph-spec/tools/schema-generator/internal/golang"
-	"github.com/neo4j/graph-spec/tools/schema-generator/internal/model"
-	"github.com/neo4j/graph-spec/tools/schema-generator/internal/schema"
+	"github.com/neo4j/ontology-graph-spec/tools/schema-generator/internal/golang"
+	"github.com/neo4j/ontology-graph-spec/tools/schema-generator/internal/model"
+	"github.com/neo4j/ontology-graph-spec/tools/schema-generator/internal/schema"
 )
 
 type Options struct {

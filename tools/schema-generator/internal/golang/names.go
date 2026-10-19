@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/neo4j/graph-spec/tools/schema-generator/internal/model"
+	"github.com/neo4j/ontology-graph-spec/tools/schema-generator/internal/model"
 )
 
 // typeName is the Go name of a named type. A definition only used as a variant of one union is prefixed with the
