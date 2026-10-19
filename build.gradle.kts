@@ -123,7 +123,7 @@ tasks.register("generateTsUnions", TypeScriptModifierTask::class.java) {
         layout.buildDirectory
             .dir("dist/js/productionLibrary/")
             .get()
-            .file("graph-spec.d.mts")
+            .file("ontology-graph-spec.d.mts")
             .asFile
 }
 
