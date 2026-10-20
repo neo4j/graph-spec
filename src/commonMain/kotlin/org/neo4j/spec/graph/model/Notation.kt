@@ -39,7 +39,7 @@ object Notation {
             if (label != null && node.labels.identifier == null) {
                 node.labels.identifier = label
             }
-            if (node.labels.identifier != null) {
+            if (label == node.labels.identifier) {
                 node.label = null
             }
         }
