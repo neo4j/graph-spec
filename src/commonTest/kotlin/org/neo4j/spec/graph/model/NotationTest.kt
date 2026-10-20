@@ -50,15 +50,27 @@ class NotationTest {
     }
 
     @Test
-    fun `label doesn't replace an existing identifier`() {
+    fun `label doesn't replace an existing identifier and is kept when they conflict`() {
         val node = Node(label = "Short")
         node.labels.identifier = "Long"
         val model = model(nodes = mutableMapOf("User" to node))
 
         model.longhand()
 
-        assertNull(node.label)
+        assertEquals("Short", node.label, "A conflicting label must not be discarded")
         assertEquals("Long", node.labels.identifier)
+    }
+
+    @Test
+    fun `label is cleared when it matches an existing identifier`() {
+        val node = Node(label = "User")
+        node.labels.identifier = "User"
+        val model = model(nodes = mutableMapOf("User" to node))
+
+        model.longhand()
+
+        assertNull(node.label)
+        assertEquals("User", node.labels.identifier)
     }
 
     @Test
