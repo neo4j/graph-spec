@@ -699,6 +699,8 @@ type TableColumn struct {
 	Dimension *int64 `json:"dimension,omitempty"`
 	// Name of the column in the source. Unique within the table.
 	Name *string `json:"name,omitempty"`
+	// Whether the column can hold null values.
+	Nullable *bool `json:"nullable,omitempty"`
 	// Size of the column.
 	Size *int64 `json:"size,omitempty"`
 	// Neo4j type suggested for values of this column.

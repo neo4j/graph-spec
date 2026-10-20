@@ -34,7 +34,7 @@ data class Table(
     val columns: MutableList<TableColumn> = mutableListOf(),
     @SerialName("primary_keys")
     @SerialDescription("Names of the columns making up the primary key.")
-    val primaryKeys: MutableSet<String> = mutableSetOf(),
+    val primaryKeys: MutableList<String> = mutableListOf(),
     @SerialName("foreign_keys")
     @SerialDescription("Foreign keys of the table keyed by id.")
     val foreignKeys: MutableMap<String, ForeignKey> = mutableMapOf(),

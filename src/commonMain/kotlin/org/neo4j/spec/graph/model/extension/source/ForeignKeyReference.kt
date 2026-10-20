@@ -31,7 +31,7 @@ data class ForeignKeyReference(
     @SerialDescription("Id of the referenced table.")
     var table: String,
     @SerialDescription("Names of the referenced columns.")
-    val columns: MutableSet<String> = mutableSetOf(),
+    val columns: MutableList<String> = mutableListOf(),
     @SerialDescription("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()

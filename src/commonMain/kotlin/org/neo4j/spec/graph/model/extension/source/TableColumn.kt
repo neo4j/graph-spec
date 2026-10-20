@@ -39,6 +39,8 @@ data class TableColumn(
     val suggested: Neo4jType = Neo4jType.ANY,
     @SerialDescription("Neo4j types values of this column can be converted to when using the import tool.")
     val supported: Set<Neo4jType> = emptySet(),
+    @SerialDescription("Whether the column can hold null values.")
+    val nullable: Boolean = true,
     @SerialDescription("Dimension of the column when it holds vectors.")
     val dimension: Int? = null,
     @SerialDescription("User-defined arbitrary data.")

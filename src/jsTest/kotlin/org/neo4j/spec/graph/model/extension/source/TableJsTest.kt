@@ -9,8 +9,8 @@ class TableJsTest : JsMappingTest<Table, TableJs>() {
     override fun createClass() = Table(
         source = "sourceId",
         columns = mutableListOf(TableColumn(name = "field", type = "varchar")),
-        primaryKeys = mutableSetOf("field"),
-        foreignKeys = mutableMapOf("key" to ForeignKey(mutableSetOf("key"), ForeignKeyReference("table"))),
+        primaryKeys = mutableListOf("field"),
+        foreignKeys = mutableMapOf("key" to ForeignKey(mutableListOf("key"), ForeignKeyReference("table"))),
         custom = mutableMapOf("key1" to "val1"),
     )
 
