@@ -271,7 +271,7 @@ extensions:
           columns: ["departure_airport", "arrival_airport"]
           references:
             table: "airports_data"
-            columns: ["airport_code"]
+            columns: ["airport_code", "airport_code"]
     seats:
       source: "cloud"
       columns:

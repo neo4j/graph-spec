@@ -6532,7 +6532,7 @@ extensions:
           columns: ["PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER"]
           references:
             table: "PARTY"
-            columns: ["PARTY_IDENTIFIER"]
+            columns: ["PARTY_IDENTIFIER", "PARTY_IDENTIFIER"]
     PARTY_RELATIONSHIP_ROLE:
       source: "cloud"
       columns:
@@ -7083,7 +7083,7 @@ extensions:
           columns: ["RELATED_POLICY_IDENTIFIER", "POLICY_IDENTIFIER"]
           references:
             table: "POLICY"
-            columns: ["POLICY_IDENTIFIER"]
+            columns: ["POLICY_IDENTIFIER", "POLICY_IDENTIFIER"]
     PREMIUM:
       source: "cloud"
       columns:

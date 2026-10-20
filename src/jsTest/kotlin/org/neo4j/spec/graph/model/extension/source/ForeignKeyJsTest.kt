@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 class ForeignKeyJsTest : JsMappingTest<ForeignKey, ForeignKeyJs>() {
 
     override fun createClass() = ForeignKey(
-        columns = mutableSetOf("field1", "field2"),
+        columns = mutableListOf("field1", "field2"),
         references = ForeignKeyReference("table"),
         custom = mutableMapOf("key1" to "val1"),
     )

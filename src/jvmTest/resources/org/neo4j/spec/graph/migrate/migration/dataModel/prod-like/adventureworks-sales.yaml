@@ -429,7 +429,7 @@ extensions:
           columns: ["fromcurrencycode", "tocurrencycode"]
           references:
             table: "currency"
-            columns: ["currencycode"]
+            columns: ["currencycode", "currencycode"]
     customer:
       source: "cloud"
       columns:
@@ -659,7 +659,7 @@ extensions:
           columns: ["billtoaddressid", "shiptoaddressid"]
           references:
             table: "address"
-            columns: ["addressid"]
+            columns: ["addressid", "addressid"]
         foreignKey2:
           columns: ["shipmethodid"]
           references:

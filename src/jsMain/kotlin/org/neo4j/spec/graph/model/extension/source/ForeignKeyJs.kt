@@ -49,7 +49,7 @@ fun ForeignKey.toJs() = foreignKeyJs(
 )
 
 fun ForeignKeyJs.toClass() = ForeignKey(
-    columns = columns.toMutableSet(),
+    columns = columns.toMutableList(),
     references = references.toClass(),
     custom = custom.toCustomClass()
 )
