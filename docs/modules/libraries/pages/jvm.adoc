@@ -1,0 +1,95 @@
+= JVM
+:description: Use the Neo4j Ontology Graph Specification library from Kotlin, Java and other JVM languages.
+
+Requires Java 11 or later.
+
+== Install
+
+[.tabs]
+.Gradle
+[source,kotlin,subs="attributes+"]
+----
+implementation("org.neo4j.spec.graph:ontology-graph-spec:{library-version}")
+----
+
+.Maven
+[source,xml,subs="attributes+"]
+----
+<dependency>
+    <groupId>org.neo4j.spec.graph</groupId>
+    <artifactId>ontology-graph-spec</artifactId>
+    <version>{library-version}</version>
+</dependency>
+----
+
+== Read and write models
+
+`GraphSpec.Json` and `GraphSpec.Yaml` read and write models. Reading expands any xref:format:shorthand.adoc[shorthand].
+
+[.tabs]
+.Kotlin
+[source,kotlin]
+----
+import org.neo4j.spec.graph.GraphSpec
+
+val model = GraphSpec.Yaml.decodeFromString(yaml)
+val json = GraphSpec.Json.encodeToString(model)
+----
+
+.Java
+[source,java]
+----
+import org.neo4j.spec.graph.GraphSpec;
+import org.neo4j.spec.graph.model.GraphModel;
+import org.neo4j.spec.graph.model.Type;
+import org.neo4j.spec.graph.model.Version;
+
+GraphModel model = GraphSpec.Yaml.INSTANCE.decodeFromString(yaml, Type.GRAPH_SPEC);
+String json = GraphSpec.Json.INSTANCE.encodeToString(model, Type.GRAPH_SPEC, Version.LATEST);
+----
+
+== Validate models
+
+[.tabs]
+.Kotlin
+[source,kotlin]
+----
+import org.neo4j.spec.graph.validate.Validations
+
+val issues = model.validate(Validations.core)
+----
+
+.Java
+[source,java]
+----
+import org.neo4j.spec.graph.validate.Issue;
+import org.neo4j.spec.graph.validate.Validations;
+
+List<Issue> issues = model.validate(Validations.Companion.getCore());
+----
+
+See xref:validation.adoc[] for the validator sets and issues.
+
+== Migrate models
+
+To read from or write to another format, pass its type, and for writing its version.
+
+[.tabs]
+.Kotlin
+[source,kotlin]
+----
+import org.neo4j.spec.graph.model.Type
+import org.neo4j.spec.graph.model.Version
+
+val model = GraphSpec.Json.decodeFromString(dataModelJson, Type.DATA_MODEL)
+val exported = GraphSpec.Json.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30)
+----
+
+.Java
+[source,java]
+----
+GraphModel model = GraphSpec.Json.INSTANCE.decodeFromString(dataModelJson, Type.DATA_MODEL);
+String exported = GraphSpec.Json.INSTANCE.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30);
+----
+
+See xref:migration.adoc[] for the supported types and versions.

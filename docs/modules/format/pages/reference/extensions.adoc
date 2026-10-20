@@ -1,0 +1,233 @@
+= Extensions
+:description: Data source tables, mappings, display information and custom data in a Neo4j Ontology Graph Specification model document.
+// The tables mirror ontology-graph-spec.schema.json, until they are generated from it
+
+Extensions hold information tools need alongside the ontology, such as data sources and mappings for importing data,
+diagram layout, and custom data.
+
+== Custom data
+
+Many objects have a `custom` field, directly or under their `extensions`, for any other data to keep with the model. The
+specification gives it no meaning. Grouping data under a key named after the tool or organisation that writes it avoids
+clashes with data written by other tools.
+
+[source,yaml]
+----
+nodes:
+  person:
+    label: Person
+    extensions:
+      custom:
+        acme:
+          owner: catalogue-team
+----
+
+== Model extensions
+
+Extensions for a graph model.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `tables` | map of <<_table,table>> | No | Data source table schemas keyed by table id.
+| `mappings` | map of list of <<_mapping,mapping>> | No | Sets of data source mappings from tables to nodes and
+relationships, often used for importing.
+| `custom` | map | No | User-defined arbitrary data.
+|===
+
+== Node extensions
+
+Extensions for a node.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `indexes` | map of xref:reference/constraints-and-indexes.adoc#_node_index[node index] | No | Database indexes on this
+node keyed by id.
+| `display` | <<_node_display,node display>> | No | Optional visual information of this node.
+| `custom` | map | No | User-defined arbitrary data.
+|===
+
+== Node display
+
+Visual information for a node.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `x` | number | Yes | Horizontal position.
+| `y` | number | Yes | Vertical position.
+| `colour` | string | No | Display colour of the node as a hex string, e.g. #FF8800.
+| `custom` | map | No | User-defined arbitrary data.
+|===
+
+== Relationship extensions
+
+Extensions for a relationship.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `indexes` | map of xref:reference/constraints-and-indexes.adoc#_relationship_index[relationship index] | No | Indexes
+on this relationship keyed by id.
+| `custom` | map | No | User-defined arbitrary data.
+|===
+
+== Table
+
+A data source table schema.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `source` | string | Yes | Where the table's data comes from.
+| `columns` | list of <<_table_column,table column>> | No | Columns of the table in their source order.
+| `primary_keys` | list of strings | No | Names of the columns making up the primary key.
+| `foreign_keys` | map of <<_foreign_key,foreign key>> | No | Foreign keys of the table keyed by id.
+| `custom` | map | No | User-defined arbitrary data.
+|===
+
+== Table column
+
+A column of a data source table.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `name` | string | No | Name of the column in the source. Unique within the table.
+| `type` | string | No | Data type of the column in the source.
+| `size` | integer | No | Size of the column.
+| `suggested` | xref:reference/properties.adoc#_types[type] | No | Neo4j type suggested for values of this column.
+| `supported` | list of xref:reference/properties.adoc#_types[type] | No | Neo4j types values of this column can be
+converted to when using the import tool.
+| `dimension` | integer | No | Dimension of the column when it holds vectors.
+| `custom` | map | No | User-defined arbitrary data.
+|===
+
+== Foreign key
+
+A foreign key of a table.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `columns` | list of strings | Yes | Names of the columns in this table which make up the key.
+| `references` | <<_foreign_key_reference,foreign key reference>> | Yes | The table and columns the key refers to.
+| `custom` | map | No | User-defined arbitrary data.
+|===
+
+== Foreign key reference
+
+The target of a foreign key.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `table` | string | Yes | Id of the referenced table.
+| `columns` | list of strings | No | Names of the referenced columns.
+| `custom` | map | No | User-defined arbitrary data.
+|===
+
+== Mapping
+
+A mapping from a data source table to the graph. Either a node, relationship or query mapping.
+
+One of <<_node_mapping,node mapping>>, <<_query_mapping,query mapping>>, <<_relationship_mapping,relationship mapping>>,
+chosen by its `type`.
+
+== Node mapping
+
+Maps rows of a table to nodes.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | `NODE` | Yes | Always `NODE`.
+| `node` | string | Yes | Id of the node being mapped.
+| `table` | string | Yes | Id of the source table.
+| `properties` | map of <<_property_mapping,property mapping>> | Yes | Mappings from property ids to source columns.
+| `mode` | <<_mapping_mode,mapping mode>> | No | Whether nodes are merged with existing nodes or always created.
+| `match_label` | string | No | Label used to match existing nodes.
+| `key` | list of strings | No | Ids of the properties which identify a node.
+| `depends_on` | string | No | Id of another mapping in the same list which must be imported before this one. Empty when
+there is no dependency.
+| `id` | string | No | Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
+|===
+
+== Relationship mapping
+
+Maps rows of a table to relationships.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | `RELATIONSHIP` | Yes | Always `RELATIONSHIP`.
+| `relationship` | string | Yes | Id of the relationship being mapped.
+| `table` | string | Yes | Id of the source table.
+| `from_node` | <<_target_mapping,target mapping>> | Yes | How the start node of the relationship is matched.
+| `to_node` | <<_target_mapping,target mapping>> | Yes | How the end node of the relationship is matched.
+| `match_label` | string | No | Label used to match existing relationships.
+| `properties` | map of <<_property_mapping,property mapping>> | No | Mappings from property ids to source columns.
+| `mode` | <<_mapping_mode,mapping mode>> | No | Whether relationships are merged with existing relationships or always
+created.
+| `key` | list of strings | No | Ids of the properties which identify a relationship.
+| `depends_on` | string | No | Id of another mapping in the same list which must be imported before this one. Empty when
+there is no dependency.
+| `id` | string | No | Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
+|===
+
+== Query mapping
+
+Maps the results of a query run against a table.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | `QUERY` | Yes | Always `QUERY`.
+| `table` | string | Yes | Id of the source table.
+| `query` | string | Yes | The query to run.
+| `depends_on` | string | No | Id of another mapping in the same list which must be imported before this one. Empty when
+there is no dependency.
+| `id` | string | No | Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
+|===
+
+== Property mapping
+
+Maps a property to a source column.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `column` | string | Yes | Name of the source column.
+|===
+
+== Target mapping
+
+Identifies a node at one end of a mapped relationship.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `label` | string | No | Label of the node.
+| `properties` | map of <<_property_mapping,property mapping>> | No | Mappings from property ids to source columns used
+to match the node.
+|===
+
+== Mapping mode
+
+Write approach used when importing data (merged into existing data or always created).
+
+`MERGE`, `CREATE`

@@ -1,0 +1,53 @@
+= Rules
+:description: The rules a Neo4j Ontology Graph Specification model must follow beyond its JSON Schema.
+
+A valid model matches the JSON Schema and follows the rules on this page. The schema can't express these rules, so a
+document can pass a JSON Schema validator and still be invalid. Most of them check that one part of the document refers
+correctly to another.
+
+Tools may apply stricter rules for their own purposes. For example, a tool that imports data may require every property
+to set its `name`.
+
+TIP: The xref:libraries:validation.adoc[libraries] check these rules when they validate a model.
+
+== References
+
+* The `node` of a relationship's `from` and `to`, when set, must be the id of a node in the document.
+* The `properties` of a node constraint must be ids of the node's properties.
+* The `label` of a node constraint must be the node's identifying label or one of its implied labels.
+* The `properties` of a relationship constraint must be ids of the relationship's properties.
+* The `properties` of a node index must be ids of the node's properties.
+* The `properties` of a relationship index must be ids of the relationship's properties.
+* The `key` of a relationship mapping must contain only ids of the mapped relationship's properties.
+
+== Constraints
+
+* An `EXISTS` constraint must cover exactly one property.
+* A `PROPERTY_TYPE` constraint must cover exactly one property.
+
+== Indexes
+
+* The `type` of an index's `options` must match the `type` of the index.
+
+== Properties
+
+* A property can't set both `pattern` and `one_of`.
+
+== Relationship counts
+
+* A relationship end can't set `count` together with `min_count` or `max_count`.
+* `count` and `min_count` must not be negative.
+* `min_count` must not be greater than `max_count`.
+
+== Lengths
+
+[cols="2,1"]
+|===
+| Field | Maximum length in characters
+
+| The model's `name` | 256
+| The model's `description` | 65,536
+| The `description` of a node, relationship or property | 1,024
+| The `name` of a property | 256
+| The `name` of a constraint or index | 800
+|===

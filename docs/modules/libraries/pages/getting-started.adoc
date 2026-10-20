@@ -1,0 +1,156 @@
+= Getting started
+:description: Install a Neo4j Ontology Graph Specification library, load a model and validate it.
+
+This guide installs a library, then loads and validates a model.
+
+== Install the library
+
+[.tabs]
+.Gradle
+[source,kotlin,subs="attributes+"]
+----
+implementation("org.neo4j.spec.graph:ontology-graph-spec:{library-version}")
+----
+
+.Maven
+[source,xml,subs="attributes+"]
+----
+<dependency>
+    <groupId>org.neo4j.spec.graph</groupId>
+    <artifactId>ontology-graph-spec</artifactId>
+    <version>{library-version}</version>
+</dependency>
+----
+
+.npm
+[source,shell,subs="attributes+"]
+----
+npm install @neo4j/ontology-graph-spec@{library-version}
+----
+
+.Go
+[source,shell,subs="attributes+"]
+----
+go get github.com/neo4j/ontology-graph-spec/go@v{library-version}
+----
+
+Each platform's page lists its requirements.
+
+== Get a model
+
+Save the model from the xref:format:getting-started.adoc[format getting started guide] as `movies.json`:
+
+[source,json]
+----
+include::format:example$movies.json[]
+----
+
+== Load and validate the model
+
+Validation returns a list of issues, which is empty when the model has no problems.
+
+[.tabs]
+.Kotlin
+[source,kotlin]
+----
+import java.io.File
+import org.neo4j.spec.graph.GraphSpec
+import org.neo4j.spec.graph.validate.Validations
+
+fun main() {
+    val model = GraphSpec.Json.decodeFromString(File("movies.json").readText())
+    val issues = model.validate(Validations.core)
+    if (issues.isEmpty()) {
+        println("No issues found")
+    }
+    for (issue in issues) {
+        println("${issue.code} at ${issue.path}: ${issue.message}")
+    }
+}
+----
+
+.Java
+[source,java]
+----
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import org.neo4j.spec.graph.GraphSpec;
+import org.neo4j.spec.graph.model.GraphModel;
+import org.neo4j.spec.graph.model.Type;
+import org.neo4j.spec.graph.validate.Issue;
+import org.neo4j.spec.graph.validate.Validations;
+
+public class GettingStarted {
+    public static void main(String[] args) throws Exception {
+        String content = Files.readString(Path.of("movies.json"));
+        GraphModel model = GraphSpec.Json.INSTANCE.decodeFromString(content, Type.GRAPH_SPEC);
+        List<Issue> issues = model.validate(Validations.Companion.getCore());
+        if (issues.isEmpty()) {
+            System.out.println("No issues found");
+        }
+        for (Issue issue : issues) {
+            System.out.println(issue.getCode() + " at " + issue.getPath() + ": " + issue.getMessage());
+        }
+    }
+}
+----
+
+.TypeScript
+[source,typescript]
+----
+import { readFileSync } from "node:fs";
+import { GraphModel, GraphSpec, Validations } from "@neo4j/ontology-graph-spec";
+
+const model = GraphSpec.Json.decodeFromString(readFileSync("movies.json", "utf8"));
+const issues = GraphModel.validate(model, Validations.core).asJsReadonlyArrayView();
+if (issues.length === 0) {
+  console.log("No issues found");
+}
+for (const issue of issues) {
+  console.log(`${issue.code} at ${issue.path}: ${issue.message}`);
+}
+----
+
+.Go
+[source,go]
+----
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"log"
+	"os"
+
+	"github.com/neo4j/ontology-graph-spec/go/model"
+	"github.com/neo4j/ontology-graph-spec/go/validation"
+)
+
+func main() {
+	content, err := os.ReadFile("movies.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	var graph model.GraphModel
+	if err := json.Unmarshal(content, &graph); err != nil {
+		log.Fatal(err)
+	}
+	issues, err := validation.Validate(graph)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if len(issues) == 0 {
+		fmt.Println("No issues found")
+	}
+	for _, issue := range issues {
+		fmt.Printf("%s at %s: %s\n", issue.Code, issue.Path, issue.Message)
+	}
+}
+----
+
+Running it prints:
+
+----
+No issues found
+----

@@ -1,0 +1,44 @@
+= Concepts
+:description: The ontology concepts a Neo4j Ontology Graph Specification model can describe.
+
+An ontology describes a domain: the kinds of entities in it, how they relate, what they mean and the rules they follow.
+A model can describe each of these. It can start as a plain graph model of labels, relationship types and properties,
+and gain meaning as you add to it.
+
+== Entities and relationships
+
+Each kind of entity in the domain is a xref:reference/nodes.adoc[node], identified by a label such as `Person` or
+`Movie`. Each way entities relate is a xref:reference/relationships.adoc[relationship], with a type such as `ACTED_IN`
+and the nodes it connects. Both can have xref:reference/properties.adoc[properties], each with a type.
+
+== Meaning
+
+Nodes, relationships and properties can describe what they mean:
+
+* `description` says what something represents in the domain, such as "A film released to the public".
+* `aliases` lists other names people use for a node or relationship, such as `Actor` for `Person`.
+* `reference` links to a definition maintained elsewhere, such as a term in an industry standard or a glossary.
+
+The model's own `name` and `description` say what domain it covers.
+
+== Labels
+
+A node has one identifying label, and can have further labels:
+
+* `implied` labels are labels every node of the kind has, which express a hierarchy. An `Actor` node that implies
+`Person` says every actor is a person.
+* `optional` labels are labels only some nodes of the kind have, such as a role or a state. `Person` nodes may also be
+`Director` nodes.
+
+== Domain rules
+
+A model can record the rules of the domain:
+
+* Constraints, which require a property to exist, be unique, form a key or have a type.
+* The number of relationships at each end, such as "every movie has at least one actor".
+* The values a property can take, via `one_of` or `pattern`.
+
+== Extensions
+
+xref:reference/extensions.adoc[Extensions] hold information tools need alongside the ontology, such as data sources and
+mappings for importing data, diagram layout, and custom data.

@@ -1,0 +1,32 @@
+= Validation
+:description: Check a model for issues with the built-in validators, and add your own checks.
+
+Validation checks a model against a list of validators and returns the issues found, which is empty when the model has
+no problems.
+
+== Validator sets
+
+[cols="1,4"]
+|===
+| Set | Checks
+
+| `Validations.core` | The xref:format:rules.adoc[rules] of the format.
+| `Validations.all` | `core`, plus stricter checks used by Neo4j's import tools, such as requiring every property to set
+its `name`.
+|===
+
+A validator can depend on others, and only runs when they found no issues. This avoids a cascade of issues from a single
+mistake, but means fixing an issue can reveal new ones.
+
+== Issues
+
+[cols="1,4"]
+|===
+| Field | Description
+
+| `code` | A stable identifier for the kind of issue, such as `missing_relation_to_node`.
+| `message` | A human-readable description.
+| `path` | Where the issue is, as a dot-separated path such as `relationships.acted-in.to.film`. Optional.
+| `details` | Extra information as string keys and values. Often empty.
+|===
+
