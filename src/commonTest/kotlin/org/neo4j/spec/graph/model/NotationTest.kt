@@ -18,6 +18,7 @@ package org.neo4j.spec.graph.model
 
 import org.neo4j.spec.graph.model.node.Node
 import org.neo4j.spec.graph.model.node.NodeConstraint
+import org.neo4j.spec.graph.model.node.extension.NodeConstraintExtensions
 import org.neo4j.spec.graph.model.property.Property
 import org.neo4j.spec.graph.model.relationship.Relationship
 import org.neo4j.spec.graph.model.relationship.RelationshipConstraint
@@ -278,6 +279,12 @@ class NotationTest {
             constraints = mutableMapOf(
                 "custom" to NodeConstraint(ConstraintType.UNIQUE, "User", mutableSetOf("id"), name = "my_name"),
                 "composite" to NodeConstraint(ConstraintType.KEY, "User", mutableSetOf("a", "b")),
+                "extended" to NodeConstraint(
+                    ConstraintType.EXISTS,
+                    "User",
+                    mutableSetOf("b"),
+                    NodeConstraintExtensions(custom = mutableMapOf("owner" to "team"))
+                ),
                 "other_label" to NodeConstraint(ConstraintType.EXISTS, "Other", mutableSetOf("a"))
             )
         )
@@ -287,9 +294,20 @@ class NotationTest {
 
         model.shorthand()
 
-        assertEquals(3, node.constraints.size)
+        assertEquals(4, node.constraints.size)
         assertEquals("User", node.labels.identifier)
         assertNull(node.label)
         assertNull(node.properties["id"]!!.unique)
+    }
+
+    @Test
+    fun `longhand leaves a node without a label or identifier alone`() {
+        val node = Node()
+        val model = model(nodes = mutableMapOf("User" to node))
+
+        model.longhand()
+
+        assertNull(node.label)
+        assertNull(node.labels.identifier)
     }
 }

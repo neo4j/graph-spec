@@ -16,6 +16,7 @@
  */
 package org.neo4j.spec.graph.model
 
+import org.neo4j.spec.graph.model.extension.CustomExtensions
 import org.neo4j.spec.graph.model.node.Constraint
 import org.neo4j.spec.graph.model.node.NodeConstraint
 import org.neo4j.spec.graph.model.property.Property
@@ -38,7 +39,9 @@ object Notation {
             if (label != null && node.labels.identifier == null) {
                 node.labels.identifier = label
             }
-            node.label = null
+            if (node.labels.identifier != null) {
+                node.label = null
+            }
         }
         model.nodes.forEach { (key, node) ->
             expand(
@@ -64,7 +67,12 @@ object Notation {
 
     fun shorthand(model: GraphModel) {
         model.nodes.values.forEach { node ->
-            collapse(node.constraints, node.properties, node.labels.identifier ?: "") { constraint ->
+            collapse(
+                node.constraints,
+                node.properties,
+                node.labels.identifier ?: "",
+                { it.extensions }
+            ) { constraint ->
                 constraint.label == node.labels.identifier
             }
             val labels = node.labels
@@ -77,18 +85,19 @@ object Notation {
             }
         }
         model.relationships.values.forEach { relationship ->
-            collapse(relationship.constraints, relationship.properties, relationship.type)
+            collapse(relationship.constraints, relationship.properties, relationship.type, { it.extensions })
         }
     }
 
     /**
      * Converts single property constraints into shorthand flags on the property.
-     * Constraints with a custom name are kept, as the name would be lost.
+     * Constraints with a custom name or extensions are kept, as that data would be lost.
      */
     private fun <C> collapse(
         constraints: MutableMap<String, C>,
         properties: MutableMap<String, Property>,
         label: String,
+        extensions: (C) -> CustomExtensions,
         check: (C) -> Boolean = { true }
     ) where C : Constraint, C : Named {
         val collapsed = mutableSetOf<String>()
@@ -96,7 +105,9 @@ object Notation {
             val propertyKey = constraint.properties.singleOrNull() ?: continue
             val property = properties[propertyKey] ?: continue
             val expected = NameFormat.constraintName(listOf(property.name ?: propertyKey), label, constraint.type)
-            if (!check(constraint) || (constraint.name != null && constraint.name != expected)) {
+            if (!check(constraint) || extensions(constraint).custom.isNotEmpty() ||
+                (constraint.name != null && constraint.name != expected)
+            ) {
                 continue
             }
             when (constraint.type) {
