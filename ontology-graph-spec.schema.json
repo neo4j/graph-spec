@@ -945,6 +945,10 @@
                         "$ref": "#/$defs/Neo4jType"
                     }
                 },
+                "nullable": {
+                    "type": "boolean",
+                    "description": "Whether the column can hold null values."
+                },
                 "dimension": {
                     "type": [
                         "integer",
