@@ -41,8 +41,8 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
         targetType: String = Type.GRAPH_SPEC,
         targetVersion: String = Version.LATEST
     ): String {
-        if (targetType != Type.GRAPH_SPEC) { // Migrations expect internalised graph spec models.
-            model.internalise()
+        if (targetType != Type.GRAPH_SPEC) { // Migrations expect longhand graph spec models.
+            model.longhand()
         }
         if (!path.requiresMigration(model.specVersion(), Type.GRAPH_SPEC, targetVersion, targetType)) {
             return configuration.format.encodeModelToString(model)
@@ -55,7 +55,7 @@ sealed class GraphSpec(val configuration: GraphSpecConfig) {
 
     fun decodeFromString(content: String, type: String = Type.GRAPH_SPEC): GraphModel {
         val graphModel = decodeModel(content, type)
-        graphModel.internalise()
+        graphModel.longhand()
         return graphModel
     }
 

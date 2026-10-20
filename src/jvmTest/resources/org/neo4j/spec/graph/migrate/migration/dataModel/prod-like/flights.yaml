@@ -2,97 +2,137 @@ schema: "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json"
 version: "1.0.0"
 id: "graph-model"
 nodes:
-  Aircraft:
-    label: "Aircraft"
+  "n:0":
+    labels:
+      identifier: "Aircraft"
     properties:
-      aircraftCode: { type: "STRING", unique: true }
-      model: { type: "STRING" }
-      aircraftRange: { type: "INTEGER" }
+      "p:0_0": { type: "STRING", name: "aircraftCode" }
+      "p:0_1": { type: "STRING", name: "model" }
+      "p:0_2": { type: "INTEGER", name: "aircraftRange" }
+    constraints:
+      "c:0":
+        type: "UNIQUE"
+        label: "Aircraft"
+        properties: ["p:0_0"]
+        name: "aircrafts_data"
     extensions:
       indexes:
-        "aircrafts_data-text":
+        "i:0":
           type: "TEXT"
           labels: ["Aircraft"]
-          properties: ["aircraftCode"]
-  Airport:
-    label: "Airport"
+          properties: ["p:0_0"]
+          name: "aircrafts_data-text"
+  "n:1":
+    labels:
+      identifier: "Airport"
     properties:
-      airportCode: { type: "STRING", unique: true }
-      airportName: { type: "STRING" }
-      city: { type: "STRING" }
-      coordinates: { type: "POINT" }
-      timezone: { type: "STRING" }
+      "p:1_0": { type: "STRING", name: "airportCode" }
+      "p:1_1": { type: "STRING", name: "airportName" }
+      "p:1_2": { type: "STRING", name: "city" }
+      "p:1_3": { type: "POINT", name: "coordinates" }
+      "p:1_4": { type: "STRING", name: "timezone" }
+    constraints:
+      "c:1":
+        type: "UNIQUE"
+        label: "Airport"
+        properties: ["p:1_0"]
+        name: "airports_data"
     extensions:
       indexes:
-        "airports_data-text":
+        "i:1":
           type: "TEXT"
           labels: ["Airport"]
-          properties: ["airportCode"]
-  Booking:
-    label: "Booking"
+          properties: ["p:1_0"]
+          name: "airports_data-text"
+  "n:2":
+    labels:
+      identifier: "Booking"
     properties:
-      bookRef: { type: "STRING", unique: true }
-      bookDate: { type: "ZONED DATETIME" }
-      totalAmount: { type: "FLOAT" }
+      "p:2_0": { type: "STRING", name: "bookRef" }
+      "p:2_1": { type: "ZONED DATETIME", name: "bookDate" }
+      "p:2_2": { type: "FLOAT", name: "totalAmount" }
+    constraints:
+      "c:2":
+        type: "UNIQUE"
+        label: "Booking"
+        properties: ["p:2_0"]
+        name: "bookings"
     extensions:
       indexes:
-        "bookings-text":
+        "i:2":
           type: "TEXT"
           labels: ["Booking"]
-          properties: ["bookRef"]
-  Flight:
-    label: "Flight"
+          properties: ["p:2_0"]
+          name: "bookings-text"
+  "n:3":
+    labels:
+      identifier: "Flight"
     properties:
-      flightId: { type: "INTEGER", unique: true }
-      flightNo: { type: "STRING" }
-      scheduledDeparture: { type: "ZONED DATETIME" }
-      scheduledArrival: { type: "ZONED DATETIME" }
-      status: { type: "STRING" }
-      actualDeparture: { type: "ZONED DATETIME" }
-      actualArrival: { type: "ZONED DATETIME" }
+      "p:3_0": { type: "INTEGER", name: "flightId" }
+      "p:3_1": { type: "STRING", name: "flightNo" }
+      "p:3_2": { type: "ZONED DATETIME", name: "scheduledDeparture" }
+      "p:3_3": { type: "ZONED DATETIME", name: "scheduledArrival" }
+      "p:3_6": { type: "STRING", name: "status" }
+      "p:3_8": { type: "ZONED DATETIME", name: "actualDeparture" }
+      "p:3_9": { type: "ZONED DATETIME", name: "actualArrival" }
+    constraints:
+      "c:3":
+        type: "UNIQUE"
+        label: "Flight"
+        properties: ["p:3_0"]
+        name: "flights"
     extensions:
       indexes:
-        flights:
+        "i:3":
           type: "TEXT"
           labels: ["Flight"]
-          properties: ["flightId"]
-  Ticket:
-    label: "Ticket"
+          properties: ["p:3_0"]
+          name: "flights"
+  "n:4":
+    labels:
+      identifier: "Ticket"
     properties:
-      ticketNo: { type: "STRING", unique: true }
-      passengerId: { type: "STRING" }
-      passengerName: { type: "STRING" }
-      contactData: { type: "STRING" }
+      "p:4_0": { type: "STRING", name: "ticketNo" }
+      "p:4_2": { type: "STRING", name: "passengerId" }
+      "p:4_3": { type: "STRING", name: "passengerName" }
+      "p:4_4": { type: "STRING", name: "contactData" }
+    constraints:
+      "c:4":
+        type: "UNIQUE"
+        label: "Ticket"
+        properties: ["p:4_0"]
+        name: "tickets"
     extensions:
       indexes:
-        "tickets-text":
+        "i:4":
           type: "TEXT"
           labels: ["Ticket"]
-          properties: ["ticketNo"]
+          properties: ["p:4_0"]
+          name: "tickets-text"
 relationships:
-  FLIGHT_USES_AIRCRAFT:
+  "r:0":
     type: "FLIGHT_USES_AIRCRAFT"
-    from: { node: "Flight" }
-    to: { node: "Aircraft" }
-  FLIGHT_DEPARTS_FROM_AIRPORT:
+    from: { node: "n:3" }
+    to: { node: "n:0" }
+  "r:1":
     type: "FLIGHT_DEPARTS_FROM_AIRPORT"
-    from: { node: "Flight" }
-    to: { node: "Airport" }
-  FLIGHT_ARRIVES_AT_AIRPORT:
+    from: { node: "n:3" }
+    to: { node: "n:1" }
+  "r:2":
     type: "FLIGHT_ARRIVES_AT_AIRPORT"
-    from: { node: "Flight" }
-    to: { node: "Airport" }
-  FLIGHT_HAS_TICKET:
+    from: { node: "n:3" }
+    to: { node: "n:1" }
+  "r:3":
     type: "FLIGHT_HAS_TICKET"
-    from: { node: "Flight" }
-    to: { node: "Ticket" }
+    from: { node: "n:3" }
+    to: { node: "n:4" }
     properties:
-      fare_conditions: { type: "STRING" }
-      amount: { type: "FLOAT" }
-  TICKET_BELONGS_TO_BOOKING:
+      "p:3_0": { type: "STRING", name: "fare_conditions" }
+      "p:3_1": { type: "FLOAT", name: "amount" }
+  "r:4":
     type: "TICKET_BELONGS_TO_BOOKING"
-    from: { node: "Ticket" }
-    to: { node: "Booking" }
+    from: { node: "n:4" }
+    to: { node: "n:2" }
 extensions:
   tables:
     aircrafts_data:
@@ -318,97 +358,97 @@ extensions:
   mappings:
     mapping0:
       - type: "NODE"
-        node: "Aircraft"
+        node: "n:0"
         table: "aircrafts_data"
         properties:
-          aircraftCode: { column: "aircraft_code" }
-          model: { column: "model" }
-          aircraftRange: { column: "aircrafts_range" }
-        key: ["aircraftCode"]
+          "p:0_0": { column: "aircraft_code" }
+          "p:0_1": { column: "model" }
+          "p:0_2": { column: "aircrafts_range" }
+        key: ["p:0_0"]
       - type: "NODE"
-        node: "Airport"
+        node: "n:1"
         table: "airports_data"
         properties:
-          airportCode: { column: "airport_code" }
-          airportName: { column: "airport_name" }
-          city: { column: "city" }
-          coordinates: { column: "coordinates" }
-          timezone: { column: "timezone" }
-        key: ["airportCode"]
+          "p:1_0": { column: "airport_code" }
+          "p:1_1": { column: "airport_name" }
+          "p:1_2": { column: "city" }
+          "p:1_3": { column: "coordinates" }
+          "p:1_4": { column: "timezone" }
+        key: ["p:1_0"]
       - type: "NODE"
-        node: "Booking"
+        node: "n:2"
         table: "bookings"
         properties:
-          bookRef: { column: "book_ref" }
-          bookDate: { column: "book_date" }
-          totalAmount: { column: "total_amount" }
-        key: ["bookRef"]
+          "p:2_0": { column: "book_ref" }
+          "p:2_1": { column: "book_date" }
+          "p:2_2": { column: "total_amount" }
+        key: ["p:2_0"]
       - type: "NODE"
-        node: "Flight"
+        node: "n:3"
         table: "flights"
         properties:
-          flightId: { column: "flight_id" }
-          flightNo: { column: "flight_no" }
-          scheduledDeparture: { column: "scheduled_departure" }
-          scheduledArrival: { column: "scheduled_arrival" }
-          status: { column: "status" }
-          actualDeparture: { column: "actual_departure" }
-          actualArrival: { column: "actual_arrival" }
-        key: ["flightId"]
+          "p:3_0": { column: "flight_id" }
+          "p:3_1": { column: "flight_no" }
+          "p:3_2": { column: "scheduled_departure" }
+          "p:3_3": { column: "scheduled_arrival" }
+          "p:3_6": { column: "status" }
+          "p:3_8": { column: "actual_departure" }
+          "p:3_9": { column: "actual_arrival" }
+        key: ["p:3_0"]
       - type: "NODE"
-        node: "Ticket"
+        node: "n:4"
         table: "tickets"
         properties:
-          ticketNo: { column: "ticket_no" }
-          passengerId: { column: "passenger_id" }
-          passengerName: { column: "passenger_name" }
-          contactData: { column: "contact_data" }
-        key: ["ticketNo"]
+          "p:4_0": { column: "ticket_no" }
+          "p:4_2": { column: "passenger_id" }
+          "p:4_3": { column: "passenger_name" }
+          "p:4_4": { column: "contact_data" }
+        key: ["p:4_0"]
       - type: "RELATIONSHIP"
-        relationship: "FLIGHT_USES_AIRCRAFT"
+        relationship: "r:0"
         table: "flights"
         from_node:
           properties:
-            flightId: { column: "flight_id" }
+            "p:3_0": { column: "flight_id" }
         to_node:
           properties:
-            aircraftCode: { column: "aircraft_code" }
+            "p:0_0": { column: "aircraft_code" }
       - type: "RELATIONSHIP"
-        relationship: "FLIGHT_DEPARTS_FROM_AIRPORT"
+        relationship: "r:1"
         table: "flights"
         from_node:
           properties:
-            flightId: { column: "flight_id" }
+            "p:3_0": { column: "flight_id" }
         to_node:
           properties:
-            airportCode: { column: "departure_airport" }
+            "p:1_0": { column: "departure_airport" }
       - type: "RELATIONSHIP"
-        relationship: "FLIGHT_ARRIVES_AT_AIRPORT"
+        relationship: "r:2"
         table: "flights"
         from_node:
           properties:
-            flightId: { column: "flight_id" }
+            "p:3_0": { column: "flight_id" }
         to_node:
           properties:
-            airportCode: { column: "arrival_airport" }
+            "p:1_0": { column: "arrival_airport" }
       - type: "RELATIONSHIP"
-        relationship: "FLIGHT_HAS_TICKET"
+        relationship: "r:3"
         table: "ticket_flights"
         from_node:
           properties:
-            flightId: { column: "flight_id" }
+            "p:3_0": { column: "flight_id" }
         to_node:
           properties:
-            ticketNo: { column: "ticket_no" }
+            "p:4_0": { column: "ticket_no" }
         properties:
-          fare_conditions: { column: "fare_conditions" }
-          amount: { column: "amount" }
+          "p:3_0": { column: "fare_conditions" }
+          "p:3_1": { column: "amount" }
       - type: "RELATIONSHIP"
-        relationship: "TICKET_BELONGS_TO_BOOKING"
+        relationship: "r:4"
         table: "tickets"
         from_node:
           properties:
-            ticketNo: { column: "ticket_no" }
+            "p:4_0": { column: "ticket_no" }
         to_node:
           properties:
-            bookRef: { column: "book_ref" }
+            "p:2_0": { column: "book_ref" }

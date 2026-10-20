@@ -42,7 +42,7 @@ data class NodeIndex(
     @SerialDescription("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf(),
-    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
+    @SerialDescription("Name of the index in the database.")
     override var name: String? = null
 ) : CustomExtensions,
     Named

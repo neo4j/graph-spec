@@ -36,12 +36,6 @@ import org.neo4j.spec.graph.model.remove
 class NodeEditor {
     companion object {
         @JsStatic
-        fun setName(model: GraphModelJs, nodeId: String, newName: String) {
-            val node = model.nodes.getOrThrow(nodeId, "Node")
-            node.name = newName
-        }
-
-        @JsStatic
         fun setReference(model: GraphModelJs, nodeId: String, reference: String) {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             node.reference = reference
@@ -103,7 +97,7 @@ class NodeEditor {
         fun addProperty(model: GraphModelJs, nodeId: String): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.properties.addUnique("property") { id ->
-                propertyJs(id = id, name = id)
+                propertyJs(id = id)
             }
         }
 

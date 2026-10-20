@@ -41,11 +41,6 @@ class RelationshipEditor {
         }
 
         @JsStatic
-        fun setName(relationship: RelationshipJs, name: String) {
-            relationship.name = name
-        }
-
-        @JsStatic
         fun setSourceNode(relationship: RelationshipJs, node: String) {
             RelationshipTargetEditor.setNode(relationship.from, node)
         }
@@ -120,7 +115,7 @@ class RelationshipEditor {
         fun addProperty(model: GraphModelJs, relationshipId: String): String {
             val relationship = model.relationships.getOrThrow(relationshipId, "Node")
             return relationship.properties.addUnique("property") { id ->
-                propertyJs(id = id, name = id)
+                propertyJs(id = id)
             }
         }
 

@@ -41,7 +41,6 @@ external interface NodeJs {
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, NodeConstraintJs>
     val extensions: NodeExtensionsJs
-    var name: String
     val id: String
     val description: String
     var aliases: Array<String>
@@ -53,7 +52,6 @@ fun nodeJs(
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, NodeConstraintJs> = emptyRecord(),
     extensions: NodeExtensionsJs = nodeExtensionsJs(),
-    name: String,
     id: String,
     description: String = "",
     aliases: Array<String> = emptyArray(),
@@ -63,7 +61,6 @@ fun nodeJs(
     this.properties = properties
     this.constraints = constraints
     this.extensions = extensions
-    this.name = name
     this.id = id
     this.description = description
     this.aliases = aliases
@@ -75,7 +72,6 @@ fun Node.toJs(key: String) = nodeJs(
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
     extensions = extensions.toJs(),
-    name = name ?: key,
     id = key,
     description = description,
     aliases = aliases.toTypedArray(),
@@ -87,7 +83,6 @@ fun NodeJs.toClass(id: String): Node = Node(
     properties = properties.associateBy { key, value -> value.toClass("nodes.$id", key) },
     constraints = constraints.associateBy { _, value -> value.toClass() },
     extensions = extensions.toClass(),
-    name = name,
     description = description,
     aliases = aliases.toMutableSet(),
     reference = reference

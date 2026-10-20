@@ -2,22 +2,24 @@ schema: "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json"
 version: "1.0.0"
 id: "graph-model"
 nodes:
-  document:
-    label: "document"
+  "n:0":
+    labels:
+      identifier: "document"
     properties:
-      documentid: { type: "INTEGER" }
-      embedding: { type: "VECTOR<FLOAT>", dimension: 123 }
-      legacyembedding: { type: "VECTOR<FLOAT>" }
+      "p:0_0": { type: "INTEGER", name: "documentid" }
+      "p:0_1": { type: "VECTOR<FLOAT>", dimension: 123, name: "embedding" }
+      "p:0_2": { type: "VECTOR<FLOAT>", name: "legacyembedding" }
     extensions:
       indexes:
-        document_embedding:
+        "i:0":
           type: "VECTOR"
           labels: ["document"]
-          properties: ["embedding"]
+          properties: ["p:0_1"]
           options:
             type: "VECTOR"
             vector.dimensions: 123
             vector.similarity_function: "euclidean"
+          name: "document_embedding"
 extensions:
   tables:
     document:
@@ -40,10 +42,10 @@ extensions:
   mappings:
     mapping0:
       - type: "NODE"
-        node: "document"
+        node: "n:0"
         table: "document"
         properties:
-          documentid: { column: "documentid" }
-          embedding: { column: "embedding" }
-          legacyembedding: { column: "legacyembedding" }
-        key: ["documentid"]
+          "p:0_0": { column: "documentid" }
+          "p:0_1": { column: "embedding" }
+          "p:0_2": { column: "legacyembedding" }
+        key: ["p:0_0"]

@@ -20,22 +20,13 @@ class NodeEditorTest {
 
     @BeforeTest
     fun setup() {
-        val initialNode = nodeJs(
-            name = "Initial Node",
-            id = nodeId
-        )
+        val initialNode = nodeJs(id = nodeId)
 
         model = graphModelJs(
             version = "1.0",
             id = "test",
             nodes = recordOf(nodeId to initialNode),
         )
-    }
-
-    @Test
-    fun testSetName() {
-        NodeEditor.setName(model, nodeId, "Updated Name")
-        assertEquals("Updated Name", model.nodes[nodeId]?.name)
     }
 
     @Test
@@ -154,10 +145,6 @@ class NodeEditorTest {
     @Test
     fun testErrorHandling() {
         // Verify that passing a non-existent nodeId throws an exception (via getOrThrow)
-        assertFails {
-            NodeEditor.setName(model, "non-existent-id", "New Name")
-        }
-
         // Verify that passing a non-existent propertyId throws an exception
         assertFails {
             NodeEditor.setPropertyName(model, nodeId, "fake-prop", "name")

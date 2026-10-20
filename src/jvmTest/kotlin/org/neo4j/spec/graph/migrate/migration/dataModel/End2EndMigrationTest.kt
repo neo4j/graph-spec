@@ -34,7 +34,6 @@ class End2EndMigrationTest {
 
             val model = GraphSpec.Json.decodeFromString(input, Type.DATA_MODEL)
 
-            model.prettify()
             val output = GraphSpec.Yaml.encodeToString(model)
 
             assertEquals(expected, output)

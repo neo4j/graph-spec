@@ -43,22 +43,17 @@ import org.neo4j.spec.graph.model.relationship.toJs
 class GraphModelEditor {
     companion object {
         @JsStatic
-        fun plain(model: GraphModel): GraphModelJs {
-            if (model.pretty) {
-                error("Pretty models can't be converted to plain models, call model.internalise() first.")
-            }
-            return graphModelJs(
-                schema = model.schema,
-                version = model.version,
-                id = model.id,
-                name = model.name,
-                description = model.description,
-                nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
-                relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
-                    .toRecord(),
-                extensions = model.extensions.toJs()
-            )
-        }
+        fun plain(model: GraphModel): GraphModelJs = graphModelJs(
+            schema = model.schema,
+            version = model.version,
+            id = model.id,
+            name = model.name,
+            description = model.description,
+            nodes = model.nodes.mapValues { (key, node) -> node.toJs(key) }.toRecord(),
+            relationships = model.relationships.mapValues { (id, relationship) -> relationship.toJs(id) }
+                .toRecord(),
+            extensions = model.extensions.toJs()
+        )
 
         @JsStatic
         fun model(model: GraphModelJs): GraphModel = GraphModel(
@@ -73,14 +68,13 @@ class GraphModelEditor {
         )
 
         @JsStatic
-        fun addNode(model: GraphModelJs, name: String? = null, label: String? = null): String =
-            model.nodes.addUnique("node") { nodeId ->
-                val node = nodeJs(id = nodeId, name = name ?: nodeId)
-                if (label != null) {
-                    NodeEditor.setIdentifyingLabel(model, nodeId, label)
-                }
-                node
+        fun addNode(model: GraphModelJs, label: String? = null): String = model.nodes.addUnique("node") { nodeId ->
+            val node = nodeJs(id = nodeId)
+            if (label != null) {
+                NodeEditor.setIdentifyingLabel(model, nodeId, label)
             }
+            node
+        }
 
         @JsStatic
         fun removeNode(model: GraphModelJs, nodeId: String) {
@@ -88,9 +82,9 @@ class GraphModelEditor {
         }
 
         @JsStatic
-        fun addRelationship(model: GraphModelJs, type: String, name: String?): String =
+        fun addRelationship(model: GraphModelJs, type: String): String =
             model.relationships.addUnique("relationship") { relId ->
-                relationshipJs(type = type, id = relId, name = name ?: relId)
+                relationshipJs(type = type, id = relId)
             }
 
         @JsStatic
