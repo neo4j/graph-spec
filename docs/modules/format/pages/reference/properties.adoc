@@ -57,6 +57,3 @@ Each type except `UUID` and the `VECTOR` types also has a list form, such as `LI
 `VECTOR<INTEGER8>`
 | Other | `UUID`, `ANY`
 |===
-
-NOTE: In YAML, quote types that contain `<` and `>`, such as `"LIST<STRING>"`. Neo4j's tools currently reject them
-unquoted.

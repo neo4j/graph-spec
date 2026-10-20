@@ -26,12 +26,6 @@ own revision of the model.
 * `description` and `aliases` carry the meaning of each part. See xref:concepts.adoc#_meaning[Meaning].
 * `label`, `must_exist` and `unique` are xref:shorthand.adoc[shorthand].
 
-[NOTE]
-====
-In YAML, quote any value that contains a colon, such as a URL or a time, and any type that contains `<` and `>`, such as
-`"LIST<STRING>"`. Neo4j's tools currently reject them unquoted, even though YAML allows it.
-====
-
 == Validate it
 
 The specification is defined by a JSON Schema at `https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json`. You can
