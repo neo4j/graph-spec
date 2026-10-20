@@ -4,6 +4,15 @@
 The Neo4j Ontology Graph Specification is a format and library for defining, validating and migrating ontologies for Neo4j, expressed as YAML or JSON.
 It provides library support for JVM, JavaScript, TypeScript and Go for validation and migration.
 
+== Why this specification
+
+Agents are becoming the main way people work with graph data.
+A schema tells an agent what exists, not what it means.
+The specification gives the graph's business meaning a standard, machine-readable form.
+
+Define your domain once and agents, document intelligence, import and your own tooling all read the same artifact.
+It is published, versioned, SDK-backed and openly governed, so it is a stable contract to build on.
+
 == The format
 
 A graph model document describes nodes, relationships, their properties, constraints and indexes, plus optional extensions such as data source tables and import mappings.
@@ -104,6 +113,7 @@ relationships:
 == SDKs
 
 The specification ships libraries for several platforms, each able to migrate older model documents to the latest format and validate a document against the schema.
+The source for the specification, its schema and all SDKs lives in the https://github.com/neo4j/ontology-graph-spec[ontology-graph-spec repository on GitHub], where you can open issues, follow releases and contribute.
 
 === JVM
 
