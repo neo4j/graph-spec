@@ -13,7 +13,7 @@ import kotlin.test.assertEquals
 class InternalDataModelIT {
 
     @TestFactory
-    fun `Internal model round-trip`() = listOf(
+    fun `Longhand model round-trip`() = listOf(
         "adventureworks-sales.yaml",
         "chinook.yaml",
         "dvd-rental.yaml",
@@ -24,20 +24,12 @@ class InternalDataModelIT {
         "vector-embeddings.yaml"
     ).map { name ->
         dynamicTest(name.removeSuffix(".yaml")) {
-            var initial = File(End2EndMigrationTest::class.java.getResource("prod-like/$name")!!.path).readText()
-            val expected = File(End2EndMigrationTest::class.java.getResource("internal/$name")!!.path).readText()
+            val initial = File(End2EndMigrationTest::class.java.getResource("prod-like/$name")!!.path).readText()
             val model = GraphSpec.Yaml.decodeFromString(initial)
 
-            model.internalise()
-            val internal = GraphSpec.Yaml.encodeToString(model)
+            val output = GraphSpec.Yaml.encodeToString(model)
 
-            assertEquals(expected, internal)
-
-            model.prettify()
-            val pretty = GraphSpec.Yaml.encodeToString(model)
-            // FIXME our YAML library doesn't correctly handle negative doubles, isn't maintained and there's no alternative.
-            initial = initial.replace("\"-100.123\"", "-100.123")
-            assertEquals(initial, pretty)
+            assertEquals(initial, output)
         }
     }
 

@@ -2,229 +2,325 @@ schema: "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json"
 version: "1.0.0"
 id: "graph-model"
 nodes:
-  creditcard:
-    label: "creditcard"
+  "n:0":
+    labels:
+      identifier: "creditcard"
     properties:
-      creditcardid: { type: "INTEGER", unique: true }
-      cardtype: { type: "STRING" }
-      cardnumber: { type: "STRING" }
-      expmonth: { type: "INTEGER" }
-      expyear: { type: "INTEGER" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:0_0": { type: "INTEGER", name: "creditcardid" }
+      "p:0_1": { type: "STRING", name: "cardtype" }
+      "p:0_2": { type: "STRING", name: "cardnumber" }
+      "p:0_3": { type: "INTEGER", name: "expmonth" }
+      "p:0_4": { type: "INTEGER", name: "expyear" }
+      "p:0_5": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:0":
+        type: "UNIQUE"
+        label: "creditcard"
+        properties: ["p:0_0"]
+        name: "creditcard"
     extensions:
       indexes:
-        creditcard:
+        "i:0":
           type: "TEXT"
           labels: ["creditcard"]
-          properties: ["creditcardid"]
-  currency:
-    label: "currency"
+          properties: ["p:0_0"]
+          name: "creditcard"
+  "n:1":
+    labels:
+      identifier: "currency"
     properties:
-      currencycode: { type: "STRING", unique: true }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:1_0": { type: "STRING", name: "currencycode" }
+      "p:1_2": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:1":
+        type: "UNIQUE"
+        label: "currency"
+        properties: ["p:1_0"]
+        name: "currency"
     extensions:
       indexes:
-        "currency-text":
+        "i:1":
           type: "TEXT"
           labels: ["currency"]
-          properties: ["currencycode"]
-  currencyrate:
-    label: "currencyrate"
+          properties: ["p:1_0"]
+          name: "currency-text"
+  "n:2":
+    labels:
+      identifier: "currencyrate"
     properties:
-      currencyrateid: { type: "INTEGER", unique: true }
-      currencyratedate: { type: "ZONED DATETIME" }
-      averagerate: { type: "FLOAT" }
-      endofdayrate: { type: "FLOAT" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:2_0": { type: "INTEGER", name: "currencyrateid" }
+      "p:2_1": { type: "ZONED DATETIME", name: "currencyratedate" }
+      "p:2_4": { type: "FLOAT", name: "averagerate" }
+      "p:2_5": { type: "FLOAT", name: "endofdayrate" }
+      "p:2_6": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:2":
+        type: "UNIQUE"
+        label: "currencyrate"
+        properties: ["p:2_0"]
+        name: "currencyrate"
     extensions:
       indexes:
-        currencyrate:
+        "i:2":
           type: "TEXT"
           labels: ["currencyrate"]
-          properties: ["currencyrateid"]
-  customer:
-    label: "customer"
+          properties: ["p:2_0"]
+          name: "currencyrate"
+  "n:3":
+    labels:
+      identifier: "customer"
     properties:
-      customerid: { type: "INTEGER", unique: true }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:3_0": { type: "INTEGER", name: "customerid" }
+      "p:3_4": { type: "STRING", name: "rowguid" }
+      "p:3_5": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:3":
+        type: "UNIQUE"
+        label: "customer"
+        properties: ["p:3_0"]
+        name: "customer"
     extensions:
       indexes:
-        customer:
+        "i:3":
           type: "TEXT"
           labels: ["customer"]
-          properties: ["customerid"]
-  salesorderheader:
-    label: "salesorderheader"
+          properties: ["p:3_0"]
+          name: "customer"
+  "n:4":
+    labels:
+      identifier: "salesorderheader"
     properties:
-      salesorderid: { type: "INTEGER", unique: true }
-      revisionnumber: { type: "INTEGER" }
-      orderdate: { type: "ZONED DATETIME" }
-      duedate: { type: "ZONED DATETIME" }
-      shipdate: { type: "ZONED DATETIME" }
-      status: { type: "INTEGER" }
-      creditcardapprovalcode: { type: "STRING" }
-      subtotal: { type: "FLOAT" }
-      taxamt: { type: "FLOAT" }
-      freight: { type: "FLOAT" }
-      totaldue: { type: "FLOAT" }
-      comment: { type: "STRING" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:4_0": { type: "INTEGER", name: "salesorderid" }
+      "p:4_1": { type: "INTEGER", name: "revisionnumber" }
+      "p:4_2": { type: "ZONED DATETIME", name: "orderdate" }
+      "p:4_3": { type: "ZONED DATETIME", name: "duedate" }
+      "p:4_4": { type: "ZONED DATETIME", name: "shipdate" }
+      "p:4_5": { type: "INTEGER", name: "status" }
+      "p:4_16": { type: "STRING", name: "creditcardapprovalcode" }
+      "p:4_18": { type: "FLOAT", name: "subtotal" }
+      "p:4_19": { type: "FLOAT", name: "taxamt" }
+      "p:4_20": { type: "FLOAT", name: "freight" }
+      "p:4_21": { type: "FLOAT", name: "totaldue" }
+      "p:4_22": { type: "STRING", name: "comment" }
+      "p:4_23": { type: "STRING", name: "rowguid" }
+      "p:4_24": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:4":
+        type: "UNIQUE"
+        label: "salesorderheader"
+        properties: ["p:4_0"]
+        name: "salesorderheader"
     extensions:
       indexes:
-        salesorderheader:
+        "i:4":
           type: "TEXT"
           labels: ["salesorderheader"]
-          properties: ["salesorderid"]
-  salesperson:
-    label: "salesperson"
+          properties: ["p:4_0"]
+          name: "salesorderheader"
+  "n:5":
+    labels:
+      identifier: "salesperson"
     properties:
-      businessentityid: { type: "INTEGER", unique: true }
-      salesquota: { type: "FLOAT" }
-      bonus: { type: "FLOAT" }
-      commissionpct: { type: "FLOAT" }
-      salesytd: { type: "FLOAT" }
-      saleslastyear: { type: "FLOAT" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:5_0": { type: "INTEGER", name: "businessentityid" }
+      "p:5_2": { type: "FLOAT", name: "salesquota" }
+      "p:5_3": { type: "FLOAT", name: "bonus" }
+      "p:5_4": { type: "FLOAT", name: "commissionpct" }
+      "p:5_5": { type: "FLOAT", name: "salesytd" }
+      "p:5_6": { type: "FLOAT", name: "saleslastyear" }
+      "p:5_7": { type: "STRING", name: "rowguid" }
+      "p:5_8": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:5":
+        type: "UNIQUE"
+        label: "salesperson"
+        properties: ["p:5_0"]
+        name: "salesperson"
     extensions:
       indexes:
-        salesperson:
+        "i:5":
           type: "TEXT"
           labels: ["salesperson"]
-          properties: ["businessentityid"]
-  salesreason:
-    label: "salesreason"
+          properties: ["p:5_0"]
+          name: "salesperson"
+  "n:6":
+    labels:
+      identifier: "salesreason"
     properties:
-      salesreasonid: { type: "INTEGER", unique: true }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:6_0": { type: "INTEGER", name: "salesreasonid" }
+      "p:6_3": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:6":
+        type: "UNIQUE"
+        label: "salesreason"
+        properties: ["p:6_0"]
+        name: "salesreason"
     extensions:
       indexes:
-        salesreason:
+        "i:6":
           type: "TEXT"
           labels: ["salesreason"]
-          properties: ["salesreasonid"]
-  salestaxrate:
-    label: "salestaxrate"
+          properties: ["p:6_0"]
+          name: "salesreason"
+  "n:7":
+    labels:
+      identifier: "salestaxrate"
     properties:
-      salestaxrateid: { type: "INTEGER", unique: true }
-      taxtype: { type: "INTEGER" }
-      taxrate: { type: "FLOAT" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:7_0": { type: "INTEGER", name: "salestaxrateid" }
+      "p:7_2": { type: "INTEGER", name: "taxtype" }
+      "p:7_3": { type: "FLOAT", name: "taxrate" }
+      "p:7_5": { type: "STRING", name: "rowguid" }
+      "p:7_6": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:7":
+        type: "UNIQUE"
+        label: "salestaxrate"
+        properties: ["p:7_0"]
+        name: "salestaxrate"
     extensions:
       indexes:
-        salestaxrate:
+        "i:7":
           type: "TEXT"
           labels: ["salestaxrate"]
-          properties: ["salestaxrateid"]
-  salesterritory:
-    label: "salesterritory"
+          properties: ["p:7_0"]
+          name: "salestaxrate"
+  "n:8":
+    labels:
+      identifier: "salesterritory"
     properties:
-      territoryid: { type: "INTEGER", unique: true }
-      group: { type: "STRING" }
-      salesytd: { type: "FLOAT" }
-      saleslastyear: { type: "FLOAT" }
-      costytd: { type: "FLOAT" }
-      costlastyear: { type: "FLOAT" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:8_0": { type: "INTEGER", name: "territoryid" }
+      "p:8_3": { type: "STRING", name: "group" }
+      "p:8_4": { type: "FLOAT", name: "salesytd" }
+      "p:8_5": { type: "FLOAT", name: "saleslastyear" }
+      "p:8_6": { type: "FLOAT", name: "costytd" }
+      "p:8_7": { type: "FLOAT", name: "costlastyear" }
+      "p:8_8": { type: "STRING", name: "rowguid" }
+      "p:8_9": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:8":
+        type: "UNIQUE"
+        label: "salesterritory"
+        properties: ["p:8_0"]
+        name: "salesterritory"
     extensions:
       indexes:
-        salesterritory:
+        "i:8":
           type: "TEXT"
           labels: ["salesterritory"]
-          properties: ["territoryid"]
-  shoppingcartitem:
-    label: "shoppingcartitem"
+          properties: ["p:8_0"]
+          name: "salesterritory"
+  "n:9":
+    labels:
+      identifier: "shoppingcartitem"
     properties:
-      shoppingcartitemid: { type: "INTEGER", unique: true }
-      shoppingcartid: { type: "STRING" }
-      quantity: { type: "INTEGER" }
-      datecreated: { type: "ZONED DATETIME" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:9_0": { type: "INTEGER", name: "shoppingcartitemid" }
+      "p:9_1": { type: "STRING", name: "shoppingcartid" }
+      "p:9_2": { type: "INTEGER", name: "quantity" }
+      "p:9_4": { type: "ZONED DATETIME", name: "datecreated" }
+      "p:9_5": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:9":
+        type: "UNIQUE"
+        label: "shoppingcartitem"
+        properties: ["p:9_0"]
+        name: "shoppingcartitem"
     extensions:
       indexes:
-        shoppingcartitem:
+        "i:9":
           type: "TEXT"
           labels: ["shoppingcartitem"]
-          properties: ["shoppingcartitemid"]
-  specialoffer:
-    label: "specialoffer"
+          properties: ["p:9_0"]
+          name: "shoppingcartitem"
+  "n:10":
+    labels:
+      identifier: "specialoffer"
     properties:
-      specialofferid: { type: "INTEGER", unique: true }
-      description: { type: "STRING" }
-      discountpct: { type: "FLOAT" }
-      type: { type: "STRING" }
-      category: { type: "STRING" }
-      startdate: { type: "ZONED DATETIME" }
-      enddate: { type: "ZONED DATETIME" }
-      minqty: { type: "INTEGER" }
-      maxqty: { type: "INTEGER" }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:10_0": { type: "INTEGER", name: "specialofferid" }
+      "p:10_1": { type: "STRING", name: "description" }
+      "p:10_2": { type: "FLOAT", name: "discountpct" }
+      "p:10_3": { type: "STRING", name: "type" }
+      "p:10_4": { type: "STRING", name: "category" }
+      "p:10_5": { type: "ZONED DATETIME", name: "startdate" }
+      "p:10_6": { type: "ZONED DATETIME", name: "enddate" }
+      "p:10_7": { type: "INTEGER", name: "minqty" }
+      "p:10_8": { type: "INTEGER", name: "maxqty" }
+      "p:10_9": { type: "STRING", name: "rowguid" }
+      "p:10_10": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:10":
+        type: "UNIQUE"
+        label: "specialoffer"
+        properties: ["p:10_0"]
+        name: "specialoffer"
     extensions:
       indexes:
-        specialoffer:
+        "i:10":
           type: "TEXT"
           labels: ["specialoffer"]
-          properties: ["specialofferid"]
-  store:
-    label: "store"
+          properties: ["p:10_0"]
+          name: "specialoffer"
+  "n:11":
+    labels:
+      identifier: "store"
     properties:
-      businessentityid: { type: "INTEGER", unique: true }
-      rowguid: { type: "STRING" }
-      modifieddate: { type: "ZONED DATETIME" }
+      "p:11_0": { type: "INTEGER", name: "businessentityid" }
+      "p:11_4": { type: "STRING", name: "rowguid" }
+      "p:11_5": { type: "ZONED DATETIME", name: "modifieddate" }
+    constraints:
+      "c:11":
+        type: "UNIQUE"
+        label: "store"
+        properties: ["p:11_0"]
+        name: "store"
     extensions:
       indexes:
-        store:
+        "i:11":
           type: "TEXT"
           labels: ["store"]
-          properties: ["businessentityid"]
+          properties: ["p:11_0"]
+          name: "store"
 relationships:
-  SALESTERRITORY:
+  "r:0":
     type: "SALESTERRITORY"
-    from: { node: "customer" }
-    to: { node: "salesterritory" }
-  STORE:
+    from: { node: "n:3" }
+    to: { node: "n:8" }
+  "r:1":
     type: "STORE"
-    from: { node: "customer" }
-    to: { node: "store" }
-  CREDITCARD:
+    from: { node: "n:3" }
+    to: { node: "n:11" }
+  "r:2":
     type: "CREDITCARD"
-    from: { node: "salesorderheader" }
-    to: { node: "creditcard" }
-  CURRENCYRATE:
+    from: { node: "n:4" }
+    to: { node: "n:0" }
+  "r:3":
     type: "CURRENCYRATE"
-    from: { node: "salesorderheader" }
-    to: { node: "currencyrate" }
-  CUSTOMER:
+    from: { node: "n:4" }
+    to: { node: "n:2" }
+  "r:4":
     type: "CUSTOMER"
-    from: { node: "salesorderheader" }
-    to: { node: "customer" }
-  SALESPERSON:
+    from: { node: "n:4" }
+    to: { node: "n:3" }
+  "r:5":
     type: "SALESPERSON"
-    from: { node: "salesorderheader" }
-    to: { node: "salesperson" }
-  SALESTERRITORY2:
+    from: { node: "n:4" }
+    to: { node: "n:5" }
+  "r:6":
     type: "SALESTERRITORY"
-    from: { node: "salesorderheader" }
-    to: { node: "salesterritory" }
-  SALESREASON:
+    from: { node: "n:4" }
+    to: { node: "n:8" }
+  "r:7":
     type: "SALESREASON"
-    from: { node: "salesorderheader" }
-    to: { node: "salesreason" }
+    from: { node: "n:4" }
+    to: { node: "n:6" }
     properties:
-      modifieddate: { type: "ZONED DATETIME" }
-  SALESTERRITORY3:
+      "p:7_0": { type: "ZONED DATETIME", name: "modifieddate" }
+  "r:8":
     type: "SALESTERRITORY"
-    from: { node: "salesperson" }
-    to: { node: "salesterritory" }
-  SALESPERSON2:
+    from: { node: "n:5" }
+    to: { node: "n:8" }
+  "r:9":
     type: "SALESPERSON"
-    from: { node: "store" }
-    to: { node: "salesperson" }
+    from: { node: "n:11" }
+    to: { node: "n:5" }
 extensions:
   tables:
     countryregioncurrency:
@@ -1352,226 +1448,226 @@ extensions:
   mappings:
     mapping0:
       - type: "NODE"
-        node: "creditcard"
+        node: "n:0"
         table: "creditcard"
         properties:
-          creditcardid: { column: "creditcardid" }
-          cardtype: { column: "cardtype" }
-          cardnumber: { column: "cardnumber" }
-          expmonth: { column: "expmonth" }
-          expyear: { column: "expyear" }
-          modifieddate: { column: "modifieddate" }
-        key: ["creditcardid"]
+          "p:0_0": { column: "creditcardid" }
+          "p:0_1": { column: "cardtype" }
+          "p:0_2": { column: "cardnumber" }
+          "p:0_3": { column: "expmonth" }
+          "p:0_4": { column: "expyear" }
+          "p:0_5": { column: "modifieddate" }
+        key: ["p:0_0"]
       - type: "NODE"
-        node: "currency"
+        node: "n:1"
         table: "currency"
         properties:
-          currencycode: { column: "currencycode" }
-          modifieddate: { column: "modifieddate" }
-        key: ["currencycode"]
+          "p:1_0": { column: "currencycode" }
+          "p:1_2": { column: "modifieddate" }
+        key: ["p:1_0"]
       - type: "NODE"
-        node: "currencyrate"
+        node: "n:2"
         table: "currencyrate"
         properties:
-          currencyrateid: { column: "currencyrateid" }
-          currencyratedate: { column: "currencyratedate" }
-          averagerate: { column: "averagerate" }
-          endofdayrate: { column: "endofdayrate" }
-          modifieddate: { column: "modifieddate" }
-        key: ["currencyrateid"]
+          "p:2_0": { column: "currencyrateid" }
+          "p:2_1": { column: "currencyratedate" }
+          "p:2_4": { column: "averagerate" }
+          "p:2_5": { column: "endofdayrate" }
+          "p:2_6": { column: "modifieddate" }
+        key: ["p:2_0"]
       - type: "NODE"
-        node: "customer"
+        node: "n:3"
         table: "customer"
         properties:
-          customerid: { column: "customerid" }
-          rowguid: { column: "rowguid" }
-          modifieddate: { column: "modifieddate" }
-        key: ["customerid"]
+          "p:3_0": { column: "customerid" }
+          "p:3_4": { column: "rowguid" }
+          "p:3_5": { column: "modifieddate" }
+        key: ["p:3_0"]
       - type: "NODE"
-        node: "salesorderheader"
+        node: "n:4"
         table: "salesorderheader"
         properties:
-          salesorderid: { column: "salesorderid" }
-          revisionnumber: { column: "revisionnumber" }
-          orderdate: { column: "orderdate" }
-          duedate: { column: "duedate" }
-          shipdate: { column: "shipdate" }
-          status: { column: "status" }
-          creditcardapprovalcode: { column: "creditcardapprovalcode" }
-          subtotal: { column: "subtotal" }
-          taxamt: { column: "taxamt" }
-          freight: { column: "freight" }
-          totaldue: { column: "totaldue" }
-          comment: { column: "comment" }
-          rowguid: { column: "rowguid" }
-          modifieddate: { column: "modifieddate" }
-        key: ["salesorderid"]
+          "p:4_0": { column: "salesorderid" }
+          "p:4_1": { column: "revisionnumber" }
+          "p:4_2": { column: "orderdate" }
+          "p:4_3": { column: "duedate" }
+          "p:4_4": { column: "shipdate" }
+          "p:4_5": { column: "status" }
+          "p:4_16": { column: "creditcardapprovalcode" }
+          "p:4_18": { column: "subtotal" }
+          "p:4_19": { column: "taxamt" }
+          "p:4_20": { column: "freight" }
+          "p:4_21": { column: "totaldue" }
+          "p:4_22": { column: "comment" }
+          "p:4_23": { column: "rowguid" }
+          "p:4_24": { column: "modifieddate" }
+        key: ["p:4_0"]
       - type: "NODE"
-        node: "salesperson"
+        node: "n:5"
         table: "salesperson"
         properties:
-          businessentityid: { column: "businessentityid" }
-          salesquota: { column: "salesquota" }
-          bonus: { column: "bonus" }
-          commissionpct: { column: "commissionpct" }
-          salesytd: { column: "salesytd" }
-          saleslastyear: { column: "saleslastyear" }
-          rowguid: { column: "rowguid" }
-          modifieddate: { column: "modifieddate" }
-        key: ["businessentityid"]
+          "p:5_0": { column: "businessentityid" }
+          "p:5_2": { column: "salesquota" }
+          "p:5_3": { column: "bonus" }
+          "p:5_4": { column: "commissionpct" }
+          "p:5_5": { column: "salesytd" }
+          "p:5_6": { column: "saleslastyear" }
+          "p:5_7": { column: "rowguid" }
+          "p:5_8": { column: "modifieddate" }
+        key: ["p:5_0"]
       - type: "NODE"
-        node: "salesreason"
+        node: "n:6"
         table: "salesreason"
         properties:
-          salesreasonid: { column: "salesreasonid" }
-          modifieddate: { column: "modifieddate" }
-        key: ["salesreasonid"]
+          "p:6_0": { column: "salesreasonid" }
+          "p:6_3": { column: "modifieddate" }
+        key: ["p:6_0"]
       - type: "NODE"
-        node: "salestaxrate"
+        node: "n:7"
         table: "salestaxrate"
         properties:
-          salestaxrateid: { column: "salestaxrateid" }
-          taxtype: { column: "taxtype" }
-          taxrate: { column: "taxrate" }
-          rowguid: { column: "rowguid" }
-          modifieddate: { column: "modifieddate" }
-        key: ["salestaxrateid"]
+          "p:7_0": { column: "salestaxrateid" }
+          "p:7_2": { column: "taxtype" }
+          "p:7_3": { column: "taxrate" }
+          "p:7_5": { column: "rowguid" }
+          "p:7_6": { column: "modifieddate" }
+        key: ["p:7_0"]
       - type: "NODE"
-        node: "salesterritory"
+        node: "n:8"
         table: "salesterritory"
         properties:
-          territoryid: { column: "territoryid" }
-          group: { column: "group" }
-          salesytd: { column: "salesytd" }
-          saleslastyear: { column: "saleslastyear" }
-          costytd: { column: "costytd" }
-          costlastyear: { column: "costlastyear" }
-          rowguid: { column: "rowguid" }
-          modifieddate: { column: "modifieddate" }
-        key: ["territoryid"]
+          "p:8_0": { column: "territoryid" }
+          "p:8_3": { column: "group" }
+          "p:8_4": { column: "salesytd" }
+          "p:8_5": { column: "saleslastyear" }
+          "p:8_6": { column: "costytd" }
+          "p:8_7": { column: "costlastyear" }
+          "p:8_8": { column: "rowguid" }
+          "p:8_9": { column: "modifieddate" }
+        key: ["p:8_0"]
       - type: "NODE"
-        node: "shoppingcartitem"
+        node: "n:9"
         table: "shoppingcartitem"
         properties:
-          shoppingcartitemid: { column: "shoppingcartitemid" }
-          shoppingcartid: { column: "shoppingcartid" }
-          quantity: { column: "quantity" }
-          datecreated: { column: "datecreated" }
-          modifieddate: { column: "modifieddate" }
-        key: ["shoppingcartitemid"]
+          "p:9_0": { column: "shoppingcartitemid" }
+          "p:9_1": { column: "shoppingcartid" }
+          "p:9_2": { column: "quantity" }
+          "p:9_4": { column: "datecreated" }
+          "p:9_5": { column: "modifieddate" }
+        key: ["p:9_0"]
       - type: "NODE"
-        node: "specialoffer"
+        node: "n:10"
         table: "specialoffer"
         properties:
-          specialofferid: { column: "specialofferid" }
-          description: { column: "description" }
-          discountpct: { column: "discountpct" }
-          type: { column: "type" }
-          category: { column: "category" }
-          startdate: { column: "startdate" }
-          enddate: { column: "enddate" }
-          minqty: { column: "minqty" }
-          maxqty: { column: "maxqty" }
-          rowguid: { column: "rowguid" }
-          modifieddate: { column: "modifieddate" }
-        key: ["specialofferid"]
+          "p:10_0": { column: "specialofferid" }
+          "p:10_1": { column: "description" }
+          "p:10_2": { column: "discountpct" }
+          "p:10_3": { column: "type" }
+          "p:10_4": { column: "category" }
+          "p:10_5": { column: "startdate" }
+          "p:10_6": { column: "enddate" }
+          "p:10_7": { column: "minqty" }
+          "p:10_8": { column: "maxqty" }
+          "p:10_9": { column: "rowguid" }
+          "p:10_10": { column: "modifieddate" }
+        key: ["p:10_0"]
       - type: "NODE"
-        node: "store"
+        node: "n:11"
         table: "store"
         properties:
-          businessentityid: { column: "businessentityid" }
-          rowguid: { column: "rowguid" }
-          modifieddate: { column: "modifieddate" }
-        key: ["businessentityid"]
+          "p:11_0": { column: "businessentityid" }
+          "p:11_4": { column: "rowguid" }
+          "p:11_5": { column: "modifieddate" }
+        key: ["p:11_0"]
       - type: "RELATIONSHIP"
-        relationship: "SALESTERRITORY"
+        relationship: "r:0"
         table: "customer"
         from_node:
           properties:
-            customerid: { column: "customerid" }
+            "p:3_0": { column: "customerid" }
         to_node:
           properties:
-            territoryid: { column: "territoryid" }
+            "p:8_0": { column: "territoryid" }
       - type: "RELATIONSHIP"
-        relationship: "STORE"
+        relationship: "r:1"
         table: "customer"
         from_node:
           properties:
-            customerid: { column: "customerid" }
+            "p:3_0": { column: "customerid" }
         to_node:
           properties:
-            businessentityid: { column: "storeid" }
+            "p:11_0": { column: "storeid" }
       - type: "RELATIONSHIP"
-        relationship: "CREDITCARD"
+        relationship: "r:2"
         table: "salesorderheader"
         from_node:
           properties:
-            salesorderid: { column: "salesorderid" }
+            "p:4_0": { column: "salesorderid" }
         to_node:
           properties:
-            creditcardid: { column: "creditcardid" }
+            "p:0_0": { column: "creditcardid" }
       - type: "RELATIONSHIP"
-        relationship: "CURRENCYRATE"
+        relationship: "r:3"
         table: "salesorderheader"
         from_node:
           properties:
-            salesorderid: { column: "salesorderid" }
+            "p:4_0": { column: "salesorderid" }
         to_node:
           properties:
-            currencyrateid: { column: "currencyrateid" }
+            "p:2_0": { column: "currencyrateid" }
       - type: "RELATIONSHIP"
-        relationship: "CUSTOMER"
+        relationship: "r:4"
         table: "salesorderheader"
         from_node:
           properties:
-            salesorderid: { column: "salesorderid" }
+            "p:4_0": { column: "salesorderid" }
         to_node:
           properties:
-            customerid: { column: "customerid" }
+            "p:3_0": { column: "customerid" }
       - type: "RELATIONSHIP"
-        relationship: "SALESPERSON"
+        relationship: "r:5"
         table: "salesorderheader"
         from_node:
           properties:
-            salesorderid: { column: "salesorderid" }
+            "p:4_0": { column: "salesorderid" }
         to_node:
           properties:
-            businessentityid: { column: "salespersonid" }
+            "p:5_0": { column: "salespersonid" }
       - type: "RELATIONSHIP"
-        relationship: "SALESTERRITORY2"
+        relationship: "r:6"
         table: "salesorderheader"
         from_node:
           properties:
-            salesorderid: { column: "salesorderid" }
+            "p:4_0": { column: "salesorderid" }
         to_node:
           properties:
-            territoryid: { column: "territoryid" }
+            "p:8_0": { column: "territoryid" }
       - type: "RELATIONSHIP"
-        relationship: "SALESREASON"
+        relationship: "r:7"
         table: "salesorderheadersalesreason"
         from_node:
           properties:
-            salesorderid: { column: "salesorderid" }
+            "p:4_0": { column: "salesorderid" }
         to_node:
           properties:
-            salesreasonid: { column: "salesreasonid" }
+            "p:6_0": { column: "salesreasonid" }
         properties:
-          modifieddate: { column: "modifieddate" }
+          "p:7_0": { column: "modifieddate" }
       - type: "RELATIONSHIP"
-        relationship: "SALESTERRITORY3"
+        relationship: "r:8"
         table: "salesperson"
         from_node:
           properties:
-            businessentityid: { column: "businessentityid" }
+            "p:5_0": { column: "businessentityid" }
         to_node:
           properties:
-            territoryid: { column: "territoryid" }
+            "p:8_0": { column: "territoryid" }
       - type: "RELATIONSHIP"
-        relationship: "SALESPERSON2"
+        relationship: "r:9"
         table: "store"
         from_node:
           properties:
-            businessentityid: { column: "businessentityid" }
+            "p:11_0": { column: "businessentityid" }
         to_node:
           properties:
-            businessentityid: { column: "salespersonid" }
+            "p:5_0": { column: "salespersonid" }

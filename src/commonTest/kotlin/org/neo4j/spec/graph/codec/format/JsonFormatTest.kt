@@ -128,7 +128,6 @@ class JsonFormatTest {
     @Test
     fun `test custom extension values serialize with implicit types`() {
         val node = Node(
-            name = "TestNode",
             extensions = NodeExtensions(
                 custom = mutableMapOf(
                     "ext_str" to "hello",

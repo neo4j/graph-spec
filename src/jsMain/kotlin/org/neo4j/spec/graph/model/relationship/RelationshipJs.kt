@@ -41,7 +41,6 @@ external interface RelationshipJs {
     val properties: Record<String, PropertyJs>
     val constraints: Record<String, RelationshipConstraintJs>
     val extensions: RelationshipExtensionsJs
-    var name: String
     val id: String
     val description: String
     var aliases: Array<String>
@@ -55,7 +54,6 @@ fun relationshipJs(
     properties: Record<String, PropertyJs> = emptyRecord(),
     constraints: Record<String, RelationshipConstraintJs> = emptyRecord(),
     extensions: RelationshipExtensionsJs = relationshipExtensionsJs(),
-    name: String,
     id: String,
     description: String = "",
     aliases: Array<String> = emptyArray(),
@@ -67,7 +65,6 @@ fun relationshipJs(
     this.properties = properties
     this.constraints = constraints
     this.extensions = extensions
-    this.name = name
     this.id = id
     this.description = description
     this.aliases = aliases
@@ -81,7 +78,6 @@ fun Relationship.toJs(id: String) = relationshipJs(
     properties = properties.mapValues { (key, property) -> property.toJs(key) }.toRecord(),
     constraints = constraints.mapValues { (_, constraint) -> constraint.toJs() }.toRecord(),
     extensions = extensions.toJs(),
-    name = name ?: id,
     id = id,
     description = description,
     aliases = aliases.toTypedArray(),
@@ -95,7 +91,6 @@ fun RelationshipJs.toClass(id: String) = Relationship(
     properties = properties.associateBy { key, property -> property.toClass("relationships.$id", key) },
     constraints = constraints.associateBy { _, constraint -> constraint.toClass() },
     extensions = extensions.toClass(),
-    name = name,
     description = description,
     aliases = aliases.toMutableSet(),
     reference = reference

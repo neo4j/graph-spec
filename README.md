@@ -77,6 +77,10 @@ An excerpt of a model describing actors, movies and the relationship between the
 ```
 
 > [!NOTE]
+> The example uses shorthand: a node's `label` and a property's `key`, `unique` and `must_exist`. These are accepted
+> when decoding and expanded into `labels.identifier` and constraints.
+
+> [!NOTE]
 > Cardinality (`min_count`, `max_count`, `count`) and `one_of` are part of the model but not yet enforced in the database.
 
 See [go/model/testdata/graph-spec-example.json](go/model/testdata/graph-spec-example.json) for a complete model,

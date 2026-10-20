@@ -17,8 +17,7 @@
 package org.neo4j.spec.graph.model.type
 
 /**
- * Interface for parts of the model which need to be switched between a stable id for [model.Internal] version
- * and a name for the [model.Pretty] version.
+ * Interface for parts of the model which have an optional name in the database, separate from their id.
  */
 interface Named {
     var name: String?

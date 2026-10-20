@@ -110,6 +110,50 @@ relationships:
 }
 ----
 
+== Shorthand and longhand
+
+Some parts of a document can be written more concisely when authoring it.
+The libraries expand this shorthand when decoding a document, and always encode a document in its longhand form.
+Tools that want the concise form can convert a model back with `GraphModel.shorthand()` (and to longhand with `GraphModel.longhand()`).
+Only constraints that the shorthand reproduces exactly are collapsed; for example a constraint with a custom name is kept as it is.
+
+[cols="1,2,2"]
+|===
+| Shorthand | Where | Expands to
+
+| `label`
+| A node
+| `labels.identifier`
+
+| `key`, `unique`, `must_exist`
+| A property
+| A `KEY`, `UNIQUE` or `EXISTS` constraint on the property, added to the `constraints` of the node or relationship
+|===
+
+For example, the `person` node above is encoded as:
+
+[source,yaml]
+----
+nodes:
+  person:
+    labels:
+      identifier: Person
+    properties:
+      name:
+        type: STRING
+      born:
+        type: INTEGER
+    constraints:
+      exists_person_name:
+        type: EXISTS
+        label: Person
+        properties: [name]
+        name: name_Person_exists
+----
+
+Keys of nodes, relationships, properties, constraints and indexes should rarely be renamed.
+The optional `name` field on properties, constraints and indexes holds the name used in the database.
+
 == SDKs
 
 The specification ships libraries for several platforms, each able to migrate older model documents to the latest format and validate a document against the schema.

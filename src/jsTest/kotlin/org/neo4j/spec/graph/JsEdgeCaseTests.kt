@@ -30,7 +30,6 @@ class JsEdgeCaseTests {
             id = "test",
             nodes = recordOf(
                 "n:1" to nodeJs(
-                    name = "Movie",
                     labels = labelsJs("Movie"),
                     properties = recordOf(
                         "p:n1:1" to propertyJs("LIST<STRING>", name = "genres", id = "p:n1:1"),
@@ -64,12 +63,10 @@ class JsEdgeCaseTests {
                 "PersonNode" to Node(
                     labels = Labels("Person"),
                     properties = mutableMapOf("born" to Property(Neo4jType.INTEGER, mustExist = true)),
-                    name = "Person",
                 )
-            ),
-            pretty = true
+            )
         )
-        graphSpec.internalise()
+        graphSpec.longhand()
         val plain = GraphModelEditor.plain(graphSpec)
         val model = GraphModelEditor.model(plain)
         val encoded = GraphSpec.Json.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30)
@@ -78,8 +75,9 @@ class JsEdgeCaseTests {
         assertTrue(encoded.contains("\"nullable\": false"))
 
         val decoded = GraphSpec.Json.decodeFromString(encoded, Type.DATA_MODEL)
-        assertEquals("Person", decoded.nodes["PersonNode"]?.name)
-        assertEquals("born", decoded.nodes["PersonNode"]?.properties?.get("PersonNode_property0")?.name)
+        val node = decoded.nodes.values.single()
+        assertEquals("Person", node.labels.identifier)
+        assertEquals("born", node.properties.values.single().name)
     }
 
     @Test
@@ -92,8 +90,7 @@ class JsEdgeCaseTests {
                     label = "Person",
                     properties = mutableMapOf("name" to Property(Neo4jType.STRING)),
                 )
-            ),
-            pretty = true
+            )
         )
         val encoded = GraphSpec.Json.encodeToString(graphSpec, Type.DATA_MODEL, Version.DATA_MODEL_V30)
         assertTrue(encoded.contains("\"token\": \"Person\""))

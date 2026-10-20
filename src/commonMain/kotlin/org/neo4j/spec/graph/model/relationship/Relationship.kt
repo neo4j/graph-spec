@@ -22,7 +22,6 @@ import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.property.Property
 import org.neo4j.spec.graph.model.relationship.RelationshipConstraint
 import org.neo4j.spec.graph.model.relationship.extension.RelationshipExtensions
-import org.neo4j.spec.graph.model.type.Named
 import kotlin.js.JsExport
 
 @JsExport
@@ -42,12 +41,10 @@ data class Relationship(
     val constraints: MutableMap<String, RelationshipConstraint> = mutableMapOf(),
     @SerialDescription("Extensions for the relationship.")
     val extensions: RelationshipExtensions = RelationshipExtensions(),
-    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
-    override var name: String? = null,
     @SerialDescription("Description of the relationship.")
     val description: String = "",
     @SerialDescription("Alternative names for the relationship.")
     val aliases: MutableSet<String> = mutableSetOf(),
     @SerialDescription("Reference or URI of an external resource describing the relationship.")
     val reference: String = ""
-) : Named
+)

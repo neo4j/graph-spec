@@ -20,7 +20,6 @@ import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import org.neo4j.spec.graph.model.extension.GraphModelExtensions
 import org.neo4j.spec.graph.model.node.Node
 import org.neo4j.spec.graph.model.relationship.Relationship
@@ -54,18 +53,22 @@ data class GraphModel(
     @SerialDescription("Relationship definitions keyed by relationship id.")
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
     @SerialDescription("Extensions to the model: data source tables, mappings and external custom data.")
-    val extensions: GraphModelExtensions = GraphModelExtensions(),
-    @Transient
-    var pretty: Boolean = false
+    val extensions: GraphModelExtensions = GraphModelExtensions()
 ) {
+    /**
+     * Expands any shorthand in the model into its longhand form, see [Notation].
+     */
     @JsExport.Ignore
-    fun prettify() {
-        Pretty.prettify(this)
+    fun longhand() {
+        Notation.longhand(this)
     }
 
+    /**
+     * Collapses longhand in the model into shorthand wherever that loses no information, see [Notation].
+     */
     @JsExport.Ignore
-    fun internalise() {
-        Internal.internalise(this)
+    fun shorthand() {
+        Notation.shorthand(this)
     }
 
     @JsExport.Ignore
@@ -80,9 +83,9 @@ data class GraphModel(
         fun validate(model: GraphModel, validators: List<Validation>) = model.validate(validators)
 
         @JsStatic
-        fun prettify(model: GraphModel) = model.prettify()
+        fun longhand(model: GraphModel) = model.longhand()
 
         @JsStatic
-        fun internalise(model: GraphModel) = model.internalise()
+        fun shorthand(model: GraphModel) = model.shorthand()
     }
 }

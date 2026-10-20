@@ -60,7 +60,6 @@ class StringLengthTest {
     @Test
     fun `pass at the limits`() {
         val node = Node(
-            name = "a".repeat(MAX_NAME_LENGTH),
             description = "a".repeat(MAX_DESCRIPTION_LENGTH),
             properties = mutableMapOf(
                 "p" to Property(name = "a".repeat(MAX_NAME_LENGTH), description = "a".repeat(MAX_DESCRIPTION_LENGTH))
@@ -85,7 +84,6 @@ class StringLengthTest {
             )
         )
         val model = model(
-            name = "a".repeat(MAX_NAME_LENGTH),
             description = "a".repeat(MAX_MODEL_DESCRIPTION_LENGTH),
             nodes = mapOf("n" to node)
         )
@@ -107,7 +105,6 @@ class StringLengthTest {
     @Test
     fun `fail when node fields are too long`() {
         val node = Node(
-            name = "a".repeat(MAX_NAME_LENGTH + 1),
             description = "a".repeat(MAX_DESCRIPTION_LENGTH + 1),
             properties = mutableMapOf(
                 "p" to Property(
@@ -137,7 +134,6 @@ class StringLengthTest {
 
         assertEquals(
             listOf<String?>(
-                "nodes.n.name",
                 "nodes.n.description",
                 "nodes.n.properties.p.name",
                 "nodes.n.properties.p.description",
@@ -154,7 +150,6 @@ class StringLengthTest {
             type = "KNOWS",
             from = RelationshipTarget(),
             to = RelationshipTarget(),
-            name = "a".repeat(MAX_NAME_LENGTH + 1),
             description = "a".repeat(MAX_DESCRIPTION_LENGTH + 1),
             constraints = mutableMapOf(
                 "c" to RelationshipConstraint(
@@ -167,7 +162,6 @@ class StringLengthTest {
 
         assertEquals(
             listOf<String?>(
-                "relationships.r.name",
                 "relationships.r.description",
                 "relationships.r.constraints.c.name"
             ),

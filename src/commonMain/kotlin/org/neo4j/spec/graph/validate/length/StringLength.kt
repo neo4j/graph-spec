@@ -39,7 +39,6 @@ object StringLength : Validation {
         for ((nodeId, node) in model.nodes) {
             checkEntity(
                 path = "nodes.$nodeId",
-                entity = node,
                 description = node.description,
                 properties = node.properties,
                 constraints = node.constraints,
@@ -51,7 +50,6 @@ object StringLength : Validation {
         for ((relationshipId, relationship) in model.relationships) {
             checkEntity(
                 path = "relationships.$relationshipId",
-                entity = relationship,
                 description = relationship.description,
                 properties = relationship.properties,
                 constraints = relationship.constraints,
@@ -63,14 +61,12 @@ object StringLength : Validation {
 
     private fun checkEntity(
         path: String,
-        entity: Named,
         description: String,
         properties: Map<String, Property>,
         constraints: Map<String, Named>,
         indexes: Map<String, Named>,
         issues: MutableList<Issue>
     ) {
-        check("name", entity.name, MAX_NAME_LENGTH, "$path.name", issues)
         check("description", description, MAX_DESCRIPTION_LENGTH, "$path.description", issues)
         for ((propertyId, property) in properties) {
             val propertyPath = "$path.properties.$propertyId"

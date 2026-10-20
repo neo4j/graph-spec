@@ -21,7 +21,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.node.extension.NodeExtensions
 import org.neo4j.spec.graph.model.property.Property
-import org.neo4j.spec.graph.model.type.Named
 import kotlin.js.JsExport
 
 @JsExport
@@ -29,7 +28,7 @@ import kotlin.js.JsExport
 @SerialName("Node")
 @SerialDescription("A node of the graph.")
 data class Node(
-    @SerialDescription("Shorthand for the identifying label. Moved to labels when the model is internalised.")
+    @SerialDescription("Shorthand for the identifying label. Expanded into labels when the model is decoded.")
     var label: String? = null,
     @SerialDescription("Labels of the node.")
     val labels: Labels = Labels(),
@@ -39,12 +38,10 @@ data class Node(
     val constraints: MutableMap<String, NodeConstraint> = mutableMapOf(),
     @SerialDescription("Extensions for the node.")
     val extensions: NodeExtensions = NodeExtensions(),
-    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
-    override var name: String? = null,
     @SerialDescription("Description of the node.")
     val description: String = "",
     @SerialDescription("Alternative names for the node.")
     val aliases: MutableSet<String> = mutableSetOf(),
     @SerialDescription("Reference or URI of an external resource describing the node.")
     val reference: String = ""
-) : Named
+)

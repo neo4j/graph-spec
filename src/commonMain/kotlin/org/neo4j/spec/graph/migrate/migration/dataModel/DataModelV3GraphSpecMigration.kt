@@ -155,7 +155,6 @@ class DataModelV3GraphSpecMigration :
                 "extensions" toNotEmpty mapOf(
                     "indexes" to convertIndexes(indexes, labelRef, primaryLabel, propertyTokens)
                 ).filterValues { !it.isNullOrEmpty() }.mapValues { it.value!! },
-                "name" to tokens.firstOrNull(),
                 "description" to nodeObject.literalOrNull("description")
             )
         }
@@ -237,7 +236,6 @@ class DataModelV3GraphSpecMigration :
         constraints: Map<String, List<SchemaMap>>,
         indexes: Map<String, List<SchemaMap>>
     ): MutableMap<String, SchemaMap> {
-        val uniqueNames = mutableSetOf<String>()
         val relationships = mutableMapOf<String, SchemaMap>()
         val relationshipTypes =
             schema.listOfMapsOrNull("relationshipTypes")?.associateBy { it.id() } ?: return relationships
@@ -258,24 +256,10 @@ class DataModelV3GraphSpecMigration :
                 "extensions" toNotEmpty mapOf(
                     "indexes" to convertIndexes(indexes, typeRef, token, propertyTokens)
                 ).filterValues { !it.isNullOrEmpty() }.mapValues { it.value!! },
-                "name" to uniqueRelationshipName(token, uniqueNames),
                 "description" to objectType.literalOrNull("description")
             )
         }
         return relationships
-    }
-
-    private fun uniqueRelationshipName(token: String, names: MutableSet<String>): String {
-        if (names.add(token)) {
-            return token
-        }
-        for (i in 2 until Int.MAX_VALUE) {
-            val name = "${token}$i"
-            if (names.add(name)) {
-                return name
-            }
-        }
-        throw IllegalArgumentException("Unable to find unique relationship name for $token")
     }
 
     internal fun convertProperties(labels: List<SchemaMap>): Map<String, SchemaMap> = labels

@@ -25,7 +25,6 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
             custom = mutableMapOf("key1" to "val1"),
             indexes = mutableMapOf("index" to RelationshipIndex(IndexType.POINT, mutableSetOf("prop")))
         ),
-        name = "relationshipName",
         aliases = mutableSetOf("alias1", "alias2"),
         reference = "rel-ref"
     )
@@ -43,7 +42,6 @@ class RelationshipJsTest : JsMappingTest<Relationship, RelationshipJs>() {
         assertJsEquals(relationshipIndexJs("POINT", arrayOf("prop")), jsObject.extensions.indexes["index"])
         assertEquals<Any?>("val1", jsObject.extensions.custom["key1"])
         assertEquals("relationshipId", jsObject.id)
-        assertEquals("relationshipName", jsObject.name)
         assertEquals(listOf("alias1", "alias2"), jsObject.aliases.toList())
         assertEquals("rel-ref", jsObject.reference)
     }

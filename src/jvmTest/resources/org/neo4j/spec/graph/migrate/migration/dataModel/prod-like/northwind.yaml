@@ -2,69 +2,93 @@ schema: "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json"
 version: "1.0.0"
 id: "graph-model"
 nodes:
-  categories:
-    label: "categories"
+  "n:0":
+    labels:
+      identifier: "categories"
     properties:
-      categoryid: { type: "INTEGER", unique: true }
-      categoryname: { type: "STRING" }
-      description: { type: "STRING" }
-      picture: { type: "STRING" }
+      "p:0_0": { type: "INTEGER", name: "categoryid" }
+      "p:0_1": { type: "STRING", name: "categoryname" }
+      "p:0_2": { type: "STRING", name: "description" }
+      "p:0_3": { type: "STRING", name: "picture" }
+    constraints:
+      "c:0":
+        type: "UNIQUE"
+        label: "categories"
+        properties: ["p:0_0"]
+        name: "categories"
     extensions:
       indexes:
-        categories:
+        "i:0":
           type: "TEXT"
           labels: ["categories"]
-          properties: ["categoryid"]
+          properties: ["p:0_0"]
+          name: "categories"
       display:
         x: -100.123
         y: 200.0
-  products:
-    label: "products"
+  "n:1":
+    labels:
+      identifier: "products"
     properties:
-      productid: { type: "INTEGER", unique: true }
-      productname: { type: "STRING" }
-      quantityperunit: { type: "STRING" }
-      unitprice: { type: "FLOAT" }
-      unitsinstock: { type: "INTEGER" }
-      unitsonorder: { type: "INTEGER" }
-      reorderlevel: { type: "INTEGER" }
-      discontinued: { type: "INTEGER" }
+      "p:1_0": { type: "INTEGER", name: "productid" }
+      "p:1_1": { type: "STRING", name: "productname" }
+      "p:1_4": { type: "STRING", name: "quantityperunit" }
+      "p:1_5": { type: "FLOAT", name: "unitprice" }
+      "p:1_6": { type: "INTEGER", name: "unitsinstock" }
+      "p:1_7": { type: "INTEGER", name: "unitsonorder" }
+      "p:1_8": { type: "INTEGER", name: "reorderlevel" }
+      "p:1_9": { type: "INTEGER", name: "discontinued" }
+    constraints:
+      "c:1":
+        type: "UNIQUE"
+        label: "products"
+        properties: ["p:1_0"]
+        name: "products"
     extensions:
       indexes:
-        products:
+        "i:1":
           type: "TEXT"
           labels: ["products"]
-          properties: ["productid"]
-  suppliers:
-    label: "suppliers"
+          properties: ["p:1_0"]
+          name: "products"
+  "n:2":
+    labels:
+      identifier: "suppliers"
     properties:
-      supplierid: { type: "INTEGER", unique: true }
-      companyname: { type: "STRING" }
-      contactname: { type: "STRING" }
-      contacttitle: { type: "STRING" }
-      address: { type: "STRING" }
-      city: { type: "STRING" }
-      region: { type: "STRING" }
-      postalcode: { type: "STRING" }
-      country: { type: "STRING" }
-      phone: { type: "STRING" }
-      fax: { type: "STRING" }
-      homepage: { type: "STRING" }
+      "p:2_0": { type: "INTEGER", name: "supplierid" }
+      "p:2_1": { type: "STRING", name: "companyname" }
+      "p:2_2": { type: "STRING", name: "contactname" }
+      "p:2_3": { type: "STRING", name: "contacttitle" }
+      "p:2_4": { type: "STRING", name: "address" }
+      "p:2_5": { type: "STRING", name: "city" }
+      "p:2_6": { type: "STRING", name: "region" }
+      "p:2_7": { type: "STRING", name: "postalcode" }
+      "p:2_8": { type: "STRING", name: "country" }
+      "p:2_9": { type: "STRING", name: "phone" }
+      "p:2_10": { type: "STRING", name: "fax" }
+      "p:2_11": { type: "STRING", name: "homepage" }
+    constraints:
+      "c:2":
+        type: "UNIQUE"
+        label: "suppliers"
+        properties: ["p:2_0"]
+        name: "suppliers"
     extensions:
       indexes:
-        suppliers:
+        "i:2":
           type: "TEXT"
           labels: ["suppliers"]
-          properties: ["supplierid"]
+          properties: ["p:2_0"]
+          name: "suppliers"
 relationships:
-  CATEGORIES:
+  "r:0":
     type: "CATEGORIES"
-    from: { node: "products" }
-    to: { node: "categories" }
-  SUPPLIERS:
+    from: { node: "n:1" }
+    to: { node: "n:0" }
+  "r:1":
     type: "SUPPLIERS"
-    from: { node: "products" }
-    to: { node: "suppliers" }
+    from: { node: "n:1" }
+    to: { node: "n:2" }
 extensions:
   tables:
     categories:
@@ -227,59 +251,59 @@ extensions:
   mappings:
     mapping0:
       - type: "NODE"
-        node: "categories"
+        node: "n:0"
         table: "categories"
         properties:
-          categoryid: { column: "categoryid" }
-          categoryname: { column: "categoryname" }
-          description: { column: "description" }
-          picture: { column: "picture" }
-        key: ["categoryid"]
+          "p:0_0": { column: "categoryid" }
+          "p:0_1": { column: "categoryname" }
+          "p:0_2": { column: "description" }
+          "p:0_3": { column: "picture" }
+        key: ["p:0_0"]
       - type: "NODE"
-        node: "products"
+        node: "n:1"
         table: "products"
         properties:
-          productid: { column: "productid" }
-          productname: { column: "productname" }
-          quantityperunit: { column: "quantityperunit" }
-          unitprice: { column: "unitprice" }
-          unitsinstock: { column: "unitsinstock" }
-          unitsonorder: { column: "unitsonorder" }
-          reorderlevel: { column: "reorderlevel" }
-          discontinued: { column: "discontinued" }
-        key: ["productid"]
+          "p:1_0": { column: "productid" }
+          "p:1_1": { column: "productname" }
+          "p:1_4": { column: "quantityperunit" }
+          "p:1_5": { column: "unitprice" }
+          "p:1_6": { column: "unitsinstock" }
+          "p:1_7": { column: "unitsonorder" }
+          "p:1_8": { column: "reorderlevel" }
+          "p:1_9": { column: "discontinued" }
+        key: ["p:1_0"]
       - type: "NODE"
-        node: "suppliers"
+        node: "n:2"
         table: "suppliers"
         properties:
-          supplierid: { column: "supplierid" }
-          companyname: { column: "companyname" }
-          contactname: { column: "contactname" }
-          contacttitle: { column: "contacttitle" }
-          address: { column: "address" }
-          city: { column: "city" }
-          region: { column: "region" }
-          postalcode: { column: "postalcode" }
-          country: { column: "country" }
-          phone: { column: "phone" }
-          fax: { column: "fax" }
-          homepage: { column: "homepage" }
-        key: ["supplierid"]
+          "p:2_0": { column: "supplierid" }
+          "p:2_1": { column: "companyname" }
+          "p:2_2": { column: "contactname" }
+          "p:2_3": { column: "contacttitle" }
+          "p:2_4": { column: "address" }
+          "p:2_5": { column: "city" }
+          "p:2_6": { column: "region" }
+          "p:2_7": { column: "postalcode" }
+          "p:2_8": { column: "country" }
+          "p:2_9": { column: "phone" }
+          "p:2_10": { column: "fax" }
+          "p:2_11": { column: "homepage" }
+        key: ["p:2_0"]
       - type: "RELATIONSHIP"
-        relationship: "CATEGORIES"
+        relationship: "r:0"
         table: "products"
         from_node:
           properties:
-            productid: { column: "productid" }
+            "p:1_0": { column: "productid" }
         to_node:
           properties:
-            categoryid: { column: "categoryid" }
+            "p:0_0": { column: "categoryid" }
       - type: "RELATIONSHIP"
-        relationship: "SUPPLIERS"
+        relationship: "r:1"
         table: "products"
         from_node:
           properties:
-            productid: { column: "productid" }
+            "p:1_0": { column: "productid" }
         to_node:
           properties:
-            supplierid: { column: "supplierid" }
+            "p:2_0": { column: "supplierid" }

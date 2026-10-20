@@ -37,7 +37,7 @@ data class NodeConstraint(
     override val properties: MutableSet<String>,
     @SerialDescription("Extensions for the constraint.")
     val extensions: NodeConstraintExtensions = NodeConstraintExtensions(),
-    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
+    @SerialDescription("Name of the constraint in the database.")
     override var name: String? = null
 ) : Constraint,
     Named

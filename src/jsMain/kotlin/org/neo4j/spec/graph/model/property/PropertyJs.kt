@@ -32,7 +32,7 @@ external interface PropertyJs {
     var unique: Boolean?
     var key: Boolean?
     val extensions: PropertyExtensionsJs
-    var name: String
+    var name: String?
     val id: String
     val description: String
     var reference: String
@@ -47,7 +47,7 @@ fun propertyJs(
     unique: Boolean? = null,
     key: Boolean? = null,
     extensions: PropertyExtensionsJs = propertyExtensionsJs(),
-    name: String,
+    name: String? = null,
     id: String,
     description: String = "",
     reference: String = "",
@@ -75,7 +75,7 @@ fun Property.toJs(key: String) = propertyJs(
     unique = unique,
     key = this.key,
     extensions = extensions.toJs(),
-    name = name ?: key,
+    name = name,
     id = key,
     description = description,
     reference = reference,

@@ -34,18 +34,18 @@ data class Property(
     var dimension: Int? = null,
     @SerialName("must_exist")
     @SerialDescription(
-        "Shorthand for an existence constraint. Expanded into constraints when the model is internalised."
+        "Shorthand for an existence constraint. Expanded into constraints when the model is decoded."
     )
     var mustExist: Boolean? = null,
     @SerialDescription(
-        "Shorthand for a uniqueness constraint. Expanded into constraints when the model is internalised."
+        "Shorthand for a uniqueness constraint. Expanded into constraints when the model is decoded."
     )
     var unique: Boolean? = null,
-    @SerialDescription("Shorthand for a key constraint. Expanded into constraints when the model is internalised.")
+    @SerialDescription("Shorthand for a key constraint. Expanded into constraints when the model is decoded.")
     var key: Boolean? = null,
     @SerialDescription("Extensions for the property.")
     val extensions: PropertyExtensions = PropertyExtensions(),
-    @SerialDescription("Human-readable name. Used in place of the stable id in the pretty form of the model.")
+    @SerialDescription("Name of the property in the database, when different from its id.")
     override var name: String? = null,
     @SerialDescription("Description of the property.")
     val description: String = "",

@@ -25,7 +25,6 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
             indexes = mutableMapOf("index" to NodeIndex(IndexType.RANGE, mutableSetOf("label"), mutableSetOf("prop"))),
             display = NodeDisplay(1.0, 2.0, "#FF8800")
         ),
-        name = "Node Name",
         aliases = mutableSetOf("alias1", "alias2"),
         reference = "node-ref"
     )

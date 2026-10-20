@@ -13,7 +13,6 @@ class RelationshipEditorTest {
     fun setup() {
         val relationship = relationshipJs(
             type = "WORKS_AT",
-            name = "WorksAt",
             id = relId
         )
         model = graphModelJs(
@@ -25,18 +24,16 @@ class RelationshipEditorTest {
 
     @Test
     fun testBasicMetadataUpdates() {
-        val rel = relationshipJs(type = "A", name = "NameA", id = "1")
+        val rel = relationshipJs(type = "A", id = "1")
 
         RelationshipEditor.setType(rel, "B")
-        RelationshipEditor.setName(rel, "NameB")
 
         assertEquals("B", rel.type)
-        assertEquals("NameB", rel.name)
     }
 
     @Test
     fun testSourceTargetDelegation() {
-        val rel = relationshipJs(type = "T", name = "N", id = "1")
+        val rel = relationshipJs(type = "T", id = "1")
 
         // Test Source (from) delegation
         RelationshipEditor.setSourceNode(rel, "Node1")
@@ -56,7 +53,7 @@ class RelationshipEditorTest {
         // Add Property
         val propId = RelationshipEditor.addProperty(model, relId)
         assertNotNull(rel.properties[propId])
-        assertEquals(propId, rel.properties[propId]?.name)
+        assertNull(rel.properties[propId]?.name)
 
         // Update Property
         RelationshipEditor.setPropertyName(model, relId, propId, "NewName")
@@ -116,7 +113,7 @@ class RelationshipEditorTest {
     fun testErrorHandling() {
         // Test that operations on non-existent relationships throw as expected
         assertFails {
-            RelationshipEditor.setType(relationshipJs(type="", name="", id=""), "new")
+            RelationshipEditor.setType(relationshipJs(type="", id=""), "new")
             // The above won't fail, but the Model ones will:
             RelationshipEditor.addProperty(model, "non-existent-id")
         }
