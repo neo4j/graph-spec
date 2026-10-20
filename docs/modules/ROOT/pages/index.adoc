@@ -16,7 +16,7 @@ It is published, versioned, SDK-backed and openly governed, so it is a stable co
 == The format
 
 A graph model document describes nodes, relationships, their properties, constraints and indexes, plus optional extensions such as data source tables and import mappings.
-The format is defined by the JSON Schema file `ontology-graph-spec.schema.json` at the root of the repository, with `$id` `https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json`.
+The format is defined by the JSON Schema file `ontology-graph-spec.schema.json` at the root of the repository, served with these docs at link:/docs/ontology-graph-spec/current/schema.json[/docs/ontology-graph-spec/current/schema.json], with `$id` `https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json`.
 
 A document requires three top-level fields: `schema`, `version` and `id`.
 Nodes are keyed by id under `nodes`, relationships under `relationships`; a relationship requires `type`, `from` and `to`, and each property takes a Neo4j `type` such as `STRING` or `INTEGER`.
