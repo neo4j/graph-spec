@@ -151,7 +151,7 @@ nodes:
         name: name_Person_exists
 ----
 
-Keys of nodes, relationships, properties, constraints and indexes are never renamed.
+Keys of nodes, relationships, properties, constraints and indexes should rarely be renamed.
 The optional `name` field on properties, constraints and indexes holds the name used in the database.
 
 == SDKs
