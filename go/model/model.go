@@ -403,12 +403,10 @@ type Node struct {
 	Description *string `json:"description,omitempty"`
 	// Extensions for the node.
 	Extensions *NodeExtensions `json:"extensions,omitempty"`
-	// Shorthand for the identifying label. Moved to labels when the model is internalised.
+	// Shorthand for the identifying label. Expanded into labels when the model is decoded.
 	Label *string `json:"label,omitempty"`
 	// Labels of the node.
 	Labels *Labels `json:"labels,omitempty"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
-	Name *string `json:"name,omitempty"`
 	// Properties of the node keyed by id.
 	Properties *map[string]Property `json:"properties,omitempty"`
 	// Reference or URI of an external resource describing the node.
@@ -421,7 +419,7 @@ type NodeConstraint struct {
 	Extensions *NodeConstraintExtensions `json:"extensions,omitempty"`
 	// Label the constraint applies to.
 	Label *string `json:"label,omitempty"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
+	// Name of the constraint in the database.
 	Name *string `json:"name,omitempty"`
 	// Ids of the properties the constraint covers.
 	Properties []string `json:"properties"`
@@ -463,7 +461,7 @@ type NodeIndex struct {
 	Custom *map[string]any `json:"custom,omitempty"`
 	// Labels the index covers.
 	Labels []string `json:"labels"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
+	// Name of the index in the database.
 	Name *string `json:"name,omitempty"`
 	// Configuration specific to the type of index.
 	Options *IndexOption `json:"options,omitempty"`
@@ -513,11 +511,11 @@ type Property struct {
 	Dimension *int64 `json:"dimension,omitempty"`
 	// Extensions for the property.
 	Extensions *PropertyExtensions `json:"extensions,omitempty"`
-	// Shorthand for a key constraint. Expanded into constraints when the model is internalised.
+	// Shorthand for a key constraint. Expanded into constraints when the model is decoded.
 	Key *bool `json:"key,omitempty"`
-	// Shorthand for an existence constraint. Expanded into constraints when the model is internalised.
+	// Shorthand for an existence constraint. Expanded into constraints when the model is decoded.
 	MustExist *bool `json:"must_exist,omitempty"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
+	// Name of the property in the database, when different from its id.
 	Name *string `json:"name,omitempty"`
 	// Values the property is restricted to.
 	OneOf *[]string `json:"one_of,omitempty"`
@@ -527,7 +525,7 @@ type Property struct {
 	Reference *string `json:"reference,omitempty"`
 	// Neo4j type of the property.
 	Type *Neo4jType `json:"type,omitempty"`
-	// Shorthand for a uniqueness constraint. Expanded into constraints when the model is internalised.
+	// Shorthand for a uniqueness constraint. Expanded into constraints when the model is decoded.
 	Unique *bool `json:"unique,omitempty"`
 }
 
@@ -615,8 +613,6 @@ type Relationship struct {
 	Extensions *RelationshipExtensions `json:"extensions,omitempty"`
 	// The node the relationship starts at.
 	From RelationshipTarget `json:"from"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
-	Name *string `json:"name,omitempty"`
 	// Properties of the relationship keyed by id.
 	Properties *map[string]Property `json:"properties,omitempty"`
 	// Reference or URI of an external resource describing the relationship.
@@ -631,7 +627,7 @@ type Relationship struct {
 type RelationshipConstraint struct {
 	// Extensions for the constraint.
 	Extensions *RelationshipConstraintExtensions `json:"extensions,omitempty"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
+	// Name of the constraint in the database.
 	Name *string `json:"name,omitempty"`
 	// Ids of the properties the constraint covers.
 	Properties []string `json:"properties"`
@@ -657,7 +653,7 @@ type RelationshipExtensions struct {
 type RelationshipIndex struct {
 	// User-defined arbitrary data.
 	Custom *map[string]any `json:"custom,omitempty"`
-	// Human-readable name. Used in place of the stable id in the pretty form of the model.
+	// Name of the index in the database.
 	Name *string `json:"name,omitempty"`
 	// Configuration specific to the type of index.
 	Options *IndexOption `json:"options,omitempty"`
