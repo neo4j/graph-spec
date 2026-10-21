@@ -13,12 +13,10 @@
       "constraints": {
         "typeConstraint": {
           "type": "PROPERTY_TYPE",
-          "label": "Person",
           "properties": []
         },
         "existenceConstraint": {
           "type": "EXISTS",
-          "label": "Person",
           "properties": []
         }
       },
