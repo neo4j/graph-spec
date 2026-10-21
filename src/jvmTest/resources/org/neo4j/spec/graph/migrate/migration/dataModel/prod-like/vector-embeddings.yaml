@@ -21,7 +21,7 @@ nodes:
             vector.similarity_function: "euclidean"
           name: "document_embedding"
 extensions:
-  tables:
+  data_source_tables:
     document:
       source: "cloud"
       columns:
@@ -39,7 +39,7 @@ extensions:
           suggested: "VECTOR<FLOAT>"
           supported: ["VECTOR<FLOAT>"]
       primary_keys: ["documentid"]
-  mappings:
+  data_source_mappings:
     mapping0:
       - type: "NODE"
         node: "n:0"

@@ -32,6 +32,10 @@ import org.neo4j.spec.graph.model.property.PropertyJs
 import org.neo4j.spec.graph.model.property.propertyJs
 import org.neo4j.spec.graph.model.remove
 
+/**
+ * **Experimental:** these JavaScript helpers (the `*Editor` classes and the plain `*Js` objects) are experimental
+ * and may change or be removed in any release without notice.
+ */
 @JsExport
 class NodeEditor {
     companion object {
@@ -182,13 +186,12 @@ class NodeEditor {
             model: GraphModelJs,
             nodeId: String,
             type: String,
-            label: String? = null,
             properties: Array<String> = emptyArray(),
             extensions: NodeConstraintExtensionsJs = nodeConstraintExtensionsJs()
         ): String {
             val node = model.nodes.getOrThrow(nodeId, "Node")
             return node.constraints.addUnique("constraint") {
-                nodeConstraintJs(type, label, properties, extensions)
+                nodeConstraintJs(type, properties, extensions)
             }
         }
 
@@ -196,12 +199,6 @@ class NodeEditor {
         fun setConstraintType(model: GraphModelJs, nodeId: String, constraintId: String, type: String) {
             val constraint = getConstraint(model, nodeId, constraintId)
             NodeConstraintEditor.setType(constraint, type)
-        }
-
-        @JsStatic
-        fun setConstraintLabel(model: GraphModelJs, nodeId: String, constraintId: String, label: String) {
-            val constraint = getConstraint(model, nodeId, constraintId)
-            NodeConstraintEditor.setLabel(constraint, label)
         }
 
         @JsStatic

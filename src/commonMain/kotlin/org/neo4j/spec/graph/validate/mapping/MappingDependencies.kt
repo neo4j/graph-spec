@@ -30,7 +30,7 @@ import org.neo4j.spec.graph.validate.Validation
  */
 object MappingDependencies : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        val lists = model.extensions.mappings
+        val lists = model.extensions.dataSourceMappings
         for ((listId, mappings) in lists) {
             validateList(listId, mappings, lists, issues)
         }
@@ -53,7 +53,7 @@ object MappingDependencies : Validation {
                     Issue(
                         code = "mapping_id_duplicate",
                         message = "Mapping id '$id' is used by more than one mapping in '$listId'",
-                        path = "extensions.mappings.$listId[$index].id"
+                        path = "extensions.data_source_mappings.$listId[$index].id"
                     )
                 )
             } else {
@@ -69,7 +69,7 @@ object MappingDependencies : Validation {
                 continue
             }
             val target = indexById[dependsOn]
-            val path = "extensions.mappings.$listId[$index].depends_on"
+            val path = "extensions.data_source_mappings.$listId[$index].depends_on"
             when {
                 target == index -> issues.add(
                     Issue(
@@ -121,7 +121,7 @@ object MappingDependencies : Validation {
                         message = "Mappings ${cycle.sorted().joinToString(", ") {
                             "[$it]"
                         }} in '$listId' depend on each other in a cycle",
-                        path = "extensions.mappings.$listId[$first].depends_on"
+                        path = "extensions.data_source_mappings.$listId[$first].depends_on"
                     )
                 )
             }

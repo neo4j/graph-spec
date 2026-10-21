@@ -53,7 +53,7 @@ class NodeMappingKeyTest {
             properties = mutableMapOf("name" to Property())
         )
         model.nodes["person"] = node
-        model.extensions.mappings["mapping0"] = mutableListOf(
+        model.extensions.dataSourceMappings["mapping0"] = mutableListOf(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -75,7 +75,7 @@ class NodeMappingKeyTest {
             properties = mutableMapOf("name" to Property())
         )
         model.nodes["person"] = node
-        model.extensions.mappings["mapping0"] = mutableListOf(
+        model.extensions.dataSourceMappings["mapping0"] = mutableListOf(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -99,7 +99,7 @@ class NodeMappingKeyTest {
             properties = mutableMapOf("name" to Property())
         )
         model.nodes["person"] = node
-        model.extensions.mappings["mapping0"] = mutableListOf(
+        model.extensions.dataSourceMappings["mapping0"] = mutableListOf(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -118,6 +118,6 @@ class NodeMappingKeyTest {
         validator.validateNode(model, "person", node, issues)
 
         assertEquals(1, issues.size)
-        assertEquals("extensions.mappings.mapping0[1].key", issues[0].path)
+        assertEquals("extensions.data_source_mappings.mapping0[1].key", issues[0].path)
     }
 }

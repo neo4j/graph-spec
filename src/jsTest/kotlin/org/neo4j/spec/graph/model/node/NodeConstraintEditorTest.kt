@@ -6,7 +6,6 @@ class NodeConstraintEditorTest {
 
     private fun createConstraint(): NodeConstraintJs = nodeConstraintJs(
         type = "UNIQUENESS",
-        label = "User",
         properties = arrayOf("email")
     )
 
@@ -15,19 +14,6 @@ class NodeConstraintEditorTest {
         val constraint = createConstraint()
         NodeConstraintEditor.setType(constraint, "NODE_PROPERTY_EXISTENCE")
         assertEquals("NODE_PROPERTY_EXISTENCE", constraint.type)
-    }
-
-    @Test
-    fun testSetLabel() {
-        val constraint = createConstraint()
-
-        // Change label
-        NodeConstraintEditor.setLabel(constraint, "Admin")
-        assertEquals("Admin", constraint.label)
-
-        // Set to null
-        NodeConstraintEditor.setLabel(constraint, null)
-        assertNull(constraint.label)
     }
 
     @Test

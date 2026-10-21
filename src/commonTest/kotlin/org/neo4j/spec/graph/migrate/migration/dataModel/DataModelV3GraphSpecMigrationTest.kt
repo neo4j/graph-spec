@@ -257,7 +257,6 @@ class DataModelV3GraphSpecMigrationTest {
         val constraint = result["c:1"]
         assertNotNull(constraint)
         assertEquals("UNIQUE", constraint.string("type"))
-        assertEquals("Person", constraint.string("label"))
         assertEquals(listOf("p1", "p2").toSchemaElement(), constraint.list("properties"))
         assertEquals("constraint1", constraint.string("name"))
     }
@@ -768,10 +767,13 @@ class DataModelV3GraphSpecMigrationTest {
 
         val result = migration.migrate(input)
 
-        assertNotNull(result.map("extensions").mapOfMaps("tables")["users"])
+        assertNotNull(result.map("extensions").mapOfMaps("data_source_tables")["users"])
         assertTrue(result.mapOfMaps("nodes").isEmpty(), "nodes should be present but empty")
         assertTrue(result.mapOfMaps("relationships").isEmpty(), "relationships should be present but empty")
-        assertFalse(result.map("extensions").containsKey("mappings"), "mappings should be omitted when empty")
+        assertFalse(
+            result.map("extensions").containsKey("data_source_mappings"),
+            "mappings should be omitted when empty"
+        )
         assertTrue(result.containsKey("description"), "description should be present but empty")
     }
 }

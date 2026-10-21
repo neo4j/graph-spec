@@ -50,7 +50,7 @@ object Notation {
                 entity = key,
                 label = node.labels.identifier ?: ""
             ) { type, props ->
-                NodeConstraint(type, node.labels.identifier, props)
+                NodeConstraint(type, props)
             }
         }
         model.relationships.forEach { (key, relationship) ->
@@ -67,14 +67,7 @@ object Notation {
 
     fun shorthand(model: GraphModel) {
         model.nodes.values.forEach { node ->
-            collapse(
-                node.constraints,
-                node.properties,
-                node.labels.identifier ?: "",
-                { it.extensions }
-            ) { constraint ->
-                constraint.label == node.labels.identifier
-            }
+            collapse(node.constraints, node.properties, node.labels.identifier ?: "", { it.extensions })
             val labels = node.labels
             val identifier = labels.identifier
             if (identifier != null && labels.implied.isEmpty() && labels.optional.isEmpty() &&
@@ -97,15 +90,14 @@ object Notation {
         constraints: MutableMap<String, C>,
         properties: MutableMap<String, Property>,
         label: String,
-        extensions: (C) -> CustomExtensions,
-        check: (C) -> Boolean = { true }
+        extensions: (C) -> CustomExtensions
     ) where C : Constraint, C : Named {
         val collapsed = mutableSetOf<String>()
         for ((key, constraint) in constraints) {
             val propertyKey = constraint.properties.singleOrNull() ?: continue
             val property = properties[propertyKey] ?: continue
             val expected = NameFormat.constraintName(listOf(property.name ?: propertyKey), label, constraint.type)
-            if (!check(constraint) || extensions(constraint).custom.isNotEmpty() ||
+            if (extensions(constraint).custom.isNotEmpty() ||
                 (constraint.name != null && constraint.name != expected)
             ) {
                 continue

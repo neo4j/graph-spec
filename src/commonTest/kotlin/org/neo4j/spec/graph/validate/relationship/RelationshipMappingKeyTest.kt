@@ -45,7 +45,7 @@ class RelationshipMappingKeyTest {
             )
         ),
         extensions = GraphModelExtensions(
-            mappings = mutableMapOf(
+            dataSourceMappings = mutableMapOf(
                 "m0" to mutableListOf(
                     NodeMapping(node = "node0", table = "t", properties = mutableMapOf(), key = mutableSetOf("age")),
                     RelationshipMapping(
@@ -78,7 +78,7 @@ class RelationshipMappingKeyTest {
 
         assertEquals(1, issues.size)
         assertEquals("invalid_relationship_mapping_key", issues.first().code)
-        assertEquals("extensions.mappings.m0[1].key", issues.first().path)
+        assertEquals("extensions.data_source_mappings.m0[1].key", issues.first().path)
         assertEquals("age", issues.first().details["property"])
     }
 

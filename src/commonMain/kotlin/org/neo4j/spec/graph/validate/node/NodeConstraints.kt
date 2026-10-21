@@ -41,15 +41,5 @@ object NodeConstraints : NodeValidation {
                 )
             }
         }
-        val label = constraint.label
-        if (!node.labels.implied.contains(label) && node.labels.identifier != label) {
-            issues.add(
-                Issue(
-                    code = "missing_node_constraint_label",
-                    message = "Missing label with id '$label' for node constraint '$constraintId'",
-                    path = "nodes.$nodeId.constraints.$constraintId.labels.$label"
-                )
-            )
-        }
     }
 }

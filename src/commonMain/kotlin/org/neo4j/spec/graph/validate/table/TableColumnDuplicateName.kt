@@ -40,7 +40,7 @@ object TableColumnDuplicateName : TableValidation {
                 Issue(
                     code = "duplicate_table_column_name",
                     message = "Duplicate column name '$name' in table '$tableId'",
-                    path = "extensions.tables.$tableId.columns[$columnIndex].name"
+                    path = "extensions.data_source_tables.$tableId.columns[$columnIndex].name"
                 )
             )
         }

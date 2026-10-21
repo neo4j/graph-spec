@@ -13,12 +13,10 @@
       "constraints": {
         "typeConstraint": {
           "type": "PROPERTY_TYPE",
-          "label": "Person",
           "properties": []
         },
         "existenceConstraint": {
           "type": "EXISTS",
-          "label": "Person",
           "properties": []
         }
       },
@@ -31,8 +29,8 @@
   "relationships": {},
   "extensions": {
     "custom": {},
-    "tables": {},
-    "mappings": {
+    "data_source_tables": {},
+    "data_source_mappings": {
       "mapping0": []
     }
   }

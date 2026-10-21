@@ -114,7 +114,7 @@ class JsonFormatTest {
             version = "1.0",
             id = "test",
             nodes = mutableMapOf(),
-            extensions = GraphModelExtensions(mappings = mutableMapOf())
+            extensions = GraphModelExtensions(dataSourceMappings = mutableMapOf())
         )
 
         val schema = jsonFormat.encodeToSchema(model)
@@ -122,7 +122,7 @@ class JsonFormatTest {
 
         assertEquals(model.version, decoded.version)
         assertTrue(decoded.nodes.isEmpty())
-        assertTrue(decoded.extensions.mappings.isEmpty())
+        assertTrue(decoded.extensions.dataSourceMappings.isEmpty())
     }
 
     @Test
@@ -164,7 +164,7 @@ class JsonFormatTest {
             version = "1",
             id = "test",
             extensions = GraphModelExtensions(
-                mappings = mutableMapOf(
+                dataSourceMappings = mutableMapOf(
                     "m0" to mutableListOf(
                         NodeMapping(
                             node = "n0",
@@ -189,7 +189,7 @@ class JsonFormatTest {
         assertTrue(encoded.contains(""""type": "QUERY""""))
 
         val decoded = jsonFormat.decodeModelFromString(encoded)
-        assertEquals(model.extensions.mappings, decoded.extensions.mappings)
+        assertEquals(model.extensions.dataSourceMappings, decoded.extensions.dataSourceMappings)
     }
 
     @Test
@@ -224,7 +224,7 @@ class JsonFormatTest {
         val json = """{ "node": "n0", "table": "t0", "properties": {} }"""
 
         val failure = assertFailsWith<SerializationException> {
-            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"mappings":{"m0":[$json]}}}""")
+            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"data_source_mappings":{"m0":[$json]}}}""")
         }
 
         assertTrue(
@@ -238,7 +238,7 @@ class JsonFormatTest {
         val json = """{ "type": "NotARealMapping", "node": "n0", "table": "t0", "properties": {} }"""
 
         assertFailsWith<SerializationException> {
-            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"mappings":{"m0":[$json]}}}""")
+            jsonFormat.decodeModelFromString("""{"version":"1","extensions":{"data_source_mappings":{"m0":[$json]}}}""")
         }
     }
 

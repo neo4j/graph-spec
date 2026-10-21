@@ -18,6 +18,10 @@ package org.neo4j.spec.graph.model.node
 
 import org.neo4j.spec.graph.model.dropAt
 
+/**
+ * **Experimental:** these JavaScript helpers (the `*Editor` classes and the plain `*Js` objects) are experimental
+ * and may change or be removed in any release without notice.
+ */
 @JsExport
 class LabelsEditor {
     companion object {

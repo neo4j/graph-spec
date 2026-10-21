@@ -26,7 +26,7 @@ import kotlin.js.JsExport
 @JsExport
 interface TableValidation : Validation {
     override fun validate(model: GraphModel, issues: MutableList<Issue>) {
-        for ((tableId, table) in model.extensions.tables) {
+        for ((tableId, table) in model.extensions.dataSourceTables) {
             validateTable(model, tableId, table, issues)
             for ((index, column) in table.columns.withIndex()) {
                 validateTableColumn(model, tableId, table, index, column, issues)

@@ -19,7 +19,7 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
     override fun createClass() = Node(
         labels = Labels("label"),
         properties = mutableMapOf("prop" to Property(Neo4jType.STRING, name = "propertyName")),
-        constraints = mutableMapOf("constraint" to NodeConstraint(ConstraintType.EXISTS, "label", mutableSetOf("prop"))),
+        constraints = mutableMapOf("constraint" to NodeConstraint(ConstraintType.EXISTS, mutableSetOf("prop"))),
         extensions = NodeExtensions(
             custom = mutableMapOf("key1" to "val1"),
             indexes = mutableMapOf("index" to NodeIndex(IndexType.RANGE, mutableSetOf("label"), mutableSetOf("prop"))),
@@ -36,7 +36,7 @@ class NodeJsTest : JsMappingTest<Node, NodeJs>() {
     override fun verifyJsObject(jsObject: NodeJs) {
         assertEquals("label", jsObject.labels.identifier)
         assertJsEquals(propertyJs("STRING", id = "prop", name = "propertyName"), jsObject.properties["prop"])
-        assertJsEquals(nodeConstraintJs("EXISTS", "label", arrayOf("prop")), jsObject.constraints["constraint"])
+        assertJsEquals(nodeConstraintJs("EXISTS", arrayOf("prop")), jsObject.constraints["constraint"])
         assertJsEquals(nodeIndexJs("RANGE", arrayOf("label"), arrayOf("prop")), jsObject.extensions.indexes["index"])
         assertEquals<Any?>("val1", jsObject.extensions.custom["key1"])
         assertEquals(1.0, jsObject.extensions.display?.x)

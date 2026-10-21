@@ -112,7 +112,6 @@ class NotationTest {
         val constraint = node.constraints["key_User_id"]
         assertNotNull(constraint, "A key constraint should be generated for the property")
         assertEquals(ConstraintType.KEY, constraint.type)
-        assertEquals("User", constraint.label, "Constraint should reference the node's label")
         assertEquals(mutableSetOf("id"), constraint.properties)
         assertEquals("id_User_key", constraint.name)
     }
@@ -289,15 +288,13 @@ class NotationTest {
         val node = Node(
             properties = mutableMapOf("id" to Property(), "a" to Property(), "b" to Property()),
             constraints = mutableMapOf(
-                "custom" to NodeConstraint(ConstraintType.UNIQUE, "User", mutableSetOf("id"), name = "my_name"),
-                "composite" to NodeConstraint(ConstraintType.KEY, "User", mutableSetOf("a", "b")),
+                "custom" to NodeConstraint(ConstraintType.UNIQUE, mutableSetOf("id"), name = "my_name"),
+                "composite" to NodeConstraint(ConstraintType.KEY, mutableSetOf("a", "b")),
                 "extended" to NodeConstraint(
                     ConstraintType.EXISTS,
-                    "User",
                     mutableSetOf("b"),
                     NodeConstraintExtensions(custom = mutableMapOf("owner" to "team"))
-                ),
-                "other_label" to NodeConstraint(ConstraintType.EXISTS, "Other", mutableSetOf("a"))
+                )
             )
         )
         node.labels.identifier = "User"
@@ -306,7 +303,7 @@ class NotationTest {
 
         model.shorthand()
 
-        assertEquals(4, node.constraints.size)
+        assertEquals(3, node.constraints.size)
         assertEquals("User", node.labels.identifier)
         assertNull(node.label)
         assertNull(node.properties["id"]!!.unique)

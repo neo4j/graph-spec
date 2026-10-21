@@ -26,7 +26,7 @@ internal data class LocatedNodeMapping(val mappingId: String, val index: Int, va
  */
 internal fun findNodeMappings(model: GraphModel, nodeId: String): List<LocatedNodeMapping> {
     val found = mutableListOf<LocatedNodeMapping>()
-    for ((mappingId, mappings) in model.extensions.mappings) {
+    for ((mappingId, mappings) in model.extensions.dataSourceMappings) {
         for ((index, mapping) in mappings.withIndex()) {
             if (mapping is NodeMapping && mapping.node == nodeId) {
                 found.add(LocatedNodeMapping(mappingId, index, mapping))
