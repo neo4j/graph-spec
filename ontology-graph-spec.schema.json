@@ -284,13 +284,6 @@
                     "$ref": "#/$defs/ConstraintType",
                     "description": "Type of the constraint."
                 },
-                "label": {
-                    "type": [
-                        "string",
-                        "null"
-                    ],
-                    "description": "Label the constraint applies to."
-                },
                 "properties": {
                     "type": "array",
                     "description": "Ids of the properties the constraint covers.",
@@ -852,14 +845,14 @@
             "type": "object",
             "description": "Extensions for a graph model.",
             "properties": {
-                "tables": {
+                "data_source_tables": {
                     "type": "object",
                     "description": "Data source table schemas keyed by table id.",
                     "additionalProperties": {
                         "$ref": "#/$defs/Table"
                     }
                 },
-                "mappings": {
+                "data_source_mappings": {
                     "type": "object",
                     "description": "Sets of data source mappings from tables to nodes and relationships, often used for importing.",
                     "additionalProperties": {

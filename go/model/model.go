@@ -100,9 +100,9 @@ type GraphModelExtensions struct {
 	// User-defined arbitrary data.
 	Custom *map[string]any `json:"custom,omitempty"`
 	// Sets of data source mappings from tables to nodes and relationships, often used for importing.
-	Mappings *map[string][]Mapping `json:"mappings,omitempty"`
+	DataSourceMappings *map[string][]Mapping `json:"data_source_mappings,omitempty"`
 	// Data source table schemas keyed by table id.
-	Tables *map[string]Table `json:"tables,omitempty"`
+	DataSourceTables *map[string]Table `json:"data_source_tables,omitempty"`
 }
 
 // Configuration specific to the type of an index.
@@ -417,8 +417,6 @@ type Node struct {
 type NodeConstraint struct {
 	// Extensions for the constraint.
 	Extensions *NodeConstraintExtensions `json:"extensions,omitempty"`
-	// Label the constraint applies to.
-	Label *string `json:"label,omitempty"`
 	// Name of the constraint in the database.
 	Name *string `json:"name,omitempty"`
 	// Ids of the properties the constraint covers.
