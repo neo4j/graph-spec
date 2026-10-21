@@ -215,7 +215,13 @@ jobs:
             cd "$TARGET_DIR"
             # Update package.json version dynamically before publishing
             npm version ${{ needs.determine-version.outputs.version }} --no-git-tag-version --allow-same-version
-            npm publish --tag alpha --access public
+            # Prereleases (x.y.z-alpha.N) go to the alpha dist-tag, stable releases to latest
+            if [[ "${{ needs.determine-version.outputs.version }}" == *-alpha.* ]]; then
+              NPM_TAG=alpha
+            else
+              NPM_TAG=latest
+            fi
+            npm publish --tag "${NPM_TAG}" --access public
           else
             echo "Directory $TARGET_DIR not found. Check your Gradle JS/TS build configurations."
             exit 1
