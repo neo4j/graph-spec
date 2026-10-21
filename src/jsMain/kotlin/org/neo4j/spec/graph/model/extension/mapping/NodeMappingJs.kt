@@ -30,7 +30,8 @@ external interface NodeMappingJs : MappingJs {
     val properties: Record<String, PropertyMappingJs>
     var mode: String
     var matchLabel: String?
-    var key: Array<String>
+    var keyColumns: Array<String>
+    var keyProperties: Array<String>
     var dependsOn: String
     var id: String
 }
@@ -41,7 +42,8 @@ fun nodeMappingJs(
     properties: Record<String, PropertyMappingJs>,
     mode: String,
     matchLabel: String?,
-    key: Array<String>,
+    keyColumns: Array<String>,
+    keyProperties: Array<String>,
     dependsOn: String = "",
     id: String = ""
 ): NodeMappingJs = jso {
@@ -51,7 +53,8 @@ fun nodeMappingJs(
     this.properties = properties
     this.mode = mode
     this.matchLabel = matchLabel
-    this.key = key
+    this.keyColumns = keyColumns
+    this.keyProperties = keyProperties
     this.dependsOn = dependsOn
     this.id = id
 }
@@ -62,7 +65,8 @@ fun NodeMapping.toJs() = nodeMappingJs(
     properties = properties.map { it.key to it.value.toJs() }.toMap().toRecord(),
     mode = mode.name,
     matchLabel = matchLabel,
-    key = key.toTypedArray(),
+    keyColumns = keyColumns.toTypedArray(),
+    keyProperties = keyProperties.toTypedArray(),
     dependsOn = dependsOn,
     id = id
 )
@@ -73,7 +77,8 @@ fun NodeMappingJs.toClass() = NodeMapping(
     properties = properties.associateBy { _, value -> value.toClass() },
     mode = MappingMode.valueOf(mode),
     matchLabel = matchLabel,
-    key = key.toMutableSet(),
+    keyColumns = keyColumns.toMutableSet(),
+    keyProperties = keyProperties.toMutableSet(),
     dependsOn = dependsOn,
     id = id
 )

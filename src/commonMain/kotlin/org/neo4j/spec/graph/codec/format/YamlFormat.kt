@@ -114,6 +114,8 @@ class YamlFormat(private val yaml: Yaml, private val json: JsonFormat, options: 
                     "extensions.tables.*.foreign_keys.*.references.columns",
                     "extensions.mappings.*[*].properties.*",
                     "extensions.mappings.*[*].key",
+                    "extensions.mappings.*[*].key_columns",
+                    "extensions.mappings.*[*].key_properties",
                     "extensions.mappings.*[*].from_node.properties.*",
                     "extensions.mappings.*[*].to_node.properties.*"
                 )

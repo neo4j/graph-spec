@@ -48,4 +48,4 @@ extensions:
           "p:0_0": { column: "documentid" }
           "p:0_1": { column: "embedding" }
           "p:0_2": { column: "legacyembedding" }
-        key: ["p:0_0"]
+        key_properties: ["p:0_0"]

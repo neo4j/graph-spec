@@ -11,7 +11,8 @@ class NodeMappingJsTest : JsMappingTest<NodeMapping, NodeMappingJs>() {
         properties = mutableMapOf("property" to PropertyMapping("field")),
         mode = MappingMode.CREATE,
         matchLabel = "label_name",
-        key = mutableSetOf("key1", "key2"),
+        keyColumns = mutableSetOf("col1"),
+        keyProperties = mutableSetOf("key1", "key2"),
         dependsOn = "other",
         id = "mapping-id"
     )
@@ -26,7 +27,8 @@ class NodeMappingJsTest : JsMappingTest<NodeMapping, NodeMappingJs>() {
         assertJsEquals(propertyMappingJs("field"), jsObject.properties["property"])
         assertEquals("CREATE", jsObject.mode)
         assertEquals("label_name", jsObject.matchLabel)
-        assertContentEquals(arrayOf("key1", "key2"), jsObject.key)
+        assertContentEquals(arrayOf("col1"), jsObject.keyColumns)
+        assertContentEquals(arrayOf("key1", "key2"), jsObject.keyProperties)
         assertEquals("other", jsObject.dependsOn)
         assertEquals("mapping-id", jsObject.id)
     }

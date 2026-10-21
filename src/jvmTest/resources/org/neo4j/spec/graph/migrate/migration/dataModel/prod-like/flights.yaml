@@ -364,7 +364,7 @@ extensions:
           "p:0_0": { column: "aircraft_code" }
           "p:0_1": { column: "model" }
           "p:0_2": { column: "aircrafts_range" }
-        key: ["p:0_0"]
+        key_properties: ["p:0_0"]
       - type: "NODE"
         node: "n:1"
         table: "airports_data"
@@ -374,7 +374,7 @@ extensions:
           "p:1_2": { column: "city" }
           "p:1_3": { column: "coordinates" }
           "p:1_4": { column: "timezone" }
-        key: ["p:1_0"]
+        key_properties: ["p:1_0"]
       - type: "NODE"
         node: "n:2"
         table: "bookings"
@@ -382,7 +382,7 @@ extensions:
           "p:2_0": { column: "book_ref" }
           "p:2_1": { column: "book_date" }
           "p:2_2": { column: "total_amount" }
-        key: ["p:2_0"]
+        key_properties: ["p:2_0"]
       - type: "NODE"
         node: "n:3"
         table: "flights"
@@ -394,7 +394,7 @@ extensions:
           "p:3_6": { column: "status" }
           "p:3_8": { column: "actual_departure" }
           "p:3_9": { column: "actual_arrival" }
-        key: ["p:3_0"]
+        key_properties: ["p:3_0"]
       - type: "NODE"
         node: "n:4"
         table: "tickets"
@@ -403,7 +403,7 @@ extensions:
           "p:4_2": { column: "passenger_id" }
           "p:4_3": { column: "passenger_name" }
           "p:4_4": { column: "contact_data" }
-        key: ["p:4_0"]
+        key_properties: ["p:4_0"]
       - type: "RELATIONSHIP"
         relationship: "r:0"
         table: "flights"

@@ -7927,19 +7927,19 @@ extensions:
           "p:0_0": { column: "ACCOUNT_IDENTIFIER" }
           "p:0_1": { column: "ACCOUNT_TYPE_CODE" }
           "p:0_2": { column: "ACCOUNT_NAME" }
-        key: ["p:0_0"]
+        key_properties: ["p:0_0"]
       - type: "NODE"
         node: "n:1"
         table: "ADMINISTRATIVE_ORGANIZATION_UNIT"
         properties:
           "p:1_0": { column: "ORGANIZATION_IDENTIFIER" }
-        key: ["p:1_0"]
+        key_properties: ["p:1_0"]
       - type: "NODE"
         node: "n:2"
         table: "AGENCY_CONTRACT"
         properties:
           "p:2_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:2_0"]
+        key_properties: ["p:2_0"]
       - type: "NODE"
         node: "n:3"
         table: "AGREEMENT"
@@ -7948,26 +7948,26 @@ extensions:
           "p:3_1": { column: "AGREEMENT_NAME" }
           "p:3_2": { column: "AGREEMENT_ORIGINAL_INCEPTION_DATE" }
           "p:3_4": { column: "AGREEMENT_TYPE_CODE" }
-        key: ["p:3_0"]
+        key_properties: ["p:3_0"]
       - type: "NODE"
         node: "n:4"
         table: "ANIMAL"
         properties:
           "p:4_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:4_0"]
+        key_properties: ["p:4_0"]
       - type: "NODE"
         node: "n:5"
         table: "APPROVAL"
         properties:
           "p:5_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:5_0"]
+        key_properties: ["p:5_0"]
       - type: "NODE"
         node: "n:6"
         table: "ARBITRATION"
         properties:
           "p:6_0": { column: "ARBITRATION_IDENTIFIER" }
           "p:6_1": { column: "ARBITRATION_DESCRIPTION" }
-        key: ["p:6_0"]
+        key_properties: ["p:6_0"]
       - type: "NODE"
         node: "n:7"
         table: "ASSESSMENT"
@@ -7977,80 +7977,80 @@ extensions:
           "p:7_2": { column: "ASSESSMENT_DESCRIPTION" }
           "p:7_3": { column: "END_DATE" }
           "p:7_4": { column: "ASSESSMENT_REASON_DESCRIPTION" }
-        key: ["p:7_0"]
+        key_properties: ["p:7_0"]
       - type: "NODE"
         node: "n:8"
         table: "ASSESSMENT_RESULT"
         properties:
           "p:8_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
           "p:8_2": { column: "ASSESSMENT_RESULT_TYPE_CODE" }
-        key: ["p:8_0"]
+        key_properties: ["p:8_0"]
       - type: "NODE"
         node: "n:9"
         table: "ASSUMED_CLAIM_AMOUNT"
         properties:
           "p:9_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:9_0"]
+        key_properties: ["p:9_0"]
       - type: "NODE"
         node: "n:10"
         table: "ASSUMED_POLICY_AMOUNT"
         properties:
           "p:10_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:10_0"]
+        key_properties: ["p:10_0"]
       - type: "NODE"
         node: "n:11"
         table: "AUTOMOBILE"
         properties:
           "p:11_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:11_0"]
+        key_properties: ["p:11_0"]
       - type: "NODE"
         node: "n:12"
         table: "AUTO_REPAIR_SHOP_CONTRACT"
         properties:
           "p:12_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:12_0"]
+        key_properties: ["p:12_0"]
       - type: "NODE"
         node: "n:13"
         table: "BINDING"
         properties:
           "p:13_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:13_0"]
+        key_properties: ["p:13_0"]
       - type: "NODE"
         node: "n:14"
         table: "BOAT"
         properties:
           "p:14_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:14_0"]
+        key_properties: ["p:14_0"]
       - type: "NODE"
         node: "n:15"
         table: "BODY_OBJECT"
         properties:
           "p:15_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:15_0"]
+        key_properties: ["p:15_0"]
       - type: "NODE"
         node: "n:16"
         table: "BROKERAGE_CONTRACT"
         properties:
           "p:16_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:16_0"]
+        key_properties: ["p:16_0"]
       - type: "NODE"
         node: "n:17"
         table: "BUS"
         properties:
           "p:17_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:17_0"]
+        key_properties: ["p:17_0"]
       - type: "NODE"
         node: "n:18"
         table: "BUSINESS_EVENT"
         properties:
           "p:18_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:18_0"]
+        key_properties: ["p:18_0"]
       - type: "NODE"
         node: "n:19"
         table: "CANCEL"
         properties:
           "p:19_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:19_0"]
+        key_properties: ["p:19_0"]
       - type: "NODE"
         node: "n:20"
         table: "CATASTROPHE"
@@ -8060,25 +8060,25 @@ extensions:
           "p:20_2": { column: "CATASTROPHE_NAME" }
           "p:20_3": { column: "INDUSTRY_CATASTROPHE_CODE" }
           "p:20_4": { column: "COMPANY_CATASTROPHE_CODE" }
-        key: ["p:20_0"]
+        key_properties: ["p:20_0"]
       - type: "NODE"
         node: "n:21"
         table: "CEDED_CLAIM_AMOUNT"
         properties:
           "p:21_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:21_0"]
+        key_properties: ["p:21_0"]
       - type: "NODE"
         node: "n:22"
         table: "CEDED_POLICY_AMOUNT"
         properties:
           "p:22_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:22_0"]
+        key_properties: ["p:22_0"]
       - type: "NODE"
         node: "n:23"
         table: "CHANNEL_SCORE"
         properties:
           "p:23_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:23_0"]
+        key_properties: ["p:23_0"]
       - type: "NODE"
         node: "n:24"
         table: "CLAIM"
@@ -8094,7 +8094,7 @@ extensions:
           "p:24_11": { column: "CLAIM_REOPEN_DATE" }
           "p:24_12": { column: "CLAIM_STATUS_CODE" }
           "p:24_13": { column: "CLAIM_REPORTED_DATE" }
-        key: ["p:24_0"]
+        key_properties: ["p:24_0"]
       - type: "NODE"
         node: "n:25"
         table: "CLAIM_AMOUNT"
@@ -8104,26 +8104,26 @@ extensions:
           "p:25_4": { column: "EVENT_DATE" }
           "p:25_5": { column: "CLAIM_AMOUNT" }
           "p:25_6": { column: "INSURANCE_TYPE_CODE" }
-        key: ["p:25_0"]
+        key_properties: ["p:25_0"]
       - type: "NODE"
         node: "n:26"
         table: "CLAIM_EVALUATION_RESULT"
         properties:
           "p:26_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:26_0"]
+        key_properties: ["p:26_0"]
       - type: "NODE"
         node: "n:27"
         table: "CLAIM_EVENT"
         properties:
           "p:27_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:27_0"]
+        key_properties: ["p:27_0"]
       - type: "NODE"
         node: "n:28"
         table: "CLAIM_FOLDER"
         properties:
           "p:28_0": { column: "CLAIM_IDENTIFIER" }
           "p:28_1": { column: "CLAIM_FOLDER_LABEL_NAME" }
-        key: ["p:28_0"]
+        key_properties: ["p:28_0"]
       - type: "NODE"
         node: "n:29"
         table: "CLAIM_OFFER"
@@ -8131,43 +8131,43 @@ extensions:
           "p:29_0": { column: "CLAIM_OFFER_IDENTIFIER" }
           "p:29_4": { column: "SETTLEMENT_OFFER_AMOUNT" }
           "p:29_5": { column: "SETTLEMENT_OFFER_PROVISION_DESCRIPTION" }
-        key: ["p:29_0"]
+        key_properties: ["p:29_0"]
       - type: "NODE"
         node: "n:30"
         table: "CLAIM_PAYMENT"
         properties:
           "p:30_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:30_0"]
+        key_properties: ["p:30_0"]
       - type: "NODE"
         node: "n:31"
         table: "CLAIM_RESERVE"
         properties:
           "p:31_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:31_0"]
+        key_properties: ["p:31_0"]
       - type: "NODE"
         node: "n:32"
         table: "COMBINATION_STRUCTURE"
         properties:
           "p:32_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:32_0"]
+        key_properties: ["p:32_0"]
       - type: "NODE"
         node: "n:33"
         table: "COMBINE"
         properties:
           "p:33_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:33_0"]
+        key_properties: ["p:33_0"]
       - type: "NODE"
         node: "n:34"
         table: "COMMERCIAL_AGREEMENT"
         properties:
           "p:34_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:34_0"]
+        key_properties: ["p:34_0"]
       - type: "NODE"
         node: "n:35"
         table: "COMMERCIAL_STRUCTURE"
         properties:
           "p:35_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:35_0"]
+        key_properties: ["p:35_0"]
       - type: "NODE"
         node: "n:36"
         table: "COMMUNICATION_IDENTITY"
@@ -8176,13 +8176,13 @@ extensions:
           "p:36_1": { column: "COMMUNICATION_TYPE_CODE" }
           "p:36_2": { column: "COMMUNICATION_VALUE" }
           "p:36_3": { column: "COMMUNICATION_QUALIFIER_VALUE" }
-        key: ["p:36_0"]
+        key_properties: ["p:36_0"]
       - type: "NODE"
         node: "n:37"
         table: "COMMUTATION_AGREEMENT"
         properties:
           "p:37_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:37_0"]
+        key_properties: ["p:37_0"]
       - type: "NODE"
         node: "n:38"
         table: "COMPANY"
@@ -8191,19 +8191,19 @@ extensions:
           "p:38_1": { column: "COMPANY_CODE" }
           "p:38_2": { column: "COMPANY_DESCRIPTION" }
           "p:38_3": { column: "COMPANY_NAME" }
-        key: ["p:38_0"]
+        key_properties: ["p:38_0"]
       - type: "NODE"
         node: "n:39"
         table: "CONSTRUCTION_VEHICLE"
         properties:
           "p:39_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:39_0"]
+        key_properties: ["p:39_0"]
       - type: "NODE"
         node: "n:40"
         table: "CONSULTANT_CONTRACT"
         properties:
           "p:40_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:40_0"]
+        key_properties: ["p:40_0"]
       - type: "NODE"
         node: "n:41"
         table: "COVERAGE"
@@ -8211,7 +8211,7 @@ extensions:
           "p:41_0": { column: "COVERAGE_IDENTIFIER" }
           "p:41_1": { column: "COVERAGE_DESCRIPTION" }
           "p:41_2": { column: "COVERAGE_NAME" }
-        key: ["p:41_0"]
+        key_properties: ["p:41_0"]
       - type: "NODE"
         node: "n:42"
         table: "COVERAGE_GROUP"
@@ -8219,7 +8219,7 @@ extensions:
           "p:42_0": { column: "COVERAGE_GROUP_IDENTIFIER" }
           "p:42_1": { column: "COVERAGE_GROUP_DESCRIPTION" }
           "p:42_2": { column: "COVERAGE_GROUP_NAME" }
-        key: ["p:42_0"]
+        key_properties: ["p:42_0"]
       - type: "NODE"
         node: "n:43"
         table: "COVERAGE_LIMIT_TYPE"
@@ -8227,14 +8227,14 @@ extensions:
           "p:43_0": { column: "COVERAGE_LIMIT_TYPE_IDENTIFIER" }
           "p:43_1": { column: "COVERAGE_LIMIT_NAME" }
           "p:43_2": { column: "COVERAGE_LIMIT_DESCRIPTION" }
-        key: ["p:43_0"]
+        key_properties: ["p:43_0"]
       - type: "NODE"
         node: "n:44"
         table: "COVERAGE_PART"
         properties:
           "p:44_0": { column: "COVERAGE_PART_CODE" }
           "p:44_1": { column: "COVERAGE_PART_NAME" }
-        key: ["p:44_0"]
+        key_properties: ["p:44_0"]
       - type: "NODE"
         node: "n:45"
         table: "COVERAGE_TYPE"
@@ -8242,181 +8242,181 @@ extensions:
           "p:45_0": { column: "COVERAGE_TYPE_IDENTIFIER" }
           "p:45_1": { column: "COVERAGE_TYPE_DESCRIPTION" }
           "p:45_2": { column: "COVERAGE_TYPE_NAME" }
-        key: ["p:45_0"]
+        key_properties: ["p:45_0"]
       - type: "NODE"
         node: "n:46"
         table: "CREDIT_CLAIM_AMOUNT"
         properties:
           "p:46_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:46_0"]
+        key_properties: ["p:46_0"]
       - type: "NODE"
         node: "n:47"
         table: "CREDIT_POLICY_AMOUNT"
         properties:
           "p:47_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:47_0"]
+        key_properties: ["p:47_0"]
       - type: "NODE"
         node: "n:48"
         table: "CREDIT_RATING"
         properties:
           "p:48_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:48_0"]
+        key_properties: ["p:48_0"]
       - type: "NODE"
         node: "n:49"
         table: "CUSTOMER_SCORE"
         properties:
           "p:49_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:49_0"]
+        key_properties: ["p:49_0"]
       - type: "NODE"
         node: "n:50"
         table: "DEBIT_CLAIM_AMOUNT"
         properties:
           "p:50_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:50_0"]
+        key_properties: ["p:50_0"]
       - type: "NODE"
         node: "n:51"
         table: "DEBIT_POLICY_AMOUNT"
         properties:
           "p:51_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:51_0"]
+        key_properties: ["p:51_0"]
       - type: "NODE"
         node: "n:52"
         table: "DEDUCTIBLE_RECOVERY"
         properties:
           "p:52_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:52_0"]
+        key_properties: ["p:52_0"]
       - type: "NODE"
         node: "n:53"
         table: "DEMOGRAPHIC_SCORE"
         properties:
           "p:53_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:53_0"]
+        key_properties: ["p:53_0"]
       - type: "NODE"
         node: "n:54"
         table: "DERIVATIVE_CONTRACT"
         properties:
           "p:54_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:54_0"]
+        key_properties: ["p:54_0"]
       - type: "NODE"
         node: "n:55"
         table: "DIRECT_CLAIM_AMOUNT"
         properties:
           "p:55_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:55_0"]
+        key_properties: ["p:55_0"]
       - type: "NODE"
         node: "n:56"
         table: "DIRECT_POLICY_AMOUNT"
         properties:
           "p:56_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:56_0"]
+        key_properties: ["p:56_0"]
       - type: "NODE"
         node: "n:57"
         table: "DWELLING"
         properties:
           "p:57_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:57_0"]
+        key_properties: ["p:57_0"]
       - type: "NODE"
         node: "n:58"
         table: "EMPLOYMENT_AGREEMENT"
         properties:
           "p:58_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:58_0"]
+        key_properties: ["p:58_0"]
       - type: "NODE"
         node: "n:59"
         table: "ENDORSEMENT"
         properties:
           "p:59_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:59_0"]
+        key_properties: ["p:59_0"]
       - type: "NODE"
         node: "n:60"
         table: "EVENT"
         properties:
           "p:60_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:60_0"]
+        key_properties: ["p:60_0"]
       - type: "NODE"
         node: "n:61"
         table: "EXPENSE_PAYMENT"
         properties:
           "p:61_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:61_0"]
+        key_properties: ["p:61_0"]
       - type: "NODE"
         node: "n:62"
         table: "EXPENSE_RECOVERY"
         properties:
           "p:62_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:62_0"]
+        key_properties: ["p:62_0"]
       - type: "NODE"
         node: "n:63"
         table: "EXPENSE_RESERVE"
         properties:
           "p:63_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:63_0"]
+        key_properties: ["p:63_0"]
       - type: "NODE"
         node: "n:64"
         table: "FARM_EQUIPMENT"
         properties:
           "p:64_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:64_0"]
+        key_properties: ["p:64_0"]
       - type: "NODE"
         node: "n:65"
         table: "FEE"
         properties:
           "p:65_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:65_0"]
+        key_properties: ["p:65_0"]
       - type: "NODE"
         node: "n:66"
         table: "FIELD_ORGANIZATION_UNIT"
         properties:
           "p:66_0": { column: "ORGANIZATION_IDENTIFIER" }
-        key: ["p:66_0"]
+        key_properties: ["p:66_0"]
       - type: "NODE"
         node: "n:67"
         table: "FINANCIAL_ACCOUNT_AGREEMENT"
         properties:
           "p:67_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:67_0"]
+        key_properties: ["p:67_0"]
       - type: "NODE"
         node: "n:68"
         table: "FINANCIAL_SERVICES_ASSESSMENT"
         properties:
           "p:68_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:68_0"]
+        key_properties: ["p:68_0"]
       - type: "NODE"
         node: "n:69"
         table: "FINANCIAL_VALUATION"
         properties:
           "p:69_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:69_0"]
+        key_properties: ["p:69_0"]
       - type: "NODE"
         node: "n:70"
         table: "FLAT"
         properties:
           "p:70_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:70_0"]
+        key_properties: ["p:70_0"]
       - type: "NODE"
         node: "n:71"
         table: "FOR_PROFIT_ORGANIZATION"
         properties:
           "p:71_0": { column: "ORGANIZATION_IDENTIFIER" }
-        key: ["p:71_0"]
+        key_properties: ["p:71_0"]
       - type: "NODE"
         node: "n:72"
         table: "FRAUD_ASSESSMENT"
         properties:
           "p:72_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:72_0"]
+        key_properties: ["p:72_0"]
       - type: "NODE"
         node: "n:73"
         table: "FREIGHT_GROUP"
         properties:
           "p:73_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:73_0"]
+        key_properties: ["p:73_0"]
       - type: "NODE"
         node: "n:74"
         table: "FULL_TERM"
         properties:
           "p:74_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:74_0"]
+        key_properties: ["p:74_0"]
       - type: "NODE"
         node: "n:75"
         table: "GEOGRAPHIC_LOCATION"
@@ -8426,51 +8426,51 @@ extensions:
           "p:75_3": { column: "LOCATION_CODE" }
           "p:75_4": { column: "LOCATION_NAME" }
           "p:75_5": { column: "LOCATION_NUMBER" }
-        key: ["p:75_0"]
+        key_properties: ["p:75_0"]
       - type: "NODE"
         node: "n:76"
         table: "GOVERNMENT_ORGANIZATION"
         properties:
           "p:76_0": { column: "ORGANIZATION_IDENTIFIER" }
-        key: ["p:76_0"]
+        key_properties: ["p:76_0"]
       - type: "NODE"
         node: "n:77"
         table: "GROUPING"
         properties:
           "p:77_0": { column: "GROUPING_IDENTIFIER" }
           "p:77_1": { column: "GROUPING_NAME" }
-        key: ["p:77_0"]
+        key_properties: ["p:77_0"]
       - type: "NODE"
         node: "n:78"
         table: "GROUP_AGREEMENT"
         properties:
           "p:78_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:78_0"]
+        key_properties: ["p:78_0"]
       - type: "NODE"
         node: "n:79"
         table: "HOUSEHOLD"
         properties:
           "p:79_0": { column: "HOUSEHOLD_IDENTIFIER" }
-        key: ["p:79_0"]
+        key_properties: ["p:79_0"]
       - type: "NODE"
         node: "n:80"
         table: "HOUSEHOLD_CONTENT"
         properties:
           "p:80_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:80_0"]
+        key_properties: ["p:80_0"]
       - type: "NODE"
         node: "n:81"
         table: "INDIVIDUAL_AGREEMENT"
         properties:
           "p:81_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:81_0"]
+        key_properties: ["p:81_0"]
       - type: "NODE"
         node: "n:82"
         table: "INSURABLE_OBJECT"
         properties:
           "p:82_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
           "p:82_2": { column: "INSURABLE_OBJECT_TYPE_CODE" }
-        key: ["p:82_0"]
+        key_properties: ["p:82_0"]
       - type: "NODE"
         node: "n:83"
         table: "INSURANCE_CLASS"
@@ -8478,19 +8478,19 @@ extensions:
           "p:83_0": { column: "INSURANCE_CLASS_IDENTIFIER" }
           "p:83_1": { column: "INSURANCE_CLASS_NAME" }
           "p:83_2": { column: "INSURANCE_CLASS_DESCRIPTION" }
-        key: ["p:83_0"]
+        key_properties: ["p:83_0"]
       - type: "NODE"
         node: "n:84"
         table: "INSURED_ACCOUNT"
         properties:
           "p:84_0": { column: "ACCOUNT_IDENTIFIER" }
-        key: ["p:84_0"]
+        key_properties: ["p:84_0"]
       - type: "NODE"
         node: "n:85"
         table: "INTERMEDIARY_AGREEMENT"
         properties:
           "p:85_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:85_0"]
+        key_properties: ["p:85_0"]
       - type: "NODE"
         node: "n:86"
         table: "LEGAL_JURISDICTION"
@@ -8499,13 +8499,13 @@ extensions:
           "p:86_1": { column: "LEGAL_JURISDICTION_NAME" }
           "p:86_2": { column: "LEGAL_JURISDICTION_DESCRIPTION" }
           "p:86_3": { column: "RULES_REFERENCE_DESCRIPTION" }
-        key: ["p:86_0"]
+        key_properties: ["p:86_0"]
       - type: "NODE"
         node: "n:87"
         table: "LIFE_EVENT"
         properties:
           "p:87_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:87_0"]
+        key_properties: ["p:87_0"]
       - type: "NODE"
         node: "n:88"
         table: "LINE_OF_BUSINESS"
@@ -8514,7 +8514,7 @@ extensions:
           "p:88_1": { column: "LINE_OF_BUSINESS_NAME" }
           "p:88_2": { column: "LINE_OF_BUSINESS_DESCRIPTION" }
           "p:88_3": { column: "LINE_OF_BUSINESS_CODE" }
-        key: ["p:88_0"]
+        key_properties: ["p:88_0"]
       - type: "NODE"
         node: "n:89"
         table: "LINE_OF_BUSINESS_GROUP"
@@ -8522,14 +8522,14 @@ extensions:
           "p:89_0": { column: "LINE_OF_BUSINESS_GROUP_IDENTIFIER" }
           "p:89_1": { column: "LINE_OF_BUSINESS_GROUP_NAME" }
           "p:89_2": { column: "LINE_OF_BUSINESS_GROUP_DESCRIPTION" }
-        key: ["p:89_0"]
+        key_properties: ["p:89_0"]
       - type: "NODE"
         node: "n:90"
         table: "LITIGATION"
         properties:
           "p:90_0": { column: "LITIGATION_IDENTIFIER" }
           "p:90_3": { column: "LITIGATION_DESCRIPTION" }
-        key: ["p:90_0"]
+        key_properties: ["p:90_0"]
       - type: "NODE"
         node: "n:91"
         table: "LOCATION_ADDRESS"
@@ -8542,73 +8542,73 @@ extensions:
           "p:91_5": { column: "COUNTRY_CODE" }
           "p:91_7": { column: "BEGIN_DATE" }
           "p:91_8": { column: "END_DATE" }
-        key: ["p:91_0"]
+        key_properties: ["p:91_0"]
       - type: "NODE"
         node: "n:92"
         table: "LOSS_PAYMENT"
         properties:
           "p:92_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:92_0"]
+        key_properties: ["p:92_0"]
       - type: "NODE"
         node: "n:93"
         table: "LOSS_RECOVERY"
         properties:
           "p:93_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:93_0"]
+        key_properties: ["p:93_0"]
       - type: "NODE"
         node: "n:94"
         table: "LOSS_RESERVE"
         properties:
           "p:94_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:94_0"]
+        key_properties: ["p:94_0"]
       - type: "NODE"
         node: "n:95"
         table: "MANUFACTURED_OBJECT"
         properties:
           "p:95_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:95_0"]
+        key_properties: ["p:95_0"]
       - type: "NODE"
         node: "n:96"
         table: "MEDICAL_CONDITION"
         properties:
           "p:96_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:96_0"]
+        key_properties: ["p:96_0"]
       - type: "NODE"
         node: "n:97"
         table: "MID_TERM"
         properties:
           "p:97_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:97_0"]
+        key_properties: ["p:97_0"]
       - type: "NODE"
         node: "n:98"
         table: "MILKING_MACHINE"
         properties:
           "p:98_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:98_0"]
+        key_properties: ["p:98_0"]
       - type: "NODE"
         node: "n:99"
         table: "MOBILE_HOME"
         properties:
           "p:99_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:99_0"]
+        key_properties: ["p:99_0"]
       - type: "NODE"
         node: "n:100"
         table: "MOTORCYCLE"
         properties:
           "p:100_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:100_0"]
+        key_properties: ["p:100_0"]
       - type: "NODE"
         node: "n:101"
         table: "NEW_BUSINESS"
         properties:
           "p:101_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:101_0"]
+        key_properties: ["p:101_0"]
       - type: "NODE"
         node: "n:102"
         table: "NOT_FOR_PROFIT_ORGANIZATION"
         properties:
           "p:102_0": { column: "ORGANIZATION_IDENTIFIER" }
-        key: ["p:102_0"]
+        key_properties: ["p:102_0"]
       - type: "NODE"
         node: "n:103"
         table: "OCCURRENCE"
@@ -8620,7 +8620,7 @@ extensions:
           "p:103_5": { column: "OCCURRENCE_BEGIN_TIME" }
           "p:103_6": { column: "OCCURRENCE_END_TIME" }
           "p:103_7": { column: "OCCURRENCE_NAME" }
-        key: ["p:103_0"]
+        key_properties: ["p:103_0"]
       - type: "NODE"
         node: "n:104"
         table: "ORGANIZATION"
@@ -8634,7 +8634,7 @@ extensions:
           "p:104_6": { column: "ORGANIZATION_DESCRIPTION" }
           "p:104_7": { column: "ACRONYM_NAME" }
           "p:104_8": { column: "INDUSTRY_TYPE_CODE" }
-        key: ["p:104_0"]
+        key_properties: ["p:104_0"]
       - type: "NODE"
         node: "n:105"
         table: "ORGANIZATION_UNIT"
@@ -8645,13 +8645,13 @@ extensions:
           "p:105_3": { column: "INDUSTRY_CODE" }
           "p:105_4": { column: "ACCOUNTING_CODE" }
           "p:105_5": { column: "WORK_SITE_TYPE_CODE" }
-        key: ["p:105_0"]
+        key_properties: ["p:105_0"]
       - type: "NODE"
         node: "n:106"
         table: "OTHER_ASSESSMENT_RESULT"
         properties:
           "p:106_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:106_0"]
+        key_properties: ["p:106_0"]
       - type: "NODE"
         node: "n:107"
         table: "PARTY"
@@ -8661,14 +8661,14 @@ extensions:
           "p:107_2": { column: "BEGIN_DATE" }
           "p:107_3": { column: "END_DATE" }
           "p:107_4": { column: "PARTY_TYPE_CODE" }
-        key: ["p:107_0"]
+        key_properties: ["p:107_0"]
       - type: "NODE"
         node: "n:108"
         table: "PARTY_PREFERENCE"
         properties:
           "p:108_0": { column: "PARTY_IDENTIFIER" }
           "p:108_1": { column: "PREFERRED_LANGUAGE_CODE" }
-        key: ["p:108_0"]
+        key_properties: ["p:108_0"]
       - type: "NODE"
         node: "n:109"
         table: "PARTY_ROLE"
@@ -8676,7 +8676,7 @@ extensions:
           "p:109_0": { column: "PARTY_ROLE_CODE" }
           "p:109_1": { column: "PARTY_ROLE_NAME" }
           "p:109_2": { column: "PARTY_ROLE_DESCRIPTION" }
-        key: ["p:109_0"]
+        key_properties: ["p:109_0"]
       - type: "NODE"
         node: "n:110"
         table: "PERSON"
@@ -8692,14 +8692,14 @@ extensions:
           "p:110_8": { column: "BIRTH_PLACE_NAME" }
           "p:110_9": { column: "GENDER_CODE" }
           "p:110_10": { column: "PREFIX_NAME" }
-        key: ["p:110_0"]
+        key_properties: ["p:110_0"]
       - type: "NODE"
         node: "n:111"
         table: "PERSON_PROFESSION"
         properties:
           "p:111_0": { column: "PERSON_IDENTIFIER" }
           "p:111_1": { column: "PROFESSION_NAME" }
-        key: ["p:111_0"]
+        key_properties: ["p:111_0"]
       - type: "NODE"
         node: "n:112"
         table: "PHYSICAL_LOCATION"
@@ -8713,19 +8713,19 @@ extensions:
           "p:112_6": { column: "HORIZONTAL_ACCURACY_VALUE" }
           "p:112_7": { column: "VERTICAL_ACCURACY_VALUE" }
           "p:112_8": { column: "TRAVEL_DIRECTION_DESCRIPTION" }
-        key: ["p:112_0"]
+        key_properties: ["p:112_0"]
       - type: "NODE"
         node: "n:113"
         table: "PHYSICAL_OBJECT_ASSESSMENT"
         properties:
           "p:113_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:113_0"]
+        key_properties: ["p:113_0"]
       - type: "NODE"
         node: "n:114"
         table: "PLACE_ASSESSMENT"
         properties:
           "p:114_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:114_0"]
+        key_properties: ["p:114_0"]
       - type: "NODE"
         node: "n:115"
         table: "POLICY"
@@ -8735,7 +8735,7 @@ extensions:
           "p:115_2": { column: "EXPIRATION_DATE" }
           "p:115_3": { column: "POLICY_NUMBER" }
           "p:115_4": { column: "STATUS_CODE" }
-        key: ["p:115_0"]
+        key_properties: ["p:115_0"]
       - type: "NODE"
         node: "n:116"
         table: "POLICY_AMOUNT"
@@ -8746,7 +8746,7 @@ extensions:
           "p:116_6": { column: "EARNING_END_DATE" }
           "p:116_8": { column: "POLICY_AMOUNT" }
           "p:116_10": { column: "INSURANCE_TYPE_CODE" }
-        key: ["p:116_0"]
+        key_properties: ["p:116_0"]
       - type: "NODE"
         node: "n:117"
         table: "POLICY_DEDUCTIBLE"
@@ -8755,7 +8755,7 @@ extensions:
           "p:117_3": { column: "DEDUCTIBLE_TYPE_CODE" }
           "p:117_4": { column: "DEDUCTIBLE_VALUE" }
           "p:117_5": { column: "DEDUCTIBLE_BASIS_CODE" }
-        key: ["p:117_0"]
+        key_properties: ["p:117_0"]
       - type: "NODE"
         node: "n:118"
         table: "POLICY_EVENT"
@@ -8765,7 +8765,7 @@ extensions:
           "p:118_2": { column: "EFFECTIVE_DATE" }
           "p:118_3": { column: "EVENT_TYPE_CODE" }
           "p:118_4": { column: "EVENT_SUB_TYPE_CODE" }
-        key: ["p:118_0"]
+        key_properties: ["p:118_0"]
       - type: "NODE"
         node: "n:119"
         table: "POLICY_LIMIT"
@@ -8774,19 +8774,19 @@ extensions:
           "p:119_3": { column: "LIMIT_TYPE_CODE" }
           "p:119_4": { column: "LIMIT_VALUE" }
           "p:119_5": { column: "LIMIT_BASIS_CODE" }
-        key: ["p:119_0"]
+        key_properties: ["p:119_0"]
       - type: "NODE"
         node: "n:120"
         table: "PREMIUM"
         properties:
           "p:120_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:120_0"]
+        key_properties: ["p:120_0"]
       - type: "NODE"
         node: "n:121"
         table: "PRE_QUALIFICATION"
         properties:
           "p:121_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:121_0"]
+        key_properties: ["p:121_0"]
       - type: "NODE"
         node: "n:122"
         table: "PRODUCT"
@@ -8794,43 +8794,43 @@ extensions:
           "p:122_0": { column: "PRODUCT_IDENTIFIER" }
           "p:122_2": { column: "LICENSED_PRODUCT_NAME" }
           "p:122_3": { column: "PRODUCT_DESCRIPTION" }
-        key: ["p:122_0"]
+        key_properties: ["p:122_0"]
       - type: "NODE"
         node: "n:123"
         table: "PROFESSIONAL_GROUP"
         properties:
           "p:123_0": { column: "GROUPING_IDENTIFIER" }
-        key: ["p:123_0"]
+        key_properties: ["p:123_0"]
       - type: "NODE"
         node: "n:124"
         table: "PROJECT"
         properties:
           "p:124_0": { column: "GROUPING_IDENTIFIER" }
-        key: ["p:124_0"]
+        key_properties: ["p:124_0"]
       - type: "NODE"
         node: "n:125"
         table: "PROPERTY_IN_TRANSIT"
         properties:
           "p:125_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:125_0"]
+        key_properties: ["p:125_0"]
       - type: "NODE"
         node: "n:126"
         table: "PROVIDER_AGREEMENT"
         properties:
           "p:126_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:126_0"]
+        key_properties: ["p:126_0"]
       - type: "NODE"
         node: "n:127"
         table: "PRO_RATA"
         properties:
           "p:127_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:127_0"]
+        key_properties: ["p:127_0"]
       - type: "NODE"
         node: "n:128"
         table: "QUOTE"
         properties:
           "p:128_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:128_0"]
+        key_properties: ["p:128_0"]
       - type: "NODE"
         node: "n:129"
         table: "RATING_TERRITORY"
@@ -8839,79 +8839,79 @@ extensions:
           "p:129_1": { column: "RATING_TERRITORY_ASSIGNING_ORGANIZATION_IDENTIFIER" }
           "p:129_2": { column: "RATING_TERRITORY_CODE" }
           "p:129_3": { column: "RATING_TERRITORY_CODE_SET_IDENTIFIER" }
-        key: ["p:129_0"]
+        key_properties: ["p:129_0"]
       - type: "NODE"
         node: "n:130"
         table: "RECOVERY"
         properties:
           "p:130_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:130_0"]
+        key_properties: ["p:130_0"]
       - type: "NODE"
         node: "n:131"
         table: "RECREATIONAL_VEHICLE"
         properties:
           "p:131_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:131_0"]
+        key_properties: ["p:131_0"]
       - type: "NODE"
         node: "n:132"
         table: "REINSTATEMENT"
         properties:
           "p:132_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:132_0"]
+        key_properties: ["p:132_0"]
       - type: "NODE"
         node: "n:133"
         table: "REINSURANCE_AGREEMENT"
         properties:
           "p:133_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:133_0"]
+        key_properties: ["p:133_0"]
       - type: "NODE"
         node: "n:134"
         table: "REINSURANCE_RECOVERY"
         properties:
           "p:134_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:134_0"]
+        key_properties: ["p:134_0"]
       - type: "NODE"
         node: "n:135"
         table: "RENEWAL"
         properties:
           "p:135_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:135_0"]
+        key_properties: ["p:135_0"]
       - type: "NODE"
         node: "n:136"
         table: "RESIDENTIAL_STRUCTURE"
         properties:
           "p:136_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:136_0"]
+        key_properties: ["p:136_0"]
       - type: "NODE"
         node: "n:137"
         table: "RISK_FACTOR_SCORE"
         properties:
           "p:137_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:137_0"]
+        key_properties: ["p:137_0"]
       - type: "NODE"
         node: "n:138"
         table: "SALVAGE"
         properties:
           "p:138_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:138_0"]
+        key_properties: ["p:138_0"]
       - type: "NODE"
         node: "n:139"
         table: "SCHEDULED_ITEM"
         properties:
           "p:139_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:139_0"]
+        key_properties: ["p:139_0"]
       - type: "NODE"
         node: "n:140"
         table: "SHORT_RATE"
         properties:
           "p:140_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:140_0"]
+        key_properties: ["p:140_0"]
       - type: "NODE"
         node: "n:141"
         table: "STAFFING_AGREEMENT"
         properties:
           "p:141_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:141_0"]
+        key_properties: ["p:141_0"]
       - type: "NODE"
         node: "n:142"
         table: "STAFF_CLASSIFICATION"
@@ -8919,7 +8919,7 @@ extensions:
           "p:142_0": { column: "STAFF_CLASSIFICATION_CODE" }
           "p:142_1": { column: "STAFF_CLASSIFICATION_NAME" }
           "p:142_2": { column: "STAFF_CLASSIFICATION_DESCRIPTION" }
-        key: ["p:142_0"]
+        key_properties: ["p:142_0"]
       - type: "NODE"
         node: "n:143"
         table: "STAFF_POSITION"
@@ -8927,86 +8927,86 @@ extensions:
           "p:143_0": { column: "STAFF_POSITION_IDENTIFIER" }
           "p:143_1": { column: "STAFF_POSITION_NAME" }
           "p:143_2": { column: "STAFF_POSITION_DESCRIPTION" }
-        key: ["p:143_0"]
+        key_properties: ["p:143_0"]
       - type: "NODE"
         node: "n:144"
         table: "STATE"
         properties:
           "p:144_0": { column: "STATE_CODE" }
           "p:144_1": { column: "STATE_NAME" }
-        key: ["p:144_0"]
+        key_properties: ["p:144_0"]
       - type: "NODE"
         node: "n:145"
         table: "STRUCTURE"
         properties:
           "p:145_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:145_0"]
+        key_properties: ["p:145_0"]
       - type: "NODE"
         node: "n:146"
         table: "SUBROGATION"
         properties:
           "p:146_0": { column: "CLAIM_AMOUNT_IDENTIFIER" }
-        key: ["p:146_0"]
+        key_properties: ["p:146_0"]
       - type: "NODE"
         node: "n:147"
         table: "SURCHARGE"
         properties:
           "p:147_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:147_0"]
+        key_properties: ["p:147_0"]
       - type: "NODE"
         node: "n:148"
         table: "TAX"
         properties:
           "p:148_0": { column: "POLICY_AMOUNT_IDENTIFIER" }
-        key: ["p:148_0"]
+        key_properties: ["p:148_0"]
       - type: "NODE"
         node: "n:149"
         table: "TEAM"
         properties:
           "p:149_0": { column: "GROUPING_IDENTIFIER" }
-        key: ["p:149_0"]
+        key_properties: ["p:149_0"]
       - type: "NODE"
         node: "n:150"
         table: "THIRD_PARTY_STAFFING_AGREEMENT"
         properties:
           "p:150_0": { column: "AGREEMENT_IDENTIFIER" }
-        key: ["p:150_0"]
+        key_properties: ["p:150_0"]
       - type: "NODE"
         node: "n:151"
         table: "TRACTOR"
         properties:
           "p:151_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:151_0"]
+        key_properties: ["p:151_0"]
       - type: "NODE"
         node: "n:152"
         table: "TRAILER"
         properties:
           "p:152_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:152_0"]
+        key_properties: ["p:152_0"]
       - type: "NODE"
         node: "n:153"
         table: "TRANSPORTATION_CLASS"
         properties:
           "p:153_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:153_0"]
+        key_properties: ["p:153_0"]
       - type: "NODE"
         node: "n:154"
         table: "TRUCK"
         properties:
           "p:154_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:154_0"]
+        key_properties: ["p:154_0"]
       - type: "NODE"
         node: "n:155"
         table: "UNDERWRITING_ASSESSMENT"
         properties:
           "p:155_0": { column: "ASSESSMENT_RESULT_IDENTIFIER" }
-        key: ["p:155_0"]
+        key_properties: ["p:155_0"]
       - type: "NODE"
         node: "n:156"
         table: "VAN"
         properties:
           "p:156_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:156_0"]
+        key_properties: ["p:156_0"]
       - type: "NODE"
         node: "n:157"
         table: "VEHICLE"
@@ -9017,25 +9017,25 @@ extensions:
           "p:157_3": { column: "VEHICLE_DRIVING_WHEEL_QUANTITY" }
           "p:157_4": { column: "VEHICLE_MAKE_NAME" }
           "p:157_5": { column: "VEHICLE_IDENTIFICATION_NUMBER" }
-        key: ["p:157_0"]
+        key_properties: ["p:157_0"]
       - type: "NODE"
         node: "n:158"
         table: "WATERCRAFT"
         properties:
           "p:158_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:158_0"]
+        key_properties: ["p:158_0"]
       - type: "NODE"
         node: "n:159"
         table: "WORKERS_COMP_CLASS"
         properties:
           "p:159_0": { column: "INSURABLE_OBJECT_IDENTIFIER" }
-        key: ["p:159_0"]
+        key_properties: ["p:159_0"]
       - type: "NODE"
         node: "n:160"
         table: "audit"
         properties:
           "p:160_0": { column: "EVENT_IDENTIFIER" }
-        key: ["p:160_0"]
+        key_properties: ["p:160_0"]
       - type: "RELATIONSHIP"
         relationship: "r:0"
         table: "ACCOUNT_AGREEMENT"

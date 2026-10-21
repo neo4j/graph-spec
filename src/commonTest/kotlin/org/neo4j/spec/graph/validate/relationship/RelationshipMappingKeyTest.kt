@@ -47,7 +47,7 @@ class RelationshipMappingKeyTest {
         extensions = GraphModelExtensions(
             mappings = mutableMapOf(
                 "m0" to mutableListOf(
-                    NodeMapping(node = "node0", table = "t", properties = mutableMapOf(), key = mutableSetOf("age")),
+                    NodeMapping(node = "node0", table = "t", properties = mutableMapOf(), keyProperties = mutableSetOf("age")),
                     RelationshipMapping(
                         relationship = relationship,
                         table = "t",

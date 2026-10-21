@@ -314,7 +314,7 @@ class DataModelV3GraphSpecMigration :
                 "node" to ref,
                 "table" to nodeMapping.literal("tableName"),
                 "properties" toNotEmpty migratePropertyMappings(nodeMapping),
-                "key" toNotEmpty migrateKeyProperties(nodeMapping, nodeKeys[ref] ?: emptySet())
+                "key_properties" toNotEmpty migrateKeyProperties(nodeMapping, nodeKeys[ref] ?: emptySet())
             )
         }
         return mappings

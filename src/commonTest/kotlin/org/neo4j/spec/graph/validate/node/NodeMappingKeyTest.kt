@@ -58,7 +58,7 @@ class NodeMappingKeyTest {
                 node = "person",
                 table = "people.csv",
                 properties = mutableMapOf(),
-                key = mutableSetOf("name")
+                keyProperties = mutableSetOf("name")
             )
         )
         val issues = mutableListOf<Issue>()
@@ -66,6 +66,28 @@ class NodeMappingKeyTest {
         validator.validateNode(model, "person", node, issues)
 
         assertTrue(issues.isEmpty(), "Expected no issues when node mapping has key")
+    }
+
+    @Test
+    fun `pass when node mapping has key columns`() {
+        val node = Node(
+            labels = Labels(identifier = "Person"),
+            properties = mutableMapOf("name" to Property())
+        )
+        model.nodes["person"] = node
+        model.extensions.mappings["mapping0"] = mutableListOf(
+            NodeMapping(
+                node = "person",
+                table = "people.csv",
+                properties = mutableMapOf(),
+                keyColumns = mutableSetOf("id")
+            )
+        )
+        val issues = mutableListOf<Issue>()
+
+        validator.validateNode(model, "person", node, issues)
+
+        assertTrue(issues.isEmpty(), "Expected no issues when node mapping has key columns")
     }
 
     @Test
@@ -80,7 +102,7 @@ class NodeMappingKeyTest {
                 node = "person",
                 table = "people.csv",
                 properties = mutableMapOf(),
-                key = mutableSetOf()
+                keyProperties = mutableSetOf()
             )
         )
         val issues = mutableListOf<Issue>()
@@ -104,13 +126,13 @@ class NodeMappingKeyTest {
                 node = "person",
                 table = "people.csv",
                 properties = mutableMapOf(),
-                key = mutableSetOf("name")
+                keyProperties = mutableSetOf("name")
             ),
             NodeMapping(
                 node = "person",
                 table = "more_people.csv",
                 properties = mutableMapOf(),
-                key = mutableSetOf()
+                keyProperties = mutableSetOf()
             )
         )
         val issues = mutableListOf<Issue>()
@@ -118,6 +140,6 @@ class NodeMappingKeyTest {
         validator.validateNode(model, "person", node, issues)
 
         assertEquals(1, issues.size)
-        assertEquals("extensions.mappings.mapping0[1].key", issues[0].path)
+        assertEquals("extensions.mappings.mapping0[1].key_properties", issues[0].path)
     }
 }

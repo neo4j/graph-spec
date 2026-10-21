@@ -27,6 +27,7 @@ import org.neo4j.spec.graph.validate.node.NodeIndexesExists
 import org.neo4j.spec.graph.validate.node.NodeLabel
 import org.neo4j.spec.graph.validate.node.NodeLabelToken
 import org.neo4j.spec.graph.validate.node.NodeMappingKey
+import org.neo4j.spec.graph.validate.node.NodeMappingKeyExclusive
 import org.neo4j.spec.graph.validate.node.NodeMappingKeyType
 import org.neo4j.spec.graph.validate.node.NodeProperties
 import org.neo4j.spec.graph.validate.node.NodePropertyDuplicateName
@@ -106,6 +107,7 @@ class Validations {
             NodeLabel,
             RelationshipType,
             NodeMappingKey,
+            NodeMappingKeyExclusive,
             NodeIndexProperties,
             RelationshipIndexProperties,
             NodeConstraintProperties,

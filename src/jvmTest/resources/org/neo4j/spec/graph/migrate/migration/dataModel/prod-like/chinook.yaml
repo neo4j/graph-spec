@@ -638,14 +638,14 @@ extensions:
         properties:
           "p:0_0": { column: "album_id" }
           "p:0_1": { column: "title" }
-        key: ["p:0_0"]
+        key_properties: ["p:0_0"]
       - type: "NODE"
         node: "n:1"
         table: "artist"
         properties:
           "p:1_0": { column: "artist_id" }
           "p:1_1": { column: "name" }
-        key: ["p:1_0"]
+        key_properties: ["p:1_0"]
       - type: "NODE"
         node: "n:2"
         table: "customer"
@@ -662,7 +662,7 @@ extensions:
           "p:2_9": { column: "phone" }
           "p:2_10": { column: "fax" }
           "p:2_11": { column: "email" }
-        key: ["p:2_0"]
+        key_properties: ["p:2_0"]
       - type: "NODE"
         node: "n:3"
         table: "employee"
@@ -681,14 +681,14 @@ extensions:
           "p:3_12": { column: "phone" }
           "p:3_13": { column: "fax" }
           "p:3_14": { column: "email" }
-        key: ["p:3_0"]
+        key_properties: ["p:3_0"]
       - type: "NODE"
         node: "n:4"
         table: "genre"
         properties:
           "p:4_0": { column: "genre_id" }
           "p:4_1": { column: "name" }
-        key: ["p:4_0"]
+        key_properties: ["p:4_0"]
       - type: "NODE"
         node: "n:5"
         table: "invoice"
@@ -701,7 +701,7 @@ extensions:
           "p:5_6": { column: "billing_country" }
           "p:5_7": { column: "billing_postal_code" }
           "p:5_8": { column: "total" }
-        key: ["p:5_0"]
+        key_properties: ["p:5_0"]
       - type: "NODE"
         node: "n:6"
         table: "invoice_line"
@@ -709,21 +709,21 @@ extensions:
           "p:6_0": { column: "invoice_line_id" }
           "p:6_3": { column: "unit_price" }
           "p:6_4": { column: "quantity" }
-        key: ["p:6_0"]
+        key_properties: ["p:6_0"]
       - type: "NODE"
         node: "n:7"
         table: "media_type"
         properties:
           "p:7_0": { column: "media_type_id" }
           "p:7_1": { column: "name" }
-        key: ["p:7_0"]
+        key_properties: ["p:7_0"]
       - type: "NODE"
         node: "n:8"
         table: "playlist"
         properties:
           "p:8_0": { column: "playlist_id" }
           "p:8_1": { column: "name" }
-        key: ["p:8_0"]
+        key_properties: ["p:8_0"]
       - type: "NODE"
         node: "n:9"
         table: "track"
@@ -734,7 +734,7 @@ extensions:
           "p:9_6": { column: "milliseconds" }
           "p:9_7": { column: "bytes" }
           "p:9_8": { column: "unit_price" }
-        key: ["p:9_0"]
+        key_properties: ["p:9_0"]
       - type: "RELATIONSHIP"
         relationship: "r:0"
         table: "album"

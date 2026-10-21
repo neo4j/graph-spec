@@ -818,7 +818,7 @@ extensions:
           "p:0_5": { column: "browserUsed" }
           "p:0_6": { column: "content" }
           "p:0_7": { column: "length" }
-        key: ["p:0_3"]
+        key_properties: ["p:0_3"]
       - type: "NODE"
         node: "n:1"
         table: "Forum"
@@ -828,7 +828,7 @@ extensions:
           "p:1_2": { column: "explicitlyDeleted" }
           "p:1_3": { column: "id" }
           "p:1_4": { column: "title" }
-        key: ["p:1_3"]
+        key_properties: ["p:1_3"]
       - type: "NODE"
         node: "n:2"
         table: "Organisation"
@@ -837,7 +837,7 @@ extensions:
           "p:2_1": { column: "type" }
           "p:2_2": { column: "name" }
           "p:2_3": { column: "url" }
-        key: ["p:2_0"]
+        key_properties: ["p:2_0"]
       - type: "NODE"
         node: "n:3"
         table: "Person"
@@ -854,7 +854,7 @@ extensions:
           "p:3_9": { column: "browserUsed" }
           "p:3_11": { column: "language" }
           "p:3_12": { column: "email" }
-        key: ["p:3_3"]
+        key_properties: ["p:3_3"]
       - type: "NODE"
         node: "n:4"
         table: "Place"
@@ -863,7 +863,7 @@ extensions:
           "p:4_1": { column: "name" }
           "p:4_2": { column: "url" }
           "p:4_3": { column: "type" }
-        key: ["p:4_0"]
+        key_properties: ["p:4_0"]
       - type: "NODE"
         node: "n:5"
         table: "Post"
@@ -878,7 +878,7 @@ extensions:
           "p:5_7": { column: "language" }
           "p:5_8": { column: "content" }
           "p:5_9": { column: "length" }
-        key: ["p:5_3"]
+        key_properties: ["p:5_3"]
       - type: "NODE"
         node: "n:6"
         table: "Tag"
@@ -886,7 +886,7 @@ extensions:
           "p:6_0": { column: "id" }
           "p:6_1": { column: "name" }
           "p:6_2": { column: "url" }
-        key: ["p:6_0"]
+        key_properties: ["p:6_0"]
       - type: "NODE"
         node: "n:7"
         table: "TagClass"
@@ -894,7 +894,7 @@ extensions:
           "p:7_0": { column: "id" }
           "p:7_1": { column: "name" }
           "p:7_2": { column: "url" }
-        key: ["p:7_0"]
+        key_properties: ["p:7_0"]
       - type: "RELATIONSHIP"
         relationship: "r:0"
         table: "Comment"

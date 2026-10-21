@@ -258,7 +258,7 @@ extensions:
           "p:0_1": { column: "categoryname" }
           "p:0_2": { column: "description" }
           "p:0_3": { column: "picture" }
-        key: ["p:0_0"]
+        key_properties: ["p:0_0"]
       - type: "NODE"
         node: "n:1"
         table: "products"
@@ -271,7 +271,7 @@ extensions:
           "p:1_7": { column: "unitsonorder" }
           "p:1_8": { column: "reorderlevel" }
           "p:1_9": { column: "discontinued" }
-        key: ["p:1_0"]
+        key_properties: ["p:1_0"]
       - type: "NODE"
         node: "n:2"
         table: "suppliers"
@@ -288,7 +288,7 @@ extensions:
           "p:2_9": { column: "phone" }
           "p:2_10": { column: "fax" }
           "p:2_11": { column: "homepage" }
-        key: ["p:2_0"]
+        key_properties: ["p:2_0"]
       - type: "RELATIONSHIP"
         relationship: "r:0"
         table: "products"
