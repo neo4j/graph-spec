@@ -40,14 +40,7 @@
       }
     },
     "Movie": {
-      "labels": {
-        "identifier": "Movie",
-        "implied": [],
-        "optional": [],
-        "extensions": {
-          "custom": {}
-        }
-      },
+      "label": "Movie",
       "properties": {
         "id": {
           "type": "STRING",

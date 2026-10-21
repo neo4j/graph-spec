@@ -23,6 +23,7 @@ import org.neo4j.spec.graph.codec.schema.schemaMapOf
 import org.neo4j.spec.graph.model.Version
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -805,5 +806,18 @@ class GraphSpecDataModelV3MigrationTest {
 
         assertEquals("name_Person_key", graphSchema.listOfMaps("constraints")[0].string("name"))
         assertEquals("name_Person_text", graphSchema.listOfMaps("indexes")[0].string("name"))
+    }
+
+    @Test
+    fun `migrate fails for a node without a label`() {
+        val missingLabels = schemaMapOf("nodes" to schemaMapOf("n" to schemaMapOf("description" to "no labels")))
+        val missingIdentifier = schemaMapOf(
+            "nodes" to schemaMapOf("n" to schemaMapOf("labels" to schemaMapOf("implied" to listOf("Entity"))))
+        )
+
+        listOf(missingLabels, missingIdentifier).forEach { input ->
+            val failure = assertFailsWith<IllegalStateException> { migration.migrate(input) }
+            assertTrue(failure.message!!.contains("has no label, set label or labels.identifier"))
+        }
     }
 }

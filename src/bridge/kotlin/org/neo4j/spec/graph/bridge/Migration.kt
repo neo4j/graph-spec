@@ -24,15 +24,18 @@ import org.neo4j.spec.graph.GraphSpec
 import org.neo4j.spec.graph.codec.format.JsonFormat
 import org.neo4j.spec.graph.codec.schema.SchemaMap
 import org.neo4j.spec.graph.migrate.MigrationPath
+import org.neo4j.spec.graph.model.Type
 import kotlin.experimental.ExperimentalNativeApi
 
-private val format = JsonFormat(
+private val jsonFormat = JsonFormat(
     Json {
         ignoreUnknownKeys = true
         isLenient = true
         prettyPrint = false
     }
 )
+
+private val graphSpec = GraphSpec { format(jsonFormat) }
 
 @OptIn(ExperimentalForeignApi::class, ExperimentalNativeApi::class)
 @CName("migrate")
@@ -50,10 +53,17 @@ fun migrate(
     targetVersion,
     outputBuffer = outputBuffer,
     bufferSize = bufferSize
-) { input ->
+) { input -> migrateContent(input[0], type = input[1], targetType = input[2], targetVersion = input[3]) }
+
+internal fun migrateContent(content: String, type: String, targetType: String, targetVersion: String): String {
+    if (type == Type.GRAPH_SPEC) {
+        // Migrations expect longhand, so go via the model to expand any shorthand.
+        val model = graphSpec.decodeFromString(content)
+        return graphSpec.encodeToString(model, targetType = targetType, targetVersion = targetVersion)
+    }
     val path = MigrationPath(GraphSpec.Json.configuration.migrations)
-    val schema = format.decodeFromString(input[0])
+    val schema = jsonFormat.decodeFromString(content)
     var map = schema as? SchemaMap ?: error("Schema format expected")
-    map = path.migrate(map, type = input[1], targetType = input[2], targetVersion = input[3])
-    format.encodeToString(map)
+    map = path.migrate(map, type = type, targetType = targetType, targetVersion = targetVersion)
+    return jsonFormat.encodeToString(map)
 }
