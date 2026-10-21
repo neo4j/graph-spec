@@ -19,11 +19,13 @@ jobs:
     # The existing base version (x.y.z) is determined from git tags of the form `release/vX.Y.Z`.
     # How it is incremented is determined by PR labels:
     #   - `release:major|release:minor|release:patch` -> bump stable base
-    #   - `release:alpha` only -> continue dangling alpha line, else create next patch alpha
-    #   - `release:alpha` + bump label -> bump base, then create/increment alpha on that base
-    #   - `release:promote` -> promote newest dangling alpha base to stable (no bump)
+    #   - `release:alpha|release:rc` only -> continue dangling prerelease line, else create next patch prerelease
+    #   - prerelease label + bump label -> bump base, then create/increment the prerelease on that base
+    #   - `release:promote` -> promote newest dangling prerelease base to stable (no bump)
+    # A prerelease line only moves forwards: alpha -> rc -> stable.
     # Invalid combinations:
-    #   - `release:promote` with `release:alpha`
+    #   - more than one of `release:alpha`, `release:rc`
+    #   - `release:promote` with any prerelease label
     #   - `release:promote` with any bump label
 
     # Only run for merged PRs that explicitly request a release label.
@@ -34,6 +36,7 @@ jobs:
         contains(github.event.pull_request.labels.*.name, 'release:minor') ||
         contains(github.event.pull_request.labels.*.name, 'release:patch') || 
         contains(github.event.pull_request.labels.*.name, 'release:alpha') ||
+        contains(github.event.pull_request.labels.*.name, 'release:rc') ||
         contains(github.event.pull_request.labels.*.name, 'release:promote')
       )
     runs-on: ubuntu-latest
@@ -56,7 +59,7 @@ jobs:
             const hasMajor = labels.includes("release:major");
             const hasMinor = labels.includes("release:minor");
             const hasPatch = labels.includes("release:patch");
-            const hasAlpha = labels.includes("release:alpha");
+            const preLabels = ["alpha", "rc"].filter(c => labels.includes(`release:${c}`));
             const hasPromote = labels.includes("release:promote");
 
             const bumpCount = [hasMajor, hasMinor, hasPatch].filter(Boolean).length;
@@ -65,8 +68,13 @@ jobs:
               return;
             }
 
-            if (hasPromote && (hasAlpha || bumpCount > 0)) {
-              core.setFailed("Invalid labels: release:promote cannot be combined with release:alpha or release:major/minor/patch.");
+            if (preLabels.length > 1) {
+              core.setFailed("Invalid labels: only one of release:alpha, release:rc can be set.");
+              return;
+            }
+
+            if (hasPromote && (preLabels.length > 0 || bumpCount > 0)) {
+              core.setFailed("Invalid labels: release:promote cannot be combined with release:alpha/rc or release:major/minor/patch.");
               return;
             }
 
@@ -74,7 +82,7 @@ jobs:
             if (hasMajor) bump = "major";
             else if (hasMinor) bump = "minor";
 
-            const channel = hasAlpha ? "alpha" : "stable";
+            const channel = preLabels.length === 1 ? preLabels[0] : "stable";
             const hasExplicitBump = bumpCount === 1 ? "true" : "false";
             const promote = hasPromote ? "true" : "false";
 
@@ -96,21 +104,22 @@ jobs:
 
           all_tags="$(git tag -l 'release/v*' --sort=-v:refname)"
           stable_tags="$(printf '%s\n' "$all_tags" | grep -E '^release/v[0-9]+\.[0-9]+\.[0-9]+$' || true)"
-          alpha_tags="$(printf '%s\n' "$all_tags" | grep -E '^release/v[0-9]+\.[0-9]+\.[0-9]+-alpha\.[0-9]+$' || true)"
+          pre_tags="$(printf '%s\n' "$all_tags" | grep -E '^release/v[0-9]+\.[0-9]+\.[0-9]+-(alpha|rc)\.[0-9]+$' || true)"
 
           latest_stable_tag="$(printf '%s\n' "$stable_tags" | head -n1 || true)"
           latest_stable_version="${latest_stable_tag#release/v}"
 
-          dangling_alpha_base=""
+          # A prerelease base (of any channel) is dangling until its stable tag exists.
+          dangling_pre_base=""
           while IFS= read -r tag; do
             [[ -z "$tag" ]] && continue
             tag_version="${tag#release/v}"
-            base="${tag_version%-alpha.*}"
+            base="${tag_version%%-*}"
             if ! git rev-parse -q --verify "refs/tags/release/v${base}" >/dev/null; then
-              dangling_alpha_base="$base"
+              dangling_pre_base="$base"
               break
             fi
-          done <<< "$alpha_tags"
+          done <<< "$pre_tags"
 
           bump_semver() {
             local version="$1"
@@ -128,40 +137,52 @@ jobs:
 
           if [[ "${channel}" == "stable" ]]; then
             if [[ "${promote}" == "true" ]]; then
-              if [[ -z "${dangling_alpha_base}" ]]; then
-                echo "release:promote requested but no dangling alpha exists" >&2
+              if [[ -z "${dangling_pre_base}" ]]; then
+                echo "release:promote requested but no dangling prerelease exists" >&2
                 exit 1
               fi
-              next_version="${dangling_alpha_base}"
+              next_version="${dangling_pre_base}"
             else
               baseline="${latest_stable_version:-0.0.0}"
               next_version="$(bump_semver "${baseline}" "${bump}")"
             fi
           else
-            # Alpha channel
+            # Prerelease channel (alpha or rc)
             if [[ "${has_explicit_bump}" == "true" ]]; then
-              baseline="${dangling_alpha_base:-${latest_stable_version:-0.0.0}}"
+              baseline="${dangling_pre_base:-${latest_stable_version:-0.0.0}}"
               base_version="$(bump_semver "${baseline}" "${bump}")"
             else
-              if [[ -n "${dangling_alpha_base}" ]]; then
-                base_version="${dangling_alpha_base}"
+              if [[ -n "${dangling_pre_base}" ]]; then
+                base_version="${dangling_pre_base}"
               else
                 baseline="${latest_stable_version:-0.0.0}"
                 base_version="$(bump_semver "${baseline}" "patch")"
               fi
             fi
 
-            latest_base_alpha_tag="$(
-              printf '%s\n' "$alpha_tags" \
-              | grep -E "^release/v${base_version//./\\.}-alpha\.[0-9]+$" \
+            # Prereleases only move forwards: refuse e.g. an alpha once an rc exists on the base.
+            channels=(alpha rc)
+            for i in "${!channels[@]}"; do
+              [[ "${channels[$i]}" == "${channel}" ]] && channel_index="$i"
+            done
+            for later in "${channels[@]:$((channel_index + 1))}"; do
+              if printf '%s\n' "$pre_tags" | grep -qE "^release/v${base_version//./\\.}-${later}\.[0-9]+$"; then
+                echo "Cannot release a ${channel} of ${base_version}: a ${later} already exists" >&2
+                exit 1
+              fi
+            done
+
+            latest_base_channel_tag="$(
+              printf '%s\n' "$pre_tags" \
+              | grep -E "^release/v${base_version//./\\.}-${channel}\.[0-9]+$" \
               | head -n1 || true
             )"
 
-            if [[ -n "${latest_base_alpha_tag}" ]]; then
-              alpha_number="${latest_base_alpha_tag##*-alpha.}"
-              next_version="${base_version}-alpha.$((alpha_number + 1))"
+            if [[ -n "${latest_base_channel_tag}" ]]; then
+              pre_number="${latest_base_channel_tag##*-${channel}.}"
+              next_version="${base_version}-${channel}.$((pre_number + 1))"
             else
-              next_version="${base_version}-alpha.1"
+              next_version="${base_version}-${channel}.1"
             fi
           fi
 
@@ -215,7 +236,14 @@ jobs:
             cd "$TARGET_DIR"
             # Update package.json version dynamically before publishing
             npm version ${{ needs.determine-version.outputs.version }} --no-git-tag-version --allow-same-version
-            npm publish --tag alpha --access public
+            # Prereleases (x.y.z-<channel>.N) go to the matching dist-tag, stable releases to latest
+            VERSION="${{ needs.determine-version.outputs.version }}"
+            if [[ "${VERSION}" =~ -([a-z]+)\.[0-9]+$ ]]; then
+              NPM_TAG="${BASH_REMATCH[1]}"
+            else
+              NPM_TAG=latest
+            fi
+            npm publish --tag "${NPM_TAG}" --access public
           else
             echo "Directory $TARGET_DIR not found. Check your Gradle JS/TS build configurations."
             exit 1
@@ -240,7 +268,7 @@ jobs:
         uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
 
       - name: Publish to Maven Central
-        run: ./gradlew publishToMavenCentral -Pversion=${{ needs.determine-version.outputs.version }} --no-daemon # Replace with publishAndReleaseToMavenCentral later
+        run: ./gradlew publishAndReleaseToMavenCentral -Pversion=${{ needs.determine-version.outputs.version }} --no-daemon
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
