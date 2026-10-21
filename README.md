@@ -121,17 +121,14 @@ The Go library bundles the Kotlin/Native library, which is embedded and loaded a
 
 ## Usage
 
-Every library follows the same three steps: **decode** a document into a `GraphModel`, **validate** it, and
-**migrate** it to or from other model formats. `GraphSpec.Json` and `GraphSpec.Yaml` (JVM and JS/TS) decode and encode
-the two document formats; Go works with JSON.
+Every library can **decode** a document into a `GraphModel` and **validate** it. The JVM and JS/TS libraries can also
+**encode** a model back to a document, using `GraphSpec.Json` or `GraphSpec.Yaml`. Go works with JSON.
 
 ### Kotlin
 
 ```kotlin
 import org.neo4j.spec.graph.GraphSpec
 import org.neo4j.spec.graph.model.GraphModel
-import org.neo4j.spec.graph.model.Type
-import org.neo4j.spec.graph.model.Version
 import org.neo4j.spec.graph.validate.Validations
 
 // Decode (use GraphSpec.Yaml for YAML)
@@ -143,12 +140,6 @@ issues.forEach { println("${it.code}: ${it.message} (${it.path})") }
 
 // Encode
 val encoded: String = GraphSpec.Yaml.encodeToString(model)
-
-// Migrate an older data model document to the latest graph spec...
-val migrated = GraphSpec.Json.decodeFromString(oldDataModelJson, Type.DATA_MODEL)
-
-// ...and back again
-val dataModelJson = GraphSpec.Json.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30)
 ```
 
 ### Java
@@ -171,10 +162,6 @@ for (Issue issue : model.validate(Validations.Companion.getAll())) {
 
 // Encode
 String encoded = GraphSpec.Yaml.INSTANCE.encodeToString(model, Type.GRAPH_SPEC, Version.LATEST);
-
-// Migrate an older data model document to the latest graph spec, and back again
-GraphModel migrated = GraphSpec.Json.INSTANCE.decodeFromString(oldDataModelJson, Type.DATA_MODEL);
-String dataModelJson = GraphSpec.Json.INSTANCE.encodeToString(model, Type.DATA_MODEL, Version.DATA_MODEL_V30);
 ```
 
 ### JavaScript / TypeScript
@@ -199,7 +186,6 @@ const encoded: string = GraphSpec.Yaml.encodeToString(model);
 import (
 	"encoding/json"
 
-	"github.com/neo4j/ontology-graph-spec/go/migration"
 	"github.com/neo4j/ontology-graph-spec/go/model"
 	"github.com/neo4j/ontology-graph-spec/go/validation"
 )
@@ -218,12 +204,6 @@ if err != nil {
 for _, issue := range issues {
 	fmt.Printf("%s: %s (%s)\n", issue.Code, issue.Message, issue.Path)
 }
-
-// Migrate an older data model document to the latest graph spec...
-migrated, err := migration.ToGraphSpec(string(oldDataModelJSON), migration.ModelTypeDataModel)
-
-// ...and back again
-dataModelJSON, err := migration.FromGraphSpec(graph, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
 ```
 
 ## Documentation
