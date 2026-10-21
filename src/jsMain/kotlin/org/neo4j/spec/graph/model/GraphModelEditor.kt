@@ -17,27 +17,23 @@
 package org.neo4j.spec.graph.model
 
 import js.objects.toRecord
-import org.neo4j.spec.graph.model.extension.mapping.toClass
-import org.neo4j.spec.graph.model.extension.mapping.toJs
 import org.neo4j.spec.graph.model.extension.source.tableJs
-import org.neo4j.spec.graph.model.extension.source.toClass
-import org.neo4j.spec.graph.model.extension.source.toJs
 import org.neo4j.spec.graph.model.extension.toClass
 import org.neo4j.spec.graph.model.extension.toJs
 import org.neo4j.spec.graph.model.node.NodeEditor
-import org.neo4j.spec.graph.model.node.extension.toClass
-import org.neo4j.spec.graph.model.node.extension.toJs
 import org.neo4j.spec.graph.model.node.nodeJs
 import org.neo4j.spec.graph.model.node.toClass
 import org.neo4j.spec.graph.model.node.toJs
-import org.neo4j.spec.graph.model.relationship.extension.toClass
-import org.neo4j.spec.graph.model.relationship.extension.toJs
 import org.neo4j.spec.graph.model.relationship.relationshipJs
 import org.neo4j.spec.graph.model.relationship.toClass
 import org.neo4j.spec.graph.model.relationship.toJs
+
 /**
  * We have duplicate model built on external interfaces with conversion to and from classes in order
  * to support plain JavaScript objects which are used in React's Redux state storage.
+ *
+ * **Experimental:** these JavaScript helpers (the `*Editor` classes and the plain `*Js` objects) are experimental
+ * and may change or be removed in any release without notice.
  */
 @JsExport
 class GraphModelEditor {
