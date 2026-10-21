@@ -58,6 +58,9 @@ internal class KeyConversionContext(
  * Works out the conversion of [mapping] to key properties or key columns without changing it, so a failure leaves
  * everything unchanged. Running the returned function applies the conversion.
  *
+ * @return a lambda method with the changes so the caller can change atomically, checking all mappings are valid
+ * before making any changes.
+ *
  * @throws IllegalArgumentException if a key can't be converted.
  */
 internal fun planKeyConversion(
@@ -71,23 +74,25 @@ internal fun planKeyConversion(
         val endpoints = context.endpoints(mapping.relationship)
         val from = planTarget(mapping.fromNode, endpoints?.first, context, toProperties)
         val to = planTarget(mapping.toNode, endpoints?.second, context, toProperties)
-        ({
+        return {
             own()
             from()
             to()
-        })
+        }
     }
-    is QueryMapping -> ({})
+    is QueryMapping -> return {}
 }
 
-private fun planKeys(
+internal fun planKeys(
     properties: Map<String, PropertyMapping>,
     columns: MutableSet<String>,
     keys: MutableSet<String>,
     toProperties: Boolean
 ): () -> Unit {
     if (toProperties) {
-        if (columns.isEmpty()) return {}
+        if (columns.isEmpty()) {
+            return {}
+        }
         val converted = columnsToProperties(columns, properties)
         return {
             keys.clear()
@@ -95,7 +100,9 @@ private fun planKeys(
             columns.clear()
         }
     }
-    if (keys.isEmpty()) return {}
+    if (keys.isEmpty()) {
+        return {}
+    }
     val converted = propertiesToColumns(keys, properties)
     return {
         columns.clear()
@@ -111,7 +118,9 @@ private fun planTarget(
     toProperties: Boolean
 ): () -> Unit {
     if (toProperties) {
-        if (target.nodeKeyColumn.isEmpty()) return {}
+        if (target.nodeKeyColumn.isEmpty()) {
+            return {}
+        }
         val column = target.nodeKeyColumn
         val property = context.nodePropertyMappings(requireNotNull(nodeId) { "Relationship of mapping not found" })
             .firstNotNullOfOrNull { mappings -> mappings.entries.firstOrNull { it.value.column == column }?.key }
@@ -121,7 +130,9 @@ private fun planTarget(
             target.nodeKeyColumn = ""
         }
     }
-    if (target.nodeKeyProperty.isEmpty()) return {}
+    if (target.nodeKeyProperty.isEmpty()) {
+        return {}
+    }
     val property = target.nodeKeyProperty
     val column = context.nodePropertyMappings(requireNotNull(nodeId) { "Relationship of mapping not found" })
         .firstNotNullOfOrNull { it[property]?.column }

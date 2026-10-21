@@ -113,6 +113,26 @@ class MappingKeyConversionTest {
     }
 
     @Test
+    fun `converts every mapping in the model to columns`() {
+        val node = person(keys = setOf("id"))
+        val relationship = worksAt(
+            TargetMapping(nodeKeyProperty = "id", relationshipColumn = "pid"),
+            TargetMapping(nodeKeyProperty = "code", relationshipColumn = "cid")
+        )
+        val company = company()
+
+        MappingKeyConversion.useKeyColumns(model(node, company, relationship))
+
+        assertEquals(setOf("person_id"), node.keyColumns)
+        assertTrue(node.keyProperties.isEmpty())
+        assertEquals(setOf("company_code"), company.keyColumns)
+        assertTrue(company.keyProperties.isEmpty())
+        assertEquals("person_id", relationship.fromNode.nodeKeyColumn)
+        assertEquals("company_code", relationship.toNode.nodeKeyColumn)
+        assertTrue(relationship.fromNode.nodeKeyProperty.isEmpty())
+    }
+
+    @Test
     fun `a failed conversion changes nothing`() {
         val relationship = worksAt(
             TargetMapping(nodeKeyColumn = "person_id", relationshipColumn = "pid"),
