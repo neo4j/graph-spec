@@ -90,15 +90,14 @@ object Notation {
         constraints: MutableMap<String, C>,
         properties: MutableMap<String, Property>,
         label: String,
-        extensions: (C) -> CustomExtensions,
-        check: (C) -> Boolean = { true }
+        extensions: (C) -> CustomExtensions
     ) where C : Constraint, C : Named {
         val collapsed = mutableSetOf<String>()
         for ((key, constraint) in constraints) {
             val propertyKey = constraint.properties.singleOrNull() ?: continue
             val property = properties[propertyKey] ?: continue
             val expected = NameFormat.constraintName(listOf(property.name ?: propertyKey), label, constraint.type)
-            if (!check(constraint) || extensions(constraint).custom.isNotEmpty() ||
+            if (extensions(constraint).custom.isNotEmpty() ||
                 (constraint.name != null && constraint.name != expected)
             ) {
                 continue
