@@ -253,7 +253,7 @@
             }
           },
           "mode": "MERGE",
-          "key": [
+          "key_properties": [
             "id"
           ]
         },
@@ -267,7 +267,7 @@
             }
           },
           "mode": "MERGE",
-          "key": [
+          "key_properties": [
             "id"
           ]
         },
@@ -276,20 +276,12 @@
           "relationship": "ACTED_IN",
           "table": "actors-movies",
           "from_node": {
-            "label": "Actor",
-            "properties": {
-              "id": {
-                "column": "actor_id"
-              }
-            }
+            "node_key_property": "id",
+            "relationship_column": "actor_id"
           },
           "to_node": {
-            "label": "Movie",
-            "properties": {
-              "id": {
-                "column": "movie_id"
-              }
-            }
+            "node_key_property": "id",
+            "relationship_column": "movie_id"
           },
           "properties": {
             "roles": {
@@ -297,7 +289,7 @@
             }
           },
           "mode": "MERGE",
-          "key": []
+          "key_properties": []
         }
       ]
     }
