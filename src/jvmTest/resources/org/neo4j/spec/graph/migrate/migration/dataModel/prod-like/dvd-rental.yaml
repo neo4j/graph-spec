@@ -1175,147 +1175,147 @@ extensions:
         relationship: "r:0"
         table: "address"
         from_node:
-          properties:
-            "p:1_0": { column: "address_id" }
+          node_key_property: "p:1_0"
+          relationship_column: "address_id"
         to_node:
-          properties:
-            "p:3_0": { column: "city_id" }
+          node_key_property: "p:3_0"
+          relationship_column: "city_id"
       - type: "RELATIONSHIP"
         relationship: "r:1"
         table: "city"
         from_node:
-          properties:
-            "p:3_0": { column: "city_id" }
+          node_key_property: "p:3_0"
+          relationship_column: "city_id"
         to_node:
-          properties:
-            "p:4_0": { column: "country_id" }
+          node_key_property: "p:4_0"
+          relationship_column: "country_id"
       - type: "RELATIONSHIP"
         relationship: "r:2"
         table: "customer"
         from_node:
-          properties:
-            "p:5_0": { column: "customer_id" }
+          node_key_property: "p:5_0"
+          relationship_column: "customer_id"
         to_node:
-          properties:
-            "p:1_0": { column: "address_id" }
+          node_key_property: "p:1_0"
+          relationship_column: "address_id"
       - type: "RELATIONSHIP"
         relationship: "r:3"
         table: "film"
         from_node:
-          properties:
-            "p:6_0": { column: "film_id" }
+          node_key_property: "p:6_0"
+          relationship_column: "film_id"
         to_node:
-          properties:
-            "p:8_0": { column: "language_id" }
+          node_key_property: "p:8_0"
+          relationship_column: "language_id"
       - type: "RELATIONSHIP"
         relationship: "r:4"
         table: "film_actor"
         from_node:
-          properties:
-            "p:0_0": { column: "actor_id" }
+          node_key_property: "p:0_0"
+          relationship_column: "actor_id"
         to_node:
-          properties:
-            "p:6_0": { column: "film_id" }
+          node_key_property: "p:6_0"
+          relationship_column: "film_id"
         properties:
           "p:4_0": { column: "last_update" }
       - type: "RELATIONSHIP"
         relationship: "r:5"
         table: "film_category"
         from_node:
-          properties:
-            "p:2_0": { column: "category_id" }
+          node_key_property: "p:2_0"
+          relationship_column: "category_id"
         to_node:
-          properties:
-            "p:6_0": { column: "film_id" }
+          node_key_property: "p:6_0"
+          relationship_column: "film_id"
         properties:
           "p:5_0": { column: "last_update" }
       - type: "RELATIONSHIP"
         relationship: "r:6"
         table: "inventory"
         from_node:
-          properties:
-            "p:7_0": { column: "inventory_id" }
+          node_key_property: "p:7_0"
+          relationship_column: "inventory_id"
         to_node:
-          properties:
-            "p:6_0": { column: "film_id" }
+          node_key_property: "p:6_0"
+          relationship_column: "film_id"
       - type: "RELATIONSHIP"
         relationship: "r:7"
         table: "payment"
         from_node:
-          properties:
-            "p:9_0": { column: "payment_id" }
+          node_key_property: "p:9_0"
+          relationship_column: "payment_id"
         to_node:
-          properties:
-            "p:5_0": { column: "customer_id" }
+          node_key_property: "p:5_0"
+          relationship_column: "customer_id"
       - type: "RELATIONSHIP"
         relationship: "r:8"
         table: "payment"
         from_node:
-          properties:
-            "p:9_0": { column: "payment_id" }
+          node_key_property: "p:9_0"
+          relationship_column: "payment_id"
         to_node:
-          properties:
-            "p:10_0": { column: "rental_id" }
+          node_key_property: "p:10_0"
+          relationship_column: "rental_id"
       - type: "RELATIONSHIP"
         relationship: "r:9"
         table: "payment"
         from_node:
-          properties:
-            "p:9_0": { column: "payment_id" }
+          node_key_property: "p:9_0"
+          relationship_column: "payment_id"
         to_node:
-          properties:
-            "p:11_0": { column: "staff_id" }
+          node_key_property: "p:11_0"
+          relationship_column: "staff_id"
       - type: "RELATIONSHIP"
         relationship: "r:10"
         table: "rental"
         from_node:
-          properties:
-            "p:10_0": { column: "rental_id" }
+          node_key_property: "p:10_0"
+          relationship_column: "rental_id"
         to_node:
-          properties:
-            "p:5_0": { column: "customer_id" }
+          node_key_property: "p:5_0"
+          relationship_column: "customer_id"
       - type: "RELATIONSHIP"
         relationship: "r:11"
         table: "rental"
         from_node:
-          properties:
-            "p:10_0": { column: "rental_id" }
+          node_key_property: "p:10_0"
+          relationship_column: "rental_id"
         to_node:
-          properties:
-            "p:7_0": { column: "inventory_id" }
+          node_key_property: "p:7_0"
+          relationship_column: "inventory_id"
       - type: "RELATIONSHIP"
         relationship: "r:12"
         table: "rental"
         from_node:
-          properties:
-            "p:10_0": { column: "rental_id" }
+          node_key_property: "p:10_0"
+          relationship_column: "rental_id"
         to_node:
-          properties:
-            "p:11_0": { column: "staff_id" }
+          node_key_property: "p:11_0"
+          relationship_column: "staff_id"
       - type: "RELATIONSHIP"
         relationship: "r:13"
         table: "staff"
         from_node:
-          properties:
-            "p:11_0": { column: "staff_id" }
+          node_key_property: "p:11_0"
+          relationship_column: "staff_id"
         to_node:
-          properties:
-            "p:1_0": { column: "address_id" }
+          node_key_property: "p:1_0"
+          relationship_column: "address_id"
       - type: "RELATIONSHIP"
         relationship: "r:14"
         table: "store"
         from_node:
-          properties:
-            "p:12_0": { column: "store_id" }
+          node_key_property: "p:12_0"
+          relationship_column: "store_id"
         to_node:
-          properties:
-            "p:1_0": { column: "address_id" }
+          node_key_property: "p:1_0"
+          relationship_column: "address_id"
       - type: "RELATIONSHIP"
         relationship: "r:15"
         table: "store"
         from_node:
-          properties:
-            "p:12_0": { column: "store_id" }
+          node_key_property: "p:12_0"
+          relationship_column: "store_id"
         to_node:
-          properties:
-            "p:11_0": { column: "manager_staff_id" }
+          node_key_property: "p:11_0"
+          relationship_column: "manager_staff_id"

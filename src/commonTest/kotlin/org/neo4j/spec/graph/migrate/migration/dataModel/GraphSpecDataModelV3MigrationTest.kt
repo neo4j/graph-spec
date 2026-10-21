@@ -271,13 +271,9 @@ class GraphSpecDataModelV3MigrationTest {
                             "relationship" to "actual_rel_id",
                             "table" to "user_follows",
                             "from_node" to
-                                schemaMapOf(
-                                    "properties" to schemaMapOf("uid" to schemaMapOf("column" to "from_id"))
-                                ),
+                                schemaMapOf("node_key_property" to "uid", "relationship_column" to "from_id"),
                             "to_node" to
-                                schemaMapOf(
-                                    "properties" to schemaMapOf("uid" to schemaMapOf("column" to "to_id"))
-                                )
+                                schemaMapOf("node_key_property" to "uid", "relationship_column" to "to_id")
                         )
                     )
                 )

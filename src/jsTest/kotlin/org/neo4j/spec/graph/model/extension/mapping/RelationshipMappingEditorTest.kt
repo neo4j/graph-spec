@@ -10,7 +10,7 @@ class RelationshipMappingEditorTest {
 
     private fun mapping(columns: Array<String> = emptyArray(), keys: Array<String> = emptyArray()): RelationshipMappingJs {
         val properties = mapOf("id" to propertyMappingJs("person_id"), "name" to propertyMappingJs("person_name"))
-        return relationshipMappingJs("knows", "people", targetMappingJs("L", emptyMap<String, PropertyMappingJs>().toRecord()), targetMappingJs("L", emptyMap<String, PropertyMappingJs>().toRecord()), properties.toRecord(), "MERGE", null, columns, keys)
+        return relationshipMappingJs("knows", "people", targetMappingJs(), targetMappingJs(), properties.toRecord(), "MERGE", null, columns, keys)
     }
 
     @Test

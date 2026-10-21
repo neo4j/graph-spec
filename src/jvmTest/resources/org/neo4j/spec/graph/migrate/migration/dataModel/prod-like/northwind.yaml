@@ -293,17 +293,17 @@ extensions:
         relationship: "r:0"
         table: "products"
         from_node:
-          properties:
-            "p:1_0": { column: "productid" }
+          node_key_property: "p:1_0"
+          relationship_column: "productid"
         to_node:
-          properties:
-            "p:0_0": { column: "categoryid" }
+          node_key_property: "p:0_0"
+          relationship_column: "categoryid"
       - type: "RELATIONSHIP"
         relationship: "r:1"
         table: "products"
         from_node:
-          properties:
-            "p:1_0": { column: "productid" }
+          node_key_property: "p:1_0"
+          relationship_column: "productid"
         to_node:
-          properties:
-            "p:2_0": { column: "supplierid" }
+          node_key_property: "p:2_0"
+          relationship_column: "supplierid"

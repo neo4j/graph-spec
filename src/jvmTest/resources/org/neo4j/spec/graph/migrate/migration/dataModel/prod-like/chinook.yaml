@@ -739,89 +739,89 @@ extensions:
         relationship: "r:0"
         table: "album"
         from_node:
-          properties:
-            "p:0_0": { column: "album_id" }
+          node_key_property: "p:0_0"
+          relationship_column: "album_id"
         to_node:
-          properties:
-            "p:1_0": { column: "artist_id" }
+          node_key_property: "p:1_0"
+          relationship_column: "artist_id"
       - type: "RELATIONSHIP"
         relationship: "r:1"
         table: "customer"
         from_node:
-          properties:
-            "p:2_0": { column: "customer_id" }
+          node_key_property: "p:2_0"
+          relationship_column: "customer_id"
         to_node:
-          properties:
-            "p:3_0": { column: "support_rep_id" }
+          node_key_property: "p:3_0"
+          relationship_column: "support_rep_id"
       - type: "RELATIONSHIP"
         relationship: "r:2"
         table: "employee"
         from_node:
-          properties:
-            "p:3_0": { column: "employee_id" }
+          node_key_property: "p:3_0"
+          relationship_column: "employee_id"
         to_node:
-          properties:
-            "p:3_0": { column: "reports_to" }
+          node_key_property: "p:3_0"
+          relationship_column: "reports_to"
       - type: "RELATIONSHIP"
         relationship: "r:3"
         table: "invoice"
         from_node:
-          properties:
-            "p:5_0": { column: "invoice_id" }
+          node_key_property: "p:5_0"
+          relationship_column: "invoice_id"
         to_node:
-          properties:
-            "p:2_0": { column: "customer_id" }
+          node_key_property: "p:2_0"
+          relationship_column: "customer_id"
       - type: "RELATIONSHIP"
         relationship: "r:4"
         table: "invoice_line"
         from_node:
-          properties:
-            "p:6_0": { column: "invoice_line_id" }
+          node_key_property: "p:6_0"
+          relationship_column: "invoice_line_id"
         to_node:
-          properties:
-            "p:5_0": { column: "invoice_id" }
+          node_key_property: "p:5_0"
+          relationship_column: "invoice_id"
       - type: "RELATIONSHIP"
         relationship: "r:5"
         table: "invoice_line"
         from_node:
-          properties:
-            "p:6_0": { column: "invoice_line_id" }
+          node_key_property: "p:6_0"
+          relationship_column: "invoice_line_id"
         to_node:
-          properties:
-            "p:9_0": { column: "track_id" }
+          node_key_property: "p:9_0"
+          relationship_column: "track_id"
       - type: "RELATIONSHIP"
         relationship: "r:6"
         table: "playlist_track"
         from_node:
-          properties:
-            "p:8_0": { column: "playlist_id" }
+          node_key_property: "p:8_0"
+          relationship_column: "playlist_id"
         to_node:
-          properties:
-            "p:9_0": { column: "track_id" }
+          node_key_property: "p:9_0"
+          relationship_column: "track_id"
       - type: "RELATIONSHIP"
         relationship: "r:7"
         table: "track"
         from_node:
-          properties:
-            "p:9_0": { column: "track_id" }
+          node_key_property: "p:9_0"
+          relationship_column: "track_id"
         to_node:
-          properties:
-            "p:0_0": { column: "album_id" }
+          node_key_property: "p:0_0"
+          relationship_column: "album_id"
       - type: "RELATIONSHIP"
         relationship: "r:8"
         table: "track"
         from_node:
-          properties:
-            "p:9_0": { column: "track_id" }
+          node_key_property: "p:9_0"
+          relationship_column: "track_id"
         to_node:
-          properties:
-            "p:4_0": { column: "genre_id" }
+          node_key_property: "p:4_0"
+          relationship_column: "genre_id"
       - type: "RELATIONSHIP"
         relationship: "r:9"
         table: "track"
         from_node:
-          properties:
-            "p:9_0": { column: "track_id" }
+          node_key_property: "p:9_0"
+          relationship_column: "track_id"
         to_node:
-          properties:
-            "p:7_0": { column: "media_type_id" }
+          node_key_property: "p:7_0"
+          relationship_column: "media_type_id"

@@ -79,8 +79,8 @@ class GraphSpecDataModelV3Migration :
                         "relationship" to refOf(relId),
                         "tableName" to mapping.literal("table"),
                         "fromMappings" toNotEmpty
-                            convertEntityMap(mapping.map("from_node").mapOfMapsOrNull("properties")),
-                        "toMappings" toNotEmpty convertEntityMap(mapping.map("to_node").mapOfMapsOrNull("properties")),
+                            convertEntityMap(mapping.map("from_node")),
+                        "toMappings" toNotEmpty convertEntityMap(mapping.map("to_node")),
                         "propertyMappings" to convertPropertyMappings(mapping.mapOfMapsOrNull("properties"))
                     )
                 }
@@ -458,13 +458,9 @@ class GraphSpecDataModelV3Migration :
         }
     }
 
-    internal fun convertEntityMap(properties: Map<String, SchemaMap>?): Map<String, Any> {
-        if (properties.isNullOrEmpty()) {
-            return emptyMap()
-        }
-        return properties.entries.associate { (key, value) ->
-            "#$key" to value.literal("column")
-        }
+    internal fun convertEntityMap(target: SchemaMap): Map<String, Any> {
+        val property = target.stringOrNull("node_key_property")?.takeIf { it.isNotEmpty() } ?: return emptyMap()
+        return mapOf("#$property" to target.literal("relationship_column"))
     }
 
     companion object {

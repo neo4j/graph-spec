@@ -26,8 +26,18 @@ import kotlin.js.JsExport
 @SerialName("TargetMapping")
 @SerialDescription("Identifies a node at one end of a mapped relationship.")
 data class TargetMapping(
-    @SerialDescription("Label of the node.")
-    var label: String = "",
-    @SerialDescription("Mappings from property ids to source columns used to match the node.")
-    val properties: MutableMap<String, PropertyMapping> = mutableMapOf()
+    @SerialName("node_key_column")
+    @SerialDescription(
+        "Name of the column in the node's source table which identifies the node. " +
+            "Mutually exclusive with node_key_property."
+    )
+    var nodeKeyColumn: String = "",
+    @SerialName("node_key_property")
+    @SerialDescription(
+        "Id of the node property which identifies the node. Mutually exclusive with node_key_column."
+    )
+    var nodeKeyProperty: String = "",
+    @SerialName("relationship_column")
+    @SerialDescription("Name of the column in the relationship's source table which refers to the node.")
+    var relationshipColumn: String = ""
 )

@@ -16,29 +16,34 @@
  */
 package org.neo4j.spec.graph.model.extension.mapping
 
-import js.objects.Record
-import js.objects.toRecord
 import kotlinx.js.JsPlainObject
-import org.neo4j.spec.graph.model.associateBy
 import org.neo4j.spec.graph.model.jso
 @JsExport
 @JsPlainObject
 external interface TargetMappingJs {
-    var label: String
-    val properties: Record<String, PropertyMappingJs>
+    var nodeKeyColumn: String
+    var nodeKeyProperty: String
+    var relationshipColumn: String
 }
 
-fun targetMappingJs(label: String, properties: Record<String, PropertyMappingJs>): TargetMappingJs = jso {
-    this.label = label
-    this.properties = properties
+fun targetMappingJs(
+    nodeKeyColumn: String = "",
+    nodeKeyProperty: String = "",
+    relationshipColumn: String = ""
+): TargetMappingJs = jso {
+    this.nodeKeyColumn = nodeKeyColumn
+    this.nodeKeyProperty = nodeKeyProperty
+    this.relationshipColumn = relationshipColumn
 }
 
 fun TargetMapping.toJs() = targetMappingJs(
-    label = label,
-    properties = properties.map { it.key to it.value.toJs() }.toMap().toRecord()
+    nodeKeyColumn = nodeKeyColumn,
+    nodeKeyProperty = nodeKeyProperty,
+    relationshipColumn = relationshipColumn
 )
 
 fun TargetMappingJs.toClass() = TargetMapping(
-    label = label,
-    properties = properties.associateBy { _, value -> value.toClass() }
+    nodeKeyColumn = nodeKeyColumn,
+    nodeKeyProperty = nodeKeyProperty,
+    relationshipColumn = relationshipColumn
 )

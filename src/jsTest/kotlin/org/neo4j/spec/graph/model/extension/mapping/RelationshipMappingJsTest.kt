@@ -8,8 +8,8 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
     override fun createClass() = RelationshipMapping(
         relationship = "relationshipId",
         table = "table_name",
-        fromNode = TargetMapping(label = "from_label"),
-        toNode = TargetMapping(label = "to_label"),
+        fromNode = TargetMapping(nodeKeyProperty = "from_prop", relationshipColumn = "from_col"),
+        toNode = TargetMapping(nodeKeyProperty = "to_prop", relationshipColumn = "to_col"),
         properties = mutableMapOf("prop" to PropertyMapping("field")),
         mode = MappingMode.MERGE,
         matchLabel = "matchLabel",
@@ -26,8 +26,10 @@ class RelationshipMappingJsTest : JsMappingTest<RelationshipMapping, Relationshi
     override fun verifyJsObject(jsObject: RelationshipMappingJs) {
         assertEquals("RELATIONSHIP", jsObject.type)
         assertEquals("table_name", jsObject.table)
-        assertEquals("from_label", jsObject.fromNode.label)
-        assertEquals("to_label", jsObject.toNode.label)
+        assertEquals("from_prop", jsObject.fromNode.nodeKeyProperty)
+        assertEquals("from_col", jsObject.fromNode.relationshipColumn)
+        assertEquals("to_prop", jsObject.toNode.nodeKeyProperty)
+        assertEquals("to_col", jsObject.toNode.relationshipColumn)
         assertJsEquals(propertyMappingJs("field"), jsObject.properties["prop"])
         assertEquals("MERGE", jsObject.mode)
         assertEquals("matchLabel", jsObject.matchLabel)

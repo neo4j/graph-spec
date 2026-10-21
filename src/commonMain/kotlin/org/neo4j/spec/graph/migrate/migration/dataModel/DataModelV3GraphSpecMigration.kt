@@ -288,14 +288,22 @@ class DataModelV3GraphSpecMigration :
             mappings += schemaMapOf(
                 "type" to SchemaLiteral(MappingType.RELATIONSHIP), // needed for Kotlin/Native migrations
                 "relationship" to ref,
-                "from_node" to mapOf("properties" to mapping.entityMap("fromMappings")),
-                "to_node" to mapOf("properties" to mapping.entityMap("toMappings")),
+                "from_node" to mapping.targetMapping("fromMappings"),
+                "to_node" to mapping.targetMapping("toMappings"),
                 "table" to mapping.literal("tableName"),
                 "properties" toNotEmpty migratePropertyMappings(mapping),
                 "key_properties" toNotEmpty migrateKeyProperties(mapping, relKeys[ref] ?: emptySet())
             )
         }
         return mappings
+    }
+
+    /**
+     * A target mapping identifies a node by a single property, so only the first entry of a V3 mapping is kept.
+     */
+    internal fun SchemaMap.targetMapping(key: String): Map<String, Any> {
+        val (property, column) = entityMap(key).entries.firstOrNull() ?: return emptyMap()
+        return mapOf("node_key_property" to property, "relationship_column" to column.literal("column"))
     }
 
     internal fun SchemaMap.entityMap(key: String) = mapOrNull(key)?.map { (key, value) ->

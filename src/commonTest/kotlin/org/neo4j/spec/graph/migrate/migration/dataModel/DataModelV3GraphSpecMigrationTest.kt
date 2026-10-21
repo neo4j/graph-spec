@@ -492,9 +492,10 @@ class DataModelV3GraphSpecMigrationTest {
         assertEquals("obj1", mapping.string("relationship"))
         assertEquals("WORKS_IN", mapping.string("table"))
 
-        val startProps = mapping.map("from_node").map("properties")
-        assertTrue(startProps.containsKey("propA"))
-        assertEquals("COL_A", startProps.map("propA").string("column"))
+        assertEquals("propA", mapping.map("from_node").string("node_key_property"))
+        assertEquals("COL_A", mapping.map("from_node").string("relationship_column"))
+        assertEquals("propB", mapping.map("to_node").string("node_key_property"))
+        assertEquals("COL_B", mapping.map("to_node").string("relationship_column"))
     }
 
     @Test

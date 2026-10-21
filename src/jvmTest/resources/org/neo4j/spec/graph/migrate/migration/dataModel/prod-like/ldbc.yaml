@@ -899,47 +899,47 @@ extensions:
         relationship: "r:0"
         table: "Comment"
         from_node:
-          properties:
-            "p:0_3": { column: "id" }
+          node_key_property: "p:0_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:3_3": { column: "CreatorPersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "CreatorPersonId"
       - type: "RELATIONSHIP"
         relationship: "r:1"
         table: "Comment"
         from_node:
-          properties:
-            "p:0_3": { column: "id" }
+          node_key_property: "p:0_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:4_0": { column: "LocationCountryId" }
+          node_key_property: "p:4_0"
+          relationship_column: "LocationCountryId"
       - type: "RELATIONSHIP"
         relationship: "r:2"
         table: "Comment"
         from_node:
-          properties:
-            "p:0_3": { column: "id" }
+          node_key_property: "p:0_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:5_3": { column: "ParentPostId" }
+          node_key_property: "p:5_3"
+          relationship_column: "ParentPostId"
       - type: "RELATIONSHIP"
         relationship: "r:3"
         table: "Comment"
         from_node:
-          properties:
-            "p:0_3": { column: "id" }
+          node_key_property: "p:0_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:0_3": { column: "ParentCommentId" }
+          node_key_property: "p:0_3"
+          relationship_column: "ParentCommentId"
       - type: "RELATIONSHIP"
         relationship: "r:4"
         table: "CommentHasTag"
         from_node:
-          properties:
-            "p:0_3": { column: "CommentId" }
+          node_key_property: "p:0_3"
+          relationship_column: "CommentId"
         to_node:
-          properties:
-            "p:6_0": { column: "TagId" }
+          node_key_property: "p:6_0"
+          relationship_column: "TagId"
         properties:
           "p:4_0": { column: "creationDate" }
           "p:4_1": { column: "deletionDate" }
@@ -948,20 +948,20 @@ extensions:
         relationship: "r:5"
         table: "Forum"
         from_node:
-          properties:
-            "p:1_3": { column: "id" }
+          node_key_property: "p:1_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:3_3": { column: "ModeratorPersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "ModeratorPersonId"
       - type: "RELATIONSHIP"
         relationship: "r:6"
         table: "ForumHasMember"
         from_node:
-          properties:
-            "p:3_3": { column: "PersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "PersonId"
         to_node:
-          properties:
-            "p:1_3": { column: "ForumId" }
+          node_key_property: "p:1_3"
+          relationship_column: "ForumId"
         properties:
           "p:6_0": { column: "creationDate" }
           "p:6_1": { column: "deletionDate" }
@@ -970,11 +970,11 @@ extensions:
         relationship: "r:7"
         table: "ForumHasTag"
         from_node:
-          properties:
-            "p:1_3": { column: "ForumId" }
+          node_key_property: "p:1_3"
+          relationship_column: "ForumId"
         to_node:
-          properties:
-            "p:6_0": { column: "TagId" }
+          node_key_property: "p:6_0"
+          relationship_column: "TagId"
         properties:
           "p:7_0": { column: "creationDate" }
           "p:7_1": { column: "deletionDate" }
@@ -982,29 +982,29 @@ extensions:
         relationship: "r:8"
         table: "Organisation"
         from_node:
-          properties:
-            "p:2_0": { column: "id" }
+          node_key_property: "p:2_0"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:4_0": { column: "LocationPlaceId" }
+          node_key_property: "p:4_0"
+          relationship_column: "LocationPlaceId"
       - type: "RELATIONSHIP"
         relationship: "r:9"
         table: "Person"
         from_node:
-          properties:
-            "p:3_3": { column: "id" }
+          node_key_property: "p:3_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:4_0": { column: "LocationCityId" }
+          node_key_property: "p:4_0"
+          relationship_column: "LocationCityId"
       - type: "RELATIONSHIP"
         relationship: "r:10"
         table: "PersonHasInterest"
         from_node:
-          properties:
-            "p:3_3": { column: "PersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "PersonId"
         to_node:
-          properties:
-            "p:6_0": { column: "TagId" }
+          node_key_property: "p:6_0"
+          relationship_column: "TagId"
         properties:
           "p:10_0": { column: "creationDate" }
           "p:10_1": { column: "deletionDate" }
@@ -1012,11 +1012,11 @@ extensions:
         relationship: "r:11"
         table: "PersonKnowsPerson"
         from_node:
-          properties:
-            "p:3_3": { column: "Person1Id" }
+          node_key_property: "p:3_3"
+          relationship_column: "Person1Id"
         to_node:
-          properties:
-            "p:3_3": { column: "Person2Id" }
+          node_key_property: "p:3_3"
+          relationship_column: "Person2Id"
         properties:
           "p:11_0": { column: "creationDate" }
           "p:11_1": { column: "deletionDate" }
@@ -1025,11 +1025,11 @@ extensions:
         relationship: "r:12"
         table: "PersonLikesComment"
         from_node:
-          properties:
-            "p:3_3": { column: "PersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "PersonId"
         to_node:
-          properties:
-            "p:0_3": { column: "CommentId" }
+          node_key_property: "p:0_3"
+          relationship_column: "CommentId"
         properties:
           "p:12_0": { column: "creationDate" }
           "p:12_1": { column: "deletionDate" }
@@ -1038,11 +1038,11 @@ extensions:
         relationship: "r:13"
         table: "PersonLikesPost"
         from_node:
-          properties:
-            "p:3_3": { column: "PersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "PersonId"
         to_node:
-          properties:
-            "p:5_3": { column: "PostId" }
+          node_key_property: "p:5_3"
+          relationship_column: "PostId"
         properties:
           "p:13_0": { column: "creationDate" }
           "p:13_1": { column: "deletionDate" }
@@ -1051,11 +1051,11 @@ extensions:
         relationship: "r:14"
         table: "PersonStudiesAt"
         from_node:
-          properties:
-            "p:3_3": { column: "PersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "PersonId"
         to_node:
-          properties:
-            "p:2_0": { column: "UniversityId" }
+          node_key_property: "p:2_0"
+          relationship_column: "UniversityId"
         properties:
           "p:14_0": { column: "creationDate" }
           "p:14_1": { column: "deletionDate" }
@@ -1064,11 +1064,11 @@ extensions:
         relationship: "r:15"
         table: "PersonWorksAt"
         from_node:
-          properties:
-            "p:3_3": { column: "PersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "PersonId"
         to_node:
-          properties:
-            "p:2_0": { column: "CompanyId" }
+          node_key_property: "p:2_0"
+          relationship_column: "CompanyId"
         properties:
           "p:15_0": { column: "creationDate" }
           "p:15_1": { column: "deletionDate" }
@@ -1077,47 +1077,47 @@ extensions:
         relationship: "r:16"
         table: "Place"
         from_node:
-          properties:
-            "p:4_0": { column: "id" }
+          node_key_property: "p:4_0"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:4_0": { column: "PartOfPlaceId" }
+          node_key_property: "p:4_0"
+          relationship_column: "PartOfPlaceId"
       - type: "RELATIONSHIP"
         relationship: "r:17"
         table: "Post"
         from_node:
-          properties:
-            "p:5_3": { column: "id" }
+          node_key_property: "p:5_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:3_3": { column: "CreatorPersonId" }
+          node_key_property: "p:3_3"
+          relationship_column: "CreatorPersonId"
       - type: "RELATIONSHIP"
         relationship: "r:18"
         table: "Post"
         from_node:
-          properties:
-            "p:5_3": { column: "id" }
+          node_key_property: "p:5_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:1_3": { column: "ContainerForumId" }
+          node_key_property: "p:1_3"
+          relationship_column: "ContainerForumId"
       - type: "RELATIONSHIP"
         relationship: "r:19"
         table: "Post"
         from_node:
-          properties:
-            "p:5_3": { column: "id" }
+          node_key_property: "p:5_3"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:4_0": { column: "LocationCountryId" }
+          node_key_property: "p:4_0"
+          relationship_column: "LocationCountryId"
       - type: "RELATIONSHIP"
         relationship: "r:20"
         table: "PostHasTag"
         from_node:
-          properties:
-            "p:5_3": { column: "PostId" }
+          node_key_property: "p:5_3"
+          relationship_column: "PostId"
         to_node:
-          properties:
-            "p:6_0": { column: "TagId" }
+          node_key_property: "p:6_0"
+          relationship_column: "TagId"
         properties:
           "p:20_0": { column: "creationDate" }
           "p:20_1": { column: "deletionDate" }
@@ -1125,17 +1125,17 @@ extensions:
         relationship: "r:21"
         table: "Tag"
         from_node:
-          properties:
-            "p:6_0": { column: "id" }
+          node_key_property: "p:6_0"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:7_0": { column: "TypeTagClassId" }
+          node_key_property: "p:7_0"
+          relationship_column: "TypeTagClassId"
       - type: "RELATIONSHIP"
         relationship: "r:22"
         table: "TagClass"
         from_node:
-          properties:
-            "p:7_0": { column: "id" }
+          node_key_property: "p:7_0"
+          relationship_column: "id"
         to_node:
-          properties:
-            "p:7_0": { column: "SubclassOfTagClassId" }
+          node_key_property: "p:7_0"
+          relationship_column: "SubclassOfTagClassId"

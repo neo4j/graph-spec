@@ -1583,91 +1583,91 @@ extensions:
         relationship: "r:0"
         table: "customer"
         from_node:
-          properties:
-            "p:3_0": { column: "customerid" }
+          node_key_property: "p:3_0"
+          relationship_column: "customerid"
         to_node:
-          properties:
-            "p:8_0": { column: "territoryid" }
+          node_key_property: "p:8_0"
+          relationship_column: "territoryid"
       - type: "RELATIONSHIP"
         relationship: "r:1"
         table: "customer"
         from_node:
-          properties:
-            "p:3_0": { column: "customerid" }
+          node_key_property: "p:3_0"
+          relationship_column: "customerid"
         to_node:
-          properties:
-            "p:11_0": { column: "storeid" }
+          node_key_property: "p:11_0"
+          relationship_column: "storeid"
       - type: "RELATIONSHIP"
         relationship: "r:2"
         table: "salesorderheader"
         from_node:
-          properties:
-            "p:4_0": { column: "salesorderid" }
+          node_key_property: "p:4_0"
+          relationship_column: "salesorderid"
         to_node:
-          properties:
-            "p:0_0": { column: "creditcardid" }
+          node_key_property: "p:0_0"
+          relationship_column: "creditcardid"
       - type: "RELATIONSHIP"
         relationship: "r:3"
         table: "salesorderheader"
         from_node:
-          properties:
-            "p:4_0": { column: "salesorderid" }
+          node_key_property: "p:4_0"
+          relationship_column: "salesorderid"
         to_node:
-          properties:
-            "p:2_0": { column: "currencyrateid" }
+          node_key_property: "p:2_0"
+          relationship_column: "currencyrateid"
       - type: "RELATIONSHIP"
         relationship: "r:4"
         table: "salesorderheader"
         from_node:
-          properties:
-            "p:4_0": { column: "salesorderid" }
+          node_key_property: "p:4_0"
+          relationship_column: "salesorderid"
         to_node:
-          properties:
-            "p:3_0": { column: "customerid" }
+          node_key_property: "p:3_0"
+          relationship_column: "customerid"
       - type: "RELATIONSHIP"
         relationship: "r:5"
         table: "salesorderheader"
         from_node:
-          properties:
-            "p:4_0": { column: "salesorderid" }
+          node_key_property: "p:4_0"
+          relationship_column: "salesorderid"
         to_node:
-          properties:
-            "p:5_0": { column: "salespersonid" }
+          node_key_property: "p:5_0"
+          relationship_column: "salespersonid"
       - type: "RELATIONSHIP"
         relationship: "r:6"
         table: "salesorderheader"
         from_node:
-          properties:
-            "p:4_0": { column: "salesorderid" }
+          node_key_property: "p:4_0"
+          relationship_column: "salesorderid"
         to_node:
-          properties:
-            "p:8_0": { column: "territoryid" }
+          node_key_property: "p:8_0"
+          relationship_column: "territoryid"
       - type: "RELATIONSHIP"
         relationship: "r:7"
         table: "salesorderheadersalesreason"
         from_node:
-          properties:
-            "p:4_0": { column: "salesorderid" }
+          node_key_property: "p:4_0"
+          relationship_column: "salesorderid"
         to_node:
-          properties:
-            "p:6_0": { column: "salesreasonid" }
+          node_key_property: "p:6_0"
+          relationship_column: "salesreasonid"
         properties:
           "p:7_0": { column: "modifieddate" }
       - type: "RELATIONSHIP"
         relationship: "r:8"
         table: "salesperson"
         from_node:
-          properties:
-            "p:5_0": { column: "businessentityid" }
+          node_key_property: "p:5_0"
+          relationship_column: "businessentityid"
         to_node:
-          properties:
-            "p:8_0": { column: "territoryid" }
+          node_key_property: "p:8_0"
+          relationship_column: "territoryid"
       - type: "RELATIONSHIP"
         relationship: "r:9"
         table: "store"
         from_node:
-          properties:
-            "p:11_0": { column: "businessentityid" }
+          node_key_property: "p:11_0"
+          relationship_column: "businessentityid"
         to_node:
-          properties:
-            "p:5_0": { column: "salespersonid" }
+          node_key_property: "p:5_0"
+          relationship_column: "salespersonid"

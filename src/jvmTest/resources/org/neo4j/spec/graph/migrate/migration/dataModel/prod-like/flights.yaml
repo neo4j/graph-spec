@@ -408,38 +408,38 @@ extensions:
         relationship: "r:0"
         table: "flights"
         from_node:
-          properties:
-            "p:3_0": { column: "flight_id" }
+          node_key_property: "p:3_0"
+          relationship_column: "flight_id"
         to_node:
-          properties:
-            "p:0_0": { column: "aircraft_code" }
+          node_key_property: "p:0_0"
+          relationship_column: "aircraft_code"
       - type: "RELATIONSHIP"
         relationship: "r:1"
         table: "flights"
         from_node:
-          properties:
-            "p:3_0": { column: "flight_id" }
+          node_key_property: "p:3_0"
+          relationship_column: "flight_id"
         to_node:
-          properties:
-            "p:1_0": { column: "departure_airport" }
+          node_key_property: "p:1_0"
+          relationship_column: "departure_airport"
       - type: "RELATIONSHIP"
         relationship: "r:2"
         table: "flights"
         from_node:
-          properties:
-            "p:3_0": { column: "flight_id" }
+          node_key_property: "p:3_0"
+          relationship_column: "flight_id"
         to_node:
-          properties:
-            "p:1_0": { column: "arrival_airport" }
+          node_key_property: "p:1_0"
+          relationship_column: "arrival_airport"
       - type: "RELATIONSHIP"
         relationship: "r:3"
         table: "ticket_flights"
         from_node:
-          properties:
-            "p:3_0": { column: "flight_id" }
+          node_key_property: "p:3_0"
+          relationship_column: "flight_id"
         to_node:
-          properties:
-            "p:4_0": { column: "ticket_no" }
+          node_key_property: "p:4_0"
+          relationship_column: "ticket_no"
         properties:
           "p:3_0": { column: "fare_conditions" }
           "p:3_1": { column: "amount" }
@@ -447,8 +447,8 @@ extensions:
         relationship: "r:4"
         table: "tickets"
         from_node:
-          properties:
-            "p:4_0": { column: "ticket_no" }
+          node_key_property: "p:4_0"
+          relationship_column: "ticket_no"
         to_node:
-          properties:
-            "p:2_0": { column: "book_ref" }
+          node_key_property: "p:2_0"
+          relationship_column: "book_ref"
