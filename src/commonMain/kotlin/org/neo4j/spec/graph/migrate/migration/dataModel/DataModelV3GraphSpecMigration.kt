@@ -202,7 +202,6 @@ class DataModelV3GraphSpecMigration :
         val id = constraint.id()
         id to schemaMapOf(
             "type" to constraintType.name,
-            "label" to label,
             "properties" toNotEmpty properties?.map { it.ref() },
             "name" to (
                 constraint.stringOrNull("name")?.takeUnless { it.isBlank() }

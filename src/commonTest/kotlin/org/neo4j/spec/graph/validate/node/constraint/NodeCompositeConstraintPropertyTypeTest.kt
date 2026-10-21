@@ -45,7 +45,6 @@ class NodeCompositeConstraintPropertyTypeTest {
             constraints = mutableMapOf(
                 "comp" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email", "age")
                 )
             )
@@ -68,7 +67,6 @@ class NodeCompositeConstraintPropertyTypeTest {
             constraints = mutableMapOf(
                 "comp" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email", "score")
                 )
             )
@@ -93,7 +91,6 @@ class NodeCompositeConstraintPropertyTypeTest {
             constraints = mutableMapOf(
                 "comp" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("score", "rating")
                 )
             )
@@ -117,7 +114,6 @@ class NodeCompositeConstraintPropertyTypeTest {
             constraints = mutableMapOf(
                 "comp" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("score")
                 )
             )
@@ -144,7 +140,6 @@ class NodeCompositeConstraintPropertyTypeTest {
             constraints = mutableMapOf(
                 "comp" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email", "tags")
                 )
             )
@@ -166,7 +161,6 @@ class NodeCompositeConstraintPropertyTypeTest {
             constraints = mutableMapOf(
                 "comp" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email", "missing")
                 )
             )

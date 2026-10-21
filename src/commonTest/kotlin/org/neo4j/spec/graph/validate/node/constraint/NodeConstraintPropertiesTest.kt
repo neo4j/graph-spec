@@ -41,7 +41,6 @@ class NodeConstraintPropertiesTest {
             constraints = mutableMapOf(
                 "uniq_email" to NodeConstraint(
                     type = ConstraintType.UNIQUE,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 )
             )
@@ -61,7 +60,6 @@ class NodeConstraintPropertiesTest {
             constraints = mutableMapOf(
                 "empty" to NodeConstraint(
                     type = ConstraintType.UNIQUE,
-                    label = "Person",
                     properties = mutableSetOf()
                 )
             )

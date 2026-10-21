@@ -28,11 +28,6 @@ class NodeConstraintEditor {
         }
 
         @JsStatic
-        fun setLabel(constraint: NodeConstraintJs, label: String?) {
-            constraint.label = label
-        }
-
-        @JsStatic
         fun addProperty(constraint: NodeConstraintJs, property: String) {
             if (!constraint.properties.contains(property)) {
                 constraint.properties += property

@@ -12,7 +12,6 @@ nodes:
     constraints:
       "c:0":
         type: "UNIQUE"
-        label: "Aircraft"
         properties: ["p:0_0"]
         name: "aircrafts_data"
     extensions:
@@ -34,7 +33,6 @@ nodes:
     constraints:
       "c:1":
         type: "UNIQUE"
-        label: "Airport"
         properties: ["p:1_0"]
         name: "airports_data"
     extensions:
@@ -54,7 +52,6 @@ nodes:
     constraints:
       "c:2":
         type: "UNIQUE"
-        label: "Booking"
         properties: ["p:2_0"]
         name: "bookings"
     extensions:
@@ -78,7 +75,6 @@ nodes:
     constraints:
       "c:3":
         type: "UNIQUE"
-        label: "Flight"
         properties: ["p:3_0"]
         name: "flights"
     extensions:
@@ -99,7 +95,6 @@ nodes:
     constraints:
       "c:4":
         type: "UNIQUE"
-        label: "Ticket"
         properties: ["p:4_0"]
         name: "tickets"
     extensions:

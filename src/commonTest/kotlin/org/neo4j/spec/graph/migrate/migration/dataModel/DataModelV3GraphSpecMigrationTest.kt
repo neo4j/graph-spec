@@ -257,7 +257,6 @@ class DataModelV3GraphSpecMigrationTest {
         val constraint = result["c:1"]
         assertNotNull(constraint)
         assertEquals("UNIQUE", constraint.string("type"))
-        assertEquals("Person", constraint.string("label"))
         assertEquals(listOf("p1", "p2").toSchemaElement(), constraint.list("properties"))
         assertEquals("constraint1", constraint.string("name"))
     }

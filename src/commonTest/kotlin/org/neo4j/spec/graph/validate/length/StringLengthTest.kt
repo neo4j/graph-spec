@@ -67,7 +67,6 @@ class StringLengthTest {
             constraints = mutableMapOf(
                 "c" to NodeConstraint(
                     ConstraintType.UNIQUE,
-                    "L",
                     mutableSetOf("p"),
                     name = "a".repeat(MAX_CONSTRAINT_INDEX_NAME_LENGTH)
                 )
@@ -115,7 +114,6 @@ class StringLengthTest {
             constraints = mutableMapOf(
                 "c" to NodeConstraint(
                     ConstraintType.UNIQUE,
-                    "L",
                     mutableSetOf("p"),
                     name = "a".repeat(MAX_CONSTRAINT_INDEX_NAME_LENGTH + 1)
                 )
@@ -176,7 +174,6 @@ class StringLengthTest {
                 "c" to
                     NodeConstraint(
                         ConstraintType.UNIQUE,
-                        "L",
                         mutableSetOf("p"),
                         name = "a".repeat(MAX_NAME_LENGTH + 1)
                     )

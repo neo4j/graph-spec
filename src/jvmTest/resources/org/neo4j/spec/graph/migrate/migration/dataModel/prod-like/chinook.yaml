@@ -11,7 +11,6 @@ nodes:
     constraints:
       "c:0":
         type: "UNIQUE"
-        label: "album"
         properties: ["p:0_0"]
         name: "album"
     extensions:
@@ -30,7 +29,6 @@ nodes:
     constraints:
       "c:1":
         type: "UNIQUE"
-        label: "artist"
         properties: ["p:1_0"]
         name: "artist"
     extensions:
@@ -59,7 +57,6 @@ nodes:
     constraints:
       "c:2":
         type: "UNIQUE"
-        label: "customer"
         properties: ["p:2_0"]
         name: "customer"
     extensions:
@@ -90,7 +87,6 @@ nodes:
     constraints:
       "c:3":
         type: "UNIQUE"
-        label: "employee"
         properties: ["p:3_0"]
         name: "employee"
     extensions:
@@ -109,7 +105,6 @@ nodes:
     constraints:
       "c:4":
         type: "UNIQUE"
-        label: "genre"
         properties: ["p:4_0"]
         name: "genre"
     extensions:
@@ -134,7 +129,6 @@ nodes:
     constraints:
       "c:5":
         type: "UNIQUE"
-        label: "invoice"
         properties: ["p:5_0"]
         name: "invoice"
     extensions:
@@ -154,7 +148,6 @@ nodes:
     constraints:
       "c:6":
         type: "UNIQUE"
-        label: "invoice_line"
         properties: ["p:6_0"]
         name: "invoice_line"
     extensions:
@@ -173,7 +166,6 @@ nodes:
     constraints:
       "c:7":
         type: "UNIQUE"
-        label: "media_type"
         properties: ["p:7_0"]
         name: "media_type"
     extensions:
@@ -192,7 +184,6 @@ nodes:
     constraints:
       "c:8":
         type: "UNIQUE"
-        label: "playlist"
         properties: ["p:8_0"]
         name: "playlist"
     extensions:
@@ -215,7 +206,6 @@ nodes:
     constraints:
       "c:9":
         type: "UNIQUE"
-        label: "track"
         properties: ["p:9_0"]
         name: "track"
     extensions:

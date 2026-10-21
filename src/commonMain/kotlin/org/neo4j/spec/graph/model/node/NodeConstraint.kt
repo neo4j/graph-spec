@@ -31,8 +31,6 @@ import kotlin.js.JsExport
 data class NodeConstraint(
     @SerialDescription("Type of the constraint.")
     override var type: ConstraintType,
-    @SerialDescription("Label the constraint applies to.")
-    var label: String? = null, // TODO: Optional to avoid id issues with frontend redux?
     @SerialDescription("Ids of the properties the constraint covers.")
     override val properties: MutableSet<String>,
     @SerialDescription("Extensions for the constraint.")

@@ -49,11 +49,9 @@ class NodeIndexConstraintNameConflictTest {
     private fun constraint(
         name: String?,
         properties: Set<String>,
-        label: String = "Person",
         type: ConstraintType = ConstraintType.UNIQUE
     ) = NodeConstraint(
         type = type,
-        label = label,
         properties = properties.toMutableSet(),
         name = name
     )

@@ -12,7 +12,6 @@ class NodeConstraintJsTest : JsMappingTest<NodeConstraint, NodeConstraintJs>() {
 
     override fun createClass() = NodeConstraint(
         type = ConstraintType.KEY,
-        label = "node_label",
         properties = mutableSetOf("property_1", "property_2"),
         extensions = NodeConstraintExtensions(
             mutableMapOf("key1" to "val1")
@@ -25,7 +24,6 @@ class NodeConstraintJsTest : JsMappingTest<NodeConstraint, NodeConstraintJs>() {
 
     override fun verifyJsObject(jsObject: NodeConstraintJs) {
         assertEquals("KEY", jsObject.type)
-        assertEquals("node_label", jsObject.label)
         assertEquals(2, jsObject.properties.size)
         assertTrue(jsObject.properties.contains("property_1"))
         assertTrue(jsObject.properties.contains("property_2"))

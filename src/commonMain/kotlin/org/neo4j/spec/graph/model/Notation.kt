@@ -50,7 +50,7 @@ object Notation {
                 entity = key,
                 label = node.labels.identifier ?: ""
             ) { type, props ->
-                NodeConstraint(type, node.labels.identifier, props)
+                NodeConstraint(type, props)
             }
         }
         model.relationships.forEach { (key, relationship) ->
@@ -67,14 +67,7 @@ object Notation {
 
     fun shorthand(model: GraphModel) {
         model.nodes.values.forEach { node ->
-            collapse(
-                node.constraints,
-                node.properties,
-                node.labels.identifier ?: "",
-                { it.extensions }
-            ) { constraint ->
-                constraint.label == node.labels.identifier
-            }
+            collapse(node.constraints, node.properties, node.labels.identifier ?: "", { it.extensions })
             val labels = node.labels
             val identifier = labels.identifier
             if (identifier != null && labels.implied.isEmpty() && labels.optional.isEmpty() &&

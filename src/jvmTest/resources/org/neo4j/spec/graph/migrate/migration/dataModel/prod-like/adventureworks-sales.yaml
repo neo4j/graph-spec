@@ -15,7 +15,6 @@ nodes:
     constraints:
       "c:0":
         type: "UNIQUE"
-        label: "creditcard"
         properties: ["p:0_0"]
         name: "creditcard"
     extensions:
@@ -34,7 +33,6 @@ nodes:
     constraints:
       "c:1":
         type: "UNIQUE"
-        label: "currency"
         properties: ["p:1_0"]
         name: "currency"
     extensions:
@@ -56,7 +54,6 @@ nodes:
     constraints:
       "c:2":
         type: "UNIQUE"
-        label: "currencyrate"
         properties: ["p:2_0"]
         name: "currencyrate"
     extensions:
@@ -76,7 +73,6 @@ nodes:
     constraints:
       "c:3":
         type: "UNIQUE"
-        label: "customer"
         properties: ["p:3_0"]
         name: "customer"
     extensions:
@@ -107,7 +103,6 @@ nodes:
     constraints:
       "c:4":
         type: "UNIQUE"
-        label: "salesorderheader"
         properties: ["p:4_0"]
         name: "salesorderheader"
     extensions:
@@ -132,7 +127,6 @@ nodes:
     constraints:
       "c:5":
         type: "UNIQUE"
-        label: "salesperson"
         properties: ["p:5_0"]
         name: "salesperson"
     extensions:
@@ -151,7 +145,6 @@ nodes:
     constraints:
       "c:6":
         type: "UNIQUE"
-        label: "salesreason"
         properties: ["p:6_0"]
         name: "salesreason"
     extensions:
@@ -173,7 +166,6 @@ nodes:
     constraints:
       "c:7":
         type: "UNIQUE"
-        label: "salestaxrate"
         properties: ["p:7_0"]
         name: "salestaxrate"
     extensions:
@@ -198,7 +190,6 @@ nodes:
     constraints:
       "c:8":
         type: "UNIQUE"
-        label: "salesterritory"
         properties: ["p:8_0"]
         name: "salesterritory"
     extensions:
@@ -220,7 +211,6 @@ nodes:
     constraints:
       "c:9":
         type: "UNIQUE"
-        label: "shoppingcartitem"
         properties: ["p:9_0"]
         name: "shoppingcartitem"
     extensions:
@@ -248,7 +238,6 @@ nodes:
     constraints:
       "c:10":
         type: "UNIQUE"
-        label: "specialoffer"
         properties: ["p:10_0"]
         name: "specialoffer"
     extensions:
@@ -268,7 +257,6 @@ nodes:
     constraints:
       "c:11":
         type: "UNIQUE"
-        label: "store"
         properties: ["p:11_0"]
         name: "store"
     extensions:

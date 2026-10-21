@@ -13,7 +13,6 @@ nodes:
     constraints:
       "c:0":
         type: "UNIQUE"
-        label: "categories"
         properties: ["p:0_0"]
         name: "categories"
     extensions:
@@ -41,7 +40,6 @@ nodes:
     constraints:
       "c:1":
         type: "UNIQUE"
-        label: "products"
         properties: ["p:1_0"]
         name: "products"
     extensions:
@@ -70,7 +68,6 @@ nodes:
     constraints:
       "c:2":
         type: "UNIQUE"
-        label: "suppliers"
         properties: ["p:2_0"]
         name: "suppliers"
     extensions:

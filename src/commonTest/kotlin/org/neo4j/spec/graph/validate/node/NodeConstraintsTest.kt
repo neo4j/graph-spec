@@ -44,7 +44,6 @@ class NodeConstraintsTest {
         )
         val constraint = NodeConstraint(
             type = ConstraintType.UNIQUE,
-            label = "User",
             properties = mutableSetOf("email")
         )
 
@@ -65,7 +64,6 @@ class NodeConstraintsTest {
         )
         val constraint = NodeConstraint(
             type = ConstraintType.UNIQUE,
-            label = "User",
             properties = mutableSetOf("email")
         )
 
@@ -86,7 +84,6 @@ class NodeConstraintsTest {
         )
         val constraint = NodeConstraint(
             type = ConstraintType.UNIQUE,
-            label = "User",
             properties = mutableSetOf("email")
         )
 
@@ -100,31 +97,7 @@ class NodeConstraintsTest {
     }
 
     @Test
-    fun `missing label`() {
-        val nodeId = "userNode"
-        val constraintId = "uniq_user_email"
-
-        val node = Node(
-            labels = Labels(identifier = "DifferentLabel"),
-            properties = mutableMapOf("email" to Property())
-        )
-        val constraint = NodeConstraint(
-            type = ConstraintType.UNIQUE,
-            label = "User", // Expected label
-            properties = mutableSetOf("email")
-        )
-
-        val issues = mutableListOf<Issue>()
-        validator.validateConstraint(model, nodeId, node, constraintId, constraint, issues)
-
-        assertEquals(1, issues.size)
-        val issue = issues.first()
-        assertEquals("missing_node_constraint_label", issue.code)
-        assertEquals("nodes.userNode.constraints.uniq_user_email.labels.User", issue.path)
-    }
-
-    @Test
-    fun `missing properties and missing label`() {
+    fun `missing properties`() {
         val nodeId = "userNode"
         val constraintId = "uniq_user_email"
 
@@ -134,16 +107,14 @@ class NodeConstraintsTest {
         )
         val constraint = NodeConstraint(
             type = ConstraintType.UNIQUE,
-            label = "User",
             properties = mutableSetOf("email", "name")
         )
 
         val issues = mutableListOf<Issue>()
         validator.validateConstraint(model, nodeId, node, constraintId, constraint, issues)
 
-        assertEquals(3, issues.size)
+        assertEquals(2, issues.size)
         assertEquals("missing_node_constraint_property", issues[0].code)
         assertEquals("missing_node_constraint_property", issues[1].code)
-        assertEquals("missing_node_constraint_label", issues[2].code)
     }
 }

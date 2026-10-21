@@ -13,7 +13,6 @@ nodes:
     constraints:
       "c:0":
         type: "UNIQUE"
-        label: "actor"
         properties: ["p:0_0"]
         name: "actor"
     extensions:
@@ -37,7 +36,6 @@ nodes:
     constraints:
       "c:1":
         type: "UNIQUE"
-        label: "address"
         properties: ["p:1_0"]
         name: "address"
     extensions:
@@ -57,7 +55,6 @@ nodes:
     constraints:
       "c:2":
         type: "UNIQUE"
-        label: "category"
         properties: ["p:2_0"]
         name: "category"
     extensions:
@@ -77,7 +74,6 @@ nodes:
     constraints:
       "c:3":
         type: "UNIQUE"
-        label: "city"
         properties: ["p:3_0"]
         name: "city"
     extensions:
@@ -97,7 +93,6 @@ nodes:
     constraints:
       "c:4":
         type: "UNIQUE"
-        label: "country"
         properties: ["p:4_0"]
         name: "country"
     extensions:
@@ -123,7 +118,6 @@ nodes:
     constraints:
       "c:5":
         type: "UNIQUE"
-        label: "customer"
         properties: ["p:5_0"]
         name: "customer"
     extensions:
@@ -149,7 +143,6 @@ nodes:
     constraints:
       "c:6":
         type: "UNIQUE"
-        label: "film"
         properties: ["p:6_0"]
         name: "film"
     extensions:
@@ -169,7 +162,6 @@ nodes:
     constraints:
       "c:7":
         type: "UNIQUE"
-        label: "inventory"
         properties: ["p:7_0"]
         name: "inventory"
     extensions:
@@ -189,7 +181,6 @@ nodes:
     constraints:
       "c:8":
         type: "UNIQUE"
-        label: "language"
         properties: ["p:8_0"]
         name: "language"
     extensions:
@@ -209,7 +200,6 @@ nodes:
     constraints:
       "c:9":
         type: "UNIQUE"
-        label: "payment"
         properties: ["p:9_0"]
         name: "payment"
     extensions:
@@ -230,7 +220,6 @@ nodes:
     constraints:
       "c:10":
         type: "UNIQUE"
-        label: "rental"
         properties: ["p:10_0"]
         name: "rental"
     extensions:
@@ -256,7 +245,6 @@ nodes:
     constraints:
       "c:11":
         type: "UNIQUE"
-        label: "staff"
         properties: ["p:11_0"]
         name: "staff"
     extensions:
@@ -275,7 +263,6 @@ nodes:
     constraints:
       "c:12":
         type: "UNIQUE"
-        label: "store"
         properties: ["p:12_0"]
         name: "store"
     extensions:
