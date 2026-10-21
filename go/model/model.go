@@ -279,8 +279,10 @@ type MappingNode struct {
 	DependsOn *string `json:"depends_on,omitempty"`
 	// Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
 	ID *string `json:"id,omitempty"`
-	// Ids of the properties which identify a node.
-	Key *[]string `json:"key,omitempty"`
+	// Names of the source table columns which identify a node. Mutually exclusive with key_properties.
+	KeyColumns *[]string `json:"key_columns,omitempty"`
+	// Ids of the properties which identify a node. Mutually exclusive with key_columns.
+	KeyProperties *[]string `json:"key_properties,omitempty"`
 	// Label used to match existing nodes.
 	MatchLabel *string `json:"match_label,omitempty"`
 	// Whether nodes are merged with existing nodes or always created.
@@ -573,8 +575,10 @@ type MappingRelationship struct {
 	FromNode TargetMapping `json:"from_node"`
 	// Optional id of this mapping, so other mappings in the same list can reference it in depends_on.
 	ID *string `json:"id,omitempty"`
-	// Ids of the properties which identify a relationship.
-	Key *[]string `json:"key,omitempty"`
+	// Names of the source table columns which identify a relationship. Mutually exclusive with key_properties.
+	KeyColumns *[]string `json:"key_columns,omitempty"`
+	// Ids of the properties which identify a relationship. Mutually exclusive with key_columns.
+	KeyProperties *[]string `json:"key_properties,omitempty"`
 	// Label used to match existing relationships.
 	MatchLabel *string `json:"match_label,omitempty"`
 	// Whether relationships are merged with existing relationships or always created.
@@ -713,10 +717,12 @@ type TableColumn struct {
 
 // Identifies a node at one end of a mapped relationship.
 type TargetMapping struct {
-	// Label of the node.
-	Label *string `json:"label,omitempty"`
-	// Mappings from property ids to source columns used to match the node.
-	Properties *map[string]PropertyMapping `json:"properties,omitempty"`
+	// Name of the column in the node's source table which identifies the node. Mutually exclusive with node_key_property.
+	NodeKeyColumn *string `json:"node_key_column,omitempty"`
+	// Id of the node property which identifies the node. Mutually exclusive with node_key_column.
+	NodeKeyProperty *string `json:"node_key_property,omitempty"`
+	// Name of the column in the relationship's source table which refers to the node.
+	RelationshipColumn *string `json:"relationship_column,omitempty"`
 }
 
 // Configuration of a vector index.

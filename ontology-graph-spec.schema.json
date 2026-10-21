@@ -1066,9 +1066,16 @@
                     ],
                     "description": "Label used to match existing nodes."
                 },
-                "key": {
+                "key_columns": {
                     "type": "array",
-                    "description": "Ids of the properties which identify a node.",
+                    "description": "Names of the source table columns which identify a node. Mutually exclusive with key_properties.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "key_properties": {
+                    "type": "array",
+                    "description": "Ids of the properties which identify a node. Mutually exclusive with key_columns.",
                     "items": {
                         "type": "string"
                     }
@@ -1186,9 +1193,16 @@
                     "$ref": "#/$defs/MappingMode",
                     "description": "Whether relationships are merged with existing relationships or always created."
                 },
-                "key": {
+                "key_columns": {
                     "type": "array",
-                    "description": "Ids of the properties which identify a relationship.",
+                    "description": "Names of the source table columns which identify a relationship. Mutually exclusive with key_properties.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "key_properties": {
+                    "type": "array",
+                    "description": "Ids of the properties which identify a relationship. Mutually exclusive with key_columns.",
                     "items": {
                         "type": "string"
                     }
@@ -1215,16 +1229,17 @@
             "type": "object",
             "description": "Identifies a node at one end of a mapped relationship.",
             "properties": {
-                "label": {
+                "node_key_column": {
                     "type": "string",
-                    "description": "Label of the node."
+                    "description": "Name of the column in the node's source table which identifies the node. Mutually exclusive with node_key_property."
                 },
-                "properties": {
-                    "type": "object",
-                    "description": "Mappings from property ids to source columns used to match the node.",
-                    "additionalProperties": {
-                        "$ref": "#/$defs/PropertyMapping"
-                    }
+                "node_key_property": {
+                    "type": "string",
+                    "description": "Id of the node property which identifies the node. Mutually exclusive with node_key_column."
+                },
+                "relationship_column": {
+                    "type": "string",
+                    "description": "Name of the column in the relationship's source table which refers to the node."
                 }
             },
             "required": [],
