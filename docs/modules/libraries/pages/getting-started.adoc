@@ -42,7 +42,7 @@ Save the model from the xref:format:getting-started.adoc[format getting started 
 
 [source,json]
 ----
-include::format:example$movies.json[]
+include::ROOT:example$movies.json[]
 ----
 
 == Load and validate the model

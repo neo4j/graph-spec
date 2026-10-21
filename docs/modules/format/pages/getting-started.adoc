@@ -9,13 +9,13 @@ A small ontology of people, the movies they act in and the roles they play:
 .YAML
 [source,yaml]
 ----
-include::example$movies.yaml[]
+include::ROOT:example$movies.yaml[]
 ----
 
 .JSON
 [source,json]
 ----
-include::example$movies.json[]
+include::ROOT:example$movies.json[]
 ----
 
 In this model:
