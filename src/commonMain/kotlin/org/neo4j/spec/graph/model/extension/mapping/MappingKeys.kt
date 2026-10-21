@@ -42,3 +42,92 @@ internal fun propertiesToColumns(
 ): MutableSet<String> = propertyIds.mapTo(mutableSetOf()) { id ->
     requireNotNull(properties[id]) { "Key property '$id' is not mapped to a column" }.column
 }
+
+/**
+ * What is needed beyond a mapping itself to convert the node keys of its relationship targets.
+ *
+ * @property endpoints the ids of the start and end nodes of a relationship.
+ * @property nodePropertyMappings the property mappings of every mapping of a node.
+ */
+internal class KeyConversionContext(
+    val endpoints: (relationshipId: String) -> Pair<String, String>?,
+    val nodePropertyMappings: (nodeId: String) -> List<Map<String, PropertyMapping>>
+)
+
+/**
+ * Works out the conversion of [mapping] to key properties or key columns without changing it, so a failure leaves
+ * everything unchanged. Running the returned function applies the conversion.
+ *
+ * @throws IllegalArgumentException if a key can't be converted.
+ */
+internal fun planKeyConversion(
+    mapping: Mapping,
+    context: KeyConversionContext,
+    toProperties: Boolean
+): () -> Unit = when (mapping) {
+    is NodeMapping -> planKeys(mapping.properties, mapping.keyColumns, mapping.keyProperties, toProperties)
+    is RelationshipMapping -> {
+        val own = planKeys(mapping.properties, mapping.keyColumns, mapping.keyProperties, toProperties)
+        val endpoints = context.endpoints(mapping.relationship)
+        val from = planTarget(mapping.fromNode, endpoints?.first, context, toProperties)
+        val to = planTarget(mapping.toNode, endpoints?.second, context, toProperties)
+        ({
+            own()
+            from()
+            to()
+        })
+    }
+    is QueryMapping -> ({})
+}
+
+private fun planKeys(
+    properties: Map<String, PropertyMapping>,
+    columns: MutableSet<String>,
+    keys: MutableSet<String>,
+    toProperties: Boolean
+): () -> Unit {
+    if (toProperties) {
+        if (columns.isEmpty()) return {}
+        val converted = columnsToProperties(columns, properties)
+        return {
+            keys.clear()
+            keys.addAll(converted)
+            columns.clear()
+        }
+    }
+    if (keys.isEmpty()) return {}
+    val converted = propertiesToColumns(keys, properties)
+    return {
+        columns.clear()
+        columns.addAll(converted)
+        keys.clear()
+    }
+}
+
+private fun planTarget(
+    target: TargetMapping,
+    nodeId: String?,
+    context: KeyConversionContext,
+    toProperties: Boolean
+): () -> Unit {
+    if (toProperties) {
+        if (target.nodeKeyColumn.isEmpty()) return {}
+        val column = target.nodeKeyColumn
+        val property = context.nodePropertyMappings(requireNotNull(nodeId) { "Relationship of mapping not found" })
+            .firstNotNullOfOrNull { mappings -> mappings.entries.firstOrNull { it.value.column == column }?.key }
+        requireNotNull(property) { "Node key column '$column' is not mapped to any property of node '$nodeId'" }
+        return {
+            target.nodeKeyProperty = property
+            target.nodeKeyColumn = ""
+        }
+    }
+    if (target.nodeKeyProperty.isEmpty()) return {}
+    val property = target.nodeKeyProperty
+    val column = context.nodePropertyMappings(requireNotNull(nodeId) { "Relationship of mapping not found" })
+        .firstNotNullOfOrNull { it[property]?.column }
+    requireNotNull(column) { "Node key property '$property' is not mapped to a column of node '$nodeId'" }
+    return {
+        target.nodeKeyColumn = column
+        target.nodeKeyProperty = ""
+    }
+}
