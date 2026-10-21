@@ -60,7 +60,10 @@ class ValidationTest {
             assertTrue(resultSize > 0)
             val payload = (outputBuffer + 1)!!.toKString()
             assertEquals(STATUS_OK, outputBuffer[0], message = "Error: $payload")
-            assertTrue(payload.contains("Constraint 'c1' on node 'n' has no properties"), "Unexpected payload: $payload")
+            assertTrue(
+                payload.contains("Constraint 'c1' on node 'n' has no properties"),
+                "Unexpected payload: $payload"
+            )
         }
     }
 }
