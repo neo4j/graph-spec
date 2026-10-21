@@ -16,19 +16,9 @@
  */
 package org.neo4j.spec.graph.bridge
 
-import kotlinx.cinterop.ByteVar
-import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.cinterop.allocArray
-import kotlinx.cinterop.cstr
-import kotlinx.cinterop.get
-import kotlinx.cinterop.memScoped
-import kotlinx.cinterop.plus
-import kotlinx.cinterop.toKString
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-@OptIn(ExperimentalForeignApi::class)
 class ValidationTest {
 
     @Test
@@ -50,20 +40,15 @@ class ValidationTest {
             }
         }
         """.trimIndent()
-        val bufferSize = 1024
 
-        memScoped {
-            val inputPtr = input.cstr.getPointer(this)
-            val outputBuffer = allocArray<ByteVar>(bufferSize)
-
-            val resultSize = validate(inputPtr, outputBuffer = outputBuffer, bufferSize = bufferSize)
-            assertTrue(resultSize > 0)
-            val payload = (outputBuffer + 1)!!.toKString()
-            assertEquals(STATUS_OK, outputBuffer[0], message = "Error: $payload")
-            assertTrue(
-                payload.contains("Constraint 'c1' on node 'n' has no properties"),
-                "Unexpected payload: $payload"
-            )
+        val result = validateContent(input)
+        listOf(
+            "invalid_node_exist_constraint_property_count",
+            "missing_node_identifier_label",
+            "missing_node_properties",
+            "missing_node_constraint_properties"
+        ).forEach { code ->
+            assertTrue(result.contains("\"code\":\"$code\""), "Expected issue $code in $result")
         }
     }
 }
