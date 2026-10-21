@@ -18,7 +18,6 @@ nodes:
     constraints:
       movie-title-unique:
         type: UNIQUE
-        label: Movie
         properties: [title]
     extensions:
       indexes:
@@ -37,7 +36,6 @@ A constraint on a node.
 | Field | Type | Required | Description
 
 | `type` | <<_constraint_type,constraint type>> | Yes | Type of the constraint.
-| `label` | string | No | Label the constraint applies to.
 | `properties` | list of strings | Yes | Ids of the properties the constraint covers.
 | `extensions` | xref:reference/extensions.adoc#_custom_data[custom data] | No | Extensions for the constraint.
 | `name` | string | No | Name of the constraint in the database.

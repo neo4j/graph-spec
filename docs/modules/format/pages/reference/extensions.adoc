@@ -30,8 +30,8 @@ Extensions for a graph model.
 |===
 | Field | Type | Required | Description
 
-| `tables` | map of <<_table,table>> | No | Data source table schemas keyed by table id.
-| `mappings` | map of list of <<_mapping,mapping>> | No | Sets of data source mappings from tables to nodes and
+| `data_source_tables` | map of <<_table,table>> | No | Data source table schemas keyed by table id.
+| `data_source_mappings` | map of list of <<_mapping,mapping>> | No | Sets of data source mappings from tables to nodes and
 relationships, often used for importing.
 | `custom` | map | No | User-defined arbitrary data.
 |===
@@ -106,6 +106,7 @@ A column of a data source table.
 | `suggested` | xref:reference/properties.adoc#_types[type] | No | Neo4j type suggested for values of this column.
 | `supported` | list of xref:reference/properties.adoc#_types[type] | No | Neo4j types values of this column can be
 converted to when using the import tool.
+| `nullable` | boolean | No | Whether the column can hold null values. Defaults to `true`.
 | `dimension` | integer | No | Dimension of the column when it holds vectors.
 | `custom` | map | No | User-defined arbitrary data.
 |===

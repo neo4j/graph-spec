@@ -14,7 +14,6 @@ TIP: The xref:libraries:validation.adoc[libraries] check these rules when they v
 
 * The `node` of a relationship's `from` and `to`, when set, must be the id of a node in the document.
 * The `properties` of a node constraint must be ids of the node's properties.
-* The `label` of a node constraint must be the node's identifying label or one of its implied labels.
 * The `properties` of a relationship constraint must be ids of the relationship's properties.
 * The `properties` of a node index must be ids of the node's properties.
 * The `properties` of a relationship index must be ids of the relationship's properties.

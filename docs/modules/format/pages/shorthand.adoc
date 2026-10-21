@@ -53,7 +53,6 @@ nodes:
     constraints:
       exists_person_name:
         type: EXISTS
-        label: Person
         properties: [name]
         name: name_Person_exists
   movie:
@@ -65,7 +64,6 @@ nodes:
     constraints:
       unique_movie_title:
         type: UNIQUE
-        label: Movie
         properties: [title]
         name: title_Movie_uniq
 ----
