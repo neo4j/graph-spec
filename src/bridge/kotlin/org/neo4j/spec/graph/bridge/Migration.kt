@@ -56,7 +56,7 @@ fun migrate(
 ) { input -> migrateContent(input[0], type = input[1], targetType = input[2], targetVersion = input[3]) }
 
 internal fun migrateContent(content: String, type: String, targetType: String, targetVersion: String): String {
-    if (type == Type.GRAPH_SPEC && targetType != Type.GRAPH_SPEC) {
+    if (type == Type.GRAPH_SPEC) {
         // Migrations expect longhand, so go via the model to expand any shorthand.
         val model = graphSpec.decodeFromString(content)
         return graphSpec.encodeToString(model, targetType = targetType, targetVersion = targetVersion)
