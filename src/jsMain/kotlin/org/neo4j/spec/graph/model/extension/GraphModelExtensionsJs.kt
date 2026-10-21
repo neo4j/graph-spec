@@ -52,7 +52,9 @@ fun graphModelExtensionsJs(
 fun GraphModelExtensions.toJs() = graphModelExtensionsJs(
     custom = custom.toCustomJs(),
     dataSourceTables = dataSourceTables.mapValues { (_, table) -> table.toJs() }.toRecord(),
-    dataSourceMappings = dataSourceMappings.mapValues { (_, group) -> group.map { it.toJs() }.toTypedArray() }.toRecord()
+    dataSourceMappings = dataSourceMappings.mapValues { (_, group) ->
+        group.map { it.toJs() }.toTypedArray()
+    }.toRecord()
 )
 
 fun GraphModelExtensionsJs.toClass(): GraphModelExtensions = GraphModelExtensions(

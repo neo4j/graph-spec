@@ -93,9 +93,10 @@ class GraphModelEditor {
         }
 
         @JsStatic
-        fun addTable(model: GraphModelJs, source: String): String = model.extensions.dataSourceTables.addUnique("table") {
-            tableJs(source)
-        }
+        fun addTable(model: GraphModelJs, source: String): String =
+            model.extensions.dataSourceTables.addUnique("table") {
+                tableJs(source)
+            }
 
         @JsStatic
         fun removeTable(model: GraphModelJs, tableId: String) {

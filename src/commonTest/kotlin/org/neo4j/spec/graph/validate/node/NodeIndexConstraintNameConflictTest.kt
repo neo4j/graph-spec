@@ -46,15 +46,12 @@ class NodeIndexConstraintNameConflictTest {
         name = name
     )
 
-    private fun constraint(
-        name: String?,
-        properties: Set<String>,
-        type: ConstraintType = ConstraintType.UNIQUE
-    ) = NodeConstraint(
-        type = type,
-        properties = properties.toMutableSet(),
-        name = name
-    )
+    private fun constraint(name: String?, properties: Set<String>, type: ConstraintType = ConstraintType.UNIQUE) =
+        NodeConstraint(
+            type = type,
+            properties = properties.toMutableSet(),
+            name = name
+        )
 
     private fun node(
         indexes: Map<String, NodeIndex> = emptyMap(),

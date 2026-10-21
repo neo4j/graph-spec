@@ -770,7 +770,10 @@ class DataModelV3GraphSpecMigrationTest {
         assertNotNull(result.map("extensions").mapOfMaps("data_source_tables")["users"])
         assertTrue(result.mapOfMaps("nodes").isEmpty(), "nodes should be present but empty")
         assertTrue(result.mapOfMaps("relationships").isEmpty(), "relationships should be present but empty")
-        assertFalse(result.map("extensions").containsKey("data_source_mappings"), "mappings should be omitted when empty")
+        assertFalse(
+            result.map("extensions").containsKey("data_source_mappings"),
+            "mappings should be omitted when empty"
+        )
         assertTrue(result.containsKey("description"), "description should be present but empty")
     }
 }
