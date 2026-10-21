@@ -30,3 +30,10 @@ mistake, but means fixing an issue can reveal new ones.
 | `details` | Extra information as string keys and values. Often empty.
 |===
 
+== Custom checks
+
+For validation beyond the standard sets, custom checks can be written against the model in your own code.
+
+TIP: On the JVM, implement the `Validation` interface and pass it to `validate` alongside a built-in set, so your checks
+run as part of validation.
+
