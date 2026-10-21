@@ -34,7 +34,7 @@ object TableColumnEmptyName : TableValidation {
                 Issue(
                     code = "missing_table_column_name",
                     message = "Missing name for table column at index $columnIndex in table '$tableId'",
-                    path = "extensions.tables.$tableId.columns[$columnIndex].name"
+                    path = "extensions.data_source_tables.$tableId.columns[$columnIndex].name"
                 )
             )
         }

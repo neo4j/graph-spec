@@ -309,7 +309,7 @@ relationships:
     from: { node: "n:7" }
     to: { node: "n:7" }
 extensions:
-  tables:
+  data_source_tables:
     Comment:
       source: "cloud"
       columns:
@@ -796,7 +796,7 @@ extensions:
           type: "INTEGER"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-  mappings:
+  data_source_mappings:
     mapping0:
       - type: "NODE"
         node: "n:0"

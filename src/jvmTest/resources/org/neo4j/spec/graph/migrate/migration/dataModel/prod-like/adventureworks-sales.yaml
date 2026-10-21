@@ -310,7 +310,7 @@ relationships:
     from: { node: "n:11" }
     to: { node: "n:5" }
 extensions:
-  tables:
+  data_source_tables:
     countryregioncurrency:
       source: "cloud"
       columns:
@@ -1433,7 +1433,7 @@ extensions:
           type: "int4"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-  mappings:
+  data_source_mappings:
     mapping0:
       - type: "NODE"
         node: "n:0"

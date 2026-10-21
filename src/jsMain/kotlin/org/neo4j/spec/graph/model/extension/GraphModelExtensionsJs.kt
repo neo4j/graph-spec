@@ -35,28 +35,28 @@ import org.neo4j.spec.graph.model.jso
 @JsPlainObject
 external interface GraphModelExtensionsJs {
     val custom: Record<String, Any>
-    val tables: Record<String, TableJs>
-    val mappings: Record<String, Array<MappingJs>>
+    val dataSourceTables: Record<String, TableJs>
+    val dataSourceMappings: Record<String, Array<MappingJs>>
 }
 
 fun graphModelExtensionsJs(
     custom: Record<String, Any> = emptyRecord(),
-    tables: Record<String, TableJs> = emptyRecord(),
-    mappings: Record<String, Array<MappingJs>> = emptyRecord()
+    dataSourceTables: Record<String, TableJs> = emptyRecord(),
+    dataSourceMappings: Record<String, Array<MappingJs>> = emptyRecord()
 ): GraphModelExtensionsJs = jso {
     this.custom = custom
-    this.tables = tables
-    this.mappings = mappings
+    this.dataSourceTables = dataSourceTables
+    this.dataSourceMappings = dataSourceMappings
 }
 
 fun GraphModelExtensions.toJs() = graphModelExtensionsJs(
     custom = custom.toCustomJs(),
-    tables = tables.mapValues { (_, table) -> table.toJs() }.toRecord(),
-    mappings = mappings.mapValues { (_, group) -> group.map { it.toJs() }.toTypedArray() }.toRecord()
+    dataSourceTables = dataSourceTables.mapValues { (_, table) -> table.toJs() }.toRecord(),
+    dataSourceMappings = dataSourceMappings.mapValues { (_, group) -> group.map { it.toJs() }.toTypedArray() }.toRecord()
 )
 
 fun GraphModelExtensionsJs.toClass(): GraphModelExtensions = GraphModelExtensions(
     custom = custom.toCustomClass(),
-    tables = tables.associateBy { _, js -> js.toClass() },
-    mappings = mappings.associateBy { _, group -> group.map { it.toClass() }.toMutableList() }
+    dataSourceTables = dataSourceTables.associateBy { _, js -> js.toClass() },
+    dataSourceMappings = dataSourceMappings.associateBy { _, group -> group.map { it.toClass() }.toMutableList() }
 )

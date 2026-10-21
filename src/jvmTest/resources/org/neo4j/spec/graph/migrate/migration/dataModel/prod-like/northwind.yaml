@@ -87,7 +87,7 @@ relationships:
     from: { node: "n:1" }
     to: { node: "n:2" }
 extensions:
-  tables:
+  data_source_tables:
     categories:
       source: "cloud"
       columns:
@@ -245,7 +245,7 @@ extensions:
           suggested: "STRING"
           supported: ["STRING"]
       primary_keys: ["supplierid"]
-  mappings:
+  data_source_mappings:
     mapping0:
       - type: "NODE"
         node: "n:0"

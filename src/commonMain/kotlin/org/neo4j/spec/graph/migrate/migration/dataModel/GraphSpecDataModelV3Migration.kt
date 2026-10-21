@@ -88,7 +88,7 @@ class GraphSpecDataModelV3Migration :
             }
         }.partition { it.first == "node" }
         return schemaMapOf(
-            "dataSourceSchema" to convertSourceSchema(schema.mapOrNull("extensions")?.mapOfMapsOrNull("tables")),
+            "dataSourceSchema" to convertSourceSchema(schema.mapOrNull("extensions")?.mapOfMapsOrNull("data_source_tables")),
             "nodeMappings" to nodeMappings.map { it.second },
             "relationshipMappings" to relationshipMappings.map { it.second }
         )
@@ -274,7 +274,7 @@ class GraphSpecDataModelV3Migration :
     /**
      * Mappings are grouped by id, the data model has no such grouping so they're flattened into a single list.
      */
-    private fun SchemaMap.mappings(): List<SchemaMap> = mapOfListsOfMapsOrNull("mappings").orEmpty().values.flatten()
+    private fun SchemaMap.mappings(): List<SchemaMap> = mapOfListsOfMapsOrNull("data_source_mappings").orEmpty().values.flatten()
 
     private fun convertSourceSchema(tables: Map<String, SchemaMap>?): SchemaMap {
         if (tables == null) {

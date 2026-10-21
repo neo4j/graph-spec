@@ -80,10 +80,10 @@ class DataModelV3GraphSpecMigration :
     private fun extensions(tables: Map<String, SchemaMap>, mappings: List<SchemaMap>): Map<String, Any> {
         val extensions = mutableMapOf<String, Any>()
         if (tables.isNotEmpty()) {
-            extensions["tables"] = tables
+            extensions["data_source_tables"] = tables
         }
         if (mappings.isNotEmpty()) {
-            extensions["mappings"] = mapOf(MAPPING_ID to mappings)
+            extensions["data_source_mappings"] = mapOf(MAPPING_ID to mappings)
         }
         return extensions
     }

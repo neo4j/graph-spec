@@ -28,7 +28,7 @@ object NodeMappingKey : NodeValidation {
                         // Replaced legacy code: missing_node_key_property
                         code = "missing_node_mapping_key",
                         message = "Node '$nodeId' has no mapping key defined",
-                        path = "extensions.mappings.$mappingId[$index].key"
+                        path = "extensions.data_source_mappings.$mappingId[$index].key"
                     )
                 )
             }

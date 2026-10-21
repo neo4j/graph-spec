@@ -342,7 +342,7 @@ relationships:
     from: { node: "n:12" }
     to: { node: "n:11" }
 extensions:
-  tables:
+  data_source_tables:
     actor:
       source: "cloud"
       columns:
@@ -1029,7 +1029,7 @@ extensions:
           references:
             table: "staff"
             columns: ["staff_id"]
-  mappings:
+  data_source_mappings:
     mapping0:
       - type: "NODE"
         node: "n:0"

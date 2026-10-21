@@ -40,7 +40,7 @@ class NodeMappingKeyTypeTest {
             properties = mutableMapOf("id" to Property(type = Neo4jType.STRING))
         )
         model.nodes["person"] = node
-        model.extensions.mappings["mapping0"] = mutableListOf(
+        model.extensions.dataSourceMappings["mapping0"] = mutableListOf(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -62,7 +62,7 @@ class NodeMappingKeyTypeTest {
             properties = mutableMapOf("id" to Property(type = Neo4jType.INTEGER))
         )
         model.nodes["person"] = node
-        model.extensions.mappings["mapping0"] = mutableListOf(
+        model.extensions.dataSourceMappings["mapping0"] = mutableListOf(
             NodeMapping(
                 node = "person",
                 table = "people.csv",
@@ -84,7 +84,7 @@ class NodeMappingKeyTypeTest {
             properties = mutableMapOf("id" to Property(type = Neo4jType.FLOAT))
         )
         model.nodes["person"] = node
-        model.extensions.mappings["mapping0"] = mutableListOf(
+        model.extensions.dataSourceMappings["mapping0"] = mutableListOf(
             NodeMapping(
                 node = "person",
                 table = "people.csv",

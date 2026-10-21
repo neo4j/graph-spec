@@ -3571,7 +3571,7 @@ relationships:
     from: { node: "n:160" }
     to: { node: "n:59" }
 extensions:
-  tables:
+  data_source_tables:
     ACCOUNT:
       source: "cloud"
       columns:
@@ -7757,7 +7757,7 @@ extensions:
           references:
             table: "ENDORSEMENT"
             columns: ["EVENT_IDENTIFIER"]
-  mappings:
+  data_source_mappings:
     mapping0:
       - type: "NODE"
         node: "n:0"

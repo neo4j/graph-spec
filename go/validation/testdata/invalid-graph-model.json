@@ -31,8 +31,8 @@
   "relationships": {},
   "extensions": {
     "custom": {},
-    "tables": {},
-    "mappings": {
+    "data_source_tables": {},
+    "data_source_mappings": {
       "mapping0": []
     }
   }
