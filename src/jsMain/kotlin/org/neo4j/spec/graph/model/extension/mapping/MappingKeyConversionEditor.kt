@@ -56,7 +56,9 @@ class MappingKeyConversionEditor {
 
         private fun context(model: GraphModelJs): KeyConversionContext {
             val relationships = model.relationships.toMap()
-            val mappings = allMappings(model).filter { it.type == MappingType.NODE }.map { it.unsafeCast<NodeMappingJs>() }
+            val mappings = allMappings(model).filter {
+                it.type == MappingType.NODE
+            }.map { it.unsafeCast<NodeMappingJs>() }
             return KeyConversionContext(
                 endpoints = { id -> relationships[id]?.let { it.from.node to it.to.node } },
                 nodePropertyMappings = { nodeId ->

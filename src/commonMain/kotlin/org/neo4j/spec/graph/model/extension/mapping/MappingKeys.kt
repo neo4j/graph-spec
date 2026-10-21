@@ -63,25 +63,22 @@ internal class KeyConversionContext(
  *
  * @throws IllegalArgumentException if a key can't be converted.
  */
-internal fun planKeyConversion(
-    mapping: Mapping,
-    context: KeyConversionContext,
-    toProperties: Boolean
-): () -> Unit = when (mapping) {
-    is NodeMapping -> planKeys(mapping.properties, mapping.keyColumns, mapping.keyProperties, toProperties)
-    is RelationshipMapping -> {
-        val own = planKeys(mapping.properties, mapping.keyColumns, mapping.keyProperties, toProperties)
-        val endpoints = context.endpoints(mapping.relationship)
-        val from = planTarget(mapping.fromNode, endpoints?.first, context, toProperties)
-        val to = planTarget(mapping.toNode, endpoints?.second, context, toProperties)
-        return {
-            own()
-            from()
-            to()
+internal fun planKeyConversion(mapping: Mapping, context: KeyConversionContext, toProperties: Boolean): () -> Unit =
+    when (mapping) {
+        is NodeMapping -> planKeys(mapping.properties, mapping.keyColumns, mapping.keyProperties, toProperties)
+        is RelationshipMapping -> {
+            val own = planKeys(mapping.properties, mapping.keyColumns, mapping.keyProperties, toProperties)
+            val endpoints = context.endpoints(mapping.relationship)
+            val from = planTarget(mapping.fromNode, endpoints?.first, context, toProperties)
+            val to = planTarget(mapping.toNode, endpoints?.second, context, toProperties)
+            return {
+                own()
+                from()
+                to()
+            }
         }
+        is QueryMapping -> return {}
     }
-    is QueryMapping -> return {}
-}
 
 internal fun planKeys(
     properties: Map<String, PropertyMapping>,

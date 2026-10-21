@@ -43,15 +43,14 @@ class MappingKeyConversionTest {
         keyProperties = mutableSetOf("code")
     )
 
-    private fun worksAt(from: TargetMapping, to: TargetMapping, relationship: String = "worksAt") =
-        RelationshipMapping(
-            relationship = relationship,
-            table = "jobs",
-            fromNode = from,
-            toNode = to,
-            properties = mutableMapOf("since" to PropertyMapping("start_year")),
-            keyColumns = mutableSetOf("start_year")
-        )
+    private fun worksAt(from: TargetMapping, to: TargetMapping, relationship: String = "worksAt") = RelationshipMapping(
+        relationship = relationship,
+        table = "jobs",
+        fromNode = from,
+        toNode = to,
+        properties = mutableMapOf("since" to PropertyMapping("start_year")),
+        keyColumns = mutableSetOf("start_year")
+    )
 
     private fun model(vararg mappings: Mapping) = GraphModel(
         version = "1",
