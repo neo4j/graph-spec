@@ -12,7 +12,6 @@ nodes:
     constraints:
       "c:0":
         type: "UNIQUE"
-        label: "ACCOUNT"
         properties: ["p:0_0"]
         name: "ACCOUNT"
     extensions:
@@ -30,7 +29,6 @@ nodes:
     constraints:
       "c:1":
         type: "UNIQUE"
-        label: "ADMINISTRATIVE_ORGANIZATION_UNIT"
         properties: ["p:1_0"]
         name: "ADMINISTRATIVE_ORGANIZATION_UNIT"
     extensions:
@@ -48,7 +46,6 @@ nodes:
     constraints:
       "c:2":
         type: "UNIQUE"
-        label: "AGENCY_CONTRACT"
         properties: ["p:2_0"]
         name: "AGENCY_CONTRACT"
     extensions:
@@ -69,7 +66,6 @@ nodes:
     constraints:
       "c:3":
         type: "UNIQUE"
-        label: "AGREEMENT"
         properties: ["p:3_0"]
         name: "AGREEMENT"
     extensions:
@@ -87,7 +83,6 @@ nodes:
     constraints:
       "c:4":
         type: "UNIQUE"
-        label: "ANIMAL"
         properties: ["p:4_0"]
         name: "ANIMAL"
     extensions:
@@ -105,7 +100,6 @@ nodes:
     constraints:
       "c:5":
         type: "UNIQUE"
-        label: "APPROVAL"
         properties: ["p:5_0"]
         name: "APPROVAL"
     extensions:
@@ -124,7 +118,6 @@ nodes:
     constraints:
       "c:6":
         type: "UNIQUE"
-        label: "ARBITRATION"
         properties: ["p:6_0"]
         name: "ARBITRATION"
     extensions:
@@ -146,7 +139,6 @@ nodes:
     constraints:
       "c:7":
         type: "UNIQUE"
-        label: "ASSESSMENT"
         properties: ["p:7_0"]
         name: "ASSESSMENT"
     extensions:
@@ -165,7 +157,6 @@ nodes:
     constraints:
       "c:8":
         type: "UNIQUE"
-        label: "ASSESSMENT_RESULT"
         properties: ["p:8_0"]
         name: "ASSESSMENT_RESULT"
     extensions:
@@ -183,7 +174,6 @@ nodes:
     constraints:
       "c:9":
         type: "UNIQUE"
-        label: "ASSUMED_CLAIM_AMOUNT"
         properties: ["p:9_0"]
         name: "ASSUMED_CLAIM_AMOUNT"
     extensions:
@@ -201,7 +191,6 @@ nodes:
     constraints:
       "c:10":
         type: "UNIQUE"
-        label: "ASSUMED_POLICY_AMOUNT"
         properties: ["p:10_0"]
         name: "ASSUMED_POLICY_AMOUNT"
     extensions:
@@ -219,7 +208,6 @@ nodes:
     constraints:
       "c:11":
         type: "UNIQUE"
-        label: "AUTOMOBILE"
         properties: ["p:11_0"]
         name: "AUTOMOBILE"
     extensions:
@@ -237,7 +225,6 @@ nodes:
     constraints:
       "c:12":
         type: "UNIQUE"
-        label: "AUTO_REPAIR_SHOP_CONTRACT"
         properties: ["p:12_0"]
         name: "AUTO_REPAIR_SHOP_CONTRACT"
     extensions:
@@ -255,7 +242,6 @@ nodes:
     constraints:
       "c:13":
         type: "UNIQUE"
-        label: "BINDING"
         properties: ["p:13_0"]
         name: "BINDING"
     extensions:
@@ -273,7 +259,6 @@ nodes:
     constraints:
       "c:14":
         type: "UNIQUE"
-        label: "BOAT"
         properties: ["p:14_0"]
         name: "BOAT"
     extensions:
@@ -291,7 +276,6 @@ nodes:
     constraints:
       "c:15":
         type: "UNIQUE"
-        label: "BODY_OBJECT"
         properties: ["p:15_0"]
         name: "BODY_OBJECT"
     extensions:
@@ -309,7 +293,6 @@ nodes:
     constraints:
       "c:16":
         type: "UNIQUE"
-        label: "BROKERAGE_CONTRACT"
         properties: ["p:16_0"]
         name: "BROKERAGE_CONTRACT"
     extensions:
@@ -327,7 +310,6 @@ nodes:
     constraints:
       "c:17":
         type: "UNIQUE"
-        label: "BUS"
         properties: ["p:17_0"]
         name: "BUS"
     extensions:
@@ -345,7 +327,6 @@ nodes:
     constraints:
       "c:18":
         type: "UNIQUE"
-        label: "BUSINESS_EVENT"
         properties: ["p:18_0"]
         name: "BUSINESS_EVENT"
     extensions:
@@ -363,7 +344,6 @@ nodes:
     constraints:
       "c:19":
         type: "UNIQUE"
-        label: "CANCEL"
         properties: ["p:19_0"]
         name: "CANCEL"
     extensions:
@@ -385,7 +365,6 @@ nodes:
     constraints:
       "c:20":
         type: "UNIQUE"
-        label: "CATASTROPHE"
         properties: ["p:20_0"]
         name: "CATASTROPHE"
     extensions:
@@ -403,7 +382,6 @@ nodes:
     constraints:
       "c:21":
         type: "UNIQUE"
-        label: "CEDED_CLAIM_AMOUNT"
         properties: ["p:21_0"]
         name: "CEDED_CLAIM_AMOUNT"
     extensions:
@@ -421,7 +399,6 @@ nodes:
     constraints:
       "c:22":
         type: "UNIQUE"
-        label: "CEDED_POLICY_AMOUNT"
         properties: ["p:22_0"]
         name: "CEDED_POLICY_AMOUNT"
     extensions:
@@ -439,7 +416,6 @@ nodes:
     constraints:
       "c:23":
         type: "UNIQUE"
-        label: "CHANNEL_SCORE"
         properties: ["p:23_0"]
         name: "CHANNEL_SCORE"
     extensions:
@@ -467,7 +443,6 @@ nodes:
     constraints:
       "c:24":
         type: "UNIQUE"
-        label: "CLAIM"
         properties: ["p:24_0"]
         name: "CLAIM"
     extensions:
@@ -489,7 +464,6 @@ nodes:
     constraints:
       "c:25":
         type: "UNIQUE"
-        label: "CLAIM_AMOUNT"
         properties: ["p:25_0"]
         name: "CLAIM_AMOUNT"
     extensions:
@@ -507,7 +481,6 @@ nodes:
     constraints:
       "c:26":
         type: "UNIQUE"
-        label: "CLAIM_EVALUATION_RESULT"
         properties: ["p:26_0"]
         name: "CLAIM_EVALUATION_RESULT"
     extensions:
@@ -525,7 +498,6 @@ nodes:
     constraints:
       "c:27":
         type: "UNIQUE"
-        label: "CLAIM_EVENT"
         properties: ["p:27_0"]
         name: "CLAIM_EVENT"
     extensions:
@@ -544,7 +516,6 @@ nodes:
     constraints:
       "c:28":
         type: "UNIQUE"
-        label: "CLAIM_FOLDER"
         properties: ["p:28_0"]
         name: "CLAIM_FOLDER"
     extensions:
@@ -564,7 +535,6 @@ nodes:
     constraints:
       "c:29":
         type: "UNIQUE"
-        label: "CLAIM_OFFER"
         properties: ["p:29_0"]
         name: "CLAIM_OFFER"
     extensions:
@@ -582,7 +552,6 @@ nodes:
     constraints:
       "c:30":
         type: "UNIQUE"
-        label: "CLAIM_PAYMENT"
         properties: ["p:30_0"]
         name: "CLAIM_PAYMENT"
     extensions:
@@ -600,7 +569,6 @@ nodes:
     constraints:
       "c:31":
         type: "UNIQUE"
-        label: "CLAIM_RESERVE"
         properties: ["p:31_0"]
         name: "CLAIM_RESERVE"
     extensions:
@@ -618,7 +586,6 @@ nodes:
     constraints:
       "c:32":
         type: "UNIQUE"
-        label: "COMBINATION_STRUCTURE"
         properties: ["p:32_0"]
         name: "COMBINATION_STRUCTURE"
     extensions:
@@ -636,7 +603,6 @@ nodes:
     constraints:
       "c:33":
         type: "UNIQUE"
-        label: "COMBINE"
         properties: ["p:33_0"]
         name: "COMBINE"
     extensions:
@@ -654,7 +620,6 @@ nodes:
     constraints:
       "c:34":
         type: "UNIQUE"
-        label: "COMMERCIAL_AGREEMENT"
         properties: ["p:34_0"]
         name: "COMMERCIAL_AGREEMENT"
     extensions:
@@ -672,7 +637,6 @@ nodes:
     constraints:
       "c:35":
         type: "UNIQUE"
-        label: "COMMERCIAL_STRUCTURE"
         properties: ["p:35_0"]
         name: "COMMERCIAL_STRUCTURE"
     extensions:
@@ -693,7 +657,6 @@ nodes:
     constraints:
       "c:36":
         type: "UNIQUE"
-        label: "COMMUNICATION_IDENTITY"
         properties: ["p:36_0"]
         name: "COMMUNICATION_IDENTITY"
     extensions:
@@ -711,7 +674,6 @@ nodes:
     constraints:
       "c:37":
         type: "UNIQUE"
-        label: "COMMUTATION_AGREEMENT"
         properties: ["p:37_0"]
         name: "COMMUTATION_AGREEMENT"
     extensions:
@@ -732,7 +694,6 @@ nodes:
     constraints:
       "c:38":
         type: "UNIQUE"
-        label: "COMPANY"
         properties: ["p:38_0"]
         name: "COMPANY"
     extensions:
@@ -750,7 +711,6 @@ nodes:
     constraints:
       "c:39":
         type: "UNIQUE"
-        label: "CONSTRUCTION_VEHICLE"
         properties: ["p:39_0"]
         name: "CONSTRUCTION_VEHICLE"
     extensions:
@@ -768,7 +728,6 @@ nodes:
     constraints:
       "c:40":
         type: "UNIQUE"
-        label: "CONSULTANT_CONTRACT"
         properties: ["p:40_0"]
         name: "CONSULTANT_CONTRACT"
     extensions:
@@ -788,7 +747,6 @@ nodes:
     constraints:
       "c:41":
         type: "UNIQUE"
-        label: "COVERAGE"
         properties: ["p:41_0"]
         name: "COVERAGE"
     extensions:
@@ -808,7 +766,6 @@ nodes:
     constraints:
       "c:42":
         type: "UNIQUE"
-        label: "COVERAGE_GROUP"
         properties: ["p:42_0"]
         name: "COVERAGE_GROUP"
     extensions:
@@ -828,7 +785,6 @@ nodes:
     constraints:
       "c:43":
         type: "UNIQUE"
-        label: "COVERAGE_LIMIT_TYPE"
         properties: ["p:43_0"]
         name: "COVERAGE_LIMIT_TYPE"
     extensions:
@@ -847,7 +803,6 @@ nodes:
     constraints:
       "c:44":
         type: "UNIQUE"
-        label: "COVERAGE_PART"
         properties: ["p:44_0"]
         name: "COVERAGE_PART"
     extensions:
@@ -867,7 +822,6 @@ nodes:
     constraints:
       "c:45":
         type: "UNIQUE"
-        label: "COVERAGE_TYPE"
         properties: ["p:45_0"]
         name: "COVERAGE_TYPE"
     extensions:
@@ -885,7 +839,6 @@ nodes:
     constraints:
       "c:46":
         type: "UNIQUE"
-        label: "CREDIT_CLAIM_AMOUNT"
         properties: ["p:46_0"]
         name: "CREDIT_CLAIM_AMOUNT"
     extensions:
@@ -903,7 +856,6 @@ nodes:
     constraints:
       "c:47":
         type: "UNIQUE"
-        label: "CREDIT_POLICY_AMOUNT"
         properties: ["p:47_0"]
         name: "CREDIT_POLICY_AMOUNT"
     extensions:
@@ -921,7 +873,6 @@ nodes:
     constraints:
       "c:48":
         type: "UNIQUE"
-        label: "CREDIT_RATING"
         properties: ["p:48_0"]
         name: "CREDIT_RATING"
     extensions:
@@ -939,7 +890,6 @@ nodes:
     constraints:
       "c:49":
         type: "UNIQUE"
-        label: "CUSTOMER_SCORE"
         properties: ["p:49_0"]
         name: "CUSTOMER_SCORE"
     extensions:
@@ -957,7 +907,6 @@ nodes:
     constraints:
       "c:50":
         type: "UNIQUE"
-        label: "DEBIT_CLAIM_AMOUNT"
         properties: ["p:50_0"]
         name: "DEBIT_CLAIM_AMOUNT"
     extensions:
@@ -975,7 +924,6 @@ nodes:
     constraints:
       "c:51":
         type: "UNIQUE"
-        label: "DEBIT_POLICY_AMOUNT"
         properties: ["p:51_0"]
         name: "DEBIT_POLICY_AMOUNT"
     extensions:
@@ -993,7 +941,6 @@ nodes:
     constraints:
       "c:52":
         type: "UNIQUE"
-        label: "DEDUCTIBLE_RECOVERY"
         properties: ["p:52_0"]
         name: "DEDUCTIBLE_RECOVERY"
     extensions:
@@ -1011,7 +958,6 @@ nodes:
     constraints:
       "c:53":
         type: "UNIQUE"
-        label: "DEMOGRAPHIC_SCORE"
         properties: ["p:53_0"]
         name: "DEMOGRAPHIC_SCORE"
     extensions:
@@ -1029,7 +975,6 @@ nodes:
     constraints:
       "c:54":
         type: "UNIQUE"
-        label: "DERIVATIVE_CONTRACT"
         properties: ["p:54_0"]
         name: "DERIVATIVE_CONTRACT"
     extensions:
@@ -1047,7 +992,6 @@ nodes:
     constraints:
       "c:55":
         type: "UNIQUE"
-        label: "DIRECT_CLAIM_AMOUNT"
         properties: ["p:55_0"]
         name: "DIRECT_CLAIM_AMOUNT"
     extensions:
@@ -1065,7 +1009,6 @@ nodes:
     constraints:
       "c:56":
         type: "UNIQUE"
-        label: "DIRECT_POLICY_AMOUNT"
         properties: ["p:56_0"]
         name: "DIRECT_POLICY_AMOUNT"
     extensions:
@@ -1083,7 +1026,6 @@ nodes:
     constraints:
       "c:57":
         type: "UNIQUE"
-        label: "DWELLING"
         properties: ["p:57_0"]
         name: "DWELLING"
     extensions:
@@ -1101,7 +1043,6 @@ nodes:
     constraints:
       "c:58":
         type: "UNIQUE"
-        label: "EMPLOYMENT_AGREEMENT"
         properties: ["p:58_0"]
         name: "EMPLOYMENT_AGREEMENT"
     extensions:
@@ -1119,7 +1060,6 @@ nodes:
     constraints:
       "c:59":
         type: "UNIQUE"
-        label: "ENDORSEMENT"
         properties: ["p:59_0"]
         name: "ENDORSEMENT"
     extensions:
@@ -1137,7 +1077,6 @@ nodes:
     constraints:
       "c:60":
         type: "UNIQUE"
-        label: "EVENT"
         properties: ["p:60_0"]
         name: "EVENT"
     extensions:
@@ -1155,7 +1094,6 @@ nodes:
     constraints:
       "c:61":
         type: "UNIQUE"
-        label: "EXPENSE_PAYMENT"
         properties: ["p:61_0"]
         name: "EXPENSE_PAYMENT"
     extensions:
@@ -1173,7 +1111,6 @@ nodes:
     constraints:
       "c:62":
         type: "UNIQUE"
-        label: "EXPENSE_RECOVERY"
         properties: ["p:62_0"]
         name: "EXPENSE_RECOVERY"
     extensions:
@@ -1191,7 +1128,6 @@ nodes:
     constraints:
       "c:63":
         type: "UNIQUE"
-        label: "EXPENSE_RESERVE"
         properties: ["p:63_0"]
         name: "EXPENSE_RESERVE"
     extensions:
@@ -1209,7 +1145,6 @@ nodes:
     constraints:
       "c:64":
         type: "UNIQUE"
-        label: "FARM_EQUIPMENT"
         properties: ["p:64_0"]
         name: "FARM_EQUIPMENT"
     extensions:
@@ -1227,7 +1162,6 @@ nodes:
     constraints:
       "c:65":
         type: "UNIQUE"
-        label: "FEE"
         properties: ["p:65_0"]
         name: "FEE"
     extensions:
@@ -1245,7 +1179,6 @@ nodes:
     constraints:
       "c:66":
         type: "UNIQUE"
-        label: "FIELD_ORGANIZATION_UNIT"
         properties: ["p:66_0"]
         name: "FIELD_ORGANIZATION_UNIT"
     extensions:
@@ -1263,7 +1196,6 @@ nodes:
     constraints:
       "c:67":
         type: "UNIQUE"
-        label: "FINANCIAL_ACCOUNT_AGREEMENT"
         properties: ["p:67_0"]
         name: "FINANCIAL_ACCOUNT_AGREEMENT"
     extensions:
@@ -1281,7 +1213,6 @@ nodes:
     constraints:
       "c:68":
         type: "UNIQUE"
-        label: "FINANCIAL_SERVICES_ASSESSMENT"
         properties: ["p:68_0"]
         name: "FINANCIAL_SERVICES_ASSESSMENT"
     extensions:
@@ -1299,7 +1230,6 @@ nodes:
     constraints:
       "c:69":
         type: "UNIQUE"
-        label: "FINANCIAL_VALUATION"
         properties: ["p:69_0"]
         name: "FINANCIAL_VALUATION"
     extensions:
@@ -1317,7 +1247,6 @@ nodes:
     constraints:
       "c:70":
         type: "UNIQUE"
-        label: "FLAT"
         properties: ["p:70_0"]
         name: "FLAT"
     extensions:
@@ -1335,7 +1264,6 @@ nodes:
     constraints:
       "c:71":
         type: "UNIQUE"
-        label: "FOR_PROFIT_ORGANIZATION"
         properties: ["p:71_0"]
         name: "FOR_PROFIT_ORGANIZATION"
     extensions:
@@ -1353,7 +1281,6 @@ nodes:
     constraints:
       "c:72":
         type: "UNIQUE"
-        label: "FRAUD_ASSESSMENT"
         properties: ["p:72_0"]
         name: "FRAUD_ASSESSMENT"
     extensions:
@@ -1371,7 +1298,6 @@ nodes:
     constraints:
       "c:73":
         type: "UNIQUE"
-        label: "FREIGHT_GROUP"
         properties: ["p:73_0"]
         name: "FREIGHT_GROUP"
     extensions:
@@ -1389,7 +1315,6 @@ nodes:
     constraints:
       "c:74":
         type: "UNIQUE"
-        label: "FULL_TERM"
         properties: ["p:74_0"]
         name: "FULL_TERM"
     extensions:
@@ -1411,7 +1336,6 @@ nodes:
     constraints:
       "c:75":
         type: "UNIQUE"
-        label: "GEOGRAPHIC_LOCATION"
         properties: ["p:75_0"]
         name: "GEOGRAPHIC_LOCATION"
     extensions:
@@ -1429,7 +1353,6 @@ nodes:
     constraints:
       "c:76":
         type: "UNIQUE"
-        label: "GOVERNMENT_ORGANIZATION"
         properties: ["p:76_0"]
         name: "GOVERNMENT_ORGANIZATION"
     extensions:
@@ -1448,7 +1371,6 @@ nodes:
     constraints:
       "c:77":
         type: "UNIQUE"
-        label: "GROUPING"
         properties: ["p:77_0"]
         name: "GROUPING"
     extensions:
@@ -1466,7 +1388,6 @@ nodes:
     constraints:
       "c:78":
         type: "UNIQUE"
-        label: "GROUP_AGREEMENT"
         properties: ["p:78_0"]
         name: "GROUP_AGREEMENT"
     extensions:
@@ -1484,7 +1405,6 @@ nodes:
     constraints:
       "c:79":
         type: "UNIQUE"
-        label: "HOUSEHOLD"
         properties: ["p:79_0"]
         name: "HOUSEHOLD"
     extensions:
@@ -1502,7 +1422,6 @@ nodes:
     constraints:
       "c:80":
         type: "UNIQUE"
-        label: "HOUSEHOLD_CONTENT"
         properties: ["p:80_0"]
         name: "HOUSEHOLD_CONTENT"
     extensions:
@@ -1520,7 +1439,6 @@ nodes:
     constraints:
       "c:81":
         type: "UNIQUE"
-        label: "INDIVIDUAL_AGREEMENT"
         properties: ["p:81_0"]
         name: "INDIVIDUAL_AGREEMENT"
     extensions:
@@ -1539,7 +1457,6 @@ nodes:
     constraints:
       "c:82":
         type: "UNIQUE"
-        label: "INSURABLE_OBJECT"
         properties: ["p:82_0"]
         name: "INSURABLE_OBJECT"
     extensions:
@@ -1559,7 +1476,6 @@ nodes:
     constraints:
       "c:83":
         type: "UNIQUE"
-        label: "INSURANCE_CLASS"
         properties: ["p:83_0"]
         name: "INSURANCE_CLASS"
     extensions:
@@ -1577,7 +1493,6 @@ nodes:
     constraints:
       "c:84":
         type: "UNIQUE"
-        label: "INSURED_ACCOUNT"
         properties: ["p:84_0"]
         name: "INSURED_ACCOUNT"
     extensions:
@@ -1595,7 +1510,6 @@ nodes:
     constraints:
       "c:85":
         type: "UNIQUE"
-        label: "INTERMEDIARY_AGREEMENT"
         properties: ["p:85_0"]
         name: "INTERMEDIARY_AGREEMENT"
     extensions:
@@ -1616,7 +1530,6 @@ nodes:
     constraints:
       "c:86":
         type: "UNIQUE"
-        label: "LEGAL_JURISDICTION"
         properties: ["p:86_0"]
         name: "LEGAL_JURISDICTION"
     extensions:
@@ -1634,7 +1547,6 @@ nodes:
     constraints:
       "c:87":
         type: "UNIQUE"
-        label: "LIFE_EVENT"
         properties: ["p:87_0"]
         name: "LIFE_EVENT"
     extensions:
@@ -1655,7 +1567,6 @@ nodes:
     constraints:
       "c:88":
         type: "UNIQUE"
-        label: "LINE_OF_BUSINESS"
         properties: ["p:88_0"]
         name: "LINE_OF_BUSINESS"
     extensions:
@@ -1675,7 +1586,6 @@ nodes:
     constraints:
       "c:89":
         type: "UNIQUE"
-        label: "LINE_OF_BUSINESS_GROUP"
         properties: ["p:89_0"]
         name: "LINE_OF_BUSINESS_GROUP"
     extensions:
@@ -1694,7 +1604,6 @@ nodes:
     constraints:
       "c:90":
         type: "UNIQUE"
-        label: "LITIGATION"
         properties: ["p:90_0"]
         name: "LITIGATION"
     extensions:
@@ -1719,7 +1628,6 @@ nodes:
     constraints:
       "c:91":
         type: "UNIQUE"
-        label: "LOCATION_ADDRESS"
         properties: ["p:91_0"]
         name: "LOCATION_ADDRESS"
     extensions:
@@ -1737,7 +1645,6 @@ nodes:
     constraints:
       "c:92":
         type: "UNIQUE"
-        label: "LOSS_PAYMENT"
         properties: ["p:92_0"]
         name: "LOSS_PAYMENT"
     extensions:
@@ -1755,7 +1662,6 @@ nodes:
     constraints:
       "c:93":
         type: "UNIQUE"
-        label: "LOSS_RECOVERY"
         properties: ["p:93_0"]
         name: "LOSS_RECOVERY"
     extensions:
@@ -1773,7 +1679,6 @@ nodes:
     constraints:
       "c:94":
         type: "UNIQUE"
-        label: "LOSS_RESERVE"
         properties: ["p:94_0"]
         name: "LOSS_RESERVE"
     extensions:
@@ -1791,7 +1696,6 @@ nodes:
     constraints:
       "c:95":
         type: "UNIQUE"
-        label: "MANUFACTURED_OBJECT"
         properties: ["p:95_0"]
         name: "MANUFACTURED_OBJECT"
     extensions:
@@ -1809,7 +1713,6 @@ nodes:
     constraints:
       "c:96":
         type: "UNIQUE"
-        label: "MEDICAL_CONDITION"
         properties: ["p:96_0"]
         name: "MEDICAL_CONDITION"
     extensions:
@@ -1827,7 +1730,6 @@ nodes:
     constraints:
       "c:97":
         type: "UNIQUE"
-        label: "MID_TERM"
         properties: ["p:97_0"]
         name: "MID_TERM"
     extensions:
@@ -1845,7 +1747,6 @@ nodes:
     constraints:
       "c:98":
         type: "UNIQUE"
-        label: "MILKING_MACHINE"
         properties: ["p:98_0"]
         name: "MILKING_MACHINE"
     extensions:
@@ -1863,7 +1764,6 @@ nodes:
     constraints:
       "c:99":
         type: "UNIQUE"
-        label: "MOBILE_HOME"
         properties: ["p:99_0"]
         name: "MOBILE_HOME"
     extensions:
@@ -1881,7 +1781,6 @@ nodes:
     constraints:
       "c:100":
         type: "UNIQUE"
-        label: "MOTORCYCLE"
         properties: ["p:100_0"]
         name: "MOTORCYCLE"
     extensions:
@@ -1899,7 +1798,6 @@ nodes:
     constraints:
       "c:101":
         type: "UNIQUE"
-        label: "NEW_BUSINESS"
         properties: ["p:101_0"]
         name: "NEW_BUSINESS"
     extensions:
@@ -1917,7 +1815,6 @@ nodes:
     constraints:
       "c:102":
         type: "UNIQUE"
-        label: "NOT_FOR_PROFIT_ORGANIZATION"
         properties: ["p:102_0"]
         name: "NOT_FOR_PROFIT_ORGANIZATION"
     extensions:
@@ -1941,7 +1838,6 @@ nodes:
     constraints:
       "c:103":
         type: "UNIQUE"
-        label: "OCCURRENCE"
         properties: ["p:103_0"]
         name: "OCCURRENCE"
     extensions:
@@ -1967,7 +1863,6 @@ nodes:
     constraints:
       "c:104":
         type: "UNIQUE"
-        label: "ORGANIZATION"
         properties: ["p:104_0"]
         name: "ORGANIZATION"
     extensions:
@@ -1990,7 +1885,6 @@ nodes:
     constraints:
       "c:105":
         type: "UNIQUE"
-        label: "ORGANIZATION_UNIT"
         properties: ["p:105_0"]
         name: "ORGANIZATION_UNIT"
     extensions:
@@ -2008,7 +1902,6 @@ nodes:
     constraints:
       "c:106":
         type: "UNIQUE"
-        label: "OTHER_ASSESSMENT_RESULT"
         properties: ["p:106_0"]
         name: "OTHER_ASSESSMENT_RESULT"
     extensions:
@@ -2030,7 +1923,6 @@ nodes:
     constraints:
       "c:107":
         type: "UNIQUE"
-        label: "PARTY"
         properties: ["p:107_0"]
         name: "PARTY"
     extensions:
@@ -2049,7 +1941,6 @@ nodes:
     constraints:
       "c:108":
         type: "UNIQUE"
-        label: "PARTY_PREFERENCE"
         properties: ["p:108_0"]
         name: "PARTY_PREFERENCE"
     extensions:
@@ -2069,7 +1960,6 @@ nodes:
     constraints:
       "c:109":
         type: "UNIQUE"
-        label: "PARTY_ROLE"
         properties: ["p:109_0"]
         name: "PARTY_ROLE"
     extensions:
@@ -2097,7 +1987,6 @@ nodes:
     constraints:
       "c:110":
         type: "UNIQUE"
-        label: "PERSON"
         properties: ["p:110_0"]
         name: "PERSON"
     extensions:
@@ -2116,7 +2005,6 @@ nodes:
     constraints:
       "c:111":
         type: "UNIQUE"
-        label: "PERSON_PROFESSION"
         properties: ["p:111_0"]
         name: "PERSON_PROFESSION"
     extensions:
@@ -2142,7 +2030,6 @@ nodes:
     constraints:
       "c:112":
         type: "UNIQUE"
-        label: "PHYSICAL_LOCATION"
         properties: ["p:112_0"]
         name: "PHYSICAL_LOCATION"
     extensions:
@@ -2160,7 +2047,6 @@ nodes:
     constraints:
       "c:113":
         type: "UNIQUE"
-        label: "PHYSICAL_OBJECT_ASSESSMENT"
         properties: ["p:113_0"]
         name: "PHYSICAL_OBJECT_ASSESSMENT"
     extensions:
@@ -2178,7 +2064,6 @@ nodes:
     constraints:
       "c:114":
         type: "UNIQUE"
-        label: "PLACE_ASSESSMENT"
         properties: ["p:114_0"]
         name: "PLACE_ASSESSMENT"
     extensions:
@@ -2200,7 +2085,6 @@ nodes:
     constraints:
       "c:115":
         type: "UNIQUE"
-        label: "POLICY"
         properties: ["p:115_0"]
         name: "POLICY"
     extensions:
@@ -2223,7 +2107,6 @@ nodes:
     constraints:
       "c:116":
         type: "UNIQUE"
-        label: "POLICY_AMOUNT"
         properties: ["p:116_0"]
         name: "POLICY_AMOUNT"
     extensions:
@@ -2244,7 +2127,6 @@ nodes:
     constraints:
       "c:117":
         type: "UNIQUE"
-        label: "POLICY_DEDUCTIBLE"
         properties: ["p:117_0"]
         name: "POLICY_DEDUCTIBLE"
     extensions:
@@ -2266,7 +2148,6 @@ nodes:
     constraints:
       "c:118":
         type: "UNIQUE"
-        label: "POLICY_EVENT"
         properties: ["p:118_0"]
         name: "POLICY_EVENT"
     extensions:
@@ -2287,7 +2168,6 @@ nodes:
     constraints:
       "c:119":
         type: "UNIQUE"
-        label: "POLICY_LIMIT"
         properties: ["p:119_0"]
         name: "POLICY_LIMIT"
     extensions:
@@ -2305,7 +2185,6 @@ nodes:
     constraints:
       "c:120":
         type: "UNIQUE"
-        label: "PREMIUM"
         properties: ["p:120_0"]
         name: "PREMIUM"
     extensions:
@@ -2323,7 +2202,6 @@ nodes:
     constraints:
       "c:121":
         type: "UNIQUE"
-        label: "PRE_QUALIFICATION"
         properties: ["p:121_0"]
         name: "PRE_QUALIFICATION"
     extensions:
@@ -2343,7 +2221,6 @@ nodes:
     constraints:
       "c:122":
         type: "UNIQUE"
-        label: "PRODUCT"
         properties: ["p:122_0"]
         name: "PRODUCT"
     extensions:
@@ -2361,7 +2238,6 @@ nodes:
     constraints:
       "c:123":
         type: "UNIQUE"
-        label: "PROFESSIONAL_GROUP"
         properties: ["p:123_0"]
         name: "PROFESSIONAL_GROUP"
     extensions:
@@ -2379,7 +2255,6 @@ nodes:
     constraints:
       "c:124":
         type: "UNIQUE"
-        label: "PROJECT"
         properties: ["p:124_0"]
         name: "PROJECT"
     extensions:
@@ -2397,7 +2272,6 @@ nodes:
     constraints:
       "c:125":
         type: "UNIQUE"
-        label: "PROPERTY_IN_TRANSIT"
         properties: ["p:125_0"]
         name: "PROPERTY_IN_TRANSIT"
     extensions:
@@ -2415,7 +2289,6 @@ nodes:
     constraints:
       "c:126":
         type: "UNIQUE"
-        label: "PROVIDER_AGREEMENT"
         properties: ["p:126_0"]
         name: "PROVIDER_AGREEMENT"
     extensions:
@@ -2433,7 +2306,6 @@ nodes:
     constraints:
       "c:127":
         type: "UNIQUE"
-        label: "PRO_RATA"
         properties: ["p:127_0"]
         name: "PRO_RATA"
     extensions:
@@ -2451,7 +2323,6 @@ nodes:
     constraints:
       "c:128":
         type: "UNIQUE"
-        label: "QUOTE"
         properties: ["p:128_0"]
         name: "QUOTE"
     extensions:
@@ -2472,7 +2343,6 @@ nodes:
     constraints:
       "c:129":
         type: "UNIQUE"
-        label: "RATING_TERRITORY"
         properties: ["p:129_0"]
         name: "RATING_TERRITORY"
     extensions:
@@ -2490,7 +2360,6 @@ nodes:
     constraints:
       "c:130":
         type: "UNIQUE"
-        label: "RECOVERY"
         properties: ["p:130_0"]
         name: "RECOVERY"
     extensions:
@@ -2508,7 +2377,6 @@ nodes:
     constraints:
       "c:131":
         type: "UNIQUE"
-        label: "RECREATIONAL_VEHICLE"
         properties: ["p:131_0"]
         name: "RECREATIONAL_VEHICLE"
     extensions:
@@ -2526,7 +2394,6 @@ nodes:
     constraints:
       "c:132":
         type: "UNIQUE"
-        label: "REINSTATEMENT"
         properties: ["p:132_0"]
         name: "REINSTATEMENT"
     extensions:
@@ -2544,7 +2411,6 @@ nodes:
     constraints:
       "c:133":
         type: "UNIQUE"
-        label: "REINSURANCE_AGREEMENT"
         properties: ["p:133_0"]
         name: "REINSURANCE_AGREEMENT"
     extensions:
@@ -2562,7 +2428,6 @@ nodes:
     constraints:
       "c:134":
         type: "UNIQUE"
-        label: "REINSURANCE_RECOVERY"
         properties: ["p:134_0"]
         name: "REINSURANCE_RECOVERY"
     extensions:
@@ -2580,7 +2445,6 @@ nodes:
     constraints:
       "c:135":
         type: "UNIQUE"
-        label: "RENEWAL"
         properties: ["p:135_0"]
         name: "RENEWAL"
     extensions:
@@ -2598,7 +2462,6 @@ nodes:
     constraints:
       "c:136":
         type: "UNIQUE"
-        label: "RESIDENTIAL_STRUCTURE"
         properties: ["p:136_0"]
         name: "RESIDENTIAL_STRUCTURE"
     extensions:
@@ -2616,7 +2479,6 @@ nodes:
     constraints:
       "c:137":
         type: "UNIQUE"
-        label: "RISK_FACTOR_SCORE"
         properties: ["p:137_0"]
         name: "RISK_FACTOR_SCORE"
     extensions:
@@ -2634,7 +2496,6 @@ nodes:
     constraints:
       "c:138":
         type: "UNIQUE"
-        label: "SALVAGE"
         properties: ["p:138_0"]
         name: "SALVAGE"
     extensions:
@@ -2652,7 +2513,6 @@ nodes:
     constraints:
       "c:139":
         type: "UNIQUE"
-        label: "SCHEDULED_ITEM"
         properties: ["p:139_0"]
         name: "SCHEDULED_ITEM"
     extensions:
@@ -2670,7 +2530,6 @@ nodes:
     constraints:
       "c:140":
         type: "UNIQUE"
-        label: "SHORT_RATE"
         properties: ["p:140_0"]
         name: "SHORT_RATE"
     extensions:
@@ -2688,7 +2547,6 @@ nodes:
     constraints:
       "c:141":
         type: "UNIQUE"
-        label: "STAFFING_AGREEMENT"
         properties: ["p:141_0"]
         name: "STAFFING_AGREEMENT"
     extensions:
@@ -2708,7 +2566,6 @@ nodes:
     constraints:
       "c:142":
         type: "UNIQUE"
-        label: "STAFF_CLASSIFICATION"
         properties: ["p:142_0"]
         name: "STAFF_CLASSIFICATION"
     extensions:
@@ -2728,7 +2585,6 @@ nodes:
     constraints:
       "c:143":
         type: "UNIQUE"
-        label: "STAFF_POSITION"
         properties: ["p:143_0"]
         name: "STAFF_POSITION"
     extensions:
@@ -2747,7 +2603,6 @@ nodes:
     constraints:
       "c:144":
         type: "UNIQUE"
-        label: "STATE"
         properties: ["p:144_0"]
         name: "STATE"
     extensions:
@@ -2765,7 +2620,6 @@ nodes:
     constraints:
       "c:145":
         type: "UNIQUE"
-        label: "STRUCTURE"
         properties: ["p:145_0"]
         name: "STRUCTURE"
     extensions:
@@ -2783,7 +2637,6 @@ nodes:
     constraints:
       "c:146":
         type: "UNIQUE"
-        label: "SUBROGATION"
         properties: ["p:146_0"]
         name: "SUBROGATION"
     extensions:
@@ -2801,7 +2654,6 @@ nodes:
     constraints:
       "c:147":
         type: "UNIQUE"
-        label: "SURCHARGE"
         properties: ["p:147_0"]
         name: "SURCHARGE"
     extensions:
@@ -2819,7 +2671,6 @@ nodes:
     constraints:
       "c:148":
         type: "UNIQUE"
-        label: "TAX"
         properties: ["p:148_0"]
         name: "TAX"
     extensions:
@@ -2837,7 +2688,6 @@ nodes:
     constraints:
       "c:149":
         type: "UNIQUE"
-        label: "TEAM"
         properties: ["p:149_0"]
         name: "TEAM"
     extensions:
@@ -2855,7 +2705,6 @@ nodes:
     constraints:
       "c:150":
         type: "UNIQUE"
-        label: "THIRD_PARTY_STAFFING_AGREEMENT"
         properties: ["p:150_0"]
         name: "THIRD_PARTY_STAFFING_AGREEMENT"
     extensions:
@@ -2873,7 +2722,6 @@ nodes:
     constraints:
       "c:151":
         type: "UNIQUE"
-        label: "TRACTOR"
         properties: ["p:151_0"]
         name: "TRACTOR"
     extensions:
@@ -2891,7 +2739,6 @@ nodes:
     constraints:
       "c:152":
         type: "UNIQUE"
-        label: "TRAILER"
         properties: ["p:152_0"]
         name: "TRAILER"
     extensions:
@@ -2909,7 +2756,6 @@ nodes:
     constraints:
       "c:153":
         type: "UNIQUE"
-        label: "TRANSPORTATION_CLASS"
         properties: ["p:153_0"]
         name: "TRANSPORTATION_CLASS"
     extensions:
@@ -2927,7 +2773,6 @@ nodes:
     constraints:
       "c:154":
         type: "UNIQUE"
-        label: "TRUCK"
         properties: ["p:154_0"]
         name: "TRUCK"
     extensions:
@@ -2945,7 +2790,6 @@ nodes:
     constraints:
       "c:155":
         type: "UNIQUE"
-        label: "UNDERWRITING_ASSESSMENT"
         properties: ["p:155_0"]
         name: "UNDERWRITING_ASSESSMENT"
     extensions:
@@ -2963,7 +2807,6 @@ nodes:
     constraints:
       "c:156":
         type: "UNIQUE"
-        label: "VAN"
         properties: ["p:156_0"]
         name: "VAN"
     extensions:
@@ -2986,7 +2829,6 @@ nodes:
     constraints:
       "c:157":
         type: "UNIQUE"
-        label: "VEHICLE"
         properties: ["p:157_0"]
         name: "VEHICLE"
     extensions:
@@ -3004,7 +2846,6 @@ nodes:
     constraints:
       "c:158":
         type: "UNIQUE"
-        label: "WATERCRAFT"
         properties: ["p:158_0"]
         name: "WATERCRAFT"
     extensions:
@@ -3022,7 +2863,6 @@ nodes:
     constraints:
       "c:159":
         type: "UNIQUE"
-        label: "WORKERS_COMP_CLASS"
         properties: ["p:159_0"]
         name: "WORKERS_COMP_CLASS"
     extensions:
@@ -3040,7 +2880,6 @@ nodes:
     constraints:
       "c:160":
         type: "UNIQUE"
-        label: "audit"
         properties: ["p:160_0"]
         name: "audit"
     extensions:
@@ -3732,7 +3571,7 @@ relationships:
     from: { node: "n:160" }
     to: { node: "n:59" }
 extensions:
-  tables:
+  data_source_tables:
     ACCOUNT:
       source: "cloud"
       columns:
@@ -6532,7 +6371,7 @@ extensions:
           columns: ["PARTY_IDENTIFIER", "RELATED_PARTY_IDENTIFIER"]
           references:
             table: "PARTY"
-            columns: ["PARTY_IDENTIFIER"]
+            columns: ["PARTY_IDENTIFIER", "PARTY_IDENTIFIER"]
     PARTY_RELATIONSHIP_ROLE:
       source: "cloud"
       columns:
@@ -7083,7 +6922,7 @@ extensions:
           columns: ["RELATED_POLICY_IDENTIFIER", "POLICY_IDENTIFIER"]
           references:
             table: "POLICY"
-            columns: ["POLICY_IDENTIFIER"]
+            columns: ["POLICY_IDENTIFIER", "POLICY_IDENTIFIER"]
     PREMIUM:
       source: "cloud"
       columns:
@@ -7918,7 +7757,7 @@ extensions:
           references:
             table: "ENDORSEMENT"
             columns: ["EVENT_IDENTIFIER"]
-  mappings:
+  data_source_mappings:
     mapping0:
       - type: "NODE"
         node: "n:0"

@@ -29,7 +29,7 @@ import kotlin.js.JsExport
 @SerialDescription("A foreign key of a table.")
 data class ForeignKey(
     @SerialDescription("Names of the columns in this table which make up the key.")
-    val columns: MutableSet<String>,
+    val columns: MutableList<String>,
     @SerialDescription("The table and columns the key refers to.")
     val references: ForeignKeyReference,
     @SerialDescription("User-defined arbitrary data.")

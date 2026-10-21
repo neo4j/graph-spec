@@ -60,7 +60,7 @@ fun Table.toJs() = tableJs(
 fun TableJs.toClass() = Table(
     source = source,
     columns = columns.map { it.toClass() }.toMutableList(),
-    primaryKeys = primaryKeys.toMutableSet(),
+    primaryKeys = primaryKeys.toMutableList(),
     foreignKeys = foreignKeys.associateBy { _, fk -> fk.toClass() },
     custom = custom.toCustomClass()
 )

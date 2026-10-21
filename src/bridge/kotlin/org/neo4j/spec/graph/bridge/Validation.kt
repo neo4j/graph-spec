@@ -25,7 +25,7 @@ import org.neo4j.spec.graph.validate.ValidationTree
 import org.neo4j.spec.graph.validate.Validations
 import kotlin.experimental.ExperimentalNativeApi
 
-private val json = Json {
+private val jsonFormat = Json {
     ignoreUnknownKeys = true
     isLenient = true
     prettyPrint = false
@@ -35,9 +35,13 @@ private val json = Json {
 @CName("validate")
 fun validate(inputJson: CPointer<ByteVar>?, outputBuffer: CPointer<ByteVar>?, bufferSize: Int) =
     invokeBridge(inputJson, outputBuffer = outputBuffer, bufferSize = bufferSize) { input ->
-        val graphModel = GraphSpec.Json.decodeFromString(content = input[0])
-        val validation = ValidationTree()
-        validation.build(Validations.all)
-        val issues = validation.validate(graphModel)
-        json.encodeToString(issues)
+        validateContent(content = input[0])
     }
+
+internal fun validateContent(content: String): String {
+    val graphModel = GraphSpec.Json.decodeFromString(content)
+    val validation = ValidationTree()
+    validation.build(Validations.all)
+    val issues = validation.validate(graphModel)
+    return jsonFormat.encodeToString(issues)
+}

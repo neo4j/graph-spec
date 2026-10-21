@@ -33,6 +33,7 @@ external interface TableColumnJs {
     var size: Int
     val suggested: String
     val supported: Array<String>
+    val nullable: Boolean
     val dimension: Int?
     val custom: Record<String, Any>
 }
@@ -43,6 +44,7 @@ fun tableColumnJs(
     size: Int = -1,
     suggested: String = "ANY",
     supported: Array<String> = emptyArray(),
+    nullable: Boolean = true,
     dimension: Int? = null,
     custom: Record<String, Any> = emptyRecord()
 ): TableColumnJs = jso {
@@ -51,6 +53,7 @@ fun tableColumnJs(
     this.size = size
     this.suggested = suggested
     this.supported = supported
+    this.nullable = nullable
     this.dimension = dimension
     this.custom = custom
 }
@@ -61,6 +64,7 @@ fun TableColumn.toJs() = tableColumnJs(
     size = size,
     suggested = Neo4jType.toString(suggested),
     supported = supported.map { Neo4jType.toString(it) }.toTypedArray(),
+    nullable = nullable,
     dimension = dimension,
     custom = custom.toCustomJs()
 )
@@ -71,6 +75,7 @@ fun TableColumnJs.toClass() = TableColumn(
     size = size,
     suggested = neo4jType(suggested),
     supported = supported.map { neo4jType(it) }.toSet(),
+    nullable = nullable,
     dimension = dimension,
     custom = custom.toCustomClass()
 )

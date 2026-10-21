@@ -17,7 +17,6 @@ nodes:
     constraints:
       "c:0":
         type: "UNIQUE"
-        label: "Comment"
         properties: ["p:0_3"]
         name: "Comment"
     extensions:
@@ -39,7 +38,6 @@ nodes:
     constraints:
       "c:1":
         type: "UNIQUE"
-        label: "Forum"
         properties: ["p:1_3"]
         name: "Forum"
     extensions:
@@ -60,7 +58,6 @@ nodes:
     constraints:
       "c:2":
         type: "UNIQUE"
-        label: "Organisation"
         properties: ["p:2_0"]
         name: "Organisation"
     extensions:
@@ -89,7 +86,6 @@ nodes:
     constraints:
       "c:3":
         type: "UNIQUE"
-        label: "Person"
         properties: ["p:3_3"]
         name: "Person"
     extensions:
@@ -110,7 +106,6 @@ nodes:
     constraints:
       "c:4":
         type: "UNIQUE"
-        label: "Place"
         properties: ["p:4_0"]
         name: "Place"
     extensions:
@@ -137,7 +132,6 @@ nodes:
     constraints:
       "c:5":
         type: "UNIQUE"
-        label: "Post"
         properties: ["p:5_3"]
         name: "Post"
     extensions:
@@ -157,7 +151,6 @@ nodes:
     constraints:
       "c:6":
         type: "UNIQUE"
-        label: "Tag"
         properties: ["p:6_0"]
         name: "Tag"
     extensions:
@@ -177,7 +170,6 @@ nodes:
     constraints:
       "c:7":
         type: "UNIQUE"
-        label: "TagClass"
         properties: ["p:7_0"]
         name: "TagClass"
     extensions:
@@ -317,7 +309,7 @@ relationships:
     from: { node: "n:7" }
     to: { node: "n:7" }
 extensions:
-  tables:
+  data_source_tables:
     Comment:
       source: "cloud"
       columns:
@@ -804,7 +796,7 @@ extensions:
           type: "INTEGER"
           suggested: "INTEGER"
           supported: ["INTEGER", "STRING", "FLOAT"]
-  mappings:
+  data_source_mappings:
     mapping0:
       - type: "NODE"
         node: "n:0"

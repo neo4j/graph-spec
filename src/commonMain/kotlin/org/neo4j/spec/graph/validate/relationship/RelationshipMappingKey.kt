@@ -32,7 +32,7 @@ object RelationshipMappingKey : RelationshipValidation {
         relationship: Relationship,
         issues: MutableList<Issue>
     ) {
-        for ((mappingId, mappings) in model.extensions.mappings) {
+        for ((mappingId, mappings) in model.extensions.dataSourceMappings) {
             for ((index, mapping) in mappings.withIndex()) {
                 if (mapping !is RelationshipMapping || mapping.relationship != relationshipId) {
                     continue
@@ -42,7 +42,7 @@ object RelationshipMappingKey : RelationshipValidation {
                         Issue(
                             code = "invalid_relationship_mapping_key",
                             message = "Mapping key '$propertyId' is not a property of relationship '$relationshipId'",
-                            path = "extensions.mappings.$mappingId[$index].key",
+                            path = "extensions.data_source_mappings.$mappingId[$index].key",
                             details = mapOf("relationship" to relationshipId, "property" to propertyId)
                         )
                     )

@@ -23,6 +23,7 @@ import org.neo4j.spec.graph.codec.schema.schemaMapOf
 import org.neo4j.spec.graph.model.Version
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -265,7 +266,7 @@ class GraphSpecDataModelV3MigrationTest {
                 )
             ),
             "extensions" to schemaMapOf(
-                "mappings" to schemaMapOf(
+                "data_source_mappings" to schemaMapOf(
                     "m0" to listOf(
                         schemaMapOf(
                             "relationship" to "actual_rel_id",
@@ -300,7 +301,7 @@ class GraphSpecDataModelV3MigrationTest {
         val input = schemaMapOf(
             "relationships" to schemaMapOf(), // Empty
             "extensions" to schemaMapOf(
-                "mappings" to schemaMapOf(
+                "data_source_mappings" to schemaMapOf(
                     "m0" to listOf(
                         schemaMapOf(
                             "relationship" to "NON_EXISTENT",
@@ -323,7 +324,7 @@ class GraphSpecDataModelV3MigrationTest {
     fun `convertExtensions identifies key properties from mappings`() {
         val input = schemaMapOf(
             "extensions" to schemaMapOf(
-                "mappings" to schemaMapOf(
+                "data_source_mappings" to schemaMapOf(
                     "m0" to listOf(
                         schemaMapOf(
                             "node" to "node1",
@@ -372,7 +373,7 @@ class GraphSpecDataModelV3MigrationTest {
     fun `convertSourceSchema handles complex foreign keys correctly`() {
         val input = schemaMapOf(
             "extensions" to schemaMapOf(
-                "tables" to schemaMapOf(
+                "data_source_tables" to schemaMapOf(
                     "Orders" to schemaMapOf(
                         "source" to "SQL",
                         "foreign_keys" to schemaMapOf(
@@ -568,7 +569,7 @@ class GraphSpecDataModelV3MigrationTest {
             "nodes" to schemaMapOf(
                 "n1" to schemaMapOf("labels" to schemaMapOf("identifier" to "Person"))
             ),
-            "extensions" to schemaMapOf("tables" to schemaMapOf()) // key present, but no table entries
+            "extensions" to schemaMapOf("data_source_tables" to schemaMapOf()) // key present, but no table entries
         )
 
         val result = migration.migrate(input)
@@ -604,7 +605,7 @@ class GraphSpecDataModelV3MigrationTest {
     fun `migrate emits expanded true for each converted table schema`() {
         val input = schemaMapOf(
             "extensions" to schemaMapOf(
-                "tables" to schemaMapOf(
+                "data_source_tables" to schemaMapOf(
                     "users" to schemaMapOf(
                         "source" to "local",
                         "fields" to schemaMapOf(
@@ -805,5 +806,18 @@ class GraphSpecDataModelV3MigrationTest {
 
         assertEquals("name_Person_key", graphSchema.listOfMaps("constraints")[0].string("name"))
         assertEquals("name_Person_text", graphSchema.listOfMaps("indexes")[0].string("name"))
+    }
+
+    @Test
+    fun `migrate fails for a node without a label`() {
+        val missingLabels = schemaMapOf("nodes" to schemaMapOf("n" to schemaMapOf("description" to "no labels")))
+        val missingIdentifier = schemaMapOf(
+            "nodes" to schemaMapOf("n" to schemaMapOf("labels" to schemaMapOf("implied" to listOf("Entity"))))
+        )
+
+        listOf(missingLabels, missingIdentifier).forEach { input ->
+            val failure = assertFailsWith<IllegalStateException> { migration.migrate(input) }
+            assertTrue(failure.message!!.contains("has no label, set label or labels.identifier"))
+        }
     }
 }

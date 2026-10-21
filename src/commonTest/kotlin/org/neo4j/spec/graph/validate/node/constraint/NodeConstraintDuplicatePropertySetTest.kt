@@ -41,12 +41,10 @@ class NodeConstraintDuplicatePropertySetTest {
             constraints = mutableMapOf(
                 "key_email_name" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email", "name")
                 ),
                 "uniq_email" to NodeConstraint(
                     type = ConstraintType.UNIQUE,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 )
             )
@@ -66,12 +64,10 @@ class NodeConstraintDuplicatePropertySetTest {
             constraints = mutableMapOf(
                 "key1" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email", "name")
                 ),
                 "key2" to NodeConstraint(
                     type = ConstraintType.UNIQUE,
-                    label = "Person",
                     properties = mutableSetOf("email", "name")
                 )
             )
@@ -93,12 +89,10 @@ class NodeConstraintDuplicatePropertySetTest {
             constraints = mutableMapOf(
                 "key1" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email", "name")
                 ),
                 "key2" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("name", "email")
                 )
             )
@@ -119,12 +113,10 @@ class NodeConstraintDuplicatePropertySetTest {
             constraints = mutableMapOf(
                 "key1" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 ),
                 "key2" to NodeConstraint(
                     type = ConstraintType.UNIQUE,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 )
             )

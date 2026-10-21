@@ -50,6 +50,6 @@ fun ForeignKeyReference.toJs() = foreignKeyReferenceJs(
 
 fun ForeignKeyReferenceJs.toClass() = ForeignKeyReference(
     table = table,
-    columns = columns.toMutableSet(),
+    columns = columns.toMutableList(),
     custom = custom.toCustomClass()
 )

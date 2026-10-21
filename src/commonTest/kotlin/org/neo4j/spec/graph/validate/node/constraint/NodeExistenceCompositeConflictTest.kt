@@ -41,12 +41,10 @@ class NodeExistenceCompositeConflictTest {
             constraints = mutableMapOf(
                 "exist_email" to NodeConstraint(
                     type = ConstraintType.EXISTS,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 ),
                 "key_name" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("name")
                 )
             )
@@ -66,12 +64,10 @@ class NodeExistenceCompositeConflictTest {
             constraints = mutableMapOf(
                 "exist_email" to NodeConstraint(
                     type = ConstraintType.EXISTS,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 ),
                 "comp_email_name" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email", "name")
                 )
             )
@@ -93,12 +89,10 @@ class NodeExistenceCompositeConflictTest {
             constraints = mutableMapOf(
                 "exist_email" to NodeConstraint(
                     type = ConstraintType.EXISTS,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 ),
                 "key_email" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 )
             )
@@ -119,12 +113,10 @@ class NodeExistenceCompositeConflictTest {
             constraints = mutableMapOf(
                 "exist_email" to NodeConstraint(
                     type = ConstraintType.EXISTS,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 ),
                 "exist_email_name" to NodeConstraint(
                     type = ConstraintType.EXISTS,
-                    label = "Person",
                     properties = mutableSetOf("email", "name")
                 )
             )

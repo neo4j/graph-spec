@@ -41,7 +41,6 @@ class NodeKeyOverlapTest {
             constraints = mutableMapOf(
                 "uniq_email" to NodeConstraint(
                     type = ConstraintType.UNIQUE,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 )
             )
@@ -61,12 +60,10 @@ class NodeKeyOverlapTest {
             constraints = mutableMapOf(
                 "key_email" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 ),
                 "uniq_name" to NodeConstraint(
                     type = ConstraintType.UNIQUE,
-                    label = "Person",
                     properties = mutableSetOf("name")
                 )
             )
@@ -86,12 +83,10 @@ class NodeKeyOverlapTest {
             constraints = mutableMapOf(
                 "key_email" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 ),
                 "uniq_email" to NodeConstraint(
                     type = ConstraintType.UNIQUE,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 )
             )
@@ -112,12 +107,10 @@ class NodeKeyOverlapTest {
             constraints = mutableMapOf(
                 "key_email" to NodeConstraint(
                     type = ConstraintType.KEY,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 ),
                 "exist_email" to NodeConstraint(
                     type = ConstraintType.EXISTS,
-                    label = "Person",
                     properties = mutableSetOf("email")
                 )
             )

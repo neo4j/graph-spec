@@ -31,7 +31,7 @@ object NodeMappingKeyType : NodeValidation {
                             // Replaced legacy code: invalid_node_key_property_type
                             code = "invalid_node_mapping_key_type",
                             message = "Mapping key '$propertyId' on node '$nodeId' must be STRING or INTEGER",
-                            path = "extensions.mappings.$mappingId[$index].key.$propertyId"
+                            path = "extensions.data_source_mappings.$mappingId[$index].key.$propertyId"
                         )
                     )
                 }

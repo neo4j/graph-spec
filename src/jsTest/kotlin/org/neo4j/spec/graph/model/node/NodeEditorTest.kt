@@ -80,17 +80,12 @@ class NodeEditorTest {
         val constraintId = NodeEditor.addConstraint(
             model = model,
             nodeId = nodeId,
-            type = "UNIQUENESS",
-            label = "User"
+            type = "UNIQUENESS"
         )
 
         val node = model.nodes[nodeId]!!
         assertNotNull(node.constraints[constraintId])
         assertEquals("UNIQUENESS", node.constraints[constraintId]?.type)
-
-        // Update Label
-        NodeEditor.setConstraintLabel(model, nodeId, constraintId, "Admin")
-        assertEquals("Admin", node.constraints[constraintId]?.label)
 
         // Update Type
         NodeEditor.setConstraintType(model, nodeId, constraintId, "NODE_KEY")

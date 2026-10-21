@@ -40,14 +40,7 @@
       }
     },
     "Movie": {
-      "labels": {
-        "identifier": "Movie",
-        "implied": [],
-        "optional": [],
-        "extensions": {
-          "custom": {}
-        }
-      },
+      "label": "Movie",
       "properties": {
         "id": {
           "type": "STRING",
@@ -97,7 +90,7 @@
   },
   "extensions": {
     "custom": {},
-    "tables": {
+    "data_source_tables": {
       "actors": {
         "source": "sql/postgres",
         "columns": [
@@ -238,7 +231,7 @@
         "custom": {}
       }
     },
-    "mappings": {
+    "data_source_mappings": {
       "mapping0": [
         {
           "type": "NODE",

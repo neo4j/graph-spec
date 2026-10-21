@@ -88,7 +88,8 @@ class GraphSpecDataModelV3Migration :
             }
         }.partition { it.first == "node" }
         return schemaMapOf(
-            "dataSourceSchema" to convertSourceSchema(schema.mapOrNull("extensions")?.mapOfMapsOrNull("tables")),
+            "dataSourceSchema" to
+                convertSourceSchema(schema.mapOrNull("extensions")?.mapOfMapsOrNull("data_source_tables")),
             "nodeMappings" to nodeMappings.map { it.second },
             "relationshipMappings" to relationshipMappings.map { it.second }
         )
@@ -210,12 +211,9 @@ class GraphSpecDataModelV3Migration :
         val nodeLabels = mutableListOf<SchemaMap>()
         val nodeObjectTypes = mutableListOf<SchemaMap>()
         for ((nodeId, node) in nodes) {
-            val labelsInfo =
-                node.mapOrNull("labels")
-                    ?: error(
-                        "Missing required labels at ${node.path}.labels - Make sure you are using internal version."
-                    )
-            val primaryLabel = labelsInfo.string("identifier")
+            val labelsInfo = node.mapOrNull("labels")
+            val primaryLabel = labelsInfo?.stringOrNull("identifier")
+                ?: error("Node at ${node.path} has no label, set label or labels.identifier")
             val impliedLabels = labelsInfo.listOrNull("implied")?.map { it.toString() } ?: emptyList()
             val optionalLabels = labelsInfo.listOrNull("optional")?.map { it.toString() } ?: emptyList()
             val allLabels = listOf(primaryLabel) + impliedLabels + optionalLabels
@@ -274,7 +272,8 @@ class GraphSpecDataModelV3Migration :
     /**
      * Mappings are grouped by id, the data model has no such grouping so they're flattened into a single list.
      */
-    private fun SchemaMap.mappings(): List<SchemaMap> = mapOfListsOfMapsOrNull("mappings").orEmpty().values.flatten()
+    private fun SchemaMap.mappings(): List<SchemaMap> =
+        mapOfListsOfMapsOrNull("data_source_mappings").orEmpty().values.flatten()
 
     private fun convertSourceSchema(tables: Map<String, SchemaMap>?): SchemaMap {
         if (tables == null) {

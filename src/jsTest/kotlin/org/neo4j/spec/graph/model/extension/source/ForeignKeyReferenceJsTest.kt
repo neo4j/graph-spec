@@ -8,7 +8,7 @@ class ForeignKeyReferenceJsTest : JsMappingTest<ForeignKeyReference, ForeignKeyR
 
     override fun createClass() = ForeignKeyReference(
         table = "table_name",
-        columns = mutableSetOf("field1", "field2"),
+        columns = mutableListOf("field1", "field2"),
         custom = mutableMapOf("key1" to "val1"),
     )
 
