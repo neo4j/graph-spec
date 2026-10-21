@@ -103,7 +103,7 @@ class GraphSpecDataModelV3Migration :
         val keyProperties = mutableMapOf<String, MutableSet<String>>()
         for (mapping in schema.mapOrNull("extensions")?.mappings().orEmpty()) {
             val entity = mapping.stringOrNull(singular) ?: continue
-            val keys = mapping.listOrNull(if (singular == "node") "key_properties" else "key") ?: continue
+            val keys = mapping.listOrNull("key_properties") ?: continue
             if (keys.isNotEmpty()) {
                 val set = keyProperties.getOrPut(entity) { mutableSetOf() }
                 set.addAll(keys.map { id -> (id as SchemaLiteral).string })

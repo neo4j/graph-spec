@@ -943,7 +943,7 @@ extensions:
         properties:
           "p:4_0": { column: "creationDate" }
           "p:4_1": { column: "deletionDate" }
-        key: ["p:4_0"]
+        key_properties: ["p:4_0"]
       - type: "RELATIONSHIP"
         relationship: "r:5"
         table: "Forum"

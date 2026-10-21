@@ -292,7 +292,7 @@ class DataModelV3GraphSpecMigration :
                 "to_node" to mapOf("properties" to mapping.entityMap("toMappings")),
                 "table" to mapping.literal("tableName"),
                 "properties" toNotEmpty migratePropertyMappings(mapping),
-                "key" toNotEmpty migrateKeyProperties(mapping, relKeys[ref] ?: emptySet())
+                "key_properties" toNotEmpty migrateKeyProperties(mapping, relKeys[ref] ?: emptySet())
             )
         }
         return mappings

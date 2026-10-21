@@ -343,7 +343,7 @@ class GraphSpecDataModelV3MigrationTest {
                                 "p2" to schemaMapOf("field" to "field2"),
                                 "p3" to schemaMapOf("field" to "field3")
                             ),
-                            "key" to schemaListOf("p2", "p3")
+                            "key_properties" to schemaListOf("p2", "p3")
                         )
                     )
                 )

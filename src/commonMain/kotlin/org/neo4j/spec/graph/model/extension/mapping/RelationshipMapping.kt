@@ -43,8 +43,16 @@ data class RelationshipMapping(
     val properties: MutableMap<String, PropertyMapping> = mutableMapOf(),
     @SerialDescription("Whether relationships are merged with existing relationships or always created.")
     var mode: MappingMode = MappingMode.MERGE,
-    @SerialDescription("Ids of the properties which identify a relationship.")
-    val key: MutableSet<String> = mutableSetOf(),
+    @SerialName("key_columns")
+    @SerialDescription(
+        "Names of the source table columns which identify a relationship. Mutually exclusive with key_properties."
+    )
+    val keyColumns: MutableSet<String> = mutableSetOf(),
+    @SerialName("key_properties")
+    @SerialDescription(
+        "Ids of the properties which identify a relationship. Mutually exclusive with key_columns."
+    )
+    val keyProperties: MutableSet<String> = mutableSetOf(),
     @SerialName("depends_on")
     @SerialDescription(
         "Id of another mapping in the same list which must be imported before this one. " +

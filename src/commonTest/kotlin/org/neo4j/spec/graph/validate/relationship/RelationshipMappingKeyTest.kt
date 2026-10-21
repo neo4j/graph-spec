@@ -53,7 +53,7 @@ class RelationshipMappingKeyTest {
                         table = "t",
                         fromNode = TargetMapping(),
                         toNode = TargetMapping(),
-                        key = key.toMutableSet()
+                        keyProperties = key.toMutableSet()
                     )
                 )
             )
@@ -78,7 +78,7 @@ class RelationshipMappingKeyTest {
 
         assertEquals(1, issues.size)
         assertEquals("invalid_relationship_mapping_key", issues.first().code)
-        assertEquals("extensions.mappings.m0[1].key", issues.first().path)
+        assertEquals("extensions.mappings.m0[1].key_properties", issues.first().path)
         assertEquals("age", issues.first().details["property"])
     }
 

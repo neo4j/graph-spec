@@ -32,7 +32,8 @@ external interface RelationshipMappingJs : MappingJs {
     val properties: Record<String, PropertyMappingJs>
     var mode: String
     var matchLabel: String?
-    var key: Array<String>
+    var keyColumns: Array<String>
+    var keyProperties: Array<String>
     var dependsOn: String
     var id: String
 }
@@ -45,7 +46,8 @@ fun relationshipMappingJs(
     properties: Record<String, PropertyMappingJs>,
     mode: String,
     matchLabel: String?,
-    key: Array<String>,
+    keyColumns: Array<String>,
+    keyProperties: Array<String>,
     dependsOn: String = "",
     id: String = ""
 ): RelationshipMappingJs = jso {
@@ -57,7 +59,8 @@ fun relationshipMappingJs(
     this.properties = properties
     this.mode = mode
     this.matchLabel = matchLabel
-    this.key = key
+    this.keyColumns = keyColumns
+    this.keyProperties = keyProperties
     this.dependsOn = dependsOn
     this.id = id
 }
@@ -70,7 +73,8 @@ fun RelationshipMapping.toJs() = relationshipMappingJs(
     properties = properties.map { it.key to it.value.toJs() }.toMap().toRecord(),
     mode = mode.name,
     matchLabel = matchLabel,
-    key = key.toTypedArray(),
+    keyColumns = keyColumns.toTypedArray(),
+    keyProperties = keyProperties.toTypedArray(),
     dependsOn = dependsOn,
     id = id
 )
@@ -83,7 +87,8 @@ fun RelationshipMappingJs.toClass() = RelationshipMapping(
     properties = properties.associateBy { _, value -> value.toClass() },
     mode = MappingMode.valueOf(mode),
     matchLabel = matchLabel,
-    key = key.toMutableSet(),
+    keyColumns = keyColumns.toMutableSet(),
+    keyProperties = keyProperties.toMutableSet(),
     dependsOn = dependsOn,
     id = id
 )

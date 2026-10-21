@@ -45,6 +45,7 @@ import org.neo4j.spec.graph.validate.relationship.RelationshipIndexOptions
 import org.neo4j.spec.graph.validate.relationship.RelationshipIndexProperties
 import org.neo4j.spec.graph.validate.relationship.RelationshipIndexes
 import org.neo4j.spec.graph.validate.relationship.RelationshipMappingKey
+import org.neo4j.spec.graph.validate.relationship.RelationshipMappingKeyExclusive
 import org.neo4j.spec.graph.validate.relationship.RelationshipNodes
 import org.neo4j.spec.graph.validate.relationship.RelationshipPropertyDuplicateName
 import org.neo4j.spec.graph.validate.relationship.RelationshipPropertyEmptyName
@@ -82,6 +83,7 @@ class Validations {
             NodePropertyPatternOneOf,
             RelationshipPropertyPatternOneOf,
             RelationshipMappingKey,
+            RelationshipMappingKeyExclusive,
             StringLength
         )
 
