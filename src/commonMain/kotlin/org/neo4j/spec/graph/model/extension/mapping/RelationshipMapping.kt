@@ -63,4 +63,32 @@ data class RelationshipMapping(
         "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
     )
     var id: String = ""
-) : Mapping
+) : Mapping {
+    /**
+     * Identifies by key properties instead of key columns, replacing [keyProperties] with the properties mapped to
+     * the current [keyColumns] and clearing [keyColumns]. Does nothing if there are no key columns.
+     *
+     * @throws IllegalArgumentException if a key column is not mapped to a property, leaving the mapping unchanged.
+     */
+    fun useKeyProperties() {
+        if (keyColumns.isEmpty()) return
+        val converted = columnsToProperties(keyColumns, properties)
+        keyProperties.clear()
+        keyProperties.addAll(converted)
+        keyColumns.clear()
+    }
+
+    /**
+     * Identifies by key columns instead of key properties, replacing [keyColumns] with the columns of the current
+     * [keyProperties] and clearing [keyProperties]. Does nothing if there are no key properties.
+     *
+     * @throws IllegalArgumentException if a key property is not mapped to a column, leaving the mapping unchanged.
+     */
+    fun useKeyColumns() {
+        if (keyProperties.isEmpty()) return
+        val converted = propertiesToColumns(keyProperties, properties)
+        keyColumns.clear()
+        keyColumns.addAll(converted)
+        keyProperties.clear()
+    }
+}
