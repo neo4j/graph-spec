@@ -23,7 +23,6 @@ import org.neo4j.spec.graph.codec.schema.schemaMapOf
 import org.neo4j.spec.graph.model.Version
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFails
 import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
