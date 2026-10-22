@@ -110,12 +110,6 @@ implementation("org.neo4j.spec.graph:ontology-graph-spec:x.y.z")
 npm install -D @neo4j/ontology-graph-spec
 ```
 
-```typescript
-import { GraphSpec } from "@neo4j/ontology-graph-spec";
-
-const model: GraphModel = GraphSpec.Json.decodeFromString(value);
-```
-
 ### Go
 
 ```bash
@@ -124,6 +118,93 @@ go get github.com/neo4j/ontology-graph-spec/go@vX.Y.Z
 
 The Go library bundles the Kotlin/Native library, which is embedded and loaded automatically. The runtime needs
 `glibc` and `libstdc++`. See the [Go README](go/README.md) for details, including running without embedding.
+
+## Usage
+
+Every library can **decode** a document into a `GraphModel` and **validate** it. The JVM and JS/TS libraries can also
+**encode** a model back to a document, using `GraphSpec.Json` or `GraphSpec.Yaml`. Go works with JSON.
+
+### Kotlin
+
+```kotlin
+import org.neo4j.spec.graph.GraphSpec
+import org.neo4j.spec.graph.model.GraphModel
+import org.neo4j.spec.graph.validate.Validations
+
+// Decode (use GraphSpec.Yaml for YAML)
+val model: GraphModel = GraphSpec.Json.decodeFromString(json)
+
+// Validate
+val issues = model.validate(Validations.all)
+issues.forEach { println("${it.code}: ${it.message} (${it.path})") }
+
+// Encode
+val encoded: String = GraphSpec.Yaml.encodeToString(model)
+```
+
+### Java
+
+```java
+import org.neo4j.spec.graph.GraphSpec;
+import org.neo4j.spec.graph.model.GraphModel;
+import org.neo4j.spec.graph.model.Type;
+import org.neo4j.spec.graph.model.Version;
+import org.neo4j.spec.graph.validate.Issue;
+import org.neo4j.spec.graph.validate.Validations;
+
+// Decode (use GraphSpec.Yaml.INSTANCE for YAML)
+GraphModel model = GraphSpec.Json.INSTANCE.decodeFromString(json, Type.GRAPH_SPEC);
+
+// Validate
+for (Issue issue : model.validate(Validations.Companion.getAll())) {
+    System.out.println(issue.getCode() + ": " + issue.getMessage());
+}
+
+// Encode
+String encoded = GraphSpec.Yaml.INSTANCE.encodeToString(model, Type.GRAPH_SPEC, Version.LATEST);
+```
+
+### JavaScript / TypeScript
+
+```typescript
+import { GraphSpec, GraphModel, Validations } from "@neo4j/ontology-graph-spec";
+
+// Decode (use GraphSpec.Yaml for YAML)
+const model: GraphModel = GraphSpec.Json.decodeFromString(json);
+
+// Validate
+const issues = GraphModel.validate(model, Validations.all);
+issues.forEach((issue) => console.log(`${issue.code}: ${issue.message}`));
+
+// Encode
+const encoded: string = GraphSpec.Yaml.encodeToString(model);
+```
+
+### Go
+
+```go
+import (
+	"encoding/json"
+
+	"github.com/neo4j/ontology-graph-spec/go/model"
+	"github.com/neo4j/ontology-graph-spec/go/validation"
+)
+
+// Decode
+var graph model.GraphModel
+if err := json.Unmarshal(raw, &graph); err != nil {
+	return err
+}
+
+// Validate
+issues, err := validation.Validate(graph)
+if err != nil {
+	return err
+}
+for _, issue := range issues {
+	fmt.Printf("%s: %s (%s)\n", issue.Code, issue.Message, issue.Path)
+}
+```
 
 ## Documentation
 
