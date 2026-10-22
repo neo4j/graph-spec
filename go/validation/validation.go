@@ -3,6 +3,7 @@ package validation
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/neo4j/ontology-graph-spec/go/internal/bridge"
 	"github.com/neo4j/ontology-graph-spec/go/model"
@@ -27,12 +28,23 @@ const (
 	SetAll              Set = "all"
 )
 
-func Validate(model model.GraphModel, validationSet Set) ([]Issue, error) {
+// Validate checks the model against the union of the given sets.
+// If no set is provided the default [SetCore] is used.
+func Validate(model model.GraphModel, sets ...Set) ([]Issue, error) {
+	validationSets := string(SetCore)
+	if len(sets) != 0 {
+		labels := make([]string, len(sets))
+		for i, set := range sets {
+			labels[i] = string(set)
+		}
+		validationSets = strings.Join(labels, ",")
+	}
+
 	bytes, err := json.Marshal(model)
 	if err != nil {
 		return nil, err
 	}
-	res, err := bridge.Call(bridge.Validate, bytes, string(validationSet))
+	res, err := bridge.Call(bridge.Validate, bytes, validationSets)
 	if err != nil {
 		return nil, err
 	}

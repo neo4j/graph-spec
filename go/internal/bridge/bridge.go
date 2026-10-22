@@ -34,7 +34,7 @@ const (
 
 type bridge struct {
 	migrate  func(inputJSON unsafe.Pointer, inputType, targetType, targetVersion string, outputBuffer unsafe.Pointer, bufferSize int32) int32
-	validate func(inputJSON unsafe.Pointer, validationType string, outputBuffer unsafe.Pointer, bufferSize int32) int32
+	validate func(inputJSON unsafe.Pointer, validationSets string, outputBuffer unsafe.Pointer, bufferSize int32) int32
 }
 
 var loadBridge = sync.OnceValues(bindBridge)

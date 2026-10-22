@@ -18,7 +18,9 @@ package org.neo4j.spec.graph.bridge
 
 import kotlin.test.Test
 import kotlin.test.assertContains
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class ValidationTest {
@@ -55,7 +57,31 @@ class ValidationTest {
     }
 
     @Test
-    fun testValidateSets() {
+    fun testValidateMultipleSets() {
+        val result = validateContent(input, "labelled,well_constrained")
+        listOf("missing_node_identifier_label", "missing_node_properties").forEach { code ->
+            assertTrue(result.contains("\"code\":\"$code\""), "Expected issue $code in $result")
+        }
+        listOf("invalid_node_exist_constraint_property_count", "missing_node_constraint_properties").forEach { code ->
+            assertFalse(result.contains("\"code\":\"$code\""), "Unexpected issue $code in $result")
+        }
+    }
+
+    @Test
+    fun testValidateOverlappingSetsReportsIssuesOnce() {
+        assertEquals(validateContent(input, "all,core,labelled,all"), validateContent(input, "all"))
+    }
+
+    @Test
+    fun testValidateUnknownSetAmongMany() {
+        val error = assertFailsWith<IllegalArgumentException> {
+            validateContent(input, "core,unknown")
+        }
+        assertContains(error.message!!, "unknown validation type: unknown")
+    }
+
+    @Test
+    fun testValidateEverySet() {
         val validationSets = listOf(
             "core", "labelled", "consistent_schema", "mappable", "bulk_importable", "well_constrained", "all"
         )
