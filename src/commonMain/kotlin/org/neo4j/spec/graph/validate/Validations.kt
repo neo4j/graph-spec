@@ -85,22 +85,22 @@ class Validations {
             StringLength
         )
 
-        // Every node has an identifier label and every relationship a type, and property names are set and unique
-        // within their node or relationship.
+        // Every node has an identifier label and every relationship a type.
         @JsStatic
-        val named: Set<Validation> = setOf(
+        val labelled: Set<Validation> = setOf(
             NodeLabel,
-            RelationshipType,
+            RelationshipType
+        )
+
+        // Property names are set and unique within their node or relationship, indexes and constraints have
+        // properties, composite constraints don't repeat a property set or overlap an existence constraint, and index
+        // and constraint names are unique.
+        @JsStatic
+        val consistentSchema: Set<Validation> = setOf(
             NodePropertyEmptyName,
             NodePropertyDuplicateName,
             RelationshipPropertyEmptyName,
-            RelationshipPropertyDuplicateName
-        )
-
-        // Indexes and constraints have properties, composite constraints don't repeat a property set or overlap an
-        // existence constraint, and index and constraint names are unique.
-        @JsStatic
-        val consistentSchema: Set<Validation> = setOf(
+            RelationshipPropertyDuplicateName,
             NodeIndexProperties,
             RelationshipIndexProperties,
             NodeConstraintProperties,
@@ -143,6 +143,6 @@ class Validations {
         // Every built-in validator.
         @JsStatic
         val all: Set<Validation> =
-            valid + named + consistentSchema + mappable + bulkImportable + wellConstrained
+            valid + labelled + consistentSchema + mappable + bulkImportable + wellConstrained
     }
 }
