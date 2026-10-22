@@ -15,12 +15,24 @@ type Issue struct {
 	Details map[string]string `json:"details"`
 }
 
-func Validate(model model.GraphModel) ([]Issue, error) {
+type Set string
+
+const (
+	SetCore             Set = "core"
+	SetLabelled         Set = "labelled"
+	SetConsistentSchema Set = "consistent_schema"
+	SetMappable         Set = "mappable"
+	SetBulkImportable   Set = "bulk_importable"
+	SetWellConstrained  Set = "well_constrained"
+	SetAll              Set = "all"
+)
+
+func Validate(model model.GraphModel, validationSet Set) ([]Issue, error) {
 	bytes, err := json.Marshal(model)
 	if err != nil {
 		return nil, err
 	}
-	res, err := bridge.Call(bridge.Validate, bytes)
+	res, err := bridge.Call(bridge.Validate, bytes, string(validationSet))
 	if err != nil {
 		return nil, err
 	}

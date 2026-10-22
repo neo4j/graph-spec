@@ -21,6 +21,7 @@ import kotlinx.cinterop.CPointer
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.serialization.json.Json
 import org.neo4j.spec.graph.GraphSpec
+import org.neo4j.spec.graph.validate.Validation
 import org.neo4j.spec.graph.validate.ValidationTree
 import org.neo4j.spec.graph.validate.Validations
 import kotlin.experimental.ExperimentalNativeApi
@@ -31,17 +32,37 @@ private val jsonFormat = Json {
     prettyPrint = false
 }
 
+private val validationLabelsToSet: Map<String, Set<Validation>> = mapOf(
+    "core" to Validations.core,
+    "labelled" to Validations.labelled,
+    "consistent_schema" to Validations.consistentSchema,
+    "mappable" to Validations.mappable,
+    "bulk_importable" to Validations.bulkImportable,
+    "well_constrained" to Validations.wellConstrained,
+    "all" to Validations.all,
+)
+
 @OptIn(ExperimentalForeignApi::class, ExperimentalNativeApi::class)
 @CName("validate")
-fun validate(inputJson: CPointer<ByteVar>?, outputBuffer: CPointer<ByteVar>?, bufferSize: Int) =
-    invokeBridge(inputJson, outputBuffer = outputBuffer, bufferSize = bufferSize) { input ->
-        validateContent(content = input[0])
-    }
+fun validate(
+    inputJson: CPointer<ByteVar>?,
+    validationType: CPointer<ByteVar>?,
+    outputBuffer: CPointer<ByteVar>?,
+    bufferSize: Int,
+) = invokeBridge(
+    inputJson,
+    validationType,
+    outputBuffer = outputBuffer,
+    bufferSize = bufferSize
+) { input -> validateContent(content = input[0], type = input[1]) }
 
-internal fun validateContent(content: String): String {
+internal fun validateContent(content: String, type: String): String {
+    val validationSet = validationLabelsToSet.getOrElse(type) {
+        throw IllegalArgumentException("unknown validation type: $type")
+    }
+    val validation = ValidationTree().also { it.build(validationSet) }
+
     val graphModel = GraphSpec.Json.decodeFromString(content)
-    val validation = ValidationTree()
-    validation.build(Validations.all)
     val issues = validation.validate(graphModel)
     return jsonFormat.encodeToString(issues)
 }

@@ -22,7 +22,7 @@ func TestValidate(t *testing.T) {
 	err = json.Unmarshal(raw, &graph)
 	require.NoError(t, err)
 
-	res, err := validation.Validate(graph)
+	res, err := validation.Validate(graph, validation.SetAll)
 	require.NoError(t, err)
 
 	t.Log(fmt.Sprintf("Validated graph: %v", res))
@@ -39,4 +39,30 @@ func TestValidate(t *testing.T) {
 		"missing_node_constraint_properties",
 		"missing_node_constraint_properties",
 	}, codes)
+}
+
+func TestValidate_Sets(t *testing.T) {
+	raw, err := testdata.ReadFile("testdata/invalid-graph-model.json")
+	require.NoError(t, err)
+
+	var graph model.GraphModel
+	err = json.Unmarshal(raw, &graph)
+	require.NoError(t, err)
+
+	validations := []validation.Set{
+		validation.SetCore,
+		validation.SetLabelled,
+		validation.SetConsistentSchema,
+		validation.SetMappable,
+		validation.SetBulkImportable,
+		validation.SetWellConstrained,
+		validation.SetAll,
+	}
+
+	for _, v := range validations {
+		t.Run(fmt.Sprintf("validation runs for set %s", v), func(t *testing.T) {
+			_, err := validation.Validate(graph, v)
+			require.NoError(t, err)
+		})
+	}
 }
