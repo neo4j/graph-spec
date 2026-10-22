@@ -16,34 +16,34 @@
  */
 package org.neo4j.spec.graph.model.extension.source
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.CustomExtensions
 import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import org.neo4j.spec.graph.model.property.Neo4jType
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("TableColumn")
-@SerialDescription("A column of a data source table.")
+@Description("A column of a data source table.")
 data class TableColumn(
-    @SerialDescription("Name of the column in the source. Unique within the table.")
+    @Description("Name of the column in the source. Unique within the table.")
     val name: String = "",
-    @SerialDescription("Data type of the column in the source.")
+    @Description("Data type of the column in the source.")
     var type: String = "",
-    @SerialDescription("Size of the column.")
+    @Description("Size of the column.")
     var size: Int = -1,
-    @SerialDescription("Neo4j type suggested for values of this column.")
+    @Description("Neo4j type suggested for values of this column.")
     val suggested: Neo4jType = Neo4jType.ANY,
-    @SerialDescription("Neo4j types values of this column can be converted to when using the import tool.")
+    @Description("Neo4j types values of this column can be converted to when using the import tool.")
     val supported: Set<Neo4jType> = emptySet(),
-    @SerialDescription("Whether the column can hold null values.")
+    @Description("Whether the column can hold null values.")
     val nullable: Boolean = true,
-    @SerialDescription("Dimension of the column when it holds vectors.")
+    @Description("Dimension of the column when it holds vectors.")
     val dimension: Int? = null,
-    @SerialDescription("User-defined arbitrary data.")
+    @Description("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions

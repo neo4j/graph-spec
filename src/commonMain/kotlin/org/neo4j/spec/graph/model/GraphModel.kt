@@ -16,13 +16,13 @@
  */
 package org.neo4j.spec.graph.model
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.GraphModelExtensions
 import org.neo4j.spec.graph.model.node.Node
 import org.neo4j.spec.graph.model.relationship.Relationship
+import org.neo4j.spec.graph.schema.Description
 import org.neo4j.spec.graph.validate.Issue
 import org.neo4j.spec.graph.validate.Validation
 import org.neo4j.spec.graph.validate.ValidationTree
@@ -33,26 +33,26 @@ import kotlin.js.JsStatic
 @Serializable
 @SerialName("GraphModel")
 data class GraphModel(
-    @SerialDescription("Schema specification uri used.")
+    @Description("Schema specification uri used.")
     @Required
     val schema: String = Version.schemaUrl(Version.LATEST),
-    @SerialDescription(
+    @Description(
         "User-defined version of this model document, e.g. a revision number or label."
     )
     val version: String,
-    @SerialDescription(
+    @Description(
         "Unique identifier of the model, typically a kebab-case version of the name, used for referencing."
     )
     val id: String,
-    @SerialDescription("Human readable name for the model.")
+    @Description("Human readable name for the model.")
     val name: String = "",
-    @SerialDescription("Description of the model.")
+    @Description("Description of the model.")
     val description: String = "",
-    @SerialDescription("Node definitions keyed by node id.")
+    @Description("Node definitions keyed by node id.")
     val nodes: MutableMap<String, Node> = mutableMapOf(),
-    @SerialDescription("Relationship definitions keyed by relationship id.")
+    @Description("Relationship definitions keyed by relationship id.")
     val relationships: MutableMap<String, Relationship> = mutableMapOf(),
-    @SerialDescription("Extensions to the model: data source tables, mappings and external custom data.")
+    @Description("Extensions to the model: data source tables, mappings and external custom data.")
     val extensions: GraphModelExtensions = GraphModelExtensions()
 ) {
     /**

@@ -19,6 +19,12 @@ repositories { mavenCentral() }
 kotlin {
     jvm {
         compilerOptions { jvmTarget.set(JvmTarget.JVM_11) }
+        val mainCompilation = compilations.getByName("main")
+        // Build-only tooling used to generate JSON schema. Should not be part of the runtime dependencies
+        compilations.create("schemaTool") {
+            associateWith(mainCompilation)
+            defaultSourceSet.dependencies { implementation(libs.kotlinx.schema.generator.json) }
+        }
         testRuns.named("test") { executionTask.configure { useJUnitPlatform() } }
     }
     js(IR) {
@@ -75,10 +81,8 @@ kotlin {
         }
 
         commonMain.dependencies {
-            implementation(libs.kotlinx.schema.generator.json)
             implementation(libs.kotlinx.serializer.json)
             implementation(libs.kotlinx.yamlkt)
-            implementation(libs.kaseChange)
         }
         jsMain.dependencies {
             implementation(devNpm("typescript", "5.9.3"))
@@ -137,9 +141,9 @@ tasks.named("jsNodeProductionLibraryDistribution") {
 
 tasks.register<JavaExec>("generateGraphModelJsonSchema") {
     description = "Writes JSON Schema for GraphModel Go type generation"
-    val compilation = kotlin.jvm().compilations.getByName("main")
+    val compilation = kotlin.jvm().compilations.getByName("schemaTool")
     dependsOn(compilation.compileTaskProvider)
-    classpath = compilation.output.classesDirs + compilation.compileDependencyFiles
+    classpath = compilation.output.classesDirs + compilation.runtimeDependencyFiles
     mainClass.set("org.neo4j.spec.graph.schema.GenerateGraphModelJsonSchemaKt")
     workingDir = layout.projectDirectory.asFile
     doFirst {

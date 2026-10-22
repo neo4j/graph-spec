@@ -16,35 +16,34 @@
  */
 package org.neo4j.spec.graph.model.relationship
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.property.Property
-import org.neo4j.spec.graph.model.relationship.RelationshipConstraint
 import org.neo4j.spec.graph.model.relationship.extension.RelationshipExtensions
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("Relationship")
-@SerialDescription("A relationship of the graph.")
+@Description("A relationship of the graph.")
 data class Relationship(
-    @SerialDescription("Type of the relationship.")
+    @Description("Type of the relationship.")
     var type: String,
-    @SerialDescription("The node the relationship starts at.")
+    @Description("The node the relationship starts at.")
     val from: RelationshipTarget,
-    @SerialDescription("The node the relationship ends at.")
+    @Description("The node the relationship ends at.")
     val to: RelationshipTarget,
-    @SerialDescription("Properties of the relationship keyed by id.")
+    @Description("Properties of the relationship keyed by id.")
     val properties: MutableMap<String, Property> = mutableMapOf(),
-    @SerialDescription("Constraints on the relationship keyed by id.")
+    @Description("Constraints on the relationship keyed by id.")
     val constraints: MutableMap<String, RelationshipConstraint> = mutableMapOf(),
-    @SerialDescription("Extensions for the relationship.")
+    @Description("Extensions for the relationship.")
     val extensions: RelationshipExtensions = RelationshipExtensions(),
-    @SerialDescription("Description of the relationship.")
+    @Description("Description of the relationship.")
     val description: String = "",
-    @SerialDescription("Alternative names for the relationship.")
+    @Description("Alternative names for the relationship.")
     val aliases: MutableSet<String> = mutableSetOf(),
-    @SerialDescription("Reference or URI of an external resource describing the relationship.")
+    @Description("Reference or URI of an external resource describing the relationship.")
     val reference: String = ""
 )

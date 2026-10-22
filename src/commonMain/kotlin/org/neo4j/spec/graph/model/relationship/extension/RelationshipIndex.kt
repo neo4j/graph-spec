@@ -16,7 +16,6 @@
  */
 package org.neo4j.spec.graph.model.relationship.extension
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.CustomExtensions
@@ -24,23 +23,24 @@ import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import org.neo4j.spec.graph.model.index.IndexOption
 import org.neo4j.spec.graph.model.type.IndexType
 import org.neo4j.spec.graph.model.type.Named
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("RelationshipIndex")
-@SerialDescription("An index on a relationship.")
+@Description("An index on a relationship.")
 data class RelationshipIndex(
-    @SerialDescription("Type of the index.")
+    @Description("Type of the index.")
     var type: IndexType,
-    @SerialDescription("Ids of the properties the index covers.")
+    @Description("Ids of the properties the index covers.")
     val properties: MutableSet<String>,
-    @SerialDescription("Configuration specific to the type of index.")
+    @Description("Configuration specific to the type of index.")
     val options: IndexOption? = null,
-    @SerialDescription("User-defined arbitrary data.")
+    @Description("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf(),
-    @SerialDescription("Name of the index in the database.")
+    @Description("Name of the index in the database.")
     override var name: String? = null
 ) : CustomExtensions,
     Named

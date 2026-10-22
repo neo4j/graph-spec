@@ -16,19 +16,19 @@
  */
 package org.neo4j.spec.graph.model.node.extension
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.CustomExtensions
 import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("LabelsExtensions")
-@SerialDescription("Extensions for the labels of a node.")
+@Description("Extensions for the labels of a node.")
 data class LabelsExtensions(
-    @SerialDescription("User-defined arbitrary data.")
+    @Description("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions

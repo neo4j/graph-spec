@@ -16,36 +16,36 @@
  */
 package org.neo4j.spec.graph.model.extension.mapping
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName(MappingType.NODE)
-@SerialDescription("Maps rows of a table to nodes.")
+@Description("Maps rows of a table to nodes.")
 data class NodeMapping(
-    @SerialDescription("Id of the node being mapped.")
+    @Description("Id of the node being mapped.")
     var node: String,
-    @SerialDescription("Id of the source table.")
+    @Description("Id of the source table.")
     var table: String,
-    @SerialDescription("Mappings from property ids to source columns.")
+    @Description("Mappings from property ids to source columns.")
     val properties: MutableMap<String, PropertyMapping>,
-    @SerialDescription("Whether nodes are merged with existing nodes or always created.")
+    @Description("Whether nodes are merged with existing nodes or always created.")
     var mode: MappingMode = MappingMode.MERGE,
     @SerialName("match_label")
-    @SerialDescription("Label used to match existing nodes.")
+    @Description("Label used to match existing nodes.")
     var matchLabel: String? = null,
-    @SerialDescription("Ids of the properties which identify a node.")
+    @Description("Ids of the properties which identify a node.")
     val key: MutableSet<String> = mutableSetOf(),
     @SerialName("depends_on")
-    @SerialDescription(
+    @Description(
         "Id of another mapping in the same list which must be imported before this one. " +
             "Empty when there is no dependency."
     )
     var dependsOn: String = "",
-    @SerialDescription(
+    @Description(
         "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
     )
     var id: String = ""

@@ -16,13 +16,13 @@
  */
 package org.neo4j.spec.graph.model.type
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @SerialName("ConstraintType")
-@SerialDescription("The type of a constraint.")
+@Description("The type of a constraint.")
 enum class ConstraintType {
     EXISTS,
     KEY,

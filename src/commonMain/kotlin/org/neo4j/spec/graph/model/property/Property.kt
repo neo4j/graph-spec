@@ -16,44 +16,44 @@
  */
 package org.neo4j.spec.graph.model.property
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.property.extension.PropertyExtensions
 import org.neo4j.spec.graph.model.type.Named
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("Property")
-@SerialDescription("A property of a node or relationship.")
+@Description("A property of a node or relationship.")
 data class Property(
-    @SerialDescription("Neo4j type of the property.")
+    @Description("Neo4j type of the property.")
     var type: Neo4jType = Neo4jType.ANY,
-    @SerialDescription("Dimension of the property when it holds a vector.")
+    @Description("Dimension of the property when it holds a vector.")
     var dimension: Int? = null,
     @SerialName("must_exist")
-    @SerialDescription(
+    @Description(
         "Shorthand for an existence constraint. Expanded into constraints when the model is decoded."
     )
     var mustExist: Boolean? = null,
-    @SerialDescription(
+    @Description(
         "Shorthand for a uniqueness constraint. Expanded into constraints when the model is decoded."
     )
     var unique: Boolean? = null,
-    @SerialDescription("Shorthand for a key constraint. Expanded into constraints when the model is decoded.")
+    @Description("Shorthand for a key constraint. Expanded into constraints when the model is decoded.")
     var key: Boolean? = null,
-    @SerialDescription("Extensions for the property.")
+    @Description("Extensions for the property.")
     val extensions: PropertyExtensions = PropertyExtensions(),
-    @SerialDescription("Name of the property in the database, when different from its id.")
+    @Description("Name of the property in the database, when different from its id.")
     override var name: String? = null,
-    @SerialDescription("Description of the property.")
+    @Description("Description of the property.")
     val description: String = "",
-    @SerialDescription("Reference or URI of an external resource describing the property.")
+    @Description("Reference or URI of an external resource describing the property.")
     val reference: String = "",
-    @SerialDescription("Pattern values of the property are expected to match.")
+    @Description("Pattern values of the property are expected to match.")
     val pattern: String = "",
     @SerialName("one_of")
-    @SerialDescription("Values the property is restricted to.")
+    @Description("Values the property is restricted to.")
     val oneOf: MutableList<String> = mutableListOf()
 ) : Named

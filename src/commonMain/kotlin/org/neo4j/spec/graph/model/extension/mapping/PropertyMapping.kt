@@ -16,16 +16,16 @@
  */
 package org.neo4j.spec.graph.model.extension.mapping
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("PropertyMapping")
-@SerialDescription("Maps a property to a source column.")
+@Description("Maps a property to a source column.")
 data class PropertyMapping(
-    @SerialDescription("Name of the source column.")
+    @Description("Name of the source column.")
     var column: String
 )

@@ -16,13 +16,13 @@
  */
 package org.neo4j.spec.graph.model.extension
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.GraphModel
 import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import org.neo4j.spec.graph.model.extension.mapping.Mapping
 import org.neo4j.spec.graph.model.extension.source.Table
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 /**
@@ -31,15 +31,15 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("GraphModelExtensions")
-@SerialDescription("Extensions for a graph model.")
+@Description("Extensions for a graph model.")
 data class GraphModelExtensions(
-    @SerialDescription("Data source table schemas keyed by table id.")
+    @Description("Data source table schemas keyed by table id.")
     @SerialName("data_source_tables")
     val dataSourceTables: MutableMap<String, Table> = mutableMapOf(),
-    @SerialDescription("Sets of data source mappings from tables to nodes and relationships, often used for importing.")
+    @Description("Sets of data source mappings from tables to nodes and relationships, often used for importing.")
     @SerialName("data_source_mappings")
     val dataSourceMappings: MutableMap<String, MutableList<Mapping>> = mutableMapOf(),
-    @SerialDescription("User-defined arbitrary data.")
+    @Description("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions

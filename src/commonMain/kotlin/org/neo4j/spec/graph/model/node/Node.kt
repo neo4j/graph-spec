@@ -16,32 +16,32 @@
  */
 package org.neo4j.spec.graph.model.node
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.node.extension.NodeExtensions
 import org.neo4j.spec.graph.model.property.Property
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("Node")
-@SerialDescription("A node of the graph.")
+@Description("A node of the graph.")
 data class Node(
-    @SerialDescription("Shorthand for the identifying label. Expanded into labels when the model is decoded.")
+    @Description("Shorthand for the identifying label. Expanded into labels when the model is decoded.")
     var label: String? = null,
-    @SerialDescription("Labels of the node.")
+    @Description("Labels of the node.")
     val labels: Labels = Labels(),
-    @SerialDescription("Properties of the node keyed by id.")
+    @Description("Properties of the node keyed by id.")
     val properties: MutableMap<String, Property> = mutableMapOf(),
-    @SerialDescription("Constraints on the node keyed by id.")
+    @Description("Constraints on the node keyed by id.")
     val constraints: MutableMap<String, NodeConstraint> = mutableMapOf(),
-    @SerialDescription("Extensions for the node.")
+    @Description("Extensions for the node.")
     val extensions: NodeExtensions = NodeExtensions(),
-    @SerialDescription("Description of the node.")
+    @Description("Description of the node.")
     val description: String = "",
-    @SerialDescription("Alternative names for the node.")
+    @Description("Alternative names for the node.")
     val aliases: MutableSet<String> = mutableSetOf(),
-    @SerialDescription("Reference or URI of an external resource describing the node.")
+    @Description("Reference or URI of an external resource describing the node.")
     val reference: String = ""
 )

@@ -16,23 +16,23 @@
  */
 package org.neo4j.spec.graph.model.extension.source
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.CustomExtensions
 import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("ForeignKeyReference")
-@SerialDescription("The target of a foreign key.")
+@Description("The target of a foreign key.")
 data class ForeignKeyReference(
-    @SerialDescription("Id of the referenced table.")
+    @Description("Id of the referenced table.")
     var table: String,
-    @SerialDescription("Names of the referenced columns.")
+    @Description("Names of the referenced columns.")
     val columns: MutableList<String> = mutableListOf(),
-    @SerialDescription("User-defined arbitrary data.")
+    @Description("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions
