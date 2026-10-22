@@ -63,9 +63,10 @@ import kotlin.js.JsStatic
 @JsExport
 class Validations {
     companion object {
-        // Graph-spec validators added independent of any UPX call site.
+        // The rules a model must follow beyond its JSON Schema to be valid: references resolve, constraint and
+        // index details are consistent, relationship counts make sense and text is within length limits.
         @JsStatic
-        val core: List<Validation> = listOf(
+        val valid: Set<Validation> = setOf(
             NodeTypeConstraint,
             RelationshipTypeConstraint,
             NodeConstraints,
@@ -84,63 +85,64 @@ class Validations {
             StringLength
         )
 
-        // UPX kg-builder `validateStructuredSchema` (schemas-validators/) - gates accepting
-        // an AI-generated schema before it's applied to the model.
+        // Every node has an identifier label and every relationship a type, and property names are set and unique
+        // within their node or relationship.
         @JsStatic
-        val kgbuilderComplete: List<Validation> = listOf(
+        val named: Set<Validation> = setOf(
             NodeLabel,
-            NodeProperties,
-            NodeConstraintCoverage,
-            NodeKeyOverlap,
-            NodeExistenceConstraint,
             RelationshipType,
-            RelationshipKeyOverlap,
-            RelationshipExistenceConstraint,
-            RelationshipNodes
+            NodePropertyEmptyName,
+            NodePropertyDuplicateName,
+            RelationshipPropertyEmptyName,
+            RelationshipPropertyDuplicateName
         )
 
-        // UPX `getDataModelErrors` (errors.ts) - shared call site, gates "Run Import"
-        // in both kg-builder's data-model-slice.ts and import's data-model.ts.
+        // Indexes and constraints have properties, composite constraints don't repeat a property set or overlap an
+        // existence constraint, and index and constraint names are unique.
         @JsStatic
-        val importComplete: List<Validation> = listOf(
-            NodeLabel,
-            RelationshipType,
-            NodeMappingKey,
+        val consistentSchema: Set<Validation> = setOf(
             NodeIndexProperties,
             RelationshipIndexProperties,
             NodeConstraintProperties,
             NodeConstraintDuplicatePropertySet,
             NodeExistenceCompositeConflict,
-            NodeIndexConstraintNameConflict,
+            NodeIndexConstraintNameConflict
+        )
+
+        // Node mappings have a key, mapping ids are unique and dependencies resolve without cycles, and data source
+        // table columns have a unique name and, outside local tables, a type.
+        @JsStatic
+        val mappable: Set<Validation> = setOf(
+            NodeMappingKey,
+            MappingDependencies,
             TableColumnEmptyName,
             TableColumnDuplicateName,
-            TableColumnType,
-            NodePropertyEmptyName,
-            NodePropertyDuplicateName,
-            RelationshipPropertyEmptyName,
-            RelationshipPropertyDuplicateName,
-            MappingDependencies
+            TableColumnType
         )
 
-        // UPX `migrateDataModelToLatestVersion` (migrations.ts) - throws and aborts loading a
-        // model, called by both import and ontologies whenever a saved model is loaded/uploaded.
+        // Neo4j bulk import restrictions: labels and types don't contain invalid characters and node mapping keys and
+        // composite constraint properties must be valid types.
         @JsStatic
-        val draft: List<Validation> = listOf(
-            NodeLabel,
-            RelationshipType
-        )
-
-        // UPX `apps/import/.../data-model.utils.ts` - import-app-only bulk pass.
-        @JsStatic
-        val bulkImportComplete: List<Validation> = listOf(
+        val bulkImportable: Set<Validation> = setOf(
             NodeLabelToken,
             RelationshipTypeToken,
             NodeMappingKeyType,
             NodeCompositeConstraintPropertyType
         )
 
+        // Opinionated checks the format doesn't require: every node has properties and a constraint, and no UNIQUE
+        // or EXISTS constraint repeats the properties of a KEY constraint.
         @JsStatic
-        val all: List<Validation> =
-            (core + kgbuilderComplete + importComplete + draft + bulkImportComplete).distinct()
+        val wellConstrained: Set<Validation> = setOf(
+            NodeProperties,
+            NodeConstraintCoverage,
+            NodeKeyOverlap,
+            RelationshipKeyOverlap
+        )
+
+        // Every built-in validator.
+        @JsStatic
+        val all: Set<Validation> =
+            valid + named + consistentSchema + mappable + bulkImportable + wellConstrained
     }
 }
