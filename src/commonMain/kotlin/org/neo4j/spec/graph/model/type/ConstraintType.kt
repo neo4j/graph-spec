@@ -16,8 +16,8 @@
  */
 package org.neo4j.spec.graph.model.type
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
+import org.neo4j.spec.graph.schema.SerialDescription
 import kotlin.js.JsExport
 
 @JsExport

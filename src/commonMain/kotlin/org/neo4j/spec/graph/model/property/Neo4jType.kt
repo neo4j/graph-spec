@@ -16,9 +16,9 @@
  */
 package org.neo4j.spec.graph.model.property
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.neo4j.spec.graph.schema.SerialDescription
 import kotlin.js.JsExport
 
 @JsExport

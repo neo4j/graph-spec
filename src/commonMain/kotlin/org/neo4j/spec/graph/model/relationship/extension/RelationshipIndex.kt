@@ -16,7 +16,6 @@
  */
 package org.neo4j.spec.graph.model.relationship.extension
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.CustomExtensions
@@ -24,6 +23,7 @@ import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
 import org.neo4j.spec.graph.model.index.IndexOption
 import org.neo4j.spec.graph.model.type.IndexType
 import org.neo4j.spec.graph.model.type.Named
+import org.neo4j.spec.graph.schema.SerialDescription
 import kotlin.js.JsExport
 
 @JsExport

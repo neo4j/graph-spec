@@ -16,12 +16,12 @@
  */
 package org.neo4j.spec.graph.model.relationship
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.property.Property
 import org.neo4j.spec.graph.model.relationship.RelationshipConstraint
 import org.neo4j.spec.graph.model.relationship.extension.RelationshipExtensions
+import org.neo4j.spec.graph.schema.SerialDescription
 import kotlin.js.JsExport
 
 @JsExport

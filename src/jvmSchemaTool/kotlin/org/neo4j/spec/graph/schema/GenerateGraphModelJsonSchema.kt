@@ -19,6 +19,7 @@ package org.neo4j.spec.graph.schema
 import java.io.File
 import kotlinx.schema.generator.json.JsonSchemaConfig
 import kotlinx.schema.generator.json.serialization.SerializationClassJsonSchemaGenerator
+import kotlinx.schema.generator.json.serialization.SerializationClassSchemaIntrospector
 import kotlinx.schema.json.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
@@ -39,7 +40,14 @@ fun main(args: Array<String>) {
         File(args.firstOrNull()?.takeIf { it.isNotEmpty() } ?: "ontology-graph-spec.schema.json").absoluteFile
     out.parentFile?.mkdirs()
     val json = Json { prettyPrint = true }
-    val generator = SerializationClassJsonSchemaGenerator(jsonSchemaConfig = JsonSchemaConfig.Default)
+    val generator =
+        SerializationClassJsonSchemaGenerator(
+            introspectorConfig =
+                SerializationClassSchemaIntrospector.Config(
+                    descriptionExtractor = { annotations -> annotations.filterIsInstance<SerialDescription>().firstOrNull()?.value }
+                ),
+            jsonSchemaConfig = JsonSchemaConfig.Default
+        )
     val schema = json.parseToJsonElement(generator.generateSchema(GraphModel.serializer().descriptor).encodeToString(json)).jsonObject
     out.writeText(json.encodeToString(JsonElement.serializer(), withId(schema, Version.schemaUrl(Version.LATEST))))
 }

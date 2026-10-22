@@ -16,13 +16,13 @@
  */
 package org.neo4j.spec.graph.model
 
-import kotlinx.schema.generator.json.SerialDescription
 import kotlinx.serialization.Required
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.GraphModelExtensions
 import org.neo4j.spec.graph.model.node.Node
 import org.neo4j.spec.graph.model.relationship.Relationship
+import org.neo4j.spec.graph.schema.SerialDescription
 import org.neo4j.spec.graph.validate.Issue
 import org.neo4j.spec.graph.validate.Validation
 import org.neo4j.spec.graph.validate.ValidationTree
