@@ -1,0 +1,68 @@
+= Go
+:description: Use the Neo4j Ontology Graph Specification library from Go.
+
+Requires:
+
+* Go 1.25.6 or later
+* `linux/amd64`, `linux/arm64` or `darwin/arm64`
+* `glibc` and `libstdc++` at runtime, so not `musl`-based distributions such as Alpine
+
+== Install
+
+[source,shell,subs="attributes+"]
+----
+go get github.com/neo4j/ontology-graph-spec/go@v{library-version}
+----
+
+== Read and write models
+
+Models are Go structs with JSON tags, so read and write them with `encoding/json`.
+
+[source,go]
+----
+import "github.com/neo4j/ontology-graph-spec/go/model"
+
+var graph model.GraphModel
+err := json.Unmarshal(content, &graph)
+----
+
+NOTE: The Go library currently only supports JSON.
+
+== Validate models
+
+[source,go]
+----
+import "github.com/neo4j/ontology-graph-spec/go/validation"
+
+issues, err := validation.Validate(graph)
+----
+
+See xref:validation.adoc[] for the validator sets and issues.
+
+== Migrate models
+
+[source,go]
+----
+import "github.com/neo4j/ontology-graph-spec/go/migration"
+
+graph, err := migration.ToGraphSpec(dataModelJSON, migration.ModelTypeDataModel)
+exported, err := migration.FromGraphSpec(graph, migration.ModelTypeDataModel, migration.ModelVersionDataModelV30)
+----
+
+See xref:migration.adoc[] for the supported types and versions.
+
+== Native library
+
+Validation and migration run in a native library embedded in the module and loaded on first use.
+
+If you want to load the library from a custom location, set `GRAPHDATAMODEL_LIB_PATH` to the path of the library for
+your platform, copied from `go/internal/bridge/lib/` in the repository.
+
+
+
+The native library has its own heap, which counts towards the process's memory but isn't bounded by `GOMEMLIMIT`. To cap
+the heap, for example to avoid issues relating to extremely large documents or many concurrent calls, set
+`GRAPHSPEC_MAX_HEAP_BYTES`.
+
+TIP: See the https://github.com/neo4j/ontology-graph-spec/blob/main/go/README.md[Go README] in the repository for more
+information on native library loading and building the Go library.

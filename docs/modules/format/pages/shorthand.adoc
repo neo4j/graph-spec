@@ -1,0 +1,72 @@
+= Shorthand and longhand
+:description: The shorthand forms of a Neo4j Ontology Graph Specification model document, and the longhand they stand for.
+
+Some parts of a model can be written more concisely. Each shorthand form stands for a longer, longhand form, and the two
+mean exactly the same thing. What form to use depends on preference and use-case: Shorthand is easier to write and read,
+and longhand can express things shorthand can't, such as a constraint with a custom name.
+
+[cols="1,1,2"]
+|===
+| Shorthand | Where | Stands for
+
+| `label` | A node | `labels.identifier`
+| `must_exist: true` | A property | An `EXISTS` constraint on the property
+| `unique: true` | A property | A `UNIQUE` constraint on the property
+| `key: true` | A property | A `KEY` constraint on the property
+|===
+
+A constraint written as shorthand covers that one property. On a node, it applies to the node's identifying label. On a
+relationship, it is a constraint on the relationship.
+
+== Example
+
+The following nodes use shorthand:
+
+[source,yaml]
+----
+nodes:
+  person:
+    label: Person
+    properties:
+      name:
+        type: STRING
+        must_exist: true
+  movie:
+    label: Movie
+    properties:
+      title:
+        type: STRING
+        unique: true
+----
+
+They mean the same as these nodes written in longhand:
+
+[source,yaml]
+----
+nodes:
+  person:
+    labels:
+      identifier: Person
+    properties:
+      name:
+        type: STRING
+    constraints:
+      exists_person_name:
+        type: EXISTS
+        properties: [name]
+        name: name_Person_exists
+  movie:
+    labels:
+      identifier: Movie
+    properties:
+      title:
+        type: STRING
+    constraints:
+      unique_movie_title:
+        type: UNIQUE
+        properties: [title]
+        name: title_Movie_uniq
+----
+
+Tools that read a model may convert between the two forms. For example, a tool may write a model back out in longhand
+even if it was written in shorthand.

@@ -1,0 +1,172 @@
+= Constraints and indexes
+:description: The fields of constraints and indexes in a Neo4j Ontology Graph Specification model document.
+// The tables mirror ontology-graph-spec.schema.json, until they are generated from it
+
+Constraints are listed under the `constraints` of a node or relationship, and indexes under the `indexes` of its
+`extensions`, each keyed by id.
+
+[source,yaml]
+----
+nodes:
+  movie:
+    label: Movie
+    properties:
+      title:
+        type: STRING
+      released:
+        type: INTEGER
+    constraints:
+      movie-title-unique:
+        type: UNIQUE
+        properties: [title]
+    extensions:
+      indexes:
+        movie-released:
+          type: RANGE
+          labels: [Movie]
+          properties: [released]
+----
+
+== Node constraint
+
+A constraint on a node.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | <<_constraint_type,constraint type>> | Yes | Type of the constraint.
+| `properties` | list of strings | Yes | Ids of the properties the constraint covers.
+| `extensions` | xref:reference/extensions.adoc#_custom_data[custom data] | No | Extensions for the constraint.
+| `name` | string | No | Name of the constraint in the database.
+|===
+
+== Relationship constraint
+
+A constraint on a relationship.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | <<_constraint_type,constraint type>> | Yes | Type of the constraint.
+| `properties` | list of strings | Yes | Ids of the properties the constraint covers.
+| `extensions` | xref:reference/extensions.adoc#_custom_data[custom data] | No | Extensions for the constraint.
+| `name` | string | No | Name of the constraint in the database.
+|===
+
+== Constraint type
+
+[cols="1,3"]
+|===
+| Type | Requires that
+
+| `EXISTS` | Every node or relationship has the property.
+| `UNIQUE` | No two nodes or relationships have the same values for the properties.
+| `KEY` | Every node or relationship has the properties, and no two have the same values for them.
+| `PROPERTY_TYPE` | The property's values have the property's `type`.
+|===
+
+== Node index
+
+An index on a node.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | <<_index_type,index type>> | Yes | Type of the index.
+| `labels` | list of strings | Yes | Labels the index covers.
+| `properties` | list of strings | Yes | Ids of the properties the index covers.
+| `options` | <<_index_options,index options>> | No | Configuration specific to the type of index.
+| `custom` | map | No | User-defined arbitrary data.
+| `name` | string | No | Name of the index in the database.
+|===
+
+== Relationship index
+
+An index on a relationship.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | <<_index_type,index type>> | Yes | Type of the index.
+| `properties` | list of strings | Yes | Ids of the properties the index covers.
+| `options` | <<_index_options,index options>> | No | Configuration specific to the type of index.
+| `custom` | map | No | User-defined arbitrary data.
+| `name` | string | No | Name of the index in the database.
+|===
+
+== Index type
+
+The type of an index.
+
+`FULLTEXT`, `POINT`, `RANGE`, `TEXT`, `VECTOR`, `LOOKUP`
+
+== Index options
+
+Configuration specific to the type of an index.
+
+One of <<_full_text_options,full-text options>>, <<_point_options,point options>>, <<_vector_options,vector options>>,
+chosen by its `type`.
+
+== Full-text options
+
+Configuration of a full-text index.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | `FULLTEXT` | Yes | Always `FULLTEXT`.
+| `fulltext.default_analyzer` | string | No | Analyzer used when the index doesn't specify one.
+| `fulltext.analyzer` | string | No | Analyzer used by the index.
+| `fulltext.eventually_consistent` | boolean | No | Whether the index is eventually consistent, updating asynchronously
+after transactions commit.
+| `fulltext.eventually_consistent_apply_parallelism` | integer | No | Number of threads used to apply updates to an
+eventually consistent index.
+| `fulltext.eventually_consistent_refresh_interval` | string | No | How often an eventually consistent index is
+refreshed.
+| `fulltext.eventually_consistent_refresh_parallelism` | integer | No | Number of threads used to refresh an eventually
+consistent index.
+| `fulltext.eventually_consistent_index_update_queue_max_length` | integer | No | Maximum number of pending updates
+queued for an eventually consistent index.
+|===
+
+== Point options
+
+Configuration of a point index.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | `POINT` | Yes | Always `POINT`.
+| `spatial.cartesian.min` | list of numbers | No | Lower bounds of the 2D cartesian space.
+| `spatial.cartesian.max` | list of numbers | No | Upper bounds of the 2D cartesian space.
+| `spatial.cartesian-3d.min` | list of numbers | No | Lower bounds of the 3D cartesian space.
+| `spatial.cartesian-3d.max` | list of numbers | No | Upper bounds of the 3D cartesian space.
+| `spatial.wgs-84.min` | list of numbers | No | Lower bounds of the 2D WGS-84 space.
+| `spatial.wgs-84.max` | list of numbers | No | Upper bounds of the 2D WGS-84 space.
+| `spatial.wgs-84-3d.min` | list of numbers | No | Lower bounds of the 3D WGS-84 space.
+| `spatial.wgs-84-3d.max` | list of numbers | No | Upper bounds of the 3D WGS-84 space.
+|===
+
+== Vector options
+
+Configuration of a vector index.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | `VECTOR` | Yes | Always `VECTOR`.
+| `vector.dimensions` | integer | No | Number of dimensions of the indexed vectors.
+| `vector.similarity_function` | string | No | Function used to compare vectors, e.g. cosine or euclidean.
+| `vector.default_search_expansion_factor` | number | No | Default expansion factor applied to searches of the index.
+| `vector.quantization.enabled` | boolean | No | Whether vector quantization is enabled.
+| `vector.quantization.type` | string | No | Type of vector quantization used.
+| `vector.hnsw.m` | integer | No | Maximum number of connections per node in the HNSW graph.
+| `vector.hnsw.ef_construction` | integer | No | Number of nearest neighbours considered when building the HNSW graph.
+|===
