@@ -1,0 +1,32 @@
+= Model
+:description: The top-level fields of a Neo4j Ontology Graph Specification model document.
+// The tables mirror ontology-graph-spec.schema.json, until they are generated from it
+
+A model document is a YAML or JSON object. The JSON Schema at
+`https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json` is the normative definition of the format, and fields it
+doesn't define are not allowed.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `schema` | string | Yes | Schema specification uri used.
+| `version` | string | Yes | User-defined version of this model document, e.g. a revision number or label.
+| `id` | string | Yes | Unique identifier of the model, typically a kebab-case version of the name, used for
+referencing.
+| `name` | string | No | Human readable name for the model.
+| `description` | string | No | Description of the model.
+| `nodes` | map of xref:reference/nodes.adoc#_node[node] | No | Node definitions keyed by node id.
+| `relationships` | map of xref:reference/relationships.adoc#_relationship[relationship] | No | Relationship definitions
+keyed by relationship id.
+| `extensions` | xref:reference/extensions.adoc#_model_extensions[model extensions] | No | Extensions to the model: data
+source tables, mappings and external custom data.
+|===
+
+See xref:versioning.adoc[] for how `schema` and `version` relate.
+
+== Ids
+
+Nodes, relationships, properties, constraints and indexes are keyed by ids, which other parts of the document use to
+refer to them. Ids are separate from the labels, types and names used in the graph, so a label can be renamed without
+breaking references to it. For the same reason, ids should rarely change.

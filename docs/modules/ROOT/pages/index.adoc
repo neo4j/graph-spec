@@ -1,8 +1,9 @@
 = Neo4j Ontology Graph Specification
 :description: The Neo4j Ontology Graph Specification is a format and library for defining, validating and migrating ontologies for Neo4j, expressed as YAML or JSON, with library support for JVM, JavaScript, TypeScript and Go.
 
-The Neo4j Ontology Graph Specification is a format and library for defining, validating and migrating ontologies for Neo4j, expressed as YAML or JSON.
-It provides library support for JVM, JavaScript, TypeScript and Go for validation and migration.
+The Neo4j Ontology Graph Specification is a format and library for defining, validating and migrating ontologies for
+Neo4j, expressed as YAML or JSON. It provides library support for JVM, JavaScript, TypeScript and Go for validation and
+migration.
 
 == Why this specification
 
@@ -13,197 +14,16 @@ The specification gives the graph's business meaning a standard, machine-readabl
 Define your domain once and agents, document intelligence, import and your own tooling all read the same artifact.
 It is published, versioned, SDK-backed and openly governed, so it is a stable contract to build on.
 
-== The format
+== Where to start
 
-A graph model document describes nodes, relationships, their properties, constraints and indexes, plus optional extensions such as data source tables and import mappings.
-The format is defined by the JSON Schema file `ontology-graph-spec.schema.json` at the root of the repository, served with these docs at link:/docs/ontology-graph-spec/current/schema.json[/docs/ontology-graph-spec/current/schema.json], with `$id` `https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json`.
+Write an ontology::
+You want to describe an ontology or graph model, by hand or with the help of an agent, and use it with Neo4j's tools.
+Start with xref:format:getting-started.adoc[], then use the xref:format:reference/model.adoc[reference] as you go.
 
-A document requires three top-level fields: `schema`, `version` and `id`.
-Nodes are keyed by id under `nodes`, relationships under `relationships`; a relationship requires `type`, `from` and `to`, and each property takes a Neo4j `type` such as `STRING` or `INTEGER`.
+Build with the libraries::
+You are building a tool that reads, writes, validates or converts ontology documents. Start with the
+xref:libraries:index.adoc[libraries overview].
 
-.A minimal graph model document
-[.tabs]
-
-.YAML
-[source,yaml]
-----
-schema: https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json
-version: "1.0.0"
-id: movies
-name: Movies
-description: A small example graph model.
-nodes:
-  person:
-    label: Person
-    properties:
-      name:
-        type: STRING
-        must_exist: true
-      born:
-        type: INTEGER
-  movie:
-    label: Movie
-    properties:
-      title:
-        type: STRING
-        unique: true
-relationships:
-  acted-in:
-    type: ACTED_IN
-    from:
-      node: person
-    to:
-      node: movie
-    properties:
-      role:
-        type: STRING
-----
-
-.JSON
-[source,json]
-----
-{
-  "schema": "https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json",
-  "version": "1.0.0",
-  "id": "movies",
-  "name": "Movies",
-  "description": "A small example graph model.",
-  "nodes": {
-    "person": {
-      "label": "Person",
-      "properties": {
-        "name": {
-          "type": "STRING",
-          "must_exist": true
-        },
-        "born": {
-          "type": "INTEGER"
-        }
-      }
-    },
-    "movie": {
-      "label": "Movie",
-      "properties": {
-        "title": {
-          "type": "STRING",
-          "unique": true
-        }
-      }
-    }
-  },
-  "relationships": {
-    "acted-in": {
-      "type": "ACTED_IN",
-      "from": {
-        "node": "person"
-      },
-      "to": {
-        "node": "movie"
-      },
-      "properties": {
-        "role": {
-          "type": "STRING"
-        }
-      }
-    }
-  }
-}
-----
-
-== Shorthand and longhand
-
-Some parts of a document can be written more concisely when authoring it.
-The libraries expand this shorthand when decoding a document, and always encode a document in its longhand form.
-Tools that want the concise form can convert a model back with `GraphModel.shorthand()` (and to longhand with `GraphModel.longhand()`).
-Only constraints that the shorthand reproduces exactly are collapsed; for example a constraint with a custom name is kept as it is.
-
-[cols="1,2,2"]
-|===
-| Shorthand | Where | Expands to
-
-| `label`
-| A node
-| `labels.identifier`
-
-| `key`, `unique`, `must_exist`
-| A property
-| A `KEY`, `UNIQUE` or `EXISTS` constraint on the property, added to the `constraints` of the node or relationship
-|===
-
-For example, the `person` node above is encoded as:
-
-[source,yaml]
-----
-nodes:
-  person:
-    labels:
-      identifier: Person
-    properties:
-      name:
-        type: STRING
-      born:
-        type: INTEGER
-    constraints:
-      exists_person_name:
-        type: EXISTS
-        label: Person
-        properties: [name]
-        name: name_Person_exists
-----
-
-Keys of nodes, relationships, properties, constraints and indexes should rarely be renamed.
-The optional `name` field on properties, constraints and indexes holds the name used in the database.
-
-== SDKs
-
-The specification ships libraries for several platforms, each able to migrate older model documents to the latest format and validate a document against the schema.
-The source for the specification, its schema and all SDKs lives in the https://github.com/neo4j/ontology-graph-spec[ontology-graph-spec repository on GitHub], where you can open issues, follow releases and contribute.
-
-=== JVM
-
-Add the dependency with Gradle:
-
-[source,gradle]
-----
-implementation("org.neo4j.importer:graph-spec:x.y.z")
-----
-
-or with Maven:
-
-[source,xml]
-----
-<dependency>
-    <groupId>org.neo4j.importer</groupId>
-    <artifactId>graph-spec</artifactId>
-    <version>x.y.z</version>
-</dependency>
-----
-
-The JVM library is the source of truth: it parses graph model documents, migrates them between format versions and validates them.
-
-=== JavaScript / TypeScript
-
-Install from npm:
-
-[source,shell]
-----
-npm install -D @neo4j-importer/graph-spec
-----
-
-[source,typescript]
-----
-import { GraphSpec } from "@neo4j-importer/graph-spec";
-
-const model: GraphModel = GraphSpec.Json.decodeFromString(value);
-----
-
-=== Go
-
-Fetch the module with `go get`:
-
-[source,shell]
-----
-go get github.com/neo4j/graph-spec/go@vX.Y.Z
-----
-
-The Go library provides Go-native GraphSpec types plus migration and validation methods, which call into the Kotlin source of truth via an embedded Kotlin/Native library (loaded automatically on supported platforms; the runtime needs `glibc` and `libstdc++`).
+The source for the specification, its schema and the libraries lives in the
+https://github.com/neo4j/ontology-graph-spec[ontology-graph-spec repository on GitHub], where you can open issues,
+follow releases and contribute.

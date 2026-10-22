@@ -1,1 +1,23 @@
-* xref:index.adoc[]
+* xref:index.adoc[Overview]
+
+* Format
+** xref:format:getting-started.adoc[]
+** xref:format:concepts.adoc[]
+** Reference
+*** xref:format:reference/model.adoc[]
+*** xref:format:reference/nodes.adoc[]
+*** xref:format:reference/relationships.adoc[]
+*** xref:format:reference/properties.adoc[]
+*** xref:format:reference/constraints-and-indexes.adoc[]
+*** xref:format:reference/extensions.adoc[]
+** xref:format:shorthand.adoc[]
+** xref:format:rules.adoc[]
+** xref:format:versioning.adoc[]
+
+* xref:libraries:index.adoc[Libraries]
+** xref:libraries:getting-started.adoc[]
+** xref:libraries:jvm.adoc[]
+** xref:libraries:javascript.adoc[]
+** xref:libraries:go.adoc[]
+** xref:libraries:validation.adoc[]
+** xref:libraries:migration.adoc[]

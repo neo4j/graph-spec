@@ -1,0 +1,45 @@
+= Getting started
+:description: Write a first Neo4j Ontology Graph Specification model and validate it against the schema.
+
+== A first model
+
+A small ontology of people, the movies they act in and the roles they play:
+
+[.tabs]
+.YAML
+[source,yaml]
+----
+include::ROOT:example$movies.yaml[]
+----
+
+.JSON
+[source,json]
+----
+include::ROOT:example$movies.json[]
+----
+
+In this model:
+
+* `schema`, `version` and `id` are required. `schema` identifies the version of the specification, and `version` is your
+own revision of the model.
+* `nodes` and `relationships` are keyed by ids you choose, which relationships and constraints use to refer to them.
+* `description` and `aliases` carry the meaning of each part. See xref:concepts.adoc#_meaning[Meaning].
+* `label`, `must_exist` and `unique` are xref:shorthand.adoc[shorthand].
+
+== Validate it
+
+The specification is defined by a JSON Schema at `https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json`. You can
+validate a model with any JSON Schema validator, for example:
+
+[source,shell]
+----
+check-jsonschema --schemafile https://neo4j.com/docs/ontology-graph-spec/1.0.0/schema.json movies.yaml
+----
+
+The schema can't check references within a document, such as whether a relationship points at a node that exists. Those
+checks, and a few others, are the xref:rules.adoc[rules] of the format.
+
+== Next steps
+
+* xref:concepts.adoc[] explains how a model captures the meaning of a domain.
+* The xref:reference/model.adoc[reference] describes every field.

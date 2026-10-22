@@ -1,0 +1,61 @@
+= Relationships
+:description: The fields of a relationship and its ends in a Neo4j Ontology Graph Specification model document.
+// The tables mirror ontology-graph-spec.schema.json, until they are generated from it
+
+A relationship describes how entities in the domain relate. Relationships are listed under `relationships`, keyed by
+relationship id.
+
+[source,yaml]
+----
+relationships:
+  acted-in:
+    type: ACTED_IN
+    description: The person appeared in the movie as a cast member.
+    from:
+      node: person
+    to:
+      node: movie
+      min_count: 1
+    properties:
+      role:
+        type: STRING
+----
+
+== Relationship
+
+A relationship of the graph.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `type` | string | Yes | Type of the relationship.
+| `from` | <<_relationship_end,relationship end>> | Yes | The node the relationship starts at.
+| `to` | <<_relationship_end,relationship end>> | Yes | The node the relationship ends at.
+| `properties` | map of xref:reference/properties.adoc#_property[property] | No | Properties of the relationship keyed
+by id.
+| `constraints` | map of xref:reference/constraints-and-indexes.adoc#_relationship_constraint[relationship constraint] |
+No | Constraints on the relationship keyed by id.
+| `extensions` | xref:reference/extensions.adoc#_relationship_extensions[relationship extensions] | No | Extensions for
+the relationship.
+| `description` | string | No | Description of the relationship.
+| `aliases` | list of strings | No | Alternative names for the relationship.
+| `reference` | string | No | Reference or URI of an external resource describing the relationship.
+|===
+
+== Relationship end
+
+One end of a relationship.
+
+[cols="2,2,1,5"]
+|===
+| Field | Type | Required | Description
+
+| `node` | string | No | Id of the node at this end.
+| `label` | string | No | Label of the node at this end.
+| `count` | integer | No | Exact number of relationships per node at this end. Null when unconstrained.
+| `min_count` | integer | No | Minimum number of relationships per node at this end.
+| `max_count` | integer | No | Maximum number of relationships per node at this end.
+|===
+
+A relationship end sets either `count`, or `min_count` and `max_count`.

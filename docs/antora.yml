@@ -6,3 +6,4 @@ nav:
 - modules/ROOT/content-nav.adoc
 asciidoc:
   attributes:
+    library-version: 1.0.0
