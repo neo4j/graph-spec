@@ -18,13 +18,13 @@ package org.neo4j.spec.graph.model.extension.mapping
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("MappingMode")
-@SerialDescription("Write approach used when importing data (merged into existing data or always created).")
+@Description("Write approach used when importing data (merged into existing data or always created).")
 enum class MappingMode {
     MERGE,
     CREATE

@@ -19,13 +19,13 @@ package org.neo4j.spec.graph.model.index
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.type.IndexType
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @Serializable
 @JsExport
 @SerialName("IndexOption")
-@SerialDescription("Configuration specific to the type of an index.")
+@Description("Configuration specific to the type of an index.")
 sealed interface IndexOption {
     val type: IndexType
 }

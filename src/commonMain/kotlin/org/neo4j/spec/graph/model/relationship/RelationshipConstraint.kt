@@ -22,21 +22,21 @@ import org.neo4j.spec.graph.model.node.Constraint
 import org.neo4j.spec.graph.model.relationship.extension.RelationshipConstraintExtensions
 import org.neo4j.spec.graph.model.type.ConstraintType
 import org.neo4j.spec.graph.model.type.Named
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("RelationshipConstraint")
-@SerialDescription("A constraint on a relationship.")
+@Description("A constraint on a relationship.")
 data class RelationshipConstraint(
-    @SerialDescription("Type of the constraint.")
+    @Description("Type of the constraint.")
     override var type: ConstraintType,
-    @SerialDescription("Ids of the properties the constraint covers.")
+    @Description("Ids of the properties the constraint covers.")
     override val properties: MutableSet<String>,
-    @SerialDescription("Extensions for the constraint.")
+    @Description("Extensions for the constraint.")
     val extensions: RelationshipConstraintExtensions = RelationshipConstraintExtensions(),
-    @SerialDescription("Name of the constraint in the database.")
+    @Description("Name of the constraint in the database.")
     override var name: String? = null
 ) : Constraint,
     Named

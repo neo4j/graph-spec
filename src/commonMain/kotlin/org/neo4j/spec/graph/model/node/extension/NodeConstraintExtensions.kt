@@ -20,15 +20,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.CustomExtensions
 import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("NodeConstraintExtensions")
-@SerialDescription("Extensions for a node constraint.")
+@Description("Extensions for a node constraint.")
 data class NodeConstraintExtensions(
-    @SerialDescription("User-defined arbitrary data.")
+    @Description("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions

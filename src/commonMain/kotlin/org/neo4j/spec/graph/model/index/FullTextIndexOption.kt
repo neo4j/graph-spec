@@ -19,7 +19,7 @@ package org.neo4j.spec.graph.model.index
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.type.IndexType
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 /**
@@ -30,28 +30,28 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("FULLTEXT")
-@SerialDescription("Configuration of a full-text index.")
+@Description("Configuration of a full-text index.")
 data class FullTextIndexOption(
     @SerialName("fulltext.default_analyzer")
-    @SerialDescription("Analyzer used when the index doesn't specify one.")
+    @Description("Analyzer used when the index doesn't specify one.")
     val defaultAnalyzer: String = "standard-no-stop-words",
     @SerialName("fulltext.analyzer")
-    @SerialDescription("Analyzer used by the index.")
+    @Description("Analyzer used by the index.")
     val analyzer: String? = null,
     @SerialName("fulltext.eventually_consistent")
-    @SerialDescription("Whether the index is eventually consistent, updating asynchronously after transactions commit.")
+    @Description("Whether the index is eventually consistent, updating asynchronously after transactions commit.")
     val eventuallyConsistent: Boolean = false,
     @SerialName("fulltext.eventually_consistent_apply_parallelism")
-    @SerialDescription("Number of threads used to apply updates to an eventually consistent index.")
+    @Description("Number of threads used to apply updates to an eventually consistent index.")
     val eventuallyConsistentApplyParallelism: Int = 1,
     @SerialName("fulltext.eventually_consistent_refresh_interval")
-    @SerialDescription("How often an eventually consistent index is refreshed.")
+    @Description("How often an eventually consistent index is refreshed.")
     val eventuallyConsistentRefreshInterval: String = "0s",
     @SerialName("fulltext.eventually_consistent_refresh_parallelism")
-    @SerialDescription("Number of threads used to refresh an eventually consistent index.")
+    @Description("Number of threads used to refresh an eventually consistent index.")
     val eventuallyConsistentRefreshParallelism: Int = 1,
     @SerialName("fulltext.eventually_consistent_index_update_queue_max_length")
-    @SerialDescription("Maximum number of pending updates queued for an eventually consistent index.")
+    @Description("Maximum number of pending updates queued for an eventually consistent index.")
     val eventuallyConsistentUpdateQueueMaxLength: Int = 10_000
 ) : IndexOption {
     override val type: IndexType get() = IndexType.FULLTEXT

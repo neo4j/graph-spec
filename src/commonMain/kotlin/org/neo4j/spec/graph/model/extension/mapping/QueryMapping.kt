@@ -18,25 +18,25 @@ package org.neo4j.spec.graph.model.extension.mapping
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName(MappingType.QUERY)
-@SerialDescription("Maps the results of a query run against a table.")
+@Description("Maps the results of a query run against a table.")
 data class QueryMapping(
-    @SerialDescription("Id of the source table.")
+    @Description("Id of the source table.")
     var table: String,
-    @SerialDescription("The query to run.")
+    @Description("The query to run.")
     var query: String,
     @SerialName("depends_on")
-    @SerialDescription(
+    @Description(
         "Id of another mapping in the same list which must be imported before this one. " +
             "Empty when there is no dependency."
     )
     var dependsOn: String = "",
-    @SerialDescription(
+    @Description(
         "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
     )
     var id: String = ""

@@ -19,7 +19,7 @@ package org.neo4j.spec.graph.model.index
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.type.IndexType
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 /**
@@ -28,28 +28,28 @@ import kotlin.js.JsExport
 @JsExport
 @Serializable
 @SerialName("VECTOR")
-@SerialDescription("Configuration of a vector index.")
+@Description("Configuration of a vector index.")
 data class VectorIndexOption(
     @SerialName("vector.dimensions")
-    @SerialDescription("Number of dimensions of the indexed vectors.")
+    @Description("Number of dimensions of the indexed vectors.")
     val dimensions: Int? = null,
     @SerialName("vector.similarity_function")
-    @SerialDescription("Function used to compare vectors, e.g. cosine or euclidean.")
+    @Description("Function used to compare vectors, e.g. cosine or euclidean.")
     val similarityFunction: String = "cosine",
     @SerialName("vector.default_search_expansion_factor")
-    @SerialDescription("Default expansion factor applied to searches of the index.")
+    @Description("Default expansion factor applied to searches of the index.")
     val defaultSearchExpansionFactor: Float? = null,
     @SerialName("vector.quantization.enabled")
-    @SerialDescription("Whether vector quantization is enabled.")
+    @Description("Whether vector quantization is enabled.")
     val quantizationEnabled: Boolean = true,
     @SerialName("vector.quantization.type")
-    @SerialDescription("Type of vector quantization used.")
+    @Description("Type of vector quantization used.")
     val quantizationType: String = "scalar",
     @SerialName("vector.hnsw.m")
-    @SerialDescription("Maximum number of connections per node in the HNSW graph.")
+    @Description("Maximum number of connections per node in the HNSW graph.")
     val hnswM: Int = 16,
     @SerialName("vector.hnsw.ef_construction")
-    @SerialDescription("Number of nearest neighbours considered when building the HNSW graph.")
+    @Description("Number of nearest neighbours considered when building the HNSW graph.")
     val hnswEfConstruction: Int = 100
 ) : IndexOption {
     override val type: IndexType get() = IndexType.VECTOR

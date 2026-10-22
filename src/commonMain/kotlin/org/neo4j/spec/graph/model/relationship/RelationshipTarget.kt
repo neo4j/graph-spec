@@ -18,24 +18,24 @@ package org.neo4j.spec.graph.model.relationship
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("RelationshipTarget")
-@SerialDescription("One end of a relationship.")
+@Description("One end of a relationship.")
 data class RelationshipTarget(
-    @SerialDescription("Id of the node at this end.")
+    @Description("Id of the node at this end.")
     var node: String = "",
-    @SerialDescription("Label of the node at this end.")
+    @Description("Label of the node at this end.")
     var label: String = "",
-    @SerialDescription("Exact number of relationships per node at this end. Null when unconstrained.")
+    @Description("Exact number of relationships per node at this end. Null when unconstrained.")
     var count: Int? = null,
     @SerialName("min_count")
-    @SerialDescription("Minimum number of relationships per node at this end.")
+    @Description("Minimum number of relationships per node at this end.")
     var minCount: Int? = null,
     @SerialName("max_count")
-    @SerialDescription("Maximum number of relationships per node at this end.")
+    @Description("Maximum number of relationships per node at this end.")
     var maxCount: Int? = null
 )

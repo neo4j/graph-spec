@@ -20,21 +20,21 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.extension.CustomExtensions
 import org.neo4j.spec.graph.model.extension.custom.CustomMapSerializer
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("NodeDisplay")
-@SerialDescription("Visual information for a node.")
+@Description("Visual information for a node.")
 data class NodeDisplay(
-    @SerialDescription("Horizontal position.")
+    @Description("Horizontal position.")
     var x: Double,
-    @SerialDescription("Vertical position.")
+    @Description("Vertical position.")
     var y: Double,
-    @SerialDescription("Display colour of the node as a hex string, e.g. #FF8800.")
+    @Description("Display colour of the node as a hex string, e.g. #FF8800.")
     var colour: String? = null,
-    @SerialDescription("User-defined arbitrary data.")
+    @Description("User-defined arbitrary data.")
     @Serializable(with = CustomMapSerializer::class)
     override val custom: MutableMap<String, Any> = mutableMapOf()
 ) : CustomExtensions

@@ -27,4 +27,4 @@ import kotlinx.serialization.SerialInfo
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.VALUE_PARAMETER)
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
-annotation class SerialDescription(val value: String)
+annotation class Description(val value: String)

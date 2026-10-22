@@ -19,20 +19,20 @@ package org.neo4j.spec.graph.model.node
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.neo4j.spec.graph.model.node.extension.LabelsExtensions
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("Labels")
-@SerialDescription("The labels of a node.")
+@Description("The labels of a node.")
 data class Labels(
-    @SerialDescription("The label which identifies the node.")
+    @Description("The label which identifies the node.")
     var identifier: String? = null,
-    @SerialDescription("Labels implied by the node in addition to the identifier.")
+    @Description("Labels implied by the node in addition to the identifier.")
     val implied: MutableSet<String> = mutableSetOf(),
-    @SerialDescription("Labels which may be present on the node but aren't required.")
+    @Description("Labels which may be present on the node but aren't required.")
     val optional: MutableSet<String> = mutableSetOf(),
-    @SerialDescription("Extensions for the labels.")
+    @Description("Extensions for the labels.")
     val extensions: LabelsExtensions = LabelsExtensions()
 )

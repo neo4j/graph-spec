@@ -18,16 +18,16 @@ package org.neo4j.spec.graph.model.extension.mapping
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("TargetMapping")
-@SerialDescription("Identifies a node at one end of a mapped relationship.")
+@Description("Identifies a node at one end of a mapped relationship.")
 data class TargetMapping(
-    @SerialDescription("Label of the node.")
+    @Description("Label of the node.")
     var label: String = "",
-    @SerialDescription("Mappings from property ids to source columns used to match the node.")
+    @Description("Mappings from property ids to source columns used to match the node.")
     val properties: MutableMap<String, PropertyMapping> = mutableMapOf()
 )

@@ -18,40 +18,40 @@ package org.neo4j.spec.graph.model.extension.mapping
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName(MappingType.RELATIONSHIP)
-@SerialDescription("Maps rows of a table to relationships.")
+@Description("Maps rows of a table to relationships.")
 data class RelationshipMapping(
-    @SerialDescription("Id of the relationship being mapped.")
+    @Description("Id of the relationship being mapped.")
     var relationship: String,
-    @SerialDescription("Id of the source table.")
+    @Description("Id of the source table.")
     var table: String,
     @SerialName("from_node")
-    @SerialDescription("How the start node of the relationship is matched.")
+    @Description("How the start node of the relationship is matched.")
     val fromNode: TargetMapping,
     @SerialName("to_node")
-    @SerialDescription("How the end node of the relationship is matched.")
+    @Description("How the end node of the relationship is matched.")
     val toNode: TargetMapping,
     @SerialName("match_label")
-    @SerialDescription("Label used to match existing relationships.")
+    @Description("Label used to match existing relationships.")
     var matchLabel: String? = null,
-    @SerialDescription("Mappings from property ids to source columns.")
+    @Description("Mappings from property ids to source columns.")
     val properties: MutableMap<String, PropertyMapping> = mutableMapOf(),
-    @SerialDescription("Whether relationships are merged with existing relationships or always created.")
+    @Description("Whether relationships are merged with existing relationships or always created.")
     var mode: MappingMode = MappingMode.MERGE,
-    @SerialDescription("Ids of the properties which identify a relationship.")
+    @Description("Ids of the properties which identify a relationship.")
     val key: MutableSet<String> = mutableSetOf(),
     @SerialName("depends_on")
-    @SerialDescription(
+    @Description(
         "Id of another mapping in the same list which must be imported before this one. " +
             "Empty when there is no dependency."
     )
     var dependsOn: String = "",
-    @SerialDescription(
+    @Description(
         "Optional id of this mapping, so other mappings in the same list can reference it in depends_on."
     )
     var id: String = ""

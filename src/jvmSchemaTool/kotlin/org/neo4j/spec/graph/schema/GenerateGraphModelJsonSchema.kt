@@ -44,7 +44,7 @@ fun main(args: Array<String>) {
         SerializationClassJsonSchemaGenerator(
             introspectorConfig =
                 SerializationClassSchemaIntrospector.Config(
-                    descriptionExtractor = { annotations -> annotations.filterIsInstance<SerialDescription>().firstOrNull()?.value }
+                    descriptionExtractor = { annotations -> annotations.filterIsInstance<Description>().firstOrNull()?.value }
                 ),
             jsonSchemaConfig = JsonSchemaConfig.Default
         )

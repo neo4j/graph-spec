@@ -18,13 +18,13 @@ package org.neo4j.spec.graph.model.property
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.neo4j.spec.graph.schema.SerialDescription
+import org.neo4j.spec.graph.schema.Description
 import kotlin.js.JsExport
 
 @JsExport
 @Serializable
 @SerialName("Neo4jType")
-@SerialDescription("A Neo4j property type.")
+@Description("A Neo4j property type.")
 enum class Neo4jType {
     ANY,
 
