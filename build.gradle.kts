@@ -83,7 +83,6 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.serializer.json)
             implementation(libs.kotlinx.yamlkt)
-            implementation(libs.kaseChange)
         }
         jsMain.dependencies {
             implementation(devNpm("typescript", "5.9.3"))
