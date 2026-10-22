@@ -66,7 +66,7 @@ class Validations {
         // The rules a model must follow beyond its JSON Schema to be valid: references resolve, constraint and
         // index details are consistent, relationship counts make sense and text is within length limits.
         @JsStatic
-        val valid: Set<Validation> = setOf(
+        val core: Set<Validation> = setOf(
             NodeTypeConstraint,
             RelationshipTypeConstraint,
             NodeConstraints,
@@ -143,6 +143,6 @@ class Validations {
         // Every built-in validator.
         @JsStatic
         val all: Set<Validation> =
-            valid + labelled + consistentSchema + mappable + bulkImportable + wellConstrained
+            core + labelled + consistentSchema + mappable + bulkImportable + wellConstrained
     }
 }
