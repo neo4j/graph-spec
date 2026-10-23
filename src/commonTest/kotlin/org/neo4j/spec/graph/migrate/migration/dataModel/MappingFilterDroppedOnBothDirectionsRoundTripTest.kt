@@ -19,6 +19,7 @@ package org.neo4j.spec.graph.migrate.migration.dataModel
 import org.neo4j.spec.graph.codec.schema.schemaMapOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
 class MappingFilterDroppedOnBothDirectionsRoundTripTest {
 
@@ -27,6 +28,10 @@ class MappingFilterDroppedOnBothDirectionsRoundTripTest {
 
     @Test
     fun `gm3 to gs to gm3 round-trip preserves mappingFilter on node mapping`() {
+        val filterInput = schemaMapOf(
+            "fieldName" to "active",
+            "exactMatch" to "true"
+        )
         val gm3Input = schemaMapOf(
             "version" to "3.0.0",
             "graphSchemaRepresentation" to schemaMapOf(
@@ -51,7 +56,7 @@ class MappingFilterDroppedOnBothDirectionsRoundTripTest {
                     schemaMapOf(
                         "node" to mapOf("\$ref" to "#n1"),
                         "tableName" to "users",
-                        "mappingFilter" to schemaMapOf("fieldName" to "active", "exactMatch" to "true"),
+                        "mappingFilter" to filterInput,
                         "propertyMappings" to emptyList<Any>()
                     )
                 ),
@@ -61,13 +66,22 @@ class MappingFilterDroppedOnBothDirectionsRoundTripTest {
         )
 
         val gm3RoundTripped = gm3Input.let(gm3ToGs::migrate).let(gsToGm3::migrate)
-        val nodeMapping = gm3RoundTripped
-            .map("graphMappingRepresentation")
-            .listOfMaps("nodeMappings")
-            .first()
+        val nodeMapping = assertNotNull(
+            gm3RoundTripped
+                .map("graphMappingRepresentation")
+                .listOfMapsOrNull("nodeMappings")
+                ?.firstOrNull(),
+            "node mapping listing absent on gm3-gs-gm3 round-trip",
+        )
+        val filterActual = assertNotNull(
+            nodeMapping.mapOrNull("mappingFilter"),
+            "mappingFilter slot dropped on gm3-gs-gm3 round-trip: omitted at DataModelV3GraphSpecMigration.kt:311-317 (gm3ToGs nodeMappings) and never re-emitted at GraphSpecDataModelV3Migration.kt:71-75 (gsToGm3 convertGraphMapping node assembly)"
+        )
 
-        val filter = nodeMapping.mapOrNull("mappingFilter")
-        assertEquals("active", filter?.stringOrNull("fieldName"))
-        assertEquals("true", filter?.stringOrNull("exactMatch"))
+        assertEquals(
+            filterInput,
+            filterActual,
+            "mappingFilter contents not preserved on gm3-gs-gm3 round-trip (same UPX lines in both directions)"
+        )
     }
 }
