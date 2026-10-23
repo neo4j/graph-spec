@@ -20,8 +20,9 @@ import org.neo4j.spec.graph.codec.schema.schemaListOf
 import org.neo4j.spec.graph.codec.schema.schemaMapOf
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
-class IdsToIgnoreZeroedGsToGm3RoundTripTest {
+class IdsToIgnoreZeroedGm3ToGsToGm3RoundTripTest {
 
     private val gsToGm3 = GraphSpecDataModelV3Migration()
     private val gm3ToGs = DataModelV3GraphSpecMigration()
@@ -53,13 +54,15 @@ class IdsToIgnoreZeroedGsToGm3RoundTripTest {
         )
 
         val gm3RoundTripped = gm3Input.let(gm3ToGs::migrate).let(gsToGm3::migrate)
-        val idsToIgnore = gm3RoundTripped
-            .map("configurations")
-            .listOrNull("idsToIgnore")
-            ?.content
-            ?.map { (it as org.neo4j.spec.graph.codec.schema.SchemaLiteral).string }
-            ?: emptyList()
+        val idsToIgnore = assertNotNull(
+            gm3RoundTripped.map("configurations").listOrNull("idsToIgnore"),
+            "idsToIgnore section absent from configurations on gm3-gs-gm3 round-trip; DataModelV3GraphSpecMigration does not carry configurations through, GraphSpecDataModelV3Migration.kt:62 hardcodes an empty list"
+        )
 
-        assertEquals(listOf("0", "1", "6"), idsToIgnore)
+        assertEquals(
+            schemaListOf("0", "1", "6"),
+            idsToIgnore,
+            "configurations.idsToIgnore zeroed on gm3-gs-gm3 round-trip (GraphSpecDataModelV3Migration.kt:62 always emits empty)"
+        )
     }
 }
